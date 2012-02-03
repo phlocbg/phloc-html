@@ -17,9 +17,13 @@
  */
 package com.phloc.html.hc.html5;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
@@ -33,7 +37,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
 public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaElement <THISTYPE>> extends
-                                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, HCSource>
+                                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, AbstractHCMediaElementChild <?>>
 {
   public static final boolean DEFAULT_AUTOPLAY = false;
   public static final boolean DEFAULT_CONTROLS = false;
@@ -108,6 +112,30 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     if (aSource != null)
       addChild (aSource);
     return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addTrack (@Nullable final HCTrack aTrack)
+  {
+    if (aTrack != null)
+      addChild (aTrack);
+    return thisAsT ();
+  }
+
+  @Override
+  @Nonnull
+  @Nonempty
+  protected List <AbstractHCMediaElementChild <?>> getChildrenFormEmitting (@Nonnull @Nonempty final List <AbstractHCMediaElementChild <?>> aChildren)
+  {
+    // <source> must be before <track>
+    final List <AbstractHCMediaElementChild <?>> ret = new ArrayList <AbstractHCMediaElementChild <?>> (aChildren.size ());
+    for (final AbstractHCMediaElementChild <?> aChild : aChildren)
+      if (aChild.getElement ().equals (EHTMLElement.SOURCE))
+        ret.add (aChild);
+    for (final AbstractHCMediaElementChild <?> aChild : aChildren)
+      if (aChild.getElement ().equals (EHTMLElement.TRACK))
+        ret.add (aChild);
+    return ret;
   }
 
   @Override

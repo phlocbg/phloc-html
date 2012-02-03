@@ -15,25 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.html5;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.impl.AbstractHCElement;
 
-public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCObject <THISTYPE>
+@SinceHTML5
+public abstract class AbstractHCMediaElementChild <THISTYPE extends AbstractHCMediaElementChild <THISTYPE>> extends
+                                                                                                            AbstractHCElement <THISTYPE>
 {
-  /**
-   * @return The contained HTML element. Never <code>null</code>.
-   */
-  @Nonnull
-  EHTMLElement getElement ();
-
-  /**
-   * @return The tag name of this element (without namespace)
-   */
-  @Nonnull
-  @Nonempty
-  String getTagName ();
+  public AbstractHCMediaElementChild (@Nonnull final EHTMLElement eElement)
+  {
+    super (eElement);
+  }
 }

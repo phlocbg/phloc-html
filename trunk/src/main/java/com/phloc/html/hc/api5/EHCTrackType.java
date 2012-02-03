@@ -15,25 +15,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.api5;
 
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
-public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCObject <THISTYPE>
+/**
+ * Track type (read-only property in JS)
+ * 
+ * @author philip
+ */
+public enum EHCTrackType implements IHCHasHTMLAttributeValue
 {
-  /**
-   * @return The contained HTML element. Never <code>null</code>.
-   */
-  @Nonnull
-  EHTMLElement getElement ();
+  SUBTITLES ("subtitles"),
+  CAPTIONS ("captions"),
+  DESCRIPTIONS ("descriptions"),
+  CHAPTERS ("chapters"),
+  METADATA ("metadata");
 
-  /**
-   * @return The tag name of this element (without namespace)
-   */
+  private String m_sAttrValue;
+
+  private EHCTrackType (@Nonnull @Nonempty final String sAttrValue)
+  {
+    m_sAttrValue = sAttrValue;
+  }
+
   @Nonnull
   @Nonempty
-  String getTagName ();
+  public String getAttrValue ()
+  {
+    return m_sAttrValue;
+  }
 }

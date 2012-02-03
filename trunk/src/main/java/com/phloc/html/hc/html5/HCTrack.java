@@ -21,45 +21,60 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.api5.IHCHasMedia;
 
 @SinceHTML5
-public final class HCSource extends AbstractHCMediaElementChild <HCSource> implements IHCHasMedia <HCSource>
+public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
 {
-  private String m_sMediaQuery;
+  private String m_sKind;
   private ISimpleURL m_aSrc;
-  private IMimeType m_aType;
+  private String m_sSrcLang;
+  private String m_sLabel;
+  private boolean m_bDefault = false;
 
-  public HCSource ()
+  public HCTrack ()
   {
-    super (EHTMLElement.SOURCE);
+    super (EHTMLElement.CANVAS);
   }
 
   @Nonnull
-  public HCSource setMedia (@Nullable final String sMediaQuery)
+  public HCTrack setKind (@Nullable final String sKind)
   {
-    m_sMediaQuery = sMediaQuery;
+    m_sKind = sKind;
     return this;
   }
 
   @Nonnull
-  public HCSource setSrc (@Nullable final ISimpleURL aSrc)
+  public HCTrack setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
     return this;
   }
 
   @Nonnull
-  public HCSource setType (@Nullable final IMimeType aType)
+  public HCTrack setSrcLang (@Nullable final String sSrcLang)
   {
-    m_aType = aType;
+    m_sSrcLang = sSrcLang;
+    return this;
+  }
+
+  @Nonnull
+  public HCTrack setLabel (@Nullable final String sLabel)
+  {
+    m_sLabel = sLabel;
+    return this;
+  }
+
+  @Nonnull
+  public HCTrack setDefault (final boolean bDefault)
+  {
+    m_bDefault = bDefault;
     return this;
   }
 
@@ -67,12 +82,16 @@ public final class HCSource extends AbstractHCMediaElementChild <HCSource> imple
   protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
-    if (StringHelper.hasText (m_sMediaQuery))
-      aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMediaQuery);
+    if (StringHelper.hasText (m_sKind))
+      aElement.setAttribute (CHTMLAttributes.KIND, m_sKind);
     if (m_aSrc != null)
       aElement.setAttribute (CHTMLAttributes.SRC, m_aSrc.getAsString ());
-    if (m_aType != null)
-      aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
+    if (StringHelper.hasText (m_sSrcLang))
+      aElement.setAttribute (CHTMLAttributes.SRCLANG, m_sSrcLang);
+    if (StringHelper.hasText (m_sLabel))
+      aElement.setAttribute (CHTMLAttributes.LABEL, m_sLabel);
+    if (m_bDefault)
+      aElement.setAttribute (CHTMLAttributes.DEFAULT, CHTMLAttributeValues.DEFAULT);
   }
 
   public String getPlainText ()

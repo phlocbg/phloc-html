@@ -91,6 +91,7 @@ public final class CHTMLAttributes
   public static final String ICON = "icon";
   public static final String ID = "id";
   public static final String ISMAP = "ismap";
+  public static final String KIND = "kind";
   public static final String LABEL = "label";
   public static final String LANG = "lang";
   public static final String LANGUAGE = "language";
@@ -135,6 +136,7 @@ public final class CHTMLAttributes
   public static final String SPAN = "span";
   public static final String SPELLCHECK = "spellcheck";
   public static final String SRC = "src";
+  public static final String SRCLANG = "srclang";
   public static final String STANDBY = "standby";
   public static final String START = "start";
   public static final String STARTTIME = "starttime";
