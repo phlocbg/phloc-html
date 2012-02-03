@@ -65,6 +65,7 @@ public final class CHTMLAttributes
   public static final String CONTROLLER = "controller";
   public static final String CONTROLS = "controls";
   public static final String COORDS = "coords";
+  public static final String CROSSORIGIN = "crossorigin";
   public static final String DATA = "data";
   public static final String DATETIME = "datetime";
   public static final String DECLARE = "declare";
@@ -103,6 +104,7 @@ public final class CHTMLAttributes
   public static final String MENU = "menu";
   public static final String METHOD = "method";
   public static final String MULTIPLE = "multiple";
+  public static final String MUTED = "muted";
   public static final String NAME = "name";
   public static final String NOHREF = "nohref";
   public static final String NORESIZE = "noresize";

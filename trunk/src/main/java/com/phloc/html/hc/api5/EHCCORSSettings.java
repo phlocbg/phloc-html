@@ -15,16 +15,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html5;
+package com.phloc.html.hc.api5;
 
-import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.SinceHTML5;
+import javax.annotation.Nonnull;
 
-@SinceHTML5
-public final class HCAudio extends AbstractHCMediaElement <HCAudio>
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
+
+/**
+ * CORS settings
+ * 
+ * @author philip
+ */
+public enum EHCCORSSettings implements IHCHasHTMLAttributeValue
 {
-  public HCAudio ()
+  ANONYMOUS ("anonymous"),
+  USE_CREDENTIALS ("use-credentials");
+
+  @Nonnull
+  public static final EHCCORSSettings DEFAULT = ANONYMOUS;
+
+  private String m_sAttrValue;
+
+  private EHCCORSSettings (@Nonnull @Nonempty final String sAttrValue)
   {
-    super (EHTMLElement.AUDIO);
+    m_sAttrValue = sAttrValue;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getAttrValue ()
+  {
+    return m_sAttrValue;
   }
 }
