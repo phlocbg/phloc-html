@@ -53,7 +53,7 @@ public final class HCCanvas extends AbstractHCElement <HCCanvas>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
     if (m_nHeight > 0)
@@ -64,8 +64,6 @@ public final class HCCanvas extends AbstractHCElement <HCCanvas>
 
   public String getPlainText ()
   {
-    // Since sources have no plaintext either, we don't need to iterate them
-    // here
     return "";
   }
 }
