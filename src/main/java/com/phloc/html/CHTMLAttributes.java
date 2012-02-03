@@ -84,6 +84,7 @@ public final class CHTMLAttributes
   public static final String HEADERS = "headers";
   public static final String HEIGHT = "height";
   public static final String HIDDEN = "hidden";
+  public static final String HIGH = "high";
   public static final String HREF = "href";
   public static final String HREFLANG = "hreflang";
   public static final String HSPACE = "hspace";
@@ -97,13 +98,16 @@ public final class CHTMLAttributes
   public static final String LANGUAGE = "language";
   public static final String LOOP = "loop";
   public static final String LONGDESC = "longdesc";
+  public static final String LOW = "low";
   public static final String MARGINHEIGHT = "marginheight";
   public static final String MARGINWIDTH = "marginwidth";
   public static final String MASTERSOUND = "mastersound";
+  public static final String MAX = "max";
   public static final String MAXLENGTH = "maxlength";
   public static final String MEDIA = "media";
   public static final String MENU = "menu";
   public static final String METHOD = "method";
+  public static final String MIN = "min";
   public static final String MULTIPLE = "multiple";
   public static final String MUTED = "muted";
   public static final String NAME = "name";
@@ -112,6 +116,7 @@ public final class CHTMLAttributes
   public static final String NOSHADE = "noshade";
   public static final String NOWRAP = "nowrap";
   public static final String OBJECT = "object";
+  public static final String OPTIMUM = "optimum";
   public static final String PALETTE = "palette";
   public static final String PLAYCOUNT = "playcount";
   public static final String PLUGINSPAGE = "pluginspage";

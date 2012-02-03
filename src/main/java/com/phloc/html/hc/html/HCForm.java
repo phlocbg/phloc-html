@@ -149,6 +149,12 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
+  @Nonnull
+  private static HCButton _createFakeSubmitButton ()
+  {
+    return new HCButton_Submit ("").addClass (CHCCSS.CSS_CLASS_INVISIBLE_BUTTON);
+  }
+
   @Override
   protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
@@ -182,11 +188,5 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
         aButton.setTabIndex (m_nSubmitButtonTabIndex);
       aElement.appendChild (aButton.getAsNode (aConversionSettings));
     }
-  }
-
-  @Nonnull
-  private static HCButton _createFakeSubmitButton ()
-  {
-    return new HCButton_Submit ("").addClass (CHCCSS.CSS_CLASS_INVISIBLE_BUTTON);
   }
 }
