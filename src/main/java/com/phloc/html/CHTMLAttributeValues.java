@@ -41,6 +41,7 @@ public final class CHTMLAttributeValues
   public static final String CHECKED = CHTMLAttributes.CHECKED;
   public static final String DEFAULT = CHTMLAttributes.DEFAULT;
   public static final String HIDDEN = CHTMLAttributes.HIDDEN;
+  public static final String MUTED = CHTMLAttributes.MUTED;
 
   /*
    * Button types:

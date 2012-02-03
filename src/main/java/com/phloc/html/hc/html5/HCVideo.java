@@ -21,10 +21,10 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 
 @SinceHTML5
-public final class HCAudio extends AbstractHCMediaElement <HCAudio>
+public final class HCVideo extends AbstractHCMediaElement <HCVideo>
 {
-  public HCAudio ()
+  public HCVideo ()
   {
-    super (EHTMLElement.AUDIO);
+    super (EHTMLElement.VIDEO);
   }
 }
