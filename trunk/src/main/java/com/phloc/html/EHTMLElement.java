@@ -123,7 +123,7 @@ public enum EHTMLElement
   PLAINTEXT ("plaintext"),
   PRE ("pre"),
   PROGRESS ("progress"),
-  RB ("rb"),
+  RP ("rp"),
   RT ("rt"),
   RUBY ("ruby"),
   Q ("q"),
