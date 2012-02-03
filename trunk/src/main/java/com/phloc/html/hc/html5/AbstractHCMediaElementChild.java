@@ -23,6 +23,13 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Base class for &lt;source> and &lt;track
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ *        Implementation type
+ */
 @SinceHTML5
 public abstract class AbstractHCMediaElementChild <THISTYPE extends AbstractHCMediaElementChild <THISTYPE>> extends
                                                                                                             AbstractHCElement <THISTYPE>

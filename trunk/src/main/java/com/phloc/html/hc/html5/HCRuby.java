@@ -22,9 +22,11 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+@SinceHTML5
 public final class HCRuby extends AbstractHCElementWithChildren <HCRuby>
 {
   public HCRuby ()
