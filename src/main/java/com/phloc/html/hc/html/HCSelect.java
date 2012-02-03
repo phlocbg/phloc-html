@@ -200,7 +200,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     {
       // Special check, as this is not derived from
       // AbstractHCElementWithChildren
-      if (!m_eElement.mayBeSelfClosed ())
+      if (!getElement ().mayBeSelfClosed ())
         aElement.appendText ("");
     }
   }

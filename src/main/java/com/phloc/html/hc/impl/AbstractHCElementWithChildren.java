@@ -276,7 +276,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
       // and a closing tag are written separately
       // Note: just using "hasChildren" is not enough, in case a child is
       // present, that is not rendered!
-      if (!m_eElement.mayBeSelfClosed ())
+      if (!getElement ().mayBeSelfClosed ())
         aElement.appendText ("");
     }
   }

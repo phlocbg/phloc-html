@@ -41,7 +41,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
-  protected final EHTMLElement m_eElement;
+  private final EHTMLElement m_eElement;
   private final String m_sElementName;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
@@ -50,6 +50,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       throw new NullPointerException ("element");
     m_eElement = eElement;
     m_sElementName = eElement.getElementName ();
+  }
+
+  @Nonnull
+  public final EHTMLElement getElement ()
+  {
+    return m_eElement;
   }
 
   @Nonnull

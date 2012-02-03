@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
@@ -141,12 +142,29 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     return HCUtils.recursiveGetChildWithTagName (this, aElements) != null;
   }
 
+  /**
+   * Helper method that returns the elements in the correct order for emitting.
+   * This can e.g. be used for sorting or ordering.
+   * 
+   * @param aChildren
+   *        The children to be emitted
+   * @return The non-<code>null</code> list with all child elements to be
+   *         emitted.
+   */
+  @Nonnull
+  @Nonempty
+  @OverrideOnDemand
+  protected List <CHILDTYPE> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
+  {
+    return aChildren;
+  }
+
   @Override
   protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
     if (hasChildren ())
-      for (final CHILDTYPE aChild : m_aChildren)
+      for (final CHILDTYPE aChild : getChildrenFormEmitting (m_aChildren))
         aElement.appendChild (aChild.getAsNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
@@ -155,7 +173,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
       // and a closing tag are written separately
       // Note: just using "hasChildren" is not enough, in case a child is
       // present, that is not rendered!
-      if (!m_eElement.mayBeSelfClosed ())
+      if (!getElement ().mayBeSelfClosed ())
         aElement.appendText ("");
     }
   }
