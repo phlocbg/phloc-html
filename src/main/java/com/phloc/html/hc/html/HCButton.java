@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -29,7 +28,6 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.hc.api.IHCHasTabIndex;
@@ -114,22 +112,8 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    if (GlobalDebug.isDebugMode () &&
-        recursiveContainsChildWithTagName (EHTMLElement.INPUT,
-                                           EHTMLElement.SELECT,
-                                           EHTMLElement.TEXTAREA,
-                                           EHTMLElement.LABEL,
-                                           EHTMLElement.BUTTON,
-                                           EHTMLElement.FORM,
-                                           EHTMLElement.FIELDSET,
-                                           EHTMLElement.IFRAME,
-                                           EHTMLElement.ISINDEX))
-    {
-      XHTMLConsistencyException.onInconsistency ("Button element contains forbidden tag!");
-    }
-
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, getType ().getAttrValue ());
     if (StringHelper.hasText (m_sName))

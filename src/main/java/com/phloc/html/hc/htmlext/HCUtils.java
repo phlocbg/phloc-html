@@ -152,6 +152,12 @@ public final class HCUtils
     return null;
   }
 
+  public static final boolean recursiveContainsChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
+                                                                 @Nonnull @Nonempty final EHTMLElement... aElements)
+  {
+    return recursiveGetChildWithTagName (aOwner, aElements) != null;
+  }
+
   public static boolean recursivelyContainsAtLeastOneTextNode (@Nullable final IHCBaseNode aStartNode)
   {
     if (aStartNode == null)

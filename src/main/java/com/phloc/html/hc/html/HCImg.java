@@ -26,6 +26,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
@@ -55,7 +56,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   @Nonnull
   public HCImg setSrc (@Nullable final String sSrc)
   {
-    checkIfLinkIsMasked (sSrc);
+    HCConsistencyChecker.checkIfLinkIsMasked (sSrc);
     m_sSrc = sSrc;
     return this;
   }
@@ -112,7 +113,7 @@ public class HCImg extends AbstractHCElement <HCImg>
     return this;
   }
 
-  private String _getRealAlt ()
+  private String _getRealAlternativeText ()
   {
     String sRealAlt = m_sAlt;
     if (StringHelper.hasNoText (sRealAlt))
@@ -124,7 +125,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_sSrc != null)
@@ -136,7 +137,7 @@ public class HCImg extends AbstractHCElement <HCImg>
     }
 
     // Ensure that the alt attribute is present
-    aElement.setAttribute (CHTMLAttributes.ALT, _getRealAlt ());
+    aElement.setAttribute (CHTMLAttributes.ALT, _getRealAlternativeText ());
 
     // If the title is empty, but the alternative text is present, use the
     // alternative text as title

@@ -26,12 +26,9 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -90,11 +87,9 @@ public final class HCProgress extends AbstractHCElementWithChildren <HCProgress>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    final IHCElement <?> aNestedMeter = HCUtils.recursiveGetChildWithTagName (this, EHTMLElement.PROGRESS);
-    if (aNestedMeter != null)
-      XHTMLConsistencyException.onInconsistency ("Progress contains other nested progress: " + aNestedMeter);
+    super.applyProperties (aElement, aConversionSettings);
 
     /**
      * <pre>
@@ -104,9 +99,6 @@ public final class HCProgress extends AbstractHCElementWithChildren <HCProgress>
      * present, must have a value greater than zero.
      * </pre>
      */
-
-    super.applyProperties (aElement, aConversionSettings);
-
     if (!EqualsUtils.equals (m_dValue, CGlobal.ILLEGAL_DOUBLE))
       aElement.setAttribute (CHTMLAttributes.VALUE, Double.toString (m_dValue));
     if (!EqualsUtils.equals (m_dMax, CGlobal.ILLEGAL_DOUBLE))

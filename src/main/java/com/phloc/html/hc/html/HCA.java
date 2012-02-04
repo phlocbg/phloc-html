@@ -21,16 +21,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.api5.IHCHasMedia;
+import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -65,7 +64,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTa
     if (aHref == null)
       throw new NullPointerException ("href");
 
-    checkIfLinkIsMasked (aHref.getAsString ());
+    HCConsistencyChecker.checkIfLinkIsMasked (aHref.getAsString ());
     m_aHref = aHref;
     return this;
   }
@@ -117,11 +116,8 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTa
   }
 
   @Override
-  protected final void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected final void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    if (GlobalDebug.isDebugMode () && recursiveContainsChildWithTagName (EHTMLElement.A))
-      XHTMLConsistencyException.onInconsistency ("Links may never contain other links!");
-
     super.applyProperties (aElement, aConversionSettings);
     if (m_aHref != null)
       aElement.setAttribute (CHTMLAttributes.HREF, m_aHref.getAsString ());

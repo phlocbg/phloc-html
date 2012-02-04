@@ -26,12 +26,9 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -122,12 +119,8 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    final IHCElement <?> aNestedMeter = HCUtils.recursiveGetChildWithTagName (this, EHTMLElement.METER);
-    if (aNestedMeter != null)
-      XHTMLConsistencyException.onInconsistency ("Meter contains other nested meter: " + aNestedMeter);
-
     /**
      * <pre>
      * The following inequalities must hold, as applicable:
