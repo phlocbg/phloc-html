@@ -327,9 +327,9 @@ public class HCSWFObject extends AbstractWrappedHCNode implements IHCHasExternal
        .append ("\", \"")
        .appendEscaped (m_sHTMLContainerID)
        .append ("\", \"")
-       .append (m_sWidth)
+       .appendEscaped (m_sWidth)
        .append ("\", \"")
-       .append (m_sHeight)
+       .appendEscaped (m_sHeight)
        .append ("\", \"")
        .appendEscaped (m_sRequiredSWFVersion)
        .append ("\", ");
