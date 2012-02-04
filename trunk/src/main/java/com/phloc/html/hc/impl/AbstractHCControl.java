@@ -33,8 +33,6 @@ import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.html.HCScript;
-import com.phloc.html.js.EJSEvent;
-import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.html.js.provider.JSCodeWrapper;
 
@@ -63,12 +61,6 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   {
     m_sName = sName;
     return thisAsT ();
-  }
-
-  @Nonnull
-  public final THISTYPE setOnChange (@Nullable final IJSCodeProvider aOnChange)
-  {
-    return addEventHandler (EJSEvent.ONCHANGE, aOnChange);
   }
 
   public final int getTabIndex ()
@@ -127,7 +119,7 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
     if (StringHelper.hasText (m_sName))

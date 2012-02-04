@@ -20,11 +20,8 @@ package com.phloc.html.hc;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.name.IHasName;
-import com.phloc.html.hc.IHCControl;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.IHCHasFocus;
 import com.phloc.html.hc.api.IHCHasTabIndex;
-import com.phloc.html.js.IJSCodeProvider;
 
 public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
                                                                      IHCElement <THISTYPE>,
@@ -34,9 +31,6 @@ public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
 {
   @Nonnull
   THISTYPE setName (String sName);
-
-  @Nonnull
-  THISTYPE setOnChange (IJSCodeProvider sOnChange);
 
   @Nonnull
   THISTYPE setDisabled (boolean bDisabled);

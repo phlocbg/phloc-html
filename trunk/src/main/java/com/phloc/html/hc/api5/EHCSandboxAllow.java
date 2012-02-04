@@ -15,36 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc.api5;
 
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
 /**
- * Enum for HTML text directions.
+ * Sandbox allowance?
  * 
  * @author philip
  */
-public enum EHCTextDirection implements IHCHasHTMLAttributeValue
+public enum EHCSandboxAllow implements IHCHasHTMLAttributeValue
 {
-  /** left-to-right */
-  LTR ("ltr"),
-
-  /** right-to-left */
-  RTL ("rtl"),
-
-  /** automatic */
-  AUTO ("auto");
-
-  /**
-   * Default text direction: left-to-right
-   */
-  public static final EHCTextDirection DEFAULT = LTR;
+  ALLOW_FORMS ("allow-forms"),
+  ALLOW_SCRIPTS ("allow-scripts"),
+  ALLOW_TOP_NAVIGATION ("allow-top-navigation"),
+  ALLOW_SAME_ORIGIN ("allow-same-origin");
 
   private String m_sAttrValue;
 
-  private EHCTextDirection (@Nonnull @Nonempty final String sAttrValue)
+  private EHCSandboxAllow (@Nonnull @Nonempty final String sAttrValue)
   {
     m_sAttrValue = sAttrValue;
   }
