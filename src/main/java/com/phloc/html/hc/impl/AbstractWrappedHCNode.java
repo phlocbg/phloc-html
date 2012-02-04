@@ -40,15 +40,18 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
    * finally.
+   * 
+   * @param aConversionSettings
+   *        Conversion settings to be applied
    */
   @OverrideOnDemand
-  protected void prepareBeforeGetAsNode ()
+  protected void prepareBeforeGetAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {}
 
   @Nonnull
   public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
-    prepareBeforeGetAsNode ();
+    prepareBeforeGetAsNode (aConversionSettings);
     return getContainedHCNode ().getAsNode (aConversionSettings);
   }
 

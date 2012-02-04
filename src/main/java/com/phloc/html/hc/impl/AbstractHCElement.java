@@ -36,7 +36,7 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCElement;
 
-public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCObject <THISTYPE> implements
+public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCHTMLObject <THISTYPE> implements
                                                                                                                     IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);

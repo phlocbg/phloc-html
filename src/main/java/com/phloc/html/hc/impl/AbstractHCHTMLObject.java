@@ -59,12 +59,12 @@ import com.phloc.html.js.provider.JSCodeWrapper;
  * @author philip
  * @param <THISTYPE>
  */
-public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> extends AbstractHCNode implements
+public abstract class AbstractHCHTMLObject <THISTYPE extends IHCObject <THISTYPE>> extends AbstractHCNode implements
                                                                                                      IHCObject <THISTYPE>
 {
   /** prefix for JS attributes */
   protected static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
-  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCObject.class);
+  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCHTMLObject.class);
 
   private String m_sID;
   private String m_sTitle;
@@ -79,7 +79,7 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
   private JSEventMap m_aJSHandler;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
-  protected AbstractHCObject ()
+  protected AbstractHCHTMLObject ()
   {}
 
   protected static final void consistencyAssert (final boolean bCondition)
@@ -106,7 +106,7 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
   protected final THISTYPE thisAsT ()
   {
     // Avoid the unchecked cast warning in all places
-    return GenericReflection.<AbstractHCObject <THISTYPE>, THISTYPE> uncheckedCast (this);
+    return GenericReflection.<AbstractHCHTMLObject <THISTYPE>, THISTYPE> uncheckedCast (this);
   }
 
   @Nullable
