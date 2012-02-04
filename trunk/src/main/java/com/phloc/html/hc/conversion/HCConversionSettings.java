@@ -26,9 +26,11 @@ import com.phloc.html.EHTMLVersion;
 public final class HCConversionSettings
 {
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
 
   private final EHTMLVersion m_eHTMLVersion;
   private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN_HTML;
+  private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
 
   public HCConversionSettings (@Nonnull final EHTMLVersion eHTMLVersion)
   {
@@ -53,5 +55,15 @@ public final class HCConversionSettings
   public boolean isIdentAndAlignHTML ()
   {
     return m_bIndentAndAlignHTML;
+  }
+
+  public void setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
+  {
+    m_bConsistencyChecksEnabled = bConsistencyChecksEnabled;
+  }
+
+  public boolean areConsistencyChecksEnabled ()
+  {
+    return m_bConsistencyChecksEnabled;
   }
 }

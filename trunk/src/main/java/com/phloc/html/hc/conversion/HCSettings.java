@@ -80,7 +80,7 @@ public final class HCSettings
   @Nullable
   public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode)
   {
-    // No indent/align required for this conversion
+    // No indent/align required for conversion to IMicroNode
     return aHCNode.getAsNode (getConversionSettings (false));
   }
 
