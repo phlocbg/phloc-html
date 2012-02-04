@@ -20,28 +20,20 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.DeprecatedInHTML32;
-import com.phloc.html.annotations.DeprecatedInHTML4;
-import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
 public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends
                                                                                  AbstractHCHTMLObject <THISTYPE> implements
                                                                                                                 IHCElement <THISTYPE>
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
-
   private final EHTMLElement m_eElement;
   private final String m_sElementName;
 
@@ -121,17 +113,9 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     if (!canConvertToNode ())
       return null;
 
-    if (GlobalDebug.isDebugMode ())
-    {
-      if (getClass ().getAnnotation (DeprecatedInHTML32.class) != null)
-        s_aLogger.warn ("The element '" + m_sElementName + "' was deprecated in HTML 3.2");
-      else
-        if (getClass ().getAnnotation (DeprecatedInHTML4.class) != null)
-          s_aLogger.warn ("The element '" + m_sElementName + "' was deprecated in HTML 4.0");
-        else
-          if (getClass ().getAnnotation (DeprecatedInXHTML1.class) != null)
-            s_aLogger.warn ("The element '" + m_sElementName + "' is deprecated in XHTML1");
-    }
+    // Run some
+    if (aConversionSettings.areConsistencyChecksEnabled ())
+      HCConsistencyChecker.runConsistencyCheck (this, aConversionSettings.getHTMLVersion ());
 
     // Prepare object
     prepareBeforeCreateElement ();

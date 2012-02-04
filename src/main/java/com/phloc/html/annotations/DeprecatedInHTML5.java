@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@Target ({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
+@Target ({ ElementType.TYPE, ElementType.FIELD })
 public @interface DeprecatedInHTML5
 {
   String value() default "";

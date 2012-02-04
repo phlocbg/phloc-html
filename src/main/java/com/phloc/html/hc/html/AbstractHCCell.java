@@ -26,7 +26,6 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.hc.api.EHCCellAlign;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
@@ -87,7 +86,6 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
     return this;
   }
 
-  @DeprecatedInHTML5
   @Nonnull
   public final AbstractHCCell setAlign (final EHCCellAlign eAlign)
   {
@@ -96,7 +94,7 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nColspan > 1)

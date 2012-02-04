@@ -76,4 +76,9 @@ public enum EHTMLVersion
    */
   @Nonnull
   public abstract IMicroDocumentType getDocType ();
+
+  public boolean isAtLeastHTML5 ()
+  {
+    return this == HTML5;
+  }
 }
