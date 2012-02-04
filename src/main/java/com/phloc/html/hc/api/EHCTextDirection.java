@@ -20,6 +20,7 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.annotations.SinceHTML5;
 
 /**
  * Enum for HTML text directions.
@@ -35,12 +36,18 @@ public enum EHCTextDirection implements IHCHasHTMLAttributeValue
   RTL ("rtl"),
 
   /** automatic */
+  @SinceHTML5
   AUTO ("auto");
 
   /**
    * Default text direction: left-to-right
    */
   public static final EHCTextDirection DEFAULT = LTR;
+
+  /**
+   * Default text direction for HTML5: left-to-right
+   */
+  public static final EHCTextDirection DEFAULT_HTML5 = AUTO;
 
   private String m_sAttrValue;
 

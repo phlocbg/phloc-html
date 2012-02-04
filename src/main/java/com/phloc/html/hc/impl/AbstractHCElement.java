@@ -64,14 +64,17 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   protected static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
+  /** The HTML enum element */
   private final EHTMLElement m_eElement;
+  /** The cached element name */
   private final String m_sElementName;
+
   private String m_sID;
   private String m_sTitle;
+  private String m_sLanguage;
+  private EHCTextDirection m_eDirection;
   private LinkedHashSet <String> m_aClasses;
   private LinkedHashMap <ECSSProperty, ICSSValue> m_aStyles;
-  private EHCTextDirection m_eDirection;
-  private String m_sLanguage;
   /*
    * Use 1 pointer instead of many to save memory if no handler is used at all
    * (which happens quite often)!
@@ -100,12 +103,6 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return m_sElementName;
   }
 
-  protected static final void consistencyAssert (final boolean bCondition)
-  {
-    if (!bCondition)
-      throw new IllegalStateException ("Consistency check failed");
-  }
-
   protected static final void checkIfLinkIsMasked (@Nullable final String sHref)
   {
     if (sHref != null)
@@ -114,8 +111,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       // from a user input, which cannot be told at this point, it might as well
       // contain a'&amp;' followed by some malicious code that should be
       // escaped.
-      if (sHref.contains ("&amp;"))
-        throw new IllegalArgumentException ("The URL '" + sHref + "' seems to be already quoted!");
+      HCConsistencyChecker.consistencyAssert (!sHref.contains ("&amp;"), "The URL seems to be already quoted!");
     }
   }
 
@@ -171,7 +167,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     final String sClass = aProvider == null ? null : aProvider.getCSSClass ();
     if (sClass != null && sClass.length () > 0)
     {
-      consistencyAssert (sClass.indexOf (' ') == -1);
+      HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1, "Cannot add a class with a whitespace");
       if (m_aClasses == null)
         m_aClasses = new LinkedHashSet <String> ();
       m_aClasses.add (sClass);
@@ -212,7 +208,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       final String sClass = aProvider.getCSSClass ();
       if (StringHelper.hasText (sClass))
       {
-        consistencyAssert (sClass.indexOf (' ') == -1);
+        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1, "Cannot remove a class with a whitespace");
         m_aClasses.remove (sClass);
       }
     }
@@ -226,7 +222,8 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       final String sClass = aProvider.getCSSClass ();
       if (StringHelper.hasText (sClass))
       {
-        consistencyAssert (sClass.indexOf (' ') == -1);
+        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1,
+                                                "Cannot check for a class with a whitespace");
         return m_aClasses.contains (sClass);
       }
     }
@@ -419,67 +416,6 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   }
 
   /**
-   * Set all attributes and child elements of this object
-   * 
-   * @param aElement
-   *        The current micro element to be filled
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   */
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (@Nonnull final IMicroElement aElement,
-                                  @Nonnull final HCConversionSettings aConversionSettings)
-  {
-    applyProperties (aElement, false, aConversionSettings);
-  }
-
-  /**
-   * Set all attributes and child elements of this object
-   * 
-   * @param aElement
-   *        The current micro element to be filled
-   * @param bSkipUniqueProperties
-   *        do not write the ID attribute
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   */
-  protected final void applyProperties (@Nonnull final IMicroElement aElement,
-                                        final boolean bSkipUniqueProperties,
-                                        @Nonnull final HCConversionSettings aConversionSettings)
-  {
-    if (!bSkipUniqueProperties && StringHelper.hasText (m_sID))
-      aElement.setAttribute (CHTMLAttributes.ID, m_sID);
-
-    if (m_aClasses != null && !m_aClasses.isEmpty ())
-      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.implode (" ", m_aClasses));
-
-    if (m_aStyles != null && !m_aStyles.isEmpty ())
-    {
-      final StringBuilder aSB = new StringBuilder ();
-      for (final ICSSValue aValue : m_aStyles.values ())
-        aSB.append (aValue.getAsCSSString (ECSSVersion.LATEST, true));
-      aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
-    }
-
-    if (m_eDirection != null)
-      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
-
-    if (StringHelper.hasText (m_sLanguage))
-      aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
-
-    if (m_aJSHandler != null)
-      m_aJSHandler.applyToElement (aElement);
-
-    if (StringHelper.hasText (m_sTitle))
-      aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
-
-    if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
-      for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
-        aElement.setAttribute (aEntry.getKey (), aEntry.getValue ());
-  }
-
-  /**
    * This method checks whether the node is suitable for conversion to an
    * IMicroElement.
    * 
@@ -518,6 +454,50 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   }
 
   /**
+   * Set all attributes and child elements of this object
+   * 
+   * @param aElement
+   *        The current micro element to be filled
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void applyProperties (@Nonnull final IMicroElement aElement,
+                                  @Nonnull final HCConversionSettings aConversionSettings)
+  {
+    if (StringHelper.hasText (m_sID))
+      aElement.setAttribute (CHTMLAttributes.ID, m_sID);
+
+    if (m_aClasses != null && !m_aClasses.isEmpty ())
+      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.implode (" ", m_aClasses));
+
+    if (m_aStyles != null && !m_aStyles.isEmpty ())
+    {
+      final StringBuilder aSB = new StringBuilder ();
+      for (final ICSSValue aValue : m_aStyles.values ())
+        aSB.append (aValue.getAsCSSString (ECSSVersion.LATEST, true));
+      aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
+    }
+
+    if (m_eDirection != null)
+      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
+
+    if (StringHelper.hasText (m_sLanguage))
+      aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
+
+    if (m_aJSHandler != null)
+      m_aJSHandler.applyToElement (aElement);
+
+    if (StringHelper.hasText (m_sTitle))
+      aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
+
+    if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
+      for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
+        aElement.setAttribute (aEntry.getKey (), aEntry.getValue ());
+  }
+
+  /**
    * This method is called after the element itself was created and filled.
    * Overwrite this method to perform actions that can only be done after the
    * element was build finally.
@@ -544,7 +524,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 
     // Run some
     if (aConversionSettings.areConsistencyChecksEnabled ())
-      HCConsistencyChecker.runConsistencyCheck (this, aConversionSettings.getHTMLVersion ());
+      HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
 
     // Prepare object
     prepareBeforeCreateElement (aConversionSettings);

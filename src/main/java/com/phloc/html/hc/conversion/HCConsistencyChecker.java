@@ -18,6 +18,7 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +30,14 @@ import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.html.AbstractHCBaseTable;
 
 /**
  * This class performs some consistency checks on HCNodes
  * 
  * @author philip
  */
+@Immutable
 public final class HCConsistencyChecker
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCConsistencyChecker.class);
@@ -42,31 +45,46 @@ public final class HCConsistencyChecker
   private HCConsistencyChecker ()
   {}
 
-  public static void runConsistencyCheck (@Nonnull final IHCElement <?> aElement,
-                                          @Nonnull final EHTMLVersion eHTMLVersion)
+  public static void consistencyAssert (final boolean bCondition, final String sMsg)
+  {
+    if (!bCondition)
+      throw new IllegalStateException ("Consistency check failed: " + sMsg);
+  }
+
+  public static void consistencyWarning (final String sMsg)
+  {
+    s_aLogger.warn (sMsg);
+  }
+
+  public static void runConsistencyCheckBeforeCreation (@Nonnull final IHCElement <?> aElement,
+                                                        @Nonnull final EHTMLVersion eHTMLVersion)
   {
     final String sElementName = aElement.getTagName ();
     final Class <?> aElementClass = aElement.getClass ();
     if (aElementClass.getAnnotation (DeprecatedInHTML32.class) != null)
-      s_aLogger.warn ("The element '" + sElementName + "' was deprecated in HTML 3.2");
+      consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 3.2");
     else
       if (aElementClass.getAnnotation (DeprecatedInHTML4.class) != null)
-        s_aLogger.warn ("The element '" + sElementName + "' was deprecated in HTML 4.0");
+        consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 4.0");
       else
         if (aElementClass.getAnnotation (DeprecatedInXHTML1.class) != null)
-          s_aLogger.warn ("The element '" + sElementName + "' is deprecated in XHTML1");
+          consistencyWarning ("The element '" + sElementName + "' is deprecated in XHTML1");
         else
           if (eHTMLVersion.isAtLeastHTML5 ())
           {
             // HTML5 specifics checks
             if (aElementClass.getAnnotation (DeprecatedInHTML5.class) != null)
-              s_aLogger.warn ("The element '" + sElementName + "' is deprecated in HTML5");
+              consistencyWarning ("The element '" + sElementName + "' is deprecated in HTML5");
           }
           else
           {
             // pre-HTML5 checks
             if (aElementClass.getAnnotation (SinceHTML5.class) != null)
-              s_aLogger.warn ("The element '" + sElementName + "' is only available in HTML5");
+              consistencyWarning ("The element '" + sElementName + "' is only available in HTML5");
           }
+
+    // Special checks based on the implementation
+    if (aElement instanceof AbstractHCBaseTable <?>)
+      AbstractHCBaseTable.checkInternalConsistency ((AbstractHCBaseTable <?>) aElement);
   }
 }

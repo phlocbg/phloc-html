@@ -20,10 +20,9 @@ package com.phloc.html.hc.api5;
 import javax.annotation.Nonnull;
 
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 
 @SinceHTML5
-public interface IHCHasMedia <THISTYPE extends IHCHasMedia <THISTYPE>> extends IHCNode
+public interface IHCHasMedia <THISTYPE extends IHCHasMedia <THISTYPE>>
 {
   /**
    * Change media query

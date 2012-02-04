@@ -21,16 +21,13 @@ import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.api.IHCHasTabIndex;
-
 /**
  * Base interface for objects having a tab-index
  * 
  * @author philip
  * @param <THISTYPE>
  */
-public interface IHCHasTabIndex <THISTYPE extends IHCHasTabIndex <THISTYPE>> extends IHCNode
+public interface IHCHasTabIndex <THISTYPE extends IHCHasTabIndex <THISTYPE>>
 {
   /**
    * Set the tab index of this object.
