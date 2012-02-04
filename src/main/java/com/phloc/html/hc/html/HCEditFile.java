@@ -24,7 +24,6 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
@@ -37,7 +36,6 @@ public class HCEditFile extends AbstractHCControl <HCEditFile>
   public HCEditFile (@Nullable final String sName)
   {
     super (EHTMLElement.INPUT);
-    addClasses (CHCCSS.CSS_CLASS_EDIT, CHCCSS.CSS_CLASS_EDIT_FILE);
     setName (sName);
   }
 
@@ -56,7 +54,7 @@ public class HCEditFile extends AbstractHCControl <HCEditFile>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.FILE.getAttrValue ());

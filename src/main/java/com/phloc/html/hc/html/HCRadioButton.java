@@ -24,7 +24,6 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
@@ -37,7 +36,6 @@ public class HCRadioButton extends AbstractHCControl <HCRadioButton>
   public HCRadioButton (@Nullable final String sName)
   {
     super (EHTMLElement.INPUT);
-    addClass (CHCCSS.CSS_CLASS_RADIO);
     setName (sName);
   }
 
@@ -74,7 +72,7 @@ public class HCRadioButton extends AbstractHCControl <HCRadioButton>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.RADIO.getAttrValue ());

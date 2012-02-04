@@ -323,20 +323,20 @@ public class HCSWFObject extends AbstractWrappedHCNode implements IHCHasExternal
 
     // Call embedder
     aJS.append ("swfobject.embedSWF(\"")
-       .append (JSMarshaller.javaScriptEscape (m_aSWFURL.getAsString ()))
+       .appendEscaped (m_aSWFURL.getAsString ())
        .append ("\", \"")
-       .append (JSMarshaller.javaScriptEscape (m_sHTMLContainerID))
+       .appendEscaped (m_sHTMLContainerID)
        .append ("\", \"")
        .append (m_sWidth)
        .append ("\", \"")
        .append (m_sHeight)
        .append ("\", \"")
-       .append (JSMarshaller.javaScriptEscape (m_sRequiredSWFVersion))
+       .appendEscaped (m_sRequiredSWFVersion)
        .append ("\", ");
     // only supported by Flash Player 6.0.65; m_nWidth >= 310 && m_nHeight >=
     // 147;
     if (m_aExpressInstallSWFURL != null)
-      aJS.append ('"').append (JSMarshaller.javaScriptEscape (m_aExpressInstallSWFURL.getAsString ())).append ('"');
+      aJS.append ('"').appendEscaped (m_aExpressInstallSWFURL.getAsString ()).append ('"');
     else
       aJS.append (JSMarshaller.KEYWORD_NULL);
     aJS.append (", flashvars, params, attributes);\n");

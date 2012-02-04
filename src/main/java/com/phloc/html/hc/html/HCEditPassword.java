@@ -25,7 +25,6 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
@@ -39,7 +38,6 @@ public class HCEditPassword extends AbstractHCControl <HCEditPassword>
   public HCEditPassword (@Nullable final String sName)
   {
     super (EHTMLElement.INPUT);
-    addClasses (CHCCSS.CSS_CLASS_EDIT, CHCCSS.CSS_CLASS_EDIT_PASSWORD);
     setName (sName);
   }
 
@@ -80,7 +78,7 @@ public class HCEditPassword extends AbstractHCControl <HCEditPassword>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.PASSWORD.getAttrValue ());

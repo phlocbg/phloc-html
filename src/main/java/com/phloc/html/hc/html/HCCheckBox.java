@@ -29,8 +29,6 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
-import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
@@ -43,8 +41,6 @@ public class HCCheckBox extends AbstractHCControl <HCCheckBox>
   public HCCheckBox (@Nullable final String sName)
   {
     super (EHTMLElement.INPUT);
-    addClass (CHCCSS.CSS_CLASS_CHECKBOX);
-    setValue (CHCParam.VALUE_CHECKED);
     setName (sName);
   }
 
@@ -84,7 +80,7 @@ public class HCCheckBox extends AbstractHCControl <HCCheckBox>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.CHECKBOX.getAttrValue ());

@@ -125,6 +125,8 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE removeAllEventHandler (@Nonnull EJSEvent eJSEvent);
 
+  boolean isUnfocusable ();
+
   @Nonnull
   THISTYPE makeUnfocusable (boolean bUnfocusable);
 

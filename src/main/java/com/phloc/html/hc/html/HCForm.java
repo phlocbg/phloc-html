@@ -20,17 +20,16 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCFormMethod;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
-import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
 public class HCForm extends AbstractHCElementWithChildren <HCForm>
@@ -119,23 +118,9 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   }
 
   @Nonnull
-  public final HCForm setOnReset (@Nullable final IJSCodeProvider aOnReset)
-  {
-    addEventHandler (EJSEvent.ONRESET, aOnReset);
-    return this;
-  }
-
-  @Nonnull
-  public final HCForm setOnSubmit (@Nullable final IJSCodeProvider aOnSubmit)
-  {
-    addEventHandler (EJSEvent.ONSUBMIT, aOnSubmit);
-    return this;
-  }
-
-  @Nonnull
   public final HCForm setSubmitPressingEnter (final boolean bSubmitPressingEnter)
   {
-    return setSubmitPressingEnter (bSubmitPressingEnter, -1);
+    return setSubmitPressingEnter (bSubmitPressingEnter, CGlobal.ILLEGAL_UINT);
   }
 
   @Nonnull
@@ -146,10 +131,14 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
-  @Nonnull
-  private static HCButton _createFakeSubmitButton ()
+  public final boolean isSubmitPressingEnter ()
   {
-    return new HCButton_Submit ("").addClass (CHCCSS.CSS_CLASS_INVISIBLE_BUTTON);
+    return m_bSubmitPressingEnter;
+  }
+
+  public final int getSubmitButtonTabIndex ()
+  {
+    return m_nSubmitButtonTabIndex;
   }
 
   @Override
@@ -173,13 +162,5 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
     if (m_aLinkTarget != null)
       aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget.getAttrValue ());
-
-    if (m_bSubmitPressingEnter)
-    {
-      final HCButton aButton = _createFakeSubmitButton ();
-      if (m_nSubmitButtonTabIndex >= 0)
-        aButton.setTabIndex (m_nSubmitButtonTabIndex);
-      aElement.appendChild (aButton.getAsNode (aConversionSettings));
-    }
   }
 }

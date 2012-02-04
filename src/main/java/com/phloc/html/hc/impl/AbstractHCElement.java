@@ -28,7 +28,6 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.compare.EqualsUtils;
@@ -39,30 +38,27 @@ import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.xml.CXML;
-import com.phloc.commons.xml.CXMLRegEx;
 import com.phloc.css.ECSSProperty;
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.ICSSClassProvider;
 import com.phloc.css.ICSSValue;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.conversion.HCDefaultCustomizer;
+import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
-import com.phloc.html.js.provider.JSCodeWrapper;
 
 public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCNode implements
                                                                                                        IHCElement <THISTYPE>
 {
-  /** prefix for JS attributes */
-  protected static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
   /** The HTML enum element */
@@ -81,6 +77,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    * (which happens quite often)!
    */
   private JSEventMap m_aJSHandler;
+  private boolean m_bUnfocusable = false;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
@@ -120,10 +117,8 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @Nonnull
   public final THISTYPE setID (final String sID)
   {
+    // RegEx check: !CXMLRegEx.PATTERN_NCNAME.matcher (sID).matches ()
     // Happens to often, since "[" and "]" occur very often and are not allowed
-    if (false)
-      if (sID != null && !CXMLRegEx.PATTERN_NCNAME.matcher (sID).matches ())
-        s_aLogger.warn ("The ID '" + sID + "' does not match the required regular expression!");
     m_sID = sID;
     return thisAsT ();
   }
@@ -143,9 +138,6 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @Nonnull
   public final THISTYPE setTitle (@Nullable final String sTitle)
   {
-    if (false && GlobalDebug.isDebugMode ())
-      if (StringHelper.endsWith (sTitle, '.') && !StringHelper.endsWith (sTitle, "..."))
-        s_aLogger.warn ("Remove the trailing dot from '" + sTitle + "'");
     m_sTitle = sTitle;
     return thisAsT ();
   }
@@ -154,6 +146,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   public final THISTYPE addClass (@Nullable final ICSSClassProvider aProvider)
   {
     final String sClass = aProvider == null ? null : aProvider.getCSSClass ();
+    // Note: don't use StringHelper - raises Eclipse warning :-|
     if (sClass != null && sClass.length () > 0)
     {
       HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1, "Cannot add a class with a whitespace");
@@ -379,9 +372,13 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @Nonnull
   public final THISTYPE makeUnfocusable (final boolean bUnfocusable)
   {
-    if (bUnfocusable)
-      return setEventHandler (EJSEvent.ONFOCUS, JS_BLUR);
-    return removeAllEventHandler (EJSEvent.ONFOCUS);
+    m_bUnfocusable = bUnfocusable;
+    return thisAsT ();
+  }
+
+  public final boolean isUnfocusable ()
+  {
+    return m_bUnfocusable;
   }
 
   @Nonnull
@@ -463,9 +460,10 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 
     if (m_aStyles != null && !m_aStyles.isEmpty ())
     {
+      final boolean bOptimizedCSS = !aConversionSettings.isIdentAndAlignCSS ();
       final StringBuilder aSB = new StringBuilder ();
       for (final ICSSValue aValue : m_aStyles.values ())
-        aSB.append (aValue.getAsCSSString (ECSSVersion.LATEST, true));
+        aSB.append (aValue.getAsCSSString (ECSSVersion.LATEST, bOptimizedCSS));
       aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
     }
 
@@ -499,9 +497,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @OverrideOnDemand
   protected void finishAfterApplyProperties (@Nonnull final IMicroElement eElement,
                                              @Nonnull final HCConversionSettings aConversionSettings)
-  {
-    HCDefaultCustomizer.customize (eElement);
-  }
+  {}
 
   /*
    * Note: return type cannot by IMicroElement since the checkbox object
@@ -513,9 +509,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     if (!canConvertToNode (aConversionSettings))
       return null;
 
-    // Run some
+    // Run some consistency checks if desired
     if (aConversionSettings.areConsistencyChecksEnabled ())
       HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
+
+    // Do standard customization
+    HCDefaultCustomizer.customize (this);
 
     // Prepare object
     prepareBeforeCreateElement (aConversionSettings);
@@ -525,5 +524,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     applyProperties (ret, aConversionSettings);
     finishAfterApplyProperties (ret, aConversionSettings);
     return ret;
+  }
+
+  @Override
+  @Nullable
+  public IHCBaseNode getOutOfBandNode ()
+  {
+    return HCDefaultCustomizer.getCustomOutOfBandNode (this);
   }
 }

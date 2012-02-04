@@ -32,12 +32,13 @@ public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
   @Nonnull
   THISTYPE setName (String sName);
 
+  boolean isDisabled ();
+
   @Nonnull
   THISTYPE setDisabled (boolean bDisabled);
 
-  @Nonnull
-  THISTYPE setReadOnly (boolean bReadOnly);
+  boolean isReadonly ();
 
   @Nonnull
-  THISTYPE setFocused (boolean bFocused);
+  THISTYPE setReadonly (boolean bReadOnly);
 }

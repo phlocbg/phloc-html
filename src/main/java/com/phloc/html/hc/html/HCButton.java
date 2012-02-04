@@ -28,7 +28,6 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -46,7 +45,6 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
   public HCButton ()
   {
     super (EHTMLElement.BUTTON);
-    addClass (CHCCSS.CSS_CLASS_BUTTON);
   }
 
   public HCButton (@Nonnull final IPredefinedLocaleTextProvider aLabel)
