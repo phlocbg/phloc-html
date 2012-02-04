@@ -28,7 +28,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.DevelopersNote;
-import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
@@ -39,7 +38,6 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.htmlext.HCUtils;
 
 public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
                                                                                                                 AbstractHCElement <THISTYPE> implements
@@ -255,11 +253,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final IHCBaseNode getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aChildren, nIndex);
-  }
-
-  protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
-  {
-    return HCUtils.recursiveGetChildWithTagName (this, aElements) != null;
   }
 
   @Override

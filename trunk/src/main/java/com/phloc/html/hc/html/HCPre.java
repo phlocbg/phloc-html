@@ -20,13 +20,9 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.GlobalDebug;
-import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 public final class HCPre extends AbstractHCElementWithChildren <HCPre>
@@ -64,20 +60,5 @@ public final class HCPre extends AbstractHCElementWithChildren <HCPre>
   public HCPre (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
     super (EHTMLElement.PRE, aChildren);
-  }
-
-  @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
-  {
-    if (GlobalDebug.isDebugMode () &&
-        recursiveContainsChildWithTagName (EHTMLElement.IMG,
-                                           EHTMLElement.OBJECT,
-                                           EHTMLElement.BIG,
-                                           EHTMLElement.SMALL,
-                                           EHTMLElement.SUB,
-                                           EHTMLElement.SUP))
-      XHTMLConsistencyException.onInconsistency ("PRE elements contains forbidden tag!");
-
-    super.applyProperties (aElement, aConversionSettings);
   }
 }

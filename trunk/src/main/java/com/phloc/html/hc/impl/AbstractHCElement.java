@@ -50,6 +50,7 @@ import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCDefaultCustomizer;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
@@ -101,18 +102,6 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   public final String getTagName ()
   {
     return m_sElementName;
-  }
-
-  protected static final void checkIfLinkIsMasked (@Nullable final String sHref)
-  {
-    if (sHref != null)
-    {
-      // FIXME: this is potential vulnerability. If the passed href is passed
-      // from a user input, which cannot be told at this point, it might as well
-      // contain a'&amp;' followed by some malicious code that should be
-      // escaped.
-      HCConsistencyChecker.consistencyAssert (!sHref.contains ("&amp;"), "The URL seems to be already quoted!");
-    }
   }
 
   @Nonnull
@@ -510,7 +499,9 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @OverrideOnDemand
   protected void finishAfterApplyProperties (@Nonnull final IMicroElement eElement,
                                              @Nonnull final HCConversionSettings aConversionSettings)
-  {}
+  {
+    HCDefaultCustomizer.customize (eElement);
+  }
 
   /*
    * Note: return type cannot by IMicroElement since the checkbox object

@@ -18,11 +18,13 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.annotations.DeprecatedInHTML4;
@@ -31,6 +33,13 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.html.AbstractHCBaseTable;
+import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.HCButton;
+import com.phloc.html.hc.html.HCForm;
+import com.phloc.html.hc.html.HCPre;
+import com.phloc.html.hc.html5.HCMeter;
+import com.phloc.html.hc.html5.HCProgress;
+import com.phloc.html.hc.htmlext.HCUtils;
 
 /**
  * This class performs some consistency checks on HCNodes
@@ -56,11 +65,10 @@ public final class HCConsistencyChecker
     s_aLogger.warn (sMsg);
   }
 
-  public static void runConsistencyCheckBeforeCreation (@Nonnull final IHCElement <?> aElement,
-                                                        @Nonnull final EHTMLVersion eHTMLVersion)
+  private static void _checkDeprecation (final Class <?> aElementClass,
+                                         final String sElementName,
+                                         final EHTMLVersion eHTMLVersion)
   {
-    final String sElementName = aElement.getTagName ();
-    final Class <?> aElementClass = aElement.getClass ();
     if (aElementClass.getAnnotation (DeprecatedInHTML32.class) != null)
       consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 3.2");
     else
@@ -82,9 +90,107 @@ public final class HCConsistencyChecker
             if (aElementClass.getAnnotation (SinceHTML5.class) != null)
               consistencyWarning ("The element '" + sElementName + "' is only available in HTML5");
           }
+  }
+
+  private static void _checkTable (final AbstractHCBaseTable <?> aTable)
+  {
+    AbstractHCBaseTable.checkInternalConsistency (aTable);
+  }
+
+  private static void _checkButton (final HCButton aButton)
+  {
+    final IHCElement <?> aChild = HCUtils.recursiveGetChildWithTagName (aButton,
+                                                                        EHTMLElement.INPUT,
+                                                                        EHTMLElement.SELECT,
+                                                                        EHTMLElement.TEXTAREA,
+                                                                        EHTMLElement.LABEL,
+                                                                        EHTMLElement.BUTTON,
+                                                                        EHTMLElement.FORM,
+                                                                        EHTMLElement.FIELDSET,
+                                                                        EHTMLElement.IFRAME,
+                                                                        EHTMLElement.ISINDEX);
+    if (aChild != null)
+      consistencyWarning ("Button element contains forbidden tag " + aChild.getElement ());
+  }
+
+  private static void _checkA (final HCA aA)
+  {
+    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.A))
+      consistencyWarning ("Links may never contain other links!");
+  }
+
+  private static void _checkPre (final HCPre aPre)
+  {
+    final IHCElement <?> aChild = HCUtils.recursiveGetChildWithTagName (aPre,
+                                                                        EHTMLElement.IMG,
+                                                                        EHTMLElement.OBJECT,
+                                                                        EHTMLElement.BIG,
+                                                                        EHTMLElement.SMALL,
+                                                                        EHTMLElement.SUB,
+                                                                        EHTMLElement.SUP);
+    if (aChild != null)
+      consistencyWarning ("PRE elements contains forbidden tag " + aChild.getElement ());
+  }
+
+  private static void _checkForm (final HCForm aForm)
+  {
+    if (HCUtils.recursiveContainsChildWithTagName (aForm, EHTMLElement.FORM))
+      consistencyWarning ("Form contains other nested form");
+  }
+
+  private static void _checkMeter (final HCMeter aMeter)
+  {
+    if (HCUtils.recursiveContainsChildWithTagName (aMeter, EHTMLElement.METER))
+      consistencyWarning ("Meter contains other nested meter");
+  }
+
+  private static void _checkProgress (final HCProgress aProgress)
+  {
+    if (HCUtils.recursiveContainsChildWithTagName (aProgress, EHTMLElement.PROGRESS))
+      consistencyWarning ("Progress contains other nested progress");
+  }
+
+  public static void runConsistencyCheckBeforeCreation (@Nonnull final IHCElement <?> aElement,
+                                                        @Nonnull final EHTMLVersion eHTMLVersion)
+  {
+    final String sElementName = aElement.getTagName ();
+    final Class <?> aElementClass = aElement.getClass ();
+
+    // Deprecation is checked for all elements
+    _checkDeprecation (aElementClass, sElementName, eHTMLVersion);
 
     // Special checks based on the implementation
     if (aElement instanceof AbstractHCBaseTable <?>)
-      AbstractHCBaseTable.checkInternalConsistency ((AbstractHCBaseTable <?>) aElement);
+      _checkTable ((AbstractHCBaseTable <?>) aElement);
+    else
+      if (aElement instanceof HCButton)
+        _checkButton ((HCButton) aElement);
+      else
+        if (aElement instanceof HCA)
+          _checkA ((HCA) aElement);
+        else
+          if (aElement instanceof HCPre)
+            _checkPre ((HCPre) aElement);
+          else
+            if (aElement instanceof HCForm)
+              _checkForm ((HCForm) aElement);
+            else
+              if (aElement instanceof HCMeter)
+                _checkMeter ((HCMeter) aElement);
+              else
+                if (aElement instanceof HCProgress)
+                  _checkProgress ((HCProgress) aElement);
+  }
+
+  public static void checkIfLinkIsMasked (@Nullable final String sHref)
+  {
+    if (sHref != null)
+    {
+      // FIXME: this is potential vulnerability. If the passed href is passed
+      // from a user input, which cannot be told at this point, it might as well
+      // contain a'&amp;' followed by some malicious code that should be
+      // escaped.
+      consistencyAssert (!sHref.contains ("&amp;"), "The URL seems to be already quoted!");
+    }
   }
 }

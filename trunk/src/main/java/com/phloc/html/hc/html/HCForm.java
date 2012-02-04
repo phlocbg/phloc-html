@@ -26,12 +26,9 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.hc.CHCCSS;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCFormMethod;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
@@ -158,10 +155,6 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   @Override
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    final IHCElement <?> aNestedForm = HCUtils.recursiveGetChildWithTagName (this, EHTMLElement.FORM);
-    if (aNestedForm != null)
-      XHTMLConsistencyException.onInconsistency ("Form contains other nested form: " + aNestedForm);
-
     super.applyProperties (aElement, aConversionSettings);
 
     if (m_aAction != null)
