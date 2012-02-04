@@ -136,6 +136,13 @@ public final class HCDefaultCustomizer
     }
   }
 
+  /**
+   * Get a custom out of band node
+   * 
+   * @param aElement
+   *        The element to be customized
+   * @return <code>null</code> if there is no custom out-of-band node
+   */
   @Nullable
   public static IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement)
   {
