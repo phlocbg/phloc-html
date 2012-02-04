@@ -60,7 +60,7 @@ import com.phloc.html.js.provider.JSCodeWrapper;
  * @param <THISTYPE>
  */
 public abstract class AbstractHCHTMLObject <THISTYPE extends IHCObject <THISTYPE>> extends AbstractHCNode implements
-                                                                                                     IHCObject <THISTYPE>
+                                                                                                         IHCObject <THISTYPE>
 {
   /** prefix for JS attributes */
   protected static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
@@ -331,90 +331,6 @@ public abstract class AbstractHCHTMLObject <THISTYPE extends IHCObject <THISTYPE
     // Now we have a non-empty string, not starting with "javascript:" and
     // ensure to be ending with ";"
     return DefaultJSCodeProvider.create (sJSCode);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnClick (@Nullable final IJSCodeProvider aOnClick)
-  {
-    return setEventHandler (EJSEvent.ONCLICK, aOnClick);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnDblClick (@Nullable final IJSCodeProvider aOnClick)
-  {
-    return setEventHandler (EJSEvent.ONDBLCLICK, aOnClick);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnMouseOver (@Nullable final IJSCodeProvider aOnMouseOver)
-  {
-    return setEventHandler (EJSEvent.ONMOUSEOVER, aOnMouseOver);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnMouseOut (@Nullable final IJSCodeProvider aOnMouseOut)
-  {
-    return setEventHandler (EJSEvent.ONMOUSEOUT, aOnMouseOut);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnMouseUp (@Nullable final IJSCodeProvider aOnMouseUp)
-  {
-    return setEventHandler (EJSEvent.ONMOUSEUP, aOnMouseUp);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnMouseDown (@Nullable final IJSCodeProvider aOnMouseDown)
-  {
-    return setEventHandler (EJSEvent.ONMOUSEDOWN, aOnMouseDown);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnMouseMove (@Nullable final IJSCodeProvider aOnMouseMove)
-  {
-    return setEventHandler (EJSEvent.ONMOUSEMOVE, aOnMouseMove);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnKeyUp (@Nullable final IJSCodeProvider aOnKeyUp)
-  {
-    return setEventHandler (EJSEvent.ONKEYUP, aOnKeyUp);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnKeyDown (@Nullable final IJSCodeProvider aOnKeyDown)
-  {
-    return setEventHandler (EJSEvent.ONKEYDOWN, aOnKeyDown);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnKeyPress (@Nullable final IJSCodeProvider aOnKeyPress)
-  {
-    return setEventHandler (EJSEvent.ONKEYPRESS, aOnKeyPress);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnFocus (@Nullable final IJSCodeProvider aOnFocus)
-  {
-    return setEventHandler (EJSEvent.ONFOCUS, aOnFocus);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE setOnBlur (@Nullable final IJSCodeProvider aOnBlur)
-  {
-    return addEventHandler (EJSEvent.ONBLUR, aOnBlur);
   }
 
   @Nonnull
