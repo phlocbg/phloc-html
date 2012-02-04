@@ -184,9 +184,9 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   }
 
   @Override
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_bMultiple)
       aElement.setAttribute (CHTMLAttributes.MULTIPLE, CHTMLAttributeValues.MULTIPLE);
     if (m_nSize > 1)

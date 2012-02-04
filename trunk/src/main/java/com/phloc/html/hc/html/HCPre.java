@@ -67,7 +67,7 @@ public final class HCPre extends AbstractHCElementWithChildren <HCPre>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
     if (GlobalDebug.isDebugMode () &&
         recursiveContainsChildWithTagName (EHTMLElement.IMG,
@@ -78,6 +78,6 @@ public final class HCPre extends AbstractHCElementWithChildren <HCPre>
                                            EHTMLElement.SUP))
       XHTMLConsistencyException.onInconsistency ("PRE elements contains forbidden tag!");
 
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
   }
 }

@@ -124,9 +124,9 @@ public class HCImg extends AbstractHCElement <HCImg>
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_sSrc != null)
       aElement.setAttribute (CHTMLAttributes.SRC, m_sSrc);
     if (m_aExtent != null)

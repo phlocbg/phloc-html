@@ -115,9 +115,9 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_bDisabled)
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_bSelected)

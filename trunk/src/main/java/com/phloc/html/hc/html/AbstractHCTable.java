@@ -349,23 +349,23 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     return ContainerHelper.getLastElement (m_aBodyRows);
   }
 
-  protected void applyHeaderRow (@Nonnull final HCConversionSettings aConversionSettings,
-                                 final IMicroElement aTHead,
-                                 final HCRow aRow)
+  protected void applyHeaderRow (final IMicroElement aTHead,
+                                 final HCRow aRow,
+                                 @Nonnull final HCConversionSettings aConversionSettings)
   {
     aTHead.appendChild (aRow.getAsNode (aConversionSettings));
   }
 
-  protected void applyFooterRow (@Nonnull final HCConversionSettings aConversionSettings,
-                                 final IMicroElement aTFoot,
-                                 final HCRow aRow)
+  protected void applyFooterRow (final IMicroElement aTFoot,
+                                 final HCRow aRow,
+                                 @Nonnull final HCConversionSettings aConversionSettings)
   {
     aTFoot.appendChild (aRow.getAsNode (aConversionSettings));
   }
 
-  protected void applyBodyRow (@Nonnull final HCConversionSettings aConversionSettings,
-                               final IMicroElement aTBody,
-                               final HCRow aRow)
+  protected void applyBodyRow (final IMicroElement aTBody,
+                               final HCRow aRow,
+                               @Nonnull final HCConversionSettings aConversionSettings)
   {
     aTBody.appendChild (aRow.getAsNode (aConversionSettings));
   }
@@ -378,9 +378,9 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    applyProperties (aConversionSettings, aElement, true, false);
+    applyProperties (aElement, true, false, aConversionSettings);
   }
 
   private static int _getApplicableRowspan (final int nCellIndex, @Nullable final List <int []> aRowSpans)
@@ -488,15 +488,15 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     }
   }
 
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings,
-                                  final IMicroElement aElement,
+  protected void applyProperties (final IMicroElement aElement,
                                   final boolean bApplyStructure,
-                                  final boolean bSkipUniqueProperties)
+                                  final boolean bSkipUniqueProperties,
+                                  @Nonnull final HCConversionSettings aConversionSettings)
   {
     if (GlobalDebug.isDebugMode ())
       _checkInternalConsistency ();
 
-    super.applyProperties (aElement, bSkipUniqueProperties);
+    super.applyProperties (aElement, bSkipUniqueProperties, aConversionSettings);
     if (bApplyStructure)
     {
       if (m_nCellSpacing >= 0)
@@ -510,14 +510,14 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
         final IMicroElement aTHead = aElement.appendElement (EHTMLElement.THEAD.getElementName ());
         if (StringHelper.hasText (m_sHeaderID))
           aTHead.setAttribute (CHTMLAttributes.ID, m_sHeaderID);
-        applyHeaderRow (aConversionSettings, aTHead, m_aHeaderRow);
+        applyHeaderRow (aTHead, m_aHeaderRow, aConversionSettings);
       }
       if (m_aFooterRow != null)
       {
         final IMicroElement aTFoot = aElement.appendElement (EHTMLElement.TFOOT.getElementName ());
         if (StringHelper.hasText (m_sFooterID))
           aTFoot.setAttribute (CHTMLAttributes.ID, m_sFooterID);
-        applyFooterRow (aConversionSettings, aTFoot, m_aFooterRow);
+        applyFooterRow (aTFoot, m_aFooterRow, aConversionSettings);
       }
 
       // add the tbody anyway - helpful for JS tables
@@ -556,12 +556,12 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
             if (nWidth >= 0)
               aCell.addStyle (CCSSProperties.WIDTH.newValue (CCSS.px (nWidth)));
           }
-          applyBodyRow (aConversionSettings, aTBody, aRow);
+          applyBodyRow (aTBody, aRow, aConversionSettings);
         }
       }
 
       for (final HCRow aRow : m_aBodyRows)
-        applyBodyRow (aConversionSettings, aTBody, aRow);
+        applyBodyRow (aTBody, aRow, aConversionSettings);
     }
   }
 

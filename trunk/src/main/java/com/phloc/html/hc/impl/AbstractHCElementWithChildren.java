@@ -263,9 +263,9 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Override
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
       for (final IHCBaseNode aChild : m_aChildren)
         aElement.appendChild (aChild.getAsNode (aConversionSettings));

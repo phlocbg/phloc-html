@@ -67,9 +67,9 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_nCols > 0)
       aElement.setAttribute (CHTMLAttributes.COLS, Integer.toString (m_nCols));
     if (m_nRows > 0)

@@ -36,8 +36,9 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
-public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCHTMLObject <THISTYPE> implements
-                                                                                                                    IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends
+                                                                                 AbstractHCHTMLObject <THISTYPE> implements
+                                                                                                                IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -98,6 +99,18 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return new MicroElement (m_sElementName);
   }
 
+  /**
+   * This method is called after the element itself was created and filled.
+   * Overwrite this method to perform actions that can only be done after the
+   * element was build finally.
+   * 
+   * @param eElement
+   *        The created micro element
+   */
+  @OverrideOnDemand
+  protected void finishAfterCreateElement (@Nonnull final IMicroElement eElement)
+  {}
+
   /*
    * Note: return type cannot by IMicroElement since the checkbox object
    * delivers an IMicroNodeList!
@@ -120,11 +133,13 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
             s_aLogger.warn ("The element '" + m_sElementName + "' is deprecated in XHTML1");
     }
 
+    // Prepare object
     prepareBeforeCreateElement ();
     final IMicroElement ret = createElement ();
     if (ret == null)
       throw new IllegalStateException ("Created a null element!");
-    applyProperties (aConversionSettings, ret);
+    applyProperties (ret, aConversionSettings);
+    finishAfterCreateElement (ret);
     return ret;
   }
 }

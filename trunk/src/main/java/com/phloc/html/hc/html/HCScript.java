@@ -76,9 +76,9 @@ public final class HCScript extends AbstractHCElement <HCScript>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_JAVASCRIPT.getAsString ());
     setInlineScript (aElement, m_sContent);
   }

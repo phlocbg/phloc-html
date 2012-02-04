@@ -83,9 +83,9 @@ public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sFor))
       aElement.setAttribute (CHTMLAttributes.FOR, m_sFor);
   }

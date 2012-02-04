@@ -80,9 +80,9 @@ public class HCEditPassword extends AbstractHCControl <HCEditPassword>
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.PASSWORD.getAttrValue ());
     if (m_nMaxLength > 0)
       aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
