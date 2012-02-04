@@ -128,7 +128,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   boolean isUnfocusable ();
 
   @Nonnull
-  THISTYPE makeUnfocusable (boolean bUnfocusable);
+  THISTYPE setUnfocusable (boolean bUnfocusable);
 
   /**
    * Set a custom attribute that is serialized as is.

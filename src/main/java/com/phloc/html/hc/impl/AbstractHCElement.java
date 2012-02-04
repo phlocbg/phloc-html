@@ -370,7 +370,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   }
 
   @Nonnull
-  public final THISTYPE makeUnfocusable (final boolean bUnfocusable)
+  public final THISTYPE setUnfocusable (final boolean bUnfocusable)
   {
     m_bUnfocusable = bUnfocusable;
     return thisAsT ();
