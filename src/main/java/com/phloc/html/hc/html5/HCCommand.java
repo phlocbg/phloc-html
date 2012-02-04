@@ -31,7 +31,7 @@ import com.phloc.html.hc.api5.EHCCommandType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
-@SinceHTML5 ("IE9 only")
+@SinceHTML5
 public final class HCCommand extends AbstractHCElement <HCCommand>
 {
   public static final boolean DEFAULT_CHECKED = false;
@@ -103,7 +103,7 @@ public final class HCCommand extends AbstractHCElement <HCCommand>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bChecked)

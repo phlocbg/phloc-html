@@ -38,21 +38,21 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
   /** XML writer settings for emitting stuff indented and aligned */
-  private static final IXMLWriterSettings s_aXMLSettingsAligned = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
+  private static final IXMLWriterSettings s_aXMLSettingsIndent = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
                                                                                                                                   .setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
 
   /** XML writer settings for emitting stuff not indented and not aligned */
-  private static final IXMLWriterSettings s_aXMLSettingsNotAligned = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
+  private static final IXMLWriterSettings s_aXMLSettingsNotIndented = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
                                                                                                                                      .setIndent (EXMLSerializeIndent.NONE);
 
   @Nonnull
-  public final String getAsXHTMLString (@Nonnull final HCConversionSettings aConversionSettings)
+  public final String getAsHTMLString (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final IMicroNode aNode = getAsNode (aConversionSettings);
     if (aNode == null)
       return "";
-    return MicroWriter.getNodeAsString (aNode, aConversionSettings.isIdentAndAlignHTML () ? s_aXMLSettingsAligned
-                                                                                         : s_aXMLSettingsNotAligned);
+    return MicroWriter.getNodeAsString (aNode, aConversionSettings.isIdentAndAlignHTML () ? s_aXMLSettingsIndent
+                                                                                         : s_aXMLSettingsNotIndented);
   }
 
   @Override

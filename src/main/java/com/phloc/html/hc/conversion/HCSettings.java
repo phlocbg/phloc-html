@@ -92,8 +92,8 @@ public final class HCSettings
    * @return The node as XML optionally without indentation.
    */
   @Nonnull
-  public static String getAsXHTMLString (@Nonnull final IHCBaseNode aHCNode, final boolean bIndentAndAlign)
+  public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode, final boolean bIndentAndAlign)
   {
-    return aHCNode.getAsXHTMLString (getConversionSettings (bIndentAndAlign));
+    return aHCNode.getAsHTMLString (getConversionSettings (bIndentAndAlign));
   }
 }
