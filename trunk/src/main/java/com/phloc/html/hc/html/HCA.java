@@ -29,9 +29,9 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.XHTMLConsistencyException;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.api5.IHCHasMedia;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**

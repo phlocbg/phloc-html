@@ -27,8 +27,8 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCStyle;
 
 @Immutable

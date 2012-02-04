@@ -26,9 +26,9 @@ import com.phloc.commons.xml.serialize.EXMLSerializeFormat;
 import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Default implementation of the {@link IHCNode} interface.

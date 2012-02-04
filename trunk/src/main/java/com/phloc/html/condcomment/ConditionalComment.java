@@ -30,8 +30,8 @@ import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.HCCommentNode;
 
 /**

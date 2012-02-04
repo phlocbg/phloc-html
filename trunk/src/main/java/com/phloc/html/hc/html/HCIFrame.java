@@ -27,10 +27,10 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCIFrameAlign;
 import com.phloc.html.hc.api.EHCScrolling;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>

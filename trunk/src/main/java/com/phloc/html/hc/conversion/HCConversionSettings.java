@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -25,9 +25,6 @@ import com.phloc.html.EHTMLVersion;
 @NotThreadSafe
 public final class HCConversionSettings
 {
-  public static final HCConversionSettings DEFAULT = new HCConversionSettings (EHTMLVersion.DEFAULT);
-  public static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (EHTMLVersion.DEFAULT).setIndentAndAlignHTML (false);
-
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
 
   private final EHTMLVersion m_eHTMLVersion;

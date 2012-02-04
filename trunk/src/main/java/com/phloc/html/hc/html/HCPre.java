@@ -25,8 +25,8 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.XHTMLConsistencyException;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 public final class HCPre extends AbstractHCElementWithChildren <HCPre>

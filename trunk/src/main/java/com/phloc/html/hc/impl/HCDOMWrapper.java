@@ -23,7 +23,7 @@ import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.utils.MicroRecursiveIterator;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * This is a simple wrapper around any {@link IMicroNode} so it can easily be

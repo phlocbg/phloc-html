@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Represents a single text node as HC node.

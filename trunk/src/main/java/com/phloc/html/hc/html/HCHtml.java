@@ -29,9 +29,9 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.CHTMLDocTypes;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCTextDirection;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 
 /**

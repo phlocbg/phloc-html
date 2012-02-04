@@ -21,8 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.phloc.commons.CGlobal;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
@@ -37,7 +36,7 @@ public final class HCBodyTest
     b.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create ("onClick ()"));
     b.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
     b.setCustomAttr ("bla", "foo");
-    assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\" />" +
-                  CGlobal.LINE_SEPARATOR, b.getAsXHTMLString (HCConversionSettings.DEFAULT));
+    assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\" />",
+                  HCSettings.getAsXHTMLString (b, false));
   }
 }

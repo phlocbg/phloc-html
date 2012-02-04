@@ -29,10 +29,10 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without

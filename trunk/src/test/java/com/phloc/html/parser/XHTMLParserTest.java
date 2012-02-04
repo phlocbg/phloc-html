@@ -27,11 +27,11 @@ import org.junit.Test;
 
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCTextNode;
-import com.phloc.html.parser.XHTMLParser;
 
 /**
  * Test class for class {@link XHTMLParser}.
@@ -332,13 +332,15 @@ public final class XHTMLParserTest
   {
     IHCNode aNode = XHTMLParser.convertToXHTMLOnDemand ("<b>Hallo</b>");
     assertTrue (aNode instanceof HCDOMWrapper);
-    assertTrue (((HCDOMWrapper) aNode).getAsNode (HCConversionSettings.DEFAULT) instanceof IMicroContainer);
-    assertTrue (((HCDOMWrapper) aNode).getAsNode (HCConversionSettings.DEFAULT).getChildAtIndex (0) instanceof IMicroElement);
+    IMicroNode aMicroNode = HCSettings.getAsNode (aNode);
+    assertTrue (aMicroNode instanceof IMicroContainer);
+    assertTrue (((IMicroContainer) aMicroNode).getChildAtIndex (0) instanceof IMicroElement);
 
     aNode = XHTMLParser.convertToXHTMLOnDemand ("<b>Hallo<br/>phloc</b>");
     assertTrue (aNode instanceof HCDOMWrapper);
-    assertTrue (((HCDOMWrapper) aNode).getAsNode (HCConversionSettings.DEFAULT) instanceof IMicroContainer);
-    assertTrue (((HCDOMWrapper) aNode).getAsNode (HCConversionSettings.DEFAULT).getChildAtIndex (0) instanceof IMicroElement);
+    aMicroNode = HCSettings.getAsNode (aNode);
+    assertTrue (aMicroNode instanceof IMicroContainer);
+    assertTrue (((IMicroContainer) aMicroNode).getChildAtIndex (0) instanceof IMicroElement);
 
     aNode = XHTMLParser.convertToXHTMLOnDemand ("<b>Hallo");
     assertTrue (aNode instanceof HCTextNode);

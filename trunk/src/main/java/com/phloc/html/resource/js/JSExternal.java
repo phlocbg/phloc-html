@@ -25,8 +25,8 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCScriptFile;
 
 @Immutable

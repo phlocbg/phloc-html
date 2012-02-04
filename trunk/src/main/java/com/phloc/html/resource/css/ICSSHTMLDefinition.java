@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Base interface for both external and inline CSS declarations in HTML.

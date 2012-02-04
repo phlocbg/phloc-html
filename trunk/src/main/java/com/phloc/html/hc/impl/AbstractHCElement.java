@@ -33,8 +33,8 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.annotations.DeprecatedInHTML4;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCHTMLObject <THISTYPE> implements
                                                                                                                     IHCElement <THISTYPE>

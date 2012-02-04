@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Implementation of a node that is ONLY an out-of-band node!

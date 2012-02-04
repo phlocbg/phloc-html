@@ -21,9 +21,9 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Base class for an HTML control that consists only of another HC node (e.g.
