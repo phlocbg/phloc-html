@@ -29,6 +29,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.parent.IHasChildrenSorted;
@@ -122,6 +123,13 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   public final int getChildCount ()
   {
     return ContainerHelper.getSize (m_aChildren);
+  }
+
+  @Nullable
+  @ReturnsMutableObject (reason = "speed")
+  protected final List <CHILDTYPE> directGetChildren ()
+  {
+    return m_aChildren;
   }
 
   @Nullable

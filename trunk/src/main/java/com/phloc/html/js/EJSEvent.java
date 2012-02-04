@@ -184,6 +184,9 @@ public enum EJSEvent
     m_aJSEventTypes = ContainerHelper.newUnmodifiableSet (aTypes);
   }
 
+  /**
+   * @return The HTML attribute to be emitted for this event.
+   */
   @Nonnull
   @Nonempty
   public String getEvent ()
