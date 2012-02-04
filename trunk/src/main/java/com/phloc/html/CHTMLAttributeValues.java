@@ -42,6 +42,7 @@ public final class CHTMLAttributeValues
   public static final String DEFAULT = CHTMLAttributes.DEFAULT;
   public static final String HIDDEN = CHTMLAttributes.HIDDEN;
   public static final String MUTED = CHTMLAttributes.MUTED;
+  public static final String AUTOFOCUS = CHTMLAttributes.AUTOFOCUS;
 
   /*
    * Button types:
