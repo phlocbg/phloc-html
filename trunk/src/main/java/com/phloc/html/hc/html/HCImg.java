@@ -53,7 +53,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   }
 
   @Nonnull
-  public HCImg setSrc (final String sSrc)
+  public HCImg setSrc (@Nullable final String sSrc)
   {
     checkIfLinkIsMasked (sSrc);
     m_sSrc = sSrc;
@@ -92,7 +92,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   /**
    * Scales the image so that neither with nor height are exceeded, keeping the
    * aspect ratio.
-   *
+   * 
    * @param nMaxWidth
    * @param nMaxHeight
    * @return the correctly resized image tag
@@ -124,7 +124,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
     if (m_sSrc != null)
