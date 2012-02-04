@@ -101,46 +101,6 @@ public interface IHCObject <THISTYPE extends IHCObject <THISTYPE>> extends IHCNo
   @Nonnull
   THISTYPE setLanguage (String sLanguage);
 
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnClick (IJSCodeProvider aOnClick);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnMouseOver (IJSCodeProvider aOnMouseOver);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnMouseOut (IJSCodeProvider aOnMouseOut);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnMouseUp (IJSCodeProvider aOnMouseUp);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnMouseDown (IJSCodeProvider aOnMouseDown);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnKeyUp (IJSCodeProvider aOnMouseUp);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnKeyDown (IJSCodeProvider aOnMouseUp);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnKeyPress (IJSCodeProvider aOnMouseUp);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnFocus (IJSCodeProvider aOnFocus);
-
-  @Deprecated
-  @Nonnull
-  THISTYPE setOnBlur (IJSCodeProvider aOnBlur);
-
   @Nonnull
   THISTYPE setEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
 

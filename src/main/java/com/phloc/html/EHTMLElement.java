@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
@@ -194,7 +195,7 @@ public enum EHTMLElement
    *        The name of the tag to validate.
    * @return <code>true</code> if the tag may not be self closed.
    */
-  public static boolean isTagThatMayNotBeSelfClosed (final String sElementName)
+  public static boolean isTagThatMayNotBeSelfClosed (@Nullable final String sElementName)
   {
     if (s_aNotSelfClosedElements.isEmpty ())
     {
@@ -214,7 +215,7 @@ public enum EHTMLElement
    * @return <code>true</code> if it is a known HTML tag, <code>false</code>
    *         otherwise.
    */
-  public static boolean isHTMLTagName (final String sTagName)
+  public static boolean isHTMLTagName (@Nullable final String sTagName)
   {
     if (StringHelper.hasText (sTagName))
       for (final EHTMLElement e : values ())
