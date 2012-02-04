@@ -59,9 +59,9 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_CSS.getAsString ());
     if (m_aMediaList != null)
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());

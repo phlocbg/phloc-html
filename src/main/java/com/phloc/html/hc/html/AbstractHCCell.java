@@ -96,9 +96,9 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_nColspan > 1)
       aElement.setAttribute (CHTMLAttributes.COLSPAN, Integer.toString (m_nColspan));
     if (m_nRowspan > 1)

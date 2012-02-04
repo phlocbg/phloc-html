@@ -93,9 +93,9 @@ public class HCHiddenField extends AbstractHCElement <HCHiddenField>
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.HIDDEN.getAttrValue ());
     if (m_sName != null)
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);

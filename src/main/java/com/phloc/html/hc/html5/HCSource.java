@@ -64,9 +64,9 @@ public final class HCSource extends AbstractHCMediaElementChild <HCSource> imple
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sMediaQuery))
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMediaQuery);
     if (m_aSrc != null)

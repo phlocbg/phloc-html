@@ -156,13 +156,13 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     final IHCElement <?> aNestedForm = HCUtils.recursiveGetChildWithTagName (this, EHTMLElement.FORM);
     if (aNestedForm != null)
       XHTMLConsistencyException.onInconsistency ("Form contains other nested form: " + aNestedForm);
 
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
 
     if (m_aAction != null)
       aElement.setAttribute (CHTMLAttributes.ACTION, m_aAction.getJSCode ());

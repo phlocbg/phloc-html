@@ -193,9 +193,9 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject> implement
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_nWidth > 0)
       aElement.setAttribute (CHTMLAttributes.WIDTH, Integer.toString (m_nWidth));
     if (m_nHeight > 0)

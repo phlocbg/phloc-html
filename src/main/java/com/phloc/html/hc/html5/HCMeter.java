@@ -122,7 +122,7 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
   }
 
   @Override
-  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
     final IHCElement <?> aNestedMeter = HCUtils.recursiveGetChildWithTagName (this, EHTMLElement.METER);
     if (aNestedMeter != null)
@@ -140,7 +140,7 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
      * </pre>
      */
 
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
 
     if (!EqualsUtils.equals (m_dValue, CGlobal.ILLEGAL_DOUBLE))
       aElement.setAttribute (CHTMLAttributes.VALUE, Double.toString (m_dValue));

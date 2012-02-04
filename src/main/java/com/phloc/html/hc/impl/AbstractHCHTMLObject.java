@@ -404,20 +404,32 @@ public abstract class AbstractHCHTMLObject <THISTYPE extends IHCObject <THISTYPE
   /**
    * Set all attributes and child elements of this object
    * 
-   * @param aConversionSettings
-   *        The conversion settings to be used
    * @param aElement
    *        The current micro element to be filled
+   * @param aConversionSettings
+   *        The conversion settings to be used
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings,
-                                  @Nonnull final IMicroElement aElement)
+  protected void applyProperties (@Nonnull final IMicroElement aElement,
+                                  @Nonnull final HCConversionSettings aConversionSettings)
   {
-    applyProperties (aElement, false);
+    applyProperties (aElement, false, aConversionSettings);
   }
 
-  protected final void applyProperties (@Nonnull final IMicroElement aElement, final boolean bSkipUniqueProperties)
+  /**
+   * Set all attributes and child elements of this object
+   * 
+   * @param aElement
+   *        The current micro element to be filled
+   * @param bSkipUniqueProperties
+   *        do not write the ID attribute
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  protected final void applyProperties (@Nonnull final IMicroElement aElement,
+                                        final boolean bSkipUniqueProperties,
+                                        @Nonnull final HCConversionSettings aConversionSettings)
   {
     if (!bSkipUniqueProperties && StringHelper.hasText (m_sID))
       aElement.setAttribute (CHTMLAttributes.ID, m_sID);

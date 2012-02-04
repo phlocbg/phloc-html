@@ -43,9 +43,9 @@ public class HCUL extends AbstractHCList <HCUL>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
 
     if (m_eType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());

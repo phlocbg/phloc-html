@@ -117,12 +117,12 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTa
   }
 
   @Override
-  protected final void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected final void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
   {
     if (GlobalDebug.isDebugMode () && recursiveContainsChildWithTagName (EHTMLElement.A))
       XHTMLConsistencyException.onInconsistency ("Links may never contain other links!");
 
-    super.applyProperties (aConversionSettings, aElement);
+    super.applyProperties (aElement, aConversionSettings);
     if (m_aHref != null)
       aElement.setAttribute (CHTMLAttributes.HREF, m_aHref.getAsString ());
     if (m_aTarget != null)
