@@ -37,6 +37,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
+// TODO change hierarchy to http://dev.w3.org/html5/markup/select.html#select
 public class HCSelect extends AbstractHCControl <HCSelect>
 {
   private boolean m_bMultiple = false;
