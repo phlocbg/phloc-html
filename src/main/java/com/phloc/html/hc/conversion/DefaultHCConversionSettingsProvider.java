@@ -35,6 +35,12 @@ public final class DefaultHCConversionSettingsProvider implements IHCConversionS
                                                                                                           .setIndentAndAlignHTML (false);
 
   @Nonnull
+  public EHTMLVersion getHTMLVersion ()
+  {
+    return HTML_VERSION;
+  }
+
+  @Nonnull
   public HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
     return bIndentAndAlign ? DEFAULT : DEFAULT_NOT_INDENTED;

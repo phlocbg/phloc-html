@@ -36,6 +36,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.xml.CXML;
 import com.phloc.css.ECSSProperty;
@@ -531,5 +532,21 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   public IHCBaseNode getOutOfBandNode ()
   {
     return HCDefaultCustomizer.getCustomOutOfBandNode (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("element", m_eElement)
+                                       .appendIfNotNull ("ID", m_sID)
+                                       .appendIfNotNull ("title", m_sTitle)
+                                       .appendIfNotNull ("language", m_sLanguage)
+                                       .appendIfNotNull ("direction", m_eDirection)
+                                       .appendIfNotNull ("classes", m_aClasses)
+                                       .appendIfNotNull ("styles", m_aStyles)
+                                       .appendIfNotNull ("JSHandler", m_aJSHandler)
+                                       .append ("unfocusable", m_bUnfocusable)
+                                       .appendIfNotNull ("customAttrs", m_aCustomAttrs)
+                                       .toString ();
   }
 }
