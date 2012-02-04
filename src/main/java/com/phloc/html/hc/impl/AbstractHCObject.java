@@ -17,8 +17,6 @@
  */
 package com.phloc.html.hc.impl;
 
-import java.io.Serializable;
-import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -51,7 +49,7 @@ import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
+import com.phloc.html.js.JSEventMap;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 import com.phloc.html.js.provider.JSCodeWrapper;
 
@@ -68,94 +66,6 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
   protected static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCObject.class);
 
-  private static final class JSEventMap implements Serializable
-  {
-    private final Map <EJSEvent, IJSCodeProvider> m_aEvents = new EnumMap <EJSEvent, IJSCodeProvider> (EJSEvent.class);
-
-    /**
-     * Add an additional handler for the given JS event. If an existing handler
-     * is present, the new handler is appended.
-     * 
-     * @param eJSEvent
-     *        The JS event. May not be <code>null</code>.
-     * @param aNewHandler
-     *        The new handler to be added. May not be <code>null</code>.
-     */
-    public void addHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
-    {
-      if (eJSEvent == null)
-        throw new NullPointerException ("JSEvent");
-      if (aNewHandler == null)
-        throw new NullPointerException ("newHandler");
-
-      final IJSCodeProvider aOldHandler = m_aEvents.get (eJSEvent);
-      if (aOldHandler == null)
-      {
-        // Set only the new handler
-        m_aEvents.put (eJSEvent, aNewHandler);
-      }
-      else
-      {
-        // Combine old and new handler
-        m_aEvents.put (eJSEvent, new CollectingJSCodeProvider (aOldHandler, aNewHandler));
-      }
-    }
-
-    /**
-     * Set a handler for the given JS event. If an existing handler is present,
-     * it is automatically overridden.
-     * 
-     * @param eJSEvent
-     *        The JS event. May not be <code>null</code>.
-     * @param aNewHandler
-     *        The new handler to be added. May not be <code>null</code>.
-     */
-    public void setHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
-    {
-      if (eJSEvent == null)
-        throw new NullPointerException ("JSEvent");
-      if (aNewHandler == null)
-        throw new NullPointerException ("newHandler");
-
-      // Set only the new handler
-      m_aEvents.put (eJSEvent, aNewHandler);
-    }
-
-    public void removeHandler (@Nonnull final EJSEvent eJSEvent)
-    {
-      if (eJSEvent == null)
-        throw new NullPointerException ("JSEvent");
-
-      m_aEvents.remove (eJSEvent);
-    }
-
-    @Nullable
-    public IJSCodeProvider getHandler (@Nonnull final EJSEvent eJSEvent)
-    {
-      return m_aEvents.get (eJSEvent);
-    }
-
-    public void applyToElement (@Nonnull final IMicroElement aElement)
-    {
-      // Loop over all events for consistent results
-      for (final EJSEvent eEvent : EJSEvent.values ())
-      {
-        final IJSCodeProvider aProvider = m_aEvents.get (eEvent);
-        if (aProvider != null)
-        {
-          final String sJSCode = aProvider.getJSCode ();
-          aElement.setAttribute (eEvent.getEvent (), CJS.JS_PREFIX + sJSCode);
-        }
-      }
-    }
-
-    @Override
-    public String toString ()
-    {
-      return new ToStringGenerator (this).append ("events", m_aEvents).toString ();
-    }
-  }
-
   private String m_sID;
   private String m_sTitle;
   private LinkedHashSet <String> m_aClasses;
@@ -166,7 +76,7 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
    * Use 1 pointer instead of many to save memory if no handler is used at all
    * (which happens quite often)!
    */
-  private JSEventMap m_aJSEvents;
+  private JSEventMap m_aJSHandler;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
   protected AbstractHCObject ()
@@ -508,9 +418,9 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
     final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);
     if (aCleanedCode != null)
     {
-      if (m_aJSEvents == null)
-        m_aJSEvents = new JSEventMap ();
-      m_aJSEvents.addHandler (eJSEvent, aCleanedCode);
+      if (m_aJSHandler == null)
+        m_aJSHandler = new JSEventMap ();
+      m_aJSHandler.addHandler (eJSEvent, aCleanedCode);
     }
     return thisAsT ();
   }
@@ -521,9 +431,9 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
     final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);
     if (aCleanedCode != null)
     {
-      if (m_aJSEvents == null)
-        m_aJSEvents = new JSEventMap ();
-      m_aJSEvents.setHandler (eJSEvent, aCleanedCode);
+      if (m_aJSHandler == null)
+        m_aJSHandler = new JSEventMap ();
+      m_aJSHandler.setHandler (eJSEvent, aCleanedCode);
     }
     return thisAsT ();
   }
@@ -531,15 +441,15 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
   @Nonnull
   public final THISTYPE removeAllEventHandler (@Nonnull final EJSEvent eJSEvent)
   {
-    if (m_aJSEvents != null)
-      m_aJSEvents.removeHandler (eJSEvent);
+    if (m_aJSHandler != null)
+      m_aJSHandler.removeHandler (eJSEvent);
     return thisAsT ();
   }
 
   @Nullable
-  public final IJSCodeProvider getEvent (@Nonnull final EJSEvent eJSEvent)
+  public final IJSCodeProvider getEventHandler (@Nonnull final EJSEvent eJSEvent)
   {
-    return m_aJSEvents == null ? null : m_aJSEvents.getHandler (eJSEvent);
+    return m_aJSHandler == null ? null : m_aJSHandler.getHandler (eJSEvent);
   }
 
   @Nonnull
@@ -608,8 +518,8 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
     if (StringHelper.hasText (m_sLanguage))
       aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
 
-    if (m_aJSEvents != null)
-      m_aJSEvents.applyToElement (aElement);
+    if (m_aJSHandler != null)
+      m_aJSHandler.applyToElement (aElement);
 
     if (StringHelper.hasText (m_sTitle))
       aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
@@ -628,7 +538,7 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
                                        .appendIfNotNull ("styles", m_aStyles)
                                        .appendIfNotNull ("direction", m_eDirection)
                                        .appendIfNotNull ("language", m_sLanguage)
-                                       .appendIfNotNull ("JShandler", m_aJSEvents)
+                                       .appendIfNotNull ("JShandler", m_aJSHandler)
                                        .appendIfNotNull ("custom", m_aCustomAttrs)
                                        .toString ();
   }

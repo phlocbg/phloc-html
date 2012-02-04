@@ -29,13 +29,13 @@ public class HCA_JS extends HCA
 {
   private static final ISimpleURL JS_URL = new ReadonlySimpleURL (CJS.JS_VOID);
 
-  public HCA_JS (final IJSCodeProvider aJS)
+  public HCA_JS (final IJSCodeProvider aJSOnClick)
   {
     /**
      * JS links must always set a JS void in the href. This ensures that if the
      * href gets called (due to double click etc.) it has no effect.
      **/
     super (JS_URL);
-    addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (cleanJSLink (aJS, true)).append ("return false;"));
+    addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (cleanJSLink (aJSOnClick, true)).append ("return false;"));
   }
 }

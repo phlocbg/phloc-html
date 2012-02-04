@@ -17,62 +17,27 @@
  */
 package com.phloc.html.hc.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
-import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 
-public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildrenSorted <AbstractHCCell>
+public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, AbstractHCCell>
 {
   private final boolean m_bHeader;
-  private final List <AbstractHCCell> m_aCells = new ArrayList <AbstractHCCell> ();
 
   public HCRow (final boolean bHeader)
   {
     super (EHTMLElement.TR);
     m_bHeader = bHeader;
-  }
-
-  public boolean hasChildren ()
-  {
-    return !m_aCells.isEmpty ();
-  }
-
-  @Nonnegative
-  public int getChildCount ()
-  {
-    return m_aCells.size ();
-  }
-
-  @Nonnull
-  @ReturnsImmutableObject
-  public List <? extends AbstractHCCell> getChildren ()
-  {
-    return ContainerHelper.makeUnmodifiable (m_aCells);
-  }
-
-  @Nullable
-  public AbstractHCCell getChildAtIndex (@Nonnegative final int nIndex)
-  {
-    return ContainerHelper.getSafe (m_aCells, nIndex);
   }
 
   /**
@@ -85,7 +50,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   {
     final AbstractHCCell ret = m_bHeader ? new HCHeaderCell () : new HCCell ();
     ret.setParentRow (this);
-    m_aCells.add (ret);
+    addChild (ret);
     return ret;
   }
 
@@ -99,7 +64,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   {
     final AbstractHCCell ret = m_bHeader ? new HCHeaderCell () : new HCCell ();
     ret.setParentRow (this);
-    m_aCells.add (nIndex, ret);
+    addChild (nIndex, ret);
     return ret;
   }
 
@@ -355,9 +320,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   @Nullable
   public AbstractHCCell getCellAtIndex (final int nIndex)
   {
-    if (nIndex >= 0 && nIndex < m_aCells.size ())
-      return m_aCells.get (nIndex);
-    return null;
+    return getChildAtIndex (nIndex);
   }
 
   /**
@@ -372,7 +335,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   public AbstractHCCell getCellAtEffectiveIndex (final int nIndex)
   {
     int i = 0;
-    for (final AbstractHCCell aCell : m_aCells)
+    for (final AbstractHCCell aCell : directGetChildren ())
     {
       if (i >= nIndex)
         return aCell;
@@ -402,7 +365,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   public int getEffectiveCellCount ()
   {
     int ret = 0;
-    for (final AbstractHCCell aCell : m_aCells)
+    for (final AbstractHCCell aCell : directGetChildren ())
       ret += aCell.getColspan ();
     return ret;
   }
@@ -411,7 +374,7 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   public HCNodeList getCellsAsNodeList ()
   {
     final HCNodeList ret = new HCNodeList ();
-    for (final AbstractHCCell aCell : m_aCells)
+    for (final AbstractHCCell aCell : directGetChildren ())
       ret.addChild (aCell);
     return ret;
   }
@@ -421,41 +384,5 @@ public final class HCRow extends AbstractHCElement <HCRow> implements IHasChildr
   {
     // Avoid rows without cells!
     return hasChildren ();
-  }
-
-  @Override
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
-  {
-    super.applyProperties (aConversionSettings, aElement);
-    for (final AbstractHCCell aCell : m_aCells)
-      aElement.appendChild (aCell.getAsNode (aConversionSettings));
-  }
-
-  @Nonnull
-  public String getPlainText ()
-  {
-    final StringBuilder ret = new StringBuilder ();
-    for (final AbstractHCCell aCell : m_aCells)
-      ret.append (aCell.getPlainText ());
-    return ret.toString ();
-  }
-
-  @Override
-  @Nullable
-  public IHCBaseNode getOutOfBandNode ()
-  {
-    final HCNodeList aCont = new HCNodeList ();
-    for (final AbstractHCCell aCell : m_aCells)
-      aCont.addChild (aCell.getOutOfBandNode ());
-    return aCont.getAsSimpleNode ();
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ())
-                            .append ("header", m_bHeader)
-                            .append ("cells", m_aCells)
-                            .toString ();
   }
 }
