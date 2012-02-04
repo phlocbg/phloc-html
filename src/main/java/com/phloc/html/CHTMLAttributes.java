@@ -36,6 +36,7 @@ public final class CHTMLAttributes
   public static final String ALIGN = "align";
   public static final String ALT = "alt";
   public static final String ARCHIVE = "archive";
+  public static final String AUTOFOCUS = "autofocus";
   public static final String AUTOPLAY = "autoplay";
   public static final String AUTOSTART = "autostart";
   public static final String AXIS = "axis";
@@ -44,6 +45,7 @@ public final class CHTMLAttributes
   public static final String BORDER = "border";
   public static final String CELLPADDING = "cellpadding";
   public static final String CELLSPACING = "cellspacing";
+  public static final String CHALLENGE = "challenge";
   public static final String CHAR = "char";
   public static final String CHAROFF = "charoff";
   public static final String CHARSET = "charset";
@@ -79,6 +81,7 @@ public final class CHTMLAttributes
   public static final String ENDTIME = "endtime";
   public static final String FACE = "face";
   public static final String FOR = "for";
+  public static final String FORM = "form";
   public static final String FRAME = "frame";
   public static final String FRAMEBORDER = "frameborder";
   public static final String HEADERS = "headers";
@@ -92,6 +95,7 @@ public final class CHTMLAttributes
   public static final String ICON = "icon";
   public static final String ID = "id";
   public static final String ISMAP = "ismap";
+  public static final String KEYTYPE = "keytype";
   public static final String KIND = "kind";
   public static final String LABEL = "label";
   public static final String LANG = "lang";

@@ -1,0 +1,117 @@
+/**
+ * Copyright (C) 2006-2012 phloc systems
+ * http://www.phloc.com
+ * office[at]phloc[dot]com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.phloc.html.hc.html5;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
+import com.phloc.html.CHTMLAttributeValues;
+import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.api5.EHCKeyGenType;
+import com.phloc.html.hc.impl.AbstractHCElement;
+
+@SinceHTML5
+public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
+{
+  public static final boolean DEFAULT_AUTOFOCUS = false;
+  public static final boolean DEFAULT_DISABLED = false;
+
+  private String m_sChallenge;
+  private EHCKeyGenType m_eKeyType = EHCKeyGenType.DEFAULT;
+  private boolean m_bAutofocus = DEFAULT_AUTOFOCUS;
+  private String m_sName;
+  private boolean m_bDisabled = DEFAULT_DISABLED;
+  private String m_sForm;
+
+  public HCKeyGen ()
+  {
+    super (EHTMLElement.KEYGEN);
+  }
+
+  @Nonnull
+  public HCKeyGen setChallenge (@Nullable final String sChallenge)
+  {
+    m_sChallenge = sChallenge;
+    return this;
+  }
+
+  @Nonnull
+  public HCKeyGen setKeyType (@Nonnull final EHCKeyGenType eKeyType)
+  {
+    if (eKeyType == null)
+      throw new NullPointerException ("keyType");
+    m_eKeyType = eKeyType;
+    return this;
+  }
+
+  @Nonnull
+  public HCKeyGen setAutofocus (final boolean bAutofocus)
+  {
+    m_bAutofocus = bAutofocus;
+    return this;
+  }
+
+  @Nonnull
+  public HCKeyGen setName (@Nullable final String sName)
+  {
+    m_sName = sName;
+    return this;
+  }
+
+  @Nonnull
+  public HCKeyGen setDisabled (final boolean bDisabled)
+  {
+    m_bDisabled = bDisabled;
+    return this;
+  }
+
+  @Nonnull
+  public HCKeyGen setForm (@Nullable final String sForm)
+  {
+    m_sForm = sForm;
+    return this;
+  }
+
+  @Override
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  {
+    super.applyProperties (aConversionSettings, aElement);
+    if (StringHelper.hasText (m_sChallenge))
+      aElement.setAttribute (CHTMLAttributes.CHALLENGE, m_sChallenge);
+    aElement.setAttribute (CHTMLAttributes.KEYTYPE, m_eKeyType.getAttrValue ());
+    if (m_bAutofocus)
+      aElement.setAttribute (CHTMLAttributes.AUTOFOCUS, CHTMLAttributeValues.AUTOFOCUS);
+    if (StringHelper.hasText (m_sName))
+      aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
+    if (m_bDisabled)
+      aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
+    if (StringHelper.hasText (m_sForm))
+      aElement.setAttribute (CHTMLAttributes.FORM, m_sForm);
+  }
+
+  @Nonnull
+  public String getPlainText ()
+  {
+    return "";
+  }
+}
