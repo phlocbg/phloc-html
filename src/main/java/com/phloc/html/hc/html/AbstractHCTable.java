@@ -371,7 +371,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   }
 
   @Override
-  protected boolean canConvertToNode ()
+  protected boolean canConvertToNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
     return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;

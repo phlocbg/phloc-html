@@ -40,11 +40,15 @@ import com.phloc.html.js.provider.JSCodeWrapper;
 public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements
                                                                                                                      IHCControl <THISTYPE>
 {
+  public static final boolean DEFAULT_DISABLED = false;
+  public static final boolean DEFAULT_READONLY = false;
+  public static final boolean DEFAULT_FOCUSED = false;
+
   private String m_sName;
   private int m_nTabIndex = CGlobal.ILLEGAL_UINT;
-  private boolean m_bDisabled = false;
-  private boolean m_bReadOnly = false;
-  private boolean m_bFocused = false;
+  private boolean m_bDisabled = DEFAULT_DISABLED;
+  private boolean m_bReadOnly = DEFAULT_READONLY;
+  private boolean m_bFocused = DEFAULT_FOCUSED;
 
   public AbstractHCControl (@Nonnull @Nonempty final EHTMLElement aElement)
   {
@@ -108,7 +112,7 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   {
     m_bFocused = bFocused;
     // for focusing we need an ID!
-    if (getID () == null)
+    if (bFocused && getID () == null)
       setID (GlobalIDFactory.getNewStringID ());
     return thisAsT ();
   }
@@ -120,7 +124,7 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sName))
