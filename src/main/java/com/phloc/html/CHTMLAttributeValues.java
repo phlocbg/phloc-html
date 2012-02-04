@@ -30,6 +30,7 @@ public final class CHTMLAttributeValues
   /*
    * Generic values:
    */
+  public static final String CHECKED = CHTMLAttributes.CHECKED;
   public static final String DISABLED = CHTMLAttributes.DISABLED;
   public static final String MULTIPLE = CHTMLAttributes.MULTIPLE;
   public static final String READONLY = CHTMLAttributes.READONLY;
@@ -38,18 +39,12 @@ public final class CHTMLAttributeValues
   public static final String DECLARE = CHTMLAttributes.DECLARE;
   public static final String STAR = "*";
   public static final String OFF = "off";
-  public static final String CHECKED = CHTMLAttributes.CHECKED;
+
+  // HTML5
   public static final String DEFAULT = CHTMLAttributes.DEFAULT;
   public static final String HIDDEN = CHTMLAttributes.HIDDEN;
   public static final String MUTED = CHTMLAttributes.MUTED;
   public static final String AUTOFOCUS = CHTMLAttributes.AUTOFOCUS;
-
-  /*
-   * Button types:
-   */
-  public static final String BUTTON_TYPE_BUTTON = "button";
-  public static final String BUTTON_TYPE_RESET = "reset";
-  public static final String BUTTON_TYPE_SUBMIT = "submit";
 
   // HTML5 audio
   public static final String AUTOPLAY = CHTMLAttributes.AUTOPLAY;
