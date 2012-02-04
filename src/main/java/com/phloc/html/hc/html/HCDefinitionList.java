@@ -17,95 +17,30 @@
  */
 package com.phloc.html.hc.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.ReturnsImmutableObject;
-import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.impl.AbstractHCElement;
-import com.phloc.html.hc.impl.HCNodeList;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
-public class HCDefinitionList extends AbstractHCElement <HCDefinitionList> implements
-                                                                          IHasChildrenSorted <AbstractHCDefinitionItem>
+public class HCDefinitionList extends
+                             AbstractHCElementWithInternalChildren <HCDefinitionList, AbstractHCDefinitionItem>
 {
-  private final List <AbstractHCDefinitionItem> m_aItems = new ArrayList <AbstractHCDefinitionItem> ();
-
   protected HCDefinitionList (@Nonnull final EHTMLElement aElement)
   {
     super (aElement);
   }
 
-  public final boolean hasChildren ()
-  {
-    return !m_aItems.isEmpty ();
-  }
-
-  @Nonnegative
-  public final int getChildCount ()
-  {
-    return m_aItems.size ();
-  }
-
-  @Nonnull
-  @ReturnsImmutableObject
-  public final List <? extends AbstractHCDefinitionItem> getChildren ()
-  {
-    return ContainerHelper.makeUnmodifiable (m_aItems);
-  }
-
-  @Nullable
-  public final AbstractHCDefinitionItem getChildAtIndex (@Nonnegative final int nIndex)
-  {
-    return ContainerHelper.getSafe (m_aItems, nIndex);
-  }
-
   public final boolean hasItems ()
   {
-    return !m_aItems.isEmpty ();
+    return hasChildren ();
   }
 
   @Nonnull
   public final HCDefinitionList addItem (@Nullable final AbstractHCDefinitionItem aItem)
   {
     if (aItem != null)
-      m_aItems.add (aItem);
+      addChild (aItem);
     return this;
-  }
-
-  @Override
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
-  {
-    super.applyProperties (aConversionSettings, aElement);
-
-    for (final AbstractHCDefinitionItem aItem : m_aItems)
-      aElement.appendChild (aItem.getAsNode (aConversionSettings));
-  }
-
-  @Nonnull
-  public final String getPlainText ()
-  {
-    final StringBuilder ret = new StringBuilder ();
-    for (final AbstractHCDefinitionItem aChild : m_aItems)
-      ret.append (aChild.getPlainText ());
-    return ret.toString ();
-  }
-
-  @Override
-  @Nullable
-  public IHCBaseNode getOutOfBandNode ()
-  {
-    final HCNodeList aCont = new HCNodeList ();
-    for (final AbstractHCDefinitionItem aItem : m_aItems)
-      aCont.addChild (aItem.getOutOfBandNode ());
-    return aCont.getAsSimpleNode ();
   }
 }

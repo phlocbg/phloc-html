@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc.html;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnegative;
@@ -25,17 +24,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsImmutableObject;
-import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
-public class HCColGroup extends AbstractHCElement <HCColGroup>
+public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGroup, HCCol>
 {
-  private final List <HCCol> m_aCols = new ArrayList <HCCol> ();
-
   public HCColGroup ()
   {
     super (EHTMLElement.COLGROUP);
@@ -82,44 +75,24 @@ public class HCColGroup extends AbstractHCElement <HCColGroup>
   public final HCColGroup addColumn (@Nullable final HCCol aCol)
   {
     if (aCol != null)
-      m_aCols.add (aCol);
+      addChild (aCol);
     return this;
   }
 
   public final boolean hasColumns ()
   {
-    return !m_aCols.isEmpty ();
+    return hasChildren ();
   }
 
   @Nonnegative
   public final int getColumnCount ()
   {
-    return m_aCols.size ();
+    return getChildCount ();
   }
 
   @ReturnsImmutableObject
   public final List <HCCol> getColumns ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aCols);
-  }
-
-  @Override
-  protected void applyProperties (@Nonnull final HCConversionSettings aConversionSettings, final IMicroElement aElement)
-  {
-    super.applyProperties (aConversionSettings, aElement);
-    for (final HCCol aCol : m_aCols)
-      aElement.appendChild (aCol.getAsNode (aConversionSettings));
-  }
-
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ()).append ("cols", m_aCols).toString ();
+    return getChildren ();
   }
 }

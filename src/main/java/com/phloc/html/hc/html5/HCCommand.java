@@ -22,19 +22,17 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api5.EHCCommandType;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5 ("IE9 only")
-public final class HCCommand extends AbstractHCElementWithChildren <HCCommand>
+public final class HCCommand extends AbstractHCElement <HCCommand>
 {
   public static final boolean DEFAULT_CHECKED = false;
   public static final boolean DEFAULT_DEFAULT = false;
@@ -51,36 +49,6 @@ public final class HCCommand extends AbstractHCElementWithChildren <HCCommand>
   public HCCommand ()
   {
     super (EHTMLElement.COMMAND);
-  }
-
-  public HCCommand (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCCommand (@Nullable final String sChild)
-  {
-    super (EHTMLElement.COMMAND, sChild);
-  }
-
-  public HCCommand (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.COMMAND, aChildren);
-  }
-
-  public HCCommand (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.COMMAND, aChild);
-  }
-
-  public HCCommand (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.COMMAND, aChildren);
-  }
-
-  public HCCommand (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.COMMAND, aChildren);
   }
 
   @Nonnull
@@ -135,7 +103,7 @@ public final class HCCommand extends AbstractHCElementWithChildren <HCCommand>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
     if (m_bChecked)
@@ -151,5 +119,11 @@ public final class HCCommand extends AbstractHCElementWithChildren <HCCommand>
     if (StringHelper.hasText (m_sRadioGroup) && EHCCommandType.RADIO.equals (m_eType))
       aElement.setAttribute (CHTMLAttributes.RADIOGROUP, m_sRadioGroup);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+  }
+
+  @Nonnull
+  public String getPlainText ()
+  {
+    return StringHelper.getNotNull (m_sLabel);
   }
 }
