@@ -62,11 +62,13 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    * This method checks whether the node is suitable for conversion to an
    * IMicroElement.
    * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
    * @return <code>true</code> if the node can be converted to a node,
    *         <code>false</code> otherwise.
    */
   @OverrideOnDemand
-  protected boolean canConvertToNode ()
+  protected boolean canConvertToNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     return true;
   }
@@ -75,9 +77,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
    * finally.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
    */
   @OverrideOnDemand
-  protected void prepareBeforeCreateElement ()
+  protected void prepareBeforeCreateElement (@Nonnull final HCConversionSettings aConversionSettings)
   {}
 
   /**
@@ -98,9 +103,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    * 
    * @param eElement
    *        The created micro element
+   * @param aConversionSettings
+   *        The conversion settings to be used
    */
   @OverrideOnDemand
-  protected void finishAfterCreateElement (@Nonnull final IMicroElement eElement)
+  protected void finishAfterApplyProperties (@Nonnull final IMicroElement eElement,
+                                             @Nonnull final HCConversionSettings aConversionSettings)
   {}
 
   /*
@@ -110,7 +118,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   @Nullable
   public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
-    if (!canConvertToNode ())
+    if (!canConvertToNode (aConversionSettings))
       return null;
 
     // Run some
@@ -118,12 +126,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       HCConsistencyChecker.runConsistencyCheck (this, aConversionSettings.getHTMLVersion ());
 
     // Prepare object
-    prepareBeforeCreateElement ();
+    prepareBeforeCreateElement (aConversionSettings);
     final IMicroElement ret = createElement ();
     if (ret == null)
       throw new IllegalStateException ("Created a null element!");
     applyProperties (ret, aConversionSettings);
-    finishAfterCreateElement (ret);
+    finishAfterApplyProperties (ret, aConversionSettings);
     return ret;
   }
 }
