@@ -30,8 +30,8 @@ import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
@@ -218,6 +218,14 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
     return ContainerHelper.getSafe (m_aNodes, nIndex);
   }
 
+  /**
+   * Try to simplify this nodelist as much as possible.
+   * 
+   * @return the most simple representation of this list. If the list is empty,
+   *         <code>null</code> is returned. If exactly one element is contained,
+   *         this element will be returned. If more than one element is
+   *         contained no simplification can be performed.
+   */
   @Nullable
   public IHCBaseNode getAsSimpleNode ()
   {

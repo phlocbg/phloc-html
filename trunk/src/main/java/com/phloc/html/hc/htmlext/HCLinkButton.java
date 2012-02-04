@@ -21,17 +21,15 @@ import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.marshal.JSMarshaller;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 @DevelopersNote ("Do not use for pDAF3 - missing CSS information. Use HCP3Button instead!")
 public class HCLinkButton extends HCButton
 {
   public HCLinkButton (final String sLabel, final ISimpleURL aURL)
   {
-    super (sLabel, DefaultJSCodeProvider.create ("self.location.href='" +
-                                                 JSMarshaller.javaScriptEscape (aURL.getAsString ()) +
-                                                 "'"));
+    super (sLabel, new CollectingJSCodeProvider ("self.location.href='").appendEscaped (aURL.getAsString ())
+                                                                        .append ("'"));
   }
 
   public HCLinkButton (final String sLabel, final IJSCodeProvider aJS)

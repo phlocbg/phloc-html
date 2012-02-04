@@ -25,7 +25,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 public final class CollectingJSCodeProvider implements IJSCodeProvider
 {
@@ -70,6 +70,12 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   {
     m_aSB.append (aCS);
     return this;
+  }
+
+  @Nonnull
+  public CollectingJSCodeProvider appendEscaped (@Nullable final String sText)
+  {
+    return append (JSMarshaller.javaScriptEscape (sText));
   }
 
   @Nonnull

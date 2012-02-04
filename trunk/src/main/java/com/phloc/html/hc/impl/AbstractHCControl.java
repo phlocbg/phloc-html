@@ -22,19 +22,13 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.CHCCSS;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.html.HCScript;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
-import com.phloc.html.js.provider.JSCodeWrapper;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
 public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements
@@ -80,25 +74,27 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
     return thisAsT ();
   }
 
+  public final boolean isDisabled ()
+  {
+    return m_bDisabled;
+  }
+
   @Nonnull
   public final THISTYPE setDisabled (final boolean bDisabled)
   {
     m_bDisabled = bDisabled;
-    if (bDisabled)
-      addClass (CHCCSS.CSS_CLASS_DISABLED);
-    else
-      removeClass (CHCCSS.CSS_CLASS_DISABLED);
     return thisAsT ();
   }
 
+  public final boolean isReadonly ()
+  {
+    return m_bReadOnly;
+  }
+
   @Nonnull
-  public final THISTYPE setReadOnly (final boolean bReadOnly)
+  public final THISTYPE setReadonly (final boolean bReadOnly)
   {
     m_bReadOnly = bReadOnly;
-    if (bReadOnly)
-      addClass (CHCCSS.CSS_CLASS_READONLY);
-    else
-      removeClass (CHCCSS.CSS_CLASS_READONLY);
     return thisAsT ();
   }
 
@@ -111,9 +107,6 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   public final THISTYPE setFocused (final boolean bFocused)
   {
     m_bFocused = bFocused;
-    // for focusing we need an ID!
-    if (bFocused && getID () == null)
-      setID (GlobalIDFactory.getNewStringID ());
     return thisAsT ();
   }
 
@@ -135,20 +128,5 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
     if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
-  }
-
-  @Override
-  public IHCBaseNode getOutOfBandNode ()
-  {
-    if (m_bFocused && StringHelper.hasText (getID ()))
-    {
-      return new HCScript (new CollectingJSCodeProvider ("if(").append (JSCodeWrapper.getFunctionCall ("document.getElementById",
-                                                                                                       getID ()))
-                                                               .append (')')
-                                                               .append (JSCodeWrapper.getFunctionCall ("document.getElementById",
-                                                                                                       getID ()))
-                                                               .append (".focus();"));
-    }
-    return null;
   }
 }

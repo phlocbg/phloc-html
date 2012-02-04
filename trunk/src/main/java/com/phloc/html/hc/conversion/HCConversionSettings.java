@@ -25,11 +25,12 @@ import com.phloc.html.EHTMLVersion;
 @NotThreadSafe
 public final class HCConversionSettings
 {
-  public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  public static final boolean DEFAULT_INDENT_AND_ALIGN = true;
   public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
 
   private final EHTMLVersion m_eHTMLVersion;
-  private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN_HTML;
+  private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN;
+  private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN;
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
 
   public HCConversionSettings (@Nonnull final EHTMLVersion eHTMLVersion)
@@ -55,6 +56,18 @@ public final class HCConversionSettings
   public boolean isIdentAndAlignHTML ()
   {
     return m_bIndentAndAlignHTML;
+  }
+
+  @Nonnull
+  public HCConversionSettings setIndentAndAlignCSS (final boolean bIndentAndAlignCSS)
+  {
+    m_bIndentAndAlignCSS = bIndentAndAlignCSS;
+    return this;
+  }
+
+  public boolean isIdentAndAlignCSS ()
+  {
+    return m_bIndentAndAlignCSS;
   }
 
   @Nonnull
