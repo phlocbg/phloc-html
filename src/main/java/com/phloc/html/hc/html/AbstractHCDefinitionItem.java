@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**

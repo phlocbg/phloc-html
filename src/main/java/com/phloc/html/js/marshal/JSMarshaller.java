@@ -33,8 +33,8 @@ import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.lang.ClassHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.json.IJSON;
 
@@ -248,7 +248,7 @@ public final class JSMarshaller
       {
         case HTML:
           if (aObject instanceof IHCNode)
-            aSB.append (((IHCNode) aObject).getAsXHTMLString (HCConversionSettings.DEFAULT_NOT_INDENTED));
+            aSB.append (HCSettings.getAsXHTMLString ((IHCNode) aObject, false));
           else
             aSB.append ((String) aObject);
           break;

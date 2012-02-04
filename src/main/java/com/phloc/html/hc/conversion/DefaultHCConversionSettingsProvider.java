@@ -15,34 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.EHTMLVersion;
 
 /**
- * Base interface for HTML controls.
+ * Default implementation of {@link IHCConversionSettingsProvider} using the
+ * default {@link EHTMLVersion}
  * 
  * @author philip
  */
-public interface IHCBaseNode extends IHC
+public final class DefaultHCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
-  /**
-   * @param aConversionSettings
-   *        The settings to be used
-   * @return The fully created HTML node
-   */
-  @Nullable
-  IMicroNode getAsNode (@Nonnull HCConversionSettings aConversionSettings);
+  private static final HCConversionSettings DEFAULT = new HCConversionSettings (EHTMLVersion.DEFAULT);
+  private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (EHTMLVersion.DEFAULT).setIndentAndAlignHTML (false);
 
-  /**
-   * @param aConversionSettings
-   *        whether or not to indent and beautify the returned code
-   * @return The node as XML optionally without indentation.
-   */
   @Nonnull
-  String getAsXHTMLString (@Nonnull HCConversionSettings aConversionSettings);
+  public HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
+  {
+    return bIndentAndAlign ? DEFAULT : DEFAULT_NOT_INDENTED;
+  }
 }

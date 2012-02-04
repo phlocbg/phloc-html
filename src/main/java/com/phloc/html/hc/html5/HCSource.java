@@ -27,8 +27,8 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.api5.IHCHasMedia;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 @SinceHTML5
 public final class HCSource extends AbstractHCMediaElementChild <HCSource> implements IHCHasMedia <HCSource>

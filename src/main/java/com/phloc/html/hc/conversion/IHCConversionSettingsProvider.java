@@ -15,21 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource.js;
+package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
-
-/**
- * Base interface for JS external and inline objects.
- * 
- * @author philip
- */
-public interface IJSHTMLDefinition extends IHasConditionalComment
+public interface IHCConversionSettingsProvider
 {
   @Nonnull
-  IHCNode getAsHCNode (@Nonnull HCConversionSettings aConversionSettings);
+  HCConversionSettings getConversionSettings (boolean bIndentAndAlign);
 }

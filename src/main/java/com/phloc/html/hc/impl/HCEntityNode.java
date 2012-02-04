@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.impl.MicroEntityReference;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.entities.EHTMLEntity;
 import com.phloc.html.entities.IHTMLEntity;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Represents an entity reference as HC node.

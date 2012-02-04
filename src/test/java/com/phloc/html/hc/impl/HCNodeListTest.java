@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroContainer;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCSpan;
@@ -47,7 +47,7 @@ public final class HCNodeListTest
     x.addChild (new HCDiv ("d1"));
     x.addChild (new HCDiv ("d2"));
     assertTrue (x.hasChildren ());
-    final IMicroContainer aNode = x.getAsNode (HCConversionSettings.DEFAULT);
+    final IMicroContainer aNode = (IMicroContainer) HCSettings.getAsNode (x);
     assertNotNull (aNode);
     assertEquals (2, x.getChildCount ());
 
@@ -55,7 +55,7 @@ public final class HCNodeListTest
     x.addChild (new HCSpan ("span"));
     final HCDiv div = x.addAndReturnChild (new HCDiv ("d3"));
     assertNotNull (div);
-    assertTrue (div.getAsXHTMLString (HCConversionSettings.DEFAULT).startsWith ("<div>d3</div>"));
+    assertTrue (HCSettings.getAsXHTMLString (div, false).startsWith ("<div>d3</div>"));
     assertEquals (2, x.getChildCount ());
   }
 
@@ -65,7 +65,7 @@ public final class HCNodeListTest
     final HCTable table = new HCTable ();
     final HCRow tr = table.addBodyRow ();
     tr.addCell (new HCNodeList ().addChild (new HCDiv ("dd2")).addChild (new HCDiv ("dd1")));
-    assertTrue (table.getAsXHTMLString (HCConversionSettings.DEFAULT).contains ("<div>dd2</div>"));
+    assertTrue (HCSettings.getAsXHTMLString (table, false).contains ("<div>dd2</div>"));
   }
 
   @Test
@@ -74,8 +74,8 @@ public final class HCNodeListTest
     final HCNodeList x = new HCNodeList ();
     x.addChild (new HCDiv ("Na so was"));
     x.addChild (new HCDiv ("aber auch"));
-    assertNotNull (x.getAsNode (HCConversionSettings.DEFAULT));
+    assertNotNull (HCSettings.getAsNode (x));
     assertEquals ("<div>Na so was</div>" + CGlobal.LINE_SEPARATOR + "<div>aber auch</div>" + CGlobal.LINE_SEPARATOR,
-                  x.getAsXHTMLString (HCConversionSettings.DEFAULT));
+                  HCSettings.getAsXHTMLString (x, true));
   }
 }

@@ -25,8 +25,8 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.CHCCSS;
-import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.api.EHCInputType;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
 public class HCEditFile extends AbstractHCControl <HCEditFile>

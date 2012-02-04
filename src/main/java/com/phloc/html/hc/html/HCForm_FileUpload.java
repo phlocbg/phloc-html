@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**

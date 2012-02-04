@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.impl.MicroCDATA;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Represents a single CDATA node as HC node.

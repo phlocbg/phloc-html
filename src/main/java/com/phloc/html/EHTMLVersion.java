@@ -65,6 +65,9 @@ public enum EHTMLVersion
     }
   };
 
+  /**
+   * XHTML 1.1 is the default HTML version to use
+   */
   @Nonnull
   public static final EHTMLVersion DEFAULT = XHTML11;
 
