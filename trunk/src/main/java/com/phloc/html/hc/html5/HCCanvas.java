@@ -18,36 +18,68 @@
 package com.phloc.html.hc.html5;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
-// FIXME has allowed content!
 @SinceHTML5
-public final class HCCanvas extends AbstractHCElement <HCCanvas>
+public final class HCCanvas extends AbstractHCElementWithChildren <HCCanvas>
 {
-  private int m_nHeight = CGlobal.ILLEGAL_UINT;
-  private int m_nWidth = CGlobal.ILLEGAL_UINT;
+  private long m_nHeight = CGlobal.ILLEGAL_ULONG;
+  private long m_nWidth = CGlobal.ILLEGAL_ULONG;
 
   public HCCanvas ()
   {
     super (EHTMLElement.CANVAS);
   }
 
+  public HCCanvas (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  {
+    this (aChild.getText ());
+  }
+
+  public HCCanvas (@Nullable final String sChild)
+  {
+    super (EHTMLElement.CANVAS, sChild);
+  }
+
+  public HCCanvas (@Nullable final String... aChildren)
+  {
+    super (EHTMLElement.CANVAS, aChildren);
+  }
+
+  public HCCanvas (@Nullable final IHCNode aChild)
+  {
+    super (EHTMLElement.CANVAS, aChild);
+  }
+
+  public HCCanvas (@Nullable final IHCNode... aChildren)
+  {
+    super (EHTMLElement.CANVAS, aChildren);
+  }
+
+  public HCCanvas (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    super (EHTMLElement.CANVAS, aChildren);
+  }
+
   @Nonnull
-  public HCCanvas setHeight (final int nHeight)
+  public HCCanvas setHeight (final long nHeight)
   {
     m_nHeight = nHeight;
     return this;
   }
 
   @Nonnull
-  public HCCanvas setWidth (final int nWidth)
+  public HCCanvas setWidth (final long nWidth)
   {
     m_nWidth = nWidth;
     return this;
@@ -57,14 +89,9 @@ public final class HCCanvas extends AbstractHCElement <HCCanvas>
   protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
-    if (m_nHeight > 0)
+    if (m_nHeight >= 0)
       aElement.setAttribute (CHTMLAttributes.HEIGHT, m_nHeight);
-    if (m_nWidth > 0)
+    if (m_nWidth >= 0)
       aElement.setAttribute (CHTMLAttributes.WIDTH, m_nWidth);
-  }
-
-  public String getPlainText ()
-  {
-    return "";
   }
 }

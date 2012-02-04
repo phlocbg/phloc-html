@@ -36,6 +36,7 @@ import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.html.js.provider.JSCodeWrapper;
 
+// TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
 public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements
                                                                                                                      IHCControl <THISTYPE>
 {
