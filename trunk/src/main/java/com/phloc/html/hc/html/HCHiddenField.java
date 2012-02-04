@@ -23,12 +23,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 public class HCHiddenField extends AbstractHCElement <HCHiddenField>
@@ -93,10 +93,10 @@ public class HCHiddenField extends AbstractHCElement <HCHiddenField>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
-    aElement.setAttribute (CHTMLAttributes.TYPE, CHTMLAttributeValues.INPUT_TYPE_HIDDEN);
+    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.HIDDEN.getAttrValue ());
     if (m_sName != null)
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (m_sValue != null)

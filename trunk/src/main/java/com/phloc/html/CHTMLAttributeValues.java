@@ -50,16 +50,6 @@ public final class CHTMLAttributeValues
   public static final String BUTTON_TYPE_RESET = "reset";
   public static final String BUTTON_TYPE_SUBMIT = "submit";
 
-  /*
-   * Input types:
-   */
-  public static final String INPUT_TYPE_CHECKBOX = "checkbox";
-  public static final String INPUT_TYPE_FILE = "file";
-  public static final String INPUT_TYPE_HIDDEN = "hidden";
-  public static final String INPUT_TYPE_PASSWORD = "password";
-  public static final String INPUT_TYPE_RADIO = "radio";
-  public static final String INPUT_TYPE_TEXT = "text";
-
   // HTML5 audio
   public static final String AUTOPLAY = CHTMLAttributes.AUTOPLAY;
   public static final String CONTROLS = CHTMLAttributes.CONTROLS;

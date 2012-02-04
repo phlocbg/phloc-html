@@ -27,6 +27,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
 public class HCEdit extends AbstractHCControl <HCEdit>
@@ -105,10 +106,10 @@ public class HCEdit extends AbstractHCControl <HCEdit>
   }
 
   @Override
-  protected void applyProperties (HCConversionSettings aConversionSettings, final IMicroElement aElement)
+  protected void applyProperties (final HCConversionSettings aConversionSettings, final IMicroElement aElement)
   {
     super.applyProperties (aConversionSettings, aElement);
-    aElement.setAttribute (CHTMLAttributes.TYPE, CHTMLAttributeValues.INPUT_TYPE_TEXT);
+    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.TEXT.getAttrValue ());
     if (m_sValue != null)
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_nMaxLength > 0)

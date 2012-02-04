@@ -27,6 +27,7 @@ import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+// FIXME has allowed content!
 @SinceHTML5
 public final class HCCanvas extends AbstractHCElement <HCCanvas>
 {
