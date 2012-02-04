@@ -88,13 +88,18 @@ public abstract class AbstractHCObject <THISTYPE extends IHCObject <THISTYPE>> e
       throw new IllegalStateException ("Consistency check failed");
   }
 
-  protected static final void checkIfLinkIsMasked (@Nonnull final String sHref)
+  protected static final void checkIfLinkIsMasked (@Nullable final String sHref)
   {
-    // FIXME: this is potential vulnerability. If the passed href is passed from
-    // a user input, which cannot be told at this point, it might as well
-    // contain a'&amp;' followed by some malicious code that should be escaped.
-    if (sHref.contains ("&amp;"))
-      throw new IllegalArgumentException ("The URL '" + sHref + "' seems to be already quoted!");
+    if (sHref != null)
+    {
+      // FIXME: this is potential vulnerability. If the passed href is passed
+      // from
+      // a user input, which cannot be told at this point, it might as well
+      // contain a'&amp;' followed by some malicious code that should be
+      // escaped.
+      if (sHref.contains ("&amp;"))
+        throw new IllegalArgumentException ("The URL '" + sHref + "' seems to be already quoted!");
+    }
   }
 
   @Nonnull
