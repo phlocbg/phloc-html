@@ -32,6 +32,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.XHTMLConsistencyException;
 import com.phloc.html.hc.CHCCSS;
 import com.phloc.html.hc.HCConversionSettings;
+import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
@@ -107,9 +108,9 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
 
   @OverrideOnDemand
   @Nonnull
-  protected String getType ()
+  protected EHCButtonType getType ()
   {
-    return CHTMLAttributeValues.BUTTON_TYPE_BUTTON;
+    return EHCButtonType.BUTTON;
   }
 
   @Override
@@ -130,7 +131,7 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
     }
 
     super.applyProperties (aConversionSettings, aElement);
-    aElement.setAttribute (CHTMLAttributes.TYPE, getType ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, getType ().getAttrValue ());
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sValue))

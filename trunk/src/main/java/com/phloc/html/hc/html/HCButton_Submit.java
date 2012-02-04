@@ -19,7 +19,7 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nullable;
 
-import com.phloc.html.CHTMLAttributeValues;
+import com.phloc.html.hc.api.EHCButtonType;
 
 public final class HCButton_Submit extends HCButton
 {
@@ -32,8 +32,8 @@ public final class HCButton_Submit extends HCButton
   }
 
   @Override
-  protected String getType ()
+  protected EHCButtonType getType ()
   {
-    return CHTMLAttributeValues.BUTTON_TYPE_SUBMIT;
+    return EHCButtonType.SUBMIT;
   }
 }
