@@ -78,7 +78,8 @@ public final class HTML5DocumentType extends AbstractMicroNode implements IMicro
   @Nonnull
   public IMicroDocumentType getClone ()
   {
-    return this;
+    // Must be a new object because of the potentially assigned parent
+    return new HTML5DocumentType ();
   }
 
   public boolean isEqualContent (@Nullable final IMicroNode aNode)

@@ -19,8 +19,13 @@ package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.html.EHTMLVersion;
+
 public interface IHCConversionSettingsProvider
 {
+  @Nonnull
+  EHTMLVersion getHTMLVersion ();
+
   @Nonnull
   HCConversionSettings getConversionSettings (boolean bIndentAndAlign);
 }
