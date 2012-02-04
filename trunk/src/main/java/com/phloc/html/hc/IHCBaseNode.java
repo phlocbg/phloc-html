@@ -44,5 +44,5 @@ public interface IHCBaseNode extends IHC
    * @return The node as XML optionally without indentation.
    */
   @Nonnull
-  String getAsXHTMLString (@Nonnull HCConversionSettings aConversionSettings);
+  String getAsHTMLString (@Nonnull HCConversionSettings aConversionSettings);
 }

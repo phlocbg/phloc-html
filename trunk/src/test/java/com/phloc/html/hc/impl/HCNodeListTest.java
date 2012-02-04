@@ -55,7 +55,7 @@ public final class HCNodeListTest
     x.addChild (new HCSpan ("span"));
     final HCDiv div = x.addAndReturnChild (new HCDiv ("d3"));
     assertNotNull (div);
-    assertTrue (HCSettings.getAsXHTMLString (div, false).startsWith ("<div>d3</div>"));
+    assertTrue (HCSettings.getAsHTMLString (div, false).startsWith ("<div>d3</div>"));
     assertEquals (2, x.getChildCount ());
   }
 
@@ -65,7 +65,7 @@ public final class HCNodeListTest
     final HCTable table = new HCTable ();
     final HCRow tr = table.addBodyRow ();
     tr.addCell (new HCNodeList ().addChild (new HCDiv ("dd2")).addChild (new HCDiv ("dd1")));
-    assertTrue (HCSettings.getAsXHTMLString (table, false).contains ("<div>dd2</div>"));
+    assertTrue (HCSettings.getAsHTMLString (table, false).contains ("<div>dd2</div>"));
   }
 
   @Test
@@ -76,6 +76,6 @@ public final class HCNodeListTest
     x.addChild (new HCDiv ("aber auch"));
     assertNotNull (HCSettings.getAsNode (x));
     assertEquals ("<div>Na so was</div>" + CGlobal.LINE_SEPARATOR + "<div>aber auch</div>" + CGlobal.LINE_SEPARATOR,
-                  HCSettings.getAsXHTMLString (x, true));
+                  HCSettings.getAsHTMLString (x, true));
   }
 }

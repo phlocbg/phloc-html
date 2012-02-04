@@ -37,6 +37,6 @@ public final class HCBodyTest
     b.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
     b.setCustomAttr ("bla", "foo");
     assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\" />",
-                  HCSettings.getAsXHTMLString (b, false));
+                  HCSettings.getAsHTMLString (b, false));
   }
 }

@@ -57,9 +57,11 @@ public final class HCConversionSettings
     return m_bIndentAndAlignHTML;
   }
 
-  public void setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
+  @Nonnull
+  public HCConversionSettings setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
   {
     m_bConsistencyChecksEnabled = bConsistencyChecksEnabled;
+    return this;
   }
 
   public boolean areConsistencyChecksEnabled ()

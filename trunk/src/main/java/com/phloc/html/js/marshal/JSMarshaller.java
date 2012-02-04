@@ -248,7 +248,7 @@ public final class JSMarshaller
       {
         case HTML:
           if (aObject instanceof IHCNode)
-            aSB.append (HCSettings.getAsXHTMLString ((IHCNode) aObject, false));
+            aSB.append (HCSettings.getAsHTMLString ((IHCNode) aObject, false));
           else
             aSB.append ((String) aObject);
           break;
