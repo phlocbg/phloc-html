@@ -52,6 +52,7 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
+import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
@@ -86,7 +87,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   private boolean m_bHidden = false;
   private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private String m_sAccessKey;
-  private boolean m_bDraggable = false;
+  private EHCDraggable m_eDraggable;
   private EHCContentEditable m_eContentEditable;
   private String m_sContextMenu;
   private boolean m_bSpellCheck = false;
@@ -431,15 +432,16 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return thisAsT ();
   }
 
-  public final boolean isDraggable ()
+  @Nullable
+  public final EHCDraggable getDraggable ()
   {
-    return m_bDraggable;
+    return m_eDraggable;
   }
 
   @Nonnull
-  public final THISTYPE setDraggable (final boolean bDraggable)
+  public final THISTYPE setDraggable (@Nullable final EHCDraggable eDraggable)
   {
-    m_bDraggable = bDraggable;
+    m_eDraggable = eDraggable;
     return thisAsT ();
   }
 
@@ -588,8 +590,8 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
     if (StringHelper.hasNoText (m_sAccessKey))
       aElement.setAttribute (CHTMLAttributes.ACCESSKEY, m_sAccessKey);
-    if (m_bDraggable)
-      aElement.setAttribute (CHTMLAttributes.DRAGGABLE, CHTMLAttributeValues.DRAGGABLE);
+    if (m_eDraggable != null)
+      aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
     if (m_eContentEditable != null)
       aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
     if (StringHelper.hasNoText (m_sContextMenu))
