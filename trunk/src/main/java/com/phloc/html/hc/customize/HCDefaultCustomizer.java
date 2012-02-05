@@ -100,9 +100,7 @@ public final class HCDefaultCustomizer
                 if (aForm.isSubmitPressingEnter ())
                 {
                   final HCButton aButton = _createFakeSubmitButton ();
-                  final int nTabIndex = aForm.getSubmitButtonTabIndex ();
-                  if (nTabIndex >= 0)
-                    aButton.setTabIndex (nTabIndex);
+                  aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
                   aForm.addChild (aButton);
                 }
               }

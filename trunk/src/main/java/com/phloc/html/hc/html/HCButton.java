@@ -20,7 +20,6 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -120,7 +119,7 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bDisabled)
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
-    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
+    if (m_nTabIndex >= 0)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
   }
 }
