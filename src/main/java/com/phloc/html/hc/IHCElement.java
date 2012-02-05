@@ -31,6 +31,7 @@ import com.phloc.css.ICSSValue;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
+import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -174,18 +175,20 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setAccessKey (@Nullable String sAccessKey);
 
   /**
-   * @return <code>true</code> if this is draggable
+   * @return the draggable state
    */
-  boolean isDraggable ();
+  @Nullable
+  EHCDraggable getDraggable ();
 
   /**
    * Set the draggable state of this element
    * 
-   * @param bDraggable
-   *        <code>true</code> if it is draggable, <code>false</code> otherwise
+   * @param eDraggable
+   *        value to set
    * @return this
    */
-  THISTYPE setDraggable (boolean bDraggable);
+  @Nonnull
+  THISTYPE setDraggable (@Nullable EHCDraggable eDraggable);
 
   /**
    * @return The current state of content editable
