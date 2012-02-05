@@ -20,14 +20,12 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.api5.IHCHasMedia;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -38,13 +36,12 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTabIndex <HCA>, IHCHasMedia <HCA>
+public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMedia <HCA>
 {
   private ISimpleURL m_aHref;
   private HCA_Target m_aTarget;
   private String m_sName;
   private IMimeType m_aType;
-  private int m_nTabIndex = CGlobal.ILLEGAL_UINT;
   private String m_sMediaQuery;
 
   public HCA ()
@@ -96,18 +93,6 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTa
     return this;
   }
 
-  public int getTabIndex ()
-  {
-    return m_nTabIndex;
-  }
-
-  @Nonnull
-  public final HCA setTabIndex (final int nTabIndex)
-  {
-    m_nTabIndex = nTabIndex;
-    return this;
-  }
-
   @Nonnull
   public final HCA setMedia (@Nullable final String sMediaQuery)
   {
@@ -131,8 +116,6 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasTa
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (m_aType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
-      aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
     // HTML5 only:
     if (StringHelper.hasText (m_sMediaQuery))
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMediaQuery);

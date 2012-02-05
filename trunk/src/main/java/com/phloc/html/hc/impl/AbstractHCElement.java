@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
+import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -28,6 +29,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.compare.EqualsUtils;
@@ -79,6 +81,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    */
   private JSEventMap m_aJSHandler;
   private boolean m_bUnfocusable = false;
+  private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
@@ -382,6 +385,19 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return m_bUnfocusable;
   }
 
+  @CheckForSigned
+  public final long getTabIndex ()
+  {
+    return m_nTabIndex;
+  }
+
+  @Nonnull
+  public final THISTYPE setTabIndex (final long nTabIndex)
+  {
+    m_nTabIndex = nTabIndex;
+    return thisAsT ();
+  }
+
   @Nonnull
   public final THISTYPE setCustomAttr (@Nullable final String sName, @Nullable final String sValue)
   {
@@ -456,6 +472,15 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     if (StringHelper.hasText (m_sID))
       aElement.setAttribute (CHTMLAttributes.ID, m_sID);
 
+    if (StringHelper.hasText (m_sTitle))
+      aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
+
+    if (StringHelper.hasText (m_sLanguage))
+      aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
+
+    if (m_eDirection != null)
+      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
+
     if (m_aClasses != null && !m_aClasses.isEmpty ())
       aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.implode (" ", m_aClasses));
 
@@ -468,17 +493,13 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
     }
 
-    if (m_eDirection != null)
-      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
-
-    if (StringHelper.hasText (m_sLanguage))
-      aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
-
     if (m_aJSHandler != null)
       m_aJSHandler.applyToElement (aElement);
 
-    if (StringHelper.hasText (m_sTitle))
-      aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
+    // unfocusable is handled by the customizer as it is non-standard
+
+    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
+      aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
 
     if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
