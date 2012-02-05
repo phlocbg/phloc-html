@@ -45,6 +45,8 @@ public final class CHTMLAttributeValues
   public static final String HIDDEN = CHTMLAttributes.HIDDEN;
   public static final String MUTED = CHTMLAttributes.MUTED;
   public static final String AUTOFOCUS = CHTMLAttributes.AUTOFOCUS;
+  public static final String DRAGGABLE = CHTMLAttributes.DRAGGABLE;
+  public static final String SPELLCHECK = CHTMLAttributes.SPELLCHECK;
 
   // HTML5 audio
   public static final String AUTOPLAY = CHTMLAttributes.AUTOPLAY;
