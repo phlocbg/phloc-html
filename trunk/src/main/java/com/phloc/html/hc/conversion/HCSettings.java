@@ -26,6 +26,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 
 @ThreadSafe
 public final class HCSettings
@@ -95,5 +96,12 @@ public final class HCSettings
   public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode, final boolean bIndentAndAlign)
   {
     return aHCNode.getAsHTMLString (getConversionSettings (bIndentAndAlign));
+  }
+
+  @Nullable
+  public static IHCBaseNode getOutOfBandNode (@Nonnull final IHCNode aHCNode)
+  {
+    // No indent/align required for retrieving out of band node
+    return aHCNode.getOutOfBandNode (getConversionSettings (false));
   }
 }

@@ -17,9 +17,10 @@
  */
 package com.phloc.html.hc;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Base interface for a main HC node.
@@ -29,9 +30,11 @@ import com.phloc.html.hc.IHCBaseNode;
 public interface IHCNode extends IHCBaseNode
 {
   /**
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
    * @return The HTML nodes that are out of band for the main content (e.g. for
    *         scripts etc.)
    */
   @Nullable
-  IHCBaseNode getOutOfBandNode ();
+  IHCBaseNode getOutOfBandNode (@Nonnull HCConversionSettings aConversionSettings);
 }
