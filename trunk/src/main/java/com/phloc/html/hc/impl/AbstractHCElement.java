@@ -51,6 +51,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
+import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
@@ -82,9 +83,13 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
    */
   private JSEventMap m_aJSHandler;
   private boolean m_bUnfocusable = false;
-  private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private boolean m_bHidden = false;
+  private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private String m_sAccessKey;
+  private boolean m_bDraggable = false;
+  private EHCContentEditable m_eContentEditable;
+  private String m_sContextMenu;
+  private boolean m_bSpellCheck = false;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
@@ -426,6 +431,56 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return thisAsT ();
   }
 
+  public final boolean isDraggable ()
+  {
+    return m_bDraggable;
+  }
+
+  @Nonnull
+  public final THISTYPE setDraggable (final boolean bDraggable)
+  {
+    m_bDraggable = bDraggable;
+    return thisAsT ();
+  }
+
+  @Nullable
+  public final EHCContentEditable getContentEditable ()
+  {
+    return m_eContentEditable;
+  }
+
+  @Nonnull
+  public final THISTYPE setContentEditable (@Nullable final EHCContentEditable eContentEditable)
+  {
+    m_eContentEditable = eContentEditable;
+    return thisAsT ();
+  }
+
+  @Nullable
+  public final String getContextMenu ()
+  {
+    return m_sContextMenu;
+  }
+
+  @Nonnull
+  public final THISTYPE setContextMenu (@Nullable final String sContextMenu)
+  {
+    m_sContextMenu = sContextMenu;
+    return thisAsT ();
+  }
+
+  public final boolean isSpellCheck ()
+  {
+    return m_bSpellCheck;
+  }
+
+  @Nonnull
+  public final THISTYPE setSpellCheck (final boolean bSpellCheck)
+  {
+    m_bSpellCheck = bSpellCheck;
+    return thisAsT ();
+  }
+
   @Nonnull
   public final THISTYPE setCustomAttr (@Nullable final String sName, @Nullable final String sValue)
   {
@@ -526,12 +581,21 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 
     // unfocusable is handled by the customizer as it is non-standard
 
+    // Global HTML5 attributes
     if (m_bHidden)
       aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
     if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
     if (StringHelper.hasNoText (m_sAccessKey))
       aElement.setAttribute (CHTMLAttributes.ACCESSKEY, m_sAccessKey);
+    if (m_bDraggable)
+      aElement.setAttribute (CHTMLAttributes.DRAGGABLE, CHTMLAttributeValues.DRAGGABLE);
+    if (m_eContentEditable != null)
+      aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
+    if (StringHelper.hasNoText (m_sContextMenu))
+      aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenu);
+    if (m_bSpellCheck)
+      aElement.setAttribute (CHTMLAttributes.SPELLCHECK, CHTMLAttributeValues.SPELLCHECK);
 
     if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())

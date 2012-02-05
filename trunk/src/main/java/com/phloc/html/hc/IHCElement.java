@@ -30,6 +30,7 @@ import com.phloc.css.ICSSClassProvider;
 import com.phloc.css.ICSSValue;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCTextDirection;
+import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -112,6 +113,10 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE removeStyle (@Nonnull ECSSProperty eProperty);
 
+  boolean hasStyle (@Nullable ECSSProperty eProperty);
+
+  boolean hasStyle (@Nullable ICSSValue aValue);
+
   @Nonnull
   THISTYPE setDirection (EHCTextDirection eDirection);
 
@@ -167,6 +172,58 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   @Nonnull
   THISTYPE setAccessKey (@Nullable String sAccessKey);
+
+  /**
+   * @return <code>true</code> if this is draggable
+   */
+  boolean isDraggable ();
+
+  /**
+   * Set the draggable state of this element
+   * 
+   * @param bDraggable
+   *        <code>true</code> if it is draggable, <code>false</code> otherwise
+   * @return this
+   */
+  THISTYPE setDraggable (boolean bDraggable);
+
+  /**
+   * @return The current state of content editable
+   */
+  @Nullable
+  EHCContentEditable getContentEditable ();
+
+  /**
+   * Change the content editable state
+   * 
+   * @param eContentEditable
+   *        New value
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setContentEditable (@Nullable EHCContentEditable eContentEditable);
+
+  /**
+   * @return The ID of the &lt;menu> element that should be used as the context
+   *         menu. May be <code>null</code>.
+   */
+  @Nullable
+  String getContextMenu ();
+
+  /**
+   * Set the ID of the &lt;menu> element that should add as a context menu
+   * 
+   * @param sContextMenu
+   *        The ID of the &lt;menu> element
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setContextMenu (@Nullable String sContextMenu);
+
+  boolean isSpellCheck ();
+
+  @Nonnull
+  THISTYPE setSpellCheck (boolean bSpellCheck);
 
   /**
    * Set a custom attribute that is serialized as is.
