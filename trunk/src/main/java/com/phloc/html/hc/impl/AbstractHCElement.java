@@ -45,6 +45,7 @@ import com.phloc.css.ECSSProperty;
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.ICSSClassProvider;
 import com.phloc.css.ICSSValue;
+import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -82,6 +83,8 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   private JSEventMap m_aJSHandler;
   private boolean m_bUnfocusable = false;
   private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
+  private boolean m_bHidden = false;
+  private String m_sAccessKey;
   private LinkedHashMap <String, String> m_aCustomAttrs;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
@@ -373,6 +376,11 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return m_aJSHandler == null ? null : m_aJSHandler.getHandler (eJSEvent);
   }
 
+  public final boolean isUnfocusable ()
+  {
+    return m_bUnfocusable;
+  }
+
   @Nonnull
   public final THISTYPE setUnfocusable (final boolean bUnfocusable)
   {
@@ -380,9 +388,16 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
     return thisAsT ();
   }
 
-  public final boolean isUnfocusable ()
+  public final boolean isHidden ()
   {
-    return m_bUnfocusable;
+    return m_bHidden;
+  }
+
+  @Nonnull
+  public final THISTYPE setHidden (final boolean bHidden)
+  {
+    m_bHidden = bHidden;
+    return thisAsT ();
   }
 
   @CheckForSigned
@@ -395,6 +410,19 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
   public final THISTYPE setTabIndex (final long nTabIndex)
   {
     m_nTabIndex = nTabIndex;
+    return thisAsT ();
+  }
+
+  @Nullable
+  public final String getAccessKey ()
+  {
+    return m_sAccessKey;
+  }
+
+  @Nonnull
+  public final THISTYPE setAccessKey (@Nullable final String sAccessKey)
+  {
+    m_sAccessKey = sAccessKey;
     return thisAsT ();
   }
 
@@ -498,8 +526,12 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 
     // unfocusable is handled by the customizer as it is non-standard
 
+    if (m_bHidden)
+      aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
     if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
+    if (StringHelper.hasNoText (m_sAccessKey))
+      aElement.setAttribute (CHTMLAttributes.ACCESSKEY, m_sAccessKey);
 
     if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())

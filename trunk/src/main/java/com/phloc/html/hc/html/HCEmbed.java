@@ -37,7 +37,6 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
   private int m_nHeight = CGlobal.ILLEGAL_UINT;
   private String m_sPluginURL;
   private String m_sPluginsPage;
-  private boolean m_bHidden = false;
   private boolean m_bAutoStart = false;
   private boolean m_bLoop = false;
   private String m_sPalette;
@@ -90,13 +89,6 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
   }
 
   @Nonnull
-  public final HCEmbed setHidden (final boolean bHidden)
-  {
-    m_bHidden = bHidden;
-    return this;
-  }
-
-  @Nonnull
   public final HCEmbed setAutoStart (final boolean bAutoStart)
   {
     m_bAutoStart = bAutoStart;
@@ -125,7 +117,7 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aSrc != null)
@@ -138,8 +130,6 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
       aElement.setAttribute (CHTMLAttributes.PLUGINURL, m_sPluginURL);
     if (StringHelper.hasText (m_sPluginsPage))
       aElement.setAttribute (CHTMLAttributes.PLUGINSPAGE, m_sPluginsPage);
-    if (m_bHidden)
-      aElement.setAttribute (CHTMLAttributes.HIDDEN, Boolean.toString (m_bHidden));
     if (m_bAutoStart)
       aElement.setAttribute (CHTMLAttributes.AUTOSTART, Boolean.toString (m_bAutoStart));
     if (m_bLoop)
