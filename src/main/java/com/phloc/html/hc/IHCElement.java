@@ -133,6 +133,26 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setUnfocusable (boolean bUnfocusable);
 
   /**
+   * @return <code>true</code> if this is hidden
+   */
+  boolean isHidden ();
+
+  /**
+   * Set the hidden state of this element
+   * 
+   * @param bHidden
+   *        <code>true</code> if it is hidden, <code>false</code> otherwise
+   * @return this
+   */
+  THISTYPE setHidden (boolean bHidden);
+
+  /**
+   * @return The tab index of this object. Negative values are invalid!
+   */
+  @CheckForSigned
+  long getTabIndex ();
+
+  /**
    * Set the tab index of this object. This is a common element in HTML5 only.
    * 
    * @param nTabIndex
@@ -142,11 +162,11 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE setTabIndex (@Nonnegative long nTabIndex);
 
-  /**
-   * @return The tab index of this object. Negative values are invalid!
-   */
-  @CheckForSigned
-  long getTabIndex ();
+  @Nullable
+  String getAccessKey ();
+
+  @Nonnull
+  THISTYPE setAccessKey (@Nullable String sAccessKey);
 
   /**
    * Set a custom attribute that is serialized as is.
