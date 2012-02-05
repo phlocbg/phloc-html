@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.EJSEvent;
@@ -59,9 +60,9 @@ public final class HCBody extends AbstractHCElementWithChildren <HCBody>
   }
 
   @Override
-  public IHCBaseNode getOutOfBandNode ()
+  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
-    final IHCBaseNode aOutOfBandNode = super.getOutOfBandNode ();
+    final IHCBaseNode aOutOfBandNode = super.getOutOfBandNode (aConversionSettings);
     if (m_aOufOfBandNodes.isEmpty ())
     {
       // This object has not out of band nodes

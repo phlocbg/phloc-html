@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.hc.customize.HCDefaultCustomizer;
+import com.phloc.html.hc.customize.IHCCustomizer;
 
 @NotThreadSafe
 public final class HCConversionSettings
@@ -32,6 +34,7 @@ public final class HCConversionSettings
   private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN;
   private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN;
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
+  private IHCCustomizer m_aCustomizer = new HCDefaultCustomizer ();
 
   public HCConversionSettings (@Nonnull final EHTMLVersion eHTMLVersion)
   {
@@ -80,5 +83,20 @@ public final class HCConversionSettings
   public boolean areConsistencyChecksEnabled ()
   {
     return m_bConsistencyChecksEnabled;
+  }
+
+  @Nonnull
+  public HCConversionSettings setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
+  {
+    if (aCustomizer == null)
+      throw new NullPointerException ("customizer");
+    m_aCustomizer = aCustomizer;
+    return this;
+  }
+
+  @Nonnull
+  public IHCCustomizer getCustomizer ()
+  {
+    return m_aCustomizer;
   }
 }

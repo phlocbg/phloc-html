@@ -32,7 +32,7 @@ import com.phloc.html.js.provider.JSCodeWrapper;
  * @author philip
  */
 @Immutable
-public final class HCDefaultCustomizer
+public class HCDefaultCustomizer implements IHCCustomizer
 {
   private static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
   private static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
@@ -51,7 +51,7 @@ public final class HCDefaultCustomizer
 
   private static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
 
-  private HCDefaultCustomizer ()
+  public HCDefaultCustomizer ()
   {}
 
   @Nonnull
@@ -66,7 +66,7 @@ public final class HCDefaultCustomizer
    * @param aElement
    *        The element to be customized
    */
-  public static void customize (@Nonnull final IHCElement <?> aElement)
+  public void customizeHCElement (@Nonnull final IHCElement <?> aElement)
   {
     if (aElement instanceof HCButton)
     {
@@ -142,7 +142,7 @@ public final class HCDefaultCustomizer
    * @return <code>null</code> if there is no custom out-of-band node
    */
   @Nullable
-  public static IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement)
+  public IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement)
   {
     if (aElement instanceof IHCControl <?>)
     {

@@ -122,7 +122,7 @@ public final class HCHtml extends AbstractHCBaseNode
     aRoot.appendChild (eBody);
 
     // Handle the out of band nodes in the head
-    final IHCBaseNode aOufOfBandNode = m_aBody.getOutOfBandNode ();
+    final IHCBaseNode aOufOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
     m_aHead.handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
 
     // Create head (after body)

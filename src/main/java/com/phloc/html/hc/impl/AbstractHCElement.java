@@ -55,7 +55,6 @@ import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
@@ -634,7 +633,7 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
       HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
 
     // Do standard customization
-    HCDefaultCustomizer.customize (this);
+    aConversionSettings.getCustomizer ().customizeHCElement (this);
 
     // Prepare object
     prepareBeforeCreateElement (aConversionSettings);
@@ -648,9 +647,9 @@ public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>>
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode ()
+  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
-    return HCDefaultCustomizer.getCustomOutOfBandNode (this);
+    return aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this);
   }
 
   @Override

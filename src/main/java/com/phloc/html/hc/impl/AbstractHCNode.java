@@ -17,10 +17,12 @@
  */
 package com.phloc.html.hc.impl;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
  * Default implementation of the {@link IHCNode} interface.
@@ -30,7 +32,7 @@ import com.phloc.html.hc.IHCNode;
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
 {
   @Nullable
-  public IHCBaseNode getOutOfBandNode ()
+  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     return null;
   }

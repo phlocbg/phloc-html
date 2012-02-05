@@ -448,15 +448,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Override
   @Nullable
-  public final IHCBaseNode getOutOfBandNode ()
+  public final IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
     if (m_aHeaderRow != null)
-      aCont.addChild (m_aHeaderRow.getOutOfBandNode ());
+      aCont.addChild (m_aHeaderRow.getOutOfBandNode (aConversionSettings));
     for (final HCRow aBodyRow : m_aBodyRows)
-      aCont.addChild (aBodyRow.getOutOfBandNode ());
+      aCont.addChild (aBodyRow.getOutOfBandNode (aConversionSettings));
     if (m_aFooterRow != null)
-      aCont.addChild (m_aFooterRow.getOutOfBandNode ());
+      aCont.addChild (m_aFooterRow.getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
   }
 }

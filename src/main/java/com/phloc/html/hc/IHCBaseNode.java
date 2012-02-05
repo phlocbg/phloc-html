@@ -32,7 +32,7 @@ public interface IHCBaseNode extends IHC
 {
   /**
    * @param aConversionSettings
-   *        The settings to be used
+   *        The conversion settings to be used. May not be <code>null</code>.
    * @return The fully created HTML node
    */
   @Nullable
@@ -40,7 +40,7 @@ public interface IHCBaseNode extends IHC
 
   /**
    * @param aConversionSettings
-   *        whether or not to indent and beautify the returned code
+   *        The conversion settings to be used. May not be <code>null</code>.
    * @return The node as XML optionally without indentation.
    */
   @Nonnull

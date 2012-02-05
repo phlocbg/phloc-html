@@ -256,12 +256,12 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode ()
+  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
     for (final IHCBaseNode aNode : m_aNodes)
       if (aNode instanceof IHCNode)
-        aCont.addChild (((IHCNode) aNode).getOutOfBandNode ());
+        aCont.addChild (((IHCNode) aNode).getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
   }
 }

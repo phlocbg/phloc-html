@@ -199,18 +199,18 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode ()
+  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
 
     // Of this
-    aCont.addChild (super.getOutOfBandNode ());
+    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
 
     // Of all children
     if (hasChildren ())
       for (final CHILDTYPE aChild : m_aChildren)
         if (aChild instanceof IHCNode)
-          aCont.addChild (((IHCNode) aChild).getOutOfBandNode ());
+          aCont.addChild (((IHCNode) aChild).getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
   }
 }
