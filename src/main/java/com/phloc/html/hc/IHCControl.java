@@ -21,12 +21,10 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.name.IHasName;
 import com.phloc.html.hc.api.IHCHasFocus;
-import com.phloc.html.hc.api.IHCHasTabIndex;
 
 public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
                                                                      IHCElement <THISTYPE>,
                                                                      IHasName,
-                                                                     IHCHasTabIndex <THISTYPE>,
                                                                      IHCHasFocus <THISTYPE>
 {
   @Nonnull

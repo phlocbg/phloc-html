@@ -28,18 +28,16 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCButtonType;
-import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
-public class HCButton extends AbstractHCElementWithChildren <HCButton> implements IHCHasTabIndex <HCButton>
+public class HCButton extends AbstractHCElementWithChildren <HCButton>
 {
   private String m_sName;
   private String m_sValue;
   private boolean m_bDisabled = false;
-  private int m_nTabIndex = -1;
 
   public HCButton ()
   {
@@ -89,18 +87,6 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
     return this;
   }
 
-  public int getTabIndex ()
-  {
-    return m_nTabIndex;
-  }
-
-  @Nonnull
-  public final HCButton setTabIndex (final int nTabIndex)
-  {
-    m_nTabIndex = nTabIndex;
-    return this;
-  }
-
   @OverrideOnDemand
   @Nonnull
   protected EHCButtonType getType ()
@@ -119,7 +105,5 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bDisabled)
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
-    if (m_nTabIndex >= 0)
-      aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
   }
 }

@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc;
 
+import javax.annotation.CheckForSigned;
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -129,6 +131,22 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   @Nonnull
   THISTYPE setUnfocusable (boolean bUnfocusable);
+
+  /**
+   * Set the tab index of this object. This is a common element in HTML5 only.
+   * 
+   * @param nTabIndex
+   *        The tab-index of this object. Negative values will be ignored!
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setTabIndex (@Nonnegative long nTabIndex);
+
+  /**
+   * @return The tab index of this object. Negative values are invalid!
+   */
+  @CheckForSigned
+  long getTabIndex ();
 
   /**
    * Set a custom attribute that is serialized as is.

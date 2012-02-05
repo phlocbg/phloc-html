@@ -20,7 +20,6 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -39,7 +38,6 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   public static final boolean DEFAULT_FOCUSED = false;
 
   private String m_sName;
-  private int m_nTabIndex = CGlobal.ILLEGAL_UINT;
   private boolean m_bDisabled = DEFAULT_DISABLED;
   private boolean m_bReadOnly = DEFAULT_READONLY;
   private boolean m_bFocused = DEFAULT_FOCUSED;
@@ -59,18 +57,6 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
   public final THISTYPE setName (@Nullable final String sName)
   {
     m_sName = sName;
-    return thisAsT ();
-  }
-
-  public final int getTabIndex ()
-  {
-    return m_nTabIndex;
-  }
-
-  @Nonnull
-  public final THISTYPE setTabIndex (final int nTabIndex)
-  {
-    m_nTabIndex = nTabIndex;
     return thisAsT ();
   }
 
@@ -126,7 +112,5 @@ public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>>
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_bReadOnly)
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
-    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
-      aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
   }
 }

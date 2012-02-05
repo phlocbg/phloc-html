@@ -29,11 +29,10 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCObjectAlign;
-import com.phloc.html.hc.api.IHCHasTabIndex;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
-public class HCObject extends AbstractHCElementWithChildren <HCObject> implements IHCHasTabIndex <HCObject>
+public class HCObject extends AbstractHCElementWithChildren <HCObject>
 {
   private int m_nWidth = CGlobal.ILLEGAL_UINT;
   private int m_nHeight = CGlobal.ILLEGAL_UINT;
@@ -49,7 +48,6 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject> implement
   private boolean m_bDeclare = false;
   private String m_sName;
   private String m_sStandBy;
-  private int m_nTabIndex = CGlobal.ILLEGAL_UINT;
   private IMimeType m_aType;
   private String m_sUseMap;
 
@@ -166,18 +164,6 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject> implement
     return this;
   }
 
-  public int getTabIndex ()
-  {
-    return m_nTabIndex;
-  }
-
-  @Nonnull
-  public final HCObject setTabIndex (@Nullable final int nTabIndex)
-  {
-    m_nTabIndex = nTabIndex;
-    return this;
-  }
-
   @Nonnull
   public final HCObject setType (@Nullable final IMimeType aType)
   {
@@ -193,7 +179,7 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject> implement
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nWidth > 0)
@@ -224,8 +210,6 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject> implement
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sStandBy))
       aElement.setAttribute (CHTMLAttributes.STANDBY, m_sStandBy);
-    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
-      aElement.setAttribute (CHTMLAttributes.TABINDEX, Integer.toString (m_nTabIndex));
     if (m_aType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (StringHelper.hasText (m_sUseMap))
