@@ -18,26 +18,20 @@
 package com.phloc.html.hc.htmlext;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.ReturnsImmutableObject;
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.api.IHCHasExternalJS;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.impl.AbstractWrappedHCNode;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
-import com.phloc.html.resource.js.ConstantJSPathProvider;
-import com.phloc.html.resource.js.IJSPathProvider;
 
 /**
  * Create the necessary tags for embedding a flash files using SWFObject.<br>
@@ -45,10 +39,8 @@ import com.phloc.html.resource.js.IJSPathProvider;
  * 
  * @author philip
  */
-public class HCSWFObject extends AbstractWrappedHCNode implements IHCHasExternalJS
+public class HCSWFObject extends AbstractWrappedHCNode
 {
-  private static final List <IJSPathProvider> JS = ContainerHelper.<IJSPathProvider> newUnmodifiableList (new ConstantJSPathProvider ("swfobject/swfobject-2.2.js"));
-
   // Required:
   private ISimpleURL m_aSWFURL;
   private String m_sHTMLContainerID;
@@ -63,13 +55,6 @@ public class HCSWFObject extends AbstractWrappedHCNode implements IHCHasExternal
 
   public HCSWFObject ()
   {}
-
-  @Nonnull
-  @ReturnsImmutableObject
-  public List <IJSPathProvider> getRequiredJSFiles ()
-  {
-    return JS;
-  }
 
   @Nonnull
   public final HCSWFObject setSWFURL (final ISimpleURL aSWFURL)
