@@ -112,6 +112,12 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   }
 
   @Nonnull
+  public final HCOption addOption (final String sText, final boolean bSelected)
+  {
+    return addOption (sText, sText, bSelected);
+  }
+
+  @Nonnull
   public final HCOption addOption (final String sValue, final String sText)
   {
     final HCOption aOption = new HCOption (sValue);
