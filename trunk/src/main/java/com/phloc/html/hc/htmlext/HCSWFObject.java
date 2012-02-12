@@ -327,7 +327,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
     aJS.append (", flashvars, params, attributes);\n");
 
     final HCNodeList ret = new HCNodeList ();
-    ret.addChild (new HCDiv ("DummySWFNode").setID (m_sHTMLContainerID));
+    ret.addChild (new HCDiv ("").setID (m_sHTMLContainerID));
     ret.addChild (new HCScript (aJS));
     return ret;
   }
