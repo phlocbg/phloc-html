@@ -36,6 +36,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.xml.CXML;
@@ -44,6 +45,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCLinkType;
+import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
@@ -117,23 +119,34 @@ public final class HCHead extends AbstractHCBaseNode
   }
 
   @Nonnull
-  public HCHead setShortcutIconHref (@Nullable final ISimpleURL aShortcutIconHref)
-  {
-    if (aShortcutIconHref != null)
-    {
-      addLink (new HCLink (EHCLinkType.SHORTCUT_ICON, aShortcutIconHref));
-      // Required for IE:
-      addLink (new HCLink (EHCLinkType.ICON, CMimeType.IMAGE_ICON, aShortcutIconHref));
-    }
-    return this;
-  }
-
-  @Nonnull
   public HCHead addMetaElement (@Nonnull final IMetaElement aMetaElement)
   {
     if (aMetaElement == null)
       throw new NullPointerException ("metaElement");
     m_aMetaElements.put (aMetaElement.getName (), aMetaElement);
+    return this;
+  }
+
+  @Nonnull
+  public EChange removeMetaElement (@Nullable final String sMetaElementName)
+  {
+    return EChange.valueOf (m_aMetaElements.remove (sMetaElementName) != null);
+  }
+
+  @Nonnull
+  public HCHead setShortcutIconHref (@Nullable final ISimpleURL aShortcutIconHref)
+  {
+    if (aShortcutIconHref == null)
+    {
+      removeLinkOfRel (EHCLinkType.SHORTCUT_ICON);
+      removeLinkOfRel (EHCLinkType.ICON);
+    }
+    else
+    {
+      addLink (new HCLink (EHCLinkType.SHORTCUT_ICON, aShortcutIconHref));
+      // Required for IE:
+      addLink (new HCLink (EHCLinkType.ICON, CMimeType.IMAGE_ICON, aShortcutIconHref));
+    }
     return this;
   }
 
@@ -151,6 +164,22 @@ public final class HCHead extends AbstractHCBaseNode
       throw new NullPointerException ("link");
     m_aLinks.add (aLink);
     return this;
+  }
+
+  @Nonnull
+  public EChange removeLinkOfRel (@Nonnull final IHCLinkType aLinkType)
+  {
+    final int nMax = m_aLinks.size ();
+    for (int i = 0; i < nMax; ++i)
+    {
+      final HCLink aLink = m_aLinks.get (i);
+      if (aLink.getRel ().equals (aLinkType))
+      {
+        m_aLinks.remove (i);
+        return EChange.CHANGED;
+      }
+    }
+    return EChange.UNCHANGED;
   }
 
   @Nonnull

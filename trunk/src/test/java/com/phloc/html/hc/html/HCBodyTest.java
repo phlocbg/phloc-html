@@ -31,9 +31,13 @@ public final class HCBodyTest
   public void testBody ()
   {
     final HCBody b = new HCBody ();
-    b.addEventHandler (EJSEvent.ONLOAD, DefaultJSCodeProvider.create ("onLoad ()"));
+    // With semicolon at the end
+    b.addEventHandler (EJSEvent.ONLOAD, DefaultJSCodeProvider.create ("onLoad ();"));
+    // Empty event handler - ignored
     b.addEventHandler (EJSEvent.ONMOUSEDOWN, DefaultJSCodeProvider.create (""));
-    b.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create ("onClick ()"));
+    // With prefix
+    b.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create (" javascript: onClick ()"));
+    // Empty event handler - ignored
     b.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
     b.setCustomAttr ("bla", "foo");
     assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\" />",
