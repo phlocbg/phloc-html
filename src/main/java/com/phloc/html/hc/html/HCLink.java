@@ -37,8 +37,8 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  */
 public class HCLink extends AbstractHCElement <HCLink>
 {
-  private IHCLinkType m_eRel;
-  private IHCLinkType m_eRev;
+  private IHCLinkType m_aRel;
+  private IHCLinkType m_aRev;
   private IMimeType m_aType;
   private ISimpleURL m_aHref;
   private String m_sHrefLang;
@@ -51,10 +51,10 @@ public class HCLink extends AbstractHCElement <HCLink>
     super (EHTMLElement.LINK);
   }
 
-  public HCLink (@Nullable final IHCLinkType eRel, @Nullable final ISimpleURL aHref)
+  public HCLink (@Nullable final IHCLinkType aRel, @Nullable final ISimpleURL aHref)
   {
     this ();
-    setRel (eRel);
+    setRel (aRel);
     setHref (aHref);
   }
 
@@ -64,18 +64,36 @@ public class HCLink extends AbstractHCElement <HCLink>
     setType (aType);
   }
 
-  @Nonnull
-  public final HCLink setRel (@Nullable final IHCLinkType eRel)
+  @Nullable
+  public final IHCLinkType getRel ()
   {
-    m_eRel = eRel;
-    return this;
+    return m_aRel;
   }
 
   @Nonnull
-  public final HCLink setRev (@Nullable final IHCLinkType eRev)
+  public final HCLink setRel (@Nullable final IHCLinkType aRel)
   {
-    m_eRev = eRev;
+    m_aRel = aRel;
     return this;
+  }
+
+  @Nullable
+  public final IHCLinkType getRev ()
+  {
+    return m_aRev;
+  }
+
+  @Nonnull
+  public final HCLink setRev (@Nullable final IHCLinkType aRev)
+  {
+    m_aRev = aRev;
+    return this;
+  }
+
+  @Nullable
+  public final IMimeType getType ()
+  {
+    return m_aType;
   }
 
   @Nonnull
@@ -85,11 +103,23 @@ public class HCLink extends AbstractHCElement <HCLink>
     return this;
   }
 
+  @Nullable
+  public final ISimpleURL getHref ()
+  {
+    return m_aHref;
+  }
+
   @Nonnull
   public final HCLink setHref (@Nullable final ISimpleURL aHref)
   {
     m_aHref = aHref;
     return this;
+  }
+
+  @Nullable
+  public final String getHrefLang ()
+  {
+    return m_sHrefLang;
   }
 
   @Nonnull
@@ -99,6 +129,12 @@ public class HCLink extends AbstractHCElement <HCLink>
     return this;
   }
 
+  @Nullable
+  public final HCA_Target getTarget ()
+  {
+    return m_aTarget;
+  }
+
   @Nonnull
   public final HCLink setTarget (@Nullable final HCA_Target aTarget)
   {
@@ -106,11 +142,23 @@ public class HCLink extends AbstractHCElement <HCLink>
     return this;
   }
 
+  @Nullable
+  public final String getCharset ()
+  {
+    return m_sCharset;
+  }
+
   @Nonnull
   public final HCLink setCharset (@Nullable final String sCharset)
   {
     m_sCharset = sCharset;
     return this;
+  }
+
+  @Nullable
+  public final String getMedia ()
+  {
+    return m_sMedia;
   }
 
   @Nonnull
@@ -121,13 +169,13 @@ public class HCLink extends AbstractHCElement <HCLink>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    if (m_eRel != null)
-      aElement.setAttribute (CHTMLAttributes.REL, m_eRel.getAttrValue ());
-    if (m_eRev != null)
-      aElement.setAttribute (CHTMLAttributes.REV, m_eRev.getAttrValue ());
+    if (m_aRel != null)
+      aElement.setAttribute (CHTMLAttributes.REL, m_aRel.getAttrValue ());
+    if (m_aRev != null)
+      aElement.setAttribute (CHTMLAttributes.REV, m_aRev.getAttrValue ());
     if (m_aType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (m_aHref != null)
