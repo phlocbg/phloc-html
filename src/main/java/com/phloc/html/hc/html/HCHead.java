@@ -299,7 +299,16 @@ public final class HCHead extends AbstractHCBaseNode
         aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
         final Locale aContentLocale = aMetaEntry.getKey ();
         if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
+        {
           aMeta.setAttribute (CXML.XML_ATTR_LANG, aContentLocale.toString ());
+          if (aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ())
+          {
+            // When the attribute xml:lang in no namespace is specified, the
+            // element must also have the attribute lang present with the same
+            // value
+            aMeta.setAttribute (CHTMLAttributes.LANG, aContentLocale.toString ());
+          }
+        }
         if (aMetaElement.getScheme () != null)
           aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
       }

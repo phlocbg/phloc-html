@@ -188,8 +188,12 @@ public class HCLink extends AbstractHCElement <HCLink>
       aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
     if (StringHelper.hasText (m_sMedia))
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMedia);
-    // May not be self-closed for IE
-    aElement.appendText ("");
+
+    if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
+    {
+      // May not be self-closed for IE
+      aElement.appendText ("");
+    }
   }
 
   @Nonnull
