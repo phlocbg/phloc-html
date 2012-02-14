@@ -77,6 +77,11 @@ public enum EHTMLVersion
   @Nonnull
   public abstract IMicroDocumentType getDocType ();
 
+  public boolean isPriorToHTML5 ()
+  {
+    return !isAtLeastHTML5 ();
+  }
+
   public boolean isAtLeastHTML5 ()
   {
     return this == HTML5;

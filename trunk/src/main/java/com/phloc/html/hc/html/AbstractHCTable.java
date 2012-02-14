@@ -100,10 +100,14 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                   @Nonnull final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    if (m_nCellSpacing >= 0)
-      aElement.setAttribute (CHTMLAttributes.CELLSPACING, Integer.toString (m_nCellSpacing));
-    if (m_nCellPadding >= 0)
-      aElement.setAttribute (CHTMLAttributes.CELLPADDING, Integer.toString (m_nCellPadding));
+    if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
+    {
+      // These attributes are obsolete in HTML5
+      if (m_nCellSpacing >= 0)
+        aElement.setAttribute (CHTMLAttributes.CELLSPACING, Integer.toString (m_nCellSpacing));
+      if (m_nCellPadding >= 0)
+        aElement.setAttribute (CHTMLAttributes.CELLPADDING, Integer.toString (m_nCellPadding));
+    }
     if (m_aColGroup != null && m_aColGroup.hasColumns ())
       aElement.appendChild (m_aColGroup.getAsNode (aConversionSettings));
     if (m_aHeaderRow != null)
