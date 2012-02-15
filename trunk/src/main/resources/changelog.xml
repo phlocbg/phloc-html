@@ -20,6 +20,16 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2012-02-15" category="api" action="add">
+    <change>
+      <text locale="en">HCScript and HCScriptFile now have the possibility to handle a different script MIME type</text>
+    </change>
+  </entry>
+  <entry date="2012-02-13" category="tech" action="fix">
+    <change>
+      <text locale="en">Improved code generation for HTML5</text>
+    </change>
+  </entry>
   <release date="2012-02-13" version="3.0.0" />
   <release date="2012-02-10" version="3.0.0-RC3" />
   <release date="2012-02-05" version="3.0.0-RC2" />

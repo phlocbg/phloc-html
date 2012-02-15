@@ -138,6 +138,7 @@ public final class HCHead extends AbstractHCBaseNode
   {
     if (aShortcutIconHref == null)
     {
+      // Remove the 2 link types again
       removeLinkOfRel (EHCLinkType.SHORTCUT_ICON);
       removeLinkOfRel (EHCLinkType.ICON);
     }
@@ -279,11 +280,13 @@ public final class HCHead extends AbstractHCBaseNode
 
   public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
+    final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
+
     final IMicroElement aElement = new MicroElement (EHTMLElement.HEAD.getElementName ());
     if (StringHelper.hasText (m_sProfile))
       aElement.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
 
-    // Append meta tags first for charset encoding!
+    // Append meta element first for charset encoding!
     for (final Map.Entry <String, IMetaElement> aEntry : m_aMetaElements.entrySet ())
     {
       final String sKey = aEntry.getKey ();
@@ -301,7 +304,7 @@ public final class HCHead extends AbstractHCBaseNode
         if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
         {
           aMeta.setAttribute (CXML.XML_ATTR_LANG, aContentLocale.toString ());
-          if (aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ())
+          if (bAtLeastHTML5)
           {
             // When the attribute xml:lang in no namespace is specified, the
             // element must also have the attribute lang present with the same
@@ -309,14 +312,20 @@ public final class HCHead extends AbstractHCBaseNode
             aMeta.setAttribute (CHTMLAttributes.LANG, aContentLocale.toString ());
           }
         }
-        if (aMetaElement.getScheme () != null)
-          aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
+        if (!bAtLeastHTML5)
+        {
+          // No scheme attr in HTML5
+          if (aMetaElement.getScheme () != null)
+            aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
+        }
       }
     }
 
-    // title, base
+    // page title
     if (StringHelper.hasText (m_sPageTitle))
       aElement.appendElement (EHTMLElement.TITLE.getElementName ()).appendText (m_sPageTitle);
+
+    // base
     if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)
     {
       final IMicroElement eBase = aElement.appendElement (EHTMLElement.BASE.getElementName ());
@@ -358,8 +367,10 @@ public final class HCHead extends AbstractHCBaseNode
     return aElement;
   }
 
+  @Nonnull
   public String getPlainText ()
   {
+    // Use the page title as plain text
     return StringHelper.getNotNull (m_sPageTitle);
   }
 }

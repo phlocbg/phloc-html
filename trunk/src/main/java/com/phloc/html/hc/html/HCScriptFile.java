@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -29,8 +30,17 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents a &lt;script&gt; element that loads the code from a source URL.
+ * 
+ * @author philip
+ * @see HCScript
+ */
 public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
 {
+  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
+
+  private IMimeType m_aType = DEFAULT_TYPE;
   private ISimpleURL m_aSrc;
   private boolean m_bDefer = false;
 
@@ -52,6 +62,15 @@ public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
   }
 
   @Nonnull
+  public HCScriptFile setType (@Nonnull final IMimeType aType)
+  {
+    if (aType == null)
+      throw new NullPointerException ("type");
+    m_aType = aType;
+    return this;
+  }
+
+  @Nonnull
   public HCScriptFile setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
@@ -66,10 +85,10 @@ public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_JAVASCRIPT.getAsString ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (m_aSrc != null)
       aElement.setAttribute (CHTMLAttributes.SRC, m_aSrc.getAsString ());
     if (m_bDefer)
