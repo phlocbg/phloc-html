@@ -109,7 +109,7 @@ public enum EDublinCoreMetaElement implements IMetaElementDeclaration
   public static EDublinCoreMetaElement getDCMetaTag (@Nullable final String sTagName)
   {
     if (StringHelper.hasText (sTagName))
-      for (final EDublinCoreMetaElement eDC : EDublinCoreMetaElement.values ())
+      for (final EDublinCoreMetaElement eDC : values ())
         if (eDC.getName ().equals (sTagName))
           return eDC;
     return null;

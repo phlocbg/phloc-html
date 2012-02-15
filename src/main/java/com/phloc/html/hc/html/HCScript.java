@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -29,9 +30,18 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * This class represents an &lt;script&gt; element with inline content.
+ * 
+ * @author philip
+ * @see HCScriptFile
+ */
 public final class HCScript extends AbstractHCElement <HCScript>
 {
+  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   public static final boolean DEFAULT_USE_CDATA_MASKING = false;
+
+  private IMimeType m_aType = DEFAULT_TYPE;
   private final String m_sContent;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
@@ -44,6 +54,15 @@ public final class HCScript extends AbstractHCElement <HCScript>
   public String getJSContent ()
   {
     return m_sContent;
+  }
+
+  @Nonnull
+  public HCScript setType (@Nonnull final IMimeType aType)
+  {
+    if (aType == null)
+      throw new NullPointerException ("type");
+    m_aType = aType;
+    return this;
   }
 
   public static void setInlineScript (@Nonnull final IMicroElement aElement, @Nullable final String sContent)
@@ -76,10 +95,10 @@ public final class HCScript extends AbstractHCElement <HCScript>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_JAVASCRIPT.getAsString ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     setInlineScript (aElement, m_sContent);
   }
 
