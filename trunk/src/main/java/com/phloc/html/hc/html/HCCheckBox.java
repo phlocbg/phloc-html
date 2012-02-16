@@ -28,19 +28,18 @@ import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCControl;
+import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCCheckBox extends AbstractHCControl <HCCheckBox>
+public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 {
   private String m_sValue;
   private boolean m_bChecked = false;
 
   public HCCheckBox (@Nullable final String sName)
   {
-    super (EHTMLElement.INPUT);
+    super ();
     setName (sName);
   }
 

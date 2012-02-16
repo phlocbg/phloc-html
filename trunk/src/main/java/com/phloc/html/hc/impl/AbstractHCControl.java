@@ -29,9 +29,9 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
-// TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
-public abstract class AbstractHCControl <THISTYPE extends IHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements
-                                                                                                                     IHCControl <THISTYPE>
+public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends
+                                                                                        AbstractHCElement <THISTYPE> implements
+                                                                                                                    IHCControl <THISTYPE>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_READONLY = false;
