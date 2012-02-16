@@ -61,8 +61,8 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
-public abstract class AbstractHCElement <THISTYPE extends IHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                       IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
+                                                                                                              IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 

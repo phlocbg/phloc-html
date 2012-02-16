@@ -24,12 +24,11 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCControl;
+import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCEditPassword extends AbstractHCControl <HCEditPassword>
+public class HCEditPassword extends AbstractHCInput <HCEditPassword>
 {
   private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
   private int m_nSize = CGlobal.ILLEGAL_UINT;
@@ -37,7 +36,7 @@ public class HCEditPassword extends AbstractHCControl <HCEditPassword>
 
   public HCEditPassword (@Nullable final String sName)
   {
-    super (EHTMLElement.INPUT);
+    super ();
     setName (sName);
   }
 

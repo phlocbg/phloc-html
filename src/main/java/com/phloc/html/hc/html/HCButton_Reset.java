@@ -23,17 +23,19 @@ import com.phloc.html.hc.api.EHCButtonType;
 
 public final class HCButton_Reset extends HCButton
 {
+  private void _init ()
+  {
+    setType (EHCButtonType.RESET);
+  }
+
   public HCButton_Reset ()
-  {}
+  {
+    _init ();
+  }
 
   public HCButton_Reset (@Nullable final String sLabel)
   {
     super (sLabel);
-  }
-
-  @Override
-  protected EHCButtonType getType ()
-  {
-    return EHCButtonType.RESET;
+    _init ();
   }
 }

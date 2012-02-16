@@ -15,50 +15,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.hc.api.EHCInputType;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCEditFile extends AbstractHCInput <HCEditFile>
+// TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
+public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends
+                                                                                    AbstractHCControl <THISTYPE>
 {
-  private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
-  private int m_nSize = CGlobal.ILLEGAL_UINT;
+  private String m_sPlaceholder;
 
-  public HCEditFile (@Nullable final String sName)
+  public AbstractHCInput ()
   {
-    setName (sName);
+    super (EHTMLElement.INPUT);
+  }
+
+  @Nullable
+  public final String getPlaceholder ()
+  {
+    return m_sPlaceholder;
   }
 
   @Nonnull
-  public final HCEditFile setMaxLength (final int nMaxLength)
+  public final THISTYPE setPlaceholder (@Nullable final String sPlaceholder)
   {
-    m_nMaxLength = nMaxLength;
-    return this;
-  }
-
-  @Nonnull
-  public final HCEditFile setSize (final int nSize)
-  {
-    m_nSize = nSize;
-    return this;
+    m_sPlaceholder = sPlaceholder;
+    return thisAsT ();
   }
 
   @Override
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.FILE.getAttrValue ());
-    if (m_nMaxLength > 0)
-      aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
-    if (m_nSize > 0)
-      aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
+    if (StringHelper.hasText (m_sPlaceholder))
+      aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
   }
 }

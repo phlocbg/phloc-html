@@ -23,17 +23,19 @@ import com.phloc.html.hc.api.EHCButtonType;
 
 public final class HCButton_Submit extends HCButton
 {
+  private void _init ()
+  {
+    setType (EHCButtonType.SUBMIT);
+  }
+
   public HCButton_Submit ()
-  {}
+  {
+    _init ();
+  }
 
   public HCButton_Submit (@Nullable final String sLabel)
   {
     super (sLabel);
-  }
-
-  @Override
-  protected EHCButtonType getType ()
-  {
-    return EHCButtonType.SUBMIT;
+    _init ();
   }
 }

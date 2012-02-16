@@ -23,19 +23,18 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCControl;
+import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCRadioButton extends AbstractHCControl <HCRadioButton>
+public class HCRadioButton extends AbstractHCInput <HCRadioButton>
 {
   private String m_sValue;
   private boolean m_bChecked = false;
 
   public HCRadioButton (@Nullable final String sName)
   {
-    super (EHTMLElement.INPUT);
+    super ();
     setName (sName);
   }
 

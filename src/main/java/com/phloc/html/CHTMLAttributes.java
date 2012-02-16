@@ -122,6 +122,7 @@ public final class CHTMLAttributes
   public static final String OBJECT = "object";
   public static final String OPTIMUM = "optimum";
   public static final String PALETTE = "palette";
+  public static final String PLACEHOLDER = "placeholder";
   public static final String PLAYCOUNT = "playcount";
   public static final String PLUGINSPAGE = "pluginspage";
   public static final String PLUGINURL = "pluginurl";

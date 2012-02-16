@@ -24,12 +24,11 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCControl;
+import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCEdit extends AbstractHCControl <HCEdit>
+public class HCEdit extends AbstractHCInput <HCEdit>
 {
   private String m_sValue;
   private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
@@ -38,7 +37,7 @@ public class HCEdit extends AbstractHCControl <HCEdit>
 
   public HCEdit (@Nullable final String sName)
   {
-    super (EHTMLElement.INPUT);
+    super ();
     setName (sName);
   }
 

@@ -20,7 +20,6 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
@@ -35,6 +34,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 public class HCButton extends AbstractHCElementWithChildren <HCButton>
 {
+  private EHCButtonType m_eType = EHCButtonType.BUTTON;
   private String m_sName;
   private String m_sValue;
   private boolean m_bDisabled = false;
@@ -87,18 +87,26 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton>
     return this;
   }
 
-  @OverrideOnDemand
   @Nonnull
-  protected EHCButtonType getType ()
+  public final EHCButtonType getType ()
   {
-    return EHCButtonType.BUTTON;
+    return m_eType;
+  }
+
+  @Nonnull
+  public HCButton setType (@Nonnull final EHCButtonType eType)
+  {
+    if (eType == null)
+      throw new NullPointerException ("type");
+    m_eType = eType;
+    return this;
   }
 
   @Override
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, getType ().getAttrValue ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sValue))
