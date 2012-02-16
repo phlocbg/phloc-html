@@ -69,4 +69,16 @@ public final class HCEntityNode extends AbstractHCNode
   {
     return new HCEntityNode (EHTMLEntity.nbsp, " ");
   }
+
+  @Nonnull
+  public static HCEntityNode newCopy ()
+  {
+    return new HCEntityNode (EHTMLEntity.copy, "©");
+  }
+
+  @Nonnull
+  public static HCEntityNode newEuro ()
+  {
+    return new HCEntityNode (EHTMLEntity.euro, "€");
+  }
 }
