@@ -33,10 +33,13 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
  */
 public abstract class AbstractWrappedHCNode extends AbstractHCNode
 {
+  private boolean m_bPrepared = false;
+
   /**
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
-   * finally.
+   * finally. This method is only called once before the first call to
+   * {@link #getContainedHCNode()}!
    * 
    * @param aConversionSettings
    *        Conversion settings to be applied
@@ -51,7 +54,11 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
   @Nonnull
   public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
-    prepareBeforeGetAsNode (aConversionSettings);
+    if (!m_bPrepared)
+    {
+      prepareBeforeGetAsNode (aConversionSettings);
+      m_bPrepared = true;
+    }
     return getContainedHCNode ().getAsNode (aConversionSettings);
   }
 
