@@ -33,9 +33,6 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
  */
 public abstract class AbstractWrappedHCNode extends AbstractHCNode
 {
-  @Nonnull
-  protected abstract IHCNode getContainedHCNode ();
-
   /**
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
@@ -47,6 +44,9 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
   @OverrideOnDemand
   protected void prepareBeforeGetAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {}
+
+  @Nonnull
+  protected abstract IHCNode getContainedHCNode ();
 
   @Nonnull
   public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
