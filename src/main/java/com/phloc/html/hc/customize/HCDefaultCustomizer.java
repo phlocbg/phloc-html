@@ -92,8 +92,12 @@ public class HCDefaultCustomizer implements IHCCustomizer
     else
       if (aElement instanceof HCCheckBox)
       {
-        aElement.addClass (CSS_CLASS_CHECKBOX);
-        ((HCCheckBox) aElement).setValue (CHCParam.VALUE_CHECKED);
+        final HCCheckBox aCheckBox = (HCCheckBox) aElement;
+        aCheckBox.addClass (CSS_CLASS_CHECKBOX);
+
+        // If no value is present, assign the default value
+        if (aCheckBox.getValue () == null)
+          aCheckBox.setValue (CHCParam.VALUE_CHECKED);
       }
       else
         if (aElement instanceof HCEdit)
