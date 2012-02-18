@@ -24,17 +24,28 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
 public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends
                                                                                     AbstractHCControl <THISTYPE>
 {
+  private final EHCInputType m_eType;
   private String m_sPlaceholder;
 
-  public AbstractHCInput ()
+  public AbstractHCInput (@Nonnull final EHCInputType eType)
   {
     super (EHTMLElement.INPUT);
+    if (eType == null)
+      throw new NullPointerException ("type");
+    m_eType = eType;
+  }
+
+  @Nonnull
+  public final EHCInputType getType ()
+  {
+    return m_eType;
   }
 
   @Nullable
@@ -54,6 +65,7 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
     if (StringHelper.hasText (m_sPlaceholder))
       aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
   }

@@ -34,7 +34,7 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
 
   public HCRadioButton (@Nullable final String sName)
   {
-    super ();
+    super (EHCInputType.RADIO);
     setName (sName);
   }
 
@@ -74,7 +74,6 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.RADIO.getAttrValue ());
     if (m_sValue != null)
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bChecked)
