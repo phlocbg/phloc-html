@@ -24,20 +24,18 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCHiddenField extends AbstractHCElement <HCHiddenField>
+public class HCHiddenField extends AbstractHCInput <HCHiddenField>
 {
-  private String m_sName;
   private String m_sValue;
 
   public HCHiddenField ()
   {
-    super (EHTMLElement.INPUT);
+    super (EHCInputType.HIDDEN);
   }
 
   public HCHiddenField (@Nullable final String sName, @Nullable final String sValue)
@@ -71,13 +69,6 @@ public class HCHiddenField extends AbstractHCElement <HCHiddenField>
   }
 
   @Nonnull
-  public final HCHiddenField setName (@Nullable final String sName)
-  {
-    m_sName = sName;
-    return this;
-  }
-
-  @Nonnull
   public final HCHiddenField setValue (final boolean bValue)
   {
     return setValue (bValue ? CHCParam.VALUE_CHECKED : CHCParam.VALUE_UNCHECKED);
@@ -94,13 +85,11 @@ public class HCHiddenField extends AbstractHCElement <HCHiddenField>
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.HIDDEN.getAttrValue ());
-    if (m_sName != null)
-      aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (m_sValue != null)
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

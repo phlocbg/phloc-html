@@ -39,7 +39,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   public HCCheckBox (@Nullable final String sName)
   {
-    super ();
+    super (EHCInputType.CHECKBOX);
     setName (sName);
   }
 
@@ -82,7 +82,6 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.CHECKBOX.getAttrValue ());
     if (m_sValue != null)
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bChecked)

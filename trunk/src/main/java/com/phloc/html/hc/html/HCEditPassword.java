@@ -20,53 +20,19 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCEditPassword extends AbstractHCInput <HCEditPassword>
+public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
 {
-  private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
-  private int m_nSize = CGlobal.ILLEGAL_UINT;
   private boolean m_bDisableAutoComplete = HCDefaultSettings.isAutoCompleteOffForPasswordEdits ();
 
   public HCEditPassword (@Nullable final String sName)
   {
-    super ();
-    setName (sName);
-  }
-
-  /**
-   * Define the maximum number of characters to be entered into this field.
-   * 
-   * @param nMaxLength
-   *        The maximum number of characters to be entered
-   * @return this
-   */
-  @Nonnull
-  public final HCEditPassword setMaxLength (final int nMaxLength)
-  {
-    m_nMaxLength = nMaxLength;
-    return this;
-  }
-
-  /**
-   * Define the visible size of this edit (approx. the number of visible
-   * characters). Prefer using CSS instead of this methid!
-   * 
-   * @param nSize
-   *        The visible size
-   * @return this
-   */
-  @Nonnull
-  public final HCEditPassword setSize (final int nSize)
-  {
-    m_nSize = nSize;
-    return this;
+    super (EHCInputType.PASSWORD, sName);
   }
 
   @Nonnull
@@ -80,11 +46,6 @@ public class HCEditPassword extends AbstractHCInput <HCEditPassword>
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.PASSWORD.getAttrValue ());
-    if (m_nMaxLength > 0)
-      aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
-    if (m_nSize > 0)
-      aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
   }

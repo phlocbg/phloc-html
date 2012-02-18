@@ -20,25 +20,20 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCInput;
 
-public class HCEdit extends AbstractHCInput <HCEdit>
+public class HCEdit extends AbstractHCEdit <HCEdit>
 {
   private String m_sValue;
-  private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
-  private int m_nSize = CGlobal.ILLEGAL_UINT;
   private boolean m_bDisableAutoComplete = false;
 
   public HCEdit (@Nullable final String sName)
   {
-    super ();
-    setName (sName);
+    super (EHCInputType.TEXT, sName);
   }
 
   public HCEdit (@Nullable final String sName, @Nullable final String sValue)
@@ -65,36 +60,6 @@ public class HCEdit extends AbstractHCInput <HCEdit>
     return this;
   }
 
-  /**
-   * Set the maximum number of characters to be entered.
-   * 
-   * @param nMaxLength
-   *        The max length. Should be > 0.
-   * @return this
-   */
-  @Nonnull
-  public final HCEdit setMaxLength (final int nMaxLength)
-  {
-    m_nMaxLength = nMaxLength;
-    return this;
-  }
-
-  /**
-   * Sets the visible size of the edit. Should not be necessary in most cases,
-   * as styling via CSS is the preferred way. If you want to limit the number of
-   * available characters use {@link #setMaxLength(int)} instead.
-   * 
-   * @param nSize
-   *        The width of the edit in characters.
-   * @return this
-   */
-  @Nonnull
-  public final HCEdit setSize (final int nSize)
-  {
-    m_nSize = nSize;
-    return this;
-  }
-
   @Nonnull
   public final HCEdit setDisableAutoComplete (final boolean bDisableAutoComplete)
   {
@@ -106,13 +71,8 @@ public class HCEdit extends AbstractHCInput <HCEdit>
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, EHCInputType.TEXT.getAttrValue ());
     if (m_sValue != null)
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
-    if (m_nMaxLength > 0)
-      aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
-    if (m_nSize > 0)
-      aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
   }
