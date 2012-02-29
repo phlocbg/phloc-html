@@ -21,6 +21,11 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * Represents an inline JS item in HTML
+ * 
+ * @author philip
+ */
 public interface IJSInline extends IJSHTMLDefinition
 {
   /**
