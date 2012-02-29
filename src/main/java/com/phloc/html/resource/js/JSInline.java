@@ -29,6 +29,11 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * Default implementation of {@link IJSInline}.
+ * 
+ * @author philip
+ */
 @Immutable
 public final class JSInline extends AbstractJSHTMLDefinition implements IJSInline
 {

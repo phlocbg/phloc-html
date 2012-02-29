@@ -31,6 +31,11 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCStyle;
 
+/**
+ * Default implementation of {@link ICSSInline}.
+ * 
+ * @author philip
+ */
 @Immutable
 public final class CSSInline extends AbstractCSSHTMLDefinition implements ICSSInline
 {

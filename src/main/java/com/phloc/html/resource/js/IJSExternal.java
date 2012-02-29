@@ -21,6 +21,11 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.url.ISimpleURL;
 
+/**
+ * Represents an external JS file
+ * 
+ * @author philip
+ */
 public interface IJSExternal extends IJSHTMLDefinition
 {
   /**

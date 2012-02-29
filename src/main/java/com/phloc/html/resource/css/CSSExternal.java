@@ -32,6 +32,11 @@ import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCLink;
 
+/**
+ * Default implementation of {@link ICSSExternal}.
+ * 
+ * @author philip
+ */
 @Immutable
 public final class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExternal
 {

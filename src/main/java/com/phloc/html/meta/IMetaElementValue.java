@@ -38,5 +38,9 @@ public interface IMetaElementValue extends IHasName
   @Nullable
   Locale getContentLocale ();
 
+  /**
+   * @return <code>true</code> if the value is "http-equiv", <code>false</code>
+   *         otherwise
+   */
   boolean isHttpEquiv ();
 }

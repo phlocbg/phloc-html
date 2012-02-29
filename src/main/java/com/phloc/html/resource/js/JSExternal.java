@@ -29,6 +29,11 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.html.HCScriptFile;
 
+/**
+ * Default implementation of {@link IJSExternal}
+ * 
+ * @author philip
+ */
 @Immutable
 public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
 {
