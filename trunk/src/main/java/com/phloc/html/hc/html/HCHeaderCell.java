@@ -19,6 +19,11 @@ package com.phloc.html.hc.html;
 
 import com.phloc.html.EHTMLElement;
 
+/**
+ * Represents a table header cell
+ * 
+ * @author philip
+ */
 public final class HCHeaderCell extends AbstractHCCell
 {
   public HCHeaderCell ()

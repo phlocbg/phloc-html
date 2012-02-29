@@ -18,6 +18,7 @@
 package com.phloc.html.hc.html;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.annotations.OverrideOnDemand;
+import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.locale.LocaleUtils;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
@@ -62,7 +66,7 @@ import com.phloc.html.resource.js.JSInline;
  * 
  * @author philip
  */
-public final class HCHead extends AbstractHCBaseNode
+public class HCHead extends AbstractHCBaseNode
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
   private String m_sProfile;
@@ -73,7 +77,7 @@ public final class HCHead extends AbstractHCBaseNode
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
   private final List <ICSSHTMLDefinition> m_aCSS = new ArrayList <ICSSHTMLDefinition> ();
   private final List <IJSHTMLDefinition> m_aJS = new ArrayList <IJSHTMLDefinition> ();
-  private final List <IMicroNode> m_aCustomNodes = new ArrayList <IMicroNode> ();
+  private final List <IMicroNode> m_aCustomOutOfBandNodes = new ArrayList <IMicroNode> ();
   private IHCOutOfBandNodeHandler m_aOutOfBandHandler;
 
   public HCHead ()
@@ -82,6 +86,12 @@ public final class HCHead extends AbstractHCBaseNode
   public HCHead (@Nullable final String sPageTitle)
   {
     setPageTitle (sPageTitle);
+  }
+
+  @Nullable
+  public String getProfile ()
+  {
+    return m_sProfile;
   }
 
   @Nonnull
@@ -104,11 +114,23 @@ public final class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  @Nullable
+  public String getBaseHref ()
+  {
+    return m_sBaseHref;
+  }
+
   @Nonnull
   public HCHead setBaseHref (@Nullable final String sBaseHref)
   {
     m_sBaseHref = sBaseHref;
     return this;
+  }
+
+  @Nullable
+  public HCA_Target getBaseTarget ()
+  {
+    return m_aBaseTarget;
   }
 
   @Nonnull
@@ -131,6 +153,13 @@ public final class HCHead extends AbstractHCBaseNode
   public EChange removeMetaElement (@Nullable final String sMetaElementName)
   {
     return EChange.valueOf (m_aMetaElements.remove (sMetaElementName) != null);
+  }
+
+  @Nonnull
+  @ReturnsImmutableObject
+  public Collection <IMetaElement> getMetaElements ()
+  {
+    return ContainerHelper.makeUnmodifiable (m_aMetaElements.values ());
   }
 
   @Nonnull
@@ -184,6 +213,13 @@ public final class HCHead extends AbstractHCBaseNode
   }
 
   @Nonnull
+  @ReturnsImmutableObject
+  public List <HCLink> getLinks ()
+  {
+    return ContainerHelper.makeUnmodifiable (m_aLinks);
+  }
+
+  @Nonnull
   public HCHead addCSS (@Nonnull final ICSSHTMLDefinition aCSS)
   {
     if (aCSS == null)
@@ -199,6 +235,24 @@ public final class HCHead extends AbstractHCBaseNode
       throw new NullPointerException ("css");
     m_aCSS.add (nIndex, aCSS);
     return this;
+  }
+
+  @Nonnegative
+  public int getCSSCount ()
+  {
+    return m_aCSS.size ();
+  }
+
+  @Nonnull
+  @ReturnsImmutableObject
+  public List <ICSSHTMLDefinition> getAllCSS ()
+  {
+    return ContainerHelper.makeUnmodifiable (m_aCSS);
+  }
+
+  public void removeAllCSS ()
+  {
+    m_aCSS.clear ();
   }
 
   @Nonnull
@@ -217,6 +271,24 @@ public final class HCHead extends AbstractHCBaseNode
       throw new NullPointerException ("js");
     m_aJS.add (nIndex, aJS);
     return this;
+  }
+
+  @Nonnegative
+  public int getJSCount ()
+  {
+    return m_aJS.size ();
+  }
+
+  @Nonnull
+  @ReturnsImmutableObject
+  public List <IJSHTMLDefinition> getJS ()
+  {
+    return ContainerHelper.makeUnmodifiable (m_aJS);
+  }
+
+  public void removeAllJS ()
+  {
+    m_aJS.clear ();
   }
 
   private static void _recursiveAddFlattened (@Nullable final IHCBaseNode aOutOfBandNode,
@@ -252,7 +324,7 @@ public final class HCHead extends AbstractHCBaseNode
   {
     if (aOutOfBandNode != null)
     {
-      // Only do something if there is some ouf of band
+      // Only do something if there is something out of band
       if (m_aOutOfBandHandler != null)
         m_aOutOfBandHandler.handleOufOfBandNode (aOutOfBandNode);
       else
@@ -267,10 +339,11 @@ public final class HCHead extends AbstractHCBaseNode
           if (aNode instanceof HCScript)
             aJS.append (((HCScript) aNode).getJSContent ());
           else
-            m_aCustomNodes.add (aNode.getAsNode (aConversionSettings));
+            m_aCustomOutOfBandNodes.add (aNode.getAsNode (aConversionSettings));
         }
         if (aJS.length () > 0)
         {
+          // Ensure the inline JS is executed after the document has been loaded
           // Note: has dependency to jQuery
           addJS (new JSInline (aJS.prepend ("$(document).ready(function() {").append ("});")));
         }
@@ -278,13 +351,48 @@ public final class HCHead extends AbstractHCBaseNode
     }
   }
 
-  public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  @OverrideOnDemand
+  protected void emitLinks (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  {
+    for (final HCLink aLink : m_aLinks)
+      eHead.appendChild (aLink.getAsNode (aConversionSettings));
+  }
+
+  @OverrideOnDemand
+  protected void emitCSS (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  {
+    int nCSSExternals = 0;
+    for (final ICSSHTMLDefinition aCSS : m_aCSS)
+    {
+      if (aCSS instanceof ICSSExternal)
+        ++nCSSExternals;
+      eHead.appendChild (aCSS.getAsMicroNode (aConversionSettings));
+    }
+
+    // Sources:
+    // http://acidmartin.wordpress.com/2008/11/25/the-32-external-css-files-limitation-of-internet-explorer-and-more/
+    // http://social.msdn.microsoft.com/Forums/en-US/iewebdevelopment/thread/ad1b6e88-bbfa-4cc4-9e95-3889b82a7c1d
+    if (nCSSExternals > 31 && !GlobalDebug.isDebugMode ())
+      s_aLogger.warn ("You are including more than 31 CSS files (" +
+                      nCSSExternals +
+                      ") in your request, which will be ignored by Internet Explorer (at least up to version 8)!");
+  }
+
+  @OverrideOnDemand
+  protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  {
+    for (final IJSHTMLDefinition aJS : m_aJS)
+      eHead.appendChild (aJS.getAsMicroNode (aConversionSettings));
+  }
+
+  @Nonnull
+  public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 
-    final IMicroElement aElement = new MicroElement (EHTMLElement.HEAD.getElementName ());
+    final IMicroElement eHead = new MicroElement (EHTMLElement.HEAD.getElementName ());
     if (StringHelper.hasText (m_sProfile))
-      aElement.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
+      eHead.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
 
     // Append meta element first for charset encoding!
     for (final Map.Entry <String, IMetaElement> aEntry : m_aMetaElements.entrySet ())
@@ -297,7 +405,7 @@ public final class HCHead extends AbstractHCBaseNode
 
       for (final Map.Entry <Locale, String> aMetaEntry : aMetaElement.getContent ().entrySet ())
       {
-        final IMicroElement aMeta = aElement.appendElement (EHTMLElement.META.getElementName ());
+        final IMicroElement aMeta = eHead.appendElement (EHTMLElement.META.getElementName ());
         aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : CHTMLAttributes.NAME, sKey);
         aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
         final Locale aContentLocale = aMetaEntry.getKey ();
@@ -323,12 +431,12 @@ public final class HCHead extends AbstractHCBaseNode
 
     // page title
     if (StringHelper.hasText (m_sPageTitle))
-      aElement.appendElement (EHTMLElement.TITLE.getElementName ()).appendText (m_sPageTitle);
+      eHead.appendElement (EHTMLElement.TITLE.getElementName ()).appendText (m_sPageTitle);
 
     // base
     if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)
     {
-      final IMicroElement eBase = aElement.appendElement (EHTMLElement.BASE.getElementName ());
+      final IMicroElement eBase = eHead.appendElement (EHTMLElement.BASE.getElementName ());
       if (StringHelper.hasText (m_sBaseHref))
         eBase.setAttribute (CHTMLAttributes.HREF, m_sBaseHref);
       if (m_aBaseTarget != null)
@@ -336,35 +444,19 @@ public final class HCHead extends AbstractHCBaseNode
     }
 
     // links
-    for (final HCLink aLink : m_aLinks)
-      aElement.appendChild (aLink.getAsNode (aConversionSettings));
+    emitLinks (eHead, aConversionSettings);
 
     // CSS stuff
-    int nCSSExternals = 0;
-    for (final ICSSHTMLDefinition aCSS : m_aCSS)
-    {
-      if (aCSS instanceof ICSSExternal)
-        ++nCSSExternals;
-      aElement.appendChild (aCSS.getAsHCNode (aConversionSettings).getAsNode (aConversionSettings));
-    }
-
-    // Sources:
-    // http://acidmartin.wordpress.com/2008/11/25/the-32-external-css-files-limitation-of-internet-explorer-and-more/
-    // http://social.msdn.microsoft.com/Forums/en-US/iewebdevelopment/thread/ad1b6e88-bbfa-4cc4-9e95-3889b82a7c1d
-    if (nCSSExternals > 31 && !GlobalDebug.isDebugMode ())
-      s_aLogger.warn ("You are including more than 31 CSS files (" +
-                      nCSSExternals +
-                      ") in your request, which will be ignored by Internet Explorer (at least up to version 8)!");
+    emitCSS (eHead, aConversionSettings);
 
     // JS files
-    for (final IJSHTMLDefinition aJS : m_aJS)
-      aElement.appendChild (aJS.getAsHCNode (aConversionSettings).getAsNode (aConversionSettings));
+    emitJS (eHead, aConversionSettings);
 
     // Custom nodes (e.g. from out-of-band nodes)
-    for (final IMicroNode aCustomNode : m_aCustomNodes)
-      aElement.appendChild (aCustomNode);
+    for (final IMicroNode aCustomNode : m_aCustomOutOfBandNodes)
+      eHead.appendChild (aCustomNode);
 
-    return aElement;
+    return eHead;
   }
 
   @Nonnull
