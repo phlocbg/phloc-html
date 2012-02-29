@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.callback.INonThrowingRunnableWithParameter;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.parent.IHasChildren;
@@ -120,6 +121,8 @@ public final class HCUtils
   public static final IHCElement <?> recursiveGetChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
                                                                    @Nonnull @Nonempty final EHTMLElement... aElements)
   {
+    if (aOwner == null)
+      throw new NullPointerException ("owner");
     if (ArrayHelper.isEmpty (aElements))
       throw new IllegalArgumentException ("No tag name to search was provided");
 
@@ -176,5 +179,35 @@ public final class HCUtils
     }
 
     return false;
+  }
+
+  public static void iterateTree (@Nonnull final IHasChildren <? extends IHCBaseNode> aNode,
+                                  @Nonnull final INonThrowingRunnableWithParameter <IHCBaseNode> aCallback)
+  {
+    if (aNode == null)
+      throw new NullPointerException ("node");
+    if (aCallback == null)
+      throw new NullPointerException ("callback");
+
+    if (aNode.hasChildren ())
+    {
+      final List <IHCBaseNode> aOpen = new ArrayList <IHCBaseNode> (aNode.getChildren ());
+      while (!aOpen.isEmpty ())
+      {
+        // get current node
+        final IHCBaseNode aCurrent = aOpen.remove (0);
+
+        // call callback
+        aCallback.run (aCurrent);
+
+        // does the node has children
+        if (aCurrent instanceof IHasChildren <?>)
+        {
+          final IHasChildren <IHCBaseNode> aHasChildren = GenericReflection.<IHCBaseNode, IHasChildren <IHCBaseNode>> uncheckedCast (aCurrent);
+          if (aHasChildren.hasChildren ())
+            aOpen.addAll (0, aHasChildren.getChildren ());
+        }
+      }
+    }
   }
 }
