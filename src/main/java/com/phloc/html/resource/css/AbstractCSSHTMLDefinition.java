@@ -23,9 +23,11 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.compare.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 @Immutable
 public abstract class AbstractCSSHTMLDefinition implements ICSSHTMLDefinition
@@ -59,6 +61,12 @@ public abstract class AbstractCSSHTMLDefinition implements ICSSHTMLDefinition
   public final ConditionalComment getConditionalComment ()
   {
     return m_aCC;
+  }
+
+  @Nonnull
+  public final IMicroNode getAsMicroNode (@Nonnull final HCConversionSettings aConversionSettings)
+  {
+    return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
   }
 
   @Override

@@ -21,30 +21,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCNodeList;
-import com.phloc.html.js.EJSEvent;
-import com.phloc.html.js.IJSCodeProvider;
 
-public final class HCBody extends AbstractHCElementWithChildren <HCBody>
+/**
+ * Implementation of an HTML document &lt;body&gt; element
+ * 
+ * @author philip
+ */
+public class HCBody extends AbstractHCElementWithChildren <HCBody>
 {
   private final List <IHCBaseNode> m_aOufOfBandNodes = new ArrayList <IHCBaseNode> ();
 
-  protected HCBody ()
+  public HCBody ()
   {
     super (EHTMLElement.BODY);
-  }
-
-  @Deprecated
-  @Nonnull
-  public HCBody addOnLoad (@Nullable final IJSCodeProvider aOnLoad)
-  {
-    return addEventHandler (EJSEvent.ONLOAD, aOnLoad);
   }
 
   public void addOufOfBandNode (@Nonnull final IHCBaseNode aOufOfBandNode)
@@ -56,6 +51,8 @@ public final class HCBody extends AbstractHCElementWithChildren <HCBody>
 
   public void addOufOfBandNodes (@Nonnull final List <IHCBaseNode> aOufOfBandNodes)
   {
+    if (aOufOfBandNodes == null)
+      throw new NullPointerException ("outOfBandNodes");
     m_aOufOfBandNodes.addAll (aOufOfBandNodes);
   }
 
@@ -65,11 +62,11 @@ public final class HCBody extends AbstractHCElementWithChildren <HCBody>
     final IHCBaseNode aOutOfBandNode = super.getOutOfBandNode (aConversionSettings);
     if (m_aOufOfBandNodes.isEmpty ())
     {
-      // This object has not out of band nodes
+      // This object has no out of band nodes
       return aOutOfBandNode;
     }
 
-    // Concatenate
+    // Concatenate nodes
     final HCNodeList ret = new HCNodeList ();
     ret.addChild (aOutOfBandNode);
     ret.addChildren (m_aOufOfBandNodes);

@@ -19,6 +19,11 @@ package com.phloc.html.hc.html;
 
 import com.phloc.html.EHTMLElement;
 
+/**
+ * Represents a regular table cell
+ * 
+ * @author philip
+ */
 public final class HCCell extends AbstractHCCell
 {
   public HCCell ()

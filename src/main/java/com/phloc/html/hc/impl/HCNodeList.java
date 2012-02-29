@@ -88,6 +88,8 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
     {
       if (aNode instanceof HCNodeList)
       {
+        // Directly add all contained nodes of the node list, to avoid building
+        // a hierarchy of node lists
         for (final IHCBaseNode aContainedNode : ((HCNodeList) aNode).m_aNodes)
           m_aNodes.add (aContainedNode);
       }

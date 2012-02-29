@@ -19,6 +19,7 @@ package com.phloc.html.resource.js;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.condcomment.IHasConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -32,4 +33,7 @@ public interface IJSHTMLDefinition extends IHasConditionalComment
 {
   @Nonnull
   IHCNode getAsHCNode (@Nonnull HCConversionSettings aConversionSettings);
+
+  @Nonnull
+  IMicroNode getAsMicroNode (@Nonnull HCConversionSettings aConversionSettings);
 }

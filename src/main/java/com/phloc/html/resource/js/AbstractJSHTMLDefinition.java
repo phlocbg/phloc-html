@@ -17,13 +17,16 @@
  */
 package com.phloc.html.resource.js;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.compare.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.condcomment.ConditionalComment;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 
 @Immutable
 public abstract class AbstractJSHTMLDefinition implements IJSHTMLDefinition
@@ -44,6 +47,12 @@ public abstract class AbstractJSHTMLDefinition implements IJSHTMLDefinition
   public final ConditionalComment getConditionalComment ()
   {
     return m_aCC;
+  }
+
+  @Nonnull
+  public final IMicroNode getAsMicroNode (@Nonnull final HCConversionSettings aConversionSettings)
+  {
+    return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
   }
 
   @Override
