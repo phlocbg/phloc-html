@@ -336,12 +336,13 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell getCellAtEffectiveIndex (final int nIndex)
   {
     int i = 0;
-    for (final AbstractHCCell aCell : directGetChildren ())
-    {
-      if (i >= nIndex)
-        return aCell;
-      i += aCell.getColspan ();
-    }
+    if (hasChildren ())
+      for (final AbstractHCCell aCell : directGetChildren ())
+      {
+        if (i >= nIndex)
+          return aCell;
+        i += aCell.getColspan ();
+      }
     return null;
   }
 
@@ -366,8 +367,9 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public int getEffectiveCellCount ()
   {
     int ret = 0;
-    for (final AbstractHCCell aCell : directGetChildren ())
-      ret += aCell.getColspan ();
+    if (hasChildren ())
+      for (final AbstractHCCell aCell : directGetChildren ())
+        ret += aCell.getColspan ();
     return ret;
   }
 
@@ -375,8 +377,9 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public HCNodeList getCellsAsNodeList ()
   {
     final HCNodeList ret = new HCNodeList ();
-    for (final AbstractHCCell aCell : directGetChildren ())
-      ret.addChild (aCell);
+    if (hasChildren ())
+      for (final AbstractHCCell aCell : directGetChildren ())
+        ret.addChild (aCell);
     return ret;
   }
 
