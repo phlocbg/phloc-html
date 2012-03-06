@@ -32,6 +32,7 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 
 /**
@@ -52,7 +53,8 @@ public final class HCHtml extends AbstractHCBaseNode
    */
   public HCHtml ()
   {
-    this (EHTMLVersion.DEFAULT);
+    // Use the default from the conversion settings provider
+    this (HCSettings.getConversionSettingsProvider ().getHTMLVersion ());
   }
 
   public HCHtml (@Nonnull final EHTMLVersion eHTMLVersion)
