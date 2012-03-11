@@ -25,9 +25,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.phloc.commons.io.IReadableResource;
+import com.phloc.commons.io.resource.ClassPathResource;
 import com.phloc.commons.microdom.IMicroContainer;
+import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.commons.microdom.serialize.MicroReader;
+import com.phloc.html.entities.HTMLEntityResolver;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.impl.HCDOMWrapper;
@@ -353,5 +358,19 @@ public final class XHTMLParserTest
     aNode = XHTMLParser.convertToXHTMLOnDemand ("&");
     assertTrue (aNode instanceof HCTextNode);
     assertEquals ("&", ((HCTextNode) aNode).getText ());
+  }
+
+  @Test
+  public void testReadFromFile ()
+  {
+    final IReadableResource aRes = new ClassPathResource ("html-test/test1.htm");
+    IMicroDocument aDoc = MicroReader.readMicroXML (aRes, HTMLEntityResolver.getInstance ());
+    assertNotNull (aDoc);
+    if (false)
+    {
+      // May fail if in offline mode
+      aDoc = MicroReader.readMicroXML (aRes);
+      assertNull (aDoc);
+    }
   }
 }
