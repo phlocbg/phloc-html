@@ -27,6 +27,13 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
 
+/**
+ * Base class for an HTML &lt;input&gt; element to be used as an edit
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ *        The implementing type
+ */
 public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>> extends AbstractHCInput <THISTYPE>
 {
   private int m_nMaxLength = CGlobal.ILLEGAL_UINT;

@@ -29,6 +29,11 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;div&gt; element with open semantics.
+ * 
+ * @author philip
+ */
 public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> extends
                                                                                 AbstractHCElementWithChildren <THISTYPE>
 {
@@ -77,7 +82,7 @@ public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> 
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sName))

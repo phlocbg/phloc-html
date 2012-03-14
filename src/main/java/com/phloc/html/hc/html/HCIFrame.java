@@ -33,6 +33,11 @@ import com.phloc.html.hc.api.EHCScrolling;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;iframe&gt; element
+ * 
+ * @author philip
+ */
 public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
 {
   private ISimpleURL m_aSrc;
@@ -170,7 +175,7 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aSrc != null)

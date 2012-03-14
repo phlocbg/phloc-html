@@ -24,6 +24,11 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;fieldset&gt; element
+ * 
+ * @author philip
+ */
 public final class HCFieldSet extends AbstractHCElementWithChildren <HCFieldSet>
 {
   public HCFieldSet ()

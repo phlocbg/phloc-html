@@ -20,7 +20,7 @@ package com.phloc.html.hc.html;
 import com.phloc.html.EHTMLElement;
 
 /**
- * Represents a table header cell
+ * Represents an HTML &lt;th&gt; element
  * 
  * @author philip
  */

@@ -20,6 +20,16 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2012-03-14" category="api" action="fix">
+    <change>
+      <text locale="en">Fixed implementation of HCDefinitionList</text>
+    </change>
+  </entry>
+  <entry date="2012-03-14" category="api" action="change">
+    <change>
+      <text locale="en">Made HCHtml non-final to allow for custom head and body implementations</text>
+    </change>
+  </entry>
   <release date="2012-03-04" version="3.0.5" />
   <entry date="2012-03-02" category="tech" action="fix">
     <change>

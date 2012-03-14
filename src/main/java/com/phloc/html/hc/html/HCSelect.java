@@ -37,6 +37,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
+/**
+ * Represents an HTML &lt;select&gt; element
+ * 
+ * @author philip
+ */
 // TODO change hierarchy to http://dev.w3.org/html5/markup/select.html#select
 public class HCSelect extends AbstractHCControl <HCSelect>
 {

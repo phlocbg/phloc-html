@@ -26,6 +26,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCULType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
+/**
+ * Represents an HTML &lt;ul&gt; element
+ * 
+ * @author philip
+ */
 public class HCUL extends AbstractHCList <HCUL>
 {
   private EHCULType m_eType;
@@ -43,7 +48,7 @@ public class HCUL extends AbstractHCList <HCUL>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 

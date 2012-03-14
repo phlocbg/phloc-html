@@ -32,6 +32,11 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * Represents an HTML &lt;form&gt; element
+ * 
+ * @author philip
+ */
 public class HCForm extends AbstractHCElementWithChildren <HCForm>
 {
   private String m_sAction;

@@ -26,6 +26,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
+ * Represents an HTML &lt;i&gt; element<br>
  * HTML5: has the specific semantic purpose of representing text “offset from
  * its surrounding content without conveying any extra emphasis or importance,
  * and for which the conventional typographic presentation is italic text”

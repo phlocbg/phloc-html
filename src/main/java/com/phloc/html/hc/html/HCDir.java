@@ -22,6 +22,11 @@ import com.phloc.html.annotations.DeprecatedInHTML4;
 import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
 
+/**
+ * Represents an HTML &lt;dir&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML4
 @DeprecatedInXHTML1
 @DeprecatedInHTML5

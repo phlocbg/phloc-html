@@ -27,6 +27,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
+/**
+ * Represents an HTML &lt;textarea&gt; element
+ * 
+ * @author philip
+ */
 public class HCTextArea extends AbstractHCControl <HCTextArea>
 {
   private String m_sValue;
@@ -67,7 +72,7 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nCols > 0)

@@ -29,6 +29,11 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;label&gt; element
+ * 
+ * @author philip
+ */
 public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 {
   private String m_sFor;
@@ -83,7 +88,7 @@ public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sFor))

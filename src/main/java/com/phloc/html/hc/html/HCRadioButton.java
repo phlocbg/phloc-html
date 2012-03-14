@@ -27,6 +27,11 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
 
+/**
+ * Represents an HTML &lt;input&gt; element of type "radio"
+ * 
+ * @author philip
+ */
 public class HCRadioButton extends AbstractHCInput <HCRadioButton>
 {
   private String m_sValue;

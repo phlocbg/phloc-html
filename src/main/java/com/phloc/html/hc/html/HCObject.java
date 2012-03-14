@@ -32,6 +32,11 @@ import com.phloc.html.hc.api.EHCObjectAlign;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;object&gt; element
+ * 
+ * @author philip
+ */
 public class HCObject extends AbstractHCElementWithChildren <HCObject>
 {
   private int m_nWidth = CGlobal.ILLEGAL_UINT;

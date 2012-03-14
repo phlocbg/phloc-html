@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
- * This is a HTML "link" element!
+ * Represents an HTML &lt;link&gt; element
  * 
  * @author philip
  */

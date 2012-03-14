@@ -21,6 +21,11 @@ import javax.annotation.Nullable;
 
 import com.phloc.html.hc.api.EHCInputType;
 
+/**
+ * Represents an HTML &lt;input&gt; element with type "file"
+ * 
+ * @author philip
+ */
 public class HCEditFile extends AbstractHCEdit <HCEditFile>
 {
   public HCEditFile (@Nullable final String sName)

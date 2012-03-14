@@ -32,6 +32,11 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
 
+/**
+ * Represents an HTML &lt;input&gt; element with type "checkbox"
+ * 
+ * @author philip
+ */
 public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 {
   private String m_sValue;

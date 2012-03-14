@@ -25,6 +25,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;kbd&gt; element
+ * 
+ * @author philip
+ */
 public final class HCKBD extends AbstractHCElementWithChildren <HCKBD>
 {
   public HCKBD ()

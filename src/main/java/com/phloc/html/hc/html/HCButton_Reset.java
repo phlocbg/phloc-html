@@ -21,6 +21,11 @@ import javax.annotation.Nullable;
 
 import com.phloc.html.hc.api.EHCButtonType;
 
+/**
+ * Represents an HTML &lt;button&gt; element with type "reset"
+ * 
+ * @author philip
+ */
 public final class HCButton_Reset extends HCButton
 {
   private void _init ()

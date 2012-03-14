@@ -27,6 +27,11 @@ import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;frameset&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML5
 public final class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>
 {
@@ -53,7 +58,7 @@ public final class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nCols > 0)

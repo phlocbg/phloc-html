@@ -35,6 +35,13 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.HCEntityNode;
 
+/**
+ * Represents an HTML &lt;table&gt; element with open semantics.
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ *        The implementing type
+ */
 public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
                                                                                     AbstractHCBaseTable <THISTYPE>
 {

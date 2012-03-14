@@ -31,10 +31,9 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
- * Represents a single column in a table column group.
+ * Represents an HTML &lt;col&gt; element
  * 
  * @author philip
- * @see HCTable
  */
 public final class HCCol extends AbstractHCElement <HCCol>
 {
@@ -83,7 +82,7 @@ public final class HCCol extends AbstractHCElement <HCCol>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sWidth))

@@ -17,9 +17,8 @@
  */
 package com.phloc.html.hc.html;
 
-
 /**
- * Class for representing a simple HTML &lt;table.
+ * Class for representing a simple HTML &lt;table&gt;.
  * 
  * @author philip
  */

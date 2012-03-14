@@ -31,6 +31,11 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 
+/**
+ * Represents an HTML &lt;tr&gt; element
+ * 
+ * @author philip
+ */
 public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, AbstractHCCell>
 {
   private final boolean m_bHeader;

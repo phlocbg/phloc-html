@@ -27,6 +27,11 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;center&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML5
 @DeprecatedInXHTML1
 // Deprecation causes too many warnings...

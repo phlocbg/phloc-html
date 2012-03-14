@@ -25,12 +25,15 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Base class for DD and DT tags ({@link HCDefinitionDefinition} and
+ * Abstract base class for DD and DT tags ({@link HCDefinitionDefinition} and
  * {@link HCDefinitionTerm})
  * 
  * @author philip
+ * @param <THISTYPE>
+ *        The implementing type
  */
-public abstract class AbstractHCDefinitionItem extends AbstractHCElementWithChildren <AbstractHCDefinitionItem>
+public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends
+                                                                                                      AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement)
   {
@@ -38,7 +41,7 @@ public abstract class AbstractHCDefinitionItem extends AbstractHCElementWithChil
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
   }

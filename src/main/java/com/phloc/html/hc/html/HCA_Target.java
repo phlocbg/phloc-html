@@ -26,6 +26,11 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
+/**
+ * Represents the value of the "target" attribute of an HTML &lt;a&gt; element
+ * 
+ * @author philip
+ */
 @Immutable
 public final class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
 {

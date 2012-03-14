@@ -29,6 +29,11 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
 
+/**
+ * Represents an HTML &lt;input&gt; element with type "hidden"
+ * 
+ * @author philip
+ */
 public class HCHiddenField extends AbstractHCInput <HCHiddenField>
 {
   private String m_sValue;

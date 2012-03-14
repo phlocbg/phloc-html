@@ -32,6 +32,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * Represents an HTML &lt;button&gt; element with type "button"
+ * 
+ * @author philip
+ */
 public class HCButton extends AbstractHCElementWithChildren <HCButton>
 {
   private EHCButtonType m_eType = EHCButtonType.BUTTON;

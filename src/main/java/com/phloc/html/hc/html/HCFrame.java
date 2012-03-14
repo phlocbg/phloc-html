@@ -30,6 +30,11 @@ import com.phloc.html.hc.api.EHCScrolling;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents an HTML &lt;frame&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML5
 public class HCFrame extends AbstractHCElement <HCFrame>
 {
@@ -104,7 +109,7 @@ public class HCFrame extends AbstractHCElement <HCFrame>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.FRAMEBORDER, m_bFrameBorder ? "1" : "0");

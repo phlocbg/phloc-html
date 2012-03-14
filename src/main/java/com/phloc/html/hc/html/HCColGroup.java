@@ -27,6 +27,11 @@ import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
+/**
+ * Represents an HTML &lt;colgroup&gt; element
+ * 
+ * @author philip
+ */
 public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGroup, HCCol>
 {
   public HCColGroup ()

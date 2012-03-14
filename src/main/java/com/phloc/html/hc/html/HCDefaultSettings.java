@@ -22,7 +22,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.phloc.commons.GlobalDebug;
 
 /**
- * Default settings for phloc-web
+ * Default settings for HTML controls
  * 
  * @author philip
  */

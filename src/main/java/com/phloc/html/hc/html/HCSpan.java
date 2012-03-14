@@ -23,6 +23,11 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
 
+/**
+ * Represents an HTML &lt;span&gt; element
+ * 
+ * @author philip
+ */
 public final class HCSpan extends AbstractHCSpan <HCSpan>
 {
   public HCSpan ()
