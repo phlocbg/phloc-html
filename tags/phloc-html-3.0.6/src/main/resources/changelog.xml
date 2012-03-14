@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2006-2012 phloc systems
+    http://www.phloc.com
+    office[at]phloc[dot]com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-03-14" version="3.0.6" />
+  <entry date="2012-03-14" category="api" action="fix">
+    <change>
+      <text locale="en">Fixed implementation of HCDefinitionList</text>
+    </change>
+  </entry>
+  <entry date="2012-03-14" category="api" action="change">
+    <change>
+      <text locale="en">Made HCHtml non-final to allow for custom head and body implementations</text>
+    </change>
+  </entry>
+  <release date="2012-03-04" version="3.0.5" />
+  <entry date="2012-03-02" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed NPE for table rows without children in the debug version</text>
+    </change>
+  </entry>
+  <release date="2012-02-29" version="3.0.4" />
+  <entry date="2012-02-29" category="api" action="change">
+    <change>
+      <text locale="en">Made HCBody and HCHead non-final and added some getter</text>
+    </change>
+  </entry>
+  <entry date="2012-02-29" category="api" action="add">
+    <change>
+      <text locale="en">Added new method iterateTree in HCUtils</text>
+    </change>
+  </entry>
+  <release date="2012-02-18" version="3.0.3" />
+  <entry date="2012-02-18" category="api" action="add">
+    <change>
+      <text locale="en">Added dynamic input type for AbstractHCInput</text>
+    </change>
+  </entry>
+  <entry date="2012-02-18" category="api" action="add">
+    <change>
+      <text locale="en">Added common base class AbstractHCEdit for HCEdit, HCEditFile and HCEditPassword</text>
+    </change>
+  </entry>
+  <release date="2012-02-17" version="3.0.2" />
+  <entry date="2012-02-17" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed that checkboxes always get the default value assigned via the form customizer</text>
+    </change>
+  </entry>
+  <release date="2012-02-16" version="3.0.1" />
+  <entry date="2012-02-16" category="api" action="add">
+    <change>
+      <text locale="en">Added new base class AbstractHCInput for input elements</text>
+    </change>
+  </entry>
+  <entry date="2012-02-16" category="api" action="add">
+    <change>
+      <text locale="en">HCButton now has method setType</text>
+    </change>
+  </entry>
+  <entry date="2012-02-15" category="api" action="add">
+    <change>
+      <text locale="en">HCScript and HCScriptFile now have the possibility to handle a different script MIME type</text>
+    </change>
+  </entry>
+  <entry date="2012-02-13" category="tech" action="fix">
+    <change>
+      <text locale="en">Improved code generation for HTML5</text>
+    </change>
+  </entry>
+  <release date="2012-02-13" version="3.0.0" />
+  <release date="2012-02-10" version="3.0.0-RC3" />
+  <release date="2012-02-05" version="3.0.0-RC2" />
+  <release date="2012-02-03" version="3.0.0-RC1" />
+  <!-- published as OSS -->
+  <entry date="2012-02-03" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Now getAsNode and getAsXHTMLString take an HCConversionSettings object</text>
+    </change>
+  </entry>
+  <entry date="2012-02-02" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Restructured packages to avoid naming redundancies</text>
+    </change>
+  </entry>
+  <entry date="2012-02-01" category="api" action="add">
+    <change>
+      <text locale="en">Started improving support for HTML5</text>
+    </change>
+  </entry>
+  <release date="2012-02-01" version="2.8.0" />
+  <release date="2012-01-29" version="2.7.1" />
+  <entry date="2012-01-29" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Added possibility to specify a custom link type for HCLink using HCLinkTypeCustom</text>
+    </change>
+  </entry>
+  <release date="2012-01-29" version="2.7.0" />
+  <!-- Forked from phloc-web -->
+</changelog>
