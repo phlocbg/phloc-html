@@ -26,6 +26,11 @@ import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;plaintext&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML32
 public final class HCPlainText extends AbstractHCElementWithChildren <HCPlainText>
 {

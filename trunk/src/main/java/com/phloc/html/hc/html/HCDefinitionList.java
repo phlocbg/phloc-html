@@ -23,12 +23,17 @@ import javax.annotation.Nullable;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
+/**
+ * Represents an HTML &lt;dl&gt; element
+ * 
+ * @author philip
+ */
 public class HCDefinitionList extends
-                             AbstractHCElementWithInternalChildren <HCDefinitionList, AbstractHCDefinitionItem>
+                             AbstractHCElementWithInternalChildren <HCDefinitionList, AbstractHCDefinitionItem <?>>
 {
-  protected HCDefinitionList (@Nonnull final EHTMLElement aElement)
+  public HCDefinitionList ()
   {
-    super (aElement);
+    super (EHTMLElement.DL);
   }
 
   public final boolean hasItems ()
@@ -37,7 +42,7 @@ public class HCDefinitionList extends
   }
 
   @Nonnull
-  public final HCDefinitionList addItem (@Nullable final AbstractHCDefinitionItem aItem)
+  public final HCDefinitionList addItem (@Nullable final AbstractHCDefinitionItem <?> aItem)
   {
     if (aItem != null)
       addChild (aItem);

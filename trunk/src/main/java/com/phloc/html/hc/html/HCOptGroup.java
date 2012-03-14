@@ -27,6 +27,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;optgroup&gt; element
+ * 
+ * @author philip
+ */
 public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
 {
   private boolean m_bDisabled = false;
@@ -52,7 +57,7 @@ public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bDisabled)

@@ -21,6 +21,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML4;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
 
+/**
+ * Represents an HTML &lt;menu&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML4
 @DeprecatedInXHTML1
 public final class HCMenu extends AbstractHCList <HCMenu>

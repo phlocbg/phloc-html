@@ -26,6 +26,11 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
+/**
+ * Represents an HTML &lt;input&gt; element with type "password"
+ * 
+ * @author philip
+ */
 public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
 {
   private boolean m_bDisableAutoComplete = HCDefaultSettings.isAutoCompleteOffForPasswordEdits ();

@@ -26,6 +26,11 @@ import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;xmp&gt; element
+ * 
+ * @author philip
+ */
 @DeprecatedInHTML32
 public final class HCExample extends AbstractHCElementWithChildren <HCExample>
 {

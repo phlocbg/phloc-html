@@ -29,7 +29,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 
 /**
- * Implementation of an HTML document &lt;body&gt; element
+ * Represents an HTML &lt;body&gt; element
  * 
  * @author philip
  */

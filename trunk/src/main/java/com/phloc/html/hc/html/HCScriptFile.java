@@ -31,7 +31,8 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
- * Represents a &lt;script&gt; element that loads the code from a source URL.
+ * Represents an HTML &lt;script&gt; element that loads the code from a source
+ * URL.
  * 
  * @author philip
  * @see HCScript

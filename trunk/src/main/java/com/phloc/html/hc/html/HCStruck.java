@@ -26,6 +26,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
+ * Represents an HTML &lt;s&gt; element<br>
  * HTML5: has the specific semantic purpose of representing contents that are no
  * longer accurate or no longer relevant.
  * 

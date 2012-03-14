@@ -26,6 +26,11 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
+/**
+ * Represents an HTML &lt;input&gt; element with type "text"
+ * 
+ * @author philip
+ */
 public class HCEdit extends AbstractHCEdit <HCEdit>
 {
   private String m_sValue;

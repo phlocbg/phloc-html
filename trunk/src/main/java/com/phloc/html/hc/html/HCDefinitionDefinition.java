@@ -20,11 +20,11 @@ package com.phloc.html.hc.html;
 import com.phloc.html.EHTMLElement;
 
 /**
- * HTML element DD.
+ * Represents an HTML &lt;dd&gt; element
  * 
  * @author philip
  */
-public final class HCDefinitionDefinition extends AbstractHCDefinitionItem
+public final class HCDefinitionDefinition extends AbstractHCDefinitionItem <HCDefinitionDefinition>
 {
   public HCDefinitionDefinition ()
   {

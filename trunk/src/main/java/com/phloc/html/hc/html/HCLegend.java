@@ -24,6 +24,11 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;legend&gt; element
+ * 
+ * @author philip
+ */
 public class HCLegend extends AbstractHCElementWithChildren <HCLegend>
 {
   public HCLegend ()

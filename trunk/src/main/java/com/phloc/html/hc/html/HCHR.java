@@ -25,6 +25,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents an HTML &lt;hr&gt; element
+ * 
+ * @author philip
+ */
 public final class HCHR extends AbstractHCElement <HCHR>
 {
   private boolean m_bNoShade = false;
@@ -42,7 +47,7 @@ public final class HCHR extends AbstractHCElement <HCHR>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bNoShade)

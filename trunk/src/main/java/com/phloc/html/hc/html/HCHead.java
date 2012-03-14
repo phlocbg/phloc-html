@@ -62,7 +62,7 @@ import com.phloc.html.resource.js.IJSHTMLDefinition;
 import com.phloc.html.resource.js.JSInline;
 
 /**
- * Implementation of an HTML &lt;head&gt; element
+ * Represents an HTML &lt;head&gt; element
  * 
  * @author philip
  */

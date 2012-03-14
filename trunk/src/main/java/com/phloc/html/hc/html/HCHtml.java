@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
@@ -40,13 +41,13 @@ import com.phloc.html.hc.impl.AbstractHCBaseNode;
  * 
  * @author philip
  */
-public final class HCHtml extends AbstractHCBaseNode
+public class HCHtml extends AbstractHCBaseNode
 {
   private final EHTMLVersion m_eHTMLVersion;
   private EHCTextDirection m_eDir;
   private String m_sLang;
-  private final HCHead m_aHead = new HCHead ();
-  private final HCBody m_aBody = new HCBody ();
+  private HCHead m_aHead;
+  private HCBody m_aBody;
 
   /**
    * Create a new HTML object, using the default HTML version.
@@ -64,46 +65,82 @@ public final class HCHtml extends AbstractHCBaseNode
     m_eHTMLVersion = eHTMLVersion;
   }
 
+  /**
+   * Overwrite this method to create a custom {@link HCHead} implementation
+   * 
+   * @return Never <code>null</code>.
+   */
   @Nonnull
-  public HCHtml setDir (@Nullable final EHCTextDirection eDir)
+  @OverrideOnDemand
+  protected HCHead createHead ()
+  {
+    return new HCHead ();
+  }
+
+  /**
+   * Overwrite this method to create a custom {@link HCBody} implementation
+   * 
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  @OverrideOnDemand
+  protected HCBody createBody ()
+  {
+    return new HCBody ();
+  }
+
+  @Nonnull
+  public final HCHtml setDir (@Nullable final EHCTextDirection eDir)
   {
     m_eDir = eDir;
     return this;
   }
 
   @Nonnull
-  public HCHtml setLang (@Nullable final String sLang)
+  public final HCHtml setLang (@Nullable final String sLang)
   {
     m_sLang = sLang;
     return this;
   }
 
   @Nullable
-  public String getLang ()
+  public final String getLang ()
   {
     return m_sLang;
   }
 
   @Nonnull
-  public HCHead getHead ()
+  public final HCHead getHead ()
   {
+    if (m_aHead == null)
+    {
+      m_aHead = createHead ();
+      if (m_aHead == null)
+        throw new IllegalStateException ("Created HCHead is null!");
+    }
     return m_aHead;
   }
 
   @Nonnull
-  public HCBody getBody ()
+  public final HCBody getBody ()
   {
+    if (m_aBody == null)
+    {
+      m_aBody = createBody ();
+      if (m_aBody == null)
+        throw new IllegalStateException ("Created HCBody is null!");
+    }
     return m_aBody;
   }
 
   @Nonnull
-  public IMicroDocument getAsNode ()
+  public final IMicroDocument getAsNode ()
   {
     return getAsNode (new HCConversionSettings (m_eHTMLVersion));
   }
 
   @Nonnull
-  public IMicroDocument getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroDocument getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     // Note: we need to clone the doctype, because otherwise the object would
     // already have a parent assigned if "getAsNode" is called more than once!
@@ -119,23 +156,27 @@ public final class HCHtml extends AbstractHCBaseNode
     }
     aRoot.setAttribute (CXML.XML_ATTR_XMLNS, CHTMLDocTypes.DOCTYPE_XHTML_URI);
 
+    // Use the getter, to ensure the elements are not null
+    final HCHead aHead = getHead ();
+    final HCBody aBody = getBody ();
+
     // Create body first
-    final IMicroNode eBody = m_aBody.getAsNode (aConversionSettings);
+    final IMicroNode eBody = aBody.getAsNode (aConversionSettings);
     aRoot.appendChild (eBody);
 
-    // Handle the out of band nodes in the head
-    final IHCBaseNode aOufOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
-    m_aHead.handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
+    // Handle the out of band nodes of the body in the head
+    final IHCBaseNode aOufOfBandNode = aBody.getOutOfBandNode (aConversionSettings);
+    aHead.handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
 
-    // Create head (after body)
-    final IMicroNode eHead = m_aHead.getAsNode (aConversionSettings);
-    aRoot.insertBefore (eHead, eBody);
+    // Create head (after body) but insert it before the body
+    final IMicroNode eHead = aHead.getAsNode (aConversionSettings);
+    aRoot.insertAtIndex (0, eHead);
     return aDoc;
   }
 
   @Nonnull
   public String getPlainText ()
   {
-    return m_aBody.getPlainText ();
+    return getBody ().getPlainText ();
   }
 }

@@ -25,6 +25,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;h1&gt; element
+ * 
+ * @author philip
+ */
 public final class HCH1 extends AbstractHCElementWithChildren <HCH1>
 {
   public HCH1 ()

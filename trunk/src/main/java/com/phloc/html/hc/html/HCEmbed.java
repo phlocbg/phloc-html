@@ -30,6 +30,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents an HTML &lt;embed&gt; element
+ * 
+ * @author philip
+ */
 public class HCEmbed extends AbstractHCElement <HCEmbed>
 {
   private ISimpleURL m_aSrc;

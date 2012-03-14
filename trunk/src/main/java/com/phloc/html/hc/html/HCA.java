@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * This is a HTML "a" element!
+ * Represents an HTML &lt;a&gt; element
  * 
  * @author philip
  */

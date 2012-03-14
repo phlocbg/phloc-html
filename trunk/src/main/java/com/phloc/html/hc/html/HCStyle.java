@@ -29,6 +29,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
+/**
+ * Represents an HTML &lt;style&gt; element
+ * 
+ * @author philip
+ */
 public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
 {
   private CSSMediaList m_aMediaList;
@@ -54,12 +59,14 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   @Nonnull
   public HCStyle addMedium (final ECSSMedium eMedium)
   {
+    if (m_aMediaList == null)
+      m_aMediaList = new CSSMediaList ();
     m_aMediaList.addMedium (eMedium);
     return this;
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_CSS.getAsString ());

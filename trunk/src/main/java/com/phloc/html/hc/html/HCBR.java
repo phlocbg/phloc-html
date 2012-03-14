@@ -22,6 +22,11 @@ import javax.annotation.Nonnull;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents an HTML &lt;br&gt; element
+ * 
+ * @author philip
+ */
 public final class HCBR extends AbstractHCElement <HCBR>
 {
   public HCBR ()

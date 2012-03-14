@@ -31,7 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
- * This class represents an &lt;script&gt; element with inline content.
+ * This class represents an HTML &lt;script&gt; element with inline content.
  * 
  * @author philip
  * @see HCScriptFile

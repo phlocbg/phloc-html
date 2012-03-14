@@ -30,6 +30,11 @@ import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
+/**
+ * Represents an HTML &lt;img&gt; element
+ * 
+ * @author philip
+ */
 public class HCImg extends AbstractHCElement <HCImg>
 {
   private String m_sSrc;

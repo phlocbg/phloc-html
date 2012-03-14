@@ -26,6 +26,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCOLType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
+/**
+ * Represents an HTML &lt;ol&gt; element
+ * 
+ * @author philip
+ */
 public class HCOL extends AbstractHCList <HCOL>
 {
   private Integer m_aStart;
@@ -51,7 +56,7 @@ public class HCOL extends AbstractHCList <HCOL>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 
