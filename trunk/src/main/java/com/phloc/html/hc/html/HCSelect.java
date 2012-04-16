@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.compare.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
@@ -171,27 +172,88 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     return this;
   }
 
+  /**
+   * @return The number of available options.
+   */
   @Nonnegative
   public final int getOptionCount ()
   {
-    return m_aOptions == null ? 0 : m_aOptions.size ();
+    return ContainerHelper.getSize (m_aOptions);
   }
 
+  /**
+   * @return A non-<code>null</code> list of all available options.
+   */
+  @Nonnull
   @ReturnsImmutableObject
   public final List <HCOption> getOptions ()
   {
     return ContainerHelper.makeUnmodifiable (m_aOptions);
   }
 
+  /**
+   * Get the option at the specified index
+   * 
+   * @param nIndex
+   *        The index to retrieve. Should always be &ge; 0.
+   * @return <code>null</code> if no option is available for the specified
+   *         index.
+   */
   @Nullable
   public final HCOption getOptionAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aOptions, nIndex);
   }
 
+  /**
+   * @return <code>true</code> if this select has at least one option.
+   */
   public final boolean hasOptions ()
   {
-    return m_aOptions != null && !m_aOptions.isEmpty ();
+    return !ContainerHelper.isEmpty (m_aOptions);
+  }
+
+  /**
+   * @return A non-<code>null</code> list of all selected options.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <HCOption> getSelectedOptions ()
+  {
+    final List <HCOption> ret = new ArrayList <HCOption> ();
+    if (m_aOptions != null)
+      for (final HCOption aOption : m_aOptions)
+        if (aOption.isSelected ())
+          ret.add (aOption);
+    return ret;
+  }
+
+  /**
+   * @return The number of selected options. Always &ge; 0.
+   */
+  @Nonnegative
+  public final int getSelectedOptionCount ()
+  {
+    int ret = 0;
+    if (m_aOptions != null)
+      for (final HCOption aOption : m_aOptions)
+        if (aOption.isSelected ())
+          ret++;
+    return ret;
+  }
+
+  /**
+   * Check if this select has at least one selected option
+   * 
+   * @return <code>true</code> if at least one option is selected
+   */
+  public final boolean hasSelectedOption ()
+  {
+    if (m_aOptions != null)
+      for (final HCOption aOption : m_aOptions)
+        if (aOption.isSelected ())
+          return true;
+    return false;
   }
 
   @Override
