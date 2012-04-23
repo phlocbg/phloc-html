@@ -20,7 +20,7 @@ package com.phloc.html.hc.htmlext;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -55,7 +55,7 @@ public final class CheckBoxState
     if (!(o instanceof CheckBoxState))
       return false;
     final CheckBoxState rhs = (CheckBoxState) o;
-    return EqualsUtils.nullSafeEquals (m_sValue, rhs.m_sValue) && m_bChecked == rhs.m_bChecked;
+    return EqualsUtils.equals (m_sValue, rhs.m_sValue) && m_bChecked == rhs.m_bChecked;
   }
 
   @Override

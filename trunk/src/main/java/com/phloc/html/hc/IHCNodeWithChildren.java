@@ -23,9 +23,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.IHCNode;
 
 /**
  * Special node interface for objects containing other objects

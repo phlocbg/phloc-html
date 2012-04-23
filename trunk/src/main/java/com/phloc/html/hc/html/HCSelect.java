@@ -29,7 +29,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
@@ -146,7 +146,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOption (final String sValue, final String sText, final String sSelectedValue)
   {
-    return addOption (sValue, sText, EqualsUtils.nullSafeEquals (sValue, sSelectedValue));
+    return addOption (sValue, sText, EqualsUtils.equals (sValue, sSelectedValue));
   }
 
   @Nonnull

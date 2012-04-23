@@ -27,7 +27,6 @@ import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.version.Version;
-import com.phloc.html.condcomment.ConditionalComment;
 
 public final class ConditionalCommentTest
 {

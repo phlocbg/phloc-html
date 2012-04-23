@@ -32,7 +32,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
@@ -144,7 +144,7 @@ public final class MetaElement implements IMetaElement
   {
     final Locale aRealContentLocale = _getRealContentLocale (aContentLocale);
     final String sOldContent = m_aContents.get (aRealContentLocale);
-    if (EqualsUtils.nullSafeEquals (sOldContent, sContent))
+    if (EqualsUtils.equals (sOldContent, sContent))
       return EChange.UNCHANGED;
     if (sContent == null)
       m_aContents.remove (aRealContentLocale);
@@ -192,7 +192,7 @@ public final class MetaElement implements IMetaElement
       return false;
     final MetaElement rhs = (MetaElement) o;
     return m_sName.equals (rhs.m_sName) &&
-           EqualsUtils.nullSafeEquals (m_sScheme, rhs.m_sScheme) &&
+           EqualsUtils.equals (m_sScheme, rhs.m_sScheme) &&
            m_aContents.equals (rhs.m_aContents) &&
            m_bIsHttpEquiv == rhs.m_bIsHttpEquiv;
   }

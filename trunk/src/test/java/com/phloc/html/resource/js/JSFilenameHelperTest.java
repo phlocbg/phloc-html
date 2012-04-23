@@ -24,8 +24,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.phloc.html.resource.js.JSFilenameHelper;
-
 /**
  * Test class for class {@link JSFilenameHelper}.
  * 

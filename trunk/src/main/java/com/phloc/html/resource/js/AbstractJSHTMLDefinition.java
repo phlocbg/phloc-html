@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
@@ -63,7 +63,7 @@ public abstract class AbstractJSHTMLDefinition implements IJSHTMLDefinition
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final AbstractJSHTMLDefinition rhs = (AbstractJSHTMLDefinition) o;
-    return EqualsUtils.nullSafeEquals (m_aCC, rhs.m_aCC);
+    return EqualsUtils.equals (m_aCC, rhs.m_aCC);
   }
 
   @Override

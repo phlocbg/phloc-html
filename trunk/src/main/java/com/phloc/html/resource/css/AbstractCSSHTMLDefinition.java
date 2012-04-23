@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
@@ -77,7 +77,7 @@ public abstract class AbstractCSSHTMLDefinition implements ICSSHTMLDefinition
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final AbstractCSSHTMLDefinition rhs = (AbstractCSSHTMLDefinition) o;
-    return m_aMedia.equals (rhs.m_aMedia) && EqualsUtils.nullSafeEquals (m_aCC, rhs.m_aCC);
+    return m_aMedia.equals (rhs.m_aMedia) && EqualsUtils.equals (m_aCC, rhs.m_aCC);
   }
 
   @Override

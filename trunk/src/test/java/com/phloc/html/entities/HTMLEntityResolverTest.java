@@ -34,10 +34,9 @@ import com.phloc.commons.microdom.IMicroDocumentType;
 import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
 import com.phloc.commons.xml.EXMLVersion;
-import com.phloc.commons.xml.serialize.AbstractXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.CHTMLDocTypes;
-import com.phloc.html.entities.HTMLEntityResolver;
 
 public final class HTMLEntityResolverTest
 {
@@ -67,9 +66,8 @@ public final class HTMLEntityResolverTest
     assertTrue (_testResolve (CHTMLDocTypes.DOCTYPE_XHTML10_STRICT));
     assertTrue (_testResolve (CHTMLDocTypes.DOCTYPE_XHTML10_TRANS));
     assertTrue (_testResolve (CHTMLDocTypes.DOCTYPE_XHTML11));
-    assertTrue (_testResolve ("<?xml version=\"1.0\" encoding=\"" +
-                              AbstractXMLWriterSettings.DEFAULT_XML_CHARSET +
-                              "\"?>", CHTMLDocTypes.DOCTYPE_XHTML11));
+    assertTrue (_testResolve ("<?xml version=\"1.0\" encoding=\"" + XMLWriterSettings.DEFAULT_XML_CHARSET + "\"?>",
+                              CHTMLDocTypes.DOCTYPE_XHTML11));
   }
 
   @Test
@@ -77,7 +75,7 @@ public final class HTMLEntityResolverTest
   {
     // because of standalone="yes"!!!
     assertFalse (_testResolve ("<?xml version=\"1.0\" encoding=\"" +
-                               AbstractXMLWriterSettings.DEFAULT_XML_CHARSET +
+                               XMLWriterSettings.DEFAULT_XML_CHARSET +
                                "\" standalone=\"yes\"?>", CHTMLDocTypes.DOCTYPE_XHTML11));
   }
 

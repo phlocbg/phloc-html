@@ -22,8 +22,6 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import com.phloc.html.css.CSSInlineHelper;
-
 public final class CSSInlineHelperTest
 {
   @Test
