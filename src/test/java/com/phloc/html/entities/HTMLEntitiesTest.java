@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.phloc.commons.charset.CSpecialChars;
-import com.phloc.html.entities.HTMLEntities;
 
 public final class HTMLEntitiesTest
 {

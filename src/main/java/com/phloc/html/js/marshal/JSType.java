@@ -22,14 +22,14 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Wrapper around JavaScript types.
- *
+ * 
  * @author philip
  */
 @Immutable
@@ -75,14 +75,14 @@ public class JSType
 
   /**
    * Constant basic type for objects already having JS code present.
-   *
+   * 
    * @see IJSCodeProvider
    */
   public static final JSType JS = new JSType (EJSType.JS);
 
   /**
    * Constant basic type for objects already having JSON code present.
-   *
+   * 
    * @see IJSCodeProvider
    */
   public static final JSType JSON = new JSType (EJSType.JSON);
@@ -100,7 +100,7 @@ public class JSType
   /**
    * The constructor is protected to avoid outside instantiation. Use only the
    * above constants.
-   *
+   * 
    * @param eType
    *        The basic type. May not be <code>null</code>.
    */
@@ -113,7 +113,7 @@ public class JSType
 
   /**
    * Get the contained base type.
-   *
+   * 
    * @return The base type. Never <code>null</code>.
    */
   @Nullable
@@ -130,7 +130,7 @@ public class JSType
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final JSType rhs = (JSType) o;
-    return EqualsUtils.nullSafeEquals (m_eType, rhs.m_eType);
+    return EqualsUtils.equals (m_eType, rhs.m_eType);
   }
 
   @Override

@@ -20,7 +20,6 @@ package com.phloc.html.js.provider;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 /**
  * This class contains some static JS constants.

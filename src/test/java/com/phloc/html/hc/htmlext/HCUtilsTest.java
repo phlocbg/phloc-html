@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCBR;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.HCTextNode;
 
 public final class HCUtilsTest

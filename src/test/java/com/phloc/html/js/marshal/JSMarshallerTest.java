@@ -37,10 +37,6 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.file.SimpleFileIO;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.html.js.marshal.JSListType;
-import com.phloc.html.js.marshal.JSMapType;
-import com.phloc.html.js.marshal.JSMarshaller;
-import com.phloc.html.js.marshal.JSType;
 import com.phloc.html.js.provider.CJSCode;
 
 /**

@@ -21,7 +21,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.charset.CCharset;
-import com.phloc.commons.xml.serialize.AbstractXMLWriterSettings;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 
 /**
  * Contains the preferred charsets to be used for HTML/JS and CSS.
@@ -31,7 +31,7 @@ import com.phloc.commons.xml.serialize.AbstractXMLWriterSettings;
 @Immutable
 public final class CHTMLCharset
 {
-  public static final String CHARSET_HTML = AbstractXMLWriterSettings.DEFAULT_XML_CHARSET;
+  public static final String CHARSET_HTML = XMLWriterSettings.DEFAULT_XML_CHARSET;
   public static final String CHARSET_CSS = CCharset.CHARSET_UTF_8;
   public static final String CHARSET_JS = CCharset.CHARSET_UTF_8;
 

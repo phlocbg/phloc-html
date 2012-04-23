@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.compare.EqualsUtils;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
@@ -257,7 +257,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
     // Contained styles can never have a null value!
     final ECSSProperty eProp = aValue.getProp ();
-    return EqualsUtils.nullSafeEquals (m_aStyles.get (eProp), aValue);
+    return EqualsUtils.equals (m_aStyles.get (eProp), aValue);
   }
 
   @Nonnull

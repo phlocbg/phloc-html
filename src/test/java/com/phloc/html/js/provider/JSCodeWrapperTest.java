@@ -21,10 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.phloc.html.js.provider.CJSCode;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
-import com.phloc.html.js.provider.JSCodeWrapper;
-
 /**
  * Test class for class {@link JSCodeWrapper}.
  * 

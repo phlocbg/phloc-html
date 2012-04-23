@@ -23,8 +23,6 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
-import com.phloc.html.js.provider.CJSCode;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 @Immutable
 public final class JSCodeWrapper

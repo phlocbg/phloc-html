@@ -25,7 +25,6 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 @Immutable
 public final class DefaultJSCodeProvider implements IJSCodeProvider
