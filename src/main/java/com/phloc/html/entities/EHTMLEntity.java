@@ -19,6 +19,7 @@ package com.phloc.html.entities;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -27,6 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
+@CodingStyleguideUnaware
 public enum EHTMLEntity implements IHTMLEntity
 {
   // Reserved chars:

@@ -22,7 +22,6 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
@@ -32,7 +31,6 @@ import com.phloc.commons.string.StringHelper;
  * 
  * @author philip
  */
-@Immutable
 public enum EHTMLElement
 {
   A ("a", false),
