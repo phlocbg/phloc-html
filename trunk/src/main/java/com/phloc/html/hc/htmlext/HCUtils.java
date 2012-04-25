@@ -118,8 +118,8 @@ public final class HCUtils
    *         <code>null</code> if no such element exists.
    */
   @Nullable
-  public static final IHCElement <?> recursiveGetChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
-                                                                   @Nonnull @Nonempty final EHTMLElement... aElements)
+  public static IHCElement <?> recursiveGetChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
+                                                             @Nonnull @Nonempty final EHTMLElement... aElements)
   {
     if (aOwner == null)
       throw new NullPointerException ("owner");
@@ -155,8 +155,8 @@ public final class HCUtils
     return null;
   }
 
-  public static final boolean recursiveContainsChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
-                                                                 @Nonnull @Nonempty final EHTMLElement... aElements)
+  public static boolean recursiveContainsChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
+                                                           @Nonnull @Nonempty final EHTMLElement... aElements)
   {
     return recursiveGetChildWithTagName (aOwner, aElements) != null;
   }
