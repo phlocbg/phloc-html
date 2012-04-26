@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
@@ -94,6 +95,7 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);

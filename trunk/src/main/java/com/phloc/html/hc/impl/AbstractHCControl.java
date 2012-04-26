@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroElement;
@@ -103,6 +104,7 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);

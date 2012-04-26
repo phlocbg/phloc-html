@@ -41,12 +41,17 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public final class HCOption extends AbstractHCElementWithChildren <HCOption>
 {
+  public static final boolean DEFAULT_DISABLED = false;
+  public static final boolean DEFAULT_SELECTED = false;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCOption.class);
 
-  private boolean m_bDisabled = false;
-  private boolean m_bSelected = false;
+  private boolean m_bDisabled = DEFAULT_DISABLED;
+  private boolean m_bSelected = DEFAULT_SELECTED;
   private String m_sValue;
   private String m_sLabel;
+
+  // Check if a selection was defined or not
+  private boolean m_bSelectionDefined = false;
 
   public HCOption ()
   {
@@ -80,12 +85,22 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   public HCOption setSelected (final boolean bSelected)
   {
     m_bSelected = bSelected;
+    m_bSelectionDefined = true;
     return this;
   }
 
   public boolean isSelected ()
   {
     return m_bSelected;
+  }
+
+  /**
+   * @return <code>true</code> if this option was specially marked selected or
+   *         not selected.
+   */
+  public boolean isSelectionDefined ()
+  {
+    return m_bSelectionDefined;
   }
 
   @Nonnull
@@ -115,7 +130,7 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bDisabled)

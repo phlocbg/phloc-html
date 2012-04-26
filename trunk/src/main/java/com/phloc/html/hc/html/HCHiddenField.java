@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.CHCParam;
+import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
@@ -50,6 +51,7 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
     setValue (sValue);
   }
 
+  @Deprecated
   public HCHiddenField (@Nullable final String sID, @Nullable final String sName, @Nullable final String sValue)
   {
     this (sName, sValue);
@@ -61,6 +63,11 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
     this (sName, Integer.toString (nValue));
   }
 
+  public HCHiddenField (@Nullable final String sName, final long nValue)
+  {
+    this (sName, Long.toString (nValue));
+  }
+
   public HCHiddenField (@Nullable final String sName, @Nonnull final Locale aLocale)
   {
     this (sName, aLocale.toString ());
@@ -68,11 +75,15 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
 
   public HCHiddenField (@Nullable final String sName, final boolean bValue)
   {
-    this ();
-    setName (sName);
-    setValue (bValue);
+    this (sName, bValue ? CHCParam.VALUE_CHECKED : CHCParam.VALUE_UNCHECKED);
   }
 
+  public HCHiddenField (@Nonnull final IHCRequestField aRF)
+  {
+    this (aRF.getFieldName (), aRF.getRequestValue ());
+  }
+
+  @Deprecated
   @Nonnull
   public final HCHiddenField setValue (final boolean bValue)
   {

@@ -28,6 +28,7 @@ import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.hc.IHCRequestFieldBoolean;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCInput;
@@ -52,6 +53,11 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   {
     this (sName);
     setChecked (bChecked);
+  }
+
+  public HCCheckBox (@Nonnull final IHCRequestFieldBoolean aRF)
+  {
+    this (aRF.getFieldName (), aRF.isChecked ());
   }
 
   @Nullable
