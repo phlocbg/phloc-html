@@ -29,9 +29,11 @@ import com.phloc.commons.GlobalDebug;
 @NotThreadSafe
 public final class HCDefaultSettings
 {
+  public static final boolean DEFAULT_AUTO_COMPLETE_OFF_FOR_PASSWORD_EDITS = false;
+
   // For security reasons, the password should not be auto-filled by the browser
   // in the release-version
-  private static boolean s_bAutoCompleteOffForPasswordEdits = false;
+  private static boolean s_bAutoCompleteOffForPasswordEdits = DEFAULT_AUTO_COMPLETE_OFF_FOR_PASSWORD_EDITS;
 
   private HCDefaultSettings ()
   {}

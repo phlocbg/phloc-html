@@ -40,10 +40,11 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
 {
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
+  public static final boolean DEFAULT_DEFER = false;
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private ISimpleURL m_aSrc;
-  private boolean m_bDefer = false;
+  private boolean m_bDefer = DEFAULT_DEFER;
 
   public HCScriptFile ()
   {

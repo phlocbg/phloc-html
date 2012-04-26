@@ -33,11 +33,12 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 @SinceHTML5
 public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
 {
+  public static final EHCKeyGenType DEFAULT_KEY_TYPE = EHCKeyGenType.DEFAULT;
   public static final boolean DEFAULT_AUTOFOCUS = false;
   public static final boolean DEFAULT_DISABLED = false;
 
   private String m_sChallenge;
-  private EHCKeyGenType m_eKeyType = EHCKeyGenType.DEFAULT;
+  private EHCKeyGenType m_eKeyType = DEFAULT_KEY_TYPE;
   private boolean m_bAutofocus = DEFAULT_AUTOFOCUS;
   private String m_sName;
   private boolean m_bDisabled = DEFAULT_DISABLED;
@@ -93,7 +94,7 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sChallenge))

@@ -38,12 +38,15 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 @DeprecatedInHTML5
 public class HCFrame extends AbstractHCElement <HCFrame>
 {
-  private boolean m_bFrameBorder = true;
+  public static final boolean DEFAULT_FRAME_BORDER = true;
+  public static final boolean DEFAULT_NO_RESIZE = false;
+
+  private boolean m_bFrameBorder = DEFAULT_FRAME_BORDER;
   private String m_sLongDesc;
   private int m_nMarginWidth = CGlobal.ILLEGAL_UINT;
   private int m_nMarginHeight = CGlobal.ILLEGAL_UINT;
   private String m_sName;
-  private boolean m_bNoResize = false;
+  private boolean m_bNoResize = DEFAULT_NO_RESIZE;
   private EHCScrolling m_eScrolling;
   private String m_sSrc;
 

@@ -34,8 +34,10 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
  */
 public class HCEdit extends AbstractHCEdit <HCEdit>
 {
+  public static final boolean DEFAULT_DISABLE_AUTO_COMPLETE = false;
+
   private String m_sValue;
-  private boolean m_bDisableAutoComplete = false;
+  private boolean m_bDisableAutoComplete = DEFAULT_DISABLE_AUTO_COMPLETE;
 
   public HCEdit (@Nullable final String sName)
   {

@@ -40,12 +40,15 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
 {
+  public static final EHCScrolling DEFAULT_SCROLLING = EHCScrolling.AUTO;
+  public static final boolean DEFAULT_FRAME_BORDER = true;
+
   private ISimpleURL m_aSrc;
   private String m_sName;
   private String m_sLongDesc;
-  private EHCScrolling m_eScrolling = EHCScrolling.AUTO;
+  private EHCScrolling m_eScrolling = DEFAULT_SCROLLING;
   private EHCIFrameAlign m_eAlign;
-  private boolean m_bFrameBorder = true;
+  private boolean m_bFrameBorder = DEFAULT_FRAME_BORDER;
   private String m_sWidth;
   private String m_sHeight;
   private int m_nMarginWidth = CGlobal.ILLEGAL_UINT;

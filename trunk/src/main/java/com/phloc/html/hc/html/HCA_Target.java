@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
@@ -42,7 +43,7 @@ public final class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
 
   private final String m_sName;
 
-  public HCA_Target (@Nonnull final String sName)
+  public HCA_Target (@Nonnull @Nonempty final String sName)
   {
     if (StringHelper.hasNoText (sName))
       throw new IllegalArgumentException ("Name may not be empty!");
