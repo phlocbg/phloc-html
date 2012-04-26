@@ -40,8 +40,10 @@ import com.phloc.html.hc.impl.AbstractHCInput;
  */
 public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 {
+  public static final boolean DEFAULT_CHECKED = false;
+
   private String m_sValue;
-  private boolean m_bChecked = false;
+  private boolean m_bChecked = DEFAULT_CHECKED;
 
   public HCCheckBox (@Nullable final String sName)
   {

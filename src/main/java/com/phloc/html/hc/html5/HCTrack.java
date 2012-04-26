@@ -32,11 +32,13 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 @SinceHTML5
 public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
 {
+  public static final boolean DEFAULT_DEFAULT = false;
+
   private String m_sKind;
   private ISimpleURL m_aSrc;
   private String m_sSrcLang;
   private String m_sLabel;
-  private boolean m_bDefault = false;
+  private boolean m_bDefault = DEFAULT_DEFAULT;
 
   public HCTrack ()
   {
@@ -79,7 +81,7 @@ public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sKind))

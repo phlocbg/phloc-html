@@ -39,6 +39,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCObject extends AbstractHCElementWithChildren <HCObject>
 {
+  public static final boolean DEFAULT_DECLARE = false;
+
   private int m_nWidth = CGlobal.ILLEGAL_UINT;
   private int m_nHeight = CGlobal.ILLEGAL_UINT;
   private String m_sHSpace;
@@ -50,7 +52,7 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
   private ISimpleURL m_aCodeBase;
   private IMimeType m_aCodeType;
   private ISimpleURL m_aData;
-  private boolean m_bDeclare = false;
+  private boolean m_bDeclare = DEFAULT_DECLARE;
   private String m_sName;
   private String m_sStandBy;
   private IMimeType m_aType;

@@ -32,7 +32,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  */
 public final class HCHR extends AbstractHCElement <HCHR>
 {
-  private boolean m_bNoShade = false;
+  public static final boolean DEFAULT_NO_SHADE = false;
+
+  private boolean m_bNoShade = DEFAULT_NO_SHADE;
 
   public HCHR ()
   {

@@ -34,7 +34,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
 {
-  private boolean m_bDisabled = false;
+  public static final boolean DEFAULT_DISABLED = false;
+
+  private boolean m_bDisabled = DEFAULT_DISABLED;
   private String m_sLabel;
 
   public HCOptGroup ()

@@ -39,15 +39,21 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public class HCForm extends AbstractHCElementWithChildren <HCForm>
 {
+  public static final EHCFormMethod DEFAULT_METHOD = EHCFormMethod.POST;
+  public static final boolean DEFAULT_DISABLE_AUTO_COMPLETE = false;
+  public static final boolean DEFAULT_SUBMIT_PRESSING_ENTER = false;
+
   private String m_sAction;
   private IJSCodeProvider m_aAction;
-  private EHCFormMethod m_eMethod = EHCFormMethod.POST;
+  private EHCFormMethod m_eMethod = DEFAULT_METHOD;
   private String m_sName;
   private String m_sAcceptCharset;
   private HCA_Target m_aLinkTarget;
-  private boolean m_bDisableAutoComplete = false;
-  private boolean m_bSubmitPressingEnter = false;
-  private int m_nSubmitButtonTabIndex = -1;
+  private boolean m_bDisableAutoComplete = DEFAULT_DISABLE_AUTO_COMPLETE;
+
+  // Must be handled externally!
+  private boolean m_bSubmitPressingEnter = DEFAULT_SUBMIT_PRESSING_ENTER;
+  private int m_nSubmitButtonTabIndex = CGlobal.ILLEGAL_UINT;
 
   public HCForm ()
   {
@@ -163,9 +169,9 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sAcceptCharset))
       aElement.setAttribute (CHTMLAttributes.ACCEPTCHARSET, m_sAcceptCharset);
-    if (m_bDisableAutoComplete)
-      aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
     if (m_aLinkTarget != null)
       aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget.getAttrValue ());
+    if (m_bDisableAutoComplete)
+      aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
   }
 }

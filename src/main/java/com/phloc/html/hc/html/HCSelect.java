@@ -49,7 +49,9 @@ import com.phloc.html.hc.impl.AbstractHCControl;
 // TODO change hierarchy to http://dev.w3.org/html5/markup/select.html#select
 public class HCSelect extends AbstractHCControl <HCSelect>
 {
-  private boolean m_bMultiple = false;
+  public static final boolean DEFAULT_MULTIPLE = false;
+
+  private boolean m_bMultiple = DEFAULT_MULTIPLE;
   private int m_nSize = CGlobal.ILLEGAL_UINT;
   private List <HCOption> m_aOptions;
   private Set <String> m_aPreselectedValues;

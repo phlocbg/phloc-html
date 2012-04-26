@@ -37,13 +37,16 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  */
 public class HCEmbed extends AbstractHCElement <HCEmbed>
 {
+  public static final boolean DEFAULT_AUTO_START = false;
+  public static final boolean DEFAULT_LOOP = false;
+
   private ISimpleURL m_aSrc;
   private int m_nWidth = CGlobal.ILLEGAL_UINT;
   private int m_nHeight = CGlobal.ILLEGAL_UINT;
   private String m_sPluginURL;
   private String m_sPluginsPage;
-  private boolean m_bAutoStart = false;
-  private boolean m_bLoop = false;
+  private boolean m_bAutoStart = DEFAULT_AUTO_START;
+  private boolean m_bLoop = DEFAULT_LOOP;
   private String m_sPalette;
   private IMimeType m_aType;
 
