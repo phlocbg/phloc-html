@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -62,6 +63,7 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);

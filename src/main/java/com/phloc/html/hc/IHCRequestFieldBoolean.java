@@ -15,34 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc;
 
-import javax.annotation.Nullable;
 
-/**
- * Class for representing a simple HTML &lt;table&gt;.
- * 
- * @author philip
- */
-public final class HCTable extends AbstractHCTable <HCTable>
+public interface IHCRequestFieldBoolean extends IHCRequestField
 {
-  public HCTable ()
-  {
-    super ();
-  }
-
-  public HCTable (@Nullable final HCCol aCol)
-  {
-    super (aCol);
-  }
-
-  public HCTable (@Nullable final HCCol... aCols)
-  {
-    super (aCols);
-  }
-
-  public HCTable (@Nullable final Iterable <HCCol> aCols)
-  {
-    super (aCols);
-  }
+  /**
+   * @return <code>true</code> if the checkbox is checked or if no such request
+   *         parameter is present and the fallback is <code>true</code>,
+   *         <code>false</code> otherwise.
+   */
+  boolean isChecked ();
 }

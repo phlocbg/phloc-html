@@ -19,6 +19,7 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
@@ -101,6 +102,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected final void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);

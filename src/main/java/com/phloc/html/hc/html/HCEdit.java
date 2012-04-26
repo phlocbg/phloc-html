@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
@@ -50,6 +51,16 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
   public HCEdit (@Nullable final String sName, final int nValue)
   {
     this (sName, Integer.toString (nValue));
+  }
+
+  public HCEdit (@Nullable final String sName, final long nValue)
+  {
+    this (sName, Long.toString (nValue));
+  }
+
+  public HCEdit (@Nonnull final IHCRequestField aRF)
+  {
+    this (aRF.getFieldName (), aRF.getRequestValue ());
   }
 
   @Nullable

@@ -19,6 +19,7 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,6 +104,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement aElement,
                                   @Nonnull final HCConversionSettings aConversionSettings)
   {

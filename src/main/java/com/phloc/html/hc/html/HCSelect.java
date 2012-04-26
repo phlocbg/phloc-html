@@ -18,7 +18,9 @@
 package com.phloc.html.hc.html;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -35,6 +37,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCControl;
 
@@ -49,6 +52,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   private boolean m_bMultiple = false;
   private int m_nSize = CGlobal.ILLEGAL_UINT;
   private List <HCOption> m_aOptions;
+  private Set <String> m_aPreselectedValues;
 
   public HCSelect ()
   {
@@ -59,6 +63,22 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   {
     this ();
     setName (sName);
+  }
+
+  public HCSelect (@Nullable final String sName, @Nullable final Set <String> aPreselectedValues)
+  {
+    this (sName);
+    m_aPreselectedValues = aPreselectedValues;
+  }
+
+  public HCSelect (@Nullable final String sName, @Nullable final List <String> aPreselectedValues)
+  {
+    this (sName, aPreselectedValues == null ? null : new HashSet <String> (aPreselectedValues));
+  }
+
+  public HCSelect (@Nonnull final IHCRequestField aRF)
+  {
+    this (aRF.getFieldName (), aRF.getRequestValues ());
   }
 
   @Nonnull
@@ -73,6 +93,18 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   {
     m_nSize = nSize;
     return this;
+  }
+
+  @Nonnull
+  @ReturnsImmutableObject
+  public Set <String> getPreselectedValues ()
+  {
+    return ContainerHelper.makeUnmodifiableNotNull (m_aPreselectedValues);
+  }
+
+  public boolean isPreselectedValue (@Nullable final String sValue)
+  {
+    return m_aPreselectedValues != null && m_aPreselectedValues.contains (sValue);
   }
 
   /**
@@ -91,40 +123,52 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     if (aOption == null)
       throw new NullPointerException ("option");
 
+    // Ensure list is present
     if (m_aOptions == null)
       m_aOptions = new ArrayList <HCOption> ();
+
+    // Handle preselection (if no manual selection state was defined so far)
+    if (!aOption.isSelectionDefined ())
+      aOption.setSelected (isPreselectedValue (aOption.getValue ()));
+
     onAddOption (aOption);
     m_aOptions.add (aOption);
     return aOption;
   }
 
   @Nonnull
-  public final HCOption addOptionAtIndex (final int nIndex, @Nonnull final HCOption aOption)
+  public final HCOption addOptionAtIndex (@Nonnegative final int nIndex, @Nonnull final HCOption aOption)
   {
     if (aOption == null)
       throw new NullPointerException ("option");
 
+    // Ensure list is present
     if (m_aOptions == null)
       m_aOptions = new ArrayList <HCOption> ();
+
+    // Handle preselection (if no manual selection state was defined so far)
+    if (!aOption.isSelectionDefined ())
+      aOption.setSelected (isPreselectedValue (aOption.getValue ()));
+
     onAddOption (aOption);
     m_aOptions.add (nIndex, aOption);
     return aOption;
   }
 
   @Nonnull
-  public final HCOption addOption (final String sText)
+  public final HCOption addOption (@Nullable final String sText)
   {
     return addOption (sText, sText);
   }
 
   @Nonnull
-  public final HCOption addOption (final String sText, final boolean bSelected)
+  public final HCOption addOption (@Nullable final String sText, final boolean bSelected)
   {
     return addOption (sText, sText, bSelected);
   }
 
   @Nonnull
-  public final HCOption addOption (final String sValue, final String sText)
+  public final HCOption addOption (@Nullable final String sValue, @Nullable final String sText)
   {
     final HCOption aOption = new HCOption (sValue);
     aOption.addChild (sText);
@@ -132,19 +176,22 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   }
 
   @Nonnull
-  public final HCOption addOption (final String sValue, @Nonnull final IPredefinedLocaleTextProvider aTextProvider)
+  public final HCOption addOption (@Nullable final String sValue,
+                                   @Nonnull final IPredefinedLocaleTextProvider aTextProvider)
   {
     return addOption (sValue, aTextProvider.getText ());
   }
 
   @Nonnull
-  public final HCOption addOption (final String sValue, final String sText, final boolean bSelected)
+  public final HCOption addOption (@Nullable final String sValue, @Nullable final String sText, final boolean bSelected)
   {
     return addOption (sValue, sText).setSelected (bSelected);
   }
 
   @Nonnull
-  public final HCOption addOption (final String sValue, final String sText, final String sSelectedValue)
+  public final HCOption addOption (@Nullable final String sValue,
+                                   @Nullable final String sText,
+                                   @Nullable final String sSelectedValue)
   {
     return addOption (sValue, sText, EqualsUtils.equals (sValue, sSelectedValue));
   }
@@ -165,7 +212,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   }
 
   @Nonnull
-  public final HCSelect removeOptionAtIndex (final int nIndex)
+  public final HCSelect removeOptionAtIndex (@Nonnegative final int nIndex)
   {
     if (m_aOptions != null)
       m_aOptions.remove (nIndex);
@@ -188,7 +235,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @ReturnsImmutableObject
   public final List <HCOption> getOptions ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aOptions);
+    return ContainerHelper.makeUnmodifiableNotNull (m_aOptions);
   }
 
   /**

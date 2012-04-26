@@ -19,9 +19,7 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -38,11 +36,5 @@ public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefin
   public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement)
   {
     super (aElement);
-  }
-
-  @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
-  {
-    super.applyProperties (aElement, aConversionSettings);
   }
 }
