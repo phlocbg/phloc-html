@@ -77,6 +77,16 @@ public enum EHTMLVersion
   @Nonnull
   public abstract IMicroDocumentType getDocType ();
 
+  public boolean isXHTML10 ()
+  {
+    return this == XHTML10_STRICT || this == XHTML10_TRANSITIONAL;
+  }
+
+  public boolean isXHTML11 ()
+  {
+    return this == XHTML11;
+  }
+
   public boolean isPriorToHTML5 ()
   {
     return !isAtLeastHTML5 ();

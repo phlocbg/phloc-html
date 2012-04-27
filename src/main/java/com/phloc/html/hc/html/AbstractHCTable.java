@@ -46,8 +46,8 @@ import com.phloc.html.hc.impl.HCEntityNode;
 public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
                                                                                     AbstractHCBaseTable <THISTYPE>
 {
+  public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
-  private static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
 
   public AbstractHCTable ()
   {
@@ -136,8 +136,9 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
 
     // add the tbody anyway - helpful for JS tables
     // Required by XHTML 1.1
-    if (m_aBodyRows.isEmpty ())
+    if (m_aBodyRows.isEmpty () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
       s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
+
     final IMicroElement aTBody = aElement.appendElement (EHTMLElement.TBODY.getElementName ());
     if (StringHelper.hasText (m_sBodyID))
       aTBody.setAttribute (CHTMLAttributes.ID, m_sBodyID);
@@ -146,21 +147,19 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
     // IE9 only interprets column widths if the first row does not use colspan
     // (i.e. at least one row does not use colspan)
-    if (m_aColGroup != null)
+    if (m_aColGroup != null && !m_aBodyRows.isEmpty ())
     {
       final HCRow aFirstRow = m_aBodyRows.get (0);
       boolean bFirstRowUsesColSpan = false;
-      for (int i = 0; i < aFirstRow.getCellCount (); i++)
-      {
-        final AbstractHCCell aCell = aFirstRow.getCellAtIndex (i);
+      for (final AbstractHCCell aCell : aFirstRow.getChildren ())
         if (aCell.getColspan () > 1)
         {
           bFirstRowUsesColSpan = true;
           break;
         }
-      }
       if (bFirstRowUsesColSpan)
       {
+        // Create a dummy row with explicit widths
         final HCRow aRow = new HCRow (false);
         aRow.addClass (CSS_FORCE_COLSPAN);
         for (final HCCol aCol : m_aColGroup.getColumns ())

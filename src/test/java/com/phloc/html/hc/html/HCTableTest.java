@@ -18,6 +18,7 @@
 package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -177,5 +178,17 @@ public final class HCTableTest
     // row 3
     aTable.addBodyRow ().addCells ("e", "f", "g0");
     assertNotNull (HCSettings.getAsNode (aTable));
+  }
+
+  @Test
+  public void testEmpty ()
+  {
+    assertNull (HCSettings.getAsNode (new HCTable ()));
+    assertNotNull (HCSettings.getAsNode (new HCTable ().setBodyID ("any")));
+    assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (), new HCCol (), new HCCol ()).setBodyID ("any")));
+    assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (15), new HCCol (), new HCCol ()).setBodyID ("any")));
+    assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (), new HCCol (), new HCCol (27)).setBodyID ("any")));
+    assertNotNull (HCSettings.getAsNode (new HCTable (HCCol.star (), new HCCol (), new HCCol ()).setBodyID ("any")));
+    assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (), new HCCol (), HCCol.star ()).setBodyID ("any")));
   }
 }
