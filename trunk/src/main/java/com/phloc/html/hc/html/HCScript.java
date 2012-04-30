@@ -65,11 +65,13 @@ public final class HCScript extends AbstractHCElement <HCScript>
     return this;
   }
 
+  // TODO use IMicroNodeWithChildren interface in phloc-commons > 3.5.1
   public static void setInlineScript (@Nonnull final IMicroElement aElement, @Nullable final String sContent)
   {
     setInlineScript (aElement, sContent, DEFAULT_USE_CDATA_MASKING);
   }
 
+  // TODO use IMicroNodeWithChildren interface in phloc-commons > 3.5.1
   public static void setInlineScript (@Nonnull final IMicroElement aElement,
                                       @Nullable final String sContent,
                                       final boolean bUseCDATAMasking)
@@ -88,10 +90,19 @@ public final class HCScript extends AbstractHCElement <HCScript>
         aElement.appendCDATA ("\n" + sContent + "//");
       }
       else
+      {
+        /**
+         * <pre>
+         * <script>
+         * my script bla
+         * //</script>
+         * </pre>
+         */
         if (StringHelper.endsWith (sContent, '\n'))
           aElement.appendComment ("\n" + sContent + "//");
         else
           aElement.appendComment ("\n" + sContent + "\n//");
+      }
   }
 
   @Override
