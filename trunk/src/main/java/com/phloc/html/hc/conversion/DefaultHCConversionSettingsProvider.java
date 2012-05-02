@@ -18,6 +18,7 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.html.EHTMLVersion;
 
@@ -27,6 +28,7 @@ import com.phloc.html.EHTMLVersion;
  * 
  * @author philip
  */
+@Immutable
 public final class DefaultHCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
   private static final EHTMLVersion HTML_VERSION = EHTMLVersion.DEFAULT;

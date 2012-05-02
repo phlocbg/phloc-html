@@ -190,7 +190,9 @@ public final class HCConsistencyChecker
       // from a user input, which cannot be told at this point, it might as well
       // contain a'&amp;' followed by some malicious code that should be
       // escaped.
-      consistencyAssert (!sHref.contains ("&amp;"), "The URL seems to be already quoted!");
+      // Note PH: this is not a vulnerability. This is a programming error!
+      consistencyAssert (!sHref.contains ("&amp;"),
+                         "The URL seems to be already escaped - please use an unescaped URL!!");
     }
   }
 }
