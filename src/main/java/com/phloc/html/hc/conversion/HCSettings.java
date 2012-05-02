@@ -37,6 +37,12 @@ public final class HCSettings
   private HCSettings ()
   {}
 
+  /**
+   * Set the global conversion settings provider.
+   * 
+   * @param aConversionSettingsProvider
+   *        The object to be used. May not be <code>null</code>.
+   */
   public static void setConversionSettingsProvider (@Nonnull final IHCConversionSettingsProvider aConversionSettingsProvider)
   {
     if (aConversionSettingsProvider == null)
@@ -53,6 +59,11 @@ public final class HCSettings
     }
   }
 
+  /**
+   * @return The global conversion settings provider. Never <code>null</code>.
+   *         By default a {@link DefaultHCConversionSettingsProvider} object is
+   *         returned.
+   */
   @Nonnull
   public static IHCConversionSettingsProvider getConversionSettingsProvider ()
   {
@@ -67,6 +78,13 @@ public final class HCSettings
     }
   }
 
+  /**
+   * Get the conversion settings from the current conversion settings provider
+   * 
+   * @param bIndentAndAlign
+   *        Indented/aligned output?
+   * @return The non-<code>null</code> conversion settings
+   */
   @Nonnull
   public static HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {

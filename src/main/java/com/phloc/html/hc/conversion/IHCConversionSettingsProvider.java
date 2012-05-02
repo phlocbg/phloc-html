@@ -21,11 +21,26 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.EHTMLVersion;
 
+/**
+ * Provider interface for {@link HCConversionSettings} objects.
+ * 
+ * @author philip
+ */
 public interface IHCConversionSettingsProvider
 {
+  /**
+   * @return The HTML version to use. May not be <code>null</code>.
+   */
   @Nonnull
   EHTMLVersion getHTMLVersion ();
 
+  /**
+   * Get the conversion settings.
+   * 
+   * @param bIndentAndAlign
+   *        Should the output be indented and aligned (pretty printed)?
+   * @return The non-<code>null</code> conversion settings object.
+   */
   @Nonnull
   HCConversionSettings getConversionSettings (boolean bIndentAndAlign);
 }
