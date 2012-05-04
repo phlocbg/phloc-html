@@ -33,6 +33,7 @@ import org.joda.time.Period;
 import org.joda.time.format.ISODateTimeFormat;
 import org.joda.time.format.ISOPeriodFormat;
 
+import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
@@ -189,9 +190,9 @@ public final class HCTime extends AbstractHCElementWithChildren <HCTime>
     final int nHours = nMinutes / 60;
     final int nRestMinutes = nMinutes % 60;
     m_sDatetime = (nHours < 0 ? "-" : "+") +
-                  StringHelper.leadingZero (Math.abs (nHours), 2) +
+                  StringHelper.leadingZero (MathHelper.abs (nHours), 2) +
                   ":" +
-                  StringHelper.leadingZero (Math.abs (nRestMinutes), 2);
+                  StringHelper.leadingZero (MathHelper.abs (nRestMinutes), 2);
     return this;
   }
 
@@ -229,7 +230,7 @@ public final class HCTime extends AbstractHCElementWithChildren <HCTime>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sDatetime))

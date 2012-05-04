@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -65,14 +66,12 @@ public final class HCScript extends AbstractHCElement <HCScript>
     return this;
   }
 
-  // TODO use IMicroNodeWithChildren interface in phloc-commons > 3.5.1
-  public static void setInlineScript (@Nonnull final IMicroElement aElement, @Nullable final String sContent)
+  public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement, @Nullable final String sContent)
   {
     setInlineScript (aElement, sContent, DEFAULT_USE_CDATA_MASKING);
   }
 
-  // TODO use IMicroNodeWithChildren interface in phloc-commons > 3.5.1
-  public static void setInlineScript (@Nonnull final IMicroElement aElement,
+  public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement,
                                       @Nullable final String sContent,
                                       final boolean bUseCDATAMasking)
   {
