@@ -47,12 +47,12 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
+import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
@@ -296,9 +296,11 @@ public class HCHead extends AbstractHCBaseNode
   {
     if (aOutOfBandNode != null)
     {
-      if (aOutOfBandNode instanceof IHCNodeWithChildren <?>)
+      // Only check HCNodeList and not IHCNodeWithChildren because other
+      // surrounding elements would not be handled correctly!
+      if (aOutOfBandNode instanceof HCNodeList)
       {
-        final IHCNodeWithChildren <?> x = (IHCNodeWithChildren <?>) aOutOfBandNode;
+        final HCNodeList x = (HCNodeList) aOutOfBandNode;
         if (x.hasChildren ())
           for (final IHCBaseNode aChild : x.getChildren ())
             _recursiveAddFlattened (aChild, aRealList);
