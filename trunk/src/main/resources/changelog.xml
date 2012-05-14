@@ -20,6 +20,7 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-05-14" version="3.1.3" />
   <entry date="2012-05-14" category="tech" action="add">
     <change>
       <text locale="en">Improved toString implementations</text>
@@ -32,7 +33,7 @@
   </entry>
   <entry date="2012-05-11" category="api" action="fix">
     <change>
-      <text locale="en">Fixed typo in method naming in HCBody (Ouf vs. Out)</text>
+      <text locale="en">Fixed typo in method naming in HCBody and IHCOutOfBandNodeHandler (Ouf vs. Out)</text>
     </change>
   </entry>
   <entry date="2012-05-11" category="tech" action="fix">

@@ -153,8 +153,8 @@ public class HCHtml extends AbstractHCBaseNode
       m_bCopiedOutOfBandNodes = true;
 
       // Handle the out of band nodes of the body in the head
-      final IHCBaseNode aOufOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
-      getHead ().handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
+      final IHCBaseNode aOutOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
+      getHead ().handleOutOfBandNode (aOutOfBandNode);
     }
   }
 
