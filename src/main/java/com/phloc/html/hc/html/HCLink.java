@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -200,5 +201,20 @@ public class HCLink extends AbstractHCElement <HCLink>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("rel", m_aRel)
+                            .appendIfNotNull ("rev", m_aRev)
+                            .appendIfNotNull ("type", m_aType)
+                            .appendIfNotNull ("href", m_aHref)
+                            .appendIfNotNull ("hrefLang", m_sHrefLang)
+                            .appendIfNotNull ("target", m_aTarget)
+                            .appendIfNotNull ("charset", m_sCharset)
+                            .appendIfNotNull ("media", m_sMedia)
+                            .toString ();
   }
 }

@@ -20,6 +20,21 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2012-05-14" category="tech" action="add">
+    <change>
+      <text locale="en">Improved toString implementations</text>
+    </change>
+  </entry>
+  <entry date="2012-05-11" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed out-of-band handling in HCHtml so that it is only called once per object, because otherwise the head may be modified in each consecutive call</text>
+    </change>
+  </entry>
+  <entry date="2012-05-11" category="api" action="fix">
+    <change>
+      <text locale="en">Fixed typo in method naming in HCBody (Ouf vs. Out)</text>
+    </change>
+  </entry>
   <entry date="2012-05-11" category="tech" action="fix">
     <change>
       <text locale="en">Fixed error in out-of-band handling in HCHead</text>

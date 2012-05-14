@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -108,5 +109,11 @@ public final class HCCol extends AbstractHCElement <HCCol>
   public static HCCol fromString (final String sWidth)
   {
     return new HCCol (sWidth);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("width", m_sWidth).toString ();
   }
 }

@@ -64,4 +64,17 @@ public final class HCHeadTest
     assertEquals ("<head><title>phloc</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/my.css\"></link><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
   }
+
+  @Test
+  public void testOutOfBandNodes ()
+  {
+    final HCHtml aHtml = new HCHtml ();
+    aHtml.getBody ().addChild (new HCH1 ("Test"));
+    aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));
+    // Ensure that the out-of-band nodes are handled, because we're not calling
+    // aHtml.getAsNode ()
+    aHtml.handleOutOfBandNodes (HCSettings.getConversionSettings (false));
+    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>",
+                  HCSettings.getAsHTMLString (aHtml.getHead (), false));
+  }
 }

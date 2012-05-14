@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCULType;
@@ -54,5 +55,11 @@ public class HCUL extends AbstractHCList <HCUL>
 
     if (m_eType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("type", m_eType).toString ();
   }
 }

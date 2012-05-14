@@ -24,6 +24,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -121,5 +122,17 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     // HTML5 only:
     if (StringHelper.hasText (m_sMediaQuery))
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMediaQuery);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("href", m_aHref)
+                            .appendIfNotNull ("target", m_aTarget)
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("type", m_aType)
+                            .appendIfNotNull ("mediaQuery", m_sMediaQuery)
+                            .toString ();
   }
 }

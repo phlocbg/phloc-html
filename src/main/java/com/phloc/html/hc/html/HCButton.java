@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -118,5 +119,16 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton>
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bDisabled)
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("type", m_eType)
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("value", m_sValue)
+                            .append ("disabled", m_bDisabled)
+                            .toString ();
   }
 }

@@ -664,6 +664,12 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
                                        .appendIfNotNull ("styles", m_aStyles)
                                        .appendIfNotNull ("JSHandler", m_aJSHandler)
                                        .append ("unfocusable", m_bUnfocusable)
+                                       .append ("hidden", m_bHidden)
+                                       .append ("tabIndex", m_nTabIndex)
+                                       .appendIfNotNull ("accessKey", m_sAccessKey)
+                                       .appendIfNotNull ("draggable", m_eDraggable)
+                                       .appendIfNotNull ("contextMenu", m_sContextMenu)
+                                       .append ("spellcheck", m_bSpellCheck)
                                        .appendIfNotNull ("customAttrs", m_aCustomAttrs)
                                        .toString ();
   }

@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -59,5 +60,11 @@ public final class HCHR extends AbstractHCElement <HCHR>
   public String getPlainText ()
   {
     return "------------------------------\n";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("noShade", m_bNoShade).toString ();
   }
 }
