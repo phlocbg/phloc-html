@@ -66,6 +66,6 @@ public final class HCCommentNode extends AbstractHCNode
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("text", m_sText).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("text", m_sText).toString ();
   }
 }

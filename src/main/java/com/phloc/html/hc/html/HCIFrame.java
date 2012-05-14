@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributes;
@@ -200,5 +201,23 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
       aElement.setAttribute (CHTMLAttributes.MARGINWIDTH, Integer.toString (m_nMarginWidth));
     if (m_nMarginHeight >= 0)
       aElement.setAttribute (CHTMLAttributes.MARGINHEIGHT, Integer.toString (m_nMarginHeight));
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("src", m_aSrc)
+                            .appendIfNotNull ("src", m_aSrc)
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("longDesc", m_sLongDesc)
+                            .appendIfNotNull ("scrolling", m_eScrolling)
+                            .appendIfNotNull ("align", m_eAlign)
+                            .append ("frameBorder", m_bFrameBorder)
+                            .appendIfNotNull ("width", m_sWidth)
+                            .appendIfNotNull ("height", m_sHeight)
+                            .append ("marginWidth", m_nMarginWidth)
+                            .append ("marginHeight", m_nMarginHeight)
+                            .toString ();
   }
 }

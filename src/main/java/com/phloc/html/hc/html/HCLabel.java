@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -93,5 +94,11 @@ public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sFor))
       aElement.setAttribute (CHTMLAttributes.FOR, m_sFor);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("for", m_sFor).toString ();
   }
 }

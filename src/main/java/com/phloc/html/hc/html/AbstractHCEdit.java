@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -99,5 +100,14 @@ public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>
       aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
     if (m_nSize > 0)
       aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("maxLength", m_nMaxLength)
+                            .append ("size", m_nSize)
+                            .toString ();
   }
 }

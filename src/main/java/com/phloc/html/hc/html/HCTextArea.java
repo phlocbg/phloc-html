@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCRequestField;
@@ -96,5 +97,15 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   public String getPlainText ()
   {
     return m_sValue != null ? m_sValue : "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("value", m_sValue)
+                            .append ("cols", m_nCols)
+                            .append ("rows", m_nRows)
+                            .toString ();
   }
 }

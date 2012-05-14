@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.impl.MicroContainer;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
@@ -265,5 +266,11 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
       if (aNode instanceof IHCNode)
         aCont.addChild (((IHCNode) aNode).getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("nodes", m_aNodes).toString ();
   }
 }

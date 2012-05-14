@@ -24,6 +24,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -221,5 +222,28 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (StringHelper.hasText (m_sUseMap))
       aElement.setAttribute (CHTMLAttributes.USEMAP, m_sUseMap);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("width", m_nWidth)
+                            .append ("height", m_nHeight)
+                            .appendIfNotNull ("hspace", m_sHSpace)
+                            .appendIfNotNull ("vspace", m_sVSpace)
+                            .appendIfNotNull ("align", m_eAlign)
+                            .appendIfNotNull ("archive", m_sArchive)
+                            .appendIfNotNull ("border", m_sBorder)
+                            .appendIfNotNull ("classID", m_sClassID)
+                            .appendIfNotNull ("codeBase", m_aCodeBase)
+                            .appendIfNotNull ("codeType", m_aCodeType)
+                            .appendIfNotNull ("data", m_aData)
+                            .append ("declare", m_bDeclare)
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("standBy", m_sStandBy)
+                            .appendIfNotNull ("type", m_aType)
+                            .appendIfNotNull ("useMap", m_sUseMap)
+                            .toString ();
   }
 }

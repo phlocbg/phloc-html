@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.IHCRequestField;
@@ -110,5 +111,11 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("value", m_sValue).toString ();
   }
 }

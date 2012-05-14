@@ -23,6 +23,7 @@ import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.utils.MicroRecursiveIterator;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 
 /**
@@ -72,5 +73,11 @@ public final class HCDOMWrapper extends AbstractHCNode
           ret.append (aCDATANode.getData ()).append (' ');
         }
     return ret.toString ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("node", m_aNode).toString ();
   }
 }

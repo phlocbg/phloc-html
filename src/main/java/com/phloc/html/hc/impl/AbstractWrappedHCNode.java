@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -71,5 +72,11 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
   public final IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     return getContainedHCNode ().getOutOfBandNode (aConversionSettings);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("prepared", m_bPrepared).toString ();
   }
 }

@@ -73,7 +73,7 @@ public final class HCHeadTest
     aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));
     // Ensure that the out-of-band nodes are handled, because we're not calling
     // aHtml.getAsNode ()
-    aHtml.handleOutOfBandNodes (HCSettings.getConversionSettings (false));
+    aHtml.copyOutOfBandNodesFromBodyToHead (HCSettings.getConversionSettings (false));
     assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>",
                   HCSettings.getAsHTMLString (aHtml.getHead (), false));
   }

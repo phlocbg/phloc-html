@@ -24,6 +24,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -151,5 +152,21 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("src", m_aSrc)
+                            .append ("width", m_nWidth)
+                            .append ("height", m_nHeight)
+                            .appendIfNotNull ("pluginURL", m_sPluginURL)
+                            .appendIfNotNull ("pluginsPage", m_sPluginsPage)
+                            .append ("autoStart", m_bAutoStart)
+                            .append ("loop", m_bLoop)
+                            .appendIfNotNull ("palette", m_sPalette)
+                            .appendIfNotNull ("type", m_aType)
+                            .toString ();
   }
 }

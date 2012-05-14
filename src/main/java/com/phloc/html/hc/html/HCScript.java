@@ -25,6 +25,7 @@ import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -116,5 +117,14 @@ public final class HCScript extends AbstractHCElement <HCScript>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("type", m_aType)
+                            .appendIfNotNull ("content", m_sContent)
+                            .toString ();
   }
 }

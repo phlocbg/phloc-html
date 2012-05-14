@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
@@ -53,5 +54,13 @@ public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
     super.applyProperties (aElement, aConversionSettings);
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("disableAutoComplete", m_bDisableAutoComplete)
+                            .toString ();
   }
 }

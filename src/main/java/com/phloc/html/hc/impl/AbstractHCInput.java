@@ -23,6 +23,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
@@ -70,5 +71,14 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
     aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
     if (StringHelper.hasText (m_sPlaceholder))
       aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("type", m_eType)
+                            .appendIfNotNull ("placeholder", m_sPlaceholder)
+                            .toString ();
   }
 }

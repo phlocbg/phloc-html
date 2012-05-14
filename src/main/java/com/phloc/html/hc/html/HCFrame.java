@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML5;
@@ -135,5 +136,20 @@ public class HCFrame extends AbstractHCElement <HCFrame>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("frameBorder", m_bFrameBorder)
+                            .appendIfNotNull ("longDesc", m_sLongDesc)
+                            .append ("marginWidth", m_nMarginWidth)
+                            .append ("marginHeight", m_nMarginHeight)
+                            .appendIfNotNull ("name", m_sName)
+                            .append ("noResize", m_bNoResize)
+                            .appendIfNotNull ("scrolling", m_eScrolling)
+                            .appendIfNotNull ("src", m_sSrc)
+                            .toString ();
   }
 }
