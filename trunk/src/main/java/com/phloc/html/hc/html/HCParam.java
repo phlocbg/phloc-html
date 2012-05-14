@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCParamValueType;
@@ -31,7 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents a single parameter for an {@link HCObject} or an applet.
- *
+ * 
  * @author philip
  */
 public final class HCParam extends AbstractHCElement <HCParam>
@@ -78,7 +79,7 @@ public final class HCParam extends AbstractHCElement <HCParam>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sName))
@@ -96,5 +97,16 @@ public final class HCParam extends AbstractHCElement <HCParam>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("value", m_sValue)
+                            .appendIfNotNull ("valueType", m_eValueType)
+                            .appendIfNotNull ("type", m_aType)
+                            .toString ();
   }
 }

@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.IHCRequestFieldBoolean;
@@ -91,5 +92,14 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bChecked)
       aElement.setAttribute (CHTMLAttributes.CHECKED, CHTMLAttributeValues.CHECKED);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("value", m_sValue)
+                            .append ("checked", m_bChecked)
+                            .toString ();
   }
 }

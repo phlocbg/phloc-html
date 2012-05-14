@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -173,5 +174,21 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
       aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget.getAttrValue ());
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("action", m_sAction)
+                            .appendIfNotNull ("actionJS", m_aAction)
+                            .appendIfNotNull ("method", m_eMethod)
+                            .appendIfNotNull ("name", m_sName)
+                            .appendIfNotNull ("acceptCharset", m_sAcceptCharset)
+                            .appendIfNotNull ("linkTarget", m_aLinkTarget)
+                            .append ("disableAutoComplete", m_bDisableAutoComplete)
+                            .append ("submitPressingEnter", m_bSubmitPressingEnter)
+                            .append ("submitButtonTabIndex", m_nSubmitButtonTabIndex)
+                            .toString ();
   }
 }

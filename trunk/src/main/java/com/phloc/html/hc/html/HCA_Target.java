@@ -25,6 +25,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
 /**
@@ -54,6 +55,12 @@ public final class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
   public String getAttrValue ()
   {
     return m_sName;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (super.toString ()).append ("name", m_sName).toString ();
   }
 
   /**

@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -66,5 +67,14 @@ public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_sLabel != null)
       aElement.setAttribute (CHTMLAttributes.LABEL, m_sLabel);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("disabled", m_bDisabled)
+                            .appendIfNotNull ("label", m_sLabel)
+                            .toString ();
   }
 }

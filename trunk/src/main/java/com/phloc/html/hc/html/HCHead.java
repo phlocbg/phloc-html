@@ -42,6 +42,7 @@ import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
@@ -69,6 +70,7 @@ import com.phloc.html.resource.js.JSInline;
 public class HCHead extends AbstractHCBaseNode
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
+
   private String m_sProfile;
   private String m_sPageTitle;
   private String m_sBaseHref;
@@ -469,5 +471,22 @@ public class HCHead extends AbstractHCBaseNode
   {
     // Use the page title as plain text
     return StringHelper.getNotNull (m_sPageTitle);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("profile", m_sProfile)
+                            .appendIfNotNull ("pageTitle", m_sPageTitle)
+                            .appendIfNotNull ("baseHref", m_sBaseHref)
+                            .appendIfNotNull ("baseTarget", m_aBaseTarget)
+                            .appendIfNotNull ("metaElements", m_aMetaElements)
+                            .appendIfNotNull ("links", m_aLinks)
+                            .appendIfNotNull ("CSS", m_aCSS)
+                            .appendIfNotNull ("JS", m_aJS)
+                            .appendIfNotNull ("customOutOfBandHandler", m_aCustomOutOfBandNodes)
+                            .appendIfNotNull ("outOfBandHandler", m_aOutOfBandHandler)
+                            .toString ();
   }
 }

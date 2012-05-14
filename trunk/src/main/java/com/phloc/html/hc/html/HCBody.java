@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -87,5 +88,13 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     ret.addChild (aOutOfBandNode);
     ret.addChildren (m_aOutOfBandNodes);
     return ret.getAsSimpleNode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("outOfBandNodes", m_aOutOfBandNodes)
+                            .toString ();
   }
 }

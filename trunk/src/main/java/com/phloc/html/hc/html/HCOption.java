@@ -153,8 +153,8 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
     return ToStringGenerator.getDerived (super.toString ())
                             .append ("disabled", m_bDisabled)
                             .append ("selected", m_bSelected)
-                            .append ("value", m_sValue)
-                            .append ("label", m_sLabel)
+                            .appendIfNotNull ("value", m_sValue)
+                            .appendIfNotNull ("label", m_sLabel)
                             .toString ();
   }
 }

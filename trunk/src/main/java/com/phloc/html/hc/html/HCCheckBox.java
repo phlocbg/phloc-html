@@ -26,6 +26,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.IHCRequestFieldBoolean;
@@ -115,5 +116,14 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
     if (StringHelper.hasNoText (sFieldName))
       throw new IllegalArgumentException ("fieldName may not be empty!");
     return "__" + sFieldName;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("value", m_sValue)
+                            .append ("checked", m_bChecked)
+                            .toString ();
   }
 }

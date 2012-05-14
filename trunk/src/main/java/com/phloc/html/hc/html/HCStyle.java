@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.CHTMLAttributes;
@@ -72,5 +73,11 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
     aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_CSS.getAsString ());
     if (m_aMediaList != null)
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("mediaList", m_aMediaList).toString ();
   }
 }

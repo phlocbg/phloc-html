@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML5;
@@ -65,5 +66,14 @@ public final class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>
       aElement.setAttribute (CHTMLAttributes.COLS, Integer.toString (m_nCols));
     if (m_nRows > 0)
       aElement.setAttribute (CHTMLAttributes.ROWS, Integer.toString (m_nRows));
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("cols", m_nCols)
+                            .append ("rows", m_nRows)
+                            .toString ();
   }
 }

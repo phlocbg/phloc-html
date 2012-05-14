@@ -33,6 +33,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -326,5 +327,16 @@ public class HCSelect extends AbstractHCControl <HCSelect>
       if (!getElement ().mayBeSelfClosed ())
         aElement.appendText ("");
     }
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("multiple", m_bMultiple)
+                            .append ("size", m_nSize)
+                            .appendIfNotNull ("options", m_aOptions)
+                            .appendIfNotNull ("preselectedValues", m_aPreselectedValues)
+                            .toString ();
   }
 }
