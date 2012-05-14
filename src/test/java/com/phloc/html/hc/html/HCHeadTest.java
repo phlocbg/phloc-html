@@ -18,10 +18,12 @@
 package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
 import com.phloc.commons.url.SimpleURL;
+import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.resource.css.CSSExternal;
 import com.phloc.html.resource.js.JSExternal;
@@ -68,13 +70,19 @@ public final class HCHeadTest
   @Test
   public void testOutOfBandNodes ()
   {
+    final HCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
     aHtml.getBody ().addChild (new HCH1 ("Test"));
     aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));
     // Ensure that the out-of-band nodes are handled, because we're not calling
     // aHtml.getAsNode ()
-    aHtml.copyOutOfBandNodesFromBodyToHead (HCSettings.getConversionSettings (false));
-    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>",
-                  HCSettings.getAsHTMLString (aHtml.getHead (), false));
+    aHtml.copyOutOfBandNodesFromBodyToHead (aCS);
+    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>", aHtml.getHead ()
+                                                                                       .getAsHTMLString (aCS));
+    // Do it again and check for node consistency
+    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>", aHtml.getHead ()
+                                                                                       .getAsHTMLString (aCS));
+    assertNotNull (aHtml.getAsHTMLString (aCS));
+    assertNotNull (aHtml.getAsHTMLString (aCS));
   }
 }

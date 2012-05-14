@@ -21,7 +21,12 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
 
+/**
+ * Interface for handling custom out-of-band nodes in the HEAD elements
+ * 
+ * @author philip
+ */
 public interface IHCOutOfBandNodeHandler
 {
-  void handleOufOfBandNode (@Nonnull IHCBaseNode aOutOfBandNode);
+  void handleOutOfBandNode (@Nonnull IHCBaseNode aOutOfBandNode);
 }

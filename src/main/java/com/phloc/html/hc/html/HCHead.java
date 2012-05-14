@@ -79,7 +79,7 @@ public class HCHead extends AbstractHCBaseNode
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
   private final List <ICSSHTMLDefinition> m_aCSS = new ArrayList <ICSSHTMLDefinition> ();
   private final List <IJSHTMLDefinition> m_aJS = new ArrayList <IJSHTMLDefinition> ();
-  private final List <IMicroNode> m_aCustomOutOfBandNodes = new ArrayList <IMicroNode> ();
+  private final List <IHCBaseNode> m_aCustomOutOfBandNodes = new ArrayList <IHCBaseNode> ();
   private IHCOutOfBandNodeHandler m_aOutOfBandHandler;
 
   public HCHead ()
@@ -318,13 +318,23 @@ public class HCHead extends AbstractHCBaseNode
    * @param aOutOfBandHandler
    *        The new out of band handler. May be <code>null</code>.
    */
-  public void setOufOfBandHandler (@Nullable final IHCOutOfBandNodeHandler aOutOfBandHandler)
+  public void setOutOfBandHandler (@Nullable final IHCOutOfBandNodeHandler aOutOfBandHandler)
   {
     m_aOutOfBandHandler = aOutOfBandHandler;
   }
 
+  /**
+   * @param aConversionSettings
+   * @param aOutOfBandNode
+   */
+  @Deprecated
   public void handleOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings,
                                    @Nullable final IHCBaseNode aOutOfBandNode)
+  {
+    handleOutOfBandNode (aOutOfBandNode);
+  }
+
+  public void handleOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
   {
     // Only do something if there is something out of band
     if (aOutOfBandNode != null)
@@ -332,7 +342,7 @@ public class HCHead extends AbstractHCBaseNode
       if (m_aOutOfBandHandler != null)
       {
         // We have a special handler installed!
-        m_aOutOfBandHandler.handleOufOfBandNode (aOutOfBandNode);
+        m_aOutOfBandHandler.handleOutOfBandNode (aOutOfBandNode);
       }
       else
       {
@@ -346,7 +356,7 @@ public class HCHead extends AbstractHCBaseNode
           if (aNode instanceof HCScript)
             aJS.append (((HCScript) aNode).getJSContent ());
           else
-            m_aCustomOutOfBandNodes.add (aNode.getAsNode (aConversionSettings));
+            m_aCustomOutOfBandNodes.add (aNode);
         }
         if (aJS.length () > 0)
         {
@@ -460,8 +470,8 @@ public class HCHead extends AbstractHCBaseNode
     emitJS (eHead, aConversionSettings);
 
     // Custom nodes (e.g. from out-of-band nodes)
-    for (final IMicroNode aCustomNode : m_aCustomOutOfBandNodes)
-      eHead.appendChild (aCustomNode);
+    for (final IHCBaseNode aCustomNode : m_aCustomOutOfBandNodes)
+      eHead.appendChild (aCustomNode.getAsNode (aConversionSettings));
 
     return eHead;
   }
