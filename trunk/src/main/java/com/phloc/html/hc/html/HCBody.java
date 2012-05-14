@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -35,32 +36,47 @@ import com.phloc.html.hc.impl.HCNodeList;
  */
 public class HCBody extends AbstractHCElementWithChildren <HCBody>
 {
-  private final List <IHCBaseNode> m_aOufOfBandNodes = new ArrayList <IHCBaseNode> ();
+  private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
 
   public HCBody ()
   {
     super (EHTMLElement.BODY);
   }
 
-  public void addOufOfBandNode (@Nonnull final IHCBaseNode aOufOfBandNode)
+  @Deprecated
+  @DevelopersNote ("Was a typo!")
+  public void addOufOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
   {
-    if (aOufOfBandNode == null)
-      throw new NullPointerException ("outOfBandNode");
-    m_aOufOfBandNodes.add (aOufOfBandNode);
+    addOutOfBandNode (aOutOfBandNode);
   }
 
-  public void addOufOfBandNodes (@Nonnull final List <IHCBaseNode> aOufOfBandNodes)
+  public void addOutOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
   {
-    if (aOufOfBandNodes == null)
+    if (aOutOfBandNode == null)
+      throw new NullPointerException ("outOfBandNode");
+    m_aOutOfBandNodes.add (aOutOfBandNode);
+  }
+
+  @Deprecated
+  @DevelopersNote ("Was a typo!")
+  public void addOufOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes)
+  {
+    addOutOfBandNodes (aOutOfBandNodes);
+  }
+
+  public void addOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes)
+  {
+    if (aOutOfBandNodes == null)
       throw new NullPointerException ("outOfBandNodes");
-    m_aOufOfBandNodes.addAll (aOufOfBandNodes);
+    for (final IHCBaseNode aOutOfBandNode : aOutOfBandNodes)
+      addOutOfBandNode (aOutOfBandNode);
   }
 
   @Override
   public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
     final IHCBaseNode aOutOfBandNode = super.getOutOfBandNode (aConversionSettings);
-    if (m_aOufOfBandNodes.isEmpty ())
+    if (m_aOutOfBandNodes.isEmpty ())
     {
       // This object has no out of band nodes
       return aOutOfBandNode;
@@ -69,7 +85,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     // Concatenate nodes
     final HCNodeList ret = new HCNodeList ();
     ret.addChild (aOutOfBandNode);
-    ret.addChildren (m_aOufOfBandNodes);
+    ret.addChildren (m_aOutOfBandNodes);
     return ret.getAsSimpleNode ();
   }
 }

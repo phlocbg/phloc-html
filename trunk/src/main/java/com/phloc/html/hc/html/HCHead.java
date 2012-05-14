@@ -314,7 +314,7 @@ public class HCHead extends AbstractHCBaseNode
    * Set a custom of of band handler, that performs the actions
    * 
    * @param aOutOfBandHandler
-   *        The new out of bandhandler. May be <code>null</code>.
+   *        The new out of band handler. May be <code>null</code>.
    */
   public void setOufOfBandHandler (@Nullable final IHCOutOfBandNodeHandler aOutOfBandHandler)
   {
@@ -324,11 +324,14 @@ public class HCHead extends AbstractHCBaseNode
   public void handleOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings,
                                    @Nullable final IHCBaseNode aOutOfBandNode)
   {
+    // Only do something if there is something out of band
     if (aOutOfBandNode != null)
     {
-      // Only do something if there is something out of band
       if (m_aOutOfBandHandler != null)
+      {
+        // We have a special handler installed!
         m_aOutOfBandHandler.handleOufOfBandNode (aOutOfBandNode);
+      }
       else
       {
         // Flatten list

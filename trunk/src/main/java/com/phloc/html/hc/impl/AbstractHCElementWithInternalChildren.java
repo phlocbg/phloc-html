@@ -34,6 +34,7 @@ import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.parent.IHasChildrenSorted;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
@@ -214,5 +215,11 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
         if (aChild instanceof IHCNode)
           aCont.addChild (((IHCNode) aChild).getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("children", m_aChildren).toString ();
   }
 }

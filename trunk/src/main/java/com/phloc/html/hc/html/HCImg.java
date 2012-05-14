@@ -24,6 +24,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.gfx.ScalableSize;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
@@ -154,5 +155,15 @@ public class HCImg extends AbstractHCElement <HCImg>
   public String getPlainText ()
   {
     return "";
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("src", m_sSrc)
+                            .appendIfNotNull ("extent", m_aExtent)
+                            .appendIfNotNull ("alt", m_sAlt)
+                            .toString ();
   }
 }

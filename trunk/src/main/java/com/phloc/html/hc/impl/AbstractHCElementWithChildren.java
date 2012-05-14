@@ -33,6 +33,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -302,5 +303,11 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
         if (aChild instanceof IHCNode)
           aCont.addChild (((IHCNode) aChild).getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("children", m_aChildren).toString ();
   }
 }

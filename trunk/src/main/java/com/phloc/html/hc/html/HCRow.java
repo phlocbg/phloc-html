@@ -24,6 +24,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
@@ -393,5 +394,11 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   {
     // Avoid rows without cells!
     return hasChildren ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("header", m_bHeader).toString ();
   }
 }

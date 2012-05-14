@@ -48,6 +48,7 @@ public class HCHtml extends AbstractHCBaseNode
   private String m_sLang;
   private HCHead m_aHead;
   private HCBody m_aBody;
+  private boolean m_bHandledOutOfBandNodes = false;
 
   /**
    * Create a new HTML object, using the default HTML version.
@@ -139,6 +140,21 @@ public class HCHtml extends AbstractHCBaseNode
     return getAsNode (new HCConversionSettings (m_eHTMLVersion));
   }
 
+  public final void handleOutOfBandNodes (@Nonnull final HCConversionSettings aConversionSettings)
+  {
+    // If no body is present, there can be no out-of-band nodes!
+    if (!m_bHandledOutOfBandNodes && m_aBody != null)
+    {
+      // Ensure that out-of-band nodes are handled only once, so that
+      // consecutive calls to this method result in the same result!
+      m_bHandledOutOfBandNodes = true;
+
+      // Handle the out of band nodes of the body in the head
+      final IHCBaseNode aOufOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
+      getHead ().handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
+    }
+  }
+
   @Nonnull
   public final IMicroDocument getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
   {
@@ -164,13 +180,14 @@ public class HCHtml extends AbstractHCBaseNode
     final IMicroNode eBody = aBody.getAsNode (aConversionSettings);
     aRoot.appendChild (eBody);
 
-    // Handle the out of band nodes of the body in the head
-    final IHCBaseNode aOufOfBandNode = aBody.getOutOfBandNode (aConversionSettings);
-    aHead.handleOutOfBandNode (aConversionSettings, aOufOfBandNode);
+    // Handle out of band nodes
+    handleOutOfBandNodes (aConversionSettings);
 
-    // Create head (after body) but insert it before the body
+    // Create head after body but insert it before the body
     final IMicroNode eHead = aHead.getAsNode (aConversionSettings);
     aRoot.insertAtIndex (0, eHead);
+
+    // Done!
     return aDoc;
   }
 

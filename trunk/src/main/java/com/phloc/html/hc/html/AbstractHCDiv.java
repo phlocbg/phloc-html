@@ -23,6 +23,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -89,5 +90,11 @@ public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> 
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("name", m_sName).toString ();
   }
 }

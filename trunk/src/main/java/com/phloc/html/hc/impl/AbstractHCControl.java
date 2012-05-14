@@ -24,6 +24,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -114,5 +115,16 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_bReadOnly)
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("name", m_sName)
+                            .append ("disabled", m_bDisabled)
+                            .append ("readOnly", m_bReadOnly)
+                            .append ("focused", m_bFocused)
+                            .toString ();
   }
 }

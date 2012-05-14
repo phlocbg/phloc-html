@@ -30,6 +30,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.parent.IHasChildrenSorted;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
@@ -458,5 +459,21 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     if (m_aFooterRow != null)
       aCont.addChild (m_aFooterRow.getOutOfBandNode (aConversionSettings));
     return aCont.getAsSimpleNode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("colGroup", m_aColGroup)
+                            .append ("cellSpacing", m_nCellSpacing)
+                            .append ("cellPadding", m_nCellPadding)
+                            .appendIfNotNull ("headerRow", m_aHeaderRow)
+                            .appendIfNotNull ("headerID", m_sHeaderID)
+                            .append ("bodyRows", m_aBodyRows)
+                            .appendIfNotNull ("bodyID", m_sBodyID)
+                            .appendIfNotNull ("footerRow", m_aFooterRow)
+                            .appendIfNotNull ("footerID", m_sFooterID)
+                            .toString ();
   }
 }
