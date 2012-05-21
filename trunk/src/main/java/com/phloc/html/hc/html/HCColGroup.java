@@ -96,6 +96,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   @ReturnsImmutableObject
+  @Nullable
   public final List <HCCol> getColumns ()
   {
     return getChildren ();

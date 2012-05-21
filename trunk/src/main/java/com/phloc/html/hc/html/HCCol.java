@@ -53,7 +53,7 @@ public final class HCCol extends AbstractHCElement <HCCol>
     setWidth (Integer.toString (nWidth));
   }
 
-  private HCCol (final String sWidth)
+  private HCCol (@Nullable final String sWidth)
   {
     this ();
     setWidth (sWidth);
@@ -96,24 +96,27 @@ public final class HCCol extends AbstractHCElement <HCCol>
     return "";
   }
 
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("width", m_sWidth).toString ();
+  }
+
+  @Nonnull
   public static HCCol star ()
   {
     return new HCCol (CHTMLAttributeValues.STAR);
   }
 
+  @Nonnull
   public static HCCol perc (final int nPerc)
   {
     return new HCCol (CCSS.perc (nPerc));
   }
 
-  public static HCCol fromString (final String sWidth)
+  @Nonnull
+  public static HCCol fromString (@Nullable final String sWidth)
   {
     return new HCCol (sWidth);
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("width", m_sWidth).toString ();
   }
 }
