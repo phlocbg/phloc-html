@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.css.CCSS;
@@ -147,16 +148,17 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
     // IE9 only interprets column widths if the first row does not use colspan
     // (i.e. at least one row does not use colspan)
-    if (m_aColGroup != null && !m_aBodyRows.isEmpty ())
+    if (m_aColGroup != null && m_aColGroup.hasColumns () && !m_aBodyRows.isEmpty ())
     {
-      final HCRow aFirstRow = m_aBodyRows.get (0);
+      final HCRow aFirstRow = ContainerHelper.getFirstElement (m_aBodyRows);
       boolean bFirstRowUsesColSpan = false;
-      for (final AbstractHCCell aCell : aFirstRow.getChildren ())
-        if (aCell.getColspan () > 1)
-        {
-          bFirstRowUsesColSpan = true;
-          break;
-        }
+      if (aFirstRow.hasChildren ())
+        for (final AbstractHCCell aCell : aFirstRow.getChildren ())
+          if (aCell.getColspan () > 1)
+          {
+            bFirstRowUsesColSpan = true;
+            break;
+          }
       if (bFirstRowUsesColSpan)
       {
         // Create a dummy row with explicit widths
