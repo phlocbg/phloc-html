@@ -20,6 +20,26 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2012-05-22" category="api" action="add">
+    <change>
+      <text locale="en">Extended API of HCDefinitionDefinition, HCDefinitionTerm and HCLI</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed self-closing tag handling for tables</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed typos in rarely used HTML element names in EHTMLElement</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed self-closing tag handling for all HTML elements</text>
+    </change>
+  </entry>
   <release date="2012-05-21" version="3.1.4" />
   <entry date="2012-05-21" category="tech" action="fix">
     <change>

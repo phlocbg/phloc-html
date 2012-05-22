@@ -40,7 +40,7 @@ public final class HCBodyTest
     // Empty event handler - ignored
     b.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
     b.setCustomAttr ("bla", "foo");
-    assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\" />",
+    assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\"></body>",
                   HCSettings.getAsHTMLString (b, false));
   }
 }

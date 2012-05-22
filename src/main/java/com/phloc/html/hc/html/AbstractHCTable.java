@@ -126,6 +126,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       if (StringHelper.hasText (m_sHeaderID))
         aTHead.setAttribute (CHTMLAttributes.ID, m_sHeaderID);
       applyHeaderRow (aTHead, m_aHeaderRow, aConversionSettings);
+      if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
+        aTHead.appendText ("");
     }
     if (m_aFooterRow != null)
     {
@@ -133,6 +135,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       if (StringHelper.hasText (m_sFooterID))
         aTFoot.setAttribute (CHTMLAttributes.ID, m_sFooterID);
       applyFooterRow (aTFoot, m_aFooterRow, aConversionSettings);
+      if (!aTFoot.hasChildren () && !EHTMLElement.TFOOT.mayBeSelfClosed ())
+        aTFoot.appendText ("");
     }
 
     // add the tbody anyway - helpful for JS tables
@@ -177,5 +181,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
 
     for (final HCRow aRow : m_aBodyRows)
       applyBodyRow (aTBody, aRow, aConversionSettings);
+
+    if (!aTBody.hasChildren () && !EHTMLElement.TBODY.mayBeSelfClosed ())
+      aTBody.appendText ("");
   }
 }
