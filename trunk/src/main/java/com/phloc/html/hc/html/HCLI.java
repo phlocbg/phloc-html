@@ -17,7 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -30,5 +35,35 @@ public final class HCLI extends AbstractHCElementWithChildren <HCLI>
   public HCLI ()
   {
     super (EHTMLElement.LI);
+  }
+
+  public HCLI (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  {
+    this (aChild.getText ());
+  }
+
+  public HCLI (@Nullable final String sChild)
+  {
+    super (EHTMLElement.LI, sChild);
+  }
+
+  public HCLI (@Nullable final String... aChildren)
+  {
+    super (EHTMLElement.LI, aChildren);
+  }
+
+  public HCLI (@Nullable final IHCNode aChild)
+  {
+    super (EHTMLElement.LI, aChild);
+  }
+
+  public HCLI (@Nullable final IHCNode... aChildren)
+  {
+    super (EHTMLElement.LI, aChildren);
+  }
+
+  public HCLI (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    super (EHTMLElement.LI, aChildren);
   }
 }
