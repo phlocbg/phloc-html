@@ -160,8 +160,9 @@ public enum EHTMLElement
   XMP ("xmp", false);
 
   private static final Set <String> s_aNotSelfClosedElements = new HashSet <String> ();
-  private String m_sElementName;
-  private boolean m_bMayBeSelfClosed;
+
+  private final String m_sElementName;
+  private final boolean m_bMayBeSelfClosed;
 
   private EHTMLElement (@Nonnull @Nonempty final String sElementName, final boolean bMayBeSelfClosed)
   {
