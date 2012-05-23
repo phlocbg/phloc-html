@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
+import com.phloc.html.hc.html5.HCWBR;
 
 public final class FuncTestHC
 {
@@ -40,29 +41,56 @@ public final class FuncTestHC
     b.addChild (new HCButton_Reset ("Abbrechen"));
     b.addChild (new HCButton_Submit ("OK"));
     b.addChild (new HCButton ("Knopf"));
+    b.addChild (new HCCenter ());
     b.addChild (new HCCenter ("Zentriert"));
     b.addChild (new HCCheckBox ("cb1", true));
+    b.addChild (new HCCite ());
     b.addChild (new HCCite ("Zitiert"));
+    b.addChild (new HCCode ());
     b.addChild (new HCCode ("var i = 0;"));
+    b.addChild (new HCDefinition ());
     b.addChild (new HCDefinition ("<a> ist ein XML Tag"));
     final HCDefinitionList aDL = b.addAndReturnChild (new HCDefinitionList ());
+    aDL.addItem (new HCDefinitionDefinition ());
     aDL.addItem (new HCDefinitionDefinition ("def"));
+    aDL.addItem (new HCDefinitionTerm ());
     aDL.addItem (new HCDefinitionTerm ("term"));
+    b.addChild (new HCDeleted ());
     b.addChild (new HCDeleted ("gelöscht"));
     b.addChild (new HCDir ().addItem (new HCLI ("punkt")));
+    b.addChild (new HCDiv ());
     b.addChild (new HCDiv ("Absatz"));
     b.addChild (new HCEdit ("filename", "autoexec.bat"));
     b.addChild (new HCEditFile ("upload"));
     b.addChild (new HCEditPassword ("password"));
+    b.addChild (new HCEM ());
     b.addChild (new HCEM ("emphasised"));
     b.addChild (new HCEmbed ().setSrc (new SimpleURL ("myfile.txt")));
+    b.addChild (new HCExample ());
     b.addChild (new HCExample ("Das wäre also ein Beispiel"));
     // TODO add remaining tags
     b.addChild (new HCForm ("?").setSubmitPressingEnter (false));
+    b.addChild (new HCH1 ());
+    b.addChild (new HCH1 ("Ü1"));
+    b.addChild (new HCH2 ());
+    b.addChild (new HCH2 ("Ü2"));
+    b.addChild (new HCH3 ());
+    b.addChild (new HCH3 ("Ü3"));
+    b.addChild (new HCH4 ());
+    b.addChild (new HCH4 ("Ü4"));
+    b.addChild (new HCH5 ());
+    b.addChild (new HCH5 ("Ü5"));
+    b.addChild (new HCH6 ());
+    b.addChild (new HCH6 ("Ü6"));
+    b.addChild (new HCHR ());
+    b.addChild (new HCStrong ());
+    b.addChild (new HCStrong ("Das wäre also ein Beispiel"));
     final HCTable aTable = b.addAndReturnChild (new HCTable (new HCCol (50), new HCCol (20)).setBodyID ("ID"));
     aTable.addHeaderRow ().addCells ("Name", "Wert");
     aTable.addBodyRow ().addCells ("abc", "def");
     aTable.addFooterRow ().addCells ("", "OK!");
+    b.addChild (new HCWBR ());
+
     assertNotNull (HCSettings.getAsNode (b));
     System.out.println (HCSettings.getAsHTMLString (b, true));
   }
