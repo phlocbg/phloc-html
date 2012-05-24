@@ -1,0 +1,57 @@
+#summary Change log of phloc-html
+= Change log =
+<wiki:comment>This content is generated. Do not modify!</wiki:comment>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>5/24/12</td><td colspan="4">_Release *3.1.6*_</td></tr>
+<tr><td>5/24/12</td><td>update</td><td>tech</td><td></td><td>Updated to [http://code.google.com/p/phloc-css phloc-css] 2.7.0</td></tr>
+<tr border="1"><td>5/22/12</td><td colspan="4">_Release *3.1.5*_</td></tr>
+<tr><td>5/22/12</td><td>add</td><td>api</td><td></td><td>Extended API of HCDefinitionDefinition, HCDefinitionTerm and HCLI</td></tr>
+<tr><td>5/22/12</td><td>fix</td><td>tech</td><td></td><td>Fixed self-closing tag handling for tables</td></tr>
+<tr><td>5/22/12</td><td>fix</td><td>tech</td><td></td><td>Fixed typos in rarely used HTML element names in EHTMLElement</td></tr>
+<tr><td>5/22/12</td><td>fix</td><td>tech</td><td></td><td>Fixed self-closing tag handling for all HTML elements</td></tr>
+<tr border="1"><td>5/21/12</td><td colspan="4">_Release *3.1.4*_</td></tr>
+<tr><td>5/21/12</td><td>fix</td><td>tech</td><td></td><td>Fixed NPE in AbstractHCTable</td></tr>
+<tr border="1"><td>5/14/12</td><td colspan="4">_Release *3.1.3*_</td></tr>
+<tr><td>5/14/12</td><td>add</td><td>tech</td><td></td><td>Improved toString implementations</td></tr>
+<tr><td>5/11/12</td><td>fix</td><td>tech</td><td></td><td>Fixed out-of-band handling in HCHtml so that it is only called once per object, because otherwise the head may be modified in each consecutive call</td></tr>
+<tr><td>5/11/12</td><td>fix</td><td>api</td><td></td><td>Fixed typo in method naming in HCBody and IHCOutOfBandNodeHandler (Ouf vs. Out)</td></tr>
+<tr><td>5/11/12</td><td>fix</td><td>tech</td><td></td><td>Fixed error in out-of-band handling in HCHead</td></tr>
+<tr border="1"><td>5/2/12</td><td colspan="4">_Release *3.1.2*_</td></tr>
+<tr><td>4/27/12</td><td>fix</td><td>tech</td><td></td><td>Fixed potential crash when emitting a table without body rows</td></tr>
+<tr><td>4/26/12</td><td>add</td><td>api</td><td></td><td>Added public static final constants in all HC`*` classes for non-null default values</td></tr>
+<tr border="1"><td>4/26/12</td><td colspan="4">_Release *3.1.1*_</td></tr>
+<tr><td>4/26/12</td><td>add</td><td>api</td><td></td><td>Added support for preselected values in HCSelect and HCOption</td></tr>
+<tr><td>4/26/12</td><td>add</td><td>api</td><td></td><td>Using IHCRequestField(Boolean) as parameters in HC`*` input elements</td></tr>
+<tr><td>4/26/12</td><td>add</td><td>api</td><td></td><td>Added IHCRequestField and IHCRequestFieldBoolean</td></tr>
+<tr border="1"><td>4/23/12</td><td colspan="4">_Release *3.1.0*_</td></tr>
+<tr><td>4/23/12</td><td>update</td><td>tech</td><td>*yes*</td><td>Updated to [http://code.google.com/p/phloc-commons phloc-commons] 3.5.0</td></tr>
+<tr><td>4/16/12</td><td>add</td><td>api</td><td></td><td>Added new API in HCSelect to specifically check for the selected options</td></tr>
+<tr border="1"><td>3/14/12</td><td colspan="4">_Release *3.0.6*_</td></tr>
+<tr><td>3/14/12</td><td>fix</td><td>api</td><td></td><td>Fixed implementation of HCDefinitionList</td></tr>
+<tr><td>3/14/12</td><td>change</td><td>api</td><td></td><td>Made HCHtml non-final to allow for custom head and body implementations</td></tr>
+<tr border="1"><td>3/4/12</td><td colspan="4">_Release *3.0.5*_</td></tr>
+<tr><td>3/2/12</td><td>fix</td><td>tech</td><td></td><td>Fixed NPE for table rows without children in the debug version</td></tr>
+<tr border="1"><td>2/29/12</td><td colspan="4">_Release *3.0.4*_</td></tr>
+<tr><td>2/29/12</td><td>change</td><td>api</td><td></td><td>Made HCBody and HCHead non-final and added some getter</td></tr>
+<tr><td>2/29/12</td><td>add</td><td>api</td><td></td><td>Added new method iterateTree in HCUtils</td></tr>
+<tr border="1"><td>2/18/12</td><td colspan="4">_Release *3.0.3*_</td></tr>
+<tr><td>2/18/12</td><td>add</td><td>api</td><td></td><td>Added dynamic input type for AbstractHCInput</td></tr>
+<tr><td>2/18/12</td><td>add</td><td>api</td><td></td><td>Added common base class AbstractHCEdit for HCEdit, HCEditFile and HCEditPassword</td></tr>
+<tr border="1"><td>2/17/12</td><td colspan="4">_Release *3.0.2*_</td></tr>
+<tr><td>2/17/12</td><td>fix</td><td>tech</td><td></td><td>Fixed that checkboxes always get the default value assigned via the form customizer</td></tr>
+<tr border="1"><td>2/16/12</td><td colspan="4">_Release *3.0.1*_</td></tr>
+<tr><td>2/16/12</td><td>add</td><td>api</td><td></td><td>Added new base class AbstractHCInput for input elements</td></tr>
+<tr><td>2/16/12</td><td>add</td><td>api</td><td></td><td>HCButton now has method setType</td></tr>
+<tr><td>2/15/12</td><td>add</td><td>api</td><td></td><td>HCScript and HCScriptFile now have the possibility to handle a different script MIME type</td></tr>
+<tr><td>2/13/12</td><td>fix</td><td>tech</td><td></td><td>Improved code generation for HTML5</td></tr>
+<tr border="1"><td>2/13/12</td><td colspan="4">_Release *3.0.0*_</td></tr>
+<tr border="1"><td>2/10/12</td><td colspan="4">_Release *3.0.0*_</td></tr>
+<tr border="1"><td>2/5/12</td><td colspan="4">_Release *3.0.0*_</td></tr>
+<tr border="1"><td>2/3/12</td><td colspan="4">_Release *3.0.0*_</td></tr>
+<tr><td>2/3/12</td><td>change</td><td>api</td><td>*yes*</td><td>Now getAsNode and getAsXHTMLString take an HCConversionSettings object</td></tr>
+<tr><td>2/2/12</td><td>change</td><td>api</td><td>*yes*</td><td>Restructured packages to avoid naming redundancies</td></tr>
+<tr><td>2/1/12</td><td>add</td><td>api</td><td></td><td>Started improving support for HTML5</td></tr>
+<tr border="1"><td>2/1/12</td><td colspan="4">_Release *2.8.0*_</td></tr>
+<tr border="1"><td>1/29/12</td><td colspan="4">_Release *2.7.1*_</td></tr>
+<tr><td>1/29/12</td><td>change</td><td>api</td><td>*yes*</td><td>Added possibility to specify a custom link type for HCLink using HCLinkTypeCustom</td></tr>
+<tr border="1"><td>1/29/12</td><td colspan="4">_Release *2.7.0*_</td></tr>
+</tbody></table>
