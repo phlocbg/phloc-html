@@ -17,6 +17,8 @@
  */
 package com.phloc.html;
 
+import java.nio.charset.Charset;
+
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
@@ -32,8 +34,11 @@ import com.phloc.commons.xml.serialize.XMLWriterSettings;
 public final class CHTMLCharset
 {
   public static final String CHARSET_HTML = XMLWriterSettings.DEFAULT_XML_CHARSET;
+  public static final Charset CHARSET_HTML_OBJ = XMLWriterSettings.DEFAULT_XML_CHARSET_OBJ;
   public static final String CHARSET_CSS = CCharset.CHARSET_UTF_8;
+  public static final Charset CHARSET_CSS_OBJ = CCharset.CHARSET_UTF_8_OBJ;
   public static final String CHARSET_JS = CCharset.CHARSET_UTF_8;
+  public static final Charset CHARSET_JS_OBJ = CCharset.CHARSET_UTF_8_OBJ;
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
