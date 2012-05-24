@@ -22,8 +22,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.StringReader;
-
 import org.junit.Test;
 import org.xml.sax.InputSource;
 
@@ -34,6 +32,7 @@ import com.phloc.commons.microdom.IMicroDocumentType;
 import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
 import com.phloc.commons.xml.EXMLVersion;
+import com.phloc.commons.xml.sax.StringSAXInputSource;
 import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.CHTMLDocTypes;
@@ -48,11 +47,11 @@ public final class HTMLEntityResolverTest
   private boolean _testResolve (final String sPrefix, final IMicroDocumentType aDocType)
   {
     final String sHTML = "\n<html><head><title>foo</title></head><body><p>Hallöle&nbsp;B&ouml;ris!</p></body></html>";
-    final IMicroDocument doc = MicroReader.readMicroXML (new InputSource (new StringReader (sPrefix +
-                                                                                            XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLVersion.XML_10,
-                                                                                                                                          EXMLIncorrectCharacterHandling.DEFAULT,
-                                                                                                                                          aDocType) +
-                                                                                            sHTML)),
+    final IMicroDocument doc = MicroReader.readMicroXML (new StringSAXInputSource (sPrefix +
+                                                                                   XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLVersion.XML_10,
+                                                                                                                                 EXMLIncorrectCharacterHandling.DEFAULT,
+                                                                                                                                 aDocType) +
+                                                                                   sHTML),
                                                          HTMLEntityResolver.getInstance (),
                                                          null,
                                                          true,
