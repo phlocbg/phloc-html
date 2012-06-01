@@ -18,6 +18,7 @@
 package com.phloc.html;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -159,7 +160,7 @@ public enum EHTMLElement
   WBR ("wbr", true),
   XMP ("xmp", false);
 
-  private static final Set <String> s_aNotSelfClosedElements = new HashSet <String> ();
+  private static final Set <String> s_aSelfClosedElements = new HashSet <String> ();
 
   private final String m_sElementName;
   private final boolean m_bMayBeSelfClosed;
@@ -182,6 +183,38 @@ public enum EHTMLElement
     return m_bMayBeSelfClosed;
   }
 
+  @Nonnull
+  private static Set <String> _getSelfClosedSet ()
+  {
+    if (s_aSelfClosedElements.isEmpty ())
+    {
+      // Lazy init, because it cannot be done in the constructor!
+      for (final EHTMLElement e : values ())
+        if (e.mayBeSelfClosed ())
+        {
+          // Always use lowercased value
+          s_aSelfClosedElements.add (e.m_sElementName.toLowerCase (Locale.US));
+        }
+    }
+    return s_aSelfClosedElements;
+  }
+
+  /**
+   * Check if the passed element may be self closed when creating HTML.
+   * 
+   * @param sElementName
+   *        The name of the tag to validate.
+   * @return <code>true</code> if the tag may not be self closed.
+   */
+  public static boolean isTagThatMayBeSelfClosed (@Nullable final String sElementName)
+  {
+    if (StringHelper.hasNoText (sElementName))
+      return false;
+
+    // Always check lower cased
+    return _getSelfClosedSet ().contains (sElementName.toLowerCase (Locale.US));
+  }
+
   /**
    * Check if the passed element may not be self closed when creating HTML.
    * 
@@ -191,14 +224,11 @@ public enum EHTMLElement
    */
   public static boolean isTagThatMayNotBeSelfClosed (@Nullable final String sElementName)
   {
-    if (s_aNotSelfClosedElements.isEmpty ())
-    {
-      // Lazy init, because it cannot be done in the constructor!
-      for (final EHTMLElement e : values ())
-        if (!e.m_bMayBeSelfClosed)
-          s_aNotSelfClosedElements.add (e.m_sElementName);
-    }
-    return s_aNotSelfClosedElements.contains (sElementName);
+    if (StringHelper.hasNoText (sElementName))
+      return false;
+
+    // Always check lower cased
+    return !_getSelfClosedSet ().contains (sElementName.toLowerCase (Locale.US));
   }
 
   /**
@@ -213,7 +243,7 @@ public enum EHTMLElement
   {
     if (StringHelper.hasText (sTagName))
       for (final EHTMLElement e : values ())
-        if (e.getElementName ().equals (sTagName))
+        if (e.getElementName ().equalsIgnoreCase (sTagName))
           return true;
     return false;
   }
