@@ -28,7 +28,7 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCIFrameAlign;
 import com.phloc.html.hc.api.EHCScrolling;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -70,19 +70,25 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     super (EHTMLElement.IFRAME, aChildren);
   }
 
-  public HCIFrame (@Nullable final IHCNode aChild)
+  public HCIFrame (@Nullable final IHCBaseNode aChild)
   {
     super (EHTMLElement.IFRAME, aChild);
   }
 
-  public HCIFrame (@Nullable final IHCNode... aChildren)
+  public HCIFrame (@Nullable final IHCBaseNode... aChildren)
   {
     super (EHTMLElement.IFRAME, aChildren);
   }
 
-  public HCIFrame (@Nullable final Iterable <? extends IHCNode> aChildren)
+  public HCIFrame (@Nullable final Iterable <? extends IHCBaseNode> aChildren)
   {
     super (EHTMLElement.IFRAME, aChildren);
+  }
+
+  @Nullable
+  public ISimpleURL getSrc ()
+  {
+    return m_aSrc;
   }
 
   @Nonnull
@@ -92,11 +98,23 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     return this;
   }
 
+  @Nullable
+  public String getName ()
+  {
+    return m_sName;
+  }
+
   @Nonnull
   public HCIFrame setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
+  }
+
+  @Nullable
+  public String getLongDesc ()
+  {
+    return m_sLongDesc;
   }
 
   @Nonnull
@@ -106,11 +124,23 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     return this;
   }
 
+  @Nullable
+  public EHCScrolling getScrolling ()
+  {
+    return m_eScrolling;
+  }
+
   @Nonnull
   public HCIFrame setScrolling (@Nullable final EHCScrolling eScrolling)
   {
     m_eScrolling = eScrolling;
     return this;
+  }
+
+  @Nullable
+  public EHCIFrameAlign getAlign ()
+  {
+    return m_eAlign;
   }
 
   @Nonnull
@@ -120,11 +150,22 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     return this;
   }
 
+  public boolean isFrameBorder ()
+  {
+    return m_bFrameBorder;
+  }
+
   @Nonnull
   public HCIFrame setFrameBorder (final boolean bFrameBorder)
   {
     m_bFrameBorder = bFrameBorder;
     return this;
+  }
+
+  @Nullable
+  public String getWidth ()
+  {
+    return m_sWidth;
   }
 
   /**
@@ -149,6 +190,12 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     return this;
   }
 
+  @Nullable
+  public String getHeight ()
+  {
+    return m_sWidth;
+  }
+
   @Nonnull
   public HCIFrame setHeight (final int nHeight)
   {
@@ -164,11 +211,21 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     return this;
   }
 
+  public int getMarginWidth ()
+  {
+    return m_nMarginWidth;
+  }
+
   @Nonnull
   public HCIFrame setMarginWidth (final int nMarginWidth)
   {
     m_nMarginWidth = nMarginWidth;
     return this;
+  }
+
+  public int getMarginHeight ()
+  {
+    return m_nMarginHeight;
   }
 
   @Nonnull

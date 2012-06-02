@@ -30,7 +30,8 @@ public final class FuncTestHC
   @Test
   public void testMainHC ()
   {
-    final HCBody b = new HCBody ();
+    final HCHtml h = new HCHtml ();
+    final HCBody b = h.getBody ();
     b.addChild (new HCA (new SimpleURL ("http://www.phloc.com")).setTarget (HCA_Target.SELF).addChild ("phloc"));
     b.addChild (new HCAbbreviation ("abbr"));
     b.addChild (new HCAcronym ("acronym"));
@@ -68,8 +69,14 @@ public final class FuncTestHC
     b.addChild (new HCEmbed ().setSrc (new SimpleURL ("myfile.txt")));
     b.addChild (new HCExample ());
     b.addChild (new HCExample ("Das wäre also ein Beispiel"));
-    // TODO add remaining tags
+    b.addChild (new HCFieldSet ());
+    b.addChild (new HCFieldSet ("Gruppe"));
     b.addChild (new HCForm ("?").setSubmitPressingEnter (false));
+    b.addChild (new HCForm (new SimpleURL ()).setSubmitPressingEnter (false));
+    b.addChild (new HCForm_FileUpload ().setSubmitPressingEnter (false));
+    b.addChild (new HCForm_FileUpload (new SimpleURL ()).setSubmitPressingEnter (false));
+    b.addChild (new HCFrame ("frame1"));
+    b.addChild (new HCFrameset ());
     b.addChild (new HCH1 ());
     b.addChild (new HCH1 ("Ü1"));
     b.addChild (new HCH2 ());
@@ -82,7 +89,11 @@ public final class FuncTestHC
     b.addChild (new HCH5 ("Ü5"));
     b.addChild (new HCH6 ());
     b.addChild (new HCH6 ("Ü6"));
+    b.addChild (new HCHiddenField ("action", "value"));
+    b.addChild (new HCHiddenField ("action", 4711));
+    b.addChild (new HCHiddenField ("action", false));
     b.addChild (new HCHR ());
+    b.addChild (new HCIFrame (new HCHtml ()));
     b.addChild (new HCStrong ());
     b.addChild (new HCStrong ("Das wäre also ein Beispiel"));
     final HCTable aTable = b.addAndReturnChild (new HCTable (new HCCol (50), new HCCol (20)).setBodyID ("ID"));
@@ -91,7 +102,7 @@ public final class FuncTestHC
     aTable.addFooterRow ().addCells ("", "OK!");
     b.addChild (new HCWBR ());
 
-    assertNotNull (HCSettings.getAsNode (b));
-    System.out.println (HCSettings.getAsHTMLString (b, true));
+    assertNotNull (HCSettings.getAsNode (h));
+    System.out.println (HCSettings.getAsHTMLString (h, true));
   }
 }

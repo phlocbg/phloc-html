@@ -56,11 +56,28 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     super (EHTMLElement.FRAME);
   }
 
+  public HCFrame (@Nullable final String sName)
+  {
+    this ();
+    setName (sName);
+  }
+
+  public boolean isFrameBorder ()
+  {
+    return m_bFrameBorder;
+  }
+
   @Nonnull
   public HCFrame setFrameBorder (final boolean bFrameBorder)
   {
     m_bFrameBorder = bFrameBorder;
     return this;
+  }
+
+  @Nullable
+  public String getLongDesc ()
+  {
+    return m_sLongDesc;
   }
 
   @Nonnull
@@ -70,11 +87,21 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     return this;
   }
 
+  public int getMarginWidth ()
+  {
+    return m_nMarginWidth;
+  }
+
   @Nonnull
   public HCFrame setMarginWidth (final int nMarginWidth)
   {
     m_nMarginWidth = nMarginWidth;
     return this;
+  }
+
+  public int getMarginHeight ()
+  {
+    return m_nMarginHeight;
   }
 
   @Nonnull
@@ -84,11 +111,22 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     return this;
   }
 
+  @Nullable
+  public String getName ()
+  {
+    return m_sName;
+  }
+
   @Nonnull
   public HCFrame setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
+  }
+
+  public boolean isNoResize ()
+  {
+    return m_bNoResize;
   }
 
   @Nonnull
@@ -98,11 +136,23 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     return this;
   }
 
+  @Nullable
+  public EHCScrolling getScrolling ()
+  {
+    return m_eScrolling;
+  }
+
   @Nonnull
   public HCFrame setScrolling (@Nullable final EHCScrolling eScrolling)
   {
     m_eScrolling = eScrolling;
     return this;
+  }
+
+  @Nullable
+  public String getSrc ()
+  {
+    return m_sSrc;
   }
 
   @Nonnull
