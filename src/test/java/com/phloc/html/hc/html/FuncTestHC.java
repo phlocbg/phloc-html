@@ -93,7 +93,8 @@ public final class FuncTestHC
     b.addChild (new HCHiddenField ("action", 4711));
     b.addChild (new HCHiddenField ("action", false));
     b.addChild (new HCHR ());
-    b.addChild (new HCIFrame (new HCHtml ()));
+    b.addChild (new HCIFrame ());
+    // TODO
     b.addChild (new HCStrong ());
     b.addChild (new HCStrong ("Das wäre also ein Beispiel"));
     final HCTable aTable = b.addAndReturnChild (new HCTable (new HCCol (50), new HCCol (20)).setBodyID ("ID"));

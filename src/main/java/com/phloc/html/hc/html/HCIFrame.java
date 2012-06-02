@@ -28,7 +28,7 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCIFrameAlign;
 import com.phloc.html.hc.api.EHCScrolling;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -70,17 +70,17 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     super (EHTMLElement.IFRAME, aChildren);
   }
 
-  public HCIFrame (@Nullable final IHCBaseNode aChild)
+  public HCIFrame (@Nullable final IHCNode aChild)
   {
     super (EHTMLElement.IFRAME, aChild);
   }
 
-  public HCIFrame (@Nullable final IHCBaseNode... aChildren)
+  public HCIFrame (@Nullable final IHCNode... aChildren)
   {
     super (EHTMLElement.IFRAME, aChildren);
   }
 
-  public HCIFrame (@Nullable final Iterable <? extends IHCBaseNode> aChildren)
+  public HCIFrame (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
     super (EHTMLElement.IFRAME, aChildren);
   }
