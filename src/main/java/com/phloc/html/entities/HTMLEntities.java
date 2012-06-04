@@ -22,6 +22,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -35,6 +36,7 @@ import com.phloc.commons.string.StringHelper;
  * 
  * @author philip
  */
+@Immutable
 public final class HTMLEntities
 {
   private static final Map <String, String> s_aEntityToChar = new HashMap <String, String> ();
