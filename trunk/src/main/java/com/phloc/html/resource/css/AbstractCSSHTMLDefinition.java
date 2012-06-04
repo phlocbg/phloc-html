@@ -27,7 +27,7 @@ import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @Immutable
 public abstract class AbstractCSSHTMLDefinition implements ICSSHTMLDefinition
@@ -64,7 +64,7 @@ public abstract class AbstractCSSHTMLDefinition implements ICSSHTMLDefinition
   }
 
   @Nonnull
-  public final IMicroNode getAsMicroNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroNode getAsMicroNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
   }

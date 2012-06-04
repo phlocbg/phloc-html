@@ -29,7 +29,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCControl;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends
                                                                                         AbstractHCElement <THISTYPE> implements
@@ -106,7 +106,7 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sName))

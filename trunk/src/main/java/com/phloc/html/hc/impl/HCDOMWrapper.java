@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.utils.MicroRecursiveIterator;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * This is a simple wrapper around any {@link IMicroNode} so it can easily be
@@ -50,7 +50,7 @@ public final class HCDOMWrapper extends AbstractHCNode
   }
 
   @Nonnull
-  public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return m_aNode;
   }

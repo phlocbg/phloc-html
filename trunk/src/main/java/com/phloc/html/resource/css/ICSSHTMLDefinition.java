@@ -23,7 +23,7 @@ import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.IHasConditionalComment;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Base interface for both external and inline CSS declarations in HTML.
@@ -45,8 +45,8 @@ public interface ICSSHTMLDefinition extends IHasConditionalComment
   CSSMediaList getMedia ();
 
   @Nonnull
-  IHCNode getAsHCNode (@Nonnull HCConversionSettings aConversionSettings);
+  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
 
   @Nonnull
-  IMicroNode getAsMicroNode (@Nonnull HCConversionSettings aConversionSettings);
+  IMicroNode getAsMicroNode (@Nonnull IHCConversionSettings aConversionSettings);
 }

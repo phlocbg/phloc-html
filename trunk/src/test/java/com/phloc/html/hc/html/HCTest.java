@@ -25,9 +25,13 @@ import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.conversion.HCSettings;
-import com.phloc.html.hc.html5.HCWBR;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
+/**
+ * Instantiate and generate code for all HTML elements available
+ * 
+ * @author philip
+ */
 public final class HCTest
 {
   @Test
@@ -164,9 +168,6 @@ public final class HCTest
     b.addChild (aUL);
     b.addChild (new HCVar ());
     b.addChild (new HCVar ("zzz"));
-
-    // HTML5
-    b.addChild (new HCWBR ());
 
     assertNotNull (HCSettings.getAsNode (h));
     System.out.println (HCSettings.getAsHTMLString (h, true));

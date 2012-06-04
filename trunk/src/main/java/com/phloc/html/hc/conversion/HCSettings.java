@@ -86,7 +86,7 @@ public final class HCSettings
    * @return The non-<code>null</code> conversion settings
    */
   @Nonnull
-  public static HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
+  public static IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
     return getConversionSettingsProvider ().getConversionSettings (bIndentAndAlign);
   }

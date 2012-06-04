@@ -183,6 +183,11 @@ public enum EHTMLElement
     return m_bMayBeSelfClosed;
   }
 
+  public boolean mayNotBeSelfClosed ()
+  {
+    return !m_bMayBeSelfClosed;
+  }
+
   @Nonnull
   private static Set <String> _getSelfClosedSet ()
   {

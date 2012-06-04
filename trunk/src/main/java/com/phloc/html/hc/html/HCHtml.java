@@ -29,12 +29,12 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.CHTMLDocTypes;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.conversion.HCSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 
 /**
@@ -143,7 +143,7 @@ public class HCHtml extends AbstractHCBaseNode
     return getAsNode (new HCConversionSettings (m_eHTMLVersion));
   }
 
-  public final void copyOutOfBandNodesFromBodyToHead (@Nonnull final HCConversionSettings aConversionSettings)
+  public final void copyOutOfBandNodesFromBodyToHead (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // If no body is present, there can be no out-of-band nodes!
     if (!m_bCopiedOutOfBandNodes && m_aBody != null)
@@ -159,7 +159,7 @@ public class HCHtml extends AbstractHCBaseNode
   }
 
   @Nonnull
-  public final IMicroDocument getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroDocument getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Note: we need to clone the doctype, because otherwise the object would
     // already have a parent assigned if "getAsNode" is called more than once!
@@ -173,7 +173,7 @@ public class HCHtml extends AbstractHCBaseNode
       aRoot.setAttribute (CXML.XML_ATTR_LANG, m_sLang);
       aRoot.setAttribute ("lang", m_sLang);
     }
-    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, CHTMLDocTypes.DOCTYPE_XHTML_URI);
+    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, m_eHTMLVersion.getXMLNamespace ());
 
     // Use the getter, to ensure the elements are not null
     final HCHead aHead = getHead ();

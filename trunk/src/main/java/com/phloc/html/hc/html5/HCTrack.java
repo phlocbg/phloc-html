@@ -27,7 +27,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @SinceHTML5
 public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
@@ -42,7 +42,19 @@ public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
 
   public HCTrack ()
   {
-    super (EHTMLElement.CANVAS);
+    super (EHTMLElement.TRACK);
+  }
+
+  public HCTrack (@Nullable final ISimpleURL aSrc)
+  {
+    this ();
+    setSrc (aSrc);
+  }
+
+  @Nullable
+  public String getKind ()
+  {
+    return m_sKind;
   }
 
   @Nonnull
@@ -52,11 +64,23 @@ public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
     return this;
   }
 
+  @Nullable
+  public ISimpleURL getSrc ()
+  {
+    return m_aSrc;
+  }
+
   @Nonnull
   public HCTrack setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
     return this;
+  }
+
+  @Nullable
+  public String getSrcLang ()
+  {
+    return m_sSrcLang;
   }
 
   @Nonnull
@@ -66,11 +90,22 @@ public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
     return this;
   }
 
+  @Nullable
+  public String getLabel ()
+  {
+    return m_sLabel;
+  }
+
   @Nonnull
   public HCTrack setLabel (@Nullable final String sLabel)
   {
     m_sLabel = sLabel;
     return this;
+  }
+
+  public boolean isDefault ()
+  {
+    return m_bDefault;
   }
 
   @Nonnull
@@ -81,7 +116,7 @@ public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sKind))

@@ -35,7 +35,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.hc.impl.HCNodeList;
 
@@ -134,6 +134,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  @Nullable
+  public final String getHeaderID ()
+  {
+    return m_sHeaderID;
+  }
+
   @Nonnull
   public final THISTYPE setHeaderID (@Nullable final String sID)
   {
@@ -141,11 +147,23 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  @Nullable
+  public final String getBodyID ()
+  {
+    return m_sBodyID;
+  }
+
   @Nonnull
   public final THISTYPE setBodyID (@Nullable final String sID)
   {
     m_sBodyID = sID;
     return thisAsT ();
+  }
+
+  @Nullable
+  public final String getFooterID ()
+  {
+    return m_sFooterID;
   }
 
   @Nonnull
@@ -167,6 +185,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  @Nullable
   public final HCColGroup getColGroup ()
   {
     return m_aColGroup;
@@ -219,6 +238,17 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aColGroup == null ? 0 : m_aColGroup.getColumnCount ();
   }
 
+  @Nullable
+  public final HCRow getHeaderRow ()
+  {
+    return m_aHeaderRow;
+  }
+
+  public final boolean hasHeaderRow ()
+  {
+    return m_aHeaderRow != null;
+  }
+
   @Nonnull
   public final HCRow addHeaderRow ()
   {
@@ -228,6 +258,17 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aHeaderRow;
   }
 
+  @Nullable
+  public final HCRow getFooterRow ()
+  {
+    return m_aFooterRow;
+  }
+
+  public final boolean hasFooterRow ()
+  {
+    return m_aFooterRow != null;
+  }
+
   @Nonnull
   public final HCRow addFooterRow ()
   {
@@ -235,6 +276,41 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
       throw new IllegalStateException ("A footer row is already present! You cannot have more than one!");
     m_aFooterRow = new HCRow (true);
     return m_aFooterRow;
+  }
+
+  public final boolean hasBodyRows ()
+  {
+    return !m_aBodyRows.isEmpty ();
+  }
+
+  public final int getBodyRowCount ()
+  {
+    return m_aBodyRows.size ();
+  }
+
+  /**
+   * Get the contained list object that holds all the rows. Handle with care
+   * because it alters the internal data structures of this table.
+   * 
+   * @return The contained list object for external row order handling.
+   */
+  @Nonnull
+  @ReturnsMutableObject (reason = "For performance reasons in derived classes")
+  protected final List <HCRow> directGetBodyRowList ()
+  {
+    return m_aBodyRows;
+  }
+
+  @Nullable
+  public final HCRow getFirstBodyRow ()
+  {
+    return ContainerHelper.getFirstElement (m_aBodyRows);
+  }
+
+  @Nullable
+  public final HCRow getLastBodyRow ()
+  {
+    return ContainerHelper.getLastElement (m_aBodyRows);
   }
 
   @Nonnull
@@ -269,59 +345,8 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  public final boolean hasHeaderRow ()
-  {
-    return m_aHeaderRow != null;
-  }
-
-  public final boolean hasFooterRow ()
-  {
-    return m_aFooterRow != null;
-  }
-
-  public final boolean hasBodyRows ()
-  {
-    return !m_aBodyRows.isEmpty ();
-  }
-
-  public final int getBodyRowCount ()
-  {
-    return m_aBodyRows.size ();
-  }
-
-  /**
-   * Get the contained list object that holds all the rows. Handle with care
-   * because it alters the internal data structures of this table.
-   * 
-   * @return The contained list object for external row order handling.
-   */
-  @Nonnull
-  @ReturnsMutableObject (reason = "For performance reasons in derived classes")
-  protected final List <HCRow> directGetBodyRowList ()
-  {
-    return m_aBodyRows;
-  }
-
-  @Nullable
-  public final HCRow getHeaderRow ()
-  {
-    return m_aHeaderRow;
-  }
-
-  @Nullable
-  public final HCRow getFooterRow ()
-  {
-    return m_aFooterRow;
-  }
-
-  @Nullable
-  public final HCRow getLastBodyRow ()
-  {
-    return ContainerHelper.getLastElement (m_aBodyRows);
-  }
-
   @Override
-  protected boolean canConvertToNode (@Nonnull final HCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
     return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;
@@ -449,7 +474,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Override
   @Nullable
-  public final IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
     if (m_aHeaderRow != null)

@@ -33,7 +33,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.api5.EHCCORSSettings;
 import com.phloc.html.hc.api5.EHCPreload;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
@@ -58,11 +58,22 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     super (eElement);
   }
 
+  public final boolean isAutoPlay ()
+  {
+    return m_bAutoPlay;
+  }
+
   @Nonnull
   public final THISTYPE setAutoPlay (final boolean bAutoPlay)
   {
     m_bAutoPlay = bAutoPlay;
     return thisAsT ();
+  }
+
+  @Nullable
+  public final EHCPreload getPreload ()
+  {
+    return m_ePreload;
   }
 
   @Nonnull
@@ -72,11 +83,21 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     return thisAsT ();
   }
 
+  public final boolean isControls ()
+  {
+    return m_bControls;
+  }
+
   @Nonnull
   public final THISTYPE setControls (final boolean bControls)
   {
     m_bControls = bControls;
     return thisAsT ();
+  }
+
+  public final boolean isLoop ()
+  {
+    return m_bLoop;
   }
 
   @Nonnull
@@ -86,6 +107,11 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     return thisAsT ();
   }
 
+  public final boolean isMuted ()
+  {
+    return m_bMuted;
+  }
+
   @Nonnull
   public final THISTYPE setMuted (final boolean bMuted)
   {
@@ -93,11 +119,22 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     return thisAsT ();
   }
 
+  @Nullable
+  public final ISimpleURL getSrc ()
+  {
+    return m_aSrc;
+  }
+
   @Nonnull
   public final THISTYPE setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
     return thisAsT ();
+  }
+
+  public final EHCCORSSettings getCrossOrigin ()
+  {
+    return m_eCrossOrigin;
   }
 
   @Nonnull
@@ -141,7 +178,7 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bAutoPlay)

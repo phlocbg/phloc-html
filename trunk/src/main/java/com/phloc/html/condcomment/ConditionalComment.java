@@ -31,7 +31,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.HCCommentNode;
 
 /**
@@ -82,7 +82,7 @@ public final class ConditionalComment
 
   @Nonnull
   public IHCNode getNodeWrappedInCondition (@Nonnull final IHCNode aNode,
-                                            @Nonnull final HCConversionSettings aConversionSettings)
+                                            @Nonnull final IHCConversionSettings aConversionSettings)
   {
     final String sText = '[' +
                          m_sCondition +

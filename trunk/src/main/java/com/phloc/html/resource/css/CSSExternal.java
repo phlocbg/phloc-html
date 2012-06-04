@@ -29,7 +29,7 @@ import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCLinkType;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCLink;
 
 /**
@@ -64,7 +64,7 @@ public final class CSSExternal extends AbstractCSSHTMLDefinition implements ICSS
   }
 
   @Nonnull
-  public IHCNode getAsHCNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCLink aLink = new HCLink (EHCLinkType.STYLESHEET, CMimeType.TEXT_CSS, m_aHref);
     if (hasMedia ())

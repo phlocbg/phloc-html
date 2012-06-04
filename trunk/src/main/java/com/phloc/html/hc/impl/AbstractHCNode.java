@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Default implementation of the {@link IHCNode} interface.
@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
 {
   @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return null;
   }

@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Base interface for HTML controls.
@@ -36,7 +36,7 @@ public interface IHCBaseNode extends IHC
    * @return The fully created HTML node
    */
   @Nullable
-  IMicroNode getAsNode (@Nonnull HCConversionSettings aConversionSettings);
+  IMicroNode getAsNode (@Nonnull IHCConversionSettings aConversionSettings);
 
   /**
    * @param aConversionSettings
@@ -44,5 +44,5 @@ public interface IHCBaseNode extends IHC
    * @return The node as XML optionally without indentation.
    */
   @Nonnull
-  String getAsHTMLString (@Nonnull HCConversionSettings aConversionSettings);
+  String getAsHTMLString (@Nonnull IHCConversionSettings aConversionSettings);
 }

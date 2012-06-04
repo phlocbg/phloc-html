@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCScriptFile;
 
 /**
@@ -68,7 +68,7 @@ public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
   }
 
   @Nonnull
-  public IHCNode getAsHCNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCScriptFile aScript = new HCScriptFile (m_aHref, m_bDefer);
     if (hasConditionalComment ())

@@ -51,7 +51,7 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
@@ -328,7 +328,7 @@ public class HCHead extends AbstractHCBaseNode
    * @param aOutOfBandNode
    */
   @Deprecated
-  public void handleOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings,
+  public void handleOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings,
                                    @Nullable final IHCBaseNode aOutOfBandNode)
   {
     handleOutOfBandNode (aOutOfBandNode);
@@ -369,14 +369,14 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @OverrideOnDemand
-  protected void emitLinks (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  protected void emitLinks (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
     for (final HCLink aLink : m_aLinks)
       eHead.appendChild (aLink.getAsNode (aConversionSettings));
   }
 
   @OverrideOnDemand
-  protected void emitCSS (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  protected void emitCSS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
     int nCSSExternals = 0;
     for (final ICSSHTMLDefinition aCSS : m_aCSS)
@@ -396,14 +396,14 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @OverrideOnDemand
-  protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final HCConversionSettings aConversionSettings)
+  protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
     for (final IJSHTMLDefinition aJS : m_aJS)
       eHead.appendChild (aJS.getAsMicroNode (aConversionSettings));
   }
 
   @Nonnull
-  public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 
@@ -472,6 +472,10 @@ public class HCHead extends AbstractHCBaseNode
     // Custom nodes (e.g. from out-of-band nodes)
     for (final IHCBaseNode aCustomNode : m_aCustomOutOfBandNodes)
       eHead.appendChild (aCustomNode.getAsNode (aConversionSettings));
+
+    // Ensure tag is not self-closed
+    if (!eHead.hasChildren () && EHTMLElement.HEAD.mayNotBeSelfClosed ())
+      eHead.appendText ("");
 
     return eHead;
   }

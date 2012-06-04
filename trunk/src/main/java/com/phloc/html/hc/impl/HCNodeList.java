@@ -33,7 +33,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without
@@ -240,7 +240,7 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
   }
 
   @Nonnull
-  public IMicroContainer getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IMicroContainer getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
     for (final IHCBaseNode aNode : m_aNodes)
@@ -259,7 +259,7 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
     for (final IHCBaseNode aNode : m_aNodes)

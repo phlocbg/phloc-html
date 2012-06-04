@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Implementation of a node that is ONLY an out-of-band node!
@@ -42,7 +42,7 @@ public final class HCOutOfBandNode extends AbstractHCNode
   }
 
   @Nullable
-  public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return null;
   }
@@ -53,7 +53,7 @@ public final class HCOutOfBandNode extends AbstractHCNode
   }
 
   @Override
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return m_aOutOfBandNode;
   }
