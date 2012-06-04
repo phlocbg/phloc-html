@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.css.DefaultCSSClassProvider;
 import com.phloc.css.ICSSClassProvider;
+import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
@@ -77,13 +78,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
     return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
   }
 
-  /**
-   * Customize with some predefined classes etc.
-   * 
-   * @param aElement
-   *        The element to be customized
-   */
-  public void customizeHCElement (@Nonnull final IHCElement <?> aElement)
+  public void customizeHCElement (@Nonnull final IHCElement <?> aElement, @Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (aElement instanceof HCButton)
     {
@@ -155,15 +150,9 @@ public class HCDefaultCustomizer implements IHCCustomizer
     }
   }
 
-  /**
-   * Get a custom out of band node
-   * 
-   * @param aElement
-   *        The element to be customized
-   * @return <code>null</code> if there is no custom out-of-band node
-   */
   @Nullable
-  public IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement)
+  public IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement,
+                                             @Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (aElement instanceof IHCControl <?>)
     {

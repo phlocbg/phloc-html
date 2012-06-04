@@ -674,14 +674,20 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
 
     // Do standard customization
-    aConversionSettings.getCustomizer ().customizeHCElement (this);
+    aConversionSettings.getCustomizer ().customizeHCElement (this, aConversionSettings.getHTMLVersion ());
 
-    // Prepare object
+    // Prepare object (implementation dependent)
     prepareBeforeCreateElement (aConversionSettings);
+
+    // Create the element
     final IMicroElement ret = createElement ();
     if (ret == null)
       throw new IllegalStateException ("Created a null element!");
+
+    // Set all HTML attributes etc.
     applyProperties (ret, aConversionSettings);
+
+    // Optional callback after everything was done (implementation dependent)
     finishAfterApplyProperties (ret, aConversionSettings);
     return ret;
   }
@@ -690,7 +696,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this);
+    return aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this, aConversionSettings.getHTMLVersion ());
   }
 
   @Override

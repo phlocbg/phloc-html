@@ -17,14 +17,19 @@
  */
 package com.phloc.html.hc.html;
 
+import java.io.IOException;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.css.ECSSVersion;
+import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
+import com.phloc.css.writer.CSSWriter;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -48,6 +53,14 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   {
     this ();
     addChild (sStyle);
+  }
+
+  public HCStyle (@Nonnull final CascadingStyleSheet aCSS,
+                  @Nonnull final ECSSVersion eVersion,
+                  final boolean bOptimizedOutput) throws IOException
+  {
+    this ();
+    addChild (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
   }
 
   @Nullable
