@@ -37,7 +37,6 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
 import com.phloc.commons.xml.EXMLVersion;
 import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
-import com.phloc.html.CHTMLDocTypes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.entities.HTMLEntityResolver;
@@ -59,7 +58,8 @@ public final class XHTMLParser
   {}
 
   /**
-   * Check whether the passed text looks like it contains XHTML code.
+   * Check whether the passed text looks like it contains XHTML code. This is a
+   * heuristic check only and does not perform actual parsing!
    * 
    * @param sText
    *        The text to check.
@@ -123,11 +123,13 @@ public final class XHTMLParser
     final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
-                          "<html " +
-                          CXML.XML_ATTR_XMLNS +
-                          "=\"" +
-                          CHTMLDocTypes.DOCTYPE_XHTML_URI +
-                          "\"><head><title></title></head><body>" +
+                          "<html" +
+                          (eHTMLVersion.getXMLNamespace () != null ? ' ' +
+                                                                     CXML.XML_ATTR_XMLNS +
+                                                                     "=\"" +
+                                                                     eHTMLVersion.getXMLNamespace () +
+                                                                     "\"" : "") +
+                          "><head><title></title></head><body>" +
                           StringHelper.getNotNull (sXHTMLFragment) +
                           "</body></html>";
     return parseXHTMLDocument (sXHTML);

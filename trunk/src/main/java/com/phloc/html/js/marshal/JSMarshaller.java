@@ -130,6 +130,7 @@ public final class JSMarshaller
    * @return The unescaped string.
    * @see #javaScriptEscape(String)
    */
+  @Nullable
   public static String javaScriptUnescape (@Nullable final String sInput)
   {
     if (StringHelper.hasNoText (sInput))
@@ -406,18 +407,17 @@ public final class JSMarshaller
   {
     if (StringHelper.hasNoText (s))
       return false;
-    final int nLen = s.length ();
-    for (int i = 0; i < nLen; ++i)
+    final char [] aChars = s.toCharArray ();
+    for (int i = 0; i < aChars.length; ++i)
     {
-      final char c = s.charAt (i);
       if (i == 0)
       {
-        if (!Character.isJavaIdentifierStart (c))
+        if (!Character.isJavaIdentifierStart (aChars[i]))
           return false;
       }
       else
       {
-        if (!Character.isJavaIdentifierPart (c))
+        if (!Character.isJavaIdentifierPart (aChars[i]))
           return false;
       }
     }

@@ -114,7 +114,8 @@ public class JSType
   /**
    * Get the contained base type.
    * 
-   * @return The base type. Never <code>null</code>.
+   * @return The base type. Is only <code>null</code> for the
+   *         {@link #AUTO_DETECT} type.
    */
   @Nullable
   public final EJSType getType ()

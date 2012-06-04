@@ -27,22 +27,29 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Default implementation of the {@link IJSToStringConverter} interface, using
  * {@link JSMarshaller} to convert an object to a string representation.
- *
+ * 
  * @author philip
  */
 @Immutable
 public final class JSToStringConverter implements IJSToStringConverter
 {
+  public static final boolean DEFAULT_WITH_SURROUNDING_VAR = true;
+
   private final boolean m_bWithSurroundingVar;
 
   public JSToStringConverter ()
   {
-    this (true);
+    this (DEFAULT_WITH_SURROUNDING_VAR);
   }
 
   public JSToStringConverter (final boolean bWithSurroundingVar)
   {
     m_bWithSurroundingVar = bWithSurroundingVar;
+  }
+
+  public boolean isWithSurroundingVar ()
+  {
+    return m_bWithSurroundingVar;
   }
 
   @Nullable

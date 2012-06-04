@@ -73,6 +73,7 @@ public final class DefaultJSCodeProvider implements IJSCodeProvider
     return new ToStringGenerator (this).append ("code", m_sJSCode).toString ();
   }
 
+  @Nonnull
   public static IJSCodeProvider create (@Nullable final String sJSCode)
   {
     return StringHelper.hasNoText (sJSCode) ? EMPTY_JSCODE : new DefaultJSCodeProvider (sJSCode);

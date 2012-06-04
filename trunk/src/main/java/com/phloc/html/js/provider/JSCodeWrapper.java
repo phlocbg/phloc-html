@@ -18,8 +18,10 @@
 package com.phloc.html.js.provider;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
@@ -30,7 +32,8 @@ public final class JSCodeWrapper
   private JSCodeWrapper ()
   {}
 
-  public static void appendJSParameters (final CollectingJSCodeProvider aProvider, final Object... aArgs)
+  public static void appendJSParameters (@Nonnull final CollectingJSCodeProvider aProvider,
+                                         @Nullable final Object... aArgs)
   {
     aProvider.append ('(');
     if (aArgs != null)
@@ -57,7 +60,8 @@ public final class JSCodeWrapper
    * @return The function without a leading semicolon
    */
   @Nonnull
-  public static CollectingJSCodeProvider getFunctionCall (final String sFunction, final Object... aArgs)
+  public static CollectingJSCodeProvider getFunctionCall (@Nonnull final String sFunction,
+                                                          @Nullable final Object... aArgs)
   {
     // FIXME: may be valid for jQuery functions of the form
     // '$(".pdaf_tooltip").some.method'
@@ -71,20 +75,29 @@ public final class JSCodeWrapper
   }
 
   @Nonnull
-  public static CollectingJSCodeProvider getVariableAssignment (final String sName, final Object aInitialValue)
+  public static CollectingJSCodeProvider getVariableAssignment (@Nonnull @Nonempty final String sName,
+                                                                @Nullable final Object aInitialValue)
   {
+    if (StringHelper.hasNoText (sName))
+      throw new IllegalArgumentException ("name");
+
     final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
     aSB.append ("var ").append (sName);
     if (aInitialValue != null)
+    {
       aSB.append ('=').append (JSMarshaller.objectToJSString (aInitialValue));
+    }
     aSB.appendSemicolon ();
     return aSB;
   }
 
   @Nonnull
-  public static CollectingJSCodeProvider getInlineFunction (final IJSCodeProvider aImplementation,
-                                                            final String... sParameters)
+  public static CollectingJSCodeProvider getInlineFunction (@Nonnull final IJSCodeProvider aImplementation,
+                                                            @Nullable final String... sParameters)
   {
+    if (aImplementation == null)
+      throw new NullPointerException ("implementation");
+
     final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
     aSB.append ("function(" + StringHelper.implode (",", sParameters) + "){").append (aImplementation).append ("}");
     return aSB;

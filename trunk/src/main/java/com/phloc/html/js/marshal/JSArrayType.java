@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Specific JavaScript array type.
- *
+ * 
  * @author philip
  */
 @Immutable
@@ -64,12 +64,12 @@ public final class JSArrayType extends JSType implements IHasChildJSType
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (getType ()).append (m_aChildType).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aChildType).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (null).append ("jsType", getType ()).append ("childType", m_aChildType).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("childType", m_aChildType).toString ();
   }
 }

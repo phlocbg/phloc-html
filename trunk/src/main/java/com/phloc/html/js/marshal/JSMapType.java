@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Specific JavaScript map type.
- *
+ * 
  * @author philip
  */
 @Immutable
@@ -72,21 +72,21 @@ public final class JSMapType extends JSType
     if (!super.equals (o))
       return false;
     final JSMapType rhs = (JSMapType) o;
-    return m_aKeyType.equals (rhs.m_aKeyType);
+    return m_aKeyType.equals (rhs.m_aKeyType) && m_aValueType.equals (rhs.m_aValueType);
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (getType ()).append (m_aKeyType).append (m_aValueType).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aKeyType).append (m_aValueType).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (null).append ("jsType", getType ())
-                                       .append ("keyType", m_aKeyType)
-                                       .append ("valueType", m_aValueType)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("keyType", m_aKeyType)
+                            .append ("valueType", m_aValueType)
+                            .toString ();
   }
 }
