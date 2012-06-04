@@ -55,11 +55,23 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
     setName (sName);
   }
 
+  @Nullable
+  public String getChallenge ()
+  {
+    return m_sChallenge;
+  }
+
   @Nonnull
   public HCKeyGen setChallenge (@Nullable final String sChallenge)
   {
     m_sChallenge = sChallenge;
     return this;
+  }
+
+  @Nonnull
+  public EHCKeyGenType getKeyType ()
+  {
+    return m_eKeyType;
   }
 
   @Nonnull
@@ -71,11 +83,22 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
     return this;
   }
 
+  public boolean isAutofocus ()
+  {
+    return m_bAutofocus;
+  }
+
   @Nonnull
   public HCKeyGen setAutofocus (final boolean bAutofocus)
   {
     m_bAutofocus = bAutofocus;
     return this;
+  }
+
+  @Nullable
+  public String getName ()
+  {
+    return m_sName;
   }
 
   @Nonnull
@@ -85,11 +108,22 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
     return this;
   }
 
+  public boolean isDisabled ()
+  {
+    return m_bDisabled;
+  }
+
   @Nonnull
   public HCKeyGen setDisabled (final boolean bDisabled)
   {
     m_bDisabled = bDisabled;
     return this;
+  }
+
+  @Nullable
+  public String getForm ()
+  {
+    return m_sForm;
   }
 
   @Nonnull

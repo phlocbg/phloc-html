@@ -71,11 +71,21 @@ public final class HCCanvas extends AbstractHCElementWithChildren <HCCanvas>
     super (EHTMLElement.CANVAS, aChildren);
   }
 
+  public long getHeight ()
+  {
+    return m_nHeight;
+  }
+
   @Nonnull
   public HCCanvas setHeight (final long nHeight)
   {
     m_nHeight = nHeight;
     return this;
+  }
+
+  public long getWidth ()
+  {
+    return m_nWidth;
   }
 
   @Nonnull
@@ -86,7 +96,7 @@ public final class HCCanvas extends AbstractHCElementWithChildren <HCCanvas>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nHeight >= 0)

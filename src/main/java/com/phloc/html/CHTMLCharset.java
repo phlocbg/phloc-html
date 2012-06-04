@@ -18,6 +18,7 @@
 package com.phloc.html;
 
 import java.nio.charset.Charset;
+import java.util.Locale;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -39,6 +40,9 @@ public final class CHTMLCharset
   public static final Charset CHARSET_CSS_OBJ = CCharset.CHARSET_UTF_8_OBJ;
   public static final String CHARSET_JS = CCharset.CHARSET_UTF_8;
   public static final Charset CHARSET_JS_OBJ = CCharset.CHARSET_UTF_8_OBJ;
+
+  // The locale to be used for upper/lowercasing stuff
+  public static final Locale LOCALE = Locale.US;
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")

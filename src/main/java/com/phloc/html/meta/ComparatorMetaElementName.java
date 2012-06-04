@@ -19,6 +19,8 @@ package com.phloc.html.meta;
 
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
 import com.phloc.commons.compare.AbstractCollationComparator;
 
 /**
@@ -28,7 +30,7 @@ import com.phloc.commons.compare.AbstractCollationComparator;
  */
 public final class ComparatorMetaElementName extends AbstractCollationComparator <IMetaElementDeclaration>
 {
-  public ComparatorMetaElementName (final Locale aSortLocale)
+  public ComparatorMetaElementName (@Nullable final Locale aSortLocale)
   {
     super (aSortLocale);
   }

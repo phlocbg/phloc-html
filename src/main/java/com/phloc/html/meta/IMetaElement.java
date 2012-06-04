@@ -27,6 +27,11 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.state.EChange;
 
+/**
+ * Represents a single meta element
+ * 
+ * @author philip
+ */
 public interface IMetaElement extends IMetaElementDeclaration
 {
   /**

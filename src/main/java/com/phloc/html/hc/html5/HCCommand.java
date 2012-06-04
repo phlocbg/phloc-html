@@ -51,11 +51,21 @@ public final class HCCommand extends AbstractHCElement <HCCommand>
     super (EHTMLElement.COMMAND);
   }
 
+  public boolean isChecked ()
+  {
+    return m_bChecked;
+  }
+
   @Nonnull
   public HCCommand setChecked (final boolean bChecked)
   {
     m_bChecked = bChecked;
     return this;
+  }
+
+  public boolean isDefault ()
+  {
+    return m_bDefault;
   }
 
   @Nonnull
@@ -65,11 +75,22 @@ public final class HCCommand extends AbstractHCElement <HCCommand>
     return this;
   }
 
+  public boolean isDisabled ()
+  {
+    return m_bDisabled;
+  }
+
   @Nonnull
   public HCCommand setDisabled (final boolean bDisabled)
   {
     m_bDisabled = bDisabled;
     return this;
+  }
+
+  @Nullable
+  public ISimpleURL getIcon ()
+  {
+    return m_aIcon;
   }
 
   @Nonnull
@@ -79,6 +100,12 @@ public final class HCCommand extends AbstractHCElement <HCCommand>
     return this;
   }
 
+  @Nullable
+  public String getLabel ()
+  {
+    return m_sLabel;
+  }
+
   @Nonnull
   public HCCommand setLabel (@Nullable final String sLabel)
   {
@@ -86,11 +113,23 @@ public final class HCCommand extends AbstractHCElement <HCCommand>
     return this;
   }
 
+  @Nullable
+  public String getRadioGroup ()
+  {
+    return m_sRadioGroup;
+  }
+
   @Nonnull
   public HCCommand setRadioGroup (@Nullable final String sRadioGroup)
   {
     m_sRadioGroup = sRadioGroup;
     return this;
+  }
+
+  @Nonnull
+  public EHCCommandType getType ()
+  {
+    return m_eType;
   }
 
   @Nonnull

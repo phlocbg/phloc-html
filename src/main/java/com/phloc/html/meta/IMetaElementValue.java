@@ -24,6 +24,11 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.name.IHasName;
 
+/**
+ * Represents the value of a single meta element
+ * 
+ * @author philip
+ */
 public interface IMetaElementValue extends IHasName
 {
   /**
