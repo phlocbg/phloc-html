@@ -28,7 +28,7 @@ import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.html5.HCWBR;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
-public final class FuncTestHC
+public final class HCTest
 {
   @Test
   public void testMainHC ()
