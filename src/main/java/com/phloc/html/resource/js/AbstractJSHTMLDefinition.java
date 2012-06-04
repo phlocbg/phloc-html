@@ -26,7 +26,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @Immutable
 public abstract class AbstractJSHTMLDefinition implements IJSHTMLDefinition
@@ -50,7 +50,7 @@ public abstract class AbstractJSHTMLDefinition implements IJSHTMLDefinition
   }
 
   @Nonnull
-  public final IMicroNode getAsMicroNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroNode getAsMicroNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
   }

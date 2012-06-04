@@ -27,7 +27,7 @@ import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -67,7 +67,7 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_CSS.getAsString ());

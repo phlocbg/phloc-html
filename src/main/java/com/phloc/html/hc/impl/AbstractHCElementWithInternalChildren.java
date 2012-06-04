@@ -38,7 +38,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.htmlext.HCUtils;
 
 public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
@@ -171,7 +171,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
@@ -202,7 +202,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCNodeList aCont = new HCNodeList ();
 

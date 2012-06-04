@@ -54,7 +54,7 @@ import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
@@ -512,7 +512,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    *         <code>false</code> otherwise.
    */
   @OverrideOnDemand
-  protected boolean canConvertToNode (@Nonnull final HCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return true;
   }
@@ -526,7 +526,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    *        The conversion settings to be used
    */
   @OverrideOnDemand
-  protected void prepareBeforeCreateElement (@Nonnull final HCConversionSettings aConversionSettings)
+  protected void prepareBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
   {}
 
   /**
@@ -551,7 +551,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement aElement,
-                                  @Nonnull final HCConversionSettings aConversionSettings)
+                                  @Nonnull final IHCConversionSettings aConversionSettings)
   {
     if (StringHelper.hasText (m_sID))
       aElement.setAttribute (CHTMLAttributes.ID, m_sID);
@@ -615,7 +615,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   @OverrideOnDemand
   protected void finishAfterApplyProperties (@Nonnull final IMicroElement eElement,
-                                             @Nonnull final HCConversionSettings aConversionSettings)
+                                             @Nonnull final IHCConversionSettings aConversionSettings)
   {}
 
   /*
@@ -623,7 +623,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * delivers an IMicroNodeList!
    */
   @Nullable
-  public IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     if (!canConvertToNode (aConversionSettings))
       return null;
@@ -647,7 +647,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   @Override
   @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this);
   }

@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCStyle;
 
 /**
@@ -64,7 +64,7 @@ public final class CSSInline extends AbstractCSSHTMLDefinition implements ICSSIn
   }
 
   @Nonnull
-  public IHCNode getAsHCNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCStyle aStyle = new HCStyle (m_sContent);
     aStyle.setMedia (getMedia ());

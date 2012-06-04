@@ -25,7 +25,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -59,7 +59,7 @@ public final class JSInline extends AbstractJSHTMLDefinition implements IJSInlin
   }
 
   @Nonnull
-  public IHCNode getAsHCNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCScript aScript = new HCScript (m_aContent);
     if (hasConditionalComment ())

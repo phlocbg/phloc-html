@@ -26,7 +26,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.api.EHCInputType;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "text"
@@ -87,7 +87,7 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_sValue != null)

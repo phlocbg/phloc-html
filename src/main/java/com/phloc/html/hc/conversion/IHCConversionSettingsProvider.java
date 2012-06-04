@@ -42,5 +42,5 @@ public interface IHCConversionSettingsProvider
    * @return The non-<code>null</code> conversion settings object.
    */
   @Nonnull
-  HCConversionSettings getConversionSettings (boolean bIndentAndAlign);
+  IHCConversionSettings getConversionSettings (boolean bIndentAndAlign);
 }

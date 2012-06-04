@@ -28,7 +28,7 @@ import com.phloc.css.CCSS;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
@@ -83,7 +83,7 @@ public final class HCCol extends AbstractHCElement <HCCol>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sWidth))

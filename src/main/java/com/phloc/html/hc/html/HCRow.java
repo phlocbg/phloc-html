@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 
@@ -390,7 +390,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final HCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Avoid rows without cells!
     return hasChildren ();

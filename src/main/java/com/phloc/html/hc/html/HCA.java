@@ -30,7 +30,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api5.IHCHasMedia;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -104,7 +104,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected final void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected final void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aHref != null)

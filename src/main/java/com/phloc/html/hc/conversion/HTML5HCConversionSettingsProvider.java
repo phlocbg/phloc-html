@@ -23,15 +23,14 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.html.EHTMLVersion;
 
 /**
- * Default implementation of {@link IHCConversionSettingsProvider} using the
- * default {@link EHTMLVersion}
+ * Implementation of {@link IHCConversionSettingsProvider} for HTML5
  * 
  * @author philip
  */
 @Immutable
-public final class DefaultHCConversionSettingsProvider implements IHCConversionSettingsProvider
+public final class HTML5HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
-  public static final EHTMLVersion HTML_VERSION = EHTMLVersion.DEFAULT;
+  public static final EHTMLVersion HTML_VERSION = EHTMLVersion.HTML5;
   public static final IHCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
   public static final IHCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
                                                                                                           .setIndentAndAlignHTML (false);

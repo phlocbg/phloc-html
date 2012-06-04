@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.condcomment.IHasConditionalComment;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Base interface for JS external and inline objects.
@@ -32,8 +32,8 @@ import com.phloc.html.hc.conversion.HCConversionSettings;
 public interface IJSHTMLDefinition extends IHasConditionalComment
 {
   @Nonnull
-  IHCNode getAsHCNode (@Nonnull HCConversionSettings aConversionSettings);
+  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
 
   @Nonnull
-  IMicroNode getAsMicroNode (@Nonnull HCConversionSettings aConversionSettings);
+  IMicroNode getAsMicroNode (@Nonnull IHCConversionSettings aConversionSettings);
 }

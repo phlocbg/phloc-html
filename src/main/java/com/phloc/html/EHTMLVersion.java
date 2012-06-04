@@ -18,6 +18,7 @@
 package com.phloc.html;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroDocumentType;
 
@@ -36,6 +37,13 @@ public enum EHTMLVersion
     {
       return CHTMLDocTypes.DOCTYPE_XHTML10_STRICT;
     }
+
+    @Override
+    @Nonnull
+    public String getXMLNamespace ()
+    {
+      return CHTMLDocTypes.DOCTYPE_XHTML_URI;
+    }
   },
   XHTML10_TRANSITIONAL
   {
@@ -44,6 +52,13 @@ public enum EHTMLVersion
     public IMicroDocumentType getDocType ()
     {
       return CHTMLDocTypes.DOCTYPE_XHTML10_TRANS;
+    }
+
+    @Override
+    @Nonnull
+    public String getXMLNamespace ()
+    {
+      return CHTMLDocTypes.DOCTYPE_XHTML_URI;
     }
   },
   XHTML11
@@ -54,6 +69,13 @@ public enum EHTMLVersion
     {
       return CHTMLDocTypes.DOCTYPE_XHTML11;
     }
+
+    @Override
+    @Nonnull
+    public String getXMLNamespace ()
+    {
+      return CHTMLDocTypes.DOCTYPE_XHTML_URI;
+    }
   },
   HTML5
   {
@@ -62,6 +84,13 @@ public enum EHTMLVersion
     public IMicroDocumentType getDocType ()
     {
       return CHTMLDocTypes.DOCTYPE_HTML5;
+    }
+
+    @Override
+    @Nullable
+    public String getXMLNamespace ()
+    {
+      return null;
     }
   };
 
@@ -76,6 +105,9 @@ public enum EHTMLVersion
    */
   @Nonnull
   public abstract IMicroDocumentType getDocType ();
+
+  @Nullable
+  public abstract String getXMLNamespace ();
 
   public boolean isXHTML10 ()
   {

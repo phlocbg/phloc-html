@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.impl.MicroComment;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Represents a single CDATA node as HC node.
@@ -52,7 +52,7 @@ public final class HCCommentNode extends AbstractHCNode
   }
 
   @Nonnull
-  public IMicroComment getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IMicroComment getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return new MicroComment (m_sText);
   }

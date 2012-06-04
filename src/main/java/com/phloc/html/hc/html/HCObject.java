@@ -30,7 +30,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCObjectAlign;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -188,7 +188,7 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
 
   @Override
   protected void applyProperties (@Nonnull final IMicroElement aElement,
-                                  @Nonnull final HCConversionSettings aConversionSettings)
+                                  @Nonnull final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nWidth > 0)

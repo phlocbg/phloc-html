@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCOLType;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Represents an HTML &lt;ol&gt; element
@@ -57,7 +57,7 @@ public class HCOL extends AbstractHCList <HCOL>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 

@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Base class for an HTML control that consists only of another HC node (e.g.
@@ -46,14 +46,14 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
    *        Conversion settings to be applied
    */
   @OverrideOnDemand
-  protected void prepareBeforeGetAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  protected void prepareBeforeGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {}
 
   @Nonnull
   protected abstract IHCNode getContainedHCNode ();
 
   @Nonnull
-  public final IMicroNode getAsNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     if (!m_bPrepared)
     {
@@ -69,7 +69,7 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
   }
 
   @Override
-  public final IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getContainedHCNode ().getOutOfBandNode (aConversionSettings);
   }

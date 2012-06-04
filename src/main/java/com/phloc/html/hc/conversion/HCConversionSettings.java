@@ -25,7 +25,7 @@ import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @NotThreadSafe
-public final class HCConversionSettings
+public final class HCConversionSettings implements IHCConversionSettings
 {
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
   public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;

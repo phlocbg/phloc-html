@@ -23,8 +23,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 import com.phloc.commons.url.SimpleURL;
-import com.phloc.html.hc.conversion.HCConversionSettings;
 import com.phloc.html.hc.conversion.HCSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.resource.css.CSSExternal;
 import com.phloc.html.resource.js.JSExternal;
 
@@ -70,7 +70,7 @@ public final class HCHeadTest
   @Test
   public void testOutOfBandNodes ()
   {
-    final HCConversionSettings aCS = HCSettings.getConversionSettings (false);
+    final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
     aHtml.getBody ().addChild (new HCH1 ("Test"));
     aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));

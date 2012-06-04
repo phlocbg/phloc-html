@@ -27,7 +27,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.api5.EHCKeyGenType;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
@@ -47,6 +47,12 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
   public HCKeyGen ()
   {
     super (EHTMLElement.KEYGEN);
+  }
+
+  public HCKeyGen (@Nullable final String sName)
+  {
+    this ();
+    setName (sName);
   }
 
   @Nonnull
@@ -94,7 +100,7 @@ public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sChallenge))

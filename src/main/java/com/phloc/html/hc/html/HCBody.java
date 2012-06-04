@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 
@@ -74,7 +74,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
   }
 
   @Override
-  public IHCBaseNode getOutOfBandNode (@Nonnull final HCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final IHCBaseNode aOutOfBandNode = super.getOutOfBandNode (aConversionSettings);
     if (m_aOutOfBandNodes.isEmpty ())

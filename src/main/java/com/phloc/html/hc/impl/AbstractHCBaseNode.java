@@ -28,7 +28,7 @@ import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Default implementation of the {@link IHCNode} interface.
@@ -46,7 +46,7 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
                                                                                                                                      .setIndent (EXMLSerializeIndent.NONE);
 
   @Nonnull
-  public final String getAsHTMLString (@Nonnull final HCConversionSettings aConversionSettings)
+  public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final IMicroNode aNode = getAsNode (aConversionSettings);
     if (aNode == null)
