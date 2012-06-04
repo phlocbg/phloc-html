@@ -27,6 +27,9 @@ import javax.annotation.Nonnull;
  */
 public interface IHasChildJSType
 {
+  /**
+   * @return The type of the child. May not be <code>null</code>.
+   */
   @Nonnull
   JSType getChildType ();
 }

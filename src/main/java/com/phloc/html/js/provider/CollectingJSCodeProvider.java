@@ -34,7 +34,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   public CollectingJSCodeProvider ()
   {}
 
-  public CollectingJSCodeProvider (final CharSequence aCS)
+  public CollectingJSCodeProvider (@Nullable final CharSequence aCS)
   {
     append (aCS);
   }
@@ -62,13 +62,14 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
 
   /**
    * @param aCS
-   *        The string to append.
+   *        The string to append. May be <code>null</code>.
    * @return this
    */
   @Nonnull
   public CollectingJSCodeProvider append (@Nullable final CharSequence aCS)
   {
-    m_aSB.append (aCS);
+    if (aCS != null)
+      m_aSB.append (aCS);
     return this;
   }
 
@@ -89,6 +90,8 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   @Nonnull
   public CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
   {
+    if (aProvider instanceof CollectingJSCodeProvider)
+      return append ((CollectingJSCodeProvider) aProvider);
     if (aProvider != null)
       append (aProvider.getJSCode ());
     return this;
@@ -97,7 +100,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   @Nonnull
   public CollectingJSCodeProvider appendSemicolon ()
   {
-    // If there is nothing to append - don't append it :)
+    // If there is nothing to append to - don't append it :)
     if (m_aSB.length () == 0)
       return this;
     return append (CJS.JS_END_OF_STATEMENT);

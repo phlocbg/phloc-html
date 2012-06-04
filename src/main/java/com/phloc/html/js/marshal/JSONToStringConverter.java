@@ -37,8 +37,11 @@ public final class JSONToStringConverter implements IJSToStringConverter
   @Nullable
   public String objectToJSString (@Nullable final Object aObject, @Nonnull final JSType aType)
   {
+    if (aObject != null && !(aObject instanceof IJSON))
+      throw new IllegalArgumentException ("The passed object is not of type IJSON but " +
+                                          aObject.getClass ().getName ());
     if (aType != JSType.JSON)
-      throw new IllegalArgumentException ("Unexpected JSType '" + aType + "'!");
+      throw new IllegalArgumentException ("Unexpected JSType '" + aType + "'! Only JSON is supported!");
     return aObject == null ? null : ((IJSON) aObject).getJSONString ();
   }
 
