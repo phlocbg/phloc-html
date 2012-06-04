@@ -100,7 +100,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     if (eElement == null)
       throw new NullPointerException ("element");
     m_eElement = eElement;
-    m_sElementName = eElement.getElementName ();
+    m_sElementName = eElement.getElementNameLowerCase ();
   }
 
   @Nonnull

@@ -41,6 +41,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.entities.HTMLEntityResolver;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCTextNode;
 
@@ -165,8 +166,8 @@ public final class XHTMLParser
     final IMicroDocument aDoc = parseXHTMLFragment (sXHTML);
     if (aDoc != null && aDoc.getDocumentElement () != null)
     {
-      // Find body
-      final IMicroElement eBody = aDoc.getDocumentElement ().getFirstChildElement (EHTMLElement.BODY.getElementName ());
+      // Find body case insensitive
+      final IMicroElement eBody = HCUtils.getFirstChildElement (aDoc.getDocumentElement (), EHTMLElement.BODY);
       if (eBody != null)
       {
         final IMicroContainer ret = new MicroContainer ();

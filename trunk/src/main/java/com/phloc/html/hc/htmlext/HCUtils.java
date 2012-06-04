@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.callback.INonThrowingRunnableWithParameter;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.lang.GenericReflection;
+import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.parent.IHasChildren;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
@@ -138,8 +139,9 @@ public final class HCUtils
         if (aCurrent instanceof IHCElement <?>)
         {
           final IHCElement <?> aCurrentElement = (IHCElement <?>) aCurrent;
+          final String sCurrentTagName = aCurrentElement.getTagName ();
           for (final EHTMLElement aElement : aElements)
-            if (aCurrentElement.getTagName ().equalsIgnoreCase (aElement.getElementName ()))
+            if (sCurrentTagName.equalsIgnoreCase (aElement.getElementName ()))
               return aCurrentElement;
         }
 
@@ -209,5 +211,26 @@ public final class HCUtils
         }
       }
     }
+  }
+
+  /**
+   * Find the first HTML child element within a start element. This check
+   * considers both lower- and upper-case element names. Mixed case is not
+   * supported!
+   * 
+   * @param aElement
+   *        The element to search in
+   * @param eHTMLElement
+   *        The HTML element to search.
+   * @return <code>null</code> if no such child element is present.
+   */
+  @Nullable
+  public static IMicroElement getFirstChildElement (@Nonnull final IMicroElement aElement,
+                                                    @Nonnull final EHTMLElement eHTMLElement)
+  {
+    IMicroElement aChild = aElement.getFirstChildElement (eHTMLElement.getElementNameLowerCase ());
+    if (aChild == null)
+      aChild = aElement.getFirstChildElement (eHTMLElement.getElementNameUpperCase ());
+    return aChild;
   }
 }
