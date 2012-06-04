@@ -21,9 +21,12 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
+import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.html5.HCWBR;
+import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 public final class FuncTestHC
 {
@@ -94,13 +97,75 @@ public final class FuncTestHC
     b.addChild (new HCHiddenField ("action", false));
     b.addChild (new HCHR ());
     b.addChild (new HCIFrame ());
-    // TODO
+    b.addChild (new HCImg ("test1.png"));
+    b.addChild (new HCInserted ());
+    b.addChild (new HCInserted ("Das wäre also ein Beispiel"));
+    b.addChild (new HCItalic ());
+    b.addChild (new HCItalic ("Das wäre also ein Beispiel"));
+    b.addChild (new HCKBD ());
+    b.addChild (new HCKBD ("Das wäre also ein Beispiel"));
+    b.addChild (new HCLabel ());
+    b.addChild (new HCLabel ("Feldname"));
+    b.addChild (new HCLegend ());
+    b.addChild (new HCLegend ("Legend"));
+    b.addChild (new HCLink (EHCLinkType.ALTERNATE, CMimeType.TEXT_HTML, new SimpleURL ("any.html")));
+    b.addChild (new HCListing ());
+    b.addChild (new HCListing ("List"));
+    final HCMenu aMenu = new HCMenu ();
+    aMenu.addItem ("File");
+    aMenu.addItem ("Settings");
+    b.addChild (aMenu);
+    b.addChild (new HCNoEmbed ("Plugin missing"));
+    b.addChild (new HCNoScript ("JS missing"));
+    final HCObject aObject = new HCObject ().setClassID ("classID{567}");
+    aObject.addChild (new HCParam ("par1"));
+    b.addChild (aObject);
+    final HCOL aOL = new HCOL ();
+    aOL.addItem ("First");
+    aOL.addItem ("Seconf");
+    b.addChild (aOL);
+    b.addChild (new HCOptGroup ());
+    b.addChild (new HCP ());
+    b.addChild (new HCP ("List"));
+    b.addChild (new HCPlainText ());
+    b.addChild (new HCPlainText ("List"));
+    b.addChild (new HCPre ());
+    b.addChild (new HCPre ("List"));
+    b.addChild (new HCQ ());
+    b.addChild (new HCQ ("List"));
+    b.addChild (new HCRadioButton ("rb1"));
+    b.addChild (new HCSamp ());
+    b.addChild (new HCSamp ("List"));
+    b.addChild (new HCScript (DefaultJSCodeProvider.create ("var i = 0;")));
+    b.addChild (new HCScriptFile (new SimpleURL ("a.js")));
+    final HCSelect aSelect = new HCSelect ("x");
+    aSelect.addOption ("y", "Ypsilon");
+    aSelect.addOption ("z", "Zet");
+    b.addChild (aSelect);
+    b.addChild (new HCSpan ());
+    b.addChild (new HCSpan ("List"));
     b.addChild (new HCStrong ());
     b.addChild (new HCStrong ("Das wäre also ein Beispiel"));
+    b.addChild (new HCStruck ());
+    b.addChild (new HCStruck ("Das wäre also ein Beispiel"));
+    b.addChild (new HCStyle ("div{color:red;}"));
+    b.addChild (new HCSub ());
+    b.addChild (new HCSub ("unter"));
+    b.addChild (new HCSup ());
+    b.addChild (new HCSup ("unter"));
     final HCTable aTable = b.addAndReturnChild (new HCTable (new HCCol (50), new HCCol (20)).setBodyID ("ID"));
     aTable.addHeaderRow ().addCells ("Name", "Wert");
     aTable.addBodyRow ().addCells ("abc", "def");
     aTable.addFooterRow ().addCells ("", "OK!");
+    b.addChild (new HCTextArea ("name", "value"));
+    final HCUL aUL = new HCUL ();
+    aUL.addItem ("bla");
+    aUL.addItem ("foo");
+    b.addChild (aUL);
+    b.addChild (new HCVar ());
+    b.addChild (new HCVar ("zzz"));
+
+    // HTML5
     b.addChild (new HCWBR ());
 
     assertNotNull (HCSettings.getAsNode (h));
