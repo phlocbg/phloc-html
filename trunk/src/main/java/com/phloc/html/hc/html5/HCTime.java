@@ -85,6 +85,12 @@ public final class HCTime extends AbstractHCElementWithChildren <HCTime>
     super (EHTMLElement.TIME, aChildren);
   }
 
+  @Nullable
+  public String getDatetime ()
+  {
+    return m_sDatetime;
+  }
+
   @Nonnull
   public HCTime setAsMonth (@Nonnegative final int nYear, @Nonnegative final int nMonth)
   {
@@ -221,12 +227,6 @@ public final class HCTime extends AbstractHCElementWithChildren <HCTime>
   {
     m_sDatetime = ISOPeriodFormat.standard ().print (aPeriod);
     return this;
-  }
-
-  @Nullable
-  public String getDatetime ()
-  {
-    return m_sDatetime;
   }
 
   @Override

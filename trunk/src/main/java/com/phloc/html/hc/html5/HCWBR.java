@@ -24,7 +24,7 @@ import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
-public final class HCWBR extends AbstractHCElement <HCWBR>
+public class HCWBR extends AbstractHCElement <HCWBR>
 {
   public HCWBR ()
   {

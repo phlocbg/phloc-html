@@ -76,11 +76,21 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
     super (EHTMLElement.METER, aChildren);
   }
 
+  public double getValue ()
+  {
+    return m_dValue;
+  }
+
   @Nonnull
   public HCMeter setValue (final double dValue)
   {
     m_dValue = dValue;
     return this;
+  }
+
+  public double getMin ()
+  {
+    return m_dMin;
   }
 
   @Nonnull
@@ -90,11 +100,21 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
     return this;
   }
 
+  public double getMax ()
+  {
+    return m_dMax;
+  }
+
   @Nonnull
   public HCMeter setMax (final double dMax)
   {
     m_dMax = dMax;
     return this;
+  }
+
+  public double getLow ()
+  {
+    return m_dLow;
   }
 
   @Nonnull
@@ -104,11 +124,21 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
     return this;
   }
 
+  public double getHigh ()
+  {
+    return m_dHigh;
+  }
+
   @Nonnull
   public HCMeter setHigh (final double dHigh)
   {
     m_dHigh = dHigh;
     return this;
+  }
+
+  public double getOptimum ()
+  {
+    return m_dOptimum;
   }
 
   @Nonnull

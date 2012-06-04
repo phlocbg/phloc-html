@@ -38,7 +38,7 @@ import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Represents a single HTML meta tag.
+ * Represents a single HTML meta element.
  * 
  * @author philip
  */

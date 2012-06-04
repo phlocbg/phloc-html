@@ -72,11 +72,21 @@ public final class HCProgress extends AbstractHCElementWithChildren <HCProgress>
     super (EHTMLElement.PROGRESS, aChildren);
   }
 
+  public double getValue ()
+  {
+    return m_dValue;
+  }
+
   @Nonnull
   public HCProgress setValue (final double dValue)
   {
     m_dValue = dValue;
     return this;
+  }
+
+  public double getMax ()
+  {
+    return m_dMax;
   }
 
   @Nonnull

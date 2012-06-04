@@ -48,18 +48,14 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
   VARY ("Vary", true),
   LOTUS ("Lotus", true),
   X_UA_COMPATIBLE ("X-UA-Compatible", true),
-  DESCRIPTION ("Description"),
-  KEYWORDS ("Keywords"),
-  AUTHOR ("Author"),
-  COPYRIGHT ("Copyright");
+  // Non HTTP equiv:
+  DESCRIPTION ("Description", false),
+  KEYWORDS ("Keywords", false),
+  AUTHOR ("Author", false),
+  COPYRIGHT ("Copyright", false);
 
   private final String m_sName;
   private boolean m_bIsHttpEquiv;
-
-  private EStandardMetaElement (@Nonnull @Nonempty final String sName)
-  {
-    this (sName, false);
-  }
 
   private EStandardMetaElement (@Nonnull @Nonempty final String sName, final boolean bIsHttpEquiv)
   {

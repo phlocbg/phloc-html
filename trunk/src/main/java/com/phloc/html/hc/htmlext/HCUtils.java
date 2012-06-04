@@ -114,7 +114,7 @@ public final class HCUtils
    * 
    * @param aElements
    *        The tag names to search. May not be <code>null</code>.
-   * @return The element with the passed tag name on any level, or
+   * @return The first element with the passed tag name on any level, or
    *         <code>null</code> if no such element exists.
    */
   @Nullable
@@ -139,7 +139,7 @@ public final class HCUtils
         {
           final IHCElement <?> aCurrentElement = (IHCElement <?>) aCurrent;
           for (final EHTMLElement aElement : aElements)
-            if (aCurrentElement.getTagName ().equals (aElement.getElementName ()))
+            if (aCurrentElement.getTagName ().equalsIgnoreCase (aElement.getElementName ()))
               return aCurrentElement;
         }
 

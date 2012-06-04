@@ -18,7 +18,6 @@
 package com.phloc.html;
 
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -162,12 +161,14 @@ public enum EHTMLElement
 
   private static final Set <String> s_aSelfClosedElements = new HashSet <String> ();
 
-  private final String m_sElementName;
+  private final String m_sElementNameLC;
+  private final String m_sElementNameUC;
   private final boolean m_bMayBeSelfClosed;
 
   private EHTMLElement (@Nonnull @Nonempty final String sElementName, final boolean bMayBeSelfClosed)
   {
-    m_sElementName = sElementName;
+    m_sElementNameLC = sElementName.toLowerCase (CHTMLCharset.LOCALE);
+    m_sElementNameUC = sElementName.toUpperCase (CHTMLCharset.LOCALE);
     m_bMayBeSelfClosed = bMayBeSelfClosed;
   }
 
@@ -175,7 +176,21 @@ public enum EHTMLElement
   @Nonempty
   public String getElementName ()
   {
-    return m_sElementName;
+    return m_sElementNameLC;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getElementNameLowerCase ()
+  {
+    return m_sElementNameLC;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getElementNameUpperCase ()
+  {
+    return m_sElementNameUC;
   }
 
   public boolean mayBeSelfClosed ()
@@ -198,7 +213,7 @@ public enum EHTMLElement
         if (e.mayBeSelfClosed ())
         {
           // Always use lowercased value
-          s_aSelfClosedElements.add (e.m_sElementName.toLowerCase (Locale.US));
+          s_aSelfClosedElements.add (e.m_sElementNameLC);
         }
     }
     return s_aSelfClosedElements;
@@ -217,7 +232,7 @@ public enum EHTMLElement
       return false;
 
     // Always check lower cased
-    return _getSelfClosedSet ().contains (sElementName.toLowerCase (Locale.US));
+    return _getSelfClosedSet ().contains (sElementName.toLowerCase (CHTMLCharset.LOCALE));
   }
 
   /**
@@ -233,7 +248,7 @@ public enum EHTMLElement
       return false;
 
     // Always check lower cased
-    return !_getSelfClosedSet ().contains (sElementName.toLowerCase (Locale.US));
+    return !_getSelfClosedSet ().contains (sElementName.toLowerCase (CHTMLCharset.LOCALE));
   }
 
   /**
@@ -246,10 +261,24 @@ public enum EHTMLElement
    */
   public static boolean isHTMLTagName (@Nullable final String sTagName)
   {
+    return getFromTagNameOrNull (sTagName) != null;
+  }
+
+  /**
+   * Get the {@link EHTMLElement} for the passed tag name using case insensitive
+   * compare
+   * 
+   * @param sTagName
+   *        The case sensitive tag name to check.
+   * @return The matching {@link EHTMLElement} or <code>null</code> if no such
+   *         element is present.
+   */
+  public static EHTMLElement getFromTagNameOrNull (@Nullable final String sTagName)
+  {
     if (StringHelper.hasText (sTagName))
       for (final EHTMLElement e : values ())
-        if (e.getElementName ().equalsIgnoreCase (sTagName))
-          return true;
-    return false;
+        if (e.m_sElementNameLC.equalsIgnoreCase (sTagName))
+          return e;
+    return null;
   }
 }
