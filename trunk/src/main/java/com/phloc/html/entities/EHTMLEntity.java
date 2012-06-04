@@ -310,6 +310,13 @@ public enum EHTMLEntity implements IHTMLEntity
     return m_sEntityReference;
   }
 
+  @Nonnull
+  @Nonempty
+  public String getChar ()
+  {
+    return HTMLEntities.getCharOfEntity (this);
+  }
+
   @Override
   public String toString ()
   {
