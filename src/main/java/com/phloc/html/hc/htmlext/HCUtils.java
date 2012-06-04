@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.callback.INonThrowingRunnableWithParameter;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.lang.GenericReflection;
@@ -232,5 +233,27 @@ public final class HCUtils
     if (aChild == null)
       aChild = aElement.getFirstChildElement (eHTMLElement.getElementNameUpperCase ());
     return aChild;
+  }
+
+  /**
+   * Get a list of all HTML child elements of the given element. This methods
+   * handles lower- and upper-cased elements.
+   * 
+   * @param aElement
+   *        The element to search in
+   * @param eHTMLElement
+   *        The HTML element to search
+   * @return A non-<code>null</code> list where the lower-case elements are
+   *         listed before the upper-case elements.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IMicroElement> getChildElements (@Nonnull final IMicroElement aElement,
+                                                       @Nonnull final EHTMLElement eHTMLElement)
+  {
+    final List <IMicroElement> ret = new ArrayList <IMicroElement> ();
+    ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameLowerCase ()));
+    ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameUpperCase ()));
+    return ret;
   }
 }
