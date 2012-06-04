@@ -30,17 +30,19 @@ public final class HCBodyTest
   @Test
   public void testBody ()
   {
-    final HCBody b = new HCBody ();
+    final HCBody aBody = new HCBody ();
+    assertEquals ("<body></body>", HCSettings.getAsHTMLString (aBody, false));
+
     // With semicolon at the end
-    b.addEventHandler (EJSEvent.ONLOAD, DefaultJSCodeProvider.create ("onLoad ();"));
+    aBody.addEventHandler (EJSEvent.ONLOAD, DefaultJSCodeProvider.create ("onLoad ();"));
     // Empty event handler - ignored
-    b.addEventHandler (EJSEvent.ONMOUSEDOWN, DefaultJSCodeProvider.create (""));
+    aBody.addEventHandler (EJSEvent.ONMOUSEDOWN, DefaultJSCodeProvider.create (""));
     // With prefix
-    b.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create (" javascript: onClick ()"));
+    aBody.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create (" javascript: onClick ()"));
     // Empty event handler - ignored
-    b.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
-    b.setCustomAttr ("bla", "foo");
+    aBody.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
+    aBody.setCustomAttr ("bla", "foo");
     assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\"></body>",
-                  HCSettings.getAsHTMLString (b, false));
+                  HCSettings.getAsHTMLString (aBody, false));
   }
 }

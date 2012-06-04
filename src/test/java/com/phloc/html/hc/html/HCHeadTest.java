@@ -39,7 +39,7 @@ public final class HCHeadTest
   public void testBasic ()
   {
     final HCHead aHead = new HCHead ();
-    assertEquals ("<head />", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setPageTitle ("phloc");
     assertEquals ("<head><title>phloc</title></head>", HCSettings.getAsHTMLString (aHead, false));
