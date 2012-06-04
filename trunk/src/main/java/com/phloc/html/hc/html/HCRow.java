@@ -47,6 +47,11 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     m_bHeader = bHeader;
   }
 
+  public boolean isHeader ()
+  {
+    return m_bHeader;
+  }
+
   /**
    * Add an empty cell.
    * 
@@ -55,7 +60,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   @Nonnull
   public AbstractHCCell addCell ()
   {
-    final AbstractHCCell ret = m_bHeader ? new HCHeaderCell () : new HCCell ();
+    final AbstractHCCell ret = m_bHeader ? new HCTH () : new HCTD ();
     ret.setParentRow (this);
     addChild (ret);
     return ret;
@@ -69,7 +74,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   @Nonnull
   public AbstractHCCell addCell (@Nonnegative final int nIndex)
   {
-    final AbstractHCCell ret = m_bHeader ? new HCHeaderCell () : new HCCell ();
+    final AbstractHCCell ret = m_bHeader ? new HCTH () : new HCTD ();
     ret.setParentRow (this);
     addChild (nIndex, ret);
     return ret;

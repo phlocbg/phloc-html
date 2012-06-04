@@ -41,6 +41,12 @@ public class HCUL extends AbstractHCList <HCUL>
     super (EHTMLElement.UL);
   }
 
+  @Nullable
+  public final EHCULType getType ()
+  {
+    return m_eType;
+  }
+
   @Nonnull
   public final HCUL setType (@Nullable final EHCULType eType)
   {

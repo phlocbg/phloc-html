@@ -17,17 +17,17 @@
  */
 package com.phloc.html.hc.html;
 
-import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.html.EHTMLElement;
 
 /**
  * Represents an HTML &lt;th&gt; element
  * 
  * @author philip
  */
-@Deprecated
-@DevelopersNote ("Use HCTH instead")
-public final class HCHeaderCell extends HCTH
+public class HCTH extends AbstractHCCell
 {
-  public HCHeaderCell ()
-  {}
+  public HCTH ()
+  {
+    super (EHTMLElement.TH);
+  }
 }

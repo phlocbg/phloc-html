@@ -52,6 +52,14 @@ public final class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
   }
 
   @Nonnull
+  @Nonempty
+  public String getName ()
+  {
+    return m_sName;
+  }
+
+  @Nonnull
+  @Nonempty
   public String getAttrValue ()
   {
     return m_sName;

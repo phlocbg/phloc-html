@@ -69,23 +69,15 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
     setValue (sValue);
   }
 
-  @Nonnull
-  public HCOption setDisabled (final boolean bDisabled)
-  {
-    m_bDisabled = bDisabled;
-    return this;
-  }
-
   public boolean isDisabled ()
   {
     return m_bDisabled;
   }
 
   @Nonnull
-  public HCOption setSelected (final boolean bSelected)
+  public HCOption setDisabled (final boolean bDisabled)
   {
-    m_bSelected = bSelected;
-    m_bSelectionDefined = true;
+    m_bDisabled = bDisabled;
     return this;
   }
 
@@ -104,9 +96,10 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   }
 
   @Nonnull
-  public HCOption setValue (@Nullable final String sValue)
+  public HCOption setSelected (final boolean bSelected)
   {
-    m_sValue = sValue;
+    m_bSelected = bSelected;
+    m_bSelectionDefined = true;
     return this;
   }
 
@@ -117,9 +110,9 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   }
 
   @Nonnull
-  public HCOption setLabel (final String sLabel)
+  public HCOption setValue (@Nullable final String sValue)
   {
-    m_sLabel = sLabel;
+    m_sValue = sValue;
     return this;
   }
 
@@ -127,6 +120,13 @@ public final class HCOption extends AbstractHCElementWithChildren <HCOption>
   public String getLabel ()
   {
     return m_sLabel;
+  }
+
+  @Nonnull
+  public HCOption setLabel (final String sLabel)
+  {
+    m_sLabel = sLabel;
+    return this;
   }
 
   @Override

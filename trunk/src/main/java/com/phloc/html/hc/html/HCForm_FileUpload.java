@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -48,10 +49,16 @@ public final class HCForm_FileUpload extends HCForm
     super (aJSCodeProvder);
   }
 
+  @Nonnull
+  public final IMimeType getEncType ()
+  {
+    return CMimeType.MULTIPART_FORMDATA;
+  }
+
   @Override
-  protected void applyProperties (final IMicroElement aElement, IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.ENCTYPE, CMimeType.MULTIPART_FORMDATA.getAsString ());
+    aElement.setAttribute (CHTMLAttributes.ENCTYPE, getEncType ().getAsString ());
   }
 }

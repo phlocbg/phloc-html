@@ -52,6 +52,13 @@ public final class HCOutOfBandNode extends AbstractHCNode
     return "";
   }
 
+  @Nonnull
+  public IHCBaseNode getOutOfBandNode ()
+  {
+    return m_aOutOfBandNode;
+  }
+
+  @Nonnull
   @Override
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {

@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML32;
@@ -32,6 +33,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * @author philip
  */
 @DeprecatedInHTML32
+@Deprecated
+@DevelopersNote ("Use HCXMP")
 public final class HCExample extends AbstractHCElementWithChildren <HCExample>
 {
   public HCExample ()

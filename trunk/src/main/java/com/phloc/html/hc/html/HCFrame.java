@@ -62,101 +62,101 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     setName (sName);
   }
 
-  public boolean isFrameBorder ()
+  public final boolean isFrameBorder ()
   {
     return m_bFrameBorder;
   }
 
   @Nonnull
-  public HCFrame setFrameBorder (final boolean bFrameBorder)
+  public final HCFrame setFrameBorder (final boolean bFrameBorder)
   {
     m_bFrameBorder = bFrameBorder;
     return this;
   }
 
   @Nullable
-  public String getLongDesc ()
+  public final String getLongDesc ()
   {
     return m_sLongDesc;
   }
 
   @Nonnull
-  public HCFrame setLongDesc (@Nullable final String sLongDesc)
+  public final HCFrame setLongDesc (@Nullable final String sLongDesc)
   {
     m_sLongDesc = sLongDesc;
     return this;
   }
 
-  public int getMarginWidth ()
+  public final int getMarginWidth ()
   {
     return m_nMarginWidth;
   }
 
   @Nonnull
-  public HCFrame setMarginWidth (final int nMarginWidth)
+  public final HCFrame setMarginWidth (final int nMarginWidth)
   {
     m_nMarginWidth = nMarginWidth;
     return this;
   }
 
-  public int getMarginHeight ()
+  public final int getMarginHeight ()
   {
     return m_nMarginHeight;
   }
 
   @Nonnull
-  public HCFrame setMarginHeight (final int nMarginHeight)
+  public final HCFrame setMarginHeight (final int nMarginHeight)
   {
     m_nMarginHeight = nMarginHeight;
     return this;
   }
 
   @Nullable
-  public String getName ()
+  public final String getName ()
   {
     return m_sName;
   }
 
   @Nonnull
-  public HCFrame setName (@Nullable final String sName)
+  public final HCFrame setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
   }
 
-  public boolean isNoResize ()
+  public final boolean isNoResize ()
   {
     return m_bNoResize;
   }
 
   @Nonnull
-  public HCFrame setNoResize (final boolean bNoResize)
+  public final HCFrame setNoResize (final boolean bNoResize)
   {
     m_bNoResize = bNoResize;
     return this;
   }
 
   @Nullable
-  public EHCScrolling getScrolling ()
+  public final EHCScrolling getScrolling ()
   {
     return m_eScrolling;
   }
 
   @Nonnull
-  public HCFrame setScrolling (@Nullable final EHCScrolling eScrolling)
+  public final HCFrame setScrolling (@Nullable final EHCScrolling eScrolling)
   {
     m_eScrolling = eScrolling;
     return this;
   }
 
   @Nullable
-  public String getSrc ()
+  public final String getSrc ()
   {
     return m_sSrc;
   }
 
   @Nonnull
-  public HCFrame setSrc (@Nullable final String sSrc)
+  public final HCFrame setSrc (@Nullable final String sSrc)
   {
     m_sSrc = sSrc;
     return this;

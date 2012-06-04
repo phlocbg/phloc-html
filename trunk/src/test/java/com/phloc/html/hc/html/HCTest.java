@@ -24,7 +24,8 @@ import org.junit.Test;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.api.EHCLinkType;
-import com.phloc.html.hc.conversion.HCSettings;
+import com.phloc.html.hc.conversion.DefaultHCConversionSettingsProvider;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 /**
@@ -40,12 +41,12 @@ public final class HCTest
     final HCHtml h = new HCHtml ();
     final HCBody b = h.getBody ();
     b.addChild (new HCA (new SimpleURL ("http://www.phloc.com")).setTarget (HCA_Target.SELF).addChild ("phloc"));
-    b.addChild (new HCAbbreviation ("abbr"));
+    b.addChild (new HCAbbr ("abbr"));
     b.addChild (new HCAcronym ("acronym"));
     b.addChild (new HCAddress ("address"));
-    b.addChild (new HCBidirectionalOverwrite ("bdo"));
+    b.addChild (new HCB ("echt fett"));
+    b.addChild (new HCBDO ("bdo"));
     b.addChild (new HCBlockQuote ("blockQuote"));
-    b.addChild (new HCBold (new HCBR ()));
     b.addChild (new HCButton_Reset ("Abbrechen"));
     b.addChild (new HCButton_Submit ("OK"));
     b.addChild (new HCButton ("Knopf"));
@@ -56,15 +57,15 @@ public final class HCTest
     b.addChild (new HCCite ("Zitiert"));
     b.addChild (new HCCode ());
     b.addChild (new HCCode ("var i = 0;"));
-    b.addChild (new HCDefinition ());
-    b.addChild (new HCDefinition ("<a> ist ein XML Tag"));
-    final HCDefinitionList aDL = b.addAndReturnChild (new HCDefinitionList ());
-    aDL.addItem (new HCDefinitionDefinition ());
-    aDL.addItem (new HCDefinitionDefinition ("def"));
-    aDL.addItem (new HCDefinitionTerm ());
-    aDL.addItem (new HCDefinitionTerm ("term"));
-    b.addChild (new HCDeleted ());
-    b.addChild (new HCDeleted ("gelöscht"));
+    b.addChild (new HCDFN ());
+    b.addChild (new HCDFN ("<a> ist ein XML Tag"));
+    final HCDL aDL = b.addAndReturnChild (new HCDL ());
+    aDL.addItem (new HCDD ());
+    aDL.addItem (new HCDD ("def"));
+    aDL.addItem (new HCDT ());
+    aDL.addItem (new HCDT ("term"));
+    b.addChild (new HCDel ());
+    b.addChild (new HCDel ("gelöscht"));
     b.addChild (new HCDir ().addItem (new HCLI ("punkt")));
     b.addChild (new HCDiv ());
     b.addChild (new HCDiv ("Absatz"));
@@ -74,8 +75,6 @@ public final class HCTest
     b.addChild (new HCEM ());
     b.addChild (new HCEM ("emphasised"));
     b.addChild (new HCEmbed ().setSrc (new SimpleURL ("myfile.txt")));
-    b.addChild (new HCExample ());
-    b.addChild (new HCExample ("Das wäre also ein Beispiel"));
     b.addChild (new HCFieldSet ());
     b.addChild (new HCFieldSet ("Gruppe"));
     b.addChild (new HCForm ("?").setSubmitPressingEnter (false));
@@ -102,10 +101,10 @@ public final class HCTest
     b.addChild (new HCHR ());
     b.addChild (new HCIFrame ());
     b.addChild (new HCImg ("test1.png"));
-    b.addChild (new HCInserted ());
-    b.addChild (new HCInserted ("Das wäre also ein Beispiel"));
-    b.addChild (new HCItalic ());
-    b.addChild (new HCItalic ("Das wäre also ein Beispiel"));
+    b.addChild (new HCIns ());
+    b.addChild (new HCIns ("Das wäre also ein Beispiel"));
+    b.addChild (new HCI ());
+    b.addChild (new HCI ("Das wäre also ein Beispiel"));
     b.addChild (new HCKBD ());
     b.addChild (new HCKBD ("Das wäre also ein Beispiel"));
     b.addChild (new HCLabel ());
@@ -138,6 +137,8 @@ public final class HCTest
     b.addChild (new HCQ ());
     b.addChild (new HCQ ("List"));
     b.addChild (new HCRadioButton ("rb1"));
+    b.addChild (new HCS ());
+    b.addChild (new HCS ("Das wäre also ein Beispiel"));
     b.addChild (new HCSamp ());
     b.addChild (new HCSamp ("List"));
     b.addChild (new HCScript (DefaultJSCodeProvider.create ("var i = 0;")));
@@ -150,8 +151,8 @@ public final class HCTest
     b.addChild (new HCSpan ("List"));
     b.addChild (new HCStrong ());
     b.addChild (new HCStrong ("Das wäre also ein Beispiel"));
-    b.addChild (new HCStruck ());
-    b.addChild (new HCStruck ("Das wäre also ein Beispiel"));
+    b.addChild (new HCS ());
+    b.addChild (new HCS ("Das wäre also ein Beispiel"));
     b.addChild (new HCStyle ("div{color:red;}"));
     b.addChild (new HCSub ());
     b.addChild (new HCSub ("unter"));
@@ -168,8 +169,11 @@ public final class HCTest
     b.addChild (aUL);
     b.addChild (new HCVar ());
     b.addChild (new HCVar ("zzz"));
+    b.addChild (new HCXMP ());
+    b.addChild (new HCXMP ("Das wäre also ein Beispiel"));
 
-    assertNotNull (HCSettings.getAsNode (h));
-    System.out.println (HCSettings.getAsHTMLString (h, true));
+    final IHCConversionSettings aCS = DefaultHCConversionSettingsProvider.getInstance ().getConversionSettings (true);
+    assertNotNull (h.getAsNode (aCS));
+    System.out.print (h.getAsHTMLString (aCS));
   }
 }

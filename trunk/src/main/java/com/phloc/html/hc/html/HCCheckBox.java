@@ -76,6 +76,11 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
     return this;
   }
 
+  public final boolean isChecked ()
+  {
+    return m_bChecked;
+  }
+
   @Nonnull
   public final HCCheckBox setChecked (final boolean bChecked)
   {

@@ -78,6 +78,18 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     setAction (aAction);
   }
 
+  @Nullable
+  public final String getActionURL ()
+  {
+    return m_sAction;
+  }
+
+  @Nullable
+  public final IJSCodeProvider getActionJS ()
+  {
+    return m_aAction;
+  }
+
   @Nonnull
   public final HCForm setAction (@Nullable final String sAction)
   {
@@ -94,11 +106,23 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
+  @Nullable
+  public final EHCFormMethod getMethod ()
+  {
+    return m_eMethod;
+  }
+
   @Nonnull
   public final HCForm setMethod (@Nullable final EHCFormMethod eMethod)
   {
     m_eMethod = eMethod;
     return this;
+  }
+
+  @Nullable
+  public final String getName ()
+  {
+    return m_sName;
   }
 
   @Nonnull
@@ -108,11 +132,23 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
+  @Nullable
+  public final HCA_Target getTarget ()
+  {
+    return m_aLinkTarget;
+  }
+
   @Nonnull
   public final HCForm setTarget (@Nullable final HCA_Target aTarget)
   {
     m_aLinkTarget = aTarget;
     return this;
+  }
+
+  @Nullable
+  public final String getAcceptCharset ()
+  {
+    return m_sAcceptCharset;
   }
 
   @Nonnull
@@ -122,11 +158,26 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
+  public final boolean isDisableAutoComplete ()
+  {
+    return m_bDisableAutoComplete;
+  }
+
   @Nonnull
   public final HCForm setDisableAutoComplete (final boolean bDisableAutoComplete)
   {
     m_bDisableAutoComplete = bDisableAutoComplete;
     return this;
+  }
+
+  public final boolean isSubmitPressingEnter ()
+  {
+    return m_bSubmitPressingEnter;
+  }
+
+  public final int getSubmitButtonTabIndex ()
+  {
+    return m_nSubmitButtonTabIndex;
   }
 
   @Nonnull
@@ -141,16 +192,6 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     m_bSubmitPressingEnter = bSubmitPressingEnter;
     m_nSubmitButtonTabIndex = nSubmitButtonTabIndex;
     return this;
-  }
-
-  public final boolean isSubmitPressingEnter ()
-  {
-    return m_bSubmitPressingEnter;
-  }
-
-  public final int getSubmitButtonTabIndex ()
-  {
-    return m_nSubmitButtonTabIndex;
   }
 
   @Override

@@ -67,7 +67,8 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton>
     setEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
-  public String getName ()
+  @Nullable
+  public final String getName ()
   {
     return m_sName;
   }
@@ -79,11 +80,22 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton>
     return this;
   }
 
+  @Nullable
+  public final String getValue ()
+  {
+    return m_sValue;
+  }
+
   @Nonnull
   public final HCButton setValue (@Nullable final String sValue)
   {
     m_sValue = sValue;
     return this;
+  }
+
+  public final boolean isDisabled ()
+  {
+    return m_bDisabled;
   }
 
   @Nonnull

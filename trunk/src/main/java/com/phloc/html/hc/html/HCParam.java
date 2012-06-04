@@ -48,6 +48,12 @@ public final class HCParam extends AbstractHCElement <HCParam>
     setName (sName);
   }
 
+  @Nullable
+  public String getName ()
+  {
+    return m_sName;
+  }
+
   @Nonnull
   public HCParam setName (@Nonnull final String sName)
   {
@@ -57,6 +63,12 @@ public final class HCParam extends AbstractHCElement <HCParam>
     return this;
   }
 
+  @Nullable
+  public String getValue ()
+  {
+    return m_sValue;
+  }
+
   @Nonnull
   public HCParam setValue (@Nullable final String sValue)
   {
@@ -64,11 +76,23 @@ public final class HCParam extends AbstractHCElement <HCParam>
     return this;
   }
 
+  @Nullable
+  public EHCParamValueType getValueType ()
+  {
+    return m_eValueType;
+  }
+
   @Nonnull
   public HCParam setValueType (@Nullable final EHCParamValueType eValueType)
   {
     m_eValueType = eValueType;
     return this;
+  }
+
+  @Nullable
+  public IMimeType getType ()
+  {
+    return m_aType;
   }
 
   @Nonnull

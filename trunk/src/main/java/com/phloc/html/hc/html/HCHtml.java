@@ -93,6 +93,12 @@ public class HCHtml extends AbstractHCBaseNode
     return new HCBody ();
   }
 
+  @Nullable
+  public final EHCTextDirection getDir ()
+  {
+    return m_eDir;
+  }
+
   @Nonnull
   public final HCHtml setDir (@Nullable final EHCTextDirection eDir)
   {
@@ -100,17 +106,17 @@ public class HCHtml extends AbstractHCBaseNode
     return this;
   }
 
+  @Nullable
+  public final String getLang ()
+  {
+    return m_sLang;
+  }
+
   @Nonnull
   public final HCHtml setLang (@Nullable final String sLang)
   {
     m_sLang = sLang;
     return this;
-  }
-
-  @Nullable
-  public final String getLang ()
-  {
-    return m_sLang;
   }
 
   @Nonnull

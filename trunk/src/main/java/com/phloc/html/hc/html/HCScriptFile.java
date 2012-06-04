@@ -65,6 +65,12 @@ public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
   }
 
   @Nonnull
+  public IMimeType getType ()
+  {
+    return m_aType;
+  }
+
+  @Nonnull
   public HCScriptFile setType (@Nonnull final IMimeType aType)
   {
     if (aType == null)
@@ -73,11 +79,22 @@ public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
     return this;
   }
 
+  @Nullable
+  public ISimpleURL getSrc ()
+  {
+    return m_aSrc;
+  }
+
   @Nonnull
   public HCScriptFile setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
     return this;
+  }
+
+  public boolean isDefer ()
+  {
+    return m_bDefer;
   }
 
   @Nonnull

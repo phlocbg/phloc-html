@@ -57,6 +57,12 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
     this (aRF.getFieldName (), aRF.getRequestValue ());
   }
 
+  @Nullable
+  public final String getValue ()
+  {
+    return m_sValue;
+  }
+
   @Nonnull
   public final HCTextArea setValue (@Nullable final String sValue)
   {
@@ -64,11 +70,21 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
     return this;
   }
 
+  public final int getCols ()
+  {
+    return m_nCols;
+  }
+
   @Nonnull
   public final HCTextArea setCols (final int nCols)
   {
     m_nCols = nCols;
     return this;
+  }
+
+  public final int getRows ()
+  {
+    return m_nRows;
   }
 
   @Nonnull

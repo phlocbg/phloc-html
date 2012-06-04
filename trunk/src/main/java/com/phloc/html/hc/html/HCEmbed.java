@@ -69,11 +69,21 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
     return this;
   }
 
+  public final int getWidth ()
+  {
+    return m_nWidth;
+  }
+
   @Nonnull
   public final HCEmbed setWidth (final int nWidth)
   {
     m_nWidth = nWidth;
     return this;
+  }
+
+  public final int getHeight ()
+  {
+    return m_nHeight;
   }
 
   @Nonnull
@@ -83,11 +93,23 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
     return this;
   }
 
+  @Nullable
+  public final String getPluginURL ()
+  {
+    return m_sPluginURL;
+  }
+
   @Nonnull
   public final HCEmbed setPluginURL (@Nullable final String sPluginURL)
   {
     m_sPluginURL = sPluginURL;
     return this;
+  }
+
+  @Nullable
+  public final String getPluginsPage ()
+  {
+    return m_sPluginsPage;
   }
 
   @Nonnull
@@ -97,11 +119,21 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
     return this;
   }
 
+  public final boolean isAutoStart ()
+  {
+    return m_bAutoStart;
+  }
+
   @Nonnull
   public final HCEmbed setAutoStart (final boolean bAutoStart)
   {
     m_bAutoStart = bAutoStart;
     return this;
+  }
+
+  public final boolean isLoop ()
+  {
+    return m_bLoop;
   }
 
   @Nonnull
@@ -111,11 +143,23 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
     return this;
   }
 
+  @Nullable
+  public final String getPalette ()
+  {
+    return m_sPalette;
+  }
+
   @Nonnull
   public final HCEmbed setPalette (@Nullable final String sPalette)
   {
     m_sPalette = sPalette;
     return this;
+  }
+
+  @Nullable
+  public final IMimeType getType ()
+  {
+    return m_aType;
   }
 
   @Nonnull

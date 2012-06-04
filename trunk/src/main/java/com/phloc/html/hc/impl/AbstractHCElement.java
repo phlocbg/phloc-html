@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.CheckForSigned;
@@ -32,6 +33,8 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroElement;
@@ -155,6 +158,28 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  @ReturnsMutableCopy
+  public final List <String> getClasses ()
+  {
+    return ContainerHelper.newList (m_aClasses);
+  }
+
+  public final boolean hasClass (@Nonnull final ICSSClassProvider aProvider)
+  {
+    if (m_aClasses != null)
+    {
+      final String sClass = aProvider.getCSSClass ();
+      if (StringHelper.hasText (sClass))
+      {
+        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1,
+                                                "Cannot check for a class with a whitespace");
+        return m_aClasses.contains (sClass);
+      }
+    }
+    return false;
+  }
+
+  @Nonnull
   public final THISTYPE addClass (@Nullable final ICSSClassProvider aProvider)
   {
     final String sClass = aProvider == null ? null : aProvider.getCSSClass ();
@@ -209,19 +234,26 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  public final boolean hasClass (@Nonnull final ICSSClassProvider aProvider)
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Map <ECSSProperty, ICSSValue> getStyles ()
   {
-    if (m_aClasses != null)
-    {
-      final String sClass = aProvider.getCSSClass ();
-      if (StringHelper.hasText (sClass))
-      {
-        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1,
-                                                "Cannot check for a class with a whitespace");
-        return m_aClasses.contains (sClass);
-      }
-    }
-    return false;
+    return ContainerHelper.newMap (m_aStyles);
+  }
+
+  public final boolean hasStyle (@Nullable final ECSSProperty eProperty)
+  {
+    return m_aStyles != null && m_aStyles.containsKey (eProperty);
+  }
+
+  public final boolean hasStyle (@Nullable final ICSSValue aValue)
+  {
+    if (aValue == null || m_aStyles == null)
+      return false;
+
+    // Contained styles can never have a null value!
+    final ECSSProperty eProp = aValue.getProp ();
+    return EqualsUtils.equals (m_aStyles.get (eProp), aValue);
   }
 
   @Nonnull
@@ -245,21 +277,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  public final boolean hasStyle (@Nullable final ECSSProperty eProperty)
-  {
-    return m_aStyles != null && m_aStyles.containsKey (eProperty);
-  }
-
-  public final boolean hasStyle (@Nullable final ICSSValue aValue)
-  {
-    if (aValue == null || m_aStyles == null)
-      return false;
-
-    // Contained styles can never have a null value!
-    final ECSSProperty eProp = aValue.getProp ();
-    return EqualsUtils.equals (m_aStyles.get (eProp), aValue);
-  }
-
   @Nonnull
   public final THISTYPE removeStyle (@Nonnull final ECSSProperty eProperty)
   {
@@ -268,11 +285,23 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  @Nullable
+  public final EHCTextDirection getDirection ()
+  {
+    return m_eDirection;
+  }
+
   @Nonnull
   public final THISTYPE setDirection (@Nullable final EHCTextDirection eDirection)
   {
     m_eDirection = eDirection;
     return thisAsT ();
+  }
+
+  @Nullable
+  public final String getLanguage ()
+  {
+    return m_sLanguage;
   }
 
   @Nonnull
@@ -376,9 +405,14 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nullable
-  public final IJSCodeProvider getEventHandler (@Nonnull final EJSEvent eJSEvent)
+  public final IJSCodeProvider getEventHandler (@Nullable final EJSEvent eJSEvent)
   {
     return m_aJSHandler == null ? null : m_aJSHandler.getHandler (eJSEvent);
+  }
+
+  public final boolean containsEventHandler (@Nullable final EJSEvent eJSEvent)
+  {
+    return m_aJSHandler != null && m_aJSHandler.containsHandler (eJSEvent);
   }
 
   public final boolean isUnfocusable ()
@@ -480,6 +514,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   {
     m_bSpellCheck = bSpellCheck;
     return thisAsT ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Map <String, String> getCustomAttrs ()
+  {
+    return ContainerHelper.newOrderedMap (m_aCustomAttrs);
   }
 
   @Nonnull

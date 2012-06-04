@@ -84,6 +84,12 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
     this (aRF.getFieldName (), aRF.getRequestValue ());
   }
 
+  @Nullable
+  public final String getValue ()
+  {
+    return m_sValue;
+  }
+
   @Deprecated
   @Nonnull
   public final HCHiddenField setValue (final boolean bValue)

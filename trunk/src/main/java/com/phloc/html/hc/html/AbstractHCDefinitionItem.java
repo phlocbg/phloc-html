@@ -25,8 +25,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Abstract base class for DD and DT tags ({@link AbstractHCDefinitionItem} and
- * {@link HCDefinitionTerm})
+ * Abstract base class for DD and DT tags ({@link HCDD} and {@link HCDT})
  * 
  * @author philip
  * @param <THISTYPE>

@@ -20,53 +20,53 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Represents an HTML &lt;ins&gt; element
+ * Represents an HTML &lt;b&gt; element<br>
+ * HTML5: the specific semantic purpose of representing text “offset from its
+ * surrounding content without conveying any extra emphasis or importance, and
+ * for which the conventional typographic presentation is bold text”.
  * 
  * @author philip
  */
-@Deprecated
-@DevelopersNote ("Use HCIns")
-public final class HCInserted extends AbstractHCElementWithChildren <HCInserted>
+public final class HCB extends AbstractHCElementWithChildren <HCB>
 {
-  public HCInserted ()
+  public HCB ()
   {
-    super (EHTMLElement.INS);
+    super (EHTMLElement.B);
   }
 
-  public HCInserted (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCB (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
     this (aChild.getText ());
   }
 
-  public HCInserted (@Nullable final String sChild)
+  public HCB (@Nullable final String sChild)
   {
-    super (EHTMLElement.INS, sChild);
+    super (EHTMLElement.B, sChild);
   }
 
-  public HCInserted (@Nullable final String... aChildren)
+  public HCB (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.B, aChildren);
   }
 
-  public HCInserted (@Nullable final IHCNode aChild)
+  public HCB (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.INS, aChild);
+    super (EHTMLElement.B, aChild);
   }
 
-  public HCInserted (@Nullable final IHCNode... aChildren)
+  public HCB (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.B, aChildren);
   }
 
-  public HCInserted (@Nullable final Iterable <? extends IHCNode> aChildren)
+  public HCB (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.B, aChildren);
   }
 }

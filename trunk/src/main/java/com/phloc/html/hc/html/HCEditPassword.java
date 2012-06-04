@@ -26,6 +26,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.customize.HCDefaultSettings;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "password"
@@ -39,6 +40,11 @@ public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
   public HCEditPassword (@Nullable final String sName)
   {
     super (EHCInputType.PASSWORD, sName);
+  }
+
+  public final boolean isDisableAutoComplete ()
+  {
+    return m_bDisableAutoComplete;
   }
 
   @Nonnull

@@ -36,6 +36,11 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
 {
   private boolean m_bPrepared = false;
 
+  public final boolean isPrepared ()
+  {
+    return m_bPrepared;
+  }
+
   /**
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build

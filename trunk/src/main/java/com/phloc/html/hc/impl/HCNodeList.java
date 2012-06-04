@@ -221,6 +221,18 @@ public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChild
     return ContainerHelper.getSafe (m_aNodes, nIndex);
   }
 
+  @Nullable
+  public IHCBaseNode getFirstChild ()
+  {
+    return ContainerHelper.getFirstElement (m_aNodes);
+  }
+
+  @Nullable
+  public IHCBaseNode getLastChild ()
+  {
+    return ContainerHelper.getLastElement (m_aNodes);
+  }
+
   /**
    * Try to simplify this nodelist as much as possible.
    * 

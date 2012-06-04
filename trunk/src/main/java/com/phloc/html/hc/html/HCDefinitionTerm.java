@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
@@ -29,6 +30,8 @@ import com.phloc.html.hc.IHCNode;
  * 
  * @author philip
  */
+@Deprecated
+@DevelopersNote ("Use HCDT")
 public final class HCDefinitionTerm extends AbstractHCDefinitionItem <HCDefinitionTerm>
 {
   public HCDefinitionTerm ()

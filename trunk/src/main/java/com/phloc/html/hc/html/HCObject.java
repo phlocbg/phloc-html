@@ -88,11 +88,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final String getHSpace ()
+  {
+    return m_sHSpace;
+  }
+
   @Nonnull
   public final HCObject setHSpace (@Nullable final String sHSpace)
   {
     m_sHSpace = sHSpace;
     return this;
+  }
+
+  @Nullable
+  public final String getVSpace ()
+  {
+    return m_sVSpace;
   }
 
   @Nonnull
@@ -102,11 +114,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final EHCObjectAlign getAlign ()
+  {
+    return m_eAlign;
+  }
+
   @Nonnull
   public final HCObject setAlign (@Nullable final EHCObjectAlign eAlign)
   {
     m_eAlign = eAlign;
     return this;
+  }
+
+  @Nullable
+  public final String getArchive ()
+  {
+    return m_sArchive;
   }
 
   @Nonnull
@@ -116,11 +140,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final String getBorder ()
+  {
+    return m_sBorder;
+  }
+
   @Nonnull
   public final HCObject setBorder (@Nullable final String sBorder)
   {
     m_sBorder = sBorder;
     return this;
+  }
+
+  @Nullable
+  public final String getClassID ()
+  {
+    return m_sClassID;
   }
 
   @Nonnull
@@ -130,11 +166,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final ISimpleURL getCodeBase ()
+  {
+    return m_aCodeBase;
+  }
+
   @Nonnull
   public final HCObject setCodeBase (@Nullable final ISimpleURL aCodeBase)
   {
     m_aCodeBase = aCodeBase;
     return this;
+  }
+
+  @Nullable
+  public final IMimeType getCodeType ()
+  {
+    return m_aCodeType;
   }
 
   @Nonnull
@@ -144,11 +192,22 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final ISimpleURL getData ()
+  {
+    return m_aData;
+  }
+
   @Nonnull
   public final HCObject setData (@Nullable final ISimpleURL aData)
   {
     m_aData = aData;
     return this;
+  }
+
+  public final boolean isDeclare ()
+  {
+    return m_bDeclare;
   }
 
   @Nonnull
@@ -158,11 +217,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final String getName ()
+  {
+    return m_sName;
+  }
+
   @Nonnull
   public final HCObject setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
+  }
+
+  @Nullable
+  public final String getStandBy ()
+  {
+    return m_sStandBy;
   }
 
   @Nonnull
@@ -172,11 +243,23 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     return this;
   }
 
+  @Nullable
+  public final IMimeType getType ()
+  {
+    return m_aType;
+  }
+
   @Nonnull
   public final HCObject setType (@Nullable final IMimeType aType)
   {
     m_aType = aType;
     return this;
+  }
+
+  @Nullable
+  public final String getUseMap ()
+  {
+    return m_sUseMap;
   }
 
   @Nonnull

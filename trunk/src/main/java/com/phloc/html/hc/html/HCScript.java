@@ -52,10 +52,10 @@ public final class HCScript extends AbstractHCElement <HCScript>
     m_sContent = aProvider.getJSCode ();
   }
 
-  @Nullable
-  public String getJSContent ()
+  @Nonnull
+  public IMimeType getType ()
   {
-    return m_sContent;
+    return m_aType;
   }
 
   @Nonnull
@@ -65,6 +65,12 @@ public final class HCScript extends AbstractHCElement <HCScript>
       throw new NullPointerException ("type");
     m_aType = aType;
     return this;
+  }
+
+  @Nullable
+  public String getJSContent ()
+  {
+    return m_sContent;
   }
 
   public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement, @Nullable final String sContent)

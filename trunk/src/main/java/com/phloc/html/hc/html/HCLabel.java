@@ -74,6 +74,12 @@ public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
     super (EHTMLElement.LABEL, aChildren);
   }
 
+  @Nullable
+  public String getFor ()
+  {
+    return m_sFor;
+  }
+
   /**
    * Indicates that this label is used as the description for another object.
    * 
