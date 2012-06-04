@@ -53,6 +53,7 @@ public final class HC5Test
     b.addChild (new HCBDI ("bidirectional"));
     b.addChild (new HCCanvas ());
     b.addChild (new HCCanvas ("Der kann was der Canvas"));
+    b.addChild (new HCCommand ());
     b.addChild (new HCFigure ());
     b.addChild (new HCFigure ("Bla foo"));
     b.addChild (new HCFooter ());
