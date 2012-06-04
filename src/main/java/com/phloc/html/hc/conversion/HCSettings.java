@@ -32,7 +32,7 @@ import com.phloc.html.hc.IHCNode;
 public final class HCSettings
 {
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
-  private static IHCConversionSettingsProvider s_aSettingsProvider = new DefaultHCConversionSettingsProvider ();
+  private static IHCConversionSettingsProvider s_aSettingsProvider = DefaultHCConversionSettingsProvider.getInstance ();
 
   private HCSettings ()
   {}
@@ -92,34 +92,98 @@ public final class HCSettings
   }
 
   /**
+   * Convert the passed HC node to a micro node using the conversion settings
+   * provider.
+   * 
    * @param aHCNode
-   *        The node to be converted
+   *        The node to be converted. May not be <code>null</code>.
    * @return The fully created HTML node
    */
   @Nullable
   public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode)
   {
     // No indent/align required for conversion to IMicroNode
-    return aHCNode.getAsNode (getConversionSettings (false));
+    return getAsNode (aHCNode, getConversionSettings (false));
   }
 
   /**
    * @param aHCNode
-   *        The node to be converted
+   *        The node to be converted. May not be <code>null</code>.
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The fully created HTML node
+   */
+  @Nullable
+  public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode,
+                                      @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return aHCNode.getAsNode (aConversionSettings);
+  }
+
+  /**
+   * Convert the passed HC node to an HTML string using the conversion settings
+   * factory.
+   * 
+   * @param aHCNode
+   *        The node to be converted. May not be <code>null</code>.
    * @param bIndentAndAlign
    *        Indent and align?
-   * @return The node as XML optionally without indentation.
+   * @return The node as XML with or without indentation.
    */
   @Nonnull
   public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode, final boolean bIndentAndAlign)
   {
-    return aHCNode.getAsHTMLString (getConversionSettings (bIndentAndAlign));
+    return getAsHTMLString (aHCNode, getConversionSettings (bIndentAndAlign));
   }
 
+  /**
+   * Convert the passed HC node to an HTML string using the passed conversion
+   * settings.
+   * 
+   * @param aHCNode
+   *        The node to be converted. May not be <code>null</code>.
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The node as XML optionally without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode,
+                                        @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return aHCNode.getAsHTMLString (aConversionSettings);
+  }
+
+  /**
+   * Get the out-of-band node for the passed HC node using the conversion
+   * settings provider.
+   * 
+   * @param aHCNode
+   *        The node for which the out-of-band nodes are to be retrieved. May
+   *        not be <code>null</code>.
+   * @return <code>null</code> if no out-of-band node is present.
+   */
   @Nullable
   public static IHCBaseNode getOutOfBandNode (@Nonnull final IHCNode aHCNode)
   {
     // No indent/align required for retrieving out of band node
-    return aHCNode.getOutOfBandNode (getConversionSettings (false));
+    return getOutOfBandNode (aHCNode, getConversionSettings (false));
+  }
+
+  /**
+   * Get the out-of-band node for the passed HC node using the passed conversion
+   * settings.
+   * 
+   * @param aHCNode
+   *        The node for which the out-of-band nodes are to be retrieved. May
+   *        not be <code>null</code>.
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return <code>null</code> if no out-of-band node is present.
+   */
+  @Nullable
+  public static IHCBaseNode getOutOfBandNode (@Nonnull final IHCNode aHCNode,
+                                              @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return aHCNode.getOutOfBandNode (aConversionSettings);
   }
 }

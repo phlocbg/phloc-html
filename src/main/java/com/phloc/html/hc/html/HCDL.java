@@ -17,17 +17,34 @@
  */
 package com.phloc.html.hc.html;
 
-import com.phloc.commons.annotations.DevelopersNote;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
- * Represents an HTML &lt;th&gt; element
+ * Represents an HTML &lt;dl&gt; element
  * 
  * @author philip
  */
-@Deprecated
-@DevelopersNote ("Use HCTH instead")
-public final class HCHeaderCell extends HCTH
+public class HCDL extends AbstractHCElementWithInternalChildren <HCDL, AbstractHCDefinitionItem <?>>
 {
-  public HCHeaderCell ()
-  {}
+  public HCDL ()
+  {
+    super (EHTMLElement.DL);
+  }
+
+  public final boolean hasItems ()
+  {
+    return hasChildren ();
+  }
+
+  @Nonnull
+  public final HCDL addItem (@Nullable final AbstractHCDefinitionItem <?> aItem)
+  {
+    if (aItem != null)
+      addChild (aItem);
+    return this;
+  }
 }

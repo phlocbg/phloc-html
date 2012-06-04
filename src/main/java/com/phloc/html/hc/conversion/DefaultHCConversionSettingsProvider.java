@@ -32,9 +32,19 @@ import com.phloc.html.EHTMLVersion;
 public final class DefaultHCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
   public static final EHTMLVersion HTML_VERSION = EHTMLVersion.DEFAULT;
-  public static final IHCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
-  public static final IHCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
+  private static final HCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
+  private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
                                                                                                           .setIndentAndAlignHTML (false);
+  private static final DefaultHCConversionSettingsProvider s_aInstance = new DefaultHCConversionSettingsProvider ();
+
+  private DefaultHCConversionSettingsProvider ()
+  {}
+
+  @Nonnull
+  public static DefaultHCConversionSettingsProvider getInstance ()
+  {
+    return s_aInstance;
+  }
 
   @Nonnull
   public EHTMLVersion getHTMLVersion ()

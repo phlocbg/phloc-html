@@ -20,35 +20,49 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
+import com.phloc.html.hc.IHCNode;
 
 /**
- * Represents an HTML &lt;dl&gt; element
+ * Represents an HTML &lt;dd&gt; element
  * 
  * @author philip
  */
-@Deprecated
-@DevelopersNote ("Use HCDL")
-public class HCDefinitionList extends
-                             AbstractHCElementWithInternalChildren <HCDefinitionList, AbstractHCDefinitionItem <?>>
+public final class HCDD extends AbstractHCDefinitionItem <HCDD>
 {
-  public HCDefinitionList ()
+  public HCDD ()
   {
-    super (EHTMLElement.DL);
+    super (EHTMLElement.DD);
   }
 
-  public final boolean hasItems ()
+  public HCDD (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    return hasChildren ();
+    this (aChild.getText ());
   }
 
-  @Nonnull
-  public final HCDefinitionList addItem (@Nullable final AbstractHCDefinitionItem <?> aItem)
+  public HCDD (@Nullable final String sChild)
   {
-    if (aItem != null)
-      addChild (aItem);
-    return this;
+    super (EHTMLElement.DD, sChild);
+  }
+
+  public HCDD (@Nullable final String... aChildren)
+  {
+    super (EHTMLElement.DD, aChildren);
+  }
+
+  public HCDD (@Nullable final IHCNode aChild)
+  {
+    super (EHTMLElement.DD, aChild);
+  }
+
+  public HCDD (@Nullable final IHCNode... aChildren)
+  {
+    super (EHTMLElement.DD, aChildren);
+  }
+
+  public HCDD (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    super (EHTMLElement.DD, aChildren);
   }
 }

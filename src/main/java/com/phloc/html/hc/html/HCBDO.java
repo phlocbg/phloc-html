@@ -20,53 +20,50 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Represents an HTML &lt;ins&gt; element
+ * Represents an HTML &lt;bdo&gt; element
  * 
  * @author philip
  */
-@Deprecated
-@DevelopersNote ("Use HCIns")
-public final class HCInserted extends AbstractHCElementWithChildren <HCInserted>
+public final class HCBDO extends AbstractHCElementWithChildren <HCBDO>
 {
-  public HCInserted ()
+  public HCBDO ()
   {
-    super (EHTMLElement.INS);
+    super (EHTMLElement.BDO);
   }
 
-  public HCInserted (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCBDO (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
     this (aChild.getText ());
   }
 
-  public HCInserted (@Nullable final String sChild)
+  public HCBDO (@Nullable final String sChild)
   {
-    super (EHTMLElement.INS, sChild);
+    super (EHTMLElement.BDO, sChild);
   }
 
-  public HCInserted (@Nullable final String... aChildren)
+  public HCBDO (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.BDO, aChildren);
   }
 
-  public HCInserted (@Nullable final IHCNode aChild)
+  public HCBDO (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.INS, aChild);
+    super (EHTMLElement.BDO, aChild);
   }
 
-  public HCInserted (@Nullable final IHCNode... aChildren)
+  public HCBDO (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.BDO, aChildren);
   }
 
-  public HCInserted (@Nullable final Iterable <? extends IHCNode> aChildren)
+  public HCBDO (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (EHTMLElement.BDO, aChildren);
   }
 }

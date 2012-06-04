@@ -97,9 +97,14 @@ public final class JSEventMap implements Serializable
   }
 
   @Nullable
-  public IJSCodeProvider getHandler (@Nonnull final EJSEvent eJSEvent)
+  public IJSCodeProvider getHandler (@Nullable final EJSEvent eJSEvent)
   {
-    return m_aEvents.get (eJSEvent);
+    return eJSEvent == null ? null : m_aEvents.get (eJSEvent);
+  }
+
+  public boolean containsHandler (@Nullable final EJSEvent eJSEvent)
+  {
+    return eJSEvent != null && m_aEvents.containsKey (eJSEvent);
   }
 
   public void applyToElement (@Nonnull final IMicroElement aElement)

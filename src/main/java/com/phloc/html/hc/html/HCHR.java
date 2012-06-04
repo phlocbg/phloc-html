@@ -31,7 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * 
  * @author philip
  */
-public final class HCHR extends AbstractHCElement <HCHR>
+public class HCHR extends AbstractHCElement <HCHR>
 {
   public static final boolean DEFAULT_NO_SHADE = false;
 
@@ -42,8 +42,13 @@ public final class HCHR extends AbstractHCElement <HCHR>
     super (EHTMLElement.HR);
   }
 
+  public final boolean isNoShade ()
+  {
+    return m_bNoShade;
+  }
+
   @Nonnull
-  public HCHR setNoShade (final boolean bNoShade)
+  public final HCHR setNoShade (final boolean bNoShade)
   {
     m_bNoShade = bNoShade;
     return this;

@@ -64,17 +64,17 @@ public final class HCCol extends AbstractHCElement <HCCol>
     return CHTMLAttributeValues.STAR.equals (m_sWidth);
   }
 
+  @Nullable
+  public String getWidth ()
+  {
+    return m_sWidth;
+  }
+
   @Nonnull
   public HCCol setWidth (@Nullable final String sWidth)
   {
     m_sWidth = sWidth;
     return this;
-  }
-
-  @Nullable
-  public String getWidth ()
-  {
-    return m_sWidth;
   }
 
   public boolean isStarWidth ()

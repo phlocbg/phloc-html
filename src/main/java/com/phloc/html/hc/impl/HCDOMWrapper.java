@@ -50,6 +50,12 @@ public final class HCDOMWrapper extends AbstractHCNode
   }
 
   @Nonnull
+  public final IMicroNode getNode ()
+  {
+    return m_aNode;
+  }
+
+  @Nonnull
   public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return m_aNode;

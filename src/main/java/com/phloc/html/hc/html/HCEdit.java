@@ -79,6 +79,11 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
     return this;
   }
 
+  public final boolean isDisableAutoComplete ()
+  {
+    return m_bDisableAutoComplete;
+  }
+
   @Nonnull
   public final HCEdit setDisableAutoComplete (final boolean bDisableAutoComplete)
   {

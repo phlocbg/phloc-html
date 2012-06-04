@@ -73,6 +73,12 @@ public class HCImg extends AbstractHCElement <HCImg>
     return this;
   }
 
+  @Nullable
+  public final ScalableSize getExtent ()
+  {
+    return m_aExtent;
+  }
+
   @Nonnull
   public final HCImg setExtent (@Nullable final ScalableSize aImageData)
   {
@@ -116,6 +122,12 @@ public class HCImg extends AbstractHCElement <HCImg>
     if (m_aExtent != null)
       m_aExtent = m_aExtent.getBestMatchingSize (nMaxWidth, nMaxHeight);
     return this;
+  }
+
+  @Nullable
+  public final String getAlt ()
+  {
+    return m_sAlt;
   }
 
   @Nonnull

@@ -42,11 +42,29 @@ public class HCOL extends AbstractHCList <HCOL>
     super (EHTMLElement.OL);
   }
 
-  @Nonnull
-  public HCOL setStart (final int nStart)
+  @Nullable
+  public final Integer getStart ()
   {
-    m_aStart = Integer.valueOf (nStart);
+    return m_aStart;
+  }
+
+  @Nonnull
+  public final HCOL setStart (final int nStart)
+  {
+    return setStart (Integer.valueOf (nStart));
+  }
+
+  @Nonnull
+  public final HCOL setStart (@Nullable final Integer aStart)
+  {
+    m_aStart = aStart;
     return this;
+  }
+
+  @Nullable
+  public final EHCOLType getType ()
+  {
+    return m_eType;
   }
 
   @Nonnull

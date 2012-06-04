@@ -86,84 +86,84 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   }
 
   @Nullable
-  public ISimpleURL getSrc ()
+  public final ISimpleURL getSrc ()
   {
     return m_aSrc;
   }
 
   @Nonnull
-  public HCIFrame setSrc (@Nullable final ISimpleURL aSrc)
+  public final HCIFrame setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
     return this;
   }
 
   @Nullable
-  public String getName ()
+  public final String getName ()
   {
     return m_sName;
   }
 
   @Nonnull
-  public HCIFrame setName (@Nullable final String sName)
+  public final HCIFrame setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
   }
 
   @Nullable
-  public String getLongDesc ()
+  public final String getLongDesc ()
   {
     return m_sLongDesc;
   }
 
   @Nonnull
-  public HCIFrame setLongDesc (@Nullable final String sLongDesc)
+  public final HCIFrame setLongDesc (@Nullable final String sLongDesc)
   {
     m_sLongDesc = sLongDesc;
     return this;
   }
 
   @Nullable
-  public EHCScrolling getScrolling ()
+  public final EHCScrolling getScrolling ()
   {
     return m_eScrolling;
   }
 
   @Nonnull
-  public HCIFrame setScrolling (@Nullable final EHCScrolling eScrolling)
+  public final HCIFrame setScrolling (@Nullable final EHCScrolling eScrolling)
   {
     m_eScrolling = eScrolling;
     return this;
   }
 
   @Nullable
-  public EHCIFrameAlign getAlign ()
+  public final EHCIFrameAlign getAlign ()
   {
     return m_eAlign;
   }
 
   @Nonnull
-  public HCIFrame setAlign (@Nullable final EHCIFrameAlign eAlign)
+  public final HCIFrame setAlign (@Nullable final EHCIFrameAlign eAlign)
   {
     m_eAlign = eAlign;
     return this;
   }
 
-  public boolean isFrameBorder ()
+  public final boolean isFrameBorder ()
   {
     return m_bFrameBorder;
   }
 
   @Nonnull
-  public HCIFrame setFrameBorder (final boolean bFrameBorder)
+  public final HCIFrame setFrameBorder (final boolean bFrameBorder)
   {
     m_bFrameBorder = bFrameBorder;
     return this;
   }
 
   @Nullable
-  public String getWidth ()
+  public final String getWidth ()
   {
     return m_sWidth;
   }
@@ -176,7 +176,7 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
    * @return this
    */
   @Nonnull
-  public HCIFrame setWidth (final int nWidth)
+  public final HCIFrame setWidth (final int nWidth)
   {
     if (nWidth >= 0)
       m_sWidth = Integer.toString (nWidth);
@@ -184,20 +184,20 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   }
 
   @Nonnull
-  public HCIFrame setWidthPercentage (final double dPercentage)
+  public final HCIFrame setWidthPercentage (final double dPercentage)
   {
     m_sWidth = CCSS.perc (dPercentage);
     return this;
   }
 
   @Nullable
-  public String getHeight ()
+  public final String getHeight ()
   {
     return m_sWidth;
   }
 
   @Nonnull
-  public HCIFrame setHeight (final int nHeight)
+  public final HCIFrame setHeight (final int nHeight)
   {
     if (nHeight >= 0)
       m_sHeight = Integer.toString (nHeight);
@@ -205,31 +205,31 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   }
 
   @Nonnull
-  public HCIFrame setHeightPercentage (final double dPercentage)
+  public final HCIFrame setHeightPercentage (final double dPercentage)
   {
     m_sHeight = CCSS.perc (dPercentage);
     return this;
   }
 
-  public int getMarginWidth ()
+  public final int getMarginWidth ()
   {
     return m_nMarginWidth;
   }
 
   @Nonnull
-  public HCIFrame setMarginWidth (final int nMarginWidth)
+  public final HCIFrame setMarginWidth (final int nMarginWidth)
   {
     m_nMarginWidth = nMarginWidth;
     return this;
   }
 
-  public int getMarginHeight ()
+  public final int getMarginHeight ()
   {
     return m_nMarginHeight;
   }
 
   @Nonnull
-  public HCIFrame setMarginHeight (final int nMarginHeight)
+  public final HCIFrame setMarginHeight (final int nMarginHeight)
   {
     m_nMarginHeight = nMarginHeight;
     return this;

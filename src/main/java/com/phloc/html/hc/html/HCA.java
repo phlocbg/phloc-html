@@ -81,6 +81,12 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     return this;
   }
 
+  @Nullable
+  public final String getName ()
+  {
+    return m_sName;
+  }
+
   @Nonnull
   public final HCA setName (@Nullable final String sName)
   {
@@ -88,11 +94,23 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     return this;
   }
 
+  @Nullable
+  public final IMimeType getType ()
+  {
+    return m_aType;
+  }
+
   @Nonnull
   public final HCA setType (@Nullable final IMimeType aType)
   {
     m_aType = aType;
     return this;
+  }
+
+  @Nullable
+  public final String getMedia ()
+  {
+    return m_sMediaQuery;
   }
 
   @Nonnull

@@ -30,7 +30,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
@@ -245,16 +245,28 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nullable
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public final List <IHCBaseNode> getChildren ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aChildren);
+    return ContainerHelper.newList (m_aChildren);
   }
 
   @Nullable
   public final IHCBaseNode getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aChildren, nIndex);
+  }
+
+  @Nullable
+  public final IHCBaseNode getFirstChild ()
+  {
+    return ContainerHelper.getFirstElement (m_aChildren);
+  }
+
+  @Nullable
+  public final IHCBaseNode getLastChild ()
+  {
+    return ContainerHelper.getLastElement (m_aChildren);
   }
 
   @Override

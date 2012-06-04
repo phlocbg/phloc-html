@@ -84,11 +84,21 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     this (aRF.getFieldName (), aRF.getRequestValues ());
   }
 
+  public final boolean isMultiple ()
+  {
+    return m_bMultiple;
+  }
+
   @Nonnull
   public final HCSelect setMultiple (final boolean bMultiple)
   {
     m_bMultiple = bMultiple;
     return this;
+  }
+
+  public final int getSize ()
+  {
+    return m_nSize;
   }
 
   @Nonnull
@@ -235,10 +245,10 @@ public class HCSelect extends AbstractHCControl <HCSelect>
    * @return A non-<code>null</code> list of all available options.
    */
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public final List <HCOption> getOptions ()
   {
-    return ContainerHelper.makeUnmodifiableNotNull (m_aOptions);
+    return ContainerHelper.newList (m_aOptions);
   }
 
   /**

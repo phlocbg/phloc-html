@@ -98,12 +98,6 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
     return thisAsT ();
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
@@ -115,6 +109,12 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_bReadOnly)
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
+  }
+
+  @Nonnull
+  public String getPlainText ()
+  {
+    return "";
   }
 
   @Override

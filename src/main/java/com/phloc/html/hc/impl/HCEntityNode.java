@@ -47,6 +47,12 @@ public final class HCEntityNode extends AbstractHCNode
   }
 
   @Nonnull
+  public IHTMLEntity getEntity ()
+  {
+    return m_aEntity;
+  }
+
+  @Nonnull
   public IMicroEntityReference getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return new MicroEntityReference (m_aEntity.getEntityName ());

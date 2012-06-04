@@ -20,7 +20,6 @@ package com.phloc.html.hc.html5;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -50,21 +49,13 @@ public final class HCSource extends AbstractHCMediaElementChild <HCSource> imple
   }
 
   @Nullable
-  public String getMediaQuery ()
+  public String getMedia ()
   {
     return m_sMediaQuery;
   }
 
   @Nonnull
-  @Deprecated
-  @DevelopersNote ("Use setMediaQuery")
   public HCSource setMedia (@Nullable final String sMediaQuery)
-  {
-    return setMediaQuery (sMediaQuery);
-  }
-
-  @Nonnull
-  public HCSource setMediaQuery (@Nullable final String sMediaQuery)
   {
     m_sMediaQuery = sMediaQuery;
     return this;

@@ -29,7 +29,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
@@ -135,16 +135,28 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Nullable
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public final List <CHILDTYPE> getChildren ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aChildren);
+    return ContainerHelper.newList (m_aChildren);
   }
 
   @Nullable
   public final CHILDTYPE getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aChildren, nIndex);
+  }
+
+  @Nullable
+  public final IHCBaseNode getFirstChild ()
+  {
+    return ContainerHelper.getFirstElement (m_aChildren);
+  }
+
+  @Nullable
+  public final IHCBaseNode getLastChild ()
+  {
+    return ContainerHelper.getLastElement (m_aChildren);
   }
 
   protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)

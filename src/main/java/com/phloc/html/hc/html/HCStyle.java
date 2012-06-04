@@ -50,6 +50,12 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
     addChild (sStyle);
   }
 
+  @Nullable
+  public CSSMediaList getMedia ()
+  {
+    return m_aMediaList;
+  }
+
   @Nonnull
   public HCStyle setMedia (@Nullable final CSSMediaList aMediaList)
   {
@@ -58,7 +64,7 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   }
 
   @Nonnull
-  public HCStyle addMedium (final ECSSMedium eMedium)
+  public HCStyle addMedium (@Nonnull final ECSSMedium eMedium)
   {
     if (m_aMediaList == null)
       m_aMediaList = new CSSMediaList ();
