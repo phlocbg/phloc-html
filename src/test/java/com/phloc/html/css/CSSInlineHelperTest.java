@@ -22,6 +22,12 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+/**
+ * Test class for class CSSInlineHelper
+ * 
+ * @author philip
+ */
+@SuppressWarnings ("deprecation")
 public final class CSSInlineHelperTest
 {
   @Test

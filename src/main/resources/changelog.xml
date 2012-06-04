@@ -20,9 +20,15 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-06-04" version="3.2.0" />
+  <entry date="2012-06-04" category="api" action="change">
+    <change>
+      <text locale="en">Marked CSSInlineHelper as deprecated because it only works on the first URL and does not parse the CSS correctly</text>
+    </change>
+  </entry>
   <entry date="2012-06-04" category="api" action="add">
     <change>
-      <text locale="en">Renamed all HC* classes so that they match the form "HC" + "HTML ElementName"</text>
+      <text locale="en">Add HC* classes so that they match the form "HC" + "HTML ElementName" and deprecated the old classes</text>
     </change>
   </entry>
   <entry date="2012-06-04" category="api" action="add">

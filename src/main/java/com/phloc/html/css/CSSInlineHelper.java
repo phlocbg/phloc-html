@@ -20,18 +20,23 @@ package com.phloc.html.css;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.css.ECSSProperty;
 
 @Immutable
+@Deprecated
+@DevelopersNote ("This class is deprecated because it only works on the first URL and does not really parse the CSS!")
 public final class CSSInlineHelper
 {
   private CSSInlineHelper ()
   {}
 
   /**
-   * Try to extract the CSS background-image URL from an inline CSS style.
-   *
+   * Try to extract the CSS background-image URL from an inline CSS style.<br>
+   * IMPORTANT: this method only returns the first URL in case there is more
+   * than one URL contained!
+   * 
    * @param sInlineCSS
    *        The inline CSS style to parse.
    * @return <code>null</code> if not background image is contained, the URL
@@ -53,6 +58,18 @@ public final class CSSInlineHelper
     return sInlineCSS.substring (nStartDef, nEndDef);
   }
 
+  /**
+   * Change the source of the first background-image to the specified one.<br>
+   * IMPORTANT: this method only replaces the first URL in case there is more
+   * than one URL contained!
+   * 
+   * @param sInlineCSS
+   *        The inline CSS style where the replacement should take place
+   * @param sSource
+   *        The new href that should be used in the background-image
+   * @return <code>null</code> if the input CSS is null, or the original content
+   *         if no replacement took place or the CSS with the modified source!
+   */
   @Nullable
   public static String replaceBackgroundImageSource (@Nullable final String sInlineCSS, @Nullable final String sSource)
   {

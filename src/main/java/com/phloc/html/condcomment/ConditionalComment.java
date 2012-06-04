@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroComment;
 import com.phloc.commons.microdom.serialize.MicroWriter;
@@ -43,6 +44,7 @@ import com.phloc.html.hc.impl.HCCommentNode;
 public final class ConditionalComment
 {
   private final String m_sCondition;
+  private String m_sLineSeparator = CGlobal.LINE_SEPARATOR;
 
   private ConditionalComment (@Nonnull @Nonempty final String sCondition)
   {
@@ -58,39 +60,60 @@ public final class ConditionalComment
     return m_sCondition;
   }
 
+  @Nonnull
+  @Nonempty
+  public String getLineSeparator ()
+  {
+    return m_sLineSeparator;
+  }
+
+  @Nonnull
+  public ConditionalComment setLineSeparator (@Nonnull @Nonempty final String sLineSeparator)
+  {
+    if (StringHelper.hasNoText (sLineSeparator))
+      throw new IllegalArgumentException ("lineSeparator");
+    m_sLineSeparator = sLineSeparator;
+    return this;
+  }
+
+  @Nonnull
+  @Nonempty
+  private String _getCommentText (@Nonnull final IMicroNode aNode)
+  {
+    return '[' + m_sCondition + "]>" + m_sLineSeparator + MicroWriter.getXMLString (aNode) + "<![endif]";
+  }
+
   /**
-   * This method wraps an arbitrary node in a conditional node. The passed node
-   * is simply converted to an XML string and the content is put into the
+   * This method wraps an arbitrary micro node in a conditional node. The passed
+   * node is simply converted to an XML string and the content is put into the
    * conditional comment.
    * 
    * @param aNode
    *        The node to be wrapped. May not be <code>null</code> and should not
    *        be a comment node.
-   * @return The wrapped node.
+   * @return The wrapped micro node. Never <code>null</code>.
    */
   @Nonnull
-  public IMicroNode getNodeWrappedInCondition (@Nonnull final IMicroNode aNode)
+  public IMicroComment getNodeWrappedInCondition (@Nonnull final IMicroNode aNode)
   {
-    final String sText = '[' +
-                         m_sCondition +
-                         "]>" +
-                         CGlobal.LINE_SEPARATOR +
-                         MicroWriter.getXMLString (aNode) +
-                         "<![endif]";
-    return new MicroComment (sText);
+    return new MicroComment (_getCommentText (aNode));
   }
 
+  /**
+   * This method wraps an arbitrary HC node in a conditional node. The passed
+   * node is simply converted to an XML string and the content is put into the
+   * conditional comment.
+   * 
+   * @param aNode
+   *        The node to be wrapped. May not be <code>null</code> and should not
+   *        be a comment node.
+   * @return The wrapped node. Never <code>null</code>.
+   */
   @Nonnull
   public IHCNode getNodeWrappedInCondition (@Nonnull final IHCNode aNode,
                                             @Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final String sText = '[' +
-                         m_sCondition +
-                         "]>" +
-                         CGlobal.LINE_SEPARATOR +
-                         MicroWriter.getXMLString (aNode.getAsNode (aConversionSettings)) +
-                         "<![endif]";
-    return new HCCommentNode (sText);
+    return new HCCommentNode (_getCommentText (aNode.getAsNode (aConversionSettings)));
   }
 
   @Override
