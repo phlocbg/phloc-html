@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.phloc.commons.annotations.DevelopersNote;
-import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
  * Represents an HTML &lt;dl&gt; element
@@ -31,24 +26,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCDL")
-public class HCDefinitionList extends
-                             AbstractHCElementWithInternalChildren <HCDefinitionList, AbstractHCDefinitionItem <?>>
+public class HCDefinitionList extends HCDL
 {
   public HCDefinitionList ()
   {
-    super (EHTMLElement.DL);
-  }
-
-  public final boolean hasItems ()
-  {
-    return hasChildren ();
-  }
-
-  @Nonnull
-  public final HCDefinitionList addItem (@Nullable final AbstractHCDefinitionItem <?> aItem)
-  {
-    if (aItem != null)
-      addChild (aItem);
-    return this;
+    super ();
   }
 }

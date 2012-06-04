@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCBDO extends AbstractHCElementWithChildren <HCBDO>
+public class HCBDO extends AbstractHCElementWithChildren <HCBDO>
 {
   public HCBDO ()
   {

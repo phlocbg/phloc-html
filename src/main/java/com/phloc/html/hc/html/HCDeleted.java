@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;del&gt; element
@@ -33,40 +31,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCDel")
-public final class HCDeleted extends AbstractHCElementWithChildren <HCDeleted>
+public final class HCDeleted extends HCDel
 {
   public HCDeleted ()
   {
-    super (EHTMLElement.DEL);
+    super ();
   }
 
   public HCDeleted (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCDeleted (@Nullable final String sChild)
   {
-    super (EHTMLElement.DEL, sChild);
+    super (sChild);
   }
 
   public HCDeleted (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.DEL, aChildren);
+    super (aChildren);
   }
 
   public HCDeleted (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.DEL, aChild);
+    super (aChild);
   }
 
   public HCDeleted (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.DEL, aChildren);
+    super (aChildren);
   }
 
   public HCDeleted (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.DEL, aChildren);
+    super (aChildren);
   }
 }

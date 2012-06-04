@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 
 /**
@@ -32,40 +31,40 @@ import com.phloc.html.hc.IHCNode;
  */
 @Deprecated
 @DevelopersNote ("Use HCDD")
-public final class HCDefinitionDefinition extends AbstractHCDefinitionItem <HCDefinitionDefinition>
+public final class HCDefinitionDefinition extends HCDD
 {
   public HCDefinitionDefinition ()
   {
-    super (EHTMLElement.DD);
+    super ();
   }
 
   public HCDefinitionDefinition (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCDefinitionDefinition (@Nullable final String sChild)
   {
-    super (EHTMLElement.DD, sChild);
+    super (sChild);
   }
 
   public HCDefinitionDefinition (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.DD, aChildren);
+    super (aChildren);
   }
 
   public HCDefinitionDefinition (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.DD, aChild);
+    super (aChild);
   }
 
   public HCDefinitionDefinition (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.DD, aChildren);
+    super (aChildren);
   }
 
   public HCDefinitionDefinition (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.DD, aChildren);
+    super (aChildren);
   }
 }

@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;bdo&gt; element
@@ -33,40 +31,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCBDO")
-public final class HCBidirectionalOverwrite extends AbstractHCElementWithChildren <HCBidirectionalOverwrite>
+public final class HCBidirectionalOverwrite extends HCBDO
 {
   public HCBidirectionalOverwrite ()
   {
-    super (EHTMLElement.BDO);
+    super ();
   }
 
   public HCBidirectionalOverwrite (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCBidirectionalOverwrite (@Nullable final String sChild)
   {
-    super (EHTMLElement.BDO, sChild);
+    super (sChild);
   }
 
   public HCBidirectionalOverwrite (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.BDO, aChildren);
+    super (aChildren);
   }
 
   public HCBidirectionalOverwrite (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.BDO, aChild);
+    super (aChild);
   }
 
   public HCBidirectionalOverwrite (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.BDO, aChildren);
+    super (aChildren);
   }
 
   public HCBidirectionalOverwrite (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.BDO, aChildren);
+    super (aChildren);
   }
 }

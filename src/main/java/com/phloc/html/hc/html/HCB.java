@@ -33,7 +33,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCB extends AbstractHCElementWithChildren <HCB>
+public class HCB extends AbstractHCElementWithChildren <HCB>
 {
   public HCB ()
   {

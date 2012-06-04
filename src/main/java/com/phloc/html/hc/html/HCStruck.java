@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;s&gt; element<br>
@@ -35,40 +33,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCS")
-public final class HCStruck extends AbstractHCElementWithChildren <HCStruck>
+public final class HCStruck extends HCS
 {
   public HCStruck ()
   {
-    super (EHTMLElement.S);
+    super ();
   }
 
   public HCStruck (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCStruck (@Nullable final String sChild)
   {
-    super (EHTMLElement.S, sChild);
+    super (sChild);
   }
 
   public HCStruck (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.S, aChildren);
+    super (aChildren);
   }
 
   public HCStruck (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.S, aChild);
+    super (aChild);
   }
 
   public HCStruck (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.S, aChildren);
+    super (aChildren);
   }
 
   public HCStruck (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.S, aChildren);
+    super (aChildren);
   }
 }

@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;abbr&gt; element
@@ -33,40 +31,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCAbbr")
-public final class HCAbbreviation extends AbstractHCElementWithChildren <HCAbbreviation>
+public final class HCAbbreviation extends HCAbbr
 {
   public HCAbbreviation ()
   {
-    super (EHTMLElement.ABBR);
+    super ();
   }
 
   public HCAbbreviation (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCAbbreviation (@Nullable final String sChild)
   {
-    super (EHTMLElement.ABBR, sChild);
+    super (sChild);
   }
 
   public HCAbbreviation (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.ABBR, aChildren);
+    super (aChildren);
   }
 
   public HCAbbreviation (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.ABBR, aChild);
+    super (aChild);
   }
 
   public HCAbbreviation (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.ABBR, aChildren);
+    super (aChildren);
   }
 
   public HCAbbreviation (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.ABBR, aChildren);
+    super (aChildren);
   }
 }
