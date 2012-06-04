@@ -22,10 +22,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;xmp&gt; element
@@ -35,40 +33,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 @DeprecatedInHTML32
 @Deprecated
 @DevelopersNote ("Use HCXMP")
-public final class HCExample extends AbstractHCElementWithChildren <HCExample>
+public final class HCExample extends HCXMP
 {
   public HCExample ()
   {
-    super (EHTMLElement.XMP);
+    super ();
   }
 
   public HCExample (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCExample (@Nullable final String sChild)
   {
-    super (EHTMLElement.XMP, sChild);
+    super (sChild);
   }
 
   public HCExample (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.XMP, aChildren);
+    super (aChildren);
   }
 
   public HCExample (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.XMP, aChild);
+    super (aChild);
   }
 
   public HCExample (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.XMP, aChildren);
+    super (aChildren);
   }
 
   public HCExample (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.XMP, aChildren);
+    super (aChildren);
   }
 }

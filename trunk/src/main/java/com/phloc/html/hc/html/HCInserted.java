@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;ins&gt; element
@@ -33,40 +31,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCIns")
-public final class HCInserted extends AbstractHCElementWithChildren <HCInserted>
+public final class HCInserted extends HCIns
 {
   public HCInserted ()
   {
-    super (EHTMLElement.INS);
+    super ();
   }
 
   public HCInserted (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCInserted (@Nullable final String sChild)
   {
-    super (EHTMLElement.INS, sChild);
+    super (sChild);
   }
 
   public HCInserted (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (aChildren);
   }
 
   public HCInserted (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.INS, aChild);
+    super (aChild);
   }
 
   public HCInserted (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (aChildren);
   }
 
   public HCInserted (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.INS, aChildren);
+    super (aChildren);
   }
 }

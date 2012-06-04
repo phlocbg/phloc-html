@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCDFN extends AbstractHCElementWithChildren <HCDFN>
+public class HCDFN extends AbstractHCElementWithChildren <HCDFN>
 {
   public HCDFN ()
   {

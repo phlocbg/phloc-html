@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;i&gt; element<br>
@@ -36,40 +34,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCI")
-public final class HCItalic extends AbstractHCElementWithChildren <HCItalic>
+public final class HCItalic extends HCI
 {
   public HCItalic ()
   {
-    super (EHTMLElement.I);
+    super ();
   }
 
   public HCItalic (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCItalic (@Nullable final String sChild)
   {
-    super (EHTMLElement.I, sChild);
+    super (sChild);
   }
 
   public HCItalic (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.I, aChildren);
+    super (aChildren);
   }
 
   public HCItalic (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.I, aChild);
+    super (aChild);
   }
 
   public HCItalic (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.I, aChildren);
+    super (aChildren);
   }
 
   public HCItalic (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.I, aChildren);
+    super (aChildren);
   }
 }

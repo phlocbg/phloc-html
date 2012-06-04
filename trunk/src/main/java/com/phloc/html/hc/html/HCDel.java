@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCDel extends AbstractHCElementWithChildren <HCDel>
+public class HCDel extends AbstractHCElementWithChildren <HCDel>
 {
   public HCDel ()
   {

@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;dfn&gt; element
@@ -33,40 +31,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCDFN")
-public final class HCDefinition extends AbstractHCElementWithChildren <HCDefinition>
+public final class HCDefinition extends HCDFN
 {
   public HCDefinition ()
   {
-    super (EHTMLElement.DFN);
+    super ();
   }
 
   public HCDefinition (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCDefinition (@Nullable final String sChild)
   {
-    super (EHTMLElement.DFN, sChild);
+    super (sChild);
   }
 
   public HCDefinition (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.DFN, aChildren);
+    super (aChildren);
   }
 
   public HCDefinition (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.DFN, aChild);
+    super (aChild);
   }
 
   public HCDefinition (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.DFN, aChildren);
+    super (aChildren);
   }
 
   public HCDefinition (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.DFN, aChildren);
+    super (aChildren);
   }
 }

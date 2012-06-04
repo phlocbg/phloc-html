@@ -22,9 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;b&gt; element<br>
@@ -36,40 +34,40 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 @Deprecated
 @DevelopersNote ("Use HCB instead")
-public final class HCBold extends AbstractHCElementWithChildren <HCBold>
+public final class HCBold extends HCB
 {
   public HCBold ()
   {
-    super (EHTMLElement.B);
+    super ();
   }
 
   public HCBold (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
-    this (aChild.getText ());
+    super (aChild);
   }
 
   public HCBold (@Nullable final String sChild)
   {
-    super (EHTMLElement.B, sChild);
+    super (sChild);
   }
 
   public HCBold (@Nullable final String... aChildren)
   {
-    super (EHTMLElement.B, aChildren);
+    super (aChildren);
   }
 
   public HCBold (@Nullable final IHCNode aChild)
   {
-    super (EHTMLElement.B, aChild);
+    super (aChild);
   }
 
   public HCBold (@Nullable final IHCNode... aChildren)
   {
-    super (EHTMLElement.B, aChildren);
+    super (aChildren);
   }
 
   public HCBold (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    super (EHTMLElement.B, aChildren);
+    super (aChildren);
   }
 }

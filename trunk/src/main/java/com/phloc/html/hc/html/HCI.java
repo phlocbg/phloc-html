@@ -33,7 +33,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCI extends AbstractHCElementWithChildren <HCI>
+public class HCI extends AbstractHCElementWithChildren <HCI>
 {
   public HCI ()
   {

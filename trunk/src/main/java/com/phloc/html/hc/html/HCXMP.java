@@ -32,7 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * @author philip
  */
 @DeprecatedInHTML32
-public final class HCXMP extends AbstractHCElementWithChildren <HCXMP>
+public class HCXMP extends AbstractHCElementWithChildren <HCXMP>
 {
   public HCXMP ()
   {

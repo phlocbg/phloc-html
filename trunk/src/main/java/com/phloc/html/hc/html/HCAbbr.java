@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCAbbr extends AbstractHCElementWithChildren <HCAbbr>
+public class HCAbbr extends AbstractHCElementWithChildren <HCAbbr>
 {
   public HCAbbr ()
   {

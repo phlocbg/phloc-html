@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCIns extends AbstractHCElementWithChildren <HCIns>
+public class HCIns extends AbstractHCElementWithChildren <HCIns>
 {
   public HCIns ()
   {

@@ -29,7 +29,7 @@ import com.phloc.html.hc.IHCNode;
  * 
  * @author philip
  */
-public final class HCDT extends AbstractHCDefinitionItem <HCDT>
+public class HCDT extends AbstractHCDefinitionItem <HCDT>
 {
   public HCDT ()
   {
