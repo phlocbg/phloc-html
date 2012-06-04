@@ -1,7 +1,10 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Renamed all HC`*` classes so that they match the form "HC" + "HTML ElementName"</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>6/4/12</td><td colspan="4">_Release *3.2.0*_</td></tr>
+<tr><td>6/4/12</td><td>change</td><td>api</td><td>*yes*</td><td>Changed the IHCCustomizer interface to also take the EHTMLVersion required for customization</td></tr>
+<tr><td>6/4/12</td><td>change</td><td>api</td><td></td><td>Marked CSSInlineHelper as deprecated because it only works on the first URL and does not parse the CSS correctly</td></tr>
+<tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Add HC`*` classes so that they match the form "HC" + "HTML ElementName" and deprecated the old classes</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Extracted IHCConversionSettings interface from HCConversionSettings</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Added more getter methods in HC`*` classes</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Added special HTML5 IHCConversionSettingsProvider</td></tr>

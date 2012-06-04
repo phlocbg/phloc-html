@@ -20,6 +20,7 @@ package com.phloc.html.hc.customize;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 
@@ -29,17 +30,21 @@ public interface IHCCustomizer
    * Customize with some predefined classes etc.
    * 
    * @param aElement
-   *        The element to be customized
+   *        The element to be customized. Never <code>null</code>.
+   * @param eHTMLVersion
+   *        The HTML version to be used. Never <code>null</code>.
    */
-  void customizeHCElement (@Nonnull final IHCElement <?> aElement);
+  void customizeHCElement (@Nonnull final IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
 
   /**
    * Get a custom out of band node
    * 
    * @param aElement
    *        The element to be customized
+   * @param eHTMLVersion
+   *        The HTML version to be used. Never <code>null</code>.
    * @return <code>null</code> if there is no custom out-of-band node
    */
   @Nullable
-  IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement);
+  IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
 }
