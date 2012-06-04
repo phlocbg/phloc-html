@@ -45,11 +45,22 @@ public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
     super (EHTMLElement.OPTGROUP);
   }
 
+  public boolean isDisabled ()
+  {
+    return m_bDisabled;
+  }
+
   @Nonnull
   public HCOptGroup setDisabled (final boolean bDisabled)
   {
     m_bDisabled = bDisabled;
     return this;
+  }
+
+  @Nullable
+  public String getLabel ()
+  {
+    return m_sLabel;
   }
 
   @Nonnull

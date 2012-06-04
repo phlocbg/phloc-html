@@ -25,6 +25,7 @@ import com.phloc.commons.gfx.ScalableSize;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
@@ -51,6 +52,11 @@ public class HCImg extends AbstractHCElement <HCImg>
   {
     this ();
     setSrc (sSrc);
+  }
+
+  public HCImg (@Nonnull final ISimpleURL aSrc)
+  {
+    this (aSrc.getAsString ());
   }
 
   @Nullable
@@ -119,22 +125,11 @@ public class HCImg extends AbstractHCElement <HCImg>
     return this;
   }
 
-  private String _getRealAlternativeText ()
-  {
-    String sRealAlt = m_sAlt;
-    if (StringHelper.hasNoText (sRealAlt))
-    {
-      // If no alternative text is present, use the title
-      sRealAlt = getTitle ();
-    }
-    return sRealAlt;
-  }
-
   @Override
   protected void applyProperties (final IMicroElement aElement, final HCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    if (m_sSrc != null)
+    if (StringHelper.hasText (m_sSrc))
       aElement.setAttribute (CHTMLAttributes.SRC, m_sSrc);
     if (m_aExtent != null)
     {
@@ -143,11 +138,14 @@ public class HCImg extends AbstractHCElement <HCImg>
     }
 
     // Ensure that the alt attribute is present
-    aElement.setAttribute (CHTMLAttributes.ALT, _getRealAlternativeText ());
+    final String sTitle = getTitle ();
+    final String sRealAlt = StringHelper.hasText (m_sAlt) ? m_sAlt : sTitle;
+    aElement.setAttribute (CHTMLAttributes.ALT, sRealAlt);
 
     // If the title is empty, but the alternative text is present, use the
     // alternative text as title
-    if (StringHelper.hasNoText (getTitle ()) && StringHelper.hasText (m_sAlt))
+    // The default "title" attribute is set in a base class!
+    if (StringHelper.hasNoText (sTitle) && StringHelper.hasText (m_sAlt))
       aElement.setAttribute (CHTMLAttributes.TITLE, m_sAlt);
   }
 
