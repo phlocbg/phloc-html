@@ -5,7 +5,7 @@
 <tr><td>6/4/12</td><td>change</td><td>api</td><td>*yes*</td><td>Changed the IHCCustomizer interface to also take the EHTMLVersion required for customization</td></tr>
 <tr><td>6/4/12</td><td>change</td><td>api</td><td></td><td>Marked CSSInlineHelper as deprecated because it only works on the first URL and does not parse the CSS correctly</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Add HC`*` classes so that they match the form "HC" + "HTML ElementName" and deprecated the old classes</td></tr>
-<tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Extracted IHCConversionSettings interface from HCConversionSettings</td></tr>
+<tr><td>6/4/12</td><td>add</td><td>api</td><td>*yes*</td><td>Extracted IHCConversionSettings interface from HCConversionSettings</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Added more getter methods in HC`*` classes</td></tr>
 <tr><td>6/4/12</td><td>add</td><td>api</td><td></td><td>Added special HTML5 IHCConversionSettingsProvider</td></tr>
 <tr><td>6/4/12</td><td>fix</td><td>tech</td><td></td><td>Not emitting XML namespace in HTML5 documents</td></tr>
