@@ -8,7 +8,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>phloc-html</artifactId>
-  <version>3.2.0</version>
+  <version>3.2.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>phloc-html</name>
   <url>http://repo.phloc.com/apidocs/phloc-html/${project.version}</url>
@@ -22,9 +22,9 @@
   </licenses>
   
   <scm>
-    <url>http://code.google.com/p/phloc-html/source/browse/tags/phloc-html-3.2.0</url>
-    <connection>scm:svn:http://phloc-html.googlecode.com/svn/tags/phloc-html-3.2.0</connection>
-    <developerConnection>scm:svn:https://phloc-html.googlecode.com/svn/tags/phloc-html-3.2.0</developerConnection>
+    <url>http://code.google.com/p/phloc-html/source/browse/</url>
+    <connection>scm:svn:http://phloc-html.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:svn:https://phloc-html.googlecode.com/svn/trunk</developerConnection>
   </scm>
 
   <distributionManagement>
