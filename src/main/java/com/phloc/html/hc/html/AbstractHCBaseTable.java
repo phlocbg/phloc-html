@@ -283,6 +283,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return !m_aBodyRows.isEmpty ();
   }
 
+  @Nonnegative
   public final int getBodyRowCount ()
   {
     return m_aBodyRows.size ();
@@ -305,6 +306,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final HCRow getFirstBodyRow ()
   {
     return ContainerHelper.getFirstElement (m_aBodyRows);
+  }
+
+  @Nullable
+  public final HCRow getBodyRowAtIndex (@Nonnegative final int nIndex)
+  {
+    return ContainerHelper.getSafe (m_aBodyRows, nIndex);
   }
 
   @Nullable
@@ -392,7 +399,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     if (nCols == 0 && aBaseTable.m_aHeaderRow != null)
       nCols = aBaseTable.m_aHeaderRow.getEffectiveCellCount ();
     if (nCols == 0 && !aBaseTable.m_aBodyRows.isEmpty ())
-      nCols = aBaseTable.m_aBodyRows.get (0).getEffectiveCellCount ();
+      nCols = aBaseTable.getFirstBodyRow ().getEffectiveCellCount ();
     if (nCols == 0 && aBaseTable.m_aFooterRow != null)
       nCols = aBaseTable.m_aFooterRow.getEffectiveCellCount ();
 
