@@ -607,7 +607,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
 
     if (m_aClasses != null && !m_aClasses.isEmpty ())
-      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.implode (" ", m_aClasses));
+      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.getImploded (" ", m_aClasses));
 
     if (m_aStyles != null && !m_aStyles.isEmpty ())
     {

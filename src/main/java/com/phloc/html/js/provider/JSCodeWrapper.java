@@ -99,7 +99,7 @@ public final class JSCodeWrapper
       throw new NullPointerException ("implementation");
 
     final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
-    aSB.append ("function(" + StringHelper.implode (",", sParameters) + "){").append (aImplementation).append ("}");
+    aSB.append ("function(" + StringHelper.getImploded (",", sParameters) + "){").append (aImplementation).append ("}");
     return aSB;
   }
 }

@@ -37,7 +37,7 @@ public final class EHTMLEntityTest
     {
       assertTrue (StringHelper.hasText (e.getEntityName ()));
       assertTrue (StringHelper.hasText (e.getEntityReference ()));
-      assertTrue (e.toString (), StringHelper.length (e.getChar ()) >= 1);
+      assertTrue (e.toString (), StringHelper.getLength (e.getChar ()) >= 1);
     }
   }
 }
