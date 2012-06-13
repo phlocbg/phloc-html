@@ -33,7 +33,7 @@ public enum EHCPreload implements IHCHasHTMLAttributeValue
   METADATA ("metadata"),
   DONE ("none");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCPreload (@Nonnull @Nonempty final String sAttrValue)
   {

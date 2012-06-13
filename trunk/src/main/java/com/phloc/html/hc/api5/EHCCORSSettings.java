@@ -35,7 +35,7 @@ public enum EHCCORSSettings implements IHCHasHTMLAttributeValue
   @Nonnull
   public static final EHCCORSSettings DEFAULT = ANONYMOUS;
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCCORSSettings (@Nonnull @Nonempty final String sAttrValue)
   {

@@ -45,7 +45,7 @@ public enum EHCDropZone implements IHCHasHTMLAttributeValue
    */
   LINK ("link");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCDropZone (@Nonnull @Nonempty final String sAttrValue)
   {

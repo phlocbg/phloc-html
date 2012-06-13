@@ -34,7 +34,7 @@ public enum EHCCellAlign implements IHCHasHTMLAttributeValue
   JUSTIFY ("justify"),
   CHAR ("char");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCCellAlign (@Nonnull @Nonempty final String sAttrValue)
   {

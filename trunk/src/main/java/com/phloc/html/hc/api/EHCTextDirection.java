@@ -49,7 +49,7 @@ public enum EHCTextDirection implements IHCHasHTMLAttributeValue
    */
   public static final EHCTextDirection DEFAULT_HTML5 = AUTO;
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCTextDirection (@Nonnull @Nonempty final String sAttrValue)
   {

@@ -38,7 +38,7 @@ public enum EJSEventType implements IHasID <String>
   MEDIA ("media"),
   TOUCH ("touch");
 
-  private String m_sID;
+  private final String m_sID;
 
   private EJSEventType (@Nonnull @Nonempty final String sID)
   {

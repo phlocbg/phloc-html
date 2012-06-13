@@ -36,7 +36,7 @@ public enum EHCCommandType implements IHCHasHTMLAttributeValue
   @Nonnull
   public static final EHCCommandType DEFAULT = COMMAND;
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCCommandType (@Nonnull @Nonempty final String sAttrValue)
   {

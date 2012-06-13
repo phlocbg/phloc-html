@@ -33,7 +33,7 @@ public enum EHCContentEditable implements IHCHasHTMLAttributeValue
   FALSE ("false"),
   INHERIT ("inherit");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCContentEditable (@Nonnull @Nonempty final String sAttrValue)
   {

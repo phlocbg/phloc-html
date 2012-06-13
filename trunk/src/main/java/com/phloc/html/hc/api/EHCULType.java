@@ -34,7 +34,7 @@ public enum EHCULType implements IHCHasHTMLAttributeValue
   SQUARE ("square"),
   CIRCLE ("circle");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCULType (@Nonnull @Nonempty final String sAttrValue)
   {
