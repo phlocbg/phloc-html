@@ -63,8 +63,8 @@ public enum EHCLinkType implements IHCLinkType
   DC_SCHEMA ("schema.DC"),
   DC_SCHEMA_TERMS ("schema.DCTERMS");
 
-  private String m_sAttrValue;
-  private boolean m_bAllowedMoreThanOnce;
+  private final String m_sAttrValue;
+  private final boolean m_bAllowedMoreThanOnce;
 
   private EHCLinkType (@Nonnull @Nonempty final String sAttrValue)
   {

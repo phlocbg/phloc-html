@@ -27,7 +27,7 @@ public enum EHCButtonType implements IHCHasHTMLAttributeValue
   RESET ("reset"),
   BUTTON ("button");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCButtonType (@Nonnull @Nonempty final String sAttrValue)
   {

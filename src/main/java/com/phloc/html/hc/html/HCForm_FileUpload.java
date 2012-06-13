@@ -50,7 +50,7 @@ public final class HCForm_FileUpload extends HCForm
   }
 
   @Nonnull
-  public final IMimeType getEncType ()
+  public IMimeType getEncType ()
   {
     return CMimeType.MULTIPART_FORMDATA;
   }

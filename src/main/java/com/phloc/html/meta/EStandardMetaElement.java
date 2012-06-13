@@ -55,7 +55,7 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
   COPYRIGHT ("Copyright", false);
 
   private final String m_sName;
-  private boolean m_bIsHttpEquiv;
+  private final boolean m_bIsHttpEquiv;
 
   private EStandardMetaElement (@Nonnull @Nonempty final String sName, final boolean bIsHttpEquiv)
   {

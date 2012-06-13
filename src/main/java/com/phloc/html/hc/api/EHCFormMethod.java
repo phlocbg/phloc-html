@@ -33,7 +33,7 @@ public enum EHCFormMethod implements IHCHasHTMLAttributeValue
   GET ("GET"),
   POST ("POST");
 
-  private String m_sMethod;
+  private final String m_sMethod;
 
   private EHCFormMethod (@Nonnull final String sMethod)
   {

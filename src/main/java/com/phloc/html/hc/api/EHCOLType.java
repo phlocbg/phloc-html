@@ -36,7 +36,7 @@ public enum EHCOLType implements IHCHasHTMLAttributeValue
   ROMAN_LOWERCASE ("i"),
   ROMAN_UPPERCASE ("I");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCOLType (@Nonnull @Nonempty final String sAttrValue)
   {

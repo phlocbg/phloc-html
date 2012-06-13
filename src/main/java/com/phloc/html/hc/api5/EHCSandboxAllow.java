@@ -34,7 +34,7 @@ public enum EHCSandboxAllow implements IHCHasHTMLAttributeValue
   ALLOW_TOP_NAVIGATION ("allow-top-navigation"),
   ALLOW_SAME_ORIGIN ("allow-same-origin");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCSandboxAllow (@Nonnull @Nonempty final String sAttrValue)
   {

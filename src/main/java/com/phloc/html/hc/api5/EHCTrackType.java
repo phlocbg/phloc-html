@@ -35,7 +35,7 @@ public enum EHCTrackType implements IHCHasHTMLAttributeValue
   CHAPTERS ("chapters"),
   METADATA ("metadata");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCTrackType (@Nonnull @Nonempty final String sAttrValue)
   {

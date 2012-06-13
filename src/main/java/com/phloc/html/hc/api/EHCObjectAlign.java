@@ -34,7 +34,7 @@ public enum EHCObjectAlign implements IHCHasHTMLAttributeValue
   LEFT ("left"),
   RIGHT ("right");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCObjectAlign (@Nonnull @Nonempty final String sAttrValue)
   {

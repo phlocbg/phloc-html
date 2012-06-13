@@ -49,7 +49,7 @@ public enum EHCKeyGenType implements IHCHasHTMLAttributeValue
 
   public static final EHCKeyGenType DEFAULT = RSA;
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCKeyGenType (@Nonnull @Nonempty final String sAttrValue)
   {

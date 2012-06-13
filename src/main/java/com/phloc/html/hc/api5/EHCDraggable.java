@@ -33,7 +33,7 @@ public enum EHCDraggable implements IHCHasHTMLAttributeValue
   FALSE ("false"),
   AUTO ("auto");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCDraggable (@Nonnull @Nonempty final String sAttrValue)
   {

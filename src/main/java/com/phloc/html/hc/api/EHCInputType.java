@@ -48,7 +48,7 @@ public enum EHCInputType implements IHCHasHTMLAttributeValue
   TEL ("tel"),
   COLOR ("color");
 
-  private String m_sAttrValue;
+  private final String m_sAttrValue;
 
   private EHCInputType (@Nonnull @Nonempty final String sAttrValue)
   {

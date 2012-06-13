@@ -50,7 +50,7 @@ public final class HCDOMWrapper extends AbstractHCNode
   }
 
   @Nonnull
-  public final IMicroNode getNode ()
+  public IMicroNode getNode ()
   {
     return m_aNode;
   }
