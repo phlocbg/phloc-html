@@ -29,11 +29,11 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.css.CCSS;
-import com.phloc.css.html.DefaultCSSClassProvider;
-import com.phloc.css.html.ICSSClassProvider;
 import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.css.DefaultCSSClassProvider;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.HCEntityNode;
 

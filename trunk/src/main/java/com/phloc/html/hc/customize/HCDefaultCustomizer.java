@@ -22,9 +22,9 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.idfactory.GlobalIDFactory;
-import com.phloc.css.html.DefaultCSSClassProvider;
-import com.phloc.css.html.ICSSClassProvider;
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.css.DefaultCSSClassProvider;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
