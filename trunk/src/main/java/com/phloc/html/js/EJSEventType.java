@@ -53,7 +53,7 @@ public enum EJSEventType implements IHasID <String>
   }
 
   @Nullable
-  public EJSEventType getFromIDOrNull (@Nullable final String sID)
+  public static EJSEventType getFromIDOrNull (@Nullable final String sID)
   {
     return EnumHelper.getFromIDOrNull (EJSEventType.class, sID);
   }
