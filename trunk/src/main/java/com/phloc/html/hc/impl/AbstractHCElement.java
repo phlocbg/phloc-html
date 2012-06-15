@@ -45,8 +45,9 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.xml.CXML;
 import com.phloc.css.ECSSProperty;
-import com.phloc.css.ICSSClassProvider;
-import com.phloc.css.ICSSValue;
+import com.phloc.css.html.ICSSClassProvider;
+import com.phloc.css.propertyvalue.ICSSValue;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -610,10 +611,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
     if (m_aStyles != null && !m_aStyles.isEmpty ())
     {
-      final boolean bOptimizedCSS = !aConversionSettings.isIdentAndAlignCSS ();
+      final CSSWriterSettings aCSSSettings = new CSSWriterSettings (aConversionSettings.getCSSVersion (),
+                                                                    !aConversionSettings.isIdentAndAlignCSS ());
       final StringBuilder aSB = new StringBuilder ();
       for (final ICSSValue aValue : m_aStyles.values ())
-        aSB.append (aValue.getAsCSSString (aConversionSettings.getCSSVersion (), bOptimizedCSS));
+        aSB.append (aValue.getAsCSSString (aCSSSettings, 0));
       aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
     }
 
