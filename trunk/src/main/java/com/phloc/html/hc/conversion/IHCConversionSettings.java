@@ -19,6 +19,7 @@ package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
@@ -36,6 +37,12 @@ public interface IHCConversionSettings
    *         aligned.
    */
   boolean isIdentAndAlignHTML ();
+
+  /**
+   * @return The CSS version to be used
+   */
+  @Nonnull
+  ECSSVersion getCSSVersion ();
 
   /**
    * @return <code>true</code> if the CSS output should be indented and aligned.
