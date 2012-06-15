@@ -20,6 +20,7 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
@@ -28,11 +29,13 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 public final class HCConversionSettings implements IHCConversionSettings
 {
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  public static final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
   public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
   public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
 
   private final EHTMLVersion m_eHTMLVersion;
   private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN_HTML;
+  private ECSSVersion m_eCSSVersion = DEFAULT_CSS_VERSION;
   private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN_CSS;
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
   private IHCCustomizer m_aCustomizer = new HCDefaultCustomizer ();
@@ -81,6 +84,28 @@ public final class HCConversionSettings implements IHCConversionSettings
   public boolean isIdentAndAlignHTML ()
   {
     return m_bIndentAndAlignHTML;
+  }
+
+  /**
+   * Set the CSS version to be used.
+   * 
+   * @param eCSSVersion
+   *        The new value.
+   * @return this
+   */
+  @Nonnull
+  public HCConversionSettings setCSSVersion (@Nonnull final ECSSVersion eCSSVersion)
+  {
+    if (eCSSVersion == null)
+      throw new NullPointerException ("CSSVersion");
+    m_eCSSVersion = eCSSVersion;
+    return this;
+  }
+
+  @Nonnull
+  public ECSSVersion getCSSVersion ()
+  {
+    return m_eCSSVersion;
   }
 
   /**
