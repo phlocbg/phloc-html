@@ -22,7 +22,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.css.ECSSProperty;
+import com.phloc.css.property.ECSSProperty;
 
 @Immutable
 @Deprecated

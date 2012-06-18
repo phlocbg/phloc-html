@@ -44,7 +44,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.xml.CXML;
-import com.phloc.css.ECSSProperty;
+import com.phloc.css.property.ECSSProperty;
 import com.phloc.css.propertyvalue.ICSSValue;
 import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributeValues;
