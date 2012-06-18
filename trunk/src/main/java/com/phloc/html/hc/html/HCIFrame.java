@@ -25,7 +25,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
-import com.phloc.css.CCSS;
+import com.phloc.css.ECSSUnit;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
@@ -186,7 +186,7 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   @Nonnull
   public final HCIFrame setWidthPercentage (final double dPercentage)
   {
-    m_sWidth = CCSS.perc (dPercentage);
+    m_sWidth = ECSSUnit.perc (dPercentage);
     return this;
   }
 
@@ -207,7 +207,7 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   @Nonnull
   public final HCIFrame setHeightPercentage (final double dPercentage)
   {
-    m_sHeight = CCSS.perc (dPercentage);
+    m_sHeight = ECSSUnit.perc (dPercentage);
     return this;
   }
 

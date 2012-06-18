@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.css.CCSS;
+import com.phloc.css.ECSSUnit;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -111,7 +111,7 @@ public final class HCCol extends AbstractHCElement <HCCol>
   @Nonnull
   public static HCCol perc (final int nPerc)
   {
-    return new HCCol (CCSS.perc (nPerc));
+    return new HCCol (ECSSUnit.perc (nPerc));
   }
 
   @Nonnull
