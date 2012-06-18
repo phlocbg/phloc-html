@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.css.ECSSProperty;
+import com.phloc.css.property.ECSSProperty;
 import com.phloc.css.propertyvalue.ICSSValue;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
