@@ -269,6 +269,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  @Deprecated
+  public final THISTYPE addStyles (@Nullable final ICSSValue aValue)
+  {
+    return addStyle (aValue);
+  }
+
+  @Nonnull
   public final THISTYPE addStyles (@Nullable final ICSSValue... aValues)
   {
     if (aValues != null)
