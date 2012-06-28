@@ -211,7 +211,7 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
   }
 
   @Nonnull
-  public final HCObject setDeclare (@Nullable final boolean bDeclare)
+  public final HCObject setDeclare (final boolean bDeclare)
   {
     m_bDeclare = bDeclare;
     return this;
