@@ -17,11 +17,14 @@
  */
 package com.phloc.html.js.provider;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
@@ -78,28 +81,49 @@ public final class JSCodeWrapper
   public static CollectingJSCodeProvider getVariableAssignment (@Nonnull @Nonempty final String sName,
                                                                 @Nullable final Object aInitialValue)
   {
-    if (StringHelper.hasNoText (sName))
-      throw new IllegalArgumentException ("name");
-
-    final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
-    aSB.append ("var ").append (sName);
-    if (aInitialValue != null)
-    {
-      aSB.append ('=').append (JSMarshaller.objectToJSString (aInitialValue));
-    }
-    aSB.appendSemicolon ();
-    return aSB;
+    // Default: with variable assignment
+    return getVariableAssignment (true, sName, aInitialValue);
   }
 
   @Nonnull
+  public static CollectingJSCodeProvider getVariableAssignment (final boolean bWithVarKeyword,
+                                                                @Nonnull @Nonempty final String sName,
+                                                                @Nullable final Object aInitialValue)
+  {
+    if (StringHelper.hasNoText (sName))
+      throw new IllegalArgumentException ("name");
+
+    final CollectingJSCodeProvider aJSC = new CollectingJSCodeProvider ();
+    if (bWithVarKeyword)
+      aJSC.append ("var ");
+    aJSC.append (sName);
+    if (aInitialValue != null)
+    {
+      aJSC.append ('=').append (JSMarshaller.objectToJSString (aInitialValue));
+    }
+    aJSC.appendSemicolon ();
+    return aJSC;
+  }
+
+  @Nonnull
+  @Deprecated
   public static CollectingJSCodeProvider getInlineFunction (@Nonnull final IJSCodeProvider aImplementation,
-                                                            @Nullable final String... sParameters)
+                                                            @Nullable final String... aParameters)
+  {
+    return getInlineFunction (ContainerHelper.newList (aParameters), aImplementation);
+  }
+
+  @Nonnull
+  public static CollectingJSCodeProvider getInlineFunction (@Nullable final List <String> aParameterNames,
+                                                            @Nonnull final IJSCodeProvider aImplementation)
   {
     if (aImplementation == null)
       throw new NullPointerException ("implementation");
 
     final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
-    aSB.append ("function(" + StringHelper.getImploded (",", sParameters) + "){").append (aImplementation).append ("}");
+    aSB.append ("function(" + StringHelper.getImploded (",", aParameterNames) + "){")
+       .append (aImplementation)
+       .append ("}");
     return aSB;
   }
 }
