@@ -48,7 +48,7 @@ public final class DefaultCSSClassProvider implements ICSSClassProvider
   {
     if (StringHelper.hasNoText (sCSSClass))
       throw new IllegalArgumentException ("Empty CSS class provided");
-    if (sCSSClass.contains (" "))
+    if (sCSSClass.indexOf (' ') >= 0)
       throw new IllegalArgumentException ("CSS class may not contain spaces '" + sCSSClass + "'");
     {
       // Happens more frequently because people are reusing existing attributes
