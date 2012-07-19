@@ -26,6 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
+import com.phloc.json.IJSON;
 
 public final class CollectingJSCodeProvider implements IJSCodeProvider
 {
@@ -34,16 +35,28 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   public CollectingJSCodeProvider ()
   {}
 
-  public CollectingJSCodeProvider (@Nullable final CharSequence aCS)
+  public CollectingJSCodeProvider (@Nullable final CharSequence... aCSs)
   {
-    append (aCS);
+    if (aCSs != null)
+      for (final CharSequence aCS : aCSs)
+        if (aCS != null)
+          append (aCS);
   }
 
-  public CollectingJSCodeProvider (@Nonnull final IJSCodeProvider... aProviders)
+  public CollectingJSCodeProvider (@Nullable final IJSCodeProvider... aProviders)
   {
-    for (final IJSCodeProvider aProvider : aProviders)
-      if (aProvider != null)
-        append (aProvider);
+    if (aProviders != null)
+      for (final IJSCodeProvider aProvider : aProviders)
+        if (aProvider != null)
+          append (aProvider);
+  }
+
+  public CollectingJSCodeProvider (@Nullable final IJSON... aJSONs)
+  {
+    if (aJSONs != null)
+      for (final IJSON aJSON : aJSONs)
+        if (aJSON != null)
+          append (aJSON);
   }
 
   @Nonnull
@@ -94,6 +107,14 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
       return append ((CollectingJSCodeProvider) aProvider);
     if (aProvider != null)
       append (aProvider.getJSCode ());
+    return this;
+  }
+
+  @Nonnull
+  public CollectingJSCodeProvider append (@Nullable final IJSON aJSON)
+  {
+    if (aJSON != null)
+      append (aJSON.getJSONString ());
     return this;
   }
 
