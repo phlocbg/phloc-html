@@ -26,6 +26,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.media.CSSMediaList;
+import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -43,7 +44,19 @@ public final class CSSInline extends AbstractCSSHTMLDefinition implements ICSSIn
 
   public CSSInline (@Nonnull @Nonempty final String sContent)
   {
-    this (sContent, null, null);
+    this (sContent, (CSSMediaList) null, (ConditionalComment) null);
+  }
+
+  public CSSInline (@Nonnull @Nonempty final String sContent, @Nonnull final ECSSMedium eMedium)
+  {
+    this (sContent, eMedium, (ConditionalComment) null);
+  }
+
+  public CSSInline (@Nonnull @Nonempty final String sContent,
+                    @Nonnull final ECSSMedium eMedium,
+                    @Nullable final ConditionalComment aCC)
+  {
+    this (sContent, new CSSMediaList (eMedium), aCC);
   }
 
   public CSSInline (@Nonnull @Nonempty final String sContent,
