@@ -26,6 +26,7 @@ import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.media.CSSMediaList;
+import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCLinkType;
@@ -44,7 +45,19 @@ public final class CSSExternal extends AbstractCSSHTMLDefinition implements ICSS
 
   public CSSExternal (@Nonnull final ISimpleURL aHref)
   {
-    this (aHref, null, null);
+    this (aHref, (CSSMediaList) null, (ConditionalComment) null);
+  }
+
+  public CSSExternal (@Nonnull final ISimpleURL aHref, @Nonnull final ECSSMedium eMedium)
+  {
+    this (aHref, eMedium, (ConditionalComment) null);
+  }
+
+  public CSSExternal (@Nonnull final ISimpleURL aHref,
+                      @Nonnull final ECSSMedium eMedium,
+                      @Nullable final ConditionalComment aCC)
+  {
+    this (aHref, new CSSMediaList (eMedium), aCC);
   }
 
   public CSSExternal (@Nonnull final ISimpleURL aHref,
