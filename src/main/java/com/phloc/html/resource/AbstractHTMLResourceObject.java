@@ -15,48 +15,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource.css;
+package com.phloc.html.resource;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.resource.AbstractHTMLResourceObject;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @Immutable
-public abstract class AbstractCSSHTMLDefinition extends AbstractHTMLResourceObject implements ICSSHTMLDefinition
+public abstract class AbstractHTMLResourceObject implements IHTMLResourceObject
 {
-  private final CSSMediaList m_aMedia;
+  private final ConditionalComment m_aCC;
 
-  public AbstractCSSHTMLDefinition ()
+  public AbstractHTMLResourceObject ()
   {
-    this ((CSSMediaList) null, (ConditionalComment) null);
+    this ((ConditionalComment) null);
   }
 
-  public AbstractCSSHTMLDefinition (@Nullable final CSSMediaList aMedia)
+  public AbstractHTMLResourceObject (@Nullable final ConditionalComment aCC)
   {
-    this (aMedia, (ConditionalComment) null);
+    m_aCC = aCC;
   }
 
-  public AbstractCSSHTMLDefinition (@Nullable final CSSMediaList aMedia, @Nullable final ConditionalComment aCC)
+  public final boolean hasConditionalComment ()
   {
-    super (aCC);
-    m_aMedia = aMedia == null ? new CSSMediaList () : aMedia;
+    return m_aCC != null;
   }
 
-  public final boolean hasMedia ()
+  @Nullable
+  public final ConditionalComment getConditionalComment ()
   {
-    return m_aMedia.hasMedia ();
+    return m_aCC;
   }
 
   @Nonnull
-  public final CSSMediaList getMedia ()
+  public final IMicroNode getAsMicroNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return m_aMedia;
+    return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
   }
 
   @Override
@@ -64,21 +65,21 @@ public abstract class AbstractCSSHTMLDefinition extends AbstractHTMLResourceObje
   {
     if (o == this)
       return true;
-    if (!super.equals (o))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
-    final AbstractCSSHTMLDefinition rhs = (AbstractCSSHTMLDefinition) o;
-    return m_aMedia.equals (rhs.m_aMedia);
+    final AbstractHTMLResourceObject rhs = (AbstractHTMLResourceObject) o;
+    return EqualsUtils.equals (m_aCC, rhs.m_aCC);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aMedia).getHashCode ();
+    return new HashCodeGenerator (this).append (m_aCC).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("media", m_aMedia).toString ();
+    return new ToStringGenerator (this).appendIfNotNull ("conditionalComment", m_aCC).toString ();
   }
 }

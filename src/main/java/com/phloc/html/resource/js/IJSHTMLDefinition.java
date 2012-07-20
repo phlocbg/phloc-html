@@ -17,23 +17,14 @@
  */
 package com.phloc.html.resource.js;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.resource.IHTMLResourceObject;
 
 /**
  * Base interface for JS external and inline objects.
  * 
  * @author philip
  */
-public interface IJSHTMLDefinition extends IHasConditionalComment
+public interface IJSHTMLDefinition extends IHTMLResourceObject
 {
-  @Nonnull
-  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
-
-  @Nonnull
-  IMicroNode getAsMicroNode (@Nonnull IHCConversionSettings aConversionSettings);
+  /* empty */
 }

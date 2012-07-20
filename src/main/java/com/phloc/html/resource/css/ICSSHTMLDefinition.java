@@ -19,21 +19,19 @@ package com.phloc.html.resource.css;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.css.media.CSSMediaList;
-import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.resource.IHTMLResourceObject;
 
 /**
  * Base interface for both external and inline CSS declarations in HTML.
  * 
  * @author philip
  */
-public interface ICSSHTMLDefinition extends IHasConditionalComment
+public interface ICSSHTMLDefinition extends IHTMLResourceObject
 {
   /**
-   * @return <code>true</code> if special media properties are defined.
+   * @return <code>true</code> if the media list contains at least one specific
+   *         medium.
    */
   boolean hasMedia ();
 
@@ -43,10 +41,4 @@ public interface ICSSHTMLDefinition extends IHasConditionalComment
    */
   @Nonnull
   CSSMediaList getMedia ();
-
-  @Nonnull
-  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
-
-  @Nonnull
-  IMicroNode getAsMicroNode (@Nonnull IHCConversionSettings aConversionSettings);
 }

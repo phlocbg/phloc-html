@@ -15,24 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource.js;
+package com.phloc.html.resource;
 
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.Nonnull;
 
-import com.phloc.html.condcomment.ConditionalComment;
-import com.phloc.html.resource.AbstractHTMLResourceObject;
+import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.html.condcomment.IHasConditionalComment;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
-@Immutable
-public abstract class AbstractJSHTMLDefinition extends AbstractHTMLResourceObject
+/**
+ * Base interface for both CSS and JS declarations in HTML.
+ * 
+ * @author philip
+ */
+public interface IHTMLResourceObject extends IHasConditionalComment
 {
-  public AbstractJSHTMLDefinition ()
-  {
-    super ();
-  }
+  @Nonnull
+  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
 
-  public AbstractJSHTMLDefinition (@Nullable final ConditionalComment aCC)
-  {
-    super (aCC);
-  }
+  @Nonnull
+  IMicroNode getAsMicroNode (@Nonnull IHCConversionSettings aConversionSettings);
 }
