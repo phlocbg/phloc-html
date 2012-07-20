@@ -35,7 +35,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * @author philip
  */
 @Immutable
-public final class JSInline extends AbstractJSHTMLDefinition implements IJSInline
+public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
 {
   private final IJSCodeProvider m_aContent;
 

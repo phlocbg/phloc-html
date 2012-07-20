@@ -38,7 +38,7 @@ import com.phloc.html.hc.html.HCStyle;
  * @author philip
  */
 @Immutable
-public final class CSSInline extends AbstractCSSHTMLDefinition implements ICSSInline
+public class CSSInline extends AbstractCSSHTMLDefinition implements ICSSInline
 {
   private final String m_sContent;
 
