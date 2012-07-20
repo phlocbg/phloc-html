@@ -47,14 +47,19 @@ public class CSSInline extends AbstractCSSHTMLDefinition implements ICSSInline
     this (sContent, (CSSMediaList) null, (ConditionalComment) null);
   }
 
-  public CSSInline (@Nonnull @Nonempty final String sContent, @Nullable final ConditionalComment aCC)
-  {
-    this (sContent, (CSSMediaList) null, aCC);
-  }
-
   public CSSInline (@Nonnull @Nonempty final String sContent, @Nonnull final ECSSMedium eMedium)
   {
     this (sContent, eMedium, (ConditionalComment) null);
+  }
+
+  public CSSInline (@Nonnull @Nonempty final String sContent, @Nullable final CSSMediaList aMedia)
+  {
+    this (sContent, aMedia, (ConditionalComment) null);
+  }
+
+  public CSSInline (@Nonnull @Nonempty final String sContent, @Nullable final ConditionalComment aCC)
+  {
+    this (sContent, (CSSMediaList) null, aCC);
   }
 
   public CSSInline (@Nonnull @Nonempty final String sContent,
