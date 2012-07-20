@@ -39,7 +39,7 @@ import com.phloc.html.hc.html.HCLink;
  * @author philip
  */
 @Immutable
-public final class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExternal
+public class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExternal
 {
   private final ISimpleURL m_aHref;
 
