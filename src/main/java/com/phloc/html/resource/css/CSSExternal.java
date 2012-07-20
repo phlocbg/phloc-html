@@ -48,6 +48,11 @@ public class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExtern
     this (aHref, (CSSMediaList) null, (ConditionalComment) null);
   }
 
+  public CSSExternal (@Nonnull final ISimpleURL aHref, @Nullable final ConditionalComment aCC)
+  {
+    this (aHref, (CSSMediaList) null, aCC);
+  }
+
   public CSSExternal (@Nonnull final ISimpleURL aHref, @Nonnull final ECSSMedium eMedium)
   {
     this (aHref, eMedium, (ConditionalComment) null);
