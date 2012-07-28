@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc;
 
-
 /**
  * Interface for elements having children.
  * 

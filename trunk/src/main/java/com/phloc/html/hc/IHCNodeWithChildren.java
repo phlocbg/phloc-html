@@ -32,8 +32,8 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
  *        The type of the contained child objects.
  */
 public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THISTYPE>> extends
-                                                                             IHCNode,
-                                                                             IHasChildrenSorted <IHCBaseNode>
+                                                                                       IHCNode,
+                                                                                       IHasChildrenSorted <IHCBaseNode>
 {
   /**
    * @param aTextProvider
