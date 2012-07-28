@@ -38,7 +38,7 @@ import com.phloc.html.CHTMLDocTypes;
 
 /**
  * The SAX entity resolver for XHTML resources.
- *
+ * 
  * @author philip
  */
 public final class HTMLEntityResolver implements EntityResolver

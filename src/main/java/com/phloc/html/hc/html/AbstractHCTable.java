@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.StringParser;
 import com.phloc.css.ECSSUnit;
 import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.CHTMLAttributes;
@@ -171,7 +172,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
         for (final HCCol aCol : m_aColGroup.getColumns ())
         {
           final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
-          final int nWidth = StringHelper.parseInt (aCol.getWidth (), -1);
+          final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
           if (nWidth >= 0)
             aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
         }

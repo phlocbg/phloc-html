@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc;
 
-
 public interface IHCRequestFieldBoolean extends IHCRequestField
 {
   /**

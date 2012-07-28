@@ -39,11 +39,11 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
   /** XML writer settings for emitting stuff indented and aligned */
   private static final IXMLWriterSettings s_aXMLSettingsIndent = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
-                                                                                                                                  .setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
+                                                                                                                                 .setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
 
   /** XML writer settings for emitting stuff not indented and not aligned */
   private static final IXMLWriterSettings s_aXMLSettingsNotIndented = new XMLWriterSettings (XMLWriterSettings.SUGGESTED_XML_SETTINGS).setFormat (EXMLSerializeFormat.HTML)
-                                                                                                                                     .setIndent (EXMLSerializeIndent.NONE);
+                                                                                                                                      .setIndent (EXMLSerializeIndent.NONE);
 
   @Nonnull
   public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)

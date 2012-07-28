@@ -36,6 +36,7 @@ public class HCA_JS extends HCA
      * href gets called (due to double click etc.) it has no effect.
      **/
     super (JS_URL);
-    addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (cleanJSLink (aJSOnClick, true)).append ("return false;"));
+    addEventHandler (EJSEvent.ONCLICK,
+                     new CollectingJSCodeProvider (cleanJSLink (aJSOnClick, true)).append ("return false;"));
   }
 }
