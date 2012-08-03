@@ -20,6 +20,17 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-08-03" version="3.3.3" />
+  <entry date="2012-08-03" category="api" action="remove">
+    <change>
+      <text locale="en">Removed 3 JSAction* classes as they were very unmotivated :)</text>
+    </change>
+  </entry>
+  <entry date="2012-07-20" category="api" action="add">
+    <change>
+      <text locale="en">Added new constructors to CSSExternal and CSSInternal</text>
+    </change>
+  </entry>
   <release date="2012-07-20" version="3.3.2" />
   <entry date="2012-07-20" category="api" action="add">
     <change>
