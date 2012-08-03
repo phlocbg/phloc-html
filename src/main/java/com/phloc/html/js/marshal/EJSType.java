@@ -24,32 +24,15 @@ package com.phloc.html.js.marshal;
  */
 enum EJSType
 {
-  HTML ('h'),
-  STRING ('s'),
-  INT ('i'),
-  DOUBLE ('d'),
-  BOOLEAN ('b'),
+  HTML,
+  STRING,
+  INT,
+  DOUBLE,
+  BOOLEAN,
   ARRAY,
   LIST,
   MAP,
   VOID,
   JS,
   JSON;
-
-  private final char m_cPrefix;
-
-  private EJSType ()
-  {
-    this ('\000');
-  }
-
-  private EJSType (final char cPrefix)
-  {
-    m_cPrefix = cPrefix;
-  }
-
-  public char getPrefix ()
-  {
-    return m_cPrefix;
-  }
 }

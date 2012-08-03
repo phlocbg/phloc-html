@@ -31,7 +31,7 @@ import com.phloc.html.annotations.SinceHTML5;
 /**
  * This enumeration contains all known java script events.
  * 
- * @author boris
+ * @author boris, philip
  */
 public enum EJSEvent
 {
