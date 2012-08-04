@@ -320,6 +320,15 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  public final THISTYPE addStyles (@Nullable final Iterable <? extends ICSSValue> aValues)
+  {
+    if (aValues != null)
+      for (final ICSSValue aValue : aValues)
+        addStyle (aValue);
+    return thisAsT ();
+  }
+
+  @Nonnull
   public final THISTYPE removeStyle (@Nonnull final ECSSProperty eProperty)
   {
     if (m_aStyles != null)
