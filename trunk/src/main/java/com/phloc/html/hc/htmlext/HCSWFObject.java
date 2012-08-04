@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.css.ECSSUnit;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
@@ -95,7 +96,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
   @Nonnull
   public final HCSWFObject setWidthPerc (final int nWidth)
   {
-    m_sWidth = Integer.toString (nWidth) + "%";
+    m_sWidth = ECSSUnit.perc (nWidth);
     return this;
   }
 
@@ -124,7 +125,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
   @Nonnull
   public final HCSWFObject setHeightPerc (final int nHeight)
   {
-    m_sHeight = Integer.toString (nHeight) + "%";
+    m_sHeight = ECSSUnit.perc (nHeight);
     return this;
   }
 

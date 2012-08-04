@@ -61,12 +61,16 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
 
   public HCHiddenField (@Nullable final String sName, final int nValue)
   {
-    this (sName, Integer.toString (nValue));
+    this ();
+    setName (sName);
+    setValue (nValue);
   }
 
   public HCHiddenField (@Nullable final String sName, final long nValue)
   {
-    this (sName, Long.toString (nValue));
+    this ();
+    setName (sName);
+    setValue (nValue);
   }
 
   public HCHiddenField (@Nullable final String sName, @Nonnull final Locale aLocale)
@@ -95,6 +99,18 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
   public final HCHiddenField setValue (final boolean bValue)
   {
     return setValue (bValue ? CHCParam.VALUE_CHECKED : CHCParam.VALUE_UNCHECKED);
+  }
+
+  @Nonnull
+  public final HCHiddenField setValue (final int nValue)
+  {
+    return setValue (Integer.toString (nValue));
+  }
+
+  @Nonnull
+  public final HCHiddenField setValue (final long nValue)
+  {
+    return setValue (Long.toString (nValue));
   }
 
   @Nonnull

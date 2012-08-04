@@ -53,12 +53,14 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
 
   public HCEdit (@Nullable final String sName, final int nValue)
   {
-    this (sName, Integer.toString (nValue));
+    this (sName);
+    setValue (nValue);
   }
 
   public HCEdit (@Nullable final String sName, final long nValue)
   {
-    this (sName, Long.toString (nValue));
+    this (sName);
+    setValue (nValue);
   }
 
   public HCEdit (@Nonnull final IHCRequestField aRF)
@@ -70,6 +72,18 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
   public final String getValue ()
   {
     return m_sValue;
+  }
+
+  @Nonnull
+  public final HCEdit setValue (final int nValue)
+  {
+    return setValue (Integer.toString (nValue));
+  }
+
+  @Nonnull
+  public final HCEdit setValue (final long nValue)
+  {
+    return setValue (Long.toString (nValue));
   }
 
   @Nonnull

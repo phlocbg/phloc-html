@@ -99,9 +99,9 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nCols > 0)
-      aElement.setAttribute (CHTMLAttributes.COLS, Integer.toString (m_nCols));
+      aElement.setAttribute (CHTMLAttributes.COLS, m_nCols);
     if (m_nRows > 0)
-      aElement.setAttribute (CHTMLAttributes.ROWS, Integer.toString (m_nRows));
+      aElement.setAttribute (CHTMLAttributes.ROWS, m_nRows);
 
     // If no children are present, add an empty text node so that an opening
     // and a closing tag are written separately

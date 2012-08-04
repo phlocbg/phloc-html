@@ -101,11 +101,15 @@ public enum EHTMLVersion
   public static final EHTMLVersion DEFAULT = XHTML11;
 
   /**
-   * @return The document type matching this HTML version
+   * @return The document type matching this HTML version. Never
+   *         <code>null</code>.
    */
   @Nonnull
   public abstract IMicroDocumentType getDocType ();
 
+  /**
+   * @return The XML namespace URI to use. May be <code>null</code>.
+   */
   @Nullable
   public abstract String getXMLNamespace ();
 

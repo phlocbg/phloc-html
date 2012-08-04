@@ -323,7 +323,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     if (m_bMultiple)
       aElement.setAttribute (CHTMLAttributes.MULTIPLE, CHTMLAttributeValues.MULTIPLE);
     if (m_nSize > 1)
-      aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
+      aElement.setAttribute (CHTMLAttributes.SIZE, m_nSize);
 
     if (hasOptions ())
     {

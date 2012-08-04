@@ -170,9 +170,9 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     if (StringHelper.hasText (m_sLongDesc))
       aElement.setAttribute (CHTMLAttributes.LONGDESC, m_sLongDesc);
     if (m_nMarginWidth >= 0)
-      aElement.setAttribute (CHTMLAttributes.MARGINWIDTH, Integer.toString (m_nMarginWidth));
+      aElement.setAttribute (CHTMLAttributes.MARGINWIDTH, m_nMarginWidth);
     if (m_nMarginHeight >= 0)
-      aElement.setAttribute (CHTMLAttributes.MARGINHEIGHT, Integer.toString (m_nMarginHeight));
+      aElement.setAttribute (CHTMLAttributes.MARGINHEIGHT, m_nMarginHeight);
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (m_bNoResize)
