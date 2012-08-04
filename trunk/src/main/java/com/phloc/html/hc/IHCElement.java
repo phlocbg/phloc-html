@@ -25,8 +25,6 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.css.property.ECSSProperty;
-import com.phloc.css.propertyvalue.ICSSValue;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.api.EHCTextDirection;
@@ -35,7 +33,7 @@ import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
-public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCNode
+public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCHasCSSStyles <THISTYPE>
 {
   /**
    * @return The contained HTML element. Never <code>null</code>.
@@ -101,28 +99,17 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   boolean hasClass (@Nonnull ICSSClassProvider aProvider);
 
-  /**
-   * Add an element specific style.
-   * 
-   * @param aValue
-   *        The value to be added. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addStyle (ICSSValue aValue);
+  @Nullable
+  EHCTextDirection getDirection ();
 
   @Nonnull
-  THISTYPE removeStyle (@Nonnull ECSSProperty eProperty);
+  THISTYPE setDirection (@Nullable EHCTextDirection eDirection);
 
-  boolean hasStyle (@Nullable ECSSProperty eProperty);
-
-  boolean hasStyle (@Nullable ICSSValue aValue);
-
-  @Nonnull
-  THISTYPE setDirection (EHCTextDirection eDirection);
+  @Nullable
+  String getLanguage ();
 
   @Nonnull
-  THISTYPE setLanguage (String sLanguage);
+  THISTYPE setLanguage (@Nullable String sLanguage);
 
   @Nonnull
   THISTYPE setEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
