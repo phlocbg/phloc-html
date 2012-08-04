@@ -255,9 +255,9 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     if (StringHelper.hasText (m_sHeight))
       aElement.setAttribute (CHTMLAttributes.HEIGHT, m_sHeight);
     if (m_nMarginWidth >= 0)
-      aElement.setAttribute (CHTMLAttributes.MARGINWIDTH, Integer.toString (m_nMarginWidth));
+      aElement.setAttribute (CHTMLAttributes.MARGINWIDTH, m_nMarginWidth);
     if (m_nMarginHeight >= 0)
-      aElement.setAttribute (CHTMLAttributes.MARGINHEIGHT, Integer.toString (m_nMarginHeight));
+      aElement.setAttribute (CHTMLAttributes.MARGINHEIGHT, m_nMarginHeight);
   }
 
   @Override

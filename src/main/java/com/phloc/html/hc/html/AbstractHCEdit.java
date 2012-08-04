@@ -97,9 +97,9 @@ public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nMaxLength > 0)
-      aElement.setAttribute (CHTMLAttributes.MAXLENGTH, Integer.toString (m_nMaxLength));
+      aElement.setAttribute (CHTMLAttributes.MAXLENGTH, m_nMaxLength);
     if (m_nSize > 0)
-      aElement.setAttribute (CHTMLAttributes.SIZE, Integer.toString (m_nSize));
+      aElement.setAttribute (CHTMLAttributes.SIZE, m_nSize);
   }
 
   @Override

@@ -145,8 +145,8 @@ public class HCImg extends AbstractHCElement <HCImg>
       aElement.setAttribute (CHTMLAttributes.SRC, m_sSrc);
     if (m_aExtent != null)
     {
-      aElement.setAttribute (CHTMLAttributes.WIDTH, Integer.toString (m_aExtent.getWidth ()));
-      aElement.setAttribute (CHTMLAttributes.HEIGHT, Integer.toString (m_aExtent.getHeight ()));
+      aElement.setAttribute (CHTMLAttributes.WIDTH, m_aExtent.getWidth ());
+      aElement.setAttribute (CHTMLAttributes.HEIGHT, m_aExtent.getHeight ());
     }
 
     // Ensure that the alt attribute is present

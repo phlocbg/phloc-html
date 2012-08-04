@@ -61,7 +61,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell addCell ()
   {
     final AbstractHCCell ret = m_bHeader ? new HCTH () : new HCTD ();
-    ret.setParentRow (this);
+    ret.internalSetParentRow (this);
     addChild (ret);
     return ret;
   }
@@ -75,7 +75,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell addCell (@Nonnegative final int nIndex)
   {
     final AbstractHCCell ret = m_bHeader ? new HCTH () : new HCTD ();
-    ret.setParentRow (this);
+    ret.internalSetParentRow (this);
     addChild (nIndex, ret);
     return ret;
   }

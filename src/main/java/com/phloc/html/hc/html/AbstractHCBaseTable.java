@@ -321,6 +321,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
+  @ReturnsMutableCopy
+  public final List <HCRow> getAllBodyRows ()
+  {
+    return ContainerHelper.newList (m_aBodyRows);
+  }
+
+  @Nonnull
   public final HCRow addBodyRow ()
   {
     final HCRow ret = new HCRow (false);
@@ -381,6 +388,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return nApplicableRowspan;
   }
 
+  @Nonnegative
   private static int _getEffectiveCellCount (@Nonnull final HCRow aRow, @Nullable final List <int []> aRowSpans)
   {
     int nCellIndex = 0;

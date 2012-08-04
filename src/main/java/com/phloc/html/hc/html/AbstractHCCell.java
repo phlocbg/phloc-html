@@ -55,7 +55,7 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Nonnull
-  final AbstractHCCell setParentRow (@Nullable final HCRow aParentRow)
+  final AbstractHCCell internalSetParentRow (@Nullable final HCRow aParentRow)
   {
     m_aParentRow = aParentRow;
     return this;
@@ -106,9 +106,9 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nColspan > 1)
-      aElement.setAttribute (CHTMLAttributes.COLSPAN, Integer.toString (m_nColspan));
+      aElement.setAttribute (CHTMLAttributes.COLSPAN, m_nColspan);
     if (m_nRowspan > 1)
-      aElement.setAttribute (CHTMLAttributes.ROWSPAN, Integer.toString (m_nRowspan));
+      aElement.setAttribute (CHTMLAttributes.ROWSPAN, m_nRowspan);
     if (m_eAlign != null)
       aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign.getAttrValue ());
   }

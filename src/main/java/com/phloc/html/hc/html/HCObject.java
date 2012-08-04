@@ -275,9 +275,9 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_nWidth > 0)
-      aElement.setAttribute (CHTMLAttributes.WIDTH, Integer.toString (m_nWidth));
+      aElement.setAttribute (CHTMLAttributes.WIDTH, m_nWidth);
     if (m_nHeight > 0)
-      aElement.setAttribute (CHTMLAttributes.HEIGHT, Integer.toString (m_nHeight));
+      aElement.setAttribute (CHTMLAttributes.HEIGHT, m_nHeight);
     if (StringHelper.hasText (m_sHSpace))
       aElement.setAttribute (CHTMLAttributes.HSPACE, m_sHSpace);
     if (StringHelper.hasText (m_sVSpace))

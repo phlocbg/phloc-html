@@ -172,6 +172,10 @@ public enum EHTMLElement
     m_bMayBeSelfClosed = bMayBeSelfClosed;
   }
 
+  /**
+   * @return The defined element name in any case. Neither <code>null</code> nor
+   *         empty.
+   */
   @Nonnull
   @Nonempty
   public String getElementName ()
@@ -179,6 +183,10 @@ public enum EHTMLElement
     return m_sElementNameLC;
   }
 
+  /**
+   * @return The defined element name in lowercase characters. Neither
+   *         <code>null</code> nor empty.
+   */
   @Nonnull
   @Nonempty
   public String getElementNameLowerCase ()
@@ -186,6 +194,10 @@ public enum EHTMLElement
     return m_sElementNameLC;
   }
 
+  /**
+   * @return The defined element name in uppercase characters. Neither
+   *         <code>null</code> nor empty.
+   */
   @Nonnull
   @Nonempty
   public String getElementNameUpperCase ()
@@ -193,11 +205,20 @@ public enum EHTMLElement
     return m_sElementNameUC;
   }
 
+  /**
+   * @return <code>true</code> if this element may be self-closed (e.g. &lt;br
+   *         />), and <code>false</code> if not (e.g. &lt;link...>&lt;/link>)
+   */
   public boolean mayBeSelfClosed ()
   {
     return m_bMayBeSelfClosed;
   }
 
+  /**
+   * @return <code>true</code> if this element may not be self-closed (e.g.
+   *         &lt;link...>&lt;/link>), <code>false</code> if it may be
+   *         self-closed (e.g. &lt;br />)
+   */
   public boolean mayNotBeSelfClosed ()
   {
     return !m_bMayBeSelfClosed;
@@ -212,7 +233,7 @@ public enum EHTMLElement
       for (final EHTMLElement e : values ())
         if (e.mayBeSelfClosed ())
         {
-          // Always use lowercased value
+          // Always use lower cased value
           s_aSelfClosedElements.add (e.m_sElementNameLC);
         }
     }
@@ -276,9 +297,9 @@ public enum EHTMLElement
   public static EHTMLElement getFromTagNameOrNull (@Nullable final String sTagName)
   {
     if (StringHelper.hasText (sTagName))
-      for (final EHTMLElement e : values ())
-        if (e.m_sElementNameLC.equalsIgnoreCase (sTagName))
-          return e;
+      for (final EHTMLElement eElement : values ())
+        if (eElement.m_sElementNameLC.equalsIgnoreCase (sTagName))
+          return eElement;
     return null;
   }
 }
