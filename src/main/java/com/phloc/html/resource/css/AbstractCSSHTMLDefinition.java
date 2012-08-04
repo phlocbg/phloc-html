@@ -50,7 +50,7 @@ public abstract class AbstractCSSHTMLDefinition extends AbstractHTMLResourceObje
 
   public final boolean hasMedia ()
   {
-    return m_aMedia.hasMedia ();
+    return m_aMedia.hasAnyMedia ();
   }
 
   @Nonnull

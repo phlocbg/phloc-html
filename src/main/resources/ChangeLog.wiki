@@ -1,7 +1,9 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>8/3/12</td><td colspan="4">_Release *3.3.3*_</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>8/4/12</td><td colspan="4">_Release *3.3.4*_</td></tr>
+<tr><td>8/4/12</td><td>remove</td><td>api</td><td></td><td>Added some more HC`*` methods</td></tr>
+<tr border="1"><td>8/3/12</td><td colspan="4">_Release *3.3.3*_</td></tr>
 <tr><td>8/3/12</td><td>remove</td><td>api</td><td></td><td>Removed 3 JSAction`*` classes as they were very unmotivated :)</td></tr>
 <tr><td>7/20/12</td><td>add</td><td>api</td><td></td><td>Added new constructors to CSSExternal and CSSInternal</td></tr>
 <tr border="1"><td>7/20/12</td><td colspan="4">_Release *3.3.2*_</td></tr>
