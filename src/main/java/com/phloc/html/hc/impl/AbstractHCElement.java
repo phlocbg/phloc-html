@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -257,10 +258,25 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @ReturnsMutableCopy
   public final Collection <ICSSValue> getAllStyleValues ()
   {
-    return ContainerHelper.newList (m_aStyles.values ());
+    return m_aStyles == null ? new ArrayList <ICSSValue> () : ContainerHelper.newList (m_aStyles.values ());
   }
 
+  @Nullable
+  public final ICSSValue getStyleValue (@Nullable final ECSSProperty eProperty)
+  {
+    return eProperty == null || m_aStyles == null ? null : m_aStyles.get (eProperty);
+  }
+
+  /**
+   * @deprecated Use {@link #containsStyle(ECSSProperty)} instead
+   */
+  @Deprecated
   public final boolean hasStyle (@Nullable final ECSSProperty eProperty)
+  {
+    return containsStyle (eProperty);
+  }
+
+  public final boolean containsStyle (@Nullable final ECSSProperty eProperty)
   {
     return m_aStyles != null && m_aStyles.containsKey (eProperty);
   }
