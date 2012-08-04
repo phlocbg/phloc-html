@@ -52,6 +52,13 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   @Nonnull
+  @Deprecated
+  public final HCColGroup addColumns (@Nullable final HCCol aCol)
+  {
+    return addColumn (aCol);
+  }
+
+  @Nonnull
   public final HCColGroup addColumns (@Nullable final HCCol... aCols)
   {
     if (aCols != null)
@@ -89,6 +96,11 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
     return hasChildren ();
   }
 
+  public final boolean hasNoColumns ()
+  {
+    return !hasChildren ();
+  }
+
   @Nonnegative
   public final int getColumnCount ()
   {
@@ -100,5 +112,11 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   public final List <HCCol> getColumns ()
   {
     return getChildren ();
+  }
+
+  @Nullable
+  public final HCCol getColumnOfIndex (final int nIndex)
+  {
+    return getChildAtIndex (nIndex);
   }
 }
