@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.impl;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -234,11 +235,29 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  /**
+   * @deprecated Use {@link #getAllStyles()} instead
+   */
+  @Deprecated
   @Nonnull
   @ReturnsMutableCopy
   public final Map <ECSSProperty, ICSSValue> getStyles ()
   {
+    return getAllStyles ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Map <ECSSProperty, ICSSValue> getAllStyles ()
+  {
     return ContainerHelper.newMap (m_aStyles);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Collection <ICSSValue> getAllStyleValues ()
+  {
+    return ContainerHelper.newList (m_aStyles.values ());
   }
 
   public final boolean hasStyle (@Nullable final ECSSProperty eProperty)
@@ -289,6 +308,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   {
     if (m_aStyles != null)
       m_aStyles.remove (eProperty);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeAllStyles ()
+  {
+    m_aStyles.clear ();
     return thisAsT ();
   }
 
