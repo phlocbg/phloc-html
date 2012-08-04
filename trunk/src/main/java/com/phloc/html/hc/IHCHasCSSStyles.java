@@ -50,6 +50,16 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
   THISTYPE addStyles (@Nullable final ICSSValue... aValues);
 
   /**
+   * Add element specific styles.
+   * 
+   * @param aValues
+   *        The values to be added. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addStyles (@Nullable final Iterable <? extends ICSSValue> aValues);
+
+  /**
    * Remove the specified style from the element
    * 
    * @param eProperty
@@ -86,5 +96,13 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 
   boolean containsStyle (@Nullable ECSSProperty eProperty);
 
+  /**
+   * Check if the style property is contained, and the value matches.
+   * 
+   * @param aValue
+   *        The value to be checked
+   * @return <code>true</code> if such a CSS value is contained,
+   *         <code>false</code> otherwise
+   */
   boolean hasStyle (@Nullable ICSSValue aValue);
 }
