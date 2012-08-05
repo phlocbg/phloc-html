@@ -693,7 +693,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
           aSB.append (' ');
         aSB.append (aCSSClassProvider.getCSSClass ());
       }
-      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.getImploded (" ", m_aCSSClassProviders));
+      aElement.setAttribute (CHTMLAttributes.CLASS, aSB.toString ());
     }
 
     if (m_aStyles != null && !m_aStyles.isEmpty ())
