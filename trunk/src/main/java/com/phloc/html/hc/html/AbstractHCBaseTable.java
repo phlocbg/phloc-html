@@ -174,6 +174,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  @Nullable
+  public final HCColGroup getColGroup ()
+  {
+    return m_aColGroup;
+  }
+
   @Nonnull
   public final THISTYPE addColumn (@Nullable final HCCol aCol)
   {
@@ -184,12 +190,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
       m_aColGroup.addColumn (aCol);
     }
     return thisAsT ();
-  }
-
-  @Nullable
-  public final HCColGroup getColGroup ()
-  {
-    return m_aColGroup;
   }
 
   @Nonnull
@@ -221,9 +221,22 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
    * Remove all column definitions. This does not affect any row contents.
    * 
    * @return this
+   * @deprecated Use {@link #removeAllColumns()} instead
    */
+  @Deprecated
   @Nonnull
   public final THISTYPE clearColumns ()
+  {
+    return removeAllColumns ();
+  }
+
+  /**
+   * Remove all column definitions. This does not affect any row contents.
+   * 
+   * @return this
+   */
+  @Nonnull
+  public final THISTYPE removeAllColumns ()
   {
     m_aColGroup = null;
     return thisAsT ();
