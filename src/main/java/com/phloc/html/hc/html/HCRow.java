@@ -17,12 +17,15 @@
  */
 package com.phloc.html.hc.html;
 
+import java.util.List;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
@@ -333,6 +336,13 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell getCellAtIndex (final int nIndex)
   {
     return getChildAtIndex (nIndex);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <AbstractHCCell> getAllCells ()
+  {
+    return getChildren ();
   }
 
   /**

@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.idfactory.GlobalIDFactory;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
@@ -171,5 +172,11 @@ public class HCDefaultCustomizer implements IHCCustomizer
       }
     }
     return null;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).toString ();
   }
 }

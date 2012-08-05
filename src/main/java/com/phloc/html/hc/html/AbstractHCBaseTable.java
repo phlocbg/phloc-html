@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
@@ -360,6 +361,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Override
+  @OverridingMethodsMustInvokeSuper
   protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
@@ -401,6 +403,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   public static void checkInternalConsistency (@Nonnull final AbstractHCBaseTable <?> aBaseTable)
   {
+    // Determine number of columns to use
     int nCols = 0;
     if (aBaseTable.m_aColGroup != null)
       nCols = aBaseTable.m_aColGroup.getColumnCount ();
