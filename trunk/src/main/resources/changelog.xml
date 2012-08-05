@@ -47,6 +47,11 @@
       <text locale="en">Added some more HC* methods</text>
     </change>
   </entry>
+  <entry date="2012-08-04" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 3.1.1</text>
+    </change>
+  </entry>
   <release date="2012-08-03" version="3.3.3" />
   <entry date="2012-08-03" category="api" action="remove">
     <change>
@@ -93,6 +98,11 @@
   <entry date="2012-07-09" category="api" action="add">
     <change>
       <text locale="en">Added new method JSCodeWrapper.getVariableAssignment with an optional boolean to emit the 'var ' keyword or not</text>
+    </change>
+  </entry>
+  <entry date="2012-06-28" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 3.1.0</text>
     </change>
   </entry>
   <release date="2012-06-18" version="3.3.0" />
