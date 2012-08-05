@@ -27,12 +27,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Default implementation of the {@link ICSSClassProvider} interface.
+ * Default implementation of the {@link ICSSClassProvider} interface. Uses an
+ * internal cache to reuse existing objects. Use
+ * {@link DefaultCSSClassProvider#create(String)} to create objects!
  * 
  * @author philip
  */
@@ -67,6 +70,23 @@ public final class DefaultCSSClassProvider implements ICSSClassProvider
   public String getCSSClass ()
   {
     return m_sCSSClass;
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!(o instanceof DefaultCSSClassProvider))
+      return false;
+    final DefaultCSSClassProvider rhs = (DefaultCSSClassProvider) o;
+    return m_sCSSClass.equals (rhs.m_sCSSClass);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sCSSClass).getHashCode ();
   }
 
   @Override

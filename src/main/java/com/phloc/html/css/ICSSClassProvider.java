@@ -19,11 +19,14 @@ package com.phloc.html.css;
 
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
+
 /**
  * Interface for a CSS class provider.
  * 
  * @author philip
  */
+@MustImplementEqualsAndHashcode
 public interface ICSSClassProvider
 {
   /**

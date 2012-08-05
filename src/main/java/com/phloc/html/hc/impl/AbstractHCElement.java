@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnull;
@@ -80,7 +80,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private String m_sTitle;
   private String m_sLanguage;
   private EHCTextDirection m_eDirection;
-  private LinkedHashSet <String> m_aClasses;
+  private LinkedHashSet <ICSSClassProvider> m_aCSSClassProviders;
   private LinkedHashMap <ECSSProperty, ICSSValue> m_aStyles;
   /*
    * Use 1 pointer instead of many to save memory if no handler is used at all
@@ -159,81 +159,101 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  @Nonnull
-  @ReturnsMutableCopy
-  public final List <String> getClasses ()
+  /**
+   * @deprecated Use {@link #containsClass(ICSSClassProvider)} instead
+   */
+  @Deprecated
+  public final boolean hasClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    return ContainerHelper.newList (m_aClasses);
+    return containsClass (aCSSClassProvider);
   }
 
-  public final boolean hasClass (@Nonnull final ICSSClassProvider aProvider)
+  public final boolean containsClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    if (m_aClasses != null)
-    {
-      final String sClass = aProvider.getCSSClass ();
-      if (StringHelper.hasText (sClass))
-      {
-        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1,
-                                                "Cannot check for a class with a whitespace");
-        return m_aClasses.contains (sClass);
-      }
-    }
-    return false;
+    return m_aCSSClassProviders != null &&
+           aCSSClassProvider != null &&
+           m_aCSSClassProviders.contains (aCSSClassProvider);
   }
 
   @Nonnull
-  public final THISTYPE addClass (@Nullable final ICSSClassProvider aProvider)
+  public final THISTYPE addClass (@Nullable final ICSSClassProvider aCSSClassProvider)
   {
-    final String sClass = aProvider == null ? null : aProvider.getCSSClass ();
-    // Note: don't use StringHelper - raises Eclipse warning :-|
-    if (sClass != null && sClass.length () > 0)
+    if (aCSSClassProvider != null)
     {
-      HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1, "Cannot add a class with a whitespace");
-      if (m_aClasses == null)
-        m_aClasses = new LinkedHashSet <String> ();
-      m_aClasses.add (sClass);
+      if (m_aCSSClassProviders == null)
+        m_aCSSClassProviders = new LinkedHashSet <ICSSClassProvider> ();
+      m_aCSSClassProviders.add (aCSSClassProvider);
     }
     return thisAsT ();
   }
 
   @Deprecated
   @Nonnull
-  public final THISTYPE addClasses (@Nullable final ICSSClassProvider aProvider)
+  public final THISTYPE addClasses (@Nullable final ICSSClassProvider aCSSClassProvider)
   {
-    return addClass (aProvider);
+    return addClass (aCSSClassProvider);
   }
 
   @Nonnull
-  public final THISTYPE addClasses (@Nullable final ICSSClassProvider... aProviders)
+  public final THISTYPE addClasses (@Nullable final ICSSClassProvider... aCSSClassProviders)
   {
-    if (aProviders != null)
-      for (final ICSSClassProvider aProvider : aProviders)
+    if (aCSSClassProviders != null)
+      for (final ICSSClassProvider aProvider : aCSSClassProviders)
         addClass (aProvider);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE addClasses (@Nullable final Iterable <? extends ICSSClassProvider> aProviders)
+  public final THISTYPE addClasses (@Nullable final Iterable <? extends ICSSClassProvider> aCSSClassProviders)
   {
-    if (aProviders != null)
-      for (final ICSSClassProvider aProvider : aProviders)
+    if (aCSSClassProviders != null)
+      for (final ICSSClassProvider aProvider : aCSSClassProviders)
         addClass (aProvider);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeClass (@Nonnull final ICSSClassProvider aProvider)
+  public final THISTYPE removeClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    if (m_aClasses != null)
-    {
-      final String sClass = aProvider.getCSSClass ();
-      if (StringHelper.hasText (sClass))
-      {
-        HCConsistencyChecker.consistencyAssert (sClass.indexOf (' ') == -1, "Cannot remove a class with a whitespace");
-        m_aClasses.remove (sClass);
-      }
-    }
+    if (m_aCSSClassProviders != null && aCSSClassProvider != null)
+      m_aCSSClassProviders.remove (aCSSClassProvider);
     return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeAllClasses ()
+  {
+    if (m_aCSSClassProviders != null)
+      m_aCSSClassProviders.clear ();
+    return thisAsT ();
+  }
+
+  /**
+   * @deprecated Use {@link #getAllClasses()} instead
+   */
+  @Deprecated
+  @Nonnull
+  public final Collection <ICSSClassProvider> getClasses ()
+  {
+    return getAllClasses ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Set <ICSSClassProvider> getAllClasses ()
+  {
+    return ContainerHelper.newOrderedSet (m_aCSSClassProviders);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Set <String> getAllClassNames ()
+  {
+    final Set <String> ret = new LinkedHashSet <String> ();
+    if (m_aCSSClassProviders != null)
+      for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
+        ret.add (aCSSClassProvider.getCSSClass ());
+    return ret;
   }
 
   /**
@@ -664,8 +684,17 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     if (m_eDirection != null)
       aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
 
-    if (m_aClasses != null && !m_aClasses.isEmpty ())
-      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.getImploded (" ", m_aClasses));
+    if (m_aCSSClassProviders != null && !m_aCSSClassProviders.isEmpty ())
+    {
+      final StringBuilder aSB = new StringBuilder ();
+      for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
+      {
+        if (aSB.length () > 0)
+          aSB.append (' ');
+        aSB.append (aCSSClassProvider.getCSSClass ());
+      }
+      aElement.setAttribute (CHTMLAttributes.CLASS, StringHelper.getImploded (" ", m_aCSSClassProviders));
+    }
 
     if (m_aStyles != null && !m_aStyles.isEmpty ())
     {
@@ -766,7 +795,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
                                        .appendIfNotNull ("title", m_sTitle)
                                        .appendIfNotNull ("language", m_sLanguage)
                                        .appendIfNotNull ("direction", m_eDirection)
-                                       .appendIfNotNull ("classes", m_aClasses)
+                                       .appendIfNotNull ("classes", m_aCSSClassProviders)
                                        .appendIfNotNull ("styles", m_aStyles)
                                        .appendIfNotNull ("JSHandler", m_aJSHandler)
                                        .append ("unfocusable", m_bUnfocusable)
