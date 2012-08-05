@@ -107,9 +107,20 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
     return getChildCount ();
   }
 
+  /**
+   * @deprecated Use {@link #getAllColumns()} instead
+   */
+  @Deprecated
   @ReturnsImmutableObject
   @Nullable
   public final List <HCCol> getColumns ()
+  {
+    return getAllColumns ();
+  }
+
+  @ReturnsImmutableObject
+  @Nullable
+  public final List <HCCol> getAllColumns ()
   {
     return getChildren ();
   }

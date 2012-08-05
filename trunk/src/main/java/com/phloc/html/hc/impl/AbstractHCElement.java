@@ -665,13 +665,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void prepareBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    if (!m_bPreparedOnce)
-    {
-      prepareOnceBeforeCreateElement (aConversionSettings);
-      m_bPreparedOnce = true;
-    }
-  }
+  {}
 
   /**
    * @return The created micro element for this HC element. May not be
@@ -789,7 +783,15 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     // Do standard customization
     aConversionSettings.getCustomizer ().customizeHCElement (this, aConversionSettings.getHTMLVersion ());
 
-    // Prepare object (implementation dependent)
+    // Prepare object once per instance - before first rendering (implementation
+    // dependent)
+    if (!m_bPreparedOnce)
+    {
+      prepareOnceBeforeCreateElement (aConversionSettings);
+      m_bPreparedOnce = true;
+    }
+
+    // Prepare object for each rendering (implementation dependent)
     prepareBeforeCreateElement (aConversionSettings);
 
     // Create the element

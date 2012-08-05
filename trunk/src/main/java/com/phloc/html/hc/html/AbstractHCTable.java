@@ -169,7 +169,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     {
       // Create a dummy row with explicit widths
       final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
-      for (final HCCol aCol : m_aColGroup.getColumns ())
+      for (final HCCol aCol : m_aColGroup.getAllColumns ())
       {
         final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
         final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
