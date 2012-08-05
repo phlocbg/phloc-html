@@ -20,6 +20,12 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-08-05" version="3.3.5" />
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
+      <text locale="en">Improved accessor methods in several HC implementation classes</text>
+    </change>
+  </entry>
   <entry date="2012-08-05" category="api" action="add">
     <change>
       <text locale="en">Added new protected method AbstractHCElement.prepareOnceBeforeCreateElement that is called exactly once during preparation</text>
