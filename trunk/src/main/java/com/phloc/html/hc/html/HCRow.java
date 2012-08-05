@@ -394,6 +394,24 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return ret;
   }
 
+  public boolean isColspanUsed ()
+  {
+    if (hasChildren ())
+      for (final AbstractHCCell aCell : directGetChildren ())
+        if (aCell.getColspan () > 1)
+          return true;
+    return false;
+  }
+
+  public boolean isRowspanUsed ()
+  {
+    if (hasChildren ())
+      for (final AbstractHCCell aCell : directGetChildren ())
+        if (aCell.getRowspan () > 1)
+          return true;
+    return false;
+  }
+
   @Override
   protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
