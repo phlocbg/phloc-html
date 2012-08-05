@@ -22,6 +22,11 @@
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
   <entry date="2012-08-05" category="api" action="add">
     <change>
+      <text locale="en">Added new protected method AbstractHCElement.prepareOnceBeforeCreateElement that is called exactly once during preparation</text>
+    </change>
+  </entry>
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
       <text locale="en">Improved CSS style and CSS class handling API in IHCElement</text>
     </change>
   </entry>

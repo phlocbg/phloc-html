@@ -20,6 +20,7 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
@@ -181,5 +182,17 @@ public final class HCConversionSettings implements IHCConversionSettings
   public IHCCustomizer getCustomizer ()
   {
     return m_aCustomizer;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("htmlVersion", m_eHTMLVersion)
+                                       .append ("indentAndAlignHTML", m_bIndentAndAlignHTML)
+                                       .append ("cssVersion", m_eCSSVersion)
+                                       .append ("indentAndAlignCSS", m_bIndentAndAlignCSS)
+                                       .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
+                                       .append ("customizer", m_aCustomizer)
+                                       .toString ();
   }
 }

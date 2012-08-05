@@ -134,7 +134,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     return m_aChildren;
   }
 
-  @Nullable
+  @Nonnull
   @ReturnsMutableCopy
   public final List <CHILDTYPE> getChildren ()
   {

@@ -96,6 +96,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private String m_sContextMenu;
   private boolean m_bSpellCheck = false;
   private LinkedHashMap <String, String> m_aCustomAttrs;
+  private boolean m_bPreparedOnce = false;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
   {
@@ -621,6 +622,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  public final boolean isPreparedBeforeCreateElement ()
+  {
+    return m_bPreparedOnce;
+  }
+
   /**
    * This method checks whether the node is suitable for conversion to an
    * IMicroElement.
@@ -637,6 +643,18 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   /**
+   * This method is called once for each instead before the element itself is
+   * created. Overwrite this method to perform actions that can only be done
+   * when the element is build finally.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  @OverrideOnDemand
+  protected void prepareOnceBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
+  {}
+
+  /**
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
    * finally.
@@ -645,8 +663,15 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    *        The conversion settings to be used
    */
   @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
   protected void prepareBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
-  {}
+  {
+    if (!m_bPreparedOnce)
+    {
+      prepareOnceBeforeCreateElement (aConversionSettings);
+      m_bPreparedOnce = true;
+    }
+  }
 
   /**
    * @return The created micro element for this HC element. May not be
