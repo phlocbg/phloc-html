@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc;
 
+import java.util.Set;
+
 import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -24,6 +26,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
@@ -97,7 +100,24 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE removeClass (@Nonnull ICSSClassProvider aProvider);
 
+  @Nonnull
+  THISTYPE removeAllClasses ();
+
+  /**
+   * @deprecated Use {@link #containsClass(ICSSClassProvider)} instead
+   */
+  @Deprecated
   boolean hasClass (@Nonnull ICSSClassProvider aProvider);
+
+  boolean containsClass (@Nonnull ICSSClassProvider aProvider);
+
+  @Nonnull
+  @ReturnsMutableCopy
+  Set <ICSSClassProvider> getAllClasses ();
+
+  @Nonnull
+  @ReturnsMutableCopy
+  Set <String> getAllClassNames ();
 
   @Nullable
   EHCTextDirection getDirection ();
