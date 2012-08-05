@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.StringParser;
@@ -111,16 +110,26 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                   @Nonnull final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
+
+    // Required by XHTML 1.1
+    if (m_aBodyRows.isEmpty () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
+      s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
+
+    // Table specific attributes
     if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
     {
       // These attributes are obsolete in HTML5
       if (m_nCellSpacing >= 0)
-        aElement.setAttribute (CHTMLAttributes.CELLSPACING, Integer.toString (m_nCellSpacing));
+        aElement.setAttribute (CHTMLAttributes.CELLSPACING, m_nCellSpacing);
       if (m_nCellPadding >= 0)
-        aElement.setAttribute (CHTMLAttributes.CELLPADDING, Integer.toString (m_nCellPadding));
+        aElement.setAttribute (CHTMLAttributes.CELLPADDING, m_nCellPadding);
     }
+
+    // Append colgroup
     if (m_aColGroup != null && m_aColGroup.hasColumns ())
       aElement.appendChild (m_aColGroup.getAsNode (aConversionSettings));
+
+    // Table header?
     if (m_aHeaderRow != null)
     {
       final IMicroElement aTHead = aElement.appendElement (EHTMLElement.THEAD.getElementName ());
@@ -130,6 +139,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
         aTHead.appendText ("");
     }
+
+    // Table footer?
     if (m_aFooterRow != null)
     {
       final IMicroElement aTFoot = aElement.appendElement (EHTMLElement.TFOOT.getElementName ());
@@ -141,10 +152,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     }
 
     // add the tbody anyway - helpful for JS tables
-    // Required by XHTML 1.1
-    if (m_aBodyRows.isEmpty () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
-      s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
 
+    // Table body
     final IMicroElement aTBody = aElement.appendElement (EHTMLElement.TBODY.getElementName ());
     if (StringHelper.hasText (m_sBodyID))
       aTBody.setAttribute (CHTMLAttributes.ID, m_sBodyID);
@@ -153,33 +162,24 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
     // IE9 only interprets column widths if the first row does not use colspan
     // (i.e. at least one row does not use colspan)
-    if (m_aColGroup != null && m_aColGroup.hasColumns () && !m_aBodyRows.isEmpty ())
+    if (m_aColGroup != null &&
+        m_aColGroup.hasColumns () &&
+        !m_aBodyRows.isEmpty () &&
+        getFirstBodyRow ().isColspanUsed ())
     {
-      final HCRow aFirstRow = ContainerHelper.getFirstElement (m_aBodyRows);
-      boolean bFirstRowUsesColSpan = false;
-      if (aFirstRow.hasChildren ())
-        for (final AbstractHCCell aCell : aFirstRow.getChildren ())
-          if (aCell.getColspan () > 1)
-          {
-            bFirstRowUsesColSpan = true;
-            break;
-          }
-      if (bFirstRowUsesColSpan)
+      // Create a dummy row with explicit widths
+      final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
+      for (final HCCol aCol : m_aColGroup.getColumns ())
       {
-        // Create a dummy row with explicit widths
-        final HCRow aRow = new HCRow (false);
-        aRow.addClass (CSS_FORCE_COLSPAN);
-        for (final HCCol aCol : m_aColGroup.getColumns ())
-        {
-          final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
-          final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
-          if (nWidth >= 0)
-            aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
-        }
-        applyBodyRow (aTBody, aRow, aConversionSettings);
+        final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
+        final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
+        if (nWidth >= 0)
+          aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
       }
+      applyBodyRow (aTBody, aRow, aConversionSettings);
     }
 
+    // Main body rows
     for (final HCRow aRow : m_aBodyRows)
       applyBodyRow (aTBody, aRow, aConversionSettings);
 
