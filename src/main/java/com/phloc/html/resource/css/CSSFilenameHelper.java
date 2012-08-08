@@ -21,10 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.phloc.commons.string.StringHelper;
-import com.phloc.css.CCSS;
-
 @Immutable
+@Deprecated
 public final class CSSFilenameHelper
 {
   private CSSFilenameHelper ()
@@ -32,26 +30,22 @@ public final class CSSFilenameHelper
 
   public static boolean isCSSFilename (@Nullable final String sFilename)
   {
-    return StringHelper.endsWith (sFilename, CCSS.FILE_EXTENSION_CSS);
+    return com.phloc.css.CSSFilenameHelper.isCSSFilename (sFilename);
   }
 
   public static boolean isMinifiedCSSFilename (@Nullable final String sFilename)
   {
-    return StringHelper.endsWith (sFilename, CCSS.FILE_EXTENSION_MIN_CSS);
+    return com.phloc.css.CSSFilenameHelper.isMinifiedCSSFilename (sFilename);
   }
 
   public static boolean isRegularCSSFilename (@Nullable final String sFilename)
   {
-    return isCSSFilename (sFilename) && !isMinifiedCSSFilename (sFilename);
+    return com.phloc.css.CSSFilenameHelper.isRegularCSSFilename (sFilename);
   }
 
   @Nonnull
   public static String getMinifiedCSSPath (@Nonnull final String sCSSFilename)
   {
-    if (!isCSSFilename (sCSSFilename))
-      throw new IllegalArgumentException ("Passed file name '" + sCSSFilename + "' is not a CSS file name!");
-    if (isMinifiedCSSFilename (sCSSFilename))
-      return sCSSFilename;
-    return StringHelper.trimEnd (sCSSFilename, CCSS.FILE_EXTENSION_CSS) + CCSS.FILE_EXTENSION_MIN_CSS;
+    return com.phloc.css.CSSFilenameHelper.getMinifiedCSSFilename (sCSSFilename);
   }
 }
