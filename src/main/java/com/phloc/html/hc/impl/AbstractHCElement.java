@@ -58,6 +58,7 @@ import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
+import com.phloc.html.hc.api5.EHCDropZone;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.CJS;
@@ -88,13 +89,17 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   private JSEventMap m_aJSHandler;
   private boolean m_bUnfocusable = false;
-  private boolean m_bHidden = false;
   private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private String m_sAccessKey;
-  private EHCDraggable m_eDraggable;
+
+  // HTML5 global attributes
   private EHCContentEditable m_eContentEditable;
   private String m_sContextMenu;
+  private EHCDraggable m_eDraggable;
+  private EHCDropZone m_eDropZone;
+  private boolean m_bHidden = false;
   private boolean m_bSpellCheck = false;
+
   private LinkedHashMap <String, String> m_aCustomAttrs;
   private boolean m_bPreparedOnce = false;
 
@@ -545,19 +550,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nullable
-  public final EHCDraggable getDraggable ()
-  {
-    return m_eDraggable;
-  }
-
-  @Nonnull
-  public final THISTYPE setDraggable (@Nullable final EHCDraggable eDraggable)
-  {
-    m_eDraggable = eDraggable;
-    return thisAsT ();
-  }
-
-  @Nullable
   public final EHCContentEditable getContentEditable ()
   {
     return m_eContentEditable;
@@ -580,6 +572,32 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   public final THISTYPE setContextMenu (@Nullable final String sContextMenu)
   {
     m_sContextMenu = sContextMenu;
+    return thisAsT ();
+  }
+
+  @Nullable
+  public final EHCDraggable getDraggable ()
+  {
+    return m_eDraggable;
+  }
+
+  @Nonnull
+  public final THISTYPE setDraggable (@Nullable final EHCDraggable eDraggable)
+  {
+    m_eDraggable = eDraggable;
+    return thisAsT ();
+  }
+
+  @Nullable
+  public final EHCDropZone getDropZone ()
+  {
+    return m_eDropZone;
+  }
+
+  @Nonnull
+  public final THISTYPE setDropZone (@Nullable final EHCDropZone eDropZone)
+  {
+    m_eDropZone = eDropZone;
     return thisAsT ();
   }
 
@@ -748,6 +766,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
         aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenu);
       if (m_eDraggable != null)
         aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
+      if (m_eDropZone != null)
+        aElement.setAttribute (CHTMLAttributes.DROPZONE, m_eDropZone.getAttrValue ());
       if (m_bHidden)
         aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
       if (m_bSpellCheck)
@@ -843,11 +863,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
                                        .appendIfNotNull ("styles", m_aStyles)
                                        .appendIfNotNull ("JSHandler", m_aJSHandler)
                                        .append ("unfocusable", m_bUnfocusable)
-                                       .append ("hidden", m_bHidden)
                                        .append ("tabIndex", m_nTabIndex)
                                        .appendIfNotNull ("accessKey", m_sAccessKey)
-                                       .appendIfNotNull ("draggable", m_eDraggable)
+                                       .appendIfNotNull ("contentEditable", m_eContentEditable)
                                        .appendIfNotNull ("contextMenu", m_sContextMenu)
+                                       .appendIfNotNull ("draggable", m_eDraggable)
+                                       .appendIfNotNull ("dropZone", m_eDropZone)
+                                       .append ("hidden", m_bHidden)
                                        .append ("spellcheck", m_bSpellCheck)
                                        .appendIfNotNull ("customAttrs", m_aCustomAttrs)
                                        .toString ();
