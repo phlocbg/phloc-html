@@ -691,6 +691,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   protected void applyProperties (@Nonnull final IMicroElement aElement,
                                   @Nonnull final IHCConversionSettings aConversionSettings)
   {
+    final boolean bHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
+
     if (StringHelper.hasText (m_sID))
       aElement.setAttribute (CHTMLAttributes.ID, m_sID);
 
@@ -725,30 +727,45 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
     }
 
+    // Emit all JS events
     if (m_aJSHandler != null)
       m_aJSHandler.applyToElement (aElement);
 
     // unfocusable is handled by the customizer as it is non-standard
 
-    // Global HTML5 attributes
-    if (m_bHidden)
-      aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
+    // Global attributes
     if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
     if (StringHelper.hasNoText (m_sAccessKey))
       aElement.setAttribute (CHTMLAttributes.ACCESSKEY, m_sAccessKey);
-    if (m_eDraggable != null)
-      aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
-    if (m_eContentEditable != null)
-      aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
-    if (StringHelper.hasNoText (m_sContextMenu))
-      aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenu);
-    if (m_bSpellCheck)
-      aElement.setAttribute (CHTMLAttributes.SPELLCHECK, CHTMLAttributeValues.SPELLCHECK);
+
+    // Global HTML5 attributes
+    if (bHTML5)
+    {
+      if (m_eContentEditable != null)
+        aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
+      if (StringHelper.hasNoText (m_sContextMenu))
+        aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenu);
+      if (m_eDraggable != null)
+        aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
+      if (m_bHidden)
+        aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
+      if (m_bSpellCheck)
+        aElement.setAttribute (CHTMLAttributes.SPELLCHECK, CHTMLAttributeValues.SPELLCHECK);
+    }
 
     if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
-        aElement.setAttribute (aEntry.getKey (), aEntry.getValue ());
+      {
+        final String sAttrName = aEntry.getKey ();
+        if (bHTML5 && !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA))
+          s_aLogger.warn ("Custom attribute '" +
+                          sAttrName +
+                          "' does not start with proposed prefix '" +
+                          CHTMLAttributes.HTML5_PREFIX_DATA +
+                          "'");
+        aElement.setAttribute (sAttrName, aEntry.getValue ());
+      }
   }
 
   /**
