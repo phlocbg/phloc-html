@@ -17,160 +17,33 @@
  */
 package com.phloc.html.js.provider;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 
-public final class CollectingJSCodeProvider implements IJSCodeProvider
+public final class CollectingJSCodeProvider extends AbstractCollectingJSCodeProvider <CollectingJSCodeProvider>
 {
-  private final StringBuilder m_aSB = new StringBuilder ();
-
   public CollectingJSCodeProvider ()
   {}
 
   public CollectingJSCodeProvider (@Nullable final CharSequence... aCSs)
   {
-    if (aCSs != null)
-      for (final CharSequence aCS : aCSs)
-        if (aCS != null)
-          append (aCS);
+    super (aCSs);
+  }
+
+  public CollectingJSCodeProvider (@Nullable final String... aStrings)
+  {
+    super (aStrings);
   }
 
   public CollectingJSCodeProvider (@Nullable final IJSCodeProvider... aProviders)
   {
-    if (aProviders != null)
-      for (final IJSCodeProvider aProvider : aProviders)
-        if (aProvider != null)
-          append (aProvider);
+    super (aProviders);
   }
 
   public CollectingJSCodeProvider (@Nullable final IJSON... aJSONs)
   {
-    if (aJSONs != null)
-      for (final IJSON aJSON : aJSONs)
-        if (aJSON != null)
-          append (aJSON);
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider append (final char c)
-  {
-    m_aSB.append (c);
-    return this;
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider append (final long n)
-  {
-    m_aSB.append (n);
-    return this;
-  }
-
-  /**
-   * @param aCS
-   *        The string to append. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  public CollectingJSCodeProvider append (@Nullable final CharSequence aCS)
-  {
-    if (aCS != null)
-      m_aSB.append (aCS);
-    return this;
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider appendEscaped (@Nullable final String sText)
-  {
-    return append (JSMarshaller.javaScriptEscape (sText));
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider append (@Nullable final CollectingJSCodeProvider aProvider)
-  {
-    if (aProvider != null)
-      append (aProvider.m_aSB);
-    return this;
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
-  {
-    if (aProvider instanceof CollectingJSCodeProvider)
-      return append ((CollectingJSCodeProvider) aProvider);
-    if (aProvider != null)
-      append (aProvider.getJSCode ());
-    return this;
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider append (@Nullable final IJSON aJSON)
-  {
-    if (aJSON != null)
-      append (aJSON.getJSONString ());
-    return this;
-  }
-
-  @Nonnull
-  public CollectingJSCodeProvider appendSemicolon ()
-  {
-    // If there is nothing to append to - don't append it :)
-    if (m_aSB.length () == 0)
-      return this;
-    return append (CJS.JS_END_OF_STATEMENT);
-  }
-
-  /**
-   * @param aCS
-   *        The string to prepend.
-   * @return this
-   */
-  @Nonnull
-  public CollectingJSCodeProvider prepend (@Nullable final CharSequence aCS)
-  {
-    m_aSB.insert (0, aCS);
-    return this;
-  }
-
-  @Nonnegative
-  public int length ()
-  {
-    return m_aSB.length ();
-  }
-
-  @Nonnull
-  public String getJSCode ()
-  {
-    return m_aSB.toString ();
-  }
-
-  @Override
-  public boolean equals (final Object o)
-  {
-    if (o == this)
-      return true;
-    if (!(o instanceof CollectingJSCodeProvider))
-      return false;
-    final CollectingJSCodeProvider rhs = (CollectingJSCodeProvider) o;
-    return m_aSB.equals (rhs.m_aSB);
-  }
-
-  @Override
-  public int hashCode ()
-  {
-    return new HashCodeGenerator (this).append (m_aSB).getHashCode ();
-  }
-
-  @Override
-  public String toString ()
-  {
-    return new ToStringGenerator (this).append ("code", m_aSB).toString ();
+    super (aJSONs);
   }
 }
