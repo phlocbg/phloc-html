@@ -29,8 +29,11 @@ import com.phloc.html.js.IJSCodeProvider;
 @Immutable
 public final class CJSCode
 {
+  /** The 'this' keyword */
   public static final IJSCodeProvider JS_THIS = DefaultJSCodeProvider.create ("this");
+  /** The HTML 'event' 'keyword' */
   public static final IJSCodeProvider HTML_EVENT = DefaultJSCodeProvider.create ("event");
+  /** Often used code to get the selected value of a &lt;select&gt; element */
   public static final IJSCodeProvider HTML_SELECT_SELECTED_VALUE = DefaultJSCodeProvider.create ("this.options[this.selectedIndex].value");
 
   private CJSCode ()

@@ -26,6 +26,11 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 
+/**
+ * Immutable implementation of {@link IJSCodeProvider}.
+ * 
+ * @author philip
+ */
 @Immutable
 public final class DefaultJSCodeProvider implements IJSCodeProvider
 {
