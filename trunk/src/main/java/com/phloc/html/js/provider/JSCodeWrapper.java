@@ -28,6 +28,7 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
+import com.phloc.html.js.marshal.JSType;
 
 @Immutable
 public final class JSCodeWrapper
@@ -47,6 +48,40 @@ public final class JSCodeWrapper
         if (nIndex++ > 0)
           aProvider.append (',');
         aProvider.append (JSMarshaller.objectToJSString (aArg));
+      }
+    }
+    aProvider.append (')');
+  }
+
+  public static void appendJSParameters (@Nonnull final CollectingJSCodeProvider aProvider,
+                                         @Nullable final String... aArgs)
+  {
+    aProvider.append ('(');
+    if (aArgs != null)
+    {
+      int nIndex = 0;
+      for (final String sArg : aArgs)
+      {
+        if (nIndex++ > 0)
+          aProvider.append (',');
+        aProvider.append (JSMarshaller.objectToJSString (sArg, JSType.STRING));
+      }
+    }
+    aProvider.append (')');
+  }
+
+  public static void appendJSParameters (@Nonnull final CollectingJSCodeProvider aProvider,
+                                         @Nullable final Iterable <String> aArgs)
+  {
+    aProvider.append ('(');
+    if (aArgs != null)
+    {
+      int nIndex = 0;
+      for (final String sArg : aArgs)
+      {
+        if (nIndex++ > 0)
+          aProvider.append (',');
+        aProvider.append (JSMarshaller.objectToJSString (sArg, JSType.STRING));
       }
     }
     aProvider.append (')');
@@ -121,9 +156,9 @@ public final class JSCodeWrapper
       throw new NullPointerException ("implementation");
 
     final CollectingJSCodeProvider aSB = new CollectingJSCodeProvider ();
-    aSB.append ("function(" + StringHelper.getImploded (",", aParameterNames) + "){")
-       .append (aImplementation)
-       .append ("}");
+    aSB.append ("function");
+    appendJSParameters (aSB, aParameterNames);
+    aSB.append ("{").append (aImplementation).append ("}");
     return aSB;
   }
 }

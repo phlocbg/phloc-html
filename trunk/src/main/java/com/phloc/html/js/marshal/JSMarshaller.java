@@ -391,6 +391,12 @@ public final class JSMarshaller
   }
 
   @Nonnull
+  public static String objectToJSString (@Nullable final Object aObject, @Nonnull final JSType aType)
+  {
+    return objectToJSString (aObject, aType, false);
+  }
+
+  @Nonnull
   public static String objectToJSString (@Nullable final Object aObject,
                                          @Nonnull final JSType aType,
                                          final boolean bWithSurroundingVar)
