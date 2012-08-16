@@ -53,7 +53,12 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * A JS package.
  */
-public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassContainer, Comparable <JSPackage>
+public final class JSPackage implements
+                            IJSDeclaration,
+                            IJSGenerable,
+                            IJSClassContainer,
+                            IJSFunctionContainer,
+                            Comparable <JSPackage>
 {
   /**
    * Name of the package. May be the empty string for the root package.
@@ -65,9 +70,7 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
   /**
    * List of classes contained within this package keyed by their name.
    */
-  private final Map <String, JSDefinedClass> m_aClasses = new TreeMap <String, JSDefinedClass> ();
-
-  private final Map <String, JSFunction> m_aFunctions = new TreeMap <String, JSFunction> ();
+  private final Map <String, IJSDeclaration> m_aDecls = new TreeMap <String, IJSDeclaration> ();
 
   /**
    * JPackage constructor
@@ -89,7 +92,13 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
   }
 
   @Nullable
-  public IJSClassContainer parentContainer ()
+  public IJSClassContainer parentClassContainer ()
+  {
+    return parent ();
+  }
+
+  @Nullable
+  public IJSFunctionContainer parentFunctionContainer ()
   {
     return parent ();
   }
@@ -107,16 +116,7 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
     return m_aOwner._package (m_sName.substring (0, idx));
   }
 
-  public boolean isClass ()
-  {
-    return false;
-  }
-
-  public boolean isPackage ()
-  {
-    return true;
-  }
-
+  @Nonnull
   public JSPackage getPackage ()
   {
     return this;
@@ -128,16 +128,17 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
    * @param name
    *        Name of class to be added to this package
    * @return Newly generated class
-   * @exception JSClassAlreadyExistsException
+   * @exception JSNameAlreadyExistsException
    *            When the specified class/interface was already created.
    */
-  public JSDefinedClass _class (final String name) throws JSClassAlreadyExistsException
+  @Nonnull
+  public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
   {
-    if (m_aClasses.containsKey (name))
-      throw new JSClassAlreadyExistsException (m_aClasses.get (name));
+    if (m_aDecls.containsKey (name))
+      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
     // XXX problems caught in the NC constructor
     final JSDefinedClass c = new JSDefinedClass (this, name);
-    m_aClasses.put (name, c);
+    m_aDecls.put (name, c);
     return c;
   }
 
@@ -148,10 +149,11 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
    */
   public JSDefinedClass getClass (final String name)
   {
-    return m_aClasses.get (name);
+    return (JSDefinedClass) m_aDecls.get (name);
   }
 
-  public JSFunction function (final String name) throws JSFunctionAlreadyExistsException
+  @Nonnull
+  public JSFunction function (final String name) throws JSNameAlreadyExistsException
   {
     return function (null, name);
   }
@@ -162,15 +164,16 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
    * @param name
    *        Name of function to be added to this package
    * @return Newly generated function
-   * @exception JSFunctionAlreadyExistsException
-   *            When the specified class/interface was already created.
+   * @exception JSNameAlreadyExistsException
+   *            When the specified function was already created.
    */
-  public JSFunction function (final AbstractJSType aType, final String name) throws JSFunctionAlreadyExistsException
+  @Nonnull
+  public JSFunction function (final AbstractJSType aType, final String name) throws JSNameAlreadyExistsException
   {
-    if (m_aFunctions.containsKey (name))
-      throw new JSFunctionAlreadyExistsException (m_aFunctions.get (name));
+    if (m_aDecls.containsKey (name))
+      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
     final JSFunction c = new JSFunction (aType, name);
-    m_aFunctions.put (name, c);
+    m_aDecls.put (name, c);
     return c;
   }
 
@@ -181,7 +184,7 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
    */
   public JSFunction getFunction (final String name)
   {
-    return m_aFunctions.get (name);
+    return (JSFunction) m_aDecls.get (name);
   }
 
   /**
@@ -203,7 +206,7 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
 
     // note that c may not be a member of classes.
     // this happens when someone is trying to remove a non generated class
-    m_aClasses.remove (c.name ());
+    m_aDecls.remove (c.name ());
   }
 
   /**
@@ -218,16 +221,9 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
 
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <JSDefinedClass> classes ()
+  public Collection <IJSDeclaration> declarations ()
   {
-    return ContainerHelper.newList (m_aClasses.values ());
-  }
-
-  @Nonnull
-  @ReturnsMutableCopy
-  public Collection <JSFunction> functions ()
-  {
-    return ContainerHelper.newList (m_aFunctions.values ());
+    return ContainerHelper.newList (m_aDecls.values ());
   }
 
   /**
@@ -235,8 +231,8 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
    */
   public boolean isDefined (final String classLocalName)
   {
-    for (final JSDefinedClass aClass : classes ())
-      if (aClass.name ().equals (classLocalName))
+    for (final IJSDeclaration aDecl : declarations ())
+      if (aDecl.name ().equals (classLocalName))
         return true;
     return false;
   }
@@ -279,6 +275,6 @@ public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassCo
 
   int countArtifacts ()
   {
-    return m_aClasses.size () + m_aFunctions.size ();
+    return m_aDecls.size ();
   }
 }

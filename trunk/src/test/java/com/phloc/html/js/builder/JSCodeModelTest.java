@@ -15,10 +15,14 @@ public final class JSCodeModelTest
   {
     final JSCodeModel aCM = new JSCodeModel ();
     final JSPackage aPkg = aCM.rootPackage ();
-    final JSFunction aFunc = aPkg.function ("test");
+
+    final JSFunction aFunc = aPkg.function ("add");
     final JSVar s1 = aFunc.param (aCM.STRING, "s1");
     final JSVar s2 = aFunc.param ("s2");
     aFunc.body ()._return (s1.plus (s2));
+
+    final JSFunction aFuncMain = aPkg.function ("add2");
+    aFuncMain.body ();
 
     new AbstractCodeWriter ("UTF-8")
     {

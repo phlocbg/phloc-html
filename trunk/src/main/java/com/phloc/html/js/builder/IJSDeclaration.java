@@ -48,5 +48,7 @@ import javax.annotation.Nonnull;
  */
 public interface IJSDeclaration
 {
+  String name ();
+
   void declare (@Nonnull JSFormatter f);
 }

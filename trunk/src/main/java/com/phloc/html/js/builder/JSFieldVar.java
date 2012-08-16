@@ -79,12 +79,12 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   public JSFieldVar name (final String name)
   {
     // make sure that the new name is available
-    if (m_aOwner.fields.containsKey (name))
+    if (m_aOwner.m_aFields.containsKey (name))
       throw new IllegalArgumentException ("name " + name + " is already in use");
     final String sOldName = name ();
     super.name (name);
-    m_aOwner.fields.remove (sOldName);
-    m_aOwner.fields.put (name, this);
+    m_aOwner.m_aFields.remove (sOldName);
+    m_aOwner.m_aFields.put (name, this);
     return this;
   }
 

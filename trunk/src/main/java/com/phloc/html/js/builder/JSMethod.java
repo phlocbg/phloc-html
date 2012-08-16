@@ -51,7 +51,7 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * JS method.
  */
-public class JSMethod implements IJSDocCommentable, IJSDeclaration
+public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
 {
   /**
    * Return type for this method
@@ -257,7 +257,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
       f.stmt (new JSSBlock ());
   }
 
-  protected JSCodeModel owner ()
+  public JSCodeModel owner ()
   {
     return m_aOuter.owner ();
   }

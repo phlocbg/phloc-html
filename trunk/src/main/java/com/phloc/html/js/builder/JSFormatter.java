@@ -329,20 +329,4 @@ public class JSFormatter
     v.bind (this);
     return this;
   }
-
-  /**
-   * Generates the whole source code out of the specified class.
-   */
-  public void write (final JSDefinedClass c)
-  {
-    assert c.parentContainer ().isPackage () : "this method is only for a pacakge-level class";
-    final JSPackage pkg = (JSPackage) c.parentContainer ();
-    if (!pkg.isUnnamed ())
-    {
-      nl ().decl (pkg);
-      nl ();
-    }
-
-    decl (c);
-  }
 }
