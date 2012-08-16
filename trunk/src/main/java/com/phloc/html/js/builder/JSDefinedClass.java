@@ -55,6 +55,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * A generated Java class/interface/enum/....
@@ -142,7 +143,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
     if (StringHelper.hasNoTextAfterTrim (name))
       throw new IllegalArgumentException ("JSDefinedClass name empty");
-    if (!JSNameChecker.isJSIdentifier (name))
+    if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);
     m_sName = name;
     m_aOuter = parent;

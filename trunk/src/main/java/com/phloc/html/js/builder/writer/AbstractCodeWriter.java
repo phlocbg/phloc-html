@@ -142,14 +142,22 @@ public abstract class AbstractCodeWriter
 
   public void build (final JSCodeModel aCodeModel) throws IOException
   {
-    // avoid concurrent modification exception
+    // for all packages
     for (final JSPackage aPackage : aCodeModel.packages ())
     {
+      // Write a file
       final Writer bw = new BufferedWriter (openSource (aPackage.parent (), aPackage.name () + ".js"));
       final JSFormatter f = new JSFormatter (new PrintWriter (bw));
-      for (final IJSDeclaration c : aPackage.declarations ())
-        f.decl (c);
-      f.close ();
+      try
+      {
+        // for all declarations in the current package
+        for (final IJSDeclaration c : aPackage.declarations ())
+          f.decl (c);
+      }
+      finally
+      {
+        f.close ();
+      }
     }
     close ();
   }

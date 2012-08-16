@@ -20,6 +20,7 @@ package com.phloc.html.js.marshal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -30,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.collections.ArrayHelper;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.lang.ClassHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
@@ -53,6 +55,50 @@ public final class JSMarshaller
   private static final Logger s_aLogger = LoggerFactory.getLogger (JSMarshaller.class);
   private static final char [] CHARS_TO_MASK = new char [] { '"', '\'', '\\', '/', '\t', '\r', '\n', '\f' };
   private static final char MASK_CHAR = '\\';
+  /**
+   * All reserved keywords of JS. see <a href=
+   * "https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Reserved_Words"
+   * >here</a><br>
+   * technically the last few are not reserved words but they cannot be used as
+   * identifiers.
+   */
+  private static Set <String> RESERVED_KEYWORDS = ContainerHelper.newSet ("break",
+                                                                          "case",
+                                                                          "catch",
+                                                                          "continue",
+                                                                          "debugger",
+                                                                          "default",
+                                                                          "delete",
+                                                                          "do",
+                                                                          "else",
+                                                                          "finally",
+                                                                          "for",
+                                                                          "function",
+                                                                          "if",
+                                                                          "in",
+                                                                          "instanceof",
+                                                                          "new",
+                                                                          "return",
+                                                                          "switch",
+                                                                          "this",
+                                                                          "throw",
+                                                                          "try",
+                                                                          "typeof",
+                                                                          "var",
+                                                                          "void",
+                                                                          "while",
+                                                                          "with",
+                                                                          "class",
+                                                                          "enum",
+                                                                          "export",
+                                                                          "extends",
+                                                                          "import",
+                                                                          "super",
+                                                                          // non-reserved
+                                                                          "true",
+                                                                          "false",
+                                                                          "null",
+                                                                          "undefined");
 
   private JSMarshaller ()
   {}
@@ -267,8 +313,7 @@ public final class JSMarshaller
           break;
         case STRING:
           // Note: use single quotes for use in HTML attributes!
-          final String sValue = aObject instanceof IPredefinedLocaleTextProvider
-                                                                                ? ((IPredefinedLocaleTextProvider) aObject).getText ()
+          final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
                                                                                 : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
           break;
@@ -415,6 +460,11 @@ public final class JSMarshaller
   {
     if (StringHelper.hasNoText (s))
       return false;
+
+    // Reserved word?
+    if (RESERVED_KEYWORDS.contains (s))
+      return false;
+
     final char [] aChars = s.toCharArray ();
     for (int i = 0; i < aChars.length; ++i)
     {

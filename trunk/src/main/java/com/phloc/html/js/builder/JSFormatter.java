@@ -40,17 +40,20 @@
 
 package com.phloc.html.js.builder;
 
+import java.io.Closeable;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.StringHelper;
+
 /**
  * This is a utility class for managing indentation and other basic formatting
  * for PrintWriter.
  */
-public class JSFormatter
+public class JSFormatter implements Closeable
 {
   /**
    * Current number of indentation strings to print
@@ -66,6 +69,8 @@ public class JSFormatter
    * Stream associated with this JFormatter
    */
   private final PrintWriter m_aPW;
+
+  private boolean m_bAtBeginningOfLine = true;
 
   /**
    * Creates a JFormatter.
@@ -97,6 +102,16 @@ public class JSFormatter
     this (new PrintWriter (w));
   }
 
+  private void _spaceIfNeeded ()
+  {
+    if (m_bAtBeginningOfLine)
+    {
+      if (m_nIndentLevel > 0)
+        m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
+      m_bAtBeginningOfLine = false;
+    }
+  }
+
   /**
    * Closes this formatter.
    */
@@ -125,76 +140,6 @@ public class JSFormatter
     return this;
   }
 
-  private boolean _needSpace (final char c1, final char c2)
-  {
-    if ((c1 == ']') && (c2 == '{'))
-      return true;
-    if (c1 == ';')
-      return true;
-    if ((c1 == ')') && (c2 == '{'))
-      return true;
-    if ((c1 == ',') || (c1 == '='))
-      return true;
-    if (c2 == '=')
-      return true;
-    if (Character.isDigit (c1))
-    {
-      if ((c2 == '(') || (c2 == ')') || (c2 == ';') || (c2 == ','))
-        return false;
-      return true;
-    }
-    if (Character.isJavaIdentifierPart (c1))
-    {
-      switch (c2)
-      {
-        case '{':
-        case '}':
-        case '+':
-        case '>':
-        case '@':
-          return true;
-        default:
-          return Character.isJavaIdentifierStart (c2);
-      }
-    }
-    if (Character.isJavaIdentifierStart (c2))
-    {
-      switch (c1)
-      {
-        case ']':
-        case ')':
-        case '}':
-        case '+':
-          return true;
-        default:
-          return false;
-      }
-    }
-    if (Character.isDigit (c2))
-    {
-      if (c1 == '(')
-        return false;
-      return true;
-    }
-    return false;
-  }
-
-  private char m_cLastChar = 0;
-  private boolean m_bAtBeginningOfLine = true;
-
-  private void _spaceIfNeeded (final char c)
-  {
-    if (m_bAtBeginningOfLine)
-    {
-      for (int i = 0; i < m_nIndentLevel; i++)
-        m_aPW.print (m_sIndentSpace);
-      m_bAtBeginningOfLine = false;
-    }
-    else
-      if ((m_cLastChar != 0) && _needSpace (m_cLastChar, c))
-        m_aPW.print (' ');
-  }
-
   /**
    * Print a char into the stream
    * 
@@ -204,9 +149,8 @@ public class JSFormatter
   @Nonnull
   public JSFormatter plain (final char c)
   {
-    _spaceIfNeeded (c);
+    _spaceIfNeeded ();
     m_aPW.print (c);
-    m_cLastChar = c;
     return this;
   }
 
@@ -219,9 +163,8 @@ public class JSFormatter
   @Nonnull
   public JSFormatter plain (@Nonnull final String s)
   {
-    _spaceIfNeeded (s.charAt (0));
+    _spaceIfNeeded ();
     m_aPW.print (s);
-    m_cLastChar = s.charAt (s.length () - 1);
     return this;
   }
 
@@ -253,7 +196,7 @@ public class JSFormatter
    * Print an identifier
    */
   @Nonnull
-  public JSFormatter id (final String id)
+  public JSFormatter id (@Nonnull final String id)
   {
     plain (id);
     return this;
@@ -266,7 +209,6 @@ public class JSFormatter
   public JSFormatter nl ()
   {
     m_aPW.println ();
-    m_cLastChar = 0;
     m_bAtBeginningOfLine = true;
     return this;
   }
@@ -287,7 +229,8 @@ public class JSFormatter
   /**
    * Produces {@link IJSGeneratable}s separated by ','
    */
-  public JSFormatter generatable (final Collection <? extends IJSGeneratable> list)
+  @Nonnull
+  public JSFormatter generatable (@Nonnull final Collection <? extends IJSGeneratable> list)
   {
     boolean first = true;
     for (final IJSGeneratable item : list)
@@ -306,7 +249,8 @@ public class JSFormatter
    * @param d
    *        the JDeclaration object
    */
-  public JSFormatter decl (final IJSDeclaration d)
+  @Nonnull
+  public JSFormatter decl (@Nonnull final IJSDeclaration d)
   {
     d.declare (this);
     return this;
@@ -318,7 +262,8 @@ public class JSFormatter
    * @param s
    *        the JStatement object
    */
-  public JSFormatter stmt (final IJSStatement s)
+  @Nonnull
+  public JSFormatter stmt (@Nonnull final IJSStatement s)
   {
     s.state (this);
     return this;
@@ -330,7 +275,8 @@ public class JSFormatter
    * @param v
    *        the JVar object
    */
-  public JSFormatter var (final JSVar v)
+  @Nonnull
+  public JSFormatter var (@Nonnull final JSVar v)
   {
     v.bind (this);
     return this;

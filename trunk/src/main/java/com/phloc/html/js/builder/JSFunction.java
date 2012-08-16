@@ -205,11 +205,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.
     boolean first = true;
-    for (final JSVar var : m_aParams)
+    for (final JSVar aParam : m_aParams)
     {
       if (!first)
         f.plain (',');
-      f.var (var);
+      f.var (aParam);
       first = false;
     }
 
