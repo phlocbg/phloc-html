@@ -89,14 +89,19 @@ public final class JSExpr
     return new JSInvocation ((IJSExpression) null, method);
   }
 
-  public static JSInvocation invoke (final IJSExpression lhs, final JSMethod method)
+  public static JSInvocation invoke (@Nullable final IJSExpression lhs, final String method)
   {
     return new JSInvocation (lhs, method);
   }
 
-  public static JSInvocation invoke (final IJSExpression lhs, final String method)
+  public static JSInvocation invoke (@Nullable final IJSExpression lhs, final JSMethod method)
   {
     return new JSInvocation (lhs, method);
+  }
+
+  public static JSInvocation invoke (final JSFunction function)
+  {
+    return new JSInvocation (function);
   }
 
   public static JSFieldRef ref (final String field)

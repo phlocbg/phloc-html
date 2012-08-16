@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public interface IJSFunctionContainer extends IJSHasOwner
+public interface IJSFunctionContainer
 {
   /**
    * Add a new public function to this container

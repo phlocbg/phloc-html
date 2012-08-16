@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -84,7 +85,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @param name
    *        Name of this method
    */
-  JSFunction (final AbstractJSType aType, final String name)
+  JSFunction (@Nullable final AbstractJSType aType, @Nonnull final String name)
   {
     m_aType = aType;
     m_sName = name;
@@ -93,6 +94,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Returns the return type.
    */
+  @Nullable
   public AbstractJSType type ()
   {
     return m_aType;
@@ -101,11 +103,12 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Overrides the return type.
    */
-  public void type (final AbstractJSType t)
+  public void type (@Nullable final AbstractJSType t)
   {
     m_aType = t;
   }
 
+  @Nonnull
   public String name ()
   {
     return m_sName;
@@ -114,7 +117,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Changes the name of the method.
    */
-  public void name (final String n)
+  public void name (@Nonnull final String n)
   {
     m_sName = n;
   }
@@ -124,6 +127,8 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * 
    * @return List of parameters of this method. This list is not modifiable.
    */
+  @Nonnull
+  @ReturnsMutableCopy
   public List <JSVar> params ()
   {
     return ContainerHelper.newList (m_aParams);
@@ -137,7 +142,8 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    *        Name of the parameter being added
    * @return New parameter variable
    */
-  public JSVar param (final String name)
+  @Nonnull
+  public JSVar param (@Nonnull final String name)
   {
     return param (null, name);
   }
@@ -152,7 +158,8 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    *        Name of the parameter being added
    * @return New parameter variable
    */
-  public JSVar param (final AbstractJSType type, final String name)
+  @Nonnull
+  public JSVar param (@Nullable final AbstractJSType type, @Nonnull final String name)
   {
     final JSVar v = new JSVar (type, name, null);
     m_aParams.add (v);
@@ -160,22 +167,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   }
 
   /**
-   * Returns all the parameters in an array.
-   * 
-   * @return If there's no parameter, an empty array will be returned.
-   */
-  @Nonnull
-  @ReturnsMutableCopy
-  public List <JSVar> listParams ()
-  {
-    return ContainerHelper.newList (m_aParams);
-  }
-
-  /**
    * Get the block that makes up body of this method
    * 
    * @return Body of method
    */
+  @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)
@@ -188,6 +184,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * 
    * @return JDocComment containing javadocs for this class
    */
+  @Nonnull
   public JSDocComment javadoc ()
   {
     if (jdoc == null)
@@ -196,7 +193,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   }
 
   @Override
-  public void declare (final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter f)
   {
     if (jdoc != null)
       f.generatable (jdoc);

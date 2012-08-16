@@ -57,7 +57,7 @@ import com.phloc.commons.collections.ContainerHelper;
  * inserted into the {@link #pos() "current position"}. The position advances
  * one every time you add a new instruction.
  */
-public final class JSBlock implements IJSGeneratable, IJSStatement
+public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContainer
 {
   /**
    * Declarations and statements contained in this block. Either
@@ -428,6 +428,18 @@ public final class JSBlock implements IJSGeneratable, IJSStatement
     b.m_bBracesRequired = false;
     b.m_bIndentRequired = false;
     return _insert (b);
+  }
+
+  @Nonnull
+  public JSFunction function (@Nonnull final String name) throws JSNameAlreadyExistsException
+  {
+    return function (null, name);
+  }
+
+  @Nonnull
+  public JSFunction function (@Nullable final AbstractJSType aReturnType, @Nonnull final String name) throws JSNameAlreadyExistsException
+  {
+    return _insert (new JSFunction (aReturnType, name));
   }
 
   /**
