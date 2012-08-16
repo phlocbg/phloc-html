@@ -40,8 +40,7 @@
 
 package com.phloc.html.js.builder;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Try statement with Catch and/or Finally clause
@@ -49,41 +48,49 @@ import java.util.List;
 
 public class JSTryBlock implements IJSStatement
 {
-
-  private final JSBlock body = new JSBlock ();
-  private final List <JSCatchBlock> catches = new ArrayList <JSCatchBlock> ();
-  private JSBlock _finally = null;
+  private final JSBlock body = new JSBlock (true, true);
+  private JSCatchBlock _catch;
+  private JSBlock _finally;
 
   JSTryBlock ()
   {}
 
+  @Nonnull
   public JSBlock body ()
   {
     return body;
   }
 
-  public JSCatchBlock _catch (final AbstractJSClass exception)
+  @Nonnull
+  public JSCatchBlock _catch ()
   {
-    final JSCatchBlock cb = new JSCatchBlock (exception);
-    catches.add (cb);
-    return cb;
+    if (_catch == null)
+      _catch = new JSCatchBlock ();
+    return _catch;
   }
 
+  @Nonnull
   public JSBlock _finally ()
   {
     if (_finally == null)
-      _finally = new JSBlock ();
+      _finally = new JSBlock (true, true);
     return _finally;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain ("try").generatable (body);
-    for (final JSCatchBlock cb : catches)
-      f.generatable (cb);
-    if (_finally != null)
-      f.plain ("finally").generatable (_finally);
-    f.nl ();
+    if (_catch == null && _finally == null)
+    {
+      f.generatable (body);
+    }
+    else
+    {
+      f.plain ("try").generatable (body);
+      if (_catch != null)
+        f.generatable (_catch);
+      if (_finally != null)
+        f.plain ("finally").generatable (_finally);
+      f.nl ();
+    }
   }
-
 }

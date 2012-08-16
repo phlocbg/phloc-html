@@ -68,8 +68,8 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   /**
    * Whether or not this block must be braced and indented
    */
-  private boolean m_bBracesRequired = true;
-  private boolean m_bIndentRequired = true;
+  private boolean m_bBracesRequired;
+  private boolean m_bIndentRequired;
 
   /**
    * Current position.
@@ -78,7 +78,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
 
   public JSBlock ()
   {
-    this (true, true);
+    this (false, false);
   }
 
   public JSBlock (final boolean bracesRequired, final boolean indentRequired)

@@ -80,7 +80,7 @@ public final class JSForIn implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.plain ("for (").decl (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
+    f.plain ("for (var ").decl (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
     if (m_aBody != null)
       f.generatable (m_aBody).nl ();
     else

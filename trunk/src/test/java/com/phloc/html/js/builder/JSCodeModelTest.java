@@ -16,7 +16,8 @@ public final class JSCodeModelTest
     final JSCodeModel aCM = new JSCodeModel ();
     final JSPackage aPkg = aCM.rootPackage ();
 
-    final JSFunction aFuncMain = aPkg.function ("add2");
+    final JSFunction aFuncMain = aPkg.function ("mainAdd");
+    final JSVar m1 = aFuncMain.param ("m1");
     final JSVar aRoot = aFuncMain.body ().decl (aCM.NUMBER, "root", JSExpr.lit (5));
     final JSFunction aFunc = aFuncMain.body ().function ("add");
     {
@@ -24,7 +25,14 @@ public final class JSCodeModelTest
       final JSVar s2 = aFunc.param ("s2");
       aFunc.body ()._return (s1.plus (s2));
     }
-    aFuncMain.body ()._return (JSExpr.lit (5).invoke ("length").plus (aRoot.plus (JSExpr.invoke (aFunc))));
+    final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
+    final JSTryBlock aTB = aCond._then ()._try ();
+    aTB.body ()._return (JSExpr.lit (5));
+    aTB._catch ().body ()._return (JSExpr.lit (6));
+    aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
+    aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
+                                              .ref ("length")
+                                              .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
 
     new AbstractCodeWriter ("UTF-8")
     {
@@ -33,6 +41,6 @@ public final class JSCodeModelTest
       {
         return new PrintWriter (System.out);
       }
-    }.build (aCM);
+    }.buildPackage (aCM.rootPackage ());
   }
 }

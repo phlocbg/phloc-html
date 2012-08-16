@@ -164,7 +164,47 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  public JSInvocation arg (final boolean v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  public JSInvocation arg (final float v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  public JSInvocation arg (final double v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  public JSInvocation arg (final int v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  public JSInvocation arg (final long v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
   public JSInvocation arg (final String v)
   {

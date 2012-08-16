@@ -42,12 +42,13 @@ package com.phloc.html.js.builder.writer;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.CharsetEncoder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CharsetManager;
 import com.phloc.html.js.builder.IJSDeclaration;
 import com.phloc.html.js.builder.JSCodeModel;
@@ -66,7 +67,7 @@ public abstract class AbstractCodeWriter
    */
   protected final String m_sEncoding;
 
-  protected AbstractCodeWriter (final String sEncoding)
+  protected AbstractCodeWriter (@Nonnull @Nonempty final String sEncoding)
   {
     m_sEncoding = sEncoding;
   }
@@ -81,9 +82,9 @@ public abstract class AbstractCodeWriter
    * @param pkg
    *        The package of the file to be written.
    * @param fileName
-   *        File name without the path. Something like "Foo.java" or
-   *        "Bar.properties"
+   *        File name without the path. Something like "Foo.js"
    */
+  @Nonnull
   public abstract Writer getWriter (JSPackage pkg, String fileName) throws IOException;
 
   /**
@@ -99,14 +100,14 @@ public abstract class AbstractCodeWriter
    *        File name without the path. Something like "Foo.java" or
    *        "Bar.properties"
    */
-  public Writer openSource (@Nullable final JSPackage pkg, final String fileName) throws IOException
+  public final BufferedWriter openSource (@Nullable final JSPackage pkg, final String fileName) throws IOException
   {
     final Writer bw = getWriter (pkg, fileName);
 
     // create writer
     try
     {
-      return new UnicodeEscapeWriter (bw)
+      return new BufferedWriter (new UnicodeEscapeWriter (bw)
       {
         // can't change this signature to Encoder because
         // we can't have Encoder in method signature
@@ -124,11 +125,11 @@ public abstract class AbstractCodeWriter
 
           return !encoder.canEncode ((char) ch);
         }
-      };
+      });
     }
     catch (final Throwable t)
     {
-      return new UnicodeEscapeWriter (bw);
+      return new BufferedWriter (new UnicodeEscapeWriter (bw));
     }
   }
 
@@ -140,25 +141,27 @@ public abstract class AbstractCodeWriter
   public void close () throws IOException
   {}
 
+  public void buildPackage (final JSPackage aPackage) throws IOException
+  {
+    // Write a file
+    final JSFormatter f = new JSFormatter (openSource (aPackage.parent (), aPackage.name () + ".js"));
+    try
+    {
+      // for all declarations in the current package
+      for (final IJSDeclaration c : aPackage.declarations ())
+        f.decl (c);
+    }
+    finally
+    {
+      f.close ();
+    }
+  }
+
   public void build (final JSCodeModel aCodeModel) throws IOException
   {
     // for all packages
     for (final JSPackage aPackage : aCodeModel.packages ())
-    {
-      // Write a file
-      final Writer bw = new BufferedWriter (openSource (aPackage.parent (), aPackage.name () + ".js"));
-      final JSFormatter f = new JSFormatter (new PrintWriter (bw));
-      try
-      {
-        // for all declarations in the current package
-        for (final IJSDeclaration c : aPackage.declarations ())
-          f.decl (c);
-      }
-      finally
-      {
-        f.close ();
-      }
-    }
+      buildPackage (aPackage);
     close ();
   }
 }
