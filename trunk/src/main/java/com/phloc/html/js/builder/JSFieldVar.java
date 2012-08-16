@@ -40,17 +40,20 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * A field that can have a {@link JSDocComment} associated with it
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
 {
+  private final JSDefinedClass m_aOwner;
+
   /**
    * javadoc comments for this JFieldVar
    */
-  private JSDocComment jdoc = null;
-
-  private final JSDefinedClass m_aOwner;
+  private JSDocComment m_aJSDoc;
 
   /**
    * JFieldVar constructor
@@ -62,22 +65,27 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * @param init
    *        Value to initialize this variable to
    */
-  JSFieldVar (final JSDefinedClass owner, final AbstractJSType type, final String name, final IJSExpression init)
+  JSFieldVar (@Nonnull final JSDefinedClass owner,
+              @Nullable final AbstractJSType type,
+              @Nonnull final String name,
+              @Nullable final IJSExpression init)
   {
     super (type, name, init);
-    this.m_aOwner = owner;
+    m_aOwner = owner;
   }
 
+  @Nonnull
   @Override
-  public void name (final String name)
+  public JSFieldVar name (final String name)
   {
     // make sure that the new name is available
     if (m_aOwner.fields.containsKey (name))
       throw new IllegalArgumentException ("name " + name + " is already in use");
-    final String oldName = name ();
+    final String sOldName = name ();
     super.name (name);
-    m_aOwner.fields.remove (oldName);
+    m_aOwner.fields.remove (sOldName);
     m_aOwner.fields.put (name, this);
+    return this;
   }
 
   /**
@@ -85,18 +93,19 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * 
    * @return JDocComment containing javadocs for this class
    */
+  @Nonnull
   public JSDocComment javadoc ()
   {
-    if (jdoc == null)
-      jdoc = new JSDocComment ();
-    return jdoc;
+    if (m_aJSDoc == null)
+      m_aJSDoc = new JSDocComment ();
+    return m_aJSDoc;
   }
 
   @Override
-  public void declare (final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter f)
   {
-    if (jdoc != null)
-      f.generable (jdoc);
+    if (m_aJSDoc != null)
+      f.generable (m_aJSDoc);
     super.declare (f);
   }
 }

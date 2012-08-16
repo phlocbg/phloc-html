@@ -40,6 +40,9 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Variables and fields.
  */
@@ -56,7 +59,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    */
   private String m_sName;
 
-  /**
+  /*
    * Initialization of the variable in its declaration
    */
   private IJSExpression m_aInit;
@@ -71,8 +74,10 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    * @param init
    *        Value to initialize this variable to
    */
-  JSVar (final AbstractJSType type, final String name, final IJSExpression init)
+  JSVar (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
   {
+    if (!JSNameChecker.isJSIdentifier (name))
+      throw new IllegalArgumentException ();
     m_aType = type;
     m_sName = name;
     m_aInit = init;
@@ -84,7 +89,8 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    * @param init
    *        JExpression to be used to initialize this field
    */
-  public JSVar init (final IJSExpression init)
+  @Nonnull
+  public JSVar init (@Nullable final IJSExpression init)
   {
     m_aInit = init;
     return this;
@@ -95,6 +101,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    * 
    * @return Name of the variable
    */
+  @Nonnull
   public String name ()
   {
     return m_sName;
@@ -103,18 +110,18 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
   /**
    * Changes the name of this variable.
    */
-  public void name (final String name)
+  public JSVar name (@Nonnull final String name)
   {
     if (!JSNameChecker.isJSIdentifier (name))
       throw new IllegalArgumentException ();
     m_sName = name;
+    return this;
   }
 
   /**
-   * Return the type of this variable.
-   * 
-   * @return always non-null.
+   * @return the type of this variable.
    */
+  @Nullable
   public AbstractJSType type ()
   {
     return m_aType;
@@ -125,42 +132,44 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    * 
    * @param newType
    *        must not be null.
-   * @return the old type value. always non-null.
+   * @return the old type value.
    */
-  public AbstractJSType type (final AbstractJSType newType)
+  @Nullable
+  public AbstractJSType type (@Nullable final AbstractJSType newType)
   {
     final AbstractJSType r = m_aType;
-    if (newType == null)
-      throw new IllegalArgumentException ();
     m_aType = newType;
     return r;
   }
 
-  public void bind (final JSFormatter f)
-  {
-    f.generable (m_aType).id (m_sName);
-    if (m_aInit != null)
-      f.plain ('=').generable (m_aInit);
-  }
-
-  public void declare (final JSFormatter f)
-  {
-    f.var (this).plain (';').nl ();
-  }
-
-  public void generate (final JSFormatter f)
-  {
-    f.id (m_sName);
-  }
-
-  public IJSExpression assign (final IJSExpression rhs)
+  @Nonnull
+  public IJSExpression assign (@Nonnull final IJSExpression rhs)
   {
     return JSExpr.assign (this, rhs);
   }
 
-  public IJSExpression assignPlus (final IJSExpression rhs)
+  @Nonnull
+  public IJSExpression assignPlus (@Nonnull final IJSExpression rhs)
   {
     return JSExpr.assignPlus (this, rhs);
   }
 
+  public void bind (@Nonnull final JSFormatter f)
+  {
+    if (m_aType != null)
+      f.plain ("/*").generable (m_aType).plain ("*/");
+    f.id (m_sName);
+    if (m_aInit != null)
+      f.plain ('=').generable (m_aInit);
+  }
+
+  public void declare (@Nonnull final JSFormatter f)
+  {
+    f.var (this).plain (';').nl ();
+  }
+
+  public void generate (@Nonnull final JSFormatter f)
+  {
+    f.id (m_sName);
+  }
 }

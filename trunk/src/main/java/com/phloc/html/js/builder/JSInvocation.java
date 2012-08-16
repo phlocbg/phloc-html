@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -75,7 +76,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * List of argument expressions for this method invocation
    */
-  private final List <IJSExpression> args = new ArrayList <IJSExpression> ();
+  private final List <IJSExpression> m_aArgs = new ArrayList <IJSExpression> ();
 
   /**
    * If isConstructor==true, this field keeps the type to be created.
@@ -91,12 +92,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * @param name
    *        Name of method to invoke
    */
-  JSInvocation (final IJSExpression object, final String name)
+  JSInvocation (@Nullable final IJSExpression object, @Nonnull final String name)
   {
     this ((IJSGenerable) object, name);
   }
 
-  JSInvocation (final IJSExpression object, final JSMethod method)
+  JSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
   {
     this ((IJSGenerable) object, method);
   }
@@ -104,28 +105,28 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Invokes a static method on a class.
    */
-  JSInvocation (final AbstractJSClass type, final String name)
+  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final String name)
   {
     this ((IJSGenerable) type, name);
   }
 
-  JSInvocation (final AbstractJSClass type, final JSMethod method)
+  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
   {
     this ((IJSGenerable) type, method);
   }
 
-  private JSInvocation (final IJSGenerable object, final String name)
+  private JSInvocation (@Nullable final IJSGenerable object, @Nonnull final String name)
   {
-    this.m_aObject = object;
+    m_aObject = object;
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("method name contains '.': " + name);
-    this.m_sName = name;
+    m_sName = name;
   }
 
-  private JSInvocation (final IJSGenerable object, final JSMethod method)
+  private JSInvocation (@Nullable final IJSGenerable object, @Nonnull final JSMethod method)
   {
-    this.m_aObject = object;
-    this.m_aMethod = method;
+    m_aObject = object;
+    m_aMethod = method;
   }
 
   /**
@@ -136,10 +137,10 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    *        added arguments are treated as array initializer. Thus you can
    *        create an expression like <code>new int[]{1,2,3,4,5}</code>.
    */
-  JSInvocation (final AbstractJSType c)
+  JSInvocation (@Nonnull final AbstractJSType c)
   {
-    this.m_bIsConstructor = true;
-    this.m_aType = c;
+    m_bIsConstructor = true;
+    m_aType = c;
   }
 
   /**
@@ -148,11 +149,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * @param arg
    *        Argument to add to argument list
    */
-  public JSInvocation arg (final IJSExpression arg)
+  @Nonnull
+  public JSInvocation arg (@Nonnull final IJSExpression arg)
   {
     if (arg == null)
       throw new IllegalArgumentException ();
-    args.add (arg);
+    m_aArgs.add (arg);
     return this;
   }
 
@@ -173,7 +175,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   @ReturnsMutableCopy
   public List <IJSExpression> listArgs ()
   {
-    return ContainerHelper.newList (args);
+    return ContainerHelper.newList (m_aArgs);
   }
 
   public void generate (final JSFormatter f)
@@ -181,17 +183,17 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     if (m_bIsConstructor && m_aType.isArray ())
     {
       // [RESULT] new T[]{arg1,arg2,arg3,...};
-      f.plain ("new").generable (m_aType).plain ('{');
+      f.plain ("new ").generable (m_aType).plain ('{');
     }
     else
     {
       if (m_bIsConstructor)
-        f.plain ("new").generable (m_aType).plain ('(');
+        f.plain ("new ").generable (m_aType).plain ('(');
       else
       {
-        String name = this.m_sName;
+        String name = m_sName;
         if (name == null)
-          name = this.m_aMethod.name ();
+          name = m_aMethod.name ();
 
         if (m_aObject != null)
           f.generable (m_aObject).plain ('.').plain (name).plain ('(');
@@ -200,7 +202,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
       }
     }
 
-    f.generable (args);
+    f.generable (m_aArgs);
 
     if (m_bIsConstructor && m_aType.isArray ())
       f.plain ('}');

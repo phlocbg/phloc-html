@@ -42,7 +42,6 @@ package com.phloc.html.js.builder;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.annotation.Nonnull;
 
@@ -81,8 +80,16 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSCodeModel
 {
+  public final JSPrimitiveType ARRAY = new JSPrimitiveType (this, "Array");
+  public final JSPrimitiveType BOOLEAN = new JSPrimitiveType (this, "Boolean");
+  public final JSPrimitiveType DATE = new JSPrimitiveType (this, "Date");
+  public final JSPrimitiveType ERROR = new JSPrimitiveType (this, "Error");
+  public final JSPrimitiveType MATH = new JSPrimitiveType (this, "Math");
+  public final JSPrimitiveType NUMBER = new JSPrimitiveType (this, "number");
+  public final JSPrimitiveType STRING = new JSPrimitiveType (this, "string");
+
   /** The packages that this JCodeWriter contains. */
-  private final HashMap <String, JSPackage> packages = new HashMap <String, JSPackage> ();
+  private final HashMap <String, JSPackage> m_aPackages = new HashMap <String, JSPackage> ();
 
   public JSCodeModel ()
   {}
@@ -94,13 +101,13 @@ public final class JSCodeModel
    *        Name of the package. Use "" to indicate the root package.
    * @return Newly generated package
    */
-  public JSPackage _package (final String name)
+  JSPackage _package (final String name)
   {
-    JSPackage p = packages.get (name);
+    JSPackage p = m_aPackages.get (name);
     if (p == null)
     {
-      p = new JSPackage (name, this);
-      packages.put (name, p);
+      p = new JSPackage (this, name);
+      m_aPackages.put (name, p);
     }
     return p;
   }
@@ -110,19 +117,11 @@ public final class JSCodeModel
     return _package ("");
   }
 
-  /**
-   * Returns an iterator that walks the packages defined using this code writer.
-   */
-  public Iterator <JSPackage> packages ()
-  {
-    return packages.values ().iterator ();
-  }
-
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <JSPackage> getAllPackages ()
+  public Collection <JSPackage> packages ()
   {
-    return ContainerHelper.newList (packages.values ());
+    return ContainerHelper.newList (m_aPackages.values ());
   }
 
   /**
@@ -159,7 +158,7 @@ public final class JSCodeModel
   public int countArtifacts ()
   {
     int r = 0;
-    for (final JSPackage pkg : getAllPackages ())
+    for (final JSPackage pkg : packages ())
       r += pkg.countArtifacts ();
     return r;
   }

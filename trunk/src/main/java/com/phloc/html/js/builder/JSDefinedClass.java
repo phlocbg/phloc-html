@@ -96,7 +96,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * {@link JSCodeModel#isCaseSensitiveFileSystem}) to avoid conflicts. Lazily
    * created to save footprint.
    * 
-   * @see #getClasses()
+   * @see #_getClasses()
    */
   private Map <String, JSDefinedClass> classes;
 
@@ -253,14 +253,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     if (p.isUnnamed ())
       return name ();
     return p.name () + '.' + name ();
-  }
-
-  @Override
-  public String binaryName ()
-  {
-    if (outer instanceof JSDefinedClass)
-      return ((JSDefinedClass) outer).binaryName () + '$' + name ();
-    return fullName ();
   }
 
   /**
@@ -429,11 +421,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   public JSDefinedClass _class (final String name) throws JSClassAlreadyExistsException
   {
-    if (getClasses ().containsKey (name))
-      throw new JSClassAlreadyExistsException (getClasses ().get (name));
+    if (_getClasses ().containsKey (name))
+      throw new JSClassAlreadyExistsException (_getClasses ().get (name));
     // XXX problems caught in the NC constructor
     final JSDefinedClass c = new JSDefinedClass (this, name);
-    getClasses ().put (name, c);
+    _getClasses ().put (name, c);
     return c;
   }
 
@@ -452,14 +444,12 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Returns an iterator that walks the nested classes defined in this class.
    */
-  public final Iterator <JSDefinedClass> classes ()
+  public final Collection <JSDefinedClass> classes ()
   {
-    if (classes == null)
-      return Collections.<JSDefinedClass> emptyList ().iterator ();
-    return classes.values ().iterator ();
+    return classes == null ? ContainerHelper.<JSDefinedClass> newList () : ContainerHelper.newList (classes.values ());
   }
 
-  private Map <String, JSDefinedClass> getClasses ()
+  private Map <String, JSDefinedClass> _getClasses ()
   {
     if (classes == null)
       classes = new TreeMap <String, JSDefinedClass> ();

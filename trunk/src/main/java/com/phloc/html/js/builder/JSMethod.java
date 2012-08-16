@@ -41,7 +41,6 @@
 package com.phloc.html.js.builder;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -50,19 +49,19 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
 /**
- * Java method.
+ * JS method.
  */
 public class JSMethod implements IJSDocCommentable, IJSDeclaration
 {
   /**
    * Return type for this method
    */
-  private AbstractJSType m_aType = null;
+  private AbstractJSType m_aType;
 
   /**
    * Name of this method
    */
-  private String m_sName = null;
+  private String m_sName;
 
   /**
    * List of parameters for this method's declaration
@@ -72,14 +71,14 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   /**
    * JBlock of statements that makes up the body this method
    */
-  private JSSBlock body = null;
+  private JSSBlock body;
 
   private final JSDefinedClass m_aOuter;
 
   /**
    * javadoc comments for this JMethod
    */
-  private JSDocComment jdoc = null;
+  private JSDocComment jdoc;
 
   /**
    * JMethod constructor
@@ -116,7 +115,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    */
   public List <JSVar> params ()
   {
-    return Collections.<JSVar> unmodifiableList (params);
+    return ContainerHelper.newList (params);
   }
 
   /**

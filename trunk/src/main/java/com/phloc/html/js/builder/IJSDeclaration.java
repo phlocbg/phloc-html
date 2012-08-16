@@ -40,11 +40,13 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Common interface for code components that can generate declarations of
  * themselves.
  */
 public interface IJSDeclaration
 {
-  void declare (JSFormatter f);
+  void declare (@Nonnull JSFormatter f);
 }

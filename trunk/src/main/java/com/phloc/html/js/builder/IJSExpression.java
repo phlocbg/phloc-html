@@ -46,7 +46,7 @@ import javax.annotation.Nonnull;
  * A Java expression.
  * <p>
  * Unlike most of CodeModel, JExpressions are built bottom-up ( meaning you
- * start from leaves and then gradually build compliated expressions by
+ * start from leaves and then gradually build complicated expressions by
  * combining them.)
  * <p>
  * {@link IJSExpression} defines a series of composer methods, which returns a

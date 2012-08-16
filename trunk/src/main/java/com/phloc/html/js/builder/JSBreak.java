@@ -45,8 +45,7 @@ package com.phloc.html.js.builder;
  */
 final class JSBreak implements IJSStatement
 {
-
-  private final JSLabel label;
+  private final JSLabel m_aLabel;
 
   /**
    * JBreak constructor
@@ -56,14 +55,14 @@ final class JSBreak implements IJSStatement
    */
   JSBreak (final JSLabel _label)
   {
-    this.label = _label;
+    this.m_aLabel = _label;
   }
 
   public void state (final JSFormatter f)
   {
-    if (label == null)
+    if (m_aLabel == null)
       f.plain ("break;").nl ();
     else
-      f.plain ("break").plain (label.label).plain (';').nl ();
+      f.plain ("break").plain (m_aLabel.label).plain (';').nl ();
   }
 }

@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * A cast operation.
  */
@@ -63,10 +65,10 @@ final class JSCast extends AbstractJSExpressionImpl
    * @param object
    *        JExpression for the object upon which the cast is applied
    */
-  JSCast (final AbstractJSType type, final IJSExpression object)
+  JSCast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression object)
   {
-    this.m_aType = type;
-    this.m_aObject = object;
+    m_aType = type;
+    m_aObject = object;
   }
 
   public void generate (final JSFormatter f)

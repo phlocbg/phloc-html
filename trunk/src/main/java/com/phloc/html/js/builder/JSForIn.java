@@ -41,25 +41,24 @@
 package com.phloc.html.js.builder;
 
 /**
- * ForEach Statement This will generate the code for statement based on the new
- * j2se 1.5 j.l.s.
+ * ForIn Statement
  * 
- * @author Bhakti
+ * @author philip
  */
-public final class JSForEach implements IJSStatement
+public final class JSForIn implements IJSStatement
 {
-  private final AbstractJSType type;
-  private final String var;
-  private JSSBlock body = null; // lazily created
+  private final AbstractJSType m_aType;
+  private final String m_sVar;
+  private JSSBlock m_aBody; // lazily created
   private final IJSExpression m_aCollection;
-  private final JSVar loopVar;
+  private final JSVar m_aLoopVar;
 
-  public JSForEach (final AbstractJSType vartype, final String variable, final IJSExpression collection)
+  public JSForIn (final AbstractJSType vartype, final String variable, final IJSExpression collection)
   {
-    this.type = vartype;
-    this.var = variable;
-    this.m_aCollection = collection;
-    loopVar = new JSVar (type, var, collection);
+    m_aType = vartype;
+    m_sVar = variable;
+    m_aCollection = collection;
+    m_aLoopVar = new JSVar (m_aType, m_sVar, collection);
   }
 
   /**
@@ -67,25 +66,26 @@ public final class JSForEach implements IJSStatement
    */
   public JSVar var ()
   {
-    return loopVar;
+    return m_aLoopVar;
   }
 
   public JSSBlock body ()
   {
-    if (body == null)
-      body = new JSSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSSBlock ();
+    return m_aBody;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain ("for (");
-    f.generable (type).id (var).plain (": ").generable (m_aCollection);
+    f.plain ("for (var ");
+    if (m_aType != null)
+      f.plain ("/*").generable (m_aType).plain ("*/");
+    f.id (m_sVar).plain (" in ").generable (m_aCollection);
     f.plain (')');
-    if (body != null)
-      f.generable (body).nl ();
+    if (m_aBody != null)
+      f.generable (m_aBody).nl ();
     else
       f.plain (';').nl ();
   }
-
 }

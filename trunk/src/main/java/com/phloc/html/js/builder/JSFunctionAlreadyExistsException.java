@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Indicates that the function is already created.
  * 
@@ -47,11 +49,11 @@ package com.phloc.html.js.builder;
  */
 public class JSFunctionAlreadyExistsException extends Exception
 {
-  private final JSFunction existing;
+  private final JSFunction m_aExisting;
 
-  public JSFunctionAlreadyExistsException (final JSFunction _existing)
+  public JSFunctionAlreadyExistsException (@Nonnull final JSFunction _existing)
   {
-    this.existing = _existing;
+    this.m_aExisting = _existing;
   }
 
   /**
@@ -59,8 +61,9 @@ public class JSFunctionAlreadyExistsException extends Exception
    * 
    * @return This method always return non-null valid object.
    */
+  @Nonnull
   public JSFunction getExistingFunction ()
   {
-    return existing;
+    return m_aExisting;
   }
 }
