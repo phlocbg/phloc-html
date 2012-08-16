@@ -404,9 +404,9 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
-   * @return JDocComment containing javadocs for this class
+   * @return {@link JSDocComment} containing javadocs for this class
    */
-  public JSDocComment javadoc ()
+  public JSDocComment jsDoc ()
   {
     if (m_aJSDoc == null)
       m_aJSDoc = new JSDocComment ();

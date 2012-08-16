@@ -94,7 +94,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * @return JDocComment containing javadocs for this class
    */
   @Nonnull
-  public JSDocComment javadoc ()
+  public JSDocComment jsDoc ()
   {
     if (m_aJSDoc == null)
       m_aJSDoc = new JSDocComment ();
