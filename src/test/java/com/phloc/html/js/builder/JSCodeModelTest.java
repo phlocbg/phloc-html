@@ -28,7 +28,8 @@ public final class JSCodeModelTest
     final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
     final JSTryBlock aTB = aCond._then ()._try ();
     aTB.body ()._return (JSExpr.lit (5));
-    aTB._catch ().body ()._return (JSExpr.lit (6));
+    final JSCatchBlock aCB = aTB._catch ("ex");
+    aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
     aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
     aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
                                               .ref ("length")

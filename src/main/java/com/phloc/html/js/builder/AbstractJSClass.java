@@ -89,7 +89,6 @@ public abstract class AbstractJSClass extends AbstractJSType
 
   /** Gets the JCodeModel object to which this object belongs. */
 
-  @Override
   public final JSCodeModel owner ()
   {
     return m_aOwner;

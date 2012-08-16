@@ -41,6 +41,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Catch block for a try/catch/finally statement
@@ -52,6 +53,17 @@ public class JSCatchBlock implements IJSGeneratable
 
   JSCatchBlock ()
   {}
+
+  JSCatchBlock (final String name)
+  {
+    m_aVar = new JSVar (null, name, null);
+  }
+
+  @Nullable
+  public JSVar param ()
+  {
+    return m_aVar;
+  }
 
   @Nonnull
   public JSVar param (@Nonnull final String name)

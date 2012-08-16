@@ -168,14 +168,6 @@ public class JSFormatter implements Closeable
     return this;
   }
 
-  @Nonnull
-  public JSFormatter t (@Nonnull final AbstractJSType type)
-  {
-    if (type.isReference ())
-      return type ((AbstractJSClass) type);
-    return generatable (type);
-  }
-
   /**
    * Print a type name.
    * <p>

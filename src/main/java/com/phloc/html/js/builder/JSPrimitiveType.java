@@ -14,7 +14,6 @@ public class JSPrimitiveType extends AbstractJSType
     m_sName = sName;
   }
 
-  @Override
   public JSCodeModel owner ()
   {
     return m_aOwner;
@@ -36,7 +35,7 @@ public class JSPrimitiveType extends AbstractJSType
   public AbstractJSClass array ()
   {
     if (m_aArrayClass == null)
-      m_aArrayClass = new JSArrayClass (owner (), this);
+      m_aArrayClass = new JSArrayClass (m_aOwner, this);
     return m_aArrayClass;
   }
 

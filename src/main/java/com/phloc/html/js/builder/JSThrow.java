@@ -41,12 +41,10 @@
 package com.phloc.html.js.builder;
 
 /**
- * JThrow statement
+ * JSThrow statement
  */
-
-class JSThrow implements IJSStatement
+final class JSThrow implements IJSStatement
 {
-
   /**
    * JExpression to throw
    */
@@ -60,14 +58,13 @@ class JSThrow implements IJSStatement
    */
   JSThrow (final IJSExpression expr)
   {
-    this.m_aExpr = expr;
+    m_aExpr = expr;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain ("throw");
+    f.plain ("throw ");
     f.generatable (m_aExpr);
     f.plain (';').nl ();
   }
-
 }
