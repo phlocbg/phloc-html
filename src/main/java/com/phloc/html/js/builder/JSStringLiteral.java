@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import com.phloc.html.js.marshal.JSMarshaller;
+
 /**
  * String literal.
  * 
@@ -47,17 +49,15 @@ package com.phloc.html.js.builder;
  */
 public class JSStringLiteral extends AbstractJSExpressionImpl
 {
-
-  public final String str;
+  public final String m_sStr;
 
   JSStringLiteral (final String what)
   {
-    this.str = what;
-
+    m_sStr = what;
   }
 
   public void generate (final JSFormatter f)
   {
-    f.plain (JSExpr.quotify ('"', str));
+    f.plain ('\'').plain (JSMarshaller.javaScriptEscape (m_sStr)).plain ('\'');
   }
 }

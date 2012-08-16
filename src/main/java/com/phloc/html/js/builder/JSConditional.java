@@ -53,12 +53,12 @@ public class JSConditional implements IJSStatement
   /**
    * JBlock of statements for "then" clause
    */
-  private final JSSBlock _then = new JSSBlock ();
+  private final JSSBlock m_aThen = new JSSBlock ();
 
   /**
    * JBlock of statements for optional "else" clause
    */
-  private JSSBlock _else = null;
+  private JSSBlock m_aElse = null;
 
   /**
    * Constructor
@@ -78,7 +78,7 @@ public class JSConditional implements IJSStatement
    */
   public JSSBlock _then ()
   {
-    return _then;
+    return m_aThen;
   }
 
   /**
@@ -88,9 +88,9 @@ public class JSConditional implements IJSStatement
    */
   public JSSBlock _else ()
   {
-    if (_else == null)
-      _else = new JSSBlock ();
-    return _else;
+    if (m_aElse == null)
+      m_aElse = new JSSBlock ();
+    return m_aElse;
   }
 
   /**
@@ -105,12 +105,12 @@ public class JSConditional implements IJSStatement
   {
     if (m_aTest == JSExpr.TRUE)
     {
-      _then.generateBody (f);
+      m_aThen.generateBody (f);
       return;
     }
     if (m_aTest == JSExpr.FALSE)
     {
-      _else.generateBody (f);
+      m_aElse.generateBody (f);
       return;
     }
 
@@ -122,9 +122,9 @@ public class JSConditional implements IJSStatement
     {
       f.plain ("if (").generable (m_aTest).plain (')');
     }
-    f.generable (_then);
-    if (_else != null)
-      f.plain ("else").generable (_else);
+    f.generable (m_aThen);
+    if (m_aElse != null)
+      f.plain ("else").generable (m_aElse);
     f.nl ();
   }
 }

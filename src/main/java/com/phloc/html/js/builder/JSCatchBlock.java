@@ -46,10 +46,9 @@ package com.phloc.html.js.builder;
 
 public class JSCatchBlock implements IJSGenerable
 {
-
-  AbstractJSClass m_aException;
-  private JSVar var = null;
-  private final JSSBlock body = new JSSBlock ();
+  private final AbstractJSClass m_aException;
+  private JSVar m_aVar = null;
+  private final JSSBlock m_aBody = new JSSBlock ();
 
   JSCatchBlock (final AbstractJSClass exception)
   {
@@ -58,21 +57,21 @@ public class JSCatchBlock implements IJSGenerable
 
   public JSVar param (final String name)
   {
-    if (var != null)
+    if (m_aVar != null)
       throw new IllegalStateException ();
-    var = new JSVar (m_aException, name, null);
-    return var;
+    m_aVar = new JSVar (m_aException, name, null);
+    return m_aVar;
   }
 
   public JSSBlock body ()
   {
-    return body;
+    return m_aBody;
   }
 
   public void generate (final JSFormatter f)
   {
-    if (var == null)
-      var = new JSVar (m_aException, "_x", null);
-    f.plain ("catch (").var (var).plain (')').generable (body);
+    if (m_aVar == null)
+      m_aVar = new JSVar (m_aException, "ex", null);
+    f.plain ("catch (").var (m_aVar).plain (')').generable (m_aBody);
   }
 }

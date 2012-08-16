@@ -73,12 +73,6 @@ final class JSArrayClass extends AbstractJSClass
   }
 
   @Override
-  public String binaryName ()
-  {
-    return componentType.binaryName () + "[]";
-  }
-
-  @Override
   public void generate (final JSFormatter f)
   {
     f.generable (componentType).plain ("[]");

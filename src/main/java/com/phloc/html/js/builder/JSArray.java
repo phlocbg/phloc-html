@@ -43,6 +43,9 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * array creation and initialization.
  */
@@ -50,23 +53,24 @@ public final class JSArray extends AbstractJSExpressionImpl
 {
   private final AbstractJSType m_aType;
   private final IJSExpression m_aSize;
-  private List <IJSExpression> exprs = null;
+  private List <IJSExpression> m_aExprs;
+
+  JSArray (@Nonnull final AbstractJSType type, @Nullable final IJSExpression size)
+  {
+    m_aType = type;
+    m_aSize = size;
+  }
 
   /**
    * Add an element to the array initializer
    */
-  public JSArray add (final IJSExpression e)
+  @Nonnull
+  public JSArray add (@Nonnull final IJSExpression e)
   {
-    if (exprs == null)
-      exprs = new ArrayList <IJSExpression> ();
-    exprs.add (e);
+    if (m_aExprs == null)
+      m_aExprs = new ArrayList <IJSExpression> ();
+    m_aExprs.add (e);
     return this;
-  }
-
-  JSArray (final AbstractJSType type, final IJSExpression size)
-  {
-    this.m_aType = type;
-    this.m_aSize = size;
   }
 
   public void generate (final JSFormatter f)
@@ -75,7 +79,6 @@ public final class JSArray extends AbstractJSExpressionImpl
     // then new T'[][x] is wrong. It has to be new T'[x][].
     int arrayCount = 0;
     AbstractJSType t = m_aType;
-
     while (t.isArray ())
     {
       t = t.elementType ();
@@ -90,18 +93,13 @@ public final class JSArray extends AbstractJSExpressionImpl
     for (int i = 0; i < arrayCount; i++)
       f.plain ("[]");
 
-    if ((m_aSize == null) || (exprs != null))
+    if ((m_aSize == null) || (m_aExprs != null))
       f.plain ('{');
-    if (exprs != null)
-    {
-      f.generable (exprs);
-    }
+    if (m_aExprs != null)
+      f.generable (m_aExprs);
     else
-    {
       f.plain (' ');
-    }
-    if ((m_aSize == null) || (exprs != null))
+    if ((m_aSize == null) || (m_aExprs != null))
       f.plain ('}');
   }
-
 }

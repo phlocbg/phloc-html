@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * JAtoms: Simple code components that merely generate themselves.
  */
@@ -47,12 +49,12 @@ final class JSAtom extends AbstractJSExpressionImpl
 {
   private final String m_sWhat;
 
-  JSAtom (final String what)
+  JSAtom (@Nonnull final String what)
   {
-    this.m_sWhat = what;
+    m_sWhat = what;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sWhat);
   }

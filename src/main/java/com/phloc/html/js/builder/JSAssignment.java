@@ -45,32 +45,31 @@ package com.phloc.html.js.builder;
  */
 public class JSAssignment extends AbstractJSExpressionImpl implements IJSStatement
 {
-
-  IJSAssignmentTarget m_aLhs;
-  IJSExpression m_aRhs;
-  String m_sOp = "";
+  private final IJSAssignmentTarget m_aLhs;
+  private final String m_sOp;
+  private final IJSExpression m_aRhs;
 
   JSAssignment (final IJSAssignmentTarget lhs, final IJSExpression rhs)
   {
-    this.m_aLhs = lhs;
-    this.m_aRhs = rhs;
+    m_aLhs = lhs;
+    m_sOp = "=";
+    m_aRhs = rhs;
   }
 
-  JSAssignment (final IJSAssignmentTarget lhs, final IJSExpression rhs, final String op)
+  JSAssignment (final IJSAssignmentTarget lhs, final String op, final IJSExpression rhs)
   {
-    this.m_aLhs = lhs;
-    this.m_aRhs = rhs;
-    this.m_sOp = op;
+    m_aLhs = lhs;
+    m_sOp = op;
+    m_aRhs = rhs;
   }
 
   public void generate (final JSFormatter f)
   {
-    f.generable (m_aLhs).plain (m_sOp + '=').generable (m_aRhs);
+    f.generable (m_aLhs).plain (m_sOp).generable (m_aRhs);
   }
 
   public void state (final JSFormatter f)
   {
     f.generable (this).plain (';').nl ();
   }
-
 }

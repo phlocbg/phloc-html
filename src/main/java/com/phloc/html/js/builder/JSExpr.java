@@ -40,7 +40,8 @@
 
 package com.phloc.html.js.builder;
 
-import com.phloc.html.js.marshal.JSMarshaller;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
@@ -53,27 +54,32 @@ public final class JSExpr
   private JSExpr ()
   {}
 
-  public static IJSExpression assign (final IJSAssignmentTarget lhs, final IJSExpression rhs)
+  @Nonnull
+  public static IJSExpression assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
     return new JSAssignment (lhs, rhs);
   }
 
-  public static IJSExpression assignPlus (final IJSAssignmentTarget lhs, final IJSExpression rhs)
+  @Nonnull
+  public static IJSExpression assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, rhs, "+");
+    return new JSAssignment (lhs, "+=", rhs);
   }
 
-  public static JSInvocation _new (final AbstractJSClass c)
+  @Nonnull
+  public static JSInvocation _new (@Nonnull final AbstractJSClass c)
   {
     return new JSInvocation (c);
   }
 
-  public static JSInvocation _new (final AbstractJSType t)
+  @Nonnull
+  public static JSInvocation _new (@Nonnull final AbstractJSType t)
   {
     return new JSInvocation (t);
   }
 
-  public static JSInvocation invoke (final String method)
+  @Nonnull
+  public static JSInvocation invoke (@Nonnull final String method)
   {
     return new JSInvocation ((IJSExpression) null, method);
   }
@@ -113,11 +119,13 @@ public final class JSExpr
     return new JSArrayCompRef (lhs, index);
   }
 
+  @Nonnull
   public static JSCast cast (final AbstractJSType type, final IJSExpression expr)
   {
     return new JSCast (type, expr);
   }
 
+  @Nonnull
   public static JSArray newArray (final AbstractJSType type)
   {
     return newArray (type, null);
@@ -129,7 +137,8 @@ public final class JSExpr
    * @param type
    *        The type of the array component. 'T' or {@code new T[size]}.
    */
-  public static JSArray newArray (final AbstractJSType type, final IJSExpression size)
+  @Nonnull
+  public static JSArray newArray (final AbstractJSType type, @Nullable final IJSExpression size)
   {
     // you cannot create an array whose component type is a generic
     return new JSArray (type, size);
@@ -141,6 +150,7 @@ public final class JSExpr
    * @param type
    *        The type of the array component. 'T' or {@code new T[size]}.
    */
+  @Nonnull
   public static JSArray newArray (final AbstractJSType type, final int size)
   {
     return newArray (type, lit (size));
@@ -151,6 +161,7 @@ public final class JSExpr
   /**
    * Returns a reference to "this", an implicit reference to the current object.
    */
+  @Nonnull
   public static IJSExpression _this ()
   {
     return __this;
@@ -160,6 +171,7 @@ public final class JSExpr
 
   private static final IJSExpression __null = new JSAtom ("null");
 
+  @Nonnull
   public static IJSExpression _null ()
   {
     return __null;
@@ -180,21 +192,25 @@ public final class JSExpr
    */
   public static final IJSExpression UNDEFINED = new JSAtom ("undefined");
 
+  @Nonnull
   public static IJSExpression lit (final boolean b)
   {
     return b ? TRUE : FALSE;
   }
 
+  @Nonnull
   public static IJSExpression lit (final int n)
   {
     return new JSAtom (Integer.toString (n));
   }
 
+  @Nonnull
   public static IJSExpression lit (final long n)
   {
     return new JSAtom (Long.toString (n));
   }
 
+  @Nonnull
   public static IJSExpression lit (final float f)
   {
     if (Float.isNaN (f))
@@ -202,6 +218,7 @@ public final class JSExpr
     return new JSAtom (Float.toString (f));
   }
 
+  @Nonnull
   public static IJSExpression lit (final double d)
   {
     if (Double.isNaN (d))
@@ -209,20 +226,13 @@ public final class JSExpr
     return new JSAtom (Double.toString (d));
   }
 
-  /**
-   * Escapes the given string, then surrounds it by the specified quotation
-   * mark.
-   */
-  public static String quotify (final char quote, final String s)
-  {
-    return quote + JSMarshaller.javaScriptEscape (s) + quote;
-  }
-
+  @Nonnull
   public static IJSExpression lit (final char c)
   {
-    return new JSAtom (quotify ('\'', Character.toString (c)));
+    return new JSStringLiteral (Character.toString (c));
   }
 
+  @Nonnull
   public static IJSExpression lit (final String s)
   {
     return new JSStringLiteral (s);

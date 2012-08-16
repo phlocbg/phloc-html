@@ -40,7 +40,10 @@
 
 package com.phloc.html.js.builder;
 
-import java.util.Iterator;
+import java.util.Collection;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * The common aspect of a package and a class.
@@ -68,7 +71,7 @@ public interface IJSClassContainer
   /**
    * Returns an iterator that walks the nested classes defined in this class.
    */
-  Iterator <JSDefinedClass> classes ();
+  Collection <JSDefinedClass> classes ();
 
   /**
    * Parent JClassContainer. If this is a package, this method returns a parent
@@ -76,6 +79,7 @@ public interface IJSClassContainer
    * outer-most class, this method returns a package to which it belongs. If
    * this is an inner class, this method returns the outer class.
    */
+  @Nullable
   IJSClassContainer parentContainer ();
 
   /**
@@ -88,5 +92,6 @@ public interface IJSClassContainer
   /**
    * Get the root code model object.
    */
+  @Nonnull
   JSCodeModel owner ();
 }

@@ -43,51 +43,58 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * For statement
  */
 
 public class JSForLoop implements IJSStatement
 {
-  private final List <Object> inits = new ArrayList <Object> ();
-  private IJSExpression test = null;
-  private final List <IJSExpression> updates = new ArrayList <IJSExpression> ();
-  private JSSBlock body = null;
+  private final List <Object> m_aInits = new ArrayList <Object> ();
+  private IJSExpression m_aTest;
+  private final List <IJSExpression> m_aUpdates = new ArrayList <IJSExpression> ();
+  private JSSBlock m_aBody;
 
-  public JSVar init (final AbstractJSType type, final String var, final IJSExpression e)
+  JSForLoop ()
+  {}
+
+  @Nonnull
+  public JSVar init (@Nullable final AbstractJSType type, final String var, final IJSExpression e)
   {
     final JSVar v = new JSVar (type, var, e);
-    inits.add (v);
+    m_aInits.add (v);
     return v;
   }
 
   public void init (final JSVar v, final IJSExpression e)
   {
-    inits.add (JSExpr.assign (v, e));
+    m_aInits.add (JSExpr.assign (v, e));
   }
 
   public void test (final IJSExpression e)
   {
-    this.test = e;
+    this.m_aTest = e;
   }
 
   public void update (final IJSExpression e)
   {
-    updates.add (e);
+    m_aUpdates.add (e);
   }
 
   public JSSBlock body ()
   {
-    if (body == null)
-      body = new JSSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSSBlock ();
+    return m_aBody;
   }
 
   public void state (final JSFormatter f)
   {
     f.plain ("for (");
     boolean first = true;
-    for (final Object o : inits)
+    for (final Object o : m_aInits)
     {
       if (!first)
         f.plain (',');
@@ -97,11 +104,10 @@ public class JSForLoop implements IJSStatement
         f.generable ((IJSExpression) o);
       first = false;
     }
-    f.plain (';').generable (test).plain (';').generable (updates).plain (')');
-    if (body != null)
-      f.generable (body).nl ();
+    f.plain (';').generable (m_aTest).plain (';').generable (m_aUpdates).plain (')');
+    if (m_aBody != null)
+      f.generable (m_aBody).nl ();
     else
       f.plain (';').nl ();
   }
-
 }

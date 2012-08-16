@@ -47,11 +47,11 @@ package com.phloc.html.js.builder;
  */
 public class JSClassAlreadyExistsException extends Exception
 {
-  private final JSDefinedClass existing;
+  private final JSDefinedClass m_aExisting;
 
   public JSClassAlreadyExistsException (final JSDefinedClass _existing)
   {
-    this.existing = _existing;
+    this.m_aExisting = _existing;
   }
 
   /**
@@ -61,6 +61,6 @@ public class JSClassAlreadyExistsException extends Exception
    */
   public JSDefinedClass getExistingClass ()
   {
-    return existing;
+    return m_aExisting;
   }
 }

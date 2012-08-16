@@ -54,6 +54,11 @@ import com.phloc.commons.collections.ContainerHelper;
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {
   /**
+   * Return type for this method
+   */
+  private AbstractJSType m_aType;
+
+  /**
    * Name of this method
    */
   private String m_sName = null;
@@ -79,9 +84,39 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @param name
    *        Name of this method
    */
-  JSFunction (final String name)
+  JSFunction (final AbstractJSType aType, final String name)
   {
+    m_aType = aType;
     m_sName = name;
+  }
+
+  /**
+   * Returns the return type.
+   */
+  public AbstractJSType type ()
+  {
+    return m_aType;
+  }
+
+  /**
+   * Overrides the return type.
+   */
+  public void type (final AbstractJSType t)
+  {
+    m_aType = t;
+  }
+
+  public String name ()
+  {
+    return m_sName;
+  }
+
+  /**
+   * Changes the name of the method.
+   */
+  public void name (final String n)
+  {
+    m_sName = n;
   }
 
   /**
@@ -92,6 +127,19 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public List <JSVar> params ()
   {
     return ContainerHelper.newList (params);
+  }
+
+  /**
+   * Add the specified variable to the list of parameters for this method
+   * signature.
+   * 
+   * @param name
+   *        Name of the parameter being added
+   * @return New parameter variable
+   */
+  public JSVar param (final String name)
+  {
+    return param (null, name);
   }
 
   /**
@@ -109,19 +157,6 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     final JSVar v = new JSVar (type, name, null);
     params.add (v);
     return v;
-  }
-
-  public String name ()
-  {
-    return m_sName;
-  }
-
-  /**
-   * Changes the name of the method.
-   */
-  public void name (final String n)
-  {
-    m_sName = n;
   }
 
   /**
@@ -167,6 +202,8 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
       f.generable (jdoc);
 
     f.plain ("function ");
+    if (m_aType != null)
+      f.plain ("/*").generable (m_aType).plain ("*/");
     f.id (m_sName).plain ('(').indent ();
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.

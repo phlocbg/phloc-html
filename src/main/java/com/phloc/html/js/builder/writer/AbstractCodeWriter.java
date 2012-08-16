@@ -46,6 +46,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.CharsetEncoder;
 
+import javax.annotation.Nullable;
+
 import com.phloc.commons.charset.CharsetManager;
 import com.phloc.html.js.builder.JSCodeModel;
 import com.phloc.html.js.builder.JSDefinedClass;
@@ -98,7 +100,7 @@ public abstract class AbstractCodeWriter
    *        File name without the path. Something like "Foo.java" or
    *        "Bar.properties"
    */
-  public Writer openSource (final JSPackage pkg, final String fileName) throws IOException
+  public Writer openSource (@Nullable final JSPackage pkg, final String fileName) throws IOException
   {
     final Writer bw = getWriter (pkg, fileName);
 
@@ -142,15 +144,15 @@ public abstract class AbstractCodeWriter
   public void build (final JSCodeModel aCodeModel) throws IOException
   {
     // avoid concurrent modification exception
-    for (final JSPackage pkg : aCodeModel.getAllPackages ())
+    for (final JSPackage aPackage : aCodeModel.packages ())
     {
-      final Writer bw = new BufferedWriter (openSource (pkg.parent (), pkg.name () + ".js"));
+      final Writer bw = new BufferedWriter (openSource (aPackage.parent (), aPackage.name () + ".js"));
       final JSFormatter f = new JSFormatter (new PrintWriter (bw));
       // write classes
-      for (final JSDefinedClass c : pkg.getAllClasses ())
+      for (final JSDefinedClass c : aPackage.classes ())
         f.write (c);
       // write functions
-      for (final JSFunction c : pkg.getAllFunctionsClasses ())
+      for (final JSFunction c : aPackage.functions ())
         f.decl (c);
       f.close ();
     }

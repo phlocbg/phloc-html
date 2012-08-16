@@ -60,18 +60,6 @@ public abstract class AbstractJSType implements IJSGenerable, Comparable <Abstra
   public abstract String fullName ();
 
   /**
-   * Gets the binary name of the type. See
-   * http://java.sun.com/docs/books/jls/third_edition/html/binaryComp.html#44909
-   * 
-   * @return Name like "Foo$Bar", "int", "java.lang.String", "java.io.File[]".
-   *         Never null.
-   */
-  public String binaryName ()
-  {
-    return fullName ();
-  }
-
-  /**
    * Gets the name of this type.
    * 
    * @return Names like "int", "void", "BigInteger".

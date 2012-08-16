@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Case statement
  */
@@ -53,7 +55,7 @@ public final class JSCase implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSSBlock body = null;
+  private JSSBlock m_aBody = null;
 
   /**
    * is this a regular case statement or a default case statement?
@@ -74,8 +76,8 @@ public final class JSCase implements IJSStatement
    */
   JSCase (final IJSExpression label, final boolean isDefaultCase)
   {
-    this.m_aLabel = label;
-    this.m_bIsDefaultCase = isDefaultCase;
+    m_aLabel = label;
+    m_bIsDefaultCase = isDefaultCase;
   }
 
   public IJSExpression label ()
@@ -83,26 +85,23 @@ public final class JSCase implements IJSStatement
     return m_aLabel;
   }
 
+  @Nonnull
   public JSSBlock body ()
   {
-    if (body == null)
-      body = new JSSBlock (false, true);
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSSBlock (false, true);
+    return m_aBody;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.indent ();
     if (!m_bIsDefaultCase)
-    {
       f.plain ("case ").generable (m_aLabel).plain (':').nl ();
-    }
     else
-    {
       f.plain ("default:").nl ();
-    }
-    if (body != null)
-      f.stmt (body);
+    if (m_aBody != null)
+      f.stmt (m_aBody);
     f.outdent ();
   }
 }

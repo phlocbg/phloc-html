@@ -41,26 +41,20 @@
 package com.phloc.html.js.builder;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
 /**
- * A Java package.
+ * A JS package.
  */
-public final class JSPackage implements
-                            IJSDeclaration,
-                            IJSGenerable,
-                            IJSClassContainer,
-                            Comparable <JSPackage>,
-                            IJSDocCommentable
+public final class JSPackage implements IJSDeclaration, IJSGenerable, IJSClassContainer, Comparable <JSPackage>
 {
-
   /**
    * Name of the package. May be the empty string for the root package.
    */
@@ -76,32 +70,25 @@ public final class JSPackage implements
   private final Map <String, JSFunction> m_aFunctions = new TreeMap <String, JSFunction> ();
 
   /**
-   * package javadoc.
-   */
-  private JSDocComment m_aJSDoc = null;
-
-  /**
    * JPackage constructor
    * 
-   * @param name
-   *        Name of package
    * @param cw
    *        The code writer being used to create this package
+   * @param name
+   *        Name of package
    * @throws IllegalArgumentException
    *         If each part of the package name is not a valid identifier
    */
-  JSPackage (final String name, final JSCodeModel cw)
+  JSPackage (@Nonnull final JSCodeModel cw, @Nonnull final String name)
   {
-    this.m_aOwner = cw;
+    m_aOwner = cw;
     if (name.equals ("."))
-    {
-      final String msg = "Package name . is not allowed";
-      throw new IllegalArgumentException (msg);
-    }
+      throw new IllegalArgumentException ("Package name . is not allowed");
 
-    this.m_sName = name;
+    m_sName = name;
   }
 
+  @Nullable
   public IJSClassContainer parentContainer ()
   {
     return parent ();
@@ -110,11 +97,9 @@ public final class JSPackage implements
   /**
    * Gets the parent package, or null if this class is the root package.
    */
+  @Nullable
   public JSPackage parent ()
   {
-    if (m_sName.length () == 0)
-      return null;
-
     final int idx = m_sName.lastIndexOf ('.');
     if (idx == -1)
       return null;
@@ -166,6 +151,11 @@ public final class JSPackage implements
     return m_aClasses.get (name);
   }
 
+  public JSFunction function (final String name) throws JSFunctionAlreadyExistsException
+  {
+    return function (null, name);
+  }
+
   /**
    * Add a function to this package.
    * 
@@ -175,11 +165,11 @@ public final class JSPackage implements
    * @exception JSFunctionAlreadyExistsException
    *            When the specified class/interface was already created.
    */
-  public JSFunction function (final String name) throws JSFunctionAlreadyExistsException
+  public JSFunction function (final AbstractJSType aType, final String name) throws JSFunctionAlreadyExistsException
   {
     if (m_aFunctions.containsKey (name))
       throw new JSFunctionAlreadyExistsException (m_aFunctions.get (name));
-    final JSFunction c = new JSFunction (name);
+    final JSFunction c = new JSFunction (aType, name);
     m_aFunctions.put (name, c);
     return c;
   }
@@ -199,20 +189,7 @@ public final class JSPackage implements
    */
   public int compareTo (final JSPackage that)
   {
-    return this.m_sName.compareTo (that.m_sName);
-  }
-
-  /**
-   * Creates, if necessary, and returns the package javadoc for this
-   * JDefinedClass.
-   * 
-   * @return JDocComment containing javadocs for this class
-   */
-  public JSDocComment javadoc ()
-  {
-    if (m_aJSDoc == null)
-      m_aJSDoc = new JSDocComment ();
-    return m_aJSDoc;
+    return m_sName.compareTo (that.m_sName);
   }
 
   /**
@@ -239,25 +216,16 @@ public final class JSPackage implements
     return owner ()._package (m_sName + '.' + pkg);
   }
 
-  /**
-   * Returns an iterator that walks the top-level classes defined in this
-   * package.
-   */
-  public Iterator <JSDefinedClass> classes ()
-  {
-    return m_aClasses.values ().iterator ();
-  }
-
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <JSDefinedClass> getAllClasses ()
+  public Collection <JSDefinedClass> classes ()
   {
     return ContainerHelper.newList (m_aClasses.values ());
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <JSFunction> getAllFunctionsClasses ()
+  public Collection <JSFunction> functions ()
   {
     return ContainerHelper.newList (m_aFunctions.values ());
   }
@@ -267,13 +235,9 @@ public final class JSPackage implements
    */
   public boolean isDefined (final String classLocalName)
   {
-    final Iterator <JSDefinedClass> itr = classes ();
-    while (itr.hasNext ())
-    {
-      if ((itr.next ()).name ().equals (classLocalName))
+    for (final JSDefinedClass aClass : classes ())
+      if (aClass.name ().equals (classLocalName))
         return true;
-    }
-
     return false;
   }
 
@@ -315,9 +279,6 @@ public final class JSPackage implements
 
   int countArtifacts ()
   {
-    int r = m_aClasses.size () + m_aFunctions.size ();
-    if (m_aJSDoc != null)
-      r++;
-    return r;
+    return m_aClasses.size () + m_aFunctions.size ();
   }
 }

@@ -48,7 +48,7 @@ import java.util.Collection;
  * This is a utility class for managing indentation and other basic formatting
  * for PrintWriter.
  */
-public final class JSFormatter
+public class JSFormatter
 {
   /**
    * Current number of indentation strings to print
