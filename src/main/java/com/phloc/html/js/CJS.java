@@ -33,6 +33,9 @@ public final class CJS
   public static final String JS_PREFIX = EURLProtocol.JAVASCRIPT.getProtocol ();
   public static final char JS_END_OF_STATEMENT = ';';
   public static final String JS_END_OF_STATEMENT_STR = Character.toString (JS_END_OF_STATEMENT);
+  public static final String JS_NULL = "null";
+  public static final String JS_THIS = "this";
+  public static final String JS_UNDEFINED = "undefined";
 
   /** The void statement "javascript:void(0);" */
   public static final String JS_VOID = JS_PREFIX + "void(0)" + JS_END_OF_STATEMENT;
