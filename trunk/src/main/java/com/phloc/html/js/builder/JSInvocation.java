@@ -54,7 +54,6 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
 {
-
   /**
    * Object expression upon which this method will be invoked, or null if this
    * is a constructor invocation
@@ -69,7 +68,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    */
   private String m_sName;
 
-  private JSMethod m_aMethod;
+  private IJSDeclaration m_aMethod;
 
   private boolean m_bIsConstructor = false;
 
@@ -113,6 +112,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
   {
     this ((IJSGeneratable) type, method);
+  }
+
+  JSInvocation (@Nonnull final JSFunction function)
+  {
+    m_aObject = null;
+    m_aMethod = function;
   }
 
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final String name)
