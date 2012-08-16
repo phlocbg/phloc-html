@@ -85,23 +85,23 @@ public class JSForLoop implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.p ("for (");
+    f.plain ("for (");
     boolean first = true;
     for (final Object o : inits)
     {
       if (!first)
-        f.p (',');
+        f.plain (',');
       if (o instanceof JSVar)
-        f.b ((JSVar) o);
+        f.var ((JSVar) o);
       else
-        f.g ((IJSExpression) o);
+        f.generable ((IJSExpression) o);
       first = false;
     }
-    f.p (';').g (test).p (';').g (updates).p (')');
+    f.plain (';').generable (test).plain (';').generable (updates).plain (')');
     if (body != null)
-      f.g (body).nl ();
+      f.generable (body).nl ();
     else
-      f.p (';').nl ();
+      f.plain (';').nl ();
   }
 
 }

@@ -116,15 +116,15 @@ public class JSConditional implements IJSStatement
 
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.p ("if ").g (m_aTest);
+      f.plain ("if ").generable (m_aTest);
     }
     else
     {
-      f.p ("if (").g (m_aTest).p (')');
+      f.plain ("if (").generable (m_aTest).plain (')');
     }
-    f.g (_then);
+    f.generable (_then);
     if (_else != null)
-      f.p ("else").g (_else);
+      f.plain ("else").generable (_else);
     f.nl ();
   }
 }

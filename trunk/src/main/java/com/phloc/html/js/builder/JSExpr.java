@@ -132,7 +132,7 @@ public final class JSExpr
   public static JSArray newArray (final AbstractJSType type, final IJSExpression size)
   {
     // you cannot create an array whose component type is a generic
-    return new JSArray (type.erasure (), size);
+    return new JSArray (type, size);
   }
 
   /**
@@ -154,16 +154,6 @@ public final class JSExpr
   public static IJSExpression _this ()
   {
     return __this;
-  }
-
-  private static final IJSExpression __super = new JSAtom ("super");
-
-  /**
-   * Returns a reference to "super", an implicit reference to the super class.
-   */
-  public static IJSExpression _super ()
-  {
-    return __super;
   }
 
   /* -- Literals -- */
@@ -219,9 +209,6 @@ public final class JSExpr
     return new JSAtom (Double.toString (d));
   }
 
-  static final String charEscape = "\b\t\n\f\r\"\'\\";
-  static final String charMacro = "btnfr\"'\\";
-
   /**
    * Escapes the given string, then surrounds it by the specified quotation
    * mark.
@@ -257,7 +244,7 @@ public final class JSExpr
     {
       public void generate (final JSFormatter f)
       {
-        f.p ('(').p (source).p (')');
+        f.plain ('(').plain (source).plain (')');
       }
     };
   }

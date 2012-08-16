@@ -41,7 +41,6 @@
 package com.phloc.html.js.builder;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -67,24 +66,19 @@ public final class JSPackage implements
    */
   private final String m_sName;
 
-  private final JSCodeModel owner;
+  private final JSCodeModel m_aOwner;
 
   /**
    * List of classes contained within this package keyed by their name.
    */
-  private final Map <String, JSDefinedClass> classes = new TreeMap <String, JSDefinedClass> ();
+  private final Map <String, JSDefinedClass> m_aClasses = new TreeMap <String, JSDefinedClass> ();
 
-  /**
-   * All {@link AbstractJSClass}s in this package keyed the upper case class
-   * name. This field is non-null only on Windows, to detect "Foo" and "foo" as
-   * a collision.
-   */
-  private final Map <String, JSDefinedClass> upperCaseClassMap;
+  private final Map <String, JSFunction> m_aFunctions = new TreeMap <String, JSFunction> ();
 
   /**
    * package javadoc.
    */
-  private JSDocComment jdoc = null;
+  private JSDocComment m_aJSDoc = null;
 
   /**
    * JPackage constructor
@@ -98,17 +92,12 @@ public final class JSPackage implements
    */
   JSPackage (final String name, final JSCodeModel cw)
   {
-    this.owner = cw;
+    this.m_aOwner = cw;
     if (name.equals ("."))
     {
       final String msg = "Package name . is not allowed";
       throw new IllegalArgumentException (msg);
     }
-
-    if (JSBuilderSettings.isCaseSensitiveFileSystem)
-      upperCaseClassMap = null;
-    else
-      upperCaseClassMap = new HashMap <String, JSDefinedClass> ();
 
     this.m_sName = name;
   }
@@ -127,7 +116,10 @@ public final class JSPackage implements
       return null;
 
     final int idx = m_sName.lastIndexOf ('.');
-    return owner._package (m_sName.substring (0, idx));
+    if (idx == -1)
+      return null;
+
+    return m_aOwner._package (m_sName.substring (0, idx));
   }
 
   public boolean isClass ()
@@ -156,19 +148,11 @@ public final class JSPackage implements
    */
   public JSDefinedClass _class (final String name) throws JSClassAlreadyExistsException
   {
-    if (classes.containsKey (name))
-      throw new JSClassAlreadyExistsException (classes.get (name));
+    if (m_aClasses.containsKey (name))
+      throw new JSClassAlreadyExistsException (m_aClasses.get (name));
     // XXX problems caught in the NC constructor
     final JSDefinedClass c = new JSDefinedClass (this, name);
-
-    if (upperCaseClassMap != null)
-    {
-      final JSDefinedClass dc = upperCaseClassMap.get (name.toUpperCase ());
-      if (dc != null)
-        throw new JSClassAlreadyExistsException (dc);
-      upperCaseClassMap.put (name.toUpperCase (), c);
-    }
-    classes.put (name, c);
+    m_aClasses.put (name, c);
     return c;
   }
 
@@ -177,9 +161,37 @@ public final class JSPackage implements
    * 
    * @return null If the class is not yet created.
    */
-  public JSDefinedClass _getClass (final String name)
+  public JSDefinedClass getClass (final String name)
   {
-    return classes.get (name);
+    return m_aClasses.get (name);
+  }
+
+  /**
+   * Add a function to this package.
+   * 
+   * @param name
+   *        Name of function to be added to this package
+   * @return Newly generated function
+   * @exception JSFunctionAlreadyExistsException
+   *            When the specified class/interface was already created.
+   */
+  public JSFunction function (final String name) throws JSFunctionAlreadyExistsException
+  {
+    if (m_aFunctions.containsKey (name))
+      throw new JSFunctionAlreadyExistsException (m_aFunctions.get (name));
+    final JSFunction c = new JSFunction (name);
+    m_aFunctions.put (name, c);
+    return c;
+  }
+
+  /**
+   * Gets a reference to the already created {@link JSFunction}.
+   * 
+   * @return null If the class is not yet created.
+   */
+  public JSFunction getFunction (final String name)
+  {
+    return m_aFunctions.get (name);
   }
 
   /**
@@ -198,9 +210,9 @@ public final class JSPackage implements
    */
   public JSDocComment javadoc ()
   {
-    if (jdoc == null)
-      jdoc = new JSDocComment (owner ());
-    return jdoc;
+    if (m_aJSDoc == null)
+      m_aJSDoc = new JSDocComment ();
+    return m_aJSDoc;
   }
 
   /**
@@ -214,25 +226,7 @@ public final class JSPackage implements
 
     // note that c may not be a member of classes.
     // this happens when someone is trying to remove a non generated class
-    classes.remove (c.name ());
-    if (upperCaseClassMap != null)
-      upperCaseClassMap.remove (c.name ().toUpperCase ());
-  }
-
-  /**
-   * Reference a class within this package.
-   */
-  public AbstractJSClass ref (final String name) throws ClassNotFoundException
-  {
-    if (name.indexOf ('.') >= 0)
-      throw new IllegalArgumentException ("JClass name contains '.': " + name);
-
-    String n = "";
-    if (!isUnnamed ())
-      n = this.m_sName + '.';
-    n += name;
-
-    return owner.ref (Class.forName (n));
+    m_aClasses.remove (c.name ());
   }
 
   /**
@@ -251,14 +245,21 @@ public final class JSPackage implements
    */
   public Iterator <JSDefinedClass> classes ()
   {
-    return classes.values ().iterator ();
+    return m_aClasses.values ().iterator ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public Collection <JSDefinedClass> getAllClasses ()
   {
-    return ContainerHelper.newList (classes.values ());
+    return ContainerHelper.newList (m_aClasses.values ());
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public Collection <JSFunction> getAllFunctionsClasses ()
+  {
+    return ContainerHelper.newList (m_aFunctions.values ());
   }
 
   /**
@@ -301,7 +302,7 @@ public final class JSPackage implements
    */
   public final JSCodeModel owner ()
   {
-    return owner;
+    return m_aOwner;
   }
 
   public void declare (final JSFormatter f)
@@ -309,13 +310,13 @@ public final class JSPackage implements
 
   public void generate (final JSFormatter f)
   {
-    f.p (m_sName);
+    f.plain (m_sName);
   }
 
   int countArtifacts ()
   {
-    int r = classes.size ();
-    if (jdoc != null)
+    int r = m_aClasses.size () + m_aFunctions.size ();
+    if (m_aJSDoc != null)
       r++;
     return r;
   }

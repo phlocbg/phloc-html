@@ -81,7 +81,7 @@ final class JSArrayClass extends AbstractJSClass
   @Override
   public void generate (final JSFormatter f)
   {
-    f.g (componentType).p ("[]");
+    f.generable (componentType).plain ("[]");
   }
 
   @Override
@@ -93,7 +93,7 @@ final class JSArrayClass extends AbstractJSClass
   @Override
   public AbstractJSClass _extends ()
   {
-    return owner ().ref (Object.class);
+    return null;
   }
 
   @Override

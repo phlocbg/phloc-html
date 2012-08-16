@@ -123,11 +123,6 @@ public abstract class AbstractJSClass extends AbstractJSType
     if (this == derived)
       return true;
 
-    // the only class that is assignable from an interface is
-    // java.lang.Object
-    if (this == _package ().owner ().ref (Object.class))
-      return true;
-
     final AbstractJSClass b = derived._extends ();
     if (b != null && this.isAssignableFrom (b))
       return true;
@@ -165,8 +160,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    */
   public final AbstractJSClass getBaseClass (final AbstractJSClass baseType)
   {
-
-    if (this.erasure ().equals (baseType))
+    if (this.equals (baseType))
       return this;
 
     final AbstractJSClass b = _extends ();
@@ -186,11 +180,6 @@ public abstract class AbstractJSClass extends AbstractJSType
     }
 
     return null;
-  }
-
-  public final AbstractJSClass getBaseClass (final Class <?> baseType)
-  {
-    return getBaseClass (owner ().ref (baseType));
   }
 
   private AbstractJSClass arrayClass;
@@ -235,7 +224,7 @@ public abstract class AbstractJSClass extends AbstractJSType
 
   public void generate (final JSFormatter f)
   {
-    f.t (this);
+    f.type (this);
   }
 
   /**
@@ -243,6 +232,6 @@ public abstract class AbstractJSClass extends AbstractJSType
    */
   void printLink (final JSFormatter f)
   {
-    f.p ("{@link ").g (this).p ('}');
+    f.plain ("{@link ").generable (this).plain ('}');
   }
 }

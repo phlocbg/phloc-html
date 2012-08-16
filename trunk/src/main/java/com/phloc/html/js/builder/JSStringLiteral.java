@@ -58,6 +58,6 @@ public class JSStringLiteral extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    f.p (JSExpr.quotify ('"', str));
+    f.plain (JSExpr.quotify ('"', str));
   }
 }

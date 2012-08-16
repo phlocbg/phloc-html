@@ -73,6 +73,6 @@ public class JSCatchBlock implements IJSGenerable
   {
     if (var == null)
       var = new JSVar (m_aException, "_x", null);
-    f.p ("catch (").b (var).p (')').g (body);
+    f.plain ("catch (").var (var).plain (')').generable (body);
   }
 }

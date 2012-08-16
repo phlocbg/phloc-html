@@ -80,16 +80,16 @@ public class JSWhileLoop implements IJSStatement
   {
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.p ("while ").g (m_aTest);
+      f.plain ("while ").generable (m_aTest);
     }
     else
     {
-      f.p ("while (").g (m_aTest).p (')');
+      f.plain ("while (").generable (m_aTest).plain (')');
     }
     if (body != null)
-      f.s (body);
+      f.stmt (body);
     else
-      f.p (';').nl ();
+      f.plain (';').nl ();
   }
 
 }

@@ -63,7 +63,7 @@ public class JSLabel implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.p (label + ':').nl ();
+    f.plain (label + ':').nl ();
   }
 
 }

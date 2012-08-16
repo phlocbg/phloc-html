@@ -42,8 +42,6 @@ package com.phloc.html.js.builder.writer;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.CharsetEncoder;
@@ -52,6 +50,7 @@ import com.phloc.commons.charset.CharsetManager;
 import com.phloc.html.js.builder.JSCodeModel;
 import com.phloc.html.js.builder.JSDefinedClass;
 import com.phloc.html.js.builder.JSFormatter;
+import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -63,10 +62,13 @@ public abstract class AbstractCodeWriter
 {
   /**
    * Encoding to be used by the writer. Null means platform specific encoding.
-   * 
-   * @since 2.5
    */
-  protected String m_sEncoding = null;
+  protected final String m_sEncoding;
+
+  protected AbstractCodeWriter (final String sEncoding)
+  {
+    m_sEncoding = sEncoding;
+  }
 
   /**
    * Called by CodeModel to store the specified file. The callee must allocate a
@@ -81,7 +83,7 @@ public abstract class AbstractCodeWriter
    *        File name without the path. Something like "Foo.java" or
    *        "Bar.properties"
    */
-  public abstract OutputStream openBinary (JSPackage pkg, String fileName) throws IOException;
+  public abstract Writer getWriter (JSPackage pkg, String fileName) throws IOException;
 
   /**
    * Called by CodeModel to store the specified file. The callee must allocate a
@@ -98,9 +100,7 @@ public abstract class AbstractCodeWriter
    */
   public Writer openSource (final JSPackage pkg, final String fileName) throws IOException
   {
-    final OutputStreamWriter bw = m_sEncoding != null
-                                                     ? new OutputStreamWriter (openBinary (pkg, fileName), m_sEncoding)
-                                                     : new OutputStreamWriter (openBinary (pkg, fileName));
+    final Writer bw = getWriter (pkg, fileName);
 
     // create writer
     try
@@ -109,7 +109,7 @@ public abstract class AbstractCodeWriter
       {
         // can't change this signature to Encoder because
         // we can't have Encoder in method signature
-        private final CharsetEncoder encoder = CharsetManager.getCharsetFromName (bw.getEncoding ()).newEncoder ();
+        private final CharsetEncoder encoder = CharsetManager.getCharsetFromName (m_sEncoding).newEncoder ();
 
         @Override
         protected boolean requireEscaping (final int ch)
@@ -133,22 +133,26 @@ public abstract class AbstractCodeWriter
 
   /**
    * Called by CodeModel at the end of the process.
+   * 
+   * @throws IOException
    */
-  public abstract void close () throws IOException;
+  public void close () throws IOException
+  {}
 
   public void build (final JSCodeModel aCodeModel) throws IOException
   {
     // avoid concurrent modification exception
     for (final JSPackage pkg : aCodeModel.getAllPackages ())
     {
+      final Writer bw = new BufferedWriter (openSource (pkg.parent (), pkg.name () + ".js"));
+      final JSFormatter f = new JSFormatter (new PrintWriter (bw));
       // write classes
       for (final JSDefinedClass c : pkg.getAllClasses ())
-      {
-        final Writer bw = new BufferedWriter (openSource (pkg, c.name () + ".js"));
-        final JSFormatter f = new JSFormatter (new PrintWriter (bw));
         f.write (c);
-        f.close ();
-      }
+      // write functions
+      for (final JSFunction c : pkg.getAllFunctionsClasses ())
+        f.decl (c);
+      f.close ();
     }
     close ();
   }

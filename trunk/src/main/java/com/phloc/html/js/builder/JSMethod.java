@@ -136,11 +136,6 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     return v;
   }
 
-  public JSVar param (final Class <?> type, final String name)
-  {
-    return param (owner ()._ref (type), name);
-  }
-
   public String name ()
   {
     return m_sName;
@@ -232,7 +227,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   public JSDocComment javadoc ()
   {
     if (jdoc == null)
-      jdoc = new JSDocComment (owner ());
+      jdoc = new JSDocComment ();
     return jdoc;
   }
 
@@ -240,27 +235,27 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   public void declare (final JSFormatter f)
   {
     if (jdoc != null)
-      f.g (jdoc);
+      f.generable (jdoc);
 
-    f.g (m_aType);
-    f.id (m_sName).p ('(').i ();
+    f.generable (m_aType);
+    f.id (m_sName).plain ('(').indent ();
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.
     boolean first = true;
     for (final JSVar var : params)
     {
       if (!first)
-        f.p (',');
-      f.b (var);
+        f.plain (',');
+      f.var (var);
       first = false;
     }
 
-    f.o ().p (')');
+    f.outdent ().plain (')');
 
     if (body != null)
-      f.s (body);
+      f.stmt (body);
     else
-      f.s (new JSSBlock ());
+      f.stmt (new JSSBlock ());
   }
 
   protected JSCodeModel owner ()

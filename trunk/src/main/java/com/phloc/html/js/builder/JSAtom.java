@@ -54,6 +54,6 @@ final class JSAtom extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    f.p (m_sWhat);
+    f.plain (m_sWhat);
   }
 }

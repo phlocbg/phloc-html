@@ -81,12 +81,8 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSCodeModel
 {
-
   /** The packages that this JCodeWriter contains. */
   private final HashMap <String, JSPackage> packages = new HashMap <String, JSPackage> ();
-
-  /** All JReferencedClasses are pooled here. */
-  private final HashMap <Class <?>, JReferencedClass> refClasses = new HashMap <Class <?>, JReferencedClass> ();
 
   public JSCodeModel ()
   {}
@@ -147,14 +143,14 @@ public final class JSCodeModel
    * Gets a reference to the already created generated class.
    * 
    * @return null If the class is not yet created.
-   * @see JSPackage#_getClass(String)
+   * @see JSPackage#getClass(String)
    */
   public JSDefinedClass _getClass (final String fullyQualifiedName)
   {
     final int idx = fullyQualifiedName.lastIndexOf ('.');
     if (idx < 0)
-      return rootPackage ()._getClass (fullyQualifiedName);
-    return _package (fullyQualifiedName.substring (0, idx))._getClass (fullyQualifiedName.substring (idx + 1));
+      return rootPackage ().getClass (fullyQualifiedName);
+    return _package (fullyQualifiedName.substring (0, idx)).getClass (fullyQualifiedName.substring (idx + 1));
   }
 
   /**
@@ -166,142 +162,5 @@ public final class JSCodeModel
     for (final JSPackage pkg : getAllPackages ())
       r += pkg.countArtifacts ();
     return r;
-  }
-
-  /**
-   * Obtains a reference to an existing class from its Class object.
-   * <p>
-   * The parameter may not be primitive.
-   * 
-   * @see #_ref(Class) for the version that handles more cases.
-   */
-  public AbstractJSClass ref (final Class <?> clazz)
-  {
-    JReferencedClass jrc = refClasses.get (clazz);
-    if (jrc == null)
-    {
-      if (clazz.isPrimitive ())
-        throw new IllegalArgumentException (clazz + " is a primitive");
-      if (clazz.isArray ())
-      {
-        return new JSArrayClass (this, _ref (clazz.getComponentType ()));
-      }
-      jrc = new JReferencedClass (clazz);
-      refClasses.put (clazz, jrc);
-    }
-    return jrc;
-  }
-
-  public AbstractJSType _ref (final Class <?> c)
-  {
-    return ref (c);
-  }
-
-  /**
-   * References to existing classes.
-   * <p>
-   * JReferencedClass is kept in a pool so that they are shared. There is one
-   * pool for each JCodeModel object.
-   * <p>
-   * It is impossible to cache JReferencedClass globally only because there is
-   * the _package() method, which obtains the owner JPackage object, which is
-   * scoped to JCodeModel.
-   */
-  private class JReferencedClass extends AbstractJSClass implements IJSDeclaration
-  {
-    private final Class <?> _class;
-
-    JReferencedClass (final Class <?> _clazz)
-    {
-      super (JSCodeModel.this);
-      this._class = _clazz;
-      assert !_class.isArray ();
-    }
-
-    @Override
-    public String name ()
-    {
-      return _class.getSimpleName ().replace ('$', '.');
-    }
-
-    @Override
-    public String fullName ()
-    {
-      return _class.getName ().replace ('$', '.');
-    }
-
-    @Override
-    public String binaryName ()
-    {
-      return _class.getName ();
-    }
-
-    @Override
-    public AbstractJSClass outer ()
-    {
-      final Class <?> p = _class.getDeclaringClass ();
-      if (p == null)
-        return null;
-      return ref (p);
-    }
-
-    @Override
-    public JSPackage _package ()
-    {
-      final String name = fullName ();
-
-      // this type is array
-      if (name.indexOf ('[') != -1)
-        return JSCodeModel.this._package ("");
-
-      // other normal case
-      final int idx = name.lastIndexOf ('.');
-      if (idx < 0)
-        return JSCodeModel.this._package ("");
-      return JSCodeModel.this._package (name.substring (0, idx));
-    }
-
-    @Override
-    public AbstractJSClass _extends ()
-    {
-      final Class <?> sp = _class.getSuperclass ();
-      if (sp == null)
-        return null;
-      return ref (sp);
-    }
-
-    @Override
-    public Iterator <AbstractJSClass> _implements ()
-    {
-      final Class <?> [] interfaces = _class.getInterfaces ();
-      return new Iterator <AbstractJSClass> ()
-      {
-        private int idx = 0;
-
-        public boolean hasNext ()
-        {
-          return idx < interfaces.length;
-        }
-
-        public AbstractJSClass next ()
-        {
-          return JSCodeModel.this.ref (interfaces[idx++]);
-        }
-
-        public void remove ()
-        {
-          throw new UnsupportedOperationException ();
-        }
-      };
-    }
-
-    @Override
-    public boolean isArray ()
-    {
-      return false;
-    }
-
-    public void declare (final JSFormatter f)
-    {}
   }
 }

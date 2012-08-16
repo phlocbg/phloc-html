@@ -55,7 +55,7 @@ import java.util.Iterator;
  * <p>
  * Values can be added through the various append methods one by one or in a
  * bulk.
- *
+ * 
  * @author Kohsuke Kawaguchi
  */
 public class JSCommentPart extends ArrayList <Object>
@@ -102,18 +102,8 @@ public class JSCommentPart extends ArrayList <Object>
    */
   protected void format (final JSFormatter f, final String indent)
   {
-    if (!f.isPrinting ())
-    {
-      // quickly pass the types to JFormatter, as that's all we care.
-      // we don't need to worry about the exact formatting of text.
-      for (final Object o : this)
-        if (o instanceof AbstractJSClass)
-          f.g ((AbstractJSClass) o);
-      return;
-    }
-
     if (!isEmpty ())
-      f.p (indent);
+      f.plain (indent);
 
     final Iterator <Object> itr = iterator ();
     while (itr.hasNext ())
@@ -128,12 +118,12 @@ public class JSCommentPart extends ArrayList <Object>
         {
           final String line = s.substring (0, idx);
           if (line.length () > 0)
-            f.p (escape (line));
+            f.plain (escape (line));
           s = s.substring (idx + 1);
-          f.nl ().p (indent);
+          f.nl ().plain (indent);
         }
         if (s.length () != 0)
-          f.p (escape (s));
+          f.plain (escape (s));
       }
       else
         if (o instanceof AbstractJSClass)
@@ -144,7 +134,7 @@ public class JSCommentPart extends ArrayList <Object>
         else
           if (o instanceof AbstractJSType)
           {
-            f.g ((AbstractJSType) o);
+            f.generable ((AbstractJSType) o);
           }
           else
             throw new IllegalStateException ();

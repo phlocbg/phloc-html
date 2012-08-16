@@ -40,44 +40,112 @@
 
 package com.phloc.html.js.builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
+
 /**
- * A field that can have a {@link JSDocComment} associated with it
+ * JS function
  */
-public class JSFieldVar extends JSVar implements IJSDocCommentable
+public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {
   /**
-   * javadoc comments for this JFieldVar
+   * Name of this method
+   */
+  private String m_sName = null;
+
+  /**
+   * List of parameters for this method's declaration
+   */
+  private final List <JSVar> params = new ArrayList <JSVar> ();
+
+  /**
+   * JBlock of statements that makes up the body this method
+   */
+  private JSSBlock body = null;
+
+  /**
+   * javadoc comments for this JMethod
    */
   private JSDocComment jdoc = null;
 
-  private final JSDefinedClass m_aOwner;
-
   /**
-   * JFieldVar constructor
+   * JMethod constructor
    * 
-   * @param type
-   *        Datatype of this variable
    * @param name
-   *        Name of this variable
-   * @param init
-   *        Value to initialize this variable to
+   *        Name of this method
    */
-  JSFieldVar (final JSDefinedClass owner, final AbstractJSType type, final String name, final IJSExpression init)
+  JSFunction (final String name)
   {
-    super (type, name, init);
-    this.m_aOwner = owner;
+    m_sName = name;
   }
 
-  @Override
-  public void name (final String name)
+  /**
+   * Returns the list of variable of this method.
+   * 
+   * @return List of parameters of this method. This list is not modifiable.
+   */
+  public List <JSVar> params ()
   {
-    // make sure that the new name is available
-    if (m_aOwner.fields.containsKey (name))
-      throw new IllegalArgumentException ("name " + name + " is already in use");
-    final String oldName = name ();
-    super.name (name);
-    m_aOwner.fields.remove (oldName);
-    m_aOwner.fields.put (name, this);
+    return ContainerHelper.newList (params);
+  }
+
+  /**
+   * Add the specified variable to the list of parameters for this method
+   * signature.
+   * 
+   * @param type
+   *        JType of the parameter being added
+   * @param name
+   *        Name of the parameter being added
+   * @return New parameter variable
+   */
+  public JSVar param (final AbstractJSType type, final String name)
+  {
+    final JSVar v = new JSVar (type, name, null);
+    params.add (v);
+    return v;
+  }
+
+  public String name ()
+  {
+    return m_sName;
+  }
+
+  /**
+   * Changes the name of the method.
+   */
+  public void name (final String n)
+  {
+    m_sName = n;
+  }
+
+  /**
+   * Returns all the parameters in an array.
+   * 
+   * @return If there's no parameter, an empty array will be returned.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <JSVar> listParams ()
+  {
+    return ContainerHelper.newList (params);
+  }
+
+  /**
+   * Get the block that makes up body of this method
+   * 
+   * @return Body of method
+   */
+  public JSSBlock body ()
+  {
+    if (body == null)
+      body = new JSSBlock ();
+    return body;
   }
 
   /**
@@ -97,6 +165,25 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   {
     if (jdoc != null)
       f.generable (jdoc);
-    super.declare (f);
+
+    f.plain ("function ");
+    f.id (m_sName).plain ('(').indent ();
+    // when parameters are printed in new lines, we want them to be indented.
+    // there's a good chance no newlines happen, too, but just in case it does.
+    boolean first = true;
+    for (final JSVar var : params)
+    {
+      if (!first)
+        f.plain (',');
+      f.var (var);
+      first = false;
+    }
+
+    f.outdent ().plain (')');
+
+    if (body != null)
+      f.stmt (body);
+    else
+      f.stmt (new JSSBlock ());
   }
 }

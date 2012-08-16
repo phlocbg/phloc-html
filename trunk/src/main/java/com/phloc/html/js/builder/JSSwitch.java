@@ -103,17 +103,17 @@ public final class JSSwitch implements IJSStatement
   {
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.p ("switch ").g (m_aTest).p (" {").nl ();
+      f.plain ("switch ").generable (m_aTest).plain (" {").nl ();
     }
     else
     {
-      f.p ("switch (").g (m_aTest).p (')').p (" {").nl ();
+      f.plain ("switch (").generable (m_aTest).plain (')').plain (" {").nl ();
     }
     for (final JSCase c : cases)
-      f.s (c);
+      f.stmt (c);
     if (defaultCase != null)
-      f.s (defaultCase);
-    f.p ('}').nl ();
+      f.stmt (defaultCase);
+    f.plain ('}').nl ();
   }
 
 }

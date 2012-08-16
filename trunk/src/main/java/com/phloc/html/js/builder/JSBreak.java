@@ -62,8 +62,8 @@ final class JSBreak implements IJSStatement
   public void state (final JSFormatter f)
   {
     if (label == null)
-      f.p ("break;").nl ();
+      f.plain ("break;").nl ();
     else
-      f.p ("break").p (label.label).p (';').nl ();
+      f.plain ("break").plain (label.label).plain (';').nl ();
   }
 }

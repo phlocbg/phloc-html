@@ -41,12 +41,13 @@
 package com.phloc.html.js.builder.writer;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.phloc.commons.io.EAppend;
+import com.phloc.commons.io.resource.FileSystemResource;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -56,7 +57,6 @@ import com.phloc.html.js.builder.JSPackage;
  */
 public class FileCodeWriter extends AbstractCodeWriter
 {
-
   /** The target directory to put source code. */
   private final File m_aTarget;
 
@@ -66,34 +66,24 @@ public class FileCodeWriter extends AbstractCodeWriter
   /** Files that shall be marked as read only. */
   private final Set <File> readonlyFiles = new HashSet <File> ();
 
-  public FileCodeWriter (final File target) throws IOException
-  {
-    this (target, false);
-  }
-
   public FileCodeWriter (final File target, final String encoding) throws IOException
   {
     this (target, false, encoding);
   }
 
-  public FileCodeWriter (final File target, final boolean readOnly) throws IOException
-  {
-    this (target, readOnly, null);
-  }
-
   public FileCodeWriter (final File target, final boolean readOnly, final String encoding) throws IOException
   {
+    super (encoding);
     this.m_aTarget = target;
     this.m_bReadOnly = readOnly;
-    this.m_sEncoding = encoding;
     if (!target.exists () || !target.isDirectory ())
       throw new IOException (target + ": non-existent directory");
   }
 
   @Override
-  public OutputStream openBinary (final JSPackage pkg, final String fileName) throws IOException
+  public Writer getWriter (final JSPackage pkg, final String fileName) throws IOException
   {
-    return new FileOutputStream (getFile (pkg, fileName));
+    return new FileSystemResource (getFile (pkg, fileName)).getWriter (m_sEncoding, EAppend.TRUNCATE);
   }
 
   protected File getFile (final JSPackage pkg, final String fileName) throws IOException

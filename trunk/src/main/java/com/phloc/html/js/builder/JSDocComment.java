@@ -60,9 +60,6 @@ public class JSDocComment extends JSCommentPart implements IJSGenerable
   /** list of xdoclets */
   private final Map <String, Map <String, String>> atXdoclets = new HashMap <String, Map <String, String>> ();
 
-  /** list of @throws tags */
-  private final Map <AbstractJSClass, JSCommentPart> atThrows = new HashMap <AbstractJSClass, JSCommentPart> ();
-
   /**
    * The @return tag part.
    */
@@ -71,12 +68,8 @@ public class JSDocComment extends JSCommentPart implements IJSGenerable
   /** The @deprecated tag */
   private JSCommentPart atDeprecated = null;
 
-  private final JSCodeModel m_aOwner;
-
-  public JSDocComment (final JSCodeModel owner)
-  {
-    this.m_aOwner = owner;
-  }
+  public JSDocComment ()
+  {}
 
   @Override
   public JSDocComment append (final Object o)
@@ -102,25 +95,6 @@ public class JSDocComment extends JSCommentPart implements IJSGenerable
   public JSCommentPart addParam (final JSVar param)
   {
     return addParam (param.name ());
-  }
-
-  /**
-   * add an @throws tag to the javadoc
-   */
-  public JSCommentPart addThrows (final Class <? extends Throwable> exception)
-  {
-    return addThrows (m_aOwner.ref (exception));
-  }
-
-  /**
-   * add an @throws tag to the javadoc
-   */
-  public JSCommentPart addThrows (final AbstractJSClass exception)
-  {
-    JSCommentPart p = atThrows.get (exception);
-    if (p == null)
-      atThrows.put (exception, p = new JSCommentPart ());
-    return p;
   }
 
   /**
@@ -183,44 +157,39 @@ public class JSDocComment extends JSCommentPart implements IJSGenerable
     // I realized that we can't use StringTokenizer because
     // this will recognize multiple \n as one token.
 
-    f.p ("/**").nl ();
+    f.plain ("/**").nl ();
 
     format (f, " * ");
 
-    f.p (" * ").nl ();
+    f.plain (" * ").nl ();
     for (final Map.Entry <String, JSCommentPart> e : atParams.entrySet ())
     {
-      f.p (" * @param ").p (e.getKey ()).nl ();
+      f.plain (" * @param ").plain (e.getKey ()).nl ();
       e.getValue ().format (f, INDENT);
     }
     if (atReturn != null)
     {
-      f.p (" * @return").nl ();
+      f.plain (" * @return").nl ();
       atReturn.format (f, INDENT);
-    }
-    for (final Map.Entry <AbstractJSClass, JSCommentPart> e : atThrows.entrySet ())
-    {
-      f.p (" * @throws ").t (e.getKey ()).nl ();
-      e.getValue ().format (f, INDENT);
     }
     if (atDeprecated != null)
     {
-      f.p (" * @deprecated").nl ();
+      f.plain (" * @deprecated").nl ();
       atDeprecated.format (f, INDENT);
     }
     for (final Map.Entry <String, Map <String, String>> e : atXdoclets.entrySet ())
     {
-      f.p (" * @").p (e.getKey ());
+      f.plain (" * @").plain (e.getKey ());
       if (e.getValue () != null)
       {
         for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
         {
-          f.p (" ").p (a.getKey ()).p ("= \"").p (a.getValue ()).p ("\"");
+          f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
         }
       }
       f.nl ();
     }
-    f.p (" */").nl ();
+    f.plain (" */").nl ();
   }
 
   private static final String INDENT = " *     ";

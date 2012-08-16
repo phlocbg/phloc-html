@@ -42,16 +42,7 @@ package com.phloc.html.js.builder;
 
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * This is a utility class for managing indentation and other basic formatting
@@ -59,38 +50,6 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSFormatter
 {
-  /** all classes and ids encountered during the collection mode **/
-  /**
-   * map from short type name to ReferenceList (list of JClass and ids sharing
-   * that name)
-   **/
-  private final Map <String, ReferenceList> m_aCollectedReferences = new HashMap <String, ReferenceList> ();
-
-  /**
-   * set of imported types (including package java types, eventhough we won't
-   * generate imports for them)
-   */
-  private final Set <AbstractJSClass> m_aImportedClasses = new HashSet <AbstractJSClass> ();
-
-  private static enum Mode
-  {
-    /**
-     * Collect all the type names and identifiers. In this mode we don't
-     * actually generate anything.
-     */
-    COLLECTING,
-    /**
-     * Print the actual source code.
-     */
-    PRINTING
-  }
-
-  /**
-   * The current running mode. Set to PRINTING so that a casual client can use a
-   * formatter just like before.
-   */
-  private Mode mode = Mode.PRINTING;
-
   /**
    * Current number of indentation strings to print
    */
@@ -125,7 +84,7 @@ public final class JSFormatter
    */
   public JSFormatter (final PrintWriter s)
   {
-    this (s, "    ");
+    this (s, "  ");
   }
 
   /**
@@ -145,18 +104,9 @@ public final class JSFormatter
   }
 
   /**
-   * Returns true if we are in the printing mode, where we actually produce
-   * text. The other mode is the "collecting mode'
-   */
-  public boolean isPrinting ()
-  {
-    return mode == Mode.PRINTING;
-  }
-
-  /**
    * Decrement the indentation level.
    */
-  public JSFormatter o ()
+  public JSFormatter outdent ()
   {
     indentLevel--;
     return this;
@@ -165,7 +115,7 @@ public final class JSFormatter
   /**
    * Increment the indentation level.
    */
-  public JSFormatter i ()
+  public JSFormatter indent ()
   {
     indentLevel++;
     return this;
@@ -247,14 +197,11 @@ public final class JSFormatter
    * @param c
    *        the char
    */
-  public JSFormatter p (final char c)
+  public JSFormatter plain (final char c)
   {
-    if (mode == Mode.PRINTING)
-    {
-      _spaceIfNeeded (c);
-      m_aPW.print (c);
-      lastChar = c;
-    }
+    _spaceIfNeeded (c);
+    m_aPW.print (c);
+    lastChar = c;
     return this;
   }
 
@@ -264,14 +211,11 @@ public final class JSFormatter
    * @param s
    *        the String
    */
-  public JSFormatter p (final String s)
+  public JSFormatter plain (final String s)
   {
-    if (mode == Mode.PRINTING)
-    {
-      _spaceIfNeeded (s.charAt (0));
-      m_aPW.print (s);
-      lastChar = s.charAt (s.length () - 1);
-    }
+    _spaceIfNeeded (s.charAt (0));
+    m_aPW.print (s);
+    lastChar = s.charAt (s.length () - 1);
     return this;
   }
 
@@ -279,9 +223,9 @@ public final class JSFormatter
   {
     if (type.isReference ())
     {
-      return t ((AbstractJSClass) type);
+      return type ((AbstractJSClass) type);
     }
-    return g (type);
+    return generable (type);
   }
 
   /**
@@ -290,41 +234,12 @@ public final class JSFormatter
    * In the collecting mode we use this information to decide what types to
    * import and what not to.
    */
-  public JSFormatter t (final AbstractJSClass type)
+  public JSFormatter type (final AbstractJSClass type)
   {
-    switch (mode)
-    {
-      case PRINTING:
-        // many of the JTypes in this list are either primitive or belong to
-        // package java
-        // so we don't need a FQCN
-        if (m_aImportedClasses.contains (type))
-        {
-          p (type.name ()); // FQCN imported or not necessary, so generate short
-                            // name
-        }
-        else
-        {
-          if (type.outer () != null)
-            t (type.outer ()).p ('.').p (type.name ());
-          else
-            p (type.fullName ()); // collision was detected, so generate FQCN
-        }
-        break;
-      case COLLECTING:
-        final String shortName = type.name ();
-        if (m_aCollectedReferences.containsKey (shortName))
-        {
-          m_aCollectedReferences.get (shortName).add (type);
-        }
-        else
-        {
-          final ReferenceList tl = new ReferenceList ();
-          tl.add (type);
-          m_aCollectedReferences.put (shortName, tl);
-        }
-        break;
-    }
+    if (type.outer () != null)
+      type (type.outer ()).plain ('.').plain (type.name ());
+    else
+      plain (type.fullName ()); // collision was detected, so generate FQCN
     return this;
   }
 
@@ -333,38 +248,7 @@ public final class JSFormatter
    */
   public JSFormatter id (final String id)
   {
-    switch (mode)
-    {
-      case PRINTING:
-        p (id);
-        break;
-      case COLLECTING:
-        // see if there is a type name that collides with this id
-        if (m_aCollectedReferences.containsKey (id))
-        {
-          if (!m_aCollectedReferences.get (id).getClasses ().isEmpty ())
-          {
-            for (final AbstractJSClass type : m_aCollectedReferences.get (id).getClasses ())
-            {
-              if (type.outer () != null)
-              {
-                m_aCollectedReferences.get (id).setId (false);
-                return this;
-              }
-            }
-          }
-          m_aCollectedReferences.get (id).setId (true);
-        }
-        else
-        {
-          // not a type, but we need to create a place holder to
-          // see if there might be a collision with a type
-          final ReferenceList tl = new ReferenceList ();
-          tl.setId (true);
-          m_aCollectedReferences.put (id, tl);
-        }
-        break;
-    }
+    plain (id);
     return this;
   }
 
@@ -373,12 +257,9 @@ public final class JSFormatter
    */
   public JSFormatter nl ()
   {
-    if (mode == Mode.PRINTING)
-    {
-      m_aPW.println ();
-      lastChar = 0;
-      atBeginningOfLine = true;
-    }
+    m_aPW.println ();
+    lastChar = 0;
+    atBeginningOfLine = true;
     return this;
   }
 
@@ -388,7 +269,7 @@ public final class JSFormatter
    * @param g
    *        the JGenerable object
    */
-  public JSFormatter g (final IJSGenerable g)
+  public JSFormatter generable (final IJSGenerable g)
   {
     g.generate (this);
     return this;
@@ -397,7 +278,7 @@ public final class JSFormatter
   /**
    * Produces {@link IJSGenerable}s separated by ','
    */
-  public JSFormatter g (final Collection <? extends IJSGenerable> list)
+  public JSFormatter generable (final Collection <? extends IJSGenerable> list)
   {
     boolean first = true;
     if (!list.isEmpty ())
@@ -405,8 +286,8 @@ public final class JSFormatter
       for (final IJSGenerable item : list)
       {
         if (!first)
-          p (',');
-        g (item);
+          plain (',');
+        generable (item);
         first = false;
       }
     }
@@ -419,7 +300,7 @@ public final class JSFormatter
    * @param d
    *        the JDeclaration object
    */
-  public JSFormatter d (final IJSDeclaration d)
+  public JSFormatter decl (final IJSDeclaration d)
   {
     d.declare (this);
     return this;
@@ -431,7 +312,7 @@ public final class JSFormatter
    * @param s
    *        the JStatement object
    */
-  public JSFormatter s (final IJSStatement s)
+  public JSFormatter stmt (final IJSStatement s)
   {
     s.state (this);
     return this;
@@ -443,7 +324,7 @@ public final class JSFormatter
    * @param v
    *        the JVar object
    */
-  public JSFormatter b (final JSVar v)
+  public JSFormatter var (final JSVar v)
   {
     v.bind (this);
     return this;
@@ -454,166 +335,14 @@ public final class JSFormatter
    */
   public void write (final JSDefinedClass c)
   {
-    // first collect all the types and identifiers
-    mode = Mode.COLLECTING;
-    d (c);
-
-    javaLang = c.owner ()._package ("java.lang");
-
-    // collate type names and identifiers to determine which types can be
-    // imported
-    for (final ReferenceList tl : m_aCollectedReferences.values ())
-    {
-      if (!tl.collisions (c) && !tl.isId ())
-      {
-        assert tl.getClasses ().size () == 1;
-
-        // add to list of collected types
-        m_aImportedClasses.add (tl.getClasses ().get (0));
-      }
-    }
-
-    // the class itself that we will be generating is always accessible
-    m_aImportedClasses.add (c);
-
-    // then print the declaration
-    mode = Mode.PRINTING;
-
     assert c.parentContainer ().isPackage () : "this method is only for a pacakge-level class";
     final JSPackage pkg = (JSPackage) c.parentContainer ();
     if (!pkg.isUnnamed ())
     {
-      nl ().d (pkg);
+      nl ().decl (pkg);
       nl ();
     }
 
-    // generate import statements
-    final List <AbstractJSClass> imports = ContainerHelper.getSorted (m_aImportedClasses);
-    for (final AbstractJSClass clazz : imports)
-    {
-      // suppress import statements for primitive types, built-in types,
-      // types in the root package, and types in
-      // the same package as the current type
-      if (!supressImport (clazz, c))
-      {
-        p ("import").p (clazz.fullName ()).p (';').nl ();
-      }
-    }
-    nl ();
-
-    d (c);
-  }
-
-  /**
-   * determine if an import statement should be supressed
-   * 
-   * @param clazz
-   *        JType that may or may not have an import
-   * @param c
-   *        JType that is the current class being processed
-   * @return true if an import statement should be suppressed, false otherwise
-   */
-  private boolean supressImport (final AbstractJSClass clazz, final AbstractJSClass c)
-  {
-    if (clazz._package ().isUnnamed ())
-      return true;
-
-    final String packageName = clazz._package ().name ();
-    if (packageName.equals ("java.lang"))
-      return true; // no need to explicitly import java.lang classes
-
-    if (clazz._package () == c._package ())
-    {
-      // inner classes require an import stmt.
-      // All other pkg local classes do not need an
-      // import stmt for ref.
-      if (clazz.outer () == null)
-      {
-        return true; // no need to explicitly import a class into itself
-      }
-    }
-    return false;
-  }
-
-  private JSPackage javaLang;
-
-  /**
-   * Used during the optimization of class imports. List of
-   * {@link AbstractJSClass}es whose short name is the same.
-   * 
-   * @author Ryan.Shoemaker@Sun.COM
-   */
-  final class ReferenceList
-  {
-    private final ArrayList <AbstractJSClass> classes = new ArrayList <AbstractJSClass> ();
-
-    /** true if this name is used as an identifier (like a variable name.) **/
-    private boolean id;
-
-    /**
-     * Returns true if the symbol represented by the short name is "importable".
-     */
-    public boolean collisions (final JSDefinedClass enclosingClass)
-    {
-      // special case where a generated type collides with a type in package
-      // java
-
-      // more than one type with the same name
-      if (classes.size () > 1)
-        return true;
-
-      // an id and (at least one) type with the same name
-      if (id && classes.size () != 0)
-        return true;
-
-      for (final AbstractJSClass c : classes)
-      {
-        if (c._package () == javaLang)
-        {
-          // make sure that there's no other class with this name within the
-          // same package
-          final Iterator <JSDefinedClass> itr = enclosingClass._package ().classes ();
-          while (itr.hasNext ())
-          {
-            // even if this is the only "String" class we use,
-            // if the class called "String" is in the same package,
-            // we still need to import it.
-            final JSDefinedClass n = itr.next ();
-            if (n.name ().equals (c.name ()))
-              return true; // collision
-          }
-        }
-        if (c.outer () != null)
-          return true; // avoid importing inner class to work around 6431987.
-                       // Also see jaxb issue 166
-      }
-
-      return false;
-    }
-
-    public void add (final AbstractJSClass clazz)
-    {
-      if (!classes.contains (clazz))
-        classes.add (clazz);
-    }
-
-    public List <AbstractJSClass> getClasses ()
-    {
-      return classes;
-    }
-
-    public void setId (final boolean value)
-    {
-      id = value;
-    }
-
-    /**
-     * Return true iff this is strictly an id, meaning that there are no
-     * collisions with type names.
-     */
-    public boolean isId ()
-    {
-      return id && classes.size () == 0;
-    }
+    decl (c);
   }
 }
