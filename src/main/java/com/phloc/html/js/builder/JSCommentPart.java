@@ -74,24 +74,24 @@ public class JSCommentPart extends ArrayList <Object>
   @Override
   public boolean add (final Object o)
   {
-    flattenAppend (o);
+    _flattenAppend (o);
     return true;
   }
 
-  private void flattenAppend (final Object value)
+  private void _flattenAppend (final Object value)
   {
     if (value == null)
       return;
     if (value instanceof Object [])
     {
       for (final Object o : (Object []) value)
-        flattenAppend (o);
+        _flattenAppend (o);
     }
     else
       if (value instanceof Collection <?>)
       {
         for (final Object o : (Collection <?>) value)
-          flattenAppend (o);
+          _flattenAppend (o);
       }
       else
         super.add (value);
@@ -118,17 +118,16 @@ public class JSCommentPart extends ArrayList <Object>
         {
           final String line = s.substring (0, idx);
           if (line.length () > 0)
-            f.plain (escape (line));
+            f.plain (_escape (line));
           s = s.substring (idx + 1);
           f.nl ().plain (indent);
         }
         if (s.length () != 0)
-          f.plain (escape (s));
+          f.plain (_escape (s));
       }
       else
         if (o instanceof AbstractJSClass)
         {
-          // TODO: this doesn't print the parameterized type properly
           ((AbstractJSClass) o).printLink (f);
         }
         else
@@ -147,7 +146,7 @@ public class JSCommentPart extends ArrayList <Object>
   /**
    * Escapes the appearance of the comment terminator.
    */
-  private String escape (final String ps)
+  private static String _escape (final String ps)
   {
     String s = ps;
     while (true)
@@ -156,7 +155,7 @@ public class JSCommentPart extends ArrayList <Object>
       if (idx < 0)
         return s;
 
-      s = s.substring (0, idx + 1) + "<!---->" + s.substring (idx + 1);
+      s = s.substring (0, idx + 1) + "<!-- -->" + s.substring (idx + 1);
     }
   }
 }

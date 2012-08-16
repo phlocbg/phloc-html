@@ -54,6 +54,8 @@ import java.util.Map;
  */
 public class JSDocComment extends JSCommentPart implements IJSGenerable
 {
+  private static final String INDENT = " *     ";
+
   /** list of @param tags */
   private final Map <String, JSCommentPart> atParams = new HashMap <String, JSCommentPart> ();
 
@@ -191,6 +193,4 @@ public class JSDocComment extends JSCommentPart implements IJSGenerable
     }
     f.plain (" */").nl ();
   }
-
-  private static final String INDENT = " *     ";
 }
