@@ -108,11 +108,6 @@ public final class JSExpr
     return new JSFieldRef (lhs, field);
   }
 
-  public static JSFieldRef refthis (final String field)
-  {
-    return new JSFieldRef (null, field, true);
-  }
-
   public static JSArrayCompRef component (final IJSExpression lhs, final IJSExpression index)
   {
     return new JSArrayCompRef (lhs, index);

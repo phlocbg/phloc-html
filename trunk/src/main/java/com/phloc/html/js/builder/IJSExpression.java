@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * A Java expression.
  * <p>
@@ -57,118 +59,150 @@ public interface IJSExpression extends IJSGenerable
   /**
    * Returns "-[this]" from "[this]".
    */
+  @Nonnull
   IJSExpression minus ();
 
   /**
    * Returns "![this]" from "[this]".
    */
+  @Nonnull
   IJSExpression not ();
 
   /**
    * Returns "~[this]" from "[this]".
    */
+  @Nonnull
   IJSExpression complement ();
 
   /**
    * Returns "[this]++" from "[this]".
    */
+  @Nonnull
   IJSExpression incr ();
 
   /**
    * Returns "[this]--" from "[this]".
    */
+  @Nonnull
   IJSExpression decr ();
 
   /**
-   * Returns "typeof [this]"
+   * Returns "typeof [this]" from "[this]"
    */
+  @Nonnull
   IJSExpression typeof ();
 
   /**
    * Returns "[this]+[right]"
    */
+  @Nonnull
   IJSExpression plus (IJSExpression right);
 
   /**
    * Returns "[this]-[right]"
    */
+  @Nonnull
   IJSExpression minus (IJSExpression right);
 
   /**
    * Returns "[this]*[right]"
    */
+  @Nonnull
   IJSExpression mul (IJSExpression right);
 
   /**
    * Returns "[this]/[right]"
    */
+  @Nonnull
   IJSExpression div (IJSExpression right);
 
   /**
    * Returns "[this]%[right]"
    */
+  @Nonnull
   IJSExpression mod (IJSExpression right);
 
   /**
    * Returns "[this]&lt;&lt;[right]"
    */
+  @Nonnull
   IJSExpression shl (IJSExpression right);
 
   /**
    * Returns "[this]>>[right]"
    */
+  @Nonnull
   IJSExpression shr (IJSExpression right);
 
   /**
    * Returns "[this]>>>[right]"
    */
+  @Nonnull
   IJSExpression shrz (IJSExpression right);
 
   /** Bit-wise AND '&amp;'. */
+  @Nonnull
   IJSExpression band (IJSExpression right);
 
   /** Bit-wise OR '|'. */
+  @Nonnull
   IJSExpression bor (IJSExpression right);
 
   /** Logical AND '&amp;&amp;'. */
+  @Nonnull
   IJSExpression cand (IJSExpression right);
 
   /** Logical OR '||'. */
+  @Nonnull
   IJSExpression cor (IJSExpression right);
 
+  @Nonnull
   IJSExpression xor (IJSExpression right);
 
+  @Nonnull
   IJSExpression lt (IJSExpression right);
 
+  @Nonnull
   IJSExpression lte (IJSExpression right);
 
+  @Nonnull
   IJSExpression gt (IJSExpression right);
 
+  @Nonnull
   IJSExpression gte (IJSExpression right);
 
+  @Nonnull
   IJSExpression eq (IJSExpression right);
 
+  @Nonnull
   IJSExpression eeq (IJSExpression right);
 
+  @Nonnull
   IJSExpression ne (IJSExpression right);
 
+  @Nonnull
   IJSExpression ene (IJSExpression right);
 
   /**
    * Returns "[this].[method]". Arguments shall be added to the returned
    * {@link JSInvocation} object.
    */
+  @Nonnull
   JSInvocation invoke (JSMethod method);
 
   /**
    * Returns "[this].[method]". Arguments shall be added to the returned
    * {@link JSInvocation} object.
    */
+  @Nonnull
   JSInvocation invoke (String method);
 
+  @Nonnull
   JSFieldRef ref (JSVar field);
 
+  @Nonnull
   JSFieldRef ref (String field);
 
+  @Nonnull
   JSArrayCompRef component (IJSExpression index);
 }

@@ -62,55 +62,16 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
    */
   private JSVar m_aVar;
 
-  /**
-   * Indicates if an explicit this should be generated
-   */
-  private final boolean m_bExplicitThis;
-
-  /**
-   * Field reference constructor given an object expression and field name
-   * 
-   * @param object
-   *        JExpression for the object upon which the named field will be
-   *        accessed,
-   * @param name
-   *        Name of field to access
-   */
-  JSFieldRef (final IJSExpression object, final String name)
+  JSFieldRef (final IJSGenerable object, final String name)
   {
-    this (object, name, false);
-  }
-
-  JSFieldRef (final IJSExpression object, final JSVar v)
-  {
-    this (object, v, false);
-  }
-
-  /**
-   * Static field reference.
-   */
-  JSFieldRef (final AbstractJSType type, final String name)
-  {
-    this (type, name, false);
-  }
-
-  JSFieldRef (final AbstractJSType type, final JSVar v)
-  {
-    this (type, v, false);
-  }
-
-  JSFieldRef (final IJSGenerable object, final String name, final boolean explicitThis)
-  {
-    this.m_bExplicitThis = explicitThis;
     this.m_aObject = object;
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("Field name contains '.': " + name);
     this.m_sName = name;
   }
 
-  JSFieldRef (final IJSGenerable object, final JSVar var, final boolean explicitThis)
+  JSFieldRef (final IJSGenerable object, final JSVar var)
   {
-    this.m_bExplicitThis = explicitThis;
     this.m_aObject = object;
     this.m_aVar = var;
   }
@@ -127,14 +88,7 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
     }
     else
     {
-      if (m_bExplicitThis)
-      {
-        f.p ("this.").p (name);
-      }
-      else
-      {
-        f.id (name);
-      }
+      f.p ("this.").p (name);
     }
   }
 
