@@ -40,29 +40,28 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Catch block for a try/catch/finally statement
  */
-
 public class JSCatchBlock implements IJSGeneratable
 {
-  private final AbstractJSClass m_aException;
-  private JSVar m_aVar = null;
-  private final JSBlock m_aBody = new JSBlock ();
+  private JSVar m_aVar;
+  private final JSBlock m_aBody = new JSBlock (true, true);
 
-  JSCatchBlock (final AbstractJSClass exception)
-  {
-    this.m_aException = exception;
-  }
+  JSCatchBlock ()
+  {}
 
   public JSVar param (final String name)
   {
     if (m_aVar != null)
       throw new IllegalStateException ();
-    m_aVar = new JSVar (m_aException, name, null);
+    m_aVar = new JSVar (null, name, null);
     return m_aVar;
   }
 
+  @Nonnull
   public JSBlock body ()
   {
     return m_aBody;
@@ -71,7 +70,7 @@ public class JSCatchBlock implements IJSGeneratable
   public void generate (final JSFormatter f)
   {
     if (m_aVar == null)
-      m_aVar = new JSVar (m_aException, "ex", null);
+      m_aVar = new JSVar (null, "e", null);
     f.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
   }
 }

@@ -175,7 +175,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSBlock ();
+      m_aBody = new JSBlock (true, true);
     return m_aBody;
   }
 

@@ -53,7 +53,6 @@ import java.io.Writer;
  */
 class UnicodeEscapeWriter extends FilterWriter
 {
-
   public UnicodeEscapeWriter (final Writer next)
   {
     super (next);
@@ -114,5 +113,4 @@ class UnicodeEscapeWriter extends FilterWriter
   {
     write (buf.toCharArray (), 0, buf.length ());
   }
-
 }

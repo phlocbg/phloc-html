@@ -50,17 +50,17 @@ public class JSConditional implements IJSStatement
   /**
    * JExpression to test to determine branching
    */
-  private IJSExpression m_aTest = null;
+  private final IJSExpression m_aTest;
 
   /**
    * JBlock of statements for "then" clause
    */
-  private final JSBlock m_aThen = new JSBlock ();
+  private final JSBlock m_aThen = new JSBlock (true, true);
 
   /**
    * JBlock of statements for optional "else" clause
    */
-  private JSBlock m_aElse = null;
+  private JSBlock m_aElse;
 
   /**
    * Constructor
@@ -91,7 +91,7 @@ public class JSConditional implements IJSStatement
   public JSBlock _else ()
   {
     if (m_aElse == null)
-      m_aElse = new JSBlock ();
+      m_aElse = new JSBlock (true, true);
     return m_aElse;
   }
 

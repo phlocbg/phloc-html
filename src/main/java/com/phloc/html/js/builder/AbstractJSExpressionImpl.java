@@ -45,11 +45,6 @@ package com.phloc.html.js.builder;
  */
 public abstract class AbstractJSExpressionImpl implements IJSExpression
 {
-  //
-  //
-  // from JOp
-  //
-  //
   public final IJSExpression minus ()
   {
     return JSOp.minus (this);

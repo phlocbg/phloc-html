@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * JClass for generating expressions containing operators
  */
@@ -60,34 +62,35 @@ public final class JSOp
 
   private static class JSUnaryOp extends AbstractJSExpressionImpl
   {
-    protected String m_sOp;
-    protected IJSExpression m_aExpr;
-    protected boolean opFirst = true;
+    final String m_sOp;
+    final IJSExpression m_aExpr;
+    final boolean m_bOpFirst;
 
-    JSUnaryOp (final String op, final IJSExpression e)
+    JSUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
     {
-      this.m_sOp = op;
-      this.m_aExpr = e;
+      m_sOp = op;
+      m_aExpr = e;
+      m_bOpFirst = true;
     }
 
-    JSUnaryOp (final IJSExpression e, final String op)
+    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
     {
-      this.m_sOp = op;
-      this.m_aExpr = e;
-      opFirst = false;
+      m_sOp = op;
+      m_aExpr = e;
+      m_bOpFirst = false;
     }
 
-    public void generate (final JSFormatter f)
+    public void generate (@Nonnull final JSFormatter f)
     {
-      if (opFirst)
+      if (m_bOpFirst)
         f.plain ('(').plain (m_sOp).generatable (m_aExpr).plain (')');
       else
         f.plain ('(').generatable (m_aExpr).plain (m_sOp).plain (')');
     }
-
   }
 
-  public static IJSExpression minus (final IJSExpression e)
+  @Nonnull
+  public static IJSExpression minus (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOp ("-", e);
   }
@@ -95,7 +98,8 @@ public final class JSOp
   /**
    * Logical not <tt>'!x'</tt>.
    */
-  public static IJSExpression not (final IJSExpression e)
+  @Nonnull
+  public static IJSExpression not (@Nonnull final IJSExpression e)
   {
     if (e == JSExpr.TRUE)
       return JSExpr.FALSE;
@@ -104,19 +108,20 @@ public final class JSOp
     return new JSUnaryOp ("!", e);
   }
 
-  public static IJSExpression complement (final IJSExpression e)
+  @Nonnull
+  public static IJSExpression complement (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOp ("~", e);
   }
 
   private static class JSTightUnaryOp extends JSUnaryOp
   {
-    JSTightUnaryOp (final IJSExpression e, final String op)
+    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
     {
       super (e, op);
     }
 
-    JSTightUnaryOp (final String op, final IJSExpression e)
+    JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
     {
       super (op, e);
     }
@@ -124,23 +129,26 @@ public final class JSOp
     @Override
     public void generate (final JSFormatter f)
     {
-      if (opFirst)
+      if (m_bOpFirst)
         f.plain (m_sOp).generatable (m_aExpr);
       else
         f.generatable (m_aExpr).plain (m_sOp);
     }
   }
 
+  @Nonnull
   public static IJSExpression incr (final IJSExpression e)
   {
     return new JSTightUnaryOp (e, "++");
   }
 
+  @Nonnull
   public static IJSExpression decr (final IJSExpression e)
   {
     return new JSTightUnaryOp (e, "--");
   }
 
+  @Nonnull
   public static IJSExpression typeof (final IJSExpression e)
   {
     return new JSTightUnaryOp ("typeof ", e);
@@ -156,9 +164,9 @@ public final class JSOp
 
     JSBinaryOp (final String op, final IJSExpression left, final IJSGeneratable right)
     {
-      this.m_aLeft = left;
-      this.m_sOp = op;
-      this.m_aRight = right;
+      m_aLeft = left;
+      m_sOp = op;
+      m_aRight = right;
     }
 
     public void generate (final JSFormatter f)
@@ -308,19 +316,26 @@ public final class JSOp
                  final IJSExpression e2,
                  final IJSExpression e3)
     {
-      this.m_aExpr1 = e1;
-      this.m_sOp1 = op1;
-      this.m_aExpr2 = e2;
-      this.m_sOp2 = op2;
-      this.m_aExpr3 = e3;
+      m_aExpr1 = e1;
+      m_sOp1 = op1;
+      m_aExpr2 = e2;
+      m_sOp2 = op2;
+      m_aExpr3 = e3;
     }
 
     public void generate (final JSFormatter f)
     {
-      f.plain ('(').generatable (m_aExpr1).plain (m_sOp1).generatable (m_aExpr2).plain (m_sOp2).generatable (m_aExpr3).plain (')');
+      f.plain ('(')
+       .generatable (m_aExpr1)
+       .plain (m_sOp1)
+       .generatable (m_aExpr2)
+       .plain (m_sOp2)
+       .generatable (m_aExpr3)
+       .plain (')');
     }
   }
 
+  @Nonnull
   public static IJSExpression cond (final IJSExpression cond, final IJSExpression ifTrue, final IJSExpression ifFalse)
   {
     return new JSTernaryOp ("?", ":", cond, ifTrue, ifFalse);
