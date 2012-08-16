@@ -116,6 +116,11 @@ public final class JSOp
       super (e, op);
     }
 
+    JSTightUnaryOp (final String op, final IJSExpression e)
+    {
+      super (op, e);
+    }
+
     @Override
     public void generate (final JSFormatter f)
     {
@@ -124,7 +129,6 @@ public final class JSOp
       else
         f.g (m_aExpr).p (m_sOp);
     }
-
   }
 
   public static IJSExpression incr (final IJSExpression e)
@@ -135,6 +139,11 @@ public final class JSOp
   public static IJSExpression decr (final IJSExpression e)
   {
     return new JSTightUnaryOp (e, "--");
+  }
+
+  public static IJSExpression typeof (final IJSExpression e)
+  {
+    return new JSTightUnaryOp ("typeof ", e);
   }
 
   /* -- Binary operators -- */
@@ -281,16 +290,6 @@ public final class JSOp
   public static IJSExpression ene (final IJSExpression left, final IJSExpression right)
   {
     return new JSBinaryOp ("!==", left, right);
-  }
-
-  public static IJSExpression _instanceof (final IJSExpression left, final AbstractJSType right)
-  {
-    return new JSBinaryOp ("instanceof", left, right);
-  }
-
-  public static IJSExpression _typeof (final IJSExpression left, final AbstractJSType right)
-  {
-    return new JSBinaryOp ("typeof", left, right);
   }
 
   /* -- Ternary operators -- */

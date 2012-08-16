@@ -158,15 +158,12 @@ public final class JSCodeModel
   }
 
   /**
-   * Returns the number of files to be generated if {@link #build} is invoked
-   * now.
+   * Returns the number of files to be generated
    */
   public int countArtifacts ()
   {
     int r = 0;
-    final JSPackage [] pkgs = packages.values ().toArray (new JSPackage [packages.size ()]);
-    // avoid concurrent modification exception
-    for (final JSPackage pkg : pkgs)
+    for (final JSPackage pkg : getAllPackages ())
       r += pkg.countArtifacts ();
     return r;
   }

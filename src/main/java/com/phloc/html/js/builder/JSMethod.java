@@ -44,6 +44,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
+
 /**
  * Java method.
  */
@@ -75,11 +80,6 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    * javadoc comments for this JMethod
    */
   private JSDocComment jdoc = null;
-
-  private boolean isConstructor ()
-  {
-    return m_aType == null;
-  }
 
   /**
    * JMethod constructor
@@ -188,9 +188,11 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    * 
    * @return If there's no parameter, an empty array will be returned.
    */
-  public JSVar [] listParams ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <JSVar> listParams ()
   {
-    return params.toArray (new JSVar [params.size ()]);
+    return ContainerHelper.newList (params);
   }
 
   /**
@@ -198,12 +200,13 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    */
   public boolean hasSignature (final AbstractJSType [] argTypes)
   {
-    final JSVar [] p = listParams ();
-    if (p.length != argTypes.length)
+    final List <JSVar> p = listParams ();
+    if (p.size () != argTypes.length)
       return false;
 
-    for (int i = 0; i < p.length; i++)
-      if (!p[i].type ().equals (argTypes[i]))
+    int i = 0;
+    for (final JSVar aVar : p)
+      if (!aVar.type ().equals (argTypes[i++]))
         return false;
 
     return true;
@@ -239,8 +242,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (jdoc != null)
       f.g (jdoc);
 
-    if (!isConstructor ())
-      f.g (m_aType);
+    f.g (m_aType);
     f.id (m_sName).p ('(').i ();
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.

@@ -43,6 +43,11 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
+
 /**
  * JMethod invocation
  */
@@ -164,9 +169,11 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * 
    * @return If there's no arguments, an empty array will be returned.
    */
-  public IJSExpression [] listArgs ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IJSExpression> listArgs ()
   {
-    return args.toArray (new IJSExpression [args.size ()]);
+    return ContainerHelper.newList (args);
   }
 
   public void generate (final JSFormatter f)

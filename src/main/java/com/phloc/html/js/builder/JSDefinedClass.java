@@ -51,6 +51,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.phloc.commons.collections.ContainerHelper;
+
 /**
  * A generated Java class/interface/enum/....
  * <p>
@@ -501,11 +503,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Returns all the nested classes defined in this class.
    */
-  public final AbstractJSClass [] listClasses ()
+  public final List <JSDefinedClass> listNestedClasses ()
   {
     if (classes == null)
-      return new AbstractJSClass [0];
-    return classes.values ().toArray (new AbstractJSClass [classes.values ().size ()]);
+      return new ArrayList <JSDefinedClass> ();
+    return ContainerHelper.newList (classes.values ());
   }
 
   @Override
