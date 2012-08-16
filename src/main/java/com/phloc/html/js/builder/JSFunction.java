@@ -66,12 +66,12 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * List of parameters for this method's declaration
    */
-  private final List <JSVar> params = new ArrayList <JSVar> ();
+  private final List <JSVar> m_aParams = new ArrayList <JSVar> ();
 
   /**
    * JBlock of statements that makes up the body this method
    */
-  private JSSBlock body = null;
+  private JSBlock m_aBody = null;
 
   /**
    * javadoc comments for this JMethod
@@ -126,7 +126,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    */
   public List <JSVar> params ()
   {
-    return ContainerHelper.newList (params);
+    return ContainerHelper.newList (m_aParams);
   }
 
   /**
@@ -155,7 +155,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public JSVar param (final AbstractJSType type, final String name)
   {
     final JSVar v = new JSVar (type, name, null);
-    params.add (v);
+    m_aParams.add (v);
     return v;
   }
 
@@ -168,7 +168,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   @ReturnsMutableCopy
   public List <JSVar> listParams ()
   {
-    return ContainerHelper.newList (params);
+    return ContainerHelper.newList (m_aParams);
   }
 
   /**
@@ -176,11 +176,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * 
    * @return Body of method
    */
-  public JSSBlock body ()
+  public JSBlock body ()
   {
-    if (body == null)
-      body = new JSSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSBlock ();
+    return m_aBody;
   }
 
   /**
@@ -199,16 +199,16 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public void declare (final JSFormatter f)
   {
     if (jdoc != null)
-      f.generable (jdoc);
+      f.generatable (jdoc);
 
     f.plain ("function ");
     if (m_aType != null)
-      f.plain ("/*").generable (m_aType).plain ("*/");
+      f.plain ("/*").generatable (m_aType).plain ("*/");
     f.id (m_sName).plain ('(').indent ();
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.
     boolean first = true;
-    for (final JSVar var : params)
+    for (final JSVar var : m_aParams)
     {
       if (!first)
         f.plain (',');
@@ -218,9 +218,9 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
     f.outdent ().plain (')');
 
-    if (body != null)
-      f.stmt (body);
+    if (m_aBody != null)
+      f.stmt (m_aBody);
     else
-      f.stmt (new JSSBlock ());
+      f.stmt (new JSBlock ());
   }
 }

@@ -59,7 +59,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * Object expression upon which this method will be invoked, or null if this
    * is a constructor invocation
    */
-  private IJSGenerable m_aObject;
+  private IJSGeneratable m_aObject;
 
   /**
    * Name of the method to be invoked. Either this field is set, or
@@ -94,12 +94,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    */
   JSInvocation (@Nullable final IJSExpression object, @Nonnull final String name)
   {
-    this ((IJSGenerable) object, name);
+    this ((IJSGeneratable) object, name);
   }
 
   JSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
   {
-    this ((IJSGenerable) object, method);
+    this ((IJSGeneratable) object, method);
   }
 
   /**
@@ -107,15 +107,15 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    */
   JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final String name)
   {
-    this ((IJSGenerable) type, name);
+    this ((IJSGeneratable) type, name);
   }
 
   JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
   {
-    this ((IJSGenerable) type, method);
+    this ((IJSGeneratable) type, method);
   }
 
-  private JSInvocation (@Nullable final IJSGenerable object, @Nonnull final String name)
+  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final String name)
   {
     m_aObject = object;
     if (name.indexOf ('.') >= 0)
@@ -123,7 +123,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     m_sName = name;
   }
 
-  private JSInvocation (@Nullable final IJSGenerable object, @Nonnull final JSMethod method)
+  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod method)
   {
     m_aObject = object;
     m_aMethod = method;
@@ -183,12 +183,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     if (m_bIsConstructor && m_aType.isArray ())
     {
       // [RESULT] new T[]{arg1,arg2,arg3,...};
-      f.plain ("new ").generable (m_aType).plain ('{');
+      f.plain ("new ").generatable (m_aType).plain ('{');
     }
     else
     {
       if (m_bIsConstructor)
-        f.plain ("new ").generable (m_aType).plain ('(');
+        f.plain ("new ").generatable (m_aType).plain ('(');
       else
       {
         String name = m_sName;
@@ -196,13 +196,13 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
           name = m_aMethod.name ();
 
         if (m_aObject != null)
-          f.generable (m_aObject).plain ('.').plain (name).plain ('(');
+          f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
         else
           f.id (name).plain ('(');
       }
     }
 
-    f.generable (m_aArgs);
+    f.generatable (m_aArgs);
 
     if (m_bIsConstructor && m_aType.isArray ())
       f.plain ('}');
@@ -212,6 +212,6 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   public void state (final JSFormatter f)
   {
-    f.generable (this).plain (';').nl ();
+    f.generatable (this).plain (';').nl ();
   }
 }

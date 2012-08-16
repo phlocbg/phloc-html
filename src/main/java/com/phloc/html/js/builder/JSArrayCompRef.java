@@ -75,7 +75,7 @@ final class JSArrayCompRef extends AbstractJSExpressionImpl implements IJSAssign
 
   public void generate (final JSFormatter f)
   {
-    f.generable (m_aArray).plain ('[').generable (m_aIndex).plain (']');
+    f.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
   }
 
   public IJSExpression assign (final IJSExpression rhs)

@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -51,18 +52,18 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * A block of Java code, which may contain statements and local declarations.
  * <p>
- * {@link JSSBlock} contains a large number of factory methods that creates new
+ * {@link JSBlock} contains a large number of factory methods that creates new
  * statements/declarations. Those newly created statements/declarations are
  * inserted into the {@link #pos() "current position"}. The position advances
  * one every time you add a new instruction.
  */
-public final class JSSBlock implements IJSGenerable, IJSStatement
+public final class JSBlock implements IJSGeneratable, IJSStatement
 {
   /**
    * Declarations and statements contained in this block. Either
    * {@link IJSStatement} or {@link IJSDeclaration}.
    */
-  private final List <Object> content = new ArrayList <Object> ();
+  private final List <Object> m_aContent = new ArrayList <Object> ();
 
   /**
    * Whether or not this block must be braced and indented
@@ -75,12 +76,12 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    */
   private int pos;
 
-  public JSSBlock ()
+  public JSBlock ()
   {
     this (true, true);
   }
 
-  public JSSBlock (final boolean bracesRequired, final boolean indentRequired)
+  public JSBlock (final boolean bracesRequired, final boolean indentRequired)
   {
     m_bBracesRequired = bracesRequired;
     m_bIndentRequired = indentRequired;
@@ -94,12 +95,13 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
   @ReturnsMutableCopy
   public List <Object> getContents ()
   {
-    return ContainerHelper.newList (content);
+    return ContainerHelper.newList (m_aContent);
   }
 
-  private <T> T _insert (final T statementOrDeclaration)
+  @Nonnull
+  private <T> T _insert (@Nonnull final T statementOrDeclaration)
   {
-    content.add (pos, statementOrDeclaration);
+    m_aContent.add (pos, statementOrDeclaration);
     pos++;
     return statementOrDeclaration;
   }
@@ -127,7 +129,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
   public int pos (final int newPos)
   {
     final int r = pos;
-    if (newPos > content.size () || newPos < 0)
+    if (newPos > m_aContent.size () || newPos < 0)
       throw new IllegalArgumentException ();
     pos = newPos;
 
@@ -139,7 +141,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    */
   public boolean isEmpty ()
   {
-    return content.isEmpty ();
+    return m_aContent.isEmpty ();
   }
 
   /**
@@ -151,7 +153,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        Name of the variable
    * @return Newly generated JVar
    */
-  public JSVar decl (final AbstractJSType type, final String name)
+  @Nonnull
+  public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name)
   {
     return decl (type, name, null);
   }
@@ -167,7 +170,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        Initialization expression for this variable. May be null.
    * @return Newly generated JVar
    */
-  public JSVar decl (final AbstractJSType type, final String name, final IJSExpression init)
+  @Nonnull
+  public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
   {
     final JSVar v = new JSVar (type, name, init);
     _insert (v);
@@ -184,13 +188,15 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * @param exp
    *        Right hand side expression
    */
-  public JSSBlock assign (final IJSAssignmentTarget lhs, final IJSExpression exp)
+  @Nonnull
+  public JSBlock assign (final IJSAssignmentTarget lhs, final IJSExpression exp)
   {
     _insert (new JSAssignment (lhs, exp));
     return this;
   }
 
-  public JSSBlock assignPlus (final IJSAssignmentTarget lhs, final IJSExpression exp)
+  @Nonnull
+  public JSBlock assignPlus (final IJSAssignmentTarget lhs, final IJSExpression exp)
   {
     _insert (new JSAssignment (lhs, "+=", exp));
     return this;
@@ -206,7 +212,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        Name of method to invoke
    * @return Newly generated JInvocation
    */
-  public JSInvocation invoke (final IJSExpression expr, final String method)
+  @Nonnull
+  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final String method)
   {
     final JSInvocation i = new JSInvocation (expr, method);
     _insert (i);
@@ -223,7 +230,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        JMethod to invoke
    * @return Newly generated JInvocation
    */
-  public JSInvocation invoke (final IJSExpression expr, final JSMethod method)
+  @Nonnull
+  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final JSMethod method)
   {
     return _insert (new JSInvocation (expr, method));
   }
@@ -231,7 +239,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
   /**
    * Creates a static invocation statement.
    */
-  public JSInvocation staticInvoke (final AbstractJSClass type, final String method)
+  @Nonnull
+  public JSInvocation staticInvoke (@Nullable final AbstractJSClass type, @Nonnull final String method)
   {
     return _insert (new JSInvocation (type, method));
   }
@@ -243,7 +252,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        Name of method to invoke
    * @return Newly generated JInvocation
    */
-  public JSInvocation invoke (final String method)
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final String method)
   {
     return _insert (new JSInvocation ((IJSExpression) null, method));
   }
@@ -255,7 +265,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        JMethod to invoke
    * @return Newly generated JInvocation
    */
-  public JSInvocation invoke (final JSMethod method)
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return _insert (new JSInvocation ((IJSExpression) null, method));
   }
@@ -267,7 +278,8 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        JStatement to be added
    * @return This block
    */
-  public JSSBlock add (final IJSStatement s)
+  @Nonnull
+  public JSBlock add (@Nonnull final IJSStatement s)
   { // ## Needed?
     _insert (s);
     return this;
@@ -280,6 +292,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    *        JExpression to be tested to determine branching
    * @return Newly generated conditional statement
    */
+  @Nonnull
   public JSConditional _if (final IJSExpression expr)
   {
     return _insert (new JSConditional (expr));
@@ -290,9 +303,16 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * 
    * @return Newly generated For statement
    */
+  @Nonnull
   public JSForLoop _for ()
   {
     return _insert (new JSForLoop ());
+  }
+
+  @Nonnull
+  public JSForIn forIn (final AbstractJSType varType, final String name, final IJSExpression collection)
+  {
+    return _insert (new JSForIn (varType, name, collection));
   }
 
   /**
@@ -300,6 +320,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * 
    * @return Newly generated While statement
    */
+  @Nonnull
   public JSWhileLoop _while (final IJSExpression test)
   {
     return _insert (new JSWhileLoop (test));
@@ -308,6 +329,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
   /**
    * Create a switch/case statement and add it to this block
    */
+  @Nonnull
   public JSSwitch _switch (final IJSExpression test)
   {
     return _insert (new JSSwitch (test));
@@ -318,6 +340,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * 
    * @return Newly generated Do statement
    */
+  @Nonnull
   public JSDoLoop _do (final IJSExpression test)
   {
     return _insert (new JSDoLoop (test));
@@ -328,6 +351,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * 
    * @return Newly generated Try statement
    */
+  @Nonnull
   public JSTryBlock _try ()
   {
     return _insert (new JSTryBlock ());
@@ -338,13 +362,13 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    */
   public void _return ()
   {
-    _insert (new JSReturn (null));
+    _return (null);
   }
 
   /**
    * Create a return statement and add it to this block
    */
-  public void _return (final IJSExpression exp)
+  public void _return (@Nullable final IJSExpression exp)
   {
     _insert (new JSReturn (exp));
   }
@@ -365,7 +389,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     _break (null);
   }
 
-  public void _break (final JSLabel label)
+  public void _break (@Nullable final JSLabel label)
   {
     _insert (new JSBreak (label));
   }
@@ -381,25 +405,26 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     return l;
   }
 
-  /**
-   * Create a continue statement and add it to this block
-   */
-  public void _continue (final JSLabel label)
-  {
-    _insert (new JSContinue (label));
-  }
-
   public void _continue ()
   {
     _continue (null);
   }
 
   /**
+   * Create a continue statement and add it to this block
+   */
+  public void _continue (@Nullable final JSLabel label)
+  {
+    _insert (new JSContinue (label));
+  }
+
+  /**
    * Create a sub-block and add it to this block
    */
-  public JSSBlock block ()
+  @Nonnull
+  public JSBlock block ()
   {
-    final JSSBlock b = new JSSBlock ();
+    final JSBlock b = new JSBlock ();
     b.m_bBracesRequired = false;
     b.m_bIndentRequired = false;
     return _insert (b);
@@ -413,6 +438,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
    * For example, you can invoke this method as:
    * <code>directStatement("a=b+c;")</code>.
    */
+  @Nonnull
   public IJSStatement directStatement (final String source)
   {
     final IJSStatement s = new IJSStatement ()
@@ -426,7 +452,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     return s;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     if (m_bBracesRequired)
       f.plain ('{').nl ();
@@ -439,9 +465,9 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
       f.plain ('}');
   }
 
-  void generateBody (final JSFormatter f)
+  void generateBody (@Nonnull final JSFormatter f)
   {
-    for (final Object o : content)
+    for (final Object o : m_aContent)
     {
       if (o instanceof IJSDeclaration)
         f.decl ((IJSDeclaration) o);
@@ -450,14 +476,9 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     }
   }
 
-  public JSForIn forIn (final AbstractJSType varType, final String name, final IJSExpression collection)
-  {
-    return _insert (new JSForIn (varType, name, collection));
-  }
-
   public void state (final JSFormatter f)
   {
-    f.generable (this);
+    f.generatable (this);
     if (m_bBracesRequired)
       f.nl ();
   }

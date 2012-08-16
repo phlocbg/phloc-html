@@ -66,7 +66,7 @@ class JSThrow implements IJSStatement
   public void state (final JSFormatter f)
   {
     f.plain ("throw");
-    f.generable (m_aExpr);
+    f.generatable (m_aExpr);
     f.plain (';').nl ();
   }
 

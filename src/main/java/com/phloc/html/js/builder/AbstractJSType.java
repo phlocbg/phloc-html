@@ -44,7 +44,7 @@ package com.phloc.html.js.builder;
  * A representation of a type in codeModel. A type is always a reference type (
  * {@link AbstractJSClass}).
  */
-public abstract class AbstractJSType implements IJSGenerable, Comparable <AbstractJSType>, IJSHasOwner
+public abstract class AbstractJSType implements IJSGeneratable, Comparable <AbstractJSType>, IJSHasOwner
 {
   /**
    * Gets the full name of the type. See

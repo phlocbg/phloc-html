@@ -53,12 +53,7 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * A JS package.
  */
-public final class JSPackage implements
-                            IJSDeclaration,
-                            IJSGenerable,
-                            IJSClassContainer,
-                            IJSFunctionContainer,
-                            Comparable <JSPackage>
+public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer, Comparable <JSPackage>
 {
   /**
    * Name of the package. May be the empty string for the root package.
@@ -93,12 +88,6 @@ public final class JSPackage implements
 
   @Nullable
   public IJSClassContainer parentClassContainer ()
-  {
-    return parent ();
-  }
-
-  @Nullable
-  public IJSFunctionContainer parentFunctionContainer ()
   {
     return parent ();
   }

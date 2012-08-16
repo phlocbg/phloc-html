@@ -89,7 +89,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
 
   /** Static initializer, if this class has one */
-  private JSSBlock m_aInit;
+  private JSBlock m_aInit;
 
   /** class javadoc */
   private JSDocComment m_aJSDoc;
@@ -302,10 +302,10 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * 
    * @return JBlock containing initialization statements for this class
    */
-  public JSSBlock init ()
+  public JSBlock init ()
   {
     if (m_aInit == null)
-      m_aInit = new JSSBlock ();
+      m_aInit = new JSBlock ();
     return m_aInit;
   }
 
@@ -449,19 +449,19 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public void declare (final JSFormatter f)
   {
     if (m_aJSDoc != null)
-      f.nl ().generable (m_aJSDoc);
+      f.nl ().generatable (m_aJSDoc);
 
     f.id (m_sName);
 
     if (m_aSuperClass != null)
-      f.nl ().indent ().plain ("extends").generable (m_aSuperClass).nl ().outdent ();
+      f.nl ().indent ().plain ("extends").generatable (m_aSuperClass).nl ().outdent ();
 
     if (!m_aInterfaces.isEmpty ())
     {
       if (m_aSuperClass == null)
         f.nl ();
       f.indent ().plain ("extends");
-      f.generable (m_aInterfaces);
+      f.generatable (m_aInterfaces);
       f.nl ().outdent ();
     }
     declareBody (f);

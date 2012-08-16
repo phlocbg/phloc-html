@@ -44,6 +44,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+
 /**
  * This is a utility class for managing indentation and other basic formatting
  * for PrintWriter.
@@ -53,7 +55,7 @@ public class JSFormatter
   /**
    * Current number of indentation strings to print
    */
-  private int indentLevel;
+  private int m_nIndentLevel;
 
   /**
    * String to be used for each indentation. Defaults to four spaces.
@@ -106,18 +108,20 @@ public class JSFormatter
   /**
    * Decrement the indentation level.
    */
+  @Nonnull
   public JSFormatter outdent ()
   {
-    indentLevel--;
+    m_nIndentLevel--;
     return this;
   }
 
   /**
    * Increment the indentation level.
    */
+  @Nonnull
   public JSFormatter indent ()
   {
-    indentLevel++;
+    m_nIndentLevel++;
     return this;
   }
 
@@ -175,19 +179,19 @@ public class JSFormatter
     return false;
   }
 
-  private char lastChar = 0;
-  private boolean atBeginningOfLine = true;
+  private char m_cLastChar = 0;
+  private boolean m_bAtBeginningOfLine = true;
 
   private void _spaceIfNeeded (final char c)
   {
-    if (atBeginningOfLine)
+    if (m_bAtBeginningOfLine)
     {
-      for (int i = 0; i < indentLevel; i++)
+      for (int i = 0; i < m_nIndentLevel; i++)
         m_aPW.print (m_sIndentSpace);
-      atBeginningOfLine = false;
+      m_bAtBeginningOfLine = false;
     }
     else
-      if ((lastChar != 0) && _needSpace (lastChar, c))
+      if ((m_cLastChar != 0) && _needSpace (m_cLastChar, c))
         m_aPW.print (' ');
   }
 
@@ -197,11 +201,12 @@ public class JSFormatter
    * @param c
    *        the char
    */
+  @Nonnull
   public JSFormatter plain (final char c)
   {
     _spaceIfNeeded (c);
     m_aPW.print (c);
-    lastChar = c;
+    m_cLastChar = c;
     return this;
   }
 
@@ -211,21 +216,21 @@ public class JSFormatter
    * @param s
    *        the String
    */
-  public JSFormatter plain (final String s)
+  @Nonnull
+  public JSFormatter plain (@Nonnull final String s)
   {
     _spaceIfNeeded (s.charAt (0));
     m_aPW.print (s);
-    lastChar = s.charAt (s.length () - 1);
+    m_cLastChar = s.charAt (s.length () - 1);
     return this;
   }
 
-  public JSFormatter t (final AbstractJSType type)
+  @Nonnull
+  public JSFormatter t (@Nonnull final AbstractJSType type)
   {
     if (type.isReference ())
-    {
       return type ((AbstractJSClass) type);
-    }
-    return generable (type);
+    return generatable (type);
   }
 
   /**
@@ -234,7 +239,8 @@ public class JSFormatter
    * In the collecting mode we use this information to decide what types to
    * import and what not to.
    */
-  public JSFormatter type (final AbstractJSClass type)
+  @Nonnull
+  public JSFormatter type (@Nonnull final AbstractJSClass type)
   {
     if (type.outer () != null)
       type (type.outer ()).plain ('.').plain (type.name ());
@@ -246,6 +252,7 @@ public class JSFormatter
   /**
    * Print an identifier
    */
+  @Nonnull
   public JSFormatter id (final String id)
   {
     plain (id);
@@ -255,41 +262,40 @@ public class JSFormatter
   /**
    * Print a new line into the stream
    */
+  @Nonnull
   public JSFormatter nl ()
   {
     m_aPW.println ();
-    lastChar = 0;
-    atBeginningOfLine = true;
+    m_cLastChar = 0;
+    m_bAtBeginningOfLine = true;
     return this;
   }
 
   /**
-   * Cause the JGenerable object to generate source for iteself
+   * Cause the JGenerable object to generate source for itself
    * 
    * @param g
    *        the JGenerable object
    */
-  public JSFormatter generable (final IJSGenerable g)
+  @Nonnull
+  public JSFormatter generatable (@Nonnull final IJSGeneratable g)
   {
     g.generate (this);
     return this;
   }
 
   /**
-   * Produces {@link IJSGenerable}s separated by ','
+   * Produces {@link IJSGeneratable}s separated by ','
    */
-  public JSFormatter generable (final Collection <? extends IJSGenerable> list)
+  public JSFormatter generatable (final Collection <? extends IJSGeneratable> list)
   {
     boolean first = true;
-    if (!list.isEmpty ())
+    for (final IJSGeneratable item : list)
     {
-      for (final IJSGenerable item : list)
-      {
-        if (!first)
-          plain (',');
-        generable (item);
-        first = false;
-      }
+      if (!first)
+        plain (',');
+      generatable (item);
+      first = false;
     }
     return this;
   }

@@ -55,7 +55,7 @@ public final class JSCase implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSSBlock m_aBody = null;
+  private JSBlock m_aBody = null;
 
   /**
    * is this a regular case statement or a default case statement?
@@ -86,10 +86,10 @@ public final class JSCase implements IJSStatement
   }
 
   @Nonnull
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSSBlock (false, true);
+      m_aBody = new JSBlock (false, true);
     return m_aBody;
   }
 
@@ -97,7 +97,7 @@ public final class JSCase implements IJSStatement
   {
     f.indent ();
     if (!m_bIsDefaultCase)
-      f.plain ("case ").generable (m_aLabel).plain (':').nl ();
+      f.plain ("case ").generatable (m_aLabel).plain (':').nl ();
     else
       f.plain ("default:").nl ();
     if (m_aBody != null)

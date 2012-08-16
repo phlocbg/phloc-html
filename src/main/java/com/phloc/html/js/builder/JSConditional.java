@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * If statement, with optional else clause
  */
@@ -53,12 +55,12 @@ public class JSConditional implements IJSStatement
   /**
    * JBlock of statements for "then" clause
    */
-  private final JSSBlock m_aThen = new JSSBlock ();
+  private final JSBlock m_aThen = new JSBlock ();
 
   /**
    * JBlock of statements for optional "else" clause
    */
-  private JSSBlock m_aElse = null;
+  private JSBlock m_aElse = null;
 
   /**
    * Constructor
@@ -68,7 +70,7 @@ public class JSConditional implements IJSStatement
    */
   JSConditional (final IJSExpression test)
   {
-    this.m_aTest = test;
+    m_aTest = test;
   }
 
   /**
@@ -76,7 +78,7 @@ public class JSConditional implements IJSStatement
    * 
    * @return Then block
    */
-  public JSSBlock _then ()
+  public JSBlock _then ()
   {
     return m_aThen;
   }
@@ -86,16 +88,17 @@ public class JSConditional implements IJSStatement
    * 
    * @return Newly generated else block
    */
-  public JSSBlock _else ()
+  public JSBlock _else ()
   {
     if (m_aElse == null)
-      m_aElse = new JSSBlock ();
+      m_aElse = new JSBlock ();
     return m_aElse;
   }
 
   /**
    * Creates <tt>... else if(...) ...</tt> code.
    */
+  @Nonnull
   public JSConditional _elseif (final IJSExpression boolExp)
   {
     return _else ()._if (boolExp);
@@ -116,15 +119,15 @@ public class JSConditional implements IJSStatement
 
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.plain ("if ").generable (m_aTest);
+      f.plain ("if ").generatable (m_aTest);
     }
     else
     {
-      f.plain ("if (").generable (m_aTest).plain (')');
+      f.plain ("if (").generatable (m_aTest).plain (')');
     }
-    f.generable (m_aThen);
+    f.generatable (m_aThen);
     if (m_aElse != null)
-      f.plain ("else").generable (m_aElse);
+      f.plain ("else").generatable (m_aElse);
     f.nl ();
   }
 }

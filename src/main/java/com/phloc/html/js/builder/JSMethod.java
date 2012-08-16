@@ -66,12 +66,12 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   /**
    * List of parameters for this method's declaration
    */
-  private final List <JSVar> params = new ArrayList <JSVar> ();
+  private final List <JSVar> m_aParams = new ArrayList <JSVar> ();
 
   /**
    * JBlock of statements that makes up the body this method
    */
-  private JSSBlock body;
+  private JSBlock body;
 
   private final JSDefinedClass m_aOuter;
 
@@ -115,7 +115,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    */
   public List <JSVar> params ()
   {
-    return ContainerHelper.newList (params);
+    return ContainerHelper.newList (m_aParams);
   }
 
   /**
@@ -131,7 +131,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   public JSVar param (final AbstractJSType type, final String name)
   {
     final JSVar v = new JSVar (type, name, null);
-    params.add (v);
+    m_aParams.add (v);
     return v;
   }
 
@@ -171,9 +171,9 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    */
   public AbstractJSType [] listParamTypes ()
   {
-    final AbstractJSType [] r = new AbstractJSType [params.size ()];
+    final AbstractJSType [] r = new AbstractJSType [m_aParams.size ()];
     for (int i = 0; i < r.length; i++)
-      r[i] = params.get (i).type ();
+      r[i] = m_aParams.get (i).type ();
     return r;
   }
 
@@ -186,7 +186,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   @ReturnsMutableCopy
   public List <JSVar> listParams ()
   {
-    return ContainerHelper.newList (params);
+    return ContainerHelper.newList (m_aParams);
   }
 
   /**
@@ -211,10 +211,10 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    * 
    * @return Body of method
    */
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (body == null)
-      body = new JSSBlock ();
+      body = new JSBlock ();
     return body;
   }
 
@@ -234,14 +234,14 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   public void declare (final JSFormatter f)
   {
     if (jdoc != null)
-      f.generable (jdoc);
+      f.generatable (jdoc);
 
-    f.generable (m_aType);
+    f.generatable (m_aType);
     f.id (m_sName).plain ('(').indent ();
     // when parameters are printed in new lines, we want them to be indented.
     // there's a good chance no newlines happen, too, but just in case it does.
     boolean first = true;
-    for (final JSVar var : params)
+    for (final JSVar var : m_aParams)
     {
       if (!first)
         f.plain (',');
@@ -254,7 +254,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
     if (body != null)
       f.stmt (body);
     else
-      f.stmt (new JSSBlock ());
+      f.stmt (new JSBlock ());
   }
 
   public JSCodeModel owner ()

@@ -80,9 +80,9 @@ public final class JSOp
     public void generate (final JSFormatter f)
     {
       if (opFirst)
-        f.plain ('(').plain (m_sOp).generable (m_aExpr).plain (')');
+        f.plain ('(').plain (m_sOp).generatable (m_aExpr).plain (')');
       else
-        f.plain ('(').generable (m_aExpr).plain (m_sOp).plain (')');
+        f.plain ('(').generatable (m_aExpr).plain (m_sOp).plain (')');
     }
 
   }
@@ -125,9 +125,9 @@ public final class JSOp
     public void generate (final JSFormatter f)
     {
       if (opFirst)
-        f.plain (m_sOp).generable (m_aExpr);
+        f.plain (m_sOp).generatable (m_aExpr);
       else
-        f.generable (m_aExpr).plain (m_sOp);
+        f.generatable (m_aExpr).plain (m_sOp);
     }
   }
 
@@ -152,9 +152,9 @@ public final class JSOp
   {
     private final IJSExpression m_aLeft;
     private final String m_sOp;
-    private final IJSGenerable m_aRight;
+    private final IJSGeneratable m_aRight;
 
-    JSBinaryOp (final String op, final IJSExpression left, final IJSGenerable right)
+    JSBinaryOp (final String op, final IJSExpression left, final IJSGeneratable right)
     {
       this.m_aLeft = left;
       this.m_sOp = op;
@@ -163,7 +163,7 @@ public final class JSOp
 
     public void generate (final JSFormatter f)
     {
-      f.plain ('(').generable (m_aLeft).plain (m_sOp).generable (m_aRight).plain (')');
+      f.plain ('(').generatable (m_aLeft).plain (m_sOp).generatable (m_aRight).plain (')');
     }
   }
 
@@ -317,7 +317,7 @@ public final class JSOp
 
     public void generate (final JSFormatter f)
     {
-      f.plain ('(').generable (m_aExpr1).plain (m_sOp1).generable (m_aExpr2).plain (m_sOp2).generable (m_aExpr3).plain (')');
+      f.plain ('(').generatable (m_aExpr1).plain (m_sOp1).generatable (m_aExpr2).plain (m_sOp2).generatable (m_aExpr3).plain (')');
     }
   }
 

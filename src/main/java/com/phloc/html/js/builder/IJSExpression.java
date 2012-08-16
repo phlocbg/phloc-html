@@ -54,7 +54,7 @@ import javax.annotation.Nonnull;
  * parameters. For example, you can build "5+2" by
  * <tt>JExpr.lit(5).add(JExpr.lit(2))</tt>
  */
-public interface IJSExpression extends IJSGenerable
+public interface IJSExpression extends IJSGeneratable
 {
   /**
    * Returns "-[this]" from "[this]".

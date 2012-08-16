@@ -40,12 +40,13 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nullable;
+
 /**
  * A return statement
  */
-class JSReturn implements IJSStatement
+final class JSReturn implements IJSStatement
 {
-
   /**
    * JExpression to return; may be null.
    */
@@ -57,16 +58,16 @@ class JSReturn implements IJSStatement
    * @param expr
    *        JExpression which evaluates to return value
    */
-  JSReturn (final IJSExpression expr)
+  JSReturn (@Nullable final IJSExpression expr)
   {
-    this.m_aExpr = expr;
+    m_aExpr = expr;
   }
 
   public void state (final JSFormatter f)
   {
     f.plain ("return ");
     if (m_aExpr != null)
-      f.generable (m_aExpr);
+      f.generatable (m_aExpr);
     f.plain (';').nl ();
   }
 

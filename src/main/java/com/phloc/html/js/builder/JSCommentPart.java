@@ -133,7 +133,7 @@ public class JSCommentPart extends ArrayList <Object>
         else
           if (o instanceof AbstractJSType)
           {
-            f.generable ((AbstractJSType) o);
+            f.generatable ((AbstractJSType) o);
           }
           else
             throw new IllegalStateException ();

@@ -52,7 +52,7 @@ import java.util.Map;
  * would be nice if we have JComment class and we can derive this class from
  * there.
  */
-public class JSDocComment extends JSCommentPart implements IJSGenerable
+public class JSDocComment extends JSCommentPart implements IJSGeneratable
 {
   private static final String INDENT = " *     ";
 

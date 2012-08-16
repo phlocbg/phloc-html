@@ -75,7 +75,7 @@ final class JSArrayClass extends AbstractJSClass
   @Override
   public void generate (final JSFormatter f)
   {
-    f.generable (m_aComponentType).plain ("[]");
+    f.generatable (m_aComponentType).plain ("[]");
   }
 
   @Override

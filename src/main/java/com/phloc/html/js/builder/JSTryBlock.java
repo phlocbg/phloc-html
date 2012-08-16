@@ -50,14 +50,14 @@ import java.util.List;
 public class JSTryBlock implements IJSStatement
 {
 
-  private final JSSBlock body = new JSSBlock ();
+  private final JSBlock body = new JSBlock ();
   private final List <JSCatchBlock> catches = new ArrayList <JSCatchBlock> ();
-  private JSSBlock _finally = null;
+  private JSBlock _finally = null;
 
   JSTryBlock ()
   {}
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     return body;
   }
@@ -69,20 +69,20 @@ public class JSTryBlock implements IJSStatement
     return cb;
   }
 
-  public JSSBlock _finally ()
+  public JSBlock _finally ()
   {
     if (_finally == null)
-      _finally = new JSSBlock ();
+      _finally = new JSBlock ();
     return _finally;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain ("try").generable (body);
+    f.plain ("try").generatable (body);
     for (final JSCatchBlock cb : catches)
-      f.generable (cb);
+      f.generatable (cb);
     if (_finally != null)
-      f.plain ("finally").generable (_finally);
+      f.plain ("finally").generatable (_finally);
     f.nl ();
   }
 

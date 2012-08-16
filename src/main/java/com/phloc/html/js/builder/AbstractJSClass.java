@@ -236,6 +236,6 @@ public abstract class AbstractJSClass extends AbstractJSType
    */
   void printLink (final JSFormatter f)
   {
-    f.plain ("{@link ").generable (this).plain ('}');
+    f.plain ("{@link ").generatable (this).plain ('}');
   }
 }
