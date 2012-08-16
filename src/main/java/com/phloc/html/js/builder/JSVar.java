@@ -43,6 +43,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.html.js.marshal.JSMarshaller;
+
 /**
  * Variables and fields.
  */
@@ -76,7 +78,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    */
   JSVar (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
   {
-    if (!JSNameChecker.isJSIdentifier (name))
+    if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ();
     m_aType = type;
     m_sName = name;
@@ -112,7 +114,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    */
   public JSVar name (@Nonnull final String name)
   {
-    if (!JSNameChecker.isJSIdentifier (name))
+    if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ();
     m_sName = name;
     return this;
@@ -156,7 +158,6 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
 
   public void bind (@Nonnull final JSFormatter f)
   {
-    f.plain ("var ");
     if (m_aType != null)
       f.plain ("/*").generatable (m_aType).plain ("*/");
     f.id (m_sName);
