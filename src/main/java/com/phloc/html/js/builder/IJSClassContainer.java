@@ -40,58 +40,37 @@
 
 package com.phloc.html.js.builder;
 
-import java.util.Collection;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
  * The common aspect of a package and a class.
  */
-public interface IJSClassContainer
+public interface IJSClassContainer extends IJSHasOwner
 {
-  /**
-   * Returns true if the container is a class.
-   */
-  boolean isClass ();
-
-  /**
-   * Returns true if the container is a package.
-   */
-  boolean isPackage ();
-
-  /**
-   * Add a new public class to this class/package.
-   * 
-   * @exception JSClassAlreadyExistsException
-   *            When the specified class/interface was already created.
-   */
-  JSDefinedClass _class (String name) throws JSClassAlreadyExistsException;
-
-  /**
-   * Returns an iterator that walks the nested classes defined in this class.
-   */
-  Collection <JSDefinedClass> classes ();
-
-  /**
-   * Parent JClassContainer. If this is a package, this method returns a parent
-   * package, or null if this package is the root package. If this is an
-   * outer-most class, this method returns a package to which it belongs. If
-   * this is an inner class, this method returns the outer class.
-   */
-  @Nullable
-  IJSClassContainer parentContainer ();
-
   /**
    * Gets the nearest package parent.
    * <p>
    * If <tt>this.isPackage()</tt>, then return <tt>this</tt>.
    */
+  @Nonnull
   JSPackage getPackage ();
 
   /**
-   * Get the root code model object.
+   * Add a new public class to this class/package.
+   * 
+   * @exception JSNameAlreadyExistsException
+   *            When the specified class/interface was already created.
    */
   @Nonnull
-  JSCodeModel owner ();
+  JSDefinedClass _class (String name) throws JSNameAlreadyExistsException;
+
+  /**
+   * Parent {@link IJSClassContainer}. If this is a package, this method returns
+   * a parent package, or null if this package is the root package. If this is
+   * an outer-most class, this method returns a package to which it belongs. If
+   * this is an inner class, this method returns the outer class.
+   */
+  @Nullable
+  IJSClassContainer parentClassContainer ();
 }

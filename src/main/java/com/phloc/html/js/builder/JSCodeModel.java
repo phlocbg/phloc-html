@@ -127,10 +127,10 @@ public final class JSCodeModel
   /**
    * Creates a new generated class.
    * 
-   * @exception JSClassAlreadyExistsException
+   * @exception JSNameAlreadyExistsException
    *            When the specified class/interface was already created.
    */
-  public JSDefinedClass _class (final String fullyqualifiedName) throws JSClassAlreadyExistsException
+  public JSDefinedClass _class (final String fullyqualifiedName) throws JSNameAlreadyExistsException
   {
     final int idx = fullyqualifiedName.lastIndexOf ('.');
     if (idx < 0)

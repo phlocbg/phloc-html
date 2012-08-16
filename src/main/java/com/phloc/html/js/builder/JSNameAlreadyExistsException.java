@@ -40,26 +40,29 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Indicates that the class is already created.
- *
+ * 
  * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
-public class JSClassAlreadyExistsException extends Exception
+public class JSNameAlreadyExistsException extends Exception
 {
-  private final JSDefinedClass m_aExisting;
+  private final IJSDeclaration m_aExisting;
 
-  public JSClassAlreadyExistsException (final JSDefinedClass _existing)
+  public JSNameAlreadyExistsException (@Nonnull final IJSDeclaration _existing)
   {
-    this.m_aExisting = _existing;
+    m_aExisting = _existing;
   }
 
   /**
    * Gets a reference to the existing {@link JSDefinedClass}.
-   *
+   * 
    * @return This method always return non-null valid object.
    */
-  public JSDefinedClass getExistingClass ()
+  @Nonnull
+  public IJSDeclaration getExistingClass ()
   {
     return m_aExisting;
   }

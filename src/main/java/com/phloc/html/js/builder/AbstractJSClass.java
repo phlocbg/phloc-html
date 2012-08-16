@@ -42,6 +42,8 @@ package com.phloc.html.js.builder;
 
 import java.util.Iterator;
 
+import javax.annotation.Nullable;
+
 /**
  * Represents a Java reference type, such as a class, an interface, an enum, an
  * array type, a parameterized type.
@@ -51,9 +53,12 @@ import java.util.Iterator;
  */
 public abstract class AbstractJSClass extends AbstractJSType
 {
+  private final JSCodeModel m_aOwner;
+  private AbstractJSClass m_aArrayClass;
+
   protected AbstractJSClass (final JSCodeModel _owner)
   {
-    this.m_aOwner = _owner;
+    m_aOwner = _owner;
   }
 
   /**
@@ -62,27 +67,28 @@ public abstract class AbstractJSClass extends AbstractJSType
    * @return name of this class, without any qualification. For example, this
    *         method returns "String" for <code>java.lang.String</code>.
    */
+
   @Override
-  abstract public String name ();
+  public abstract String name ();
 
   /**
    * Gets the package to which this class belongs. TODO: shall we move move this
    * down?
    */
-  abstract public JSPackage _package ();
+  public abstract JSPackage _package ();
 
   /**
    * Returns the class in which this class is nested, or <tt>null</tt> if this
    * is a top-level class.
    */
+  @Nullable
   public AbstractJSClass outer ()
   {
     return null;
   }
 
-  private final JSCodeModel m_aOwner;
-
   /** Gets the JCodeModel object to which this object belongs. */
+
   @Override
   public final JSCodeModel owner ()
   {
@@ -99,7 +105,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    *         for {@link Object}. If this JClass represents {@link Object},
    *         return null.
    */
-  abstract public AbstractJSClass _extends ();
+  public abstract AbstractJSClass _extends ();
 
   /**
    * Iterates all super interfaces directly implemented by this class/interface.
@@ -108,7 +114,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    *         objects that represents those interfaces implemented by this
    *         object.
    */
-  abstract public Iterator <AbstractJSClass> _implements ();
+  public abstract Iterator <AbstractJSClass> _implements ();
 
   /**
    * Checks the relationship between two classes.
@@ -182,14 +188,12 @@ public abstract class AbstractJSClass extends AbstractJSType
     return null;
   }
 
-  private AbstractJSClass arrayClass;
-
   @Override
   public AbstractJSClass array ()
   {
-    if (arrayClass == null)
-      arrayClass = new JSArrayClass (owner (), this);
-    return arrayClass;
+    if (m_aArrayClass == null)
+      m_aArrayClass = new JSArrayClass (owner (), this);
+    return m_aArrayClass;
   }
 
   @Override

@@ -49,10 +49,9 @@ import java.nio.charset.CharsetEncoder;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.charset.CharsetManager;
+import com.phloc.html.js.builder.IJSDeclaration;
 import com.phloc.html.js.builder.JSCodeModel;
-import com.phloc.html.js.builder.JSDefinedClass;
 import com.phloc.html.js.builder.JSFormatter;
-import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -148,11 +147,7 @@ public abstract class AbstractCodeWriter
     {
       final Writer bw = new BufferedWriter (openSource (aPackage.parent (), aPackage.name () + ".js"));
       final JSFormatter f = new JSFormatter (new PrintWriter (bw));
-      // write classes
-      for (final JSDefinedClass c : aPackage.classes ())
-        f.write (c);
-      // write functions
-      for (final JSFunction c : aPackage.functions ())
+      for (final IJSDeclaration c : aPackage.declarations ())
         f.decl (c);
       f.close ();
     }

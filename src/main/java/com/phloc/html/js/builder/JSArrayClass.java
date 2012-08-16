@@ -52,30 +52,30 @@ final class JSArrayClass extends AbstractJSClass
 {
 
   // array component type
-  private final AbstractJSType componentType;
+  private final AbstractJSType m_aComponentType;
 
   JSArrayClass (final JSCodeModel owner, final AbstractJSType component)
   {
     super (owner);
-    this.componentType = component;
+    m_aComponentType = component;
   }
 
   @Override
   public String name ()
   {
-    return componentType.name () + "[]";
+    return m_aComponentType.name () + "[]";
   }
 
   @Override
   public String fullName ()
   {
-    return componentType.fullName () + "[]";
+    return m_aComponentType.fullName () + "[]";
   }
 
   @Override
   public void generate (final JSFormatter f)
   {
-    f.generable (componentType).plain ("[]");
+    f.generable (m_aComponentType).plain ("[]");
   }
 
   @Override
@@ -99,7 +99,7 @@ final class JSArrayClass extends AbstractJSClass
   @Override
   public AbstractJSType elementType ()
   {
-    return componentType;
+    return m_aComponentType;
   }
 
   @Override
@@ -118,7 +118,7 @@ final class JSArrayClass extends AbstractJSClass
     if (!(obj instanceof JSArrayClass))
       return false;
 
-    if (componentType.equals (((JSArrayClass) obj).componentType))
+    if (m_aComponentType.equals (((JSArrayClass) obj).m_aComponentType))
       return true;
 
     return false;
@@ -127,6 +127,6 @@ final class JSArrayClass extends AbstractJSClass
   @Override
   public int hashCode ()
   {
-    return componentType.hashCode ();
+    return m_aComponentType.hashCode ();
   }
 }
