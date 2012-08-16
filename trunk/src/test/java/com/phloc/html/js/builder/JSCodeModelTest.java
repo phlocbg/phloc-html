@@ -26,13 +26,30 @@ public final class JSCodeModelTest
         final JSVar s2 = aFunc.param ("s2");
         aFunc.body ()._return (s1.plus (s2));
       }
+
+      // if
       final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
+
+      // try catch finally
       final JSTryBlock aTB = aCond._then ()._try ();
       aTB.body ()._return (JSExpr.lit (5));
       final JSCatchBlock aCB = aTB._catch ("ex");
       aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
-      aFuncMain.body ().add (JSExpr.regex ("water(mark)?").caseInsensitive (true).invoke ("test").arg ("watermark"));
+
+      // RegExp
+      aFuncMain.body ().add (JSExpr.regex ("water(mark)?")
+                                   .global (true)
+                                   .caseInsensitive (true)
+                                   .multiLine (true)
+                                   .invoke ("test")
+                                   .arg ("waterMark"));
+      aFuncMain.body ().add (JSExpr.regex ("water(mark)?")
+                                   .global (false)
+                                   .caseInsensitive (true)
+                                   .multiLine (false)
+                                   .invoke ("test")
+                                   .arg ("Water"));
       aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
                                                 .ref ("length")
                                                 .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
