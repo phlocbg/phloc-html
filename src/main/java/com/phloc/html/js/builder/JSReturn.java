@@ -64,10 +64,10 @@ class JSReturn implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.p ("return ");
+    f.plain ("return ");
     if (m_aExpr != null)
-      f.g (m_aExpr);
-    f.p (';').nl ();
+      f.generable (m_aExpr);
+    f.plain (';').nl ();
   }
 
 }

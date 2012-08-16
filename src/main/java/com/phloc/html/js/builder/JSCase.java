@@ -92,17 +92,17 @@ public final class JSCase implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.i ();
+    f.indent ();
     if (!m_bIsDefaultCase)
     {
-      f.p ("case ").g (m_aLabel).p (':').nl ();
+      f.plain ("case ").generable (m_aLabel).plain (':').nl ();
     }
     else
     {
-      f.p ("default:").nl ();
+      f.plain ("default:").nl ();
     }
     if (body != null)
-      f.s (body);
-    f.o ();
+      f.stmt (body);
+    f.outdent ();
   }
 }

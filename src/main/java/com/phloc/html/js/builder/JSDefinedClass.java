@@ -195,19 +195,12 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return this;
   }
 
-  public JSDefinedClass _extends (final Class <?> superClass)
-  {
-    return _extends (owner ().ref (superClass));
-  }
-
   /**
    * Returns the class extended by this class.
    */
   @Override
   public AbstractJSClass _extends ()
   {
-    if (m_aSuperClass == null)
-      m_aSuperClass = owner ().ref (Object.class);
     return m_aSuperClass;
   }
 
@@ -222,11 +215,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   {
     interfaces.add (iface);
     return this;
-  }
-
-  public JSDefinedClass _implements (final Class <?> iface)
-  {
-    return _implements (owner ().ref (iface));
   }
 
   /**
@@ -289,11 +277,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return field (type, name, null);
   }
 
-  public JSFieldVar field (final Class <?> type, final String name)
-  {
-    return field (owner ()._ref (type), name);
-  }
-
   /**
    * Adds a field to the list of field members of this JDefinedClass.
    * 
@@ -316,11 +299,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
     fields.put (name, f);
     return f;
-  }
-
-  public JSFieldVar field (final Class <?> type, final String name, final IJSExpression init)
-  {
-    return field (owner ()._ref (type), name, init);
   }
 
   /**
@@ -408,11 +386,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return m;
   }
 
-  public JSMethod method (final Class <?> type, final String name)
-  {
-    return method (owner ()._ref (type), name);
-  }
-
   /**
    * Returns the set of methods defined in this class.
    */
@@ -456,18 +429,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   public JSDefinedClass _class (final String name) throws JSClassAlreadyExistsException
   {
-
-    String NAME;
-    if (JSBuilderSettings.isCaseSensitiveFileSystem)
-      NAME = name.toUpperCase ();
-    else
-      NAME = name;
-
-    if (getClasses ().containsKey (NAME))
-      throw new JSClassAlreadyExistsException (getClasses ().get (NAME));
+    if (getClasses ().containsKey (name))
+      throw new JSClassAlreadyExistsException (getClasses ().get (name));
     // XXX problems caught in the NC constructor
     final JSDefinedClass c = new JSDefinedClass (this, name);
-    getClasses ().put (NAME, c);
+    getClasses ().put (name, c);
     return c;
   }
 
@@ -479,7 +445,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public JSDocComment javadoc ()
   {
     if (jdoc == null)
-      jdoc = new JSDocComment (owner ());
+      jdoc = new JSDocComment ();
     return jdoc;
   }
 
@@ -521,20 +487,20 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public void declare (final JSFormatter f)
   {
     if (jdoc != null)
-      f.nl ().g (jdoc);
+      f.nl ().generable (jdoc);
 
     f.id (m_sName);
 
-    if (m_aSuperClass != null && m_aSuperClass != owner ().ref (Object.class))
-      f.nl ().i ().p ("extends").g (m_aSuperClass).nl ().o ();
+    if (m_aSuperClass != null)
+      f.nl ().indent ().plain ("extends").generable (m_aSuperClass).nl ().outdent ();
 
     if (!interfaces.isEmpty ())
     {
       if (m_aSuperClass == null)
         f.nl ();
-      f.i ().p ("extends");
-      f.g (interfaces);
-      f.nl ().o ();
+      f.indent ().plain ("extends");
+      f.generable (interfaces);
+      f.nl ().outdent ();
     }
     declareBody (f);
   }
@@ -544,27 +510,27 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   protected void declareBody (final JSFormatter f)
   {
-    f.p ('{').nl ().nl ().i ();
+    f.plain ('{').nl ().nl ().indent ();
 
     for (final JSFieldVar field : fields.values ())
-      f.d (field);
+      f.decl (field);
     if (m_aInit != null)
-      f.nl ().p ("static").s (m_aInit);
+      f.nl ().plain ("static").stmt (m_aInit);
     for (final JSMethod m : constructors)
     {
-      f.nl ().d (m);
+      f.nl ().decl (m);
     }
     for (final JSMethod m : methods)
     {
-      f.nl ().d (m);
+      f.nl ().decl (m);
     }
     if (classes != null)
       for (final JSDefinedClass dc : classes.values ())
-        f.nl ().d (dc);
+        f.nl ().decl (dc);
 
     if (directBlock != null)
-      f.p (directBlock);
-    f.nl ().o ().p ('}').nl ();
+      f.plain (directBlock);
+    f.nl ().outdent ().plain ('}').nl ();
   }
 
   /**

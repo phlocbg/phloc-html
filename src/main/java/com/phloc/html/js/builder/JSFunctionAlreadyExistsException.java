@@ -40,32 +40,27 @@
 
 package com.phloc.html.js.builder;
 
-import com.phloc.commons.system.EOperatingSystem;
-
-public final class JSBuilderSettings
+/**
+ * Indicates that the function is already created.
+ * 
+ * @author philip
+ */
+public class JSFunctionAlreadyExistsException extends Exception
 {
-  /**
-   * If the flag is true, we will consider two classes "Foo" and "foo" as a
-   * collision.
-   */
-  protected static final boolean isCaseSensitiveFileSystem = getFileSystemCaseSensitivity ();
+  private final JSFunction existing;
 
-  private static boolean getFileSystemCaseSensitivity ()
+  public JSFunctionAlreadyExistsException (final JSFunction _existing)
   {
-    try
-    {
-      // let the system property override, in case the user really
-      // wants to override.
-      if (System.getProperty ("com.sun.codemodel.FileSystemCaseSensitive") != null)
-        return true;
-    }
-    catch (final Exception e)
-    {}
-
-    // on Unix, it's case sensitive.
-    return EOperatingSystem.getCurrentOS ().isUnixBased ();
+    this.existing = _existing;
   }
 
-  private JSBuilderSettings ()
-  {}
+  /**
+   * Gets a reference to the existing {@link JSFunction}.
+   * 
+   * @return This method always return non-null valid object.
+   */
+  public JSFunction getExistingFunction ()
+  {
+    return existing;
+  }
 }

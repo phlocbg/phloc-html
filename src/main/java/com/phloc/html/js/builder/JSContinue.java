@@ -62,9 +62,9 @@ class JSContinue implements IJSStatement
   public void state (final JSFormatter f)
   {
     if (label == null)
-      f.p ("continue;").nl ();
+      f.plain ("continue;").nl ();
     else
-      f.p ("continue").p (label.label).p (';').nl ();
+      f.plain ("continue").plain (label.label).plain (';').nl ();
   }
 
 }

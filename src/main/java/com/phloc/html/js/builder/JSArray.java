@@ -82,26 +82,26 @@ public final class JSArray extends AbstractJSExpressionImpl
       arrayCount++;
     }
 
-    f.p ("new").g (t).p ('[');
+    f.plain ("new").generable (t).plain ('[');
     if (m_aSize != null)
-      f.g (m_aSize);
-    f.p (']');
+      f.generable (m_aSize);
+    f.plain (']');
 
     for (int i = 0; i < arrayCount; i++)
-      f.p ("[]");
+      f.plain ("[]");
 
     if ((m_aSize == null) || (exprs != null))
-      f.p ('{');
+      f.plain ('{');
     if (exprs != null)
     {
-      f.g (exprs);
+      f.generable (exprs);
     }
     else
     {
-      f.p (' ');
+      f.plain (' ');
     }
     if ((m_aSize == null) || (exprs != null))
-      f.p ('}');
+      f.plain ('}');
   }
 
 }

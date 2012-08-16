@@ -414,7 +414,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     {
       public void state (final JSFormatter f)
       {
-        f.p (source).nl ();
+        f.plain (source).nl ();
       }
     };
     add (s);
@@ -424,14 +424,14 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
   public void generate (final JSFormatter f)
   {
     if (m_bBracesRequired)
-      f.p ('{').nl ();
+      f.plain ('{').nl ();
     if (m_bIndentRequired)
-      f.i ();
+      f.indent ();
     generateBody (f);
     if (m_bIndentRequired)
-      f.o ();
+      f.outdent ();
     if (m_bBracesRequired)
-      f.p ('}');
+      f.plain ('}');
   }
 
   void generateBody (final JSFormatter f)
@@ -439,9 +439,9 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
     for (final Object o : content)
     {
       if (o instanceof IJSDeclaration)
-        f.d ((IJSDeclaration) o);
+        f.decl ((IJSDeclaration) o);
       else
-        f.s ((IJSStatement) o);
+        f.stmt ((IJSStatement) o);
     }
   }
 
@@ -459,7 +459,7 @@ public final class JSSBlock implements IJSGenerable, IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.g (this);
+    f.generable (this);
     if (m_bBracesRequired)
       f.nl ();
   }

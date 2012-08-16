@@ -78,11 +78,11 @@ public class JSTryBlock implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.p ("try").g (body);
+    f.plain ("try").generable (body);
     for (final JSCatchBlock cb : catches)
-      f.g (cb);
+      f.generable (cb);
     if (_finally != null)
-      f.p ("finally").g (_finally);
+      f.plain ("finally").generable (_finally);
     f.nl ();
   }
 

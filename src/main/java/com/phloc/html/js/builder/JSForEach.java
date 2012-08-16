@@ -79,13 +79,13 @@ public final class JSForEach implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.p ("for (");
-    f.g (type).id (var).p (": ").g (m_aCollection);
-    f.p (')');
+    f.plain ("for (");
+    f.generable (type).id (var).plain (": ").generable (m_aCollection);
+    f.plain (')');
     if (body != null)
-      f.g (body).nl ();
+      f.generable (body).nl ();
     else
-      f.p (';').nl ();
+      f.plain (';').nl ();
   }
 
 }

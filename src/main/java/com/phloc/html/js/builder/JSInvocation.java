@@ -181,12 +181,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     if (m_bIsConstructor && m_aType.isArray ())
     {
       // [RESULT] new T[]{arg1,arg2,arg3,...};
-      f.p ("new").g (m_aType).p ('{');
+      f.plain ("new").generable (m_aType).plain ('{');
     }
     else
     {
       if (m_bIsConstructor)
-        f.p ("new").g (m_aType).p ('(');
+        f.plain ("new").generable (m_aType).plain ('(');
       else
       {
         String name = this.m_sName;
@@ -194,22 +194,22 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
           name = this.m_aMethod.name ();
 
         if (m_aObject != null)
-          f.g (m_aObject).p ('.').p (name).p ('(');
+          f.generable (m_aObject).plain ('.').plain (name).plain ('(');
         else
-          f.id (name).p ('(');
+          f.id (name).plain ('(');
       }
     }
 
-    f.g (args);
+    f.generable (args);
 
     if (m_bIsConstructor && m_aType.isArray ())
-      f.p ('}');
+      f.plain ('}');
     else
-      f.p (')');
+      f.plain (')');
   }
 
   public void state (final JSFormatter f)
   {
-    f.g (this).p (';').nl ();
+    f.generable (this).plain (';').nl ();
   }
 }

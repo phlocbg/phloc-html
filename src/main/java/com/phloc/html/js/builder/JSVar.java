@@ -73,9 +73,9 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    */
   JSVar (final AbstractJSType type, final String name, final IJSExpression init)
   {
-    this.m_aType = type;
-    this.m_sName = name;
-    this.m_aInit = init;
+    m_aType = type;
+    m_sName = name;
+    m_aInit = init;
   }
 
   /**
@@ -86,7 +86,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
    */
   public JSVar init (final IJSExpression init)
   {
-    this.m_aInit = init;
+    m_aInit = init;
     return this;
   }
 
@@ -107,7 +107,7 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
   {
     if (!JSNameChecker.isJSIdentifier (name))
       throw new IllegalArgumentException ();
-    this.m_sName = name;
+    m_sName = name;
   }
 
   /**
@@ -138,14 +138,14 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
 
   public void bind (final JSFormatter f)
   {
-    f.g (m_aType).id (m_sName);
+    f.generable (m_aType).id (m_sName);
     if (m_aInit != null)
-      f.p ('=').g (m_aInit);
+      f.plain ('=').generable (m_aInit);
   }
 
   public void declare (final JSFormatter f)
   {
-    f.b (this).p (';').nl ();
+    f.var (this).plain (';').nl ();
   }
 
   public void generate (final JSFormatter f)

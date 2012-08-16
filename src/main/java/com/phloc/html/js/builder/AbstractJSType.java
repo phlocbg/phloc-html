@@ -102,14 +102,6 @@ public abstract class AbstractJSType implements IJSGenerable, Comparable <Abstra
   }
 
   /**
-   * Returns the erasure of this type.
-   */
-  public AbstractJSType erasure ()
-  {
-    return this;
-  }
-
-  /**
    * Returns true if this is a referenced type.
    */
   public final boolean isReference ()

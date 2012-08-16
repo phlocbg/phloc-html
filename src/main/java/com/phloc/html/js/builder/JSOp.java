@@ -80,9 +80,9 @@ public final class JSOp
     public void generate (final JSFormatter f)
     {
       if (opFirst)
-        f.p ('(').p (m_sOp).g (m_aExpr).p (')');
+        f.plain ('(').plain (m_sOp).generable (m_aExpr).plain (')');
       else
-        f.p ('(').g (m_aExpr).p (m_sOp).p (')');
+        f.plain ('(').generable (m_aExpr).plain (m_sOp).plain (')');
     }
 
   }
@@ -125,9 +125,9 @@ public final class JSOp
     public void generate (final JSFormatter f)
     {
       if (opFirst)
-        f.p (m_sOp).g (m_aExpr);
+        f.plain (m_sOp).generable (m_aExpr);
       else
-        f.g (m_aExpr).p (m_sOp);
+        f.generable (m_aExpr).plain (m_sOp);
     }
   }
 
@@ -163,7 +163,7 @@ public final class JSOp
 
     public void generate (final JSFormatter f)
     {
-      f.p ('(').g (m_aLeft).p (m_sOp).g (m_aRight).p (')');
+      f.plain ('(').generable (m_aLeft).plain (m_sOp).generable (m_aRight).plain (')');
     }
   }
 
@@ -317,7 +317,7 @@ public final class JSOp
 
     public void generate (final JSFormatter f)
     {
-      f.p ('(').g (m_aExpr1).p (m_sOp1).g (m_aExpr2).p (m_sOp2).g (m_aExpr3).p (')');
+      f.plain ('(').generable (m_aExpr1).plain (m_sOp1).generable (m_aExpr2).plain (m_sOp2).generable (m_aExpr3).plain (')');
     }
   }
 

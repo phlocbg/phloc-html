@@ -84,11 +84,11 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
 
     if (m_aObject != null)
     {
-      f.g (m_aObject).p ('.').p (name);
+      f.generable (m_aObject).plain ('.').plain (name);
     }
     else
     {
-      f.p ("this.").p (name);
+      f.plain ("this.").plain (name);
     }
   }
 
