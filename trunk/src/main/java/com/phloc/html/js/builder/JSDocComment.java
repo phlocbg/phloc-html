@@ -43,6 +43,8 @@ package com.phloc.html.js.builder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 /**
  * JavaDoc comment.
  * <p>
@@ -56,24 +58,25 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
 {
   private static final String INDENT = " *     ";
 
-  /** list of @param tags */
-  private final Map <String, JSCommentPart> atParams = new HashMap <String, JSCommentPart> ();
+  /** list of @-param tags */
+  private final Map <String, JSCommentPart> m_aParams = new HashMap <String, JSCommentPart> ();
 
   /** list of xdoclets */
-  private final Map <String, Map <String, String>> atXdoclets = new HashMap <String, Map <String, String>> ();
+  private final Map <String, Map <String, String>> m_aXdoclets = new HashMap <String, Map <String, String>> ();
 
   /**
-   * The @return tag part.
+   * The @-return tag part.
    */
-  private JSCommentPart atReturn;
+  private JSCommentPart m_aReturn;
 
-  /** The @deprecated tag */
-  private JSCommentPart atDeprecated;
+  /** The @-deprecated tag */
+  private JSCommentPart m_aDeprecated;
 
   public JSDocComment ()
   {}
 
   @Override
+  @Nonnull
   public JSDocComment append (final Object o)
   {
     add (o);
@@ -83,17 +86,22 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
   /**
    * Append a text to a @param tag to the javadoc
    */
+  @Nonnull
   public JSCommentPart addParam (final String param)
   {
-    JSCommentPart p = atParams.get (param);
+    JSCommentPart p = m_aParams.get (param);
     if (p == null)
-      atParams.put (param, p = new JSCommentPart ());
+    {
+      p = new JSCommentPart ();
+      m_aParams.put (param, p);
+    }
     return p;
   }
 
   /**
    * Append a text to an @param tag.
    */
+  @Nonnull
   public JSCommentPart addParam (final JSVar param)
   {
     return addParam (param.name ());
@@ -102,42 +110,47 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
   /**
    * Appends a text to @return tag.
    */
+  @Nonnull
   public JSCommentPart addReturn ()
   {
-    if (atReturn == null)
-      atReturn = new JSCommentPart ();
-    return atReturn;
+    if (m_aReturn == null)
+      m_aReturn = new JSCommentPart ();
+    return m_aReturn;
   }
 
   /**
    * add an @deprecated tag to the javadoc, with the associated message.
    */
+  @Nonnull
   public JSCommentPart addDeprecated ()
   {
-    if (atDeprecated == null)
-      atDeprecated = new JSCommentPart ();
-    return atDeprecated;
+    if (m_aDeprecated == null)
+      m_aDeprecated = new JSCommentPart ();
+    return m_aDeprecated;
   }
 
   /**
    * add an xdoclet.
    */
+  @Nonnull
   public Map <String, String> addXdoclet (final String name)
   {
-    Map <String, String> p = atXdoclets.get (name);
+    Map <String, String> p = m_aXdoclets.get (name);
     if (p == null)
-      atXdoclets.put (name, p = new HashMap <String, String> ());
+    {
+      p = new HashMap <String, String> ();
+      m_aXdoclets.put (name, p);
+    }
     return p;
   }
 
   /**
    * add an xdoclet.
    */
+  @Nonnull
   public Map <String, String> addXdoclet (final String name, final Map <String, String> attributes)
   {
-    Map <String, String> p = atXdoclets.get (name);
-    if (p == null)
-      atXdoclets.put (name, p = new HashMap <String, String> ());
+    final Map <String, String> p = addXdoclet (name);
     p.putAll (attributes);
     return p;
   }
@@ -147,49 +160,47 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
    */
   public Map <String, String> addXdoclet (final String name, final String attribute, final String value)
   {
-    Map <String, String> p = atXdoclets.get (name);
-    if (p == null)
-      atXdoclets.put (name, p = new HashMap <String, String> ());
+    final Map <String, String> p = addXdoclet (name);
     p.put (attribute, value);
     return p;
   }
 
   public void generate (final JSFormatter f)
   {
-    // I realized that we can't use StringTokenizer because
-    // this will recognize multiple \n as one token.
-
     f.plain ("/**").nl ();
 
     format (f, " * ");
 
-    f.plain (" * ").nl ();
-    for (final Map.Entry <String, JSCommentPart> e : atParams.entrySet ())
+    if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXdoclets.isEmpty ())
     {
-      f.plain (" * @param ").plain (e.getKey ()).nl ();
-      e.getValue ().format (f, INDENT);
-    }
-    if (atReturn != null)
-    {
-      f.plain (" * @return").nl ();
-      atReturn.format (f, INDENT);
-    }
-    if (atDeprecated != null)
-    {
-      f.plain (" * @deprecated").nl ();
-      atDeprecated.format (f, INDENT);
-    }
-    for (final Map.Entry <String, Map <String, String>> e : atXdoclets.entrySet ())
-    {
-      f.plain (" * @").plain (e.getKey ());
-      if (e.getValue () != null)
+      f.plain (" * ").nl ();
+      for (final Map.Entry <String, JSCommentPart> e : m_aParams.entrySet ())
       {
-        for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
-        {
-          f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
-        }
+        f.plain (" * @param ").plain (e.getKey ()).nl ();
+        e.getValue ().format (f, INDENT);
       }
-      f.nl ();
+      if (m_aReturn != null)
+      {
+        f.plain (" * @return").nl ();
+        m_aReturn.format (f, INDENT);
+      }
+      if (m_aDeprecated != null)
+      {
+        f.plain (" * @deprecated").nl ();
+        m_aDeprecated.format (f, INDENT);
+      }
+      for (final Map.Entry <String, Map <String, String>> e : m_aXdoclets.entrySet ())
+      {
+        f.plain (" * @").plain (e.getKey ());
+        if (e.getValue () != null)
+        {
+          for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
+          {
+            f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
+          }
+        }
+        f.nl ();
+      }
     }
     f.plain (" */").nl ();
   }

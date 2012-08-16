@@ -41,7 +41,7 @@
 package com.phloc.html.js.builder;
 
 /**
- * Program elements that can have Javadoc
+ * Program elements that can have JSDoc
  * 
  * @author Jonas von Malottki
  */
@@ -50,5 +50,5 @@ public interface IJSDocCommentable
   /**
    * @return the JavaDoc of the Element
    */
-  JSDocComment javadoc ();
+  JSDocComment jsDoc ();
 }

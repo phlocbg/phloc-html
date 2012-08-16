@@ -18,10 +18,12 @@ public final class JSCodeModelTest
 
     {
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
+      aFuncMain.jsDoc ().add ("This is a global function");
       final JSVar m1 = aFuncMain.param ("m1");
       final JSVar aRoot = aFuncMain.body ().decl (aCM.NUMBER, "root", JSExpr.lit (5));
       final JSFunction aFunc = aFuncMain.body ().function ("add");
       {
+        aFunc.jsDoc ().add ("This is a nested function");
         final JSVar s1 = aFunc.param (aCM.STRING, "s1");
         final JSVar s2 = aFunc.param ("s2");
         aFunc.body ()._return (s1.plus (s2));

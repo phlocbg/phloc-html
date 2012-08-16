@@ -77,11 +77,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * javadoc comments for this JMethod
    */
-  private JSDocComment jdoc;
+  private JSDocComment m_aJSDoc;
 
   /**
    * JMethod constructor
-   *
+   * 
    * @param name
    *        Name of this method
    */
@@ -124,7 +124,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Returns the list of variable of this method.
-   *
+   * 
    * @return List of parameters of this method. This list is not modifiable.
    */
   @Nonnull
@@ -137,7 +137,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this method
    * signature.
-   *
+   * 
    * @param name
    *        Name of the parameter being added
    * @return New parameter variable
@@ -151,7 +151,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this method
    * signature.
-   *
+   * 
    * @param type
    *        JType of the parameter being added
    * @param name
@@ -168,7 +168,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Get the block that makes up body of this method
-   *
+   * 
    * @return Body of method
    */
   @Nonnull
@@ -181,22 +181,22 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
-   *
+   * 
    * @return JDocComment containing javadocs for this class
    */
   @Nonnull
-  public JSDocComment javadoc ()
+  public JSDocComment jsDoc ()
   {
-    if (jdoc == null)
-      jdoc = new JSDocComment ();
-    return jdoc;
+    if (m_aJSDoc == null)
+      m_aJSDoc = new JSDocComment ();
+    return m_aJSDoc;
   }
 
   @Override
   public void declare (@Nonnull final JSFormatter f)
   {
-    if (jdoc != null)
-      f.generatable (jdoc);
+    if (m_aJSDoc != null)
+      f.generatable (m_aJSDoc);
 
     f.plain ("function ");
     if (m_aType != null)

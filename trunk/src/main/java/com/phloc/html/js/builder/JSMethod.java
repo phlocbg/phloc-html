@@ -71,14 +71,14 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   /**
    * JBlock of statements that makes up the body this method
    */
-  private JSBlock body;
+  private JSBlock m_aBody;
 
   private final JSDefinedClass m_aOuter;
 
   /**
    * javadoc comments for this JMethod
    */
-  private JSDocComment jdoc;
+  private JSDocComment m_aJSDoc;
 
   /**
    * JMethod constructor
@@ -213,28 +213,29 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    */
   public JSBlock body ()
   {
-    if (body == null)
-      body = new JSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSBlock ();
+    return m_aBody;
   }
 
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
-   * @return JDocComment containing javadocs for this class
+   * @return {@link JSDocComment} containing javadocs for this class
    */
-  public JSDocComment javadoc ()
+  @Nonnull
+  public JSDocComment jsDoc ()
   {
-    if (jdoc == null)
-      jdoc = new JSDocComment ();
-    return jdoc;
+    if (m_aJSDoc == null)
+      m_aJSDoc = new JSDocComment ();
+    return m_aJSDoc;
   }
 
   @Override
   public void declare (final JSFormatter f)
   {
-    if (jdoc != null)
-      f.generatable (jdoc);
+    if (m_aJSDoc != null)
+      f.generatable (m_aJSDoc);
 
     f.generatable (m_aType);
     f.id (m_sName).plain ('(').indent ();
@@ -251,8 +252,8 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
 
     f.outdent ().plain (')');
 
-    if (body != null)
-      f.stmt (body);
+    if (m_aBody != null)
+      f.stmt (m_aBody);
     else
       f.stmt (new JSBlock ());
   }
