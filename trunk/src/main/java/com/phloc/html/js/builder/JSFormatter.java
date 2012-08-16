@@ -43,12 +43,15 @@ package com.phloc.html.js.builder;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * This is a utility class for managing indentation and other basic formatting
@@ -61,13 +64,13 @@ public final class JSFormatter
    * map from short type name to ReferenceList (list of JClass and ids sharing
    * that name)
    **/
-  private final HashMap <String, ReferenceList> m_aCollectedReferences;
+  private final Map <String, ReferenceList> m_aCollectedReferences = new HashMap <String, ReferenceList> ();
 
   /**
    * set of imported types (including package java types, eventhough we won't
    * generate imports for them)
    */
-  private final HashSet <AbstractJSClass> m_aImportedClasses;
+  private final Set <AbstractJSClass> m_aImportedClasses = new HashSet <AbstractJSClass> ();
 
   private static enum Mode
   {
@@ -115,9 +118,6 @@ public final class JSFormatter
   {
     m_aPW = s;
     m_sIndentSpace = space;
-    m_aCollectedReferences = new HashMap <String, ReferenceList> ();
-    // ids = new HashSet<String>();
-    m_aImportedClasses = new HashSet <AbstractJSClass> ();
   }
 
   /**
@@ -177,13 +177,6 @@ public final class JSFormatter
       return true;
     if (c1 == ';')
       return true;
-    if (c1 == CLOSE_TYPE_ARGS)
-    {
-      // e.g., "public Foo<Bar> test;"
-      if (c2 == '(') // but not "new Foo<Bar>()"
-        return false;
-      return true;
-    }
     if ((c1 == ')') && (c2 == '{'))
       return true;
     if ((c1 == ',') || (c1 == '='))
@@ -258,15 +251,8 @@ public final class JSFormatter
   {
     if (mode == Mode.PRINTING)
     {
-      if (c == CLOSE_TYPE_ARGS)
-      {
-        m_aPW.print ('>');
-      }
-      else
-      {
-        _spaceIfNeeded (c);
-        m_aPW.print (c);
-      }
+      _spaceIfNeeded (c);
+      m_aPW.print (c);
       lastChar = c;
     }
     return this;
@@ -502,8 +488,7 @@ public final class JSFormatter
     }
 
     // generate import statements
-    final AbstractJSClass [] imports = m_aImportedClasses.toArray (new AbstractJSClass [m_aImportedClasses.size ()]);
-    Arrays.sort (imports);
+    final List <AbstractJSClass> imports = ContainerHelper.getSorted (m_aImportedClasses);
     for (final AbstractJSClass clazz : imports)
     {
       // suppress import statements for primitive types, built-in types,
@@ -551,14 +536,6 @@ public final class JSFormatter
   }
 
   private JSPackage javaLang;
-
-  /**
-   * Special character token we use to differenciate '>' as an operator and '>'
-   * as the end of the type arguments. The former uses '>' and it requires a
-   * preceding whitespace. The latter uses this, and it does not have a
-   * preceding whitespace.
-   */
-  /* package */static final char CLOSE_TYPE_ARGS = '\uFFFF';
 
   /**
    * Used during the optimization of class imports. List of

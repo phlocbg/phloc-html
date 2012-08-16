@@ -168,14 +168,24 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
     return JSOp.eq (this, right);
   }
 
+  public final IJSExpression eeq (final IJSExpression right)
+  {
+    return JSOp.eeq (this, right);
+  }
+
   public final IJSExpression ne (final IJSExpression right)
   {
     return JSOp.ne (this, right);
   }
 
-  public final IJSExpression _instanceof (final AbstractJSType right)
+  public final IJSExpression ene (final IJSExpression right)
   {
-    return JSOp._instanceof (this, right);
+    return JSOp.ene (this, right);
+  }
+
+  public final IJSExpression typeof ()
+  {
+    return JSOp.typeof (this);
   }
 
   //

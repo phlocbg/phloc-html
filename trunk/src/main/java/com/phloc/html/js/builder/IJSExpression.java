@@ -80,6 +80,11 @@ public interface IJSExpression extends IJSGenerable
   IJSExpression decr ();
 
   /**
+   * Returns "typeof [this]"
+   */
+  IJSExpression typeof ();
+
+  /**
    * Returns "[this]+[right]"
    */
   IJSExpression plus (IJSExpression right);
@@ -143,12 +148,11 @@ public interface IJSExpression extends IJSGenerable
 
   IJSExpression eq (IJSExpression right);
 
+  IJSExpression eeq (IJSExpression right);
+
   IJSExpression ne (IJSExpression right);
 
-  /**
-   * Returns "[this] instanceof [right]"
-   */
-  IJSExpression _instanceof (AbstractJSType right);
+  IJSExpression ene (IJSExpression right);
 
   /**
    * Returns "[this].[method]". Arguments shall be added to the returned
