@@ -101,7 +101,6 @@
         <configuration>
           <excludes>
             <exclude>src/main/resources/html/**</exclude>
-            <exclude>src/main/resources/swfobject/**</exclude>
           </excludes>
         </configuration>
       </plugin>

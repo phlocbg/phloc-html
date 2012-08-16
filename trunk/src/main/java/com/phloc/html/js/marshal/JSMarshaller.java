@@ -35,6 +35,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
+import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.json.IJSON;
 
@@ -47,7 +48,8 @@ import com.phloc.json.IJSON;
 @Immutable
 public final class JSMarshaller
 {
-  public static final String KEYWORD_NULL = "null";
+  @Deprecated
+  public static final String KEYWORD_NULL = CJS.JS_NULL;
   private static final Logger s_aLogger = LoggerFactory.getLogger (JSMarshaller.class);
   private static final char [] CHARS_TO_MASK = new char [] { '"', '\'', '\\', '/', '\t', '\r', '\n', '\f' };
   private static final char MASK_CHAR = '\\';
@@ -242,7 +244,7 @@ public final class JSMarshaller
                                    final boolean bWithSurroundingVar)
   {
     if (aObject == null)
-      aSB.append (KEYWORD_NULL);
+      aSB.append (CJS.JS_NULL);
     else
     {
       switch (aType.getType ())

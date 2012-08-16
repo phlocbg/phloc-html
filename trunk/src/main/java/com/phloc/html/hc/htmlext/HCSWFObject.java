@@ -31,6 +31,7 @@ import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.impl.AbstractWrappedHCNode;
 import com.phloc.html.hc.impl.HCNodeList;
+import com.phloc.html.js.CJS;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
@@ -324,7 +325,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
     if (m_aExpressInstallSWFURL != null)
       aJS.append ('"').appendEscaped (m_aExpressInstallSWFURL.getAsString ()).append ('"');
     else
-      aJS.append (JSMarshaller.KEYWORD_NULL);
+      aJS.append (CJS.JS_NULL);
     aJS.append (", flashvars, params, attributes);\n");
 
     final HCNodeList ret = new HCNodeList ();
