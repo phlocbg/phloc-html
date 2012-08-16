@@ -80,13 +80,18 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSCodeModel
 {
+  public final JSPrimitiveType ARGUMENTS = new JSPrimitiveType (this, "Arguments");
   public final JSPrimitiveType ARRAY = new JSPrimitiveType (this, "Array");
   public final JSPrimitiveType BOOLEAN = new JSPrimitiveType (this, "Boolean");
   public final JSPrimitiveType DATE = new JSPrimitiveType (this, "Date");
   public final JSPrimitiveType ERROR = new JSPrimitiveType (this, "Error");
+  public final JSPrimitiveType FUNCTION = new JSPrimitiveType (this, "Function");
+  public final JSPrimitiveType JSON = new JSPrimitiveType (this, "JSON");
   public final JSPrimitiveType MATH = new JSPrimitiveType (this, "Math");
-  public final JSPrimitiveType NUMBER = new JSPrimitiveType (this, "number");
-  public final JSPrimitiveType STRING = new JSPrimitiveType (this, "string");
+  public final JSPrimitiveType NUMBER = new JSPrimitiveType (this, "Number");
+  public final JSPrimitiveType OBJECT = new JSPrimitiveType (this, "Object");
+  public final JSPrimitiveType REGEXP = new JSPrimitiveType (this, "RegExp");
+  public final JSPrimitiveType STRING = new JSPrimitiveType (this, "String");
 
   /** The packages that this JCodeWriter contains. */
   private final HashMap <String, JSPackage> m_aPackages = new HashMap <String, JSPackage> ();
@@ -112,6 +117,7 @@ public final class JSCodeModel
     return p;
   }
 
+  @Nonnull
   public JSPackage rootPackage ()
   {
     return _package ("");
@@ -130,6 +136,7 @@ public final class JSCodeModel
    * @exception JSNameAlreadyExistsException
    *            When the specified class/interface was already created.
    */
+  @Nonnull
   public JSDefinedClass _class (final String fullyqualifiedName) throws JSNameAlreadyExistsException
   {
     final int idx = fullyqualifiedName.lastIndexOf ('.');
@@ -139,27 +146,13 @@ public final class JSCodeModel
   }
 
   /**
-   * Gets a reference to the already created generated class.
-   * 
-   * @return null If the class is not yet created.
-   * @see JSPackage#getClass(String)
-   */
-  public JSDefinedClass _getClass (final String fullyQualifiedName)
-  {
-    final int idx = fullyQualifiedName.lastIndexOf ('.');
-    if (idx < 0)
-      return rootPackage ().getClass (fullyQualifiedName);
-    return _package (fullyQualifiedName.substring (0, idx)).getClass (fullyQualifiedName.substring (idx + 1));
-  }
-
-  /**
    * Returns the number of files to be generated
    */
   public int countArtifacts ()
   {
-    int r = 0;
+    int ret = 0;
     for (final JSPackage pkg : packages ())
-      r += pkg.countArtifacts ();
-    return r;
+      ret += pkg.countArtifacts ();
+    return ret;
   }
 }

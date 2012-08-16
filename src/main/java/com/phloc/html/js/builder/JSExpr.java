@@ -84,41 +84,49 @@ public final class JSExpr
     return new JSInvocation ((IJSExpression) null, method);
   }
 
+  @Nonnull
   public static JSInvocation invoke (final JSMethod method)
   {
     return new JSInvocation ((IJSExpression) null, method);
   }
 
+  @Nonnull
   public static JSInvocation invoke (@Nullable final IJSExpression lhs, final String method)
   {
     return new JSInvocation (lhs, method);
   }
 
+  @Nonnull
   public static JSInvocation invoke (@Nullable final IJSExpression lhs, final JSMethod method)
   {
     return new JSInvocation (lhs, method);
   }
 
+  @Nonnull
   public static JSInvocation invoke (final JSFunction function)
   {
     return new JSInvocation (function);
   }
 
+  @Nonnull
   public static JSFieldRef ref (final String field)
   {
     return new JSFieldRef ((IJSExpression) null, field);
   }
 
+  @Nonnull
   public static JSFieldRef ref (final IJSExpression lhs, final JSVar field)
   {
     return new JSFieldRef (lhs, field);
   }
 
+  @Nonnull
   public static JSFieldRef ref (final IJSExpression lhs, final String field)
   {
     return new JSFieldRef (lhs, field);
   }
 
+  @Nonnull
   public static JSArrayCompRef component (final IJSExpression lhs, final IJSExpression index)
   {
     return new JSArrayCompRef (lhs, index);
@@ -185,38 +193,38 @@ public final class JSExpr
   /**
    * Boolean constant that represents <code>true</code>
    */
-  public static final IJSExpression TRUE = new JSAtom ("true");
+  public static final JSAtom TRUE = new JSAtom ("true");
 
   /**
    * Boolean constant that represents <code>false</code>
    */
-  public static final IJSExpression FALSE = new JSAtom ("false");
+  public static final JSAtom FALSE = new JSAtom ("false");
 
   /**
    * Boolean constant that represents <code>undefined</code>
    */
-  public static final IJSExpression UNDEFINED = new JSAtom ("undefined");
+  public static final JSAtom UNDEFINED = new JSAtom ("undefined");
 
   @Nonnull
-  public static IJSExpression lit (final boolean b)
+  public static JSAtom lit (final boolean b)
   {
     return b ? TRUE : FALSE;
   }
 
   @Nonnull
-  public static IJSExpression lit (final int n)
+  public static JSAtom lit (final int n)
   {
     return new JSAtom (Integer.toString (n));
   }
 
   @Nonnull
-  public static IJSExpression lit (final long n)
+  public static JSAtom lit (final long n)
   {
     return new JSAtom (Long.toString (n));
   }
 
   @Nonnull
-  public static IJSExpression lit (final float f)
+  public static JSAtom lit (final float f)
   {
     if (Float.isNaN (f))
       return new JSAtom ("Number.NaN");
@@ -224,7 +232,7 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static IJSExpression lit (final double d)
+  public static JSAtom lit (final double d)
   {
     if (Double.isNaN (d))
       return new JSAtom ("Number.NaN");
@@ -232,15 +240,21 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static IJSExpression lit (final char c)
+  public static JSStringLiteral lit (final char c)
   {
     return new JSStringLiteral (Character.toString (c));
   }
 
   @Nonnull
-  public static IJSExpression lit (final String s)
+  public static JSStringLiteral lit (final String s)
   {
     return new JSStringLiteral (s);
+  }
+
+  @Nonnull
+  public static JSRegExLiteral regex (final String s)
+  {
+    return new JSRegExLiteral (s);
   }
 
   /**

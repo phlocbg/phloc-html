@@ -16,24 +16,27 @@ public final class JSCodeModelTest
     final JSCodeModel aCM = new JSCodeModel ();
     final JSPackage aPkg = aCM.rootPackage ();
 
-    final JSFunction aFuncMain = aPkg.function ("mainAdd");
-    final JSVar m1 = aFuncMain.param ("m1");
-    final JSVar aRoot = aFuncMain.body ().decl (aCM.NUMBER, "root", JSExpr.lit (5));
-    final JSFunction aFunc = aFuncMain.body ().function ("add");
     {
-      final JSVar s1 = aFunc.param (aCM.STRING, "s1");
-      final JSVar s2 = aFunc.param ("s2");
-      aFunc.body ()._return (s1.plus (s2));
+      final JSFunction aFuncMain = aPkg.function ("mainAdd");
+      final JSVar m1 = aFuncMain.param ("m1");
+      final JSVar aRoot = aFuncMain.body ().decl (aCM.NUMBER, "root", JSExpr.lit (5));
+      final JSFunction aFunc = aFuncMain.body ().function ("add");
+      {
+        final JSVar s1 = aFunc.param (aCM.STRING, "s1");
+        final JSVar s2 = aFunc.param ("s2");
+        aFunc.body ()._return (s1.plus (s2));
+      }
+      final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
+      final JSTryBlock aTB = aCond._then ()._try ();
+      aTB.body ()._return (JSExpr.lit (5));
+      final JSCatchBlock aCB = aTB._catch ("ex");
+      aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
+      aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
+      aFuncMain.body ().add (JSExpr.regex ("water(mark)?").caseInsensitive (true).invoke ("test").arg ("watermark"));
+      aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
+                                                .ref ("length")
+                                                .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
     }
-    final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
-    final JSTryBlock aTB = aCond._then ()._try ();
-    aTB.body ()._return (JSExpr.lit (5));
-    final JSCatchBlock aCB = aTB._catch ("ex");
-    aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
-    aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
-    aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
-                                              .ref ("length")
-                                              .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
 
     new AbstractCodeWriter ("UTF-8")
     {

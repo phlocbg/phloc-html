@@ -40,24 +40,72 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
- * String literal.
+ * RegEx literal.
  * 
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ * @author philip
  */
-public class JSStringLiteral extends AbstractJSExpressionImpl
+public class JSRegExLiteral extends AbstractJSExpressionImpl
 {
   private final String m_sStr;
+  private boolean m_bGlobal = false;
+  private boolean m_bCaseInsensitive = false;
+  private boolean m_bMultiLine = false;
 
-  JSStringLiteral (final String what)
+  JSRegExLiteral (final String what)
   {
     m_sStr = what;
   }
 
+  public boolean global ()
+  {
+    return m_bGlobal;
+  }
+
+  @Nonnull
+  public JSRegExLiteral global (final boolean bGlobal)
+  {
+    m_bGlobal = bGlobal;
+    return this;
+  }
+
+  public boolean caseInsensitive ()
+  {
+    return m_bCaseInsensitive;
+  }
+
+  @Nonnull
+  public JSRegExLiteral caseInsensitive (final boolean bCaseInsensitive)
+  {
+    m_bCaseInsensitive = bCaseInsensitive;
+    return this;
+  }
+
+  public boolean multiLine ()
+  {
+    return m_bMultiLine;
+  }
+
+  @Nonnull
+  public JSRegExLiteral multiLine (final boolean bMultiLine)
+  {
+    m_bMultiLine = bMultiLine;
+    return this;
+  }
+
   public void generate (final JSFormatter f)
   {
-    f.plain ('\'').plain (JSMarshaller.javaScriptEscape (m_sStr)).plain ('\'');
+    // TODO masking does not fit
+    f.plain ('/').plain (JSMarshaller.javaScriptEscape (m_sStr)).plain ('/');
+    if (m_bGlobal)
+      f.plain ('g');
+    if (m_bCaseInsensitive)
+      f.plain ('i');
+    if (m_bMultiLine)
+      f.plain ('m');
   }
 }
