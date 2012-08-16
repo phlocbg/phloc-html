@@ -40,10 +40,12 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Common interface for code components that can generate uses of themselves.
  */
 public interface IJSGenerable
 {
-  void generate (JSFormatter f);
+  void generate (@Nonnull JSFormatter f);
 }

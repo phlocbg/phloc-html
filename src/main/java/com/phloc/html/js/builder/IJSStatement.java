@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Common interface for code components that can generate uses of themselves as
  * statements.
@@ -47,7 +49,5 @@ package com.phloc.html.js.builder;
 
 public interface IJSStatement
 {
-
-  public void state (JSFormatter f);
-
+  void state (@Nonnull JSFormatter f);
 }
