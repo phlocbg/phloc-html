@@ -65,6 +65,6 @@ final class JSContinue implements IJSStatement
     if (m_aLabel == null)
       f.plain ("continue;").nl ();
     else
-      f.plain ("continue").plain (m_aLabel.label).plain (';').nl ();
+      f.plain ("continue").plain (m_aLabel.m_sLabel).plain (';').nl ();
   }
 }

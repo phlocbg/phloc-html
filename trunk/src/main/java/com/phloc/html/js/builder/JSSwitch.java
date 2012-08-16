@@ -41,15 +41,18 @@
 package com.phloc.html.js.builder;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * Switch statement
  */
 public final class JSSwitch implements IJSStatement
 {
-
   /**
    * Test part of switch statement.
    */
@@ -58,45 +61,50 @@ public final class JSSwitch implements IJSStatement
   /**
    * vector of JCases.
    */
-  private final List <JSCase> cases = new ArrayList <JSCase> ();
+  private final List <JSCase> m_aCases = new ArrayList <JSCase> ();
 
   /**
    * a single default case
    */
-  private JSCase defaultCase = null;
+  private JSCase m_aDefaultCase;
 
   /**
    * Construct a While statment
    */
-  JSSwitch (final IJSExpression test)
+  JSSwitch (@Nonnull final IJSExpression test)
   {
-    this.m_aTest = test;
+    m_aTest = test;
   }
 
+  @Nonnull
   public IJSExpression test ()
   {
     return m_aTest;
   }
 
-  public Iterator <JSCase> cases ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <JSCase> cases ()
   {
-    return cases.iterator ();
+    return ContainerHelper.newList (m_aCases);
   }
 
+  @Nonnull
   public JSCase _case (final IJSExpression label)
   {
     final JSCase c = new JSCase (label);
-    cases.add (c);
+    m_aCases.add (c);
     return c;
   }
 
+  @Nonnull
   public JSCase _default ()
   {
     // what if (default != null) ???
 
     // default cases statements don't have a label
-    defaultCase = new JSCase (null, true);
-    return defaultCase;
+    m_aDefaultCase = new JSCase (null, true);
+    return m_aDefaultCase;
   }
 
   public void state (final JSFormatter f)
@@ -109,11 +117,10 @@ public final class JSSwitch implements IJSStatement
     {
       f.plain ("switch (").generatable (m_aTest).plain (')').plain (" {").nl ();
     }
-    for (final JSCase c : cases)
+    for (final JSCase c : m_aCases)
       f.stmt (c);
-    if (defaultCase != null)
-      f.stmt (defaultCase);
+    if (m_aDefaultCase != null)
+      f.stmt (m_aDefaultCase);
     f.plain ('}').nl ();
   }
-
 }

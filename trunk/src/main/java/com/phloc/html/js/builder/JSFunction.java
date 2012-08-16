@@ -62,7 +62,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Name of this method
    */
-  private String m_sName = null;
+  private String m_sName;
 
   /**
    * List of parameters for this method's declaration
@@ -72,16 +72,16 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * JBlock of statements that makes up the body this method
    */
-  private JSBlock m_aBody = null;
+  private JSBlock m_aBody;
 
   /**
    * javadoc comments for this JMethod
    */
-  private JSDocComment jdoc = null;
+  private JSDocComment jdoc;
 
   /**
    * JMethod constructor
-   * 
+   *
    * @param name
    *        Name of this method
    */
@@ -124,7 +124,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Returns the list of variable of this method.
-   * 
+   *
    * @return List of parameters of this method. This list is not modifiable.
    */
   @Nonnull
@@ -137,7 +137,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this method
    * signature.
-   * 
+   *
    * @param name
    *        Name of the parameter being added
    * @return New parameter variable
@@ -151,7 +151,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this method
    * signature.
-   * 
+   *
    * @param type
    *        JType of the parameter being added
    * @param name
@@ -168,20 +168,20 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Get the block that makes up body of this method
-   * 
+   *
    * @return Body of method
    */
   @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSBlock (true, true);
+      m_aBody = new JSBlock ();
     return m_aBody;
   }
 
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
-   * 
+   *
    * @return JDocComment containing javadocs for this class
    */
   @Nonnull

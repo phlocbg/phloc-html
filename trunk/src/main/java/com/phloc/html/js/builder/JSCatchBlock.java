@@ -48,12 +48,13 @@ import javax.annotation.Nonnull;
 public class JSCatchBlock implements IJSGeneratable
 {
   private JSVar m_aVar;
-  private final JSBlock m_aBody = new JSBlock (true, true);
+  private final JSBlock m_aBody = new JSBlock ();
 
   JSCatchBlock ()
   {}
 
-  public JSVar param (final String name)
+  @Nonnull
+  public JSVar param (@Nonnull final String name)
   {
     if (m_aVar != null)
       throw new IllegalStateException ();

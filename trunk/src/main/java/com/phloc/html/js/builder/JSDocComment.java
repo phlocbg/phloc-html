@@ -65,10 +65,10 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
   /**
    * The @return tag part.
    */
-  private JSCommentPart atReturn = null;
+  private JSCommentPart atReturn;
 
   /** The @deprecated tag */
-  private JSCommentPart atDeprecated = null;
+  private JSCommentPart atDeprecated;
 
   public JSDocComment ()
   {}

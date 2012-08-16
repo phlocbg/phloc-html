@@ -40,6 +40,10 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.Nonempty;
+
 /**
  * Label that can be used for continue and break.
  * 
@@ -47,8 +51,7 @@ package com.phloc.html.js.builder;
  */
 public class JSLabel implements IJSStatement
 {
-
-  final String label;
+  final String m_sLabel;
 
   /**
    * JBreak constructor
@@ -56,14 +59,13 @@ public class JSLabel implements IJSStatement
    * @param _label
    *        break label or null.
    */
-  JSLabel (final String _label)
+  JSLabel (@Nonnull @Nonempty final String _label)
   {
-    this.label = _label;
+    m_sLabel = _label;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain (label + ':').nl ();
+    f.plain (m_sLabel + ':').nl ();
   }
-
 }

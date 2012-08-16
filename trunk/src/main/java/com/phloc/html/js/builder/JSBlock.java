@@ -46,6 +46,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
@@ -78,7 +79,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
 
   public JSBlock ()
   {
-    this (false, false);
+    this (true, true);
   }
 
   public JSBlock (final boolean bracesRequired, final boolean indentRequired)
@@ -330,7 +331,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * Create a switch/case statement and add it to this block
    */
   @Nonnull
-  public JSSwitch _switch (final IJSExpression test)
+  public JSSwitch _switch (@Nonnull final IJSExpression test)
   {
     return _insert (new JSSwitch (test));
   }
@@ -398,7 +399,8 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * Create a label, which can be referenced from <code>continue</code> and
    * <code>break</code> statements.
    */
-  public JSLabel label (final String name)
+  @Nonnull
+  public JSLabel label (@Nonnull @Nonempty final String name)
   {
     final JSLabel l = new JSLabel (name);
     _insert (l);

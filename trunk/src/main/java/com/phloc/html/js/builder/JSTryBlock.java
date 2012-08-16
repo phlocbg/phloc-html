@@ -48,7 +48,7 @@ import javax.annotation.Nonnull;
 
 public class JSTryBlock implements IJSStatement
 {
-  private final JSBlock body = new JSBlock (true, true);
+  private final JSBlock body = new JSBlock ();
   private JSCatchBlock _catch;
   private JSBlock _finally;
 
@@ -73,7 +73,7 @@ public class JSTryBlock implements IJSStatement
   public JSBlock _finally ()
   {
     if (_finally == null)
-      _finally = new JSBlock (true, true);
+      _finally = new JSBlock ();
     return _finally;
   }
 
@@ -81,6 +81,7 @@ public class JSTryBlock implements IJSStatement
   {
     if (_catch == null && _finally == null)
     {
+      // no try when there is no catch and no finally
       f.generatable (body);
     }
     else

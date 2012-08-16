@@ -54,7 +54,7 @@ public class JSWhileLoop implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSBlock body = null;
+  private JSBlock body;
 
   /**
    * Construct a While statment

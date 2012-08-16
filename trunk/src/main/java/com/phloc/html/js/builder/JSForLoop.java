@@ -75,7 +75,7 @@ public class JSForLoop implements IJSStatement
 
   public void test (final IJSExpression e)
   {
-    this.m_aTest = e;
+    m_aTest = e;
   }
 
   public void update (final IJSExpression e)
@@ -83,6 +83,7 @@ public class JSForLoop implements IJSStatement
     m_aUpdates.add (e);
   }
 
+  @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)
