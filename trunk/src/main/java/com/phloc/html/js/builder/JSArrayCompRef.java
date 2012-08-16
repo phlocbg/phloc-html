@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * array component reference.
  */
@@ -63,28 +65,28 @@ final class JSArrayCompRef extends AbstractJSExpressionImpl implements IJSAssign
    * @param index
    *        JExpression for index of component to access
    */
-  JSArrayCompRef (final IJSExpression array, final IJSExpression index)
+  JSArrayCompRef (@Nonnull final IJSExpression array, @Nonnull final IJSExpression index)
   {
-    if ((array == null) || (index == null))
-    {
+    if (array == null || index == null)
       throw new NullPointerException ();
-    }
-    this.m_aArray = array;
-    this.m_aIndex = index;
+    m_aArray = array;
+    m_aIndex = index;
+  }
+
+  @Nonnull
+  public IJSExpression assign (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assign (this, rhs);
+  }
+
+  @Nonnull
+  public IJSExpression assignPlus (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignPlus (this, rhs);
   }
 
   public void generate (final JSFormatter f)
   {
     f.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
-  }
-
-  public IJSExpression assign (final IJSExpression rhs)
-  {
-    return JSExpr.assign (this, rhs);
-  }
-
-  public IJSExpression assignPlus (final IJSExpression rhs)
-  {
-    return JSExpr.assignPlus (this, rhs);
   }
 }

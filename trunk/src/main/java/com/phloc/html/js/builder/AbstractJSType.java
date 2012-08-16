@@ -44,7 +44,7 @@ package com.phloc.html.js.builder;
  * A representation of a type in codeModel. A type is always a reference type (
  * {@link AbstractJSClass}).
  */
-public abstract class AbstractJSType implements IJSGeneratable, Comparable <AbstractJSType>, IJSHasOwner
+public abstract class AbstractJSType implements IJSGeneratable, Comparable <AbstractJSType>
 {
   /**
    * Gets the full name of the type. See
@@ -76,22 +76,6 @@ public abstract class AbstractJSType implements IJSGeneratable, Comparable <Abst
   public boolean isArray ()
   {
     return false;
-  }
-
-  /**
-   * Tell whether or not this is a built-in primitive type, such as int or void.
-   */
-  public boolean isPrimitive ()
-  {
-    return false;
-  }
-
-  /**
-   * Returns true if this is a referenced type.
-   */
-  public final boolean isReference ()
-  {
-    return !isPrimitive ();
   }
 
   /**

@@ -70,6 +70,14 @@ public class JSTryBlock implements IJSStatement
   }
 
   @Nonnull
+  public JSCatchBlock _catch (final String name)
+  {
+    if (_catch == null)
+      _catch = new JSCatchBlock (name);
+    return _catch;
+  }
+
+  @Nonnull
   public JSBlock _finally ()
   {
     if (_finally == null)
