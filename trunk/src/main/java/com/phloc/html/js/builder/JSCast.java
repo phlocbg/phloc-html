@@ -73,6 +73,6 @@ final class JSCast extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    f.plain ("((").generable (m_aType).plain (')').generable (m_aObject).plain (')');
+    f.plain ("((").generatable (m_aType).plain (')').generatable (m_aObject).plain (')');
   }
 }

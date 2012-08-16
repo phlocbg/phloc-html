@@ -45,7 +45,7 @@ import javax.annotation.Nonnull;
 /**
  * Common interface for code components that can generate uses of themselves.
  */
-public interface IJSGenerable
+public interface IJSGeneratable
 {
   void generate (@Nonnull JSFormatter f);
 }

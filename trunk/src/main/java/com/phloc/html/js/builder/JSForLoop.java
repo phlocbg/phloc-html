@@ -55,7 +55,7 @@ public class JSForLoop implements IJSStatement
   private final List <Object> m_aInits = new ArrayList <Object> ();
   private IJSExpression m_aTest;
   private final List <IJSExpression> m_aUpdates = new ArrayList <IJSExpression> ();
-  private JSSBlock m_aBody;
+  private JSBlock m_aBody;
 
   JSForLoop ()
   {}
@@ -83,10 +83,10 @@ public class JSForLoop implements IJSStatement
     m_aUpdates.add (e);
   }
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSSBlock ();
+      m_aBody = new JSBlock ();
     return m_aBody;
   }
 
@@ -101,12 +101,12 @@ public class JSForLoop implements IJSStatement
       if (o instanceof JSVar)
         f.var ((JSVar) o);
       else
-        f.generable ((IJSExpression) o);
+        f.generatable ((IJSExpression) o);
       first = false;
     }
-    f.plain (';').generable (m_aTest).plain (';').generable (m_aUpdates).plain (')');
+    f.plain (';').generatable (m_aTest).plain (';').generatable (m_aUpdates).plain (')');
     if (m_aBody != null)
-      f.generable (m_aBody).nl ();
+      f.generatable (m_aBody).nl ();
     else
       f.plain (';').nl ();
   }

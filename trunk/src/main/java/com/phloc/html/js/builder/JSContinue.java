@@ -40,12 +40,13 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nullable;
+
 /**
  * JContinue statement
  */
-class JSContinue implements IJSStatement
+final class JSContinue implements IJSStatement
 {
-
   private final JSLabel m_aLabel;
 
   /**
@@ -54,9 +55,9 @@ class JSContinue implements IJSStatement
    * @param _label
    *        a valid label or null.
    */
-  JSContinue (final JSLabel _label)
+  JSContinue (@Nullable final JSLabel _label)
   {
-    this.m_aLabel = _label;
+    m_aLabel = _label;
   }
 
   public void state (final JSFormatter f)
@@ -66,5 +67,4 @@ class JSContinue implements IJSStatement
     else
       f.plain ("continue").plain (m_aLabel.label).plain (';').nl ();
   }
-
 }

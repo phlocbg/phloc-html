@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nullable;
+
 /**
  * JBreak statement
  */
@@ -53,9 +55,9 @@ final class JSBreak implements IJSStatement
    * @param _label
    *        break label or null.
    */
-  JSBreak (final JSLabel _label)
+  JSBreak (@Nullable final JSLabel _label)
   {
-    this.m_aLabel = _label;
+    m_aLabel = _label;
   }
 
   public void state (final JSFormatter f)

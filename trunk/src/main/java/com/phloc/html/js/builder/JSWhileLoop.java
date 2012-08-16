@@ -54,7 +54,7 @@ public class JSWhileLoop implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSSBlock body = null;
+  private JSBlock body = null;
 
   /**
    * Construct a While statment
@@ -69,10 +69,10 @@ public class JSWhileLoop implements IJSStatement
     return m_aTest;
   }
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (body == null)
-      body = new JSSBlock ();
+      body = new JSBlock ();
     return body;
   }
 
@@ -80,11 +80,11 @@ public class JSWhileLoop implements IJSStatement
   {
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.plain ("while ").generable (m_aTest);
+      f.plain ("while ").generatable (m_aTest);
     }
     else
     {
-      f.plain ("while (").generable (m_aTest).plain (')');
+      f.plain ("while (").generatable (m_aTest).plain (')');
     }
     if (body != null)
       f.stmt (body);

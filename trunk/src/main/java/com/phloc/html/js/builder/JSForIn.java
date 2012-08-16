@@ -40,6 +40,9 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * ForIn Statement
  * 
@@ -47,44 +50,39 @@ package com.phloc.html.js.builder;
  */
 public final class JSForIn implements IJSStatement
 {
-  private final AbstractJSType m_aType;
-  private final String m_sVar;
-  private JSSBlock m_aBody; // lazily created
-  private final IJSExpression m_aCollection;
   private final JSVar m_aLoopVar;
+  private final IJSExpression m_aCollection;
+  private JSBlock m_aBody; // lazily created
 
-  public JSForIn (final AbstractJSType vartype, final String variable, final IJSExpression collection)
+  JSForIn (@Nullable final AbstractJSType vartype,
+           @Nonnull final String variable,
+           @Nonnull final IJSExpression collection)
   {
-    m_aType = vartype;
-    m_sVar = variable;
     m_aCollection = collection;
-    m_aLoopVar = new JSVar (m_aType, m_sVar, collection);
+    m_aLoopVar = new JSVar (vartype, variable, null);
   }
 
   /**
    * Returns a reference to the loop variable.
    */
+  @Nonnull
   public JSVar var ()
   {
     return m_aLoopVar;
   }
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSSBlock ();
+      m_aBody = new JSBlock ();
     return m_aBody;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain ("for (var ");
-    if (m_aType != null)
-      f.plain ("/*").generable (m_aType).plain ("*/");
-    f.id (m_sVar).plain (" in ").generable (m_aCollection);
-    f.plain (')');
+    f.plain ("for (").decl (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
     if (m_aBody != null)
-      f.generable (m_aBody).nl ();
+      f.generatable (m_aBody).nl ();
     else
       f.plain (';').nl ();
   }

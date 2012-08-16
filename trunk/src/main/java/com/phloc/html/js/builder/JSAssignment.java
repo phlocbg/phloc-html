@@ -65,11 +65,11 @@ public class JSAssignment extends AbstractJSExpressionImpl implements IJSStateme
 
   public void generate (final JSFormatter f)
   {
-    f.generable (m_aLhs).plain (m_sOp).generable (m_aRhs);
+    f.generatable (m_aLhs).plain (m_sOp).generatable (m_aRhs);
   }
 
   public void state (final JSFormatter f)
   {
-    f.generable (this).plain (';').nl ();
+    f.generatable (this).plain (';').nl ();
   }
 }

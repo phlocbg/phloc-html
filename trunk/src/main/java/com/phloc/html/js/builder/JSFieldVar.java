@@ -105,7 +105,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   public void declare (@Nonnull final JSFormatter f)
   {
     if (m_aJSDoc != null)
-      f.generable (m_aJSDoc);
+      f.generatable (m_aJSDoc);
     super.declare (f);
   }
 }

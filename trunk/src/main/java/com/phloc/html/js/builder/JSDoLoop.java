@@ -55,7 +55,7 @@ public class JSDoLoop implements IJSStatement
   /**
    * JBlock of statements which makes up body of this Do statement
    */
-  private JSSBlock body = null;
+  private JSBlock body = null;
 
   /**
    * Construct a Do statment
@@ -65,10 +65,10 @@ public class JSDoLoop implements IJSStatement
     this.m_aTest = test;
   }
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     if (body == null)
-      body = new JSSBlock ();
+      body = new JSBlock ();
     return body;
   }
 
@@ -76,17 +76,17 @@ public class JSDoLoop implements IJSStatement
   {
     f.plain ("do");
     if (body != null)
-      f.generable (body);
+      f.generatable (body);
     else
       f.plain ("{ }");
 
     if (JSOp.hasTopOp (m_aTest))
     {
-      f.plain ("while ").generable (m_aTest);
+      f.plain ("while ").generatable (m_aTest);
     }
     else
     {
-      f.plain ("while (").generable (m_aTest).plain (')');
+      f.plain ("while (").generatable (m_aTest).plain (')');
     }
     f.plain (';').nl ();
   }

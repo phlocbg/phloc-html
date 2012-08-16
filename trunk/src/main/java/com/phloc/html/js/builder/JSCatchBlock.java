@@ -44,11 +44,11 @@ package com.phloc.html.js.builder;
  * Catch block for a try/catch/finally statement
  */
 
-public class JSCatchBlock implements IJSGenerable
+public class JSCatchBlock implements IJSGeneratable
 {
   private final AbstractJSClass m_aException;
   private JSVar m_aVar = null;
-  private final JSSBlock m_aBody = new JSSBlock ();
+  private final JSBlock m_aBody = new JSBlock ();
 
   JSCatchBlock (final AbstractJSClass exception)
   {
@@ -63,7 +63,7 @@ public class JSCatchBlock implements IJSGenerable
     return m_aVar;
   }
 
-  public JSSBlock body ()
+  public JSBlock body ()
   {
     return m_aBody;
   }
@@ -72,6 +72,6 @@ public class JSCatchBlock implements IJSGenerable
   {
     if (m_aVar == null)
       m_aVar = new JSVar (m_aException, "ex", null);
-    f.plain ("catch (").var (m_aVar).plain (')').generable (m_aBody);
+    f.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
   }
 }

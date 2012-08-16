@@ -156,11 +156,12 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
 
   public void bind (@Nonnull final JSFormatter f)
   {
+    f.plain ("var ");
     if (m_aType != null)
-      f.plain ("/*").generable (m_aType).plain ("*/");
+      f.plain ("/*").generatable (m_aType).plain ("*/");
     f.id (m_sName);
     if (m_aInit != null)
-      f.plain ('=').generable (m_aInit);
+      f.plain ('=').generatable (m_aInit);
   }
 
   public void declare (@Nonnull final JSFormatter f)

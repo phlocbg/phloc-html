@@ -50,7 +50,7 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
    * Object expression upon which this field will be accessed, or null for the
    * implicit 'this'.
    */
-  private final IJSGenerable m_aObject;
+  private final IJSGeneratable m_aObject;
 
   /**
    * Name of the field to be accessed. Either this or {@link #m_aVar} is set.
@@ -62,7 +62,7 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
    */
   private JSVar m_aVar;
 
-  JSFieldRef (final IJSGenerable object, final String name)
+  JSFieldRef (final IJSGeneratable object, final String name)
   {
     this.m_aObject = object;
     if (name.indexOf ('.') >= 0)
@@ -70,7 +70,7 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
     this.m_sName = name;
   }
 
-  JSFieldRef (final IJSGenerable object, final JSVar var)
+  JSFieldRef (final IJSGeneratable object, final JSVar var)
   {
     this.m_aObject = object;
     this.m_aVar = var;
@@ -84,7 +84,7 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
 
     if (m_aObject != null)
     {
-      f.generable (m_aObject).plain ('.').plain (name);
+      f.generatable (m_aObject).plain ('.').plain (name);
     }
     else
     {
