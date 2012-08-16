@@ -80,11 +80,11 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * If isConstructor==true, this field keeps the type to be created.
    */
-  private AbstractJSType m_aType = null;
+  private AbstractJSType m_aType;
 
   /**
    * Invokes a method on an object.
-   * 
+   *
    * @param object
    *        JExpression for the object upon which the named method will be
    *        invoked, or null if none
@@ -136,7 +136,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   /**
    * Invokes a constructor of an object (i.e., creates a new object.)
-   * 
+   *
    * @param c
    *        Type of the object to be created. If this type is an array type,
    *        added arguments are treated as array initializer. Thus you can
@@ -150,7 +150,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   /**
    * Add an expression to this invocation's argument list
-   * 
+   *
    * @param arg
    *        Argument to add to argument list
    */
@@ -213,7 +213,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   /**
    * Returns all arguments of the invocation.
-   * 
+   *
    * @return If there's no arguments, an empty array will be returned.
    */
   @Nonnull

@@ -70,5 +70,4 @@ final class JSReturn implements IJSStatement
       f.generatable (m_aExpr);
     f.plain (';').nl ();
   }
-
 }

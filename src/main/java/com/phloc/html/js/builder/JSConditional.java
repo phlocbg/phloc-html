@@ -55,7 +55,7 @@ public class JSConditional implements IJSStatement
   /**
    * JBlock of statements for "then" clause
    */
-  private final JSBlock m_aThen = new JSBlock (true, true);
+  private final JSBlock m_aThen = new JSBlock ();
 
   /**
    * JBlock of statements for optional "else" clause
@@ -91,7 +91,7 @@ public class JSConditional implements IJSStatement
   public JSBlock _else ()
   {
     if (m_aElse == null)
-      m_aElse = new JSBlock (true, true);
+      m_aElse = new JSBlock ();
     return m_aElse;
   }
 

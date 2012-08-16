@@ -214,7 +214,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   public JSBlock body ()
   {
     if (body == null)
-      body = new JSBlock (true, true);
+      body = new JSBlock ();
     return body;
   }
 

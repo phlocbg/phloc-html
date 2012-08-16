@@ -40,6 +40,8 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Do loops
  */
@@ -55,40 +57,36 @@ public class JSDoLoop implements IJSStatement
   /**
    * JBlock of statements which makes up body of this Do statement
    */
-  private JSBlock body = null;
+  private JSBlock m_aBody;
 
   /**
    * Construct a Do statment
    */
-  JSDoLoop (final IJSExpression test)
+  JSDoLoop (@Nonnull final IJSExpression test)
   {
-    this.m_aTest = test;
+    m_aTest = test;
   }
 
+  @Nonnull
   public JSBlock body ()
   {
-    if (body == null)
-      body = new JSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSBlock ();
+    return m_aBody;
   }
 
   public void state (final JSFormatter f)
   {
     f.plain ("do");
-    if (body != null)
-      f.generatable (body);
+    if (m_aBody != null)
+      f.generatable (m_aBody);
     else
-      f.plain ("{ }");
+      f.plain ("{}");
 
     if (JSOp.hasTopOp (m_aTest))
-    {
       f.plain ("while ").generatable (m_aTest);
-    }
     else
-    {
       f.plain ("while (").generatable (m_aTest).plain (')');
-    }
     f.plain (';').nl ();
   }
-
 }

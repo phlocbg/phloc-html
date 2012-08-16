@@ -41,6 +41,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Case statement
@@ -55,7 +56,7 @@ public final class JSCase implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSBlock m_aBody = null;
+  private JSBlock m_aBody;
 
   /**
    * is this a regular case statement or a default case statement?
@@ -65,7 +66,7 @@ public final class JSCase implements IJSStatement
   /**
    * Construct a case statement
    */
-  JSCase (final IJSExpression label)
+  JSCase (@Nullable final IJSExpression label)
   {
     this (label, false);
   }
@@ -74,12 +75,13 @@ public final class JSCase implements IJSStatement
    * Construct a case statement. If isDefaultCase is true, then label should be
    * null since default cases don't have a label.
    */
-  JSCase (final IJSExpression label, final boolean isDefaultCase)
+  JSCase (@Nullable final IJSExpression label, final boolean isDefaultCase)
   {
     m_aLabel = label;
     m_bIsDefaultCase = isDefaultCase;
   }
 
+  @Nullable
   public IJSExpression label ()
   {
     return m_aLabel;
