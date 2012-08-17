@@ -49,7 +49,21 @@ import javax.annotation.Nonnull;
  */
 public interface IJSAssignmentTarget extends IJSExpression
 {
+  @Nonnull
   JSAssignment assign (@Nonnull IJSExpression rhs);
 
+  @Nonnull
   JSAssignment assignPlus (@Nonnull IJSExpression rhs);
+
+  @Nonnull
+  JSAssignment assignMinus (@Nonnull IJSExpression rhs);
+
+  @Nonnull
+  JSAssignment assignMultiply (@Nonnull IJSExpression rhs);
+
+  @Nonnull
+  JSAssignment assignDivide (@Nonnull IJSExpression rhs);
+
+  @Nonnull
+  JSAssignment assignModulo (@Nonnull IJSExpression rhs);
 }

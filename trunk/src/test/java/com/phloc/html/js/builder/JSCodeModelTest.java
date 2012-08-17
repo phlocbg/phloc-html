@@ -18,40 +18,49 @@ public final class JSCodeModelTest
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
       aFuncMain.jsDoc ().add ("This is a global function");
       final JSVar m1 = aFuncMain.param ("m1");
+
+      // function variable
       final JSVar aRoot = aFuncMain.body ().decl (JSPrimitiveType.NUMBER, "root", JSExpr.lit (5));
+
+      // inline function
       final JSFunction aFunc = aFuncMain.body ().function ("add");
       {
         aFunc.jsDoc ().add ("This is a nested function");
         final JSVar s1 = aFunc.param (JSPrimitiveType.STRING, "s1");
         final JSVar s2 = aFunc.param ("s2");
         aFunc.body ()._return (s1.plus (s2));
+
+        // Call nested function
+        aFuncMain.body ().invoke (aFunc).arg (32).arg (-4);
+      }
+
+      // Dynamic function
+      {
+        final JSVar aAdd2 = aFuncMain.body ().decl ("add2",
+                                                    JSPrimitiveType.FUNCTION._new ()
+                                                                            .arg ("x")
+                                                                            .arg ("y")
+                                                                            .arg ("return x+y"));
+        aFuncMain.body ().invoke (aAdd2.name ()).arg (1).arg (2);
       }
 
       // if
       final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSPrimitiveType.STRING.type ()));
 
       // try catch finally
-      aFuncMain.body ().comment ("Test try/catch/finally");
+      aCond._then ().comment ("Test try/catch/finally");
       final JSTryBlock aTB = aCond._then ()._try ();
-      aTB.body ()._return (JSExpr.lit (5).inParantheses ().inParantheses ());
+      aTB.body ()._return (5);
       final JSCatchBlock aCB = aTB._catch ("ex");
       aCB.body ()._throw (JSPrimitiveType.ERROR._new ().arg (aCB.param ()));
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
 
       // RegExp
       aFuncMain.body ().comment ("Test reg exps");
-      aFuncMain.body ().add (JSExpr.regex ("water(mark)?")
-                                   .global (true)
-                                   .caseInsensitive (true)
-                                   .multiLine (true)
-                                   .invoke ("test")
-                                   .arg ("waterMark"));
-      aFuncMain.body ().add (JSExpr.regex ("water(mark)?")
-                                   .global (false)
-                                   .caseInsensitive (true)
-                                   .multiLine (false)
-                                   .invoke ("test")
-                                   .arg ("Water"));
+      aFuncMain.body ().invoke (JSExpr.regex ("water(mark)?").gim (true, true, true), "test").arg ("waterMark");
+      aFuncMain.body ().invoke (JSExpr.regex ("water(mark)?").gim (false, true, false), "test").arg ("Water");
+      aFuncMain.body ().invoke (JSExpr.lit ("string"), "search").arg (JSExpr.regex ("expression"));
+      aFuncMain.body ().invoke (JSExpr.lit ("string"), "replace").arg (JSExpr.regex ("expression")).arg ("replacement");
 
       // Anonymous function
       {
@@ -59,16 +68,25 @@ public final class JSCodeModelTest
         final JSVar av = a.param ("a");
         a.body ()._return (av.plus (0.5));
         aFuncMain.body ().invoke (a).arg (7.5);
-        aFuncMain.body ().invoke (aFunc).arg (32).arg (-4);
       }
 
       // Array
       final JSVar aArray1 = aFuncMain.body ().decl ("array1", JSExpr.newArray ().add (5));
       aFuncMain.body ().assign (aArray1.component (0), 6);
 
+      final JSVar aArray1a = aFuncMain.body ().decl ("array1a", JSPrimitiveType.ARRAY._new ().arg (5));
+      aFuncMain.body ().assign (aArray1a.component (0), 7);
+      aFuncMain.body ().invoke (aArray1a, "push").arg ("pushed");
+
       // Associative Array
       final JSVar aArray2 = aFuncMain.body ().decl ("array2",
-                                                    JSExpr.newAssocArray ().add ("num", 1).add ("array", aArray1));
+                                                    JSExpr.newAssocArray ()
+                                                          .add ("num", 1)
+                                                          .add ("array", aArray1)
+                                                          .add ("assocarray",
+                                                                JSExpr.newAssocArray ()
+                                                                      .add ("key", "value")
+                                                                      .add ("key2", "anything else")));
       aFuncMain.body ().assign (aArray2.component ("num"), 6);
 
       // concatenate misc things
@@ -88,7 +106,7 @@ public final class JSCodeModelTest
        *     return '';
        *   });
        *   // Remaining HTML + comments content
-       *   return [sHTML, sComments];
+       *   return { html:sHTML, comments:sComments };;
        * }
        * </pre>
        */
@@ -106,7 +124,7 @@ public final class JSCodeModelTest
                                      .arg (JSExpr.regex ("<!--([\\s\\S]*?)-->").global (true))
                                      .arg (anonFunction));
       aFuncMain.body ().comment ("Remaining HTML + comments content");
-      aFuncMain.body ()._return (JSExpr.newArray ().add (sHTML).add (sComments));
+      aFuncMain.body ()._return (JSExpr.newAssocArray ().add ("html", sHTML).add ("comments", sComments));
     }
 
     final String sCode = aCM.rootPackage ().getJSCode ();
