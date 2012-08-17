@@ -277,13 +277,14 @@ public final class JSExpr
   /**
    * Creates an expression directly from a source code fragment.
    * <p>
-   * This method can be used as a short-cut to create a JExpression. For
-   * example, instead of <code>_a.gt(_b)</code>, you can write it as:
-   * <code>JExpr.direct("a>b")</code>.
+   * This method can be used as a short-cut to create a {@link IJSExpression}.
+   * For example, instead of <code>_a.gt(_b)</code>, you can write it as:
+   * <code>JSExpr.direct("a>b")</code>.
    * <p>
    * Be warned that there is a danger in using this method, as it obfuscates the
    * object model.
    */
+  @Deprecated
   public static IJSExpression direct (final String source)
   {
     return new AbstractJSExpressionImpl ()

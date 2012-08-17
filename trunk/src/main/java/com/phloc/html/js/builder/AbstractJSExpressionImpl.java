@@ -372,6 +372,12 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
+  public final IJSExpression delete ()
+  {
+    return JSOp.delete (this);
+  }
+
+  @Nonnull
   public final JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return JSExpr.invoke (this, method);
