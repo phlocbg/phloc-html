@@ -1,43 +1,20 @@
-/*
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+/**
+ * Copyright (C) 2006-2012 phloc systems
+ * http://www.phloc.com
+ * office[at]phloc[dot]com
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The contents of this file are subject to the terms of either the GNU
- * General Public License Version 2 only ("GPL") or the Common Development
- * and Distribution License("CDDL") (collectively, the "License").  You
- * may not use this file except in compliance with the License.  You can
- * obtain a copy of the License at
- * https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
- * or packager/legal/LICENSE.txt.  See the License for the specific
- * language governing permissions and limitations under the License.
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
- * When distributing the software, include this License Header Notice in each
- * file and include the License file at packager/legal/LICENSE.txt.
- *
- * GPL Classpath Exception:
- * Oracle designates this particular file as subject to the "Classpath"
- * exception as provided by Oracle in the GPL Version 2 section of the License
- * file that accompanied this code.
- *
- * Modifications:
- * If applicable, add the following below the License Header, with the fields
- * enclosed by brackets [] replaced by your own identifying information:
- * "Portions Copyright [year] [name of copyright owner]"
- *
- * Contributor(s):
- * If you wish your version of this file to be governed by only the CDDL or
- * only the GPL Version 2, indicate your decision by adding "[Contributor]
- * elects to include this software in this distribution under the [CDDL or GPL
- * Version 2] license."  If you don't indicate a single choice of license, a
- * recipient has the option to distribute your version of this file under
- * either the CDDL, the GPL Version 2 or to extend the choice of license to
- * its licensees as provided above.  However, if you add GPL Version 2 code
- * and therefore, elected the GPL Version 2 license, then the option applies
- * only if the new code is made subject to such option by the copyright
- * holder.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package com.phloc.html.js.builder;
 
 import java.io.Writer;
@@ -72,12 +49,6 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   public JSPackage ()
   {}
 
-  @Nonnull
-  public JSPackage getPackage ()
-  {
-    return this;
-  }
-
   /**
    * Add a class to this package.
    * 
@@ -95,16 +66,6 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     final JSDefinedClass c = new JSDefinedClass (this, name);
     m_aDecls.put (name, c);
     return c;
-  }
-
-  /**
-   * Gets a reference to the already created {@link JSDefinedClass}.
-   * 
-   * @return null If the class is not yet created.
-   */
-  public JSDefinedClass getClass (final String name)
-  {
-    return (JSDefinedClass) m_aDecls.get (name);
   }
 
   @Nonnull
@@ -130,16 +91,6 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     final JSFunction c = new JSFunction (aType, name);
     m_aDecls.put (name, c);
     return c;
-  }
-
-  /**
-   * Gets a reference to the already created {@link JSFunction}.
-   * 
-   * @return null If the class is not yet created.
-   */
-  public JSFunction getFunction (final String name)
-  {
-    return (JSFunction) m_aDecls.get (name);
   }
 
   @Nonnull
@@ -186,27 +137,11 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   }
 
   /**
-   * Gets a reference to the already created {@link JSFunction}.
-   * 
-   * @return null If the class is not yet created.
+   * Removes a declaration from this package.
    */
-  public JSVar getVar (final String name)
+  public void remove (final String name)
   {
-    return (JSVar) m_aDecls.get (name);
-  }
-
-  /**
-   * Removes a class from this package.
-   */
-  public void remove (final AbstractJSClass c)
-  {
-    if (c._package () != this)
-      throw new IllegalArgumentException ("the specified class is not a member of this package,"
-                                          + " or it is a referenced class");
-
-    // note that c may not be a member of classes.
-    // this happens when someone is trying to remove a non generated class
-    m_aDecls.remove (c.name ());
+    m_aDecls.remove (name);
   }
 
   @Nonnull
@@ -229,14 +164,9 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   /**
    * Checks if a given name is already defined as a class/interface
    */
-  public boolean isDefined (final String declLocalName)
+  public boolean isDeclared (final String declLocalName)
   {
     return getDeclaration (declLocalName) != null;
-  }
-
-  int countArtifacts ()
-  {
-    return m_aDecls.size ();
   }
 
   public void writePackage (@Nonnull final Writer w)
@@ -255,9 +185,12 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     }
   }
 
-  @Nonnull
+  @Nullable
   public String getJSCode ()
   {
+    if (m_aDecls.isEmpty ())
+      return null;
+
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writePackage (aSW);
     return aSW.getAsString ();
