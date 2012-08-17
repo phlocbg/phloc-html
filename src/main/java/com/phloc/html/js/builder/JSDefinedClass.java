@@ -53,6 +53,7 @@ import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.marshal.JSMarshaller;
@@ -329,21 +330,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * Looks for a method that has the specified method signature and return it.
-   * 
-   * @return null if not found.
-   */
-  public JSMethod getConstructor (final AbstractJSType [] argTypes)
-  {
-    for (final JSMethod m : m_aConstructors)
-    {
-      if (m.hasSignature (argTypes))
-        return m;
-    }
-    return null;
-  }
-
-  /**
    * Add a method to the list of method members of this JDefinedClass instance.
    * 
    * @param type
@@ -363,27 +349,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Returns the set of methods defined in this class.
    */
+  @Nonnull
+  @ReturnsMutableCopy
   public Collection <JSMethod> methods ()
   {
-    return m_aMethods;
-  }
-
-  /**
-   * Looks for a method that has the specified method signature and return it.
-   * 
-   * @return null if not found.
-   */
-  public JSMethod getMethod (final String name, final AbstractJSType [] argTypes)
-  {
-    for (final JSMethod m : m_aMethods)
-    {
-      if (!m.name ().equals (name))
-        continue;
-
-      if (m.hasSignature (argTypes))
-        return m;
-    }
-    return null;
+    return ContainerHelper.newList (m_aMethods);
   }
 
   public JSPackage getPackage ()
