@@ -63,29 +63,6 @@ public abstract class AbstractJSType implements IJSGeneratable, Comparable <Abst
    */
   public abstract String name ();
 
-  /**
-   * Create an array type of this type. This method is undefined for primitive
-   * void type, which doesn't have any corresponding array representation.
-   * 
-   * @return A {@link AbstractJSClass} representing the array type whose element
-   *         type is this type
-   */
-  public abstract AbstractJSClass array ();
-
-  /** Tell whether or not this is an array type. */
-  public boolean isArray ()
-  {
-    return false;
-  }
-
-  /**
-   * If this is an array, returns the component type of the array. (T of T[])
-   */
-  public AbstractJSType elementType ()
-  {
-    throw new IllegalArgumentException ("Not an array type");
-  }
-
   @Override
   public String toString ()
   {

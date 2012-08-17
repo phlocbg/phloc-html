@@ -54,7 +54,6 @@ import javax.annotation.Nullable;
 public abstract class AbstractJSClass extends AbstractJSType
 {
   private final JSCodeModel m_aOwner;
-  private AbstractJSClass m_aArrayClass;
 
   protected AbstractJSClass (final JSCodeModel _owner)
   {
@@ -185,14 +184,6 @@ public abstract class AbstractJSClass extends AbstractJSType
     }
 
     return null;
-  }
-
-  @Override
-  public AbstractJSClass array ()
-  {
-    if (m_aArrayClass == null)
-      m_aArrayClass = new JSArrayClass (owner (), this);
-    return m_aArrayClass;
   }
 
   @Override

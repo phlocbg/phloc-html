@@ -2,21 +2,28 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.Nonempty;
+
 public class JSPrimitiveType extends AbstractJSType
 {
-  private final JSCodeModel m_aOwner;
+  public static final JSPrimitiveType ARGUMENTS = new JSPrimitiveType ("Arguments");
+  public static final JSPrimitiveType ARRAY = new JSPrimitiveType ("Array");
+  public static final JSPrimitiveType BOOLEAN = new JSPrimitiveType ("Boolean");
+  public static final JSPrimitiveType DATE = new JSPrimitiveType ("Date");
+  public static final JSPrimitiveType ERROR = new JSPrimitiveType ("Error");
+  public static final JSPrimitiveType FUNCTION = new JSPrimitiveType ("Function");
+  public static final JSPrimitiveType JSON = new JSPrimitiveType ("JSON");
+  public static final JSPrimitiveType MATH = new JSPrimitiveType ("Math");
+  public static final JSPrimitiveType NUMBER = new JSPrimitiveType ("Number");
+  public static final JSPrimitiveType OBJECT = new JSPrimitiveType ("Object");
+  public static final JSPrimitiveType REGEXP = new JSPrimitiveType ("RegExp");
+  public static final JSPrimitiveType STRING = new JSPrimitiveType ("String");
+
   private final String m_sName;
-  private AbstractJSClass m_aArrayClass;
 
-  JSPrimitiveType (final JSCodeModel aOwner, final String sName)
+  private JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
-    m_aOwner = aOwner;
     m_sName = sName;
-  }
-
-  public JSCodeModel owner ()
-  {
-    return m_aOwner;
   }
 
   @Override
@@ -31,12 +38,12 @@ public class JSPrimitiveType extends AbstractJSType
     return m_sName;
   }
 
-  @Override
-  public AbstractJSClass array ()
+  /**
+   * @return The type to be used in "typeof" expressions
+   */
+  public JSStringLiteral type ()
   {
-    if (m_aArrayClass == null)
-      m_aArrayClass = new JSArrayClass (m_aOwner, this);
-    return m_aArrayClass;
+    return JSExpr.lit (m_sName);
   }
 
   public void generate (@Nonnull final JSFormatter f)

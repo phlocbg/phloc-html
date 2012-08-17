@@ -54,6 +54,9 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
 {
+  private boolean m_bIsAnonnymousFunction = false;
+  private boolean m_bIsConstructor = false;
+
   /**
    * Object expression upon which this method will be invoked, or null if this
    * is a constructor invocation
@@ -75,8 +78,6 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * to be created.
    */
   private AbstractJSType m_aType;
-
-  private boolean m_bIsConstructor = false;
 
   /**
    * List of argument expressions for this method invocation
@@ -104,6 +105,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   {
     m_aObject = null;
     m_aCallee = anonfunc;
+    m_bIsAnonnymousFunction = true;
   }
 
   /**
@@ -232,6 +234,14 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   }
 
   /**
+   * Adds a null argument. Short for {@code arg(JSExpr.NULL)}
+   */
+  public JSInvocation argNull ()
+  {
+    return arg (JSExpr.NULL);
+  }
+
+  /**
    * Returns all arguments of the invocation.
    * 
    * @return If there's no arguments, an empty array will be returned.
@@ -245,51 +255,39 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   public void generate (final JSFormatter f)
   {
-    if (m_bIsConstructor)
+    if (m_bIsAnonnymousFunction)
     {
-      if (m_aType.isArray ())
-      {
-        // [RESULT] new T[]{arg1,arg2,arg3,...};
-        f.plain ("new ").generatable (m_aType).plain ('{');
-      }
-      else
+      f.generatable (((JSAnonymousFunction) m_aCallee).inParantheses ()).plain ('(');
+    }
+    else
+      if (m_bIsConstructor)
       {
         f.plain ("new ").generatable (m_aType).plain ('(');
       }
-    }
-    else
-    {
-      // Find name
-      String name = m_sName;
-      if (name == null && m_aCallee instanceof IJSDeclaration)
-        name = ((IJSDeclaration) m_aCallee).name ();
-
-      if (m_aObject != null)
-      {
-        // Regular object method invocation
-        if (name == null)
-          throw new IllegalStateException ();
-        f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
-      }
       else
-        if (name != null)
+      {
+        // Find name
+        String name = m_sName;
+        if (name == null && m_aCallee instanceof IJSDeclaration)
+          name = ((IJSDeclaration) m_aCallee).name ();
+
+        if (m_aObject != null)
         {
-          // E.g. global function
-          f.id (name).plain ('(');
+          // Regular object method invocation
+          if (name == null)
+            throw new IllegalStateException ();
+          f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
         }
         else
-        {
-          // anonymouse function
-          f.plain ('(');
-        }
-    }
+          if (name != null)
+          {
+            // E.g. global function
+            f.id (name).plain ('(');
+          }
+      }
 
-    f.generatable (m_aArgs);
-
-    if (m_bIsConstructor && m_aType.isArray ())
-      f.plain ('}');
-    else
-      f.plain (')');
+    // Add the arguments
+    f.generatable (m_aArgs).plain (')');
   }
 
   public void state (final JSFormatter f)

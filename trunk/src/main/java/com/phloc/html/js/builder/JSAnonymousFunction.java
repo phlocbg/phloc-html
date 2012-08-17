@@ -150,7 +150,7 @@ final class JSAnonymousFunction extends AbstractJSExpressionImpl
   public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSBlock ();
+      m_aBody = new JSBlock ().newlineAtEnd (false);
     return m_aBody;
   }
 
@@ -180,6 +180,6 @@ final class JSAnonymousFunction extends AbstractJSExpressionImpl
     if (m_aBody != null)
       f.stmt (m_aBody);
     else
-      f.stmt (new JSBlock ());
+      f.stmt (new JSBlock ().newlineAtEnd (false));
   }
 }

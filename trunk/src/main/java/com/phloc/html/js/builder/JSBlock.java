@@ -72,11 +72,12 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    */
   private boolean m_bBracesRequired;
   private boolean m_bIndentRequired;
+  private boolean m_bNewLineAtEnd = true;
 
   /**
    * Current position.
    */
-  private int pos;
+  private int m_nPos;
 
   public JSBlock ()
   {
@@ -89,13 +90,20 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     m_bIndentRequired = indentRequired;
   }
 
+  @Nonnull
+  public JSBlock newlineAtEnd (final boolean bNewLineAtEnd)
+  {
+    m_bNewLineAtEnd = bNewLineAtEnd;
+    return this;
+  }
+
   /**
    * Returns a read-only view of {@link IJSStatement}s and
    * {@link IJSDeclaration} in this block.
    */
   @Nonnull
   @ReturnsMutableCopy
-  public List <Object> getContents ()
+  public List <Object> contents ()
   {
     return ContainerHelper.newList (m_aContent);
   }
@@ -103,8 +111,8 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   @Nonnull
   private <T> T _insert (@Nonnull final T statementOrDeclaration)
   {
-    m_aContent.add (pos, statementOrDeclaration);
-    pos++;
+    m_aContent.add (m_nPos, statementOrDeclaration);
+    m_nPos++;
     return statementOrDeclaration;
   }
 
@@ -117,7 +125,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    */
   public int pos ()
   {
-    return pos;
+    return m_nPos;
   }
 
   /**
@@ -130,10 +138,10 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    */
   public int pos (final int newPos)
   {
-    final int r = pos;
+    final int r = m_nPos;
     if (newPos > m_aContent.size () || newPos < 0)
       throw new IllegalArgumentException ();
-    pos = newPos;
+    m_nPos = newPos;
 
     return r;
   }
@@ -299,6 +307,32 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   public JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return _insert (new JSInvocation ((IJSExpression) null, method));
+  }
+
+  /**
+   * Creates an invocation statement and adds it to this block.
+   * 
+   * @param aFunction
+   *        function to invoke
+   * @return Newly generated {@link JSInvocation}
+   */
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final JSFunction aFunction)
+  {
+    return _insert (new JSInvocation (aFunction));
+  }
+
+  /**
+   * Creates an invocation statement and adds it to this block.
+   * 
+   * @param aAnonymousFunction
+   *        anonymous function to invoke
+   * @return Newly generated {@link JSInvocation}
+   */
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonymousFunction)
+  {
+    return _insert (new JSInvocation (aAnonymousFunction));
   }
 
   /**
@@ -531,7 +565,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   public void state (final JSFormatter f)
   {
     f.generatable (this);
-    if (m_bBracesRequired)
+    if (m_bBracesRequired && m_bNewLineAtEnd)
       f.nl ();
   }
 }
