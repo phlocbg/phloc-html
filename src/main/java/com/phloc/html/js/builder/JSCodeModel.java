@@ -80,19 +80,6 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public final class JSCodeModel
 {
-  public final JSPrimitiveType ARGUMENTS = new JSPrimitiveType (this, "Arguments");
-  public final JSPrimitiveType ARRAY = new JSPrimitiveType (this, "Array");
-  public final JSPrimitiveType BOOLEAN = new JSPrimitiveType (this, "Boolean");
-  public final JSPrimitiveType DATE = new JSPrimitiveType (this, "Date");
-  public final JSPrimitiveType ERROR = new JSPrimitiveType (this, "Error");
-  public final JSPrimitiveType FUNCTION = new JSPrimitiveType (this, "Function");
-  public final JSPrimitiveType JSON = new JSPrimitiveType (this, "JSON");
-  public final JSPrimitiveType MATH = new JSPrimitiveType (this, "Math");
-  public final JSPrimitiveType NUMBER = new JSPrimitiveType (this, "Number");
-  public final JSPrimitiveType OBJECT = new JSPrimitiveType (this, "Object");
-  public final JSPrimitiveType REGEXP = new JSPrimitiveType (this, "RegExp");
-  public final JSPrimitiveType STRING = new JSPrimitiveType (this, "String");
-
   /** The packages that this JCodeWriter contains. */
   private final HashMap <String, JSPackage> m_aPackages = new HashMap <String, JSPackage> ();
 

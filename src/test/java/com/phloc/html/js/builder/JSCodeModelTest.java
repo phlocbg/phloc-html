@@ -17,30 +17,30 @@ public final class JSCodeModelTest
     final JSPackage aPkg = aCM.rootPackage ();
 
     // Global variable
-    aPkg.var (aCM.NUMBER, "g_aRoot", JSExpr.lit (0));
+    aPkg.var (JSPrimitiveType.NUMBER, "g_aRoot", JSExpr.lit (0));
 
     // Crude function
     {
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
       aFuncMain.jsDoc ().add ("This is a global function");
       final JSVar m1 = aFuncMain.param ("m1");
-      final JSVar aRoot = aFuncMain.body ().decl (aCM.NUMBER, "root", JSExpr.lit (5));
+      final JSVar aRoot = aFuncMain.body ().decl (JSPrimitiveType.NUMBER, "root", JSExpr.lit (5));
       final JSFunction aFunc = aFuncMain.body ().function ("add");
       {
         aFunc.jsDoc ().add ("This is a nested function");
-        final JSVar s1 = aFunc.param (aCM.STRING, "s1");
+        final JSVar s1 = aFunc.param (JSPrimitiveType.STRING, "s1");
         final JSVar s2 = aFunc.param ("s2");
         aFunc.body ()._return (s1.plus (s2));
       }
 
       // if
-      final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSExpr.lit (aCM.STRING.name ())));
+      final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSPrimitiveType.STRING.type ()));
 
       // try catch finally
       final JSTryBlock aTB = aCond._then ()._try ();
       aTB.body ()._return (JSExpr.lit (5).inParantheses ().inParantheses ());
       final JSCatchBlock aCB = aTB._catch ("ex");
-      aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
+      aCB.body ()._throw (JSExpr._new (JSPrimitiveType.ERROR).arg (aCB.param ()));
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
 
       // RegExp
@@ -62,7 +62,8 @@ public final class JSCodeModelTest
         final JSAnonymousFunction a = JSExpr.anonymousFunction ();
         final JSVar av = a.param ("a");
         a.body ()._return (av.plus (JSExpr.lit (0.5f)));
-        aFuncMain.body ().add (a.invoke ().arg (7.5));
+        aFuncMain.body ().invoke (a).arg (7.5);
+        aFuncMain.body ().invoke (aFunc).arg (32).arg (-4);
       }
 
       // concatenate misc things
