@@ -49,6 +49,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.StringHelper;
 
 /**
  * A block of Java code, which may contain statements and local declarations.
@@ -148,16 +149,44 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   /**
    * Adds a local variable declaration to this block
    * 
+   * @param name
+   *        Name of the variable
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar decl (@Nonnull final String name)
+  {
+    return decl (null, name, null);
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
    * @param type
    *        JType of the variable
    * @param name
    *        Name of the variable
-   * @return Newly generated JVar
+   * @return Newly generated {@link JSVar}
    */
   @Nonnull
   public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name)
   {
     return decl (type, name, null);
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param name
+   *        Name of the variable
+   * @param init
+   *        Initialization expression for this variable. May be null.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar decl (@Nonnull final String name, @Nullable final IJSExpression init)
+  {
+    return decl (null, name, init);
   }
 
   /**
@@ -169,7 +198,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    *        Name of the variable
    * @param init
    *        Initialization expression for this variable. May be null.
-   * @return Newly generated JVar
+   * @return Newly generated {@link JSVar}
    */
   @Nonnull
   public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
@@ -211,7 +240,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    *        method will be invoked
    * @param method
    *        Name of method to invoke
-   * @return Newly generated JInvocation
+   * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
   public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final String method)
@@ -229,7 +258,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    *        will be invoked
    * @param method
    *        JMethod to invoke
-   * @return Newly generated JInvocation
+   * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
   public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final JSMethod method)
@@ -251,7 +280,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * 
    * @param method
    *        Name of method to invoke
-   * @return Newly generated JInvocation
+   * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
   public JSInvocation invoke (@Nonnull final String method)
@@ -264,7 +293,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * 
    * @param method
    *        JMethod to invoke
-   * @return Newly generated JInvocation
+   * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSMethod method)
@@ -276,7 +305,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * Adds a statement to this block
    * 
    * @param s
-   *        JStatement to be added
+   *        statement to be added
    * @return This block
    */
   @Nonnull
@@ -442,6 +471,15 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   public JSFunction function (@Nullable final AbstractJSType aReturnType, @Nonnull final String name) throws JSNameAlreadyExistsException
   {
     return _insert (new JSFunction (aReturnType, name));
+  }
+
+  public void comment (final String s)
+  {
+    // Single line comment?
+    if (StringHelper.getLineCount (s) == 1)
+      directStatement ("// " + s);
+    else
+      _insert (new JSCommentPart ()).add (s);
   }
 
   /**

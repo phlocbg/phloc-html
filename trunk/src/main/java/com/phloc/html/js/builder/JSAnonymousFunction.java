@@ -50,19 +50,14 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
 /**
- * JS function
+ * A cast operation.
  */
-public class JSFunction implements IJSDocCommentable, IJSDeclaration
+final class JSAnonymousFunction extends AbstractJSExpressionImpl
 {
   /**
    * Return type for this function
    */
   private AbstractJSType m_aType;
-
-  /**
-   * Name of this function
-   */
-  private String m_sName;
 
   /**
    * List of parameters for this function's declaration
@@ -75,20 +70,14 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   private JSBlock m_aBody;
 
   /**
-   * javadoc comments for this JMethod
-   */
-  private JSDocComment m_aJSDoc;
-
-  /**
-   * JMethod constructor
+   * constructor
    * 
-   * @param name
-   *        Name of this function
+   * @param type
+   *        Type to which the expression is cast
    */
-  JSFunction (@Nullable final AbstractJSType aType, @Nonnull final String name)
+  JSAnonymousFunction (@Nullable final AbstractJSType type)
   {
-    m_aType = aType;
-    m_sName = name;
+    m_aType = type;
   }
 
   /**
@@ -106,20 +95,6 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public void type (@Nullable final AbstractJSType t)
   {
     m_aType = t;
-  }
-
-  @Nonnull
-  public String name ()
-  {
-    return m_sName;
-  }
-
-  /**
-   * Changes the name of the function.
-   */
-  public void name (@Nonnull final String n)
-  {
-    m_sName = n;
   }
 
   /**
@@ -153,7 +128,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * signature.
    * 
    * @param type
-   *        Type of the parameter being added
+   *        type of the parameter being added
    * @param name
    *        Name of the parameter being added
    * @return New parameter variable
@@ -179,29 +154,18 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return m_aBody;
   }
 
-  /**
-   * Creates, if necessary, and returns the class javadoc for this JDefinedClass
-   * 
-   * @return {@link JSDocComment} containing javadocs for this class
-   */
   @Nonnull
-  public JSDocComment jsDoc ()
+  public JSInvocation invoke ()
   {
-    if (m_aJSDoc == null)
-      m_aJSDoc = new JSDocComment ();
-    return m_aJSDoc;
+    return new JSInvocation (this);
   }
 
-  @Override
-  public void declare (@Nonnull final JSFormatter f)
+  public void generate (final JSFormatter f)
   {
-    if (m_aJSDoc != null)
-      f.generatable (m_aJSDoc);
-
-    f.plain ("function ");
+    f.plain ("function");
     if (m_aType != null)
-      f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.id (m_sName).plain ('(');
+      f.plain (" /*").generatable (m_aType).plain ("*/");
+    f.plain ('(');
     boolean first = true;
     for (final JSVar aParam : m_aParams)
     {

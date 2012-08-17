@@ -52,13 +52,11 @@ import javax.annotation.Nullable;
 public final class JSArray extends AbstractJSExpressionImpl
 {
   private final AbstractJSType m_aType;
-  private final IJSExpression m_aSize;
   private List <IJSExpression> m_aExprs;
 
-  JSArray (@Nonnull final AbstractJSType type, @Nullable final IJSExpression size)
+  JSArray (@Nullable final AbstractJSType type)
   {
     m_aType = type;
-    m_aSize = size;
   }
 
   /**
@@ -67,6 +65,8 @@ public final class JSArray extends AbstractJSExpressionImpl
   @Nonnull
   public JSArray add (@Nonnull final IJSExpression e)
   {
+    if (e == null)
+      throw new NullPointerException ("expr");
     if (m_aExprs == null)
       m_aExprs = new ArrayList <IJSExpression> ();
     m_aExprs.add (e);
@@ -75,31 +75,11 @@ public final class JSArray extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    // generally we produce new T[x], but when T is an array type (T=T'[])
-    // then new T'[][x] is wrong. It has to be new T'[x][].
-    int arrayCount = 0;
-    AbstractJSType t = m_aType;
-    while (t.isArray ())
-    {
-      t = t.elementType ();
-      arrayCount++;
-    }
-
-    f.plain ("new").generatable (t).plain ('[');
-    if (m_aSize != null)
-      f.generatable (m_aSize);
-    f.plain (']');
-
-    for (int i = 0; i < arrayCount; i++)
-      f.plain ("[]");
-
-    if ((m_aSize == null) || (m_aExprs != null))
-      f.plain ('{');
+    if (m_aType != null)
+      f.plain ("/* array of ").generatable (m_aType).plain (" */");
+    f.plain ('[');
     if (m_aExprs != null)
       f.generatable (m_aExprs);
-    else
-      f.plain (' ');
-    if ((m_aSize == null) || (m_aExprs != null))
-      f.plain ('}');
+    f.plain (']');
   }
 }

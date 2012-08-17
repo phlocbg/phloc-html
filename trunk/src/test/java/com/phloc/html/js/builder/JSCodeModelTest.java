@@ -16,7 +16,10 @@ public final class JSCodeModelTest
     final JSCodeModel aCM = new JSCodeModel ();
     final JSPackage aPkg = aCM.rootPackage ();
 
+    // Global variable
     aPkg.var (aCM.NUMBER, "g_aRoot", JSExpr.lit (0));
+
+    // Crude function
     {
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
       aFuncMain.jsDoc ().add ("This is a global function");
@@ -54,10 +57,50 @@ public final class JSCodeModelTest
                                    .invoke ("test")
                                    .arg ("Water"));
 
+      // Anonymous function
+      {
+        final JSAnonymousFunction a = JSExpr.anonymousFunction ();
+        final JSVar av = a.param ("a");
+        a.body ()._return (av.plus (JSExpr.lit (0.5f)));
+        aFuncMain.body ().add (a.invoke ().arg (7.5));
+      }
+
       // concatenate misc things
       aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
                                                 .ref ("length")
                                                 .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
+    }
+
+    {
+      /**
+       * <pre>
+       * function sajax_extract_htmlcomments (sHTML) {
+       *   var sComments = '';
+       *   // Lazy quantifier "*?"
+       *   sHTML = sHTML.replace(/<!--([\s\S]*?)-->/g, function(all, sComment){
+       *     sComments += sComment + '\n';
+       *     return '';
+       *   });
+       *   // Remaining HTML + comments content
+       *   return [sHTML, sComments];
+       * }
+       * </pre>
+       */
+      final JSFunction aFuncMain = aCM.rootPackage ().function ("sajax_extract_htmlcomments");
+      final JSVar sHTML = aFuncMain.param ("sHTML");
+      final JSVar sComments = aFuncMain.body ().decl ("sComments", JSExpr.lit (""));
+      aFuncMain.body ().comment ("Lazy quantifier \"*?\"");
+      final JSAnonymousFunction anonFunction = JSExpr.anonymousFunction ();
+      anonFunction.param ("all");
+      final JSVar sComment = anonFunction.param ("sComment");
+      anonFunction.body ().assignPlus (sComments, sComment.plus (JSExpr.lit ('\n')));
+      anonFunction.body ()._return (JSExpr.lit (""));
+      aFuncMain.body ().assign (sHTML,
+                                sHTML.invoke ("replace")
+                                     .arg (JSExpr.regex ("<!--([\\s\\S]*?)-->").global (true))
+                                     .arg (anonFunction));
+      aFuncMain.body ().comment ("Remaining HTML + comments content");
+      aFuncMain.body ()._return (JSExpr.newArray ().add (sHTML).add (JSExpr.NULL).add (sComments));
     }
 
     new AbstractCodeWriter ("UTF-8")
