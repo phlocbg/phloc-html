@@ -95,6 +95,12 @@ public final class JSOp
     return new JSUnaryOp ("-", e);
   }
 
+  @Nonnull
+  public static IJSExpression inParantheses (@Nonnull final IJSExpression e)
+  {
+    return new JSUnaryOp ("", e);
+  }
+
   /**
    * Logical not <tt>'!x'</tt>.
    */
