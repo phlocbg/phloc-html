@@ -43,13 +43,10 @@ package com.phloc.html.js.builder.writer;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.charset.CharsetEncoder;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.charset.CharsetManager;
 import com.phloc.html.js.builder.IJSDeclaration;
 import com.phloc.html.js.builder.JSCodeModel;
 import com.phloc.html.js.builder.JSFormatter;
@@ -81,70 +78,24 @@ public abstract class AbstractCodeWriter
    * 
    * @param pkg
    *        The package of the file to be written.
-   * @param fileName
-   *        File name without the path. Something like "Foo.js"
    */
   @Nonnull
-  public abstract Writer getWriter (JSPackage pkg, String fileName) throws IOException;
-
-  /**
-   * Called by CodeModel to store the specified file. The callee must allocate a
-   * storage to store the specified file.
-   * <p>
-   * The returned stream will be closed before the next file is stored. So the
-   * callee can assume that only one OutputStream is active at any given time.
-   * 
-   * @param pkg
-   *        The package of the file to be written.
-   * @param fileName
-   *        File name without the path. Something like "Foo.java" or
-   *        "Bar.properties"
-   */
-  public final BufferedWriter openSource (@Nullable final JSPackage pkg, final String fileName) throws IOException
-  {
-    final Writer bw = getWriter (pkg, fileName);
-
-    // create writer
-    try
-    {
-      return new BufferedWriter (new UnicodeEscapeWriter (bw)
-      {
-        // can't change this signature to Encoder because
-        // we can't have Encoder in method signature
-        private final CharsetEncoder encoder = CharsetManager.getCharsetFromName (m_sEncoding).newEncoder ();
-
-        @Override
-        protected boolean requireEscaping (final int ch)
-        {
-          // control characters
-          if (ch < 0x20 && " \t\r\n".indexOf (ch) == -1)
-            return true;
-          // check ASCII chars, for better performance
-          if (ch < 0x80)
-            return false;
-
-          return !encoder.canEncode ((char) ch);
-        }
-      });
-    }
-    catch (final Throwable t)
-    {
-      return new BufferedWriter (new UnicodeEscapeWriter (bw));
-    }
-  }
+  public abstract Writer getWriter (JSPackage pkg) throws IOException;
 
   /**
    * Called by CodeModel at the end of the process.
    * 
    * @throws IOException
    */
-  public void close () throws IOException
+  public void afterAllPackages () throws IOException
   {}
 
-  public void buildPackage (final JSPackage aPackage) throws IOException
+  public void buildPackage (@Nonnull final JSPackage aPackage) throws IOException
   {
+    final Writer bw = getWriter (aPackage);
+
     // Write a file
-    final JSFormatter f = new JSFormatter (openSource (aPackage.parent (), aPackage.name () + ".js"));
+    final JSFormatter f = new JSFormatter (new BufferedWriter (new UnicodeEscapeWriter (bw, m_sEncoding)));
     try
     {
       // for all declarations in the current package
@@ -157,11 +108,11 @@ public abstract class AbstractCodeWriter
     }
   }
 
-  public void build (final JSCodeModel aCodeModel) throws IOException
+  public void build (@Nonnull final JSCodeModel aCodeModel) throws IOException
   {
     // for all packages
     for (final JSPackage aPackage : aCodeModel.packages ())
       buildPackage (aPackage);
-    close ();
+    afterAllPackages ();
   }
 }

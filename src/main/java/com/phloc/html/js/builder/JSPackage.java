@@ -40,6 +40,7 @@
 
 package com.phloc.html.js.builder;
 
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -49,6 +50,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.io.streams.NonBlockingStringWriter;
 
 /**
  * A JS package.
@@ -317,5 +319,29 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   int countArtifacts ()
   {
     return m_aDecls.size ();
+  }
+
+  public void write (@Nonnull final Writer w)
+  {
+    // Write a file
+    final JSFormatter f = new JSFormatter (w);
+    try
+    {
+      // for all declarations in the current package
+      for (final IJSDeclaration aDecl : declarations ())
+        f.decl (aDecl);
+    }
+    finally
+    {
+      f.close ();
+    }
+  }
+
+  @Nonnull
+  public String getJSCode ()
+  {
+    final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
+    write (aSW);
+    return aSW.getAsString ();
   }
 }
