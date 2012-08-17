@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -51,8 +52,15 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * JS method.
  */
-public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
+public class JSMethod implements IJSDocCommentable, IJSDeclaration
 {
+  private final JSDefinedClass m_aOuter;
+
+  /**
+   * comments for this method
+   */
+  private JSCommentMultiLine m_aJSDoc;
+
   /**
    * Return type for this method
    */
@@ -69,26 +77,21 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   private final List <JSVar> m_aParams = new ArrayList <JSVar> ();
 
   /**
-   * JBlock of statements that makes up the body this method
+   * block of statements that makes up the body this method
    */
   private JSBlock m_aBody;
 
-  private final JSDefinedClass m_aOuter;
-
   /**
-   * javadoc comments for this JMethod
-   */
-  private JSCommentMultiLine m_aJSDoc;
-
-  /**
-   * JMethod constructor
+   * Constructor
    * 
+   * @param outer
+   *        Owning class
    * @param type
    *        Return type for the method
    * @param name
    *        Name of this method
    */
-  JSMethod (final JSDefinedClass outer, final AbstractJSType type, final String name)
+  JSMethod (@Nonnull final JSDefinedClass outer, @Nullable final AbstractJSType type, @Nonnull final String name)
   {
     m_aType = type;
     m_sName = name;
@@ -101,11 +104,17 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    * @param _class
    *        JClass containing this constructor
    */
-  JSMethod (final JSDefinedClass _class)
+  JSMethod (@Nonnull final JSDefinedClass _class)
   {
     m_aType = null;
     m_sName = _class.name ();
     m_aOuter = _class;
+  }
+
+  @Nonnull
+  public JSDefinedClass parentClass ()
+  {
+    return m_aOuter;
   }
 
   /**
@@ -113,6 +122,8 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
    * 
    * @return List of parameters of this method. This list is not modifiable.
    */
+  @Nonnull
+  @ReturnsMutableCopy
   public List <JSVar> params ()
   {
     return ContainerHelper.newList (m_aParams);
@@ -165,48 +176,6 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   }
 
   /**
-   * Returns all the parameter types in an array.
-   * 
-   * @return If there's no parameter, an empty array will be returned.
-   */
-  public AbstractJSType [] listParamTypes ()
-  {
-    final AbstractJSType [] r = new AbstractJSType [m_aParams.size ()];
-    for (int i = 0; i < r.length; i++)
-      r[i] = m_aParams.get (i).type ();
-    return r;
-  }
-
-  /**
-   * Returns all the parameters in an array.
-   * 
-   * @return If there's no parameter, an empty array will be returned.
-   */
-  @Nonnull
-  @ReturnsMutableCopy
-  public List <JSVar> listParams ()
-  {
-    return ContainerHelper.newList (m_aParams);
-  }
-
-  /**
-   * Returns true if the method has the specified signature.
-   */
-  public boolean hasSignature (final AbstractJSType [] argTypes)
-  {
-    final List <JSVar> p = listParams ();
-    if (p.size () != argTypes.length)
-      return false;
-
-    int i = 0;
-    for (final JSVar aVar : p)
-      if (!aVar.type ().equals (argTypes[i++]))
-        return false;
-
-    return true;
-  }
-
-  /**
    * Get the block that makes up body of this method
    * 
    * @return Body of method
@@ -237,29 +206,18 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
 
-    f.generatable (m_aType);
-    f.id (m_sName).plain ('(').indent ();
-    // when parameters are printed in new lines, we want them to be indented.
-    // there's a good chance no newlines happen, too, but just in case it does.
+    if (m_aType != null)
+      f.plain ("/* ").generatable (m_aType).plain (" */");
+    f.id (m_sName).plain ('(');
     boolean first = true;
     for (final JSVar var : m_aParams)
     {
-      if (!first)
+      if (first)
+        first = false;
+      else
         f.plain (',');
       f.var (var);
-      first = false;
     }
-
-    f.outdent ().plain (')');
-
-    if (m_aBody != null)
-      f.stmt (m_aBody);
-    else
-      f.stmt (new JSBlock ());
-  }
-
-  public JSCodeModel owner ()
-  {
-    return m_aOuter.owner ();
+    f.plain (')').stmt (body ());
   }
 }
