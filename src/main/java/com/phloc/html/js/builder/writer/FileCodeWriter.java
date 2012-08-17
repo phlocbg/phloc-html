@@ -115,7 +115,8 @@ public class FileCodeWriter extends AbstractCodeWriter
   {
     // mark files as read-onnly if necessary
     for (final File f : m_aReadOnlyFiles)
-      f.setReadOnly ();
+      if (!f.setReadOnly ())
+        throw new IOException (f + ": failed to set read-only!");
   }
 
   /** Converts a package name to the directory name. */
