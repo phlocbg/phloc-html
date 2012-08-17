@@ -132,7 +132,13 @@ public final class JSOp
   @Nonnull
   public static IJSExpression inParantheses (@Nonnull final IJSExpression e)
   {
-    return new JSUnaryOp ("", e);
+    return new AbstractJSExpressionImpl ()
+    {
+      public void generate (@Nonnull final JSFormatter f)
+      {
+        f.plain ('(').generatable (e).plain (')');
+      }
+    };
   }
 
   /**

@@ -43,7 +43,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 /**
- * JAtoms: Simple code components that merely generate themselves.
+ * Simple code components that merely generate themselves.
  */
 final class JSAtom extends AbstractJSExpressionImpl
 {

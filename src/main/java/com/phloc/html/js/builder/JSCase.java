@@ -54,7 +54,7 @@ public final class JSCase implements IJSStatement
   private final IJSExpression m_aLabel;
 
   /**
-   * JBlock of statements which makes up body of this While statement
+   * Block of statements which makes up body of this While statement
    */
   private JSBlock m_aBody;
 
@@ -66,9 +66,11 @@ public final class JSCase implements IJSStatement
   /**
    * Construct a case statement
    */
-  JSCase (@Nullable final IJSExpression label)
+  JSCase (@Nonnull final IJSExpression label)
   {
     this (label, false);
+    if (label == null)
+      throw new NullPointerException ("Only the default case may not have a label!");
   }
 
   /**

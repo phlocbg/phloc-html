@@ -59,7 +59,7 @@ public final class JSSwitch implements IJSStatement
   private final IJSExpression m_aTest;
 
   /**
-   * vector of JCases.
+   * vector of cases.
    */
   private final List <JSCase> m_aCases = new ArrayList <JSCase> ();
 
@@ -69,7 +69,7 @@ public final class JSSwitch implements IJSStatement
   private JSCase m_aDefaultCase;
 
   /**
-   * Construct a While statment
+   * Construct a switch statment
    */
   JSSwitch (@Nonnull final IJSExpression test)
   {
@@ -90,7 +90,7 @@ public final class JSSwitch implements IJSStatement
   }
 
   @Nonnull
-  public JSCase _case (final IJSExpression label)
+  public JSCase _case (@Nonnull final IJSExpression label)
   {
     final JSCase c = new JSCase (label);
     m_aCases.add (c);

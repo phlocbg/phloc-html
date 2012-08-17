@@ -84,31 +84,31 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression plus (@Nonnull final char v)
+  public final IJSExpression plus (final char v)
   {
     return plus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression plus (@Nonnull final double v)
+  public final IJSExpression plus (final double v)
   {
     return plus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression plus (@Nonnull final float v)
+  public final IJSExpression plus (final float v)
   {
     return plus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression plus (@Nonnull final int v)
+  public final IJSExpression plus (final int v)
   {
     return plus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression plus (@Nonnull final long v)
+  public final IJSExpression plus (final long v)
   {
     return plus (JSExpr.lit (v));
   }
@@ -126,25 +126,25 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression minus (@Nonnull final double v)
+  public final IJSExpression minus (final double v)
   {
     return minus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression minus (@Nonnull final float v)
+  public final IJSExpression minus (final float v)
   {
     return minus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression minus (@Nonnull final int v)
+  public final IJSExpression minus (final int v)
   {
     return minus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression minus (@Nonnull final long v)
+  public final IJSExpression minus (final long v)
   {
     return minus (JSExpr.lit (v));
   }
@@ -156,25 +156,25 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression mul (@Nonnull final double v)
+  public final IJSExpression mul (final double v)
   {
     return mul (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression mul (@Nonnull final float v)
+  public final IJSExpression mul (final float v)
   {
     return mul (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression mul (@Nonnull final int v)
+  public final IJSExpression mul (final int v)
   {
     return mul (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression mul (@Nonnull final long v)
+  public final IJSExpression mul (final long v)
   {
     return mul (JSExpr.lit (v));
   }
@@ -186,25 +186,25 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression div (@Nonnull final double v)
+  public final IJSExpression div (final double v)
   {
     return div (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression div (@Nonnull final float v)
+  public final IJSExpression div (final float v)
   {
     return div (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression div (@Nonnull final int v)
+  public final IJSExpression div (final int v)
   {
     return div (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression div (@Nonnull final long v)
+  public final IJSExpression div (final long v)
   {
     return div (JSExpr.lit (v));
   }
@@ -216,13 +216,13 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression mod (@Nonnull final int v)
+  public final IJSExpression mod (final int v)
   {
     return mod (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression mod (@Nonnull final long v)
+  public final IJSExpression mod (final long v)
   {
     return mod (JSExpr.lit (v));
   }
@@ -234,13 +234,13 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression shl (@Nonnull final int v)
+  public final IJSExpression shl (final int v)
   {
     return shl (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression shl (@Nonnull final long v)
+  public final IJSExpression shl (final long v)
   {
     return shl (JSExpr.lit (v));
   }
@@ -252,13 +252,13 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression shr (@Nonnull final int v)
+  public final IJSExpression shr (final int v)
   {
     return shr (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression shr (@Nonnull final long v)
+  public final IJSExpression shr (final long v)
   {
     return shr (JSExpr.lit (v));
   }
@@ -270,13 +270,13 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression shrz (@Nonnull final int v)
+  public final IJSExpression shrz (final int v)
   {
     return shrz (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final IJSExpression shrz (@Nonnull final long v)
+  public final IJSExpression shrz (final long v)
   {
     return shrz (JSExpr.lit (v));
   }
@@ -402,19 +402,19 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final JSArrayCompRef component (@Nonnull final char index)
+  public final JSArrayCompRef component (final char index)
   {
     return component (JSExpr.lit (index));
   }
 
   @Nonnull
-  public final JSArrayCompRef component (@Nonnull final int index)
+  public final JSArrayCompRef component (final int index)
   {
     return component (JSExpr.lit (index));
   }
 
   @Nonnull
-  public final JSArrayCompRef component (@Nonnull final long index)
+  public final JSArrayCompRef component (final long index)
   {
     return component (JSExpr.lit (index));
   }

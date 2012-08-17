@@ -41,6 +41,7 @@
 package com.phloc.html.js.builder;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
@@ -90,13 +91,13 @@ public class JSFormatter implements Closeable
 
   /**
    * Creates a JFormatter.
-   * 
+   *
    * @param s
    *        PrintWriter to JFormatter to use.
    * @param space
    *        Incremental indentation string, similar to tab value.
    */
-  public JSFormatter (final PrintWriter s, final String space)
+  public JSFormatter (@Nonnull final PrintWriter s,@Nonnull  final String space)
   {
     m_aPW = s;
     m_sIndentSpace = space;
@@ -115,7 +116,7 @@ public class JSFormatter implements Closeable
   /**
    * Closes this formatter.
    */
-  public void close ()
+  public void close () throws IOException
   {
     m_aPW.close ();
   }
@@ -142,7 +143,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a char into the stream
-   * 
+   *
    * @param c
    *        the char
    */
@@ -156,7 +157,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a String into the stream
-   * 
+   *
    * @param s
    *        the String
    */
@@ -175,12 +176,9 @@ public class JSFormatter implements Closeable
    * import and what not to.
    */
   @Nonnull
-  public JSFormatter type (@Nonnull final AbstractJSClass type)
+  public JSFormatter type (@Nonnull final AbstractJSType type)
   {
-    if (type.outer () != null)
-      type (type.outer ()).plain ('.').plain (type.name ());
-    else
-      plain (type.fullName ()); // collision was detected, so generate FQCN
+    plain (type.name ());
     return this;
   }
 
@@ -207,7 +205,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JGenerable object to generate source for itself
-   * 
+   *
    * @param g
    *        the JGenerable object
    */
@@ -238,7 +236,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JDeclaration to generate source for itself
-   * 
+   *
    * @param d
    *        the JDeclaration object
    */
@@ -251,7 +249,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JStatement to generate source for itself
-   * 
+   *
    * @param s
    *        the JStatement object
    */
@@ -264,7 +262,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JVar to generate source for itself
-   * 
+   *
    * @param v
    *        the JVar object
    */
