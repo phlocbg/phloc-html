@@ -57,7 +57,7 @@ public final class JSCodeModelTest
       {
         final JSAnonymousFunction a = JSExpr.anonymousFunction ();
         final JSVar av = a.param ("a");
-        a.body ()._return (av.plus (0.5f));
+        a.body ()._return (av.plus (0.5));
         aFuncMain.body ().invoke (a).arg (7.5);
         aFuncMain.body ().invoke (aFunc).arg (32).arg (-4);
       }
@@ -68,9 +68,7 @@ public final class JSCodeModelTest
 
       // Associative Array
       final JSVar aArray2 = aFuncMain.body ().decl ("array2",
-                                                    JSExpr.newAssocArray ()
-                                                          .add ("num", JSExpr.lit (1))
-                                                          .add ("array", aArray1));
+                                                    JSExpr.newAssocArray ().add ("num", 1).add ("array", aArray1));
       aFuncMain.body ().assign (aArray2.component ("num"), 6);
 
       // concatenate misc things
