@@ -275,12 +275,6 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final boolean v)
-  {
-    return assignPlus (lhs, JSExpr.lit (v));
-  }
-
-  @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final char v)
   {
     return assignPlus (lhs, JSExpr.lit (v));
@@ -320,6 +314,118 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
   {
     _insert (JSExpr.assignPlus (lhs, exp));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  {
+    return assignMinus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  {
+    return assignMinus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assignMinus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assignMinus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  {
+    _insert (JSExpr.assignMinus (lhs, exp));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  {
+    return assignMultiply (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  {
+    return assignMultiply (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assignMultiply (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assignMultiply (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  {
+    _insert (JSExpr.assignMultiply (lhs, exp));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  {
+    return assignDivide (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  {
+    return assignDivide (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assignDivide (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assignDivide (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  {
+    _insert (JSExpr.assignDivide (lhs, exp));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assignModulo (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assignModulo (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  {
+    _insert (JSExpr.assignModulo (lhs, exp));
     return this;
   }
 
