@@ -55,17 +55,12 @@ import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
- * A JS package.
+ * A JS package. This is the entry point for all functions, declarations etc.
+ * 
+ * @author philip
  */
-public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer, IJSCodeProvider
+public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
 {
-  private final JSCodeModel m_aOwner;
-
-  /**
-   * Name of the package. May be the empty string for the root package.
-   */
-  private final String m_sName;
-
   /**
    * List of classes contained within this package keyed by their name.
    */
@@ -73,69 +68,9 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * JPackage constructor
-   *
-   * @param cw
-   *        The code writer being used to create this package
-   * @param name
-   *        Name of package
-   * @throws IllegalArgumentException
-   *         If each part of the package name is not a valid identifier
    */
-  JSPackage (@Nonnull final JSCodeModel cw, @Nonnull final String name)
-  {
-    m_aOwner = cw;
-    if (name.equals ("."))
-      throw new IllegalArgumentException ("Package name . is not allowed");
-
-    m_sName = name;
-  }
-
-  /**
-   * Return the code model root object being used to create this package.
-   */
-  public final JSCodeModel owner ()
-  {
-    return m_aOwner;
-  }
-
-  /**
-   * Checks if this package is the root, unnamed package.
-   */
-  public final boolean isUnnamed ()
-  {
-    return m_sName.length () == 0;
-  }
-
-  /**
-   * Get the name of this package
-   *
-   * @return The name of this package, or the empty string if this is the null
-   *         package. For example, this method returns strings like
-   *         <code>"java.lang"</code>
-   */
-  public String name ()
-  {
-    return m_sName;
-  }
-
-  @Nullable
-  public IJSClassContainer parentClassContainer ()
-  {
-    return parent ();
-  }
-
-  /**
-   * Gets the parent package, or null if this class is the root package.
-   */
-  @Nullable
-  public JSPackage parent ()
-  {
-    final int idx = m_sName.lastIndexOf ('.');
-    if (idx == -1)
-      return null;
-
-    return m_aOwner._package (m_sName.substring (0, idx));
-  }
+  public JSPackage ()
+  {}
 
   @Nonnull
   public JSPackage getPackage ()
@@ -144,18 +79,8 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   }
 
   /**
-   * Gets a reference to a sub package of this package.
-   */
-  public JSPackage subPackage (final String pkg)
-  {
-    if (isUnnamed ())
-      return owner ()._package (pkg);
-    return owner ()._package (m_sName + '.' + pkg);
-  }
-
-  /**
    * Add a class to this package.
-   *
+   * 
    * @param name
    *        Name of class to be added to this package
    * @return Newly generated class
@@ -174,7 +99,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
-   *
+   * 
    * @return null If the class is not yet created.
    */
   public JSDefinedClass getClass (final String name)
@@ -190,7 +115,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Add a function to this package.
-   *
+   * 
    * @param name
    *        Name of function to be added to this package
    * @return Newly generated function
@@ -209,7 +134,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSFunction}.
-   *
+   * 
    * @return null If the class is not yet created.
    */
   public JSFunction getFunction (final String name)
@@ -237,7 +162,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Add a var to this package.
-   *
+   * 
    * @param aType
    *        optional type to use
    * @param name
@@ -262,7 +187,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSFunction}.
-   *
+   * 
    * @return null If the class is not yet created.
    */
   public JSVar getVar (final String name)
@@ -293,7 +218,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
-   *
+   * 
    * @return null If the object is not yet created.
    */
   public IJSDeclaration getDeclaration (final String name)
@@ -307,14 +232,6 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   public boolean isDefined (final String declLocalName)
   {
     return getDeclaration (declLocalName) != null;
-  }
-
-  public void declare (final JSFormatter f)
-  {}
-
-  public void generate (final JSFormatter f)
-  {
-    f.plain (m_sName);
   }
 
   int countArtifacts ()

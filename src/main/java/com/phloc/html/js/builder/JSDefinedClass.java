@@ -42,8 +42,6 @@ package com.phloc.html.js.builder;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +80,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /** Fields keyed by their names. */
   final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
 
-  /** class javadoc */
+  /** class JSDoc */
   private JSCommentMultiLine m_aJSDoc;
 
   /** Set of constructors for this class, if any */
@@ -96,23 +94,16 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   private String m_sDirectBlock;
 
-  JSDefinedClass (final JSPackage parent, final String name)
-  {
-    this (name, parent, parent.owner ());
-  }
-
   /**
    * JClass constructor
    * 
-   * @param mods
+   * @param parent
    *        Modifiers for this class declaration
    * @param name
    *        Name of this class
    */
-  private JSDefinedClass (@Nonnull final String name, final JSPackage parent, @Nonnull final JSCodeModel owner)
+  JSDefinedClass (final JSPackage parent, final String name)
   {
-    super (owner);
-
     if (StringHelper.hasNoTextAfterTrim (name))
       throw new IllegalArgumentException ("JSDefinedClass name empty");
     if (!JSMarshaller.isJSIdentifier (name))
@@ -128,6 +119,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    *        Superclass for this class
    * @return This class
    */
+  @Nonnull
   public JSDefinedClass _extends (@Nonnull final AbstractJSClass superClass)
   {
     if (superClass == null)
@@ -169,6 +161,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    *        Name of this field
    * @return Newly generated field
    */
+  @Nonnull
   public JSFieldVar field (final AbstractJSType type, final String name)
   {
     return field (type, name, null);
@@ -185,28 +178,28 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    *        Initial value of this field.
    * @return Newly generated field
    */
+  @Nonnull
   public JSFieldVar field (final AbstractJSType type, final String name, final IJSExpression init)
   {
     final JSFieldVar f = new JSFieldVar (this, type, name, init);
 
     if (m_aFields.containsKey (name))
-    {
       throw new IllegalArgumentException ("trying to create the same field twice: " + name);
-    }
 
     m_aFields.put (name, f);
     return f;
   }
 
   /**
-   * Returns all the fields declred in this class. The returned {@link Map} is a
-   * read-only live view.
+   * Returns all the fields declared in this class. The returned {@link Map} is
+   * a read-only live view.
    * 
    * @return always non-null.
    */
+  @Nonnull
   public Map <String, JSFieldVar> fields ()
   {
-    return Collections.unmodifiableMap (m_aFields);
+    return ContainerHelper.newMap (m_aFields);
   }
 
   /**
@@ -224,6 +217,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Adds a constructor to this class.
    */
+  @Nonnull
   public JSMethod constructor ()
   {
     final JSMethod c = new JSMethod (this);
@@ -234,9 +228,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Returns an iterator that walks the constructors defined in this class.
    */
-  public Iterator <JSMethod> constructors ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <JSMethod> constructors ()
   {
-    return m_aConstructors.iterator ();
+    return ContainerHelper.newList (m_aConstructors);
   }
 
   /**
@@ -248,6 +244,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    *        Name of the method
    * @return Newly generated JMethod
    */
+  @Nonnull
   public JSMethod method (final AbstractJSType type, final String name)
   {
     // XXX problems caught in M constructor
@@ -266,16 +263,12 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return ContainerHelper.newList (m_aMethods);
   }
 
-  public JSPackage getPackage ()
-  {
-    return parentClassContainer ().getPackage ();
-  }
-
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
    * @return {@link JSCommentMultiLine} containing javadocs for this class
    */
+  @Nonnull
   public JSCommentMultiLine jsDoc ()
   {
     if (m_aJSDoc == null)
@@ -330,14 +323,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   @Override
   public final JSPackage _package ()
-  {
-    IJSClassContainer p = m_aOuter;
-    while (!(p instanceof JSPackage))
-      p = p.parentClassContainer ();
-    return (JSPackage) p;
-  }
-
-  public final IJSClassContainer parentClassContainer ()
   {
     return m_aOuter;
   }
