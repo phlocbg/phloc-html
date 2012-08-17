@@ -43,7 +43,6 @@ package com.phloc.html.js.builder;
 /**
  * While statement
  */
-
 public class JSWhileLoop implements IJSStatement
 {
   /**
@@ -54,7 +53,7 @@ public class JSWhileLoop implements IJSStatement
   /**
    * JBlock of statements which makes up body of this While statement
    */
-  private JSBlock body;
+  private JSBlock m_aBody;
 
   /**
    * Construct a While statment
@@ -71,9 +70,9 @@ public class JSWhileLoop implements IJSStatement
 
   public JSBlock body ()
   {
-    if (body == null)
-      body = new JSBlock ();
-    return body;
+    if (m_aBody == null)
+      m_aBody = new JSBlock ();
+    return m_aBody;
   }
 
   public void state (final JSFormatter f)
@@ -86,8 +85,8 @@ public class JSWhileLoop implements IJSStatement
     {
       f.plain ("while (").generatable (m_aTest).plain (')');
     }
-    if (body != null)
-      f.stmt (body);
+    if (m_aBody != null)
+      f.stmt (m_aBody);
     else
       f.plain (';').nl ();
   }

@@ -48,9 +48,9 @@ import javax.annotation.Nonnull;
 
 public class JSTryBlock implements IJSStatement
 {
-  private final JSBlock body = new JSBlock ();
-  private JSCatchBlock _catch;
-  private JSBlock _finally;
+  private final JSBlock m_aBody = new JSBlock ();
+  private JSCatchBlock m_aCatch;
+  private JSBlock m_aFinally;
 
   JSTryBlock ()
   {}
@@ -58,47 +58,47 @@ public class JSTryBlock implements IJSStatement
   @Nonnull
   public JSBlock body ()
   {
-    return body;
+    return m_aBody;
   }
 
   @Nonnull
   public JSCatchBlock _catch ()
   {
-    if (_catch == null)
-      _catch = new JSCatchBlock ();
-    return _catch;
+    if (m_aCatch == null)
+      m_aCatch = new JSCatchBlock ();
+    return m_aCatch;
   }
 
   @Nonnull
   public JSCatchBlock _catch (final String name)
   {
-    if (_catch == null)
-      _catch = new JSCatchBlock (name);
-    return _catch;
+    if (m_aCatch == null)
+      m_aCatch = new JSCatchBlock (name);
+    return m_aCatch;
   }
 
   @Nonnull
   public JSBlock _finally ()
   {
-    if (_finally == null)
-      _finally = new JSBlock ();
-    return _finally;
+    if (m_aFinally == null)
+      m_aFinally = new JSBlock ();
+    return m_aFinally;
   }
 
   public void state (final JSFormatter f)
   {
-    if (_catch == null && _finally == null)
+    if (m_aCatch == null && m_aFinally == null)
     {
       // no try when there is no catch and no finally
-      f.generatable (body);
+      f.generatable (m_aBody);
     }
     else
     {
-      f.plain ("try").generatable (body);
-      if (_catch != null)
-        f.generatable (_catch);
-      if (_finally != null)
-        f.plain ("finally").generatable (_finally);
+      f.plain ("try").generatable (m_aBody);
+      if (m_aCatch != null)
+        f.generatable (m_aCatch);
+      if (m_aFinally != null)
+        f.plain ("finally").generatable (m_aFinally);
       f.nl ();
     }
   }
