@@ -95,6 +95,15 @@ public class JSRegExLiteral extends AbstractJSExpressionImpl
     return this;
   }
 
+  @Nonnull
+  public JSRegExLiteral gim (final boolean bGlobal, final boolean bCaseInsensitive, final boolean bMultiLine)
+  {
+    global (bGlobal);
+    caseInsensitive (bCaseInsensitive);
+    multiLine (bMultiLine);
+    return this;
+  }
+
   public void generate (final JSFormatter f)
   {
     f.plain ('/').plain (m_sStr).plain ('/');

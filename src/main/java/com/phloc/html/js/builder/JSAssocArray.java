@@ -56,6 +56,48 @@ public final class JSAssocArray extends AbstractJSExpressionImpl
   {}
 
   @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final boolean value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final char value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final double value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final float value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final int value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final long value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, final String value)
+  {
+    return add (key, JSExpr.lit (value));
+  }
+
+  @Nonnull
   public JSAssocArray add (@Nonnull final String key, @Nonnull final IJSExpression value)
   {
     return add (JSExpr.lit (key), value);
