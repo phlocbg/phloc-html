@@ -619,6 +619,17 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   }
 
   /**
+   * Insert a <code>delete expr;</code> statement
+   * 
+   * @param aExpr
+   *        the expression to be deleted. May not be <code>null</code>.
+   */
+  public void delete (@Nonnull final IJSExpression aExpr)
+  {
+    _insert (new JSDelete (aExpr));
+  }
+
+  /**
    * Create a return statement and add it to this block
    */
   public void _return ()

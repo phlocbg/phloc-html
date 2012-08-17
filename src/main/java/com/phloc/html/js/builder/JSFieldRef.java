@@ -40,6 +40,9 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Field Reference
  */
@@ -62,33 +65,29 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
    */
   private JSVar m_aVar;
 
-  JSFieldRef (final IJSGeneratable object, final String name)
+  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final String name)
   {
-    this.m_aObject = object;
+    m_aObject = object;
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("Field name contains '.': " + name);
-    this.m_sName = name;
+    m_sName = name;
   }
 
-  JSFieldRef (final IJSGeneratable object, final JSVar var)
+  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final JSVar var)
   {
-    this.m_aObject = object;
-    this.m_aVar = var;
+    m_aObject = object;
+    m_aVar = var;
   }
 
   public void generate (final JSFormatter f)
   {
-    String name = this.m_sName;
+    String name = m_sName;
     if (name == null)
       name = m_aVar.name ();
 
     if (m_aObject != null)
-    {
       f.generatable (m_aObject).plain ('.').plain (name);
-    }
     else
-    {
-      f.plain ("this.").plain (name);
-    }
+      f.id (name);
   }
 }

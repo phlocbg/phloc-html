@@ -366,15 +366,15 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final IJSExpression typeof ()
+  public final IJSExpression _instanceof (@Nonnull final AbstractJSType right)
   {
-    return JSOp.typeof (this);
+    return JSOp._instanceof (this, right);
   }
 
   @Nonnull
-  public final IJSExpression delete ()
+  public final IJSExpression typeof ()
   {
-    return JSOp.delete (this);
+    return JSOp.typeof (this);
   }
 
   @Nonnull
