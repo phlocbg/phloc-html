@@ -41,10 +41,16 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
+
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
 
 /**
- * JClass for generating expressions containing operators
+ * Class for generating expressions containing operators
  */
+@Immutable
 public final class JSOp
 {
   private JSOp ()
@@ -53,9 +59,9 @@ public final class JSOp
   /**
    * Determine whether the top level of an expression involves an operator.
    */
-  static boolean hasTopOp (final IJSExpression e)
+  static boolean hasTopOp (@Nullable final IJSExpression e)
   {
-    return (e instanceof JSUnaryOp) || (e instanceof JSBinaryOp);
+    return (e instanceof JSUnaryOp) || (e instanceof JSBinaryOp) || (e instanceof JSTernaryOp);
   }
 
   /* -- Unary operators -- */
@@ -66,21 +72,28 @@ public final class JSOp
     final IJSExpression m_aExpr;
     final boolean m_bOpFirst;
 
-    JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
+    JSTightUnaryOp (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
     {
-      m_sOp = op;
-      m_aExpr = e;
-      m_bOpFirst = true;
+      this (op, e, true);
     }
 
-    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
+    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
     {
-      m_sOp = op;
-      m_aExpr = e;
-      m_bOpFirst = false;
+      this (op, e, false);
     }
 
-    public void generate (final JSFormatter f)
+    private JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e, final boolean bOpFirst)
+    {
+      if (StringHelper.hasNoText (op))
+        throw new IllegalArgumentException ("empty operator");
+      if (e == null)
+        throw new NullPointerException ("expr");
+      m_sOp = op;
+      m_aExpr = e;
+      m_bOpFirst = bOpFirst;
+    }
+
+    public void generate (@Nonnull final JSFormatter f)
     {
       if (m_bOpFirst)
         f.plain (m_sOp).generatable (m_aExpr);
@@ -91,12 +104,12 @@ public final class JSOp
 
   private static class JSUnaryOp extends JSTightUnaryOp
   {
-    JSUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
+    JSUnaryOp (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
     {
       super (op, e);
     }
 
-    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
+    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
     {
       super (e, op);
     }
@@ -142,27 +155,21 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression incr (final IJSExpression e)
+  public static IJSExpression incr (@Nonnull final IJSExpression e)
   {
     return new JSTightUnaryOp (e, "++");
   }
 
   @Nonnull
-  public static IJSExpression decr (final IJSExpression e)
+  public static IJSExpression decr (@Nonnull final IJSExpression e)
   {
     return new JSTightUnaryOp (e, "--");
   }
 
   @Nonnull
-  public static IJSExpression typeof (final IJSExpression e)
+  public static IJSExpression typeof (@Nonnull final IJSExpression e)
   {
     return new JSTightUnaryOp ("typeof ", e);
-  }
-
-  @Nonnull
-  public static IJSExpression delete (final IJSExpression e)
-  {
-    return new JSTightUnaryOp ("delete ", e);
   }
 
   /* -- Binary operators -- */
@@ -173,70 +180,89 @@ public final class JSOp
     private final String m_sOp;
     private final IJSGeneratable m_aRight;
 
-    JSBinaryOp (final String op, final IJSExpression left, final IJSGeneratable right)
+    JSBinaryOp (@Nonnull final IJSExpression left,
+                @Nonnull @Nonempty final String op,
+                @Nonnull final IJSGeneratable right)
     {
+      if (left == null)
+        throw new NullPointerException ("left");
+      if (StringHelper.hasNoText (op))
+        throw new IllegalArgumentException ("empty operator");
+      if (right == null)
+        throw new NullPointerException ("right");
       m_aLeft = left;
       m_sOp = op;
       m_aRight = right;
     }
 
-    public void generate (final JSFormatter f)
+    public void generate (@Nonnull final JSFormatter f)
     {
       f.plain ('(').generatable (m_aLeft).plain (m_sOp).generatable (m_aRight).plain (')');
     }
   }
 
-  public static IJSExpression plus (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression plus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("+", left, right);
+    return new JSBinaryOp (left, "+", right);
   }
 
-  public static IJSExpression minus (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression minus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("-", left, right);
+    return new JSBinaryOp (left, "-", right);
   }
 
-  public static IJSExpression mul (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression mul (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("*", left, right);
+    return new JSBinaryOp (left, "*", right);
   }
 
-  public static IJSExpression div (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression div (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("/", left, right);
+    return new JSBinaryOp (left, "/", right);
   }
 
-  public static IJSExpression mod (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression mod (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("%", left, right);
+    return new JSBinaryOp (left, "%", right);
   }
 
-  public static IJSExpression shl (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression shl (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("<<", left, right);
+    return new JSBinaryOp (left, "<<", right);
   }
 
-  public static IJSExpression shr (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression shr (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp (">>", left, right);
+    return new JSBinaryOp (left, ">>", right);
   }
 
-  public static IJSExpression shrz (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression shrz (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp (">>>", left, right);
+    return new JSBinaryOp (left, ">>>", right);
   }
 
-  public static IJSExpression band (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression band (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("&", left, right);
+    return new JSBinaryOp (left, "&", right);
   }
 
-  public static IJSExpression bor (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression bor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("|", left, right);
+    return new JSBinaryOp (left, "|", right);
   }
 
-  public static IJSExpression cand (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression cand (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     if (left == JSExpr.TRUE)
       return right;
@@ -246,10 +272,11 @@ public final class JSOp
       return left; // JExpr.FALSE
     if (right == JSExpr.FALSE)
       return right; // JExpr.FALSE
-    return new JSBinaryOp ("&&", left, right);
+    return new JSBinaryOp (left, "&&", right);
   }
 
-  public static IJSExpression cor (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression cor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     if (left == JSExpr.TRUE)
       return left; // JExpr.TRUE
@@ -259,74 +286,100 @@ public final class JSOp
       return right;
     if (right == JSExpr.FALSE)
       return left;
-    return new JSBinaryOp ("||", left, right);
+    return new JSBinaryOp (left, "||", right);
   }
 
-  public static IJSExpression xor (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression xor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("^", left, right);
+    return new JSBinaryOp (left, "^", right);
   }
 
-  public static IJSExpression lt (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression lt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("<", left, right);
+    return new JSBinaryOp (left, "<", right);
   }
 
-  public static IJSExpression lte (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression lte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("<=", left, right);
+    return new JSBinaryOp (left, "<=", right);
   }
 
-  public static IJSExpression gt (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression gt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp (">", left, right);
+    return new JSBinaryOp (left, ">", right);
   }
 
-  public static IJSExpression gte (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression gte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp (">=", left, right);
+    return new JSBinaryOp (left, ">=", right);
   }
 
   // equals
-  public static IJSExpression eq (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression eq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("==", left, right);
+    return new JSBinaryOp (left, "==", right);
   }
 
   // exactly equals
-  public static IJSExpression eeq (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression eeq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("===", left, right);
+    return new JSBinaryOp (left, "===", right);
   }
 
   // not equal
-  public static IJSExpression ne (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression ne (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("!=", left, right);
+    return new JSBinaryOp (left, "!=", right);
   }
 
   // exactly not equal
-  public static IJSExpression ene (final IJSExpression left, final IJSExpression right)
+  @Nonnull
+  public static IJSExpression ene (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
-    return new JSBinaryOp ("!==", left, right);
+    return new JSBinaryOp (left, "!==", right);
+  }
+
+  @Nonnull
+  public static IJSExpression _instanceof (@Nonnull final IJSExpression left, @Nonnull final AbstractJSType right)
+  {
+    return new JSBinaryOp (left, "instanceof", right);
   }
 
   /* -- Ternary operators -- */
 
   private static class JSTernaryOp extends AbstractJSExpressionImpl
   {
-    private final String m_sOp1;
-    private final String m_sOp2;
     private final IJSExpression m_aExpr1;
+    private final String m_sOp1;
     private final IJSExpression m_aExpr2;
+    private final String m_sOp2;
     private final IJSExpression m_aExpr3;
 
-    JSTernaryOp (final String op1,
-                 final String op2,
-                 final IJSExpression e1,
-                 final IJSExpression e2,
-                 final IJSExpression e3)
+    JSTernaryOp (@Nonnull final IJSExpression e1,
+                 @Nonnull @Nonempty final String op1,
+                 @Nonnull final IJSExpression e2,
+                 @Nonnull @Nonempty final String op2,
+                 @Nonnull final IJSExpression e3)
     {
+      if (e1 == null)
+        throw new NullPointerException ("expr1");
+      if (StringHelper.hasNoText (op1))
+        throw new IllegalArgumentException ("empty operator1");
+      if (e2 == null)
+        throw new NullPointerException ("expr2");
+      if (StringHelper.hasNoText (op2))
+        throw new IllegalArgumentException ("empty operator1");
+      if (e3 == null)
+        throw new NullPointerException ("expr3");
+
       m_aExpr1 = e1;
       m_sOp1 = op1;
       m_aExpr2 = e2;
@@ -334,7 +387,7 @@ public final class JSOp
       m_aExpr3 = e3;
     }
 
-    public void generate (final JSFormatter f)
+    public void generate (@Nonnull final JSFormatter f)
     {
       f.plain ('(')
        .generatable (m_aExpr1)
@@ -347,8 +400,10 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression cond (final IJSExpression cond, final IJSExpression ifTrue, final IJSExpression ifFalse)
+  public static IJSExpression cond (@Nonnull final IJSExpression cond,
+                                    @Nonnull final IJSExpression ifTrue,
+                                    @Nonnull final IJSExpression ifFalse)
   {
-    return new JSTernaryOp ("?", ":", cond, ifTrue, ifFalse);
+    return new JSTernaryOp (cond, "?", ifTrue, ":", ifFalse);
   }
 }

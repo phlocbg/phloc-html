@@ -127,25 +127,25 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSFieldRef ref (final String field)
+  public static JSFieldRef ref (@Nonnull final String field)
   {
     return new JSFieldRef ((IJSExpression) null, field);
   }
 
   @Nonnull
-  public static JSFieldRef ref (final IJSExpression lhs, final JSVar field)
+  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final JSVar field)
   {
     return new JSFieldRef (lhs, field);
   }
 
   @Nonnull
-  public static JSFieldRef ref (final IJSExpression lhs, final String field)
+  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final String field)
   {
     return new JSFieldRef (lhs, field);
   }
 
   @Nonnull
-  public static JSArrayCompRef component (final IJSExpression lhs, final IJSExpression index)
+  public static JSArrayCompRef component (@Nonnull final IJSExpression lhs, @Nonnull final IJSExpression index)
   {
     return new JSArrayCompRef (lhs, index);
   }

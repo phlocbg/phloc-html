@@ -99,131 +99,129 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression typeof ();
 
   /**
-   * @return "delete [this]" from "[this]"
-   */
-  @Nonnull
-  IJSExpression delete ();
-
-  /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (IJSExpression right);
+  IJSExpression plus (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (IJSExpression right);
+  IJSExpression minus (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (IJSExpression right);
+  IJSExpression mul (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (IJSExpression right);
+  IJSExpression div (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]%[right]"
    */
   @Nonnull
-  IJSExpression mod (IJSExpression right);
+  IJSExpression mod (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]&lt;&lt;[right]"
    */
   @Nonnull
-  IJSExpression shl (IJSExpression right);
+  IJSExpression shl (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]>>[right]"
    */
   @Nonnull
-  IJSExpression shr (IJSExpression right);
+  IJSExpression shr (@Nonnull IJSExpression right);
 
   /**
    * @return "[this]>>>[right]"
    */
   @Nonnull
-  IJSExpression shrz (IJSExpression right);
+  IJSExpression shrz (@Nonnull IJSExpression right);
 
   /** Bit-wise AND '&amp;'. */
   @Nonnull
-  IJSExpression band (IJSExpression right);
+  IJSExpression band (@Nonnull IJSExpression right);
 
   /** Bit-wise OR '|'. */
   @Nonnull
-  IJSExpression bor (IJSExpression right);
+  IJSExpression bor (@Nonnull IJSExpression right);
 
   /** Logical AND '&amp;&amp;'. */
   @Nonnull
-  IJSExpression cand (IJSExpression right);
+  IJSExpression cand (@Nonnull IJSExpression right);
 
   /** Logical OR '||'. */
   @Nonnull
-  IJSExpression cor (IJSExpression right);
+  IJSExpression cor (@Nonnull IJSExpression right);
 
   /** XOR '^'. */
   @Nonnull
-  IJSExpression xor (IJSExpression right);
+  IJSExpression xor (@Nonnull IJSExpression right);
 
   /** Lower than '&lt;'. */
   @Nonnull
-  IJSExpression lt (IJSExpression right);
+  IJSExpression lt (@Nonnull IJSExpression right);
 
   /** Lower than or equal '&lt;='. */
   @Nonnull
-  IJSExpression lte (IJSExpression right);
+  IJSExpression lte (@Nonnull IJSExpression right);
 
   /** Greater than '>'. */
   @Nonnull
-  IJSExpression gt (IJSExpression right);
+  IJSExpression gt (@Nonnull IJSExpression right);
 
   /** Greater than or equal '>='. */
   @Nonnull
-  IJSExpression gte (IJSExpression right);
+  IJSExpression gte (@Nonnull IJSExpression right);
 
   /** Equals '=='. */
   @Nonnull
-  IJSExpression eq (IJSExpression right);
+  IJSExpression eq (@Nonnull IJSExpression right);
 
   /** Exactly equals '==='. */
   @Nonnull
-  IJSExpression eeq (IJSExpression right);
+  IJSExpression eeq (@Nonnull IJSExpression right);
 
   /** Not equals '!='. */
   @Nonnull
-  IJSExpression ne (IJSExpression right);
+  IJSExpression ne (@Nonnull IJSExpression right);
 
   /** Exactly not equals '!=='. */
   @Nonnull
-  IJSExpression ene (IJSExpression right);
+  IJSExpression ene (@Nonnull IJSExpression right);
+
+  /** instanceof */
+  @Nonnull
+  IJSExpression _instanceof (@Nonnull AbstractJSType right);
 
   /**
    * @return "[this].[method]". Arguments shall be added to the returned
    *         {@link JSInvocation} object.
    */
   @Nonnull
-  JSInvocation invoke (JSMethod method);
+  JSInvocation invoke (@Nonnull JSMethod method);
 
   /**
    * @return "[this].[method]". Arguments shall be added to the returned
    *         {@link JSInvocation} object.
    */
   @Nonnull
-  JSInvocation invoke (String method);
+  JSInvocation invoke (@Nonnull String method);
 
   @Nonnull
-  JSFieldRef ref (JSVar field);
+  JSFieldRef ref (@Nonnull JSVar field);
 
   @Nonnull
-  JSFieldRef ref (String field);
+  JSFieldRef ref (@Nonnull String field);
 
   @Nonnull
-  JSArrayCompRef component (IJSExpression index);
+  JSArrayCompRef component (@Nonnull IJSExpression index);
 }

@@ -67,6 +67,10 @@ final class JSCast extends AbstractJSExpressionImpl
    */
   JSCast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression object)
   {
+    if (type == null)
+      throw new NullPointerException ("type");
+    if (object == null)
+      throw new NullPointerException ("object");
     m_aType = type;
     m_aObject = object;
   }
