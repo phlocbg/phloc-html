@@ -49,6 +49,7 @@ import java.util.Set;
 import com.phloc.commons.io.EAppend;
 import com.phloc.commons.io.file.FileOperations;
 import com.phloc.commons.io.resource.FileSystemResource;
+import com.phloc.html.js.builder.JSCodeModel;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -110,7 +111,7 @@ public class FileCodeWriter extends AbstractCodeWriter
   }
 
   @Override
-  public void afterAllPackages () throws IOException
+  public void afterBuildAll (final JSCodeModel aCodeModel) throws IOException
   {
     // mark files as read-onnly if necessary
     for (final File f : m_aReadOnlyFiles)

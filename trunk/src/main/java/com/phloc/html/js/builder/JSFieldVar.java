@@ -44,7 +44,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * A field that can have a {@link JSDocComment} associated with it
+ * A field that can have a {@link JSCommentMultiLine} associated with it
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
 {
@@ -53,7 +53,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   /**
    * javadoc comments for this JFieldVar
    */
-  private JSDocComment m_aJSDoc;
+  private JSCommentMultiLine m_aJSDoc;
 
   /**
    * JFieldVar constructor
@@ -94,10 +94,10 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * @return JDocComment containing javadocs for this class
    */
   @Nonnull
-  public JSDocComment jsDoc ()
+  public JSCommentMultiLine jsDoc ()
   {
     if (m_aJSDoc == null)
-      m_aJSDoc = new JSDocComment ();
+      m_aJSDoc = new JSCommentMultiLine ();
     return m_aJSDoc;
   }
 

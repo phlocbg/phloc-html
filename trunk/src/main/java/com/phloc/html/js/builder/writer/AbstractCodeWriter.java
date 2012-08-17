@@ -82,14 +82,6 @@ public abstract class AbstractCodeWriter
   @Nonnull
   public abstract Writer getWriter (JSPackage pkg) throws IOException;
 
-  /**
-   * Called by CodeModel at the end of the process.
-   * 
-   * @throws IOException
-   */
-  public void afterAllPackages () throws IOException
-  {}
-
   public void buildPackage (@Nonnull final JSPackage aPackage) throws IOException
   {
     final Writer bw = getWriter (aPackage);
@@ -99,20 +91,41 @@ public abstract class AbstractCodeWriter
     try
     {
       // for all declarations in the current package
-      for (final IJSDeclaration c : aPackage.declarations ())
-        f.decl (c);
+      for (final IJSDeclaration aDecl : aPackage.declarations ())
+        f.decl (aDecl);
     }
     finally
     {
       f.close ();
     }
+    afterBuildPackage (aPackage);
   }
+
+  /**
+   * Called by CodeModel at the end of the process.
+   * 
+   * @param aPackage
+   *        The previously built package
+   * @throws IOException
+   */
+  public void afterBuildPackage (@Nonnull final JSPackage aPackage) throws IOException
+  {}
 
   public void build (@Nonnull final JSCodeModel aCodeModel) throws IOException
   {
     // for all packages
     for (final JSPackage aPackage : aCodeModel.packages ())
       buildPackage (aPackage);
-    afterAllPackages ();
+    afterBuildAll (aCodeModel);
   }
+
+  /**
+   * Called by CodeModel at the end of the process.
+   * 
+   * @param aCodeModel
+   *        the generated code model
+   * @throws IOException
+   */
+  public void afterBuildAll (@Nonnull final JSCodeModel aCodeModel) throws IOException
+  {}
 }
