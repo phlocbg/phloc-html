@@ -35,7 +35,7 @@ public final class JSCodeModelTest
       final JSTryBlock aTB = aCond._then ()._try ();
       aTB.body ()._return (JSExpr.lit (5).inParantheses ().inParantheses ());
       final JSCatchBlock aCB = aTB._catch ("ex");
-      aCB.body ()._throw (JSExpr._new (JSPrimitiveType.ERROR).arg (aCB.param ()));
+      aCB.body ()._throw (JSPrimitiveType.ERROR._new ().arg (aCB.param ()));
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
 
       // RegExp
@@ -57,10 +57,21 @@ public final class JSCodeModelTest
       {
         final JSAnonymousFunction a = JSExpr.anonymousFunction ();
         final JSVar av = a.param ("a");
-        a.body ()._return (av.plus (JSExpr.lit (0.5f)));
+        a.body ()._return (av.plus (0.5f));
         aFuncMain.body ().invoke (a).arg (7.5);
         aFuncMain.body ().invoke (aFunc).arg (32).arg (-4);
       }
+
+      // Array
+      final JSVar aArray1 = aFuncMain.body ().decl ("array1", JSExpr.newArray ().add (5));
+      aFuncMain.body ().assign (aArray1.component (0), 6);
+
+      // Associative Array
+      final JSVar aArray2 = aFuncMain.body ().decl ("array2",
+                                                    JSExpr.newAssocArray ()
+                                                          .add ("num", JSExpr.lit (1))
+                                                          .add ("array", aArray1));
+      aFuncMain.body ().assign (aArray2.component ("num"), 6);
 
       // concatenate misc things
       aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
@@ -90,14 +101,14 @@ public final class JSCodeModelTest
       final JSAnonymousFunction anonFunction = JSExpr.anonymousFunction ();
       anonFunction.param ("all");
       final JSVar sComment = anonFunction.param ("sComment");
-      anonFunction.body ().assignPlus (sComments, sComment.plus (JSExpr.lit ('\n')));
+      anonFunction.body ().assignPlus (sComments, sComment.plus ('\n'));
       anonFunction.body ()._return (JSExpr.lit (""));
       aFuncMain.body ().assign (sHTML,
                                 sHTML.invoke ("replace")
                                      .arg (JSExpr.regex ("<!--([\\s\\S]*?)-->").global (true))
                                      .arg (anonFunction));
       aFuncMain.body ().comment ("Remaining HTML + comments content");
-      aFuncMain.body ()._return (JSExpr.newArray ().add (sHTML).add (JSExpr.NULL).add (sComments));
+      aFuncMain.body ()._return (JSExpr.newArray ().add (sHTML).add (sComments));
     }
 
     final String sCode = aCM.rootPackage ().getJSCode ();

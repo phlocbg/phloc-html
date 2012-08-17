@@ -59,6 +59,48 @@ public final class JSArray extends AbstractJSExpressionImpl
     m_aType = type;
   }
 
+  @Nonnull
+  public JSArray add (@Nonnull final boolean v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final char v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final double v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final float v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final int v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final long v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nonnull final String v)
+  {
+    return add (JSExpr.lit (v));
+  }
+
   /**
    * Add an element to the array initializer
    */

@@ -44,7 +44,7 @@ package com.phloc.html.js.builder;
  * Field Reference
  */
 
-public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmentTarget
+public class JSFieldRef extends AbstractJSAssignmentTarget
 {
   /**
    * Object expression upon which this field will be accessed, or null for the
@@ -90,15 +90,5 @@ public class JSFieldRef extends AbstractJSExpressionImpl implements IJSAssignmen
     {
       f.plain ("this.").plain (name);
     }
-  }
-
-  public IJSExpression assign (final IJSExpression rhs)
-  {
-    return JSExpr.assign (this, rhs);
-  }
-
-  public IJSExpression assignPlus (final IJSExpression rhs)
-  {
-    return JSExpr.assignPlus (this, rhs);
   }
 }

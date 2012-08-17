@@ -217,6 +217,48 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     return v;
   }
 
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final boolean v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final char v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final String v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
   /**
    * Creates an assignment statement and adds it to this block.
    * 
@@ -226,16 +268,58 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    *        Right hand side expression
    */
   @Nonnull
-  public JSBlock assign (final IJSAssignmentTarget lhs, final IJSExpression exp)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
   {
-    _insert (new JSAssignment (lhs, exp));
+    _insert (JSExpr.assign (lhs, exp));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignPlus (final IJSAssignmentTarget lhs, final IJSExpression exp)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final boolean v)
   {
-    _insert (new JSAssignment (lhs, "+=", exp));
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final char v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final String v)
+  {
+    return assignPlus (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  {
+    _insert (JSExpr.assignPlus (lhs, exp));
     return this;
   }
 

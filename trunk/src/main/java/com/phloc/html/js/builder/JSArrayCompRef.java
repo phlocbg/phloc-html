@@ -45,7 +45,7 @@ import javax.annotation.Nonnull;
 /**
  * array component reference.
  */
-final class JSArrayCompRef extends AbstractJSExpressionImpl implements IJSAssignmentTarget
+final class JSArrayCompRef extends AbstractJSAssignmentTarget
 {
   /**
    * JArray expression upon which this component will be accessed.
@@ -73,18 +73,6 @@ final class JSArrayCompRef extends AbstractJSExpressionImpl implements IJSAssign
       throw new NullPointerException ("index");
     m_aArray = array;
     m_aIndex = index;
-  }
-
-  @Nonnull
-  public IJSExpression assign (@Nonnull final IJSExpression rhs)
-  {
-    return JSExpr.assign (this, rhs);
-  }
-
-  @Nonnull
-  public IJSExpression assignPlus (@Nonnull final IJSExpression rhs)
-  {
-    return JSExpr.assignPlus (this, rhs);
   }
 
   public void generate (final JSFormatter f)
