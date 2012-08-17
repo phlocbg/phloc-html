@@ -426,6 +426,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * @return This block
    */
   @Nonnull
+  @Deprecated
   public JSBlock add (@Nonnull final IJSStatement s)
   { // ## Needed?
     _insert (s);
@@ -509,7 +510,42 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    */
   public void _return ()
   {
-    _return (null);
+    _return ((IJSExpression) null);
+  }
+
+  public void _return (final boolean v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final char v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final double v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final float v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final int v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final long v)
+  {
+    _return (JSExpr.lit (v));
+  }
+
+  public void _return (final String v)
+  {
+    _return (JSExpr.lit (v));
   }
 
   /**

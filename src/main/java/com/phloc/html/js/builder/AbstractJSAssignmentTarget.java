@@ -142,4 +142,112 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   {
     return JSExpr.assignPlus (this, rhs);
   }
+
+  @Nonnull
+  public final JSAssignment assignMinus (@Nonnull final double v)
+  {
+    return assignMinus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMinus (@Nonnull final float v)
+  {
+    return assignMinus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMinus (@Nonnull final int v)
+  {
+    return assignMinus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMinus (@Nonnull final long v)
+  {
+    return assignMinus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMinus (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignMinus (this, rhs);
+  }
+
+  @Nonnull
+  public final JSAssignment assignMultiply (@Nonnull final double v)
+  {
+    return assignMultiply (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMultiply (@Nonnull final float v)
+  {
+    return assignMultiply (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMultiply (@Nonnull final int v)
+  {
+    return assignMultiply (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMultiply (@Nonnull final long v)
+  {
+    return assignMultiply (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignMultiply (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignMultiply (this, rhs);
+  }
+
+  @Nonnull
+  public final JSAssignment assignDivide (@Nonnull final double v)
+  {
+    return assignDivide (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignDivide (@Nonnull final float v)
+  {
+    return assignDivide (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignDivide (@Nonnull final int v)
+  {
+    return assignDivide (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignDivide (@Nonnull final long v)
+  {
+    return assignDivide (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignDivide (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignDivide (this, rhs);
+  }
+
+  @Nonnull
+  public final JSAssignment assignModulo (@Nonnull final int v)
+  {
+    return assignModulo (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignModulo (@Nonnull final long v)
+  {
+    return assignModulo (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignModulo (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignModulo (this, rhs);
+  }
 }

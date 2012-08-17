@@ -67,6 +67,30 @@ public final class JSExpr
   }
 
   @Nonnull
+  public static JSAssignment assignMinus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  {
+    return new JSAssignment (lhs, "-=", rhs);
+  }
+
+  @Nonnull
+  public static JSAssignment assignMultiply (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  {
+    return new JSAssignment (lhs, "*=", rhs);
+  }
+
+  @Nonnull
+  public static JSAssignment assignDivide (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  {
+    return new JSAssignment (lhs, "/=", rhs);
+  }
+
+  @Nonnull
+  public static JSAssignment assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  {
+    return new JSAssignment (lhs, "%=", rhs);
+  }
+
+  @Nonnull
   public static JSInvocation _new (@Nonnull final AbstractJSType t)
   {
     return new JSInvocation (t);
