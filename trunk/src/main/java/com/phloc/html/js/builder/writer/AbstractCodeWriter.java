@@ -47,9 +47,6 @@ import java.io.Writer;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.js.builder.IJSDeclaration;
-import com.phloc.html.js.builder.JSCodeModel;
-import com.phloc.html.js.builder.JSFormatter;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -76,56 +73,14 @@ public abstract class AbstractCodeWriter
    * The returned stream will be closed before the next file is stored. So the
    * callee can assume that only one OutputStream is active at any given time.
    * 
-   * @param pkg
+   * @param aPackage
    *        The package of the file to be written.
    */
   @Nonnull
-  public abstract Writer getWriter (JSPackage pkg) throws IOException;
+  public abstract Writer getWriter (JSPackage aPackage) throws IOException;
 
-  public void buildPackage (@Nonnull final JSPackage aPackage) throws IOException
+  public void writePackage (@Nonnull final JSPackage aPackage) throws IOException
   {
-    final Writer bw = getWriter (aPackage);
-
-    // Write a file
-    final JSFormatter f = new JSFormatter (new BufferedWriter (new UnicodeEscapeWriter (bw, m_sEncoding)));
-    try
-    {
-      // for all declarations in the current package
-      for (final IJSDeclaration aDecl : aPackage.declarations ())
-        f.decl (aDecl);
-    }
-    finally
-    {
-      f.close ();
-    }
-    afterBuildPackage (aPackage);
+    aPackage.writePackage (new BufferedWriter (new UnicodeEscapeWriter (getWriter (aPackage), m_sEncoding)));
   }
-
-  /**
-   * Called by CodeModel at the end of the process.
-   * 
-   * @param aPackage
-   *        The previously built package
-   * @throws IOException
-   */
-  public void afterBuildPackage (@Nonnull final JSPackage aPackage) throws IOException
-  {}
-
-  public void build (@Nonnull final JSCodeModel aCodeModel) throws IOException
-  {
-    // for all packages
-    for (final JSPackage aPackage : aCodeModel.packages ())
-      buildPackage (aPackage);
-    afterBuildAll (aCodeModel);
-  }
-
-  /**
-   * Called by CodeModel at the end of the process.
-   * 
-   * @param aCodeModel
-   *        the generated code model
-   * @throws IOException
-   */
-  public void afterBuildAll (@Nonnull final JSCodeModel aCodeModel) throws IOException
-  {}
 }

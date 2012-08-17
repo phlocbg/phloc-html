@@ -43,13 +43,9 @@ package com.phloc.html.js.builder.writer;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.phloc.commons.io.EAppend;
-import com.phloc.commons.io.file.FileOperations;
 import com.phloc.commons.io.resource.FileSystemResource;
-import com.phloc.html.js.builder.JSCodeModel;
 import com.phloc.html.js.builder.JSPackage;
 
 /**
@@ -62,22 +58,10 @@ public class FileCodeWriter extends AbstractCodeWriter
   /** The target directory to put source code. */
   private final File m_aTarget;
 
-  /** specify whether or not to mark the generated files read-only */
-  private final boolean m_bReadOnly;
-
-  /** Files that shall be marked as read only. */
-  private final Set <File> m_aReadOnlyFiles = new HashSet <File> ();
-
   public FileCodeWriter (final File target, final String encoding) throws IOException
-  {
-    this (target, false, encoding);
-  }
-
-  public FileCodeWriter (final File target, final boolean readOnly, final String encoding) throws IOException
   {
     super (encoding);
     m_aTarget = target;
-    m_bReadOnly = readOnly;
     if (!target.exists () || !target.isDirectory ())
       throw new IOException (target + ": non-existent directory");
   }
@@ -85,43 +69,6 @@ public class FileCodeWriter extends AbstractCodeWriter
   @Override
   public Writer getWriter (final JSPackage pkg) throws IOException
   {
-    return new FileSystemResource (getFile (pkg)).getWriter (m_sEncoding, EAppend.TRUNCATE);
-  }
-
-  protected File getFile (final JSPackage pkg) throws IOException
-  {
-    final JSPackage aParentPackage = pkg.parent ();
-
-    File dir;
-    if (aParentPackage == null || aParentPackage.isUnnamed ())
-      dir = m_aTarget;
-    else
-      dir = new File (m_aTarget, _toDirName (aParentPackage));
-
-    FileOperations.createDirRecursiveIfNotExisting (dir);
-
-    final File fn = new File (dir, pkg.name () + ".js");
-
-    if (FileOperations.deleteFileIfExisting (fn).isFailure ())
-      throw new IOException (fn + ": Can't delete previous version");
-
-    if (m_bReadOnly)
-      m_aReadOnlyFiles.add (fn);
-    return fn;
-  }
-
-  @Override
-  public void afterBuildAll (final JSCodeModel aCodeModel) throws IOException
-  {
-    // mark files as read-onnly if necessary
-    for (final File f : m_aReadOnlyFiles)
-      if (!f.setReadOnly ())
-        throw new IOException (f + ": failed to set read-only!");
-  }
-
-  /** Converts a package name to the directory name. */
-  private static String _toDirName (final JSPackage pkg)
-  {
-    return pkg.name ().replace ('.', File.separatorChar);
+    return new FileSystemResource (m_aTarget, "package.js").getWriter (m_sEncoding, EAppend.TRUNCATE);
   }
 }

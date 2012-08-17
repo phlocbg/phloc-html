@@ -51,24 +51,13 @@ import javax.annotation.Nullable;
  */
 public abstract class AbstractJSClass extends AbstractJSType
 {
-  private final JSCodeModel m_aOwner;
-
-  protected AbstractJSClass (@Nonnull final JSCodeModel _owner)
-  {
-    m_aOwner = _owner;
-  }
+  protected AbstractJSClass ()
+  {}
 
   /**
    * Gets the package to which this class belongs.
    */
   public abstract JSPackage _package ();
-
-  /** Gets the JCodeModel object to which this object belongs. */
-  @Nonnull
-  public final JSCodeModel owner ()
-  {
-    return m_aOwner;
-  }
 
   /**
    * Gets the super class of this class.

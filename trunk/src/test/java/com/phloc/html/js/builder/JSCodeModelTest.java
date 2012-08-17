@@ -7,8 +7,7 @@ public final class JSCodeModelTest
   @Test
   public void test () throws Exception
   {
-    final JSCodeModel aCM = new JSCodeModel ();
-    final JSPackage aPkg = aCM.rootPackage ();
+    final JSPackage aPkg = new JSPackage ();
 
     // Global variable
     aPkg.var (JSPrimitiveType.NUMBER, "g_aRoot", JSExpr.lit (0));
@@ -110,7 +109,7 @@ public final class JSCodeModelTest
        * }
        * </pre>
        */
-      final JSFunction aFuncMain = aCM.rootPackage ().function ("sajax_extract_htmlcomments");
+      final JSFunction aFuncMain = aPkg.function ("sajax_extract_htmlcomments");
       final JSVar sHTML = aFuncMain.param ("sHTML");
       final JSVar sComments = aFuncMain.body ().decl ("sComments", JSExpr.lit (""));
       aFuncMain.body ().comment ("Lazy quantifier \"*?\"");
@@ -127,7 +126,7 @@ public final class JSCodeModelTest
       aFuncMain.body ()._return (JSExpr.newAssocArray ().add ("html", sHTML).add ("comments", sComments));
     }
 
-    final String sCode = aCM.rootPackage ().getJSCode ();
+    final String sCode = aPkg.getJSCode ();
     System.out.println (sCode);
   }
 }
