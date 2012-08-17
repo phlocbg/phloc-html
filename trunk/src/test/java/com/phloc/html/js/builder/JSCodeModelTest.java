@@ -16,6 +16,7 @@ public final class JSCodeModelTest
     final JSCodeModel aCM = new JSCodeModel ();
     final JSPackage aPkg = aCM.rootPackage ();
 
+    aPkg.var (aCM.NUMBER, "g_aRoot", JSExpr.lit (0));
     {
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
       aFuncMain.jsDoc ().add ("This is a global function");
@@ -34,7 +35,7 @@ public final class JSCodeModelTest
 
       // try catch finally
       final JSTryBlock aTB = aCond._then ()._try ();
-      aTB.body ()._return (JSExpr.lit (5));
+      aTB.body ()._return (JSExpr.lit (5).inParantheses ().inParantheses ());
       final JSCatchBlock aCB = aTB._catch ("ex");
       aCB.body ()._throw (JSExpr._new (aCM.ERROR).arg (aCB.param ()));
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
@@ -52,6 +53,8 @@ public final class JSCodeModelTest
                                    .multiLine (false)
                                    .invoke ("test")
                                    .arg ("Water"));
+
+      // concatenate misc things
       aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
                                                 .ref ("length")
                                                 .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));

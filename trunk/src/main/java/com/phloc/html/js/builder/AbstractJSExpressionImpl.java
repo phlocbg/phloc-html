@@ -50,6 +50,11 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
     return JSOp.minus (this);
   }
 
+  public final IJSExpression inParantheses ()
+  {
+    return JSOp.inParantheses (this);
+  }
+
   /**
    * Logical not <tt>'!x'</tt>.
    */

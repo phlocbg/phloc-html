@@ -57,85 +57,91 @@ import javax.annotation.Nonnull;
 public interface IJSExpression extends IJSGeneratable
 {
   /**
-   * Returns "-[this]" from "[this]".
+   * @return "-[this]" from "[this]".
    */
   @Nonnull
   IJSExpression minus ();
 
   /**
-   * Returns "![this]" from "[this]".
+   * @return "([this])" from "[this]".
+   */
+  @Nonnull
+  IJSExpression inParantheses ();
+
+  /**
+   * @return "![this]" from "[this]".
    */
   @Nonnull
   IJSExpression not ();
 
   /**
-   * Returns "~[this]" from "[this]".
+   * @return "~[this]" from "[this]".
    */
   @Nonnull
   IJSExpression complement ();
 
   /**
-   * Returns "[this]++" from "[this]".
+   * @return "[this]++" from "[this]".
    */
   @Nonnull
   IJSExpression incr ();
 
   /**
-   * Returns "[this]--" from "[this]".
+   * @return "[this]--" from "[this]".
    */
   @Nonnull
   IJSExpression decr ();
 
   /**
-   * Returns "typeof [this]" from "[this]"
+   * @return "typeof [this]" from "[this]"
    */
   @Nonnull
   IJSExpression typeof ();
 
   /**
-   * Returns "[this]+[right]"
+   * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (IJSExpression right);
 
   /**
-   * Returns "[this]-[right]"
+   * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (IJSExpression right);
 
   /**
-   * Returns "[this]*[right]"
+   * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (IJSExpression right);
 
   /**
-   * Returns "[this]/[right]"
+   * @return "[this]/[right]"
    */
   @Nonnull
   IJSExpression div (IJSExpression right);
 
   /**
-   * Returns "[this]%[right]"
+   * @return "[this]%[right]"
    */
   @Nonnull
   IJSExpression mod (IJSExpression right);
 
   /**
-   * Returns "[this]&lt;&lt;[right]"
+   * @return "[this]&lt;&lt;[right]"
    */
   @Nonnull
   IJSExpression shl (IJSExpression right);
 
   /**
-   * Returns "[this]>>[right]"
+   * @return "[this]>>[right]"
    */
   @Nonnull
   IJSExpression shr (IJSExpression right);
 
   /**
-   * Returns "[this]>>>[right]"
+   * @return "[this]>>>[right]"
    */
   @Nonnull
   IJSExpression shrz (IJSExpression right);
@@ -184,15 +190,15 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression ene (IJSExpression right);
 
   /**
-   * Returns "[this].[method]". Arguments shall be added to the returned
-   * {@link JSInvocation} object.
+   * @return "[this].[method]". Arguments shall be added to the returned
+   *         {@link JSInvocation} object.
    */
   @Nonnull
   JSInvocation invoke (JSMethod method);
 
   /**
-   * Returns "[this].[method]". Arguments shall be added to the returned
-   * {@link JSInvocation} object.
+   * @return "[this].[method]". Arguments shall be added to the returned
+   *         {@link JSInvocation} object.
    */
   @Nonnull
   JSInvocation invoke (String method);

@@ -53,14 +53,14 @@ import com.phloc.commons.collections.ContainerHelper;
 /**
  * A JS package.
  */
-public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer, Comparable <JSPackage>
+public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer
 {
+  private final JSCodeModel m_aOwner;
+
   /**
    * Name of the package. May be the empty string for the root package.
    */
   private final String m_sName;
-
-  private final JSCodeModel m_aOwner;
 
   /**
    * List of classes contained within this package keyed by their name.
@@ -86,6 +86,34 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
     m_sName = name;
   }
 
+  /**
+   * Return the code model root object being used to create this package.
+   */
+  public final JSCodeModel owner ()
+  {
+    return m_aOwner;
+  }
+
+  /**
+   * Checks if this package is the root, unnamed package.
+   */
+  public final boolean isUnnamed ()
+  {
+    return m_sName.length () == 0;
+  }
+
+  /**
+   * Get the name of this package
+   * 
+   * @return The name of this package, or the empty string if this is the null
+   *         package. For example, this method returns strings like
+   *         <code>"java.lang"</code>
+   */
+  public String name ()
+  {
+    return m_sName;
+  }
+
   @Nullable
   public IJSClassContainer parentClassContainer ()
   {
@@ -109,6 +137,16 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   public JSPackage getPackage ()
   {
     return this;
+  }
+
+  /**
+   * Gets a reference to a sub package of this package.
+   */
+  public JSPackage subPackage (final String pkg)
+  {
+    if (isUnnamed ())
+      return owner ()._package (pkg);
+    return owner ()._package (m_sName + '.' + pkg);
   }
 
   /**
@@ -176,12 +214,57 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
     return (JSFunction) m_aDecls.get (name);
   }
 
-  /**
-   * Order is based on the lexicological order of the package name.
-   */
-  public int compareTo (final JSPackage that)
+  @Nonnull
+  public JSVar var (@Nonnull final String name) throws JSNameAlreadyExistsException
   {
-    return m_sName.compareTo (that.m_sName);
+    return var (null, name, null);
+  }
+
+  @Nonnull
+  public JSVar var (@Nonnull final String name, @Nullable final IJSExpression initExpression) throws JSNameAlreadyExistsException
+  {
+    return var (null, name, initExpression);
+  }
+
+  @Nonnull
+  public JSVar var (@Nullable final AbstractJSType aType, @Nonnull final String name) throws JSNameAlreadyExistsException
+  {
+    return var (aType, name, null);
+  }
+
+  /**
+   * Add a var to this package.
+   * 
+   * @param aType
+   *        optional type to use
+   * @param name
+   *        Name of variable to be added to this package
+   * @param initExpression
+   *        the initial expression. May be <code>null</code>
+   * @return Newly generated function
+   * @exception JSNameAlreadyExistsException
+   *            When the specified var was already created.
+   */
+  @Nonnull
+  public JSVar var (@Nullable final AbstractJSType aType,
+                    @Nonnull final String name,
+                    @Nullable final IJSExpression initExpression) throws JSNameAlreadyExistsException
+  {
+    if (m_aDecls.containsKey (name))
+      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
+    final JSVar c = new JSVar (aType, name, initExpression);
+    m_aDecls.put (name, c);
+    return c;
+  }
+
+  /**
+   * Gets a reference to the already created {@link JSFunction}.
+   * 
+   * @return null If the class is not yet created.
+   */
+  public JSVar getVar (final String name)
+  {
+    return (JSVar) m_aDecls.get (name);
   }
 
   /**
@@ -198,16 +281,6 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
     m_aDecls.remove (c.name ());
   }
 
-  /**
-   * Gets a reference to a sub package of this package.
-   */
-  public JSPackage subPackage (final String pkg)
-  {
-    if (isUnnamed ())
-      return owner ()._package (pkg);
-    return owner ()._package (m_sName + '.' + pkg);
-  }
-
   @Nonnull
   @ReturnsMutableCopy
   public Collection <IJSDeclaration> declarations ()
@@ -216,42 +289,21 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   }
 
   /**
+   * Gets a reference to the already created {@link JSDefinedClass}.
+   * 
+   * @return null If the object is not yet created.
+   */
+  public IJSDeclaration getDeclaration (final String name)
+  {
+    return m_aDecls.get (name);
+  }
+
+  /**
    * Checks if a given name is already defined as a class/interface
    */
-  public boolean isDefined (final String classLocalName)
+  public boolean isDefined (final String declLocalName)
   {
-    for (final IJSDeclaration aDecl : declarations ())
-      if (aDecl.name ().equals (classLocalName))
-        return true;
-    return false;
-  }
-
-  /**
-   * Checks if this package is the root, unnamed package.
-   */
-  public final boolean isUnnamed ()
-  {
-    return m_sName.length () == 0;
-  }
-
-  /**
-   * Get the name of this package
-   * 
-   * @return The name of this package, or the empty string if this is the null
-   *         package. For example, this method returns strings like
-   *         <code>"java.lang"</code>
-   */
-  public String name ()
-  {
-    return m_sName;
-  }
-
-  /**
-   * Return the code model root object being used to create this package.
-   */
-  public final JSCodeModel owner ()
-  {
-    return m_aOwner;
+    return getDeclaration (declLocalName) != null;
   }
 
   public void declare (final JSFormatter f)
