@@ -1,43 +1,20 @@
-/*
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+/**
+ * Copyright (C) 2006-2012 phloc systems
+ * http://www.phloc.com
+ * office[at]phloc[dot]com
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The contents of this file are subject to the terms of either the GNU
- * General Public License Version 2 only ("GPL") or the Common Development
- * and Distribution License("CDDL") (collectively, the "License").  You
- * may not use this file except in compliance with the License.  You can
- * obtain a copy of the License at
- * https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
- * or packager/legal/LICENSE.txt.  See the License for the specific
- * language governing permissions and limitations under the License.
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
- * When distributing the software, include this License Header Notice in each
- * file and include the License file at packager/legal/LICENSE.txt.
- *
- * GPL Classpath Exception:
- * Oracle designates this particular file as subject to the "Classpath"
- * exception as provided by Oracle in the GPL Version 2 section of the License
- * file that accompanied this code.
- *
- * Modifications:
- * If applicable, add the following below the License Header, with the fields
- * enclosed by brackets [] replaced by your own identifying information:
- * "Portions Copyright [year] [name of copyright owner]"
- *
- * Contributor(s):
- * If you wish your version of this file to be governed by only the CDDL or
- * only the GPL Version 2, indicate your decision by adding "[Contributor]
- * elects to include this software in this distribution under the [CDDL or GPL
- * Version 2] license."  If you don't indicate a single choice of license, a
- * recipient has the option to distribute your version of this file under
- * either the CDDL, the GPL Version 2 or to extend the choice of license to
- * its licensees as provided above.  However, if you add GPL Version 2 code
- * and therefore, elected the GPL Version 2 license, then the option applies
- * only if the new code is made subject to such option by the copyright
- * holder.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package com.phloc.html.js.builder;
 
 import java.util.ArrayList;
@@ -59,7 +36,7 @@ public final class JSSwitch implements IJSStatement
   private final IJSExpression m_aTest;
 
   /**
-   * vector of cases.
+   * List of cases.
    */
   private final List <JSCase> m_aCases = new ArrayList <JSCase> ();
 
@@ -69,7 +46,7 @@ public final class JSSwitch implements IJSStatement
   private JSCase m_aDefaultCase;
 
   /**
-   * Construct a switch statment
+   * Construct a switch statement
    */
   JSSwitch (@Nonnull final IJSExpression test)
   {
@@ -107,18 +84,14 @@ public final class JSSwitch implements IJSStatement
     return m_aDefaultCase;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     if (JSOp.hasTopOp (m_aTest))
-    {
-      f.plain ("switch ").generatable (m_aTest).plain (" {").nl ();
-    }
+      f.plain ("switch ").generatable (m_aTest).plain ('{').nl ();
     else
-    {
-      f.plain ("switch (").generatable (m_aTest).plain (')').plain (" {").nl ();
-    }
-    for (final JSCase c : m_aCases)
-      f.stmt (c);
+      f.plain ("switch (").generatable (m_aTest).plain ("){").nl ();
+    for (final JSCase aCase : m_aCases)
+      f.stmt (aCase);
     if (m_aDefaultCase != null)
       f.stmt (m_aDefaultCase);
     f.plain ('}').nl ();
