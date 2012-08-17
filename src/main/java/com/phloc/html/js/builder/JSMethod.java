@@ -78,7 +78,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   /**
    * javadoc comments for this JMethod
    */
-  private JSDocComment m_aJSDoc;
+  private JSCommentMultiLine m_aJSDoc;
 
   /**
    * JMethod constructor
@@ -221,13 +221,13 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration, IJSHasOwner
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
-   * @return {@link JSDocComment} containing javadocs for this class
+   * @return {@link JSCommentMultiLine} containing javadocs for this class
    */
   @Nonnull
-  public JSDocComment jsDoc ()
+  public JSCommentMultiLine jsDoc ()
   {
     if (m_aJSDoc == null)
-      m_aJSDoc = new JSDocComment ();
+      m_aJSDoc = new JSCommentMultiLine ();
     return m_aJSDoc;
   }
 

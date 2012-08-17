@@ -49,7 +49,6 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.string.StringHelper;
 
 /**
  * A block of Java code, which may contain statements and local declarations.
@@ -507,13 +506,9 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     return _insert (new JSFunction (aReturnType, name));
   }
 
-  public void comment (final String s)
+  public void comment (@Nonnull final String sComment)
   {
-    // Single line comment?
-    if (StringHelper.getLineCount (s) == 1)
-      directStatement ("// " + s);
-    else
-      _insert (new JSCommentPart ()).add (s);
+    _insert (new JSCommentSingleLine (sComment));
   }
 
   /**

@@ -50,5 +50,5 @@ public interface IJSDocCommentable
   /**
    * @return the JavaDoc of the Element
    */
-  JSDocComment jsDoc ();
+  JSCommentMultiLine jsDoc ();
 }

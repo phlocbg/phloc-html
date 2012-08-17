@@ -31,6 +31,7 @@ public final class JSCodeModelTest
       final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSPrimitiveType.STRING.type ()));
 
       // try catch finally
+      aFuncMain.body ().comment ("Test try/catch/finally");
       final JSTryBlock aTB = aCond._then ()._try ();
       aTB.body ()._return (JSExpr.lit (5).inParantheses ().inParantheses ());
       final JSCatchBlock aCB = aTB._catch ("ex");
@@ -38,6 +39,7 @@ public final class JSCodeModelTest
       aTB._finally ().invoke (aRoot, "substring").arg (0).arg (1);
 
       // RegExp
+      aFuncMain.body ().comment ("Test reg exps");
       aFuncMain.body ().add (JSExpr.regex ("water(mark)?")
                                    .global (true)
                                    .caseInsensitive (true)

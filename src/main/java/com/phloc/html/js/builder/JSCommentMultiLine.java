@@ -54,7 +54,7 @@ import javax.annotation.Nonnull;
  * would be nice if we have JComment class and we can derive this class from
  * there.
  */
-public class JSDocComment extends JSCommentPart implements IJSGeneratable
+public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 {
   private static final String INDENT = " *     ";
 
@@ -72,12 +72,12 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
   /** The @-deprecated tag */
   private JSCommentPart m_aDeprecated;
 
-  public JSDocComment ()
+  public JSCommentMultiLine ()
   {}
 
   @Override
   @Nonnull
-  public JSDocComment append (final Object o)
+  public JSCommentMultiLine append (final Object o)
   {
     add (o);
     return this;
@@ -169,6 +169,7 @@ public class JSDocComment extends JSCommentPart implements IJSGeneratable
   {
     f.plain ("/**").nl ();
 
+    // Main content
     format (f, " * ");
 
     if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXdoclets.isEmpty ())

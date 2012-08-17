@@ -162,30 +162,39 @@ public interface IJSExpression extends IJSGeneratable
   @Nonnull
   IJSExpression cor (IJSExpression right);
 
+  /** XOR '^'. */
   @Nonnull
   IJSExpression xor (IJSExpression right);
 
+  /** Lower than '&lt;'. */
   @Nonnull
   IJSExpression lt (IJSExpression right);
 
+  /** Lower than or equal '&lt;='. */
   @Nonnull
   IJSExpression lte (IJSExpression right);
 
+  /** Greater than '>'. */
   @Nonnull
   IJSExpression gt (IJSExpression right);
 
+  /** Greater than or equal '>='. */
   @Nonnull
   IJSExpression gte (IJSExpression right);
 
+  /** Equals '=='. */
   @Nonnull
   IJSExpression eq (IJSExpression right);
 
+  /** Exactly equals '==='. */
   @Nonnull
   IJSExpression eeq (IJSExpression right);
 
+  /** Not equals '!='. */
   @Nonnull
   IJSExpression ne (IJSExpression right);
 
+  /** Exactly not equals '!=='. */
   @Nonnull
   IJSExpression ene (IJSExpression right);
 

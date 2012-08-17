@@ -38,67 +38,30 @@
  * holder.
  */
 
-package com.phloc.html.js.builder.writer;
+package com.phloc.html.js.builder;
 
-import java.io.FilterWriter;
-import java.io.IOException;
-import java.io.Writer;
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.regex.RegExHelper;
 
 /**
- * {@link Writer} that escapes characters that are unsafe as Javadoc comments.
- * Such characters include '&lt;' and '&amp;'.
- * <p>
- * Note that this class doesn't escape other Unicode characters that are
- * typically unsafe. For example, &#x611B; (A kanji that means "love") can be
- * considered as unsafe because javac with English Windows cannot accept this
- * character in the source code.
- * <p>
- * If the application needs to escape such characters as well, then they are on
- * their own.
- * 
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ * Single line comments
  */
-public class JavadocEscapeWriter extends FilterWriter
+final class JSCommentSingleLine implements IJSStatement
 {
-  public JavadocEscapeWriter (final Writer next)
+  private final String m_sWhat;
+
+  JSCommentSingleLine (@Nonnull final String sComment)
   {
-    super (next);
+    if (sComment == null)
+      throw new NullPointerException ("comment");
+    m_sWhat = sComment;
   }
 
   @Override
-  public void write (final int ch) throws IOException
+  public void state (@Nonnull final JSFormatter f)
   {
-    if (ch == '<')
-      out.write ("&lt;");
-    else
-      if (ch == '&')
-        out.write ("&amp;");
-      else
-        out.write (ch);
-  }
-
-  @Override
-  public void write (final char [] buf, final int off, final int len) throws IOException
-  {
-    for (int i = 0; i < len; i++)
-      write (buf[off + i]);
-  }
-
-  @Override
-  public void write (final char [] buf) throws IOException
-  {
-    write (buf, 0, buf.length);
-  }
-
-  @Override
-  public void write (final String buf, final int off, final int len) throws IOException
-  {
-    write (buf.toCharArray (), off, len);
-  }
-
-  @Override
-  public void write (final String buf) throws IOException
-  {
-    write (buf.toCharArray (), 0, buf.length ());
+    for (final String sLine : RegExHelper.getSplitToArray (m_sWhat, "[\\r\\n]+"))
+      f.plain ("// ").plain (sLine).nl ();
   }
 }

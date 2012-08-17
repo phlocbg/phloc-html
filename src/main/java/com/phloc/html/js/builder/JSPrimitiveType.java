@@ -27,20 +27,26 @@ public class JSPrimitiveType extends AbstractJSType
   }
 
   @Override
+  @Nonnull
+  @Nonempty
   public String fullName ()
   {
     return m_sName;
   }
 
   @Override
+  @Nonnull
+  @Nonempty
   public String name ()
   {
     return m_sName;
   }
 
   /**
-   * @return The type to be used in "typeof" expressions
+   * @return The type to be used in "typeof" expressions. A string literal with
+   *         the name in it
    */
+  @Nonnull
   public JSStringLiteral type ()
   {
     return JSExpr.lit (m_sName);

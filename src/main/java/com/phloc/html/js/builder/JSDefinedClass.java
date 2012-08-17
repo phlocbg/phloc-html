@@ -93,7 +93,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   private JSBlock m_aInit;
 
   /** class javadoc */
-  private JSDocComment m_aJSDoc;
+  private JSCommentMultiLine m_aJSDoc;
 
   /** Set of constructors for this class, if any */
   private final List <JSMethod> m_aConstructors = new ArrayList <JSMethod> ();
@@ -404,12 +404,12 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
-   * @return {@link JSDocComment} containing javadocs for this class
+   * @return {@link JSCommentMultiLine} containing javadocs for this class
    */
-  public JSDocComment jsDoc ()
+  public JSCommentMultiLine jsDoc ()
   {
     if (m_aJSDoc == null)
-      m_aJSDoc = new JSDocComment ();
+      m_aJSDoc = new JSCommentMultiLine ();
     return m_aJSDoc;
   }
 
