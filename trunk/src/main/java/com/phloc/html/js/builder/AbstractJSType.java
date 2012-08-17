@@ -40,50 +40,28 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.Nonempty;
+
 /**
  * A representation of a type in codeModel. A type is always a reference type (
  * {@link AbstractJSClass}).
  */
-public abstract class AbstractJSType implements IJSGeneratable, Comparable <AbstractJSType>
+public abstract class AbstractJSType implements IJSGeneratable
 {
-  /**
-   * Gets the full name of the type. See
-   * http://java.sun.com/docs/books/jls/second_edition/html/names.doc.html#25430
-   * for the details.
-   * 
-   * @return Strings like "int", "java.lang.String", "java.io.File[]". Never
-   *         null.
-   */
-  public abstract String fullName ();
-
   /**
    * Gets the name of this type.
    * 
    * @return Names like "int", "void", "BigInteger".
    */
+  @Nonnull
+  @Nonempty
   public abstract String name ();
 
   @Override
   public String toString ()
   {
-    return this.getClass ().getName () + '(' + fullName () + ')';
-  }
-
-  /**
-   * Compare two JTypes by FQCN, giving sorting precedence to types that belong
-   * to packages java and javax over all others. This method is used to sort
-   * generated import statments in a conventional way for readability.
-   */
-  public int compareTo (final AbstractJSType o)
-  {
-    final String rhs = o.fullName ();
-    final boolean p = fullName ().startsWith ("java");
-    final boolean q = rhs.startsWith ("java");
-
-    if (p && !q)
-      return -1;
-    if (!p && q)
-      return 1;
-    return fullName ().compareTo (rhs);
+    return this.getClass ().getName () + '(' + name () + ')';
   }
 }

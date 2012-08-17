@@ -47,9 +47,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 
@@ -59,7 +56,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
- * A generated Java class/interface/enum/....
+ * A generated JS class.
  * <p>
  * This class models a declaration, and since a declaration can be always used
  * as a reference, it inherits {@link AbstractJSClass}.
@@ -69,29 +66,21 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * {@link #method(AbstractJSType, String)} and
  * {@link #field(AbstractJSType, String)}.
  */
-public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSClassContainer, IJSDocCommentable
+public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
 {
   /**
-   * If this is a package-member class, this is {@link JSPackage}. If this is a
-   * nested class, this is {@link JSDefinedClass}. If this is an anonymous
-   * class, this constructor shouldn't be used.
+   * If this is a package-member class, this is {@link JSPackage}.
    */
-  private final IJSClassContainer m_aOuter;
+  private final JSPackage m_aOuter;
 
-  /** Name of this class. Null if anonymous. */
+  /** Name of this class. */
   private final String m_sName;
 
   /** Name of the super class of this class. */
   private AbstractJSClass m_aSuperClass;
 
-  /** List of interfaces that this class implements */
-  private final Set <AbstractJSClass> m_aInterfaces = new TreeSet <AbstractJSClass> ();
-
   /** Fields keyed by their names. */
   final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
-
-  /** Static initializer, if this class has one */
-  private JSBlock m_aInit;
 
   /** class javadoc */
   private JSCommentMultiLine m_aJSDoc;
@@ -103,31 +92,13 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   private final List <JSMethod> m_aMethods = new ArrayList <JSMethod> ();
 
   /**
-   * Nested classes as a map from name to JDefinedClass. The name is all
-   * capitalized in a case sensitive file system (
-   * {@link JSCodeModel#isCaseSensitiveFileSystem}) to avoid conflicts. Lazily
-   * created to save footprint.
-   * 
-   * @see #_getClasses()
-   */
-  private Map <String, JSDefinedClass> m_aClasses;
-
-  /**
    * String that will be put directly inside the generated code. Can be null.
    */
   private String m_sDirectBlock;
 
-  JSDefinedClass (final IJSClassContainer parent, final String name)
+  JSDefinedClass (final JSPackage parent, final String name)
   {
     this (name, parent, parent.owner ());
-  }
-
-  /**
-   * Constructor for creating anonymous inner class.
-   */
-  JSDefinedClass (final JSCodeModel owner, final String name)
-  {
-    this (name, null, owner);
   }
 
   /**
@@ -138,7 +109,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @param name
    *        Name of this class
    */
-  private JSDefinedClass (@Nonnull final String name, final IJSClassContainer parent, final JSCodeModel owner)
+  private JSDefinedClass (@Nonnull final String name, final JSPackage parent, @Nonnull final JSCodeModel owner)
   {
     super (owner);
 
@@ -146,8 +117,8 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
       throw new IllegalArgumentException ("JSDefinedClass name empty");
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);
-    m_sName = name;
     m_aOuter = parent;
+    m_sName = name;
   }
 
   /**
@@ -161,18 +132,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   {
     if (superClass == null)
       throw new NullPointerException ();
-
-    for (AbstractJSClass o = superClass.outer (); o != null; o = o.outer ())
-    {
-      if (this == o)
-      {
-        throw new IllegalArgumentException ("Illegal class inheritance loop." +
-                                            "  Outer class " +
-                                            m_sName +
-                                            " may not subclass from inner class: " +
-                                            o.name ());
-      }
-    }
 
     m_aSuperClass = superClass;
     return this;
@@ -188,28 +147,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * This class implements the specifed interface.
-   * 
-   * @param iface
-   *        Interface that this class implements
-   * @return This class
-   */
-  public JSDefinedClass _implements (final AbstractJSClass iface)
-  {
-    m_aInterfaces.add (iface);
-    return this;
-  }
-
-  /**
-   * Returns an iterator that walks the nested classes defined in this class.
-   */
-  @Override
-  public Iterator <AbstractJSClass> _implements ()
-  {
-    return m_aInterfaces.iterator ();
-  }
-
-  /**
    * JClass name accessor.
    * <p>
    * For example, for <code>java.util.List</code>, this method returns
@@ -221,21 +158,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public String name ()
   {
     return m_sName;
-  }
-
-  /**
-   * Gets the fully qualified name of this class.
-   */
-  @Override
-  public String fullName ()
-  {
-    if (m_aOuter instanceof JSDefinedClass)
-      return ((JSDefinedClass) m_aOuter).fullName () + '.' + name ();
-
-    final JSPackage p = _package ();
-    if (p.isUnnamed ())
-      return name ();
-    return p.name () + '.' + name ();
   }
 
   /**
@@ -300,18 +222,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * Creates, if necessary, and returns the static initializer for this class.
-   * 
-   * @return JBlock containing initialization statements for this class
-   */
-  public JSBlock init ()
-  {
-    if (m_aInit == null)
-      m_aInit = new JSBlock ();
-    return m_aInit;
-  }
-
-  /**
    * Adds a constructor to this class.
    */
   public JSMethod constructor ()
@@ -361,16 +271,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return parentClassContainer ().getPackage ();
   }
 
-  public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
-  {
-    if (_getClasses ().containsKey (name))
-      throw new JSNameAlreadyExistsException (_getClasses ().get (name));
-    // XXX problems caught in the NC constructor
-    final JSDefinedClass c = new JSDefinedClass (this, name);
-    _getClasses ().put (name, c);
-    return c;
-  }
-
   /**
    * Creates, if necessary, and returns the class javadoc for this JDefinedClass
    * 
@@ -383,40 +283,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return m_aJSDoc;
   }
 
-  /**
-   * Returns an iterator that walks the nested classes defined in this class.
-   */
-  public final Collection <JSDefinedClass> classes ()
-  {
-    return m_aClasses == null ? ContainerHelper.<JSDefinedClass> newList ()
-                             : ContainerHelper.newList (m_aClasses.values ());
-  }
-
-  private Map <String, JSDefinedClass> _getClasses ()
-  {
-    if (m_aClasses == null)
-      m_aClasses = new TreeMap <String, JSDefinedClass> ();
-    return m_aClasses;
-  }
-
-  /**
-   * Returns all the nested classes defined in this class.
-   */
-  public final List <JSDefinedClass> listNestedClasses ()
-  {
-    if (m_aClasses == null)
-      return new ArrayList <JSDefinedClass> ();
-    return ContainerHelper.newList (m_aClasses.values ());
-  }
-
-  @Override
-  public AbstractJSClass outer ()
-  {
-    if (m_aOuter instanceof AbstractJSClass)
-      return (AbstractJSClass) m_aOuter;
-    return null;
-  }
-
   public void declare (final JSFormatter f)
   {
     if (m_aJSDoc != null)
@@ -427,14 +293,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     if (m_aSuperClass != null)
       f.nl ().indent ().plain ("extends").generatable (m_aSuperClass).nl ().outdent ();
 
-    if (!m_aInterfaces.isEmpty ())
-    {
-      if (m_aSuperClass == null)
-        f.nl ();
-      f.indent ().plain ("extends");
-      f.generatable (m_aInterfaces);
-      f.nl ().outdent ();
-    }
     declareBody (f);
   }
 
@@ -443,23 +301,14 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   protected void declareBody (final JSFormatter f)
   {
-    f.plain ('{').nl ().nl ().indent ();
+    f.plain ('{').nl ().indent ();
 
     for (final JSFieldVar field : m_aFields.values ())
       f.decl (field);
-    if (m_aInit != null)
-      f.nl ().plain ("static").stmt (m_aInit);
     for (final JSMethod m : m_aConstructors)
-    {
       f.nl ().decl (m);
-    }
     for (final JSMethod m : m_aMethods)
-    {
       f.nl ().decl (m);
-    }
-    if (m_aClasses != null)
-      for (final JSDefinedClass dc : m_aClasses.values ())
-        f.nl ().decl (dc);
 
     if (m_sDirectBlock != null)
       f.plain (m_sDirectBlock);

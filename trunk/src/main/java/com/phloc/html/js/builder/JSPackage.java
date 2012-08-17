@@ -51,11 +51,13 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
+import com.phloc.commons.io.streams.StreamUtils;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * A JS package.
  */
-public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer
+public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClassContainer, IJSFunctionContainer, IJSCodeProvider
 {
   private final JSCodeModel m_aOwner;
 
@@ -71,7 +73,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * JPackage constructor
-   * 
+   *
    * @param cw
    *        The code writer being used to create this package
    * @param name
@@ -106,7 +108,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Get the name of this package
-   * 
+   *
    * @return The name of this package, or the empty string if this is the null
    *         package. For example, this method returns strings like
    *         <code>"java.lang"</code>
@@ -153,7 +155,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Add a class to this package.
-   * 
+   *
    * @param name
    *        Name of class to be added to this package
    * @return Newly generated class
@@ -165,7 +167,6 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   {
     if (m_aDecls.containsKey (name))
       throw new JSNameAlreadyExistsException (m_aDecls.get (name));
-    // XXX problems caught in the NC constructor
     final JSDefinedClass c = new JSDefinedClass (this, name);
     m_aDecls.put (name, c);
     return c;
@@ -173,7 +174,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
-   * 
+   *
    * @return null If the class is not yet created.
    */
   public JSDefinedClass getClass (final String name)
@@ -189,7 +190,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Add a function to this package.
-   * 
+   *
    * @param name
    *        Name of function to be added to this package
    * @return Newly generated function
@@ -208,7 +209,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSFunction}.
-   * 
+   *
    * @return null If the class is not yet created.
    */
   public JSFunction getFunction (final String name)
@@ -236,7 +237,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Add a var to this package.
-   * 
+   *
    * @param aType
    *        optional type to use
    * @param name
@@ -261,7 +262,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSFunction}.
-   * 
+   *
    * @return null If the class is not yet created.
    */
   public JSVar getVar (final String name)
@@ -292,7 +293,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
 
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
-   * 
+   *
    * @return null If the object is not yet created.
    */
   public IJSDeclaration getDeclaration (final String name)
@@ -321,7 +322,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
     return m_aDecls.size ();
   }
 
-  public void write (@Nonnull final Writer w)
+  public void writePackage (@Nonnull final Writer w)
   {
     // Write a file
     final JSFormatter f = new JSFormatter (w);
@@ -333,7 +334,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
     }
     finally
     {
-      f.close ();
+      StreamUtils.close (f);
     }
   }
 
@@ -341,7 +342,7 @@ public final class JSPackage implements IJSDeclaration, IJSGeneratable, IJSClass
   public String getJSCode ()
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
-    write (aSW);
+    writePackage (aSW);
     return aSW.getAsString ();
   }
 }

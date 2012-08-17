@@ -40,13 +40,11 @@
 
 package com.phloc.html.js.builder;
 
-import java.util.Iterator;
-
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Represents a Java reference type, such as a class, an interface, an enum, an
- * array type, a parameterized type.
+ * Represents an abstract JS class.
  * <p>
  * To be exact, this object represents an "use" of a reference type, not
  * necessarily a declaration of it, which is modeled as {@link JSDefinedClass}.
@@ -55,39 +53,18 @@ public abstract class AbstractJSClass extends AbstractJSType
 {
   private final JSCodeModel m_aOwner;
 
-  protected AbstractJSClass (final JSCodeModel _owner)
+  protected AbstractJSClass (@Nonnull final JSCodeModel _owner)
   {
     m_aOwner = _owner;
   }
 
   /**
-   * Gets the name of this class.
-   * 
-   * @return name of this class, without any qualification. For example, this
-   *         method returns "String" for <code>java.lang.String</code>.
-   */
-
-  @Override
-  public abstract String name ();
-
-  /**
-   * Gets the package to which this class belongs. TODO: shall we move move this
-   * down?
+   * Gets the package to which this class belongs.
    */
   public abstract JSPackage _package ();
 
-  /**
-   * Returns the class in which this class is nested, or <tt>null</tt> if this
-   * is a top-level class.
-   */
-  @Nullable
-  public AbstractJSClass outer ()
-  {
-    return null;
-  }
-
   /** Gets the JCodeModel object to which this object belongs. */
-
+  @Nonnull
   public final JSCodeModel owner ()
   {
     return m_aOwner;
@@ -103,16 +80,8 @@ public abstract class AbstractJSClass extends AbstractJSType
    *         for {@link Object}. If this JClass represents {@link Object},
    *         return null.
    */
+  @Nullable
   public abstract AbstractJSClass _extends ();
-
-  /**
-   * Iterates all super interfaces directly implemented by this class/interface.
-   * 
-   * @return A non-null valid iterator that iterates all {@link AbstractJSClass}
-   *         objects that represents those interfaces implemented by this
-   *         object.
-   */
-  public abstract Iterator <AbstractJSClass> _implements ();
 
   /**
    * Checks the relationship between two classes.
@@ -120,7 +89,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    * This method works in the same way as {@link Class#isAssignableFrom(Class)}
    * works. For example, baseClass.isAssignableFrom(derivedClass)==true.
    */
-  public final boolean isAssignableFrom (final AbstractJSClass derived)
+  public final boolean isAssignableFrom (@Nonnull final AbstractJSClass derived)
   {
     // to avoid the confusion, always use "this" explicitly in this method.
 
@@ -162,7 +131,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    * @return The use of {@code baseType} in {@code this} type. or null if the
    *         type is not assignable to the base type.
    */
-  public final AbstractJSClass getBaseClass (final AbstractJSClass baseType)
+  public final AbstractJSClass getBaseClass (@Nonnull final AbstractJSClass baseType)
   {
     if (this.equals (baseType))
       return this;
@@ -171,14 +140,6 @@ public abstract class AbstractJSClass extends AbstractJSType
     if (b != null)
     {
       final AbstractJSClass bc = b.getBaseClass (baseType);
-      if (bc != null)
-        return bc;
-    }
-
-    final Iterator <AbstractJSClass> itfs = _implements ();
-    while (itfs.hasNext ())
-    {
-      final AbstractJSClass bc = itfs.next ().getBaseClass (baseType);
       if (bc != null)
         return bc;
     }
@@ -193,38 +154,42 @@ public abstract class AbstractJSClass extends AbstractJSType
   }
 
   /** Generates a static method invocation. */
+  @Nonnull
   public final JSInvocation staticInvoke (final JSMethod method)
   {
     return new JSInvocation (this, method);
   }
 
   /** Generates a static method invocation. */
+  @Nonnull
   public final JSInvocation staticInvoke (final String method)
   {
     return new JSInvocation (this, method);
   }
 
   /** Static field reference. */
+  @Nonnull
   public final JSFieldRef staticRef (final String field)
   {
     return new JSFieldRef (this, field);
   }
 
   /** Static field reference. */
+  @Nonnull
   public final JSFieldRef staticRef (final JSVar field)
   {
     return new JSFieldRef (this, field);
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.type (this);
   }
 
   /**
-   * Prints the class name in javadoc @link format.
+   * Prints the class name in JSDoc @link format.
    */
-  void printLink (final JSFormatter f)
+  void printLink (@Nonnull final JSFormatter f)
   {
     f.plain ("{@link ").generatable (this).plain ('}');
   }

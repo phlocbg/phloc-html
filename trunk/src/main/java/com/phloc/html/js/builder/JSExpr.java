@@ -159,13 +159,7 @@ public final class JSExpr
   @Nonnull
   public static JSArray newArray ()
   {
-    return newArray (null);
-  }
-
-  @Nonnull
-  public static JSArray newArray (@Nullable final AbstractJSType type)
-  {
-    return new JSArray (type);
+    return new JSArray ();
   }
 
   @Nonnull

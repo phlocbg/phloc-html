@@ -44,20 +44,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * array creation and initialization.
  */
 public final class JSArray extends AbstractJSExpressionImpl
 {
-  private final AbstractJSType m_aType;
   private List <IJSExpression> m_aExprs;
 
-  JSArray (@Nullable final AbstractJSType type)
-  {
-    m_aType = type;
-  }
+  JSArray ()
+  {}
 
   @Nonnull
   public JSArray add (@Nonnull final boolean v)
@@ -117,8 +113,6 @@ public final class JSArray extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    if (m_aType != null)
-      f.plain ("/* array of ").generatable (m_aType).plain (" */");
     f.plain ('[');
     if (m_aExprs != null)
       f.generatable (m_aExprs);

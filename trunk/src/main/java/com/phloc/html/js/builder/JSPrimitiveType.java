@@ -3,6 +3,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
 
 public class JSPrimitiveType extends AbstractJSType
 {
@@ -23,15 +24,9 @@ public class JSPrimitiveType extends AbstractJSType
 
   private JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
+    if (StringHelper.hasNoText (sName))
+      throw new IllegalArgumentException ("name");
     m_sName = sName;
-  }
-
-  @Override
-  @Nonnull
-  @Nonempty
-  public String fullName ()
-  {
-    return m_sName;
   }
 
   @Override
@@ -52,6 +47,9 @@ public class JSPrimitiveType extends AbstractJSType
     return JSExpr.lit (m_sName);
   }
 
+  /**
+   * @return A "new type" invocation object
+   */
   @Nonnull
   public JSInvocation _new ()
   {
