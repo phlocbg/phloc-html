@@ -67,8 +67,10 @@ final class JSArrayCompRef extends AbstractJSExpressionImpl implements IJSAssign
    */
   JSArrayCompRef (@Nonnull final IJSExpression array, @Nonnull final IJSExpression index)
   {
-    if (array == null || index == null)
-      throw new NullPointerException ();
+    if (array == null)
+      throw new NullPointerException ("array");
+    if (index == null)
+      throw new NullPointerException ("index");
     m_aArray = array;
     m_aIndex = index;
   }

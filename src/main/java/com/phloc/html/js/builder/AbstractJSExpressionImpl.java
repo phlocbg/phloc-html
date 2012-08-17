@@ -40,149 +40,176 @@
 
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Provides default implementations for {@link IJSExpression}.
  */
 public abstract class AbstractJSExpressionImpl implements IJSExpression
 {
+  @Nonnull
   public final IJSExpression minus ()
   {
     return JSOp.minus (this);
   }
 
+  @Nonnull
   public final IJSExpression inParantheses ()
   {
     return JSOp.inParantheses (this);
   }
 
-  /**
-   * Logical not <tt>'!x'</tt>.
-   */
+  @Nonnull
   public final IJSExpression not ()
   {
     return JSOp.not (this);
   }
 
+  @Nonnull
   public final IJSExpression complement ()
   {
     return JSOp.complement (this);
   }
 
+  @Nonnull
   public final IJSExpression incr ()
   {
     return JSOp.incr (this);
   }
 
+  @Nonnull
   public final IJSExpression decr ()
   {
     return JSOp.decr (this);
   }
 
-  public final IJSExpression plus (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression plus (@Nonnull final IJSExpression right)
   {
     return JSOp.plus (this, right);
   }
 
-  public final IJSExpression minus (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression minus (@Nonnull final IJSExpression right)
   {
     return JSOp.minus (this, right);
   }
 
-  public final IJSExpression mul (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression mul (@Nonnull final IJSExpression right)
   {
     return JSOp.mul (this, right);
   }
 
-  public final IJSExpression div (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression div (@Nonnull final IJSExpression right)
   {
     return JSOp.div (this, right);
   }
 
-  public final IJSExpression mod (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression mod (@Nonnull final IJSExpression right)
   {
     return JSOp.mod (this, right);
   }
 
-  public final IJSExpression shl (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression shl (@Nonnull final IJSExpression right)
   {
     return JSOp.shl (this, right);
   }
 
-  public final IJSExpression shr (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression shr (@Nonnull final IJSExpression right)
   {
     return JSOp.shr (this, right);
   }
 
-  public final IJSExpression shrz (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression shrz (@Nonnull final IJSExpression right)
   {
     return JSOp.shrz (this, right);
   }
 
-  public final IJSExpression band (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression band (@Nonnull final IJSExpression right)
   {
     return JSOp.band (this, right);
   }
 
-  public final IJSExpression bor (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression bor (@Nonnull final IJSExpression right)
   {
     return JSOp.bor (this, right);
   }
 
-  public final IJSExpression cand (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression cand (@Nonnull final IJSExpression right)
   {
     return JSOp.cand (this, right);
   }
 
-  public final IJSExpression cor (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression cor (@Nonnull final IJSExpression right)
   {
     return JSOp.cor (this, right);
   }
 
-  public final IJSExpression xor (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression xor (@Nonnull final IJSExpression right)
   {
     return JSOp.xor (this, right);
   }
 
-  public final IJSExpression lt (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression lt (@Nonnull final IJSExpression right)
   {
     return JSOp.lt (this, right);
   }
 
-  public final IJSExpression lte (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression lte (@Nonnull final IJSExpression right)
   {
     return JSOp.lte (this, right);
   }
 
-  public final IJSExpression gt (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression gt (@Nonnull final IJSExpression right)
   {
     return JSOp.gt (this, right);
   }
 
-  public final IJSExpression gte (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression gte (@Nonnull final IJSExpression right)
   {
     return JSOp.gte (this, right);
   }
 
-  public final IJSExpression eq (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression eq (@Nonnull final IJSExpression right)
   {
     return JSOp.eq (this, right);
   }
 
-  public final IJSExpression eeq (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression eeq (@Nonnull final IJSExpression right)
   {
     return JSOp.eeq (this, right);
   }
 
-  public final IJSExpression ne (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression ne (@Nonnull final IJSExpression right)
   {
     return JSOp.ne (this, right);
   }
 
-  public final IJSExpression ene (final IJSExpression right)
+  @Nonnull
+  public final IJSExpression ene (@Nonnull final IJSExpression right)
   {
     return JSOp.ene (this, right);
   }
 
+  @Nonnull
   public final IJSExpression typeof ()
   {
     return JSOp.typeof (this);
@@ -193,27 +220,32 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   // from JExpr
   //
   //
-  public final JSInvocation invoke (final JSMethod method)
+  @Nonnull
+  public final JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return JSExpr.invoke (this, method);
   }
 
-  public final JSInvocation invoke (final String method)
+  @Nonnull
+  public final JSInvocation invoke (@Nonnull final String method)
   {
     return JSExpr.invoke (this, method);
   }
 
-  public final JSFieldRef ref (final JSVar field)
+  @Nonnull
+  public final JSFieldRef ref (@Nonnull final JSVar field)
   {
     return JSExpr.ref (this, field);
   }
 
-  public final JSFieldRef ref (final String field)
+  @Nonnull
+  public final JSFieldRef ref (@Nonnull final String field)
   {
     return JSExpr.ref (this, field);
   }
 
-  public final JSArrayCompRef component (final IJSExpression index)
+  @Nonnull
+  public final JSArrayCompRef component (@Nonnull final IJSExpression index)
   {
     return JSExpr.component (this, index);
   }

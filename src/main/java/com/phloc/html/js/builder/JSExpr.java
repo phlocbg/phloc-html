@@ -67,12 +67,6 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation _new (@Nonnull final AbstractJSClass c)
-  {
-    return new JSInvocation (c);
-  }
-
-  @Nonnull
   public static JSInvocation _new (@Nonnull final AbstractJSType t)
   {
     return new JSInvocation (t);
@@ -139,37 +133,30 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSArray newArray (final AbstractJSType type)
+  public static JSArray newArray ()
   {
-    return newArray (type, null);
+    return newArray (null);
   }
 
-  /**
-   * Generates {@code new T[size]}.
-   * 
-   * @param type
-   *        The type of the array component. 'T' or {@code new T[size]}.
-   */
   @Nonnull
-  public static JSArray newArray (final AbstractJSType type, @Nullable final IJSExpression size)
+  public static JSArray newArray (@Nullable final AbstractJSType type)
   {
-    // you cannot create an array whose component type is a generic
-    return new JSArray (type, size);
+    return new JSArray (type);
   }
 
-  /**
-   * Generates {@code new T[size]}.
-   * 
-   * @param type
-   *        The type of the array component. 'T' or {@code new T[size]}.
-   */
   @Nonnull
-  public static JSArray newArray (final AbstractJSType type, final int size)
+  public static JSAnonymousFunction anonymousFunction ()
   {
-    return newArray (type, lit (size));
+    return anonymousFunction (null);
   }
 
-  private static final IJSExpression __this = new JSAtom ("this");
+  @Nonnull
+  public static JSAnonymousFunction anonymousFunction (@Nullable final AbstractJSType type)
+  {
+    return new JSAnonymousFunction (type);
+  }
+
+  public static final IJSExpression THIS = new JSAtom ("this");
 
   /**
    * Returns a reference to "this", an implicit reference to the current object.
@@ -177,17 +164,17 @@ public final class JSExpr
   @Nonnull
   public static IJSExpression _this ()
   {
-    return __this;
+    return THIS;
   }
 
   /* -- Literals -- */
 
-  private static final IJSExpression __null = new JSAtom ("null");
+  public static final IJSExpression NULL = new JSAtom ("null");
 
   @Nonnull
   public static IJSExpression _null ()
   {
-    return __null;
+    return NULL;
   }
 
   /**

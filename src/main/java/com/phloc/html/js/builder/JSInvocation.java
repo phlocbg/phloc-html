@@ -62,13 +62,19 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   /**
    * Name of the method to be invoked. Either this field is set, or
-   * {@link #m_aMethod}, or {@link #m_aType} (in which case it's a constructor
+   * {@link #m_aCallee}, or {@link #m_aType} (in which case it's a constructor
    * invocation.) This allows {@link JSMethod#name(String) the name of the
    * method to be changed later}.
    */
   private String m_sName;
 
-  private IJSDeclaration m_aMethod;
+  private Object m_aCallee;
+
+  /**
+   * If {@link m_bIsConstructor} == <code>true</code>, this field keeps the type
+   * to be created.
+   */
+  private AbstractJSType m_aType;
 
   private boolean m_bIsConstructor = false;
 
@@ -78,13 +84,31 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   private final List <IJSExpression> m_aArgs = new ArrayList <IJSExpression> ();
 
   /**
-   * If isConstructor==true, this field keeps the type to be created.
+   * Invoke a function
+   * 
+   * @param function
    */
-  private AbstractJSType m_aType;
+  JSInvocation (@Nonnull final JSFunction function)
+  {
+    m_aObject = null;
+    m_aCallee = function;
+  }
+
+  /**
+   * Invoke an anonymous function
+   * 
+   * @param anonfunc
+   *        The function to be invoked
+   */
+  JSInvocation (@Nonnull final JSAnonymousFunction anonfunc)
+  {
+    m_aObject = null;
+    m_aCallee = anonfunc;
+  }
 
   /**
    * Invokes a method on an object.
-   *
+   * 
    * @param object
    *        JExpression for the object upon which the named method will be
    *        invoked, or null if none
@@ -114,12 +138,6 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     this ((IJSGeneratable) type, method);
   }
 
-  JSInvocation (@Nonnull final JSFunction function)
-  {
-    m_aObject = null;
-    m_aMethod = function;
-  }
-
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final String name)
   {
     m_aObject = object;
@@ -131,26 +149,28 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod method)
   {
     m_aObject = object;
-    m_aMethod = method;
+    m_aCallee = method;
   }
 
   /**
    * Invokes a constructor of an object (i.e., creates a new object.)
-   *
-   * @param c
+   * 
+   * @param aType
    *        Type of the object to be created. If this type is an array type,
    *        added arguments are treated as array initializer. Thus you can
    *        create an expression like <code>new int[]{1,2,3,4,5}</code>.
    */
-  JSInvocation (@Nonnull final AbstractJSType c)
+  JSInvocation (@Nonnull final AbstractJSType aType)
   {
+    if (aType == null)
+      throw new NullPointerException ("constructorType");
     m_bIsConstructor = true;
-    m_aType = c;
+    m_aType = aType;
   }
 
   /**
    * Add an expression to this invocation's argument list
-   *
+   * 
    * @param arg
    *        Argument to add to argument list
    */
@@ -213,7 +233,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   /**
    * Returns all arguments of the invocation.
-   *
+   * 
    * @return If there's no arguments, an empty array will be returned.
    */
   @Nonnull
@@ -225,26 +245,43 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   public void generate (final JSFormatter f)
   {
-    if (m_bIsConstructor && m_aType.isArray ())
+    if (m_bIsConstructor)
     {
-      // [RESULT] new T[]{arg1,arg2,arg3,...};
-      f.plain ("new ").generatable (m_aType).plain ('{');
+      if (m_aType.isArray ())
+      {
+        // [RESULT] new T[]{arg1,arg2,arg3,...};
+        f.plain ("new ").generatable (m_aType).plain ('{');
+      }
+      else
+      {
+        f.plain ("new ").generatable (m_aType).plain ('(');
+      }
     }
     else
     {
-      if (m_bIsConstructor)
-        f.plain ("new ").generatable (m_aType).plain ('(');
-      else
-      {
-        String name = m_sName;
-        if (name == null)
-          name = m_aMethod.name ();
+      // Find name
+      String name = m_sName;
+      if (name == null && m_aCallee instanceof IJSDeclaration)
+        name = ((IJSDeclaration) m_aCallee).name ();
 
-        if (m_aObject != null)
-          f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
-        else
-          f.id (name).plain ('(');
+      if (m_aObject != null)
+      {
+        // Regular object method invocation
+        if (name == null)
+          throw new IllegalStateException ();
+        f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
       }
+      else
+        if (name != null)
+        {
+          // E.g. global function
+          f.id (name).plain ('(');
+        }
+        else
+        {
+          // anonymouse function
+          f.plain ('(');
+        }
     }
 
     f.generatable (m_aArgs);
