@@ -64,7 +64,7 @@ public class FileCodeWriter extends AbstractCodeWriter
   private final boolean m_bReadOnly;
 
   /** Files that shall be marked as read only. */
-  private final Set <File> readonlyFiles = new HashSet <File> ();
+  private final Set <File> m_aReadOnlyFiles = new HashSet <File> ();
 
   public FileCodeWriter (final File target, final String encoding) throws IOException
   {
@@ -74,8 +74,8 @@ public class FileCodeWriter extends AbstractCodeWriter
   public FileCodeWriter (final File target, final boolean readOnly, final String encoding) throws IOException
   {
     super (encoding);
-    this.m_aTarget = target;
-    this.m_bReadOnly = readOnly;
+    m_aTarget = target;
+    m_bReadOnly = readOnly;
     if (!target.exists () || !target.isDirectory ())
       throw new IOException (target + ": non-existent directory");
   }
@@ -92,7 +92,7 @@ public class FileCodeWriter extends AbstractCodeWriter
     if (pkg.isUnnamed ())
       dir = m_aTarget;
     else
-      dir = new File (m_aTarget, toDirName (pkg));
+      dir = new File (m_aTarget, _toDirName (pkg));
 
     if (!dir.exists ())
       dir.mkdirs ();
@@ -106,7 +106,7 @@ public class FileCodeWriter extends AbstractCodeWriter
     }
 
     if (m_bReadOnly)
-      readonlyFiles.add (fn);
+      m_aReadOnlyFiles.add (fn);
     return fn;
   }
 
@@ -114,14 +114,13 @@ public class FileCodeWriter extends AbstractCodeWriter
   public void close () throws IOException
   {
     // mark files as read-onnly if necessary
-    for (final File f : readonlyFiles)
+    for (final File f : m_aReadOnlyFiles)
       f.setReadOnly ();
   }
 
   /** Converts a package name to the directory name. */
-  private static String toDirName (final JSPackage pkg)
+  private static String _toDirName (final JSPackage pkg)
   {
     return pkg.name ().replace ('.', File.separatorChar);
   }
-
 }
