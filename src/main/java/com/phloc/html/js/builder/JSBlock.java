@@ -89,6 +89,14 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     m_bIndentRequired = indentRequired;
   }
 
+  /**
+   * Determine whether a newline should be printed at the end of the block. This
+   * is only set to false for anonymous functions
+   * 
+   * @param bNewLineAtEnd
+   *        <code>true</code> to enable newline at the end
+   * @return this
+   */
   @Nonnull
   public JSBlock newlineAtEnd (final boolean bNewLineAtEnd)
   {
@@ -137,12 +145,11 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    */
   public int pos (final int newPos)
   {
-    final int r = m_nPos;
+    final int nOldPos = m_nPos;
     if (newPos > m_aContent.size () || newPos < 0)
       throw new IllegalArgumentException ();
     m_nPos = newPos;
-
-    return r;
+    return nOldPos;
   }
 
   /**
@@ -746,6 +753,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * <code>directStatement("a=b+c;")</code>.
    */
   @Nonnull
+  @Deprecated
   public IJSStatement directStatement (final String source)
   {
     final IJSStatement s = new IJSStatement ()

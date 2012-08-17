@@ -60,32 +60,53 @@ public final class JSOp
 
   /* -- Unary operators -- */
 
-  private static class JSUnaryOp extends AbstractJSExpressionImpl
+  private static class JSTightUnaryOp extends AbstractJSExpressionImpl
   {
     final String m_sOp;
     final IJSExpression m_aExpr;
     final boolean m_bOpFirst;
 
-    JSUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
+    JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
     {
       m_sOp = op;
       m_aExpr = e;
       m_bOpFirst = true;
     }
 
-    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
+    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
     {
       m_sOp = op;
       m_aExpr = e;
       m_bOpFirst = false;
     }
 
-    public void generate (@Nonnull final JSFormatter f)
+    public void generate (final JSFormatter f)
     {
       if (m_bOpFirst)
-        f.plain ('(').plain (m_sOp).generatable (m_aExpr).plain (')');
+        f.plain (m_sOp).generatable (m_aExpr);
       else
-        f.plain ('(').generatable (m_aExpr).plain (m_sOp).plain (')');
+        f.generatable (m_aExpr).plain (m_sOp);
+    }
+  }
+
+  private static class JSUnaryOp extends JSTightUnaryOp
+  {
+    JSUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
+    {
+      super (op, e);
+    }
+
+    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
+    {
+      super (e, op);
+    }
+
+    @Override
+    public void generate (@Nonnull final JSFormatter f)
+    {
+      f.plain ('(');
+      super.generate (f);
+      f.plain (')');
     }
   }
 
@@ -120,28 +141,6 @@ public final class JSOp
     return new JSUnaryOp ("~", e);
   }
 
-  private static class JSTightUnaryOp extends JSUnaryOp
-  {
-    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull final String op)
-    {
-      super (e, op);
-    }
-
-    JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e)
-    {
-      super (op, e);
-    }
-
-    @Override
-    public void generate (final JSFormatter f)
-    {
-      if (m_bOpFirst)
-        f.plain (m_sOp).generatable (m_aExpr);
-      else
-        f.generatable (m_aExpr).plain (m_sOp);
-    }
-  }
-
   @Nonnull
   public static IJSExpression incr (final IJSExpression e)
   {
@@ -158,6 +157,12 @@ public final class JSOp
   public static IJSExpression typeof (final IJSExpression e)
   {
     return new JSTightUnaryOp ("typeof ", e);
+  }
+
+  @Nonnull
+  public static IJSExpression delete (final IJSExpression e)
+  {
+    return new JSTightUnaryOp ("delete ", e);
   }
 
   /* -- Binary operators -- */

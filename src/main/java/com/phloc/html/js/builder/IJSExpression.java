@@ -99,6 +99,12 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression typeof ();
 
   /**
+   * @return "delete [this]" from "[this]"
+   */
+  @Nonnull
+  IJSExpression delete ();
+
+  /**
    * @return "[this]+[right]"
    */
   @Nonnull
