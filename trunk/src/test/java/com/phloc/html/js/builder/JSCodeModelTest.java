@@ -1,12 +1,6 @@
 package com.phloc.html.js.builder;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
-
 import org.junit.Test;
-
-import com.phloc.html.js.builder.writer.AbstractCodeWriter;
 
 public final class JSCodeModelTest
 {
@@ -104,13 +98,7 @@ public final class JSCodeModelTest
       aFuncMain.body ()._return (JSExpr.newArray ().add (sHTML).add (JSExpr.NULL).add (sComments));
     }
 
-    new AbstractCodeWriter ("UTF-8")
-    {
-      @Override
-      public Writer getWriter (final JSPackage pkg, final String fileName) throws IOException
-      {
-        return new PrintWriter (System.out);
-      }
-    }.buildPackage (aCM.rootPackage ());
+    final String sCode = aCM.rootPackage ().getJSCode ();
+    System.out.println (sCode);
   }
 }

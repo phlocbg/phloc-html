@@ -43,6 +43,9 @@ package com.phloc.html.js.builder.writer;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.CharsetEncoder;
+
+import com.phloc.commons.charset.CharsetManager;
 
 /**
  * {@link Writer} that escapes non US-ASCII characters into Java Unicode escape
@@ -51,11 +54,16 @@ import java.io.Writer;
  * 
  * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  */
-class UnicodeEscapeWriter extends FilterWriter
+final class UnicodeEscapeWriter extends FilterWriter
 {
-  public UnicodeEscapeWriter (final Writer next)
+  private final CharsetEncoder encoder;
+
+  public UnicodeEscapeWriter (final Writer next, final String sEncoding)
   {
     super (next);
+    // can't change this signature to Encoder because
+    // we can't have Encoder in method signature
+    encoder = CharsetManager.getCharsetFromName (sEncoding).newEncoder ();
   }
 
   @Override
@@ -79,14 +87,14 @@ class UnicodeEscapeWriter extends FilterWriter
    */
   protected boolean requireEscaping (final int ch)
   {
-    if (ch >= 128)
-      return true;
-
     // control characters
     if (ch < 0x20 && " \t\r\n".indexOf (ch) == -1)
       return true;
+    // check ASCII chars, for better performance
+    if (ch < 0x80)
+      return false;
 
-    return false;
+    return !encoder.canEncode ((char) ch);
   }
 
   @Override

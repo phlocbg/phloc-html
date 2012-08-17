@@ -73,17 +73,11 @@ public class JSFormatter implements Closeable
   private boolean m_bAtBeginningOfLine = true;
 
   /**
-   * Creates a JFormatter.
-   * 
-   * @param s
-   *        PrintWriter to JFormatter to use.
-   * @param space
-   *        Incremental indentation string, similar to tab value.
+   * Creates a formatter with default incremental indentations of four spaces.
    */
-  public JSFormatter (final PrintWriter s, final String space)
+  public JSFormatter (final Writer w)
   {
-    m_aPW = s;
-    m_sIndentSpace = space;
+    this (new PrintWriter (w));
   }
 
   /**
@@ -95,11 +89,17 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Creates a formatter with default incremental indentations of four spaces.
+   * Creates a JFormatter.
+   * 
+   * @param s
+   *        PrintWriter to JFormatter to use.
+   * @param space
+   *        Incremental indentation string, similar to tab value.
    */
-  public JSFormatter (final Writer w)
+  public JSFormatter (final PrintWriter s, final String space)
   {
-    this (new PrintWriter (w));
+    m_aPW = s;
+    m_sIndentSpace = space;
   }
 
   private void _spaceIfNeeded ()

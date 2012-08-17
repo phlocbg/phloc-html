@@ -47,6 +47,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.phloc.commons.io.EAppend;
+import com.phloc.commons.io.file.FileOperations;
 import com.phloc.commons.io.resource.FileSystemResource;
 import com.phloc.html.js.builder.JSPackage;
 
@@ -81,29 +82,27 @@ public class FileCodeWriter extends AbstractCodeWriter
   }
 
   @Override
-  public Writer getWriter (final JSPackage pkg, final String fileName) throws IOException
+  public Writer getWriter (final JSPackage pkg) throws IOException
   {
-    return new FileSystemResource (getFile (pkg, fileName)).getWriter (m_sEncoding, EAppend.TRUNCATE);
+    return new FileSystemResource (getFile (pkg)).getWriter (m_sEncoding, EAppend.TRUNCATE);
   }
 
-  protected File getFile (final JSPackage pkg, final String fileName) throws IOException
+  protected File getFile (final JSPackage pkg) throws IOException
   {
+    final JSPackage aParentPackage = pkg.parent ();
+
     File dir;
-    if (pkg.isUnnamed ())
+    if (aParentPackage == null || aParentPackage.isUnnamed ())
       dir = m_aTarget;
     else
-      dir = new File (m_aTarget, _toDirName (pkg));
+      dir = new File (m_aTarget, _toDirName (aParentPackage));
 
-    if (!dir.exists ())
-      dir.mkdirs ();
+    FileOperations.createDirRecursiveIfNotExisting (dir);
 
-    final File fn = new File (dir, fileName);
+    final File fn = new File (dir, pkg.name () + ".js");
 
-    if (fn.exists ())
-    {
-      if (!fn.delete ())
-        throw new IOException (fn + ": Can't delete previous version");
-    }
+    if (FileOperations.deleteFileIfExisting (fn).isFailure ())
+      throw new IOException (fn + ": Can't delete previous version");
 
     if (m_bReadOnly)
       m_aReadOnlyFiles.add (fn);
@@ -111,7 +110,7 @@ public class FileCodeWriter extends AbstractCodeWriter
   }
 
   @Override
-  public void close () throws IOException
+  public void afterAllPackages () throws IOException
   {
     // mark files as read-onnly if necessary
     for (final File f : m_aReadOnlyFiles)
