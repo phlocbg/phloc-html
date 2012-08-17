@@ -96,12 +96,6 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final boolean v)
-  {
-    return assignPlus (JSExpr.lit (v));
-  }
-
-  @Nonnull
   public final JSAssignment assignPlus (@Nonnull final char v)
   {
     return assignPlus (JSExpr.lit (v));
