@@ -55,13 +55,13 @@ public final class JSExpr
   {}
 
   @Nonnull
-  public static IJSExpression assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, rhs);
+    return new JSAssignment (lhs, "=", rhs);
   }
 
   @Nonnull
-  public static IJSExpression assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
     return new JSAssignment (lhs, "+=", rhs);
   }
@@ -142,6 +142,12 @@ public final class JSExpr
   public static JSArray newArray (@Nullable final AbstractJSType type)
   {
     return new JSArray (type);
+  }
+
+  @Nonnull
+  public static JSAssocArray newAssocArray ()
+  {
+    return new JSAssocArray ();
   }
 
   @Nonnull

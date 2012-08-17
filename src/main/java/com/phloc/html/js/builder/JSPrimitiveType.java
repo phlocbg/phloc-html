@@ -52,6 +52,12 @@ public class JSPrimitiveType extends AbstractJSType
     return JSExpr.lit (m_sName);
   }
 
+  @Nonnull
+  public JSInvocation _new ()
+  {
+    return JSExpr._new (this);
+  }
+
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sName);

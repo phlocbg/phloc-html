@@ -40,16 +40,58 @@
 
 package com.phloc.html.js.builder;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.annotation.Nonnull;
 
 /**
- * Marker interface for code components that can be placed to the left of '=' in
- * an assignment. A left hand value can always be a right hand value, so this
- * interface derives from {@link IJSExpression}.
+ * array creation and initialization.
  */
-public interface IJSAssignmentTarget extends IJSExpression
+public final class JSAssocArray extends AbstractJSExpressionImpl
 {
-  JSAssignment assign (@Nonnull IJSExpression rhs);
+  private Map <IJSExpression, IJSExpression> m_aExprs;
 
-  JSAssignment assignPlus (@Nonnull IJSExpression rhs);
+  JSAssocArray ()
+  {}
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String key, @Nonnull final IJSExpression value)
+  {
+    return add (JSExpr.lit (key), value);
+  }
+
+  /**
+   * Add an element to the array initializer
+   */
+  @Nonnull
+  public JSAssocArray add (@Nonnull final IJSExpression key, @Nonnull final IJSExpression value)
+  {
+    if (key == null)
+      throw new NullPointerException ("key");
+    if (value == null)
+      throw new NullPointerException ("value");
+    if (m_aExprs == null)
+      m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
+    m_aExprs.put (key, value);
+    return this;
+  }
+
+  public void generate (final JSFormatter f)
+  {
+    f.plain ('{');
+    if (m_aExprs != null)
+    {
+      boolean bFirst = true;
+      for (final Map.Entry <IJSExpression, IJSExpression> aEntry : m_aExprs.entrySet ())
+      {
+        if (bFirst)
+          bFirst = false;
+        else
+          f.plain (',');
+        f.generatable (aEntry.getKey ()).plain (':').generatable (aEntry.getValue ());
+      }
+    }
+    f.plain ('}');
+  }
 }

@@ -192,6 +192,12 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return m_aJSDoc;
   }
 
+  @Nonnull
+  public JSInvocation invoke ()
+  {
+    return new JSInvocation (this);
+  }
+
   @Override
   public void declare (@Nonnull final JSFormatter f)
   {

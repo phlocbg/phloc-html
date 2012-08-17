@@ -49,7 +49,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * Variables and fields.
  */
 
-public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, IJSAssignmentTarget
+public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 {
   /**
    * JType of the variable
@@ -142,18 +142,6 @@ public class JSVar extends AbstractJSExpressionImpl implements IJSDeclaration, I
     final AbstractJSType r = m_aType;
     m_aType = newType;
     return r;
-  }
-
-  @Nonnull
-  public IJSExpression assign (@Nonnull final IJSExpression rhs)
-  {
-    return JSExpr.assign (this, rhs);
-  }
-
-  @Nonnull
-  public IJSExpression assignPlus (@Nonnull final IJSExpression rhs)
-  {
-    return JSExpr.assignPlus (this, rhs);
   }
 
   void bind (@Nonnull final JSFormatter f)

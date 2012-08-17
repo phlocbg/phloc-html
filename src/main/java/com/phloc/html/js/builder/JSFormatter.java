@@ -222,15 +222,16 @@ public class JSFormatter implements Closeable
    * Produces {@link IJSGeneratable}s separated by ','
    */
   @Nonnull
-  public JSFormatter generatable (@Nonnull final Collection <? extends IJSGeneratable> list)
+  public JSFormatter generatable (@Nonnull final Collection <? extends IJSGeneratable> aCont)
   {
     boolean first = true;
-    for (final IJSGeneratable item : list)
+    for (final IJSGeneratable item : aCont)
     {
-      if (!first)
+      if (first)
+        first = false;
+      else
         plain (',');
       generatable (item);
-      first = false;
     }
     return this;
   }

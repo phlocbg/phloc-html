@@ -42,8 +42,6 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.html.js.marshal.JSMarshaller;
-
 /**
  * RegEx literal.
  * 
@@ -99,8 +97,7 @@ public class JSRegExLiteral extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    // TODO masking does not fit
-    f.plain ('/').plain (JSMarshaller.javaScriptEscape (m_sStr)).plain ('/');
+    f.plain ('/').plain (m_sStr).plain ('/');
     if (m_bGlobal)
       f.plain ('g');
     if (m_bCaseInsensitive)

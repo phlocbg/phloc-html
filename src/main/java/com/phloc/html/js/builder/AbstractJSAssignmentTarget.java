@@ -42,41 +42,104 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
-
 /**
- * Assignment statements, which are also expressions.
+ * array component reference.
  */
-public class JSAssignment extends AbstractJSExpressionImpl implements IJSStatement
+public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImpl implements IJSAssignmentTarget
 {
-  private final IJSAssignmentTarget m_aLhs;
-  private final String m_sOp;
-  private final IJSExpression m_aRhs;
-
-  JSAssignment (@Nonnull final IJSAssignmentTarget lhs,
-                @Nonnull @Nonempty final String op,
-                @Nonnull final IJSExpression rhs)
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final boolean v)
   {
-    if (lhs == null)
-      throw new NullPointerException ("lhs");
-    if (StringHelper.hasNoText (op))
-      throw new IllegalArgumentException ("operator is empty");
-    if (rhs == null)
-      throw new NullPointerException ("rhs");
-
-    m_aLhs = lhs;
-    m_sOp = op;
-    m_aRhs = rhs;
+    return assign (JSExpr.lit (v));
   }
 
-  public void generate (final JSFormatter f)
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final char v)
   {
-    f.generatable (m_aLhs).plain (m_sOp).generatable (m_aRhs);
+    return assign (JSExpr.lit (v));
   }
 
-  public void state (final JSFormatter f)
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final double v)
   {
-    f.generatable (this).plain (';').nl ();
+    return assign (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final float v)
+  {
+    return assign (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final int v)
+  {
+    return assign (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final long v)
+  {
+    return assign (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final String v)
+  {
+    return assign (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assign (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assign (this, rhs);
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final boolean v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final char v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final double v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final float v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final int v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final long v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final String v)
+  {
+    return assignPlus (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final JSAssignment assignPlus (@Nonnull final IJSExpression rhs)
+  {
+    return JSExpr.assignPlus (this, rhs);
   }
 }
