@@ -22,9 +22,8 @@ import javax.annotation.Nullable;
 
 /**
  * Represents an abstract JS class.
- * <p>
- * To be exact, this object represents an "use" of a reference type, not
- * necessarily a declaration of it, which is modeled as {@link JSDefinedClass}.
+ * 
+ * @author philip
  */
 public abstract class AbstractJSClass extends AbstractJSType
 {
@@ -38,7 +37,7 @@ public abstract class AbstractJSClass extends AbstractJSType
 
   /**
    * Gets the super class of this class.
-   *
+   * 
    * @return Returns the JClass representing the superclass of the entity (class
    *         or interface) represented by this {@link AbstractJSClass}. Even if
    *         no super class is given explicitly or this {@link AbstractJSClass}
@@ -73,16 +72,16 @@ public abstract class AbstractJSClass extends AbstractJSType
    * Gets the parameterization of the given base type.
    * <p>
    * For example, given the following
-   *
+   * 
    * <pre>
    * <xmp>
    * interface Foo<T> extends List<List<T>> {}
    * interface Bar extends Foo<String> {}
    * </xmp>
    * </pre>
-   *
+   * 
    * This method works like this:
-   *
+   * 
    * <pre>
    * <xmp>
    * getBaseClass( Bar, List ) = List<List<String>
@@ -91,7 +90,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    * getBaseClass( ArrayList<? extends BigInteger>, List ) = List<? extends BigInteger>
    * </xmp>
    * </pre>
-   *
+   * 
    * @param baseType
    *        The class whose parameterization we are interested in.
    * @return The use of {@code baseType} in {@code this} type. or null if the

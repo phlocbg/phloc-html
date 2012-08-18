@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * While statement
+ * 
+ * @author philip
  */
 public class JSWhileLoop implements IJSStatement
 {

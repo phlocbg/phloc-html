@@ -28,6 +28,8 @@ import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * JS function
+ * 
+ * @author philip
  */
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {

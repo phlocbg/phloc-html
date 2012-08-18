@@ -29,7 +29,9 @@ import com.phloc.commons.string.StringHelper;
 
 /**
  * This is a utility class for managing indentation and other basic formatting
- * for PrintWriter.
+ * for {@link PrintWriter}.
+ * 
+ * @author philip
  */
 public class JSFormatter implements Closeable
 {
@@ -68,13 +70,13 @@ public class JSFormatter implements Closeable
 
   /**
    * Creates a JFormatter.
-   *
+   * 
    * @param s
    *        PrintWriter to JFormatter to use.
    * @param space
    *        Incremental indentation string, similar to tab value.
    */
-  public JSFormatter (@Nonnull final PrintWriter s,@Nonnull  final String space)
+  public JSFormatter (@Nonnull final PrintWriter s, @Nonnull final String space)
   {
     m_aPW = s;
     m_sIndentSpace = space;
@@ -120,7 +122,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a char into the stream
-   *
+   * 
    * @param c
    *        the char
    */
@@ -134,7 +136,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a String into the stream
-   *
+   * 
    * @param s
    *        the String
    */
@@ -182,7 +184,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JGenerable object to generate source for itself
-   *
+   * 
    * @param g
    *        the JGenerable object
    */
@@ -213,7 +215,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JDeclaration to generate source for itself
-   *
+   * 
    * @param d
    *        the JDeclaration object
    */
@@ -226,7 +228,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JStatement to generate source for itself
-   *
+   * 
    * @param s
    *        the JStatement object
    */
@@ -239,7 +241,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the JVar to generate source for itself
-   *
+   * 
    * @param v
    *        the JVar object
    */

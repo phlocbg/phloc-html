@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * If statement, with optional else clause
+ * 
+ * @author philip
  */
 public class JSConditional implements IJSStatement
 {
@@ -43,18 +45,19 @@ public class JSConditional implements IJSStatement
    * Constructor
    * 
    * @param test
-   *        JExpression which will determine branching
+   *        Expression which will determine branching
    */
-  JSConditional (final IJSExpression test)
+  JSConditional (@Nonnull final IJSExpression test)
   {
     m_aTest = test;
   }
 
   /**
-   * Return the block to be excuted by the "then" branch
+   * Return the block to be executed by the "then" branch
    * 
    * @return Then block
    */
+  @Nonnull
   public JSBlock _then ()
   {
     return m_aThen;
@@ -65,6 +68,7 @@ public class JSConditional implements IJSStatement
    * 
    * @return Newly generated else block
    */
+  @Nonnull
   public JSBlock _else ()
   {
     if (m_aElse == null)
@@ -76,7 +80,7 @@ public class JSConditional implements IJSStatement
    * Creates <tt>... else if(...) ...</tt> code.
    */
   @Nonnull
-  public JSConditional _elseif (final IJSExpression boolExp)
+  public JSConditional _elseif (@Nonnull final IJSExpression boolExp)
   {
     return _else ()._if (boolExp);
   }

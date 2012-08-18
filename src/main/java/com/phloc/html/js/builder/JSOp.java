@@ -26,6 +26,8 @@ import com.phloc.commons.string.StringHelper;
 
 /**
  * Class for generating expressions containing operators
+ * 
+ * @author philip
  */
 @Immutable
 public final class JSOp
@@ -47,9 +49,9 @@ public final class JSOp
   {
     private final IJSExpression m_aExpr;
 
-    ParanthesisExpr (@Nonnull final IJSExpression e)
+    ParanthesisExpr (@Nonnull final IJSExpression aExpr)
     {
-      m_aExpr = e;
+      m_aExpr = aExpr;
     }
 
     public void generate (@Nonnull final JSFormatter f)
@@ -58,23 +60,23 @@ public final class JSOp
     }
   }
 
-  private static class JSTightUnaryOp extends AbstractJSExpressionImpl
+  private static class JSUnaryOp extends AbstractJSExpressionImpl
   {
     final String m_sOp;
     final IJSExpression m_aExpr;
     final boolean m_bOpFirst;
 
-    JSTightUnaryOp (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
+    JSUnaryOp (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
     {
       this (op, e, true);
     }
 
-    JSTightUnaryOp (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
+    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
     {
       this (op, e, false);
     }
 
-    private JSTightUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e, final boolean bOpFirst)
+    private JSUnaryOp (@Nonnull final String op, @Nonnull final IJSExpression e, final boolean bOpFirst)
     {
       if (StringHelper.hasNoText (op))
         throw new IllegalArgumentException ("empty operator");
@@ -94,14 +96,14 @@ public final class JSOp
     }
   }
 
-  private static class JSUnaryOp extends JSTightUnaryOp
+  private static class JSUnaryOpWithParanthesis extends JSUnaryOp
   {
-    JSUnaryOp (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
+    JSUnaryOpWithParanthesis (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
     {
       super (op, e);
     }
 
-    JSUnaryOp (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
+    JSUnaryOpWithParanthesis (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
     {
       super (e, op);
     }
@@ -118,7 +120,7 @@ public final class JSOp
   @Nonnull
   public static IJSExpression minus (@Nonnull final IJSExpression e)
   {
-    return new JSUnaryOp ("-", e);
+    return new JSUnaryOpWithParanthesis ("-", e);
   }
 
   @Nonnull
@@ -137,31 +139,31 @@ public final class JSOp
       return JSExpr.FALSE;
     if (e == JSExpr.FALSE)
       return JSExpr.TRUE;
-    return new JSUnaryOp ("!", e);
+    return new JSUnaryOpWithParanthesis ("!", e);
   }
 
   @Nonnull
   public static IJSExpression complement (@Nonnull final IJSExpression e)
   {
-    return new JSUnaryOp ("~", e);
+    return new JSUnaryOpWithParanthesis ("~", e);
   }
 
   @Nonnull
   public static IJSExpression incr (@Nonnull final IJSExpression e)
   {
-    return new JSTightUnaryOp (e, "++");
+    return new JSUnaryOp (e, "++");
   }
 
   @Nonnull
   public static IJSExpression decr (@Nonnull final IJSExpression e)
   {
-    return new JSTightUnaryOp (e, "--");
+    return new JSUnaryOp (e, "--");
   }
 
   @Nonnull
   public static IJSExpression typeof (@Nonnull final IJSExpression e)
   {
-    return new JSTightUnaryOp ("typeof ", e);
+    return new JSUnaryOp ("typeof ", e);
   }
 
   /* -- Binary operators -- */

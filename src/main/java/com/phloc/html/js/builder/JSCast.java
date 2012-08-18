@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * A cast operation.
+ * 
+ * @author philip
  */
 final class JSCast extends AbstractJSExpressionImpl
 {

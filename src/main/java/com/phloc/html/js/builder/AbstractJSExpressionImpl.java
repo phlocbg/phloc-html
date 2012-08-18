@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * Provides default implementations for {@link IJSExpression}.
+ * 
+ * @author philip
  */
 public abstract class AbstractJSExpressionImpl implements IJSExpression
 {

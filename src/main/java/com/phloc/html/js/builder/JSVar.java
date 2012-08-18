@@ -24,6 +24,8 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * Variables and fields.
+ * 
+ * @author philip
  */
 public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 {

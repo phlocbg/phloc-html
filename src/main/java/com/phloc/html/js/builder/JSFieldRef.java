@@ -22,8 +22,9 @@ import javax.annotation.Nullable;
 
 /**
  * Field Reference
+ * 
+ * @author philip
  */
-
 public class JSFieldRef extends AbstractJSAssignmentTarget
 {
   /**
@@ -56,7 +57,7 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
     m_aVar = var;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     String name = m_sName;
     if (name == null)

@@ -28,12 +28,14 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
 /**
- * A block of Java code, which may contain statements and local declarations.
+ * A block of JS code, which may contain statements and local declarations.
  * <p>
  * {@link JSBlock} contains a large number of factory methods that creates new
  * statements/declarations. Those newly created statements/declarations are
  * inserted into the {@link #pos() "current position"}. The position advances
  * one every time you add a new instruction.
+ * 
+ * @author philip
  */
 public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContainer
 {

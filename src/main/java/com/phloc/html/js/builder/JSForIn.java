@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * ForIn Statement
+ * For in Statement
  * 
  * @author philip
  */
@@ -35,8 +35,8 @@ public final class JSForIn implements IJSStatement
            @Nonnull final String variable,
            @Nonnull final IJSExpression collection)
   {
-    m_aCollection = collection;
     m_aLoopVar = new JSVar (vartype, variable, null);
+    m_aCollection = collection;
   }
 
   /**
@@ -48,6 +48,7 @@ public final class JSForIn implements IJSStatement
     return m_aLoopVar;
   }
 
+  @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)

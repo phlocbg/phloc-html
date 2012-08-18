@@ -20,7 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 /**
- * Indicates that a declation is already created.
+ * Indicates that a declaration is already created.
  * 
  * @author philip
  */

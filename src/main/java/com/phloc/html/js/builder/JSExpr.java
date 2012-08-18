@@ -22,11 +22,13 @@ import javax.annotation.Nullable;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
+ * 
+ * @author philip
  */
 public final class JSExpr
 {
   /**
-   * This class is not instanciable.
+   * This class is not instancable.
    */
   private JSExpr ()
   {}

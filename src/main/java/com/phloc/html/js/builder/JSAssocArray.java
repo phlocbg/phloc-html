@@ -24,6 +24,8 @@ import javax.annotation.Nonnull;
 
 /**
  * array creation and initialization.
+ * 
+ * @author philip
  */
 public final class JSAssocArray extends AbstractJSExpressionImpl
 {

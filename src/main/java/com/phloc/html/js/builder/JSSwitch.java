@@ -27,6 +27,8 @@ import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * Switch statement
+ * 
+ * @author philip
  */
 public final class JSSwitch implements IJSStatement
 {

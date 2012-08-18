@@ -20,16 +20,9 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 /**
- * A Java expression.
- * <p>
- * Unlike most of CodeModel, JExpressions are built bottom-up ( meaning you
- * start from leaves and then gradually build complicated expressions by
- * combining them.)
- * <p>
- * {@link IJSExpression} defines a series of composer methods, which returns a
- * complicated expression (by often taking other {@link IJSExpression}s as
- * parameters. For example, you can build "5+2" by
- * <tt>JExpr.lit(5).add(JExpr.lit(2))</tt>
+ * A JS expression.
+ * 
+ * @author philip
  */
 public interface IJSExpression extends IJSGeneratable
 {

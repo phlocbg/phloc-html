@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * array component reference.
+ * 
+ * @author philip
  */
 final class JSArrayCompRef extends AbstractJSAssignmentTarget
 {

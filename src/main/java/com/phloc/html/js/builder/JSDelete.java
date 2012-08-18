@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * delete statement
+ * 
+ * @author philip
  */
 final class JSDelete implements IJSStatement
 {

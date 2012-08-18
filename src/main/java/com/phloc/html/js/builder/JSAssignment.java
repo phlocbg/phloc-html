@@ -24,6 +24,8 @@ import com.phloc.commons.string.StringHelper;
 
 /**
  * Assignment statements, which are also expressions.
+ * 
+ * @author philip
  */
 public class JSAssignment extends AbstractJSExpressionImpl implements IJSStatement
 {

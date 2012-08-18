@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * Common interface for code components that can generate uses of themselves.
+ * 
+ * @author philip
  */
 public interface IJSGeneratable
 {

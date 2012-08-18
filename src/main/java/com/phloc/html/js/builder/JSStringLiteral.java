@@ -25,7 +25,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * String literal.
  * 
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ * @author philip
  */
 public class JSStringLiteral extends AbstractJSExpressionImpl
 {

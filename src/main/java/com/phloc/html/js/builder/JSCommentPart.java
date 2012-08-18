@@ -21,19 +21,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.annotation.Nullable;
+
 /**
- * A part is a part of a javadoc comment, and it is a list of values.
- * <p>
- * A part can contain a free-form text. This text is modeled as a collection of
- * 'values' in this class. A value can be a {@link AbstractJSType} (which will
- * be prinited with a @link tag), anything that can be turned into a
- * {@link String} via the {@link Object#toString()} method, or a
- * {@link Collection}/array of those objects.
- * <p>
- * Values can be added through the various append methods one by one or in a
- * bulk.
+ * A part is a part of a JSDoc comment, and it is a list of values.
  * 
- * @author Kohsuke Kawaguchi
+ * @author philip
  */
 public class JSCommentPart extends ArrayList <Object>
 {
@@ -49,13 +42,13 @@ public class JSCommentPart extends ArrayList <Object>
   }
 
   @Override
-  public boolean add (final Object o)
+  public boolean add (@Nullable final Object o)
   {
     _flattenAppend (o);
     return true;
   }
 
-  private void _flattenAppend (final Object value)
+  private void _flattenAppend (@Nullable final Object value)
   {
     if (value == null)
       return;
