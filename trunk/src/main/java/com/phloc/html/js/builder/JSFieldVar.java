@@ -21,14 +21,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * A field that can have a {@link JSCommentMultiLine} associated with it
+ * A field of a class
+ * 
+ * @author philip
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
 {
   private final JSDefinedClass m_aOwner;
 
   /**
-   * javadoc comments for this JFieldVar
+   * JSdoc comments for this JFieldVar
    */
   private JSCommentMultiLine m_aJSDoc;
 
@@ -36,7 +38,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * JFieldVar constructor
    * 
    * @param type
-   *        Datatype of this variable
+   *        data type of this variable
    * @param name
    *        Name of this variable
    * @param init

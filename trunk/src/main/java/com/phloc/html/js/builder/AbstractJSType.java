@@ -22,14 +22,15 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
- * A representation of a type in codeModel. A type is always a reference type (
- * {@link AbstractJSClass}).
+ * A representation of a type in JS.
+ * 
+ * @author philip
  */
 public abstract class AbstractJSType implements IJSGeneratable
 {
   /**
    * Gets the name of this type.
-   *
+   * 
    * @return Names like "int", "void", "BigInteger".
    */
   @Nonnull

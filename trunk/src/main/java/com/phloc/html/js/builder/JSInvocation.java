@@ -27,7 +27,9 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 
 /**
- * JMethod invocation
+ * Object invocation
+ * 
+ * @author philip
  */
 public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
 {

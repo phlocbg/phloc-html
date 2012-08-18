@@ -28,6 +28,8 @@ import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * JS method.
+ * 
+ * @author philip
  */
 public class JSMethod implements IJSDocCommentable, IJSDeclaration
 {

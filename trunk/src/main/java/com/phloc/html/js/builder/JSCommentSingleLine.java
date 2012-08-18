@@ -23,6 +23,8 @@ import com.phloc.commons.regex.RegExHelper;
 
 /**
  * Single line comments
+ * 
+ * @author philip
  */
 final class JSCommentSingleLine implements IJSStatement
 {

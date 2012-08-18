@@ -32,14 +32,8 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * A generated JS class.
- * <p>
- * This class models a declaration, and since a declaration can be always used
- * as a reference, it inherits {@link AbstractJSClass}.
- * <h2>Where to go from here?</h2>
- * <p>
- * You'd want to generate fields and methods on a class. See
- * {@link #method(AbstractJSType, String)} and
- * {@link #field(AbstractJSType, String)}.
+ * 
+ * @author philip
  */
 public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
 {

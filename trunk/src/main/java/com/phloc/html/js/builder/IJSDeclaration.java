@@ -22,6 +22,8 @@ import javax.annotation.Nonnull;
 /**
  * Common interface for code components that can generate declarations of
  * themselves.
+ * 
+ * @author philip
  */
 public interface IJSDeclaration
 {

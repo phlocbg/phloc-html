@@ -20,29 +20,32 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
 
 /**
  * Label that can be used for continue and break.
  * 
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ * @author philip
  */
-public class JSLabel implements IJSStatement
+public final class JSLabel implements IJSStatement
 {
   final String m_sLabel;
 
   /**
-   * JBreak constructor
+   * constructor
    * 
-   * @param _label
+   * @param sLabel
    *        break label or null.
    */
-  JSLabel (@Nonnull @Nonempty final String _label)
+  JSLabel (@Nonnull @Nonempty final String sLabel)
   {
-    m_sLabel = _label;
+    if (StringHelper.hasNoText (sLabel))
+      throw new IllegalArgumentException ("label");
+    m_sLabel = sLabel;
   }
 
   public void state (final JSFormatter f)
   {
-    f.plain (m_sLabel + ':').nl ();
+    f.plain (m_sLabel).plain (':').nl ();
   }
 }

@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 /**
  * Catch block for a try/catch/finally statement
+ * 
+ * @author philip
  */
 public class JSCatchBlock implements IJSGeneratable
 {

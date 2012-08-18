@@ -28,6 +28,8 @@ import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * An anonymous function (a function without a name)
+ * 
+ * @author philip
  */
 final class JSAnonymousFunction extends AbstractJSExpressionImpl
 {

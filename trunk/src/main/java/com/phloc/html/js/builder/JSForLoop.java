@@ -25,8 +25,9 @@ import javax.annotation.Nullable;
 
 /**
  * For statement
+ * 
+ * @author philip
  */
-
 public class JSForLoop implements IJSStatement
 {
   private final List <Object> m_aInits = new ArrayList <Object> ();

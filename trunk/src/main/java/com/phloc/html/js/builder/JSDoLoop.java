@@ -21,11 +21,11 @@ import javax.annotation.Nonnull;
 
 /**
  * Do loops
+ * 
+ * @author philip
  */
-
 public class JSDoLoop implements IJSStatement
 {
-
   /**
    * Test part of Do statement for determining exit state
    */
@@ -37,7 +37,7 @@ public class JSDoLoop implements IJSStatement
   private JSBlock m_aBody;
 
   /**
-   * Construct a Do statment
+   * Constructor
    */
   JSDoLoop (@Nonnull final IJSExpression test)
   {
@@ -52,7 +52,7 @@ public class JSDoLoop implements IJSStatement
     return m_aBody;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.plain ("do");
     if (m_aBody != null)

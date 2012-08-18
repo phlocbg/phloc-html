@@ -20,7 +20,9 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nullable;
 
 /**
- * JBreak statement
+ * Break statement
+ * 
+ * @author philip
  */
 final class JSBreak implements IJSStatement
 {
@@ -29,12 +31,12 @@ final class JSBreak implements IJSStatement
   /**
    * JBreak constructor
    * 
-   * @param _label
+   * @param aLabel
    *        break label or null.
    */
-  JSBreak (@Nullable final JSLabel _label)
+  JSBreak (@Nullable final JSLabel aLabel)
   {
-    m_aLabel = _label;
+    m_aLabel = aLabel;
   }
 
   public void state (final JSFormatter f)

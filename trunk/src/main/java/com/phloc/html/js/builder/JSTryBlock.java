@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * Try statement with Catch and/or Finally clause
+ * 
+ * @author philip
  */
 public class JSTryBlock implements IJSStatement
 {

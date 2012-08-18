@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 /**
  * A return statement
+ * 
+ * @author philip
  */
 final class JSReturn implements IJSStatement
 {

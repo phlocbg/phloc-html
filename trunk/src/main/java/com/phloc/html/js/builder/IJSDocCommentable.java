@@ -20,7 +20,7 @@ package com.phloc.html.js.builder;
 /**
  * Program elements that can have JSDoc
  * 
- * @author Jonas von Malottki
+ * @author philip
  */
 public interface IJSDocCommentable
 {

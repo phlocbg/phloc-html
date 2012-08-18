@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * Throw statement
+ * 
+ * @author philip
  */
 final class JSThrow implements IJSStatement
 {

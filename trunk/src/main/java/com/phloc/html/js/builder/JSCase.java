@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 /**
  * Case statement
+ * 
+ * @author philip
  */
 public final class JSCase implements IJSStatement
 {

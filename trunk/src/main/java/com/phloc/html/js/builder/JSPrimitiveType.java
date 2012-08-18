@@ -22,6 +22,11 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 
+/**
+ * Contains the JS built-in primitive types
+ * 
+ * @author philip
+ */
 public class JSPrimitiveType extends AbstractJSType
 {
   public static final JSPrimitiveType ARGUMENTS = new JSPrimitiveType ("Arguments");

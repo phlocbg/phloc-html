@@ -19,16 +19,23 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
+
 /**
  * Simple code components that merely generate themselves.
+ * 
+ * @author philip
  */
 final class JSAtom extends AbstractJSExpressionImpl
 {
   private final String m_sWhat;
 
-  JSAtom (@Nonnull final String what)
+  JSAtom (@Nonnull @Nonempty final String sWhat)
   {
-    m_sWhat = what;
+    if (StringHelper.hasNoText (sWhat))
+      throw new IllegalArgumentException ("what");
+    m_sWhat = sWhat;
   }
 
   public void generate (@Nonnull final JSFormatter f)
