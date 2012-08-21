@@ -33,7 +33,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * 
  * @author philip
  */
-public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
+public class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
 {
   private final boolean m_bIsAnonnymousFunction;
   private final boolean m_bIsConstructor;
@@ -274,6 +274,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a null argument. Short for {@code arg(JSExpr.NULL)}
    */
+  @Nonnull
   public JSInvocation argNull ()
   {
     return arg (JSExpr.NULL);
