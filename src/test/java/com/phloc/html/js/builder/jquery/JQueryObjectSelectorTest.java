@@ -34,6 +34,8 @@ public final class JQueryObjectSelectorTest
   public void testBasic ()
   {
     assertEquals ("#id5", new JQueryObjectSelector ().addID ("id5").getAsString ());
+    // Check masking
+    assertEquals ("#id\\.value", new JQueryObjectSelector ().addID ("id.value").getAsString ());
     assertEquals (".basic", new JQueryObjectSelector ().addClass (DefaultCSSClassProvider.create ("basic"))
                                                        .getAsString ());
     assertEquals ("td", new JQueryObjectSelector ().addElement ("td").getAsString ());

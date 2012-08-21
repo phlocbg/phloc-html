@@ -17,7 +17,12 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.phloc.commons.IHasStringRepresentation;
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.js.builder.IJSExpression;
 
 /**
  * A single jQuery selector
@@ -26,5 +31,10 @@ import com.phloc.commons.IHasStringRepresentation;
  */
 public interface IJQuerySelector extends IHasStringRepresentation
 {
-  /* empty */
+  @Nonnull
+  @Nonempty
+  String getSelector ();
+
+  @Nullable
+  IJSExpression getExpression ();
 }
