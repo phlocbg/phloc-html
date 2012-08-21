@@ -38,6 +38,12 @@ public final class JSHtml
     return JSExpr.ref ("document");
   }
 
+  @Nonnull
+  public static JSFieldRef event ()
+  {
+    return JSExpr.ref ("event");
+  }
+
   /**
    * @return <code>this.options[this.selectedIndex].value</code>
    */
