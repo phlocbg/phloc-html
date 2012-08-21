@@ -24,8 +24,8 @@ import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFunction;
@@ -54,11 +54,17 @@ public class JQuery
   }
 
   @Nonnull
+  public static JQueryInvocation invoke (@Nonnull final IJQuerySelector aSelector)
+  {
+    if (aSelector == null)
+      throw new NullPointerException ("selector");
+    return new JQueryInvocation (jQuery ().invoke ().arg (aSelector.getAsString ()));
+  }
+
+  @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
-    if (StringHelper.hasNoText (sID))
-      throw new IllegalArgumentException ("ID");
-    return new JQueryInvocation (jQuery ().invoke ().arg ('#' + sID));
+    return invoke (new JQuerySelector ().addID (sID));
   }
 
   @Nonnull
@@ -67,14 +73,10 @@ public class JQuery
     if (ArrayHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final StringBuilder aSB = new StringBuilder ();
+    final JQuerySelector aSelector = new JQuerySelector ();
     for (final String sID : aIDs)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append ('#').append (sID);
-    }
-    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+      aSelector.addID (sID);
+    return invoke (aSelector);
   }
 
   @Nonnull
@@ -83,22 +85,16 @@ public class JQuery
     if (ContainerHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final StringBuilder aSB = new StringBuilder ();
+    final JQuerySelector aSelector = new JQuerySelector ();
     for (final String sID : aIDs)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append ('#').append (sID);
-    }
-    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+      aSelector.addID (sID);
+    return invoke (aSelector);
   }
 
   @Nonnull
   public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
   {
-    if (aCSSClass == null)
-      throw new NullPointerException ("cssClass");
-    return new JQueryInvocation (jQuery ().invoke ().arg ('.' + aCSSClass.getCSSClass ()));
+    return invoke (new JQuerySelector ().addClass (aCSSClass));
   }
 
   @Nonnull
@@ -107,14 +103,10 @@ public class JQuery
     if (ArrayHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final StringBuilder aSB = new StringBuilder ();
+    final JQuerySelector aSelector = new JQuerySelector ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append ('.').append (aCSSClass);
-    }
-    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+      aSelector.addClass (aCSSClass);
+    return invoke (aSelector);
   }
 
   @Nonnull
@@ -123,14 +115,16 @@ public class JQuery
     if (ContainerHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final StringBuilder aSB = new StringBuilder ();
+    final JQuerySelector aSelector = new JQuerySelector ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append ('.').append (aCSSClass);
-    }
-    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+      aSelector.addClass (aCSSClass);
+    return invoke (aSelector);
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
+  {
+    return invoke (new JQuerySelector ().addElement (sElementName));
   }
 
   @Nonnull
@@ -139,5 +133,20 @@ public class JQuery
     final JSAnonymousFunction aAnonFunction = JSExpr.anonymousFunction ();
     final JQueryInvocation aInvocation = document ().ready ().arg (aAnonFunction);
     return ReadonlyPair.create (aInvocation, aAnonFunction);
+  }
+
+  /**
+   * Add onDocumentReady call with a single statement
+   * 
+   * @param aStatement
+   *        The statement to be executed on document ready
+   * @return The invocation object
+   */
+  @Nonnull
+  public static JQueryInvocation onDocumentReady (@Nonnull final IJSStatement aStatement)
+  {
+    final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
+    aPair.getSecond ().body ().add (aStatement);
+    return aPair.getFirst ();
   }
 }

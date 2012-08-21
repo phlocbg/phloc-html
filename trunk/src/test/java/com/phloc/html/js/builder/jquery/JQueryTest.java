@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.html.js.builder.JSAnonymousFunction;
+import com.phloc.html.js.builder.JSExpr;
 
 /**
  * Test class for class {@link JQuery}.
@@ -34,11 +35,14 @@ public final class JQueryTest
   @Test
   public void testBasic ()
   {
-    final JQueryInvocation aJQI = JQuery.idRef ("id4711").focus ();
+    JQueryInvocation aJQI = JQuery.idRef ("id4711").focus ();
     assertEquals ("$('#id4711').focus();", aJQI.getJSCode ());
 
     final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = JQuery.onDocumentReady ();
     aPair.getSecond ().body ()._return (0);
     assertEquals ("$(document).ready(function(){return 0;});", aPair.getFirst ().getJSCode ());
+
+    aJQI = JQuery.onDocumentReady (JSExpr.ref ("i").assign (5));
+    assertEquals ("$(document).ready(function(){i=5;});", aJQI.getJSCode ());
   }
 }
