@@ -53,7 +53,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   {}
 
   @Nonnull
-  private <T extends IJSDeclaration> T _addDecl (@Nonnull final T aDeclaration) throws JSNameAlreadyExistsException
+  public <T extends IJSDeclaration> T addDeclaration (@Nonnull final T aDeclaration) throws JSNameAlreadyExistsException
   {
     final String sName = aDeclaration.name ();
     if (m_aDecls.containsKey (sName))
@@ -64,7 +64,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   }
 
   @Nonnull
-  private <T extends IJSStatement> T _addStmt (@Nonnull final T aStatement)
+  public <T extends IJSStatement> T addStatement (@Nonnull final T aStatement)
   {
     m_aObjs.add (aStatement);
     return aStatement;
@@ -82,7 +82,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
   {
-    return _addDecl (new JSDefinedClass (this, name));
+    return addDeclaration (new JSDefinedClass (this, name));
   }
 
   @Nonnull
@@ -103,7 +103,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name) throws JSNameAlreadyExistsException
   {
-    return _addDecl (new JSFunction (aType, name));
+    return addDeclaration (new JSFunction (aType, name));
   }
 
   @Nonnull
@@ -142,37 +142,37 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
                     @Nonnull final String name,
                     @Nullable final IJSExpression initExpression) throws JSNameAlreadyExistsException
   {
-    return _addDecl (new JSVar (aType, name, initExpression));
+    return addDeclaration (new JSVar (aType, name, initExpression));
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonFunction)
   {
-    return _addStmt (aAnonFunction.invoke ());
+    return addStatement (aAnonFunction.invoke ());
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSFunction aFunction)
   {
-    return _addStmt (aFunction.invoke ());
+    return addStatement (aFunction.invoke ());
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull @Nonempty final String sFunctionName)
   {
-    return _addStmt (new JSInvocation (sFunctionName));
+    return addStatement (new JSInvocation (sFunctionName));
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull @Nonempty final String field, @Nonnull @Nonempty final String sMethodName)
   {
-    return _addStmt (JSExpr.ref (field).invoke (sMethodName));
+    return addStatement (JSExpr.ref (field).invoke (sMethodName));
   }
 
   @Nonnull
   public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
-    return _addStmt (lhs.assign (rhs));
+    return addStatement (lhs.assign (rhs));
   }
 
   /**
@@ -183,7 +183,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSForLoop _for ()
   {
-    return _addStmt (new JSForLoop ());
+    return addStatement (new JSForLoop ());
   }
 
   @Nonnull
@@ -191,7 +191,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
                         @Nonnull final String name,
                         @Nonnull final IJSExpression collection)
   {
-    return _addStmt (new JSForIn (varType, name, collection));
+    return addStatement (new JSForIn (varType, name, collection));
   }
 
   /**
@@ -204,7 +204,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSConditional _if (@Nonnull final IJSExpression expr)
   {
-    return _addStmt (new JSConditional (expr));
+    return addStatement (new JSConditional (expr));
   }
 
   /**
