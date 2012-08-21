@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2006-2012 phloc systems
+    http://www.phloc.com
+    office[at]phloc[dot]com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-08-22" version="3.4.0-RC1" />
+  <entry date="2012-08-17" category="api" action="add">
+    <change>
+      <text locale="en">Added new package js.builder with a DSL to generate structured JS code on the fly. Based on the com.sun.codemodel 2.6 library</text>
+    </change>
+  </entry>
+  <entry date="2012-08-12" category="api" action="add">
+    <change>
+      <text locale="en">AbstractHCElement now supports HTML5 attribute dropzone</text>
+    </change>
+  </entry>
+  <release date="2012-08-05" version="3.3.5" />
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
+      <text locale="en">Improved accessor methods in several HC implementation classes</text>
+    </change>
+  </entry>
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
+      <text locale="en">Added new protected method AbstractHCElement.prepareOnceBeforeCreateElement that is called exactly once during preparation</text>
+    </change>
+  </entry>
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
+      <text locale="en">Improved CSS style and CSS class handling API in IHCElement</text>
+    </change>
+  </entry>
+  <entry date="2012-08-05" category="api" action="add">
+    <change>
+      <text locale="en">DefaultCSSClassProvider implements equals/hashCode</text>
+    </change>
+  </entry>
+  <release date="2012-08-04" version="3.3.4" />
+  <entry date="2012-08-04" category="api" action="remove">
+    <change>
+      <text locale="en">Added some more HC* methods</text>
+    </change>
+  </entry>
+  <entry date="2012-08-04" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 3.1.1</text>
+    </change>
+  </entry>
+  <release date="2012-08-03" version="3.3.3" />
+  <entry date="2012-08-03" category="api" action="remove">
+    <change>
+      <text locale="en">Removed 3 JSAction* classes as they were very unmotivated :)</text>
+    </change>
+  </entry>
+  <entry date="2012-07-20" category="api" action="add">
+    <change>
+      <text locale="en">Added new constructors to CSSExternal and CSSInternal</text>
+    </change>
+  </entry>
+  <release date="2012-07-20" version="3.3.2" />
+  <entry date="2012-07-20" category="api" action="add">
+    <change>
+      <text locale="en">Added new interfaces I(CSS|JS)PathProviderWithDependencies</text>
+    </change>
+  </entry>
+  <entry date="2012-07-20" category="api" action="add">
+    <change>
+      <text locale="en">Made CSSExternal, CSSInline and JSInline non-final</text>
+    </change>
+  </entry>
+  <entry date="2012-07-19" category="api" action="add">
+    <change>
+      <text locale="en">Added additional constructors for CSSExternal and CSSInline</text>
+    </change>
+  </entry>
+  <entry date="2012-07-19" category="api" action="add">
+    <change>
+      <text locale="en">Added new interfaces IJSPathProviderWithParam and ICSSPathProviderWithParam</text>
+    </change>
+  </entry>
+  <entry date="2012-07-19" category="api" action="update">
+    <change>
+      <text locale="en">Extended CollectingJSCodeProvider to handle IJSON objects</text>
+    </change>
+  </entry>
+  <release date="2012-07-13" version="3.3.1" />
+  <entry date="2012-07-13" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-json 2.2.8</text>
+    </change>
+  </entry>
+  <entry date="2012-07-09" category="api" action="add">
+    <change>
+      <text locale="en">Added new method JSCodeWrapper.getVariableAssignment with an optional boolean to emit the 'var ' keyword or not</text>
+    </change>
+  </entry>
+  <entry date="2012-06-28" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 3.1.0</text>
+    </change>
+  </entry>
+  <release date="2012-06-18" version="3.3.0" />
+  <entry date="2012-06-18" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 3.0.0</text>
+    </change>
+  </entry>
+  <release date="2012-06-18" version="3.3.0-RC2" />
+  <entry date="2012-06-18" category="tech" action="update" incompatible="true">
+    <change>
+      <text locale="en">Updated to phloc-css 3.0.0-RC3</text>
+    </change>
+  </entry>
+  <release date="2012-06-15" version="3.3.0-RC1" />
+  <entry date="2012-06-15" category="tech" action="update" incompatible="true">
+    <change>
+      <text locale="en">Updated to phloc-css 3.0.0-RC2</text>
+    </change>
+  </entry>
+  <entry date="2012-06-06" category="api" action="update">
+    <change>
+      <text locale="en">Extended IHCConversionSettings with getCSSVersion to determine the CSS version to use</text>
+    </change>
+  </entry>
+  <entry date="2012-06-06" category="api" action="add">
+    <change>
+      <text locale="en">Added new method AbstractHCBaseTable.getBodyRowAtIndex</text>
+    </change>
+  </entry>
+  <release date="2012-06-04" version="3.2.0" />
+  <entry date="2012-06-04" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Changed the IHCCustomizer interface to also take the EHTMLVersion required for customization</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="api" action="change">
+    <change>
+      <text locale="en">Marked CSSInlineHelper as deprecated because it only works on the first URL and does not parse the CSS correctly</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="api" action="add">
+    <change>
+      <text locale="en">Add HC* classes so that they match the form "HC" + "HTML ElementName" and deprecated the old classes</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="api" action="add" incompatible="true">
+    <change>
+      <text locale="en">Extracted IHCConversionSettings interface from HCConversionSettings</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="api" action="add">
+    <change>
+      <text locale="en">Added more getter methods in HC* classes</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="api" action="add">
+    <change>
+      <text locale="en">Added special HTML5 IHCConversionSettingsProvider</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="tech" action="fix">
+    <change>
+      <text locale="en">Not emitting XML namespace in HTML5 documents</text>
+    </change>
+  </entry>
+  <entry date="2012-06-04" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed HTML element name in HCTrack</text>
+    </change>
+  </entry>
+  <entry date="2012-06-01" category="tech" action="update">
+    <change>
+      <text locale="en">Made static self-closed check in EHTMLElement case-insensitive and added positive check method</text>
+    </change>
+  </entry>
+  <release date="2012-05-24" version="3.1.6" />
+  <entry date="2012-05-24" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to phloc-css 2.7.0</text>
+    </change>
+  </entry>
+  <release date="2012-05-22" version="3.1.5" />
+  <entry date="2012-05-22" category="api" action="add">
+    <change>
+      <text locale="en">Extended API of HCDefinitionDefinition, HCDefinitionTerm and HCLI</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed self-closing tag handling for tables</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed typos in rarely used HTML element names in EHTMLElement</text>
+    </change>
+  </entry>
+  <entry date="2012-05-22" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed self-closing tag handling for all HTML elements</text>
+    </change>
+  </entry>
+  <release date="2012-05-21" version="3.1.4" />
+  <entry date="2012-05-21" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed NPE in AbstractHCTable</text>
+    </change>
+  </entry>
+  <release date="2012-05-14" version="3.1.3" />
+  <entry date="2012-05-14" category="tech" action="add">
+    <change>
+      <text locale="en">Improved toString implementations</text>
+    </change>
+  </entry>
+  <entry date="2012-05-11" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed out-of-band handling in HCHtml so that it is only called once per object, because otherwise the head may be modified in each consecutive call</text>
+    </change>
+  </entry>
+  <entry date="2012-05-11" category="api" action="fix">
+    <change>
+      <text locale="en">Fixed typo in method naming in HCBody and IHCOutOfBandNodeHandler (Ouf vs. Out)</text>
+    </change>
+  </entry>
+  <entry date="2012-05-11" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed error in out-of-band handling in HCHead</text>
+    </change>
+  </entry>
+  <release date="2012-05-02" version="3.1.2" />
+  <entry date="2012-04-27" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed potential crash when emitting a table without body rows</text>
+    </change>
+  </entry>
+  <entry date="2012-04-26" category="api" action="add">
+    <change>
+      <text locale="en">Added public static final constants in all HC* classes for non-null default values</text>
+    </change>
+  </entry>
+  <release date="2012-04-26" version="3.1.1" />
+  <entry date="2012-04-26" category="api" action="add">
+    <change>
+      <text locale="en">Added support for preselected values in HCSelect and HCOption</text>
+    </change>
+  </entry>
+  <entry date="2012-04-26" category="api" action="add">
+    <change>
+      <text locale="en">Using IHCRequestField(Boolean) as parameters in HC* input elements</text>
+    </change>
+  </entry>
+  <entry date="2012-04-26" category="api" action="add">
+    <change>
+      <text locale="en">Added IHCRequestField and IHCRequestFieldBoolean</text>
+    </change>
+  </entry>
+  <release date="2012-04-23" version="3.1.0" />
+  <entry date="2012-04-23" category="tech" action="update" incompatible="true">
+    <change>
+      <text locale="en">Updated to phloc-commons 3.5.0</text>
+    </change>
+  </entry>
+  <entry date="2012-04-16" category="api" action="add">
+    <change>
+      <text locale="en">Added new API in HCSelect to specifically check for the selected options</text>
+    </change>
+  </entry>
+  <release date="2012-03-14" version="3.0.6" />
+  <entry date="2012-03-14" category="api" action="fix">
+    <change>
+      <text locale="en">Fixed implementation of HCDefinitionList</text>
+    </change>
+  </entry>
+  <entry date="2012-03-14" category="api" action="change">
+    <change>
+      <text locale="en">Made HCHtml non-final to allow for custom head and body implementations</text>
+    </change>
+  </entry>
+  <release date="2012-03-04" version="3.0.5" />
+  <entry date="2012-03-02" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed NPE for table rows without children in the debug version</text>
+    </change>
+  </entry>
+  <release date="2012-02-29" version="3.0.4" />
+  <entry date="2012-02-29" category="api" action="change">
+    <change>
+      <text locale="en">Made HCBody and HCHead non-final and added some getter</text>
+    </change>
+  </entry>
+  <entry date="2012-02-29" category="api" action="add">
+    <change>
+      <text locale="en">Added new method iterateTree in HCUtils</text>
+    </change>
+  </entry>
+  <release date="2012-02-18" version="3.0.3" />
+  <entry date="2012-02-18" category="api" action="add">
+    <change>
+      <text locale="en">Added dynamic input type for AbstractHCInput</text>
+    </change>
+  </entry>
+  <entry date="2012-02-18" category="api" action="add">
+    <change>
+      <text locale="en">Added common base class AbstractHCEdit for HCEdit, HCEditFile and HCEditPassword</text>
+    </change>
+  </entry>
+  <release date="2012-02-17" version="3.0.2" />
+  <entry date="2012-02-17" category="tech" action="fix">
+    <change>
+      <text locale="en">Fixed that checkboxes always get the default value assigned via the form customizer</text>
+    </change>
+  </entry>
+  <release date="2012-02-16" version="3.0.1" />
+  <entry date="2012-02-16" category="api" action="add">
+    <change>
+      <text locale="en">Added new base class AbstractHCInput for input elements</text>
+    </change>
+  </entry>
+  <entry date="2012-02-16" category="api" action="add">
+    <change>
+      <text locale="en">HCButton now has method setType</text>
+    </change>
+  </entry>
+  <entry date="2012-02-15" category="api" action="add">
+    <change>
+      <text locale="en">HCScript and HCScriptFile now have the possibility to handle a different script MIME type</text>
+    </change>
+  </entry>
+  <entry date="2012-02-13" category="tech" action="fix">
+    <change>
+      <text locale="en">Improved code generation for HTML5</text>
+    </change>
+  </entry>
+  <release date="2012-02-13" version="3.0.0" />
+  <release date="2012-02-10" version="3.0.0-RC3" />
+  <release date="2012-02-05" version="3.0.0-RC2" />
+  <release date="2012-02-03" version="3.0.0-RC1" />
+  <!-- published as OSS -->
+  <entry date="2012-02-03" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Now getAsNode and getAsXHTMLString take an HCConversionSettings object</text>
+    </change>
+  </entry>
+  <entry date="2012-02-02" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Restructured packages to avoid naming redundancies</text>
+    </change>
+  </entry>
+  <entry date="2012-02-01" category="api" action="add">
+    <change>
+      <text locale="en">Started improving support for HTML5</text>
+    </change>
+  </entry>
+  <release date="2012-02-01" version="2.8.0" />
+  <release date="2012-01-29" version="2.7.1" />
+  <entry date="2012-01-29" category="api" action="change" incompatible="true">
+    <change>
+      <text locale="en">Added possibility to specify a custom link type for HCLink using HCLinkTypeCustom</text>
+    </change>
+  </entry>
+  <release date="2012-01-29" version="2.7.0" />
+  <!-- Forked from phloc-web -->
+</changelog>
