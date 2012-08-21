@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -24,7 +26,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public interface IJSGeneratable
+public interface IJSGeneratable extends Serializable
 {
   void generate (@Nonnull JSFormatter f);
 }

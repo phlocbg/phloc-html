@@ -76,6 +76,70 @@ public final class JSArray extends AbstractJSExpressionImpl
     return add (JSExpr.lit (v));
   }
 
+  @Nonnull
+  public JSArray addAll (@Nonnull final boolean... aCont)
+  {
+    for (final boolean v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final char... aCont)
+  {
+    for (final char v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final double... aCont)
+  {
+    for (final double v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final float... aCont)
+  {
+    for (final float v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final int... aCont)
+  {
+    for (final int v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final long... aCont)
+  {
+    for (final long v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final String... aCont)
+  {
+    for (final String v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final Iterable <String> aCont)
+  {
+    for (final String v : aCont)
+      add (v);
+    return this;
+  }
+
   /**
    * Add an element to the array initializer
    */

@@ -24,6 +24,7 @@ import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
@@ -54,7 +55,7 @@ public class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation invoke (@Nonnull final IJQueryObjectSelector aSelector)
+  public static JQueryInvocation invoke (@Nonnull final JQueryObjectSelector aSelector)
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
@@ -122,9 +123,57 @@ public class JQuery
   }
 
   @Nonnull
+  public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement)
+  {
+    return elementNameRef (eElement.getElementNameLowerCase ());
+  }
+
+  @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
     return invoke (new JQueryObjectSelector ().addElement (sElementName));
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement,
+                                                 @Nonnull final IJQuerySelector aSelector)
+  {
+    return elementNameRef (eElement.getElementNameLowerCase (), aSelector);
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName,
+                                                 @Nonnull final IJQuerySelector aSelector)
+  {
+    return invoke (new JQueryObjectSelector ().addElementWithSelector (sElementName, aSelector));
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameWithIDRef (@Nonnull final EHTMLElement eElement,
+                                                       @Nonnull @Nonempty final String sID)
+  {
+    return elementNameWithIDRef (eElement.getElementNameLowerCase (), sID);
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameWithIDRef (@Nonnull @Nonempty final String sElementName,
+                                                       @Nonnull @Nonempty final String sID)
+  {
+    return invoke (new JQueryObjectSelector ().addElementWithID (sElementName, sID));
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameWithClassRef (@Nonnull final EHTMLElement eElement,
+                                                          @Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return elementNameWithClassRef (eElement.getElementNameLowerCase (), aCSSClass);
+  }
+
+  @Nonnull
+  public static JQueryInvocation elementNameWithClassRef (@Nonnull @Nonempty final String sElementName,
+                                                          @Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return invoke (new JQueryObjectSelector ().addElementWithClass (sElementName, aCSSClass));
   }
 
   @Nonnull

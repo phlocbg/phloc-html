@@ -21,14 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
+import com.phloc.commons.IHasStringRepresentation;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
 
-public class JQueryObjectSelector implements IJQueryObjectSelector
+public class JQueryObjectSelector implements IHasStringRepresentation
 {
   private final List <String> m_aElements = new ArrayList <String> ();
 
@@ -36,38 +36,78 @@ public class JQueryObjectSelector implements IJQueryObjectSelector
   {}
 
   @Nonnull
-  public JQueryObjectSelector addID (@Nonnull @Nonempty final String sID)
+  @Nonempty
+  public static String getIDSelector (@Nonnull @Nonempty final String sID)
   {
     if (StringHelper.hasNoText (sID))
       throw new IllegalArgumentException ("ID");
     // Replace all illegal characters in IDs: ":" and "."
     // http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
-    m_aElements.add ('#' + RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1"));
+    return '#' + RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1");
+  }
+
+  @Nonnull
+  public static String getClassSelector (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    if (aCSSClass == null)
+      throw new NullPointerException ("CSSClass");
+    return '.' + aCSSClass.getCSSClass ();
+  }
+
+  @Nonnull
+  @Nonempty
+  public static String getElementNameSelector (@Nonnull @Nonempty final String sElementName)
+  {
+    if (StringHelper.hasNoText (sElementName))
+      throw new IllegalArgumentException ("elementName");
+    return sElementName;
+  }
+
+  @Nonnull
+  public JQueryObjectSelector addID (@Nonnull @Nonempty final String sID)
+  {
+    m_aElements.add (getIDSelector (sID));
     return this;
   }
 
   @Nonnull
   public JQueryObjectSelector addClass (@Nonnull final ICSSClassProvider aCSSClass)
   {
-    if (aCSSClass == null)
-      throw new NullPointerException ("CSSClass");
-    m_aElements.add ('.' + aCSSClass.getCSSClass ());
+    m_aElements.add (getClassSelector (aCSSClass));
     return this;
   }
 
   @Nonnull
   public JQueryObjectSelector addElement (@Nonnull @Nonempty final String sElementName)
   {
-    return addElement (sElementName, null);
+    m_aElements.add (getElementNameSelector (sElementName));
+    return this;
   }
 
   @Nonnull
-  public JQueryObjectSelector addElement (@Nonnull @Nonempty final String sElementName,
-                                          @Nullable final IJQuerySelector aSelector)
+  public JQueryObjectSelector addElementWithSelector (@Nonnull @Nonempty final String sElementName,
+                                                      @Nonnull final IJQuerySelector aSelector)
   {
-    if (StringHelper.hasNoText (sElementName))
-      throw new IllegalArgumentException ("elementName");
-    m_aElements.add (sElementName + (aSelector == null ? "" : aSelector.getAsString ()));
+    if (aSelector == null)
+      throw new NullPointerException ("selector");
+
+    m_aElements.add (getElementNameSelector (sElementName) + aSelector.getAsString ());
+    return this;
+  }
+
+  @Nonnull
+  public JQueryObjectSelector addElementWithID (@Nonnull @Nonempty final String sElementName,
+                                                @Nonnull @Nonempty final String sID)
+  {
+    m_aElements.add (getElementNameSelector (sElementName) + getIDSelector (sID));
+    return this;
+  }
+
+  @Nonnull
+  public JQueryObjectSelector addElementWithClass (@Nonnull @Nonempty final String sElementName,
+                                                   @Nonnull final ICSSClassProvider aCSSClass)
+  {
+    m_aElements.add (getElementNameSelector (sElementName) + getClassSelector (aCSSClass));
     return this;
   }
 
