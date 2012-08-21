@@ -66,7 +66,18 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @param name
    *        Name of this function
    */
-  JSFunction (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
+  public JSFunction (@Nonnull @Nonempty final String name)
+  {
+    this (null, name);
+  }
+
+  /**
+   * JMethod constructor
+   * 
+   * @param name
+   *        Name of this function
+   */
+  public JSFunction (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
   {
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Name must a valid identifier!");

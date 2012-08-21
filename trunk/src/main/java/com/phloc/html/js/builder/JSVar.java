@@ -54,7 +54,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * @param init
    *        Value to initialize this variable to
    */
-  JSVar (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
+  public JSVar (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
   {
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ();

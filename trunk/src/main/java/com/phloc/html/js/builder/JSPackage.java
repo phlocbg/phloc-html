@@ -107,18 +107,6 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   }
 
   @Nonnull
-  public static JSFunction functionRef (@Nonnull @Nonempty final String name)
-  {
-    return functionRef (null, name);
-  }
-
-  @Nonnull
-  public static JSFunction functionRef (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
-  {
-    return new JSFunction (aType, name);
-  }
-
-  @Nonnull
   public JSVar var (@Nonnull final String name) throws JSNameAlreadyExistsException
   {
     return var (null, name, null);
@@ -179,12 +167,6 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   public JSInvocation invoke (@Nonnull @Nonempty final String field, @Nonnull @Nonempty final String sMethodName)
   {
     return _addStmt (JSExpr.ref (field).invoke (sMethodName));
-  }
-
-  @Nonnull
-  public static JSInvocation invokeRef (@Nonnull @Nonempty final String sFunctionName)
-  {
-    return new JSInvocation (sFunctionName);
   }
 
   @Nonnull

@@ -90,7 +90,7 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
    * 
    * @param sFunctionName
    */
-  JSInvocation (@Nonnull final String sFunctionName)
+  public JSInvocation (@Nonnull final String sFunctionName)
   {
     if (sFunctionName == null)
       throw new NullPointerException ("function");
