@@ -17,54 +17,49 @@
  */
 package com.phloc.html.js.builder.jquery;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.html.css.ICSSClassProvider;
 
-public class JQuerySelector implements IJQuerySelector
+public class JQuerySelector
 {
-  private final List <String> m_aElements = new ArrayList <String> ();
+  public static final JQuerySelector animated = new JQuerySelector ("animated");
+  public static final JQuerySelector button = new JQuerySelector ("button");
+  public static final JQuerySelector checkbox = new JQuerySelector ("checkbox");
+  public static final JQuerySelector checked = new JQuerySelector ("checked");
+  public static final JQuerySelector disabled = new JQuerySelector ("disabled");
+  public static final JQuerySelector empty = new JQuerySelector ("empty");
+  public static final JQuerySelector enabled = new JQuerySelector ("enabled");
+  public static final JQuerySelector even = new JQuerySelector ("even");
+  public static final JQuerySelector file = new JQuerySelector ("file");
+  public static final JQuerySelector first_child = new JQuerySelector ("first-child");
+  public static final JQuerySelector first = new JQuerySelector ("first");
+  public static final JQuerySelector focus = new JQuerySelector ("focus");
+  public static final JQuerySelector header = new JQuerySelector ("header");
+  public static final JQuerySelector hidden = new JQuerySelector ("hidden");
+  public static final JQuerySelector image = new JQuerySelector ("image");
+  public static final JQuerySelector input = new JQuerySelector ("input");
+  public static final JQuerySelector last_child = new JQuerySelector ("last-child");
+  public static final JQuerySelector last = new JQuerySelector ("last");
+  public static final JQuerySelector odd = new JQuerySelector ("odd");
+  public static final JQuerySelector only_child = new JQuerySelector ("only-child");
+  public static final JQuerySelector parent = new JQuerySelector ("parent");
+  public static final JQuerySelector password = new JQuerySelector ("password");
+  public static final JQuerySelector radio = new JQuerySelector ("radio");
+  public static final JQuerySelector reset = new JQuerySelector ("reset");
+  public static final JQuerySelector selected = new JQuerySelector ("selected");
+  public static final JQuerySelector submit = new JQuerySelector ("submit");
+  public static final JQuerySelector text = new JQuerySelector ("text");
+  public static final JQuerySelector visible = new JQuerySelector ("visible");
 
-  public JQuerySelector ()
-  {}
+  private final String m_sSelector;
 
-  @Nonnull
-  public JQuerySelector addID (@Nonnull @Nonempty final String sID)
+  private JQuerySelector (@Nonnull @Nonempty final String sSelectorName)
   {
-    if (StringHelper.hasNoText (sID))
-      throw new IllegalArgumentException ("ID");
-    m_aElements.add ('#' + sID);
-    return this;
+    if (StringHelper.hasNoText (sSelectorName))
+      throw new IllegalArgumentException ("selectorName");
+    m_sSelector = ':' + sSelectorName;
   }
 
-  @Nonnull
-  public JQuerySelector addClass (@Nonnull final ICSSClassProvider aCSSClass)
-  {
-    if (aCSSClass == null)
-      throw new NullPointerException ("CSSClass");
-    m_aElements.add ('.' + aCSSClass.getCSSClass ());
-    return this;
-  }
-
-  @Nonnull
-  public JQuerySelector addElement (@Nonnull @Nonempty final String sElementName)
-  {
-    if (StringHelper.hasNoText (sElementName))
-      throw new IllegalArgumentException ("elementName");
-    m_aElements.add (sElementName);
-    return this;
-  }
-
-  @Nonnull
-  public String getAsString ()
-  {
-    if (m_aElements.isEmpty ())
-      throw new IllegalStateException ("Empty jQuery selector is not allowed!");
-    return StringHelper.getImploded (',', m_aElements);
-  }
 }

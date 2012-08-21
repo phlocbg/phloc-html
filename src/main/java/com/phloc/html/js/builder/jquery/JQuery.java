@@ -54,7 +54,7 @@ public class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation invoke (@Nonnull final IJQuerySelector aSelector)
+  public static JQueryInvocation invoke (@Nonnull final IJQueryObjectSelector aSelector)
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
@@ -64,7 +64,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
-    return invoke (new JQuerySelector ().addID (sID));
+    return invoke (new JQueryObjectSelector ().addID (sID));
   }
 
   @Nonnull
@@ -73,7 +73,7 @@ public class JQuery
     if (ArrayHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final JQuerySelector aSelector = new JQuerySelector ();
+    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
     for (final String sID : aIDs)
       aSelector.addID (sID);
     return invoke (aSelector);
@@ -85,7 +85,7 @@ public class JQuery
     if (ContainerHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final JQuerySelector aSelector = new JQuerySelector ();
+    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
     for (final String sID : aIDs)
       aSelector.addID (sID);
     return invoke (aSelector);
@@ -94,7 +94,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (new JQuerySelector ().addClass (aCSSClass));
+    return invoke (new JQueryObjectSelector ().addClass (aCSSClass));
   }
 
   @Nonnull
@@ -103,7 +103,7 @@ public class JQuery
     if (ArrayHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final JQuerySelector aSelector = new JQuerySelector ();
+    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
       aSelector.addClass (aCSSClass);
     return invoke (aSelector);
@@ -115,7 +115,7 @@ public class JQuery
     if (ContainerHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final JQuerySelector aSelector = new JQuerySelector ();
+    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
       aSelector.addClass (aCSSClass);
     return invoke (aSelector);
@@ -124,7 +124,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
-    return invoke (new JQuerySelector ().addElement (sElementName));
+    return invoke (new JQueryObjectSelector ().addElement (sElementName));
   }
 
   @Nonnull

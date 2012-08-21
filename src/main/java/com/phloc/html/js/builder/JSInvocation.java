@@ -304,6 +304,15 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
   }
 
   /**
+   * Adds a null argument. Short for {@code arg(JSExpr.THIS)}
+   */
+  @Nonnull
+  public JSInvocation argThis ()
+  {
+    return arg (JSExpr.THIS);
+  }
+
+  /**
    * Returns all arguments of the invocation.
    * 
    * @return If there's no arguments, an empty array will be returned.
