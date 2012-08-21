@@ -183,7 +183,7 @@ public final class JSPackageTest
       }
       f.body ().assign (JSExpr.ref (aDollar, "fn", "setDisabled"), fED);
     }
-    aPkg.invoke (f).arg (JSExpr.atom ("jQuery"));
+    aPkg.invoke (f).arg (JSExpr.direct ("jQuery"));
     System.out.print (aPkg.getJSCode ());
   }
 }

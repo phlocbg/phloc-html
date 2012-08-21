@@ -26,7 +26,9 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
+import com.phloc.json.IJSON;
 
 /**
  * Object invocation
@@ -262,13 +264,34 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
     return arg (JSExpr.lit (v));
   }
 
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
   @Nonnull
-  public JSInvocation arg (@Nonnull final String v)
+  public JSInvocation arg (@Nullable final Integer v)
   {
-    return arg (JSExpr.lit (v));
+    return v == null ? argNull () : arg (v.intValue ());
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nullable final Long v)
+  {
+    return v == null ? argNull () : arg (v.longValue ());
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nullable final String v)
+  {
+    return v == null ? argNull () : arg (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nullable final IJSON v)
+  {
+    return v == null ? argNull () : arg (JSExpr.json (v));
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nullable final IJSCodeProvider v)
+  {
+    return v == null ? argNull () : arg (JSExpr.direct (v.getJSCode ()));
   }
 
   /**

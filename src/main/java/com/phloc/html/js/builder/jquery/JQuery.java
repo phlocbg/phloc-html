@@ -22,8 +22,12 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.collections.pair.IReadonlyPair;
+import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.js.builder.JSAnonymousFunction;
+import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
@@ -44,6 +48,12 @@ public class JQuery
   }
 
   @Nonnull
+  public static JQueryInvocation document ()
+  {
+    return new JQueryInvocation (jQuery ().invoke ().arg (JSExpr.direct ("document")));
+  }
+
+  @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
     if (StringHelper.hasNoText (sID))
@@ -56,6 +66,7 @@ public class JQuery
   {
     if (ArrayHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
+
     final StringBuilder aSB = new StringBuilder ();
     for (final String sID : aIDs)
     {
@@ -71,6 +82,7 @@ public class JQuery
   {
     if (ContainerHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
+
     final StringBuilder aSB = new StringBuilder ();
     for (final String sID : aIDs)
     {
@@ -87,5 +99,45 @@ public class JQuery
     if (aCSSClass == null)
       throw new NullPointerException ("cssClass");
     return new JQueryInvocation (jQuery ().invoke ().arg ('.' + aCSSClass.getCSSClass ()));
+  }
+
+  @Nonnull
+  public static JQueryInvocation classRefAll (@Nonnull @Nonempty final ICSSClassProvider... aCSSClasses)
+  {
+    if (ArrayHelper.isEmpty (aCSSClasses))
+      throw new IllegalArgumentException ("classes may not be empty");
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClass : aCSSClasses)
+    {
+      if (aSB.length () > 0)
+        aSB.append (',');
+      aSB.append ('.').append (aCSSClass);
+    }
+    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+  }
+
+  @Nonnull
+  public static JQueryInvocation classRefAll (@Nonnull @Nonempty final Iterable <ICSSClassProvider> aCSSClasses)
+  {
+    if (ContainerHelper.isEmpty (aCSSClasses))
+      throw new IllegalArgumentException ("classes may not be empty");
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClass : aCSSClasses)
+    {
+      if (aSB.length () > 0)
+        aSB.append (',');
+      aSB.append ('.').append (aCSSClass);
+    }
+    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+  }
+
+  @Nonnull
+  public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
+  {
+    final JSAnonymousFunction aAnonFunction = JSExpr.anonymousFunction ();
+    final JQueryInvocation aInvocation = document ().ready ().arg (aAnonFunction);
+    return ReadonlyPair.create (aInvocation, aAnonFunction);
   }
 }

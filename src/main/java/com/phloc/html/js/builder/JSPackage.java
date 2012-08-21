@@ -176,6 +176,12 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   }
 
   @Nonnull
+  public JSInvocation invoke (@Nonnull @Nonempty final String field, @Nonnull @Nonempty final String sMethodName)
+  {
+    return _addStmt (JSExpr.ref (field).invoke (sMethodName));
+  }
+
+  @Nonnull
   public static JSInvocation invokeRef (@Nonnull @Nonempty final String sFunctionName)
   {
     return new JSInvocation (sFunctionName);

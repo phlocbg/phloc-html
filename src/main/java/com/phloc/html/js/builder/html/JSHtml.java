@@ -32,6 +32,12 @@ public final class JSHtml
   private JSHtml ()
   {}
 
+  @Nonnull
+  public static JSFieldRef document ()
+  {
+    return JSExpr.ref ("document");
+  }
+
   /**
    * @return <code>this.options[this.selectedIndex].value</code>
    */
