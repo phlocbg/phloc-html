@@ -1,8 +1,8 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>8/17/12</td><td>add</td><td>api</td><td></td><td>Added new package js.builder with a small DSL to generate JS code on the fly. Based on the com.sun.codemodel 2.6 library</td></tr>
-<tr><td>8/14/12</td><td>add</td><td>api</td><td></td><td>Added new abstract base class AbstractCollectingJSCodeProvider</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>8/22/12</td><td colspan="4">_Release *3.4.0.RC1*_</td></tr>
+<tr><td>8/17/12</td><td>add</td><td>api</td><td></td><td>Added new package js.builder with a DSL to generate structured JS code on the fly. Based on the com.sun.codemodel 2.6 library</td></tr>
 <tr><td>8/12/12</td><td>add</td><td>api</td><td></td><td>AbstractHCElement now supports HTML5 attribute dropzone</td></tr>
 <tr border="1"><td>8/5/12</td><td colspan="4">_Release *3.3.5*_</td></tr>
 <tr><td>8/5/12</td><td>add</td><td>api</td><td></td><td>Improved accessor methods in several HC implementation classes</td></tr>
