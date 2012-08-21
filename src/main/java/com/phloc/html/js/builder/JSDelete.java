@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * delete statement
@@ -44,5 +45,11 @@ final class JSDelete implements IJSStatement
   public void state (final JSFormatter f)
   {
     f.plain ("delete ").generatable (m_aExpr).plain (';').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

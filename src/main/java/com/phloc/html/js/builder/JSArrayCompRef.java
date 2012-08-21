@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-final class JSArrayCompRef extends AbstractJSAssignmentTarget
+public final class JSArrayCompRef extends AbstractJSAssignmentTarget
 {
   /**
    * JArray expression upon which this component will be accessed.

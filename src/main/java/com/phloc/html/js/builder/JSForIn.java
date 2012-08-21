@@ -64,4 +64,10 @@ public final class JSForIn implements IJSStatement
     else
       f.plain (';').nl ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

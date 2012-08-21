@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public class JSNameAlreadyExistsException extends Exception
+public class JSNameAlreadyExistsException extends RuntimeException
 {
   private final IJSDeclaration m_aExisting;
 

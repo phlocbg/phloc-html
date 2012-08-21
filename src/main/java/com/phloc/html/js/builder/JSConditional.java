@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * If statement, with optional else clause
@@ -110,5 +111,11 @@ public class JSConditional implements IJSStatement
     if (m_aElse != null)
       f.plain ("else").generatable (m_aElse);
     f.nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

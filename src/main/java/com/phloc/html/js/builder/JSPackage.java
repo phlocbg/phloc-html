@@ -176,6 +176,25 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     return aInvocation;
   }
 
+  @Nonnull
+  public JSInvocation invoke (@Nonnull @Nonempty final String sFunctionName)
+  {
+    final JSInvocation aInvocation = new JSInvocation (sFunctionName);
+    _add (aInvocation);
+    return aInvocation;
+  }
+
+  @Nonnull
+  public static JSInvocation invokeRef (@Nonnull @Nonempty final String sFunctionName)
+  {
+    return new JSInvocation (sFunctionName);
+  }
+
+  public void assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  {
+    _add (lhs.assign (rhs));
+  }
+
   /**
    * Removes a declaration from this package.
    */

@@ -89,4 +89,10 @@ public class JSForLoop implements IJSStatement
     else
       f.plain (';').nl ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

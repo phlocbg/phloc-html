@@ -37,6 +37,12 @@ public final class CollectingJSCodeProvider extends AbstractCollectingJSCodeProv
     super (aStrings);
   }
 
+  /**
+   * Chain all passed JSCode providers together
+   * 
+   * @param aProviders
+   *        The providers to chain
+   */
   public CollectingJSCodeProvider (@Nullable final IJSCodeProvider... aProviders)
   {
     super (aProviders);

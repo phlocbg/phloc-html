@@ -22,6 +22,11 @@ import javax.annotation.Nonnull;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.JSInvocation;
 
+/**
+ * Special invocation semantics for jQuery
+ * 
+ * @author philip
+ */
 public class JQueryInvocation implements IJSCodeProvider
 {
   private final JSInvocation m_aInvocation;

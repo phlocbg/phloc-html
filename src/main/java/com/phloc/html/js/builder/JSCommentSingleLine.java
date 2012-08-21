@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.regex.RegExHelper;
 
@@ -42,5 +43,11 @@ final class JSCommentSingleLine implements IJSStatement
   {
     for (final String sLine : RegExHelper.getSplitToArray (m_sWhat, "[\\r\\n]+"))
       f.plain ("// ").plain (sLine).nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

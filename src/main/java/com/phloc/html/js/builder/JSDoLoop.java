@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Do loops
@@ -65,5 +66,11 @@ public class JSDoLoop implements IJSStatement
     else
       f.plain ("while (").generatable (m_aTest).plain (')');
     f.plain (';').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

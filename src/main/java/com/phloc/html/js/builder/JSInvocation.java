@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -34,16 +33,16 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * 
  * @author philip
  */
-public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement, IJSCodeProvider
+public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
 {
-  private boolean m_bIsAnonnymousFunction = false;
-  private boolean m_bIsConstructor = false;
+  private final boolean m_bIsAnonnymousFunction;
+  private final boolean m_bIsConstructor;
 
   /**
    * Object expression upon which this method will be invoked, or null if this
    * is a constructor invocation
    */
-  private IJSGeneratable m_aObject;
+  private final IJSGeneratable m_aObject;
 
   /**
    * Name of the method to be invoked. Either this field is set, or
@@ -51,15 +50,15 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * invocation.) This allows {@link JSMethod#name(String) the name of the
    * method to be changed later}.
    */
-  private String m_sName;
+  private final String m_sName;
 
-  private Object m_aCallee;
+  private final Object m_aCallee;
 
   /**
    * If {@link m_bIsConstructor} == <code>true</code>, this field keeps the type
    * to be created.
    */
-  private AbstractJSType m_aType;
+  private final AbstractJSType m_aType;
 
   /**
    * List of argument expressions for this method invocation
@@ -75,8 +74,29 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   {
     if (function == null)
       throw new NullPointerException ("function");
+    m_bIsAnonnymousFunction = false;
+    m_bIsConstructor = false;
     m_aObject = null;
+    m_sName = null;
     m_aCallee = function;
+    m_aType = null;
+  }
+
+  /**
+   * Invoke a function
+   * 
+   * @param sFunctionName
+   */
+  JSInvocation (@Nonnull final String sFunctionName)
+  {
+    if (sFunctionName == null)
+      throw new NullPointerException ("function");
+    m_bIsAnonnymousFunction = false;
+    m_bIsConstructor = false;
+    m_aObject = null;
+    m_sName = sFunctionName;
+    m_aCallee = null;
+    m_aType = null;
   }
 
   /**
@@ -89,9 +109,12 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   {
     if (aAnonymousFunction == null)
       throw new NullPointerException ("anonymousFunction");
-    m_aObject = null;
-    m_aCallee = aAnonymousFunction;
     m_bIsAnonnymousFunction = true;
+    m_bIsConstructor = false;
+    m_aObject = null;
+    m_sName = null;
+    m_aCallee = aAnonymousFunction;
+    m_aType = null;
   }
 
   /**
@@ -132,16 +155,24 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
       throw new IllegalArgumentException ("name");
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("method name contains '.': " + name);
+    m_bIsAnonnymousFunction = false;
+    m_bIsConstructor = false;
     m_aObject = object;
     m_sName = name;
+    m_aCallee = null;
+    m_aType = null;
   }
 
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod aMethod)
   {
     if (aMethod == null)
       throw new NullPointerException ("method");
+    m_bIsAnonnymousFunction = false;
+    m_bIsConstructor = false;
     m_aObject = object;
+    m_sName = null;
     m_aCallee = aMethod;
+    m_aType = null;
   }
 
   /**
@@ -154,7 +185,11 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   {
     if (aType == null)
       throw new NullPointerException ("constructorType");
+    m_bIsAnonnymousFunction = false;
     m_bIsConstructor = true;
+    m_aObject = null;
+    m_sName = null;
+    m_aCallee = null;
     m_aType = aType;
   }
 

@@ -50,4 +50,10 @@ final class JSReturn implements IJSStatement
       f.generatable (m_aExpr);
     f.plain (';').nl ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

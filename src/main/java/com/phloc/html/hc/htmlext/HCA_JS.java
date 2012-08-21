@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc.htmlext;
 
+import javax.annotation.Nullable;
+
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.url.ReadonlySimpleURL;
 import com.phloc.html.hc.html.HCA;
@@ -29,7 +31,7 @@ public class HCA_JS extends HCA
 {
   private static final ISimpleURL JS_URL = new ReadonlySimpleURL (CJS.JS_VOID);
 
-  public HCA_JS (final IJSCodeProvider aJSOnClick)
+  public HCA_JS (@Nullable final IJSCodeProvider aJSOnClick)
   {
     /**
      * JS links must always set a JS void in the href. This ensures that if the

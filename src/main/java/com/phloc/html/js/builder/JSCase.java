@@ -87,4 +87,10 @@ public final class JSCase implements IJSStatement
       f.stmt (m_aBody);
     f.outdent ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

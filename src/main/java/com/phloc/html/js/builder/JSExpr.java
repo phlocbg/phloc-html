@@ -37,6 +37,12 @@ public final class JSExpr
   {}
 
   @Nonnull
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
   public static JSAssignment assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
     return new JSAssignment (lhs, "=", rhs);
