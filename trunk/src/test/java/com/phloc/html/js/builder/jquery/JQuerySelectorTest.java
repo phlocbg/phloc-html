@@ -17,24 +17,21 @@
  */
 package com.phloc.html.js.builder.jquery;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import static org.junit.Assert.assertEquals;
 
-import com.phloc.commons.IHasStringRepresentation;
-import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.css.ICSSClassProvider;
+import org.junit.Test;
 
-public interface IJQueryObjectSelector extends IHasStringRepresentation
+/**
+ * Test class for class {@link JQuerySelector}.
+ * 
+ * @author philip
+ */
+public final class JQuerySelectorTest
 {
-  @Nonnull
-  IJQueryObjectSelector addID (@Nonnull @Nonempty String sID);
-
-  @Nonnull
-  IJQueryObjectSelector addClass (@Nonnull ICSSClassProvider aCSSClass);
-
-  @Nonnull
-  IJQueryObjectSelector addElement (@Nonnull @Nonempty String sElementName);
-
-  @Nonnull
-  IJQueryObjectSelector addElement (@Nonnull @Nonempty String sElementName, @Nullable IJQuerySelector aSelector);
+  @Test
+  public void testBasic ()
+  {
+    assertEquals (":animated", JQuerySelector.animated.getAsString ());
+    assertEquals (":gt(5)", JQuerySelector.gt (5).getAsString ());
+  }
 }

@@ -63,6 +63,6 @@ public class JSAssignment extends AbstractJSExpressionImpl implements IJSStateme
   @Nullable
   public String getJSCode ()
   {
-    return JSPrinter.getAsString (this);
+    return JSPrinter.getAsString ((IJSStatement) this);
   }
 }
