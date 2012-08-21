@@ -287,17 +287,17 @@ public class HCSWFObject extends AbstractWrappedHCNode
     final JSAssocArray jsFlashvars = JSExpr.newAssocArray ();
     if (m_aFlashVars != null)
       for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
-        jsFlashvars.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
+        jsFlashvars.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
     final JSAssocArray jsParams = JSExpr.newAssocArray ();
     if (m_aObjectParams != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectParams.entrySet ())
-        jsParams.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
+        jsParams.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
     final JSAssocArray jsAttributes = JSExpr.newAssocArray ();
     if (m_aObjectAttrs != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectAttrs.entrySet ())
-        jsAttributes.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
+        jsAttributes.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
     // Call embedder
     final JSInvocation aInvocation = JSPackage.invokeRef ("swfobject.embedSWF")

@@ -31,7 +31,7 @@ import com.phloc.commons.collections.ContainerHelper;
  * 
  * @author philip
  */
-final class JSAnonymousFunction extends AbstractJSExpressionImpl
+public class JSAnonymousFunction extends AbstractJSExpressionImpl
 {
   /**
    * Return type for this function

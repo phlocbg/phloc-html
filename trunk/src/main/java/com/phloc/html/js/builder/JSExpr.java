@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.collections.ArrayHelper;
+import com.phloc.json.IJSON;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
@@ -281,9 +282,9 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAtom atom (@Nonnull @Nonempty final String s)
+  public static IJSExpression json (@Nonnull final IJSON aJSON)
   {
-    return new JSAtom (s);
+    return direct (aJSON.getJSONString (JSPrinter.isIdentAndAlign ()));
   }
 
   /**
@@ -296,14 +297,14 @@ public final class JSExpr
    * Be warned that there is a danger in using this method, as it obfuscates the
    * object model.
    */
-  @Deprecated
-  public static IJSExpression direct (final String source)
+  @Nonnull
+  public static IJSExpression direct (@Nonnull final String source)
   {
     return new AbstractJSExpressionImpl ()
     {
       public void generate (final JSFormatter f)
       {
-        f.plain ('(').plain (source).plain (')');
+        f.plain (source);
       }
     };
   }
