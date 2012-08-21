@@ -29,6 +29,7 @@ import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
+import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
@@ -43,7 +44,13 @@ public class JQuery
   {}
 
   @Nonnull
-  public static JSFunction jQuery ()
+  public static JSFieldRef jQueryField ()
+  {
+    return JSExpr.ref ("$");
+  }
+
+  @Nonnull
+  public static JSFunction jQueryFunction ()
   {
     return JSPackage.functionRef ("$");
   }
@@ -51,7 +58,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation document ()
   {
-    return new JQueryInvocation (jQuery ().invoke ().arg (JSExpr.direct ("document")));
+    return new JQueryInvocation (jQueryFunction ().invoke ().arg (JSExpr.direct ("document")));
   }
 
   @Nonnull
@@ -59,7 +66,7 @@ public class JQuery
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
-    return new JQueryInvocation (jQuery ().invoke ().arg (aSelector.getAsString ()));
+    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aSelector.getAsString ()));
   }
 
   @Nonnull

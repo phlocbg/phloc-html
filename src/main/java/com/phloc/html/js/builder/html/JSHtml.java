@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
+import com.phloc.html.js.builder.JSInvocation;
 
 /**
  * This class contains JS builder default constructs that are used very commonly
@@ -42,6 +43,12 @@ public final class JSHtml
   public static JSFieldRef event ()
   {
     return JSExpr.ref ("event");
+  }
+
+  @Nonnull
+  public static JSInvocation historyBack ()
+  {
+    return JSExpr.ref ("history").invoke ("back");
   }
 
   /**
