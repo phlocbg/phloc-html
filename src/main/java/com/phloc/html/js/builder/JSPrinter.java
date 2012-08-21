@@ -60,6 +60,19 @@ public final class JSPrinter
     }
   }
 
+  public static void writeDeclaration (@Nonnull final IJSDeclaration aDeclaration, @Nonnull final Writer w)
+  {
+    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
+    try
+    {
+      f.decl (aDeclaration);
+    }
+    finally
+    {
+      StreamUtils.close (f);
+    }
+  }
+
   public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull final Writer w)
   {
     final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
@@ -96,6 +109,14 @@ public final class JSPrinter
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeExpression (aExpression, aSW);
+    return aSW.getAsString ();
+  }
+
+  @Nullable
+  public static String getAsString (@Nonnull final IJSDeclaration aDecl)
+  {
+    final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
+    writeDeclaration (aDecl, aSW);
     return aSW.getAsString ();
   }
 

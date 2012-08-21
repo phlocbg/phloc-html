@@ -224,4 +224,10 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     else
       f.stmt (new JSBlock ());
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }
