@@ -290,6 +290,7 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
   }
 
   @Nonnull
+  @Deprecated
   public JSInvocation arg (@Nullable final IJSCodeProvider v)
   {
     return v == null ? argNull () : arg (JSExpr.direct (v.getJSCode ()));
@@ -404,12 +405,6 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
   public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final IJSON v)
   {
     return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (v));
-  }
-
-  @Nonnull
-  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final IJSCodeProvider v)
-  {
-    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.direct (v.getJSCode ()));
   }
 
   /**
