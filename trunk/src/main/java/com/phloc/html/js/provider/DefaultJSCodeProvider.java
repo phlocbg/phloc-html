@@ -32,6 +32,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * @author philip
  */
 @Immutable
+@Deprecated
 public final class DefaultJSCodeProvider implements IJSCodeProvider
 {
   private static final IJSCodeProvider EMPTY_JSCODE = new DefaultJSCodeProvider ();

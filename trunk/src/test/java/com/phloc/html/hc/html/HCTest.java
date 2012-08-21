@@ -26,7 +26,7 @@ import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.conversion.DefaultHCConversionSettingsProvider;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
+import com.phloc.html.js.builder.JSExpr;
 
 /**
  * Instantiate and generate code for all HTML elements available
@@ -141,7 +141,7 @@ public final class HCTest
     b.addChild (new HCS ("Das wäre also ein Beispiel"));
     b.addChild (new HCSamp ());
     b.addChild (new HCSamp ("List"));
-    b.addChild (new HCScript (DefaultJSCodeProvider.create ("var i = 0;")));
+    b.addChild (new HCScript (JSExpr.ref ("i").assign (17)));
     b.addChild (new HCScriptFile (new SimpleURL ("a.js")));
     final HCSelect aSelect = new HCSelect ("x");
     aSelect.addOption ("y", "Ypsilon");

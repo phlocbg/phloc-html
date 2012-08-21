@@ -31,6 +31,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.html.js.marshal.JSType;
 
 @Immutable
+@Deprecated
 public final class JSCodeWrapper
 {
   private JSCodeWrapper ()

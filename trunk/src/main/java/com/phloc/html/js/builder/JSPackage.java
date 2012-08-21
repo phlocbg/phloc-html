@@ -31,14 +31,13 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
-import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * A JS package. This is the entry point for all functions, declarations etc.
  * 
  * @author philip
  */
-public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
+public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProvider
 {
   private final List <Object> m_aObjs = new ArrayList <Object> ();
 

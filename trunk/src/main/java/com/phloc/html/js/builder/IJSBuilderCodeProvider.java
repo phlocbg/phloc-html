@@ -17,15 +17,14 @@
  */
 package com.phloc.html.js.builder;
 
-import javax.annotation.Nonnull;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
- * Common interface for code components that can generate uses of themselves as
- * statements.
+ * Just a marker interface to mark all {@link IJSCodeProvider} that are build
  * 
  * @author philip
  */
-public interface IJSStatement extends IJSBuilderCodeProvider
+public interface IJSBuilderCodeProvider extends IJSCodeProvider
 {
-  void state (@Nonnull JSFormatter f);
+  /* empty */
 }
