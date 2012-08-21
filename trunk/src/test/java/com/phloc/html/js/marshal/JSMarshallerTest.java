@@ -175,7 +175,7 @@ public final class JSMarshallerTest
 
     // Special values
     assertEquals ("null", JSMarshaller.objectToJSString (null));
-    assertEquals ("i=17;\n", JSMarshaller.objectToJSString (JSExpr.ref ("i").assign (17)));
+    assertEquals ("i=17;", JSMarshaller.objectToJSString (JSExpr.ref ("i").assign (17)));
 
     // Strings
     assertEquals ("'abc'", JSMarshaller.objectToJSString ("abc"));

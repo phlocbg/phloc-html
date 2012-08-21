@@ -32,6 +32,6 @@ public final class JQueryTest
   public void testBasic ()
   {
     final JQueryInvocation aJQI = JQuery.idRef ("id4711").focus ();
-    assertEquals ("$('#id4711').focus();\n", aJQI.getJSCode ());
+    assertEquals ("$('#id4711').focus();", aJQI.getJSCode ());
   }
 }
