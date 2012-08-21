@@ -995,6 +995,18 @@ public class JQueryInvocation implements IJSStatement
     return _invoke ("disable");
   }
 
+  @Nonnull
+  public JQueryInvocation check ()
+  {
+    return _invoke ("check");
+  }
+
+  @Nonnull
+  public JQueryInvocation uncheck ()
+  {
+    return _invoke ("uncheck");
+  }
+
   public void state (@Nonnull final JSFormatter f)
   {
     m_aInvocation.state (f);

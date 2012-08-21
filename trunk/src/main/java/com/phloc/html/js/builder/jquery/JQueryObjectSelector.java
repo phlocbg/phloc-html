@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
 
@@ -39,7 +40,9 @@ public class JQueryObjectSelector implements IJQueryObjectSelector
   {
     if (StringHelper.hasNoText (sID))
       throw new IllegalArgumentException ("ID");
-    m_aElements.add ('#' + sID);
+    // Replace all illegal characters in IDs: ":" and "."
+    // http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
+    m_aElements.add ('#' + RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1"));
     return this;
   }
 

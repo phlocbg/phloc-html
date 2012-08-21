@@ -18,6 +18,8 @@
 package com.phloc.html.js.builder.jquery;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
@@ -25,36 +27,37 @@ import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSPrinter;
 
-public class JQuerySelector implements IJQuerySelector
+@Immutable
+public final class JQuerySelector implements IJQuerySelector
 {
-  public static final JQuerySelector animated = new JQuerySelector ("animated");
-  public static final JQuerySelector button = new JQuerySelector ("button");
-  public static final JQuerySelector checkbox = new JQuerySelector ("checkbox");
-  public static final JQuerySelector checked = new JQuerySelector ("checked");
-  public static final JQuerySelector disabled = new JQuerySelector ("disabled");
-  public static final JQuerySelector empty = new JQuerySelector ("empty");
-  public static final JQuerySelector enabled = new JQuerySelector ("enabled");
-  public static final JQuerySelector even = new JQuerySelector ("even");
-  public static final JQuerySelector file = new JQuerySelector ("file");
-  public static final JQuerySelector first_child = new JQuerySelector ("first-child");
-  public static final JQuerySelector first = new JQuerySelector ("first");
-  public static final JQuerySelector focus = new JQuerySelector ("focus");
-  public static final JQuerySelector header = new JQuerySelector ("header");
-  public static final JQuerySelector hidden = new JQuerySelector ("hidden");
-  public static final JQuerySelector image = new JQuerySelector ("image");
-  public static final JQuerySelector input = new JQuerySelector ("input");
-  public static final JQuerySelector last_child = new JQuerySelector ("last-child");
-  public static final JQuerySelector last = new JQuerySelector ("last");
-  public static final JQuerySelector odd = new JQuerySelector ("odd");
-  public static final JQuerySelector only_child = new JQuerySelector ("only-child");
-  public static final JQuerySelector parent = new JQuerySelector ("parent");
-  public static final JQuerySelector password = new JQuerySelector ("password");
-  public static final JQuerySelector radio = new JQuerySelector ("radio");
-  public static final JQuerySelector reset = new JQuerySelector ("reset");
-  public static final JQuerySelector selected = new JQuerySelector ("selected");
-  public static final JQuerySelector submit = new JQuerySelector ("submit");
-  public static final JQuerySelector text = new JQuerySelector ("text");
-  public static final JQuerySelector visible = new JQuerySelector ("visible");
+  public static final IJQuerySelector animated = new JQuerySelector ("animated");
+  public static final IJQuerySelector button = new JQuerySelector ("button");
+  public static final IJQuerySelector checkbox = new JQuerySelector ("checkbox");
+  public static final IJQuerySelector checked = new JQuerySelector ("checked");
+  public static final IJQuerySelector disabled = new JQuerySelector ("disabled");
+  public static final IJQuerySelector empty = new JQuerySelector ("empty");
+  public static final IJQuerySelector enabled = new JQuerySelector ("enabled");
+  public static final IJQuerySelector even = new JQuerySelector ("even");
+  public static final IJQuerySelector file = new JQuerySelector ("file");
+  public static final IJQuerySelector first_child = new JQuerySelector ("first-child");
+  public static final IJQuerySelector first = new JQuerySelector ("first");
+  public static final IJQuerySelector focus = new JQuerySelector ("focus");
+  public static final IJQuerySelector header = new JQuerySelector ("header");
+  public static final IJQuerySelector hidden = new JQuerySelector ("hidden");
+  public static final IJQuerySelector image = new JQuerySelector ("image");
+  public static final IJQuerySelector input = new JQuerySelector ("input");
+  public static final IJQuerySelector last_child = new JQuerySelector ("last-child");
+  public static final IJQuerySelector last = new JQuerySelector ("last");
+  public static final IJQuerySelector odd = new JQuerySelector ("odd");
+  public static final IJQuerySelector only_child = new JQuerySelector ("only-child");
+  public static final IJQuerySelector parent = new JQuerySelector ("parent");
+  public static final IJQuerySelector password = new JQuerySelector ("password");
+  public static final IJQuerySelector radio = new JQuerySelector ("radio");
+  public static final IJQuerySelector reset = new JQuerySelector ("reset");
+  public static final IJQuerySelector selected = new JQuerySelector ("selected");
+  public static final IJQuerySelector submit = new JQuerySelector ("submit");
+  public static final IJQuerySelector text = new JQuerySelector ("text");
+  public static final IJQuerySelector visible = new JQuerySelector ("visible");
 
   private final String m_sSelector;
   private final IJSExpression m_aExpr;
@@ -78,76 +81,114 @@ public class JQuerySelector implements IJQuerySelector
   }
 
   @Nonnull
-  public static JQuerySelector contains (@Nonnull final IJSExpression aExpr)
+  @Nonempty
+  public String getSelector ()
   {
-    return new JQuerySelector ("contains", aExpr);
+    return m_sSelector;
+  }
+
+  @Nullable
+  public IJSExpression getExpression ()
+  {
+    return m_aExpr;
   }
 
   @Nonnull
-  public static JQuerySelector eq (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("eq", aExpr);
-  }
-
-  @Nonnull
-  public static JQuerySelector gt (final int v)
-  {
-    return gt (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public static JQuerySelector gt (final long v)
-  {
-    return gt (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public static JQuerySelector gt (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("gt", aExpr);
-  }
-
-  @Nonnull
-  public static JQuerySelector has (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("has", aExpr);
-  }
-
-  @Nonnull
-  public static JQuerySelector lt (final int v)
-  {
-    return lt (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public static JQuerySelector lt (final long v)
-  {
-    return lt (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public static JQuerySelector lt (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("lt", aExpr);
-  }
-
-  @Nonnull
-  public static JQuerySelector not (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("not", aExpr);
-  }
-
-  @Nonnull
-  public static JQuerySelector nth_child (@Nonnull final IJSExpression aExpr)
-  {
-    return new JQuerySelector ("nth-child", aExpr);
-  }
-
-  @Nonnull
+  @Nonempty
   public String getAsString ()
   {
     if (m_aExpr == null)
       return m_sSelector;
     return m_sSelector + '(' + JSPrinter.getAsString (m_aExpr) + ')';
+  }
+
+  @Nonnull
+  public static IJQuerySelector contains (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("contains", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector eq (final int v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector eq (final long v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector eq (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("eq", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector gt (final int v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector gt (final long v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector gt (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("gt", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector has (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("has", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector lt (final int v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector lt (final long v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector lt (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("lt", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector not (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("not", aExpr);
+  }
+
+  @Nonnull
+  public static IJQuerySelector nth_child (final int v)
+  {
+    return nth_child (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector nth_child (final long v)
+  {
+    return nth_child (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static IJQuerySelector nth_child (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("nth-child", aExpr);
   }
 }
