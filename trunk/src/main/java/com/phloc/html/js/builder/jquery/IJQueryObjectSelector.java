@@ -23,14 +23,14 @@ import com.phloc.commons.IHasStringRepresentation;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.css.ICSSClassProvider;
 
-public interface IJQuerySelector extends IHasStringRepresentation
+public interface IJQueryObjectSelector extends IHasStringRepresentation
 {
   @Nonnull
-  IJQuerySelector addID (@Nonnull @Nonempty String sID);
+  IJQueryObjectSelector addID (@Nonnull @Nonempty String sID);
 
   @Nonnull
-  IJQuerySelector addClass (@Nonnull ICSSClassProvider aCSSClass);
+  IJQueryObjectSelector addClass (@Nonnull ICSSClassProvider aCSSClass);
 
   @Nonnull
-  IJQuerySelector addElement (@Nonnull @Nonempty String sElementName);
+  IJQueryObjectSelector addElement (@Nonnull @Nonempty String sElementName);
 }
