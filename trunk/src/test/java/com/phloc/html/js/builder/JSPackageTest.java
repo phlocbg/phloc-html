@@ -141,9 +141,49 @@ public final class JSPackageTest
                                      .arg (anonFunction));
       aFuncMain.body ().comment ("Remaining HTML + comments content");
       aFuncMain.body ()._return (JSExpr.newAssocArray ().add ("html", sHTML).add ("comments", sComments));
+
+      aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
 
     final String sCode = aPkg.getJSCode ();
-    System.out.println (sCode);
+    System.out.print (sCode);
+  }
+
+  @Test
+  public void testJQueryExtension ()
+  {
+    /**
+     * <pre>
+     * ( function($) {
+     *   // Mark elements as enabled or disabled
+     *   $.fn.setDisabled = function(bDisabled) {
+     *     return this.each( function() {
+     *       if (typeof this.disabled != "undefined")
+     *         this.disabled = bDisabled;
+     *     });
+     *   };
+     * })(jQuery);
+     * </pre>
+     */
+
+    final JSPackage aPkg = new JSPackage ();
+    final JSAnonymousFunction f = JSExpr.anonymousFunction ();
+    final JSVar aDollar = f.param ("$");
+    f.body ().comment ("Mark elements as enabled or disabled");
+    {
+      final JSAnonymousFunction fED = JSExpr.anonymousFunction ();
+      final JSVar aDisabled = fED.param ("bDisabled");
+      {
+        final JSAnonymousFunction fEDEach = JSExpr.anonymousFunction ();
+        fEDEach.body ()
+               ._if (JSExpr.refThis ("disabled").typeof ().ene (JSExpr.UNDEFINED))
+               ._then ()
+               .assign (JSExpr.refThis ("disabled"), aDisabled);
+        fED.body ()._return (JSExpr.invokeThis ("each").arg (fEDEach));
+      }
+      f.body ().assign (JSExpr.ref (aDollar, "fn", "setDisabled"), fED);
+    }
+    aPkg.invoke (f).arg (JSExpr.atom ("jQuery"));
+    System.out.print (aPkg.getJSCode ());
   }
 }

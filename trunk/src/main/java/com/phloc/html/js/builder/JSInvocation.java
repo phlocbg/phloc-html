@@ -23,8 +23,10 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.StringHelper;
 
 /**
  * Object invocation
@@ -70,6 +72,8 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    */
   JSInvocation (@Nonnull final JSFunction function)
   {
+    if (function == null)
+      throw new NullPointerException ("function");
     m_aObject = null;
     m_aCallee = function;
   }
@@ -77,13 +81,15 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Invoke an anonymous function
    * 
-   * @param anonfunc
+   * @param aAnonymousFunction
    *        The function to be invoked
    */
-  JSInvocation (@Nonnull final JSAnonymousFunction anonfunc)
+  JSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
+    if (aAnonymousFunction == null)
+      throw new NullPointerException ("anonymousFunction");
     m_aObject = null;
-    m_aCallee = anonfunc;
+    m_aCallee = aAnonymousFunction;
     m_bIsAnonnymousFunction = true;
   }
 
@@ -96,7 +102,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * @param name
    *        Name of method to invoke
    */
-  JSInvocation (@Nullable final IJSExpression object, @Nonnull final String name)
+  JSInvocation (@Nullable final IJSExpression object, @Nonnull @Nonempty final String name)
   {
     this ((IJSGeneratable) object, name);
   }
@@ -109,7 +115,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Invokes a static method on a class.
    */
-  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final String name)
+  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull @Nonempty final String name)
   {
     this ((IJSGeneratable) type, name);
   }
@@ -119,8 +125,10 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
     this ((IJSGeneratable) type, method);
   }
 
-  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final String name)
+  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
+    if (StringHelper.hasNoText (name))
+      throw new IllegalArgumentException ("name");
     m_aObject = object;
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("method name contains '.': " + name);
@@ -129,6 +137,8 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod method)
   {
+    if (method == null)
+      throw new NullPointerException ("method");
     m_aObject = object;
     m_aCallee = method;
   }
@@ -137,9 +147,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
    * Invokes a constructor of an object (i.e., creates a new object.)
    * 
    * @param aType
-   *        Type of the object to be created. If this type is an array type,
-   *        added arguments are treated as array initializer. Thus you can
-   *        create an expression like <code>new int[]{1,2,3,4,5}</code>.
+   *        Type of the object to be created. May not be <code>null</code>.
    */
   JSInvocation (@Nonnull final AbstractJSType aType)
   {
@@ -152,21 +160,22 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Add an expression to this invocation's argument list
    * 
-   * @param arg
+   * @param aArgument
    *        Argument to add to argument list
    */
   @Nonnull
-  public JSInvocation arg (@Nonnull final IJSExpression arg)
+  public JSInvocation arg (@Nonnull final IJSExpression aArgument)
   {
-    if (arg == null)
-      throw new IllegalArgumentException ();
-    m_aArgs.add (arg);
+    if (aArgument == null)
+      throw new IllegalArgumentException ("argument");
+    m_aArgs.add (aArgument);
     return this;
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
+  @Nonnull
   public JSInvocation arg (final boolean v)
   {
     return arg (JSExpr.lit (v));
@@ -175,7 +184,8 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
-  public JSInvocation arg (final float v)
+  @Nonnull
+  public JSInvocation arg (final char v)
   {
     return arg (JSExpr.lit (v));
   }
@@ -183,6 +193,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
+  @Nonnull
   public JSInvocation arg (final double v)
   {
     return arg (JSExpr.lit (v));
@@ -191,6 +202,16 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
+  @Nonnull
+  public JSInvocation arg (final float v)
+  {
+    return arg (JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   */
+  @Nonnull
   public JSInvocation arg (final int v)
   {
     return arg (JSExpr.lit (v));
@@ -199,6 +220,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
+  @Nonnull
   public JSInvocation arg (final long v)
   {
     return arg (JSExpr.lit (v));
@@ -207,7 +229,8 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
    */
-  public JSInvocation arg (final String v)
+  @Nonnull
+  public JSInvocation arg (@Nonnull final String v)
   {
     return arg (JSExpr.lit (v));
   }

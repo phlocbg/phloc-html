@@ -20,6 +20,9 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.collections.ArrayHelper;
+
 /**
  * Factory methods that generate various {@link IJSExpression}s.
  * 
@@ -76,27 +79,39 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nonnull final String method)
+  public static JSInvocation invoke (@Nonnull @Nonempty final String method)
   {
     return new JSInvocation ((IJSExpression) null, method);
   }
 
   @Nonnull
-  public static JSInvocation invoke (final JSMethod method)
+  public static JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return new JSInvocation ((IJSExpression) null, method);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression lhs, final String method)
+  public static JSInvocation invoke (@Nullable final IJSExpression lhs, @Nonnull @Nonempty final String method)
   {
     return new JSInvocation (lhs, method);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression lhs, final JSMethod method)
+  public static JSInvocation invoke (@Nullable final IJSExpression lhs, @Nonnull final JSMethod method)
   {
     return new JSInvocation (lhs, method);
+  }
+
+  @Nonnull
+  public static JSInvocation invokeThis (final String method)
+  {
+    return invoke (THIS, method);
+  }
+
+  @Nonnull
+  public static JSInvocation invokeThis (final JSMethod method)
+  {
+    return invoke (THIS, method);
   }
 
   @Nonnull
@@ -121,6 +136,35 @@ public final class JSExpr
   public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final String field)
   {
     return new JSFieldRef (lhs, field);
+  }
+
+  @Nonnull
+  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final String... fields)
+  {
+    if (ArrayHelper.isEmpty (fields))
+      throw new IllegalArgumentException ("fields may not be empty");
+    JSFieldRef ret = new JSFieldRef (lhs, fields[0]);
+    for (int i = 1; i < fields.length; ++i)
+      ret = new JSFieldRef (ret, fields[i]);
+    return ret;
+  }
+
+  @Nonnull
+  public static JSFieldRef refThis (@Nonnull final JSVar field)
+  {
+    return ref (THIS, field);
+  }
+
+  @Nonnull
+  public static JSFieldRef refThis (@Nonnull final String field)
+  {
+    return ref (THIS, field);
+  }
+
+  @Nonnull
+  public static JSFieldRef refThis (@Nonnull final String... fields)
+  {
+    return ref (THIS, fields);
   }
 
   @Nonnull
@@ -236,15 +280,21 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSStringLiteral lit (final String s)
+  public static JSStringLiteral lit (@Nonnull final String s)
   {
     return new JSStringLiteral (s);
   }
 
   @Nonnull
-  public static JSRegExLiteral regex (final String s)
+  public static JSRegExLiteral regex (@Nonnull final String s)
   {
     return new JSRegExLiteral (s);
+  }
+
+  @Nonnull
+  public static JSAtom atom (@Nonnull @Nonempty final String s)
+  {
+    return new JSAtom (s);
   }
 
   /**

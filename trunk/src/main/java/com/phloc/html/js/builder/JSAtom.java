@@ -29,17 +29,17 @@ import com.phloc.commons.string.StringHelper;
  */
 final class JSAtom extends AbstractJSExpressionImpl
 {
-  private final String m_sWhat;
+  private final String m_sAtom;
 
-  JSAtom (@Nonnull @Nonempty final String sWhat)
+  JSAtom (@Nonnull @Nonempty final String sAtom)
   {
-    if (StringHelper.hasNoText (sWhat))
-      throw new IllegalArgumentException ("what");
-    m_sWhat = sWhat;
+    if (StringHelper.hasNoText (sAtom))
+      throw new IllegalArgumentException ("atom");
+    m_sAtom = sAtom;
   }
 
   public void generate (@Nonnull final JSFormatter f)
   {
-    f.plain (m_sWhat);
+    f.plain (m_sAtom);
   }
 }

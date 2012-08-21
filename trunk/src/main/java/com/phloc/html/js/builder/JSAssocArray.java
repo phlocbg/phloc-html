@@ -71,7 +71,7 @@ public final class JSAssocArray extends AbstractJSExpressionImpl
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final String value)
+  public JSAssocArray add (@Nonnull final String key, @Nonnull final String value)
   {
     return add (key, JSExpr.lit (value));
   }
