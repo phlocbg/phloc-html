@@ -20,6 +20,8 @@ package com.phloc.html.js.builder.jquery;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.collections.ArrayHelper;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.JSFunction;
@@ -47,6 +49,36 @@ public class JQuery
     if (StringHelper.hasNoText (sID))
       throw new IllegalArgumentException ("ID");
     return new JQueryInvocation (jQuery ().invoke ().arg ('#' + sID));
+  }
+
+  @Nonnull
+  public static JQueryInvocation idRefAll (@Nonnull @Nonempty final String... aIDs)
+  {
+    if (ArrayHelper.isEmpty (aIDs))
+      throw new IllegalArgumentException ("IDs may not be empty");
+    final StringBuilder aSB = new StringBuilder ();
+    for (final String sID : aIDs)
+    {
+      if (aSB.length () > 0)
+        aSB.append (',');
+      aSB.append ('#').append (sID);
+    }
+    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
+  }
+
+  @Nonnull
+  public static JQueryInvocation idRefAll (@Nonnull @Nonempty final Iterable <String> aIDs)
+  {
+    if (ContainerHelper.isEmpty (aIDs))
+      throw new IllegalArgumentException ("IDs may not be empty");
+    final StringBuilder aSB = new StringBuilder ();
+    for (final String sID : aIDs)
+    {
+      if (aSB.length () > 0)
+        aSB.append (',');
+      aSB.append ('#').append (sID);
+    }
+    return new JQueryInvocation (jQuery ().invoke ().arg (aSB.toString ()));
   }
 
   @Nonnull

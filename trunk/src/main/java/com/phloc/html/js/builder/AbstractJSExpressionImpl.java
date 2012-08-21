@@ -321,9 +321,93 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
+  public final IJSExpression eq (final boolean v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (final char v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (final float v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (final double v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (final int v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (final long v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eq (@Nonnull final String v)
+  {
+    return eq (JSExpr.lit (v));
+  }
+
+  @Nonnull
   public final IJSExpression eq (@Nonnull final IJSExpression right)
   {
     return JSOp.eq (this, right);
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final boolean v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final char v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final float v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final double v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final int v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (final long v)
+  {
+    return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression eeq (@Nonnull final String v)
+  {
+    return eeq (JSExpr.lit (v));
   }
 
   @Nonnull
@@ -333,9 +417,93 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
+  public final IJSExpression ne (final boolean v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (final char v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (final float v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (final double v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (final int v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (final long v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ne (@Nonnull final String v)
+  {
+    return ne (JSExpr.lit (v));
+  }
+
+  @Nonnull
   public final IJSExpression ne (@Nonnull final IJSExpression right)
   {
     return JSOp.ne (this, right);
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final boolean v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final char v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final float v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final double v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final int v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (final long v)
+  {
+    return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final IJSExpression ene (@Nonnull final String v)
+  {
+    return ene (JSExpr.lit (v));
   }
 
   @Nonnull
