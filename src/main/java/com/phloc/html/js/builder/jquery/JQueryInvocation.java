@@ -981,6 +981,20 @@ public class JQueryInvocation implements IJSStatement
     return _invoke ("wrapInner");
   }
 
+  // Custom provided methods
+
+  @Nonnull
+  public JQueryInvocation enable ()
+  {
+    return _invoke ("enable");
+  }
+
+  @Nonnull
+  public JQueryInvocation disable ()
+  {
+    return _invoke ("disable");
+  }
+
   public void state (@Nonnull final JSFormatter f)
   {
     m_aInvocation.state (f);
