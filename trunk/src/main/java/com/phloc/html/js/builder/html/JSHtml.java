@@ -46,9 +46,15 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSFieldRef history ()
+  {
+    return JSExpr.ref ("history");
+  }
+
+  @Nonnull
   public static JSInvocation historyBack ()
   {
-    return JSExpr.ref ("history").invoke ("back");
+    return history ().invoke ("back");
   }
 
   /**
@@ -58,5 +64,23 @@ public final class JSHtml
   public static JSFieldRef getSelectSelectedValue ()
   {
     return JSExpr.refThis ("options").component (JSExpr.refThis ("selectedIndex")).ref ("value");
+  }
+
+  @Nonnull
+  public static JSFieldRef screen ()
+  {
+    return JSExpr.ref ("screen");
+  }
+
+  @Nonnull
+  public static JSFieldRef screenWidth ()
+  {
+    return screen ().ref ("width");
+  }
+
+  @Nonnull
+  public static JSFieldRef screenHeight ()
+  {
+    return screen ().ref ("height");
   }
 }
