@@ -52,18 +52,22 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   public JSPackage ()
   {}
 
-  private void _add (@Nonnull final IJSDeclaration aDeclaration) throws JSNameAlreadyExistsException
+  @Nonnull
+  private <T extends IJSDeclaration> T _addDecl (@Nonnull final T aDeclaration) throws JSNameAlreadyExistsException
   {
     final String sName = aDeclaration.name ();
     if (m_aDecls.containsKey (sName))
       throw new JSNameAlreadyExistsException (m_aDecls.get (sName));
     m_aObjs.add (aDeclaration);
     m_aDecls.put (sName, aDeclaration);
+    return aDeclaration;
   }
 
-  private void _add (@Nonnull final IJSStatement aStatement)
+  @Nonnull
+  private <T extends IJSStatement> T _addStmt (@Nonnull final T aStatement)
   {
     m_aObjs.add (aStatement);
+    return aStatement;
   }
 
   /**
@@ -78,9 +82,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
   {
-    final JSDefinedClass c = new JSDefinedClass (this, name);
-    _add (c);
-    return c;
+    return _addDecl (new JSDefinedClass (this, name));
   }
 
   @Nonnull
@@ -101,9 +103,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   @Nonnull
   public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name) throws JSNameAlreadyExistsException
   {
-    final JSFunction c = new JSFunction (aType, name);
-    _add (c);
-    return c;
+    return _addDecl (new JSFunction (aType, name));
   }
 
   @Nonnull
@@ -154,33 +154,25 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
                     @Nonnull final String name,
                     @Nullable final IJSExpression initExpression) throws JSNameAlreadyExistsException
   {
-    final JSVar c = new JSVar (aType, name, initExpression);
-    _add (c);
-    return c;
+    return _addDecl (new JSVar (aType, name, initExpression));
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonFunction)
   {
-    final JSInvocation aInvocation = aAnonFunction.invoke ();
-    _add (aInvocation);
-    return aInvocation;
+    return _addStmt (aAnonFunction.invoke ());
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSFunction aFunction)
   {
-    final JSInvocation aInvocation = aFunction.invoke ();
-    _add (aInvocation);
-    return aInvocation;
+    return _addStmt (aFunction.invoke ());
   }
 
   @Nonnull
   public JSInvocation invoke (@Nonnull @Nonempty final String sFunctionName)
   {
-    final JSInvocation aInvocation = new JSInvocation (sFunctionName);
-    _add (aInvocation);
-    return aInvocation;
+    return _addStmt (new JSInvocation (sFunctionName));
   }
 
   @Nonnull
@@ -189,9 +181,42 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
     return new JSInvocation (sFunctionName);
   }
 
-  public void assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
-    _add (lhs.assign (rhs));
+    return _addStmt (lhs.assign (rhs));
+  }
+
+  /**
+   * Create a For statement and add it to this block
+   * 
+   * @return Newly generated For statement
+   */
+  @Nonnull
+  public JSForLoop _for ()
+  {
+    return _addStmt (new JSForLoop ());
+  }
+
+  @Nonnull
+  public JSForIn forIn (@Nullable final AbstractJSType varType,
+                        @Nonnull final String name,
+                        @Nonnull final IJSExpression collection)
+  {
+    return _addStmt (new JSForIn (varType, name, collection));
+  }
+
+  /**
+   * Create an If statement and add it to this block
+   * 
+   * @param expr
+   *        {@link IJSExpression} to be tested to determine branching
+   * @return Newly generated conditional statement
+   */
+  @Nonnull
+  public JSConditional _if (@Nonnull final IJSExpression expr)
+  {
+    return _addStmt (new JSConditional (expr));
   }
 
   /**

@@ -38,11 +38,6 @@ public class JSFormatter implements Closeable
   public static final String DEFAULT_INDENT = "  ";
 
   /**
-   * Current number of indentation strings to print
-   */
-  private int m_nIndentLevel;
-
-  /**
    * String to be used for each indentation. Defaults to four spaces.
    */
   private final String m_sIndentSpace;
@@ -51,8 +46,14 @@ public class JSFormatter implements Closeable
    * Stream associated with this JFormatter
    */
   private final PrintWriter m_aPW;
+  /**
+   * Current number of indentation strings to print
+   */
+  private int m_nIndentLevel;
 
   private boolean m_bAtBeginningOfLine = true;
+
+  private boolean m_bIndentAndAlign = true;
 
   /**
    * Creates a formatter with default incremental indentations of four spaces.
@@ -82,6 +83,18 @@ public class JSFormatter implements Closeable
   {
     m_aPW = s;
     m_sIndentSpace = space;
+  }
+
+  public boolean indentAndAlign ()
+  {
+    return m_bIndentAndAlign;
+  }
+
+  @Nonnull
+  public JSFormatter indentAndAlign (final boolean bIndentAndAlign)
+  {
+    m_bIndentAndAlign = bIndentAndAlign;
+    return this;
   }
 
   /**
@@ -116,7 +129,7 @@ public class JSFormatter implements Closeable
   {
     if (m_bAtBeginningOfLine)
     {
-      if (m_nIndentLevel > 0)
+      if (m_nIndentLevel > 0 && m_bIndentAndAlign)
         m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
       m_bAtBeginningOfLine = false;
     }
@@ -169,8 +182,11 @@ public class JSFormatter implements Closeable
   @Nonnull
   public JSFormatter nl ()
   {
-    m_aPW.print ('\n');
-    m_bAtBeginningOfLine = true;
+    if (m_bIndentAndAlign)
+    {
+      m_aPW.print ('\n');
+      m_bAtBeginningOfLine = true;
+    }
     return this;
   }
 

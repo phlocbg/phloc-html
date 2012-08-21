@@ -19,7 +19,8 @@ package com.phloc.html.js.builder.jquery;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.builder.JSFormatter;
 import com.phloc.html.js.builder.JSInvocation;
 
 /**
@@ -27,7 +28,7 @@ import com.phloc.html.js.builder.JSInvocation;
  * 
  * @author philip
  */
-public class JQueryInvocation implements IJSCodeProvider
+public class JQueryInvocation implements IJSStatement
 {
   private final JSInvocation m_aInvocation;
 
@@ -39,9 +40,26 @@ public class JQueryInvocation implements IJSCodeProvider
   }
 
   @Nonnull
+  public JQueryInvocation disable ()
+  {
+    return new JQueryInvocation (m_aInvocation.invoke ("disable"));
+  }
+
+  @Nonnull
+  public JQueryInvocation enable ()
+  {
+    return new JQueryInvocation (m_aInvocation.invoke ("enable"));
+  }
+
+  @Nonnull
   public JQueryInvocation focus ()
   {
     return new JQueryInvocation (m_aInvocation.invoke ("focus"));
+  }
+
+  public void state (@Nonnull final JSFormatter f)
+  {
+    m_aInvocation.state (f);
   }
 
   @Nonnull

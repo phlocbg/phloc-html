@@ -69,6 +69,20 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression typeof ();
 
   /**
+   * @return "typeof [this] === undefined" or "[this] === undefined" from
+   *         "[this]"
+   */
+  @Nonnull
+  IJSExpression isUndefined ();
+
+  /**
+   * @return "typeof [this] !== undefined" or "[this] !== undefined" from
+   *         "[this]"
+   */
+  @Nonnull
+  IJSExpression isNotUndefined ();
+
+  /**
    * @return "[this]+[right]"
    */
   @Nonnull

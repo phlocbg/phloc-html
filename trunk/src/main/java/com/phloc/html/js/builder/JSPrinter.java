@@ -32,12 +32,24 @@ import com.phloc.commons.io.streams.StreamUtils;
  */
 public final class JSPrinter
 {
+  private static boolean s_bIndentAndAlign = false;
+
   private JSPrinter ()
   {}
 
+  public static void setIndentAndAlign (final boolean bIndentAndAlign)
+  {
+    s_bIndentAndAlign = bIndentAndAlign;
+  }
+
+  public static boolean isIdentAndAlign ()
+  {
+    return s_bIndentAndAlign;
+  }
+
   public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w);
+    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
     try
     {
       f.stmt (aStatement);
@@ -50,7 +62,7 @@ public final class JSPrinter
 
   public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w);
+    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
     try
     {
       // for all declarations in the current package
