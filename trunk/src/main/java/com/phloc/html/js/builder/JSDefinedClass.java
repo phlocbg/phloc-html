@@ -252,7 +252,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     if (m_aJSDoc != null)
       f.nl ().generatable (m_aJSDoc);
 
-    f.id (m_sName);
+    f.plain (m_sName);
 
     if (m_aSuperClass != null)
       f.nl ().indent ().plain ("extends").generatable (m_aSuperClass).nl ().outdent ();

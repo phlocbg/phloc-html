@@ -127,7 +127,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   {
     if (m_aType != null)
       f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.id (m_sName);
+    f.plain (m_sName);
     if (m_aInit != null)
       f.plain ('=').generatable (m_aInit);
   }
@@ -141,6 +141,6 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   public void generate (@Nonnull final JSFormatter f)
   {
-    f.id (m_sName);
+    f.plain (m_sName);
   }
 }

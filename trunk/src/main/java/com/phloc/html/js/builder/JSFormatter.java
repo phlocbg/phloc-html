@@ -162,22 +162,12 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Print an identifier
-   */
-  @Nonnull
-  public JSFormatter id (@Nonnull final String id)
-  {
-    plain (id);
-    return this;
-  }
-
-  /**
    * Print a new line into the stream
    */
   @Nonnull
   public JSFormatter nl ()
   {
-    m_aPW.println ();
+    m_aPW.print ('\n');
     m_bAtBeginningOfLine = true;
     return this;
   }
