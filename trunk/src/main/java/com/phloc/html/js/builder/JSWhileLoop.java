@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * While statement
@@ -70,4 +71,9 @@ public class JSWhileLoop implements IJSStatement
       f.plain (';').nl ();
   }
 
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

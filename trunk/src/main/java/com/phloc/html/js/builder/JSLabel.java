@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
@@ -47,5 +48,11 @@ public final class JSLabel implements IJSStatement
   public void state (final JSFormatter f)
   {
     f.plain (m_sLabel).plain (':').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

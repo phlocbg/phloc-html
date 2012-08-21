@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Throw statement
@@ -47,5 +48,11 @@ final class JSThrow implements IJSStatement
     f.plain ("throw ");
     f.generatable (m_aExpr);
     f.plain (';').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

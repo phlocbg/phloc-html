@@ -46,4 +46,10 @@ final class JSBreak implements IJSStatement
     else
       f.plain ("break").plain (m_aLabel.m_sLabel).plain (';').nl ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

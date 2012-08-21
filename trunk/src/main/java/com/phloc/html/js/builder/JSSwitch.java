@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -97,5 +98,11 @@ public final class JSSwitch implements IJSStatement
     if (m_aDefaultCase != null)
       f.stmt (m_aDefaultCase);
     f.plain ('}').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

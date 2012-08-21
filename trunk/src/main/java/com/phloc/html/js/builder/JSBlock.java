@@ -752,6 +752,12 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
       {
         f.plain (source).nl ();
       }
+
+      @Nullable
+      public String getJSCode ()
+      {
+        return JSPrinter.getAsString (this);
+      }
     };
     add (s);
     return s;
@@ -786,5 +792,11 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     f.generatable (this);
     if (m_bBracesRequired && m_bNewLineAtEnd)
       f.nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

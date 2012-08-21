@@ -43,7 +43,6 @@ import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.jquery.JQuery;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.html.js.provider.JSCodeWrapper;
 
 /**
@@ -168,12 +167,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
 
         // Add this out of band node
         // Note: assuming jQuery
-        if (false)
-        {
-          return new HCScript (JQuery.idRef (aCtrl.getID ()).focus ());
-        }
-        return new HCScript (new CollectingJSCodeProvider ("$('#").appendEscaped (aCtrl.getID ())
-                                                                  .append ("').focus();"));
+        return new HCScript (JQuery.idRef (aCtrl.getID ()).focus ());
       }
     }
     return null;

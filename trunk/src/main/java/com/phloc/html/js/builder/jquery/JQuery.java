@@ -24,6 +24,11 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
+/**
+ * Wrapper around jQuery to allow for easy function calls
+ * 
+ * @author philip
+ */
 public class JQuery
 {
   private JQuery ()

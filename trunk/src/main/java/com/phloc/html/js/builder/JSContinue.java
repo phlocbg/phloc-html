@@ -46,4 +46,10 @@ final class JSContinue implements IJSStatement
     else
       f.plain ("continue").plain (m_aLabel.m_sLabel).plain (';').nl ();
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

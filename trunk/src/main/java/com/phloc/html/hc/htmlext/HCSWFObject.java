@@ -31,9 +31,11 @@ import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.impl.AbstractWrappedHCNode;
 import com.phloc.html.hc.impl.HCNodeList;
-import com.phloc.html.js.CJS;
+import com.phloc.html.js.builder.JSAssocArray;
+import com.phloc.html.js.builder.JSExpr;
+import com.phloc.html.js.builder.JSInvocation;
+import com.phloc.html.js.builder.JSPackage;
 import com.phloc.html.js.marshal.JSMarshaller;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
  * Create the necessary tags for embedding a flash files using SWFObject.<br>
@@ -282,55 +284,39 @@ public class HCSWFObject extends AbstractWrappedHCNode
     if (StringHelper.hasNoText (m_sRequiredSWFVersion))
       throw new IllegalStateException ("No required SWF version present");
 
-    final CollectingJSCodeProvider aJS = new CollectingJSCodeProvider ();
-    aJS.append ("var flashvars = {};\n");
-    aJS.append ("var params = {};\n");
-    aJS.append ("var attributes = {};\n");
+    final JSAssocArray jsFlashvars = JSExpr.newAssocArray ();
     if (m_aFlashVars != null)
       for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
-        aJS.append ("flashvars.")
-           .append (aEntry.getKey ())
-           .append (" = ")
-           .append (JSMarshaller.objectToJSString (aEntry.getValue ()))
-           .append (";\n");
+        jsFlashvars.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
+
+    final JSAssocArray jsParams = JSExpr.newAssocArray ();
     if (m_aObjectParams != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectParams.entrySet ())
-        aJS.append ("params.")
-           .append (aEntry.getKey ())
-           .append (" = ")
-           .append (JSMarshaller.objectToJSString (aEntry.getValue ()))
-           .append (";\n");
+        jsParams.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
+
+    final JSAssocArray jsAttributes = JSExpr.newAssocArray ();
     if (m_aObjectAttrs != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectAttrs.entrySet ())
-        aJS.append ("attributes.")
-           .append (aEntry.getKey ())
-           .append (" = ")
-           .append (JSMarshaller.objectToJSString (aEntry.getValue ()))
-           .append (";\n");
+        jsAttributes.add (aEntry.getKey (), JSExpr.atom (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
     // Call embedder
-    aJS.append ("swfobject.embedSWF(\"")
-       .appendEscaped (m_aSWFURL.getAsString ())
-       .append ("\", \"")
-       .appendEscaped (m_sHTMLContainerID)
-       .append ("\", \"")
-       .appendEscaped (m_sWidth)
-       .append ("\", \"")
-       .appendEscaped (m_sHeight)
-       .append ("\", \"")
-       .appendEscaped (m_sRequiredSWFVersion)
-       .append ("\", ");
+    final JSInvocation aInvocation = JSPackage.invokeRef ("swfobject.embedSWF")
+                                              .arg (m_aSWFURL.getAsString ())
+                                              .arg (m_sHTMLContainerID)
+                                              .arg (m_sWidth)
+                                              .arg (m_sHeight)
+                                              .arg (m_sRequiredSWFVersion);
     // only supported by Flash Player 6.0.65; m_nWidth >= 310 && m_nHeight >=
     // 147;
     if (m_aExpressInstallSWFURL != null)
-      aJS.append ('"').appendEscaped (m_aExpressInstallSWFURL.getAsString ()).append ('"');
+      aInvocation.arg (m_aExpressInstallSWFURL.getAsString ());
     else
-      aJS.append (CJS.JS_NULL);
-    aJS.append (", flashvars, params, attributes);\n");
+      aInvocation.argNull ();
+    aInvocation.arg (jsFlashvars).arg (jsParams).arg (jsAttributes);
 
     final HCNodeList ret = new HCNodeList ();
-    ret.addChild (new HCDiv ("").setID (m_sHTMLContainerID));
-    ret.addChild (new HCScript (aJS));
+    ret.addChild (new HCDiv ().setID (m_sHTMLContainerID));
+    ret.addChild (new HCScript (aInvocation));
     return ret;
   }
 }

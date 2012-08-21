@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Try statement with Catch and/or Finally clause
@@ -79,5 +80,11 @@ public class JSTryBlock implements IJSStatement
         f.plain ("finally").generatable (m_aFinally);
       f.nl ();
     }
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }
