@@ -17,13 +17,10 @@
  */
 package com.phloc.html.js.provider;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.JSExpr;
-import com.phloc.html.js.builder.JSFieldRef;
 
 /**
  * This class contains some static JS constants.
@@ -31,6 +28,7 @@ import com.phloc.html.js.builder.JSFieldRef;
  * @author philip
  */
 @Immutable
+@Deprecated
 public final class CJSCode
 {
   /** The 'this' keyword */
@@ -49,10 +47,4 @@ public final class CJSCode
 
   private CJSCode ()
   {}
-
-  @Nonnull
-  public static JSFieldRef getHtmlSelectSelectedValue ()
-  {
-    return JSExpr.refThis ("options").component (JSExpr.refThis ("selectedIndex")).ref ("value");
-  }
 }
