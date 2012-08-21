@@ -19,6 +19,7 @@ package com.phloc.html.js.builder.html;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSInvocation;
@@ -40,6 +41,18 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation documentGetElementsByName (@Nonnull final String sElementName)
+  {
+    return document ().invoke ("getElementsByName").arg (sElementName);
+  }
+
+  @Nonnull
+  public static JSInvocation documentGetElementsByName (@Nonnull final IJSExpression aElementName)
+  {
+    return document ().invoke ("getElementsByName").arg (aElementName);
+  }
+
+  @Nonnull
   public static JSFieldRef event ()
   {
     return JSExpr.ref ("event");
@@ -57,13 +70,34 @@ public final class JSHtml
     return history ().invoke ("back");
   }
 
+  @Nonnull
+  public static JSFieldRef window ()
+  {
+    return JSExpr.ref ("window");
+  }
+
+  @Nonnull
+  public static JSInvocation windowPrint ()
+  {
+    return window ().invoke ("print");
+  }
+
   /**
    * @return <code>this.options[this.selectedIndex].value</code>
    */
   @Nonnull
   public static JSFieldRef getSelectSelectedValue ()
   {
-    return JSExpr.refThis ("options").component (JSExpr.refThis ("selectedIndex")).ref ("value");
+    return getSelectSelectedValue (JSExpr.THIS);
+  }
+
+  /**
+   * @return <code>aExpr.options[aExpr.selectedIndex].value</code>
+   */
+  @Nonnull
+  public static JSFieldRef getSelectSelectedValue (@Nonnull final IJSExpression aExpr)
+  {
+    return aExpr.ref ("options").component (aExpr.ref ("selectedIndex")).ref ("value");
   }
 
   @Nonnull
