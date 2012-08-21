@@ -26,14 +26,16 @@ import javax.annotation.Nonnull;
  */
 public class JSRegExLiteral extends AbstractJSExpressionImpl
 {
-  private final String m_sStr;
+  private final String m_sRegEx;
   private boolean m_bGlobal = false;
   private boolean m_bCaseInsensitive = false;
   private boolean m_bMultiLine = false;
 
-  JSRegExLiteral (final String what)
+  JSRegExLiteral (@Nonnull final String sRegEx)
   {
-    m_sStr = what;
+    if (sRegEx == null)
+      throw new NullPointerException ("regex");
+    m_sRegEx = sRegEx;
   }
 
   public boolean global ()
@@ -83,7 +85,7 @@ public class JSRegExLiteral extends AbstractJSExpressionImpl
 
   public void generate (final JSFormatter f)
   {
-    f.plain ('/').plain (m_sStr).plain ('/');
+    f.plain ('/').plain (m_sRegEx).plain ('/');
     if (m_bGlobal)
       f.plain ('g');
     if (m_bCaseInsensitive)

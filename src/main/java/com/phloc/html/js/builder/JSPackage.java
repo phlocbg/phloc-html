@@ -18,9 +18,11 @@
 package com.phloc.html.js.builder;
 
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,6 +31,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
 import com.phloc.commons.io.streams.StreamUtils;
+import com.phloc.commons.state.EChange;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
@@ -38,16 +41,32 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
 {
+  private final List <Object> m_aObjs = new ArrayList <Object> ();
+
   /**
-   * List of classes contained within this package keyed by their name.
+   * List of declarations contained within this package keyed by their name.
    */
-  private final Map <String, IJSDeclaration> m_aDecls = new TreeMap <String, IJSDeclaration> ();
+  private final Map <String, IJSDeclaration> m_aDecls = new HashMap <String, IJSDeclaration> ();
 
   /**
    * JPackage constructor
    */
   public JSPackage ()
   {}
+
+  private void _add (@Nonnull final IJSDeclaration aDeclaration) throws JSNameAlreadyExistsException
+  {
+    final String sName = aDeclaration.name ();
+    if (m_aDecls.containsKey (sName))
+      throw new JSNameAlreadyExistsException (m_aDecls.get (sName));
+    m_aObjs.add (aDeclaration);
+    m_aDecls.put (sName, aDeclaration);
+  }
+
+  private void _add (@Nonnull final IJSStatement aStatement)
+  {
+    m_aObjs.add (aStatement);
+  }
 
   /**
    * Add a class to this package.
@@ -61,15 +80,13 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   @Nonnull
   public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
   {
-    if (m_aDecls.containsKey (name))
-      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
     final JSDefinedClass c = new JSDefinedClass (this, name);
-    m_aDecls.put (name, c);
+    _add (c);
     return c;
   }
 
   @Nonnull
-  public JSFunction function (final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nonnull final String name) throws JSNameAlreadyExistsException
   {
     return function (null, name);
   }
@@ -84,12 +101,10 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
    *            When the specified function was already created.
    */
   @Nonnull
-  public JSFunction function (final AbstractJSType aType, final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull final String name) throws JSNameAlreadyExistsException
   {
-    if (m_aDecls.containsKey (name))
-      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
     final JSFunction c = new JSFunction (aType, name);
-    m_aDecls.put (name, c);
+    _add (c);
     return c;
   }
 
@@ -129,19 +144,38 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
                     @Nonnull final String name,
                     @Nullable final IJSExpression initExpression) throws JSNameAlreadyExistsException
   {
-    if (m_aDecls.containsKey (name))
-      throw new JSNameAlreadyExistsException (m_aDecls.get (name));
     final JSVar c = new JSVar (aType, name, initExpression);
-    m_aDecls.put (name, c);
+    _add (c);
     return c;
+  }
+
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonFunction)
+  {
+    final JSInvocation aInvocation = aAnonFunction.invoke ();
+    _add (aInvocation);
+    return aInvocation;
+  }
+
+  @Nonnull
+  public JSInvocation invoke (@Nonnull final JSFunction aFunction)
+  {
+    final JSInvocation aInvocation = aFunction.invoke ();
+    _add (aInvocation);
+    return aInvocation;
   }
 
   /**
    * Removes a declaration from this package.
    */
-  public void remove (final String name)
+  @Nonnull
+  public EChange removeByName (final String name)
   {
-    m_aDecls.remove (name);
+    final IJSDeclaration aDecl = m_aDecls.remove (name);
+    if (aDecl == null)
+      return EChange.UNCHANGED;
+    m_aObjs.remove (aDecl);
+    return EChange.CHANGED;
   }
 
   @Nonnull
@@ -156,7 +190,8 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
    * 
    * @return null If the object is not yet created.
    */
-  public IJSDeclaration getDeclaration (final String name)
+  @Nullable
+  public IJSDeclaration getDeclaration (@Nullable final String name)
   {
     return m_aDecls.get (name);
   }
@@ -164,9 +199,16 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   /**
    * Checks if a given name is already defined as a class/interface
    */
-  public boolean isDeclared (final String declLocalName)
+  public boolean isDeclared (@Nullable final String declLocalName)
   {
     return getDeclaration (declLocalName) != null;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <Object> members ()
+  {
+    return ContainerHelper.newList (m_aObjs);
   }
 
   public void writePackage (@Nonnull final Writer w)
@@ -176,8 +218,11 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     try
     {
       // for all declarations in the current package
-      for (final IJSDeclaration aDecl : declarations ())
-        f.decl (aDecl);
+      for (final Object aObj : members ())
+        if (aObj instanceof IJSDeclaration)
+          f.decl ((IJSDeclaration) aObj);
+        else
+          f.stmt ((IJSStatement) aObj);
     }
     finally
     {
@@ -188,7 +233,7 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   @Nullable
   public String getJSCode ()
   {
-    if (m_aDecls.isEmpty ())
+    if (m_aObjs.isEmpty ())
       return null;
 
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();

@@ -240,7 +240,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final String v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
@@ -291,7 +291,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final String v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
   {
     return assignPlus (lhs, JSExpr.lit (v));
   }
@@ -426,7 +426,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final String method)
+  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull @Nonempty final String method)
   {
     final JSInvocation i = new JSInvocation (expr, method);
     _insert (i);
@@ -466,7 +466,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nonnull final String method)
+  public JSInvocation invoke (@Nonnull @Nonempty final String method)
   {
     return _insert (new JSInvocation ((IJSExpression) null, method));
   }
@@ -646,7 +646,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     _return (JSExpr.lit (v));
   }
 
-  public void _return (final String v)
+  public void _return (@Nonnull final String v)
   {
     _return (JSExpr.lit (v));
   }

@@ -27,37 +27,37 @@ import javax.annotation.Nonnull;
 public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImpl implements IJSAssignmentTarget
 {
   @Nonnull
-  public final JSAssignment assign (@Nonnull final boolean v)
+  public final JSAssignment assign (final boolean v)
   {
     return assign (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final char v)
+  public final JSAssignment assign (final char v)
   {
     return assign (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final double v)
+  public final JSAssignment assign (final double v)
   {
     return assign (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final float v)
+  public final JSAssignment assign (final float v)
   {
     return assign (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final int v)
+  public final JSAssignment assign (final int v)
   {
     return assign (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final long v)
+  public final JSAssignment assign (final long v)
   {
     return assign (JSExpr.lit (v));
   }
@@ -75,31 +75,31 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final char v)
+  public final JSAssignment assignPlus (final char v)
   {
     return assignPlus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final double v)
+  public final JSAssignment assignPlus (final double v)
   {
     return assignPlus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final float v)
+  public final JSAssignment assignPlus (final float v)
   {
     return assignPlus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final int v)
+  public final JSAssignment assignPlus (final int v)
   {
     return assignPlus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final long v)
+  public final JSAssignment assignPlus (final long v)
   {
     return assignPlus (JSExpr.lit (v));
   }
@@ -117,25 +117,25 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (@Nonnull final double v)
+  public final JSAssignment assignMinus (final double v)
   {
     return assignMinus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (@Nonnull final float v)
+  public final JSAssignment assignMinus (final float v)
   {
     return assignMinus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (@Nonnull final int v)
+  public final JSAssignment assignMinus (final int v)
   {
     return assignMinus (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (@Nonnull final long v)
+  public final JSAssignment assignMinus (final long v)
   {
     return assignMinus (JSExpr.lit (v));
   }
@@ -147,25 +147,25 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (@Nonnull final double v)
+  public final JSAssignment assignMultiply (final double v)
   {
     return assignMultiply (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (@Nonnull final float v)
+  public final JSAssignment assignMultiply (final float v)
   {
     return assignMultiply (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (@Nonnull final int v)
+  public final JSAssignment assignMultiply (final int v)
   {
     return assignMultiply (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (@Nonnull final long v)
+  public final JSAssignment assignMultiply (final long v)
   {
     return assignMultiply (JSExpr.lit (v));
   }
@@ -177,25 +177,25 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (@Nonnull final double v)
+  public final JSAssignment assignDivide (final double v)
   {
     return assignDivide (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (@Nonnull final float v)
+  public final JSAssignment assignDivide (final float v)
   {
     return assignDivide (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (@Nonnull final int v)
+  public final JSAssignment assignDivide (final int v)
   {
     return assignDivide (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (@Nonnull final long v)
+  public final JSAssignment assignDivide (final long v)
   {
     return assignDivide (JSExpr.lit (v));
   }
@@ -207,13 +207,13 @@ public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImp
   }
 
   @Nonnull
-  public final JSAssignment assignModulo (@Nonnull final int v)
+  public final JSAssignment assignModulo (final int v)
   {
     return assignModulo (JSExpr.lit (v));
   }
 
   @Nonnull
-  public final JSAssignment assignModulo (@Nonnull final long v)
+  public final JSAssignment assignModulo (final long v)
   {
     return assignModulo (JSExpr.lit (v));
   }

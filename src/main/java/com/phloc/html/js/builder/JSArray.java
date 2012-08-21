@@ -35,37 +35,37 @@ public final class JSArray extends AbstractJSExpressionImpl
   {}
 
   @Nonnull
-  public JSArray add (@Nonnull final boolean v)
+  public JSArray add (final boolean v)
   {
     return add (JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final char v)
+  public JSArray add (final char v)
   {
     return add (JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final double v)
+  public JSArray add (final double v)
   {
     return add (JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final float v)
+  public JSArray add (final float v)
   {
     return add (JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final int v)
+  public JSArray add (final int v)
   {
     return add (JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final long v)
+  public JSArray add (final long v)
   {
     return add (JSExpr.lit (v));
   }

@@ -18,7 +18,6 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -31,9 +30,12 @@ public class JSStringLiteral extends AbstractJSExpressionImpl
 {
   private final String m_sStr;
 
-  JSStringLiteral (@Nullable final String what)
+  JSStringLiteral (@Nonnull final String sStr)
   {
-    m_sStr = what;
+    if (sStr == null)
+      throw new NullPointerException ("string");
+    // May be empty
+    m_sStr = sStr;
   }
 
   public void generate (@Nonnull final JSFormatter f)
