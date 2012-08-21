@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.Nonempty;
+
 /**
  * Provides default implementations for {@link IJSExpression}.
  * 
@@ -547,7 +549,7 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
-  public final JSInvocation invoke (@Nonnull final String method)
+  public final JSInvocation invoke (@Nonnull @Nonempty final String method)
   {
     return JSExpr.invoke (this, method);
   }

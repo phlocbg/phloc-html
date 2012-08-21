@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -310,6 +311,123 @@ public class JSInvocation extends AbstractJSExpressionImpl implements IJSStateme
   public JSInvocation argThis ()
   {
     return arg (JSExpr.THIS);
+  }
+
+  /**
+   * Add an expression to this invocation's argument list
+   * 
+   * @param aArgument
+   *        Argument to add to argument list
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nonnull final IJSExpression aArgument)
+  {
+    if (aArgument == null)
+      throw new IllegalArgumentException ("argument");
+    m_aArgs.add (nIndex, aArgument);
+    return this;
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final boolean v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final char v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final double v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final float v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final int v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  /**
+   * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
+   */
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, final long v)
+  {
+    return arg (nIndex, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final Integer v)
+  {
+    return v == null ? argNull (nIndex) : arg (nIndex, v.intValue ());
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final Long v)
+  {
+    return v == null ? argNull (nIndex) : arg (nIndex, v.longValue ());
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final String v)
+  {
+    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final IJSON v)
+  {
+    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (v));
+  }
+
+  @Nonnull
+  public JSInvocation arg (@Nonnegative final int nIndex, @Nullable final IJSCodeProvider v)
+  {
+    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.direct (v.getJSCode ()));
+  }
+
+  /**
+   * Adds a null argument. Short for {@code arg(nIndex, JSExpr.NULL)}
+   */
+  @Nonnull
+  public JSInvocation argNull (@Nonnegative final int nIndex)
+  {
+    return arg (nIndex, JSExpr.NULL);
+  }
+
+  /**
+   * Adds a null argument. Short for {@code arg(nIndex, JSExpr.THIS)}
+   */
+  @Nonnull
+  public JSInvocation argThis (@Nonnegative final int nIndex)
+  {
+    return arg (nIndex, JSExpr.THIS);
   }
 
   /**

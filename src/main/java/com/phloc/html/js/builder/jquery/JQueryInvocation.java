@@ -22,9 +22,11 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFormatter;
 import com.phloc.html.js.builder.JSInvocation;
+import com.phloc.json.IJSON;
 
 /**
  * Special invocation semantics for jQuery
@@ -125,6 +127,13 @@ public class JQueryInvocation implements IJSStatement
     return this;
   }
 
+  @Nonnull
+  public JQueryInvocation arg (@Nonnull final IJSON v)
+  {
+    m_aInvocation.arg (JSExpr.json (v));
+    return this;
+  }
+
   /**
    * Adds a null argument. Short for {@code arg(JSExpr.NULL)}
    */
@@ -136,7 +145,7 @@ public class JQueryInvocation implements IJSStatement
   }
 
   @Nonnull
-  private JQueryInvocation _invoke (@Nonnull @Nonempty final String sMethod)
+  public JQueryInvocation invoke (@Nonnull @Nonempty final String sMethod)
   {
     return new JQueryInvocation (m_aInvocation.invoke (sMethod));
   }
@@ -144,145 +153,145 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JQueryInvocation add ()
   {
-    return _invoke ("add");
+    return invoke ("add");
   }
 
   @Nonnull
   public JQueryInvocation addClass ()
   {
-    return _invoke ("addClass");
+    return invoke ("addClass");
   }
 
   @Nonnull
   public JQueryInvocation after ()
   {
-    return _invoke ("after");
+    return invoke ("after");
   }
 
   @Nonnull
   public JQueryInvocation ajaxComplete ()
   {
-    return _invoke ("ajaxComplete");
+    return invoke ("ajaxComplete");
   }
 
   @Nonnull
   public JQueryInvocation ajaxError ()
   {
-    return _invoke ("ajaxError");
+    return invoke ("ajaxError");
   }
 
   @Nonnull
   public JQueryInvocation ajaxSend ()
   {
-    return _invoke ("ajaxSend");
+    return invoke ("ajaxSend");
   }
 
   @Nonnull
   public JQueryInvocation ajaxStart ()
   {
-    return _invoke ("ajaxStart");
+    return invoke ("ajaxStart");
   }
 
   @Nonnull
   public JQueryInvocation ajaxStop ()
   {
-    return _invoke ("ajaxStop");
+    return invoke ("ajaxStop");
   }
 
   @Nonnull
   public JQueryInvocation ajaxSuccess ()
   {
-    return _invoke ("ajaxSuccess");
+    return invoke ("ajaxSuccess");
   }
 
   @Nonnull
   public JQueryInvocation andSelf ()
   {
-    return _invoke ("andSelf");
+    return invoke ("andSelf");
   }
 
   @Nonnull
   public JQueryInvocation animate ()
   {
-    return _invoke ("animate");
+    return invoke ("animate");
   }
 
   @Nonnull
   public JQueryInvocation append ()
   {
-    return _invoke ("append");
+    return invoke ("append");
   }
 
   @Nonnull
   public JQueryInvocation appendTo ()
   {
-    return _invoke ("appendTo");
+    return invoke ("appendTo");
   }
 
   @Nonnull
   public JQueryInvocation attr ()
   {
-    return _invoke ("attr");
+    return invoke ("attr");
   }
 
   @Nonnull
   public JQueryInvocation before ()
   {
-    return _invoke ("before");
+    return invoke ("before");
   }
 
   @Nonnull
   public JQueryInvocation bind ()
   {
-    return _invoke ("bind");
+    return invoke ("bind");
   }
 
   @Nonnull
   public JQueryInvocation blur ()
   {
-    return _invoke ("blur");
+    return invoke ("blur");
   }
 
   @Nonnull
   public JQueryInvocation change ()
   {
-    return _invoke ("change");
+    return invoke ("change");
   }
 
   @Nonnull
   public JQueryInvocation children ()
   {
-    return _invoke ("children");
+    return invoke ("children");
   }
 
   @Nonnull
   public JQueryInvocation clearQueue ()
   {
-    return _invoke ("clearQueue");
+    return invoke ("clearQueue");
   }
 
   @Nonnull
   public JQueryInvocation click ()
   {
-    return _invoke ("click");
+    return invoke ("click");
   }
 
   @Nonnull
   public JQueryInvocation clone_ ()
   {
-    return _invoke ("clone");
+    return invoke ("clone");
   }
 
   @Nonnull
   public JQueryInvocation closest ()
   {
-    return _invoke ("closest");
+    return invoke ("closest");
   }
 
   @Nonnull
   public JQueryInvocation contents ()
   {
-    return _invoke ("contents");
+    return invoke ("contents");
   }
 
   @Nonnull
@@ -294,217 +303,217 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JQueryInvocation css ()
   {
-    return _invoke ("css");
+    return invoke ("css");
   }
 
   @Nonnull
   public JQueryInvocation data ()
   {
-    return _invoke ("data");
+    return invoke ("data");
   }
 
   @Nonnull
   public JQueryInvocation dblclick ()
   {
-    return _invoke ("dblclick");
+    return invoke ("dblclick");
   }
 
   @Nonnull
   public JQueryInvocation delay ()
   {
-    return _invoke ("delay");
+    return invoke ("delay");
   }
 
   @Nonnull
   public JQueryInvocation delegate ()
   {
-    return _invoke ("delegate");
+    return invoke ("delegate");
   }
 
   @Nonnull
   public JQueryInvocation dequeue ()
   {
-    return _invoke ("dequeue");
+    return invoke ("dequeue");
   }
 
   @Nonnull
   public JQueryInvocation detach ()
   {
-    return _invoke ("detach");
+    return invoke ("detach");
   }
 
   @Nonnull
   public JQueryInvocation die ()
   {
-    return _invoke ("die");
+    return invoke ("die");
   }
 
   @Nonnull
   public JQueryInvocation each ()
   {
-    return _invoke ("each");
+    return invoke ("each");
   }
 
   @Nonnull
   public JQueryInvocation empty ()
   {
-    return _invoke ("empty");
+    return invoke ("empty");
   }
 
   @Nonnull
   public JQueryInvocation end ()
   {
-    return _invoke ("end");
+    return invoke ("end");
   }
 
   @Nonnull
   public JQueryInvocation eq ()
   {
-    return _invoke ("eq");
+    return invoke ("eq");
   }
 
   @Nonnull
   public JQueryInvocation error ()
   {
-    return _invoke ("error");
+    return invoke ("error");
   }
 
   @Nonnull
   public JQueryInvocation fadeIn ()
   {
-    return _invoke ("fadeIn");
+    return invoke ("fadeIn");
   }
 
   @Nonnull
   public JQueryInvocation fadeOut ()
   {
-    return _invoke ("fadeOut");
+    return invoke ("fadeOut");
   }
 
   @Nonnull
   public JQueryInvocation fadeTo ()
   {
-    return _invoke ("fadeTo");
+    return invoke ("fadeTo");
   }
 
   @Nonnull
   public JQueryInvocation fadeToggle ()
   {
-    return _invoke ("fadeToggle");
+    return invoke ("fadeToggle");
   }
 
   @Nonnull
   public JQueryInvocation filter ()
   {
-    return _invoke ("filter");
+    return invoke ("filter");
   }
 
   @Nonnull
   public JQueryInvocation find ()
   {
-    return _invoke ("find");
+    return invoke ("find");
   }
 
   @Nonnull
   public JQueryInvocation first ()
   {
-    return _invoke ("first");
+    return invoke ("first");
   }
 
   @Nonnull
   public JQueryInvocation focus ()
   {
-    return _invoke ("focus");
+    return invoke ("focus");
   }
 
   @Nonnull
   public JQueryInvocation focusin ()
   {
-    return _invoke ("focusin");
+    return invoke ("focusin");
   }
 
   @Nonnull
   public JQueryInvocation focusout ()
   {
-    return _invoke ("focusout");
+    return invoke ("focusout");
   }
 
   @Nonnull
   public JQueryInvocation get ()
   {
-    return _invoke ("get");
+    return invoke ("get");
   }
 
   @Nonnull
   public JQueryInvocation has ()
   {
-    return _invoke ("has");
+    return invoke ("has");
   }
 
   @Nonnull
   public JQueryInvocation hasClass ()
   {
-    return _invoke ("hasClass");
+    return invoke ("hasClass");
   }
 
   @Nonnull
   public JQueryInvocation height ()
   {
-    return _invoke ("height");
+    return invoke ("height");
   }
 
   @Nonnull
   public JQueryInvocation hide ()
   {
-    return _invoke ("hide");
+    return invoke ("hide");
   }
 
   @Nonnull
   public JQueryInvocation hover ()
   {
-    return _invoke ("hover");
+    return invoke ("hover");
   }
 
   @Nonnull
   public JQueryInvocation html ()
   {
-    return _invoke ("html");
+    return invoke ("html");
   }
 
   @Nonnull
   public JQueryInvocation index ()
   {
-    return _invoke ("index");
+    return invoke ("index");
   }
 
   @Nonnull
   public JQueryInvocation innerHeight ()
   {
-    return _invoke ("innerHeight");
+    return invoke ("innerHeight");
   }
 
   @Nonnull
   public JQueryInvocation innerWidth ()
   {
-    return _invoke ("innerWidth");
+    return invoke ("innerWidth");
   }
 
   @Nonnull
   public JQueryInvocation insertAfter ()
   {
-    return _invoke ("insertAfter");
+    return invoke ("insertAfter");
   }
 
   @Nonnull
   public JQueryInvocation insertBefore ()
   {
-    return _invoke ("insertBefore");
+    return invoke ("insertBefore");
   }
 
   @Nonnull
   public JQueryInvocation is ()
   {
-    return _invoke ("is");
+    return invoke ("is");
   }
 
   @Nonnull
@@ -516,25 +525,25 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JQueryInvocation keydown ()
   {
-    return _invoke ("keydown");
+    return invoke ("keydown");
   }
 
   @Nonnull
   public JQueryInvocation keypress ()
   {
-    return _invoke ("keypress");
+    return invoke ("keypress");
   }
 
   @Nonnull
   public JQueryInvocation keyup ()
   {
-    return _invoke ("keyup");
+    return invoke ("keyup");
   }
 
   @Nonnull
   public JQueryInvocation last ()
   {
-    return _invoke ("last");
+    return invoke ("last");
   }
 
   @Nonnull
@@ -546,439 +555,439 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JQueryInvocation live ()
   {
-    return _invoke ("live");
+    return invoke ("live");
   }
 
   @Nonnull
   public JQueryInvocation load ()
   {
-    return _invoke ("load");
+    return invoke ("load");
   }
 
   @Nonnull
   public JQueryInvocation map ()
   {
-    return _invoke ("map");
+    return invoke ("map");
   }
 
   @Nonnull
   public JQueryInvocation mousedown ()
   {
-    return _invoke ("mousedown");
+    return invoke ("mousedown");
   }
 
   @Nonnull
   public JQueryInvocation mouseenter ()
   {
-    return _invoke ("mouseenter");
+    return invoke ("mouseenter");
   }
 
   @Nonnull
   public JQueryInvocation mouseleave ()
   {
-    return _invoke ("mouseleave");
+    return invoke ("mouseleave");
   }
 
   @Nonnull
   public JQueryInvocation mousemove ()
   {
-    return _invoke ("mousemove");
+    return invoke ("mousemove");
   }
 
   @Nonnull
   public JQueryInvocation mouseout ()
   {
-    return _invoke ("mouseout");
+    return invoke ("mouseout");
   }
 
   @Nonnull
   public JQueryInvocation mouseover ()
   {
-    return _invoke ("mouseover");
+    return invoke ("mouseover");
   }
 
   @Nonnull
   public JQueryInvocation mouseup ()
   {
-    return _invoke ("mouseup");
+    return invoke ("mouseup");
   }
 
   @Nonnull
   public JQueryInvocation next ()
   {
-    return _invoke ("next");
+    return invoke ("next");
   }
 
   @Nonnull
   public JQueryInvocation nextAll ()
   {
-    return _invoke ("nextAll");
+    return invoke ("nextAll");
   }
 
   @Nonnull
   public JQueryInvocation nextUntil ()
   {
-    return _invoke ("nextUntil");
+    return invoke ("nextUntil");
   }
 
   @Nonnull
   public JQueryInvocation not ()
   {
-    return _invoke ("not");
+    return invoke ("not");
   }
 
   @Nonnull
   public JQueryInvocation off ()
   {
-    return _invoke ("off");
+    return invoke ("off");
   }
 
   @Nonnull
   public JQueryInvocation offset ()
   {
-    return _invoke ("offset");
+    return invoke ("offset");
   }
 
   @Nonnull
   public JQueryInvocation offsetParent ()
   {
-    return _invoke ("offsetParent");
+    return invoke ("offsetParent");
   }
 
   @Nonnull
   public JQueryInvocation on ()
   {
-    return _invoke ("on");
+    return invoke ("on");
   }
 
   @Nonnull
   public JQueryInvocation one ()
   {
-    return _invoke ("one");
+    return invoke ("one");
   }
 
   @Nonnull
   public JQueryInvocation outerHeight ()
   {
-    return _invoke ("outerHeight");
+    return invoke ("outerHeight");
   }
 
   @Nonnull
   public JQueryInvocation outerWidth ()
   {
-    return _invoke ("outerWidth");
+    return invoke ("outerWidth");
   }
 
   @Nonnull
   public JQueryInvocation parent ()
   {
-    return _invoke ("parent");
+    return invoke ("parent");
   }
 
   @Nonnull
   public JQueryInvocation parents ()
   {
-    return _invoke ("parents");
+    return invoke ("parents");
   }
 
   @Nonnull
   public JQueryInvocation parentsUntil ()
   {
-    return _invoke ("parentsUntil");
+    return invoke ("parentsUntil");
   }
 
   @Nonnull
   public JQueryInvocation position ()
   {
-    return _invoke ("position");
+    return invoke ("position");
   }
 
   @Nonnull
   public JQueryInvocation prepend ()
   {
-    return _invoke ("prepend");
+    return invoke ("prepend");
   }
 
   @Nonnull
   public JQueryInvocation prependTo ()
   {
-    return _invoke ("prependTo");
+    return invoke ("prependTo");
   }
 
   @Nonnull
   public JQueryInvocation prev ()
   {
-    return _invoke ("prev");
+    return invoke ("prev");
   }
 
   @Nonnull
   public JQueryInvocation prevAll ()
   {
-    return _invoke ("prevAll");
+    return invoke ("prevAll");
   }
 
   @Nonnull
   public JQueryInvocation prevUntil ()
   {
-    return _invoke ("prevUntil");
+    return invoke ("prevUntil");
   }
 
   @Nonnull
   public JQueryInvocation promise ()
   {
-    return _invoke ("promise");
+    return invoke ("promise");
   }
 
   @Nonnull
   public JQueryInvocation prop ()
   {
-    return _invoke ("prop");
+    return invoke ("prop");
   }
 
   @Nonnull
   public JQueryInvocation pushStack ()
   {
-    return _invoke ("pushStack");
+    return invoke ("pushStack");
   }
 
   @Nonnull
   public JQueryInvocation queue ()
   {
-    return _invoke ("queue");
+    return invoke ("queue");
   }
 
   @Nonnull
   public JQueryInvocation ready ()
   {
-    return _invoke ("ready");
+    return invoke ("ready");
   }
 
   @Nonnull
   public JQueryInvocation remove ()
   {
-    return _invoke ("remove");
+    return invoke ("remove");
   }
 
   @Nonnull
   public JQueryInvocation removeAttr ()
   {
-    return _invoke ("removeAttr");
+    return invoke ("removeAttr");
   }
 
   @Nonnull
   public JQueryInvocation removeClass ()
   {
-    return _invoke ("removeClass");
+    return invoke ("removeClass");
   }
 
   @Nonnull
   public JQueryInvocation removeData ()
   {
-    return _invoke ("removeData");
+    return invoke ("removeData");
   }
 
   @Nonnull
   public JQueryInvocation removeProp ()
   {
-    return _invoke ("removeProp");
+    return invoke ("removeProp");
   }
 
   @Nonnull
   public JQueryInvocation replaceAll ()
   {
-    return _invoke ("replaceAll");
+    return invoke ("replaceAll");
   }
 
   @Nonnull
   public JQueryInvocation replaceWith ()
   {
-    return _invoke ("replaceWith");
+    return invoke ("replaceWith");
   }
 
   @Nonnull
   public JQueryInvocation resize ()
   {
-    return _invoke ("resize");
+    return invoke ("resize");
   }
 
   @Nonnull
   public JQueryInvocation scroll ()
   {
-    return _invoke ("scroll");
+    return invoke ("scroll");
   }
 
   @Nonnull
   public JQueryInvocation scrollLeft ()
   {
-    return _invoke ("scrollLeft");
+    return invoke ("scrollLeft");
   }
 
   @Nonnull
   public JQueryInvocation scrollTop ()
   {
-    return _invoke ("scrollTop");
+    return invoke ("scrollTop");
   }
 
   @Nonnull
   public JQueryInvocation select ()
   {
-    return _invoke ("select");
+    return invoke ("select");
   }
 
   @Nonnull
   public JQueryInvocation serialize ()
   {
-    return _invoke ("serialize");
+    return invoke ("serialize");
   }
 
   @Nonnull
   public JQueryInvocation serializeArray ()
   {
-    return _invoke ("serializeArray");
+    return invoke ("serializeArray");
   }
 
   @Nonnull
   public JQueryInvocation show ()
   {
-    return _invoke ("show");
+    return invoke ("show");
   }
 
   @Nonnull
   public JQueryInvocation siblings ()
   {
-    return _invoke ("siblings");
+    return invoke ("siblings");
   }
 
   @Nonnull
   public JQueryInvocation size ()
   {
-    return _invoke ("size");
+    return invoke ("size");
   }
 
   @Nonnull
   public JQueryInvocation slice ()
   {
-    return _invoke ("slice");
+    return invoke ("slice");
   }
 
   @Nonnull
   public JQueryInvocation slideDown ()
   {
-    return _invoke ("slideDown");
+    return invoke ("slideDown");
   }
 
   @Nonnull
   public JQueryInvocation slideToggle ()
   {
-    return _invoke ("slideToggle");
+    return invoke ("slideToggle");
   }
 
   @Nonnull
   public JQueryInvocation slideUp ()
   {
-    return _invoke ("slideUp");
+    return invoke ("slideUp");
   }
 
   @Nonnull
   public JQueryInvocation stop ()
   {
-    return _invoke ("stop");
+    return invoke ("stop");
   }
 
   @Nonnull
   public JQueryInvocation submit ()
   {
-    return _invoke ("submit");
+    return invoke ("submit");
   }
 
   @Nonnull
   public JQueryInvocation text ()
   {
-    return _invoke ("text");
+    return invoke ("text");
   }
 
   @Nonnull
   public JQueryInvocation toArray ()
   {
-    return _invoke ("toArray");
+    return invoke ("toArray");
   }
 
   @Nonnull
   public JQueryInvocation toggle ()
   {
-    return _invoke ("toggle");
+    return invoke ("toggle");
   }
 
   @Nonnull
   public JQueryInvocation toggleClass ()
   {
-    return _invoke ("toggleClass");
+    return invoke ("toggleClass");
   }
 
   @Nonnull
   public JQueryInvocation trigger ()
   {
-    return _invoke ("trigger");
+    return invoke ("trigger");
   }
 
   @Nonnull
   public JQueryInvocation triggerHandler ()
   {
-    return _invoke ("triggerHandler");
+    return invoke ("triggerHandler");
   }
 
   @Nonnull
   public JQueryInvocation unbind ()
   {
-    return _invoke ("unbind");
+    return invoke ("unbind");
   }
 
   @Nonnull
   public JQueryInvocation undelegate ()
   {
-    return _invoke ("undelegate");
+    return invoke ("undelegate");
   }
 
   @Nonnull
   public JQueryInvocation unload ()
   {
-    return _invoke ("unload");
+    return invoke ("unload");
   }
 
   @Nonnull
   public JQueryInvocation unwrap ()
   {
-    return _invoke ("unwrap");
+    return invoke ("unwrap");
   }
 
   @Nonnull
   public JQueryInvocation val ()
   {
-    return _invoke ("val");
+    return invoke ("val");
   }
 
   @Nonnull
   public JQueryInvocation width ()
   {
-    return _invoke ("width");
+    return invoke ("width");
   }
 
   @Nonnull
   public JQueryInvocation wrap ()
   {
-    return _invoke ("wrap");
+    return invoke ("wrap");
   }
 
   @Nonnull
   public JQueryInvocation wrapAll ()
   {
-    return _invoke ("wrapAll");
+    return invoke ("wrapAll");
   }
 
   @Nonnull
   public JQueryInvocation wrapInner ()
   {
-    return _invoke ("wrapInner");
+    return invoke ("wrapInner");
   }
 
   // Custom provided methods
@@ -986,25 +995,25 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JQueryInvocation enable ()
   {
-    return _invoke ("enable");
+    return invoke ("enable");
   }
 
   @Nonnull
   public JQueryInvocation disable ()
   {
-    return _invoke ("disable");
+    return invoke ("disable");
   }
 
   @Nonnull
   public JQueryInvocation check ()
   {
-    return _invoke ("check");
+    return invoke ("check");
   }
 
   @Nonnull
   public JQueryInvocation uncheck ()
   {
-    return _invoke ("uncheck");
+    return invoke ("uncheck");
   }
 
   public void state (@Nonnull final JSFormatter f)

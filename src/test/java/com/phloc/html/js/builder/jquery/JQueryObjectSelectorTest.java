@@ -39,7 +39,7 @@ public final class JQueryObjectSelectorTest
     assertEquals (".basic", new JQueryObjectSelector ().addClass (DefaultCSSClassProvider.create ("basic"))
                                                        .getAsString ());
     assertEquals ("td", new JQueryObjectSelector ().addElement ("td").getAsString ());
-    assertEquals ("td:gt(3)", new JQueryObjectSelector ().addElement ("td", JQuerySelector.gt (3)).getAsString ());
-    assertEquals ("td:checked", new JQueryObjectSelector ().addElement ("td", JQuerySelector.checked).getAsString ());
+    assertEquals ("td:gt(3)", new JQueryObjectSelector ().addElementWithSelector ("td", JQuerySelector.gt (3)).getAsString ());
+    assertEquals ("td:checked", new JQueryObjectSelector ().addElementWithSelector ("td", JQuerySelector.checked).getAsString ());
   }
 }
