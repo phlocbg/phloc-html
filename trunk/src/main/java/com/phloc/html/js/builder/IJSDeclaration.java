@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public interface IJSDeclaration
+public interface IJSDeclaration extends IJSBuilderCodeProvider
 {
   String name ();
 

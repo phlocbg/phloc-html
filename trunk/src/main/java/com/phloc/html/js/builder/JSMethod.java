@@ -203,4 +203,10 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     }
     f.plain (')').stmt (body ());
   }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
 }

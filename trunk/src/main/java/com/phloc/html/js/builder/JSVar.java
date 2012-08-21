@@ -47,6 +47,19 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   /**
    * Constructor
    * 
+   * @param name
+   *        Name of this variable
+   * @param init
+   *        Value to initialize this variable to
+   */
+  public JSVar (@Nonnull final String name, @Nullable final IJSExpression init)
+  {
+    this (null, name, init);
+  }
+
+  /**
+   * Constructor
+   * 
    * @param type
    *        Datatype of this variable
    * @param name
@@ -142,5 +155,11 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sName);
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString ((IJSDeclaration) this);
   }
 }
