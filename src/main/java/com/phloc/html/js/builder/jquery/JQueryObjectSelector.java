@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
@@ -54,9 +55,16 @@ public class JQueryObjectSelector implements IJQueryObjectSelector
   @Nonnull
   public JQueryObjectSelector addElement (@Nonnull @Nonempty final String sElementName)
   {
+    return addElement (sElementName, null);
+  }
+
+  @Nonnull
+  public JQueryObjectSelector addElement (@Nonnull @Nonempty final String sElementName,
+                                          @Nullable final IJQuerySelector aSelector)
+  {
     if (StringHelper.hasNoText (sElementName))
       throw new IllegalArgumentException ("elementName");
-    m_aElements.add (sElementName);
+    m_aElements.add (sElementName + (aSelector == null ? "" : aSelector.getAsString ()));
     return this;
   }
 

@@ -17,24 +17,14 @@
  */
 package com.phloc.html.js.builder.jquery;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.phloc.commons.IHasStringRepresentation;
-import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.css.ICSSClassProvider;
 
-public interface IJQueryObjectSelector extends IHasStringRepresentation
+/**
+ * A single jQuery selector
+ * 
+ * @author philip
+ */
+public interface IJQuerySelector extends IHasStringRepresentation
 {
-  @Nonnull
-  IJQueryObjectSelector addID (@Nonnull @Nonempty String sID);
-
-  @Nonnull
-  IJQueryObjectSelector addClass (@Nonnull ICSSClassProvider aCSSClass);
-
-  @Nonnull
-  IJQueryObjectSelector addElement (@Nonnull @Nonempty String sElementName);
-
-  @Nonnull
-  IJQueryObjectSelector addElement (@Nonnull @Nonempty String sElementName, @Nullable IJQuerySelector aSelector);
+  /* empty */
 }

@@ -21,8 +21,11 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.html.js.builder.IJSExpression;
+import com.phloc.html.js.builder.JSExpr;
+import com.phloc.html.js.builder.JSPrinter;
 
-public class JQuerySelector
+public class JQuerySelector implements IJQuerySelector
 {
   public static final JQuerySelector animated = new JQuerySelector ("animated");
   public static final JQuerySelector button = new JQuerySelector ("button");
@@ -54,12 +57,97 @@ public class JQuerySelector
   public static final JQuerySelector visible = new JQuerySelector ("visible");
 
   private final String m_sSelector;
+  private final IJSExpression m_aExpr;
 
   private JQuerySelector (@Nonnull @Nonempty final String sSelectorName)
   {
     if (StringHelper.hasNoText (sSelectorName))
       throw new IllegalArgumentException ("selectorName");
     m_sSelector = ':' + sSelectorName;
+    m_aExpr = null;
   }
 
+  private JQuerySelector (@Nonnull @Nonempty final String sSelectorName, @Nonnull final IJSExpression aExpr)
+  {
+    if (StringHelper.hasNoText (sSelectorName))
+      throw new IllegalArgumentException ("selectorName");
+    if (aExpr == null)
+      throw new NullPointerException ("expr");
+    m_sSelector = ':' + sSelectorName;
+    m_aExpr = aExpr;
+  }
+
+  @Nonnull
+  public static JQuerySelector contains (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("contains", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector eq (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("eq", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector gt (final int v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static JQuerySelector gt (final long v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static JQuerySelector gt (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("gt", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector has (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("has", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector lt (final int v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static JQuerySelector lt (final long v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public static JQuerySelector lt (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("lt", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector not (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("not", aExpr);
+  }
+
+  @Nonnull
+  public static JQuerySelector nth_child (@Nonnull final IJSExpression aExpr)
+  {
+    return new JQuerySelector ("nth-child", aExpr);
+  }
+
+  @Nonnull
+  public String getAsString ()
+  {
+    if (m_aExpr == null)
+      return m_sSelector;
+    return m_sSelector + '(' + JSPrinter.getAsString (m_aExpr) + ')';
+  }
 }
