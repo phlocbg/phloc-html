@@ -31,7 +31,6 @@ import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
-import com.phloc.html.js.builder.JSPackage;
 
 /**
  * Wrapper around jQuery to allow for easy function calls
@@ -52,7 +51,7 @@ public class JQuery
   @Nonnull
   public static JSFunction jQueryFunction ()
   {
-    return JSPackage.functionRef ("$");
+    return new JSFunction ("$");
   }
 
   @Nonnull

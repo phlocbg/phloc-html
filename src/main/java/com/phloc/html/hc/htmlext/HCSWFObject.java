@@ -34,7 +34,6 @@ import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.builder.JSAssocArray;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSInvocation;
-import com.phloc.html.js.builder.JSPackage;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -300,12 +299,13 @@ public class HCSWFObject extends AbstractWrappedHCNode
         jsAttributes.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
     // Call embedder
-    final JSInvocation aInvocation = JSPackage.invokeRef ("swfobject.embedSWF")
-                                              .arg (m_aSWFURL.getAsString ())
-                                              .arg (m_sHTMLContainerID)
-                                              .arg (m_sWidth)
-                                              .arg (m_sHeight)
-                                              .arg (m_sRequiredSWFVersion);
+    final JSInvocation aInvocation = JSExpr.ref ("swfobject")
+                                           .invoke ("embedSWF")
+                                           .arg (m_aSWFURL.getAsString ())
+                                           .arg (m_sHTMLContainerID)
+                                           .arg (m_sWidth)
+                                           .arg (m_sHeight)
+                                           .arg (m_sRequiredSWFVersion);
     // only supported by Flash Player 6.0.65; m_nWidth >= 310 && m_nHeight >=
     // 147;
     if (m_aExpressInstallSWFURL != null)
