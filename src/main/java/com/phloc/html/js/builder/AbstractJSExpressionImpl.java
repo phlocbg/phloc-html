@@ -357,6 +357,22 @@ public abstract class AbstractJSExpressionImpl implements IJSExpression
   }
 
   @Nonnull
+  public final IJSExpression isUndefined ()
+  {
+    if (this instanceof JSArrayCompRef)
+      return eeq (JSExpr.UNDEFINED);
+    return typeof ().eeq (JSExpr.UNDEFINED);
+  }
+
+  @Nonnull
+  public final IJSExpression isNotUndefined ()
+  {
+    if (this instanceof JSArrayCompRef)
+      return ene (JSExpr.UNDEFINED);
+    return typeof ().ene (JSExpr.UNDEFINED);
+  }
+
+  @Nonnull
   public final JSInvocation invoke (@Nonnull final JSMethod method)
   {
     return JSExpr.invoke (this, method);

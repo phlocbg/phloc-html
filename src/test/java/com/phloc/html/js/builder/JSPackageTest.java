@@ -176,7 +176,7 @@ public final class JSPackageTest
       {
         final JSAnonymousFunction fEDEach = JSExpr.anonymousFunction ();
         fEDEach.body ()
-               ._if (JSExpr.refThis ("disabled").typeof ().ene (JSExpr.UNDEFINED))
+               ._if (JSExpr.refThis ("disabled").isNotUndefined ())
                ._then ()
                .assign (JSExpr.refThis ("disabled"), aDisabled);
         fED.body ()._return (JSExpr.invokeThis ("each").arg (fEDEach));

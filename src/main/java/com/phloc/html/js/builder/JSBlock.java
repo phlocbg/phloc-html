@@ -428,9 +428,7 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   @Nonnull
   public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull @Nonempty final String method)
   {
-    final JSInvocation i = new JSInvocation (expr, method);
-    _insert (i);
-    return i;
+    return _insert (new JSInvocation (expr, method));
   }
 
   /**
@@ -518,9 +516,10 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * @return This block
    */
   @Nonnull
-  @Deprecated
   public JSBlock add (@Nonnull final IJSStatement s)
-  { // ## Needed?
+  {
+    if (s == null)
+      throw new NullPointerException ("statement");
     _insert (s);
     return this;
   }
@@ -529,11 +528,11 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
    * Create an If statement and add it to this block
    * 
    * @param expr
-   *        JExpression to be tested to determine branching
+   *        {@link IJSExpression} to be tested to determine branching
    * @return Newly generated conditional statement
    */
   @Nonnull
-  public JSConditional _if (final IJSExpression expr)
+  public JSConditional _if (@Nonnull final IJSExpression expr)
   {
     return _insert (new JSConditional (expr));
   }
@@ -550,7 +549,9 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   }
 
   @Nonnull
-  public JSForIn forIn (final AbstractJSType varType, final String name, final IJSExpression collection)
+  public JSForIn forIn (@Nullable final AbstractJSType varType,
+                        @Nonnull final String name,
+                        @Nonnull final IJSExpression collection)
   {
     return _insert (new JSForIn (varType, name, collection));
   }

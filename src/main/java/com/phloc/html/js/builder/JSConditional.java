@@ -50,6 +50,8 @@ public class JSConditional implements IJSStatement
    */
   JSConditional (@Nonnull final IJSExpression test)
   {
+    if (test == null)
+      throw new NullPointerException ("test");
     m_aTest = test;
   }
 
@@ -100,13 +102,9 @@ public class JSConditional implements IJSStatement
     }
 
     if (JSOp.hasTopOp (m_aTest))
-    {
-      f.plain ("if ").generatable (m_aTest);
-    }
+      f.plain ("if").generatable (m_aTest);
     else
-    {
-      f.plain ("if (").generatable (m_aTest).plain (')');
-    }
+      f.plain ("if(").generatable (m_aTest).plain (')');
     f.generatable (m_aThen);
     if (m_aElse != null)
       f.plain ("else").generatable (m_aElse);

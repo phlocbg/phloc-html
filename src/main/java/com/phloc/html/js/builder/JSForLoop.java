@@ -39,24 +39,45 @@ public class JSForLoop implements IJSStatement
   {}
 
   @Nonnull
-  public JSVar init (@Nullable final AbstractJSType type, final String var, final IJSExpression e)
+  public JSVar init (@Nonnull final String var, final int v)
   {
+    return init (var, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSVar init (@Nonnull final String var, final long v)
+  {
+    return init (var, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSVar init (@Nonnull final String var, @Nonnull final IJSExpression e)
+  {
+    return init (null, var, e);
+  }
+
+  @Nonnull
+  public JSVar init (@Nullable final AbstractJSType type, @Nonnull final String var, @Nonnull final IJSExpression e)
+  {
+    if (e == null)
+      throw new NullPointerException ("initExpression");
+
     final JSVar v = new JSVar (type, var, e);
     m_aInits.add (v);
     return v;
   }
 
-  public void init (final JSVar v, final IJSExpression e)
+  public void init (@Nonnull final JSVar v, @Nonnull final IJSExpression e)
   {
     m_aInits.add (JSExpr.assign (v, e));
   }
 
-  public void test (final IJSExpression e)
+  public void test (@Nonnull final IJSExpression e)
   {
     m_aTest = e;
   }
 
-  public void update (final IJSExpression e)
+  public void update (@Nonnull final IJSExpression e)
   {
     m_aUpdates.add (e);
   }
@@ -71,17 +92,18 @@ public class JSForLoop implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.plain ("for (");
+    f.plain ("for(");
     boolean first = true;
     for (final Object o : m_aInits)
     {
-      if (!first)
+      if (first)
+        first = false;
+      else
         f.plain (',');
       if (o instanceof JSVar)
-        f.var ((JSVar) o);
+        f.plain ("var ").var ((JSVar) o);
       else
         f.generatable ((IJSExpression) o);
-      first = false;
     }
     f.plain (';').generatable (m_aTest).plain (';').generatable (m_aUpdates).plain (')');
     if (m_aBody != null)
