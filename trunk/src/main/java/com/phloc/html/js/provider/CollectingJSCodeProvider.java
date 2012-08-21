@@ -140,6 +140,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   }
 
   @Nonnull
+  @Deprecated
   public final CollectingJSCodeProvider appendSemicolon ()
   {
     // If there is nothing to append to - don't append it :)
