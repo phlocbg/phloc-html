@@ -35,6 +35,8 @@ import com.phloc.commons.string.StringHelper;
  */
 public class JSFormatter implements Closeable
 {
+  public static final String DEFAULT_INDENT = "  ";
+
   /**
    * Current number of indentation strings to print
    */
@@ -65,7 +67,7 @@ public class JSFormatter implements Closeable
    */
   public JSFormatter (final PrintWriter s)
   {
-    this (s, "  ");
+    this (s, DEFAULT_INDENT);
   }
 
   /**
@@ -80,16 +82,6 @@ public class JSFormatter implements Closeable
   {
     m_aPW = s;
     m_sIndentSpace = space;
-  }
-
-  private void _spaceIfNeeded ()
-  {
-    if (m_bAtBeginningOfLine)
-    {
-      if (m_nIndentLevel > 0)
-        m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
-      m_bAtBeginningOfLine = false;
-    }
   }
 
   /**
@@ -120,6 +112,16 @@ public class JSFormatter implements Closeable
     return this;
   }
 
+  private void _spaceIfNeeded ()
+  {
+    if (m_bAtBeginningOfLine)
+    {
+      if (m_nIndentLevel > 0)
+        m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
+      m_bAtBeginningOfLine = false;
+    }
+  }
+
   /**
    * Print a char into the stream
    * 
@@ -135,10 +137,10 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Print a String into the stream
+   * Print a {@link String} into the stream
    * 
    * @param s
-   *        the String
+   *        the {@link String}
    */
   @Nonnull
   public JSFormatter plain (@Nonnull final String s)
@@ -150,9 +152,9 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a type name.
-   * <p>
-   * In the collecting mode we use this information to decide what types to
-   * import and what not to.
+   * 
+   * @param type
+   *        The type whos name is to be printed
    */
   @Nonnull
   public JSFormatter type (@Nonnull final AbstractJSType type)
@@ -173,15 +175,15 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Cause the JGenerable object to generate source for itself
+   * Cause the {@link IJSGeneratable} object to generate source for itself
    * 
-   * @param g
-   *        the JGenerable object
+   * @param aGeneratable
+   *        the {@link IJSGeneratable} object
    */
   @Nonnull
-  public JSFormatter generatable (@Nonnull final IJSGeneratable g)
+  public JSFormatter generatable (@Nonnull final IJSGeneratable aGeneratable)
   {
-    g.generate (this);
+    aGeneratable.generate (this);
     return this;
   }
 
@@ -204,41 +206,41 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Cause the JDeclaration to generate source for itself
+   * Cause the {@link IJSDeclaration} to generate source for itself
    * 
-   * @param d
-   *        the JDeclaration object
+   * @param aDeclaration
+   *        the {@link IJSDeclaration} object
    */
   @Nonnull
-  public JSFormatter decl (@Nonnull final IJSDeclaration d)
+  public JSFormatter decl (@Nonnull final IJSDeclaration aDeclaration)
   {
-    d.declare (this);
+    aDeclaration.declare (this);
     return this;
   }
 
   /**
-   * Cause the JStatement to generate source for itself
+   * Cause the {@link IJSStatement} to generate source for itself
    * 
-   * @param s
-   *        the JStatement object
+   * @param aStatement
+   *        the {@link IJSStatement} object
    */
   @Nonnull
-  public JSFormatter stmt (@Nonnull final IJSStatement s)
+  public JSFormatter stmt (@Nonnull final IJSStatement aStatement)
   {
-    s.state (this);
+    aStatement.state (this);
     return this;
   }
 
   /**
-   * Cause the JVar to generate source for itself
+   * Cause the {@link JSVar} to generate source for itself
    * 
-   * @param v
-   *        the JVar object
+   * @param aVar
+   *        the {@link JSVar} object
    */
   @Nonnull
-  public JSFormatter var (@Nonnull final JSVar v)
+  public JSFormatter var (@Nonnull final JSVar aVar)
   {
-    v.bind (this);
+    aVar.bind (this);
     return this;
   }
 }

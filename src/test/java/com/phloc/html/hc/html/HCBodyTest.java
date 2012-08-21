@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.EJSEvent;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
+import com.phloc.html.js.builder.JSExpr;
 
 public final class HCBodyTest
 {
@@ -34,15 +34,13 @@ public final class HCBodyTest
     assertEquals ("<body></body>", HCSettings.getAsHTMLString (aBody, false));
 
     // With semicolon at the end
-    aBody.addEventHandler (EJSEvent.ONLOAD, DefaultJSCodeProvider.create ("onLoad ();"));
+    aBody.addEventHandler (EJSEvent.ONLOAD, JSExpr.invoke ("onLoad"));
     // Empty event handler - ignored
-    aBody.addEventHandler (EJSEvent.ONMOUSEDOWN, DefaultJSCodeProvider.create (""));
+    aBody.addEventHandler (EJSEvent.ONMOUSEDOWN, null);
     // With prefix
-    aBody.setEventHandler (EJSEvent.ONCLICK, DefaultJSCodeProvider.create (" javascript: onClick ()"));
-    // Empty event handler - ignored
-    aBody.addEventHandler (EJSEvent.ONKEYDOWN, DefaultJSCodeProvider.create ("    "));
+    aBody.setEventHandler (EJSEvent.ONCLICK, JSExpr.invoke ("onClick"));
     aBody.setCustomAttr ("bla", "foo");
-    assertEquals ("<body onload=\"javascript:onLoad ();\" onclick=\"javascript:onClick ();\" bla=\"foo\"></body>",
+    assertEquals ("<body onload=\"javascript:onLoad();\" onclick=\"javascript:onClick();\" bla=\"foo\"></body>",
                   HCSettings.getAsHTMLString (aBody, false));
   }
 }

@@ -39,6 +39,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSGeneratable;
 import com.phloc.json.IJSON;
 
 /**
@@ -306,7 +307,10 @@ public final class JSMarshaller
           if (aObject instanceof IJSCodeProvider)
             aSB.append (((IJSCodeProvider) aObject).getJSCode ());
           else
-            aSB.append ((String) aObject);
+            if (aObject instanceof IJSGeneratable)
+              aSB.append (((IJSCodeProvider) aObject).getJSCode ());
+            else
+              aSB.append ((String) aObject);
           break;
         case JSON:
           aSB.append (((IJSON) aObject).getJSONString ());

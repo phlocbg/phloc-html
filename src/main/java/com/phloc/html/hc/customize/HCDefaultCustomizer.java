@@ -42,8 +42,8 @@ import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.jquery.JQuery;
-import com.phloc.html.js.provider.JSCodeWrapper;
 
 /**
  * A helper class that centrally adds all non-common customizations
@@ -68,7 +68,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
   // For buttons
   private static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
 
-  private static final IJSCodeProvider JS_BLUR = JSCodeWrapper.getFunctionCall ("blur");
+  private static final IJSCodeProvider JS_BLUR = JSExpr.invoke ("blur");
 
   public HCDefaultCustomizer ()
   {}

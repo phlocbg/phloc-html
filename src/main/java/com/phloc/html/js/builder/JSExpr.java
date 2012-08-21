@@ -211,24 +211,7 @@ public final class JSExpr
 
   public static final IJSExpression THIS = new JSAtom ("this");
 
-  /**
-   * Returns a reference to "this", an implicit reference to the current object.
-   */
-  @Nonnull
-  public static IJSExpression _this ()
-  {
-    return THIS;
-  }
-
-  /* -- Literals -- */
-
   public static final IJSExpression NULL = new JSAtom ("null");
-
-  @Nonnull
-  public static IJSExpression _null ()
-  {
-    return NULL;
-  }
 
   /**
    * Boolean constant that represents <code>true</code>

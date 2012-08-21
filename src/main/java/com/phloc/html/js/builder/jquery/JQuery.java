@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.JSPackage;
 
@@ -46,5 +47,13 @@ public class JQuery
     if (StringHelper.hasNoText (sID))
       throw new IllegalArgumentException ("ID");
     return new JQueryInvocation (jQuery ().invoke ().arg ('#' + sID));
+  }
+
+  @Nonnull
+  public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    if (aCSSClass == null)
+      throw new NullPointerException ("cssClass");
+    return new JQueryInvocation (jQuery ().invoke ().arg ('.' + aCSSClass.getCSSClass ()));
   }
 }

@@ -37,7 +37,7 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.file.SimpleFileIO;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.html.js.provider.CJSCode;
+import com.phloc.html.js.builder.JSExpr;
 
 /**
  * JUnit test for class {@link JSMarshaller}.
@@ -175,7 +175,7 @@ public final class JSMarshallerTest
 
     // Special values
     assertEquals ("null", JSMarshaller.objectToJSString (null));
-    assertEquals ("this", JSMarshaller.objectToJSString (CJSCode.JS_THIS));
+    assertEquals ("i=17;\n", JSMarshaller.objectToJSString (JSExpr.ref ("i").assign (17)));
 
     // Strings
     assertEquals ("'abc'", JSMarshaller.objectToJSString ("abc"));

@@ -26,6 +26,7 @@ import org.junit.Test;
  * 
  * @author philip
  */
+@Deprecated
 public final class JSCodeWrapperTest
 {
   @Test
