@@ -23,8 +23,10 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * JS function
@@ -64,8 +66,10 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @param name
    *        Name of this function
    */
-  JSFunction (@Nullable final AbstractJSType aType, @Nonnull final String name)
+  JSFunction (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
   {
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Name must a valid identifier!");
     m_aType = aType;
     m_sName = name;
   }
@@ -82,9 +86,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Overrides the return type.
    */
-  public void type (@Nullable final AbstractJSType t)
+  @Nonnull
+  public JSFunction type (@Nullable final AbstractJSType t)
   {
     m_aType = t;
+    return this;
   }
 
   @Nonnull
@@ -96,9 +102,13 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Changes the name of the function.
    */
-  public void name (@Nonnull final String n)
+  @Nonnull
+  public JSFunction name (@Nonnull final String name)
   {
-    m_sName = n;
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Name must a valid identifier!");
+    m_sName = name;
+    return this;
   }
 
   /**
@@ -159,9 +169,9 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   }
 
   /**
-   * Creates, if necessary, and returns the class javadoc for this JDefinedClass
+   * Creates, if necessary, and returns the class JSDocs for this function
    * 
-   * @return {@link JSCommentMultiLine} containing javadocs for this class
+   * @return {@link JSCommentMultiLine} containing JSDocs for this class
    */
   @Nonnull
   public JSCommentMultiLine jsDoc ()
@@ -186,7 +196,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     f.plain ("function ");
     if (m_aType != null)
       f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.id (m_sName).plain ('(');
+    f.plain (m_sName).plain ('(');
     boolean first = true;
     for (final JSVar aParam : m_aParams)
     {

@@ -191,7 +191,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (m_aType != null)
       f.plain ("/* ").generatable (m_aType).plain (" */");
 
-    f.id (m_sName).plain ('(');
+    f.plain (m_sName).plain ('(');
     boolean first = true;
     for (final JSVar var : m_aParams)
     {

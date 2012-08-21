@@ -17,20 +17,19 @@
  */
 package com.phloc.html.js.builder;
 
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.io.streams.NonBlockingStringWriter;
-import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.commons.state.EChange;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -101,11 +100,23 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
    *            When the specified function was already created.
    */
   @Nonnull
-  public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name) throws JSNameAlreadyExistsException
   {
     final JSFunction c = new JSFunction (aType, name);
     _add (c);
     return c;
+  }
+
+  @Nonnull
+  public static JSFunction functionRef (@Nonnull @Nonempty final String name)
+  {
+    return functionRef (null, name);
+  }
+
+  @Nonnull
+  public static JSFunction functionRef (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
+  {
+    return new JSFunction (aType, name);
   }
 
   @Nonnull
@@ -204,6 +215,12 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     return getDeclaration (declLocalName) != null;
   }
 
+  @Nonnegative
+  public int memberCount ()
+  {
+    return m_aObjs.size ();
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public List <Object> members ()
@@ -211,33 +228,9 @@ public final class JSPackage implements IJSFunctionContainer, IJSCodeProvider
     return ContainerHelper.newList (m_aObjs);
   }
 
-  public void writePackage (@Nonnull final Writer w)
-  {
-    // Write a file
-    final JSFormatter f = new JSFormatter (w);
-    try
-    {
-      // for all declarations in the current package
-      for (final Object aObj : members ())
-        if (aObj instanceof IJSDeclaration)
-          f.decl ((IJSDeclaration) aObj);
-        else
-          f.stmt ((IJSStatement) aObj);
-    }
-    finally
-    {
-      StreamUtils.close (f);
-    }
-  }
-
   @Nullable
   public String getJSCode ()
   {
-    if (m_aObjs.isEmpty ())
-      return null;
-
-    final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
-    writePackage (aSW);
-    return aSW.getAsString ();
+    return JSPrinter.getAsString (this);
   }
 }

@@ -26,14 +26,15 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.string.StringHelper;
+import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * Object invocation
  * 
  * @author philip
  */
-public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
+public final class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement, IJSCodeProvider
 {
   private boolean m_bIsAnonnymousFunction = false;
   private boolean m_bIsConstructor = false;
@@ -127,20 +128,20 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
 
   private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
-    if (StringHelper.hasNoText (name))
+    if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("name");
-    m_aObject = object;
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("method name contains '.': " + name);
+    m_aObject = object;
     m_sName = name;
   }
 
-  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod method)
+  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod aMethod)
   {
-    if (method == null)
+    if (aMethod == null)
       throw new NullPointerException ("method");
     m_aObject = object;
-    m_aCallee = method;
+    m_aCallee = aMethod;
   }
 
   /**
@@ -284,7 +285,7 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
           if (name != null)
           {
             // E.g. global function
-            f.id (name).plain ('(');
+            f.plain (name).plain ('(');
           }
       }
 
@@ -295,5 +296,11 @@ public final class JSInvocation extends AbstractJSExpressionImpl implements IJSS
   public void state (final JSFormatter f)
   {
     f.generatable (this).plain (';').nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
   }
 }

@@ -20,6 +20,9 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
+
 /**
  * Field Reference
  * 
@@ -43,16 +46,20 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
    */
   private JSVar m_aVar;
 
-  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final String name)
+  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
-    m_aObject = object;
+    if (StringHelper.hasNoText (name))
+      throw new IllegalArgumentException ("name");
     if (name.indexOf ('.') >= 0)
       throw new IllegalArgumentException ("Field name contains '.': " + name);
+    m_aObject = object;
     m_sName = name;
   }
 
   JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final JSVar var)
   {
+    if (var == null)
+      throw new NullPointerException ("var");
     m_aObject = object;
     m_aVar = var;
   }
@@ -66,6 +73,6 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
     if (m_aObject != null)
       f.generatable (m_aObject).plain ('.').plain (name);
     else
-      f.id (name);
+      f.plain (name);
   }
 }
