@@ -20,14 +20,10 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2012-08-22" version="3.4.0-RC1" />
   <entry date="2012-08-17" category="api" action="add">
     <change>
-      <text locale="en">Added new package js.builder with a small DSL to generate JS code on the fly. Based on the com.sun.codemodel 2.6 library</text>
-    </change>
-  </entry>
-  <entry date="2012-08-14" category="api" action="add">
-    <change>
-      <text locale="en">Added new abstract base class AbstractCollectingJSCodeProvider</text>
+      <text locale="en">Added new package js.builder with a DSL to generate structured JS code on the fly. Based on the com.sun.codemodel 2.6 library</text>
     </change>
   </entry>
   <entry date="2012-08-12" category="api" action="add">
