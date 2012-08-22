@@ -31,6 +31,7 @@ import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
+import com.phloc.html.js.builder.html.JSHtml;
 
 /**
  * Wrapper around jQuery to allow for easy function calls
@@ -54,10 +55,13 @@ public class JQuery
     return new JSFunction ("$");
   }
 
+  /**
+   * @return a {@link JQueryInvocation} with an HTML document element
+   */
   @Nonnull
   public static JQueryInvocation document ()
   {
-    return new JQueryInvocation (jQueryFunction ().invoke ().arg (JSExpr.direct ("document")));
+    return new JQueryInvocation (jQueryFunction ().invoke ().arg (JSHtml.document ()));
   }
 
   @Nonnull
