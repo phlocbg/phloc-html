@@ -188,6 +188,12 @@ public class JQuery
   }
 
   @Nonnull
+  public static JQueryInvocation selectorRef (@Nonnull final IJQuerySelector aSelector)
+  {
+    return invoke (new JQueryObjectSelector ().addSelector (aSelector));
+  }
+
+  @Nonnull
   public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
   {
     final JSAnonymousFunction aAnonFunction = JSExpr.anonymousFunction ();
