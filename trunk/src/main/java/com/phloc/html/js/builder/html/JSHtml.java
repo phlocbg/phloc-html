@@ -424,6 +424,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSFieldRef windowParent ()
+  {
+    return window ().ref ("parent");
+  }
+
+  @Nonnull
   public static JSInvocation windowPrint ()
   {
     return window ().invoke ("print");
