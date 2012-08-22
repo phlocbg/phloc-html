@@ -170,6 +170,48 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   }
 
   @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final boolean v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final char v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final double v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final float v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final int v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, final long v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final String v)
+  {
+    return assign (lhs, JSExpr.lit (v));
+  }
+
+  @Nonnull
   public JSAssignment assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
   {
     return addStatement (lhs.assign (rhs));
