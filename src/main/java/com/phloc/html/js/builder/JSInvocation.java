@@ -196,6 +196,19 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   }
 
   /**
+   * Add an expression to this invocation's argument list or "null" if it is
+   * <code>null</code>
+   * 
+   * @param aArgument
+   *        Argument to add to argument list
+   */
+  @Nonnull
+  public JSInvocation argOrNull (@Nullable final IJSExpression aArgument)
+  {
+    return arg (aArgument == null ? JSExpr.NULL : aArgument);
+  }
+
+  /**
    * Add an expression to this invocation's argument list
    * 
    * @param aArgument
