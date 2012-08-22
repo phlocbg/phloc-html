@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public abstract class AbstractJSAssignmentTarget extends AbstractJSExpressionImpl implements IJSAssignmentTarget
+public abstract class AbstractJSAssignmentTarget extends AbstractJSExpression implements IJSAssignmentTarget
 {
   @Nonnull
   public final JSAssignment assign (final boolean v)

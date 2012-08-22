@@ -35,6 +35,26 @@ public final class JSHtml
   private JSHtml ()
   {}
 
+  // --- console ---
+
+  @Nonnull
+  public static JSFieldRef console ()
+  {
+    return JSExpr.ref ("console");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleLog (@Nonnull final String sText)
+  {
+    return consoleLog (JSExpr.lit (sText));
+  }
+
+  @Nonnull
+  public static JSInvocation consoleLog (@Nonnull final IJSExpression aExpr)
+  {
+    return console ().invoke ("log").arg (aExpr);
+  }
+
   // --- document ---
 
   @Nonnull

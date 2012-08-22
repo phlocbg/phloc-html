@@ -27,7 +27,7 @@ import com.phloc.commons.string.StringHelper;
  * 
  * @author philip
  */
-final class JSAtom extends AbstractJSExpressionImpl
+final class JSAtom extends AbstractJSExpression
 {
   private final String m_sAtom;
 

@@ -28,6 +28,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
+import com.phloc.html.js.builder.JSBlock;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
@@ -206,6 +207,23 @@ public class JQuery
   {
     final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
     aPair.getSecond ().body ().add (aStatement);
+    return aPair.getFirst ();
+  }
+
+  /**
+   * Add onDocumentReady call with a list of statements
+   * 
+   * @param aStatements
+   *        The list of statements to be executed on document ready
+   * @return The invocation object
+   */
+  @Nonnull
+  public static JQueryInvocation onDocumentReady (@Nonnull final Iterable <? extends IJSStatement> aStatements)
+  {
+    final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
+    final JSBlock aBody = aPair.getSecond ().body ();
+    for (final IJSStatement aStatement : aStatements)
+      aBody.add (aStatement);
     return aPair.getFirst ();
   }
 }

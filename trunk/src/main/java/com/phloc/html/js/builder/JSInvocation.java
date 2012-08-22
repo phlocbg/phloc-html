@@ -35,7 +35,7 @@ import com.phloc.json.IJSON;
  * 
  * @author philip
  */
-public class JSInvocation extends AbstractJSExpressionImpl implements IJSStatement
+public class JSInvocation extends AbstractJSExpression implements IJSStatement
 {
   private final boolean m_bIsAnonnymousFunction;
   private final boolean m_bIsConstructor;

@@ -45,7 +45,7 @@ public final class JSOp
 
   /* -- Unary operators -- */
 
-  private static final class ParanthesisExpr extends AbstractJSExpressionImpl
+  private static final class ParanthesisExpr extends AbstractJSExpression
   {
     private final IJSExpression m_aExpr;
 
@@ -60,7 +60,7 @@ public final class JSOp
     }
   }
 
-  private static class JSUnaryOp extends AbstractJSExpressionImpl
+  private static class JSUnaryOp extends AbstractJSExpression
   {
     final String m_sOp;
     final IJSExpression m_aExpr;
@@ -118,13 +118,13 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression minus (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression minus (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOpWithParanthesis ("-", e);
   }
 
   @Nonnull
-  public static IJSExpression inParantheses (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression inParantheses (@Nonnull final IJSExpression e)
   {
     return new ParanthesisExpr (e);
   }
@@ -133,7 +133,7 @@ public final class JSOp
    * Logical not <tt>'!x'</tt>.
    */
   @Nonnull
-  public static IJSExpression not (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression not (@Nonnull final IJSExpression e)
   {
     if (e == JSExpr.TRUE)
       return JSExpr.FALSE;
@@ -143,32 +143,32 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression complement (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression complement (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOpWithParanthesis ("~", e);
   }
 
   @Nonnull
-  public static IJSExpression incr (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression incr (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOp (e, "++");
   }
 
   @Nonnull
-  public static IJSExpression decr (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression decr (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOp (e, "--");
   }
 
   @Nonnull
-  public static IJSExpression typeof (@Nonnull final IJSExpression e)
+  public static AbstractJSExpression typeof (@Nonnull final IJSExpression e)
   {
     return new JSUnaryOp ("typeof ", e);
   }
 
   /* -- Binary operators -- */
 
-  private static class JSBinaryOp extends AbstractJSExpressionImpl
+  private static class JSBinaryOp extends AbstractJSExpression
   {
     private final IJSExpression m_aLeft;
     private final String m_sOp;
@@ -196,61 +196,61 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression plus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression plus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "+", right);
   }
 
   @Nonnull
-  public static IJSExpression minus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression minus (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "-", right);
   }
 
   @Nonnull
-  public static IJSExpression mul (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression mul (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "*", right);
   }
 
   @Nonnull
-  public static IJSExpression div (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression div (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "/", right);
   }
 
   @Nonnull
-  public static IJSExpression mod (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression mod (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "%", right);
   }
 
   @Nonnull
-  public static IJSExpression shl (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression shl (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "<<", right);
   }
 
   @Nonnull
-  public static IJSExpression shr (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression shr (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, ">>", right);
   }
 
   @Nonnull
-  public static IJSExpression shrz (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression shrz (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, ">>>", right);
   }
 
   @Nonnull
-  public static IJSExpression band (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression band (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "&", right);
   }
 
   @Nonnull
-  public static IJSExpression bor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression bor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "|", right);
   }
@@ -284,72 +284,72 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression xor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression xor (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "^", right);
   }
 
   @Nonnull
-  public static IJSExpression lt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression lt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "<", right);
   }
 
   @Nonnull
-  public static IJSExpression lte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression lte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "<=", right);
   }
 
   @Nonnull
-  public static IJSExpression gt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression gt (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, ">", right);
   }
 
   @Nonnull
-  public static IJSExpression gte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression gte (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, ">=", right);
   }
 
   // equals
   @Nonnull
-  public static IJSExpression eq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression eq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "==", right);
   }
 
   // exactly equals
   @Nonnull
-  public static IJSExpression eeq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression eeq (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "===", right);
   }
 
   // not equal
   @Nonnull
-  public static IJSExpression ne (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression ne (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "!=", right);
   }
 
   // exactly not equal
   @Nonnull
-  public static IJSExpression ene (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
+  public static AbstractJSExpression ene (@Nonnull final IJSExpression left, @Nonnull final IJSExpression right)
   {
     return new JSBinaryOp (left, "!==", right);
   }
 
   @Nonnull
-  public static IJSExpression _instanceof (@Nonnull final IJSExpression left, @Nonnull final AbstractJSType right)
+  public static AbstractJSExpression _instanceof (@Nonnull final IJSExpression left, @Nonnull final AbstractJSType right)
   {
     return new JSBinaryOp (left, "instanceof", right);
   }
 
   /* -- Ternary operators -- */
 
-  private static class JSTernaryOp extends AbstractJSExpressionImpl
+  private static class JSTernaryOp extends AbstractJSExpression
   {
     private final IJSExpression m_aExpr1;
     private final String m_sOp1;
@@ -394,9 +394,9 @@ public final class JSOp
   }
 
   @Nonnull
-  public static IJSExpression cond (@Nonnull final IJSExpression cond,
-                                    @Nonnull final IJSExpression ifTrue,
-                                    @Nonnull final IJSExpression ifFalse)
+  public static AbstractJSExpression cond (@Nonnull final IJSExpression cond,
+                                           @Nonnull final IJSExpression ifTrue,
+                                           @Nonnull final IJSExpression ifFalse)
   {
     return new JSTernaryOp (cond, "?", ifTrue, ":", ifFalse);
   }
