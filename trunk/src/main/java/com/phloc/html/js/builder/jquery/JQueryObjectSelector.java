@@ -64,6 +64,14 @@ public class JQueryObjectSelector implements IHasStringRepresentation
   }
 
   @Nonnull
+  public static String getSelectorSelector (@Nonnull final IJQuerySelector aSelector)
+  {
+    if (aSelector == null)
+      throw new NullPointerException ("selector");
+    return aSelector.getAsString ();
+  }
+
+  @Nonnull
   public JQueryObjectSelector addID (@Nonnull @Nonempty final String sID)
   {
     m_aElements.add (getIDSelector (sID));
@@ -91,7 +99,7 @@ public class JQueryObjectSelector implements IHasStringRepresentation
     if (aSelector == null)
       throw new NullPointerException ("selector");
 
-    m_aElements.add (getElementNameSelector (sElementName) + aSelector.getAsString ());
+    m_aElements.add (getElementNameSelector (sElementName) + getSelectorSelector (aSelector));
     return this;
   }
 
@@ -108,6 +116,13 @@ public class JQueryObjectSelector implements IHasStringRepresentation
                                                    @Nonnull final ICSSClassProvider aCSSClass)
   {
     m_aElements.add (getElementNameSelector (sElementName) + getClassSelector (aCSSClass));
+    return this;
+  }
+
+  @Nonnull
+  public JQueryObjectSelector addSelector (@Nonnull final IJQuerySelector aSelector)
+  {
+    m_aElements.add (getSelectorSelector (aSelector));
     return this;
   }
 
