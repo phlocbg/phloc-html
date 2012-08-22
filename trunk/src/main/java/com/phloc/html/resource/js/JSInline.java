@@ -28,6 +28,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 
 /**
  * Default implementation of {@link IJSInline}.
@@ -38,6 +39,19 @@ import com.phloc.html.js.IJSCodeProvider;
 public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
 {
   private final IJSCodeProvider m_aContent;
+
+  public JSInline (@Nonnull final IJSBuilderCodeProvider aContent)
+  {
+    this (aContent, null);
+  }
+
+  public JSInline (@Nonnull final IJSBuilderCodeProvider aContent, @Nullable final ConditionalComment aCC)
+  {
+    super (aCC);
+    if (aContent == null)
+      throw new NullPointerException ("content");
+    m_aContent = aContent;
+  }
 
   public JSInline (@Nonnull final IJSCodeProvider aContent)
   {

@@ -31,6 +31,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
@@ -45,6 +46,12 @@ public final class HCScript extends AbstractHCElement <HCScript>
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private final String m_sContent;
+
+  public HCScript (@Nonnull final IJSBuilderCodeProvider aProvider)
+  {
+    super (EHTMLElement.SCRIPT);
+    m_sContent = aProvider.getJSCode ();
+  }
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {

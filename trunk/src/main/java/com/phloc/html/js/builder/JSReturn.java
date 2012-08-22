@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
  * 
  * @author philip
  */
-final class JSReturn implements IJSStatement
+public final class JSReturn implements IJSStatement
 {
   /**
    * Expression to return; may be null.
@@ -38,7 +38,7 @@ final class JSReturn implements IJSStatement
    * @param expr
    *        JExpression which evaluates to return value
    */
-  JSReturn (@Nullable final IJSExpression expr)
+  public JSReturn (@Nullable final IJSExpression expr)
   {
     m_aExpr = expr;
   }
