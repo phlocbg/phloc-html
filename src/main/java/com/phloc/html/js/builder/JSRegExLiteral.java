@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public class JSRegExLiteral extends AbstractJSExpressionImpl
+public class JSRegExLiteral extends AbstractJSExpression
 {
   private final String m_sRegEx;
   private boolean m_bGlobal = false;

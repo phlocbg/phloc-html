@@ -28,7 +28,7 @@ import com.phloc.commons.string.StringHelper;
  * 
  * @author philip
  */
-public class JSAssignment extends AbstractJSExpressionImpl implements IJSStatement
+public class JSAssignment extends AbstractJSExpression implements IJSStatement
 {
   private final IJSAssignmentTarget m_aLhs;
   private final String m_sOp;

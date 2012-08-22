@@ -26,7 +26,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * 
  * @author philip
  */
-public class JSStringLiteral extends AbstractJSExpressionImpl
+public class JSStringLiteral extends AbstractJSExpression
 {
   private final String m_sStr;
 

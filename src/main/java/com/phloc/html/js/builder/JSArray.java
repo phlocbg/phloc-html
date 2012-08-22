@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-public final class JSArray extends AbstractJSExpressionImpl
+public final class JSArray extends AbstractJSExpression
 {
   private List <IJSExpression> m_aExprs;
 

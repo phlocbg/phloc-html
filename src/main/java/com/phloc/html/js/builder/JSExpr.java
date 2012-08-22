@@ -300,7 +300,7 @@ public final class JSExpr
   @Nonnull
   public static IJSExpression direct (@Nonnull final String source)
   {
-    return new AbstractJSExpressionImpl ()
+    return new AbstractJSExpression ()
     {
       public void generate (final JSFormatter f)
       {

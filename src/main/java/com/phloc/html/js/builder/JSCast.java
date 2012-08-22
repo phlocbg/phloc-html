@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
-final class JSCast extends AbstractJSExpressionImpl
+final class JSCast extends AbstractJSExpression
 {
   /**
    * JType to which the expression is to be cast.
