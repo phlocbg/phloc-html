@@ -21,16 +21,23 @@ import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.JSExpr;
+import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.builder.html.JSHtml;
 
 @DevelopersNote ("Do not use for pDAF3 - missing CSS information. Use HCP3Button instead!")
 public class HCLinkButton extends HCButton
 {
   public HCLinkButton (final String sLabel, final ISimpleURL aURL)
   {
-    super (sLabel, JSExpr.ref ("self").ref ("location").ref ("href").assign (aURL.getAsString ()));
+    super (sLabel, JSHtml.windowLocationHref ().assign (aURL.getAsString ()));
   }
 
+  public HCLinkButton (final String sLabel, final IJSStatement aJS)
+  {
+    super (sLabel, aJS);
+  }
+
+  @Deprecated
   public HCLinkButton (final String sLabel, final IJSCodeProvider aJS)
   {
     super (sLabel, aJS);

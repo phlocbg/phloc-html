@@ -70,6 +70,24 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation documentCreateAttribute ()
+  {
+    return document ().invoke ("createAttribute");
+  }
+
+  @Nonnull
+  public static JSInvocation documentCreateElement ()
+  {
+    return document ().invoke ("createElement");
+  }
+
+  @Nonnull
+  public static JSInvocation documentCreateTextNode ()
+  {
+    return document ().invoke ("createTextNode");
+  }
+
+  @Nonnull
   public static JSFieldRef documentEmbeds ()
   {
     return document ().ref ("embeds");
@@ -197,80 +215,6 @@ public final class JSHtml
   public static JSFieldRef historyLength ()
   {
     return history ().ref ("length");
-  }
-
-  // --- location ---
-
-  @Nonnull
-  public static JSFieldRef location ()
-  {
-    return JSExpr.ref ("location");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationHash ()
-  {
-    return location ().ref ("hash");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationHost ()
-  {
-    return location ().ref ("host");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationHostname ()
-  {
-    return location ().ref ("hostname");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationHref ()
-  {
-    return location ().ref ("href");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationPathname ()
-  {
-    return location ().ref ("pathname");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationPort ()
-  {
-    return location ().ref ("port");
-  }
-
-  @Nonnull
-  public static JSFieldRef locationProtocol ()
-  {
-    return location ().ref ("protocol");
-  }
-
-  @Nonnull
-  public static JSInvocation locationReload ()
-  {
-    return location ().invoke ("reload");
-  }
-
-  @Nonnull
-  public static JSInvocation locationReplace (@Nonnull final ISimpleURL aURL)
-  {
-    return locationReplace (JSExpr.lit (aURL.getAsString ()));
-  }
-
-  @Nonnull
-  public static JSInvocation locationReplace (@Nonnull final IJSExpression aURL)
-  {
-    return location ().invoke ("replace").arg (aURL);
-  }
-
-  @Nonnull
-  public static JSFieldRef locationSearch ()
-  {
-    return location ().ref ("search");
   }
 
   // --- navigator ---
@@ -411,6 +355,78 @@ public final class JSHtml
   public static JSFieldRef windowInnerWidth ()
   {
     return window ().ref ("innerWidth");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocation ()
+  {
+    return window ().ref ("location");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationHash ()
+  {
+    return windowLocation ().ref ("hash");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationHost ()
+  {
+    return windowLocation ().ref ("host");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationHostname ()
+  {
+    return windowLocation ().ref ("hostname");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationHref ()
+  {
+    return windowLocation ().ref ("href");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationPathname ()
+  {
+    return windowLocation ().ref ("pathname");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationPort ()
+  {
+    return windowLocation ().ref ("port");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationProtocol ()
+  {
+    return windowLocation ().ref ("protocol");
+  }
+
+  @Nonnull
+  public static JSInvocation windowLocationReload ()
+  {
+    return windowLocation ().invoke ("reload");
+  }
+
+  @Nonnull
+  public static JSInvocation windowLocationReplace (@Nonnull final ISimpleURL aURL)
+  {
+    return windowLocationReplace (JSExpr.lit (aURL.getAsString ()));
+  }
+
+  @Nonnull
+  public static JSInvocation windowLocationReplace (@Nonnull final IJSExpression aURL)
+  {
+    return windowLocation ().invoke ("replace").arg (aURL);
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLocationSearch ()
+  {
+    return windowLocation ().ref ("search");
   }
 
   @Nonnull
