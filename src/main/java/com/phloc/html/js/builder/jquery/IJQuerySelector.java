@@ -31,10 +31,18 @@ import com.phloc.html.js.builder.IJSExpression;
  */
 public interface IJQuerySelector extends IHasStringRepresentation
 {
+  /**
+   * @return The selector string without an optional expression parameter (e.g.
+   *         for <code>:gt(5)</code> "gt" is returned")
+   */
   @Nonnull
   @Nonempty
   String getSelector ();
 
+  /**
+   * @return The optional expression that was used as the parameter to this
+   *         selector.
+   */
   @Nullable
   IJSExpression getExpression ();
 }

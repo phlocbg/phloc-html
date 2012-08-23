@@ -205,7 +205,7 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   @Nonnull
   public JSInvocation argOrNull (@Nullable final IJSExpression aArgument)
   {
-    return arg (aArgument == null ? JSExpr.NULL : aArgument);
+    return aArgument == null ? argNull () : arg (aArgument);
   }
 
   /**
@@ -278,13 +278,13 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   }
 
   @Nonnull
-  public JSInvocation arg (@Nullable final Integer v)
+  public JSInvocation argOrNull (@Nullable final Integer v)
   {
     return v == null ? argNull () : arg (v.intValue ());
   }
 
   @Nonnull
-  public JSInvocation arg (@Nullable final Long v)
+  public JSInvocation argOrNull (@Nullable final Long v)
   {
     return v == null ? argNull () : arg (v.longValue ());
   }
@@ -317,6 +317,18 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   public JSInvocation argThis ()
   {
     return arg (JSExpr.THIS);
+  }
+
+  /**
+   * Add an expression to this invocation's argument list
+   * 
+   * @param aArgument
+   *        Argument to add to argument list
+   */
+  @Nonnull
+  public JSInvocation argOrNull (@Nonnegative final int nIndex, @Nullable final IJSExpression aArgument)
+  {
+    return aArgument == null ? argNull (nIndex) : arg (nIndex, aArgument);
   }
 
   /**

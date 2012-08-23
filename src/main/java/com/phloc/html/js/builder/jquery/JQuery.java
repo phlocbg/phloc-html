@@ -26,6 +26,7 @@ import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSBlock;
@@ -60,9 +61,27 @@ public class JQuery
    * @return a {@link JQueryInvocation} with an HTML document element
    */
   @Nonnull
-  public static JQueryInvocation document ()
+  public static JQueryInvocation jquery (@Nonnull final IJSExpression aExpr)
   {
-    return new JQueryInvocation (jQueryFunction ().invoke ().arg (JSHtml.document ()));
+    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aExpr));
+  }
+
+  /**
+   * @return a {@link JQueryInvocation} with an HTML document element
+   */
+  @Nonnull
+  public static JQueryInvocation jQueryDocument ()
+  {
+    return jquery (JSHtml.document ());
+  }
+
+  /**
+   * @return a {@link JQueryInvocation} with <code>this</code>
+   */
+  @Nonnull
+  public static JQueryInvocation jQueryThis ()
+  {
+    return jquery (JSExpr.THIS);
   }
 
   @Nonnull
@@ -80,7 +99,7 @@ public class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation idRefAll (@Nonnull @Nonempty final String... aIDs)
+  public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final String... aIDs)
   {
     if (ArrayHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
@@ -92,7 +111,7 @@ public class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation idRefAll (@Nonnull @Nonempty final Iterable <String> aIDs)
+  public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final Iterable <String> aIDs)
   {
     if (ContainerHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
@@ -197,7 +216,7 @@ public class JQuery
   public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
   {
     final JSAnonymousFunction aAnonFunction = JSExpr.anonymousFunction ();
-    final JQueryInvocation aInvocation = document ().ready ().arg (aAnonFunction);
+    final JQueryInvocation aInvocation = jQueryDocument ().ready ().arg (aAnonFunction);
     return ReadonlyPair.create (aInvocation, aAnonFunction);
   }
 
