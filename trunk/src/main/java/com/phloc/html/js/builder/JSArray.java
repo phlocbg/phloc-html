@@ -31,7 +31,7 @@ public final class JSArray extends AbstractJSExpression
 {
   private List <IJSExpression> m_aExprs;
 
-  JSArray ()
+  public JSArray ()
   {}
 
   @Nonnull

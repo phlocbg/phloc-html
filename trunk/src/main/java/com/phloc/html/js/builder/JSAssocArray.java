@@ -31,7 +31,7 @@ public final class JSAssocArray extends AbstractJSExpression
 {
   private Map <IJSExpression, IJSExpression> m_aExprs;
 
-  JSAssocArray ()
+  public JSAssocArray ()
   {}
 
   @Nonnull

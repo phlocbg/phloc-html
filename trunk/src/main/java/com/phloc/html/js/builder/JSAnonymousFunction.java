@@ -48,13 +48,18 @@ public class JSAnonymousFunction extends AbstractJSExpression
    */
   private JSBlock m_aBody;
 
+  public JSAnonymousFunction ()
+  {
+    this (null);
+  }
+
   /**
    * constructor
    * 
    * @param type
    *        Type to which the expression is cast
    */
-  JSAnonymousFunction (@Nullable final AbstractJSType type)
+  public JSAnonymousFunction (@Nullable final AbstractJSType type)
   {
     m_aType = type;
   }
