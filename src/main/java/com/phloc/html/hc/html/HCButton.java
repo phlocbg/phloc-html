@@ -32,6 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSStatement;
 
 /**
  * Represents an HTML &lt;button&gt; element with type "button"
@@ -61,6 +62,13 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton>
     addChild (sLabel);
   }
 
+  public HCButton (@Nullable final String sLabel, @Nullable final IJSStatement aOnClick)
+  {
+    this (sLabel);
+    setEventHandler (EJSEvent.ONCLICK, aOnClick);
+  }
+
+  @Deprecated
   public HCButton (@Nullable final String sLabel, @Nullable final IJSCodeProvider aOnClick)
   {
     this (sLabel);
