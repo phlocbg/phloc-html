@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
@@ -48,7 +49,37 @@ public final class JSEventMap implements Serializable
    * @param aNewHandler
    *        The new handler to be added. May not be <code>null</code>.
    */
+  @Deprecated
   public void addHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
+  {
+    if (eJSEvent == null)
+      throw new NullPointerException ("JSEvent");
+    if (aNewHandler == null)
+      throw new NullPointerException ("newHandler");
+
+    final IJSCodeProvider aOldHandler = m_aEvents.get (eJSEvent);
+    if (aOldHandler == null)
+    {
+      // Set only the new handler
+      m_aEvents.put (eJSEvent, aNewHandler);
+    }
+    else
+    {
+      // Combine old and new handler
+      m_aEvents.put (eJSEvent, new CollectingJSCodeProvider (aOldHandler, aNewHandler));
+    }
+  }
+
+  /**
+   * Add an additional handler for the given JS event. If an existing handler is
+   * present, the new handler is appended.
+   * 
+   * @param eJSEvent
+   *        The JS event. May not be <code>null</code>.
+   * @param aNewHandler
+   *        The new handler to be added. May not be <code>null</code>.
+   */
+  public void addHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSBuilderCodeProvider aNewHandler)
   {
     if (eJSEvent == null)
       throw new NullPointerException ("JSEvent");
@@ -77,7 +108,28 @@ public final class JSEventMap implements Serializable
    * @param aNewHandler
    *        The new handler to be added. May not be <code>null</code>.
    */
+  @Deprecated
   public void setHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
+  {
+    if (eJSEvent == null)
+      throw new NullPointerException ("JSEvent");
+    if (aNewHandler == null)
+      throw new NullPointerException ("newHandler");
+
+    // Set only the new handler
+    m_aEvents.put (eJSEvent, aNewHandler);
+  }
+
+  /**
+   * Set a handler for the given JS event. If an existing handler is present, it
+   * is automatically overridden.
+   * 
+   * @param eJSEvent
+   *        The JS event. May not be <code>null</code>.
+   * @param aNewHandler
+   *        The new handler to be added. May not be <code>null</code>.
+   */
+  public void setHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSBuilderCodeProvider aNewHandler)
   {
     if (eJSEvent == null)
       throw new NullPointerException ("JSEvent");

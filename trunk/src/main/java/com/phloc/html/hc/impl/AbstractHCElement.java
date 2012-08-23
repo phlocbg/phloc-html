@@ -68,7 +68,8 @@ import com.phloc.html.js.JSEventMap;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 @SuppressWarnings ("deprecation")
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
+                                                                                                              IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -411,6 +412,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    *         returned.
    */
   @Nullable
+  @Deprecated
   protected static final IJSCodeProvider cleanJSLink (@Nullable final IJSCodeProvider aJS, final boolean bWithJSPrefix)
   {
     // Input is null?

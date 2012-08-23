@@ -25,12 +25,27 @@ import com.phloc.html.hc.html.HCA;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.builder.JSExpr;
+import com.phloc.html.js.builder.JSReturn;
+import com.phloc.html.js.builder.JSStatementList;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 public class HCA_JS extends HCA
 {
   private static final ISimpleURL JS_URL = new ReadonlySimpleURL (CJS.JS_VOID);
 
+  public HCA_JS (@Nullable final IJSStatement aJSOnClick)
+  {
+    /**
+     * JS links must always set a JS void in the href. This ensures that if the
+     * href gets called (due to double click etc.) it has no effect.
+     **/
+    super (JS_URL);
+    addEventHandler (EJSEvent.ONCLICK, new JSStatementList (aJSOnClick, new JSReturn (JSExpr.FALSE)));
+  }
+
+  @Deprecated
   public HCA_JS (@Nullable final IJSCodeProvider aJSOnClick)
   {
     /**
