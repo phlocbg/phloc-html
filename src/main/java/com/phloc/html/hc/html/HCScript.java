@@ -53,6 +53,7 @@ public final class HCScript extends AbstractHCElement <HCScript>
     m_sContent = aProvider.getJSCode ();
   }
 
+  @Deprecated
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
     super (EHTMLElement.SCRIPT);
