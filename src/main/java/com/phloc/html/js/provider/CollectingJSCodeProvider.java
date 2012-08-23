@@ -25,6 +25,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 
@@ -35,6 +36,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   public CollectingJSCodeProvider ()
   {}
 
+  @Deprecated
   public CollectingJSCodeProvider (@Nullable final CharSequence... aCSs)
   {
     if (aCSs != null)
@@ -43,6 +45,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (aCS);
   }
 
+  @Deprecated
   public CollectingJSCodeProvider (@Nullable final String... aStrings)
   {
     if (aStrings != null)
@@ -51,6 +54,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (sString);
   }
 
+  @Deprecated
   public CollectingJSCodeProvider (@Nullable final IJSCodeProvider... aProviders)
   {
     if (aProviders != null)
@@ -59,6 +63,15 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (aProvider);
   }
 
+  public CollectingJSCodeProvider (@Nullable final IJSBuilderCodeProvider... aProviders)
+  {
+    if (aProviders != null)
+      for (final IJSCodeProvider aProvider : aProviders)
+        if (aProvider != null)
+          append (aProvider);
+  }
+
+  @Deprecated
   public CollectingJSCodeProvider (@Nullable final IJSON... aJSONs)
   {
     if (aJSONs != null)
@@ -67,6 +80,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (aJSON);
   }
 
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (final char c)
   {
@@ -74,6 +88,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
     return this;
   }
 
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (final long n)
   {
@@ -86,6 +101,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
    *        The string to append. May be <code>null</code>.
    * @return this
    */
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (@Nullable final CharSequence aCS)
   {
@@ -99,6 +115,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
    *        The string to append. May be <code>null</code>.
    * @return this
    */
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (@Nullable final String sString)
   {
@@ -107,6 +124,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
     return this;
   }
 
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider appendEscaped (@Nullable final String sText)
   {
@@ -117,10 +135,19 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   public final CollectingJSCodeProvider append (@Nullable final CollectingJSCodeProvider aProvider)
   {
     if (aProvider != null)
-      append (aProvider.m_aSB);
+      m_aSB.append (aProvider.m_aSB);
     return this;
   }
 
+  @Nonnull
+  public final CollectingJSCodeProvider append (@Nullable final IJSBuilderCodeProvider aProvider)
+  {
+    if (aProvider != null)
+      m_aSB.append (aProvider.getJSCode ());
+    return this;
+  }
+
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
   {
@@ -131,6 +158,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
     return this;
   }
 
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (@Nullable final IJSON aJSON)
   {
@@ -154,6 +182,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
    *        The string to prepend.
    * @return this
    */
+  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider prepend (@Nullable final CharSequence aCS)
   {
