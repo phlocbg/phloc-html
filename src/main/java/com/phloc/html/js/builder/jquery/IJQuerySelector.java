@@ -17,6 +17,7 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -45,4 +46,28 @@ public interface IJQuerySelector extends IHasStringRepresentation
    */
   @Nullable
   IJSExpression getExpression ();
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector chain (@Nonnull IJQuerySelector aRhsSelector);
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector multiple (@Nonnull IJQuerySelector aRhsSelector);
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector child (@Nonnull IJQuerySelector aRhsSelector);
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector descendant (@Nonnull IJQuerySelector aRhsSelector);
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector nextAdjacent (@Nonnull IJQuerySelector aRhsSelector);
+
+  @Nonnull
+  @CheckReturnValue
+  IJQuerySelector nextSiblings (@Nonnull IJQuerySelector aRhsSelector);
 }

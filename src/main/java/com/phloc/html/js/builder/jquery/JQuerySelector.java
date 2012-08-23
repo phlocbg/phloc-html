@@ -17,19 +17,22 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.collections.ArrayHelper;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.css.decl.ECSSAttributeOperator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSPrinter;
+import com.phloc.html.js.builder.JSStringLiteral;
 
 @Immutable
 public final class JQuerySelector implements IJQuerySelector
@@ -104,6 +107,48 @@ public final class JQuerySelector implements IJQuerySelector
     if (m_aExpr == null)
       return m_sSelector;
     return m_sSelector + '(' + JSPrinter.getAsString (m_aExpr) + ')';
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector chain (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return chain (this, aRhsSelector);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector multiple (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return multiple (this, aRhsSelector);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector child (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return child (this, aRhsSelector);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector descendant (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return descendant (this, aRhsSelector);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector nextAdjacent (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return nextAdjacent (this, aRhsSelector);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector nextSiblings (@Nonnull final IJQuerySelector aRhsSelector)
+  {
+    return nextSiblings (this, aRhsSelector);
   }
 
   @Nonnull
@@ -236,13 +281,208 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector (sElementName);
   }
 
+  /**
+   * Chain them directly together to build stuff like "div#id" or
+   * ".class1.class" or "span.foo"
+   * 
+   * @param aFirstSelector
+   *        The first selector. May not be <code>null</code>.
+   * @param aSecondSelector
+   *        The second selector. May not be <code>null</code>.
+   * @return <code>first<i>second</i></code>
+   */
   @Nonnull
-  public static IJQuerySelector multiple (@Nonnull final IJQuerySelector aLhsSelector,
-                                          @Nonnull final IJQuerySelector aRhsSelector)
+  public static IJQuerySelector chain (@Nonnull final IJQuerySelector aFirstSelector,
+                                       @Nonnull final IJQuerySelector aSecondSelector)
   {
-    if (aLhsSelector == null)
-      throw new NullPointerException ("lhsSelector");
-    return new JQuerySelector (aLhsSelector.getAsString () + "," + aRhsSelector.getAsString ());
+    if (aFirstSelector == null)
+      throw new NullPointerException ("firstSelector");
+    if (aSecondSelector == null)
+      throw new NullPointerException ("secondSelector");
+    return new JQuerySelector (aFirstSelector.getAsString () + aSecondSelector.getAsString ());
+  }
+
+  /**
+   * @param aSelectors
+   *        the selectors to chaing via ","
+   * @return <code>sel, sel, sel, ...</code>
+   */
+  @Nonnull
+  public static IJQuerySelector multiple (@Nonnull @Nonempty final IJQuerySelector... aSelectors)
+  {
+    if (ArrayHelper.isEmpty (aSelectors))
+      throw new IllegalArgumentException ("empty selectors");
+    if (ArrayHelper.containsAnyNullElement (aSelectors))
+      throw new IllegalArgumentException ("selectors array contains null element");
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final IJQuerySelector aSelector : aSelectors)
+    {
+      if (aSB.length () > 0)
+        aSB.append (", ");
+      aSB.append (aSelector);
+    }
+    return new JQuerySelector (aSB.toString ());
+  }
+
+  /**
+   * @param aSelectors
+   *        the selectors to chaing via ","
+   * @return <code>sel, sel, sel, ...</code>
+   */
+  @Nonnull
+  public static IJQuerySelector multiple (@Nonnull @Nonempty final Iterable <IJQuerySelector> aSelectors)
+  {
+    if (ContainerHelper.isEmpty (aSelectors))
+      throw new IllegalArgumentException ("empty selectors");
+    if (ContainerHelper.containsAnyNullElement (aSelectors))
+      throw new IllegalArgumentException ("selectors collection contains null element");
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final IJQuerySelector aSelector : aSelectors)
+    {
+      if (aSB.length () > 0)
+        aSB.append (", ");
+      aSB.append (aSelector);
+    }
+    return new JQuerySelector (aSB.toString ());
+  }
+
+  /**
+   * @param aParentSelector
+   * @param aChildSelector
+   * @return <code>parent > child</code>
+   */
+  @Nonnull
+  public static IJQuerySelector child (@Nonnull final IJQuerySelector aParentSelector,
+                                       @Nonnull final IJQuerySelector aChildSelector)
+  {
+    if (aParentSelector == null)
+      throw new NullPointerException ("parentSelector");
+    if (aChildSelector == null)
+      throw new NullPointerException ("childSelector");
+    return new JQuerySelector (aParentSelector.getAsString () + " > " + aChildSelector.getAsString ());
+  }
+
+  /**
+   * @param aAncestorSelector
+   * @param aDescendantSelector
+   * @return <code>ancestor descendant</code>
+   */
+  @Nonnull
+  public static IJQuerySelector descendant (@Nonnull final IJQuerySelector aAncestorSelector,
+                                            @Nonnull final IJQuerySelector aDescendantSelector)
+  {
+    if (aAncestorSelector == null)
+      throw new NullPointerException ("ancestorSelector");
+    if (aDescendantSelector == null)
+      throw new NullPointerException ("descendantSelector");
+    return new JQuerySelector (aAncestorSelector.getAsString () + " " + aDescendantSelector.getAsString ());
+  }
+
+  /**
+   * @param aPrevSelector
+   * @param aNextSelector
+   * @return <code>prev + next</code>
+   */
+  @Nonnull
+  public static IJQuerySelector nextAdjacent (@Nonnull final IJQuerySelector aPrevSelector,
+                                              @Nonnull final IJQuerySelector aNextSelector)
+  {
+    if (aPrevSelector == null)
+      throw new NullPointerException ("prevSelector");
+    if (aNextSelector == null)
+      throw new NullPointerException ("nextSelector");
+    return new JQuerySelector (aPrevSelector.getAsString () + " + " + aNextSelector.getAsString ());
+  }
+
+  /**
+   * @param aPrevSelector
+   * @param aSiblingsSelector
+   * @return <code>prev ~ siblings</code>
+   */
+  @Nonnull
+  public static IJQuerySelector nextSiblings (@Nonnull final IJQuerySelector aPrevSelector,
+                                              @Nonnull final IJQuerySelector aSiblingsSelector)
+  {
+    if (aPrevSelector == null)
+      throw new NullPointerException ("prevSelector");
+    if (aSiblingsSelector == null)
+      throw new NullPointerException ("siblingsSelector");
+    return new JQuerySelector (aPrevSelector.getAsString () + " ~ " + aSiblingsSelector.getAsString ());
+  }
+
+  @Nonnull
+  public static IJQuerySelector hasAttr (@Nonnull @Nonempty final String sAttrName)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    return new JQuerySelector ("[" + sAttrName + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrContainsPrefix (@Nonnull @Nonempty final String sAttrName,
+                                                    @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "|=" + JSStringLiteral.getAsString (sAttrValue) + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrContains (@Nonnull @Nonempty final String sAttrName,
+                                              @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "*=" + JSStringLiteral.getAsString (sAttrValue) + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrContainsWord (@Nonnull @Nonempty final String sAttrName,
+                                                  @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "~=" + JSStringLiteral.getAsString (sAttrValue) + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrEndsWith (@Nonnull @Nonempty final String sAttrName,
+                                              @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "$=" + JSStringLiteral.getAsString (sAttrValue) + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrEquals (@Nonnull @Nonempty final String sAttrName, @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "=" + JSStringLiteral.getAsString (sAttrValue) + "]");
+  }
+
+  @Nonnull
+  public static IJQuerySelector attrNotEquals (@Nonnull @Nonempty final String sAttrName,
+                                               @Nonnull final String sAttrValue)
+  {
+    if (StringHelper.hasNoText (sAttrName))
+      throw new IllegalArgumentException ("attrName");
+    if (sAttrValue == null)
+      throw new NullPointerException ("attrValue");
+    return new JQuerySelector ("[" + sAttrName + "!=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
   @Nonnull
@@ -253,6 +493,6 @@ public final class JQuerySelector implements IJQuerySelector
       throw new IllegalArgumentException ("attrName");
     if (sAttrValue == null)
       throw new NullPointerException ("attrValue");
-    return new JQuerySelector ("[" + sAttrName + ECSSAttributeOperator.DASHMATCH.getName () + sAttrValue + "]");
+    return new JQuerySelector ("[" + sAttrName + "^=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 }

@@ -85,7 +85,7 @@ public class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation invoke (@Nonnull final JQueryObjectSelector aSelector)
+  public static JQueryInvocation invoke (@Nonnull final IJQuerySelector aSelector)
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
@@ -93,9 +93,17 @@ public class JQuery
   }
 
   @Nonnull
+  public static JQueryInvocation invoke (@Nonnull final JQuerySelectorList aSelectorList)
+  {
+    if (aSelectorList == null)
+      throw new NullPointerException ("selectorList");
+    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aSelectorList.getAsString ()));
+  }
+
+  @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
-    return invoke (new JQueryObjectSelector ().addID (sID));
+    return invoke (JQuerySelector.id (sID));
   }
 
   @Nonnull
@@ -104,10 +112,10 @@ public class JQuery
     if (ArrayHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
+    final JQuerySelectorList aSelectorList = new JQuerySelectorList ();
     for (final String sID : aIDs)
-      aSelector.addID (sID);
-    return invoke (aSelector);
+      aSelectorList.addID (sID);
+    return invoke (aSelectorList);
   }
 
   @Nonnull
@@ -116,16 +124,16 @@ public class JQuery
     if (ContainerHelper.isEmpty (aIDs))
       throw new IllegalArgumentException ("IDs may not be empty");
 
-    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
+    final JQuerySelectorList aSelectorList = new JQuerySelectorList ();
     for (final String sID : aIDs)
-      aSelector.addID (sID);
-    return invoke (aSelector);
+      aSelectorList.addID (sID);
+    return invoke (aSelectorList);
   }
 
   @Nonnull
   public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (new JQueryObjectSelector ().addClass (aCSSClass));
+    return invoke (JQuerySelector.clazz (aCSSClass));
   }
 
   @Nonnull
@@ -134,10 +142,10 @@ public class JQuery
     if (ArrayHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
+    final JQuerySelectorList aSelectorList = new JQuerySelectorList ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
-      aSelector.addClass (aCSSClass);
-    return invoke (aSelector);
+      aSelectorList.addClass (aCSSClass);
+    return invoke (aSelectorList);
   }
 
   @Nonnull
@@ -146,22 +154,22 @@ public class JQuery
     if (ContainerHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
 
-    final JQueryObjectSelector aSelector = new JQueryObjectSelector ();
+    final JQuerySelectorList aSelectorList = new JQuerySelectorList ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
-      aSelector.addClass (aCSSClass);
-    return invoke (aSelector);
+      aSelectorList.addClass (aCSSClass);
+    return invoke (aSelectorList);
   }
 
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement)
   {
-    return elementNameRef (eElement.getElementNameLowerCase ());
+    return invoke (JQuerySelector.elementName (eElement));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
-    return invoke (new JQueryObjectSelector ().addElement (sElementName));
+    return invoke (JQuerySelector.elementName (sElementName));
   }
 
   @Nonnull
@@ -175,7 +183,7 @@ public class JQuery
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName,
                                                  @Nonnull final IJQuerySelector aSelector)
   {
-    return invoke (new JQueryObjectSelector ().addElementWithSelector (sElementName, aSelector));
+    return invoke (new JQuerySelectorList ().addElementWithSelector (sElementName, aSelector));
   }
 
   @Nonnull
@@ -189,7 +197,7 @@ public class JQuery
   public static JQueryInvocation elementNameWithIDRef (@Nonnull @Nonempty final String sElementName,
                                                        @Nonnull @Nonempty final String sID)
   {
-    return invoke (new JQueryObjectSelector ().addElementWithID (sElementName, sID));
+    return invoke (new JQuerySelectorList ().addElementWithID (sElementName, sID));
   }
 
   @Nonnull
@@ -203,13 +211,13 @@ public class JQuery
   public static JQueryInvocation elementNameWithClassRef (@Nonnull @Nonempty final String sElementName,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (new JQueryObjectSelector ().addElementWithClass (sElementName, aCSSClass));
+    return invoke (new JQuerySelectorList ().addElementWithClass (sElementName, aCSSClass));
   }
 
   @Nonnull
   public static JQueryInvocation selectorRef (@Nonnull final IJQuerySelector aSelector)
   {
-    return invoke (new JQueryObjectSelector ().addSelector (aSelector));
+    return invoke (aSelector);
   }
 
   @Nonnull
