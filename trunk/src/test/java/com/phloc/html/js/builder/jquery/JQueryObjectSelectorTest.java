@@ -24,7 +24,7 @@ import org.junit.Test;
 import com.phloc.html.css.DefaultCSSClassProvider;
 
 /**
- * Test class for class {@link JQueryObjectSelector}.
+ * Test class for class {@link JQuerySelectorList}.
  * 
  * @author philip
  */
@@ -33,13 +33,13 @@ public final class JQueryObjectSelectorTest
   @Test
   public void testBasic ()
   {
-    assertEquals ("#id5", new JQueryObjectSelector ().addID ("id5").getAsString ());
+    assertEquals ("#id5", new JQuerySelectorList ().addID ("id5").getAsString ());
     // Check masking
-    assertEquals ("#id\\.value", new JQueryObjectSelector ().addID ("id.value").getAsString ());
-    assertEquals (".basic", new JQueryObjectSelector ().addClass (DefaultCSSClassProvider.create ("basic"))
+    assertEquals ("#id\\.value", new JQuerySelectorList ().addID ("id.value").getAsString ());
+    assertEquals (".basic", new JQuerySelectorList ().addClass (DefaultCSSClassProvider.create ("basic"))
                                                        .getAsString ());
-    assertEquals ("td", new JQueryObjectSelector ().addElement ("td").getAsString ());
-    assertEquals ("td:gt(3)", new JQueryObjectSelector ().addElementWithSelector ("td", JQuerySelector.gt (3)).getAsString ());
-    assertEquals ("td:checked", new JQueryObjectSelector ().addElementWithSelector ("td", JQuerySelector.checked).getAsString ());
+    assertEquals ("td", new JQuerySelectorList ().addElement ("td").getAsString ());
+    assertEquals ("td:gt(3)", new JQuerySelectorList ().addElementWithSelector ("td", JQuerySelector.gt (3)).getAsString ());
+    assertEquals ("td:checked", new JQuerySelectorList ().addElementWithSelector ("td", JQuerySelector.checked).getAsString ());
   }
 }
