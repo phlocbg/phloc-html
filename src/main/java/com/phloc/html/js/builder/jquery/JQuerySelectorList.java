@@ -24,7 +24,6 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.IHasStringRepresentation;
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.html.css.ICSSClassProvider;
 
 public class JQuerySelectorList implements IHasStringRepresentation
@@ -87,6 +86,14 @@ public class JQuerySelectorList implements IHasStringRepresentation
   {
     if (m_aElements.isEmpty ())
       throw new IllegalStateException ("Empty jQuery selector is not allowed!");
-    return StringHelper.getImploded (' ', m_aElements);
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final IJQuerySelector aSelector : m_aElements)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (aSelector.getAsString ());
+    }
+    return aSB.toString ();
   }
 }

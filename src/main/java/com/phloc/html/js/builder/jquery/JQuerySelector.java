@@ -27,6 +27,7 @@ import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSExpression;
@@ -107,6 +108,12 @@ public final class JQuerySelector implements IJQuerySelector
     if (m_aExpr == null)
       return m_sSelector;
     return m_sSelector + '(' + JSPrinter.getAsString (m_aExpr) + ')';
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("selector", m_sSelector).appendIfNotNull ("expr", m_aExpr).toString ();
   }
 
   @Nonnull
