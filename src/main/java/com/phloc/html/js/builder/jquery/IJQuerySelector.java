@@ -47,26 +47,68 @@ public interface IJQuerySelector extends IHasStringRepresentation
   @Nullable
   IJSExpression getExpression ();
 
+  /**
+   * Get chained with the passed selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this<i>rhs</i></code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector chain (@Nonnull IJQuerySelector aRhsSelector);
 
+  /**
+   * Make a multiple selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this, rhs</code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector multiple (@Nonnull IJQuerySelector aRhsSelector);
 
+  /**
+   * Make a child selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this > rhs</code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector child (@Nonnull IJQuerySelector aRhsSelector);
 
+  /**
+   * Make a descendant selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this rhs</code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector descendant (@Nonnull IJQuerySelector aRhsSelector);
 
+  /**
+   * Make a next adjacent selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this + rhs</code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector nextAdjacent (@Nonnull IJQuerySelector aRhsSelector);
 
+  /**
+   * Make a next siblings selector
+   * 
+   * @param aRhsSelector
+   *        Other selector
+   * @return <code>this ~ rhs</code>
+   */
   @Nonnull
   @CheckReturnValue
   IJQuerySelector nextSiblings (@Nonnull IJQuerySelector aRhsSelector);

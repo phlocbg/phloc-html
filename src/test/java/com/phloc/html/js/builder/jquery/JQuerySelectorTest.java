@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.phloc.html.EHTMLElement;
+
 /**
  * Test class for class {@link JQuerySelector}.
  * 
@@ -33,5 +35,16 @@ public final class JQuerySelectorTest
   {
     assertEquals (":animated", JQuerySelector.animated.getAsString ());
     assertEquals (":gt(5)", JQuerySelector.gt (5).getAsString ());
+    assertEquals ("ul", JQuerySelector.elementName (EHTMLElement.UL).getAsString ());
+    assertEquals ("#abc", JQuerySelector.id ("abc").getAsString ());
+    assertEquals ("ul#abc", JQuerySelector.elementName (EHTMLElement.UL)
+                                          .chain (JQuerySelector.id ("abc"))
+                                          .getAsString ());
+    assertEquals ("ul li", JQuerySelector.elementName (EHTMLElement.UL)
+                                         .descendant (JQuerySelector.elementName ("li"))
+                                         .getAsString ());
+    assertEquals ("ul,ol", JQuerySelector.elementName (EHTMLElement.UL)
+                                         .multiple (JQuerySelector.elementName ("ol"))
+                                         .getAsString ());
   }
 }

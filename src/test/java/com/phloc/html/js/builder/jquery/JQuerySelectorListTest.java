@@ -28,7 +28,7 @@ import com.phloc.html.css.DefaultCSSClassProvider;
  * 
  * @author philip
  */
-public final class JQueryObjectSelectorTest
+public final class JQuerySelectorListTest
 {
   @Test
   public void testBasic ()
