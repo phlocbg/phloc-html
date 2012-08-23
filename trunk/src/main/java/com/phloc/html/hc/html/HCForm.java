@@ -31,7 +31,9 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCFormMethod;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSStatement;
 
 /**
  * Represents an HTML &lt;form&gt; element
@@ -99,10 +101,19 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   }
 
   @Nonnull
+  public final HCForm setAction (@Nullable final IJSStatement aAction)
+  {
+    m_sAction = null;
+    m_aAction = aAction;
+    return this;
+  }
+
+  @Deprecated
+  @Nonnull
   public final HCForm setAction (@Nullable final IJSCodeProvider aAction)
   {
     m_sAction = null;
-    m_aAction = cleanJSLink (aAction, true);
+    m_aAction = cleanJSLink (aAction, false);
     return this;
   }
 
@@ -200,7 +211,7 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     super.applyProperties (aElement, aConversionSettings);
 
     if (m_aAction != null)
-      aElement.setAttribute (CHTMLAttributes.ACTION, m_aAction.getJSCode ());
+      aElement.setAttribute (CHTMLAttributes.ACTION, CJS.JS_PREFIX + m_aAction.getJSCode ());
     else
       if (StringHelper.hasText (m_sAction))
         aElement.setAttribute (CHTMLAttributes.ACTION, m_sAction);

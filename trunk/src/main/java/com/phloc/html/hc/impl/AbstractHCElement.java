@@ -65,6 +65,7 @@ import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
+import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 @SuppressWarnings ("deprecation")
@@ -457,6 +458,19 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSStatement aJSCode)
+  {
+    if (aJSCode != null)
+    {
+      if (m_aJSHandler == null)
+        m_aJSHandler = new JSEventMap ();
+      m_aJSHandler.addHandler (eJSEvent, aJSCode);
+    }
+    return thisAsT ();
+  }
+
+  @Nonnull
+  @Deprecated
   public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
     final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);
@@ -470,6 +484,19 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSStatement aJSCode)
+  {
+    if (aJSCode != null)
+    {
+      if (m_aJSHandler == null)
+        m_aJSHandler = new JSEventMap ();
+      m_aJSHandler.setHandler (eJSEvent, aJSCode);
+    }
+    return thisAsT ();
+  }
+
+  @Nonnull
+  @Deprecated
   public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
     final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);

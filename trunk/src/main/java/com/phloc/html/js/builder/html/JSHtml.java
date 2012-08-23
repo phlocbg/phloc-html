@@ -461,6 +461,12 @@ public final class JSHtml
     return window ().ref ("status");
   }
 
+  @Nonnull
+  public static JSFieldRef windowOnbeforeunload ()
+  {
+    return window ().ref ("onbeforeunload");
+  }
+
   // -- others ---
 
   /**
