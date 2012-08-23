@@ -53,11 +53,13 @@ public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
     m_aContent = aContent;
   }
 
+  @Deprecated
   public JSInline (@Nonnull final IJSCodeProvider aContent)
   {
     this (aContent, null);
   }
 
+  @Deprecated
   public JSInline (@Nonnull final IJSCodeProvider aContent, @Nullable final ConditionalComment aCC)
   {
     super (aCC);
