@@ -299,9 +299,57 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression lt (final double v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lt (final float v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lt (final int v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lt (final long v)
+  {
+    return lt (JSExpr.lit (v));
+  }
+
+  @Nonnull
   public final AbstractJSExpression lt (@Nonnull final IJSExpression right)
   {
     return JSOp.lt (this, right);
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lte (final double v)
+  {
+    return lte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lte (final float v)
+  {
+    return lte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lte (final int v)
+  {
+    return lte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression lte (final long v)
+  {
+    return lte (JSExpr.lit (v));
   }
 
   @Nonnull
@@ -311,9 +359,57 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression gt (final double v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gt (final float v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gt (final int v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gt (final long v)
+  {
+    return gt (JSExpr.lit (v));
+  }
+
+  @Nonnull
   public final AbstractJSExpression gt (@Nonnull final IJSExpression right)
   {
     return JSOp.gt (this, right);
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gte (final double v)
+  {
+    return gte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gte (final float v)
+  {
+    return gte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gte (final int v)
+  {
+    return gte (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression gte (final long v)
+  {
+    return gte (JSExpr.lit (v));
   }
 
   @Nonnull
