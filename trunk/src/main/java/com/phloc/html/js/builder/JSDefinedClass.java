@@ -311,20 +311,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
       aPrototype.add (aField.name (), aField.hasInit () ? aField.init () : JSExpr.NULL);
 
     // Add all methods
+    for (final JSMethod aMethod : m_aMethods)
+      aPrototype.add (aMethod.name (), aMethod.asAnonymousFunction ());
 
     // Start with the prototype methods
-    f.plain (m_sName).plain (".prototype=").nl ().plain ('{').nl ().indent ();
-
-    int nIndex = 0;
-    for (final JSMethod m : m_aMethods)
-    {
-      f.decl (m);
-      if (++nIndex < m_aMethods.size ())
-        f.plain (',');
-      f.nl ();
-    }
-
-    f.outdent ().plain ('}').nl ();
+    JSExpr.assign (prototype (), aPrototype).generate (f);
   }
 
   @Nullable

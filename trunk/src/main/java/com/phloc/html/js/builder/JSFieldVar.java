@@ -33,12 +33,12 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   private final JSDefinedClass m_aOwner;
 
   /**
-   * JSdoc comments for this JFieldVar
+   * JSdoc comments for this field
    */
   private JSCommentMultiLine m_aJSDoc;
 
   /**
-   * JFieldVar constructor
+   * Field constructor
    * 
    * @param type
    *        data type of this variable
@@ -76,9 +76,9 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   }
 
   /**
-   * Creates, if necessary, and returns the class javadoc for this JDefinedClass
+   * Creates, if necessary, and returns the class JSDoc for this field
    * 
-   * @return JDocComment containing javadocs for this class
+   * @return {@link JSCommentMultiLine} containing JSDoc for this field
    */
   @Nonnull
   public JSCommentMultiLine jsDoc ()

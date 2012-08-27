@@ -103,7 +103,7 @@ public class JSConditional implements IJSStatement
       return;
     }
 
-    if (JSOp.hasTopOp (m_aTest))
+    if (JSOp.hasOperator (m_aTest))
       f.plain ("if").generatable (m_aTest);
     else
       f.plain ("if(").generatable (m_aTest).plain (')');

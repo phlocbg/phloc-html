@@ -55,6 +55,38 @@ public class JSOpTernary extends AbstractJSExpression
     m_aExpr3 = e3;
   }
 
+  @Nonnull
+  public IJSExpression expr1 ()
+  {
+    return m_aExpr1;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String operator1 ()
+  {
+    return m_sOp1;
+  }
+
+  @Nonnull
+  public IJSExpression expr2 ()
+  {
+    return m_aExpr2;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String operator2 ()
+  {
+    return m_sOp2;
+  }
+
+  @Nonnull
+  public IJSExpression expr3 ()
+  {
+    return m_aExpr3;
+  }
+
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain ('(')

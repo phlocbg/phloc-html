@@ -68,13 +68,10 @@ public class JSMethod extends JSFunction
     return m_aClass;
   }
 
-  @Override
-  protected void declaration (@Nonnull final JSFormatter f)
+  @Nonnull
+  public JSAnonymousFunction asAnonymousFunction ()
   {
-    f.plain (name ()).plain (':');
-    if (type () != null && f.generateTypeNames ())
-      f.plain ("/*").generatable (type ()).plain ("*/");
-    f.plain ("function");
+    return new JSAnonymousFunction (type (), params (), body ());
   }
 
   @Override
