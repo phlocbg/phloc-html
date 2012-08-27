@@ -298,7 +298,7 @@ public final class JSExpr
    * object model.
    */
   @Nonnull
-  public static IJSExpression direct (@Nonnull final String source)
+  public static AbstractJSExpression direct (@Nonnull final String source)
   {
     return new AbstractJSExpression ()
     {
