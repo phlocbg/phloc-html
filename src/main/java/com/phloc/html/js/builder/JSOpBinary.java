@@ -29,19 +29,19 @@ public class JSOpBinary extends AbstractJSExpression
   private final String m_sOp;
   private final IJSGeneratable m_aRight;
 
-  public JSOpBinary (@Nonnull final IJSExpression left,
-                     @Nonnull @Nonempty final String op,
-                     @Nonnull final IJSGeneratable right)
+  public JSOpBinary (@Nonnull final IJSExpression aLeft,
+                     @Nonnull @Nonempty final String sOp,
+                     @Nonnull final IJSGeneratable aRight)
   {
-    if (left == null)
+    if (aLeft == null)
       throw new NullPointerException ("left");
-    if (StringHelper.hasNoText (op))
+    if (StringHelper.hasNoText (sOp))
       throw new IllegalArgumentException ("empty operator");
-    if (right == null)
+    if (aRight == null)
       throw new NullPointerException ("right");
-    m_aLeft = left;
-    m_sOp = op;
-    m_aRight = right;
+    m_aLeft = aLeft;
+    m_sOp = sOp;
+    m_aRight = aRight;
   }
 
   @Nonnull

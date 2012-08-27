@@ -65,6 +65,16 @@ public class JSAnonymousFunction extends AbstractJSExpression
     m_aType = type;
   }
 
+  JSAnonymousFunction (@Nullable final AbstractJSType type,
+                       @Nullable final List <JSVar> params,
+                       @Nullable final JSBlock body)
+  {
+    this (type);
+    if (params != null)
+      m_aParams.addAll (params);
+    m_aBody = body;
+  }
+
   /**
    * Returns the return type.
    */

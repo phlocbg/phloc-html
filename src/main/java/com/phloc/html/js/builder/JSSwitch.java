@@ -92,7 +92,7 @@ public class JSSwitch implements IJSStatement
 
   public void state (@Nonnull final JSFormatter f)
   {
-    if (JSOp.hasTopOp (m_aTest))
+    if (JSOp.hasOperator (m_aTest))
       f.plain ("switch ").generatable (m_aTest).plain ('{').nl ();
     else
       f.plain ("switch (").generatable (m_aTest).plain ("){").nl ();

@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * array creation and initialization.
@@ -81,6 +82,10 @@ public class JSAssocArray extends AbstractJSExpression
   @Nonnull
   public JSAssocArray add (@Nonnull final String key, @Nonnull final IJSExpression value)
   {
+    // Don't quote value identifiers
+    if (JSMarshaller.isJSIdentifier (key))
+      return add (new JSAtom (key), value);
+
     return add (JSExpr.lit (key), value);
   }
 
@@ -102,7 +107,7 @@ public class JSAssocArray extends AbstractJSExpression
 
   public void generate (final JSFormatter f)
   {
-    f.plain ('{');
+    f.plain ('{').nl ().indent ();
     if (m_aExprs != null)
     {
       boolean bFirst = true;
@@ -111,11 +116,11 @@ public class JSAssocArray extends AbstractJSExpression
         if (bFirst)
           bFirst = false;
         else
-          f.plain (',');
+          f.plain (',').nl ();
         f.generatable (aEntry.getKey ()).plain (':').generatable (aEntry.getValue ());
       }
     }
-    f.plain ('}');
+    f.nl ().outdent ().plain ('}');
   }
 
   @Override

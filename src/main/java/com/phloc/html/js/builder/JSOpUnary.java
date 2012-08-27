@@ -29,25 +29,43 @@ public class JSOpUnary extends AbstractJSExpression
   final IJSExpression m_aExpr;
   final boolean m_bOpFirst;
 
-  public JSOpUnary (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
+  public JSOpUnary (@Nonnull @Nonempty final String sOp, @Nonnull final IJSExpression aExpr)
   {
-    this (op, e, true);
+    this (sOp, aExpr, true);
   }
 
-  public JSOpUnary (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
+  public JSOpUnary (@Nonnull final IJSExpression aExpr, @Nonnull @Nonempty final String sOp)
   {
-    this (op, e, false);
+    this (sOp, aExpr, false);
   }
 
-  private JSOpUnary (@Nonnull final String op, @Nonnull final IJSExpression e, final boolean bOpFirst)
+  private JSOpUnary (@Nonnull final String sOp, @Nonnull final IJSExpression aExpr, final boolean bOpFirst)
   {
-    if (StringHelper.hasNoText (op))
+    if (StringHelper.hasNoText (sOp))
       throw new IllegalArgumentException ("empty operator");
-    if (e == null)
+    if (aExpr == null)
       throw new NullPointerException ("expr");
-    m_sOp = op;
-    m_aExpr = e;
+    m_sOp = sOp;
+    m_aExpr = aExpr;
     m_bOpFirst = bOpFirst;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String operator ()
+  {
+    return m_sOp;
+  }
+
+  @Nonnull
+  public IJSExpression expr ()
+  {
+    return m_aExpr;
+  }
+
+  public boolean isOperatorFirst ()
+  {
+    return m_bOpFirst;
   }
 
   public void generate (@Nonnull final JSFormatter f)
