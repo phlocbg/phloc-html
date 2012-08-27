@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -161,5 +162,14 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSDeclaration) this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("type", m_aType)
+                                       .append ("name", m_sName)
+                                       .append ("init", m_aInit)
+                                       .toString ();
   }
 }

@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A representation of a type in JS.
@@ -40,6 +41,6 @@ public abstract class AbstractJSType implements IJSGeneratable
   @Override
   public String toString ()
   {
-    return getClass ().getName () + '(' + name () + ')';
+    return new ToStringGenerator (this).toString ();
   }
 }

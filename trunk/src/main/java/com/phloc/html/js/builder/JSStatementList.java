@@ -23,6 +23,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * A list of JS statements that is itself a statement
  * 
@@ -69,5 +71,11 @@ public final class JSStatementList implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("statements", m_aStatements).toString ();
   }
 }

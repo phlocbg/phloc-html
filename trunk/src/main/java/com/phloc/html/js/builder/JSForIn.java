@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * For in Statement
  * 
@@ -29,7 +31,7 @@ public final class JSForIn implements IJSStatement
 {
   private final JSVar m_aLoopVar;
   private final IJSExpression m_aCollection;
-  private JSBlock m_aBody; // lazily created
+  private JSBlock m_aBody;
 
   JSForIn (@Nullable final AbstractJSType vartype,
            @Nonnull final String variable,
@@ -69,5 +71,14 @@ public final class JSForIn implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("loopVar", m_aLoopVar)
+                                       .append ("collection", m_aCollection)
+                                       .append ("body", m_aBody)
+                                       .toString ();
   }
 }

@@ -23,8 +23,11 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * JS method.
@@ -33,7 +36,7 @@ import com.phloc.commons.collections.ContainerHelper;
  */
 public class JSMethod implements IJSDocCommentable, IJSDeclaration
 {
-  private final JSDefinedClass m_aOuter;
+  private final JSDefinedClass m_aClass;
 
   /**
    * comments for this method
@@ -63,37 +66,43 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   /**
    * Constructor
    * 
-   * @param outer
+   * @param aClass
    *        Owning class
    * @param type
    *        Return type for the method
    * @param name
    *        Name of this method
    */
-  JSMethod (@Nonnull final JSDefinedClass outer, @Nullable final AbstractJSType type, @Nonnull final String name)
+  JSMethod (@Nonnull final JSDefinedClass aClass, @Nullable final AbstractJSType type, @Nonnull final String name)
   {
+    if (aClass == null)
+      throw new NullPointerException ("class");
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Illegal method name: " + name);
+    m_aClass = aClass;
     m_aType = type;
     m_sName = name;
-    m_aOuter = outer;
   }
 
   /**
    * Constructor constructor
    * 
-   * @param _class
+   * @param aClass
    *        JClass containing this constructor
    */
-  JSMethod (@Nonnull final JSDefinedClass _class)
+  JSMethod (@Nonnull final JSDefinedClass aClass)
   {
+    if (aClass == null)
+      throw new NullPointerException ("class");
+    m_aClass = aClass;
     m_aType = null;
-    m_sName = _class.name ();
-    m_aOuter = _class;
+    m_sName = aClass.name ();
   }
 
   @Nonnull
   public JSDefinedClass parentClass ()
   {
-    return m_aOuter;
+    return m_aClass;
   }
 
   /**
@@ -134,9 +143,11 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   /**
    * Changes the name of the method.
    */
-  public void name (final String n)
+  public void name (@Nonnull @Nonempty final String name)
   {
-    m_sName = n;
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Illegal method name: " + name);
+    m_sName = name;
   }
 
   /**
@@ -208,5 +219,17 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("class", m_aClass.name ())
+                                       .append ("jsDoc", m_aJSDoc)
+                                       .append ("type", m_aType)
+                                       .append ("name", m_sName)
+                                       .append ("params", m_aParams)
+                                       .append ("body", m_aBody)
+                                       .toString ();
   }
 }

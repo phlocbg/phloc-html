@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.builder.JSStatementList;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
@@ -95,7 +96,10 @@ public final class JSEventMap implements Serializable
     else
     {
       // Combine old and new handler
-      m_aEvents.put (eJSEvent, new CollectingJSCodeProvider (aOldHandler, aNewHandler));
+      if (aOldHandler instanceof IJSStatement)
+        m_aEvents.put (eJSEvent, new JSStatementList ((IJSStatement) aOldHandler, aNewHandler));
+      else
+        m_aEvents.put (eJSEvent, new CollectingJSCodeProvider (aOldHandler, aNewHandler));
     }
   }
 

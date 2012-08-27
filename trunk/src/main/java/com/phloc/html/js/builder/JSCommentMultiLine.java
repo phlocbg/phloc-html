@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * JSDoc comment.
  * 
@@ -37,9 +39,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   /** list of xdoclets */
   private final Map <String, Map <String, String>> m_aXdoclets = new HashMap <String, Map <String, String>> ();
 
-  /**
-   * The @-return tag part.
-   */
+  /** The @-return tag part. */
   private JSCommentPart m_aReturn;
 
   /** The @-deprecated tag */
@@ -169,13 +169,21 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
         if (e.getValue () != null)
         {
           for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
-          {
             f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
-          }
         }
         f.nl ();
       }
     }
     f.plain (" */").nl ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("params", m_aParams)
+                                       .append ("xdoclets", m_aXdoclets)
+                                       .append ("return", m_aReturn)
+                                       .append ("deprecated", m_aDeprecated)
+                                       .toString ();
   }
 }

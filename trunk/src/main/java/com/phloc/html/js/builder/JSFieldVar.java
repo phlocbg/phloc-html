@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * A field of a class
  * 
@@ -86,5 +88,14 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
     super.declare (f);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("owner", m_aOwner)
+                            .append ("jsDoc", m_aJSDoc)
+                            .toString ();
   }
 }

@@ -54,6 +54,6 @@ public class HCA_JS extends HCA
      **/
     super (JS_URL);
     addEventHandler (EJSEvent.ONCLICK,
-                     new CollectingJSCodeProvider (cleanJSLink (aJSOnClick, false)).append ("return false;"));
+                     new CollectingJSCodeProvider (cleanJSLink (aJSOnClick)).append ("return false;"));
   }
 }

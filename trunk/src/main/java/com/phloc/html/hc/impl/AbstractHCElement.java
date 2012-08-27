@@ -405,16 +405,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * 
    * @param aJS
    *        The JS to be cleaned up. May be <code>null</code>.
-   * @param bWithJSPrefix
-   *        The resulting string should contain the "javascript:" prefix if any
-   *        JS code was found.
    * @return The cleaned JS without a leading "javascript:" prefix and with an
    *         ensure ";" ending. If the input is empty <code>null</code> is
    *         returned.
    */
   @Nullable
   @Deprecated
-  protected static final IJSCodeProvider cleanJSLink (@Nullable final IJSCodeProvider aJS, final boolean bWithJSPrefix)
+  protected static final IJSCodeProvider cleanJSLink (@Nullable final IJSCodeProvider aJS)
   {
     // Input is null?
     if (aJS == null)
@@ -448,10 +445,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     if (!sJSCode.endsWith (CJS.JS_END_OF_STATEMENT_STR))
       sJSCode += CJS.JS_END_OF_STATEMENT_STR;
 
-    // Ensure that a prefix is present (if desired)
-    if (bWithJSPrefix)
-      sJSCode = CJS.JS_PREFIX + sJSCode;
-
     // Now we have a non-empty string, not starting with "javascript:" and
     // ensure to be ending with ";"
     return DefaultJSCodeProvider.create (sJSCode);
@@ -473,7 +466,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Deprecated
   public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
-    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);
+    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode);
     if (aCleanedCode != null)
     {
       if (m_aJSHandler == null)
@@ -499,7 +492,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Deprecated
   public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
-    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode, false);
+    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode);
     if (aCleanedCode != null)
     {
       if (m_aJSHandler == null)

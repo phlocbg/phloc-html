@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A block of JS code, which may contain statements and local declarations.
@@ -799,5 +800,15 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("content", m_aContent)
+                                       .append ("bracesRequired", m_bBracesRequired)
+                                       .append ("identRequired", m_bIndentRequired)
+                                       .append ("newLineAtEnd", m_bNewLineAtEnd)
+                                       .toString ();
   }
 }

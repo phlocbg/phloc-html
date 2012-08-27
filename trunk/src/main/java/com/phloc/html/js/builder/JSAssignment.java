@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Assignment statements, which are also expressions.
@@ -64,5 +65,11 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSStatement) this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("lhs", m_aLhs).append ("op", m_sOp).append ("rhs", m_aRhs).toString ();
   }
 }

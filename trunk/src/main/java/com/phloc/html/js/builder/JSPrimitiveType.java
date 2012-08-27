@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Contains the JS built-in primitive types
@@ -81,5 +82,11 @@ public class JSPrimitiveType extends AbstractJSType
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sName);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("name", m_sName).toString ();
   }
 }

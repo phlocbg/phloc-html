@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Simple code components that merely generate themselves.
@@ -41,5 +42,11 @@ final class JSAtom extends AbstractJSExpression
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sAtom);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("atom", m_sAtom).toString ();
   }
 }

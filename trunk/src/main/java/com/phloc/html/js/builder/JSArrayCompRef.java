@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * array component reference.
  * 
@@ -57,5 +59,11 @@ public final class JSArrayCompRef extends AbstractJSAssignmentTarget
   public void generate (final JSFormatter f)
   {
     f.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("array", m_aArray).append ("index", m_aIndex).toString ();
   }
 }

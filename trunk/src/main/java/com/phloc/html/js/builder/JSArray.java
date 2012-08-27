@@ -22,6 +22,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * array creation and initialization.
  * 
@@ -160,5 +162,11 @@ public final class JSArray extends AbstractJSExpression
     if (m_aExprs != null)
       f.generatable (m_aExprs);
     f.plain (']');
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("exprs", m_aExprs).toString ();
   }
 }

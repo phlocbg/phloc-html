@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Provides default implementations for {@link IJSExpression}.
@@ -690,5 +691,11 @@ public abstract class AbstractJSExpression implements IJSExpression
   public final JSArrayCompRef component (@Nonnull final IJSExpression index)
   {
     return JSExpr.component (this, index);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).toString ();
   }
 }

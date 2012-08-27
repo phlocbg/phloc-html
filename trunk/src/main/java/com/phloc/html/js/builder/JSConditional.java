@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * If statement, with optional else clause
  * 
@@ -115,5 +117,14 @@ public class JSConditional implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("test", m_aTest)
+                                       .append ("then", m_aThen)
+                                       .append ("else", m_aElse)
+                                       .toString ();
   }
 }

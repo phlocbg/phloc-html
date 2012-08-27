@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -49,5 +50,11 @@ public class JSStringLiteral extends AbstractJSExpression
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (getAsString (m_sStr));
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("string", m_sStr).toString ();
   }
 }
