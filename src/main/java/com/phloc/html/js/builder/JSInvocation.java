@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 
@@ -37,9 +38,6 @@ import com.phloc.json.IJSON;
  */
 public class JSInvocation extends AbstractJSExpression implements IJSStatement
 {
-  private final boolean m_bIsAnonnymousFunction;
-  private final boolean m_bIsConstructor;
-
   /**
    * Object expression upon which this method will be invoked, or null if this
    * is a constructor invocation
@@ -47,20 +45,20 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   private final IJSGeneratable m_aObject;
 
   /**
+   * If {@link m_bIsConstructor} == <code>true</code>, this field keeps the type
+   * to be created.
+   */
+  private final AbstractJSType m_aCtorType;
+
+  /**
    * Name of the method to be invoked. Either this field is set, or
-   * {@link #m_aCallee}, or {@link #m_aType} (in which case it's a constructor
-   * invocation.) This allows {@link JSMethod#name(String) the name of the
-   * method to be changed later}.
+   * {@link #m_aCallee}, or {@link #m_aCtorType} (in which case it's a
+   * constructor invocation.) This allows {@link JSMethod#name(String) the name
+   * of the method to be changed later}.
    */
   private final String m_sName;
 
   private final Object m_aCallee;
-
-  /**
-   * If {@link m_bIsConstructor} == <code>true</code>, this field keeps the type
-   * to be created.
-   */
-  private final AbstractJSType m_aType;
 
   /**
    * List of argument expressions for this method invocation
@@ -70,18 +68,16 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   /**
    * Invoke a function
    * 
-   * @param function
+   * @param aFunction
    */
-  JSInvocation (@Nonnull final JSFunction function)
+  JSInvocation (@Nonnull final JSFunction aFunction)
   {
-    if (function == null)
+    if (aFunction == null)
       throw new NullPointerException ("function");
-    m_bIsAnonnymousFunction = false;
-    m_bIsConstructor = false;
     m_aObject = null;
     m_sName = null;
-    m_aCallee = function;
-    m_aType = null;
+    m_aCallee = aFunction;
+    m_aCtorType = null;
   }
 
   /**
@@ -93,12 +89,10 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   {
     if (sFunctionName == null)
       throw new NullPointerException ("function");
-    m_bIsAnonnymousFunction = false;
-    m_bIsConstructor = false;
     m_aObject = null;
     m_sName = sFunctionName;
     m_aCallee = null;
-    m_aType = null;
+    m_aCtorType = null;
   }
 
   /**
@@ -111,12 +105,10 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   {
     if (aAnonymousFunction == null)
       throw new NullPointerException ("anonymousFunction");
-    m_bIsAnonnymousFunction = true;
-    m_bIsConstructor = false;
     m_aObject = null;
     m_sName = null;
     m_aCallee = aAnonymousFunction;
-    m_aType = null;
+    m_aCtorType = null;
   }
 
   /**
@@ -151,30 +143,26 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
     this ((IJSGeneratable) type, method);
   }
 
-  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
+  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
+    if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("name");
-    if (name.indexOf ('.') >= 0)
-      throw new IllegalArgumentException ("method name contains '.': " + name);
-    m_bIsAnonnymousFunction = false;
-    m_bIsConstructor = false;
+    if (sName.indexOf ('.') >= 0)
+      throw new IllegalArgumentException ("method name contains '.': " + sName);
     m_aObject = object;
-    m_sName = name;
+    m_sName = sName;
     m_aCallee = null;
-    m_aType = null;
+    m_aCtorType = null;
   }
 
-  private JSInvocation (@Nullable final IJSGeneratable object, @Nonnull final JSMethod aMethod)
+  private JSInvocation (@Nullable final IJSGeneratable aObject, @Nonnull final JSMethod aMethod)
   {
     if (aMethod == null)
       throw new NullPointerException ("method");
-    m_bIsAnonnymousFunction = false;
-    m_bIsConstructor = false;
-    m_aObject = object;
+    m_aObject = aObject;
     m_sName = null;
     m_aCallee = aMethod;
-    m_aType = null;
+    m_aCtorType = null;
   }
 
   /**
@@ -187,12 +175,10 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   {
     if (aType == null)
       throw new NullPointerException ("constructorType");
-    m_bIsAnonnymousFunction = false;
-    m_bIsConstructor = true;
     m_aObject = null;
     m_sName = null;
     m_aCallee = null;
-    m_aType = aType;
+    m_aCtorType = aType;
   }
 
   /**
@@ -456,34 +442,36 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
 
   public void generate (final JSFormatter f)
   {
-    if (m_bIsAnonnymousFunction)
+    if (m_aCallee instanceof JSAnonymousFunction)
     {
+      // It's an anonymous function
       f.generatable (((JSAnonymousFunction) m_aCallee).inParantheses ()).plain ('(');
     }
     else
-      if (m_bIsConstructor)
+      if (m_aCtorType != null)
       {
-        f.plain ("new ").generatable (m_aType).plain ('(');
+        // It's a constructor call
+        f.plain ("new ").generatable (m_aCtorType).plain ('(');
       }
       else
       {
         // Find name
-        String name = m_sName;
-        if (name == null && m_aCallee instanceof IJSDeclaration)
-          name = ((IJSDeclaration) m_aCallee).name ();
+        String sName = m_sName;
+        if (sName == null && m_aCallee instanceof IJSDeclaration)
+          sName = ((IJSDeclaration) m_aCallee).name ();
 
         if (m_aObject != null)
         {
           // Regular object method invocation
-          if (name == null)
-            throw new IllegalStateException ();
-          f.generatable (m_aObject).plain ('.').plain (name).plain ('(');
+          if (sName == null)
+            throw new IllegalStateException ("Name is required if an object is present");
+          f.generatable (m_aObject).plain ('.').plain (sName).plain ('(');
         }
         else
-          if (name != null)
+          if (sName != null)
           {
             // E.g. global function
-            f.plain (name).plain ('(');
+            f.plain (sName).plain ('(');
           }
       }
 
@@ -500,5 +488,16 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSStatement) this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("object", m_aObject)
+                                       .append ("ctorType", m_aCtorType)
+                                       .append ("callee", m_aCallee)
+                                       .append ("name", m_sName)
+                                       .append ("args", m_aArgs)
+                                       .toString ();
   }
 }

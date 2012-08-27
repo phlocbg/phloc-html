@@ -31,6 +31,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A JS package. This is the entry point for all functions, declarations etc.
@@ -305,5 +306,11 @@ public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProv
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("objs", m_aObjs).toString ();
   }
 }

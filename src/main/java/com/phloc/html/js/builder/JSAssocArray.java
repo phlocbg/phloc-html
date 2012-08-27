@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * array creation and initialization.
  * 
@@ -114,5 +116,11 @@ public final class JSAssocArray extends AbstractJSExpression
       }
     }
     f.plain ('}');
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("exprs", m_aExprs).toString ();
   }
 }

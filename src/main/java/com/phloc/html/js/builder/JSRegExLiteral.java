@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * RegEx literal.
  * 
@@ -92,5 +94,15 @@ public class JSRegExLiteral extends AbstractJSExpression
       f.plain ('i');
     if (m_bMultiLine)
       f.plain ('m');
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("regex", m_sRegEx)
+                                       .append ("global", m_bGlobal)
+                                       .append ("caseInsensitive", m_bCaseInsensitive)
+                                       .append ("multiLine", m_bMultiLine)
+                                       .toString ();
   }
 }

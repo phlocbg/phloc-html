@@ -23,6 +23,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * For statement
  * 
@@ -116,5 +118,15 @@ public class JSForLoop implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("inits", m_aInits)
+                                       .append ("test", m_aTest)
+                                       .append ("updates", m_aUpdates)
+                                       .append ("body", m_aBody)
+                                       .toString ();
   }
 }

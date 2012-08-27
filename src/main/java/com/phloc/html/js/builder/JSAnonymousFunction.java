@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * An anonymous function (a function without a name)
@@ -147,7 +148,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   public void generate (final JSFormatter f)
   {
     f.plain ("function");
-    if (m_aType != null)
+    if (m_aType != null && f.generateTypeNames ())
       f.plain (" /*").generatable (m_aType).plain ("*/");
     f.plain ('(');
     boolean first = true;
@@ -159,11 +160,15 @@ public class JSAnonymousFunction extends AbstractJSExpression
         f.plain (',');
       f.var (aParam);
     }
-    f.plain (')');
+    f.plain (')').stmt (body ());
+  }
 
-    if (m_aBody != null)
-      f.stmt (m_aBody);
-    else
-      f.stmt (new JSBlock ().newlineAtEnd (false));
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("type", m_aType)
+                                       .append ("params", m_aParams)
+                                       .append ("body", m_aBody)
+                                       .toString ();
   }
 }

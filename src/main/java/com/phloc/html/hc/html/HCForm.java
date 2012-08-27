@@ -113,7 +113,7 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   public final HCForm setAction (@Nullable final IJSCodeProvider aAction)
   {
     m_sAction = null;
-    m_aAction = cleanJSLink (aAction, false);
+    m_aAction = cleanJSLink (aAction);
     return this;
   }
 

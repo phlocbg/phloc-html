@@ -112,12 +112,6 @@ public abstract class AbstractJSClass extends AbstractJSType
     return null;
   }
 
-  @Override
-  public String toString ()
-  {
-    return getClass ().getName () + '(' + name () + ')';
-  }
-
   /** Generates a static method invocation. */
   @Nonnull
   public final JSInvocation staticInvoke (final JSMethod method)

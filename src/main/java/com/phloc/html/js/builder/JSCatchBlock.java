@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * Catch block for a try/catch/finally statement
  * 
@@ -64,5 +66,11 @@ public class JSCatchBlock implements IJSGeneratable
     if (m_aVar == null)
       m_aVar = new JSVar (null, "e", null);
     f.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("var", m_aVar).append ("body", m_aBody).toString ();
   }
 }

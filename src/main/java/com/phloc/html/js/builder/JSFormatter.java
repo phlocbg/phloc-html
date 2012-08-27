@@ -55,6 +55,8 @@ public class JSFormatter implements Closeable
 
   private boolean m_bIndentAndAlign = true;
 
+  private boolean m_bGenerateTypeNames = true;
+
   /**
    * Creates a formatter with default incremental indentations of four spaces.
    */
@@ -94,6 +96,18 @@ public class JSFormatter implements Closeable
   public JSFormatter indentAndAlign (final boolean bIndentAndAlign)
   {
     m_bIndentAndAlign = bIndentAndAlign;
+    return this;
+  }
+
+  public boolean generateTypeNames ()
+  {
+    return m_bGenerateTypeNames;
+  }
+
+  @Nonnull
+  public JSFormatter generateTypeNames (final boolean bGenerateTypeNames)
+  {
+    m_bGenerateTypeNames = bGenerateTypeNames;
     return this;
   }
 

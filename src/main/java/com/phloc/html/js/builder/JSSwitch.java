@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Switch statement
@@ -104,5 +105,14 @@ public final class JSSwitch implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("test", m_aTest)
+                                       .append ("cases", m_aCases)
+                                       .append ("defaultCase", m_aDefaultCase)
+                                       .toString ();
   }
 }

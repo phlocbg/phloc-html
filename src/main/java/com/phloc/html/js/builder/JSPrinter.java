@@ -21,6 +21,7 @@ import java.io.Writer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
 import com.phloc.commons.io.streams.StreamUtils;
@@ -30,6 +31,7 @@ import com.phloc.commons.io.streams.StreamUtils;
  * 
  * @author philip
  */
+@Immutable
 public final class JSPrinter
 {
   private static boolean s_bIndentAndAlign = false;

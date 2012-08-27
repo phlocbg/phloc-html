@@ -23,6 +23,8 @@ import java.util.Iterator;
 
 import javax.annotation.Nullable;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * A part is a part of a JSDoc comment, and it is a list of values.
  * 
@@ -127,5 +129,11 @@ public class JSCommentPart extends ArrayList <Object>
 
       s = s.substring (0, idx + 1) + "<!-- -->" + s.substring (idx + 1);
     }
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("list", super.toString ()).toString ();
   }
 }

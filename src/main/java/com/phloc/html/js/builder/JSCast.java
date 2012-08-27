@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.string.ToStringGenerator;
+
 /**
  * A cast operation.
  * 
@@ -57,5 +59,11 @@ final class JSCast extends AbstractJSExpression
   public void generate (final JSFormatter f)
   {
     f.plain ("((").generatable (m_aType).plain (')').generatable (m_aObject).plain (')');
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("type", m_aType).append ("object", m_aObject).toString ();
   }
 }

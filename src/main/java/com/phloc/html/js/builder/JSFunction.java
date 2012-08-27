@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -35,6 +36,11 @@ import com.phloc.html.js.marshal.JSMarshaller;
  */
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {
+
+  /**
+   * javadoc comments for this JMethod
+   */
+  private JSCommentMultiLine m_aJSDoc;
   /**
    * Return type for this function
    */
@@ -54,11 +60,6 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * JBlock of statements that makes up the body this function
    */
   private JSBlock m_aBody;
-
-  /**
-   * javadoc comments for this JMethod
-   */
-  private JSCommentMultiLine m_aJSDoc;
 
   /**
    * JMethod constructor
@@ -205,7 +206,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
       f.generatable (m_aJSDoc);
 
     f.plain ("function ");
-    if (m_aType != null)
+    if (m_aType != null && f.generateTypeNames ())
       f.plain ("/*").generatable (m_aType).plain ("*/");
     f.plain (m_sName).plain ('(');
     boolean first = true;
@@ -229,5 +230,16 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("jsDoc", m_aJSDoc)
+                                       .append ("type", m_aType)
+                                       .append ("name", m_sName)
+                                       .append ("params", m_aParams)
+                                       .append ("body", m_aBody)
+                                       .toString ();
   }
 }

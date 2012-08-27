@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Field Reference
@@ -74,5 +75,14 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
       f.generatable (m_aObject).plain ('.').plain (name);
     else
       f.plain (name);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("object", m_aObject)
+                                       .append ("name", m_sName)
+                                       .append ("var", m_aVar)
+                                       .toString ();
   }
 }

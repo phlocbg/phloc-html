@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.collections.ArrayHelper;
@@ -29,6 +30,7 @@ import com.phloc.json.IJSON;
  * 
  * @author philip
  */
+@Immutable
 public final class JSExpr
 {
   /**
@@ -110,19 +112,19 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation invokeThis (final String method)
+  public static JSInvocation invokeThis (@Nonnull @Nonempty final String method)
   {
     return invoke (THIS, method);
   }
 
   @Nonnull
-  public static JSInvocation invokeThis (final JSMethod method)
+  public static JSInvocation invokeThis (@Nonnull final JSMethod method)
   {
     return invoke (THIS, method);
   }
 
   @Nonnull
-  public static JSInvocation invoke (final JSFunction function)
+  public static JSInvocation invoke (@Nonnull final JSFunction function)
   {
     return new JSInvocation (function);
   }
