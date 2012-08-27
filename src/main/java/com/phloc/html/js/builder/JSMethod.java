@@ -48,8 +48,6 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    */
   private JSCommentMultiLine m_aJSDoc;
 
-  private final boolean m_bIsConstructor;
-
   /**
    * Return type for this method
    */
@@ -91,25 +89,8 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (!Character.isLowerCase (name.charAt (0)))
       s_aLogger.warn ("Method names should always start with a lowercase character: " + name);
     m_aClass = aClass;
-    m_bIsConstructor = false;
     m_aType = type;
     m_sName = name;
-  }
-
-  /**
-   * Constructor constructor
-   * 
-   * @param aClass
-   *        JClass containing this constructor
-   */
-  JSMethod (@Nonnull final JSDefinedClass aClass)
-  {
-    if (aClass == null)
-      throw new NullPointerException ("class");
-    m_aClass = aClass;
-    m_bIsConstructor = true;
-    m_aType = null;
-    m_sName = aClass.name ();
   }
 
   @Nonnull
@@ -227,19 +208,10 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
 
-    if (m_bIsConstructor)
-    {
-      f.plain ("function ").plain (m_sName);
-    }
-    else
-    {
-      if (m_aType != null)
-        f.plain ("/* ").generatable (m_aType).plain (" */");
-
-      f.plain (m_sName).plain (":function");
-    }
-
-    f.plain ('(');
+    f.plain (m_sName).plain (':');
+    if (m_aType != null && f.generateTypeNames ())
+      f.plain ("/*").generatable (m_aType).plain ("*/");
+    f.plain ("function(");
     boolean first = true;
     for (final JSVar var : m_aParams)
     {

@@ -125,6 +125,24 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   }
 
   /**
+   * @return <code>true</code> if an init expression is present,
+   *         <code>false</code> otherwise
+   */
+  public boolean hasInit ()
+  {
+    return m_aInit != null;
+  }
+
+  /**
+   * @return The init expression currently assigned
+   */
+  @Nullable
+  public IJSExpression init ()
+  {
+    return m_aInit;
+  }
+
+  /**
    * Initialize this variable
    * 
    * @param init

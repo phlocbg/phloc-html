@@ -273,8 +273,16 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     if (m_aJSDoc != null)
       f.nl ().generatable (m_aJSDoc);
 
-    // Emit the constructor first
+    // Emit the constructor first (a function)
     f.decl (constructor ());
+
+    final JSAssocArray aPrototype = new JSAssocArray ();
+
+    // Add all fields
+    for (final JSFieldVar aField : m_aFields.values ())
+      aPrototype.add (aField.name (), aField.hasInit () ? aField.init () : JSExpr.NULL);
+
+    // Add all methods
 
     // Start with the prototype methods
     f.plain (m_sName).plain (".prototype=").nl ().plain ('{').nl ().indent ();
