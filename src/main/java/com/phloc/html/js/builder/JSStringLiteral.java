@@ -44,7 +44,7 @@ public class JSStringLiteral extends AbstractJSExpression
   @Nonempty
   public static String getAsString (@Nonnull final String sStr)
   {
-    return '"' + JSMarshaller.javaScriptEscape (sStr) + '"';
+    return '\'' + JSMarshaller.javaScriptEscape (sStr) + '\'';
   }
 
   public void generate (@Nonnull final JSFormatter f)

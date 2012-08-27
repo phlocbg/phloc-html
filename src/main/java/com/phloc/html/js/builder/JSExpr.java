@@ -250,18 +250,18 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAtom lit (final float f)
+  public static AbstractJSExpression lit (final float f)
   {
     if (Float.isNaN (f))
-      return new JSAtom ("Number.NaN");
+      return JSPrimitiveType.NUMBER.nan ();
     return new JSAtom (Float.toString (f));
   }
 
   @Nonnull
-  public static JSAtom lit (final double d)
+  public static AbstractJSExpression lit (final double d)
   {
     if (Double.isNaN (d))
-      return new JSAtom ("Number.NaN");
+      return JSPrimitiveType.NUMBER.nan ();
     return new JSAtom (Double.toString (d));
   }
 
@@ -284,7 +284,7 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static IJSExpression json (@Nonnull final IJSON aJSON)
+  public static AbstractJSExpression json (@Nonnull final IJSON aJSON)
   {
     return direct (aJSON.getJSONString (JSPrinter.isIdentAndAlign ()));
   }

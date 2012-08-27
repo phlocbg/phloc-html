@@ -37,35 +37,44 @@ public class JSPrimitiveType extends AbstractJSType
   public static final JSPrimitiveType ERROR = new JSPrimitiveType ("Error");
   public static final JSPrimitiveType FUNCTION = new JSPrimitiveType ("Function");
   public static final JSPrimitiveType JSON = new JSPrimitiveType ("JSON");
-  public static final JSPrimitiveType MATH = new JSPrimitiveType ("Math");
-  public static final JSPrimitiveType NUMBER = new JSPrimitiveType ("Number");
+  public static final JSTypeMath MATH = new JSTypeMath ();
+  public static final JSTypeNumber NUMBER = new JSTypeNumber ();
   public static final JSPrimitiveType OBJECT = new JSPrimitiveType ("Object");
   public static final JSPrimitiveType REGEXP = new JSPrimitiveType ("RegExp");
   public static final JSPrimitiveType STRING = new JSPrimitiveType ("String");
 
   private final String m_sName;
+  private final JSFieldRef m_aGlobal;
 
-  private JSPrimitiveType (@Nonnull @Nonempty final String sName)
+  JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
     if (StringHelper.hasNoText (sName))
       throw new IllegalArgumentException ("name");
     m_sName = sName;
+    m_aGlobal = JSExpr.ref (sName);
   }
 
   @Override
   @Nonnull
   @Nonempty
-  public String name ()
+  public final String name ()
   {
     return m_sName;
   }
 
+  @Nonnull
+  public final JSFieldRef global ()
+  {
+    return m_aGlobal;
+  }
+
   /**
    * @return The type to be used in "typeof" expressions. A string literal with
-   *         the name in it
+   *         the name in it. For {@link #NUMBER} this returns
+   *         <code>"Number"</code>
    */
   @Nonnull
-  public JSStringLiteral typeName ()
+  public final JSStringLiteral typeName ()
   {
     return JSExpr.lit (m_sName);
   }
@@ -74,12 +83,12 @@ public class JSPrimitiveType extends AbstractJSType
    * @return A "new type" invocation object
    */
   @Nonnull
-  public JSInvocation _new ()
+  public final JSInvocation _new ()
   {
     return JSExpr._new (this);
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public final void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sName);
   }
