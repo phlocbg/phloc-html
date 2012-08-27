@@ -90,19 +90,67 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    * @param aClass
    *        JClass containing this constructor
    */
-  JSMethod (@Nonnull final JSDefinedClass aClass)
+  JSMethod (@Nonnull final JSDefinedClass aClass, @Nonnull @Nonempty final String name)
   {
     if (aClass == null)
       throw new NullPointerException ("class");
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Illegal method name: " + name);
     m_aClass = aClass;
     m_aType = null;
-    m_sName = aClass.name ();
+    m_sName = name;
   }
 
   @Nonnull
   public JSDefinedClass parentClass ()
   {
     return m_aClass;
+  }
+
+  /**
+   * Creates, if necessary, and returns the class JSDoc for this method
+   * 
+   * @return {@link JSCommentMultiLine} containing JSDoc for this class
+   */
+  @Nonnull
+  public JSCommentMultiLine jsDoc ()
+  {
+    if (m_aJSDoc == null)
+      m_aJSDoc = new JSCommentMultiLine ();
+    return m_aJSDoc;
+  }
+
+  /**
+   * Returns the return type.
+   */
+  @Nullable
+  public AbstractJSType type ()
+  {
+    return m_aType;
+  }
+
+  /**
+   * Overrides the return type.
+   */
+  public void type (@Nullable final AbstractJSType type)
+  {
+    m_aType = type;
+  }
+
+  @Nonnull
+  public String name ()
+  {
+    return m_sName;
+  }
+
+  /**
+   * Changes the name of the method.
+   */
+  public void name (@Nonnull @Nonempty final String name)
+  {
+    if (!JSMarshaller.isJSIdentifier (name))
+      throw new IllegalArgumentException ("Illegal method name: " + name);
+    m_sName = name;
   }
 
   /**
@@ -121,8 +169,22 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    * Add the specified variable to the list of parameters for this method
    * signature.
    * 
+   * @param name
+   *        Name of the parameter being added
+   * @return New parameter variable
+   */
+  @Nonnull
+  public JSVar param (@Nonnull final String name)
+  {
+    return param (null, name);
+  }
+
+  /**
+   * Add the specified variable to the list of parameters for this method
+   * signature.
+   * 
    * @param type
-   *        JType of the parameter being added
+   *        type of the parameter being added
    * @param name
    *        Name of the parameter being added
    * @return New parameter variable
@@ -135,38 +197,6 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     return v;
   }
 
-  public String name ()
-  {
-    return m_sName;
-  }
-
-  /**
-   * Changes the name of the method.
-   */
-  public void name (@Nonnull @Nonempty final String name)
-  {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Illegal method name: " + name);
-    m_sName = name;
-  }
-
-  /**
-   * Returns the return type.
-   */
-  @Nullable
-  public AbstractJSType type ()
-  {
-    return m_aType;
-  }
-
-  /**
-   * Overrides the return type.
-   */
-  public void type (@Nullable final AbstractJSType t)
-  {
-    m_aType = t;
-  }
-
   /**
    * Get the block that makes up body of this method
    * 
@@ -176,21 +206,8 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
   public JSBlock body ()
   {
     if (m_aBody == null)
-      m_aBody = new JSBlock ();
+      m_aBody = new JSBlock ().newlineAtEnd (false);
     return m_aBody;
-  }
-
-  /**
-   * Creates, if necessary, and returns the class javadoc for this JDefinedClass
-   * 
-   * @return {@link JSCommentMultiLine} containing javadocs for this class
-   */
-  @Nonnull
-  public JSCommentMultiLine jsDoc ()
-  {
-    if (m_aJSDoc == null)
-      m_aJSDoc = new JSCommentMultiLine ();
-    return m_aJSDoc;
   }
 
   @Override
@@ -202,7 +219,7 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (m_aType != null)
       f.plain ("/* ").generatable (m_aType).plain (" */");
 
-    f.plain (m_sName).plain ('(');
+    f.plain (m_sName).plain (":function(");
     boolean first = true;
     for (final JSVar var : m_aParams)
     {
