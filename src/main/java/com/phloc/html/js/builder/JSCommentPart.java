@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
@@ -72,7 +73,7 @@ public class JSCommentPart extends ArrayList <Object>
   /**
    * Writes this part into the formatter by using the specified indentation.
    */
-  protected void format (final JSFormatter f, final String indent)
+  protected void format (@Nonnull final JSFormatter f, @Nonnull final String indent)
   {
     if (!isEmpty ())
       f.plain (indent);
@@ -92,7 +93,7 @@ public class JSCommentPart extends ArrayList <Object>
           if (line.length () > 0)
             f.plain (_escape (line));
           s = s.substring (idx + 1);
-          f.nl ().plain (indent);
+          f.nlFix ().plain (indent);
         }
         if (s.length () != 0)
           f.plain (_escape (s));
@@ -112,7 +113,7 @@ public class JSCommentPart extends ArrayList <Object>
     }
 
     if (!isEmpty ())
-      f.nl ();
+      f.nlFix ();
   }
 
   /**

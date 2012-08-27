@@ -49,7 +49,6 @@ public final class JSDefinedClassTest
     final JSVar jsParam = aCtor.param ("param");
     aCtor.body ().invoke ("some_global_init").arg (jsParam);
 
-    JSPrinter.setIndentAndAlign (true);
     System.out.println (aPkg.getJSCode ());
   }
 }

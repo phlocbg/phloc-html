@@ -38,7 +38,9 @@ public final class JSPackageTest
     {
       final JSFunction aFuncMain = aPkg.function ("mainAdd");
       aFuncMain.jsDoc ().add ("This is a global function");
+      aFuncMain.jsDoc ().add ("It does only crappy things");
       final JSVar m1 = aFuncMain.param ("m1");
+      aFuncMain.jsDoc ().addParam (m1).add ("Any kind of value");
 
       // function variable
       final JSVar aRoot = aFuncMain.body ().decl (JSPrimitiveType.NUMBER, "root", JSExpr.lit (5));

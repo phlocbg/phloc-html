@@ -57,7 +57,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   }
 
   /**
-   * Append a text to a @param tag to the javadoc
+   * Append a text to a @-param tag to the JSDoc
    */
   @Nonnull
   public JSCommentPart addParam (final String param)
@@ -72,10 +72,10 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   }
 
   /**
-   * Append a text to an @param tag.
+   * Append a text to an @-param tag.
    */
   @Nonnull
-  public JSCommentPart addParam (final JSVar param)
+  public JSCommentPart addParam (@Nonnull final JSVar param)
   {
     return addParam (param.name ());
   }
@@ -92,7 +92,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   }
 
   /**
-   * add an @deprecated tag to the javadoc, with the associated message.
+   * add an @-deprecated tag to the JSDoc, with the associated message.
    */
   @Nonnull
   public JSCommentPart addDeprecated ()
@@ -121,7 +121,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * add an xdoclet.
    */
   @Nonnull
-  public Map <String, String> addXdoclet (final String name, final Map <String, String> attributes)
+  public Map <String, String> addXdoclet (final String name, @Nonnull final Map <String, String> attributes)
   {
     final Map <String, String> p = addXdoclet (name);
     p.putAll (attributes);
@@ -140,27 +140,27 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 
   public void generate (final JSFormatter f)
   {
-    f.plain ("/**").nl ();
+    f.plain ("/**").nlFix ();
 
     // Main content
     format (f, " * ");
 
     if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXdoclets.isEmpty ())
     {
-      f.plain (" * ").nl ();
+      f.plain (" * ").nlFix ();
       for (final Map.Entry <String, JSCommentPart> e : m_aParams.entrySet ())
       {
-        f.plain (" * @param ").plain (e.getKey ()).nl ();
+        f.plain (" * @param ").plain (e.getKey ()).nlFix ();
         e.getValue ().format (f, INDENT);
       }
       if (m_aReturn != null)
       {
-        f.plain (" * @return").nl ();
+        f.plain (" * @return").nlFix ();
         m_aReturn.format (f, INDENT);
       }
       if (m_aDeprecated != null)
       {
-        f.plain (" * @deprecated").nl ();
+        f.plain (" * @deprecated").nlFix ();
         m_aDeprecated.format (f, INDENT);
       }
       for (final Map.Entry <String, Map <String, String>> e : m_aXdoclets.entrySet ())
@@ -171,10 +171,10 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
           for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
             f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
         }
-        f.nl ();
+        f.nlFix ();
       }
     }
-    f.plain (" */").nl ();
+    f.plain (" */").nlFix ();
   }
 
   @Override
