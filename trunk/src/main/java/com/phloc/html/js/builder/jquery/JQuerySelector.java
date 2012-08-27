@@ -326,8 +326,8 @@ public final class JQuerySelector implements IJQuerySelector
     for (final IJQuerySelector aSelector : aSelectors)
     {
       if (aSB.length () > 0)
-        aSB.append (", ");
-      aSB.append (aSelector);
+        aSB.append (',');
+      aSB.append (aSelector.getAsString ());
     }
     return new JQuerySelector (aSB.toString ());
   }
@@ -349,8 +349,8 @@ public final class JQuerySelector implements IJQuerySelector
     for (final IJQuerySelector aSelector : aSelectors)
     {
       if (aSB.length () > 0)
-        aSB.append (", ");
-      aSB.append (aSelector);
+        aSB.append (',');
+      aSB.append (aSelector.getAsString ());
     }
     return new JQuerySelector (aSB.toString ());
   }
