@@ -30,7 +30,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSStatementList implements IJSStatement
+public class JSStatementList implements IJSStatement
 {
   private final List <IJSStatement> m_aStatements = new ArrayList <IJSStatement> ();
 

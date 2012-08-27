@@ -23,7 +23,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
-class JSOpTernary extends AbstractJSExpression
+public class JSOpTernary extends AbstractJSExpression
 {
   private final IJSExpression m_aExpr1;
   private final String m_sOp1;
@@ -31,11 +31,11 @@ class JSOpTernary extends AbstractJSExpression
   private final String m_sOp2;
   private final IJSExpression m_aExpr3;
 
-  JSOpTernary (@Nonnull final IJSExpression e1,
-               @Nonnull @Nonempty final String op1,
-               @Nonnull final IJSExpression e2,
-               @Nonnull @Nonempty final String op2,
-               @Nonnull final IJSExpression e3)
+  public JSOpTernary (@Nonnull final IJSExpression e1,
+                      @Nonnull @Nonempty final String op1,
+                      @Nonnull final IJSExpression e2,
+                      @Nonnull @Nonempty final String op2,
+                      @Nonnull final IJSExpression e3)
   {
     if (e1 == null)
       throw new NullPointerException ("expr1");

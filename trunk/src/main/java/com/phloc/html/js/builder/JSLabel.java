@@ -29,7 +29,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSLabel implements IJSStatement
+public class JSLabel implements IJSStatement
 {
   final String m_sLabel;
 
@@ -39,7 +39,7 @@ public final class JSLabel implements IJSStatement
    * @param sLabel
    *        break label or null.
    */
-  JSLabel (@Nonnull @Nonempty final String sLabel)
+  public JSLabel (@Nonnull @Nonempty final String sLabel)
   {
     if (StringHelper.hasNoText (sLabel))
       throw new IllegalArgumentException ("label");

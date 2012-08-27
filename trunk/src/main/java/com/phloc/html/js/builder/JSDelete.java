@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSDelete implements IJSStatement
+public class JSDelete implements IJSStatement
 {
   private final IJSExpression m_aExpr;
 
@@ -37,7 +37,7 @@ final class JSDelete implements IJSStatement
    * @param expr
    *        expression to delete. May not be <code>null</code>.
    */
-  JSDelete (@Nonnull final IJSExpression expr)
+  public JSDelete (@Nonnull final IJSExpression expr)
   {
     if (expr == null)
       throw new NullPointerException ("expr");

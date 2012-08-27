@@ -33,7 +33,7 @@ public class JSRegExLiteral extends AbstractJSExpression
   private boolean m_bCaseInsensitive = false;
   private boolean m_bMultiLine = false;
 
-  JSRegExLiteral (@Nonnull final String sRegEx)
+  public JSRegExLiteral (@Nonnull final String sRegEx)
   {
     if (sRegEx == null)
       throw new NullPointerException ("regex");

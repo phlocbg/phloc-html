@@ -72,7 +72,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @param name
    *        Name of this class
    */
-  JSDefinedClass (@Nullable final JSPackage parent, @Nonnull @Nonempty final String name)
+  public JSDefinedClass (@Nullable final JSPackage parent, @Nonnull @Nonempty final String name)
   {
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);

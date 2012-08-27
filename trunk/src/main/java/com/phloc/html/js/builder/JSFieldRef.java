@@ -47,7 +47,7 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
    */
   private JSVar m_aVar;
 
-  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
+  public JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("name");
@@ -55,7 +55,7 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
     m_sName = name;
   }
 
-  JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final JSVar var)
+  public JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final JSVar var)
   {
     if (var == null)
       throw new NullPointerException ("var");

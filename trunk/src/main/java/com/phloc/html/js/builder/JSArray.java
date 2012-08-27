@@ -29,7 +29,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSArray extends AbstractJSExpression
+public class JSArray extends AbstractJSExpression
 {
   private List <IJSExpression> m_aExprs;
 

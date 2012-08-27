@@ -40,9 +40,9 @@ public class JSWhileLoop implements IJSStatement
   private JSBlock m_aBody;
 
   /**
-   * Construct a While statment
+   * Construct a While statement
    */
-  JSWhileLoop (@Nonnull final IJSExpression test)
+  public JSWhileLoop (@Nonnull final IJSExpression test)
   {
     m_aTest = test;
   }

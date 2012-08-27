@@ -28,11 +28,11 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSCommentSingleLine implements IJSStatement
+public class JSCommentSingleLine implements IJSStatement
 {
   private final String m_sWhat;
 
-  JSCommentSingleLine (@Nonnull final String sComment)
+  public JSCommentSingleLine (@Nonnull final String sComment)
   {
     if (sComment == null)
       throw new NullPointerException ("comment");

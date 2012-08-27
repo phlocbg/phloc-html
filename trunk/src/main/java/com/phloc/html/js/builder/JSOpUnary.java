@@ -23,18 +23,18 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
-class JSOpUnary extends AbstractJSExpression
+public class JSOpUnary extends AbstractJSExpression
 {
   final String m_sOp;
   final IJSExpression m_aExpr;
   final boolean m_bOpFirst;
 
-  JSOpUnary (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
+  public JSOpUnary (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
   {
     this (op, e, true);
   }
 
-  JSOpUnary (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
+  public JSOpUnary (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
   {
     this (op, e, false);
   }

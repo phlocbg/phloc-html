@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSContinue implements IJSStatement
+public class JSContinue implements IJSStatement
 {
   private final JSLabel m_aLabel;
 
@@ -36,7 +36,7 @@ final class JSContinue implements IJSStatement
    * @param aLabel
    *        a valid label or null.
    */
-  JSContinue (@Nullable final JSLabel aLabel)
+  public JSContinue (@Nullable final JSLabel aLabel)
   {
     m_aLabel = aLabel;
   }

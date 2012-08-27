@@ -46,7 +46,7 @@ public class JSPrimitiveType extends AbstractJSType
   private final String m_sName;
   private final JSFieldRef m_aGlobal;
 
-  JSPrimitiveType (@Nonnull @Nonempty final String sName)
+  protected JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
     if (StringHelper.hasNoText (sName))
       throw new IllegalArgumentException ("name");

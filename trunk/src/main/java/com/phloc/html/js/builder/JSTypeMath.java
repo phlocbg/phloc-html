@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
  */
 public class JSTypeMath extends JSPrimitiveType
 {
-  JSTypeMath ()
+  public JSTypeMath ()
   {
     super ("Math");
   }

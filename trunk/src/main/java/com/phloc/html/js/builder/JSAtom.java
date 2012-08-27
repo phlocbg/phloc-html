@@ -28,11 +28,11 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSAtom extends AbstractJSExpression
+public final class JSAtom extends AbstractJSExpression
 {
   private final String m_sAtom;
 
-  JSAtom (@Nonnull @Nonempty final String sAtom)
+  public JSAtom (@Nonnull @Nonempty final String sAtom)
   {
     if (StringHelper.hasNoText (sAtom))
       throw new IllegalArgumentException ("atom");

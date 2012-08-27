@@ -32,7 +32,7 @@ public class JSStringLiteral extends AbstractJSExpression
 {
   private final String m_sStr;
 
-  JSStringLiteral (@Nonnull final String sStr)
+  public JSStringLiteral (@Nonnull final String sStr)
   {
     if (sStr == null)
       throw new NullPointerException ("string");

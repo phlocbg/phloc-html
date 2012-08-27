@@ -35,9 +35,9 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   private final String m_sOp;
   private final IJSExpression m_aRhs;
 
-  JSAssignment (@Nonnull final IJSAssignmentTarget lhs,
-                @Nonnull @Nonempty final String op,
-                @Nonnull final IJSExpression rhs)
+  public JSAssignment (@Nonnull final IJSAssignmentTarget lhs,
+                       @Nonnull @Nonempty final String op,
+                       @Nonnull final IJSExpression rhs)
   {
     if (lhs == null)
       throw new NullPointerException ("lhs");

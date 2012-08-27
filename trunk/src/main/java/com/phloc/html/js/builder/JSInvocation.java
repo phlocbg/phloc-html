@@ -70,7 +70,7 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
    * 
    * @param aFunction
    */
-  JSInvocation (@Nonnull final JSFunction aFunction)
+  protected JSInvocation (@Nonnull final JSFunction aFunction)
   {
     if (aFunction == null)
       throw new NullPointerException ("function");
@@ -101,7 +101,7 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
    * @param aAnonymousFunction
    *        The function to be invoked
    */
-  JSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
+  protected JSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
     if (aAnonymousFunction == null)
       throw new NullPointerException ("anonymousFunction");
@@ -120,12 +120,12 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
    * @param name
    *        Name of method to invoke
    */
-  JSInvocation (@Nullable final IJSExpression object, @Nonnull @Nonempty final String name)
+  protected JSInvocation (@Nullable final IJSExpression object, @Nonnull @Nonempty final String name)
   {
     this ((IJSGeneratable) object, name);
   }
 
-  JSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
+  protected JSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
   {
     this ((IJSGeneratable) object, method);
   }
@@ -133,12 +133,12 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   /**
    * Invokes a static method on a class.
    */
-  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull @Nonempty final String name)
+  protected JSInvocation (@Nullable final AbstractJSClass type, @Nonnull @Nonempty final String name)
   {
     this ((IJSGeneratable) type, name);
   }
 
-  JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
+  protected JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
   {
     this ((IJSGeneratable) type, method);
   }

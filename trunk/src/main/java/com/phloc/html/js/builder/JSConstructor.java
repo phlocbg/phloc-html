@@ -36,7 +36,7 @@ public class JSConstructor extends JSFunction
    * @param aClass
    *        JClass containing this constructor
    */
-  JSConstructor (@Nonnull final JSDefinedClass aClass)
+  public JSConstructor (@Nonnull final JSDefinedClass aClass)
   {
     super (null, aClass.name ());
     m_aClass = aClass;

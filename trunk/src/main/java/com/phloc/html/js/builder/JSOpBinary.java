@@ -23,15 +23,15 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
-class JSOpBinary extends AbstractJSExpression
+public class JSOpBinary extends AbstractJSExpression
 {
   private final IJSExpression m_aLeft;
   private final String m_sOp;
   private final IJSGeneratable m_aRight;
 
-  JSOpBinary (@Nonnull final IJSExpression left,
-              @Nonnull @Nonempty final String op,
-              @Nonnull final IJSGeneratable right)
+  public JSOpBinary (@Nonnull final IJSExpression left,
+                     @Nonnull @Nonempty final String op,
+                     @Nonnull final IJSGeneratable right)
   {
     if (left == null)
       throw new NullPointerException ("left");
@@ -42,6 +42,25 @@ class JSOpBinary extends AbstractJSExpression
     m_aLeft = left;
     m_sOp = op;
     m_aRight = right;
+  }
+
+  @Nonnull
+  public IJSExpression left ()
+  {
+    return m_aLeft;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String operator ()
+  {
+    return m_sOp;
+  }
+
+  @Nonnull
+  public IJSGeneratable right ()
+  {
+    return m_aRight;
   }
 
   public void generate (@Nonnull final JSFormatter f)

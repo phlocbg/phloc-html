@@ -47,10 +47,10 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * @param init
    *        Value to initialize this variable to
    */
-  JSFieldVar (@Nonnull final JSDefinedClass owner,
-              @Nullable final AbstractJSType type,
-              @Nonnull final String name,
-              @Nullable final IJSExpression init)
+  public JSFieldVar (@Nonnull final JSDefinedClass owner,
+                     @Nullable final AbstractJSType type,
+                     @Nonnull final String name,
+                     @Nullable final IJSExpression init)
   {
     super (type, name, init);
     if (owner == null)

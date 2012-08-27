@@ -38,7 +38,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContainer
+public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContainer
 {
   /**
    * Declarations and statements contained in this block. Either
@@ -63,10 +63,10 @@ public final class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionC
     this (true, true);
   }
 
-  public JSBlock (final boolean bracesRequired, final boolean indentRequired)
+  public JSBlock (final boolean bBracesRequired, final boolean bIndentRequired)
   {
-    m_bBracesRequired = bracesRequired;
-    m_bIndentRequired = indentRequired;
+    m_bBracesRequired = bBracesRequired;
+    m_bIndentRequired = bIndentRequired;
   }
 
   /**

@@ -32,10 +32,10 @@ public class JSCatchBlock implements IJSGeneratable
   private JSVar m_aVar;
   private final JSBlock m_aBody = new JSBlock ();
 
-  JSCatchBlock ()
+  public JSCatchBlock ()
   {}
 
-  JSCatchBlock (@Nonnull final String name)
+  public JSCatchBlock (@Nonnull final String name)
   {
     m_aVar = new JSVar (null, name, null);
   }
