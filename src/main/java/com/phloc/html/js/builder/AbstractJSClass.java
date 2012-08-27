@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
+
 /**
  * Represents an abstract JS class.
  * 
@@ -115,28 +117,28 @@ public abstract class AbstractJSClass extends AbstractJSType
 
   /** Generates a static method invocation. */
   @Nonnull
-  public final JSInvocation staticInvoke (final JSMethod method)
+  public final JSInvocation staticInvoke (@Nonnull final JSMethod method)
   {
     return new JSInvocation (this, method);
   }
 
   /** Generates a static method invocation. */
   @Nonnull
-  public final JSInvocation staticInvoke (final String method)
+  public final JSInvocation staticInvoke (@Nonnull @Nonempty final String method)
   {
     return new JSInvocation (this, method);
   }
 
   /** Static field reference. */
   @Nonnull
-  public final JSFieldRef staticRef (final String field)
+  public final JSFieldRef staticRef (@Nonnull @Nonempty final String field)
   {
     return new JSFieldRef (this, field);
   }
 
   /** Static field reference. */
   @Nonnull
-  public final JSFieldRef staticRef (final JSVar field)
+  public final JSFieldRef staticRef (@Nonnull final JSVar field)
   {
     return new JSFieldRef (this, field);
   }

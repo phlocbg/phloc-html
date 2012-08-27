@@ -26,6 +26,9 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -38,7 +41,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  */
 public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
 {
-  private static final String CONSTRUCTOR_FUNCTION_NAME = "__init__";
+  private static final Logger s_aLogger = LoggerFactory.getLogger (JSDefinedClass.class);
 
   /** class JSDoc */
   private JSCommentMultiLine m_aJSDoc;
@@ -56,28 +59,31 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
 
   /** Constructors for this class */
-  private JSMethod m_aConstructor;
+  private JSConstructor m_aConstructor;
 
   /** Set of methods that are members of this class */
   private final List <JSMethod> m_aMethods = new ArrayList <JSMethod> ();
 
   /**
-   * JClass constructor
+   * constructor
    * 
    * @param parent
-   *        Modifiers for this class declaration
+   *        Owning package. May be <code>null</code>.
    * @param name
    *        Name of this class
    */
-  JSDefinedClass (final JSPackage parent, final String name)
+  JSDefinedClass (@Nullable final JSPackage parent, @Nonnull @Nonempty final String name)
   {
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);
+    if (!Character.isUpperCase (name.charAt (0)))
+      s_aLogger.warn ("Class names should always start with an upper-case character: " + name);
     m_aPackage = parent;
     m_sName = name;
   }
 
   @Override
+  @Nullable
   public final JSPackage _package ()
   {
     return m_aPackage;
@@ -194,13 +200,12 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @return The constructor object to use. Never <code>null</code>.
    */
   @Nonnull
-  public JSMethod constructor ()
+  public JSConstructor constructor ()
   {
     if (m_aConstructor != null)
       return m_aConstructor;
-    final JSMethod aConstructor = new JSMethod (this, CONSTRUCTOR_FUNCTION_NAME);
+    final JSConstructor aConstructor = new JSConstructor (this);
     m_aConstructor = aConstructor;
-    m_aMethods.add (0, aConstructor);
     return aConstructor;
   }
 
@@ -257,18 +262,21 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return m_aJSDoc;
   }
 
+  @Nonnull
+  public JSFieldRef prototype ()
+  {
+    return staticRef ("prototype");
+  }
+
   public void declare (final JSFormatter f)
   {
     if (m_aJSDoc != null)
       f.nl ().generatable (m_aJSDoc);
 
-    f.plain ("function ").plain (m_sName).plain ('{');
-    if (m_aConstructor != null)
-    {
-      // Add call to constructor
-      f.nl ().indent ().plain ("this.").plain (CONSTRUCTOR_FUNCTION_NAME).plain ("();").nl ().outdent ();
-    }
-    f.plain ('}').nl ();
+    // Emit the constructor first
+    f.decl (constructor ());
+
+    // Start with the prototype methods
     f.plain (m_sName).plain (".prototype=").nl ().plain ('{').nl ().indent ();
 
     int nIndex = 0;

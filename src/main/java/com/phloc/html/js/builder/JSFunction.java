@@ -36,11 +36,11 @@ import com.phloc.html.js.marshal.JSMarshaller;
  */
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {
-
   /**
-   * javadoc comments for this JMethod
+   * JS doc comments for this function
    */
   private JSCommentMultiLine m_aJSDoc;
+
   /**
    * Return type for this function
    */
@@ -57,12 +57,12 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   private final List <JSVar> m_aParams = new ArrayList <JSVar> ();
 
   /**
-   * JBlock of statements that makes up the body this function
+   * Block of statements that makes up the body this function
    */
   private JSBlock m_aBody;
 
   /**
-   * JMethod constructor
+   * function constructor
    * 
    * @param name
    *        Name of this function
@@ -73,7 +73,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   }
 
   /**
-   * JMethod constructor
+   * function constructor
    * 
    * @param name
    *        Name of this function

@@ -23,6 +23,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -36,12 +39,16 @@ import com.phloc.html.js.marshal.JSMarshaller;
  */
 public class JSMethod implements IJSDocCommentable, IJSDeclaration
 {
+  private static final Logger s_aLogger = LoggerFactory.getLogger (JSMethod.class);
+
   private final JSDefinedClass m_aClass;
 
   /**
    * comments for this method
    */
   private JSCommentMultiLine m_aJSDoc;
+
+  private final boolean m_bIsConstructor;
 
   /**
    * Return type for this method
@@ -79,7 +86,12 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
       throw new NullPointerException ("class");
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal method name: " + name);
+    if (name.equals (aClass.name ()))
+      throw new IllegalArgumentException ("You cannot name a method like the constructor!");
+    if (!Character.isLowerCase (name.charAt (0)))
+      s_aLogger.warn ("Method names should always start with a lowercase character: " + name);
     m_aClass = aClass;
+    m_bIsConstructor = false;
     m_aType = type;
     m_sName = name;
   }
@@ -90,15 +102,14 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
    * @param aClass
    *        JClass containing this constructor
    */
-  JSMethod (@Nonnull final JSDefinedClass aClass, @Nonnull @Nonempty final String name)
+  JSMethod (@Nonnull final JSDefinedClass aClass)
   {
     if (aClass == null)
       throw new NullPointerException ("class");
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Illegal method name: " + name);
     m_aClass = aClass;
+    m_bIsConstructor = true;
     m_aType = null;
-    m_sName = name;
+    m_sName = aClass.name ();
   }
 
   @Nonnull
@@ -216,10 +227,19 @@ public class JSMethod implements IJSDocCommentable, IJSDeclaration
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
 
-    if (m_aType != null)
-      f.plain ("/* ").generatable (m_aType).plain (" */");
+    if (m_bIsConstructor)
+    {
+      f.plain ("function ").plain (m_sName);
+    }
+    else
+    {
+      if (m_aType != null)
+        f.plain ("/* ").generatable (m_aType).plain (" */");
 
-    f.plain (m_sName).plain (":function(");
+      f.plain (m_sName).plain (":function");
+    }
+
+    f.plain ('(');
     boolean first = true;
     for (final JSVar var : m_aParams)
     {
