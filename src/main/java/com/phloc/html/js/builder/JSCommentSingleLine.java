@@ -44,7 +44,10 @@ public class JSCommentSingleLine implements IJSStatement
   {
     if (f.generateComments ())
       for (final String sLine : RegExHelper.getSplitToArray (m_sWhat, "[\\r\\n]+"))
-        f.plain ("// ").plain (sLine).nlFix ();
+        if (f.indentAndAlign ())
+          f.plain ("// ").plain (sLine).nl ();
+        else
+          f.plain ("/*").plain (sLine).plain ("*/");
   }
 
   @Nullable
