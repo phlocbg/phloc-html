@@ -33,6 +33,7 @@ public abstract class AbstractJSClass extends AbstractJSType
   /**
    * Gets the package to which this class belongs.
    */
+  @Nonnull
   public abstract JSPackage _package ();
 
   /**

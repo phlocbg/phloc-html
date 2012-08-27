@@ -19,6 +19,11 @@ package com.phloc.html.js.builder;
 
 import org.junit.Test;
 
+/**
+ * Test class for class {@link JSPackage}
+ * 
+ * @author philip
+ */
 public final class JSPackageTest
 {
   @Test

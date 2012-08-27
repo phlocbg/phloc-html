@@ -52,6 +52,8 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
               @Nullable final IJSExpression init)
   {
     super (type, name, init);
+    if (owner == null)
+      throw new NullPointerException ("owner");
     m_aOwner = owner;
   }
 

@@ -26,6 +26,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
@@ -38,10 +39,13 @@ import com.phloc.html.js.marshal.JSMarshaller;
  */
 public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
 {
-  /**
-   * If this is a package-member class, this is {@link JSPackage}.
-   */
-  private final JSPackage m_aOuter;
+  private static final String CONSTRUCTOR_FUNCTION_NAME = "__init__";
+
+  /** class JSDoc */
+  private JSCommentMultiLine m_aJSDoc;
+
+  /** Ownining package */
+  private final JSPackage m_aPackage;
 
   /** Name of this class. */
   private final String m_sName;
@@ -52,19 +56,11 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /** Fields keyed by their names. */
   final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
 
-  /** class JSDoc */
-  private JSCommentMultiLine m_aJSDoc;
-
-  /** Set of constructors for this class, if any */
-  private final List <JSMethod> m_aConstructors = new ArrayList <JSMethod> ();
+  /** Constructors for this class */
+  private JSMethod m_aConstructor;
 
   /** Set of methods that are members of this class */
   private final List <JSMethod> m_aMethods = new ArrayList <JSMethod> ();
-
-  /**
-   * String that will be put directly inside the generated code. Can be null.
-   */
-  private String m_sDirectBlock;
 
   /**
    * JClass constructor
@@ -80,12 +76,18 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
       throw new IllegalArgumentException ("JSDefinedClass name empty");
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);
-    m_aOuter = parent;
+    m_aPackage = parent;
     m_sName = name;
   }
 
+  @Override
+  public final JSPackage _package ()
+  {
+    return m_aPackage;
+  }
+
   /**
-   * This class extends the specifed class.
+   * This class extends the specified class.
    * 
    * @param superClass
    *        Superclass for this class
@@ -128,13 +130,13 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * Adds a field to the list of field members of this JDefinedClass.
    * 
    * @param type
-   *        JType of this field
+   *        type of this field
    * @param name
    *        Name of this field
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (final AbstractJSType type, final String name)
+  public JSFieldVar field (@Nullable final AbstractJSType type, @Nonnull @Nonempty final String name)
   {
     return field (type, name, null);
   }
@@ -143,7 +145,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * Adds a field to the list of field members of this JDefinedClass.
    * 
    * @param type
-   *        JType of this field.
+   *        type of this field.
    * @param name
    *        Name of this field.
    * @param init
@@ -151,7 +153,9 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (final AbstractJSType type, final String name, final IJSExpression init)
+  public JSFieldVar field (@Nullable final AbstractJSType type,
+                           @Nonnull @Nonempty final String name,
+                           @Nullable final IJSExpression init)
   {
     final JSFieldVar f = new JSFieldVar (this, type, name, init);
 
@@ -169,6 +173,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @return always non-null.
    */
   @Nonnull
+  @ReturnsMutableCopy
   public Map <String, JSFieldVar> fields ()
   {
     return ContainerHelper.newMap (m_aFields);
@@ -188,38 +193,45 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a constructor to this class.
+   * 
+   * @return The constructor object to use. Never <code>null</code>.
    */
   @Nonnull
   public JSMethod constructor ()
   {
-    final JSMethod c = new JSMethod (this);
-    m_aConstructors.add (c);
-    return c;
+    if (m_aConstructor != null)
+      return m_aConstructor;
+    final JSMethod aConstructor = new JSMethod (this, CONSTRUCTOR_FUNCTION_NAME);
+    m_aConstructor = aConstructor;
+    m_aMethods.add (0, aConstructor);
+    return aConstructor;
   }
 
   /**
-   * Returns an iterator that walks the constructors defined in this class.
+   * Add a method to the list of method members of this JS class instance.
+   * 
+   * @param name
+   *        Name of the method
+   * @return Newly generated method
    */
   @Nonnull
-  @ReturnsMutableCopy
-  public List <JSMethod> constructors ()
+  public JSMethod method (@Nonnull @Nonempty final String name)
   {
-    return ContainerHelper.newList (m_aConstructors);
+    return method (null, name);
   }
 
   /**
-   * Add a method to the list of method members of this JDefinedClass instance.
+   * Add a method to the list of method members of this JS class instance.
    * 
    * @param type
    *        Return type for this method
    * @param name
    *        Name of the method
-   * @return Newly generated JMethod
+   * @return Newly generated method
    */
   @Nonnull
-  public JSMethod method (final AbstractJSType type, final String name)
+  public JSMethod method (@Nullable final AbstractJSType type, @Nonnull @Nonempty final String name)
   {
-    // XXX problems caught in M constructor
     final JSMethod m = new JSMethod (this, type, name);
     m_aMethods.add (m);
     return m;
@@ -253,50 +265,25 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     if (m_aJSDoc != null)
       f.nl ().generatable (m_aJSDoc);
 
-    f.plain (m_sName);
+    f.plain ("function ").plain (m_sName).plain ('{');
+    if (m_aConstructor != null)
+    {
+      // Add call to constructor
+      f.nl ().indent ().plain ("this.").plain (CONSTRUCTOR_FUNCTION_NAME).plain ("();").nl ().outdent ();
+    }
+    f.plain ('}').nl ();
+    f.plain (m_sName).plain (".prototype=").nl ().plain ('{').nl ().indent ();
 
-    if (m_aSuperClass != null)
-      f.nl ().indent ().plain ("extends").generatable (m_aSuperClass).nl ().outdent ();
-
-    declareBody (f);
-  }
-
-  /**
-   * prints the body of a class.
-   */
-  protected void declareBody (final JSFormatter f)
-  {
-    f.plain ('{').nl ().indent ();
-
-    for (final JSFieldVar field : m_aFields.values ())
-      f.decl (field);
-    for (final JSMethod m : m_aConstructors)
-      f.nl ().decl (m);
+    int nIndex = 0;
     for (final JSMethod m : m_aMethods)
-      f.nl ().decl (m);
+    {
+      f.decl (m);
+      if (++nIndex < m_aMethods.size ())
+        f.plain (',');
+      f.nl ();
+    }
 
-    if (m_sDirectBlock != null)
-      f.plain (m_sDirectBlock);
-    f.nl ().outdent ().plain ('}').nl ();
-  }
-
-  /**
-   * Places the given string directly inside the generated class. This method
-   * can be used to add methods/fields that are not generated by CodeModel. This
-   * method should be used only as the last resort.
-   */
-  public void direct (final String string)
-  {
-    if (m_sDirectBlock == null)
-      m_sDirectBlock = string;
-    else
-      m_sDirectBlock += string;
-  }
-
-  @Override
-  public final JSPackage _package ()
-  {
-    return m_aOuter;
+    f.outdent ().plain ('}').nl ();
   }
 
   @Nullable
