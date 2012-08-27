@@ -42,7 +42,8 @@ public final class JSDefinedClassTest
     aMethod.body ()._return (JSHtml.documentGetElementsByTagName (jsName));
 
     aMethod = aClass.constructor ();
-    aMethod.body ().invoke ("some_global_init").arg (5);
+    final JSVar jsParam = aMethod.param ("param");
+    aMethod.body ().invoke ("some_global_init").arg (jsParam);
 
     JSPrinter.setIndentAndAlign (true);
     System.out.println (aPkg.getJSCode ());

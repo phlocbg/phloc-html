@@ -21,14 +21,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 
 /**
  * Default implementation of {@link IJSInline}.
@@ -38,46 +40,46 @@ import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 @Immutable
 public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
 {
-  private final IJSCodeProvider m_aContent;
+  private final String m_sContent;
 
-  public JSInline (@Nonnull final IJSBuilderCodeProvider aContent)
-  {
-    this (aContent, null);
-  }
-
-  public JSInline (@Nonnull final IJSBuilderCodeProvider aContent, @Nullable final ConditionalComment aCC)
-  {
-    super (aCC);
-    if (aContent == null)
-      throw new NullPointerException ("content");
-    m_aContent = aContent;
-  }
-
-  @Deprecated
   public JSInline (@Nonnull final IJSCodeProvider aContent)
   {
     this (aContent, null);
   }
 
-  @Deprecated
   public JSInline (@Nonnull final IJSCodeProvider aContent, @Nullable final ConditionalComment aCC)
   {
     super (aCC);
     if (aContent == null)
       throw new NullPointerException ("content");
-    m_aContent = aContent;
+    m_sContent = aContent.getJSCode ();
   }
 
-  @Nonnull
-  public IJSCodeProvider getContent ()
+  @DevelopersNote ("Handle with care!")
+  public JSInline (@Nonnull @Nonempty final String sContent)
   {
-    return m_aContent;
+    this (sContent, null);
+  }
+
+  @DevelopersNote ("Handle with care!")
+  public JSInline (@Nonnull @Nonempty final String sContent, @Nullable final ConditionalComment aCC)
+  {
+    super (aCC);
+    if (StringHelper.hasNoText (sContent))
+      throw new IllegalArgumentException ("Empty content is not allowed in JSInline");
+    m_sContent = sContent;
+  }
+
+  @Nullable
+  public String getContent ()
+  {
+    return m_sContent;
   }
 
   @Nonnull
   public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final HCScript aScript = new HCScript (m_aContent);
+    final HCScript aScript = new HCScript (m_sContent);
     if (hasConditionalComment ())
       return getConditionalComment ().getNodeWrappedInCondition (aScript, aConversionSettings);
     return aScript;
@@ -91,18 +93,18 @@ public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
     if (!super.equals (o))
       return false;
     final JSInline rhs = (JSInline) o;
-    return m_aContent.equals (rhs.m_aContent);
+    return m_sContent.equals (rhs.m_sContent);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aContent).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sContent).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("content", m_aContent).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("content", m_sContent).toString ();
   }
 }

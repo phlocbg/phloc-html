@@ -147,8 +147,6 @@ public class JSInvocation extends AbstractJSExpression implements IJSStatement
   {
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("name");
-    if (sName.indexOf ('.') >= 0)
-      throw new IllegalArgumentException ("method name contains '.': " + sName);
     m_aObject = object;
     m_sName = sName;
     m_aCallee = null;

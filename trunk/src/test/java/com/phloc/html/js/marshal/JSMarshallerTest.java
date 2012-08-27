@@ -18,6 +18,7 @@
 package com.phloc.html.js.marshal;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -379,5 +380,27 @@ public final class JSMarshallerTest
     sJSFile = RegExHelper.stringReplacePattern ("\\['([a-zA-Z]+)'\\]", sJSFile, ".$1");
 
     SimpleFileIO.writeFile (new File ("src/test/resources/cleaned.js"), sJSFile, CCharset.CHARSET_ISO_8859_1);
+  }
+
+  @Test
+  public void testIsJSIdentifier ()
+  {
+    assertTrue (JSMarshaller.isJSIdentifier ("$"));
+    assertTrue (JSMarshaller.isJSIdentifier ("a"));
+    assertTrue (JSMarshaller.isJSIdentifier ("A"));
+    assertTrue (JSMarshaller.isJSIdentifier ("_"));
+    assertTrue (JSMarshaller.isJSIdentifier ("Abc"));
+    assertTrue (JSMarshaller.isJSIdentifier ("abc"));
+    assertTrue (JSMarshaller.isJSIdentifier ("abc_def"));
+    assertTrue (JSMarshaller.isJSIdentifier ("_abc_def"));
+    assertTrue (JSMarshaller.isJSIdentifier ("_abc2"));
+
+    assertFalse (JSMarshaller.isJSIdentifier (""));
+    assertFalse (JSMarshaller.isJSIdentifier (null));
+    assertFalse (JSMarshaller.isJSIdentifier ("0"));
+    assertFalse (JSMarshaller.isJSIdentifier ("0abc"));
+    assertFalse (JSMarshaller.isJSIdentifier ("abc.def"));
+    assertFalse (JSMarshaller.isJSIdentifier (".def"));
+    assertFalse (JSMarshaller.isJSIdentifier ("abc."));
   }
 }

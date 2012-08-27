@@ -54,7 +54,6 @@ import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.hc.impl.HCNodeList;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 import com.phloc.html.resource.css.ICSSExternal;
@@ -362,7 +361,7 @@ public class HCHead extends AbstractHCBaseNode
         {
           // Ensure the inline JS is executed after the document has been loaded
           // Note: has dependency to jQuery
-          addJS (new JSInline (DefaultJSCodeProvider.create ("$(document).ready(function() {" + aJS.toString () + "});")));
+          addJS (new JSInline ("$(document).ready(function() {" + aJS.toString () + "});"));
         }
       }
     }

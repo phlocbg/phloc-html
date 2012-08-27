@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.mime.CMimeType;
@@ -31,7 +32,6 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.IJSBuilderCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
@@ -47,17 +47,17 @@ public final class HCScript extends AbstractHCElement <HCScript>
   private IMimeType m_aType = DEFAULT_TYPE;
   private final String m_sContent;
 
-  public HCScript (@Nonnull final IJSBuilderCodeProvider aProvider)
+  public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
     super (EHTMLElement.SCRIPT);
     m_sContent = aProvider.getJSCode ();
   }
 
-  @Deprecated
-  public HCScript (@Nonnull final IJSCodeProvider aProvider)
+  @DevelopersNote ("Handle with care!")
+  public HCScript (@Nullable final String sJSCode)
   {
     super (EHTMLElement.SCRIPT);
-    m_sContent = aProvider.getJSCode ();
+    m_sContent = sJSCode;
   }
 
   @Nonnull
@@ -117,6 +117,13 @@ public final class HCScript extends AbstractHCElement <HCScript>
         else
           aElement.appendComment ("\n" + sContent + "\n//");
       }
+  }
+
+  @Override
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    // Don't create script elements with empty content....
+    return StringHelper.hasText (m_sContent);
   }
 
   @Override
