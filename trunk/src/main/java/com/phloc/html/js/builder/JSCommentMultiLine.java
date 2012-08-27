@@ -140,6 +140,9 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 
   public void generate (final JSFormatter f)
   {
+    if (!f.generateComments ())
+      return;
+
     f.plain ("/**").nlFix ();
 
     // Main content

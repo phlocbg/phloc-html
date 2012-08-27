@@ -35,6 +35,8 @@ import com.phloc.commons.io.streams.StreamUtils;
 public final class JSPrinter
 {
   private static boolean s_bIndentAndAlign = false;
+  private static boolean s_bGenerateTypeNames = true;
+  private static boolean s_bGenerateComments = true;
 
   private JSPrinter ()
   {}
@@ -44,14 +46,42 @@ public final class JSPrinter
     s_bIndentAndAlign = bIndentAndAlign;
   }
 
-  public static boolean isIdentAndAlign ()
+  public static boolean isIndentAndAlign ()
   {
     return s_bIndentAndAlign;
   }
 
+  public static void setGenerateTypeNames (final boolean bGenerateTypeNames)
+  {
+    s_bGenerateTypeNames = bGenerateTypeNames;
+  }
+
+  public static boolean isGenerateTypeNames ()
+  {
+    return s_bGenerateTypeNames;
+  }
+
+  public static void setGenerateComments (final boolean bGenerateComments)
+  {
+    s_bGenerateComments = bGenerateComments;
+  }
+
+  public static boolean isGenerateComments ()
+  {
+    return s_bGenerateComments;
+  }
+
+  @Nonnull
+  public static JSFormatter createFormatter (@Nonnull final Writer w)
+  {
+    return new JSFormatter (w).indentAndAlign (s_bIndentAndAlign)
+                              .generateTypeNames (s_bGenerateTypeNames)
+                              .generateComments (s_bGenerateComments);
+  }
+
   public static void writeExpression (@Nonnull final IJSExpression aExpression, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
+    final JSFormatter f = createFormatter (w);
     try
     {
       f.generatable (aExpression);
@@ -64,7 +94,7 @@ public final class JSPrinter
 
   public static void writeDeclaration (@Nonnull final IJSDeclaration aDeclaration, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
+    final JSFormatter f = createFormatter (w);
     try
     {
       f.decl (aDeclaration);
@@ -77,7 +107,7 @@ public final class JSPrinter
 
   public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
+    final JSFormatter f = createFormatter (w);
     try
     {
       f.stmt (aStatement);
@@ -90,7 +120,7 @@ public final class JSPrinter
 
   public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull final Writer w)
   {
-    final JSFormatter f = new JSFormatter (w).indentAndAlign (s_bIndentAndAlign);
+    final JSFormatter f = createFormatter (w);
     try
     {
       // for all declarations in the current package

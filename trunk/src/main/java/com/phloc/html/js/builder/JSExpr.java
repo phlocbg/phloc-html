@@ -286,7 +286,7 @@ public final class JSExpr
   @Nonnull
   public static AbstractJSExpression json (@Nonnull final IJSON aJSON)
   {
-    return direct (aJSON.getJSONString (JSPrinter.isIdentAndAlign ()));
+    return direct (aJSON.getJSONString (JSPrinter.isIndentAndAlign ()));
   }
 
   /**
