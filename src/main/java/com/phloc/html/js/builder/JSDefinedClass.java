@@ -130,7 +130,20 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * Adds a field to the list of field members of this JDefinedClass.
+   * Adds a field to the list of field members of this defined class.
+   * 
+   * @param name
+   *        Name of this field
+   * @return Newly generated field
+   */
+  @Nonnull
+  public JSFieldVar field (@Nonnull @Nonempty final String name)
+  {
+    return field (null, name, null);
+  }
+
+  /**
+   * Adds a field to the list of field members of this defined class.
    * 
    * @param type
    *        type of this field
@@ -145,7 +158,22 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * Adds a field to the list of field members of this JDefinedClass.
+   * Adds a field to the list of field members of this defined class.
+   * 
+   * @param name
+   *        Name of this field.
+   * @param init
+   *        Initial value of this field.
+   * @return Newly generated field
+   */
+  @Nonnull
+  public JSFieldVar field (@Nonnull @Nonempty final String name, @Nullable final IJSExpression init)
+  {
+    return field (null, name, init);
+  }
+
+  /**
+   * Adds a field to the list of field members of this defined class.
    * 
    * @param type
    *        type of this field.
@@ -250,9 +278,9 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   }
 
   /**
-   * Creates, if necessary, and returns the class javadoc for this JDefinedClass
+   * Creates, if necessary, and returns the class JSDoc for this defined class
    * 
-   * @return {@link JSCommentMultiLine} containing javadocs for this class
+   * @return {@link JSCommentMultiLine} containing JSDoc for this class
    */
   @Nonnull
   public JSCommentMultiLine jsDoc ()

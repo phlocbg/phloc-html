@@ -33,6 +33,10 @@ public final class JSDefinedClassTest
   {
     final JSPackage aPkg = new JSPackage ();
     final JSDefinedClass aClass = aPkg._class ("DummyClass");
+
+    aClass.field ("m_nValue");
+    aClass.field ("m_dValue", JSExpr.lit (0.0));
+
     JSMethod aMethod = aClass.method ("getElement");
     final JSVar jsID = aMethod.param ("id");
     aMethod.body ()._return (JSHtml.documentGetElementById (jsID));

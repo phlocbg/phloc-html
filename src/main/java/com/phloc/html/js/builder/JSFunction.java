@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.ToStringGenerator;
@@ -199,16 +200,23 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return new JSInvocation (this);
   }
 
+  @OverrideOnDemand
+  protected void declaration (@Nonnull final JSFormatter f)
+  {
+    f.plain ("function ");
+    if (m_aType != null && f.generateTypeNames ())
+      f.plain ("/*").generatable (m_aType).plain ("*/");
+    f.plain (m_sName);
+  }
+
   @Override
   public void declare (@Nonnull final JSFormatter f)
   {
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
 
-    f.plain ("function ");
-    if (m_aType != null && f.generateTypeNames ())
-      f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.plain (m_sName).plain ('(');
+    declaration (f);
+    f.plain ('(');
     boolean first = true;
     for (final JSVar aParam : m_aParams)
     {
@@ -219,11 +227,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
       f.var (aParam);
     }
     f.plain (')');
-
-    if (m_aBody != null)
-      f.stmt (m_aBody);
-    else
-      f.stmt (new JSBlock ());
+    f.stmt (body ());
   }
 
   @Nullable
