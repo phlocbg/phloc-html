@@ -33,13 +33,22 @@ public final class JQuerySelectorListTest
   @Test
   public void testBasic ()
   {
-    assertEquals ("#id5", new JQuerySelectorList ().addID ("id5").getAsString ());
+    assertEquals ("#id5", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id5")).getAsString ());
     // Check masking
-    assertEquals ("#id\\.value", new JQuerySelectorList ().addID ("id.value").getAsString ());
-    assertEquals (".basic", new JQuerySelectorList ().addClass (DefaultCSSClassProvider.create ("basic"))
-                                                       .getAsString ());
-    assertEquals ("td", new JQuerySelectorList ().addElement ("td").getAsString ());
-    assertEquals ("td:gt(3)", new JQuerySelectorList ().addElementWithSelector ("td", JQuerySelector.gt (3)).getAsString ());
-    assertEquals ("td:checked", new JQuerySelectorList ().addElementWithSelector ("td", JQuerySelector.checked).getAsString ());
+    assertEquals ("#id\\.value", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id.value")).getAsString ());
+    assertEquals (".basic",
+                  new JQuerySelectorList ().addSelector (JQuerySelector.clazz (DefaultCSSClassProvider.create ("basic")))
+                                           .getAsString ());
+    assertEquals ("td", new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")).getAsString ());
+    assertEquals ("td:gt(3)",
+                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
+                                                                       .chain (JQuerySelector.gt (3))).getAsString ());
+    assertEquals ("td:checked",
+                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
+                                                                       .chain (JQuerySelector.checked)).getAsString ());
+    assertEquals ("td span",
+                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td"))
+                                           .addSelector (JQuerySelector.elementName ("span"))
+                                           .getAsString ());
   }
 }

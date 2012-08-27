@@ -23,8 +23,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.IHasStringRepresentation;
-import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.state.EChange;
 
 public class JQuerySelectorList implements IHasStringRepresentation
 {
@@ -43,42 +44,19 @@ public class JQuerySelectorList implements IHasStringRepresentation
   }
 
   @Nonnull
-  public JQuerySelectorList addID (@Nonnull @Nonempty final String sID)
+  @ReturnsMutableCopy
+  public List <IJQuerySelector> getAllSelectors ()
   {
-    return addSelector (JQuerySelector.id (sID));
+    return ContainerHelper.newList (m_aElements);
   }
 
   @Nonnull
-  public JQuerySelectorList addClass (@Nonnull final ICSSClassProvider aCSSClass)
+  public EChange clear ()
   {
-    return addSelector (JQuerySelector.clazz (aCSSClass));
-  }
-
-  @Nonnull
-  public JQuerySelectorList addElement (@Nonnull @Nonempty final String sElementName)
-  {
-    return addSelector (JQuerySelector.elementName (sElementName));
-  }
-
-  @Nonnull
-  public JQuerySelectorList addElementWithSelector (@Nonnull @Nonempty final String sElementName,
-                                                    @Nonnull final IJQuerySelector aSelector)
-  {
-    return addSelector (JQuerySelector.elementName (sElementName).chain (aSelector));
-  }
-
-  @Nonnull
-  public JQuerySelectorList addElementWithID (@Nonnull @Nonempty final String sElementName,
-                                              @Nonnull @Nonempty final String sID)
-  {
-    return addElementWithSelector (sElementName, JQuerySelector.id (sID));
-  }
-
-  @Nonnull
-  public JQuerySelectorList addElementWithClass (@Nonnull @Nonempty final String sElementName,
-                                                 @Nonnull final ICSSClassProvider aCSSClass)
-  {
-    return addElementWithSelector (sElementName, JQuerySelector.clazz (aCSSClass));
+    if (m_aElements.isEmpty ())
+      return EChange.UNCHANGED;
+    m_aElements.clear ();
+    return EChange.CHANGED;
   }
 
   @Nonnull

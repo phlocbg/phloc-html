@@ -43,7 +43,7 @@ public class JSCommentSingleLine implements IJSStatement
   public void state (@Nonnull final JSFormatter f)
   {
     for (final String sLine : RegExHelper.getSplitToArray (m_sWhat, "[\\r\\n]+"))
-      f.plain ("// ").plain (sLine).nl ();
+      f.plain ("// ").plain (sLine).nlFix ();
   }
 
   @Nullable

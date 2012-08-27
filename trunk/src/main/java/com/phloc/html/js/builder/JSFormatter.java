@@ -120,20 +120,50 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Decrement the indentation level.
+   * Decrement the indentation level if {@link #indentAndAlign()} is on
+   * 
+   * @return this
    */
   @Nonnull
   public JSFormatter outdent ()
+  {
+    if (m_bIndentAndAlign)
+      outdentFix ();
+    return this;
+  }
+
+  /**
+   * Decrement the indentation level.
+   * 
+   * @return this
+   */
+  @Nonnull
+  public JSFormatter outdentFix ()
   {
     m_nIndentLevel--;
     return this;
   }
 
   /**
-   * Increment the indentation level.
+   * Increment the indentation level if {@link #indentAndAlign()} is on
+   * 
+   * @return this
    */
   @Nonnull
   public JSFormatter indent ()
+  {
+    if (m_bIndentAndAlign)
+      indentFix ();
+    return this;
+  }
+
+  /**
+   * Increment the indentation level.
+   * 
+   * @return this
+   */
+  @Nonnull
+  public JSFormatter indentFix ()
   {
     m_nIndentLevel++;
     return this;
@@ -143,7 +173,7 @@ public class JSFormatter implements Closeable
   {
     if (m_bAtBeginningOfLine)
     {
-      if (m_nIndentLevel > 0 && m_bIndentAndAlign)
+      if (m_nIndentLevel > 0)
         m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
       m_bAtBeginningOfLine = false;
     }
@@ -181,7 +211,7 @@ public class JSFormatter implements Closeable
    * Print a type name.
    * 
    * @param type
-   *        The type whos name is to be printed
+   *        The type whose name is to be printed
    */
   @Nonnull
   public JSFormatter type (@Nonnull final AbstractJSType type)
@@ -191,16 +221,28 @@ public class JSFormatter implements Closeable
   }
 
   /**
-   * Print a new line into the stream
+   * Print a new line into the stream if {@link #indentAndAlign()} is on
+   * 
+   * @return this
    */
   @Nonnull
   public JSFormatter nl ()
   {
     if (m_bIndentAndAlign)
-    {
-      m_aPW.print ('\n');
-      m_bAtBeginningOfLine = true;
-    }
+      nlFix ();
+    return this;
+  }
+
+  /**
+   * Print a new line into the stream
+   * 
+   * @return this
+   */
+  @Nonnull
+  public JSFormatter nlFix ()
+  {
+    m_aPW.print ('\n');
+    m_bAtBeginningOfLine = true;
     return this;
   }
 

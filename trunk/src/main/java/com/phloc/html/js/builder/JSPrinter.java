@@ -34,7 +34,7 @@ import com.phloc.commons.io.streams.StreamUtils;
 @Immutable
 public final class JSPrinter
 {
-  private static boolean s_bIndentAndAlign = true;
+  private static boolean s_bIndentAndAlign = false;
 
   private JSPrinter ()
   {}
