@@ -20,6 +20,7 @@ package com.phloc.html.js.builder.jquery;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.IHasStringRepresentation;
@@ -41,6 +42,18 @@ public class JQuerySelectorList implements IHasStringRepresentation
       throw new NullPointerException ("selector");
     m_aElements.add (aSelector);
     return this;
+  }
+
+  @Nonnull
+  public EChange removeSelector (@Nonnegative final int nIndex)
+  {
+    return EChange.valueOf (m_aElements.remove (nIndex) != null);
+  }
+
+  @Nonnull
+  public EChange removeSelector (@Nonnegative final IJQuerySelector aSelector)
+  {
+    return EChange.valueOf (m_aElements.remove (aSelector));
   }
 
   @Nonnull
