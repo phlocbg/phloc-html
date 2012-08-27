@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSForIn implements IJSStatement
+public class JSForIn implements IJSStatement
 {
   private final JSVar m_aLoopVar;
   private final IJSExpression m_aCollection;
