@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * Field Reference
@@ -49,10 +49,8 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
 
   JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
-    if (StringHelper.hasNoText (name))
+    if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("name");
-    if (name.indexOf ('.') >= 0)
-      throw new IllegalArgumentException ("Field name contains '.': " + name);
     m_aObject = object;
     m_sName = name;
   }
