@@ -17,9 +17,7 @@
  */
 package com.phloc.html.resource.js;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.html.js.IJSCodeProvider;
+import javax.annotation.Nullable;
 
 /**
  * Represents an inline JS item in HTML
@@ -29,8 +27,8 @@ import com.phloc.html.js.IJSCodeProvider;
 public interface IJSInline extends IJSHTMLDefinition
 {
   /**
-   * @return The inline JS code to be emitted. May not be <code>null</code>.
+   * @return The inline JS code to be emitted. May be <code>null</code>.
    */
-  @Nonnull
-  IJSCodeProvider getContent ();
+  @Nullable
+  String getContent ();
 }

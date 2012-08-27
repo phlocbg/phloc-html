@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -72,8 +71,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   JSDefinedClass (final JSPackage parent, final String name)
   {
-    if (StringHelper.hasNoTextAfterTrim (name))
-      throw new IllegalArgumentException ("JSDefinedClass name empty");
     if (!JSMarshaller.isJSIdentifier (name))
       throw new IllegalArgumentException ("Illegal class name: " + name);
     m_aPackage = parent;
