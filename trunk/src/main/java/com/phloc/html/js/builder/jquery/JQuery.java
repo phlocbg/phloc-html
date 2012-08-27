@@ -69,9 +69,432 @@ public class JQuery
    * @return <code>$.fn<code>
    */
   @Nonnull
-  public static JSFieldRef jQueryFn ()
+  public static JSFieldRef fn ()
   {
     return jQueryField ().ref ("fn");
+  }
+
+  /**
+   * @return <code>$.error</code>
+   */
+  @Nonnull
+  public static JSFieldRef error ()
+  {
+    return jQueryField ().ref ("error");
+  }
+
+  /**
+   * @return <code>$.fx.interval</code>
+   */
+  @Nonnull
+  public static JSFieldRef fxInterval ()
+  {
+    return jQueryField ().ref ("fx.interval");
+  }
+
+  /**
+   * @return <code>$.fx.off</code>
+   */
+  @Nonnull
+  public static JSFieldRef fxOff ()
+  {
+    return jQueryField ().ref ("fx.off");
+  }
+
+  /**
+   * @return <code>$.cssHooks</code>
+   */
+  @Nonnull
+  public static JSFieldRef cssHooks ()
+  {
+    return jQueryField ().ref ("cssHooks");
+  }
+
+  /**
+   * @return <code>$.parseJSON</code>
+   */
+  @Nonnull
+  public static JSFieldRef parseJSON ()
+  {
+    return jQueryField ().ref ("parseJSON");
+  }
+
+  /**
+   * @return <code>$.support</code>
+   */
+  @Nonnull
+  public static JSFieldRef support ()
+  {
+    return jQueryField ().ref ("support");
+  }
+
+  /**
+   * @return <code>$.ajax</code>
+   */
+  @Nonnull
+  public static JQueryInvocation ajax ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("ajax"));
+  }
+
+  /**
+   * @return <code>$.ajaxPrefilter</code>
+   */
+  @Nonnull
+  public static JQueryInvocation ajaxPrefilter ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("ajaxPrefilter"));
+  }
+
+  /**
+   * @return <code>$.ajaxSetup</code>
+   */
+  @Nonnull
+  public static JQueryInvocation ajaxSetup ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("ajaxSetup"));
+  }
+
+  /**
+   * @return <code>$.Callbacks</code>
+   */
+  @Nonnull
+  public static JQueryInvocation Callbacks ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("Callbacks"));
+  }
+
+  /**
+   * @return <code>$.contains</code>
+   */
+  @Nonnull
+  public static JQueryInvocation contains ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("contains"));
+  }
+
+  /**
+   * @return <code>$.data</code>
+   */
+  @Nonnull
+  public static JQueryInvocation data ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("data"));
+  }
+
+  /**
+   * @return <code>$.dequeue</code>
+   */
+  @Nonnull
+  public static JQueryInvocation dequeue ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("dequeue"));
+  }
+
+  /**
+   * @return <code>$.each</code>
+   */
+  @Nonnull
+  public static JQueryInvocation each ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("each"));
+  }
+
+  /**
+   * @return <code>$.extend</code>
+   */
+  @Nonnull
+  public static JQueryInvocation extend ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("extend"));
+  }
+
+  /**
+   * @return <code>$.get</code>
+   */
+  @Nonnull
+  public static JQueryInvocation get ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("get"));
+  }
+
+  /**
+   * @return <code>$.getJSON</code>
+   */
+  @Nonnull
+  public static JQueryInvocation getJSON ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("getJSON"));
+  }
+
+  /**
+   * @return <code>$.getScript</code>
+   */
+  @Nonnull
+  public static JQueryInvocation getScript ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("getScript"));
+  }
+
+  /**
+   * @return <code>$.globalEval</code>
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("globalEval"));
+  }
+
+  /**
+   * @return <code>$.grep</code>
+   */
+  @Nonnull
+  public static JQueryInvocation grep ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("grep"));
+  }
+
+  /**
+   * @return <code>$.hasData</code>
+   */
+  @Nonnull
+  public static JQueryInvocation hasData ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("hasData"));
+  }
+
+  /**
+   * @return <code>$.holdReady</code>
+   */
+  @Nonnull
+  public static JQueryInvocation holdReady ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("holdReady"));
+  }
+
+  /**
+   * @return <code>$.inArray</code>
+   */
+  @Nonnull
+  public static JQueryInvocation inArray ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("inArray"));
+  }
+
+  /**
+   * @return <code>$.isArray</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isArray ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isArray"));
+  }
+
+  /**
+   * @return <code>$.isEmptyObject</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isEmptyObject ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isEmptyObject"));
+  }
+
+  /**
+   * @return <code>$.isFunction</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isFunction ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isFunction"));
+  }
+
+  /**
+   * @return <code>$.isNumeric</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isNumeric ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isNumeric"));
+  }
+
+  /**
+   * @return <code>$.isPlainObject</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isPlainObject ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isPlainObject"));
+  }
+
+  /**
+   * @return <code>$.isWindow</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isWindow ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isWindow"));
+  }
+
+  /**
+   * @return <code>$.isXMLDoc</code>
+   */
+  @Nonnull
+  public static JQueryInvocation isXMLDoc ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("isXMLDoc"));
+  }
+
+  /**
+   * @return <code>$.makeArray</code>
+   */
+  @Nonnull
+  public static JQueryInvocation makeArray ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("makeArray"));
+  }
+
+  /**
+   * @return <code>$.map</code>
+   */
+  @Nonnull
+  public static JQueryInvocation map ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("map"));
+  }
+
+  /**
+   * @return <code>$.merge</code>
+   */
+  @Nonnull
+  public static JQueryInvocation merge ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("merge"));
+  }
+
+  /**
+   * @return <code>$.noConflict</code>
+   */
+  @Nonnull
+  public static JQueryInvocation noConflict ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("noConflict"));
+  }
+
+  /**
+   * @return <code>$.noop</code>
+   */
+  @Nonnull
+  public static JQueryInvocation noop ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("noop"));
+  }
+
+  /**
+   * @return <code>$.now</code>
+   */
+  @Nonnull
+  public static JQueryInvocation now ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("now"));
+  }
+
+  /**
+   * @return <code>$.param</code>
+   */
+  @Nonnull
+  public static JQueryInvocation param ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("param"));
+  }
+
+  /**
+   * @return <code>$.parseXML</code>
+   */
+  @Nonnull
+  public static JQueryInvocation parseXML ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("parseXML"));
+  }
+
+  /**
+   * @return <code>$.post</code>
+   */
+  @Nonnull
+  public static JQueryInvocation post ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("post"));
+  }
+
+  /**
+   * @return <code>$.proxy</code>
+   */
+  @Nonnull
+  public static JQueryInvocation proxy ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("proxy"));
+  }
+
+  /**
+   * @return <code>$.queue</code>
+   */
+  @Nonnull
+  public static JQueryInvocation queue ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("queue"));
+  }
+
+  /**
+   * @return <code>$.removeData</code>
+   */
+  @Nonnull
+  public static JQueryInvocation removeData ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("removeData"));
+  }
+
+  /**
+   * @return <code>$.sub</code>
+   */
+  @Nonnull
+  public static JQueryInvocation sub ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("sub"));
+  }
+
+  /**
+   * @return <code>$.trim</code>
+   */
+  @Nonnull
+  public static JQueryInvocation trim ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("trim"));
+  }
+
+  /**
+   * @return <code>$.type</code>
+   */
+  @Nonnull
+  public static JQueryInvocation type ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("type"));
+  }
+
+  /**
+   * @return <code>$.unique</code>
+   */
+  @Nonnull
+  public static JQueryInvocation unique ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("unique"));
+  }
+
+  /**
+   * @return <code>$.when</code>
+   */
+  @Nonnull
+  public static JQueryInvocation when ()
+  {
+    return new JQueryInvocation (jQueryField ().invoke ("when"));
   }
 
   /**
