@@ -157,7 +157,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   void bind (@Nonnull final JSFormatter f)
   {
-    if (m_aType != null)
+    if (m_aType != null && f.generateTypeNames ())
       f.plain ("/*").generatable (m_aType).plain ("*/");
     f.plain (m_sName);
     if (m_aInit != null)

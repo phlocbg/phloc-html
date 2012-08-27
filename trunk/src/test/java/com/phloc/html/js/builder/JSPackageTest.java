@@ -152,8 +152,17 @@ public final class JSPackageTest
       aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
 
-    final String sCode = aPkg.getJSCode ();
+    JSPrinter.setMinimumCodeSize (false);
+    String sCode = aPkg.getJSCode ();
     System.out.print (sCode);
+    JSPrinter.setMinimumCodeSize (true);
+    System.out.println ("--------");
+    final int nBefore = sCode.length ();
+    sCode = aPkg.getJSCode ();
+    System.out.println (sCode);
+    System.out.println ("Saved " + (nBefore - sCode.length ()) + " chars. " + sCode.length () + " chars are left");
+    System.out.println ("--------");
+    JSPrinter.setToDefault ();
   }
 
   @Test

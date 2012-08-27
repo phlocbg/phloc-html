@@ -34,12 +34,22 @@ import com.phloc.commons.io.streams.StreamUtils;
 @Immutable
 public final class JSPrinter
 {
-  private static boolean s_bIndentAndAlign = false;
-  private static boolean s_bGenerateTypeNames = true;
-  private static boolean s_bGenerateComments = true;
+  public static final boolean DEFAULT_INDENT_AND_ALIGN = false;
+  public static final boolean DEFAULT_GENERATE_TYPE_NAMES = false;
+  public static final boolean DEFAULT_GENERATE_COMMENTS = true;
+  private static boolean s_bIndentAndAlign = DEFAULT_INDENT_AND_ALIGN;
+  private static boolean s_bGenerateTypeNames = DEFAULT_GENERATE_TYPE_NAMES;
+  private static boolean s_bGenerateComments = DEFAULT_GENERATE_COMMENTS;
 
   private JSPrinter ()
   {}
+
+  public static void setToDefault ()
+  {
+    s_bIndentAndAlign = DEFAULT_INDENT_AND_ALIGN;
+    s_bGenerateTypeNames = DEFAULT_GENERATE_TYPE_NAMES;
+    s_bGenerateComments = DEFAULT_GENERATE_COMMENTS;
+  }
 
   public static void setIndentAndAlign (final boolean bIndentAndAlign)
   {
@@ -69,6 +79,13 @@ public final class JSPrinter
   public static boolean isGenerateComments ()
   {
     return s_bGenerateComments;
+  }
+
+  public static void setMinimumCodeSize (final boolean bMinimumCodeSize)
+  {
+    setIndentAndAlign (!bMinimumCodeSize);
+    setGenerateTypeNames (!bMinimumCodeSize);
+    setGenerateComments (!bMinimumCodeSize);
   }
 
   @Nonnull
