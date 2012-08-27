@@ -35,7 +35,7 @@ public class JSWhileLoop implements IJSStatement
   private final IJSExpression m_aTest;
 
   /**
-   * JBlock of statements which makes up body of this While statement
+   * Block of statements which makes up body of this While statement
    */
   private JSBlock m_aBody;
 
@@ -44,6 +44,8 @@ public class JSWhileLoop implements IJSStatement
    */
   public JSWhileLoop (@Nonnull final IJSExpression test)
   {
+    if (test == null)
+      throw new NullPointerException ("test");
     m_aTest = test;
   }
 
