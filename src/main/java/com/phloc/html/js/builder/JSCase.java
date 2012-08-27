@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSCase implements IJSStatement
+public class JSCase implements IJSStatement
 {
   /**
    * label part of the case statement
@@ -47,7 +47,7 @@ public final class JSCase implements IJSStatement
   /**
    * Construct a case statement
    */
-  JSCase (@Nonnull final IJSExpression label)
+  public JSCase (@Nonnull final IJSExpression label)
   {
     this (label, false);
     if (label == null)
@@ -58,7 +58,7 @@ public final class JSCase implements IJSStatement
    * Construct a case statement. If isDefaultCase is true, then label should be
    * null since default cases don't have a label.
    */
-  JSCase (@Nullable final IJSExpression label, final boolean isDefaultCase)
+  public JSCase (@Nullable final IJSExpression label, final boolean isDefaultCase)
   {
     m_aLabel = label;
     m_bIsDefaultCase = isDefaultCase;

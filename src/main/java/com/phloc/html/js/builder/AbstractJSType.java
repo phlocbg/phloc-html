@@ -38,6 +38,12 @@ public abstract class AbstractJSType implements IJSGeneratable
   @Nonempty
   public abstract String name ();
 
+  @Nonnull
+  public JSCast casted (@Nonnull final IJSExpression expr)
+  {
+    return JSExpr.cast (this, expr);
+  }
+
   @Override
   public String toString ()
   {

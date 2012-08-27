@@ -33,7 +33,7 @@ public class JSTryBlock implements IJSStatement
   private JSCatchBlock m_aCatch;
   private JSBlock m_aFinally;
 
-  JSTryBlock ()
+  public JSTryBlock ()
   {}
 
   @Nonnull

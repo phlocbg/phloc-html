@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSCast extends AbstractJSExpression
+public class JSCast extends AbstractJSExpression
 {
   /**
    * JType to which the expression is to be cast.
@@ -46,7 +46,7 @@ final class JSCast extends AbstractJSExpression
    * @param object
    *        JExpression for the object upon which the cast is applied
    */
-  JSCast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression object)
+  public JSCast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression object)
   {
     if (type == null)
       throw new NullPointerException ("type");

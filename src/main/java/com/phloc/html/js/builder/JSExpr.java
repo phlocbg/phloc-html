@@ -183,7 +183,7 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSCast cast (final AbstractJSType type, final IJSExpression expr)
+  public static JSCast cast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression expr)
   {
     return new JSCast (type, expr);
   }

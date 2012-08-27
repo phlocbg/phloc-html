@@ -47,7 +47,7 @@ public class JSMethod extends JSFunction
    * @param name
    *        Name of this method
    */
-  JSMethod (@Nonnull final JSDefinedClass aClass, @Nullable final AbstractJSType type, @Nonnull final String name)
+  public JSMethod (@Nonnull final JSDefinedClass aClass, @Nullable final AbstractJSType type, @Nonnull final String name)
   {
     super (type, name);
     if (aClass == null)

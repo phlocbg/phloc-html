@@ -21,14 +21,14 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 
-class JSOpUnaryWithParanthesis extends JSOpUnary
+public class JSOpUnaryWithParanthesis extends JSOpUnary
 {
-  JSOpUnaryWithParanthesis (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
+  public JSOpUnaryWithParanthesis (@Nonnull @Nonempty final String op, @Nonnull final IJSExpression e)
   {
     super (op, e);
   }
 
-  JSOpUnaryWithParanthesis (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
+  public JSOpUnaryWithParanthesis (@Nonnull final IJSExpression e, @Nonnull @Nonempty final String op)
   {
     super (e, op);
   }

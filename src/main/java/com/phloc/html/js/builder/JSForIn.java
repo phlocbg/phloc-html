@@ -33,9 +33,9 @@ public final class JSForIn implements IJSStatement
   private final IJSExpression m_aCollection;
   private JSBlock m_aBody;
 
-  JSForIn (@Nullable final AbstractJSType vartype,
-           @Nonnull final String variable,
-           @Nonnull final IJSExpression collection)
+  public JSForIn (@Nullable final AbstractJSType vartype,
+                  @Nonnull final String variable,
+                  @Nonnull final IJSExpression collection)
   {
     m_aLoopVar = new JSVar (vartype, variable, null);
     m_aCollection = collection;

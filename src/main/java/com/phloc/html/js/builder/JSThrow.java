@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSThrow implements IJSStatement
+public class JSThrow implements IJSStatement
 {
   /**
    * Expression to throw
@@ -40,8 +40,10 @@ final class JSThrow implements IJSStatement
    * @param expr
    *        JExpression which evaluates to JThrow value
    */
-  JSThrow (@Nonnull final IJSExpression expr)
+  public JSThrow (@Nonnull final IJSExpression expr)
   {
+    if (expr == null)
+      throw new NullPointerException ("expr");
     m_aExpr = expr;
   }
 

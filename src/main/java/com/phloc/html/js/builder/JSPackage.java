@@ -38,7 +38,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProvider
+public class JSPackage implements IJSFunctionContainer, IJSBuilderCodeProvider
 {
   private final List <Object> m_aObjs = new ArrayList <Object> ();
 

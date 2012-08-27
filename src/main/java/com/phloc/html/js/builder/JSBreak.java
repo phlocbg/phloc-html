@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-final class JSBreak implements IJSStatement
+public class JSBreak implements IJSStatement
 {
   private final JSLabel m_aLabel;
 
@@ -36,7 +36,7 @@ final class JSBreak implements IJSStatement
    * @param aLabel
    *        break label or null.
    */
-  JSBreak (@Nullable final JSLabel aLabel)
+  public JSBreak (@Nullable final JSLabel aLabel)
   {
     m_aLabel = aLabel;
   }

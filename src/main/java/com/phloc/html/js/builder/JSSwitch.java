@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSSwitch implements IJSStatement
+public class JSSwitch implements IJSStatement
 {
   /**
    * Test part of switch statement.
@@ -52,8 +52,10 @@ public final class JSSwitch implements IJSStatement
   /**
    * Construct a switch statement
    */
-  JSSwitch (@Nonnull final IJSExpression test)
+  public JSSwitch (@Nonnull final IJSExpression test)
   {
+    if (test == null)
+      throw new NullPointerException ("test");
     m_aTest = test;
   }
 

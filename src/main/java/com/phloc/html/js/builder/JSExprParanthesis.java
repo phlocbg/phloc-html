@@ -21,13 +21,21 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.string.ToStringGenerator;
 
-final class JSExprParanthesis extends AbstractJSExpression
+public class JSExprParanthesis extends AbstractJSExpression
 {
   private final IJSExpression m_aExpr;
 
-  JSExprParanthesis (@Nonnull final IJSExpression aExpr)
+  public JSExprParanthesis (@Nonnull final IJSExpression aExpr)
   {
+    if (aExpr == null)
+      throw new NullPointerException ("expr");
     m_aExpr = aExpr;
+  }
+
+  @Nonnull
+  public IJSExpression expr ()
+  {
+    return m_aExpr;
   }
 
   public void generate (@Nonnull final JSFormatter f)

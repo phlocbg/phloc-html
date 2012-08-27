@@ -42,7 +42,7 @@ public class JSDoLoop implements IJSStatement
   /**
    * Constructor
    */
-  JSDoLoop (@Nonnull final IJSExpression test)
+  public JSDoLoop (@Nonnull final IJSExpression test)
   {
     m_aTest = test;
   }

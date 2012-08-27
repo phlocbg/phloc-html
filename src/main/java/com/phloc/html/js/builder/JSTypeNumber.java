@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
  */
 public class JSTypeNumber extends JSPrimitiveType
 {
-  JSTypeNumber ()
+  public JSTypeNumber ()
   {
     super ("Number");
   }

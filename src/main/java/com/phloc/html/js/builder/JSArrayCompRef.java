@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSArrayCompRef extends AbstractJSAssignmentTarget
+public class JSArrayCompRef extends AbstractJSAssignmentTarget
 {
   /**
    * JArray expression upon which this component will be accessed.

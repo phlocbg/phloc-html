@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public final class JSReturn implements IJSStatement
+public class JSReturn implements IJSStatement
 {
   /**
    * Expression to return; may be null.

@@ -37,7 +37,7 @@ public class JSForLoop implements IJSStatement
   private final List <IJSExpression> m_aUpdates = new ArrayList <IJSExpression> ();
   private JSBlock m_aBody;
 
-  JSForLoop ()
+  public JSForLoop ()
   {}
 
   @Nonnull
