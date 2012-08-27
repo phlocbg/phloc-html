@@ -57,6 +57,8 @@ public class JSFormatter implements Closeable
 
   private boolean m_bGenerateTypeNames = true;
 
+  private boolean m_bGenerateComments = true;
+
   /**
    * Creates a formatter with default incremental indentations of four spaces.
    */
@@ -108,6 +110,18 @@ public class JSFormatter implements Closeable
   public JSFormatter generateTypeNames (final boolean bGenerateTypeNames)
   {
     m_bGenerateTypeNames = bGenerateTypeNames;
+    return this;
+  }
+
+  public boolean generateComments ()
+  {
+    return m_bGenerateComments;
+  }
+
+  @Nonnull
+  public JSFormatter generateComments (final boolean bGenerateComments)
+  {
+    m_bGenerateComments = bGenerateComments;
     return this;
   }
 
