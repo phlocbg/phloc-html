@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -59,15 +60,18 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
 
   @Nonnull
   @Override
-  public JSFieldVar name (final String name)
+  public JSFieldVar name (@Nonnull @Nonempty final String sNewName)
   {
-    // make sure that the new name is available
-    if (m_aOwner.m_aFields.containsKey (name))
-      throw new IllegalArgumentException ("name " + name + " is already in use");
     final String sOldName = name ();
-    super.name (name);
-    m_aOwner.m_aFields.remove (sOldName);
-    m_aOwner.m_aFields.put (name, this);
+    if (!sOldName.equals (sNewName))
+    {
+      // make sure that the new name is available
+      if (m_aOwner.m_aFields.containsKey (sNewName))
+        throw new IllegalArgumentException ("name " + sNewName + " is already in use");
+      super.name (sNewName);
+      m_aOwner.m_aFields.remove (sOldName);
+      m_aOwner.m_aFields.put (sNewName, this);
+    }
     return this;
   }
 
