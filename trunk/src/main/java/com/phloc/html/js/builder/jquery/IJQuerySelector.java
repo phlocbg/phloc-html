@@ -42,7 +42,7 @@ public interface IJQuerySelector extends IHasStringRepresentation
 
   /**
    * @return The optional expression that was used as the parameter to this
-   *         selector.
+   *         selector. May be <code>null</code>.
    */
   @Nullable
   IJSExpression getExpression ();
