@@ -159,7 +159,7 @@ public class JQuery
    * @return <code>$.Callbacks</code>
    */
   @Nonnull
-  public static JQueryInvocation Callbacks ()
+  public static JQueryInvocation callbacks ()
   {
     return new JQueryInvocation (jQueryField ().invoke ("Callbacks"));
   }
