@@ -283,17 +283,17 @@ public class HCSWFObject extends AbstractWrappedHCNode
     if (StringHelper.hasNoText (m_sRequiredSWFVersion))
       throw new IllegalStateException ("No required SWF version present");
 
-    final JSAssocArray jsFlashvars = JSExpr.newAssocArray ();
+    final JSAssocArray jsFlashvars = new JSAssocArray ();
     if (m_aFlashVars != null)
       for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
         jsFlashvars.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
-    final JSAssocArray jsParams = JSExpr.newAssocArray ();
+    final JSAssocArray jsParams = new JSAssocArray ();
     if (m_aObjectParams != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectParams.entrySet ())
         jsParams.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
-    final JSAssocArray jsAttributes = JSExpr.newAssocArray ();
+    final JSAssocArray jsAttributes = new JSAssocArray ();
     if (m_aObjectAttrs != null)
       for (final Map.Entry <String, String> aEntry : m_aObjectAttrs.entrySet ())
         jsAttributes.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));

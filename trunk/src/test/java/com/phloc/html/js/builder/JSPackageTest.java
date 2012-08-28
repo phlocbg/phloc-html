@@ -87,14 +87,14 @@ public final class JSPackageTest
 
       // Anonymous function
       {
-        final JSAnonymousFunction a = JSExpr.anonymousFunction ();
+        final JSAnonymousFunction a = new JSAnonymousFunction ();
         final JSVar av = a.param ("a");
         a.body ()._return (av.plus (0.5));
         aFuncMain.body ().invoke (a).arg (7.5);
       }
 
       // Array
-      final JSVar aArray1 = aFuncMain.body ().decl ("array1", JSExpr.newArray ().add (5));
+      final JSVar aArray1 = aFuncMain.body ().decl ("array1", new JSArray ().add (5));
       aFuncMain.body ().assign (aArray1.component (0), 6);
 
       final JSVar aArray1a = aFuncMain.body ().decl ("array1a", JSPrimitiveType.ARRAY._new ().arg (5));
@@ -103,11 +103,11 @@ public final class JSPackageTest
 
       // Associative Array
       final JSVar aArray2 = aFuncMain.body ().decl ("array2",
-                                                    JSExpr.newAssocArray ()
+                                                    new JSAssocArray ()
                                                           .add ("num", 1)
                                                           .add ("array", aArray1)
                                                           .add ("assocarray",
-                                                                JSExpr.newAssocArray ()
+                                                                new JSAssocArray ()
                                                                       .add ("key", "value")
                                                                       .add ("key2", "anything else")));
       aFuncMain.body ().assign (aArray2.component ("num"), 6);
@@ -137,7 +137,7 @@ public final class JSPackageTest
       final JSVar sHTML = aFuncMain.param ("sHTML");
       final JSVar sComments = aFuncMain.body ().decl ("sComments", JSExpr.lit (""));
       aFuncMain.body ().comment ("Lazy quantifier \"*?\"");
-      final JSAnonymousFunction anonFunction = JSExpr.anonymousFunction ();
+      final JSAnonymousFunction anonFunction = new JSAnonymousFunction ();
       anonFunction.param ("all");
       final JSVar sComment = anonFunction.param ("sComment");
       anonFunction.body ().assignPlus (sComments, sComment.plus ('\n'));
@@ -147,7 +147,7 @@ public final class JSPackageTest
                                      .arg (JSExpr.regex ("<!--([\\s\\S]*?)-->").global (true))
                                      .arg (anonFunction));
       aFuncMain.body ().comment ("Remaining HTML + comments content");
-      aFuncMain.body ()._return (JSExpr.newAssocArray ().add ("html", sHTML).add ("comments", sComments));
+      aFuncMain.body ()._return (new JSAssocArray ().add ("html", sHTML).add ("comments", sComments));
 
       aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
@@ -183,14 +183,14 @@ public final class JSPackageTest
      */
 
     final JSPackage aPkg = new JSPackage ();
-    final JSAnonymousFunction f = JSExpr.anonymousFunction ();
+    final JSAnonymousFunction f = new JSAnonymousFunction ();
     final JSVar aDollar = f.param ("$");
     f.body ().comment ("Mark elements as enabled or disabled");
     {
-      final JSAnonymousFunction fED = JSExpr.anonymousFunction ();
+      final JSAnonymousFunction fED = new JSAnonymousFunction ();
       final JSVar aDisabled = fED.param ("bDisabled");
       {
-        final JSAnonymousFunction fEDEach = JSExpr.anonymousFunction ();
+        final JSAnonymousFunction fEDEach = new JSAnonymousFunction ();
         fEDEach.body ()
                ._if (JSExpr.refThis ("disabled").isNotUndefined ())
                ._then ()
