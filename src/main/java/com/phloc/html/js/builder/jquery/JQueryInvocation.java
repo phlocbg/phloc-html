@@ -18,136 +18,35 @@
 package com.phloc.html.js.builder.jquery;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
-import com.phloc.html.js.builder.IJSStatement;
-import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
-import com.phloc.html.js.builder.JSFormatter;
-import com.phloc.html.js.builder.JSInvocation;
-import com.phloc.json.IJSON;
+import com.phloc.html.js.builder.JSFunction;
 
 /**
  * Special invocation semantics for jQuery
  * 
  * @author philip
  */
-public class JQueryInvocation implements IJSStatement
+public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
 {
-  private final JSInvocation m_aInvocation;
-
-  public JQueryInvocation (@Nonnull final JSInvocation aInvocation)
+  public JQueryInvocation (@Nonnull final JSFunction aFunction)
   {
-    if (aInvocation == null)
-      throw new NullPointerException ("invocation");
-    m_aInvocation = aInvocation;
+    super (aFunction);
   }
 
-  /**
-   * Add an expression to this invocation's argument list
-   * 
-   * @param aArgument
-   *        Argument to add to argument list
-   */
-  @Nonnull
-  public JQueryInvocation arg (@Nonnull final IJSExpression aArgument)
+  public JQueryInvocation (@Nullable final IJSExpression lhs, @Nonnull @Nonempty final String method)
   {
-    m_aInvocation.arg (aArgument);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final boolean v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final char v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final double v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final float v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final int v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (final long v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
-   */
-  @Nonnull
-  public JQueryInvocation arg (@Nonnull final String v)
-  {
-    m_aInvocation.arg (v);
-    return this;
-  }
-
-  @Nonnull
-  public JQueryInvocation arg (@Nonnull final IJSON v)
-  {
-    m_aInvocation.arg (JSExpr.json (v));
-    return this;
-  }
-
-  /**
-   * Adds a null argument. Short for {@code arg(JSExpr.NULL)}
-   */
-  @Nonnull
-  public JQueryInvocation argNull ()
-  {
-    m_aInvocation.argNull ();
-    return this;
+    super (lhs, method);
   }
 
   @Nonnull
   public JQueryInvocation jqinvoke (@Nonnull @Nonempty final String sMethod)
   {
-    return new JQueryInvocation (m_aInvocation.invoke (sMethod));
+    return new JQueryInvocation (this, sMethod);
   }
 
   /**
@@ -372,7 +271,7 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JSFieldRef context ()
   {
-    return m_aInvocation.ref ("context");
+    return ref ("context");
   }
 
   /**
@@ -705,7 +604,7 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JSFieldRef jquery ()
   {
-    return m_aInvocation.ref ("jquery");
+    return ref ("jquery");
   }
 
   /**
@@ -750,7 +649,7 @@ public class JQueryInvocation implements IJSStatement
   @Nonnull
   public JSFieldRef length ()
   {
-    return m_aInvocation.ref ("length");
+    return ref ("length");
   }
 
   /**
@@ -873,8 +772,9 @@ public class JQueryInvocation implements IJSStatement
   /**
    * @return The invocation of the jQuery function <code>not()</code>
    */
+
   @Nonnull
-  public JQueryInvocation not ()
+  public JQueryInvocation notJQ ()
   {
     return jqinvoke ("not");
   }
@@ -1446,25 +1346,5 @@ public class JQueryInvocation implements IJSStatement
   public JQueryInvocation uncheck ()
   {
     return jqinvoke ("uncheck");
-  }
-
-  /**
-   * @return The internal invocation objects
-   */
-  @Nonnull
-  public JSInvocation internal ()
-  {
-    return m_aInvocation;
-  }
-
-  public void state (@Nonnull final JSFormatter f)
-  {
-    m_aInvocation.state (f);
-  }
-
-  @Nonnull
-  public String getJSCode ()
-  {
-    return m_aInvocation.getJSCode ();
   }
 }

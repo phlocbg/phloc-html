@@ -189,24 +189,28 @@ public final class JSExpr
   }
 
   @Nonnull
+  @Deprecated
   public static JSArray newArray ()
   {
     return new JSArray ();
   }
 
   @Nonnull
+  @Deprecated
   public static JSAssocArray newAssocArray ()
   {
     return new JSAssocArray ();
   }
 
   @Nonnull
+  @Deprecated
   public static JSAnonymousFunction anonymousFunction ()
   {
-    return anonymousFunction (null);
+    return new JSAnonymousFunction ();
   }
 
   @Nonnull
+  @Deprecated
   public static JSAnonymousFunction anonymousFunction (@Nullable final AbstractJSType type)
   {
     return new JSAnonymousFunction (type);

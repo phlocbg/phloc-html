@@ -134,7 +134,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation ajax ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("ajax"));
+    return new JQueryInvocation (jQueryField (), "ajax");
   }
 
   /**
@@ -143,7 +143,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation ajaxPrefilter ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("ajaxPrefilter"));
+    return new JQueryInvocation (jQueryField (), "ajaxPrefilter");
   }
 
   /**
@@ -152,7 +152,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation ajaxSetup ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("ajaxSetup"));
+    return new JQueryInvocation (jQueryField (), "ajaxSetup");
   }
 
   /**
@@ -161,7 +161,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation callbacks ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("Callbacks"));
+    return new JQueryInvocation (jQueryField (), "Callbacks");
   }
 
   /**
@@ -170,7 +170,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation contains ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("contains"));
+    return new JQueryInvocation (jQueryField (), "contains");
   }
 
   /**
@@ -179,7 +179,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation data ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("data"));
+    return new JQueryInvocation (jQueryField (), "data");
   }
 
   /**
@@ -188,7 +188,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation dequeue ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("dequeue"));
+    return new JQueryInvocation (jQueryField (), "dequeue");
   }
 
   /**
@@ -197,7 +197,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation each ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("each"));
+    return new JQueryInvocation (jQueryField (), "each");
   }
 
   /**
@@ -206,7 +206,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation extend ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("extend"));
+    return new JQueryInvocation (jQueryField (), "extend");
   }
 
   /**
@@ -215,7 +215,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation get ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("get"));
+    return new JQueryInvocation (jQueryField (), "get");
   }
 
   /**
@@ -224,7 +224,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation getJSON ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("getJSON"));
+    return new JQueryInvocation (jQueryField (), "getJSON");
   }
 
   /**
@@ -233,7 +233,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation getScript ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("getScript"));
+    return new JQueryInvocation (jQueryField (), "getScript");
   }
 
   /**
@@ -242,7 +242,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation globalEval ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("globalEval"));
+    return new JQueryInvocation (jQueryField (), "globalEval");
   }
 
   /**
@@ -251,7 +251,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation grep ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("grep"));
+    return new JQueryInvocation (jQueryField (), "grep");
   }
 
   /**
@@ -260,7 +260,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation hasData ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("hasData"));
+    return new JQueryInvocation (jQueryField (), "hasData");
   }
 
   /**
@@ -269,7 +269,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation holdReady ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("holdReady"));
+    return new JQueryInvocation (jQueryField (), "holdReady");
   }
 
   /**
@@ -278,7 +278,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation inArray ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("inArray"));
+    return new JQueryInvocation (jQueryField (), "inArray");
   }
 
   /**
@@ -287,7 +287,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isArray ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isArray"));
+    return new JQueryInvocation (jQueryField (), "isArray");
   }
 
   /**
@@ -296,7 +296,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isEmptyObject ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isEmptyObject"));
+    return new JQueryInvocation (jQueryField (), "isEmptyObject");
   }
 
   /**
@@ -305,7 +305,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isFunction ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isFunction"));
+    return new JQueryInvocation (jQueryField (), "isFunction");
   }
 
   /**
@@ -314,7 +314,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isNumeric ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isNumeric"));
+    return new JQueryInvocation (jQueryField (), "isNumeric");
   }
 
   /**
@@ -323,7 +323,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isPlainObject ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isPlainObject"));
+    return new JQueryInvocation (jQueryField (), "isPlainObject");
   }
 
   /**
@@ -332,7 +332,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isWindow ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isWindow"));
+    return new JQueryInvocation (jQueryField (), "isWindow");
   }
 
   /**
@@ -341,7 +341,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation isXMLDoc ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("isXMLDoc"));
+    return new JQueryInvocation (jQueryField (), "isXMLDoc");
   }
 
   /**
@@ -350,7 +350,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation makeArray ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("makeArray"));
+    return new JQueryInvocation (jQueryField (), "makeArray");
   }
 
   /**
@@ -359,7 +359,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation map ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("map"));
+    return new JQueryInvocation (jQueryField (), "map");
   }
 
   /**
@@ -368,7 +368,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation merge ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("merge"));
+    return new JQueryInvocation (jQueryField (), "merge");
   }
 
   /**
@@ -377,7 +377,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation noConflict ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("noConflict"));
+    return new JQueryInvocation (jQueryField (), "noConflict");
   }
 
   /**
@@ -386,7 +386,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation noop ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("noop"));
+    return new JQueryInvocation (jQueryField (), "noop");
   }
 
   /**
@@ -395,7 +395,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation now ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("now"));
+    return new JQueryInvocation (jQueryField (), "now");
   }
 
   /**
@@ -404,7 +404,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation param ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("param"));
+    return new JQueryInvocation (jQueryField (), "param");
   }
 
   /**
@@ -413,7 +413,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation parseXML ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("parseXML"));
+    return new JQueryInvocation (jQueryField (), "parseXML");
   }
 
   /**
@@ -422,7 +422,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation post ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("post"));
+    return new JQueryInvocation (jQueryField (), "post");
   }
 
   /**
@@ -431,7 +431,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation proxy ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("proxy"));
+    return new JQueryInvocation (jQueryField (), "proxy");
   }
 
   /**
@@ -440,7 +440,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation queue ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("queue"));
+    return new JQueryInvocation (jQueryField (), "queue");
   }
 
   /**
@@ -449,7 +449,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation removeData ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("removeData"));
+    return new JQueryInvocation (jQueryField (), "removeData");
   }
 
   /**
@@ -458,7 +458,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation sub ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("sub"));
+    return new JQueryInvocation (jQueryField (), "sub");
   }
 
   /**
@@ -467,7 +467,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation trim ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("trim"));
+    return new JQueryInvocation (jQueryField (), "trim");
   }
 
   /**
@@ -476,7 +476,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation type ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("type"));
+    return new JQueryInvocation (jQueryField (), "type");
   }
 
   /**
@@ -485,7 +485,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation unique ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("unique"));
+    return new JQueryInvocation (jQueryField (), "unique");
   }
 
   /**
@@ -494,16 +494,16 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation when ()
   {
-    return new JQueryInvocation (jQueryField ().invoke ("when"));
+    return new JQueryInvocation (jQueryField (), "when");
   }
 
   /**
    * @return a {@link JQueryInvocation} with an arbitrary expression
    */
   @Nonnull
-  public static JQueryInvocation jquery (@Nonnull final IJSExpression aExpr)
+  public static JQueryInvocation jQuery (@Nonnull final IJSExpression aExpr)
   {
-    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aExpr));
+    return new JQueryInvocation (jQueryFunction ()).arg (aExpr);
   }
 
   /**
@@ -512,7 +512,7 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation jQueryDocument ()
   {
-    return jquery (JSHtml.document ());
+    return jQuery (JSHtml.document ());
   }
 
   /**
@@ -521,29 +521,29 @@ public class JQuery
   @Nonnull
   public static JQueryInvocation jQueryThis ()
   {
-    return jquery (JSExpr.THIS);
+    return jQuery (JSExpr.THIS);
   }
 
   @Nonnull
-  public static JQueryInvocation invoke (@Nonnull final IJQuerySelector aSelector)
+  public static JQueryInvocation select (@Nonnull final IJQuerySelector aSelector)
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
-    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aSelector.getAsString ()));
+    return jQuery (JSExpr.lit (aSelector.getAsString ()));
   }
 
   @Nonnull
-  public static JQueryInvocation invoke (@Nonnull final JQuerySelectorList aSelectorList)
+  public static JQueryInvocation select (@Nonnull final JQuerySelectorList aSelectorList)
   {
     if (aSelectorList == null)
       throw new NullPointerException ("selectorList");
-    return new JQueryInvocation (jQueryFunction ().invoke ().arg (aSelectorList.getAsString ()));
+    return jQuery (JSExpr.lit (aSelectorList.getAsString ()));
   }
 
   @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
-    return invoke (JQuerySelector.id (sID));
+    return select (JQuerySelector.id (sID));
   }
 
   @Nonnull
@@ -555,7 +555,7 @@ public class JQuery
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final String sID : aIDs)
       aSelectors.add (JQuerySelector.id (sID));
-    return invoke (JQuerySelector.multiple (aSelectors));
+    return select (JQuerySelector.multiple (aSelectors));
   }
 
   @Nonnull
@@ -567,13 +567,13 @@ public class JQuery
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final String sID : aIDs)
       aSelectors.add (JQuerySelector.id (sID));
-    return invoke (JQuerySelector.multiple (aSelectors));
+    return select (JQuerySelector.multiple (aSelectors));
   }
 
   @Nonnull
   public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (JQuerySelector.clazz (aCSSClass));
+    return select (JQuerySelector.clazz (aCSSClass));
   }
 
   @Nonnull
@@ -585,7 +585,7 @@ public class JQuery
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
       aSelectors.add (JQuerySelector.clazz (aCSSClass));
-    return invoke (JQuerySelector.multiple (aSelectors));
+    return select (JQuerySelector.multiple (aSelectors));
   }
 
   @Nonnull
@@ -597,19 +597,19 @@ public class JQuery
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
       aSelectors.add (JQuerySelector.clazz (aCSSClass));
-    return invoke (JQuerySelector.multiple (aSelectors));
+    return select (JQuerySelector.multiple (aSelectors));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement)
   {
-    return invoke (JQuerySelector.elementName (eElement));
+    return select (JQuerySelector.elementName (eElement));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
-    return invoke (JQuerySelector.elementName (sElementName));
+    return select (JQuerySelector.elementName (sElementName));
   }
 
   @Nonnull
@@ -623,47 +623,47 @@ public class JQuery
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName,
                                                  @Nonnull final IJQuerySelector aSelector)
   {
-    return invoke (JQuerySelector.elementName (sElementName).chain (aSelector));
+    return select (JQuerySelector.elementName (sElementName).chain (aSelector));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithIDRef (@Nonnull final EHTMLElement eElement,
                                                        @Nonnull @Nonempty final String sID)
   {
-    return invoke (JQuerySelector.elementName (eElement).chain (JQuerySelector.id (sID)));
+    return select (JQuerySelector.elementName (eElement).chain (JQuerySelector.id (sID)));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithIDRef (@Nonnull @Nonempty final String sElementName,
                                                        @Nonnull @Nonempty final String sID)
   {
-    return invoke (JQuerySelector.elementName (sElementName).chain (JQuerySelector.id (sID)));
+    return select (JQuerySelector.elementName (sElementName).chain (JQuerySelector.id (sID)));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull final EHTMLElement eElement,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (JQuerySelector.elementName (eElement).chain (JQuerySelector.clazz (aCSSClass)));
+    return select (JQuerySelector.elementName (eElement).chain (JQuerySelector.clazz (aCSSClass)));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull @Nonempty final String sElementName,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
   {
-    return invoke (JQuerySelector.elementName (sElementName).chain (JQuerySelector.clazz (aCSSClass)));
+    return select (JQuerySelector.elementName (sElementName).chain (JQuerySelector.clazz (aCSSClass)));
   }
 
   @Nonnull
   public static JQueryInvocation selectorRef (@Nonnull final IJQuerySelector aSelector)
   {
-    return invoke (aSelector);
+    return select (aSelector);
   }
 
   @Nonnull
   public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
   {
-    final JSAnonymousFunction aAnonFunction = JSExpr.anonymousFunction ();
+    final JSAnonymousFunction aAnonFunction = new JSAnonymousFunction ();
     final JQueryInvocation aInvocation = jQueryDocument ().ready ().arg (aAnonFunction);
     return ReadonlyPair.create (aInvocation, aAnonFunction);
   }

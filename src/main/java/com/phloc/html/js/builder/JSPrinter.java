@@ -37,6 +37,7 @@ public final class JSPrinter
   public static final boolean DEFAULT_INDENT_AND_ALIGN = false;
   public static final boolean DEFAULT_GENERATE_TYPE_NAMES = false;
   public static final boolean DEFAULT_GENERATE_COMMENTS = true;
+
   private static boolean s_bIndentAndAlign = DEFAULT_INDENT_AND_ALIGN;
   private static boolean s_bGenerateTypeNames = DEFAULT_GENERATE_TYPE_NAMES;
   private static boolean s_bGenerateComments = DEFAULT_GENERATE_COMMENTS;
