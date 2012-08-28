@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
@@ -38,70 +39,88 @@ public class JSAssocArray extends AbstractJSExpression
   {}
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final boolean value)
+  public JSAssocArray add (@Nonnull final String sKey, final boolean aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final char value)
+  public JSAssocArray add (@Nonnull final String sKey, final char aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final double value)
+  public JSAssocArray add (@Nonnull final String sKey, final double aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final float value)
+  public JSAssocArray add (@Nonnull final String sKey, final float aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final int value)
+  public JSAssocArray add (@Nonnull final String sKey, final int aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, final long value)
+  public JSAssocArray add (@Nonnull final String sKey, final long aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, @Nonnull final String value)
+  public JSAssocArray add (@Nonnull final String sKey, @Nonnull final String aValue)
   {
-    return add (key, JSExpr.lit (value));
+    return add (sKey, JSExpr.lit (aValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String key, @Nonnull final IJSExpression value)
+  public JSAssocArray addAllStrings (@Nullable final Map <String, String> aValues)
+  {
+    if (aValues != null)
+      for (final Map.Entry <String, String> aEntry : aValues.entrySet ())
+        add (aEntry.getKey (), JSExpr.lit (aEntry.getValue ()));
+    return this;
+  }
+
+  @Nonnull
+  public JSAssocArray addAll (@Nullable final Map <String, IJSExpression> aValues)
+  {
+    if (aValues != null)
+      for (final Map.Entry <String, IJSExpression> aEntry : aValues.entrySet ())
+        add (aEntry.getKey (), aEntry.getValue ());
+    return this;
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String sKey, @Nonnull final IJSExpression aValue)
   {
     // Don't quote value identifiers
-    if (JSMarshaller.isJSIdentifier (key))
-      return add (new JSAtom (key), value);
+    if (JSMarshaller.isJSIdentifier (sKey))
+      return add (new JSAtom (sKey), aValue);
 
-    return add (JSExpr.lit (key), value);
+    return add (JSExpr.lit (sKey), aValue);
   }
 
   /**
    * Add an element to the array initializer
    */
   @Nonnull
-  public JSAssocArray add (@Nonnull final IJSExpression key, @Nonnull final IJSExpression value)
+  public JSAssocArray add (@Nonnull final IJSExpression sKey, @Nonnull final IJSExpression aValue)
   {
-    if (key == null)
+    if (sKey == null)
       throw new NullPointerException ("key");
-    if (value == null)
+    if (aValue == null)
       throw new NullPointerException ("value");
     if (m_aExprs == null)
       m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
-    m_aExprs.put (key, value);
+    m_aExprs.put (sKey, aValue);
     return this;
   }
 
