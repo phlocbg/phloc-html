@@ -209,7 +209,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnull final IJSExpression aArgument)
   {
     if (aArgument == null)
-      throw new IllegalArgumentException ("argument");
+      throw new NullPointerException ("argument");
     m_aArgs.add (aArgument);
     return _thisAsT ();
   }
@@ -332,7 +332,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final IJSExpression aArgument)
   {
     if (aArgument == null)
-      throw new IllegalArgumentException ("argument");
+      throw new NullPointerException ("argument");
     m_aArgs.add (nIndex, aArgument);
     return _thisAsT ();
   }
