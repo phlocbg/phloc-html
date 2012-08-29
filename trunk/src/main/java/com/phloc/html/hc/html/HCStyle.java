@@ -1,4 +1,5 @@
 /**
+
  * Copyright (C) 2006-2012 phloc systems
  * http://www.phloc.com
  * office[at]phloc[dot]com
@@ -27,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.microdom.IMicroNodeWithChildren;
+import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -40,36 +43,43 @@ import com.phloc.css.writer.CSSWriter;
 import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
-import com.phloc.html.hc.impl.HCTextNode;
+import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;style&gt; element
  * 
  * @author philip
  */
-public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
+public final class HCStyle extends AbstractHCElement <HCStyle>
 {
+  public static enum EMode
+  {
+    /**
+     * Emit JS code as plain text, but XML masked
+     */
+    PLAIN_TEXT,
+    /**
+     * Emit JS code as plain text, but without XML masking
+     */
+    PLAIN_TEXT_NO_ESCAPE;
+  }
+
+  public static final EMode DEFAULT_MODE = EMode.PLAIN_TEXT_NO_ESCAPE;
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_CSS;
-  public static final boolean DEFAULT_ESCAPE_TEXT = false;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCStyle.class);
 
-  private static boolean s_bDefaultEscapeText = DEFAULT_ESCAPE_TEXT;
+  private static EMode s_eDefaultMode = DEFAULT_MODE;
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private CSSMediaList m_aMediaList;
+  private final String m_sContent;
+  private EMode m_eMode = s_eDefaultMode;
 
-  public HCStyle ()
+  public HCStyle (@Nullable final String sContent)
   {
     super (EHTMLElement.STYLE);
-  }
-
-  public HCStyle (@Nullable final String sStyle)
-  {
-    this ();
-    addChild (sStyle);
+    m_sContent = sContent;
   }
 
   @Deprecated
@@ -88,20 +98,6 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   public HCStyle (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
   {
     this (new CSSWriter (aSettings).getCSSAsString (aCSS));
-  }
-
-  @Override
-  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
-  {
-    if (!s_bDefaultEscapeText && aChild instanceof HCTextNode)
-    {
-      final HCTextNode aText = (HCTextNode) aChild;
-      if (StringHelper.containsIgnoreCase (aText.getText (), "</style>", Locale.US))
-        throw new IllegalArgumentException ("The style text contains a closing style tag!");
-
-      // Do not escape style element text nodes!
-      aText.setEscape (false);
-    }
   }
 
   @Nonnull
@@ -141,37 +137,101 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
     return this;
   }
 
+  @Nullable
+  public String getStyleContent ()
+  {
+    return m_sContent;
+  }
+
+  @Nonnull
+  public EMode getMode ()
+  {
+    return m_eMode;
+  }
+
+  @Nonnull
+  public HCStyle setMode (@Nonnull final EMode eMode)
+  {
+    if (eMode == null)
+      throw new NullPointerException ("mode");
+    m_eMode = eMode;
+    return this;
+  }
+
+  @Override
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    // Don't create style elements with empty content....
+    return StringHelper.hasText (m_sContent);
+  }
+
+  public static void setInlineStyle (@Nonnull final IMicroNodeWithChildren aElement,
+                                     @Nullable final String sContent,
+                                     @Nonnull final EMode eMode)
+  {
+    if (StringHelper.hasText (sContent))
+      switch (eMode)
+      {
+        case PLAIN_TEXT:
+          aElement.appendText (sContent);
+          break;
+        case PLAIN_TEXT_NO_ESCAPE:
+          if (StringHelper.containsIgnoreCase (sContent, "</script>", Locale.US))
+            throw new IllegalArgumentException ("The script text contains a closing script tag!");
+          aElement.appendChild (new MicroText (sContent).setEscape (false));
+          break;
+      }
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    if (m_aMediaList != null)
+    if (m_aMediaList != null && m_aMediaList.hasAnyMedia ())
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());
+    setInlineStyle (aElement, m_sContent, m_eMode);
+  }
+
+  @Nonnull
+  public String getPlainText ()
+  {
+    return "";
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("mediaList", m_aMediaList).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("type", m_aType)
+                            .appendIfNotNull ("mediaList", m_aMediaList)
+                            .append ("content", m_sContent)
+                            .append ("mode", m_eMode)
+                            .toString ();
   }
 
   /**
-   * Set whether the content of style elements should be escaped or not. This
-   * only affects new built {@link HCStyle} objects, and does not alter existing
-   * objects! By default escaping is disabled.
+   * Set how the content of style elements should be emitted. This only affects
+   * new built objects, and does not alter existing objects! The default mode is
+   * {@link #DEFAULT_MODE}.
    * 
-   * @param bEscapeText
-   *        <code>true</code> to escape the text, <code>false</code> if not.
+   * @param eMode
+   *        The new mode to set. May not be <code>null</code>.
    */
-  public static void setDefaultEscapeText (final boolean bEscapeText)
+  public static void setDefaultMode (@Nonnull final EMode eMode)
   {
-    s_bDefaultEscapeText = bEscapeText;
-    s_aLogger.info ("Default <style> text escaping set to " + bEscapeText);
+    if (eMode == null)
+      throw new NullPointerException ("mode");
+    s_eDefaultMode = eMode;
+    s_aLogger.info ("Default <style> mode set to " + eMode);
   }
 
-  public static boolean isDefaultEscapeText ()
+  /**
+   * @return The default mode to emit style content. Never <code>null</code>.
+   */
+  @Nonnull
+  public static EMode getDefaultMode ()
   {
-    return s_bDefaultEscapeText;
+    return s_eDefaultMode;
   }
 }

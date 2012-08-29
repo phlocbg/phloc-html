@@ -44,11 +44,11 @@ public final class HCStyleTest
     HCStyle aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
                   aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
-    HCStyle.setDefaultEscapeText (true);
+    HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url(&#39;foo.gif&#39;);}</style>",
                   aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
-    HCStyle.setDefaultEscapeText (false);
+    HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT_NO_ESCAPE);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
                   aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
