@@ -19,7 +19,6 @@ package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.phloc.html.hc.conversion.DefaultHCConversionSettingsProvider;
@@ -36,17 +35,22 @@ public final class HCStyleTest
   {
     final HCStyle aStyle = new HCStyle ("div{color:red;}");
     assertEquals ("<style type=\"text/css\">div{color:red;}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getInstance ()
-                                                                             .getConversionSettings (false)));
+                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
   }
 
   @Test
-  @Ignore
   public void testQuoted ()
   {
-    final HCStyle aStyle = new HCStyle ("div{background:url('foo.gif');}");
+    HCStyle aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getInstance ()
-                                                                             .getConversionSettings (false)));
+                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+    HCStyle.setEscapeText (true);
+    aStyle = new HCStyle ("div{background:url('foo.gif');}");
+    assertEquals ("<style type=\"text/css\">div{background:url(&#39;foo.gif&#39;);}</style>",
+                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+    HCStyle.setEscapeText (false);
+    aStyle = new HCStyle ("div{background:url('foo.gif');}");
+    assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
+                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
   }
 }

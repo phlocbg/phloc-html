@@ -34,6 +34,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 public final class HCTextNode extends AbstractHCNode
 {
   private final String m_sText;
+  private boolean m_bEscape = MicroText.DEFAULT_ESCAPE;
 
   public HCTextNode (@Nonnull final IPredefinedLocaleTextProvider aTextProvider)
   {
@@ -55,6 +56,26 @@ public final class HCTextNode extends AbstractHCNode
     m_sText = Long.toString (nText);
   }
 
+  /**
+   * Enable or disable XML escaping in the final document
+   * 
+   * @param bEscape
+   *        <code>true</code> to enable escaping (default), <code>false</code>
+   *        to disable it
+   * @return this
+   */
+  @Nonnull
+  public HCTextNode setEscape (final boolean bEscape)
+  {
+    m_bEscape = bEscape;
+    return this;
+  }
+
+  public boolean isEscape ()
+  {
+    return m_bEscape;
+  }
+
   @Nonnull
   public String getText ()
   {
@@ -64,7 +85,7 @@ public final class HCTextNode extends AbstractHCNode
   @Nonnull
   public IMicroText getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return new MicroText (m_sText);
+    return new MicroText (m_sText).setEscape (m_bEscape);
   }
 
   @Nonnull
@@ -76,6 +97,9 @@ public final class HCTextNode extends AbstractHCNode
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("text", m_sText).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("text", m_sText)
+                            .append ("escape", m_bEscape)
+                            .toString ();
   }
 }

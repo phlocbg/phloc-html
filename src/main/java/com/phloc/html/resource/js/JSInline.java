@@ -17,6 +17,8 @@
  */
 package com.phloc.html.resource.js;
 
+import java.io.IOException;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -26,6 +28,10 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.css.decl.CSSDeclarationList;
+import com.phloc.css.decl.CascadingStyleSheet;
+import com.phloc.css.writer.CSSWriter;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -53,6 +59,30 @@ public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
     if (aContent == null)
       throw new NullPointerException ("content");
     m_sContent = aContent.getJSCode ();
+  }
+
+  public JSInline (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
+  {
+    this (aCSS, aSettings, null);
+  }
+
+  public JSInline (@Nonnull final CascadingStyleSheet aCSS,
+                   @Nonnull final CSSWriterSettings aSettings,
+                   @Nullable final ConditionalComment aCC) throws IOException
+  {
+    this (new CSSWriter (aSettings).getCSSAsString (aCSS), aCC);
+  }
+
+  public JSInline (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
+  {
+    this (aCSS, aSettings, null);
+  }
+
+  public JSInline (@Nonnull final CSSDeclarationList aCSS,
+                   @Nonnull final CSSWriterSettings aSettings,
+                   @Nullable final ConditionalComment aCC) throws IOException
+  {
+    this (new CSSWriter (aSettings).getCSSAsString (aCSS), aCC);
   }
 
   @DevelopersNote ("Handle with care!")

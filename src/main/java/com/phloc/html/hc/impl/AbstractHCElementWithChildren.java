@@ -96,6 +96,16 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
    *        The child that was added
    */
   @OverrideOnDemand
+  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
+  {}
+
+  /**
+   * Callback
+   * 
+   * @param aChild
+   *        The child that was added
+   */
+  @OverrideOnDemand
   protected void afterAddChild (@Nonnull final IHCBaseNode aChild)
   {}
 
@@ -107,6 +117,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
     if (aChild != null)
     {
+      beforeAddChild (aChild);
       if (m_aChildren == null)
         m_aChildren = new ArrayList <IHCBaseNode> ();
       if (nIndex < 0)
