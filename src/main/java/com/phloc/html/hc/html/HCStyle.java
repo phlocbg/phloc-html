@@ -60,16 +60,14 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
                   @Nonnull final ECSSVersion eVersion,
                   final boolean bOptimizedOutput) throws IOException
   {
-    this ();
-    addChild (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
+    this (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
   }
 
   public HCStyle (@Nonnull final CSSDeclarationList aCSS,
                   @Nonnull final ECSSVersion eVersion,
                   final boolean bOptimizedOutput) throws IOException
   {
-    this ();
-    addChild (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
+    this (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
   }
 
   @Nullable

@@ -22,9 +22,12 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.mock.DebugModeTestRule;
 import com.phloc.html.hc.conversion.HCSettings;
 
 /**
@@ -34,6 +37,8 @@ import com.phloc.html.hc.conversion.HCSettings;
  */
 public final class HCTableTest
 {
+  @Rule
+  public final TestRule m_aRule = new DebugModeTestRule ();
   private static boolean s_bDebug;
 
   @BeforeClass
