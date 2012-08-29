@@ -23,8 +23,12 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.ECSSVersion;
@@ -48,9 +52,13 @@ import com.phloc.html.hc.impl.HCTextNode;
  */
 public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
 {
+  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_CSS;
   public static final boolean DEFAULT_ESCAPE_TEXT = false;
-  private static boolean s_bEscapeText = DEFAULT_ESCAPE_TEXT;
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCStyle.class);
 
+  private static boolean s_bDefaultEscapeText = DEFAULT_ESCAPE_TEXT;
+
+  private IMimeType m_aType = DEFAULT_TYPE;
   private CSSMediaList m_aMediaList;
 
   public HCStyle ()
@@ -85,7 +93,7 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   @Override
   protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
   {
-    if (!s_bEscapeText && aChild instanceof HCTextNode)
+    if (!s_bDefaultEscapeText && aChild instanceof HCTextNode)
     {
       final HCTextNode aText = (HCTextNode) aChild;
       if (StringHelper.containsIgnoreCase (aText.getText (), "</style>", Locale.US))
@@ -94,6 +102,21 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
       // Do not escape style element text nodes!
       aText.setEscape (false);
     }
+  }
+
+  @Nonnull
+  public IMimeType getType ()
+  {
+    return m_aType;
+  }
+
+  @Nonnull
+  public HCStyle setType (@Nonnull final IMimeType aType)
+  {
+    if (aType == null)
+      throw new NullPointerException ("type");
+    m_aType = aType;
+    return this;
   }
 
   @Nullable
@@ -122,7 +145,7 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, CMimeType.TEXT_CSS.getAsString ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (m_aMediaList != null)
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());
   }
@@ -141,13 +164,14 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
    * @param bEscapeText
    *        <code>true</code> to escape the text, <code>false</code> if not.
    */
-  public static void setEscapeText (final boolean bEscapeText)
+  public static void setDefaultEscapeText (final boolean bEscapeText)
   {
-    s_bEscapeText = bEscapeText;
+    s_bDefaultEscapeText = bEscapeText;
+    s_aLogger.info ("Default <style> text escaping set to " + bEscapeText);
   }
 
-  public static boolean isEscapeText ()
+  public static boolean isDefaultEscapeText ()
   {
-    return s_bEscapeText;
+    return s_bDefaultEscapeText;
   }
 }

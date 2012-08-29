@@ -20,9 +20,13 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNodeWithChildren;
+import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -41,11 +45,35 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public final class HCScript extends AbstractHCElement <HCScript>
 {
+  public static enum EMode
+  {
+    /**
+     * Emit JS code as plain text, but XML masked
+     */
+    PLAIN_TEXT,
+    /**
+     * Emit JS code as plain text, but without XML masking
+     */
+    PLAIN_TEXT_NO_ESCAPE,
+    /**
+     * Wrap the whole JS code in XML comments
+     */
+    WRAP_IN_COMMENT,
+    /**
+     * Wrap the whole JS code in an XML CDATA container
+     */
+    CDATA,
+  }
+
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
-  public static final boolean DEFAULT_USE_CDATA_MASKING = false;
+  public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
+
+  private static EMode s_eDefaultMode = DEFAULT_MODE;
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private final String m_sContent;
+  private EMode m_eMode = s_eDefaultMode;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
@@ -81,41 +109,54 @@ public final class HCScript extends AbstractHCElement <HCScript>
     return m_sContent;
   }
 
-  public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement, @Nullable final String sContent)
+  @Nonnull
+  public EMode getMode ()
   {
-    setInlineScript (aElement, sContent, DEFAULT_USE_CDATA_MASKING);
+    return m_eMode;
+  }
+
+  @Nonnull
+  public HCScript setMode (@Nonnull final EMode eMode)
+  {
+    if (eMode == null)
+      throw new NullPointerException ("mode");
+    m_eMode = eMode;
+    return this;
   }
 
   public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement,
                                       @Nullable final String sContent,
-                                      final boolean bUseCDATAMasking)
+                                      @Nonnull final EMode eMode)
   {
     if (StringHelper.hasText (sContent))
-      if (bUseCDATAMasking)
+      switch (eMode)
       {
-        // Tested OK with FF6, Opera11, Chrome13, IE8, IE9
-        /**
-         * <pre>
-         * //<![CDATA[
-         * my script bla//]]>
-         * </pre>
-         */
-        aElement.appendText ("//");
-        aElement.appendCDATA ("\n" + sContent + "//");
-      }
-      else
-      {
-        /**
-         * <pre>
-         * <script>
-         * my script bla
-         * //</script>
-         * </pre>
-         */
-        if (StringHelper.endsWith (sContent, '\n'))
-          aElement.appendComment ("\n" + sContent + "//");
-        else
-          aElement.appendComment ("\n" + sContent + "\n//");
+        case PLAIN_TEXT:
+          aElement.appendText (sContent);
+          break;
+        case PLAIN_TEXT_NO_ESCAPE:
+          aElement.appendChild (new MicroText (sContent).setEscape (false));
+          break;
+        case WRAP_IN_COMMENT:
+          // <script>
+          // my script bla
+          // //</script>
+          if (StringHelper.getLastChar (sContent) == '\n')
+            aElement.appendComment ("\n" + sContent + "//");
+          else
+            aElement.appendComment ("\n" + sContent + "\n//");
+          break;
+        case CDATA:
+          // Tested OK with FF6, Opera11, Chrome13, IE8, IE9
+          /**
+           * <pre>
+           * //<![CDATA[
+           * my script bla//]]>
+           * </pre>
+           */
+          aElement.appendText ("//");
+          aElement.appendCDATA ("\n" + sContent + "//");
+          break;
       }
   }
 
@@ -131,7 +172,7 @@ public final class HCScript extends AbstractHCElement <HCScript>
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    setInlineScript (aElement, m_sContent);
+    setInlineScript (aElement, m_sContent, m_eMode);
   }
 
   @Nonnull
@@ -147,5 +188,19 @@ public final class HCScript extends AbstractHCElement <HCScript>
                             .appendIfNotNull ("type", m_aType)
                             .appendIfNotNull ("content", m_sContent)
                             .toString ();
+  }
+
+  public static void setDefaultMode (@Nonnull final EMode eMode)
+  {
+    if (eMode == null)
+      throw new NullPointerException ("mode");
+    s_eDefaultMode = eMode;
+    s_aLogger.info ("Default <script> mode set to " + eMode);
+  }
+
+  @Nonnull
+  public static EMode getDefaultMode ()
+  {
+    return s_eDefaultMode;
   }
 }
