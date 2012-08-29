@@ -63,7 +63,7 @@ import com.phloc.html.resource.js.JSInline;
 
 /**
  * Represents an HTML &lt;head&gt; element
- *
+ * 
  * @author philip
  */
 public class HCHead extends AbstractHCBaseNode
@@ -183,7 +183,7 @@ public class HCHead extends AbstractHCBaseNode
 
   /**
    * Add a link object to the head.
-   *
+   * 
    * @param aLink
    *        The link to be added. May not be <code>null</code>.
    * @return this
@@ -313,7 +313,7 @@ public class HCHead extends AbstractHCBaseNode
 
   /**
    * Set a custom of of band handler, that performs the actions
-   *
+   * 
    * @param aOutOfBandHandler
    *        The new out of band handler. May be <code>null</code>.
    */
@@ -350,7 +350,7 @@ public class HCHead extends AbstractHCBaseNode
         {
           // Ensure the inline JS is executed after the document has been loaded
           // Note: has dependency to jQuery
-          addJS (new JSInline ("$(document).ready(function() {" + aJS.toString () + "});"));
+          addJS (new JSInline ("$(document).ready(function(){" + aJS.toString () + "});"));
         }
       }
     }
