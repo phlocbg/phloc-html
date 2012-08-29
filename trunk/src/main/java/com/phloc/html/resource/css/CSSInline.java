@@ -90,7 +90,9 @@ public class CSSInline extends AbstractCSSHTMLDefinition implements ICSSInline
   public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final HCStyle aStyle = new HCStyle (m_sContent);
-    aStyle.setMedia (getMedia ());
+    if (hasMedia ())
+      aStyle.setMedia (getMedia ());
+
     if (hasConditionalComment ())
       return getConditionalComment ().getNodeWrappedInCondition (aStyle, aConversionSettings);
     return aStyle;
