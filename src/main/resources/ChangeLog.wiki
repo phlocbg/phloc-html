@@ -1,7 +1,9 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>8/22/12</td><td colspan="4">_Release *3.4.0.RC2*_</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>8/29/12</td><td>add</td><td>api</td><td></td><td>AbstractHCElementWithChildren got a new protected callback method beforeAddChild</td></tr>
+<tr><td>8/29/12</td><td>remove</td><td>api</td><td></td><td>Removed all deprecated elements</td></tr>
+<tr border="1"><td>8/22/12</td><td colspan="4">_Release *3.4.0.RC2*_</td></tr>
 <tr><td>8/22/12</td><td>change</td><td>api</td><td></td><td>Some changes in JS builder</td></tr>
 <tr border="1"><td>8/22/12</td><td colspan="4">_Release *3.4.0.RC1*_</td></tr>
 <tr><td>8/17/12</td><td>add</td><td>api</td><td></td><td>Added new package js.builder with a DSL to generate structured JS code on the fly. Based on the com.sun.codemodel 2.6 library</td></tr>
