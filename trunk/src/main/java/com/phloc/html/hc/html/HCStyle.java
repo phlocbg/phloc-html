@@ -18,12 +18,14 @@
 package com.phloc.html.hc.html;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CSSDeclarationList;
@@ -31,10 +33,13 @@ import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
 import com.phloc.css.writer.CSSWriter;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Represents an HTML &lt;style&gt; element
@@ -43,6 +48,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
 {
+  public static final boolean DEFAULT_ESCAPE_TEXT = false;
+  private static boolean s_bEscapeText = DEFAULT_ESCAPE_TEXT;
+
   private CSSMediaList m_aMediaList;
 
   public HCStyle ()
@@ -56,6 +64,7 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
     addChild (sStyle);
   }
 
+  @Deprecated
   public HCStyle (@Nonnull final CascadingStyleSheet aCSS,
                   @Nonnull final ECSSVersion eVersion,
                   final boolean bOptimizedOutput) throws IOException
@@ -63,11 +72,28 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
     this (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
   }
 
-  public HCStyle (@Nonnull final CSSDeclarationList aCSS,
-                  @Nonnull final ECSSVersion eVersion,
-                  final boolean bOptimizedOutput) throws IOException
+  public HCStyle (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
   {
-    this (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
+    this (new CSSWriter (aSettings).getCSSAsString (aCSS));
+  }
+
+  public HCStyle (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
+  {
+    this (new CSSWriter (aSettings).getCSSAsString (aCSS));
+  }
+
+  @Override
+  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
+  {
+    if (!s_bEscapeText && aChild instanceof HCTextNode)
+    {
+      final HCTextNode aText = (HCTextNode) aChild;
+      if (StringHelper.containsIgnoreCase (aText.getText (), "</style>", Locale.US))
+        throw new IllegalArgumentException ("The style text contains a closing style tag!");
+
+      // Do not escape style element text nodes!
+      aText.setEscape (false);
+    }
   }
 
   @Nullable
@@ -105,5 +131,23 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("mediaList", m_aMediaList).toString ();
+  }
+
+  /**
+   * Set whether the content of style elements should be escaped or not. This
+   * only affects new built {@link HCStyle} objects, and does not alter existing
+   * objects! By default escaping is disabled.
+   * 
+   * @param bEscapeText
+   *        <code>true</code> to escape the text, <code>false</code> if not.
+   */
+  public static void setEscapeText (final boolean bEscapeText)
+  {
+    s_bEscapeText = bEscapeText;
+  }
+
+  public static boolean isEscapeText ()
+  {
+    return s_bEscapeText;
   }
 }

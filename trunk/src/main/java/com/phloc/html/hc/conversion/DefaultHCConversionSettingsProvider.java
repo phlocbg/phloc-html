@@ -55,6 +55,12 @@ public final class DefaultHCConversionSettingsProvider implements IHCConversionS
   @Nonnull
   public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
+    return getStaticConversionSettings (bIndentAndAlign);
+  }
+
+  @Nonnull
+  public static IHCConversionSettings getStaticConversionSettings (final boolean bIndentAndAlign)
+  {
     return bIndentAndAlign ? DEFAULT : DEFAULT_NOT_INDENTED;
   }
 }
