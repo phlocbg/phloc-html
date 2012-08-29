@@ -69,8 +69,9 @@ public class JSMethod extends JSFunction
   }
 
   @Nonnull
-  public JSAnonymousFunction asAnonymousFunction ()
+  public JSAnonymousFunction getAsAnonymousFunction ()
   {
+    // No name required for anonymous function
     return new JSAnonymousFunction (type (), params (), body ());
   }
 

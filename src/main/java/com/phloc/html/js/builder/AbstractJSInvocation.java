@@ -36,7 +36,9 @@ import com.phloc.json.IJSON;
  * 
  * @author philip
  */
-public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends AbstractJSExpression implements IJSStatement
+public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends
+                                                                                              AbstractJSExpression implements
+                                                                                                                  IJSStatement
 {
   /**
    * Object expression upon which this method will be invoked, or null if this
@@ -489,6 +491,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     f.generatable (this).plain (';').nl ();
   }
 
+  @Override
   @Nullable
   public String getJSCode ()
   {

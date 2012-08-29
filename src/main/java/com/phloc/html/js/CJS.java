@@ -31,18 +31,10 @@ public final class CJS
 {
   /** The JavaScript prefix "javascript:" */
   public static final String JS_PREFIX = EURLProtocol.JAVASCRIPT.getProtocol ();
-  @Deprecated
-  public static final char JS_END_OF_STATEMENT = ';';
-  @Deprecated
-  public static final String JS_END_OF_STATEMENT_STR = Character.toString (JS_END_OF_STATEMENT);
   public static final String JS_NULL = "null";
-  @Deprecated
-  public static final String JS_THIS = "this";
-  @Deprecated
-  public static final String JS_UNDEFINED = "undefined";
 
   /** The void statement "javascript:void(0);" */
-  public static final String JS_VOID = JS_PREFIX + "void(0)" + JS_END_OF_STATEMENT;
+  public static final String JS_VOID = JS_PREFIX + "void(0);";
 
   /** Regular JS file extension */
   public static final String FILE_EXTENSION_JS = ".js";

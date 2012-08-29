@@ -39,7 +39,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Represents a single HTML meta element.
- * 
+ *
  * @author philip
  */
 @NotThreadSafe
@@ -215,12 +215,5 @@ public final class MetaElement implements IMetaElement
                                        .append ("contents", m_aContents)
                                        .append ("isHttpEquiv", m_bIsHttpEquiv)
                                        .toString ();
-  }
-
-  @Nonnull
-  @Deprecated
-  public static MetaElement createSimpleMetaTag (final String sName, final String sContent, final boolean bIsHttpEquiv)
-  {
-    return new MetaElement (sName, null, bIsHttpEquiv, null, sContent);
   }
 }

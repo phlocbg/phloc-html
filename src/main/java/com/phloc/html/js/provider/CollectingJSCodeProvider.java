@@ -17,44 +17,23 @@
  */
 package com.phloc.html.js.provider;
 
-import javax.annotation.Nonnegative;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.IJSBuilderCodeProvider;
-import com.phloc.html.js.marshal.JSMarshaller;
-import com.phloc.json.IJSON;
 
 public final class CollectingJSCodeProvider implements IJSCodeProvider
 {
-  private final StringBuilder m_aSB = new StringBuilder ();
+  private final List <IJSCodeProvider> m_aList = new ArrayList <IJSCodeProvider> ();
 
   public CollectingJSCodeProvider ()
   {}
 
-  @Deprecated
-  public CollectingJSCodeProvider (@Nullable final CharSequence... aCSs)
-  {
-    if (aCSs != null)
-      for (final CharSequence aCS : aCSs)
-        if (aCS != null)
-          append (aCS);
-  }
-
-  @Deprecated
-  public CollectingJSCodeProvider (@Nullable final String... aStrings)
-  {
-    if (aStrings != null)
-      for (final String sString : aStrings)
-        if (sString != null)
-          append (sString);
-  }
-
-  @Deprecated
   public CollectingJSCodeProvider (@Nullable final IJSCodeProvider... aProviders)
   {
     if (aProviders != null)
@@ -63,7 +42,7 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (aProvider);
   }
 
-  public CollectingJSCodeProvider (@Nullable final IJSBuilderCodeProvider... aProviders)
+  public CollectingJSCodeProvider (@Nullable final Iterable <? extends IJSCodeProvider> aProviders)
   {
     if (aProviders != null)
       for (final IJSCodeProvider aProvider : aProviders)
@@ -71,140 +50,26 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
           append (aProvider);
   }
 
-  @Deprecated
-  public CollectingJSCodeProvider (@Nullable final IJSON... aJSONs)
-  {
-    if (aJSONs != null)
-      for (final IJSON aJSON : aJSONs)
-        if (aJSON != null)
-          append (aJSON);
-  }
-
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider append (final char c)
-  {
-    m_aSB.append (c);
-    return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider append (final long n)
-  {
-    m_aSB.append (n);
-    return this;
-  }
-
-  /**
-   * @param aCS
-   *        The string to append. May be <code>null</code>.
-   * @return this
-   */
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final CharSequence aCS)
-  {
-    if (aCS != null)
-      m_aSB.append (aCS);
-    return this;
-  }
-
-  /**
-   * @param sString
-   *        The string to append. May be <code>null</code>.
-   * @return this
-   */
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final String sString)
-  {
-    if (sString != null)
-      m_aSB.append (sString);
-    return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider appendEscaped (@Nullable final String sText)
-  {
-    return append (JSMarshaller.javaScriptEscape (sText));
-  }
-
-  @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final CollectingJSCodeProvider aProvider)
-  {
-    if (aProvider != null)
-      m_aSB.append (aProvider.m_aSB);
-    return this;
-  }
-
-  @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final IJSBuilderCodeProvider aProvider)
-  {
-    if (aProvider != null)
-      m_aSB.append (aProvider.getJSCode ());
-    return this;
-  }
-
-  @Deprecated
   @Nonnull
   public final CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
   {
-    if (aProvider instanceof CollectingJSCodeProvider)
-      return append ((CollectingJSCodeProvider) aProvider);
     if (aProvider != null)
-      append (aProvider.getJSCode ());
+      m_aList.add (aProvider);
     return this;
   }
 
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final IJSON aJSON)
+  public final void reset ()
   {
-    if (aJSON != null)
-      append (aJSON.getJSONString ());
-    return this;
-  }
-
-  @Nonnull
-  @Deprecated
-  public final CollectingJSCodeProvider appendSemicolon ()
-  {
-    // If there is nothing to append to - don't append it :)
-    if (m_aSB.length () == 0)
-      return this;
-    return append (CJS.JS_END_OF_STATEMENT);
-  }
-
-  /**
-   * @param aCS
-   *        The string to prepend.
-   * @return this
-   */
-  @Deprecated
-  @Nonnull
-  public final CollectingJSCodeProvider prepend (@Nullable final CharSequence aCS)
-  {
-    m_aSB.insert (0, aCS);
-    return this;
-  }
-
-  @Nonnegative
-  public final int length ()
-  {
-    return m_aSB.length ();
+    m_aList.clear ();
   }
 
   @Nonnull
   public final String getJSCode ()
   {
-    return m_aSB.toString ();
-  }
-
-  public final void reset ()
-  {
-    m_aSB.setLength (0);
+    final StringBuilder aSB = new StringBuilder ();
+    for (final IJSCodeProvider aJSCodeProvider : m_aList)
+      aSB.append (aJSCodeProvider.getJSCode ());
+    return aSB.toString ();
   }
 
   @Override
@@ -215,18 +80,18 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
     if (!(o instanceof CollectingJSCodeProvider))
       return false;
     final CollectingJSCodeProvider rhs = (CollectingJSCodeProvider) o;
-    return m_aSB.equals (rhs.m_aSB);
+    return m_aList.equals (rhs.m_aList);
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aSB).getHashCode ();
+    return new HashCodeGenerator (this).append (m_aList).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("code", m_aSB).toString ();
+    return new ToStringGenerator (this).append ("list", m_aList).toString ();
   }
 }

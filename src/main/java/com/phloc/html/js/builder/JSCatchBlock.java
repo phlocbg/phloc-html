@@ -68,6 +68,12 @@ public class JSCatchBlock implements IJSGeneratable
     f.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
   }
 
+  @Nonnull
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
+
   @Override
   public String toString ()
   {

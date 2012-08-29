@@ -63,7 +63,7 @@ import com.phloc.html.resource.js.JSInline;
 
 /**
  * Represents an HTML &lt;head&gt; element
- * 
+ *
  * @author philip
  */
 public class HCHead extends AbstractHCBaseNode
@@ -183,7 +183,7 @@ public class HCHead extends AbstractHCBaseNode
 
   /**
    * Add a link object to the head.
-   * 
+   *
    * @param aLink
    *        The link to be added. May not be <code>null</code>.
    * @return this
@@ -313,24 +313,13 @@ public class HCHead extends AbstractHCBaseNode
 
   /**
    * Set a custom of of band handler, that performs the actions
-   * 
+   *
    * @param aOutOfBandHandler
    *        The new out of band handler. May be <code>null</code>.
    */
   public void setOutOfBandHandler (@Nullable final IHCOutOfBandNodeHandler aOutOfBandHandler)
   {
     m_aOutOfBandHandler = aOutOfBandHandler;
-  }
-
-  /**
-   * @param aConversionSettings
-   * @param aOutOfBandNode
-   */
-  @Deprecated
-  public void handleOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings,
-                                   @Nullable final IHCBaseNode aOutOfBandNode)
-  {
-    handleOutOfBandNode (aOutOfBandNode);
   }
 
   public void handleOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)

@@ -103,12 +103,6 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE removeAllClasses ();
 
-  /**
-   * @deprecated Use {@link #containsClass(ICSSClassProvider)} instead
-   */
-  @Deprecated
-  boolean hasClass (@Nonnull ICSSClassProvider aProvider);
-
   boolean containsClass (@Nonnull ICSSClassProvider aProvider);
 
   @Nonnull
@@ -132,10 +126,10 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setLanguage (@Nullable String sLanguage);
 
   @Nonnull
-  THISTYPE setEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
+  THISTYPE addEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
 
   @Nonnull
-  THISTYPE addEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
+  THISTYPE setEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
 
   @Nonnull
   THISTYPE removeAllEventHandler (@Nonnull EJSEvent eJSEvent);

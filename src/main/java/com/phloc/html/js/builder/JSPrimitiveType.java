@@ -93,6 +93,12 @@ public class JSPrimitiveType extends AbstractJSType
     f.plain (m_sName);
   }
 
+  @Nonnull
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
+
   @Override
   public String toString ()
   {

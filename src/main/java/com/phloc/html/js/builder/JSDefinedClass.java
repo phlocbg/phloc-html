@@ -304,23 +304,23 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     // Emit the constructor first (a function)
     f.decl (constructor ());
 
-    final JSAssocArray aPrototype = new JSAssocArray ();
+    final JSAssocArray aPrototypefields = new JSAssocArray ();
 
     // Add all fields
     for (final JSFieldVar aField : m_aFields.values ())
-      aPrototype.add (aField.name (), aField.hasInit () ? aField.init () : JSExpr.NULL);
+      aPrototypefields.add (aField.name (), aField.hasInit () ? aField.init () : JSExpr.NULL);
 
     // Add all methods
     for (final JSMethod aMethod : m_aMethods)
-      aPrototype.add (aMethod.name (), aMethod.asAnonymousFunction ());
+      aPrototypefields.add (aMethod.name (), aMethod.getAsAnonymousFunction ());
 
     // Start with the prototype methods
-    JSExpr.assign (prototype (), aPrototype).generate (f);
+    JSExpr.assign (prototype (), aPrototypefields).generate (f);
   }
 
   @Nullable
   public String getJSCode ()
   {
-    return JSPrinter.getAsString (this);
+    return JSPrinter.getAsString ((IJSDeclaration) this);
   }
 }

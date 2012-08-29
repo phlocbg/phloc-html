@@ -19,14 +19,19 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.js.IJSCodeProvider;
+
 /**
  * Common interface for code components that can generate declarations of
  * themselves.
  * 
  * @author philip
  */
-public interface IJSDeclaration extends IJSBuilderCodeProvider
+public interface IJSDeclaration extends IJSCodeProvider
 {
+  @Nonnull
+  @Nonempty
   String name ();
 
   void declare (@Nonnull JSFormatter f);

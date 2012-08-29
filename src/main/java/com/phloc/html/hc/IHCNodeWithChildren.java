@@ -21,6 +21,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 
@@ -77,7 +78,8 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Deprecated
-  THISTYPE addChildren (IHCBaseNode aChild);
+  @DevelopersNote ("Use addChild instead")
+  THISTYPE addChildren (@Nullable IHCBaseNode aChild);
 
   /**
    * @param aChildren

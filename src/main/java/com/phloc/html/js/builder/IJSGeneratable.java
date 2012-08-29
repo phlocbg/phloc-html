@@ -17,16 +17,16 @@
  */
 package com.phloc.html.js.builder;
 
-import java.io.Serializable;
-
 import javax.annotation.Nonnull;
+
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Common interface for code components that can generate uses of themselves.
  * 
  * @author philip
  */
-public interface IJSGeneratable extends Serializable
+public interface IJSGeneratable extends IJSCodeProvider
 {
   void generate (@Nonnull JSFormatter f);
 }

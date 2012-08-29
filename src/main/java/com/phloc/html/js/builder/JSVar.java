@@ -176,7 +176,8 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
     f.plain (m_sName);
   }
 
-  @Nullable
+  @Override
+  @Nonnull
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSDeclaration) this);

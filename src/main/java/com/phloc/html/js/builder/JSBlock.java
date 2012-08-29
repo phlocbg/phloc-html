@@ -799,7 +799,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nullable
   public String getJSCode ()
   {
-    return JSPrinter.getAsString (this);
+    return JSPrinter.getAsString ((IJSGeneratable) this);
   }
 
   @Override

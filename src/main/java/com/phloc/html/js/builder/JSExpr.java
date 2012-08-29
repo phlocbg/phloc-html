@@ -27,7 +27,7 @@ import com.phloc.json.IJSON;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
- * 
+ *
  * @author philip
  */
 @Immutable
@@ -186,34 +186,6 @@ public final class JSExpr
   public static JSCast cast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression expr)
   {
     return new JSCast (type, expr);
-  }
-
-  @Nonnull
-  @Deprecated
-  public static JSArray newArray ()
-  {
-    return new JSArray ();
-  }
-
-  @Nonnull
-  @Deprecated
-  public static JSAssocArray newAssocArray ()
-  {
-    return new JSAssocArray ();
-  }
-
-  @Nonnull
-  @Deprecated
-  public static JSAnonymousFunction anonymousFunction ()
-  {
-    return new JSAnonymousFunction ();
-  }
-
-  @Nonnull
-  @Deprecated
-  public static JSAnonymousFunction anonymousFunction (@Nullable final AbstractJSType type)
-  {
-    return new JSAnonymousFunction (type);
   }
 
   public static final IJSExpression THIS = new JSAtom ("this");

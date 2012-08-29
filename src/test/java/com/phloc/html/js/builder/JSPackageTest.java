@@ -102,20 +102,24 @@ public final class JSPackageTest
       aFuncMain.body ().invoke (aArray1a, "push").arg ("pushed");
 
       // Associative Array
-      final JSVar aArray2 = aFuncMain.body ().decl ("array2",
-                                                    new JSAssocArray ()
-                                                          .add ("num", 1)
-                                                          .add ("array", aArray1)
-                                                          .add ("assocarray",
-                                                                new JSAssocArray ()
-                                                                      .add ("key", "value")
-                                                                      .add ("key2", "anything else")));
+      final JSVar aArray2 = aFuncMain.body ()
+                                     .decl ("array2",
+                                            new JSAssocArray ().add ("num", 1)
+                                                               .add ("array", aArray1)
+                                                               .add ("assocarray",
+                                                                     new JSAssocArray ().add ("key", "value")
+                                                                                        .add ("key2", "anything else")));
       aFuncMain.body ().assign (aArray2.component ("num"), 6);
 
       // concatenate misc things
-      aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc")
-                                                .ref ("length")
-                                                .plus (aRoot.plus (JSExpr.invoke (aFunc).arg (2).arg (4)))));
+      aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc").ref ("length"))
+                                   .plus (aRoot)
+                                   .plus (JSExpr.invoke (aFunc).arg (2).arg (4))
+                                   .plus (7)
+                                   .mul (1.5)
+                                   .plus (5)
+                                   .minus (3)
+                                   .div (2));
     }
 
     {

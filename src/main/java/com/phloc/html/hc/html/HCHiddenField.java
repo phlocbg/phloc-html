@@ -33,7 +33,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "hidden"
- * 
+ *
  * @author philip
  */
 public class HCHiddenField extends AbstractHCInput <HCHiddenField>
@@ -50,13 +50,6 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
     this ();
     setName (sName);
     setValue (sValue);
-  }
-
-  @Deprecated
-  public HCHiddenField (@Nullable final String sID, @Nullable final String sName, @Nullable final String sValue)
-  {
-    this (sName, sValue);
-    setID (sID);
   }
 
   public HCHiddenField (@Nullable final String sName, final int nValue)
@@ -92,13 +85,6 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
   public final String getValue ()
   {
     return m_sValue;
-  }
-
-  @Deprecated
-  @Nonnull
-  public final HCHiddenField setValue (final boolean bValue)
-  {
-    return setValue (bValue ? CHCParam.VALUE_CHECKED : CHCParam.VALUE_UNCHECKED);
   }
 
   @Nonnull
