@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc.html;
 
+import java.util.Locale;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -62,11 +64,11 @@ public final class HCScript extends AbstractHCElement <HCScript>
     /**
      * Wrap the whole JS code in an XML CDATA container
      */
-    CDATA,
+    CDATA;
   }
 
-  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
+  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
 
   private static EMode s_eDefaultMode = DEFAULT_MODE;
@@ -135,6 +137,8 @@ public final class HCScript extends AbstractHCElement <HCScript>
           aElement.appendText (sContent);
           break;
         case PLAIN_TEXT_NO_ESCAPE:
+          if (StringHelper.containsIgnoreCase (sContent, "</script>", Locale.US))
+            throw new IllegalArgumentException ("The script text contains a closing script tag!");
           aElement.appendChild (new MicroText (sContent).setEscape (false));
           break;
         case WRAP_IN_COMMENT:
@@ -187,9 +191,18 @@ public final class HCScript extends AbstractHCElement <HCScript>
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("type", m_aType)
                             .appendIfNotNull ("content", m_sContent)
+                            .append ("mode", m_eMode)
                             .toString ();
   }
 
+  /**
+   * Set how the content of script elements should be emitted. This only affects
+   * new built objects, and does not alter existing objects! The default mode is
+   * {@link #DEFAULT_MODE}.
+   * 
+   * @param eMode
+   *        The new mode to set. May not be <code>null</code>.
+   */
   public static void setDefaultMode (@Nonnull final EMode eMode)
   {
     if (eMode == null)
@@ -198,6 +211,9 @@ public final class HCScript extends AbstractHCElement <HCScript>
     s_aLogger.info ("Default <script> mode set to " + eMode);
   }
 
+  /**
+   * @return The default mode to emit script content. Never <code>null</code>.
+   */
   @Nonnull
   public static EMode getDefaultMode ()
   {
