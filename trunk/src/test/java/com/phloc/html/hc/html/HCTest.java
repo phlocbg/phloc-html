@@ -176,36 +176,4 @@ public final class HCTest
     assertNotNull (h.getAsNode (aCS));
     System.out.print (h.getAsHTMLString (aCS));
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testMainHCDeprecated ()
-  {
-    final HCHtml h = new HCHtml ();
-    final HCBody b = h.getBody ();
-    b.addChild (new HCAbbreviation ("abbr"));
-    b.addChild (new HCBold ("echt fett"));
-    b.addChild (new HCBidirectionalOverwrite ("bdo"));
-    b.addChild (new HCDefinition ());
-    b.addChild (new HCDefinition ("<a> ist ein XML Tag"));
-    final HCDefinitionList aDL = b.addAndReturnChild (new HCDefinitionList ());
-    aDL.addItem (new HCDefinitionDefinition ());
-    aDL.addItem (new HCDefinitionDefinition ("def"));
-    aDL.addItem (new HCDefinitionTerm ());
-    aDL.addItem (new HCDefinitionTerm ("term"));
-    b.addChild (new HCDeleted ());
-    b.addChild (new HCDeleted ("gelöscht"));
-    b.addChild (new HCExample ());
-    b.addChild (new HCExample ("List"));
-    b.addChild (new HCInserted ());
-    b.addChild (new HCInserted ("Das wäre also ein Beispiel"));
-    b.addChild (new HCItalic ());
-    b.addChild (new HCItalic ("Das wäre also ein Beispiel"));
-    b.addChild (new HCStruck ());
-    b.addChild (new HCStruck ("Das wäre also ein Beispiel"));
-
-    final IHCConversionSettings aCS = DefaultHCConversionSettingsProvider.getInstance ().getConversionSettings (true);
-    assertNotNull (h.getAsNode (aCS));
-    System.out.print (h.getAsHTMLString (aCS));
-  }
 }
