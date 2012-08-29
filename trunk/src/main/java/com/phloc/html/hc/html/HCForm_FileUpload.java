@@ -26,7 +26,7 @@ import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSStatement;
 
 /**
  * A specialized form that adds the required attribute for handling file
@@ -44,9 +44,9 @@ public final class HCForm_FileUpload extends HCForm
     super (aAction);
   }
 
-  public HCForm_FileUpload (@Nullable final IJSCodeProvider aJSCodeProvder)
+  public HCForm_FileUpload (@Nullable final IJSStatement aJSStatement)
   {
-    super (aJSCodeProvder);
+    super (aJSStatement);
   }
 
   @Nonnull

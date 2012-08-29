@@ -74,7 +74,7 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     this (aAction.getAsString ());
   }
 
-  public HCForm (@Nullable final IJSCodeProvider aAction)
+  public HCForm (@Nullable final IJSStatement aAction)
   {
     this ();
     setAction (aAction);
@@ -105,15 +105,6 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   {
     m_sAction = null;
     m_aAction = aAction;
-    return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public final HCForm setAction (@Nullable final IJSCodeProvider aAction)
-  {
-    m_sAction = null;
-    m_aAction = cleanJSLink (aAction);
     return this;
   }
 

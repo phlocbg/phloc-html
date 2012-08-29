@@ -61,12 +61,9 @@ import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.hc.api5.EHCDropZone;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.js.CJS;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
-import com.phloc.html.js.builder.IJSBuilderCodeProvider;
-import com.phloc.html.js.provider.DefaultJSCodeProvider;
 
 @SuppressWarnings ("deprecation")
 public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
@@ -167,15 +164,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  /**
-   * @deprecated Use {@link #containsClass(ICSSClassProvider)} instead
-   */
-  @Deprecated
-  public final boolean hasClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
-  {
-    return containsClass (aCSSClassProvider);
-  }
-
   public final boolean containsClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
     return m_aCSSClassProviders != null &&
@@ -236,16 +224,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  /**
-   * @deprecated Use {@link #getAllClasses()} instead
-   */
-  @Deprecated
-  @Nonnull
-  public final Collection <ICSSClassProvider> getClasses ()
-  {
-    return getAllClasses ();
-  }
-
   @Nonnull
   @ReturnsMutableCopy
   public final Set <ICSSClassProvider> getAllClasses ()
@@ -262,17 +240,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
         ret.add (aCSSClassProvider.getCSSClass ());
     return ret;
-  }
-
-  /**
-   * @deprecated Use {@link #getAllStyles()} instead
-   */
-  @Deprecated
-  @Nonnull
-  @ReturnsMutableCopy
-  public final Map <ECSSProperty, ICSSValue> getStyles ()
-  {
-    return getAllStyles ();
   }
 
   @Nonnull
@@ -293,15 +260,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   public final ICSSValue getStyleValue (@Nullable final ECSSProperty eProperty)
   {
     return eProperty == null || m_aStyles == null ? null : m_aStyles.get (eProperty);
-  }
-
-  /**
-   * @deprecated Use {@link #containsStyle(ECSSProperty)} instead
-   */
-  @Deprecated
-  public final boolean hasStyle (@Nullable final ECSSProperty eProperty)
-  {
-    return containsStyle (eProperty);
   }
 
   public final boolean containsStyle (@Nullable final ECSSProperty eProperty)
@@ -397,62 +355,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  /**
-   * Cleans the passed JS so that it is suitable for appending it to a sequence
-   * of commands.<br>
-   * In contrast to assignment, we don't need no "javascript:" prefix when
-   * appending something!
-   * 
-   * @param aJS
-   *        The JS to be cleaned up. May be <code>null</code>.
-   * @return The cleaned JS without a leading "javascript:" prefix and with an
-   *         ensure ";" ending. If the input is empty <code>null</code> is
-   *         returned.
-   */
-  @Nullable
-  @Deprecated
-  protected static final IJSCodeProvider cleanJSLink (@Nullable final IJSCodeProvider aJS)
-  {
-    // Input is null?
-    if (aJS == null)
-      return null;
-
-    // Is the contained JS code empty?
-    String sJSCode = aJS.getJSCode ();
-    if (sJSCode == null)
-      return null;
-
-    // Trim all whitespaces - than empty?
-    sJSCode = sJSCode.trim ();
-    if (sJSCode.length () == 0)
-      return null;
-
-    // Short hint indicating a potentially invalid JS code
-    if (sJSCode.startsWith (CJS.JS_END_OF_STATEMENT_STR))
-      s_aLogger.warn ("JS code starts with a ';'!");
-
-    // kick the leading "javascript:" prefix
-    if (sJSCode.startsWith (CJS.JS_PREFIX))
-    {
-      sJSCode = sJSCode.substring (CJS.JS_PREFIX.length ()).trim ();
-
-      // If there is nothing left, this is a crappy statement
-      if (StringHelper.hasNoText (sJSCode))
-        return null;
-    }
-
-    // Ensure string ends with a ";"
-    if (!sJSCode.endsWith (CJS.JS_END_OF_STATEMENT_STR))
-      sJSCode += CJS.JS_END_OF_STATEMENT_STR;
-
-    // Now we have a non-empty string, not starting with "javascript:" and
-    // ensure to be ending with ";"
-    return DefaultJSCodeProvider.create (sJSCode);
-  }
-
   @Nonnull
-  public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent,
-                                         @Nullable final IJSBuilderCodeProvider aJSCode)
+  public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
     if (aJSCode != null)
     {
@@ -464,42 +368,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
-  @Deprecated
-  public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
-  {
-    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode);
-    if (aCleanedCode != null)
-    {
-      if (m_aJSHandler == null)
-        m_aJSHandler = new JSEventMap ();
-      m_aJSHandler.addHandler (eJSEvent, aCleanedCode);
-    }
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent,
-                                         @Nullable final IJSBuilderCodeProvider aJSCode)
+  public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
     if (aJSCode != null)
     {
       if (m_aJSHandler == null)
         m_aJSHandler = new JSEventMap ();
       m_aJSHandler.setHandler (eJSEvent, aJSCode);
-    }
-    return thisAsT ();
-  }
-
-  @Nonnull
-  @Deprecated
-  public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
-  {
-    final IJSCodeProvider aCleanedCode = cleanJSLink (aJSCode);
-    if (aCleanedCode != null)
-    {
-      if (m_aJSHandler == null)
-        m_aJSHandler = new JSEventMap ();
-      m_aJSHandler.setHandler (eJSEvent, aCleanedCode);
     }
     return thisAsT ();
   }

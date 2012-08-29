@@ -61,6 +61,7 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
     f.generatable (this).plain (';').nl ();
   }
 
+  @Override
   @Nullable
   public String getJSCode ()
   {

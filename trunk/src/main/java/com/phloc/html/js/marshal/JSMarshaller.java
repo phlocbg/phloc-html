@@ -45,14 +45,12 @@ import com.phloc.json.IJSON;
 /**
  * Marshaler class that converts Java Objects to their respective JavaScript
  * notation.
- * 
+ *
  * @author philip
  */
 @Immutable
 public final class JSMarshaller
 {
-  @Deprecated
-  public static final String KEYWORD_NULL = CJS.JS_NULL;
   private static final Logger s_aLogger = LoggerFactory.getLogger (JSMarshaller.class);
   private static final char [] CHARS_TO_MASK = new char [] { '"', '\'', '\\', '/', '\t', '\r', '\n', '\f' };
   private static final char MASK_CHAR = '\\';
@@ -110,7 +108,7 @@ public final class JSMarshaller
    * Reference: <a href=
    * "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Literals#String_Literals"
    * > Core JavaScript 1.5 Guide </a>
-   * 
+   *
    * @param sInput
    *        the input string
    * @return the escaped string
@@ -173,7 +171,7 @@ public final class JSMarshaller
    * Important: this is not a 100% reversion of
    * {@link #javaScriptEscape(String)} since the escaping method drops any '\r'
    * character and it will therefore not be unescaped!
-   * 
+   *
    * @param sInput
    *        The string to be unescaped. May be <code>null</code>.
    * @return The unescaped string.
@@ -429,7 +427,7 @@ public final class JSMarshaller
   /**
    * Auto-detect the type of the passed object and convert it to a JS string. If
    * the type detection failed, an {@link IllegalArgumentException} is thrown.
-   * 
+   *
    * @param aObject
    *        The object to be converted. May be <code>null</code>. Note: works
    *        for atomic types and arrays, but <b>not</b> for collection types!

@@ -28,6 +28,7 @@ public class JSOpBinary extends AbstractJSExpression
   private final IJSExpression m_aLeft;
   private final String m_sOp;
   private final IJSGeneratable m_aRight;
+  private boolean m_bUseBraces = true;
 
   public JSOpBinary (@Nonnull final IJSExpression aLeft,
                      @Nonnull @Nonempty final String sOp,
@@ -42,6 +43,19 @@ public class JSOpBinary extends AbstractJSExpression
     m_aLeft = aLeft;
     m_sOp = sOp;
     m_aRight = aRight;
+
+    if (aLeft instanceof JSOpBinary)
+    {
+      final JSOpBinary r = (JSOpBinary) aLeft;
+      if (m_sOp.equals (r.m_sOp))
+        r.m_bUseBraces = false;
+    }
+    if (aRight instanceof JSOpBinary)
+    {
+      final JSOpBinary r = (JSOpBinary) aRight;
+      if (m_sOp.equals (r.m_sOp))
+        r.m_bUseBraces = false;
+    }
   }
 
   @Nonnull
@@ -65,7 +79,13 @@ public class JSOpBinary extends AbstractJSExpression
 
   public void generate (@Nonnull final JSFormatter f)
   {
-    f.plain ('(').generatable (m_aLeft).plain (m_sOp).generatable (m_aRight).plain (')');
+    final boolean bUseBraces = m_bUseBraces;
+
+    if (bUseBraces)
+      f.plain ('(');
+    f.generatable (m_aLeft).plain (m_sOp).generatable (m_aRight);
+    if (bUseBraces)
+      f.plain (')');
   }
 
   @Override

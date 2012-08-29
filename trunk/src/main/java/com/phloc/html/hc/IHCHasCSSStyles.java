@@ -31,7 +31,7 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 {
   /**
    * Add an element specific style.
-   * 
+   *
    * @param aValue
    *        The value to be added. May be <code>null</code>.
    * @return this
@@ -41,7 +41,7 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 
   /**
    * Add element specific styles.
-   * 
+   *
    * @param aValues
    *        The values to be added. May be <code>null</code>.
    * @return this
@@ -51,7 +51,7 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 
   /**
    * Add element specific styles.
-   * 
+   *
    * @param aValues
    *        The values to be added. May be <code>null</code>.
    * @return this
@@ -61,7 +61,7 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 
   /**
    * Remove the specified style from the element
-   * 
+   *
    * @param eProperty
    *        The style property to remove
    * @return this
@@ -71,7 +71,7 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
 
   /**
    * Remove all styles from the element
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -88,17 +88,11 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
   @Nullable
   ICSSValue getStyleValue (@Nullable ECSSProperty eProperty);
 
-  /**
-   * @deprecated Use {@link #containsStyle(ECSSProperty)} instead
-   */
-  @Deprecated
-  boolean hasStyle (@Nullable ECSSProperty eProperty);
-
   boolean containsStyle (@Nullable ECSSProperty eProperty);
 
   /**
    * Check if the style property is contained, and the value matches.
-   * 
+   *
    * @param aValue
    *        The value to be checked
    * @return <code>true</code> if such a CSS value is contained,

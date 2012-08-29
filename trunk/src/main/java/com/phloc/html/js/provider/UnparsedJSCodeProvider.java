@@ -18,32 +18,24 @@
 package com.phloc.html.js.provider;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
- * Immutable implementation of {@link IJSCodeProvider}.
+ * Implementation of {@link IJSCodeProvider} that takes an arbitrary string from
+ * any sources
  * 
  * @author philip
  */
 @Immutable
-@Deprecated
-public final class DefaultJSCodeProvider implements IJSCodeProvider
+public final class UnparsedJSCodeProvider implements IJSCodeProvider
 {
-  private static final IJSCodeProvider EMPTY_JSCODE = new DefaultJSCodeProvider ();
   private final String m_sJSCode;
 
-  private DefaultJSCodeProvider ()
-  {
-    m_sJSCode = "";
-  }
-
-  private DefaultJSCodeProvider (@Nonnull final String sJSCode)
+  public UnparsedJSCodeProvider (@Nonnull final String sJSCode)
   {
     if (sJSCode == null)
       throw new NullPointerException ("JSCode");
@@ -61,9 +53,9 @@ public final class DefaultJSCodeProvider implements IJSCodeProvider
   {
     if (o == this)
       return true;
-    if (!(o instanceof DefaultJSCodeProvider))
+    if (!(o instanceof UnparsedJSCodeProvider))
       return false;
-    final DefaultJSCodeProvider rhs = (DefaultJSCodeProvider) o;
+    final UnparsedJSCodeProvider rhs = (UnparsedJSCodeProvider) o;
     return m_sJSCode.equals (rhs.m_sJSCode);
   }
 
@@ -77,11 +69,5 @@ public final class DefaultJSCodeProvider implements IJSCodeProvider
   public String toString ()
   {
     return new ToStringGenerator (this).append ("code", m_sJSCode).toString ();
-  }
-
-  @Nonnull
-  public static IJSCodeProvider create (@Nullable final String sJSCode)
-  {
-    return StringHelper.hasNoText (sJSCode) ? EMPTY_JSCODE : new DefaultJSCodeProvider (sJSCode);
   }
 }

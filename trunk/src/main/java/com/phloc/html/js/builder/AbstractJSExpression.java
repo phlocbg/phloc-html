@@ -693,6 +693,12 @@ public abstract class AbstractJSExpression implements IJSExpression
     return JSExpr.component (this, index);
   }
 
+  @Nonnull
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
+
   @Override
   public String toString ()
   {

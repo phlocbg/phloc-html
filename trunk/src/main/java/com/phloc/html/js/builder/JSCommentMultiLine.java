@@ -180,6 +180,12 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
     f.plain (" */").nlFix ();
   }
 
+  @Nonnull
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString (this);
+  }
+
   @Override
   public String toString ()
   {

@@ -29,7 +29,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
  * Represents an HTML &lt;colgroup&gt; element
- * 
+ *
  * @author philip
  */
 public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGroup, HCCol>
@@ -78,7 +78,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
 
   /**
    * Define a new column.
-   * 
+   *
    * @param aCol
    *        the column to add
    * @return this
@@ -105,17 +105,6 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   public final int getColumnCount ()
   {
     return getChildCount ();
-  }
-
-  /**
-   * @deprecated Use {@link #getAllColumns()} instead
-   */
-  @Deprecated
-  @ReturnsImmutableObject
-  @Nullable
-  public final List <HCCol> getColumns ()
-  {
-    return getAllColumns ();
   }
 
   @ReturnsImmutableObject

@@ -22,7 +22,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -44,13 +43,6 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     super (EHTMLElement.BODY);
   }
 
-  @Deprecated
-  @DevelopersNote ("Was a typo!")
-  public void addOufOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
-  {
-    addOutOfBandNode (aOutOfBandNode);
-  }
-
   public void addOutOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
   {
     if (aOutOfBandNode == null)
@@ -58,14 +50,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     m_aOutOfBandNodes.add (aOutOfBandNode);
   }
 
-  @Deprecated
-  @DevelopersNote ("Was a typo!")
-  public void addOufOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes)
-  {
-    addOutOfBandNodes (aOutOfBandNodes);
-  }
-
-  public void addOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes)
+  public void addOutOfBandNodes (@Nonnull final Iterable <? extends IHCBaseNode> aOutOfBandNodes)
   {
     if (aOutOfBandNodes == null)
       throw new NullPointerException ("outOfBandNodes");

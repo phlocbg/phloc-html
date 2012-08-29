@@ -97,12 +97,12 @@ public final class JSPrinter
                               .generateComments (s_bGenerateComments);
   }
 
-  public static void writeExpression (@Nonnull final IJSExpression aExpression, @Nonnull final Writer w)
+  public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable, @Nonnull final Writer w)
   {
     final JSFormatter f = createFormatter (w);
     try
     {
-      f.generatable (aExpression);
+      f.generatable (aGeneratable);
     }
     finally
     {
@@ -155,10 +155,10 @@ public final class JSPrinter
   }
 
   @Nullable
-  public static String getAsString (@Nonnull final IJSExpression aExpression)
+  public static String getAsString (@Nonnull final IJSGeneratable aGeneratable)
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
-    writeExpression (aExpression, aSW);
+    writeGeneratable (aGeneratable, aSW);
     return aSW.getAsString ();
   }
 
