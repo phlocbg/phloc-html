@@ -26,6 +26,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.ECSSVersion;
+import com.phloc.css.decl.CSSDeclarationList;
 import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
@@ -56,6 +57,14 @@ public final class HCStyle extends AbstractHCElementWithChildren <HCStyle>
   }
 
   public HCStyle (@Nonnull final CascadingStyleSheet aCSS,
+                  @Nonnull final ECSSVersion eVersion,
+                  final boolean bOptimizedOutput) throws IOException
+  {
+    this ();
+    addChild (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
+  }
+
+  public HCStyle (@Nonnull final CSSDeclarationList aCSS,
                   @Nonnull final ECSSVersion eVersion,
                   final boolean bOptimizedOutput) throws IOException
   {
