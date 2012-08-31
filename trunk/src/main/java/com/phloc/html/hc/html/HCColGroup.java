@@ -29,7 +29,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
  * Represents an HTML &lt;colgroup&gt; element
- *
+ * 
  * @author philip
  */
 public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGroup, HCCol>
@@ -78,7 +78,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
 
   /**
    * Define a new column.
-   *
+   * 
    * @param aCol
    *        the column to add
    * @return this
@@ -88,6 +88,23 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   {
     if (aCol != null)
       addChild (aCol);
+    return this;
+  }
+
+  /**
+   * Define a new column.
+   * 
+   * @param nIndex
+   *        The index where the column should be added
+   * @param aCol
+   *        the column to add
+   * @return this
+   */
+  @Nonnull
+  public final HCColGroup addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
+  {
+    if (aCol != null)
+      addChild (nIndex, aCol);
     return this;
   }
 

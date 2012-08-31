@@ -43,7 +43,7 @@ import com.phloc.html.hc.impl.HCNodeList;
 /**
  * This is the common base class for regular HC tables as well as for more
  * complex constructs (e.g. PUI)
- *
+ * 
  * @author philip
  * @param <THISTYPE>
  *        Implementation type
@@ -193,6 +193,18 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
+  public final THISTYPE addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
+  {
+    if (aCol != null)
+    {
+      if (m_aColGroup == null)
+        m_aColGroup = new HCColGroup ();
+      m_aColGroup.addColumn (nIndex, aCol);
+    }
+    return thisAsT ();
+  }
+
+  @Nonnull
   @Deprecated
   public final THISTYPE addColumns (@Nullable final HCCol aCol)
   {
@@ -219,7 +231,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   /**
    * Remove all column definitions. This does not affect any row contents.
-   *
+   * 
    * @return this
    */
   @Nonnull
@@ -293,7 +305,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   /**
    * Get the contained list object that holds all the rows. Handle with care
    * because it alters the internal data structures of this table.
-   *
+   * 
    * @return The contained list object for external row order handling.
    */
   @Nonnull
