@@ -72,6 +72,8 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Add an empty cell at the specified index.
    * 
+   * @param nIndex
+   *        The index where the cell should be added
    * @return The created cell. Never <code>null</code>.
    */
   @Nonnull
@@ -98,6 +100,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   }
 
   /**
+   * Add a single new cell and add the passed element.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellChild
+   *        The element to add. May be <code>null</code>.
+   * @return The created cell. Never <code>null</code>.
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex, @Nullable final IHCNode aCellChild)
+  {
+    return addCell (nIndex).addChild (aCellChild);
+  }
+
+  /**
    * Add a single new cell and add the passed elements.
    * 
    * @param aCellChildren
@@ -114,6 +132,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Add a single new cell and add the passed elements.
    * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellChildren
+   *        The list of elements to add. May be <code>null</code>.
+   * @return The created cell. Never <code>null</code>.
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex, @Nullable final IHCNode... aCellChildren)
+  {
+    return addCell (nIndex).addChildren (aCellChildren);
+  }
+
+  /**
+   * Add a single new cell and add the passed elements.
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return The created cell. Never <code>null</code>.
@@ -123,6 +157,23 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell addAndReturnCell (@Nullable final Iterable <? extends IHCNode> aCellChildren)
   {
     return addCell ().addChildren (aCellChildren);
+  }
+
+  /**
+   * Add a single new cell and add the passed elements.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellChildren
+   *        The list of elements to add. May be <code>null</code>.
+   * @return The created cell. Never <code>null</code>.
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex,
+                                          @Nullable final Iterable <? extends IHCNode> aCellChildren)
+  {
+    return addCell (nIndex).addChildren (aCellChildren);
   }
 
   /**
@@ -142,6 +193,23 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Add a single cell with the given text element.
    * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellText
+   *        The text to be set into the cell. May not be <code>null</code>.
+   * @return the created table cell
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex,
+                                          @Nonnull final IPredefinedLocaleTextProvider aCellText)
+  {
+    return addAndReturnCell (nIndex, aCellText.getText ());
+  }
+
+  /**
+   * Add a single cell with the given text element.
+   * 
    * @param sCellText
    *        The text to be set into the cell. May be <code>null</code>.
    * @return the created table cell
@@ -151,6 +219,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public AbstractHCCell addAndReturnCell (@Nullable final String sCellText)
   {
     return addCell ().addChild (sCellText);
+  }
+
+  /**
+   * Add a single cell with the given text element.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param sCellText
+   *        The text to be set into the cell. May be <code>null</code>.
+   * @return the created table cell
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex, @Nullable final String sCellText)
+  {
+    return addCell (nIndex).addChild (sCellText);
   }
 
   /**
@@ -168,6 +252,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   }
 
   /**
+   * Add a single cell with the given text elements.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellTexts
+   *        The text to be set into the cell. May be <code>null</code>.
+   * @return the created table cell
+   */
+  @Nonnull
+  @CheckReturnValue
+  public AbstractHCCell addAndReturnCell (@Nonnegative final int nIndex, @Nullable final String... aCellTexts)
+  {
+    return addCell (nIndex).addChildren (aCellTexts);
+  }
+
+  /**
    * Add a single new cell and add the passed element.
    * 
    * @param aChild
@@ -178,6 +278,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public HCRow addCell (@Nullable final IHCNode aChild)
   {
     addCell ().addChild (aChild);
+    return this;
+  }
+
+  /**
+   * Add a single new cell and add the passed element.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aChild
+   *        The element to add. May be <code>null</code>.
+   * @return this (the table row)
+   */
+  @Nonnull
+  public HCRow addCell (@Nonnegative final int nIndex, @Nullable final IHCNode aChild)
+  {
+    addCell (nIndex).addChild (aChild);
     return this;
   }
 
@@ -198,6 +314,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Add a single new cell and add the passed elements.
    * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellChildren
+   *        The list of elements to add. May be <code>null</code>.
+   * @return this (the table row)
+   */
+  @Nonnull
+  public HCRow addCell (@Nonnegative final int nIndex, @Nullable final IHCNode... aCellChildren)
+  {
+    addCell (nIndex).addChildren (aCellChildren);
+    return this;
+  }
+
+  /**
+   * Add a single new cell and add the passed elements.
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return this (the table row)
@@ -206,6 +338,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public HCRow addCell (@Nullable final Iterable <? extends IHCNode> aCellChildren)
   {
     addCell ().addChildren (aCellChildren);
+    return this;
+  }
+
+  /**
+   * Add a single new cell and add the passed elements.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellChildren
+   *        The list of elements to add. May be <code>null</code>.
+   * @return this (the table row)
+   */
+  @Nonnull
+  public HCRow addCell (@Nonnegative final int nIndex, @Nullable final Iterable <? extends IHCNode> aCellChildren)
+  {
+    addCell (nIndex).addChildren (aCellChildren);
     return this;
   }
 
@@ -225,6 +373,21 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Add a single cell with the given text element.
    * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param aCellText
+   *        The text to be set into the cell.
+   * @return this (the table row)
+   */
+  @Nonnull
+  public HCRow addCell (@Nonnegative final int nIndex, @Nonnull final IPredefinedLocaleTextProvider aCellText)
+  {
+    return addCell (nIndex, aCellText.getText ());
+  }
+
+  /**
+   * Add a single cell with the given text element.
+   * 
    * @param sCellText
    *        The text to be set into the cell. May be <code>null</code>.
    * @return this (the table row)
@@ -233,6 +396,22 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public HCRow addCell (@Nullable final String sCellText)
   {
     addCell ().addChild (sCellText);
+    return this;
+  }
+
+  /**
+   * Add a single cell with the given text element.
+   * 
+   * @param nIndex
+   *        The index where the cell should be added
+   * @param sCellText
+   *        The text to be set into the cell. May be <code>null</code>.
+   * @return this (the table row)
+   */
+  @Nonnull
+  public HCRow addCell (@Nonnegative final int nIndex, @Nullable final String sCellText)
+  {
+    addCell (nIndex).addChild (sCellText);
     return this;
   }
 
@@ -250,6 +429,14 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
       for (final IPredefinedLocaleTextProvider aCellTextProvider : aCellTextProviders)
         addCell (aCellTextProvider.getText ());
     return this;
+  }
+
+  @Deprecated
+  @DevelopersNote ("Use either addCell or add parameters :)")
+  @Nonnull
+  public HCRow addCells (@Nullable final IPredefinedLocaleTextProvider aCellTextProvider)
+  {
+    return addCell (aCellTextProvider);
   }
 
   /**
@@ -276,14 +463,6 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return addCell (sCellChild);
   }
 
-  @Deprecated
-  @DevelopersNote ("Use either addCell or add parameters :)")
-  @Nonnull
-  public HCRow addCells (@Nullable final IHCNode aCellChild)
-  {
-    return addCell (aCellChild);
-  }
-
   /**
    * Add multiple cells, one for each passed element.
    * 
@@ -299,6 +478,14 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
       for (final IHCNode aCellChild : aCellChildren)
         addCell (aCellChild);
     return this;
+  }
+
+  @Deprecated
+  @DevelopersNote ("Use either addCell or add parameters :)")
+  @Nonnull
+  public HCRow addCells (@Nullable final IHCNode aCellChild)
+  {
+    return addCell (aCellChild);
   }
 
   /**
@@ -322,6 +509,12 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   public HCRow addNonEmptyCell (@Nullable final String sCellText)
   {
     return addCell (StringHelper.hasNoText (sCellText) ? " " : sCellText);
+  }
+
+  @Nonnull
+  public HCRow addNonEmptyCell (@Nonnegative final int nIndex, @Nullable final String sCellText)
+  {
+    return addCell (nIndex, StringHelper.hasNoText (sCellText) ? " " : sCellText);
   }
 
   /**
