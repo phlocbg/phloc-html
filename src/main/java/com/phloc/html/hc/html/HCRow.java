@@ -434,7 +434,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   @Deprecated
   @DevelopersNote ("Use either addCell or add parameters :)")
   @Nonnull
-  public HCRow addCells (@Nullable final IPredefinedLocaleTextProvider aCellTextProvider)
+  public HCRow addCells (@Nonnull final IPredefinedLocaleTextProvider aCellTextProvider)
   {
     return addCell (aCellTextProvider);
   }
