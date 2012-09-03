@@ -66,8 +66,7 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
 @SuppressWarnings ("deprecation")
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                              IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -677,12 +676,16 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
       {
         final String sAttrName = aEntry.getKey ();
-        if (bHTML5 && !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA))
+        if (bHTML5 &&
+            aConversionSettings.areConsistencyChecksEnabled () &&
+            !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA))
+        {
           s_aLogger.warn ("Custom attribute '" +
                           sAttrName +
                           "' does not start with proposed prefix '" +
                           CHTMLAttributes.HTML5_PREFIX_DATA +
                           "'");
+        }
         aElement.setAttribute (sAttrName, aEntry.getValue ());
       }
   }
