@@ -39,7 +39,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public final class HCOption extends AbstractHCElementWithChildren <HCOption>
+public class HCOption extends AbstractHCElementWithChildren <HCOption>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_SELECTED = false;
