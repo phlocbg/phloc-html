@@ -26,7 +26,7 @@ import com.phloc.html.hc.api.EHCButtonType;
  * 
  * @author philip
  */
-public final class HCButton_Reset extends HCButton
+public class HCButton_Reset extends HCButton
 {
   private void _init ()
   {
