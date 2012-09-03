@@ -41,9 +41,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
-                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
-                                                                                                                                                                                                      IHasChildrenSorted <CHILDTYPE>
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <CHILDTYPE>
 {
   protected List <CHILDTYPE> m_aChildren;
 
@@ -92,7 +90,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
         addChild (aChild);
   }
 
-  protected final void removeChild (@Nullable final IHCBaseNode aChild)
+  protected final void removeChild (@Nullable final CHILDTYPE aChild)
   {
     if (aChild != null && m_aChildren != null)
       m_aChildren.remove (aChild);
@@ -114,7 +112,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Nullable
-  public final IHCBaseNode getChild (final int nIndex)
+  public final CHILDTYPE getChild (final int nIndex)
   {
     if (m_aChildren != null && nIndex >= 0 && nIndex < m_aChildren.size ())
       return m_aChildren.get (nIndex);
@@ -148,13 +146,13 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Nullable
-  public final IHCBaseNode getFirstChild ()
+  public final CHILDTYPE getFirstChild ()
   {
     return ContainerHelper.getFirstElement (m_aChildren);
   }
 
   @Nullable
-  public final IHCBaseNode getLastChild ()
+  public final CHILDTYPE getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aChildren);
   }
@@ -207,7 +205,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     if (!hasChildren ())
       return "";
     final StringBuilder ret = new StringBuilder ();
-    for (final IHCBaseNode aChild : m_aChildren)
+    for (final CHILDTYPE aChild : m_aChildren)
       ret.append (aChild.getPlainText ());
     return ret.toString ();
   }
