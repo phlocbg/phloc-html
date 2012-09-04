@@ -1,7 +1,9 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>9/4/12</td><td colspan="4">_Release *3.4.2*_</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>9/4/12</td><td colspan="4">_Release *3.4.3*_</td></tr>
+<tr><td>9/4/12</td><td>add</td><td>api</td><td></td><td>Made all HC`*` impl classes non-final</td></tr>
+<tr border="1"><td>9/4/12</td><td colspan="4">_Release *3.4.2*_</td></tr>
 <tr><td>9/4/12</td><td>add</td><td>api</td><td></td><td>Updated table API so that things can be removed as well</td></tr>
 <tr border="1"><td>9/4/12</td><td colspan="4">_Release *3.4.1*_</td></tr>
 <tr><td>9/3/12</td><td>fix</td><td>api</td><td></td><td>Fixed return type of AbstractHCElementWithInternalChildren.getFirstChild and getLastChild</td></tr>
