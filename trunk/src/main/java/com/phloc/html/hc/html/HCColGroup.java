@@ -136,4 +136,9 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   {
     return getChildAtIndex (nIndex);
   }
+
+  public final void removeColumnAtIndex (final int nIndex)
+  {
+    removeChild (nIndex);
+  }
 }

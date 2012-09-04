@@ -31,6 +31,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.parent.IHasChildrenSorted;
+import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -48,9 +49,7 @@ import com.phloc.html.hc.impl.HCNodeList;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
-                                                                                            AbstractHCElement <THISTYPE> implements
-                                                                                                                        IHasChildrenSorted <IHCNode>
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <IHCNode>
 {
   protected HCColGroup m_aColGroup;
   protected int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -135,44 +134,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  @Nullable
-  public final String getHeaderID ()
-  {
-    return m_sHeaderID;
-  }
-
-  @Nonnull
-  public final THISTYPE setHeaderID (@Nullable final String sID)
-  {
-    m_sHeaderID = sID;
-    return thisAsT ();
-  }
-
-  @Nullable
-  public final String getBodyID ()
-  {
-    return m_sBodyID;
-  }
-
-  @Nonnull
-  public final THISTYPE setBodyID (@Nullable final String sID)
-  {
-    m_sBodyID = sID;
-    return thisAsT ();
-  }
-
-  @Nullable
-  public final String getFooterID ()
-  {
-    return m_sFooterID;
-  }
-
-  @Nonnull
-  public final THISTYPE setFooterID (@Nullable final String sID)
-  {
-    m_sFooterID = sID;
-    return thisAsT ();
-  }
+  //
+  // column handling
+  //
 
   @Nullable
   public final HCColGroup getColGroup ()
@@ -230,6 +194,22 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   /**
+   * Remove the column definition at the specified index. This does not affect
+   * any row contents.
+   * 
+   * @param nColumnIndex
+   *        The index of the column to remove
+   * @return this
+   */
+  @Nonnull
+  public final THISTYPE removeColumnAtIndex (@Nonnegative final int nColumnIndex)
+  {
+    if (m_aColGroup != null)
+      m_aColGroup.removeColumnAtIndex (nColumnIndex);
+    return thisAsT ();
+  }
+
+  /**
    * Remove all column definitions. This does not affect any row contents.
    * 
    * @return this
@@ -249,6 +229,23 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final int getColumnCount ()
   {
     return m_aColGroup == null ? 0 : m_aColGroup.getColumnCount ();
+  }
+
+  //
+  // header row handling
+  //
+
+  @Nullable
+  public final String getHeaderID ()
+  {
+    return m_sHeaderID;
+  }
+
+  @Nonnull
+  public final THISTYPE setHeaderID (@Nullable final String sID)
+  {
+    m_sHeaderID = sID;
+    return thisAsT ();
   }
 
   @Nullable
@@ -271,6 +268,38 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aHeaderRow;
   }
 
+  @Nonnull
+  public final HCRow getOrAddHeaderRow ()
+  {
+    return m_aHeaderRow != null ? m_aHeaderRow : addHeaderRow ();
+  }
+
+  @Nonnull
+  public final EChange removeHeaderRow ()
+  {
+    if (m_aHeaderRow == null)
+      return EChange.UNCHANGED;
+    m_aHeaderRow = null;
+    return EChange.CHANGED;
+  }
+
+  //
+  // footer row handling
+  //
+
+  @Nullable
+  public final String getFooterID ()
+  {
+    return m_sFooterID;
+  }
+
+  @Nonnull
+  public final THISTYPE setFooterID (@Nullable final String sID)
+  {
+    m_sFooterID = sID;
+    return thisAsT ();
+  }
+
   @Nullable
   public final HCRow getFooterRow ()
   {
@@ -289,6 +318,38 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
       throw new IllegalStateException ("A footer row is already present! You cannot have more than one!");
     m_aFooterRow = new HCRow (true);
     return m_aFooterRow;
+  }
+
+  @Nonnull
+  public final HCRow getOrAddFooterRow ()
+  {
+    return m_aFooterRow != null ? m_aFooterRow : addFooterRow ();
+  }
+
+  @Nonnull
+  public final EChange removeFooterRow ()
+  {
+    if (m_aFooterRow == null)
+      return EChange.UNCHANGED;
+    m_aFooterRow = null;
+    return EChange.CHANGED;
+  }
+
+  //
+  // body row handling
+  //
+
+  @Nullable
+  public final String getBodyID ()
+  {
+    return m_sBodyID;
+  }
+
+  @Nonnull
+  public final THISTYPE setBodyID (@Nullable final String sID)
+  {
+    m_sBodyID = sID;
+    return thisAsT ();
   }
 
   public final boolean hasBodyRows ()
@@ -371,6 +432,25 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
       m_aBodyRows.add (nIndex, aRow);
     return thisAsT ();
   }
+
+  @Nonnull
+  public final THISTYPE removeBodyRowAtIndex (@Nonnegative final int nIndex)
+  {
+    if (nIndex >= 0 && nIndex < m_aBodyRows.size ())
+      m_aBodyRows.remove (nIndex);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeAllBodyRows ()
+  {
+    m_aBodyRows.clear ();
+    return thisAsT ();
+  }
+
+  //
+  // code generation
+  //
 
   @Override
   @OverridingMethodsMustInvokeSuper
