@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;sup&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCSup extends AbstractHCElementWithChildren <HCSup>
+public class HCSup extends AbstractHCElementWithChildren <HCSup>
 {
   public HCSup ()
   {

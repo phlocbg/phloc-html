@@ -34,11 +34,11 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;script&gt; element that loads the code from a source
  * URL.
- * 
+ *
  * @author philip
  * @see HCScript
  */
-public final class HCScriptFile extends AbstractHCElement <HCScriptFile>
+public class HCScriptFile extends AbstractHCElement <HCScriptFile>
 {
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   public static final boolean DEFAULT_DEFER = false;

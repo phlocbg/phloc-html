@@ -27,7 +27,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCNav extends AbstractHCElementWithChildren <HCNav>
+public class HCNav extends AbstractHCElementWithChildren <HCNav>
 {
   public HCNav ()
   {

@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;noembed&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCNoEmbed extends AbstractHCElementWithChildren <HCNoEmbed>
+public class HCNoEmbed extends AbstractHCElementWithChildren <HCNoEmbed>
 {
   public HCNoEmbed ()
   {

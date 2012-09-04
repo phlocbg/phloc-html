@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;h4&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCH4 extends AbstractHCElementWithChildren <HCH4>
+public class HCH4 extends AbstractHCElementWithChildren <HCH4>
 {
   public HCH4 ()
   {

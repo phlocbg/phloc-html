@@ -28,11 +28,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;blockquote&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInXHTML1
-public final class HCBlockQuote extends AbstractHCElementWithChildren <HCBlockQuote>
+public class HCBlockQuote extends AbstractHCElementWithChildren <HCBlockQuote>
 {
   public HCBlockQuote ()
   {

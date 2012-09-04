@@ -30,11 +30,11 @@ import com.phloc.html.EHTMLElement;
 
 /**
  * HTML5 document type representation
- * 
+ *
  * @author philip
  */
 @Immutable
-public final class HTML5DocumentType extends AbstractMicroNode implements IMicroDocumentType
+public class HTML5DocumentType extends AbstractMicroNode implements IMicroDocumentType
 {
   public HTML5DocumentType ()
   {}

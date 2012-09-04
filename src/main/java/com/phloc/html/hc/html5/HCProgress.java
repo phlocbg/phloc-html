@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCProgress extends AbstractHCElementWithChildren <HCProgress>
+public class HCProgress extends AbstractHCElementWithChildren <HCProgress>
 {
   private double m_dValue = CGlobal.ILLEGAL_DOUBLE;
   private double m_dMax = CGlobal.ILLEGAL_DOUBLE;
@@ -103,9 +103,9 @@ public final class HCProgress extends AbstractHCElementWithChildren <HCProgress>
 
     /**
      * <pre>
-     * The value attribute, if present, must have a value equal to or 
-     * greater than zero, and less than or equal to the value of the max 
-     * attribute, if present, or 1.0, otherwise. The max attribute, if 
+     * The value attribute, if present, must have a value equal to or
+     * greater than zero, and less than or equal to the value of the max
+     * attribute, if present, or 1.0, otherwise. The max attribute, if
      * present, must have a value greater than zero.
      * </pre>
      */

@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCCanvas extends AbstractHCElementWithChildren <HCCanvas>
+public class HCCanvas extends AbstractHCElementWithChildren <HCCanvas>
 {
   private long m_nHeight = CGlobal.ILLEGAL_ULONG;
   private long m_nWidth = CGlobal.ILLEGAL_ULONG;

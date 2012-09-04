@@ -28,11 +28,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;acronym&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInHTML5
-public final class HCAcronym extends AbstractHCElementWithChildren <HCAcronym>
+public class HCAcronym extends AbstractHCElementWithChildren <HCAcronym>
 {
   public HCAcronym ()
   {

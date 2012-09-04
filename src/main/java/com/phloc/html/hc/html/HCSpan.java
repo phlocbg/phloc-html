@@ -25,10 +25,10 @@ import com.phloc.html.hc.IHCNode;
 
 /**
  * Represents an HTML &lt;span&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCSpan extends AbstractHCSpan <HCSpan>
+public class HCSpan extends AbstractHCSpan <HCSpan>
 {
   public HCSpan ()
   {

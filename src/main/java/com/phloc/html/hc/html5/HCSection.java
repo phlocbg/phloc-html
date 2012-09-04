@@ -27,7 +27,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCSection extends AbstractHCElementWithChildren <HCSection>
+public class HCSection extends AbstractHCElementWithChildren <HCSection>
 {
   public HCSection ()
   {

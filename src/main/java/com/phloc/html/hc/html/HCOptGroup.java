@@ -30,10 +30,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;optgroup&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
+public class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
 {
   public static final boolean DEFAULT_DISABLED = false;
 

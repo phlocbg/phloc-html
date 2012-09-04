@@ -48,10 +48,10 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;style&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCStyle extends AbstractHCElement <HCStyle>
+public class HCStyle extends AbstractHCElement <HCStyle>
 {
   public static enum EMode
   {
@@ -214,7 +214,7 @@ public final class HCStyle extends AbstractHCElement <HCStyle>
    * Set how the content of style elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   * 
+   *
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */

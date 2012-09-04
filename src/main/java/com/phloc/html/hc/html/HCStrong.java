@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;strong&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCStrong extends AbstractHCElementWithChildren <HCStrong>
+public class HCStrong extends AbstractHCElementWithChildren <HCStrong>
 {
   public HCStrong ()
   {

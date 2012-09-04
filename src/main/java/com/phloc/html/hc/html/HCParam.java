@@ -32,10 +32,10 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents a single parameter for an {@link HCObject} or an applet.
- * 
+ *
  * @author philip
  */
-public final class HCParam extends AbstractHCElement <HCParam>
+public class HCParam extends AbstractHCElement <HCParam>
 {
   private String m_sName;
   private String m_sValue;

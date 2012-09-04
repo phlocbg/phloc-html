@@ -24,13 +24,13 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 
 /**
  * Represents an HTML &lt;dir&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInHTML4
 @DeprecatedInXHTML1
 @DeprecatedInHTML5
-public final class HCDir extends AbstractHCList <HCDir>
+public class HCDir extends AbstractHCList <HCDir>
 {
   public HCDir ()
   {

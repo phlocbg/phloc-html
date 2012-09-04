@@ -41,11 +41,11 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
- * 
+ *
  * @author philip
  * @see HCScriptFile
  */
-public final class HCScript extends AbstractHCElement <HCScript>
+public class HCScript extends AbstractHCElement <HCScript>
 {
   public static enum EMode
   {
@@ -199,7 +199,7 @@ public final class HCScript extends AbstractHCElement <HCScript>
    * Set how the content of script elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   * 
+   *
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */

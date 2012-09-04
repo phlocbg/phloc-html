@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;pre&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCPre extends AbstractHCElementWithChildren <HCPre>
+public class HCPre extends AbstractHCElementWithChildren <HCPre>
 {
   public HCPre ()
   {

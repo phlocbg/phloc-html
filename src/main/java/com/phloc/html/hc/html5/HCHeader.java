@@ -30,11 +30,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * This class represents the HTML5 <code>&lt;header&gt;</code> element. If
  * you're looking for the HTML <code>&lt;head&gt;</code> element please refer to
  * the class {@link com.phloc.html.hc.html.HCHead}.
- * 
+ *
  * @author philip
  */
 @SinceHTML5
-public final class HCHeader extends AbstractHCElementWithChildren <HCHeader>
+public class HCHeader extends AbstractHCElementWithChildren <HCHeader>
 {
   public HCHeader ()
   {

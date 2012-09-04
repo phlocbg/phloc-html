@@ -28,11 +28,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;listing&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInHTML32
-public final class HCListing extends AbstractHCElementWithChildren <HCListing>
+public class HCListing extends AbstractHCElementWithChildren <HCListing>
 {
   public HCListing ()
   {

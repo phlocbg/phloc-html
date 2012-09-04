@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;cite&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCCite extends AbstractHCElementWithChildren <HCCite>
+public class HCCite extends AbstractHCElementWithChildren <HCCite>
 {
   public HCCite ()
   {
