@@ -32,10 +32,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;label&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
+public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 {
   private String m_sFor;
 
@@ -82,7 +82,7 @@ public final class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Indicates that this label is used as the description for another object.
-   * 
+   *
    * @param sFor
    *        The HTML ID of the other object.
    * @return this

@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
-public final class HCCommand extends AbstractHCElement <HCCommand>
+public class HCCommand extends AbstractHCElement <HCCommand>
 {
   public static final boolean DEFAULT_CHECKED = false;
   public static final boolean DEFAULT_DEFAULT = false;

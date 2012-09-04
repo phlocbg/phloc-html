@@ -23,12 +23,12 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 
 /**
  * Represents an HTML &lt;menu&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInHTML4
 @DeprecatedInXHTML1
-public final class HCMenu extends AbstractHCList <HCMenu>
+public class HCMenu extends AbstractHCList <HCMenu>
 {
   public HCMenu ()
   {

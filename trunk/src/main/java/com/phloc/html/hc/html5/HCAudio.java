@@ -21,7 +21,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 
 @SinceHTML5
-public final class HCAudio extends AbstractHCMediaElement <HCAudio>
+public class HCAudio extends AbstractHCMediaElement <HCAudio>
 {
   public HCAudio ()
   {

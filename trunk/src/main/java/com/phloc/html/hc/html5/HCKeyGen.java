@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
-public final class HCKeyGen extends AbstractHCElement <HCKeyGen>
+public class HCKeyGen extends AbstractHCElement <HCKeyGen>
 {
   public static final EHCKeyGenType DEFAULT_KEY_TYPE = EHCKeyGenType.DEFAULT;
   public static final boolean DEFAULT_AUTOFOCUS = false;

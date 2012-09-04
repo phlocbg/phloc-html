@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;em&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCEM extends AbstractHCElementWithChildren <HCEM>
+public class HCEM extends AbstractHCElementWithChildren <HCEM>
 {
   public HCEM ()
   {

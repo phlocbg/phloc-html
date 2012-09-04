@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
+public class HCMeter extends AbstractHCElementWithChildren <HCMeter>
 {
   private double m_dValue = CGlobal.ILLEGAL_DOUBLE;
   private double m_dMin = CGlobal.ILLEGAL_DOUBLE;
@@ -154,15 +154,14 @@ public final class HCMeter extends AbstractHCElementWithChildren <HCMeter>
     /**
      * <pre>
      * The following inequalities must hold, as applicable:
-     * 
-     * minimum ≤ value ≤ maximum
-     * minimum ≤ low ≤ maximum (if low is specified)
-     * minimum ≤ high ≤ maximum (if high is specified)
-     * minimum ≤ optimum ≤ maximum (if optimum is specified)
-     * low ≤ high (if both low and high are specified)
+     *
+     * minimum &le; value &le; maximum
+     * minimum &le; low &le; maximum (if low is specified)
+     * minimum &le; high &le; maximum (if high is specified)
+     * minimum &le; optimum &le; maximum (if optimum is specified)
+     * low &le; high (if both low and high are specified)
      * </pre>
      */
-
     super.applyProperties (aElement, aConversionSettings);
 
     if (!EqualsUtils.equals (m_dValue, CGlobal.ILLEGAL_DOUBLE))

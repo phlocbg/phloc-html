@@ -21,10 +21,10 @@ import javax.annotation.Nullable;
 
 /**
  * Class for representing a simple HTML &lt;table&gt;.
- * 
+ *
  * @author philip
  */
-public final class HCTable extends AbstractHCTable <HCTable>
+public class HCTable extends AbstractHCTable <HCTable>
 {
   public HCTable ()
   {

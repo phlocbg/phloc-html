@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;code&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCCode extends AbstractHCElementWithChildren <HCCode>
+public class HCCode extends AbstractHCElementWithChildren <HCCode>
 {
   public HCCode ()
   {

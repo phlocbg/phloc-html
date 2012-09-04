@@ -31,7 +31,7 @@ import com.phloc.html.hc.api5.IHCHasMedia;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @SinceHTML5
-public final class HCSource extends AbstractHCMediaElementChild <HCSource> implements IHCHasMedia <HCSource>
+public class HCSource extends AbstractHCMediaElementChild <HCSource> implements IHCHasMedia <HCSource>
 {
   private String m_sMediaQuery;
   private ISimpleURL m_aSrc;

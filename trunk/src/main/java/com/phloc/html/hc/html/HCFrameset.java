@@ -30,11 +30,11 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;frameset&gt; element
- * 
+ *
  * @author philip
  */
 @DeprecatedInHTML5
-public final class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>
+public class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>
 {
   private int m_nCols = CGlobal.ILLEGAL_UINT;
   private int m_nRows = CGlobal.ILLEGAL_UINT;

@@ -24,10 +24,10 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;br&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCBR extends AbstractHCElement <HCBR>
+public class HCBR extends AbstractHCElement <HCBR>
 {
   public HCBR ()
   {

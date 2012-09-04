@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;var&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCVar extends AbstractHCElementWithChildren <HCVar>
+public class HCVar extends AbstractHCElementWithChildren <HCVar>
 {
   public HCVar ()
   {

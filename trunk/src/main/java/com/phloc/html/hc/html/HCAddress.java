@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;address&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCAddress extends AbstractHCElementWithChildren <HCAddress>
+public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
 {
   public HCAddress ()
   {

@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;li&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCLI extends AbstractHCElementWithChildren <HCLI>
+public class HCLI extends AbstractHCElementWithChildren <HCLI>
 {
   public HCLI ()
   {

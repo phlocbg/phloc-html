@@ -30,7 +30,7 @@ import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 @SinceHTML5
-public final class HCTrack extends AbstractHCMediaElementChild <HCTrack>
+public class HCTrack extends AbstractHCMediaElementChild <HCTrack>
 {
   public static final boolean DEFAULT_DEFAULT = false;
 

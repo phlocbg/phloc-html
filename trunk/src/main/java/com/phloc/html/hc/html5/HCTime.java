@@ -46,7 +46,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCTime extends AbstractHCElementWithChildren <HCTime>
+public class HCTime extends AbstractHCElementWithChildren <HCTime>
 {
   private String m_sDatetime;
 

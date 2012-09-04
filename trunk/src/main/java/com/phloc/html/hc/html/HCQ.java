@@ -27,10 +27,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;q&gt; element
- * 
+ *
  * @author philip
  */
-public final class HCQ extends AbstractHCElementWithChildren <HCQ>
+public class HCQ extends AbstractHCElementWithChildren <HCQ>
 {
   public HCQ ()
   {

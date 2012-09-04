@@ -25,7 +25,7 @@ import com.phloc.commons.url.EURLProtocol;
 import com.phloc.commons.url.ReadonlySimpleURL;
 import com.phloc.html.hc.html.HCA;
 
-public final class HCA_MailTo extends HCA
+public class HCA_MailTo extends HCA
 {
   public HCA_MailTo (@Nonnull final String sEmail)
   {

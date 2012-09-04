@@ -27,7 +27,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public final class HCRuby extends AbstractHCElementWithChildren <HCRuby>
+public class HCRuby extends AbstractHCElementWithChildren <HCRuby>
 {
   public HCRuby ()
   {

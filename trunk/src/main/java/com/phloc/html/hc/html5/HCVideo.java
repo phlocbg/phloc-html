@@ -21,7 +21,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 
 @SinceHTML5
-public final class HCVideo extends AbstractHCMediaElement <HCVideo>
+public class HCVideo extends AbstractHCMediaElement <HCVideo>
 {
   public HCVideo ()
   {
