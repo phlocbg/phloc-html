@@ -20,12 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
@@ -43,7 +38,6 @@ public class HCOption extends AbstractHCElementWithChildren <HCOption>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_SELECTED = false;
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCOption.class);
 
   private boolean m_bDisabled = DEFAULT_DISABLED;
   private boolean m_bSelected = DEFAULT_SELECTED;
@@ -141,10 +135,6 @@ public class HCOption extends AbstractHCElementWithChildren <HCOption>
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_sLabel != null)
       aElement.setAttribute (CHTMLAttributes.LABEL, m_sLabel);
-
-    if (GlobalDebug.isDebugMode () && false)
-      if (getChildCount () == 1 && StringHelper.hasNoText (getChild (0).getPlainText ()))
-        s_aLogger.warn ("Use another meta option for this option: " + toString ());
   }
 
   @Override
