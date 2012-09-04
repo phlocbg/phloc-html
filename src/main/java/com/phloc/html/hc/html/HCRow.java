@@ -505,12 +505,14 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return this;
   }
 
+  @Deprecated
   @Nonnull
   public HCRow addNonEmptyCell (@Nullable final String sCellText)
   {
     return addCell (StringHelper.hasNoText (sCellText) ? " " : sCellText);
   }
 
+  @Deprecated
   @Nonnull
   public HCRow addNonEmptyCell (@Nonnegative final int nIndex, @Nullable final String sCellText)
   {
@@ -531,6 +533,9 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return getChildAtIndex (nIndex);
   }
 
+  /**
+   * @return A list with all contained cells. Never <code>null</code>.
+   */
   @Nonnull
   @ReturnsMutableCopy
   public List <AbstractHCCell> getAllCells ()
@@ -575,7 +580,7 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
   /**
    * Count the number of effective cells - including "colspans" - of this row.
    * 
-   * @return The number of effectively contained cells.
+   * @return The number of effectively contained cells. Always &ge; 0.
    */
   @Nonnegative
   public int getEffectiveCellCount ()
@@ -587,6 +592,10 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return ret;
   }
 
+  /**
+   * @return All cell nodes as one big {@link HCNodeList}. Never
+   *         <code>null</code>.
+   */
   @Nonnull
   public HCNodeList getCellsAsNodeList ()
   {
@@ -597,6 +606,35 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return ret;
   }
 
+  /**
+   * Remove the cell at the specified index
+   * 
+   * @param nIndex
+   *        The index to remove
+   * @return this
+   */
+  @Nonnull
+  public HCRow removeCellAtIndex (@Nonnegative final int nIndex)
+  {
+    removeChild (nIndex);
+    return this;
+  }
+
+  /**
+   * Remove all cells of this row
+   * 
+   * @return this
+   */
+  @Nonnull
+  public HCRow removeAllCells ()
+  {
+    removeAllChildren ();
+    return this;
+  }
+
+  /**
+   * @return <code>true</code> if at least one contained cell uses a colspan.
+   */
   public boolean isColspanUsed ()
   {
     if (hasChildren ())
@@ -606,6 +644,9 @@ public final class HCRow extends AbstractHCElementWithInternalChildren <HCRow, A
     return false;
   }
 
+  /**
+   * @return <code>true</code> if at least one contained cell uses a rowspan.
+   */
   public boolean isRowspanUsed ()
   {
     if (hasChildren ())
