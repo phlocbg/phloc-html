@@ -39,13 +39,12 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.html.js.builder.IJSGeneratable;
 import com.phloc.json.IJSON;
 
 /**
  * Marshaler class that converts Java Objects to their respective JavaScript
  * notation.
- *
+ * 
  * @author philip
  */
 @Immutable
@@ -108,7 +107,7 @@ public final class JSMarshaller
    * Reference: <a href=
    * "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Literals#String_Literals"
    * > Core JavaScript 1.5 Guide </a>
-   *
+   * 
    * @param sInput
    *        the input string
    * @return the escaped string
@@ -171,7 +170,7 @@ public final class JSMarshaller
    * Important: this is not a 100% reversion of
    * {@link #javaScriptEscape(String)} since the escaping method drops any '\r'
    * character and it will therefore not be unescaped!
-   *
+   * 
    * @param sInput
    *        The string to be unescaped. May be <code>null</code>.
    * @return The unescaped string.
@@ -294,6 +293,17 @@ public final class JSMarshaller
     {
       switch (aType.getType ())
       {
+        case BOOLEAN:
+        case DOUBLE:
+          // double: No check for "Number" because this destroys float values!
+          aSB.append (aObject.toString ());
+          break;
+        case INT:
+          if (aObject instanceof Number)
+            aSB.append (Long.toString (((Number) aObject).longValue ()));
+          else
+            aSB.append (aObject.toString ());
+          break;
         case HTML:
           if (aObject instanceof IHCNode)
             aSB.append (HCSettings.getAsHTMLString ((IHCNode) aObject, false));
@@ -305,10 +315,7 @@ public final class JSMarshaller
           if (aObject instanceof IJSCodeProvider)
             aSB.append (((IJSCodeProvider) aObject).getJSCode ());
           else
-            if (aObject instanceof IJSGeneratable)
-              aSB.append (((IJSCodeProvider) aObject).getJSCode ());
-            else
-              aSB.append ((String) aObject);
+            aSB.append ((String) aObject);
           break;
         case JSON:
           aSB.append (((IJSON) aObject).getJSONString ());
@@ -318,19 +325,6 @@ public final class JSMarshaller
           final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
                                                                                 : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
-          break;
-        case BOOLEAN:
-          aSB.append (aObject.toString ());
-          break;
-        case INT:
-          if (aObject instanceof Number)
-            aSB.append (Long.toString (((Number) aObject).longValue ()));
-          else
-            aSB.append (aObject.toString ());
-          break;
-        case DOUBLE:
-          // No check for "Number" because this destroys float values!
-          aSB.append (aObject.toString ());
           break;
         case ARRAY:
         case LIST:
@@ -427,7 +421,7 @@ public final class JSMarshaller
   /**
    * Auto-detect the type of the passed object and convert it to a JS string. If
    * the type detection failed, an {@link IllegalArgumentException} is thrown.
-   *
+   * 
    * @param aObject
    *        The object to be converted. May be <code>null</code>. Note: works
    *        for atomic types and arrays, but <b>not</b> for collection types!
