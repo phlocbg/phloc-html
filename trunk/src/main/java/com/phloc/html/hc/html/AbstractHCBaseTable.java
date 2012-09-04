@@ -31,7 +31,6 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.parent.IHasChildrenSorted;
-import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -235,12 +234,22 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // header row handling
   //
 
+  /**
+   * @return The ID of the header row. May be <code>null</code>.
+   */
   @Nullable
   public final String getHeaderID ()
   {
     return m_sHeaderID;
   }
 
+  /**
+   * Set the table header ID
+   * 
+   * @param sID
+   *        The ID ot be set. May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public final THISTYPE setHeaderID (@Nullable final String sID)
   {
@@ -248,17 +257,32 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  /**
+   * @return The current set header row or <code>null</code> if no header row is
+   *         present
+   */
   @Nullable
   public final HCRow getHeaderRow ()
   {
     return m_aHeaderRow;
   }
 
+  /**
+   * @return <code>true</code> if a header row is present, <code>false</code> if
+   *         not
+   */
   public final boolean hasHeaderRow ()
   {
     return m_aHeaderRow != null;
   }
 
+  /**
+   * Add a new header row.
+   * 
+   * @return The created header row
+   * @throws IllegalStateException
+   *         if a header row is already present
+   */
   @Nonnull
   public final HCRow addHeaderRow ()
   {
@@ -268,31 +292,49 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aHeaderRow;
   }
 
+  /**
+   * Create a new header row, or reuse it if it is already existing.
+   * 
+   * @return The header row and never <code>null</code>.
+   */
   @Nonnull
   public final HCRow getOrAddHeaderRow ()
   {
     return m_aHeaderRow != null ? m_aHeaderRow : addHeaderRow ();
   }
 
+  /**
+   * Remove the header row, if it is present.
+   * 
+   * @return this
+   */
   @Nonnull
-  public final EChange removeHeaderRow ()
+  public final THISTYPE removeHeaderRow ()
   {
-    if (m_aHeaderRow == null)
-      return EChange.UNCHANGED;
     m_aHeaderRow = null;
-    return EChange.CHANGED;
+    return thisAsT ();
   }
 
   //
   // footer row handling
   //
 
+  /**
+   * @return The ID of the footer row. May be <code>null</code>.
+   */
   @Nullable
   public final String getFooterID ()
   {
     return m_sFooterID;
   }
 
+  /**
+   * Set the table footer ID
+   * 
+   * @param sID
+   *        The ID ot be set. May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public final THISTYPE setFooterID (@Nullable final String sID)
   {
@@ -300,17 +342,32 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
+  /**
+   * @return The current set footer row or <code>null</code> if no footer row is
+   *         present
+   */
   @Nullable
   public final HCRow getFooterRow ()
   {
     return m_aFooterRow;
   }
 
+  /**
+   * @return <code>true</code> if a footer row is present, <code>false</code> if
+   *         not
+   */
   public final boolean hasFooterRow ()
   {
     return m_aFooterRow != null;
   }
 
+  /**
+   * Add a new footer row.
+   * 
+   * @return The created footer row
+   * @throws IllegalStateException
+   *         if a footer row is already present
+   */
   @Nonnull
   public final HCRow addFooterRow ()
   {
@@ -320,19 +377,27 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aFooterRow;
   }
 
+  /**
+   * Create a new footer row, or reuse it if it is already existing.
+   * 
+   * @return The footer row and never <code>null</code>.
+   */
   @Nonnull
   public final HCRow getOrAddFooterRow ()
   {
     return m_aFooterRow != null ? m_aFooterRow : addFooterRow ();
   }
 
+  /**
+   * Remove the footer row, if it is present.
+   * 
+   * @return this
+   */
   @Nonnull
-  public final EChange removeFooterRow ()
+  public final THISTYPE removeFooterRow ()
   {
-    if (m_aFooterRow == null)
-      return EChange.UNCHANGED;
     m_aFooterRow = null;
-    return EChange.CHANGED;
+    return thisAsT ();
   }
 
   //

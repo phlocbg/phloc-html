@@ -45,7 +45,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
     addColumns (aCols);
   }
 
-  public HCColGroup (@Nullable final Iterable <HCCol> aCols)
+  public HCColGroup (@Nullable final Iterable <? extends HCCol> aCols)
   {
     this ();
     addColumns (aCols);
@@ -53,13 +53,13 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
 
   @Nonnull
   @Deprecated
-  public final HCColGroup addColumns (@Nullable final HCCol aCol)
+  public HCColGroup addColumns (@Nullable final HCCol aCol)
   {
     return addColumn (aCol);
   }
 
   @Nonnull
-  public final HCColGroup addColumns (@Nullable final HCCol... aCols)
+  public HCColGroup addColumns (@Nullable final HCCol... aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -68,7 +68,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   @Nonnull
-  public final HCColGroup addColumns (@Nullable final Iterable <HCCol> aCols)
+  public HCColGroup addColumns (@Nullable final Iterable <? extends HCCol> aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -77,14 +77,14 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   /**
-   * Define a new column.
+   * Add a new column.
    * 
    * @param aCol
    *        the column to add
    * @return this
    */
   @Nonnull
-  public final HCColGroup addColumn (@Nullable final HCCol aCol)
+  public HCColGroup addColumn (@Nullable final HCCol aCol)
   {
     if (aCol != null)
       addChild (aCol);
@@ -92,7 +92,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   /**
-   * Define a new column.
+   * Add a new column.
    * 
    * @param nIndex
    *        The index where the column should be added
@@ -101,44 +101,84 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
    * @return this
    */
   @Nonnull
-  public final HCColGroup addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
+  public HCColGroup addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
   {
     if (aCol != null)
       addChild (nIndex, aCol);
     return this;
   }
 
-  public final boolean hasColumns ()
+  /**
+   * @return <code>true</code> if at least one column is present
+   */
+  public boolean hasColumns ()
   {
     return hasChildren ();
   }
 
-  public final boolean hasNoColumns ()
+  /**
+   * @return <code>true</code> if not a single column is present
+   */
+  public boolean hasNoColumns ()
   {
     return !hasChildren ();
   }
 
+  /**
+   * @return The number of contained columns. Always &ge; 0.
+   */
   @Nonnegative
-  public final int getColumnCount ()
+  public int getColumnCount ()
   {
     return getChildCount ();
   }
 
+  /**
+   * @return A list of all contained columns. Never <code>null</code>.
+   */
+  @Nonnull
   @ReturnsImmutableObject
-  @Nullable
-  public final List <HCCol> getAllColumns ()
+  public List <HCCol> getAllColumns ()
   {
     return getChildren ();
   }
 
+  /**
+   * Get the column at the specified index
+   * 
+   * @param nIndex
+   *        The index to retrieve the column from
+   * @return <code>null</code> if no such column exists
+   */
   @Nullable
-  public final HCCol getColumnOfIndex (final int nIndex)
+  public HCCol getColumnOfIndex (final int nIndex)
   {
     return getChildAtIndex (nIndex);
   }
 
-  public final void removeColumnAtIndex (final int nIndex)
+  /**
+   * Remove the column at the specified index
+   * 
+   * @param nIndex
+   *        The index of the column to be removed
+   * @return this
+   */
+  @Nonnull
+  public HCColGroup removeColumnAtIndex (final int nIndex)
   {
     removeChild (nIndex);
+    return this;
+  }
+
+  /**
+   * Remove all contained colums
+   * 
+   * @return this
+   */
+  @Nonnull
+  public HCColGroup removeAllColumns ()
+  {
+    removeAllChildren ();
+    return this;
   }
 }

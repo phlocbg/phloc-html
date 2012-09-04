@@ -36,7 +36,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * 
  * @author philip
  */
-public final class HCCol extends AbstractHCElement <HCCol>
+public class HCCol extends AbstractHCElement <HCCol>
 {
   private String m_sWidth;
 
@@ -59,11 +59,17 @@ public final class HCCol extends AbstractHCElement <HCCol>
     setWidth (sWidth);
   }
 
+  /**
+   * @return <code>true</code> if this is a star column (width == "*")
+   */
   public boolean isStar ()
   {
     return CHTMLAttributeValues.STAR.equals (m_sWidth);
   }
 
+  /**
+   * @return The width definition or <code>null</code> if no width is present
+   */
   @Nullable
   public String getWidth ()
   {
@@ -77,9 +83,10 @@ public final class HCCol extends AbstractHCElement <HCCol>
     return this;
   }
 
+  @Deprecated
   public boolean isStarWidth ()
   {
-    return CHTMLAttributeValues.STAR.equals (m_sWidth);
+    return isStar ();
   }
 
   @Override
@@ -102,18 +109,36 @@ public final class HCCol extends AbstractHCElement <HCCol>
     return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("width", m_sWidth).toString ();
   }
 
+  /**
+   * @return A new "star" column (<code>&lt;col width="*" /></code>). Never
+   *         <code>null</code>.
+   */
   @Nonnull
   public static HCCol star ()
   {
     return new HCCol (CHTMLAttributeValues.STAR);
   }
 
+  /**
+   * Create a new column with a certain percentage.
+   * 
+   * @param nPerc
+   *        The percentage to be used. Should ideally be between 0 and 100.
+   * @return Never <code>null</code>.
+   */
   @Nonnull
-  public static HCCol perc (final int nPerc)
+  public static HCCol perc (@Nonnegative final int nPerc)
   {
     return new HCCol (ECSSUnit.perc (nPerc));
   }
 
+  /**
+   * Create a new column with an arbitrary width definition.
+   * 
+   * @param sWidth
+   *        The width to be used. May be <code>null</code>.
+   * @return Never <code>null</code>.
+   */
   @Nonnull
   public static HCCol fromString (@Nullable final String sWidth)
   {
