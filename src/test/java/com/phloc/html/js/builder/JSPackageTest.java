@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.phloc.html.js.provider.UnparsedJSCodeProvider;
+
 /**
  * Test class for class {@link JSPackage}
  * 
@@ -237,5 +239,9 @@ public final class JSPackageTest
     }
     aPkg.invoke (f).arg (JSExpr.direct ("jQuery"));
     System.out.print (aPkg.getJSCode ());
+
+    // Use an unparsed JS code inside a block
+    assertEquals ("{a=b;}",
+                  JSPrinter.getAsString ((IJSGeneratable) new JSBlock ().add (new UnparsedJSCodeProvider ("a=b;"))));
   }
 }
