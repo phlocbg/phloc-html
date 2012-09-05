@@ -66,7 +66,8 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
 @SuppressWarnings ("deprecation")
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
+                                                                                                              IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -237,7 +238,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     final Set <String> ret = new LinkedHashSet <String> ();
     if (m_aCSSClassProviders != null)
       for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
-        ret.add (aCSSClassProvider.getCSSClass ());
+      {
+        final String sCSSClass = aCSSClassProvider.getCSSClass ();
+        if (StringHelper.hasText (sCSSClass))
+          ret.add (sCSSClass);
+      }
     return ret;
   }
 
@@ -626,9 +631,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       final StringBuilder aSB = new StringBuilder ();
       for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
       {
-        if (aSB.length () > 0)
-          aSB.append (' ');
-        aSB.append (aCSSClassProvider.getCSSClass ());
+        final String sCSSClass = aCSSClassProvider.getCSSClass ();
+        if (StringHelper.hasText (sCSSClass))
+        {
+          if (aSB.length () > 0)
+            aSB.append (' ');
+          aSB.append (sCSSClass);
+        }
       }
       aElement.setAttribute (CHTMLAttributes.CLASS, aSB.toString ());
     }
