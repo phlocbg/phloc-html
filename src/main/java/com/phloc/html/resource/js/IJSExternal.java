@@ -38,4 +38,9 @@ public interface IJSExternal extends IJSHTMLDefinition
    * @return whether or not the script is to be using 'defer'
    */
   boolean isDefer ();
+
+  /**
+   * @return whether or not the script is to be using 'async'
+   */
+  boolean isAsync ();
 }
