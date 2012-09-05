@@ -41,7 +41,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public final class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
+public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
 {
   private final List <IHCBaseNode> m_aNodes = new ArrayList <IHCBaseNode> ();
 

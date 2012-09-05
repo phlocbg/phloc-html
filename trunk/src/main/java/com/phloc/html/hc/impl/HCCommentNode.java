@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public final class HCCommentNode extends AbstractHCNode
+public class HCCommentNode extends AbstractHCNode
 {
   private final String m_sText;
 

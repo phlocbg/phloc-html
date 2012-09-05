@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public final class HCDOMWrapper extends AbstractHCNode
+public class HCDOMWrapper extends AbstractHCNode
 {
   private final IMicroNode m_aNode;
 

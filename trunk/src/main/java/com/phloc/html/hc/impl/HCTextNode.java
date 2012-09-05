@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public final class HCTextNode extends AbstractHCNode
+public class HCTextNode extends AbstractHCNode
 {
   private final String m_sText;
   private boolean m_bEscape = MicroText.DEFAULT_ESCAPE;
