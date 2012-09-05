@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
@@ -34,7 +35,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;script&gt; element that loads the code from a source
  * URL.
- *
+ * 
  * @author philip
  * @see HCScript
  */
@@ -42,10 +43,13 @@ public class HCScriptFile extends AbstractHCElement <HCScriptFile>
 {
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   public static final boolean DEFAULT_DEFER = false;
+  public static final boolean DEFAULT_ASYNC = false;
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private ISimpleURL m_aSrc;
+  private String m_sCharset;
   private boolean m_bDefer = DEFAULT_DEFER;
+  private boolean m_bAsync = DEFAULT_ASYNC;
 
   public HCScriptFile ()
   {
@@ -92,6 +96,19 @@ public class HCScriptFile extends AbstractHCElement <HCScriptFile>
     return this;
   }
 
+  @Nullable
+  public String getCharset ()
+  {
+    return m_sCharset;
+  }
+
+  @Nonnull
+  public HCScriptFile setCharset (@Nullable final String sCharset)
+  {
+    m_sCharset = sCharset;
+    return this;
+  }
+
   public boolean isDefer ()
   {
     return m_bDefer;
@@ -104,6 +121,18 @@ public class HCScriptFile extends AbstractHCElement <HCScriptFile>
     return this;
   }
 
+  public boolean isAsync ()
+  {
+    return m_bAsync;
+  }
+
+  @Nonnull
+  public HCScriptFile setAsync (final boolean bAsync)
+  {
+    m_bAsync = bAsync;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
@@ -111,8 +140,12 @@ public class HCScriptFile extends AbstractHCElement <HCScriptFile>
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (m_aSrc != null)
       aElement.setAttribute (CHTMLAttributes.SRC, m_aSrc.getAsString ());
+    if (StringHelper.hasText (m_sCharset))
+      aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
     if (m_bDefer)
       aElement.setAttribute (CHTMLAttributes.DEFER, CHTMLAttributeValues.DEFER);
+    if (m_bAsync)
+      aElement.setAttribute (CHTMLAttributes.ASYNC, CHTMLAttributeValues.ASYNC);
 
     // Tag may not be self closed
     aElement.appendText ("");
@@ -129,7 +162,9 @@ public class HCScriptFile extends AbstractHCElement <HCScriptFile>
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("type", m_aType)
                             .appendIfNotNull ("src", m_aSrc)
+                            .appendIfNotNull ("charset", m_sCharset)
                             .append ("defer", m_bDefer)
+                            .append ("async", m_bAsync)
                             .toString ();
   }
 }
