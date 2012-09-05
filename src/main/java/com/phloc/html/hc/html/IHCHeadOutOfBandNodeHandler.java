@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc.html;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
@@ -26,7 +28,7 @@ import com.phloc.html.hc.IHCBaseNode;
  * 
  * @author philip
  */
-public interface IHCHeadOutOfBandNodeHandler
+public interface IHCHeadOutOfBandNodeHandler extends Serializable
 {
   /**
    * Handle ouf-of-band nodes in an &lt;head> element
