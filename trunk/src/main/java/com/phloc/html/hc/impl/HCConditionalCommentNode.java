@@ -25,6 +25,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.charset.CharsetManager;
+import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
@@ -58,6 +59,10 @@ public class HCConditionalCommentNode extends AbstractHCNode
       throw new IllegalArgumentException ("Passed condition may not be empty!");
     if (aWrappedNode == null)
       throw new NullPointerException ("wrappedNode");
+    if (aWrappedNode instanceof HCCommentNode)
+      throw new IllegalArgumentException ("You cannot wrap a comment inside a conditional comment");
+    if (aWrappedNode instanceof HCConditionalCommentNode)
+      throw new IllegalArgumentException ("You cannot wrap a conditional comment inside another conditional comment");
     m_sCondition = sCondition;
     m_aWrappedNode = aWrappedNode;
   }
@@ -131,7 +136,7 @@ public class HCConditionalCommentNode extends AbstractHCNode
   }
 
   @Nullable
-  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public IMicroComment getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getCommentNode (aConversionSettings).getAsNode (aConversionSettings);
   }

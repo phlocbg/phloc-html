@@ -86,6 +86,11 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     this (new UnparsedJSCodeProvider (sJSCode));
   }
 
+  public boolean isInlineJS ()
+  {
+    return true;
+  }
+
   @Nonnull
   public IJSCodeProvider getJSCodeProvider ()
   {

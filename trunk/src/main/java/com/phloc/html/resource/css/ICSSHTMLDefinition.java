@@ -27,6 +27,7 @@ import com.phloc.html.resource.IHTMLResourceObject;
  * 
  * @author philip
  */
+@Deprecated
 public interface ICSSHTMLDefinition extends IHTMLResourceObject
 {
   /**

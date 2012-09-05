@@ -33,7 +33,7 @@ import com.phloc.html.hc.html.HCSpan;
 import com.phloc.html.hc.html.HCTable;
 
 /**
- * Test class for class HCNodeList
+ * Test class for class {@link HCNodeList}
  * 
  * @author philip
  */

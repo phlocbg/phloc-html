@@ -28,6 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
+@Deprecated
 @Immutable
 public abstract class AbstractHTMLResourceObject implements IHTMLResourceObject
 {

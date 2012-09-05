@@ -23,6 +23,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.resource.AbstractHTMLResourceObject;
 
+@Deprecated
 @Immutable
 public abstract class AbstractJSHTMLDefinition extends AbstractHTMLResourceObject
 {

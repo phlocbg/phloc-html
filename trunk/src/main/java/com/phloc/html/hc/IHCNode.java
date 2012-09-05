@@ -20,6 +20,7 @@ package com.phloc.html.hc;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
@@ -37,4 +38,14 @@ public interface IHCNode extends IHCBaseNode
    */
   @Nullable
   IHCBaseNode getOutOfBandNode (@Nonnull IHCConversionSettings aConversionSettings);
+
+  /**
+   * Get this node wrapped in a conditional comment
+   * 
+   * @param sCondition
+   *        The condition to us
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
 }

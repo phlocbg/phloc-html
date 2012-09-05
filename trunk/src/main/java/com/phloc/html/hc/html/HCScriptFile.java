@@ -61,6 +61,11 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
     setDefer (bDefer);
   }
 
+  public boolean isInlineJS ()
+  {
+    return false;
+  }
+
   @Nullable
   public ISimpleURL getSrc ()
   {

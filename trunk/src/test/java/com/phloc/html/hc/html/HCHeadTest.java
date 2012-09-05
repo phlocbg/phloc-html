@@ -25,8 +25,6 @@ import org.junit.Test;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.resource.css.CSSExternal;
-import com.phloc.html.resource.js.JSExternal;
 
 /**
  * Test class for class {@link HCHead}
@@ -58,11 +56,11 @@ public final class HCHeadTest
                   HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setShortcutIconHref (null);
-    aHead.addJS (new JSExternal (new SimpleURL ("/my.js")));
+    aHead.addJS (new HCScriptFile (new SimpleURL ("/my.js")));
     assertEquals ("<head><title>phloc</title><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
-    aHead.addCSS (new CSSExternal (new SimpleURL ("/my.css")));
+    aHead.addCSS (HCLink.createCSSLink (new SimpleURL ("/my.css")));
     assertEquals ("<head><title>phloc</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/my.css\"></link><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
   }

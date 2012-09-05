@@ -24,6 +24,7 @@ import javax.annotation.Nullable;
  * 
  * @author philip
  */
+@Deprecated
 public interface IHasConditionalComment
 {
   /**

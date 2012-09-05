@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
  * 
  * @author philip
  */
+@Deprecated
 public interface ICSSInline extends ICSSHTMLDefinition
 {
   /**

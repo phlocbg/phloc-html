@@ -29,6 +29,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
+@Deprecated
 public interface IHTMLResourceObject extends IHasConditionalComment, IHCConvertible
 {
   @Nonnull

@@ -25,7 +25,6 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
-import com.phloc.html.resource.js.JSInline;
 
 public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNodeHandler
 {
@@ -49,7 +48,7 @@ public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNode
     {
       // Ensure the inline JS is executed after the document has been loaded
       // Note: has dependency to jQuery
-      aHead.addJS (new JSInline (JQuery.onDocumentReady (aJS)));
+      aHead.addJS (new HCScript (JQuery.onDocumentReady (aJS)));
     }
   }
 }

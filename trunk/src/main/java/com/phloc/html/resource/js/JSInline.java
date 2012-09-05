@@ -43,6 +43,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * 
  * @author philip
  */
+@Deprecated
 @Immutable
 public class JSInline extends AbstractJSHTMLDefinition implements IJSInline
 {
