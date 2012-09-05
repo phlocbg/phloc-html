@@ -33,6 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
@@ -47,11 +48,14 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * @author philip
  */
 @Immutable
-public class HCConditionalCommentNode extends AbstractHCNode
+public class HCConditionalCommentNode extends AbstractHCNode implements IHCWrappingNode
 {
+  public static final String DEFAULT_LINE_SEPARATOR = CGlobal.LINE_SEPARATOR;
+  private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
+
   private String m_sCondition;
   private final IHCBaseNode m_aWrappedNode;
-  private String m_sLineSeparator = CGlobal.LINE_SEPARATOR;
+  private String m_sLineSeparator = s_sDefaultLineSeparator;
 
   public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCBaseNode aWrappedNode)
   {
@@ -87,7 +91,6 @@ public class HCConditionalCommentNode extends AbstractHCNode
   }
 
   @Nonnull
-  @Nonempty
   public IHCBaseNode getWrappedNode ()
   {
     return m_aWrappedNode;
@@ -150,6 +153,20 @@ public class HCConditionalCommentNode extends AbstractHCNode
                                                                                                        CCharset.CHARSET_ISO_8859_1_OBJ)))
                                        .append ("wrappedNode", m_aWrappedNode)
                                        .toString ();
+  }
+
+  @Nonnull
+  @Nonempty
+  public static String getDefaultLineSeparator ()
+  {
+    return s_sDefaultLineSeparator;
+  }
+
+  public static void setDefaultLineSeparator (@Nonnull @Nonempty final String sDefaultLineSeparator)
+  {
+    if (StringHelper.hasNoText (sDefaultLineSeparator))
+      throw new IllegalArgumentException ("defaultLineSeparator");
+    s_sDefaultLineSeparator = sDefaultLineSeparator;
   }
 
   @Nonnull

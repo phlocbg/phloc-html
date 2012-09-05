@@ -49,12 +49,14 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
+import com.phloc.html.hc.impl.HCConditionalCommentNode;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 import com.phloc.html.resource.css.ICSSExternal;
@@ -282,20 +284,40 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  private static boolean _isValidCSSNode (@Nonnull final IHCBaseNode aNode)
+  {
+    // Direct CSS node?
+    if (aNode instanceof IHCCSSNode)
+    {
+      // Special case
+      if (aNode instanceof HCLink && !EHCLinkType.STYLESHEET.equals (((HCLink) aNode).getRel ()))
+        return false;
+      return true;
+    }
+    // Conditional comment?
+    if (aNode instanceof HCConditionalCommentNode)
+      return _isValidCSSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    return false;
+  }
+
   @Nonnull
-  public HCHead addCSS (@Nonnull final IHCCSSNode aCSS)
+  public HCHead addCSS (@Nonnull final IHCNode aCSS)
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
+    if (!_isValidCSSNode (aCSS))
+      throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (aCSS);
     return this;
   }
 
   @Nonnull
-  public HCHead addCSS (@Nonnegative final int nIndex, @Nonnull final IHCCSSNode aCSS)
+  public HCHead addCSS (@Nonnegative final int nIndex, @Nonnull final IHCNode aCSS)
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
+    if (!_isValidCSSNode (aCSS))
+      throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (nIndex, aCSS);
     return this;
   }
@@ -320,12 +342,12 @@ public class HCHead extends AbstractHCBaseNode
 
   @Nonnull
   @ReturnsMutableCopy
-  public List <IHCCSSNode> getAllCSSNodes ()
+  public List <IHCNode> getAllCSSNodes ()
   {
-    final List <IHCCSSNode> ret = new ArrayList <IHCCSSNode> ();
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
     for (final Object aObj : m_aCSS)
-      if (aObj instanceof IHCCSSNode)
-        ret.add ((IHCCSSNode) aObj);
+      if (aObj instanceof IHCNode)
+        ret.add ((IHCNode) aObj);
     return ret;
   }
 
@@ -376,6 +398,17 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  private static boolean _isValidJSNode (@Nonnull final IHCBaseNode aNode)
+  {
+    // Direct JS node?
+    if (aNode instanceof IHCJSNode)
+      return true;
+    // Conditional comment?
+    if (aNode instanceof HCConditionalCommentNode)
+      return _isValidJSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    return false;
+  }
+
   /**
    * Append some JavaScript code
    * 
@@ -384,10 +417,12 @@ public class HCHead extends AbstractHCBaseNode
    * @return this
    */
   @Nonnull
-  public HCHead addJS (@Nonnull final IHCJSNode aJS)
+  public HCHead addJS (@Nonnull final IHCNode aJS)
   {
     if (aJS == null)
       throw new NullPointerException ("js");
+    if (!_isValidJSNode (aJS))
+      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (aJS);
     return this;
   }
@@ -402,10 +437,12 @@ public class HCHead extends AbstractHCBaseNode
    * @return this
    */
   @Nonnull
-  public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IHCJSNode aJS)
+  public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IHCNode aJS)
   {
     if (aJS == null)
       throw new NullPointerException ("js");
+    if (!_isValidJSNode (aJS))
+      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (nIndex, aJS);
     return this;
   }
@@ -433,12 +470,12 @@ public class HCHead extends AbstractHCBaseNode
 
   @Nonnull
   @ReturnsMutableCopy
-  public List <IHCJSNode> getAllJSNodes ()
+  public List <IHCNode> getAllJSNodes ()
   {
-    final List <IHCJSNode> ret = new ArrayList <IHCJSNode> ();
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
     for (final Object aObj : m_aJS)
-      if (aObj instanceof IHCJSNode)
-        ret.add ((IHCJSNode) aObj);
+      if (aObj instanceof IHCNode)
+        ret.add ((IHCNode) aObj);
     return ret;
   }
 
@@ -524,9 +561,9 @@ public class HCHead extends AbstractHCBaseNode
       }
       else
       {
-        if (!((IHCCSSNode) aCSS).isInlineCSS ())
+        if (aCSS instanceof IHCCSSNode && !((IHCCSSNode) aCSS).isInlineCSS ())
           ++nCSSExternals;
-        eHead.appendChild (((IHCCSSNode) aCSS).getAsNode (aConversionSettings));
+        eHead.appendChild (((IHCNode) aCSS).getAsNode (aConversionSettings));
       }
     }
 
@@ -547,7 +584,7 @@ public class HCHead extends AbstractHCBaseNode
       if (aJS instanceof IJSHTMLDefinition)
         eHead.appendChild (((IJSHTMLDefinition) aJS).getAsNode (aConversionSettings));
       else
-        eHead.appendChild (((IHCJSNode) aJS).getAsNode (aConversionSettings));
+        eHead.appendChild (((IHCNode) aJS).getAsNode (aConversionSettings));
     }
   }
 

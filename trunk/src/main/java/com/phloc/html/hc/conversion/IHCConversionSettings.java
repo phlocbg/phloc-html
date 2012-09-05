@@ -19,13 +19,25 @@ package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
+/**
+ * Settings interface that is used to convert HC* nodes to micro nodes, to text
+ * and for consistency check.
+ * 
+ * @author philip
+ */
 public interface IHCConversionSettings
 {
+  final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
+  boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
+  boolean DEFAULT_CONSISTENCY_CHECKS = true;
+
   /**
    * @return The HTML version to be used to transform HC nodes into XML nodes.
    */
@@ -34,24 +46,33 @@ public interface IHCConversionSettings
 
   /**
    * @return <code>true</code> if the HTML output should be indented and
-   *         aligned.
+   *         aligned. Default is {@value #DEFAULT_INDENT_AND_ALIGN_HTML}
    */
   boolean isIdentAndAlignHTML ();
 
   /**
-   * @return The CSS version to be used
+   * @return The XML writer settings to be used. Is considering the
+   *         {@link #isIdentAndAlignHTML()} flags.
+   */
+  @Nonnull
+  IXMLWriterSettings getXMLWriterSettings ();
+
+  /**
+   * @return The CSS version to be used. Default is {@link #DEFAULT_CSS_VERSION}
    */
   @Nonnull
   ECSSVersion getCSSVersion ();
 
   /**
    * @return <code>true</code> if the CSS output should be indented and aligned.
+   *         Default is {@value #DEFAULT_INDENT_AND_ALIGN_CSS}
    */
   boolean isIdentAndAlignCSS ();
 
   /**
    * @return <code>true</code> if the consistency checks are enabled,
-   *         <code>false</code> otherwise.
+   *         <code>false</code> otherwise. Default is
+   *         {@link #DEFAULT_CONSISTENCY_CHECKS}.
    */
   boolean areConsistencyChecksEnabled ();
 

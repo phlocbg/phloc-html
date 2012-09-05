@@ -22,10 +22,6 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.xml.serialize.EXMLSerializeFormat;
-import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
-import com.phloc.commons.xml.serialize.IXMLWriterSettings;
-import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -37,22 +33,13 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
-  /** XML writer settings for emitting stuff indented and aligned */
-  private static final IXMLWriterSettings s_aXMLSettingsIndent = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.HTML)
-                                                                                         .setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
-
-  /** XML writer settings for emitting stuff not indented and not aligned */
-  private static final IXMLWriterSettings s_aXMLSettingsNotIndented = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.HTML)
-                                                                                              .setIndent (EXMLSerializeIndent.NONE);
-
   @Nonnull
   public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     final IMicroNode aNode = getAsNode (aConversionSettings);
     if (aNode == null)
       return "";
-    return MicroWriter.getNodeAsString (aNode, aConversionSettings.isIdentAndAlignHTML () ? s_aXMLSettingsIndent
-                                                                                         : s_aXMLSettingsNotIndented);
+    return MicroWriter.getNodeAsString (aNode, aConversionSettings.getXMLWriterSettings ());
   }
 
   @Override
