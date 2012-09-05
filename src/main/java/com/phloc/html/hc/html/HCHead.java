@@ -51,7 +51,6 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCLinkType;
-import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.meta.EStandardMetaElement;
@@ -78,7 +77,7 @@ public class HCHead extends AbstractHCBaseNode
   private final List <ICSSHTMLDefinition> m_aCSS = new ArrayList <ICSSHTMLDefinition> ();
   private final List <IJSHTMLDefinition> m_aJS = new ArrayList <IJSHTMLDefinition> ();
   private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-  private IHCOutOfBandNodeHandler m_aOutOfBandHandler = new HCHeadDefaultJQueryOutOfBandHandler ();
+  private IHCHeadOutOfBandNodeHandler m_aOutOfBandHandler = new HCHeadDefaultJQueryOutOfBandHandler ();
 
   public HCHead ()
   {}
@@ -371,7 +370,7 @@ public class HCHead extends AbstractHCBaseNode
    * @return this
    */
   @Nonnull
-  public HCHead setOutOfBandHandler (@Nonnull final IHCOutOfBandNodeHandler aOutOfBandHandler)
+  public HCHead setOutOfBandHandler (@Nonnull final IHCHeadOutOfBandNodeHandler aOutOfBandHandler)
   {
     if (aOutOfBandHandler == null)
       throw new NullPointerException ("outOfBandNodeHandler");
@@ -383,7 +382,7 @@ public class HCHead extends AbstractHCBaseNode
    * @return the installed out-of-band-node handler. Never <code>null</code> .
    */
   @Nonnull
-  public IHCOutOfBandNodeHandler getOutOfBandHandler ()
+  public IHCHeadOutOfBandNodeHandler getOutOfBandHandler ()
   {
     return m_aOutOfBandHandler;
   }

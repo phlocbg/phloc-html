@@ -15,19 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.html.HCHead;
 
 /**
  * Interface for handling custom out-of-band nodes in the HEAD elements
  * 
  * @author philip
  */
-public interface IHCOutOfBandNodeHandler
+public interface IHCHeadOutOfBandNodeHandler
 {
   /**
    * Handle ouf-of-band nodes in an &lt;head> element

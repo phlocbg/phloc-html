@@ -22,14 +22,13 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 import com.phloc.html.resource.js.JSInline;
 
-public class HCHeadDefaultJQueryOutOfBandHandler implements IHCOutOfBandNodeHandler
+public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNodeHandler
 {
   public HCHeadDefaultJQueryOutOfBandHandler ()
   {}
