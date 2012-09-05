@@ -54,6 +54,7 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
     setSrc (aSrc);
   }
 
+  @Deprecated
   public HCScriptFile (@Nullable final ISimpleURL aSrc, final boolean bDefer)
   {
     this (aSrc);

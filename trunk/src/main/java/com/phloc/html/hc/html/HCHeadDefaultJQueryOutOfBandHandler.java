@@ -25,7 +25,6 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
-import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 import com.phloc.html.resource.js.JSInline;
 
 public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNodeHandler
@@ -42,7 +41,7 @@ public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNode
     for (final IHCBaseNode aNode : aRealList)
     {
       if (aNode instanceof HCScript)
-        aJS.append (new UnparsedJSCodeProvider (((HCScript) aNode).getJSContent ()));
+        aJS.append ((HCScript) aNode);
       else
         aHead.addOutOfBandNode (aNode);
     }

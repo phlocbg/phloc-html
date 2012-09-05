@@ -41,7 +41,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
  * @author philip
  * @see HCScriptFile
  */
-public class HCScript extends AbstractHCScript <HCScript>
+public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProvider
 {
   public static enum EMode
   {
@@ -87,13 +87,23 @@ public class HCScript extends AbstractHCScript <HCScript>
   }
 
   @Nonnull
-  public IJSCodeProvider getCodeProvider ()
+  public IJSCodeProvider getJSCodeProvider ()
   {
     return m_aProvider;
   }
 
+  /**
+   * @deprecated Use {@link #getJSCode()} instead
+   */
+  @Deprecated
   @Nullable
   public String getJSContent ()
+  {
+    return getJSCode ();
+  }
+
+  @Nullable
+  public String getJSCode ()
   {
     return m_aProvider.getJSCode ();
   }
@@ -154,7 +164,7 @@ public class HCScript extends AbstractHCScript <HCScript>
   @Override
   protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    m_sJSCode = getJSContent ();
+    m_sJSCode = getJSCode ();
     // Don't create script elements with empty content....
     return StringHelper.hasText (m_sJSCode);
   }

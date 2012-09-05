@@ -38,22 +38,33 @@ import com.phloc.html.hc.html.HCScriptFile;
 public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
 {
   public static final boolean DEFAULT_DEFER = false;
+  public static final boolean DEFAULT_ASYNC = false;
 
   private final ISimpleURL m_aHref;
   private final boolean m_bDefer;
+  private final boolean m_bAsync;
 
   public JSExternal (@Nonnull final ISimpleURL aHref)
   {
-    this (aHref, DEFAULT_DEFER, null);
+    this (aHref, DEFAULT_DEFER, DEFAULT_ASYNC, null);
   }
 
   public JSExternal (@Nonnull final ISimpleURL aHref, final boolean bDefer, @Nullable final ConditionalComment aCC)
+  {
+    this (aHref, bDefer, DEFAULT_ASYNC, aCC);
+  }
+
+  public JSExternal (@Nonnull final ISimpleURL aHref,
+                     final boolean bDefer,
+                     final boolean bAsync,
+                     @Nullable final ConditionalComment aCC)
   {
     super (aCC);
     if (aHref == null)
       throw new NullPointerException ("href");
     m_aHref = aHref;
     m_bDefer = bDefer;
+    m_bAsync = bAsync;
   }
 
   @Nonnull
@@ -67,10 +78,15 @@ public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
     return m_bDefer;
   }
 
+  public final boolean isAsync ()
+  {
+    return m_bAsync;
+  }
+
   @Nonnull
   public IHCNode getAsHCNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final HCScriptFile aScript = new HCScriptFile (m_aHref, m_bDefer);
+    final HCScriptFile aScript = new HCScriptFile (m_aHref).setDefer (m_bDefer).setAsync (m_bAsync);
     if (hasConditionalComment ())
       return getConditionalComment ().getNodeWrappedInCondition (aScript, aConversionSettings);
     return aScript;
@@ -84,13 +100,17 @@ public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
     if (!super.equals (o))
       return false;
     final JSExternal rhs = (JSExternal) o;
-    return m_aHref.equals (rhs.m_aHref) && m_bDefer == rhs.m_bDefer;
+    return m_aHref.equals (rhs.m_aHref) && m_bDefer == rhs.m_bDefer && m_bAsync == rhs.m_bAsync;
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aHref).append (m_bDefer).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aHref)
+                            .append (m_bDefer)
+                            .append (m_bAsync)
+                            .getHashCode ();
   }
 
   @Override
@@ -99,6 +119,7 @@ public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
     return ToStringGenerator.getDerived (super.toString ())
                             .append ("href", m_aHref)
                             .append ("defer", m_bDefer)
+                            .append ("async", m_bAsync)
                             .toString ();
   }
 }
