@@ -23,8 +23,9 @@ import org.junit.Test;
 
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
+import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.api.EHCLinkType;
-import com.phloc.html.hc.conversion.DefaultHCConversionSettingsProvider;
+import com.phloc.html.hc.conversion.HCConversionSettingsProvider;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.builder.JSExpr;
 
@@ -172,7 +173,7 @@ public final class HCTest
     b.addChild (new HCXMP ());
     b.addChild (new HCXMP ("Das wäre also ein Beispiel"));
 
-    final IHCConversionSettings aCS = DefaultHCConversionSettingsProvider.getInstance ().getConversionSettings (true);
+    final IHCConversionSettings aCS = new HCConversionSettingsProvider (EHTMLVersion.DEFAULT).getConversionSettings (true);
     assertNotNull (h.getAsNode (aCS));
     System.out.print (h.getAsHTMLString (aCS));
   }

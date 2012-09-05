@@ -20,6 +20,8 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.EHTMLVersion;
 
 /**
@@ -29,14 +31,17 @@ import com.phloc.html.EHTMLVersion;
  * @author philip
  */
 @Immutable
-public final class DefaultHCConversionSettingsProvider extends HCConversionSettingsProvider
+@Deprecated
+public final class DefaultHCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
+  public static final EHTMLVersion HTML_VERSION = EHTMLVersion.DEFAULT;
+  private static final HCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
+  private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
+                                                                                                          .setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN));
   private static final DefaultHCConversionSettingsProvider s_aInstance = new DefaultHCConversionSettingsProvider ();
 
   private DefaultHCConversionSettingsProvider ()
-  {
-    super (EHTMLVersion.DEFAULT);
-  }
+  {}
 
   @Nonnull
   public static DefaultHCConversionSettingsProvider getInstance ()
@@ -45,8 +50,20 @@ public final class DefaultHCConversionSettingsProvider extends HCConversionSetti
   }
 
   @Nonnull
+  public EHTMLVersion getHTMLVersion ()
+  {
+    return HTML_VERSION;
+  }
+
+  @Nonnull
+  public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
+  {
+    return getStaticConversionSettings (bIndentAndAlign);
+  }
+
+  @Nonnull
   public static IHCConversionSettings getStaticConversionSettings (final boolean bIndentAndAlign)
   {
-    return getInstance ().getConversionSettings (bIndentAndAlign);
+    return bIndentAndAlign ? DEFAULT : DEFAULT_NOT_INDENTED;
   }
 }

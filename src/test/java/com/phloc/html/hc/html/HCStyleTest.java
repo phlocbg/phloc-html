@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.phloc.html.hc.conversion.DefaultHCConversionSettingsProvider;
+import com.phloc.html.hc.conversion.HCSettings;
 
 /**
  * Test class for class {@link HCStyle}.
@@ -34,8 +34,7 @@ public final class HCStyleTest
   public void testSimple ()
   {
     final HCStyle aStyle = new HCStyle ("div{color:red;}");
-    assertEquals ("<style type=\"text/css\">div{color:red;}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+    assertEquals ("<style type=\"text/css\">div{color:red;}</style>", HCSettings.getAsHTMLString (aStyle, false));
   }
 
   @Test
@@ -43,14 +42,14 @@ public final class HCStyleTest
   {
     HCStyle aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+                  HCSettings.getAsHTMLString (aStyle, false));
     HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url(&#39;foo.gif&#39;);}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+                  HCSettings.getAsHTMLString (aStyle, false));
     HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT_NO_ESCAPE);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
     assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
-                  aStyle.getAsHTMLString (DefaultHCConversionSettingsProvider.getStaticConversionSettings (false)));
+                  HCSettings.getAsHTMLString (aStyle, false));
   }
 }

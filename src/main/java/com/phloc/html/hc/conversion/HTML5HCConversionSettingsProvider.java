@@ -20,6 +20,8 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.EHTMLVersion;
 
 /**
@@ -28,12 +30,13 @@ import com.phloc.html.EHTMLVersion;
  * @author philip
  */
 @Immutable
+@Deprecated
 public final class HTML5HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
   public static final EHTMLVersion HTML_VERSION = EHTMLVersion.HTML5;
   private static final HCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
   private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
-                                                                                                          .setIndentAndAlignHTML (false);
+                                                                                                          .setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN));
   private static final HTML5HCConversionSettingsProvider s_aInstance = new HTML5HCConversionSettingsProvider ();
 
   private HTML5HCConversionSettingsProvider ()

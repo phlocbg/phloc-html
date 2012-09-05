@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
 import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 
@@ -32,7 +33,7 @@ import com.phloc.html.hc.IHCNode;
 public final class HCSettings
 {
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
-  private static IHCConversionSettingsProvider s_aSettingsProvider = DefaultHCConversionSettingsProvider.getInstance ();
+  private static IHCConversionSettingsProvider s_aSettingsProvider = new HCConversionSettingsProvider (EHTMLVersion.DEFAULT);
 
   private HCSettings ()
   {}
@@ -61,7 +62,7 @@ public final class HCSettings
 
   /**
    * @return The global conversion settings provider. Never <code>null</code>.
-   *         By default a {@link DefaultHCConversionSettingsProvider} object is
+   *         By default a {@link HCConversionSettingsProvider} object is
    *         returned.
    */
   @Nonnull
