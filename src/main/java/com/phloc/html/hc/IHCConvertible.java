@@ -15,22 +15,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource;
+package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.IHCConvertible;
-import com.phloc.html.hc.IHCNode;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
- * Base interface for both CSS and JS declarations in HTML.
+ * Interface for HC elements that can be converted to micro XML (and therefore
+ * also to a string)
  * 
  * @author philip
  */
-public interface IHTMLResourceObject extends IHasConditionalComment, IHCConvertible
+public interface IHCConvertible
 {
+  /**
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The fully created HTML node
+   */
+  @Nullable
+  IMicroNode getAsNode (@Nonnull IHCConversionSettings aConversionSettings);
+
+  /**
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The node as XML optionally without indentation.
+   */
   @Nonnull
-  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
+  String getAsHTMLString (@Nonnull IHCConversionSettings aConversionSettings);
 }

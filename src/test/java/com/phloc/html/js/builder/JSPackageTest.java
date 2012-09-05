@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 /**
@@ -157,14 +159,44 @@ public final class JSPackageTest
     }
 
     JSPrinter.setMinimumCodeSize (false);
-    String sCode = aPkg.getJSCode ();
+    final String sCode = aPkg.getJSCode ();
     System.out.print (sCode);
     JSPrinter.setMinimumCodeSize (true);
     System.out.println ("--------");
-    final int nBefore = sCode.length ();
-    sCode = aPkg.getJSCode ();
-    System.out.println (sCode);
-    System.out.println ("Saved " + (nBefore - sCode.length ()) + " chars. " + sCode.length () + " chars are left");
+    final String sCompressedCode = aPkg.getJSCode ();
+    assertEquals ("var g_aRoot=0;"
+                      + "function mainAdd(m1){"
+                      + "var root=5;"
+                      + "function add(s1,s2){return (s1+s2);}"
+                      + "add(32,-4);"
+                      + "var add2=new Function('x','y','return x+y');"
+                      + "add2(1,2);"
+                      + "if(typeof m1==='String')"
+                      + "{try{return 5;}catch (ex){throw new Error(ex);}finally{root.substring(0,1);}}"
+                      + "/water(mark)?/gim.test('waterMark');"
+                      + "/water(mark)?/i.test('Water');"
+                      + "'string'.search(/expression/);"
+                      + "'string'.replace(/expression/,'replacement');"
+                      + "(function(a){return (a+0.5);})(7.5);"
+                      + "var array1=[5];"
+                      + "array1[0]=6;"
+                      + "var array1a=new Array(5);"
+                      + "array1a[0]=7;"
+                      + "array1a.push('pushed');"
+                      + "var array2={num:1,array:array1,assocarray:{key:'value',key2:'anything else'}};"
+                      + "array2['num']=6;"
+                      + "return (((((m1+'abc'.length+root+add(2,4)+7)*1.5)+5)-3)/2);}"
+                      + "function sajax_extract_htmlcomments(sHTML){"
+                      + "var sComments='';"
+                      + "sHTML=sHTML.replace(/<!--([\\s\\S]*?)-->/g,function(all,sComment){sComments+=(sComment+'\\n');return '';});"
+                      + "return {html:sHTML,comments:sComments};}"
+                      + "sajax_extract_htmlcomments('<div>Test<\\/div>');",
+                  sCompressedCode);
+    System.out.println ("Saved " +
+                        (sCode.length () - sCompressedCode.length ()) +
+                        " chars. " +
+                        sCompressedCode.length () +
+                        " chars are left");
     System.out.println ("--------");
     JSPrinter.setToDefault ();
   }

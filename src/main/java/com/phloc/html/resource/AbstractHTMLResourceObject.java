@@ -55,9 +55,15 @@ public abstract class AbstractHTMLResourceObject implements IHTMLResourceObject
   }
 
   @Nonnull
-  public final IMicroNode getAsMicroNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getAsHCNode (aConversionSettings).getAsNode (aConversionSettings);
+  }
+
+  @Nonnull
+  public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return getAsHCNode (aConversionSettings).getAsHTMLString (aConversionSettings);
   }
 
   @Override

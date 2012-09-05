@@ -38,10 +38,11 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
- *
+ * 
  * @author philip
  * @see HCScriptFile
  */
@@ -74,20 +75,22 @@ public class HCScript extends AbstractHCElement <HCScript>
   private static EMode s_eDefaultMode = DEFAULT_MODE;
 
   private IMimeType m_aType = DEFAULT_TYPE;
-  private final String m_sContent;
+  private final IJSCodeProvider m_aProvider;
+  private String m_sJSCode;
   private EMode m_eMode = s_eDefaultMode;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
     super (EHTMLElement.SCRIPT);
-    m_sContent = aProvider.getJSCode ();
+    if (aProvider == null)
+      throw new NullPointerException ("provider");
+    m_aProvider = aProvider;
   }
 
   @DevelopersNote ("Handle with care!")
-  public HCScript (@Nullable final String sJSCode)
+  public HCScript (@Nonnull final String sJSCode)
   {
-    super (EHTMLElement.SCRIPT);
-    m_sContent = sJSCode;
+    this (new UnparsedJSCodeProvider (sJSCode));
   }
 
   @Nonnull
@@ -105,10 +108,16 @@ public class HCScript extends AbstractHCElement <HCScript>
     return this;
   }
 
+  @Nonnull
+  public IJSCodeProvider getCodeProvider ()
+  {
+    return m_aProvider;
+  }
+
   @Nullable
   public String getJSContent ()
   {
-    return m_sContent;
+    return m_aProvider.getJSCode ();
   }
 
   @Nonnull
@@ -167,8 +176,9 @@ public class HCScript extends AbstractHCElement <HCScript>
   @Override
   protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
+    m_sJSCode = getJSContent ();
     // Don't create script elements with empty content....
-    return StringHelper.hasText (m_sContent);
+    return StringHelper.hasText (m_sJSCode);
   }
 
   @Override
@@ -176,7 +186,9 @@ public class HCScript extends AbstractHCElement <HCScript>
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    setInlineScript (aElement, m_sContent, m_eMode);
+
+    // m_sJSCode is set in canConvertToNode which is called before this method!
+    setInlineScript (aElement, m_sJSCode, m_eMode);
   }
 
   @Nonnull
@@ -189,8 +201,8 @@ public class HCScript extends AbstractHCElement <HCScript>
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("type", m_aType)
-                            .appendIfNotNull ("content", m_sContent)
+                            .append ("type", m_aType)
+                            .append ("provider", m_aProvider)
                             .append ("mode", m_eMode)
                             .toString ();
   }
@@ -199,7 +211,7 @@ public class HCScript extends AbstractHCElement <HCScript>
    * Set how the content of script elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   *
+   * 
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */
