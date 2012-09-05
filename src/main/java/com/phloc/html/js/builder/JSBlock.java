@@ -781,12 +781,15 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
 
   void generateBody (@Nonnull final JSFormatter f)
   {
-    for (final Object o : m_aContent)
+    for (final IJSCodeProvider o : m_aContent)
     {
       if (o instanceof IJSDeclaration)
         f.decl ((IJSDeclaration) o);
       else
-        f.stmt ((IJSStatement) o);
+        if (o instanceof IJSStatement)
+          f.stmt ((IJSStatement) o);
+        else
+          f.plain (o.getJSCode ());
     }
   }
 
