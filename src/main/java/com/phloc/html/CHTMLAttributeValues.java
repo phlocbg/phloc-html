@@ -41,6 +41,7 @@ public final class CHTMLAttributeValues
   public static final String OFF = "off";
 
   // HTML5
+  public static final String ASYNC = CHTMLAttributes.ASYNC;
   public static final String DEFAULT = CHTMLAttributes.DEFAULT;
   public static final String HIDDEN = CHTMLAttributes.HIDDEN;
   public static final String MUTED = CHTMLAttributes.MUTED;

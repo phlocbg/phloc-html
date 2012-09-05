@@ -36,6 +36,7 @@ public final class CHTMLAttributes
   public static final String ALIGN = "align";
   public static final String ALT = "alt";
   public static final String ARCHIVE = "archive";
+  public static final String ASYNC = "async";
   public static final String AUTOFOCUS = "autofocus";
   public static final String AUTOPLAY = "autoplay";
   public static final String AUTOSTART = "autostart";
