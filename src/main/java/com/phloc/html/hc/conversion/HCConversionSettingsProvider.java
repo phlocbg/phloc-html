@@ -23,30 +23,36 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.html.EHTMLVersion;
 
 /**
- * Default implementation of {@link IHCConversionSettingsProvider} using the
- * HTML version {@link EHTMLVersion#DEFAULT}
+ * Default implementation of {@link IHCConversionSettingsProvider} using a
+ * provided {@link EHTMLVersion}
  * 
  * @author philip
  */
 @Immutable
-public final class DefaultHCConversionSettingsProvider extends HCConversionSettingsProvider
+public class HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
-  private static final DefaultHCConversionSettingsProvider s_aInstance = new DefaultHCConversionSettingsProvider ();
+  private final EHTMLVersion m_eHTMLVersion;
+  private final HCConversionSettings m_aCSIndent;
+  private final HCConversionSettings m_aCSNoIndent;
 
-  private DefaultHCConversionSettingsProvider ()
+  public HCConversionSettingsProvider (@Nonnull final EHTMLVersion eHTMLVersion)
   {
-    super (EHTMLVersion.DEFAULT);
+    if (eHTMLVersion == null)
+      throw new NullPointerException ("HTMLVersion");
+    m_eHTMLVersion = eHTMLVersion;
+    m_aCSIndent = new HCConversionSettings (eHTMLVersion);
+    m_aCSNoIndent = new HCConversionSettings (eHTMLVersion).setIndentAndAlignCSS (false).setIndentAndAlignHTML (false);
   }
 
   @Nonnull
-  public static DefaultHCConversionSettingsProvider getInstance ()
+  public EHTMLVersion getHTMLVersion ()
   {
-    return s_aInstance;
+    return m_eHTMLVersion;
   }
 
   @Nonnull
-  public static IHCConversionSettings getStaticConversionSettings (final boolean bIndentAndAlign)
+  public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
-    return getInstance ().getConversionSettings (bIndentAndAlign);
+    return bIndentAndAlign ? m_aCSIndent : m_aCSNoIndent;
   }
 }

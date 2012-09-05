@@ -21,6 +21,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
@@ -29,13 +32,10 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 @NotThreadSafe
 public final class HCConversionSettings implements IHCConversionSettings
 {
-  public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
-  public static final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
-  public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
-  public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
-
   private final EHTMLVersion m_eHTMLVersion;
   private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN_HTML;
+  private XMLWriterSettings m_aXMLWriterSettingsIndent = new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
+  private XMLWriterSettings m_aXMLWriterSettingsNoIndent = new XMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE);
   private ECSSVersion m_eCSSVersion = DEFAULT_CSS_VERSION;
   private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN_CSS;
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
@@ -54,9 +54,6 @@ public final class HCConversionSettings implements IHCConversionSettings
     m_eHTMLVersion = eHTMLVersion;
   }
 
-  /**
-   * @return The HTML version to be used to transform HC nodes into XML nodes.
-   */
   @Nonnull
   public EHTMLVersion getHTMLVersion ()
   {
@@ -77,14 +74,35 @@ public final class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
-  /**
-   * @return <code>true</code> if the HTML output should be indented and
-   *         aligned. The default value is defined by
-   *         {@link #DEFAULT_INDENT_AND_ALIGN_HTML}.
-   */
   public boolean isIdentAndAlignHTML ()
   {
     return m_bIndentAndAlignHTML;
+  }
+
+  /**
+   * Set the XML writer settings to be used. By default values equivalent to
+   * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used. The real XML
+   * writer settings depend on the {@link #isIdentAndAlignHTML()} setting.
+   * 
+   * @param aXMLWriterSettings
+   *        The XML writer settings to be used. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCConversionSettings setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
+  {
+    if (aXMLWriterSettings == null)
+      throw new NullPointerException ("XMLWriterSettings");
+    // The objects are cached with indent and no-indent for performance reasons
+    m_aXMLWriterSettingsIndent = new XMLWriterSettings (aXMLWriterSettings).setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
+    m_aXMLWriterSettingsNoIndent = new XMLWriterSettings (aXMLWriterSettings).setIndent (EXMLSerializeIndent.NONE);
+    return this;
+  }
+
+  @Nonnull
+  public IXMLWriterSettings getXMLWriterSettings ()
+  {
+    return m_bIndentAndAlignHTML ? m_aXMLWriterSettingsIndent : m_aXMLWriterSettingsNoIndent;
   }
 
   /**
@@ -123,11 +141,6 @@ public final class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
-  /**
-   * @return <code>true</code> if the CSS output should be indented and aligned.
-   *         The default value is defined by
-   *         {@link #DEFAULT_INDENT_AND_ALIGN_CSS}.
-   */
   public boolean isIdentAndAlignCSS ()
   {
     return m_bIndentAndAlignCSS;
@@ -148,10 +161,6 @@ public final class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
-  /**
-   * @return <code>true</code> if the consistency checks are enabled,
-   *         <code>false</code> otherwise.
-   */
   public boolean areConsistencyChecksEnabled ()
   {
     return m_bConsistencyChecksEnabled;
@@ -174,10 +183,6 @@ public final class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
-  /**
-   * @return The current customizer to be used. Never <code>null</code>. By
-   *         default a {@link HCDefaultCustomizer} object is returned.
-   */
   @Nonnull
   public IHCCustomizer getCustomizer ()
   {
