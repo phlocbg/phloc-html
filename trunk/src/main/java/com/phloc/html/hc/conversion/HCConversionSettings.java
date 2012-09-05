@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ECSSVersion;
@@ -33,9 +32,7 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 public final class HCConversionSettings implements IHCConversionSettings
 {
   private final EHTMLVersion m_eHTMLVersion;
-  private boolean m_bIndentAndAlignHTML = DEFAULT_INDENT_AND_ALIGN_HTML;
-  private XMLWriterSettings m_aXMLWriterSettingsIndent = new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
-  private XMLWriterSettings m_aXMLWriterSettingsNoIndent = new XMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE);
+  private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ();
   private ECSSVersion m_eCSSVersion = DEFAULT_CSS_VERSION;
   private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN_CSS;
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
@@ -61,28 +58,8 @@ public final class HCConversionSettings implements IHCConversionSettings
   }
 
   /**
-   * Set the indent and align HTML flag
-   * 
-   * @param bIndentAndAlignHTML
-   *        The new value
-   * @return this
-   */
-  @Nonnull
-  public HCConversionSettings setIndentAndAlignHTML (final boolean bIndentAndAlignHTML)
-  {
-    m_bIndentAndAlignHTML = bIndentAndAlignHTML;
-    return this;
-  }
-
-  public boolean isIdentAndAlignHTML ()
-  {
-    return m_bIndentAndAlignHTML;
-  }
-
-  /**
    * Set the XML writer settings to be used. By default values equivalent to
-   * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used. The real XML
-   * writer settings depend on the {@link #isIdentAndAlignHTML()} setting.
+   * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used.
    * 
    * @param aXMLWriterSettings
    *        The XML writer settings to be used. May not be <code>null</code>.
@@ -94,15 +71,14 @@ public final class HCConversionSettings implements IHCConversionSettings
     if (aXMLWriterSettings == null)
       throw new NullPointerException ("XMLWriterSettings");
     // The objects are cached with indent and no-indent for performance reasons
-    m_aXMLWriterSettingsIndent = new XMLWriterSettings (aXMLWriterSettings).setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN);
-    m_aXMLWriterSettingsNoIndent = new XMLWriterSettings (aXMLWriterSettings).setIndent (EXMLSerializeIndent.NONE);
+    m_aXMLWriterSettings = new XMLWriterSettings (aXMLWriterSettings);
     return this;
   }
 
   @Nonnull
   public IXMLWriterSettings getXMLWriterSettings ()
   {
-    return m_bIndentAndAlignHTML ? m_aXMLWriterSettingsIndent : m_aXMLWriterSettingsNoIndent;
+    return m_aXMLWriterSettings;
   }
 
   /**
@@ -193,7 +169,7 @@ public final class HCConversionSettings implements IHCConversionSettings
   public String toString ()
   {
     return new ToStringGenerator (this).append ("htmlVersion", m_eHTMLVersion)
-                                       .append ("indentAndAlignHTML", m_bIndentAndAlignHTML)
+                                       .append ("XMLWriterSettings", m_aXMLWriterSettings)
                                        .append ("cssVersion", m_eCSSVersion)
                                        .append ("indentAndAlignCSS", m_bIndentAndAlignCSS)
                                        .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)

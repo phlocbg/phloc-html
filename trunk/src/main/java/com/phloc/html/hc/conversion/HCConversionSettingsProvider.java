@@ -20,7 +20,12 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
+import com.phloc.css.ECSSVersion;
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
  * Default implementation of {@link IHCConversionSettingsProvider} using a
@@ -41,7 +46,8 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
     m_aCSIndent = new HCConversionSettings (eHTMLVersion);
-    m_aCSNoIndent = new HCConversionSettings (eHTMLVersion).setIndentAndAlignCSS (false).setIndentAndAlignHTML (false);
+    m_aCSNoIndent = new HCConversionSettings (eHTMLVersion).setIndentAndAlignCSS (false)
+                                                           .setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE));
   }
 
   @Nonnull
@@ -54,5 +60,29 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
     return bIndentAndAlign ? m_aCSIndent : m_aCSNoIndent;
+  }
+
+  public void setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
+  {
+    m_aCSIndent.setXMLWriterSettings (aXMLWriterSettings);
+    m_aCSNoIndent.setXMLWriterSettings (aXMLWriterSettings);
+  }
+
+  public void setCSSVersion (@Nonnull final ECSSVersion eCSSVersion)
+  {
+    m_aCSIndent.setCSSVersion (eCSSVersion);
+    m_aCSNoIndent.setCSSVersion (eCSSVersion);
+  }
+
+  public void setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
+  {
+    m_aCSIndent.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
+    m_aCSNoIndent.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
+  }
+
+  public void setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
+  {
+    m_aCSIndent.setCustomizer (aCustomizer);
+    m_aCSNoIndent.setCustomizer (aCustomizer);
   }
 }

@@ -33,8 +33,9 @@ import com.phloc.html.hc.customize.IHCCustomizer;
  */
 public interface IHCConversionSettings
 {
-  final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
-  final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
+  // Is implied from default XMLWriter settings
+  boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
   boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
   boolean DEFAULT_CONSISTENCY_CHECKS = true;
 
@@ -45,14 +46,7 @@ public interface IHCConversionSettings
   EHTMLVersion getHTMLVersion ();
 
   /**
-   * @return <code>true</code> if the HTML output should be indented and
-   *         aligned. Default is {@value #DEFAULT_INDENT_AND_ALIGN_HTML}
-   */
-  boolean isIdentAndAlignHTML ();
-
-  /**
-   * @return The XML writer settings to be used. Is considering the
-   *         {@link #isIdentAndAlignHTML()} flags.
+   * @return The XML writer settings to be used.
    */
   @Nonnull
   IXMLWriterSettings getXMLWriterSettings ();
