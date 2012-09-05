@@ -39,6 +39,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.html.HCDiv;
+import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
 @Immutable
@@ -254,6 +255,44 @@ public final class HCUtils
     final List <IMicroElement> ret = new ArrayList <IMicroElement> ();
     ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameLowerCase ()));
     ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameUpperCase ()));
+    return ret;
+  }
+
+  private static void _recursiveAddFlattened (@Nullable final IHCBaseNode aNode,
+                                              @Nonnull final List <IHCBaseNode> aRealList)
+  {
+    if (aNode != null)
+    {
+      // Only check HCNodeList and not IHCNodeWithChildren because other
+      // surrounding elements would not be handled correctly!
+      if (aNode instanceof HCNodeList)
+      {
+        final HCNodeList x = (HCNodeList) aNode;
+        if (x.hasChildren ())
+          for (final IHCBaseNode aChild : x.getChildren ())
+            _recursiveAddFlattened (aChild, aRealList);
+      }
+      else
+        aRealList.add (aNode);
+    }
+  }
+
+  /**
+   * Inline all contained node lists so that a "flat" list results. This only
+   * flattens something if the passed node is an {@link HCNodeList} and all
+   * node-lists directly contained in the other nodelists. Node-lists that are
+   * hidden deep inside the tree are not considered!
+   * 
+   * @param aNode
+   *        The source node. May be <code>null</code>.
+   * @return A non-<code>null</code> flattened list.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCBaseNode> getAsFlattenedList (@Nullable final IHCBaseNode aNode)
+  {
+    final List <IHCBaseNode> ret = new ArrayList <IHCBaseNode> ();
+    _recursiveAddFlattened (aNode, ret);
     return ret;
   }
 }

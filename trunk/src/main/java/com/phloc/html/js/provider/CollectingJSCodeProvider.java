@@ -20,14 +20,22 @@ package com.phloc.html.js.provider;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.IHasSize;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 
-public final class CollectingJSCodeProvider implements IJSCodeProvider
+/**
+ * A JSCode provider that encapsulates a list of {@link IJSCodeProvider}
+ * elements and itself implements {@link IJSCodeProvider}.
+ * 
+ * @author philip
+ */
+public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
 {
   private final List <IJSCodeProvider> m_aList = new ArrayList <IJSCodeProvider> ();
 
@@ -51,20 +59,39 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider
   }
 
   @Nonnull
-  public final CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
+  public CollectingJSCodeProvider append (@Nullable final IJSCodeProvider aProvider)
   {
     if (aProvider != null)
       m_aList.add (aProvider);
     return this;
   }
 
-  public final void reset ()
+  @Nonnull
+  public CollectingJSCodeProvider removeAtIndex (@Nonnegative final int nIndex)
+  {
+    if (nIndex >= 0 && nIndex < m_aList.size ())
+      m_aList.remove (nIndex);
+    return this;
+  }
+
+  public void reset ()
   {
     m_aList.clear ();
   }
 
+  public boolean isEmpty ()
+  {
+    return m_aList.isEmpty ();
+  }
+
+  @Nonnegative
+  public int size ()
+  {
+    return m_aList.size ();
+  }
+
   @Nonnull
-  public final String getJSCode ()
+  public String getJSCode ()
   {
     final StringBuilder aSB = new StringBuilder ();
     for (final IJSCodeProvider aJSCodeProvider : m_aList)

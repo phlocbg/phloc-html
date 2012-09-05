@@ -20,6 +20,7 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.html.HCHead;
 
 /**
  * Interface for handling custom out-of-band nodes in the HEAD elements
@@ -28,5 +29,13 @@ import com.phloc.html.hc.IHCBaseNode;
  */
 public interface IHCOutOfBandNodeHandler
 {
-  void handleOutOfBandNode (@Nonnull IHCBaseNode aOutOfBandNode);
+  /**
+   * Handle ouf-of-band nodes in an &lt;head> element
+   * 
+   * @param aHead
+   *        The head node that has the out-of-band-node
+   * @param aOutOfBandNode
+   *        The out of band node to be handled. Never <code>null</code>.
+   */
+  void handleOutOfBandNode (@Nonnull HCHead aHead, @Nonnull IHCBaseNode aOutOfBandNode);
 }

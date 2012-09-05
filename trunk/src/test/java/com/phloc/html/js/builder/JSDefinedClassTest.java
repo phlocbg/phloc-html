@@ -49,6 +49,7 @@ public final class JSDefinedClassTest
     final JSVar jsParam = aCtor.param ("param");
     aCtor.body ().invoke ("some_global_init").arg (jsParam);
 
-    System.out.println (aPkg.getJSCode ());
+    if (false)
+      System.out.println (aPkg.getJSCode ());
   }
 }

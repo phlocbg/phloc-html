@@ -27,6 +27,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * A block of JS code, which may contain statements and local declarations.
@@ -44,7 +45,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    * Declarations and statements contained in this block. Either
    * {@link IJSStatement} or {@link IJSDeclaration}.
    */
-  private final List <Object> m_aContent = new ArrayList <Object> ();
+  private final List <IJSCodeProvider> m_aContent = new ArrayList <IJSCodeProvider> ();
 
   /**
    * Whether or not this block must be braced and indented
@@ -90,17 +91,17 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   @Nonnull
   @ReturnsMutableCopy
-  public List <Object> contents ()
+  public List <IJSCodeProvider> contents ()
   {
     return ContainerHelper.newList (m_aContent);
   }
 
   @Nonnull
-  private <T> T _insert (@Nonnull final T statementOrDeclaration)
+  private <T extends IJSCodeProvider> T _insert (@Nonnull final T aElement)
   {
-    m_aContent.add (m_nPos, statementOrDeclaration);
+    m_aContent.add (m_nPos, aElement);
     m_nPos++;
-    return statementOrDeclaration;
+    return aElement;
   }
 
   /**
@@ -512,16 +513,16 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   /**
    * Adds a statement to this block
    * 
-   * @param s
-   *        statement to be added
+   * @param aJSCode
+   *        Code to be added
    * @return This block
    */
   @Nonnull
-  public JSBlock add (@Nonnull final IJSStatement s)
+  public JSBlock add (@Nonnull final IJSCodeProvider aJSCode)
   {
-    if (s == null)
+    if (aJSCode == null)
       throw new NullPointerException ("statement");
-    _insert (s);
+    _insert (aJSCode);
     return this;
   }
 

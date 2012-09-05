@@ -29,8 +29,8 @@ import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
-import com.phloc.html.js.builder.IJSStatement;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
@@ -676,7 +676,7 @@ public class JQuery
    * @return The invocation object
    */
   @Nonnull
-  public static JQueryInvocation onDocumentReady (@Nonnull final IJSStatement aStatement)
+  public static JQueryInvocation onDocumentReady (@Nonnull final IJSCodeProvider aStatement)
   {
     final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
     aPair.getSecond ().body ().add (aStatement);

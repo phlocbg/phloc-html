@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.locale.LocaleUtils;
 import com.phloc.commons.microdom.IMicroElement;
@@ -53,13 +54,11 @@ import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.api.IHCOutOfBandNodeHandler;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
-import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 import com.phloc.html.resource.css.ICSSExternal;
 import com.phloc.html.resource.css.ICSSHTMLDefinition;
 import com.phloc.html.resource.js.IJSHTMLDefinition;
-import com.phloc.html.resource.js.JSInline;
 
 /**
  * Represents an HTML &lt;head&gt; element
@@ -78,8 +77,8 @@ public class HCHead extends AbstractHCBaseNode
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
   private final List <ICSSHTMLDefinition> m_aCSS = new ArrayList <ICSSHTMLDefinition> ();
   private final List <IJSHTMLDefinition> m_aJS = new ArrayList <IJSHTMLDefinition> ();
-  private final List <IHCBaseNode> m_aCustomOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-  private IHCOutOfBandNodeHandler m_aOutOfBandHandler;
+  private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
+  private IHCOutOfBandNodeHandler m_aOutOfBandHandler = new HCHeadDefaultJQueryOutOfBandHandler ();
 
   public HCHead ()
   {}
@@ -88,6 +87,10 @@ public class HCHead extends AbstractHCBaseNode
   {
     setPageTitle (sPageTitle);
   }
+
+  //
+  // Head fields/attributes
+  //
 
   @Nullable
   public String getProfile ()
@@ -141,6 +144,10 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  //
+  // Meta element handling
+  //
+
   @Nonnull
   public HCHead addMetaElement (@Nonnull final IMetaElement aMetaElement)
   {
@@ -162,6 +169,16 @@ public class HCHead extends AbstractHCBaseNode
   {
     return ContainerHelper.makeUnmodifiable (m_aMetaElements.values ());
   }
+
+  @Nonnegative
+  public int getMetaElementCount ()
+  {
+    return m_aMetaElements.size ();
+  }
+
+  //
+  // Link handling
+  //
 
   @Nonnull
   public HCHead setShortcutIconHref (@Nullable final ISimpleURL aShortcutIconHref)
@@ -197,6 +214,25 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  /**
+   * Add a link object to the head at the specified position.
+   * 
+   * @param nIndex
+   *        The index where the links should be added (counting link elements
+   *        only)
+   * @param aLink
+   *        The link to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCHead addLink (@Nonnegative final int nIndex, @Nonnull final HCLink aLink)
+  {
+    if (aLink == null)
+      throw new NullPointerException ("link");
+    m_aLinks.add (nIndex, aLink);
+    return this;
+  }
+
   @Nonnull
   public EChange removeLinkOfRel (@Nonnull final IHCLinkType aLinkType)
   {
@@ -214,11 +250,15 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public List <HCLink> getLinks ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aLinks);
+    return ContainerHelper.newList (m_aLinks);
   }
+
+  //
+  // CSS handling
+  //
 
   @Nonnull
   public HCHead addCSS (@Nonnull final ICSSHTMLDefinition aCSS)
@@ -245,17 +285,30 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public List <ICSSHTMLDefinition> getAllCSS ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aCSS);
+    return ContainerHelper.newList (m_aCSS);
   }
 
-  public void removeAllCSS ()
+  @Nonnull
+  public HCHead removeAllCSS ()
   {
     m_aCSS.clear ();
+    return this;
   }
 
+  //
+  // JS handling
+  //
+
+  /**
+   * Append some JavaScript code
+   * 
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public HCHead addJS (@Nonnull final IJSHTMLDefinition aJS)
   {
@@ -265,6 +318,15 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  /**
+   * Append some JavaScript code at the specified index
+   * 
+   * @param nIndex
+   *        The index where the JS should be added (counting only JS elements)
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IJSHTMLDefinition aJS)
   {
@@ -274,6 +336,9 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  /**
+   * @return The number of contained JS elements
+   */
   @Nonnegative
   public int getJSCount ()
   {
@@ -281,80 +346,72 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public List <IJSHTMLDefinition> getJS ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aJS);
+    return ContainerHelper.newList (m_aJS);
   }
 
-  public void removeAllJS ()
+  @Nonnull
+  public HCHead removeAllJS ()
   {
     m_aJS.clear ();
+    return this;
   }
 
-  private static void _recursiveAddFlattened (@Nullable final IHCBaseNode aOutOfBandNode,
-                                              @Nonnull final List <IHCBaseNode> aRealList)
-  {
-    if (aOutOfBandNode != null)
-    {
-      // Only check HCNodeList and not IHCNodeWithChildren because other
-      // surrounding elements would not be handled correctly!
-      if (aOutOfBandNode instanceof HCNodeList)
-      {
-        final HCNodeList x = (HCNodeList) aOutOfBandNode;
-        if (x.hasChildren ())
-          for (final IHCBaseNode aChild : x.getChildren ())
-            _recursiveAddFlattened (aChild, aRealList);
-      }
-      else
-        aRealList.add (aOutOfBandNode);
-    }
-  }
+  //
+  // out-of-band-node handling
+  //
 
   /**
    * Set a custom of of band handler, that performs the actions
    * 
    * @param aOutOfBandHandler
-   *        The new out of band handler. May be <code>null</code>.
+   *        The new out of band handler. May not be <code>null</code>.
+   * @return this
    */
-  public void setOutOfBandHandler (@Nullable final IHCOutOfBandNodeHandler aOutOfBandHandler)
+  @Nonnull
+  public HCHead setOutOfBandHandler (@Nonnull final IHCOutOfBandNodeHandler aOutOfBandHandler)
   {
+    if (aOutOfBandHandler == null)
+      throw new NullPointerException ("outOfBandNodeHandler");
     m_aOutOfBandHandler = aOutOfBandHandler;
+    return this;
   }
 
+  /**
+   * @return the installed out-of-band-node handler. Never <code>null</code> .
+   */
+  @Nonnull
+  public IHCOutOfBandNodeHandler getOutOfBandHandler ()
+  {
+    return m_aOutOfBandHandler;
+  }
+
+  @Nonnull
+  public HCHead addOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
+  {
+    if (aOutOfBandNode != null)
+      m_aOutOfBandNodes.add (aOutOfBandNode);
+    return this;
+  }
+
+  /**
+   * Handle an out-of-band node as created by the HTML body.
+   * 
+   * @param aOutOfBandNode
+   *        The out-of-band-node to handle. May be <code>null</code>.
+   */
   public void handleOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
   {
     // Only do something if there is something out of band
     if (aOutOfBandNode != null)
-    {
-      if (m_aOutOfBandHandler != null)
-      {
-        // We have a special handler installed!
-        m_aOutOfBandHandler.handleOutOfBandNode (aOutOfBandNode);
-      }
-      else
-      {
-        // Flatten list
-        final List <IHCBaseNode> aRealList = new ArrayList <IHCBaseNode> ();
-        _recursiveAddFlattened (aOutOfBandNode, aRealList);
-
-        final StringBuilder aJS = new StringBuilder ();
-        for (final IHCBaseNode aNode : aRealList)
-        {
-          if (aNode instanceof HCScript)
-            aJS.append (((HCScript) aNode).getJSContent ());
-          else
-            m_aCustomOutOfBandNodes.add (aNode);
-        }
-        if (aJS.length () > 0)
-        {
-          // Ensure the inline JS is executed after the document has been loaded
-          // Note: has dependency to jQuery
-          addJS (new JSInline ("$(document).ready(function(){" + aJS.toString () + "});"));
-        }
-      }
-    }
+      m_aOutOfBandHandler.handleOutOfBandNode (this, aOutOfBandNode);
   }
+
+  //
+  // Code generation
+  //
 
   @OverrideOnDemand
   protected void emitLinks (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
@@ -371,7 +428,7 @@ public class HCHead extends AbstractHCBaseNode
     {
       if (aCSS instanceof ICSSExternal)
         ++nCSSExternals;
-      eHead.appendChild (aCSS.getAsMicroNode (aConversionSettings));
+      eHead.appendChild (aCSS.getAsNode (aConversionSettings));
     }
 
     // Sources:
@@ -387,7 +444,7 @@ public class HCHead extends AbstractHCBaseNode
   protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
     for (final IJSHTMLDefinition aJS : m_aJS)
-      eHead.appendChild (aJS.getAsMicroNode (aConversionSettings));
+      eHead.appendChild (aJS.getAsNode (aConversionSettings));
   }
 
   @Nonnull
@@ -457,8 +514,8 @@ public class HCHead extends AbstractHCBaseNode
     // JS files
     emitJS (eHead, aConversionSettings);
 
-    // Custom nodes (e.g. from out-of-band nodes)
-    for (final IHCBaseNode aCustomNode : m_aCustomOutOfBandNodes)
+    // out-of-band-nodes at the end
+    for (final IHCBaseNode aCustomNode : m_aOutOfBandNodes)
       eHead.appendChild (aCustomNode.getAsNode (aConversionSettings));
 
     // Ensure tag is not self-closed
@@ -487,7 +544,7 @@ public class HCHead extends AbstractHCBaseNode
                             .appendIfNotNull ("links", m_aLinks)
                             .appendIfNotNull ("CSS", m_aCSS)
                             .appendIfNotNull ("JS", m_aJS)
-                            .appendIfNotNull ("customOutOfBandHandler", m_aCustomOutOfBandNodes)
+                            .appendIfNotNull ("outOfBandNodes", m_aOutOfBandNodes)
                             .appendIfNotNull ("outOfBandHandler", m_aOutOfBandHandler)
                             .toString ();
   }
