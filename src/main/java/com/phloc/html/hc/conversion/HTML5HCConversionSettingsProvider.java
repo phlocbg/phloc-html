@@ -22,6 +22,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
 
 /**
@@ -35,8 +36,9 @@ public final class HTML5HCConversionSettingsProvider implements IHCConversionSet
 {
   public static final EHTMLVersion HTML_VERSION = EHTMLVersion.HTML5;
   private static final HCConversionSettings DEFAULT = new HCConversionSettings (HTML_VERSION);
-  private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setIndentAndAlignCSS (false)
-                                                                                                          .setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN));
+  private static final HCConversionSettings DEFAULT_NOT_INDENTED = new HCConversionSettings (HTML_VERSION).setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.INDENT_AND_ALIGN))
+                                                                                                          .setCSSWriterSettings (new CSSWriterSettings (HCConversionSettings.DEFAULT_CSS_VERSION,
+                                                                                                                                                        true));
   private static final HTML5HCConversionSettingsProvider s_aInstance = new HTML5HCConversionSettingsProvider ();
 
   private HTML5HCConversionSettingsProvider ()
