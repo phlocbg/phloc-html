@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public final class HCEntityNode extends AbstractHCNode
+public class HCEntityNode extends AbstractHCNode
 {
   private final IHTMLEntity m_aEntity;
   private final String m_sPlainText;
