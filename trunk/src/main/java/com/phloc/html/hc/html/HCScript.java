@@ -29,14 +29,9 @@ import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.microdom.impl.MicroText;
-import com.phloc.commons.mime.CMimeType;
-import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
@@ -46,7 +41,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
  * @author philip
  * @see HCScriptFile
  */
-public class HCScript extends AbstractHCElement <HCScript>
+public class HCScript extends AbstractHCScript <HCScript>
 {
   public static enum EMode
   {
@@ -69,19 +64,17 @@ public class HCScript extends AbstractHCElement <HCScript>
   }
 
   public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
-  public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
 
   private static EMode s_eDefaultMode = DEFAULT_MODE;
 
-  private IMimeType m_aType = DEFAULT_TYPE;
   private final IJSCodeProvider m_aProvider;
   private String m_sJSCode;
   private EMode m_eMode = s_eDefaultMode;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
-    super (EHTMLElement.SCRIPT);
+    super ();
     if (aProvider == null)
       throw new NullPointerException ("provider");
     m_aProvider = aProvider;
@@ -91,21 +84,6 @@ public class HCScript extends AbstractHCElement <HCScript>
   public HCScript (@Nonnull final String sJSCode)
   {
     this (new UnparsedJSCodeProvider (sJSCode));
-  }
-
-  @Nonnull
-  public IMimeType getType ()
-  {
-    return m_aType;
-  }
-
-  @Nonnull
-  public HCScript setType (@Nonnull final IMimeType aType)
-  {
-    if (aType == null)
-      throw new NullPointerException ("type");
-    m_aType = aType;
-    return this;
   }
 
   @Nonnull
@@ -185,23 +163,15 @@ public class HCScript extends AbstractHCElement <HCScript>
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
 
     // m_sJSCode is set in canConvertToNode which is called before this method!
     setInlineScript (aElement, m_sJSCode, m_eMode);
-  }
-
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("type", m_aType)
                             .append ("provider", m_aProvider)
                             .append ("mode", m_eMode)
                             .toString ();
