@@ -50,6 +50,8 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCLinkType;
+import com.phloc.html.hc.api.IHCCSSNode;
+import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
@@ -64,6 +66,7 @@ import com.phloc.html.resource.js.IJSHTMLDefinition;
  * 
  * @author philip
  */
+@SuppressWarnings ("deprecation")
 public class HCHead extends AbstractHCBaseNode
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
@@ -74,8 +77,8 @@ public class HCHead extends AbstractHCBaseNode
   private HCA_Target m_aBaseTarget;
   private final Map <String, IMetaElement> m_aMetaElements = new LinkedHashMap <String, IMetaElement> ();
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
-  private final List <ICSSHTMLDefinition> m_aCSS = new ArrayList <ICSSHTMLDefinition> ();
-  private final List <IJSHTMLDefinition> m_aJS = new ArrayList <IJSHTMLDefinition> ();
+  private final List <Object> m_aCSS = new ArrayList <Object> ();
+  private final List <Object> m_aJS = new ArrayList <Object> ();
   private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
   private IHCHeadOutOfBandNodeHandler m_aOutOfBandHandler = new HCHeadDefaultJQueryOutOfBandHandler ();
 
@@ -259,6 +262,7 @@ public class HCHead extends AbstractHCBaseNode
   // CSS handling
   //
 
+  @Deprecated
   @Nonnull
   public HCHead addCSS (@Nonnull final ICSSHTMLDefinition aCSS)
   {
@@ -268,8 +272,27 @@ public class HCHead extends AbstractHCBaseNode
     return this;
   }
 
+  @Deprecated
   @Nonnull
   public HCHead addCSS (@Nonnegative final int nIndex, @Nonnull final ICSSHTMLDefinition aCSS)
+  {
+    if (aCSS == null)
+      throw new NullPointerException ("css");
+    m_aCSS.add (nIndex, aCSS);
+    return this;
+  }
+
+  @Nonnull
+  public HCHead addCSS (@Nonnull final IHCCSSNode aCSS)
+  {
+    if (aCSS == null)
+      throw new NullPointerException ("css");
+    m_aCSS.add (aCSS);
+    return this;
+  }
+
+  @Nonnull
+  public HCHead addCSS (@Nonnegative final int nIndex, @Nonnull final IHCCSSNode aCSS)
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
@@ -283,11 +306,27 @@ public class HCHead extends AbstractHCBaseNode
     return m_aCSS.size ();
   }
 
+  @Deprecated
   @Nonnull
   @ReturnsMutableCopy
   public List <ICSSHTMLDefinition> getAllCSS ()
   {
-    return ContainerHelper.newList (m_aCSS);
+    final List <ICSSHTMLDefinition> ret = new ArrayList <ICSSHTMLDefinition> ();
+    for (final Object aObj : m_aCSS)
+      if (aObj instanceof ICSSHTMLDefinition)
+        ret.add ((ICSSHTMLDefinition) aObj);
+    return ret;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IHCCSSNode> getAllCSSNodes ()
+  {
+    final List <IHCCSSNode> ret = new ArrayList <IHCCSSNode> ();
+    for (final Object aObj : m_aCSS)
+      if (aObj instanceof IHCCSSNode)
+        ret.add ((IHCCSSNode) aObj);
+    return ret;
   }
 
   @Nonnull
@@ -308,6 +347,7 @@ public class HCHead extends AbstractHCBaseNode
    *        The JS to be added. May not be <code>null</code>.
    * @return this
    */
+  @Deprecated
   @Nonnull
   public HCHead addJS (@Nonnull final IJSHTMLDefinition aJS)
   {
@@ -326,8 +366,43 @@ public class HCHead extends AbstractHCBaseNode
    *        The JS to be added. May not be <code>null</code>.
    * @return this
    */
+  @Deprecated
   @Nonnull
   public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IJSHTMLDefinition aJS)
+  {
+    if (aJS == null)
+      throw new NullPointerException ("js");
+    m_aJS.add (nIndex, aJS);
+    return this;
+  }
+
+  /**
+   * Append some JavaScript code
+   * 
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCHead addJS (@Nonnull final IHCJSNode aJS)
+  {
+    if (aJS == null)
+      throw new NullPointerException ("js");
+    m_aJS.add (aJS);
+    return this;
+  }
+
+  /**
+   * Append some JavaScript code at the specified index
+   * 
+   * @param nIndex
+   *        The index where the JS should be added (counting only JS elements)
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IHCJSNode aJS)
   {
     if (aJS == null)
       throw new NullPointerException ("js");
@@ -344,11 +419,27 @@ public class HCHead extends AbstractHCBaseNode
     return m_aJS.size ();
   }
 
+  @Deprecated
   @Nonnull
   @ReturnsMutableCopy
   public List <IJSHTMLDefinition> getJS ()
   {
-    return ContainerHelper.newList (m_aJS);
+    final List <IJSHTMLDefinition> ret = new ArrayList <IJSHTMLDefinition> ();
+    for (final Object aObj : m_aJS)
+      if (aObj instanceof IJSHTMLDefinition)
+        ret.add ((IJSHTMLDefinition) aObj);
+    return ret;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IHCJSNode> getAllJSNodes ()
+  {
+    final List <IHCJSNode> ret = new ArrayList <IHCJSNode> ();
+    for (final Object aObj : m_aJS)
+      if (aObj instanceof IHCJSNode)
+        ret.add ((IHCJSNode) aObj);
+    return ret;
   }
 
   @Nonnull
@@ -423,11 +514,20 @@ public class HCHead extends AbstractHCBaseNode
   protected void emitCSS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
     int nCSSExternals = 0;
-    for (final ICSSHTMLDefinition aCSS : m_aCSS)
+    for (final Object aCSS : m_aCSS)
     {
-      if (aCSS instanceof ICSSExternal)
-        ++nCSSExternals;
-      eHead.appendChild (aCSS.getAsNode (aConversionSettings));
+      if (aCSS instanceof ICSSHTMLDefinition)
+      {
+        if (aCSS instanceof ICSSExternal)
+          ++nCSSExternals;
+        eHead.appendChild (((ICSSHTMLDefinition) aCSS).getAsNode (aConversionSettings));
+      }
+      else
+      {
+        if (!((IHCCSSNode) aCSS).isInlineCSS ())
+          ++nCSSExternals;
+        eHead.appendChild (((IHCCSSNode) aCSS).getAsNode (aConversionSettings));
+      }
     }
 
     // Sources:
@@ -442,8 +542,13 @@ public class HCHead extends AbstractHCBaseNode
   @OverrideOnDemand
   protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
   {
-    for (final IJSHTMLDefinition aJS : m_aJS)
-      eHead.appendChild (aJS.getAsNode (aConversionSettings));
+    for (final Object aJS : m_aJS)
+    {
+      if (aJS instanceof IJSHTMLDefinition)
+        eHead.appendChild (((IJSHTMLDefinition) aJS).getAsNode (aConversionSettings));
+      else
+        eHead.appendChild (((IHCJSNode) aJS).getAsNode (aConversionSettings));
+    }
   }
 
   @Nonnull

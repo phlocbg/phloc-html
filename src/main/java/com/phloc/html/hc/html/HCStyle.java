@@ -60,15 +60,16 @@ import com.phloc.css.writer.CSSWriter;
 import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;style&gt; element
- *
+ * 
  * @author philip
  */
-public class HCStyle extends AbstractHCElement <HCStyle>
+public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
 {
   public static enum EMode
   {
@@ -117,6 +118,11 @@ public class HCStyle extends AbstractHCElement <HCStyle>
     this (new CSSWriter (aSettings).getCSSAsString (aCSS));
   }
 
+  public boolean isInlineCSS ()
+  {
+    return true;
+  }
+
   @Nonnull
   public IMimeType getType ()
   {
@@ -151,6 +157,13 @@ public class HCStyle extends AbstractHCElement <HCStyle>
     if (m_aMediaList == null)
       m_aMediaList = new CSSMediaList ();
     m_aMediaList.addMedium (eMedium);
+    return this;
+  }
+
+  @Nonnull
+  public HCStyle removeAllMedia ()
+  {
+    m_aMediaList = null;
     return this;
   }
 
@@ -231,7 +244,7 @@ public class HCStyle extends AbstractHCElement <HCStyle>
    * Set how the content of style elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   *
+   * 
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */

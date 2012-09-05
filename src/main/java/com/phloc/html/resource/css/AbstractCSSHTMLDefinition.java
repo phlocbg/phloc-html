@@ -27,6 +27,7 @@ import com.phloc.css.media.CSSMediaList;
 import com.phloc.html.condcomment.ConditionalComment;
 import com.phloc.html.resource.AbstractHTMLResourceObject;
 
+@Deprecated
 @Immutable
 public abstract class AbstractCSSHTMLDefinition extends AbstractHTMLResourceObject implements ICSSHTMLDefinition
 {

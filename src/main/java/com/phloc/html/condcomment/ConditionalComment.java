@@ -40,6 +40,7 @@ import com.phloc.html.hc.impl.HCCommentNode;
  * 
  * @author philip
  */
+@Deprecated
 @Immutable
 public final class ConditionalComment
 {

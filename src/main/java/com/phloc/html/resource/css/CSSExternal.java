@@ -38,6 +38,7 @@ import com.phloc.html.hc.html.HCLink;
  * 
  * @author philip
  */
+@Deprecated
 @Immutable
 public class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExternal
 {
@@ -91,7 +92,7 @@ public class CSSExternal extends AbstractCSSHTMLDefinition implements ICSSExtern
   {
     final HCLink aLink = new HCLink (EHCLinkType.STYLESHEET, CMimeType.TEXT_CSS, m_aHref);
     if (hasMedia ())
-      aLink.setMedia (getMedia ().getMediaString ());
+      aLink.setMedia (getMedia ());
     if (hasConditionalComment ())
       return getConditionalComment ().getNodeWrappedInCondition (aLink, aConversionSettings);
     return aLink;

@@ -27,6 +27,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
@@ -37,7 +38,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @see HCScript
  * @see HCScriptFile
  */
-public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLTYPE>> extends AbstractHCElement <IMPLTYPE>
+public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLTYPE>> extends
+                                                                                      AbstractHCElement <IMPLTYPE> implements
+                                                                                                                  IHCJSNode
 {
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_JAVASCRIPT;
 

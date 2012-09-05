@@ -20,6 +20,7 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -35,5 +36,11 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return null;
+  }
+
+  @Nonnull
+  public IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
+  {
+    return new HCConditionalCommentNode (sCondition, this);
   }
 }

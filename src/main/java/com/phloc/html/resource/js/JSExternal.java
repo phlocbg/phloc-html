@@ -34,6 +34,7 @@ import com.phloc.html.hc.html.HCScriptFile;
  * 
  * @author philip
  */
+@Deprecated
 @Immutable
 public class JSExternal extends AbstractJSHTMLDefinition implements IJSExternal
 {

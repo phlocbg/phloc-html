@@ -26,6 +26,7 @@ import com.phloc.commons.url.ISimpleURL;
  * 
  * @author philip
  */
+@Deprecated
 public interface IJSExternal extends IJSHTMLDefinition
 {
   /**

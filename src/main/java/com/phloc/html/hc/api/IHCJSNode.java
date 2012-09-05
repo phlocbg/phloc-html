@@ -15,17 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource.js;
+package com.phloc.html.hc.api;
 
-import com.phloc.html.resource.IHTMLResourceObject;
+import com.phloc.html.hc.IHCNode;
 
 /**
- * Base interface for JS external and inline objects.
+ * Marker interface for nodes that can contain JS code (inline or external)
  * 
  * @author philip
  */
-@Deprecated
-public interface IJSHTMLDefinition extends IHTMLResourceObject
+public interface IHCJSNode extends IHCNode
 {
-  /* empty */
+  /**
+   * @return <code>true</code> if this is an inline JS node, <code>false</code>
+   *         if it is an externally referenced JS node
+   */
+  boolean isInlineJS ();
 }

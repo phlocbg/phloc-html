@@ -21,12 +21,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.css.media.CSSMediaList;
+import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.EHCLinkType;
+import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -36,7 +41,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * 
  * @author philip
  */
-public class HCLink extends AbstractHCElement <HCLink>
+public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 {
   private IHCLinkType m_aRel;
   private IHCLinkType m_aRev;
@@ -45,7 +50,7 @@ public class HCLink extends AbstractHCElement <HCLink>
   private String m_sHrefLang;
   private HCA_Target m_aTarget;
   private String m_sCharset;
-  private String m_sMedia;
+  private CSSMediaList m_aMediaList;
 
   public HCLink ()
   {
@@ -65,107 +70,128 @@ public class HCLink extends AbstractHCElement <HCLink>
     setType (aType);
   }
 
+  public boolean isInlineCSS ()
+  {
+    return false;
+  }
+
   @Nullable
-  public final IHCLinkType getRel ()
+  public IHCLinkType getRel ()
   {
     return m_aRel;
   }
 
   @Nonnull
-  public final HCLink setRel (@Nullable final IHCLinkType aRel)
+  public HCLink setRel (@Nullable final IHCLinkType aRel)
   {
     m_aRel = aRel;
     return this;
   }
 
   @Nullable
-  public final IHCLinkType getRev ()
+  public IHCLinkType getRev ()
   {
     return m_aRev;
   }
 
   @Nonnull
-  public final HCLink setRev (@Nullable final IHCLinkType aRev)
+  public HCLink setRev (@Nullable final IHCLinkType aRev)
   {
     m_aRev = aRev;
     return this;
   }
 
   @Nullable
-  public final IMimeType getType ()
+  public IMimeType getType ()
   {
     return m_aType;
   }
 
   @Nonnull
-  public final HCLink setType (@Nullable final IMimeType aType)
+  public HCLink setType (@Nullable final IMimeType aType)
   {
     m_aType = aType;
     return this;
   }
 
   @Nullable
-  public final ISimpleURL getHref ()
+  public ISimpleURL getHref ()
   {
     return m_aHref;
   }
 
   @Nonnull
-  public final HCLink setHref (@Nullable final ISimpleURL aHref)
+  public HCLink setHref (@Nullable final ISimpleURL aHref)
   {
     m_aHref = aHref;
     return this;
   }
 
   @Nullable
-  public final String getHrefLang ()
+  public String getHrefLang ()
   {
     return m_sHrefLang;
   }
 
   @Nonnull
-  public final HCLink setHrefLang (@Nullable final String sHrefLang)
+  public HCLink setHrefLang (@Nullable final String sHrefLang)
   {
     m_sHrefLang = sHrefLang;
     return this;
   }
 
   @Nullable
-  public final HCA_Target getTarget ()
+  public HCA_Target getTarget ()
   {
     return m_aTarget;
   }
 
   @Nonnull
-  public final HCLink setTarget (@Nullable final HCA_Target aTarget)
+  public HCLink setTarget (@Nullable final HCA_Target aTarget)
   {
     m_aTarget = aTarget;
     return this;
   }
 
   @Nullable
-  public final String getCharset ()
+  public String getCharset ()
   {
     return m_sCharset;
   }
 
   @Nonnull
-  public final HCLink setCharset (@Nullable final String sCharset)
+  public HCLink setCharset (@Nullable final String sCharset)
   {
     m_sCharset = sCharset;
     return this;
   }
 
   @Nullable
-  public final String getMedia ()
+  public CSSMediaList getMedia ()
   {
-    return m_sMedia;
+    return m_aMediaList;
   }
 
   @Nonnull
-  public final HCLink setMedia (@Nullable final String sMedia)
+  public HCLink setMedia (@Nullable final CSSMediaList aMediaList)
   {
-    m_sMedia = sMedia;
+    m_aMediaList = aMediaList;
+    return this;
+  }
+
+  @Nonnull
+  public HCLink addMedium (@Nonnull final ECSSMedium eMedium)
+  {
+    if (m_aMediaList == null)
+      m_aMediaList = new CSSMediaList ();
+    m_aMediaList.addMedium (eMedium);
+    return this;
+  }
+
+  @Nonnull
+  public HCLink removeAllMedia ()
+  {
+    m_aMediaList = null;
     return this;
   }
 
@@ -187,8 +213,8 @@ public class HCLink extends AbstractHCElement <HCLink>
       aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget.getAttrValue ());
     if (StringHelper.hasText (m_sCharset))
       aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
-    if (StringHelper.hasText (m_sMedia))
-      aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMedia);
+    if (m_aMediaList != null && m_aMediaList.hasAnyMedia ())
+      aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());
 
     if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
     {
@@ -214,7 +240,20 @@ public class HCLink extends AbstractHCElement <HCLink>
                             .appendIfNotNull ("hrefLang", m_sHrefLang)
                             .appendIfNotNull ("target", m_aTarget)
                             .appendIfNotNull ("charset", m_sCharset)
-                            .appendIfNotNull ("media", m_sMedia)
+                            .appendIfNotNull ("mediaList", m_aMediaList)
                             .toString ();
+  }
+
+  /**
+   * Shortcut to create a &lt;link&gt; element specific to CSS
+   * 
+   * @param aCSSURL
+   *        The CSS URL to be referenced
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  public static HCLink createCSSLink (@Nonnull final ISimpleURL aCSSURL)
+  {
+    return new HCLink (EHCLinkType.STYLESHEET, CMimeType.TEXT_CSS, aCSSURL);
   }
 }
