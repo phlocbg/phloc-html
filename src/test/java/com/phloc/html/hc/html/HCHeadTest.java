@@ -25,6 +25,7 @@ import org.junit.Test;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * Test class for class {@link HCHead}
@@ -66,7 +67,7 @@ public final class HCHeadTest
   }
 
   @Test
-  public void testOutOfBandNodes ()
+  public void testOutOfBandNodes1 ()
   {
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
@@ -80,6 +81,32 @@ public final class HCHeadTest
     // Do it again and check for node consistency
     assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>", aHtml.getHead ()
                                                                                        .getAsHTMLString (aCS));
+
+    // Call it twice
+    assertNotNull (aHtml.getAsHTMLString (aCS));
+    assertNotNull (aHtml.getAsHTMLString (aCS));
+  }
+
+  @Test
+  public void testOutOfBandNodes2 ()
+  {
+    final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
+    final HCHtml aHtml = new HCHtml ();
+    aHtml.getBody ().addChild (new HCH1 ("Test"));
+    aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
+    aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
+    // Ensure that the out-of-band nodes are handled, because we're not calling
+    // aHtml.getAsNode ()
+    aHtml.copyOutOfBandNodesFromBodyToHead (aCS);
+    assertEquals ("<head><script type=\"text/javascript\"><!--\n"
+                  + "$(document).ready(function(){a=b;c=d;});\n"
+                  + "//--></script></head>", aHtml.getHead ().getAsHTMLString (aCS));
+    // Do it again and check for node consistency
+    assertEquals ("<head><script type=\"text/javascript\"><!--\n"
+                  + "$(document).ready(function(){a=b;c=d;});\n"
+                  + "//--></script></head>", aHtml.getHead ().getAsHTMLString (aCS));
+
+    // Call it twice
     assertNotNull (aHtml.getAsHTMLString (aCS));
     assertNotNull (aHtml.getAsHTMLString (aCS));
   }

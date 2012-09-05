@@ -23,7 +23,6 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.htmlext.HCUtils;
-import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNodeHandler
@@ -39,16 +38,19 @@ public class HCHeadDefaultJQueryOutOfBandHandler implements IHCHeadOutOfBandNode
     final CollectingJSCodeProvider aJS = new CollectingJSCodeProvider ();
     for (final IHCBaseNode aNode : aRealList)
     {
-      if (aNode instanceof HCScript)
-        aJS.append ((HCScript) aNode);
+      if (aNode instanceof HCScriptOnDocumentReady)
+        aJS.append (((HCScriptOnDocumentReady) aNode).getOnDocumentReadyCode ());
       else
-        aHead.addOutOfBandNode (aNode);
+        if (aNode instanceof HCScript)
+          aJS.append ((HCScript) aNode);
+        else
+          aHead.addOutOfBandNode (aNode);
     }
     if (!aJS.isEmpty ())
     {
       // Ensure the inline JS is executed after the document has been loaded
       // Note: has dependency to jQuery
-      aHead.addJS (new HCScript (JQuery.onDocumentReady (aJS)));
+      aHead.addJS (new HCScriptOnDocumentReady (aJS));
     }
   }
 }

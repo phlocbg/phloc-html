@@ -498,7 +498,8 @@ public class JQuery
   }
 
   /**
-   * @return a {@link JQueryInvocation} with an arbitrary expression
+   * @return a {@link JQueryInvocation} with an arbitrary expression.
+   *         <code>$(<i>expr</i>)</code>
    */
   @Nonnull
   public static JQueryInvocation jQuery (@Nonnull final IJSExpression aExpr)
@@ -507,7 +508,8 @@ public class JQuery
   }
 
   /**
-   * @return a {@link JQueryInvocation} with an HTML document element
+   * @return a {@link JQueryInvocation} with an HTML document element.
+   *         <code>$(document)</code>
    */
   @Nonnull
   public static JQueryInvocation jQueryDocument ()
@@ -516,7 +518,8 @@ public class JQuery
   }
 
   /**
-   * @return a {@link JQueryInvocation} with <code>this</code>
+   * @return a {@link JQueryInvocation} with <code>this</code>.
+   *         <code>$(this)</code>
    */
   @Nonnull
   public static JQueryInvocation jQueryThis ()
@@ -671,15 +674,15 @@ public class JQuery
   /**
    * Add onDocumentReady call with a single statement
    * 
-   * @param aStatement
+   * @param aJSCodeProvider
    *        The statement to be executed on document ready
    * @return The invocation object
    */
   @Nonnull
-  public static JQueryInvocation onDocumentReady (@Nonnull final IJSCodeProvider aStatement)
+  public static JQueryInvocation onDocumentReady (@Nonnull final IJSCodeProvider aJSCodeProvider)
   {
     final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
-    aPair.getSecond ().body ().add (aStatement);
+    aPair.getSecond ().body ().add (aJSCodeProvider);
     return aPair.getFirst ();
   }
 }
