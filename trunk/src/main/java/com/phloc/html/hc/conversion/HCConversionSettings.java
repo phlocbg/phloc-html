@@ -20,21 +20,30 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ICloneable;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ECSSVersion;
+import com.phloc.css.ICSSWriterSettings;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @NotThreadSafe
-public final class HCConversionSettings implements IHCConversionSettings
+public final class HCConversionSettings implements IHCConversionSettings, ICloneable <HCConversionSettings>
 {
+  // Is implied from default XMLWriter settings
+  public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  public static final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
+  public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
+  public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
+
   private final EHTMLVersion m_eHTMLVersion;
   private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ();
-  private ECSSVersion m_eCSSVersion = DEFAULT_CSS_VERSION;
-  private boolean m_bIndentAndAlignCSS = DEFAULT_INDENT_AND_ALIGN_CSS;
+  private CSSWriterSettings m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION,
+                                                                          !DEFAULT_INDENT_AND_ALIGN_CSS);
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
   private IHCCustomizer m_aCustomizer = new HCDefaultCustomizer ();
 
@@ -49,6 +58,23 @@ public final class HCConversionSettings implements IHCConversionSettings
     if (eHTMLVersion == null)
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
+  }
+
+  /**
+   * Copy ctor.
+   * 
+   * @param aBase
+   *        Object to copy the settings from. May not be <code>null</code>.
+   */
+  public HCConversionSettings (@Nonnull final IHCConversionSettings aBase)
+  {
+    if (aBase == null)
+      throw new NullPointerException ("base");
+    m_eHTMLVersion = aBase.getHTMLVersion ();
+    m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
+    m_aCSSWriterSettings = new CSSWriterSettings (aBase.getCSSWriterSettings ());
+    m_bConsistencyChecksEnabled = aBase.areConsistencyChecksEnabled ();
+    m_aCustomizer = aBase.getCustomizer ();
   }
 
   @Nonnull
@@ -76,50 +102,31 @@ public final class HCConversionSettings implements IHCConversionSettings
   }
 
   @Nonnull
-  public IXMLWriterSettings getXMLWriterSettings ()
+  public XMLWriterSettings getXMLWriterSettings ()
   {
     return m_aXMLWriterSettings;
   }
 
   /**
-   * Set the CSS version to be used.
+   * Set the CSS writer settings to be used.
    * 
-   * @param eCSSVersion
-   *        The new value.
+   * @param aCSSWriterSettings
+   *        The settings. May not be <code>null</code>.
    * @return this
    */
   @Nonnull
-  public HCConversionSettings setCSSVersion (@Nonnull final ECSSVersion eCSSVersion)
+  public HCConversionSettings setCSSWriterSettings (@Nonnull final ICSSWriterSettings aCSSWriterSettings)
   {
-    if (eCSSVersion == null)
-      throw new NullPointerException ("CSSVersion");
-    m_eCSSVersion = eCSSVersion;
+    if (aCSSWriterSettings == null)
+      throw new NullPointerException ("CSSWriterSettings");
+    m_aCSSWriterSettings = new CSSWriterSettings (aCSSWriterSettings);
     return this;
   }
 
   @Nonnull
-  public ECSSVersion getCSSVersion ()
+  public CSSWriterSettings getCSSWriterSettings ()
   {
-    return m_eCSSVersion;
-  }
-
-  /**
-   * Set the indent and align CSS flag
-   * 
-   * @param bIndentAndAlignCSS
-   *        The new value
-   * @return this
-   */
-  @Nonnull
-  public HCConversionSettings setIndentAndAlignCSS (final boolean bIndentAndAlignCSS)
-  {
-    m_bIndentAndAlignCSS = bIndentAndAlignCSS;
-    return this;
-  }
-
-  public boolean isIdentAndAlignCSS ()
-  {
-    return m_bIndentAndAlignCSS;
+    return m_aCSSWriterSettings;
   }
 
   /**
@@ -165,13 +172,18 @@ public final class HCConversionSettings implements IHCConversionSettings
     return m_aCustomizer;
   }
 
+  @Nonnull
+  public HCConversionSettings getClone ()
+  {
+    return new HCConversionSettings (this);
+  }
+
   @Override
   public String toString ()
   {
     return new ToStringGenerator (this).append ("htmlVersion", m_eHTMLVersion)
                                        .append ("XMLWriterSettings", m_aXMLWriterSettings)
-                                       .append ("cssVersion", m_eCSSVersion)
-                                       .append ("indentAndAlignCSS", m_bIndentAndAlignCSS)
+                                       .append ("CSSWriterSettings", m_aCSSWriterSettings)
                                        .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
                                        .append ("customizer", m_aCustomizer)
                                        .toString ();

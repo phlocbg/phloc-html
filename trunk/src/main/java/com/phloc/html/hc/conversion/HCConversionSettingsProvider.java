@@ -22,8 +22,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
-import com.phloc.commons.xml.serialize.XMLWriterSettings;
-import com.phloc.css.ECSSVersion;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
@@ -36,53 +35,62 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 @Immutable
 public class HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
-  private final EHTMLVersion m_eHTMLVersion;
-  private final HCConversionSettings m_aCSIndent;
-  private final HCConversionSettings m_aCSNoIndent;
+  private final HCConversionSettings m_aCS;
+  private HCConversionSettings m_aCSOptimized;
 
   public HCConversionSettingsProvider (@Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (eHTMLVersion == null)
       throw new NullPointerException ("HTMLVersion");
-    m_eHTMLVersion = eHTMLVersion;
-    m_aCSIndent = new HCConversionSettings (eHTMLVersion);
-    m_aCSNoIndent = new HCConversionSettings (eHTMLVersion).setIndentAndAlignCSS (false)
-                                                           .setXMLWriterSettings (new XMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE));
+    m_aCS = new HCConversionSettings (eHTMLVersion);
   }
 
   @Nonnull
   public EHTMLVersion getHTMLVersion ()
   {
-    return m_eHTMLVersion;
+    return m_aCS.getHTMLVersion ();
+  }
+
+  @Nonnull
+  private IHCConversionSettings _getOptimized ()
+  {
+    if (m_aCSOptimized == null)
+    {
+      // Lazily create on demand
+      m_aCSOptimized = m_aCS.getClone ();
+      m_aCSOptimized.getXMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE);
+      m_aCSOptimized.getCSSWriterSettings ().setOptimizedOutput (true);
+    }
+    return m_aCSOptimized;
   }
 
   @Nonnull
   public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
-    return bIndentAndAlign ? m_aCSIndent : m_aCSNoIndent;
+    return bIndentAndAlign ? m_aCS : _getOptimized ();
   }
 
   public void setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
   {
-    m_aCSIndent.setXMLWriterSettings (aXMLWriterSettings);
-    m_aCSNoIndent.setXMLWriterSettings (aXMLWriterSettings);
+    m_aCS.setXMLWriterSettings (aXMLWriterSettings);
+    m_aCSOptimized = null;
   }
 
-  public void setCSSVersion (@Nonnull final ECSSVersion eCSSVersion)
+  public void setCSSWriterSettings (@Nonnull final CSSWriterSettings aCSSWriterSettings)
   {
-    m_aCSIndent.setCSSVersion (eCSSVersion);
-    m_aCSNoIndent.setCSSVersion (eCSSVersion);
+    m_aCS.setCSSWriterSettings (aCSSWriterSettings);
+    m_aCSOptimized = null;
   }
 
   public void setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
   {
-    m_aCSIndent.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
-    m_aCSNoIndent.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
+    m_aCS.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
+    m_aCSOptimized = null;
   }
 
   public void setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
   {
-    m_aCSIndent.setCustomizer (aCustomizer);
-    m_aCSNoIndent.setCustomizer (aCustomizer);
+    m_aCS.setCustomizer (aCustomizer);
+    m_aCSOptimized = null;
   }
 }
