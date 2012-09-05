@@ -513,16 +513,16 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   /**
    * Adds a statement to this block
    * 
-   * @param aJSCode
+   * @param aJSCodeProvider
    *        Code to be added
    * @return This block
    */
   @Nonnull
-  public JSBlock add (@Nonnull final IJSCodeProvider aJSCode)
+  public JSBlock add (@Nonnull final IJSCodeProvider aJSCodeProvider)
   {
-    if (aJSCode == null)
-      throw new NullPointerException ("statement");
-    _insert (aJSCode);
+    if (aJSCodeProvider == null)
+      throw new NullPointerException ("JSCodeProvider");
+    _insert (aJSCodeProvider);
     return this;
   }
 
