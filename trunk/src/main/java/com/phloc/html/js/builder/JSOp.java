@@ -239,7 +239,7 @@ public final class JSOp
   public static AbstractJSExpression _instanceof (@Nonnull final IJSExpression aLeft,
                                                   @Nonnull final AbstractJSType aRight)
   {
-    return new JSOpBinary (aLeft, "instanceof", aRight);
+    return new JSOpBinary (aLeft, " instanceof ", aRight);
   }
 
   /* -- Ternary operators -- */

@@ -52,5 +52,16 @@ public final class JSOpTest
     _test ("a", JSOp.cor (a, JSExpr.FALSE));
     _test ("true", JSOp.cor (JSExpr.TRUE, b));
     _test ("b", JSOp.cor (JSExpr.FALSE, b));
+    _test ("(a^b)", JSOp.xor (a, b));
+    _test ("(a<b)", JSOp.lt (a, b));
+    _test ("(a<=b)", JSOp.lte (a, b));
+    _test ("(a>b)", JSOp.gt (a, b));
+    _test ("(a>=b)", JSOp.gte (a, b));
+    _test ("(a==b)", JSOp.eq (a, b));
+    _test ("(a===b)", JSOp.eeq (a, b));
+    _test ("(a!=b)", JSOp.ne (a, b));
+    _test ("(a!==b)", JSOp.ene (a, b));
+    _test ("(a instanceof Number)", JSOp._instanceof (a, JSPrimitiveType.NUMBER));
+    _test ("(a?b:5)", JSOp.cond (a, b, n5));
   }
 }
