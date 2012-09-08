@@ -34,6 +34,11 @@ public class JSAtomBoolean extends JSAtom
     m_bValue = bValue;
   }
 
+  public boolean getValue ()
+  {
+    return m_bValue;
+  }
+
   @Override
   public String toString ()
   {
