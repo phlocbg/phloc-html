@@ -22,17 +22,21 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.json.IJSON;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
- *
+ * 
  * @author philip
  */
 @Immutable
 public final class JSExpr
 {
+  @PresentForCodeCoverage
+  private static final JSExpr s_aInstance = new JSExpr ();
+
   /**
    * This class is not instancable.
    */
@@ -195,12 +199,12 @@ public final class JSExpr
   /**
    * Boolean constant that represents <code>true</code>
    */
-  public static final JSAtom TRUE = new JSAtom ("true");
+  public static final JSAtomBoolean TRUE = new JSAtomBoolean (true);
 
   /**
    * Boolean constant that represents <code>false</code>
    */
-  public static final JSAtom FALSE = new JSAtom ("false");
+  public static final JSAtomBoolean FALSE = new JSAtomBoolean (false);
 
   /**
    * Boolean constant that represents <code>undefined</code>
@@ -208,7 +212,7 @@ public final class JSExpr
   public static final JSAtom UNDEFINED = new JSAtom ("undefined");
 
   @Nonnull
-  public static JSAtom lit (final boolean b)
+  public static JSAtomBoolean lit (final boolean b)
   {
     return b ? TRUE : FALSE;
   }
