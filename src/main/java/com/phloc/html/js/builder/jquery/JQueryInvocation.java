@@ -242,7 +242,7 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
    * @return The invocation of the jQuery function <code>clone()</code>
    */
   @Nonnull
-  public JQueryInvocation clone_ ()
+  public JQueryInvocation _clone ()
   {
     return jqinvoke ("clone");
   }
@@ -774,7 +774,7 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
    */
 
   @Nonnull
-  public JQueryInvocation notJQ ()
+  public JQueryInvocation _not ()
   {
     return jqinvoke ("not");
   }

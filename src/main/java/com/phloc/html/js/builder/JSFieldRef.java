@@ -50,7 +50,7 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
   public JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
   {
     if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("name");
+      throw new IllegalArgumentException ("Name '" + name + "' is not a valid JSIdentifier!");
     m_aObject = object;
     m_sName = name;
   }
