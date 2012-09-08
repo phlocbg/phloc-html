@@ -1,6 +1,8 @@
 package com.phloc.html.js.builder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -63,5 +65,12 @@ public final class JSOpTest
     _test ("(a!==b)", JSOp.ene (a, b));
     _test ("(a instanceof Number)", JSOp._instanceof (a, JSPrimitiveType.NUMBER));
     _test ("(a?b:5)", JSOp.cond (a, b, n5));
+
+    assertFalse (JSOp.hasOperator (null));
+    assertFalse (JSOp.hasOperator (n5));
+    assertTrue (JSOp.hasOperator (JSOp.minus (n5)));
+    assertTrue (JSOp.hasOperator (JSOp.not (a)));
+    assertTrue (JSOp.hasOperator (JSOp.xor (a, b)));
+    assertTrue (JSOp.hasOperator (JSOp.cond (a, b, n5)));
   }
 }

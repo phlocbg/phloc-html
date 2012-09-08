@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.PresentForCodeCoverage;
+
 /**
  * Class for generating expressions containing operators
  * 
@@ -29,6 +31,9 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public final class JSOp
 {
+  @PresentForCodeCoverage
+  private static final JSOp s_aInstance = new JSOp ();
+
   private JSOp ()
   {}
 

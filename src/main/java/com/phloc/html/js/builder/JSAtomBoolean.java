@@ -17,36 +17,26 @@
  */
 package com.phloc.html.js.builder;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Simple code components that merely generate themselves.
+ * An atom for boolean values
  * 
  * @author philip
  */
-public class JSAtom extends AbstractJSExpression
+public class JSAtomBoolean extends JSAtom
 {
-  private final String m_sAtom;
+  private final boolean m_bValue;
 
-  public JSAtom (@Nonnull @Nonempty final String sAtom)
+  public JSAtomBoolean (final boolean bValue)
   {
-    if (StringHelper.hasNoText (sAtom))
-      throw new IllegalArgumentException ("atom");
-    m_sAtom = sAtom;
-  }
-
-  public void generate (@Nonnull final JSFormatter f)
-  {
-    f.plain (m_sAtom);
+    super (bValue ? "true" : "false");
+    m_bValue = bValue;
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("atom", m_sAtom).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("value", m_bValue).toString ();
   }
 }
