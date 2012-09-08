@@ -160,20 +160,16 @@ public final class JSOp
       return aRight;
     if (aRight == JSExpr.TRUE)
       return aLeft;
-    if (aLeft == JSExpr.FALSE)
-      return aLeft; // JExpr.FALSE
-    if (aRight == JSExpr.FALSE)
-      return aRight; // JExpr.FALSE
+    if (aLeft == JSExpr.FALSE || aRight == JSExpr.FALSE)
+      return JSExpr.FALSE;
     return new JSOpBinary (aLeft, "&&", aRight);
   }
 
   @Nonnull
   public static IJSExpression cor (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
-    if (aLeft == JSExpr.TRUE)
-      return aLeft; // JExpr.TRUE
-    if (aRight == JSExpr.TRUE)
-      return aRight; // JExpr.FALSE
+    if (aLeft == JSExpr.TRUE || aRight == JSExpr.TRUE)
+      return JSExpr.TRUE;
     if (aLeft == JSExpr.FALSE)
       return aRight;
     if (aRight == JSExpr.FALSE)
