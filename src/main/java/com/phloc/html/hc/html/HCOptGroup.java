@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;optgroup&gt; element
- *
+ * 
  * @author philip
  */
 public class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>

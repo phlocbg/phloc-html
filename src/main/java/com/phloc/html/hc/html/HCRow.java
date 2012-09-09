@@ -37,7 +37,7 @@ import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Represents an HTML &lt;tr&gt; element
- *
+ * 
  * @author philip
  */
 public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, AbstractHCCell>
@@ -57,7 +57,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add an empty cell.
-   *
+   * 
    * @return The created cell. Never <code>null</code>.
    */
   @Nonnull
@@ -71,7 +71,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add an empty cell at the specified index.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @return The created cell. Never <code>null</code>.
@@ -87,7 +87,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed element.
-   *
+   * 
    * @param aCellChild
    *        The element to add. May be <code>null</code>.
    * @return The created cell. Never <code>null</code>.
@@ -101,7 +101,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellChild
@@ -117,7 +117,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return The created cell. Never <code>null</code>.
@@ -131,7 +131,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellChildren
@@ -147,7 +147,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return The created cell. Never <code>null</code>.
@@ -161,7 +161,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellChildren
@@ -178,7 +178,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param aCellText
    *        The text to be set into the cell. May not be <code>null</code>.
    * @return the created table cell
@@ -192,7 +192,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellText
@@ -209,7 +209,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param sCellText
    *        The text to be set into the cell. May be <code>null</code>.
    * @return the created table cell
@@ -223,7 +223,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param sCellText
@@ -239,7 +239,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text elements.
-   *
+   * 
    * @param aCellTexts
    *        The text to be set into the cell. May be <code>null</code>.
    * @return the created table cell
@@ -253,7 +253,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text elements.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellTexts
@@ -269,7 +269,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed element.
-   *
+   * 
    * @param aChild
    *        The element to add. May be <code>null</code>.
    * @return this (the table row)
@@ -283,7 +283,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aChild
@@ -299,7 +299,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return this (the table row)
@@ -313,7 +313,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellChildren
@@ -329,7 +329,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements to add. May be <code>null</code>.
    * @return this (the table row)
@@ -343,7 +343,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single new cell and add the passed elements.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellChildren
@@ -359,7 +359,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param aCellText
    *        The text to be set into the cell.
    * @return this (the table row)
@@ -372,7 +372,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param aCellText
@@ -387,7 +387,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param sCellText
    *        The text to be set into the cell. May be <code>null</code>.
    * @return this (the table row)
@@ -401,7 +401,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add a single cell with the given text element.
-   *
+   * 
    * @param nIndex
    *        The index where the cell should be added
    * @param sCellText
@@ -417,7 +417,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add multiple cells, one for each passed string.
-   *
+   * 
    * @param aCellTextProviders
    *        The list of text providers for which a table cell should be created.
    * @return this (the table row)
@@ -441,7 +441,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add multiple cells, one for each passed string.
-   *
+   * 
    * @param aCellTexts
    *        The list of strings for which a table cell should be created.
    * @return this (the table row)
@@ -465,7 +465,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add multiple cells, one for each passed element.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements for which new cells should be created. May be
    *        <code>null</code>.
@@ -490,7 +490,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Add multiple cells, one for each passed element.
-   *
+   * 
    * @param aCellChildren
    *        The list of elements for which new cells should be created. May be
    *        <code>null</code>.
@@ -522,7 +522,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
   /**
    * Get the cell at the specified index in this row. This method does NOT
    * consider colspans!!!!
-   *
+   * 
    * @param nIndex
    *        The index of the cell
    * @return <code>null</code> if no such cell is present
@@ -546,7 +546,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
   /**
    * Get the cell at the specified index in this row. This method does consider
    * colspans!!!!
-   *
+   * 
    * @param nIndex
    *        The index of the cell
    * @return <code>null</code> if no such cell is present
@@ -568,7 +568,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
   /**
    * Note: this method only counts the effective cells and does NOT include
    * eventually contained "colspans"!
-   *
+   * 
    * @return The number of contained cells.
    */
   @Nonnegative
@@ -579,7 +579,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Count the number of effective cells - including "colspans" - of this row.
-   *
+   * 
    * @return The number of effectively contained cells. Always &ge; 0.
    */
   @Nonnegative
@@ -608,7 +608,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Remove the cell at the specified index
-   *
+   * 
    * @param nIndex
    *        The index to remove
    * @return this
@@ -622,7 +622,7 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
 
   /**
    * Remove all cells of this row
-   *
+   * 
    * @return this
    */
   @Nonnull

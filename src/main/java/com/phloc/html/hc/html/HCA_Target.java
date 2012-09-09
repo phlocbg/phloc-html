@@ -30,7 +30,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
 /**
  * Represents the value of the "target" attribute of an HTML &lt;a&gt; element
- *
+ * 
  * @author philip
  */
 @Immutable
@@ -74,7 +74,7 @@ public class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
   /**
    * Try to find one of the default targets by name. The name comparison is
    * performed case insensitive.
-   *
+   * 
    * @param sName
    *        The name to check. May not be <code>null</code>.
    * @param aDefault

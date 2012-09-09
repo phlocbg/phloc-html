@@ -31,7 +31,7 @@ import com.phloc.html.js.builder.IJSStatement;
 /**
  * A specialized form that adds the required attribute for handling file
  * uploads.
- *
+ * 
  * @author philip
  */
 public class HCForm_FileUpload extends HCForm
