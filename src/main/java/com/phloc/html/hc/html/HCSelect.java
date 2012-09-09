@@ -183,8 +183,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOption (@Nullable final String sValue, @Nullable final String sText)
   {
-    final HCOption aOption = new HCOption (sValue);
-    aOption.addChild (sText);
+    final HCOption aOption = new HCOption ().setValue (sValue).addChild (sText);
     return addOption (aOption);
   }
 
@@ -212,8 +211,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOptionAtIndex (final int nIndex, final String sValue, final String sText)
   {
-    final HCOption aOption = new HCOption (sValue);
-    aOption.addChild (sText);
+    final HCOption aOption = new HCOption ().setValue (sValue).addChild (sText);
     return addOptionAtIndex (nIndex, aOption);
   }
 

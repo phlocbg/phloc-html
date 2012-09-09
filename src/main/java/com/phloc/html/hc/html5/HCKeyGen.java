@@ -52,7 +52,7 @@ public class HCKeyGen extends AbstractHCElement <HCKeyGen>
   public HCKeyGen (@Nullable final String sName)
   {
     this ();
-    setName (sName);
+    m_sName = sName;
   }
 
   @Nullable

@@ -32,7 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents a single parameter for an {@link HCObject} or an applet.
- *
+ * 
  * @author philip
  */
 public class HCParam extends AbstractHCElement <HCParam>
@@ -45,7 +45,9 @@ public class HCParam extends AbstractHCElement <HCParam>
   public HCParam (@Nonnull final String sName)
   {
     super (EHTMLElement.PARAM);
-    setName (sName);
+    if (sName == null)
+      throw new NullPointerException ("name");
+    m_sName = sName;
   }
 
   @Nullable
