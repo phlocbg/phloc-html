@@ -131,5 +131,10 @@ public final class JQueryTest
     assertEquals ("$('div.any');", JQuery.elementNameWithClassRef (EHTMLElement.DIV, aClass).getJSCode ());
     assertEquals ("$('bla.any');", JQuery.elementNameWithClassRef ("bla", aClass).getJSCode ());
     assertEquals ("$(':checked');", JQuery.select (JQuerySelector.checked).getJSCode ());
+    assertEquals ("$(':checked');", JQuery.select (new JQuerySelectorList ().addSelector (JQuerySelector.checked))
+                                          .getJSCode ());
+    assertEquals ("$(':checked :animated');",
+                  JQuery.select (new JQuerySelectorList ().addSelector (JQuerySelector.checked)
+                                                          .addSelector (JQuerySelector.animated)).getJSCode ());
   }
 }

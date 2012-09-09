@@ -18,8 +18,10 @@
 package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -28,6 +30,7 @@ import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
+import com.phloc.html.meta.MetaElement;
 
 /**
  * Test class for class {@link HCHead}
@@ -45,11 +48,57 @@ public final class HCHeadTest
     assertNull (aHead.getBaseHref ());
     assertNull (aHead.getBaseTarget ());
     assertTrue (aHead.getAllMetaElements ().isEmpty ());
+    assertEquals (0, aHead.getMetaElementCount ());
     assertTrue (aHead.getAllLinks ().isEmpty ());
+    assertEquals (0, aHead.getLinkCount ());
     assertTrue (aHead.getAllCSSNodes ().isEmpty ());
     assertTrue (aHead.getAllJSNodes ().isEmpty ());
     assertNotNull (aHead.getOutOfBandHandler ());
     assertEquals ("", aHead.getPlainText ());
+
+    assertSame (aHead, aHead.setProfile ("any"));
+    assertEquals ("any", aHead.getProfile ());
+    assertEquals ("<head profile=\"any\"></head>", HCSettings.getAsHTMLString (aHead, false));
+
+    assertSame (aHead, aHead.setPageTitle ("Title"));
+    assertEquals ("Title", aHead.getPageTitle ());
+    assertEquals ("<head profile=\"any\"><title>Title</title></head>", HCSettings.getAsHTMLString (aHead, false));
+
+    assertSame (aHead, aHead.setBaseHref ("/"));
+    assertEquals ("/", aHead.getBaseHref ());
+    assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" /></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
+
+    assertSame (aHead, aHead.setBaseTarget (HCA_Target.BLANK));
+    assertEquals (HCA_Target.BLANK, aHead.getBaseTarget ());
+    assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" target=\"_blank\" /></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
+  }
+
+  @Test
+  public void testMetaElements ()
+  {
+    final HCHead aHead = new HCHead ();
+    assertTrue (aHead.getAllMetaElements ().isEmpty ());
+    assertEquals (0, aHead.getMetaElementCount ());
+
+    assertSame (aHead, aHead.addMetaElement (new MetaElement ("foo", "bar")));
+    assertFalse (aHead.getAllMetaElements ().isEmpty ());
+    assertEquals (1, aHead.getMetaElementCount ());
+    assertEquals ("<head><meta name=\"foo\" content=\"bar\" /></head>", HCSettings.getAsHTMLString (aHead, false));
+
+    assertSame (aHead, aHead.addMetaElement (new MetaElement ("goo", true, "car")));
+    assertEquals (2, aHead.getMetaElementCount ());
+    assertEquals ("<head>"
+                  + "<meta name=\"foo\" content=\"bar\" />"
+                  + "<meta http-equiv=\"goo\" content=\"car\" />"
+                  + "</head>", HCSettings.getAsHTMLString (aHead, false));
+  }
+
+  @Test
+  public void testGenerate ()
+  {
+    final HCHead aHead = new HCHead ();
     assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setPageTitle ("phloc");
