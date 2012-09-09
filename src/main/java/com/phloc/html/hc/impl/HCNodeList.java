@@ -296,8 +296,26 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
+  public static HCNodeList create (@Nullable final String... aChildren)
+  {
+    return new HCNodeList ().addChildren (aChildren);
+  }
+
+  @Nonnull
   public static HCNodeList create (@Nullable final IHCNode aChild)
   {
     return new HCNodeList ().addChild (aChild);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final IHCNode... aChildren)
+  {
+    return new HCNodeList ().addChildren (aChildren);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    return new HCNodeList ().addChildren (aChildren);
   }
 }

@@ -69,52 +69,52 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
   }
 
   @Nullable
-  public final ISimpleURL getHref ()
+  public ISimpleURL getHref ()
   {
     return m_aHref;
   }
 
   @Nonnull
-  public final HCA setTarget (@Nullable final HCA_Target aTarget)
+  public HCA setTarget (@Nullable final HCA_Target aTarget)
   {
     m_aTarget = aTarget;
     return this;
   }
 
   @Nullable
-  public final String getName ()
+  public String getName ()
   {
     return m_sName;
   }
 
   @Nonnull
-  public final HCA setName (@Nullable final String sName)
+  public HCA setName (@Nullable final String sName)
   {
     m_sName = sName;
     return this;
   }
 
   @Nullable
-  public final IMimeType getType ()
+  public IMimeType getType ()
   {
     return m_aType;
   }
 
   @Nonnull
-  public final HCA setType (@Nullable final IMimeType aType)
+  public HCA setType (@Nullable final IMimeType aType)
   {
     m_aType = aType;
     return this;
   }
 
   @Nullable
-  public final String getMedia ()
+  public String getMedia ()
   {
     return m_sMediaQuery;
   }
 
   @Nonnull
-  public final HCA setMedia (@Nullable final String sMediaQuery)
+  public HCA setMedia (@Nullable final String sMediaQuery)
   {
     m_sMediaQuery = sMediaQuery;
     return this;
@@ -122,7 +122,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected final void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aHref != null)
