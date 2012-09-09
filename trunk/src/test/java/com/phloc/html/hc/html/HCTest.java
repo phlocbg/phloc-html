@@ -101,7 +101,7 @@ public final class HCTest
     b.addChild (new HCHiddenField ("action", false));
     b.addChild (new HCHR ());
     b.addChild (new HCIFrame ());
-    b.addChild (new HCImg ("test1.png"));
+    b.addChild (new HCImg ().setSrc ("test1.png"));
     b.addChild (new HCIns ());
     b.addChild (new HCIns ().addChild ("Das wäre also ein Beispiel"));
     b.addChild (new HCI ());
@@ -145,7 +145,7 @@ public final class HCTest
     b.addChild (new HCSamp ());
     b.addChild (new HCSamp ().addChild ("List"));
     b.addChild (new HCScript (JSExpr.ref ("i").assign (17)));
-    b.addChild (new HCScriptFile (new SimpleURL ("a.js")));
+    b.addChild (new HCScriptFile ().setSrc (new SimpleURL ("a.js")));
     final HCSelect aSelect = new HCSelect ("x");
     aSelect.addOption ("y", "Ypsilon");
     aSelect.addOption ("z", "Zet");

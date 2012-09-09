@@ -20,9 +20,12 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -30,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public class JSStatementList implements IJSStatement
+public final class JSStatementList implements IJSStatement
 {
   private final List <IJSStatement> m_aStatements = new ArrayList <IJSStatement> ();
 
@@ -58,6 +61,24 @@ public class JSStatementList implements IJSStatement
       throw new NullPointerException ("statement");
     m_aStatements.add (aStatement);
     return this;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IJSStatement> getAllStatements ()
+  {
+    return ContainerHelper.newList (m_aStatements);
+  }
+
+  @Nonnegative
+  public int size ()
+  {
+    return m_aStatements.size ();
+  }
+
+  public boolean isEmpty ()
+  {
+    return m_aStatements.isEmpty ();
   }
 
   @Override

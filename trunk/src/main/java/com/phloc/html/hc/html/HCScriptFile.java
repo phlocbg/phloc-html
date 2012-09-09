@@ -48,6 +48,7 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
     super ();
   }
 
+  @Deprecated
   public HCScriptFile (@Nullable final ISimpleURL aSrc)
   {
     super ();

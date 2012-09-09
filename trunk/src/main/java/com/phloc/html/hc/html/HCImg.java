@@ -48,21 +48,32 @@ public class HCImg extends AbstractHCElement <HCImg>
     super (EHTMLElement.IMG);
   }
 
+  @Deprecated
   public HCImg (@Nullable final String sSrc)
   {
     this ();
     setSrc (sSrc);
   }
 
+  @Deprecated
   public HCImg (@Nonnull final ISimpleURL aSrc)
   {
-    this (aSrc.getAsString ());
+    this ();
+    setSrc (aSrc);
   }
 
   @Nullable
   public final String getSrc ()
   {
     return m_sSrc;
+  }
+
+  @Nonnull
+  public HCImg setSrc (@Nullable final ISimpleURL aSrc)
+  {
+    if (aSrc != null)
+      setSrc (aSrc.getAsString ());
+    return this;
   }
 
   @Nonnull
