@@ -86,6 +86,7 @@ public class HCHead extends AbstractHCBaseNode
   public HCHead ()
   {}
 
+  @Deprecated
   public HCHead (@Nullable final String sPageTitle)
   {
     setPageTitle (sPageTitle);

@@ -52,11 +52,13 @@ public class HCOption extends AbstractHCElementWithChildren <HCOption>
     super (EHTMLElement.OPTION);
   }
 
+  @Deprecated
   public HCOption (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
     this (aChild.getText ());
   }
 
+  @Deprecated
   public HCOption (@Nullable final String sValue)
   {
     this ();

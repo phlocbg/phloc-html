@@ -46,8 +46,8 @@ public final class HC5Test
     b.addChild (new HCAside ());
     b.addChild (new HCAside ().addChild ("Aside"));
     final HCAudio aAudio = new HCAudio ();
-    aAudio.addSource (new HCSource (new SimpleURL ("a.mp3")));
-    aAudio.addTrack (new HCTrack (new SimpleURL ("a.mp3")));
+    aAudio.addSource (new HCSource ().setSrc (new SimpleURL ("a.mp3")));
+    aAudio.addTrack (new HCTrack ().setSrc (new SimpleURL ("a.mp3")));
     b.addChild (aAudio);
     b.addChild (new HCBDI ());
     b.addChild (new HCBDI ().addChild ("bidirectional"));
@@ -82,8 +82,8 @@ public final class HC5Test
     b.addChild (new HCTime ());
     b.addChild (new HCTime ().addChild ("Bla foo"));
     final HCVideo aVideo = new HCVideo ();
-    aVideo.addSource (new HCSource (new SimpleURL ("a.avi")));
-    aVideo.addTrack (new HCTrack (new SimpleURL ("a.avi")));
+    aVideo.addSource (new HCSource ().setSrc (new SimpleURL ("a.avi")));
+    aVideo.addTrack (new HCTrack ().setSrc (new SimpleURL ("a.avi")));
     b.addChild (aVideo);
     b.addChild (new HCWBR ());
 

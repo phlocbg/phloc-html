@@ -75,8 +75,6 @@ public final class HCHeadTest
     assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" target=\"_blank\" /></head>",
                   HCSettings.getAsHTMLString (aHead, false));
     assertNotNull (aHead.toString ());
-
-    assertEquals ("Juhu", new HCHead ("Juhu").getPageTitle ());
   }
 
   @Test

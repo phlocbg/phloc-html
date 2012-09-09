@@ -50,13 +50,7 @@ public class HCCol extends AbstractHCElement <HCCol>
     this ();
     if (nWidth < 0)
       throw new IllegalArgumentException ("The passed width is too small: " + nWidth);
-    setWidth (Integer.toString (nWidth));
-  }
-
-  private HCCol (@Nullable final String sWidth)
-  {
-    this ();
-    setWidth (sWidth);
+    m_sWidth = Integer.toString (nWidth);
   }
 
   /**
@@ -65,6 +59,12 @@ public class HCCol extends AbstractHCElement <HCCol>
   public boolean isStar ()
   {
     return CHTMLAttributeValues.STAR.equals (m_sWidth);
+  }
+
+  @Deprecated
+  public boolean isStarWidth ()
+  {
+    return isStar ();
   }
 
   /**
@@ -81,12 +81,6 @@ public class HCCol extends AbstractHCElement <HCCol>
   {
     m_sWidth = sWidth;
     return this;
-  }
-
-  @Deprecated
-  public boolean isStarWidth ()
-  {
-    return isStar ();
   }
 
   @Override
@@ -116,7 +110,7 @@ public class HCCol extends AbstractHCElement <HCCol>
   @Nonnull
   public static HCCol star ()
   {
-    return new HCCol (CHTMLAttributeValues.STAR);
+    return new HCCol ().setWidth (CHTMLAttributeValues.STAR);
   }
 
   /**
@@ -129,7 +123,7 @@ public class HCCol extends AbstractHCElement <HCCol>
   @Nonnull
   public static HCCol perc (@Nonnegative final int nPerc)
   {
-    return new HCCol (ECSSUnit.perc (nPerc));
+    return new HCCol ().setWidth (ECSSUnit.perc (nPerc));
   }
 
   /**
@@ -142,6 +136,6 @@ public class HCCol extends AbstractHCElement <HCCol>
   @Nonnull
   public static HCCol fromString (@Nullable final String sWidth)
   {
-    return new HCCol (sWidth);
+    return new HCCol ().setWidth (sWidth);
   }
 }
