@@ -66,8 +66,7 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
 @SuppressWarnings ("deprecation")
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                              IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -80,8 +79,10 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private String m_sTitle;
   private String m_sLanguage;
   private EHCTextDirection m_eDirection;
-  private LinkedHashSet <ICSSClassProvider> m_aCSSClassProviders;
-  private LinkedHashMap <ECSSProperty, ICSSValue> m_aStyles;
+  // Must be a LinkedHashSet:
+  private Set <ICSSClassProvider> m_aCSSClassProviders;
+  // Must be a LinkedHashMap:
+  private Map <ECSSProperty, ICSSValue> m_aStyles;
   /*
    * Use 1 pointer instead of many to save memory if no handler is used at all
    * (which happens quite often)!
@@ -99,7 +100,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private boolean m_bHidden = false;
   private boolean m_bSpellCheck = false;
 
-  private LinkedHashMap <String, String> m_aCustomAttrs;
+  // Must be a LinkedHashMap_
+  private Map <String, String> m_aCustomAttrs;
   private boolean m_bPreparedOnce = false;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
