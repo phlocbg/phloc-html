@@ -17,18 +17,13 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML32;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;plaintext&gt; element
- *
+ * 
  * @author philip
  */
 @DeprecatedInHTML32
@@ -37,35 +32,5 @@ public class HCPlainText extends AbstractHCElementWithChildren <HCPlainText>
   public HCPlainText ()
   {
     super (EHTMLElement.PLAINTEXT);
-  }
-
-  public HCPlainText (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCPlainText (@Nullable final String sChild)
-  {
-    super (EHTMLElement.PLAINTEXT, sChild);
-  }
-
-  public HCPlainText (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.PLAINTEXT, aChildren);
-  }
-
-  public HCPlainText (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.PLAINTEXT, aChild);
-  }
-
-  public HCPlainText (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.PLAINTEXT, aChildren);
-  }
-
-  public HCPlainText (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.PLAINTEXT, aChildren);
   }
 }

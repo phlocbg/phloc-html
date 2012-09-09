@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;pre&gt; element
- *
+ * 
  * @author philip
  */
 public class HCPre extends AbstractHCElementWithChildren <HCPre>
@@ -35,35 +30,5 @@ public class HCPre extends AbstractHCElementWithChildren <HCPre>
   public HCPre ()
   {
     super (EHTMLElement.PRE);
-  }
-
-  public HCPre (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCPre (@Nullable final String sChild)
-  {
-    super (EHTMLElement.PRE, sChild);
-  }
-
-  public HCPre (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.PRE, aChildren);
-  }
-
-  public HCPre (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.PRE, aChild);
-  }
-
-  public HCPre (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.PRE, aChildren);
-  }
-
-  public HCPre (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.PRE, aChildren);
   }
 }

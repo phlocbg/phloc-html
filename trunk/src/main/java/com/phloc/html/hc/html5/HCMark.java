@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCMark extends AbstractHCElementWithChildren <HCMark>
   public HCMark ()
   {
     super (EHTMLElement.MARK);
-  }
-
-  public HCMark (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCMark (@Nullable final String sChild)
-  {
-    super (EHTMLElement.MARK, sChild);
-  }
-
-  public HCMark (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.MARK, aChildren);
-  }
-
-  public HCMark (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.MARK, aChild);
-  }
-
-  public HCMark (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.MARK, aChildren);
-  }
-
-  public HCMark (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.MARK, aChildren);
   }
 }

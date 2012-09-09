@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.phloc.commons.state.EChange;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -73,6 +74,9 @@ public final class HCHeadTest
     assertEquals (HCA_Target.BLANK, aHead.getBaseTarget ());
     assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" target=\"_blank\" /></head>",
                   HCSettings.getAsHTMLString (aHead, false));
+    assertNotNull (aHead.toString ());
+
+    assertEquals ("Juhu", new HCHead ("Juhu").getPageTitle ());
   }
 
   @Test
@@ -85,7 +89,8 @@ public final class HCHeadTest
     assertSame (aHead, aHead.addMetaElement (new MetaElement ("foo", "bar")));
     assertFalse (aHead.getAllMetaElements ().isEmpty ());
     assertEquals (1, aHead.getMetaElementCount ());
-    assertEquals ("<head><meta name=\"foo\" content=\"bar\" /></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head>" + "<meta name=\"foo\" content=\"bar\" />" + "</head>",
+                  HCSettings.getAsHTMLString (aHead, false));
 
     assertSame (aHead, aHead.addMetaElement (new MetaElement ("goo", true, "car")));
     assertEquals (2, aHead.getMetaElementCount ());
@@ -93,6 +98,18 @@ public final class HCHeadTest
                   + "<meta name=\"foo\" content=\"bar\" />"
                   + "<meta http-equiv=\"goo\" content=\"car\" />"
                   + "</head>", HCSettings.getAsHTMLString (aHead, false));
+
+    assertEquals (EChange.UNCHANGED, aHead.removeMetaElement ("any"));
+    assertEquals (2, aHead.getMetaElementCount ());
+    assertEquals (EChange.CHANGED, aHead.removeMetaElement ("foo"));
+    assertEquals (1, aHead.getMetaElementCount ());
+    assertEquals (EChange.UNCHANGED, aHead.removeMetaElement ("foo"));
+    assertEquals (1, aHead.getMetaElementCount ());
+    assertEquals ("<head>" + "<meta http-equiv=\"goo\" content=\"car\" />" + "</head>",
+                  HCSettings.getAsHTMLString (aHead, false));
+    assertEquals (EChange.CHANGED, aHead.removeMetaElement ("goo"));
+    assertEquals (0, aHead.getMetaElementCount ());
+    assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
   }
 
   @Test
@@ -132,7 +149,7 @@ public final class HCHeadTest
   {
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
-    aHtml.getBody ().addChild (new HCH1 ("Test"));
+    aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));
     // Ensure that the out-of-band nodes are handled, because we're not calling
     // aHtml.getAsNode ()
@@ -153,7 +170,7 @@ public final class HCHeadTest
   {
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
-    aHtml.getBody ().addChild (new HCH1 ("Test"));
+    aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
     aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
     // Ensure that the out-of-band nodes are handled, because we're not calling

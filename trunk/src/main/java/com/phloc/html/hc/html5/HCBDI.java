@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCBDI extends AbstractHCElementWithChildren <HCBDI>
   public HCBDI ()
   {
     super (EHTMLElement.BDI);
-  }
-
-  public HCBDI (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCBDI (@Nullable final String sChild)
-  {
-    super (EHTMLElement.BDI, sChild);
-  }
-
-  public HCBDI (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.BDI, aChildren);
-  }
-
-  public HCBDI (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.BDI, aChild);
-  }
-
-  public HCBDI (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.BDI, aChildren);
-  }
-
-  public HCBDI (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.BDI, aChildren);
   }
 }

@@ -17,19 +17,14 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;center&gt; element
- *
+ * 
  * @author philip
  */
 @DeprecatedInHTML5
@@ -41,35 +36,5 @@ public class HCCenter extends AbstractHCElementWithChildren <HCCenter>
   public HCCenter ()
   {
     super (EHTMLElement.CENTER);
-  }
-
-  public HCCenter (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCCenter (@Nullable final String sChild)
-  {
-    super (EHTMLElement.CENTER, sChild);
-  }
-
-  public HCCenter (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.CENTER, aChildren);
-  }
-
-  public HCCenter (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.CENTER, aChild);
-  }
-
-  public HCCenter (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.CENTER, aChildren);
-  }
-
-  public HCCenter (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.CENTER, aChildren);
   }
 }

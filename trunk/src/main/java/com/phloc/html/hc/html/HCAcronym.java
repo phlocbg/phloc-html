@@ -17,18 +17,13 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;acronym&gt; element
- *
+ * 
  * @author philip
  */
 @DeprecatedInHTML5
@@ -37,35 +32,5 @@ public class HCAcronym extends AbstractHCElementWithChildren <HCAcronym>
   public HCAcronym ()
   {
     super (EHTMLElement.ACRONYM);
-  }
-
-  public HCAcronym (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCAcronym (@Nullable final String sChild)
-  {
-    super (EHTMLElement.ACRONYM, sChild);
-  }
-
-  public HCAcronym (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.ACRONYM, aChildren);
-  }
-
-  public HCAcronym (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.ACRONYM, aChild);
-  }
-
-  public HCAcronym (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.ACRONYM, aChildren);
-  }
-
-  public HCAcronym (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.ACRONYM, aChildren);
   }
 }

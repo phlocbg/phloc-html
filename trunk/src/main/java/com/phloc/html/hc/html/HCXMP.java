@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.DeprecatedInHTML32;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -39,33 +34,4 @@ public class HCXMP extends AbstractHCElementWithChildren <HCXMP>
     super (EHTMLElement.XMP);
   }
 
-  public HCXMP (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCXMP (@Nullable final String sChild)
-  {
-    super (EHTMLElement.XMP, sChild);
-  }
-
-  public HCXMP (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.XMP, aChildren);
-  }
-
-  public HCXMP (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.XMP, aChild);
-  }
-
-  public HCXMP (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.XMP, aChildren);
-  }
-
-  public HCXMP (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.XMP, aChildren);
-  }
 }

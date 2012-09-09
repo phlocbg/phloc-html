@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;var&gt; element
- *
+ * 
  * @author philip
  */
 public class HCVar extends AbstractHCElementWithChildren <HCVar>
@@ -35,35 +30,5 @@ public class HCVar extends AbstractHCElementWithChildren <HCVar>
   public HCVar ()
   {
     super (EHTMLElement.VAR);
-  }
-
-  public HCVar (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCVar (@Nullable final String sChild)
-  {
-    super (EHTMLElement.VAR, sChild);
-  }
-
-  public HCVar (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.VAR, aChildren);
-  }
-
-  public HCVar (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.VAR, aChild);
-  }
-
-  public HCVar (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.VAR, aChildren);
-  }
-
-  public HCVar (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.VAR, aChildren);
   }
 }

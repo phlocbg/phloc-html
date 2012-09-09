@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCAside extends AbstractHCElementWithChildren <HCAside>
   public HCAside ()
   {
     super (EHTMLElement.ASIDE);
-  }
-
-  public HCAside (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCAside (@Nullable final String sChild)
-  {
-    super (EHTMLElement.ASIDE, sChild);
-  }
-
-  public HCAside (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.ASIDE, aChildren);
-  }
-
-  public HCAside (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.ASIDE, aChild);
-  }
-
-  public HCAside (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.ASIDE, aChildren);
-  }
-
-  public HCAside (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.ASIDE, aChildren);
   }
 }

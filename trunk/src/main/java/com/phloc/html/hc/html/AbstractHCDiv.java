@@ -24,10 +24,8 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -36,44 +34,13 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> extends
-                                                                                AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
 {
   private String m_sName;
 
   public AbstractHCDiv ()
   {
     super (EHTMLElement.DIV);
-  }
-
-  public AbstractHCDiv (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public AbstractHCDiv (@Nullable final String sChild)
-  {
-    super (EHTMLElement.DIV, sChild);
-  }
-
-  public AbstractHCDiv (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.DIV, aChildren);
-  }
-
-  public AbstractHCDiv (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.DIV, aChild);
-  }
-
-  public AbstractHCDiv (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.DIV, aChildren);
-  }
-
-  public AbstractHCDiv (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.DIV, aChildren);
   }
 
   @Nullable

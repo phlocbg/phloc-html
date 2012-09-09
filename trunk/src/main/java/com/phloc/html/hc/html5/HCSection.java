@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCSection extends AbstractHCElementWithChildren <HCSection>
   public HCSection ()
   {
     super (EHTMLElement.SECTION);
-  }
-
-  public HCSection (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCSection (@Nullable final String sChild)
-  {
-    super (EHTMLElement.SECTION, sChild);
-  }
-
-  public HCSection (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.SECTION, aChildren);
-  }
-
-  public HCSection (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.SECTION, aChild);
-  }
-
-  public HCSection (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.SECTION, aChildren);
-  }
-
-  public HCSection (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.SECTION, aChildren);
   }
 }

@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -35,35 +30,5 @@ public class HCAbbr extends AbstractHCElementWithChildren <HCAbbr>
   public HCAbbr ()
   {
     super (EHTMLElement.ABBR);
-  }
-
-  public HCAbbr (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCAbbr (@Nullable final String sChild)
-  {
-    super (EHTMLElement.ABBR, sChild);
-  }
-
-  public HCAbbr (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.ABBR, aChildren);
-  }
-
-  public HCAbbr (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.ABBR, aChild);
-  }
-
-  public HCAbbr (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.ABBR, aChildren);
-  }
-
-  public HCAbbr (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.ABBR, aChildren);
   }
 }

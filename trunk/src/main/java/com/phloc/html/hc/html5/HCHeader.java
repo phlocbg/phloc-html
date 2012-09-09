@@ -17,20 +17,15 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * This class represents the HTML5 <code>&lt;header&gt;</code> element. If
  * you're looking for the HTML <code>&lt;head&gt;</code> element please refer to
  * the class {@link com.phloc.html.hc.html.HCHead}.
- *
+ * 
  * @author philip
  */
 @SinceHTML5
@@ -39,35 +34,5 @@ public class HCHeader extends AbstractHCElementWithChildren <HCHeader>
   public HCHeader ()
   {
     super (EHTMLElement.HEADER);
-  }
-
-  public HCHeader (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCHeader (@Nullable final String sChild)
-  {
-    super (EHTMLElement.HEADER, sChild);
-  }
-
-  public HCHeader (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.HEADER, aChildren);
-  }
-
-  public HCHeader (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.HEADER, aChild);
-  }
-
-  public HCHeader (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.HEADER, aChildren);
-  }
-
-  public HCHeader (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.HEADER, aChildren);
   }
 }

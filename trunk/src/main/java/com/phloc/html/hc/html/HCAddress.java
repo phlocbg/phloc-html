@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;address&gt; element
- *
+ * 
  * @author philip
  */
 public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
@@ -35,35 +30,5 @@ public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
   public HCAddress ()
   {
     super (EHTMLElement.ADDRESS);
-  }
-
-  public HCAddress (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCAddress (@Nullable final String sChild)
-  {
-    super (EHTMLElement.ADDRESS, sChild);
-  }
-
-  public HCAddress (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.ADDRESS, aChildren);
-  }
-
-  public HCAddress (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.ADDRESS, aChild);
-  }
-
-  public HCAddress (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.ADDRESS, aChildren);
-  }
-
-  public HCAddress (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.ADDRESS, aChildren);
   }
 }

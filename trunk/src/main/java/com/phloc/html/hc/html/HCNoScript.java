@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;noscript&gt; element
- *
+ * 
  * @author philip
  */
 public class HCNoScript extends AbstractHCElementWithChildren <HCNoScript>
@@ -35,35 +30,5 @@ public class HCNoScript extends AbstractHCElementWithChildren <HCNoScript>
   public HCNoScript ()
   {
     super (EHTMLElement.NOSCRIPT);
-  }
-
-  public HCNoScript (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCNoScript (@Nullable final String sChild)
-  {
-    super (EHTMLElement.NOSCRIPT, sChild);
-  }
-
-  public HCNoScript (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.NOSCRIPT, aChildren);
-  }
-
-  public HCNoScript (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.NOSCRIPT, aChild);
-  }
-
-  public HCNoScript (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.NOSCRIPT, aChildren);
-  }
-
-  public HCNoScript (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.NOSCRIPT, aChildren);
   }
 }

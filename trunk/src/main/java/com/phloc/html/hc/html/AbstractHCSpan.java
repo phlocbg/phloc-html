@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -30,41 +25,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public abstract class AbstractHCSpan <THISTYPE extends AbstractHCSpan <THISTYPE>> extends
-                                                                                  AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCSpan <THISTYPE extends AbstractHCSpan <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCSpan ()
   {
     super (EHTMLElement.SPAN);
-  }
-
-  public AbstractHCSpan (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public AbstractHCSpan (@Nullable final String sChild)
-  {
-    super (EHTMLElement.SPAN, sChild);
-  }
-
-  public AbstractHCSpan (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.SPAN, aChildren);
-  }
-
-  public AbstractHCSpan (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.SPAN, aChild);
-  }
-
-  public AbstractHCSpan (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.SPAN, aChildren);
-  }
-
-  public AbstractHCSpan (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.SPAN, aChildren);
   }
 }

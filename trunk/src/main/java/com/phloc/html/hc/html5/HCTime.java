@@ -36,12 +36,10 @@ import org.joda.time.format.ISOPeriodFormat;
 import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.typeconvert.TypeConverter;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -53,36 +51,6 @@ public class HCTime extends AbstractHCElementWithChildren <HCTime>
   public HCTime ()
   {
     super (EHTMLElement.TIME);
-  }
-
-  public HCTime (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCTime (@Nullable final String sChild)
-  {
-    super (EHTMLElement.TIME, sChild);
-  }
-
-  public HCTime (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.TIME, aChildren);
-  }
-
-  public HCTime (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.TIME, aChild);
-  }
-
-  public HCTime (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.TIME, aChildren);
-  }
-
-  public HCTime (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.TIME, aChildren);
   }
 
   @Nullable

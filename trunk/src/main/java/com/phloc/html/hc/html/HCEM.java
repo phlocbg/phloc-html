@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;em&gt; element
- *
+ * 
  * @author philip
  */
 public class HCEM extends AbstractHCElementWithChildren <HCEM>
@@ -35,35 +30,5 @@ public class HCEM extends AbstractHCElementWithChildren <HCEM>
   public HCEM ()
   {
     super (EHTMLElement.EM);
-  }
-
-  public HCEM (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCEM (@Nullable final String sChild)
-  {
-    super (EHTMLElement.EM, sChild);
-  }
-
-  public HCEM (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.EM, aChildren);
-  }
-
-  public HCEM (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.EM, aChild);
-  }
-
-  public HCEM (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.EM, aChildren);
-  }
-
-  public HCEM (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.EM, aChildren);
   }
 }

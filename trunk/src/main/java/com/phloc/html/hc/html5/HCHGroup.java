@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCHGroup extends AbstractHCElementWithChildren <HCHGroup>
   public HCHGroup ()
   {
     super (EHTMLElement.HGROUP);
-  }
-
-  public HCHGroup (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCHGroup (@Nullable final String sChild)
-  {
-    super (EHTMLElement.HGROUP, sChild);
-  }
-
-  public HCHGroup (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.HGROUP, aChildren);
-  }
-
-  public HCHGroup (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.HGROUP, aChild);
-  }
-
-  public HCHGroup (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.HGROUP, aChildren);
-  }
-
-  public HCHGroup (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.HGROUP, aChildren);
   }
 }

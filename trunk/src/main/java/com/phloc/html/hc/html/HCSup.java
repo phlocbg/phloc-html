@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;sup&gt; element
- *
+ * 
  * @author philip
  */
 public class HCSup extends AbstractHCElementWithChildren <HCSup>
@@ -35,35 +30,5 @@ public class HCSup extends AbstractHCElementWithChildren <HCSup>
   public HCSup ()
   {
     super (EHTMLElement.SUP);
-  }
-
-  public HCSup (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCSup (@Nullable final String sChild)
-  {
-    super (EHTMLElement.SUP, sChild);
-  }
-
-  public HCSup (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.SUP, aChildren);
-  }
-
-  public HCSup (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.SUP, aChild);
-  }
-
-  public HCSup (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.SUP, aChildren);
-  }
-
-  public HCSup (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.SUP, aChildren);
   }
 }
