@@ -24,7 +24,7 @@ import com.phloc.html.annotations.DeprecatedInXHTML1;
 
 /**
  * Represents an HTML &lt;dir&gt; element
- *
+ * 
  * @author philip
  */
 @DeprecatedInHTML4

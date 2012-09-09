@@ -110,9 +110,11 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
-  public final THISTYPE addChild (@Nonnull final IPredefinedLocaleTextProvider aTextProvider)
+  public final THISTYPE addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
   {
-    return addChild (aTextProvider.getText ());
+    if (aTextProvider != null)
+      return addChild (aTextProvider.getText ());
+    return thisAsT ();
   }
 
   @Nonnull

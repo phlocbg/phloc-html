@@ -288,4 +288,16 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   {
     return ToStringGenerator.getDerived (super.toString ()).append ("nodes", m_aNodes).toString ();
   }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final String sChild)
+  {
+    return new HCNodeList ().addChild (sChild);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final IHCNode aChild)
+  {
+    return new HCNodeList ().addChild (aChild);
+  }
 }
