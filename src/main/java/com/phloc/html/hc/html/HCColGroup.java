@@ -39,12 +39,14 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
     super (EHTMLElement.COLGROUP);
   }
 
+  @Deprecated
   public HCColGroup (@Nullable final HCCol... aCols)
   {
     this ();
     addColumns (aCols);
   }
 
+  @Deprecated
   public HCColGroup (@Nullable final Iterable <? extends HCCol> aCols)
   {
     this ();

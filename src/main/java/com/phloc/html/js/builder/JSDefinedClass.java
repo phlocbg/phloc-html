@@ -56,7 +56,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   private AbstractJSClass m_aSuperClass;
 
   /** Fields keyed by their names. */
-  final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
+  private final Map <String, JSFieldVar> m_aFields = new LinkedHashMap <String, JSFieldVar> ();
 
   /** Constructors for this class */
   private JSConstructor m_aConstructor;
@@ -189,12 +189,18 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
                            @Nullable final IJSExpression init)
   {
     final JSFieldVar f = new JSFieldVar (this, type, name, init);
+    return addField (f);
+  }
 
+  @Nonnull
+  public JSFieldVar addField (@Nonnull final JSFieldVar aField)
+  {
+    final String name = aField.name ();
     if (m_aFields.containsKey (name))
       throw new IllegalArgumentException ("trying to create the same field twice: " + name);
 
-    m_aFields.put (name, f);
-    return f;
+    m_aFields.put (name, aField);
+    return aField;
   }
 
   /**
@@ -210,13 +216,18 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return ContainerHelper.newMap (m_aFields);
   }
 
+  public boolean containsField (final String sName)
+  {
+    return m_aFields.containsKey (sName);
+  }
+
   /**
    * Removes a {@link JSFieldVar} from this class.
    * 
    * @throws IllegalArgumentException
    *         if the given field is not a field on this class.
    */
-  public void removeField (final JSFieldVar field)
+  public void removeField (@Nonnull final JSFieldVar field)
   {
     if (m_aFields.remove (field.name ()) != field)
       throw new IllegalArgumentException ();

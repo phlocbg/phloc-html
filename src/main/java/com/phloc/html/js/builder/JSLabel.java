@@ -31,7 +31,7 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSLabel implements IJSStatement
 {
-  final String m_sLabel;
+  private final String m_sLabel;
 
   /**
    * constructor
@@ -44,6 +44,13 @@ public class JSLabel implements IJSStatement
     if (StringHelper.hasNoText (sLabel))
       throw new IllegalArgumentException ("label");
     m_sLabel = sLabel;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String label ()
+  {
+    return m_sLabel;
   }
 
   public void state (final JSFormatter f)
