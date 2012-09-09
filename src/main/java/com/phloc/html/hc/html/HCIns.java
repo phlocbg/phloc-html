@@ -43,7 +43,7 @@ public class HCIns extends AbstractHCElementWithChildren <HCIns>
   }
 
   @Deprecated
-  public HCIns (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCIns (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

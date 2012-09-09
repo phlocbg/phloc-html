@@ -43,7 +43,7 @@ public class HCXMP extends AbstractHCElementWithChildren <HCXMP>
   }
 
   @Deprecated
-  public HCXMP (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCXMP (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

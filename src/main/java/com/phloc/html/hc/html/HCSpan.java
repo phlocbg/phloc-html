@@ -41,7 +41,7 @@ public class HCSpan extends AbstractHCSpan <HCSpan>
   }
 
   @Deprecated
-  public HCSpan (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCSpan (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

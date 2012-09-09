@@ -54,7 +54,7 @@ public class MainCreateHCClasses
                                               "  }\r\n" +
                                               "\r\n" +
                                               "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nonnull final IPredefinedLocaleTextProvider aChild)\r\n" +
+                                              "  public HC$$ (@Nullable final IPredefinedLocaleTextProvider aChild)\r\n" +
                                               "  {\r\n" +
                                               "    this ();\r\n" +
                                               "    addChild (aChild);\r\n" +
@@ -173,6 +173,7 @@ public class MainCreateHCClasses
                                               + "import org.junit.Test;\r\n"
                                               + "\r\n"
                                               + "import com.phloc.commons.collections.ContainerHelper;\r\n"
+                                              + "import com.phloc.commons.text.IPredefinedLocaleTextProvider;\r\n"
                                               + "import com.phloc.html.hc.IHCNode;\r\n"
                                               + "\r\n"
                                               + "/**\r\n"
@@ -189,6 +190,7 @@ public class MainCreateHCClasses
                                               "  public void testCreate ()\r\n" +
                                               "  {\r\n" +
                                               "    assertFalse (new HC$$ ().hasChildren ());\r\n" +
+                                              "    assertEquals (0, HC$$.create ((IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (\"Text\").getChildCount ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((String) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (HCB.create (\"Bold\")).getChildCount ());\r\n" +
@@ -209,6 +211,7 @@ public class MainCreateHCClasses
                                               "  public void testDeprecated ()\r\n" +
                                               "  {\r\n" +
                                               "    assertFalse (new HC$$ ().hasChildren ());\r\n" +
+                                              "    assertEquals (0, new HC$$ ((IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, new HC$$ (\"Text\").getChildCount ());\r\n" +
                                               "    assertEquals (0, new HC$$ ((String) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, new HC$$ (HCB.create (\"Bold\")).getChildCount ());\r\n" +

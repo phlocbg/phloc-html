@@ -43,7 +43,7 @@ public class HCSup extends AbstractHCElementWithChildren <HCSup>
   }
 
   @Deprecated
-  public HCSup (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCSup (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

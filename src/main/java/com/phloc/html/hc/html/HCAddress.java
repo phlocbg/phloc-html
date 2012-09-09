@@ -43,7 +43,7 @@ public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
   }
 
   @Deprecated
-  public HCAddress (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCAddress (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

@@ -41,7 +41,7 @@ public class HCDiv extends AbstractHCDiv <HCDiv>
   }
 
   @Deprecated
-  public HCDiv (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCDiv (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

@@ -43,7 +43,7 @@ public class HCBlockQuote extends AbstractHCElementWithChildren <HCBlockQuote>
   }
 
   @Deprecated
-  public HCBlockQuote (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCBlockQuote (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

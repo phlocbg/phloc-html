@@ -43,7 +43,7 @@ public class HCLI extends AbstractHCElementWithChildren <HCLI>
   }
 
   @Deprecated
-  public HCLI (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCLI (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

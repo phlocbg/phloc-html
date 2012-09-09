@@ -43,7 +43,7 @@ public class HCSub extends AbstractHCElementWithChildren <HCSub>
   }
 
   @Deprecated
-  public HCSub (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCSub (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

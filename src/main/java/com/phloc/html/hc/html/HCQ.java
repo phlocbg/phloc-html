@@ -43,7 +43,7 @@ public class HCQ extends AbstractHCElementWithChildren <HCQ>
   }
 
   @Deprecated
-  public HCQ (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCQ (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

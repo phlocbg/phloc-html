@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
 
 /**
@@ -39,6 +40,7 @@ public final class HCQTest
   public void testCreate ()
   {
     assertFalse (new HCQ ().hasChildren ());
+    assertEquals (0, HCQ.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
     assertEquals (1, HCQ.create ("Text").getChildCount ());
     assertEquals (0, HCQ.create ((String) null).getChildCount ());
     assertEquals (1, HCQ.create (HCB.create ("Bold")).getChildCount ());
@@ -58,6 +60,7 @@ public final class HCQTest
   public void testDeprecated ()
   {
     assertFalse (new HCQ ().hasChildren ());
+    assertEquals (0, new HCQ ((IPredefinedLocaleTextProvider) null).getChildCount ());
     assertEquals (1, new HCQ ("Text").getChildCount ());
     assertEquals (0, new HCQ ((String) null).getChildCount ());
     assertEquals (1, new HCQ (HCB.create ("Bold")).getChildCount ());

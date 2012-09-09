@@ -43,7 +43,7 @@ public class HCH1 extends AbstractHCElementWithChildren <HCH1>
   }
 
   @Deprecated
-  public HCH1 (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCH1 (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);
