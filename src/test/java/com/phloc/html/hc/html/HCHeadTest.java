@@ -19,6 +19,8 @@ package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -38,6 +40,16 @@ public final class HCHeadTest
   public void testBasic ()
   {
     final HCHead aHead = new HCHead ();
+    assertNull (aHead.getProfile ());
+    assertNull (aHead.getPageTitle ());
+    assertNull (aHead.getBaseHref ());
+    assertNull (aHead.getBaseTarget ());
+    assertTrue (aHead.getAllMetaElements ().isEmpty ());
+    assertTrue (aHead.getAllLinks ().isEmpty ());
+    assertTrue (aHead.getAllCSSNodes ().isEmpty ());
+    assertTrue (aHead.getAllJSNodes ().isEmpty ());
+    assertNotNull (aHead.getOutOfBandHandler ());
+    assertEquals ("", aHead.getPlainText ());
     assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setPageTitle ("phloc");

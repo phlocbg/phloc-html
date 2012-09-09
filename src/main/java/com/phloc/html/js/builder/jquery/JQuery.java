@@ -633,34 +633,28 @@ public class JQuery
   public static JQueryInvocation elementNameWithIDRef (@Nonnull final EHTMLElement eElement,
                                                        @Nonnull @Nonempty final String sID)
   {
-    return select (JQuerySelector.elementName (eElement).chain (JQuerySelector.id (sID)));
+    return elementNameRef (eElement, JQuerySelector.id (sID));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithIDRef (@Nonnull @Nonempty final String sElementName,
                                                        @Nonnull @Nonempty final String sID)
   {
-    return select (JQuerySelector.elementName (sElementName).chain (JQuerySelector.id (sID)));
+    return elementNameRef (sElementName, JQuerySelector.id (sID));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull final EHTMLElement eElement,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
   {
-    return select (JQuerySelector.elementName (eElement).chain (JQuerySelector.clazz (aCSSClass)));
+    return elementNameRef (eElement, JQuerySelector.clazz (aCSSClass));
   }
 
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull @Nonempty final String sElementName,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
   {
-    return select (JQuerySelector.elementName (sElementName).chain (JQuerySelector.clazz (aCSSClass)));
-  }
-
-  @Nonnull
-  public static JQueryInvocation selectorRef (@Nonnull final IJQuerySelector aSelector)
-  {
-    return select (aSelector);
+    return elementNameRef (sElementName, JQuerySelector.clazz (aCSSClass));
   }
 
   @Nonnull

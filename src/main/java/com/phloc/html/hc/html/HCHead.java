@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.locale.LocaleUtils;
@@ -167,11 +166,22 @@ public class HCHead extends AbstractHCBaseNode
     return EChange.valueOf (m_aMetaElements.remove (sMetaElementName) != null);
   }
 
+  /**
+   * @deprecated Use {@link #getAllMetaElements()} instead
+   */
+  @Deprecated
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Collection <IMetaElement> getMetaElements ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aMetaElements.values ());
+    return getAllMetaElements ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IMetaElement> getAllMetaElements ()
+  {
+    return ContainerHelper.newList (m_aMetaElements.values ());
   }
 
   @Nonnegative
@@ -253,9 +263,20 @@ public class HCHead extends AbstractHCBaseNode
     return EChange.UNCHANGED;
   }
 
+  /**
+   * @deprecated Use {@link #getAllLinks()} instead
+   */
+  @Deprecated
   @Nonnull
   @ReturnsMutableCopy
   public List <HCLink> getLinks ()
+  {
+    return getAllLinks ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <HCLink> getAllLinks ()
   {
     return ContainerHelper.newList (m_aLinks);
   }

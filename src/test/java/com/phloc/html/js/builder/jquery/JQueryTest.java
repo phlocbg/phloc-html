@@ -21,7 +21,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.css.DefaultCSSClassProvider;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 
@@ -105,5 +109,27 @@ public final class JQueryTest
     assertEquals ("$(a);", JQuery.jQuery (JSExpr.ref ("a")).getJSCode ());
     assertEquals ("$(this);", JQuery.jQueryThis ().getJSCode ());
     assertEquals ("$(document);", JQuery.jQueryDocument ().getJSCode ());
+  }
+
+  @Test
+  public void testSelectprs ()
+  {
+    assertEquals ("$('#abc');", JQuery.idRef ("abc").getJSCode ());
+    assertEquals ("$('#abc');", JQuery.idRefMultiple ("abc").getJSCode ());
+    assertEquals ("$('#a,#b,#c');", JQuery.idRefMultiple ("a", "b", "c").getJSCode ());
+    assertEquals ("$('#a,#b,#c');", JQuery.idRefMultiple (ContainerHelper.newList ("a", "b", "c")).getJSCode ());
+    final ICSSClassProvider aClass = DefaultCSSClassProvider.create ("any");
+    final ICSSClassProvider aClass2 = DefaultCSSClassProvider.create ("other");
+    assertEquals ("$('.any');", JQuery.classRef (aClass).getJSCode ());
+    assertEquals ("$('.any');", JQuery.classRefMultiple (aClass).getJSCode ());
+    assertEquals ("$('.any,.other');", JQuery.classRefMultiple (aClass, aClass2).getJSCode ());
+    assertEquals ("$('.any,.other');", JQuery.classRefMultiple (ContainerHelper.newList (aClass, aClass2)).getJSCode ());
+    assertEquals ("$('div');", JQuery.elementNameRef (EHTMLElement.DIV).getJSCode ());
+    assertEquals ("$('bla');", JQuery.elementNameRef ("bla").getJSCode ());
+    assertEquals ("$('div#foo');", JQuery.elementNameWithIDRef (EHTMLElement.DIV, "foo").getJSCode ());
+    assertEquals ("$('bla#foo');", JQuery.elementNameWithIDRef ("bla", "foo").getJSCode ());
+    assertEquals ("$('div.any');", JQuery.elementNameWithClassRef (EHTMLElement.DIV, aClass).getJSCode ());
+    assertEquals ("$('bla.any');", JQuery.elementNameWithClassRef ("bla", aClass).getJSCode ());
+    assertEquals ("$(':checked');", JQuery.select (JQuerySelector.checked).getJSCode ());
   }
 }
