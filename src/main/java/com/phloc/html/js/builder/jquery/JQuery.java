@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
@@ -44,6 +45,9 @@ import com.phloc.html.js.builder.html.JSHtml;
  */
 public class JQuery
 {
+  @PresentForCodeCoverage
+  private static final JQuery s_aInstance = new JQuery ();
+
   private JQuery ()
   {}
 

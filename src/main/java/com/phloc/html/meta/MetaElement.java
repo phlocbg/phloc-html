@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.CGlobal;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
@@ -39,7 +38,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Represents a single HTML meta element.
- *
+ * 
  * @author philip
  */
 @NotThreadSafe
@@ -59,6 +58,17 @@ public final class MetaElement implements IMetaElement
   /** HTTP equivalent or not? */
   private boolean m_bIsHttpEquiv;
 
+  /**
+   * Constructor without content!!
+   * 
+   * @param sName
+   *        Element name
+   * @param sScheme
+   *        Element scheme
+   * @param bIsHttpEquiv
+   *        <code>true</code> if it is a HTTP equivalent meta element,
+   *        <code>false</code> if not
+   */
   public MetaElement (@Nonnull final String sName, @Nullable final String sScheme, final boolean bIsHttpEquiv)
   {
     if (sName == null)
@@ -120,17 +130,17 @@ public final class MetaElement implements IMetaElement
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Set <Locale> getAllLocales ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aContents.keySet ());
+    return ContainerHelper.newSet (m_aContents.keySet ());
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Map <Locale, String> getContent ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aContents);
+    return ContainerHelper.newMap (m_aContents);
   }
 
   @Nonnull

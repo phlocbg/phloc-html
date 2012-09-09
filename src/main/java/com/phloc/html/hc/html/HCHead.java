@@ -281,6 +281,12 @@ public class HCHead extends AbstractHCBaseNode
     return ContainerHelper.newList (m_aLinks);
   }
 
+  @Nonnegative
+  public int getLinkCount ()
+  {
+    return m_aLinks.size ();
+  }
+
   //
   // CSS handling
   //
@@ -621,36 +627,40 @@ public class HCHead extends AbstractHCBaseNode
     // Append meta element first for charset encoding!
     for (final Map.Entry <String, IMetaElement> aEntry : m_aMetaElements.entrySet ())
     {
-      final String sKey = aEntry.getKey ();
+      final String sName = aEntry.getKey ();
       final IMetaElement aMetaElement = aEntry.getValue ();
 
       // determine whether the key is an "http-equiv" or a "name"
-      final boolean bIsHttpEquiv = aMetaElement.isHttpEquiv () || EStandardMetaElement.isHttpEquivMetaElement (sKey);
+      final boolean bIsHttpEquiv = aMetaElement.isHttpEquiv () || EStandardMetaElement.isHttpEquivMetaElement (sName);
 
-      for (final Map.Entry <Locale, String> aMetaEntry : aMetaElement.getContent ().entrySet ())
-      {
-        final IMicroElement aMeta = eHead.appendElement (EHTMLElement.META.getElementName ());
-        aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : CHTMLAttributes.NAME, sKey);
-        aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
-        final Locale aContentLocale = aMetaEntry.getKey ();
-        if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
+      final Map <Locale, String> aContent = aMetaElement.getContent ();
+      if (aContent.isEmpty ())
+        s_aLogger.info ("Meta element '" + sName + "' has no content!");
+      else
+        for (final Map.Entry <Locale, String> aMetaEntry : aContent.entrySet ())
         {
-          aMeta.setAttribute (CXML.XML_ATTR_LANG, aContentLocale.toString ());
-          if (bAtLeastHTML5)
+          final IMicroElement aMeta = eHead.appendElement (EHTMLElement.META.getElementName ());
+          aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : CHTMLAttributes.NAME, sName);
+          aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
+          final Locale aContentLocale = aMetaEntry.getKey ();
+          if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
           {
-            // When the attribute xml:lang in no namespace is specified, the
-            // element must also have the attribute lang present with the same
-            // value
-            aMeta.setAttribute (CHTMLAttributes.LANG, aContentLocale.toString ());
+            aMeta.setAttribute (CXML.XML_ATTR_LANG, aContentLocale.toString ());
+            if (bAtLeastHTML5)
+            {
+              // When the attribute xml:lang in no namespace is specified, the
+              // element must also have the attribute lang present with the same
+              // value
+              aMeta.setAttribute (CHTMLAttributes.LANG, aContentLocale.toString ());
+            }
+          }
+          if (!bAtLeastHTML5)
+          {
+            // No scheme attr in HTML5
+            if (aMetaElement.getScheme () != null)
+              aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
           }
         }
-        if (!bAtLeastHTML5)
-        {
-          // No scheme attr in HTML5
-          if (aMetaElement.getScheme () != null)
-            aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
-        }
-      }
     }
 
     // page title
