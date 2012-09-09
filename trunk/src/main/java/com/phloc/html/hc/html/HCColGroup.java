@@ -39,27 +39,6 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
     super (EHTMLElement.COLGROUP);
   }
 
-  @Deprecated
-  public HCColGroup (@Nullable final HCCol... aCols)
-  {
-    this ();
-    addColumns (aCols);
-  }
-
-  @Deprecated
-  public HCColGroup (@Nullable final Iterable <? extends HCCol> aCols)
-  {
-    this ();
-    addColumns (aCols);
-  }
-
-  @Nonnull
-  @Deprecated
-  public HCColGroup addColumns (@Nullable final HCCol aCol)
-  {
-    return addColumn (aCol);
-  }
-
   @Nonnull
   public HCColGroup addColumns (@Nullable final HCCol... aCols)
   {
@@ -173,7 +152,7 @@ public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGrou
   }
 
   /**
-   * Remove all contained colums
+   * Remove all contained columns
    * 
    * @return this
    */
