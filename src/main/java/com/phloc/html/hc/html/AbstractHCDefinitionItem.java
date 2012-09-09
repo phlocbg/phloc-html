@@ -18,10 +18,8 @@
 package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -31,37 +29,10 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends
-                                                                                                      AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement)
   {
     super (aElement);
-  }
-
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement, @Nullable final String sChild)
-  {
-    super (aElement, sChild);
-  }
-
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement, @Nullable final String... aChildren)
-  {
-    super (aElement, aChildren);
-  }
-
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement, @Nullable final IHCNode aChild)
-  {
-    super (aElement, aChild);
-  }
-
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement, @Nullable final IHCNode... aChildren)
-  {
-    super (aElement, aChildren);
-  }
-
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement,
-                                   @Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (aElement, aChildren);
   }
 }

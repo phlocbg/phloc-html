@@ -18,16 +18,13 @@
 package com.phloc.html.hc.html5;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -40,36 +37,6 @@ public class HCProgress extends AbstractHCElementWithChildren <HCProgress>
   public HCProgress ()
   {
     super (EHTMLElement.PROGRESS);
-  }
-
-  public HCProgress (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCProgress (@Nullable final String sChild)
-  {
-    super (EHTMLElement.PROGRESS, sChild);
-  }
-
-  public HCProgress (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.PROGRESS, aChildren);
-  }
-
-  public HCProgress (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.PROGRESS, aChild);
-  }
-
-  public HCProgress (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.PROGRESS, aChildren);
-  }
-
-  public HCProgress (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.PROGRESS, aChildren);
   }
 
   public double getValue ()

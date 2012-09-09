@@ -40,6 +40,7 @@ public final class HCConditionalCommentNodeTest
                   HCSettings.getAsHTMLString (HCConditionalCommentNode.createForIE (new HCTextNode ("abc")), false));
     HCConditionalCommentNode.setDefaultLineSeparator ("\n");
     assertEquals ("<!--[if IE]>\n<b>bold</b>" + CGlobal.LINE_SEPARATOR + "<![endif]-->",
-                  HCSettings.getAsHTMLString (HCConditionalCommentNode.createForIE (new HCB ("bold")), false));
+                  HCSettings.getAsHTMLString (HCConditionalCommentNode.createForIE (new HCB ().addChild ("bold")),
+                                              false));
   }
 }

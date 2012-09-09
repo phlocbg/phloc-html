@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;kbd&gt; element
- *
+ * 
  * @author philip
  */
 public class HCKBD extends AbstractHCElementWithChildren <HCKBD>
@@ -35,35 +30,5 @@ public class HCKBD extends AbstractHCElementWithChildren <HCKBD>
   public HCKBD ()
   {
     super (EHTMLElement.KBD);
-  }
-
-  public HCKBD (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCKBD (@Nullable final String sChild)
-  {
-    super (EHTMLElement.KBD, sChild);
-  }
-
-  public HCKBD (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.KBD, aChildren);
-  }
-
-  public HCKBD (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.KBD, aChild);
-  }
-
-  public HCKBD (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.KBD, aChildren);
-  }
-
-  public HCKBD (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.KBD, aChildren);
   }
 }

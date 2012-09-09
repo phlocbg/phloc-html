@@ -17,15 +17,10 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.IHCNode;
 
 /**
  * Represents an HTML &lt;span&gt; element
- *
+ * 
  * @author philip
  */
 public class HCSpan extends AbstractHCSpan <HCSpan>
@@ -33,35 +28,5 @@ public class HCSpan extends AbstractHCSpan <HCSpan>
   public HCSpan ()
   {
     super ();
-  }
-
-  public HCSpan (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCSpan (@Nullable final String sChild)
-  {
-    super (sChild);
-  }
-
-  public HCSpan (@Nullable final String... aChildren)
-  {
-    super (aChildren);
-  }
-
-  public HCSpan (@Nullable final IHCNode aChild)
-  {
-    super (aChild);
-  }
-
-  public HCSpan (@Nullable final IHCNode... aChildren)
-  {
-    super (aChildren);
-  }
-
-  public HCSpan (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (aChildren);
   }
 }

@@ -250,15 +250,15 @@ public class HCHead extends AbstractHCBaseNode
   @Nonnull
   public EChange removeLinkOfRel (@Nonnull final IHCLinkType aLinkType)
   {
-    final int nMax = m_aLinks.size ();
-    for (int i = 0; i < nMax; ++i)
+    int i = 0;
+    for (final HCLink aLink : m_aLinks)
     {
-      final HCLink aLink = m_aLinks.get (i);
       if (aLink.getRel ().equals (aLinkType))
       {
         m_aLinks.remove (i);
         return EChange.CHANGED;
       }
+      ++i;
     }
     return EChange.UNCHANGED;
   }

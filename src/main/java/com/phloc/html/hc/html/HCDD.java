@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 
 /**
  * Represents an HTML &lt;dd&gt; element
@@ -34,35 +29,5 @@ public class HCDD extends AbstractHCDefinitionItem <HCDD>
   public HCDD ()
   {
     super (EHTMLElement.DD);
-  }
-
-  public HCDD (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCDD (@Nullable final String sChild)
-  {
-    super (EHTMLElement.DD, sChild);
-  }
-
-  public HCDD (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.DD, aChildren);
-  }
-
-  public HCDD (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.DD, aChild);
-  }
-
-  public HCDD (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.DD, aChildren);
-  }
-
-  public HCDD (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.DD, aChildren);
   }
 }

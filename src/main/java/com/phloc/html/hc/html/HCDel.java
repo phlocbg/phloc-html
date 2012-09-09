@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -35,35 +30,5 @@ public class HCDel extends AbstractHCElementWithChildren <HCDel>
   public HCDel ()
   {
     super (EHTMLElement.DEL);
-  }
-
-  public HCDel (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCDel (@Nullable final String sChild)
-  {
-    super (EHTMLElement.DEL, sChild);
-  }
-
-  public HCDel (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.DEL, aChildren);
-  }
-
-  public HCDel (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.DEL, aChild);
-  }
-
-  public HCDel (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.DEL, aChildren);
-  }
-
-  public HCDel (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.DEL, aChildren);
   }
 }

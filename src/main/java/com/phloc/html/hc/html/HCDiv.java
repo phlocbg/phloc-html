@@ -17,15 +17,10 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.IHCNode;
 
 /**
  * Represents an HTML &lt;div&gt; element
- *
+ * 
  * @author philip
  */
 public class HCDiv extends AbstractHCDiv <HCDiv>
@@ -33,35 +28,5 @@ public class HCDiv extends AbstractHCDiv <HCDiv>
   public HCDiv ()
   {
     super ();
-  }
-
-  public HCDiv (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCDiv (@Nullable final String sChild)
-  {
-    super (sChild);
-  }
-
-  public HCDiv (@Nullable final String... aChildren)
-  {
-    super (aChildren);
-  }
-
-  public HCDiv (@Nullable final IHCNode aChild)
-  {
-    super (aChild);
-  }
-
-  public HCDiv (@Nullable final IHCNode... aChildren)
-  {
-    super (aChildren);
-  }
-
-  public HCDiv (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (aChildren);
   }
 }

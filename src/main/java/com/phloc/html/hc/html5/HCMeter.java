@@ -18,16 +18,13 @@
 package com.phloc.html.hc.html5;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -44,36 +41,6 @@ public class HCMeter extends AbstractHCElementWithChildren <HCMeter>
   public HCMeter ()
   {
     super (EHTMLElement.METER);
-  }
-
-  public HCMeter (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCMeter (@Nullable final String sChild)
-  {
-    super (EHTMLElement.METER, sChild);
-  }
-
-  public HCMeter (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.METER, aChildren);
-  }
-
-  public HCMeter (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.METER, aChild);
-  }
-
-  public HCMeter (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.METER, aChildren);
-  }
-
-  public HCMeter (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.METER, aChildren);
   }
 
   public double getValue ()
@@ -154,7 +121,7 @@ public class HCMeter extends AbstractHCElementWithChildren <HCMeter>
     /**
      * <pre>
      * The following inequalities must hold, as applicable:
-     *
+     * 
      * minimum &le; value &le; maximum
      * minimum &le; low &le; maximum (if low is specified)
      * minimum &le; high &le; maximum (if high is specified)

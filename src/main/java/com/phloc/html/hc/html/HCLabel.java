@@ -23,16 +23,14 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;label&gt; element
- *
+ * 
  * @author philip
  */
 public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
@@ -44,36 +42,6 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
     super (EHTMLElement.LABEL);
   }
 
-  public HCLabel (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCLabel (@Nullable final String sChild)
-  {
-    super (EHTMLElement.LABEL, sChild);
-  }
-
-  public HCLabel (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.LABEL, aChildren);
-  }
-
-  public HCLabel (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.LABEL, aChild);
-  }
-
-  public HCLabel (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.LABEL, aChildren);
-  }
-
-  public HCLabel (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.LABEL, aChildren);
-  }
-
   @Nullable
   public String getFor ()
   {
@@ -82,7 +50,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Indicates that this label is used as the description for another object.
-   *
+   * 
    * @param sFor
    *        The HTML ID of the other object.
    * @return this

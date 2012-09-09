@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;cite&gt; element
- *
+ * 
  * @author philip
  */
 public class HCCite extends AbstractHCElementWithChildren <HCCite>
@@ -35,35 +30,5 @@ public class HCCite extends AbstractHCElementWithChildren <HCCite>
   public HCCite ()
   {
     super (EHTMLElement.CITE);
-  }
-
-  public HCCite (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCCite (@Nullable final String sChild)
-  {
-    super (EHTMLElement.CITE, sChild);
-  }
-
-  public HCCite (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.CITE, aChildren);
-  }
-
-  public HCCite (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.CITE, aChild);
-  }
-
-  public HCCite (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.CITE, aChildren);
-  }
-
-  public HCCite (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.CITE, aChildren);
   }
 }

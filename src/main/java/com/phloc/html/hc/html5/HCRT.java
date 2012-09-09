@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCRT extends AbstractHCElementWithChildren <HCRT>
   public HCRT ()
   {
     super (EHTMLElement.RT);
-  }
-
-  public HCRT (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCRT (@Nullable final String sChild)
-  {
-    super (EHTMLElement.RT, sChild);
-  }
-
-  public HCRT (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.RT, aChildren);
-  }
-
-  public HCRT (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.RT, aChild);
-  }
-
-  public HCRT (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.RT, aChildren);
-  }
-
-  public HCRT (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.RT, aChildren);
   }
 }

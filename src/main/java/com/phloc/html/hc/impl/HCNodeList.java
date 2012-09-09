@@ -48,16 +48,19 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   public HCNodeList ()
   {}
 
+  @Deprecated
   public HCNodeList (@Nullable final IHCBaseNode aNode)
   {
     addChild (aNode);
   }
 
+  @Deprecated
   public HCNodeList (@Nullable final IHCBaseNode... aNodes)
   {
     addChildren (aNodes);
   }
 
+  @Deprecated
   public HCNodeList (@Nullable final Iterable <? extends IHCBaseNode> aNodes)
   {
     addChildren (aNodes);

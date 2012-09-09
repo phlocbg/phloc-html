@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;noembed&gt; element
- *
+ * 
  * @author philip
  */
 public class HCNoEmbed extends AbstractHCElementWithChildren <HCNoEmbed>
@@ -35,35 +30,5 @@ public class HCNoEmbed extends AbstractHCElementWithChildren <HCNoEmbed>
   public HCNoEmbed ()
   {
     super (EHTMLElement.NOEMBED);
-  }
-
-  public HCNoEmbed (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCNoEmbed (@Nullable final String sChild)
-  {
-    super (EHTMLElement.NOEMBED, sChild);
-  }
-
-  public HCNoEmbed (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.NOEMBED, aChildren);
-  }
-
-  public HCNoEmbed (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.NOEMBED, aChild);
-  }
-
-  public HCNoEmbed (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.NOEMBED, aChildren);
-  }
-
-  public HCNoEmbed (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.NOEMBED, aChildren);
   }
 }

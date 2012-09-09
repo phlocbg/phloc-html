@@ -41,47 +41,13 @@ import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
   private List <IHCBaseNode> m_aChildren;
 
   protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement)
   {
     super (aElement);
-  }
-
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement, @Nullable final String sChild)
-  {
-    this (aElement);
-    addChild (sChild);
-  }
-
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement, @Nullable final String... aChildren)
-  {
-    this (aElement);
-    addChildren (aChildren);
-  }
-
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement, @Nullable final IHCBaseNode aChild)
-  {
-    this (aElement);
-    addChild (aChild);
-  }
-
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement,
-                                           @Nullable final IHCBaseNode... aChildren)
-  {
-    this (aElement);
-    addChildren (aChildren);
-  }
-
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement,
-                                           final Iterable <? extends IHCBaseNode> aChildren)
-  {
-    this (aElement);
-    addChildren (aChildren);
   }
 
   public final boolean hasChildren ()

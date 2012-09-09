@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCFigure extends AbstractHCElementWithChildren <HCFigure>
   public HCFigure ()
   {
     super (EHTMLElement.FIGURE);
-  }
-
-  public HCFigure (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCFigure (@Nullable final String sChild)
-  {
-    super (EHTMLElement.FIGURE, sChild);
-  }
-
-  public HCFigure (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.FIGURE, aChildren);
-  }
-
-  public HCFigure (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.FIGURE, aChild);
-  }
-
-  public HCFigure (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.FIGURE, aChildren);
-  }
-
-  public HCFigure (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.FIGURE, aChildren);
   }
 }

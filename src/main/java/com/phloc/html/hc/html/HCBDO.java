@@ -17,12 +17,7 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -35,35 +30,5 @@ public class HCBDO extends AbstractHCElementWithChildren <HCBDO>
   public HCBDO ()
   {
     super (EHTMLElement.BDO);
-  }
-
-  public HCBDO (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCBDO (@Nullable final String sChild)
-  {
-    super (EHTMLElement.BDO, sChild);
-  }
-
-  public HCBDO (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.BDO, aChildren);
-  }
-
-  public HCBDO (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.BDO, aChild);
-  }
-
-  public HCBDO (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.BDO, aChildren);
-  }
-
-  public HCBDO (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.BDO, aChildren);
   }
 }

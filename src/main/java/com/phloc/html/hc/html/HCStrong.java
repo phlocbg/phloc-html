@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;strong&gt; element
- *
+ * 
  * @author philip
  */
 public class HCStrong extends AbstractHCElementWithChildren <HCStrong>
@@ -35,35 +30,5 @@ public class HCStrong extends AbstractHCElementWithChildren <HCStrong>
   public HCStrong ()
   {
     super (EHTMLElement.STRONG);
-  }
-
-  public HCStrong (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCStrong (@Nullable final String sChild)
-  {
-    super (EHTMLElement.STRONG, sChild);
-  }
-
-  public HCStrong (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.STRONG, aChildren);
-  }
-
-  public HCStrong (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.STRONG, aChild);
-  }
-
-  public HCStrong (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.STRONG, aChildren);
-  }
-
-  public HCStrong (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.STRONG, aChildren);
   }
 }

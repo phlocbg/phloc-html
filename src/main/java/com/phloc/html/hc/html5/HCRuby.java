@@ -17,13 +17,8 @@
  */
 package com.phloc.html.hc.html5;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
@@ -32,35 +27,5 @@ public class HCRuby extends AbstractHCElementWithChildren <HCRuby>
   public HCRuby ()
   {
     super (EHTMLElement.RUBY);
-  }
-
-  public HCRuby (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCRuby (@Nullable final String sChild)
-  {
-    super (EHTMLElement.RUBY, sChild);
-  }
-
-  public HCRuby (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.RUBY, aChildren);
-  }
-
-  public HCRuby (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.RUBY, aChild);
-  }
-
-  public HCRuby (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.RUBY, aChildren);
-  }
-
-  public HCRuby (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.RUBY, aChildren);
   }
 }

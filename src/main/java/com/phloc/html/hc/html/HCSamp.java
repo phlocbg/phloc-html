@@ -17,17 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;samp&gt; element
- *
+ * 
  * @author philip
  */
 public class HCSamp extends AbstractHCElementWithChildren <HCSamp>
@@ -35,35 +30,5 @@ public class HCSamp extends AbstractHCElementWithChildren <HCSamp>
   public HCSamp ()
   {
     super (EHTMLElement.SAMP);
-  }
-
-  public HCSamp (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  public HCSamp (@Nullable final String sChild)
-  {
-    super (EHTMLElement.SAMP, sChild);
-  }
-
-  public HCSamp (@Nullable final String... aChildren)
-  {
-    super (EHTMLElement.SAMP, aChildren);
-  }
-
-  public HCSamp (@Nullable final IHCNode aChild)
-  {
-    super (EHTMLElement.SAMP, aChild);
-  }
-
-  public HCSamp (@Nullable final IHCNode... aChildren)
-  {
-    super (EHTMLElement.SAMP, aChildren);
-  }
-
-  public HCSamp (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    super (EHTMLElement.SAMP, aChildren);
   }
 }

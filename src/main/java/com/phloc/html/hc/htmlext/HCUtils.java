@@ -98,12 +98,12 @@ public final class HCUtils
         if (nNext >= 0)
         {
           if (nNext > nIndex)
-            ret.add (new HCDiv (sText.substring (nIndex, nNext)));
+            ret.add (new HCDiv ().addChild (sText.substring (nIndex, nNext)));
           nIndex = nNext + PATTERN_NEWLINE.length ();
         }
         else
         {
-          ret.add (new HCDiv (sText.substring (nIndex)));
+          ret.add (new HCDiv ().addChild (sText.substring (nIndex)));
           break;
         }
       }
