@@ -43,7 +43,7 @@ public class HCAbbr extends AbstractHCElementWithChildren <HCAbbr>
   }
 
   @Deprecated
-  public HCAbbr (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCAbbr (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

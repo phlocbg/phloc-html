@@ -43,7 +43,7 @@ public class HCStrong extends AbstractHCElementWithChildren <HCStrong>
   }
 
   @Deprecated
-  public HCStrong (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCStrong (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

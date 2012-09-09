@@ -43,7 +43,7 @@ public class HCKBD extends AbstractHCElementWithChildren <HCKBD>
   }
 
   @Deprecated
-  public HCKBD (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCKBD (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

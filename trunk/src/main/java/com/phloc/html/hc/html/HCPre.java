@@ -43,7 +43,7 @@ public class HCPre extends AbstractHCElementWithChildren <HCPre>
   }
 
   @Deprecated
-  public HCPre (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCPre (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

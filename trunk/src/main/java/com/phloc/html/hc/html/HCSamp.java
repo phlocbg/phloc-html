@@ -43,7 +43,7 @@ public class HCSamp extends AbstractHCElementWithChildren <HCSamp>
   }
 
   @Deprecated
-  public HCSamp (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCSamp (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

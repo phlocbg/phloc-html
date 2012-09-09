@@ -43,7 +43,7 @@ public class HCAcronym extends AbstractHCElementWithChildren <HCAcronym>
   }
 
   @Deprecated
-  public HCAcronym (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCAcronym (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

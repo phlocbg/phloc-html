@@ -43,7 +43,7 @@ public class HCEM extends AbstractHCElementWithChildren <HCEM>
   }
 
   @Deprecated
-  public HCEM (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCEM (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

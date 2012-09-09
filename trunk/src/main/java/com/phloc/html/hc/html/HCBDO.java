@@ -43,7 +43,7 @@ public class HCBDO extends AbstractHCElementWithChildren <HCBDO>
   }
 
   @Deprecated
-  public HCBDO (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCBDO (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

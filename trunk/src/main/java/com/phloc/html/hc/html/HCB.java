@@ -43,7 +43,7 @@ public class HCB extends AbstractHCElementWithChildren <HCB>
   }
 
   @Deprecated
-  public HCB (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCB (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);

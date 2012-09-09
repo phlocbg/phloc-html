@@ -43,7 +43,7 @@ public class HCListing extends AbstractHCElementWithChildren <HCListing>
   }
 
   @Deprecated
-  public HCListing (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  public HCListing (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
     this ();
     addChild (aChild);
