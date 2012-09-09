@@ -18,16 +18,18 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
+@Immutable
 public class JSOpUnary extends AbstractJSExpression
 {
-  final String m_sOp;
-  final IJSExpression m_aExpr;
-  final boolean m_bOpFirst;
+  private final String m_sOp;
+  private final IJSExpression m_aExpr;
+  private final boolean m_bOpFirst;
 
   public JSOpUnary (@Nonnull @Nonempty final String sOp, @Nonnull final IJSExpression aExpr)
   {

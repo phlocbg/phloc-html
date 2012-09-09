@@ -112,7 +112,9 @@ public final class HCTest
     b.addChild (new HCLabel ().addChild ("Feldname"));
     b.addChild (new HCLegend ());
     b.addChild (new HCLegend ("Legend"));
-    b.addChild (new HCLink (EHCLinkType.ALTERNATE, CMimeType.TEXT_HTML, new SimpleURL ("any.html")));
+    b.addChild (new HCLink ().setRel (EHCLinkType.ALTERNATE)
+                             .setType (CMimeType.TEXT_HTML)
+                             .setHref (new SimpleURL ("any.html")));
     b.addChild (new HCListing ());
     b.addChild (new HCListing ().addChild ("List"));
     final HCMenu aMenu = new HCMenu ();

@@ -57,6 +57,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     super (EHTMLElement.LINK);
   }
 
+  @Deprecated
   public HCLink (@Nullable final IHCLinkType aRel, @Nullable final ISimpleURL aHref)
   {
     this ();
@@ -64,6 +65,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     setHref (aHref);
   }
 
+  @Deprecated
   public HCLink (@Nullable final IHCLinkType eRel, @Nullable final IMimeType aType, @Nullable final ISimpleURL aHref)
   {
     this (eRel, aHref);
@@ -254,6 +256,6 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   @Nonnull
   public static HCLink createCSSLink (@Nonnull final ISimpleURL aCSSURL)
   {
-    return new HCLink (EHCLinkType.STYLESHEET, CMimeType.TEXT_CSS, aCSSURL);
+    return new HCLink ().setRel (EHCLinkType.STYLESHEET).setType (CMimeType.TEXT_CSS).setHref (aCSSURL);
   }
 }

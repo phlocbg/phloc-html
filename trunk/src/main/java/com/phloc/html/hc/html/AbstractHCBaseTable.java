@@ -31,6 +31,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.parent.IHasChildrenSorted;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -51,14 +52,14 @@ import com.phloc.html.hc.impl.HCNodeList;
 public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <IHCNode>
 {
   protected HCColGroup m_aColGroup;
-  protected int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
-  protected int m_nCellPadding = CGlobal.ILLEGAL_UINT;
-  protected HCRow m_aHeaderRow;
-  protected String m_sHeaderID;
-  protected final List <HCRow> m_aBodyRows = new ArrayList <HCRow> ();
-  protected String m_sBodyID;
-  protected HCRow m_aFooterRow;
-  protected String m_sFooterID;
+  private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
+  private int m_nCellPadding = CGlobal.ILLEGAL_UINT;
+  private HCRow m_aHeaderRow;
+  private String m_sHeaderID;
+  private final List <HCRow> m_aBodyRows = new ArrayList <HCRow> ();
+  private String m_sBodyID;
+  private HCRow m_aFooterRow;
+  private String m_sFooterID;
 
   /**
    * This constructor is used to create elements with logic like a table but
@@ -258,6 +259,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   /**
+   * @return <code>true</code> if a header ID is present, <code>false</code>
+   *         otherwise
+   */
+  public final boolean hasHeaderID ()
+  {
+    return StringHelper.hasText (m_sHeaderID);
+  }
+
+  /**
    * @return The current set header row or <code>null</code> if no header row is
    *         present
    */
@@ -326,6 +336,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final String getFooterID ()
   {
     return m_sFooterID;
+  }
+
+  /**
+   * @return <code>true</code> if a footer ID is present, <code>false</code>
+   *         otherwise
+   */
+  public final boolean hasFooterID ()
+  {
+    return StringHelper.hasText (m_sFooterID);
   }
 
   /**
@@ -415,6 +434,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   {
     m_sBodyID = sID;
     return thisAsT ();
+  }
+
+  /**
+   * @return <code>true</code> if a body ID is present, <code>false</code>
+   *         otherwise
+   */
+  public final boolean hasBodyID ()
+  {
+    return StringHelper.hasText (m_sBodyID);
   }
 
   public final boolean hasBodyRows ()

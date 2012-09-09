@@ -43,7 +43,7 @@ import com.phloc.html.hc.htmlext.HCUtils;
 
 public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <CHILDTYPE>
 {
-  protected List <CHILDTYPE> m_aChildren;
+  private List <CHILDTYPE> m_aChildren;
 
   protected AbstractHCElementWithInternalChildren (@Nonnull final EHTMLElement aElement)
   {

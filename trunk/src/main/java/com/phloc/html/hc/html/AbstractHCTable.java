@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.StringParser;
 import com.phloc.css.ECSSUnit;
 import com.phloc.css.property.CCSSProperties;
@@ -44,8 +43,7 @@ import com.phloc.html.hc.impl.HCEntityNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
-                                                                                    AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
   public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
@@ -101,7 +99,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;
+    return hasHeaderRow () || hasBodyRows () || hasBodyID () || hasFooterRow ();
   }
 
   @Override
@@ -112,17 +110,17 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     super.applyProperties (aElement, aConversionSettings);
 
     // Required by XHTML 1.1
-    if (m_aBodyRows.isEmpty () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
+    if (!hasBodyRows () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
       s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
 
     // Table specific attributes
     if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
     {
       // These attributes are obsolete in HTML5
-      if (m_nCellSpacing >= 0)
-        aElement.setAttribute (CHTMLAttributes.CELLSPACING, m_nCellSpacing);
-      if (m_nCellPadding >= 0)
-        aElement.setAttribute (CHTMLAttributes.CELLPADDING, m_nCellPadding);
+      if (getCellSpacing () >= 0)
+        aElement.setAttribute (CHTMLAttributes.CELLSPACING, getCellSpacing ());
+      if (getCellPadding () >= 0)
+        aElement.setAttribute (CHTMLAttributes.CELLPADDING, getCellPadding ());
     }
 
     // Append colgroup
@@ -130,23 +128,23 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       aElement.appendChild (m_aColGroup.getAsNode (aConversionSettings));
 
     // Table header?
-    if (m_aHeaderRow != null)
+    if (hasHeaderRow ())
     {
       final IMicroElement aTHead = aElement.appendElement (EHTMLElement.THEAD.getElementName ());
-      if (StringHelper.hasText (m_sHeaderID))
-        aTHead.setAttribute (CHTMLAttributes.ID, m_sHeaderID);
-      applyHeaderRow (aTHead, m_aHeaderRow, aConversionSettings);
+      if (hasHeaderID ())
+        aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
+      applyHeaderRow (aTHead, getHeaderRow (), aConversionSettings);
       if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
         aTHead.appendText ("");
     }
 
     // Table footer?
-    if (m_aFooterRow != null)
+    if (hasFooterRow ())
     {
       final IMicroElement aTFoot = aElement.appendElement (EHTMLElement.TFOOT.getElementName ());
-      if (StringHelper.hasText (m_sFooterID))
-        aTFoot.setAttribute (CHTMLAttributes.ID, m_sFooterID);
-      applyFooterRow (aTFoot, m_aFooterRow, aConversionSettings);
+      if (hasFooterID ())
+        aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
+      applyFooterRow (aTFoot, getFooterRow (), aConversionSettings);
       if (!aTFoot.hasChildren () && !EHTMLElement.TFOOT.mayBeSelfClosed ())
         aTFoot.appendText ("");
     }
@@ -155,17 +153,14 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
 
     // Table body
     final IMicroElement aTBody = aElement.appendElement (EHTMLElement.TBODY.getElementName ());
-    if (StringHelper.hasText (m_sBodyID))
-      aTBody.setAttribute (CHTMLAttributes.ID, m_sBodyID);
+    if (hasBodyID ())
+      aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
 
     // bug fix for IE9 table layout bug
     // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
     // IE9 only interprets column widths if the first row does not use colspan
     // (i.e. at least one row does not use colspan)
-    if (m_aColGroup != null &&
-        m_aColGroup.hasColumns () &&
-        !m_aBodyRows.isEmpty () &&
-        getFirstBodyRow ().isColspanUsed ())
+    if (m_aColGroup != null && m_aColGroup.hasColumns () && hasBodyRows () && getFirstBodyRow ().isColspanUsed ())
     {
       // Create a dummy row with explicit widths
       final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
@@ -180,7 +175,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     }
 
     // Main body rows
-    for (final HCRow aRow : m_aBodyRows)
+    for (final HCRow aRow : directGetBodyRowList ())
       applyBodyRow (aTBody, aRow, aConversionSettings);
 
     if (!aTBody.hasChildren () && !EHTMLElement.TBODY.mayBeSelfClosed ())
