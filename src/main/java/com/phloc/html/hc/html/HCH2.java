@@ -17,7 +17,12 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -30,5 +35,47 @@ public class HCH2 extends AbstractHCElementWithChildren <HCH2>
   public HCH2 ()
   {
     super (EHTMLElement.H2);
+  }
+
+  @Deprecated
+  public HCH2 (@Nonnull final IPredefinedLocaleTextProvider aChild)
+  {
+    this ();
+    addChild (aChild);
+  }
+
+  @Deprecated
+  public HCH2 (@Nullable final String sChild)
+  {
+    this ();
+    addChild (sChild);
+  }
+
+  @Deprecated
+  public HCH2 (@Nullable final String... aChildren)
+  {
+    this ();
+    addChildren (aChildren);
+  }
+
+  @Deprecated
+  public HCH2 (@Nullable final IHCNode aChild)
+  {
+    this ();
+    addChild (aChild);
+  }
+
+  @Deprecated
+  public HCH2 (@Nullable final IHCNode... aChildren)
+  {
+    this ();
+    addChildren (aChildren);
+  }
+
+  @Deprecated
+  public HCH2 (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    this ();
+    addChildren (aChildren);
   }
 }
