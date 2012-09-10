@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -40,6 +41,13 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   public HCLabel ()
   {
     super (EHTMLElement.LABEL);
+  }
+
+  @Deprecated
+  public HCLabel (@Nullable final String sText)
+  {
+    this ();
+    addChild (sText);
   }
 
   @Nullable
@@ -74,5 +82,31 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("for", m_sFor).toString ();
+  }
+
+  /**
+   * Create a new LABEL element with the passed child text
+   * 
+   * @param aChild
+   *        The child text provider to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return new HCLabel ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child text
+   * 
+   * @param sChild
+   *        The child to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final String sChild)
+  {
+    return new HCLabel ().addChild (sChild);
   }
 }

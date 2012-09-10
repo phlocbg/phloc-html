@@ -31,9 +31,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
-public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends
-                                                                                        AbstractHCElement <THISTYPE> implements
-                                                                                                                    IHCControl <THISTYPE>
+public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCControl <THISTYPE>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_READONLY = false;

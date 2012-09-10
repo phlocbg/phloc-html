@@ -41,10 +41,10 @@ public final class JQuerySelectorTest
                                           .chain (JQuerySelector.id ("abc"))
                                           .getAsString ());
     assertEquals ("ul li", JQuerySelector.elementName (EHTMLElement.UL)
-                  .descendant (JQuerySelector.elementName ("li"))
-                  .getAsString ());
+                                         .descendant (JQuerySelector.elementName ("li"))
+                                         .getAsString ());
     assertEquals ("ul,ol", JQuerySelector.elementName (EHTMLElement.UL)
-                  .multiple (JQuerySelector.elementName ("ol"))
-                  .getAsString ());
+                                         .multiple (JQuerySelector.elementName ("ol"))
+                                         .getAsString ());
   }
 }

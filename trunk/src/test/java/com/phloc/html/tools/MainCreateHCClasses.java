@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.parser.tools;
+package com.phloc.html.tools;
 
 import java.io.File;
 import java.util.Locale;
@@ -250,6 +250,8 @@ public class MainCreateHCClasses
                                               "KBD",
                                               "LI",
                                               "Listing",
+                                              "NoEmbed",
+                                              "NoScript",
                                               "P",
                                               "Pre",
                                               "Q",
