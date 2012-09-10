@@ -72,9 +72,11 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
-  public HCNodeList addChild (@Nonnull final IPredefinedLocaleTextProvider aTextProvider)
+  public HCNodeList addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
   {
-    return addChild (aTextProvider.getText ());
+    if (aTextProvider != null)
+      addChild (aTextProvider.getText ());
+    return this;
   }
 
   @Nonnull
