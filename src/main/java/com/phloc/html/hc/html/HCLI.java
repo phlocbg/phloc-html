@@ -98,6 +98,19 @@ public class HCLI extends AbstractHCElementWithChildren <HCLI>
   }
 
   /**
+   * Create a new LI element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCLI element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLI create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCLI ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new LI element with the passed child text
    * 
    * @param sChild

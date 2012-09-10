@@ -41,6 +41,8 @@ public final class HCAddressTest
   {
     assertFalse (new HCAddress ().hasChildren ());
     assertEquals (0, HCAddress.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCAddress.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                              .getChildCount ());
     assertEquals (1, HCAddress.create ("Text").getChildCount ());
     assertEquals (0, HCAddress.create ((String) null).getChildCount ());
     assertEquals (1, HCAddress.create (HCB.create ("Bold")).getChildCount ());

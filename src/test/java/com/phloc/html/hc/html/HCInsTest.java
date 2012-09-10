@@ -41,6 +41,8 @@ public final class HCInsTest
   {
     assertFalse (new HCIns ().hasChildren ());
     assertEquals (0, HCIns.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCIns.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCIns.create ("Text").getChildCount ());
     assertEquals (0, HCIns.create ((String) null).getChildCount ());
     assertEquals (1, HCIns.create (HCB.create ("Bold")).getChildCount ());

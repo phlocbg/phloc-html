@@ -41,6 +41,8 @@ public final class HCSampTest
   {
     assertFalse (new HCSamp ().hasChildren ());
     assertEquals (0, HCSamp.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCSamp.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                           .getChildCount ());
     assertEquals (1, HCSamp.create ("Text").getChildCount ());
     assertEquals (0, HCSamp.create ((String) null).getChildCount ());
     assertEquals (1, HCSamp.create (HCB.create ("Bold")).getChildCount ());

@@ -118,6 +118,23 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
+  @DevelopersNote ("Use addChild instead!")
+  @Deprecated
+  public final THISTYPE addChildren (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
+  public final THISTYPE addChildren (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    if (aChildren != null)
+      for (final IPredefinedLocaleTextProvider aChild : aChildren)
+        addChild (aChild);
+    return thisAsT ();
+  }
+
+  @Nonnull
   public final THISTYPE addChild (@Nullable final String sText)
   {
     // Empty text is OK!!!

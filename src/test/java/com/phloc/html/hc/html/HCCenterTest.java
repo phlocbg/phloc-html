@@ -41,6 +41,8 @@ public final class HCCenterTest
   {
     assertFalse (new HCCenter ().hasChildren ());
     assertEquals (0, HCCenter.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCCenter.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                             .getChildCount ());
     assertEquals (1, HCCenter.create ("Text").getChildCount ());
     assertEquals (0, HCCenter.create ((String) null).getChildCount ());
     assertEquals (1, HCCenter.create (HCB.create ("Bold")).getChildCount ());

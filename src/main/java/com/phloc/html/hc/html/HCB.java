@@ -98,6 +98,19 @@ public class HCB extends AbstractHCElementWithChildren <HCB>
   }
 
   /**
+   * Create a new B element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCB element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCB create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCB ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new B element with the passed child text
    * 
    * @param sChild

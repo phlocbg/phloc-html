@@ -98,6 +98,19 @@ public class HCSamp extends AbstractHCElementWithChildren <HCSamp>
   }
 
   /**
+   * Create a new SAMP element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCSamp element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCSamp create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCSamp ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new SAMP element with the passed child text
    * 
    * @param sChild

@@ -41,6 +41,8 @@ public final class HCAcronymTest
   {
     assertFalse (new HCAcronym ().hasChildren ());
     assertEquals (0, HCAcronym.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCAcronym.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                              .getChildCount ());
     assertEquals (1, HCAcronym.create ("Text").getChildCount ());
     assertEquals (0, HCAcronym.create ((String) null).getChildCount ());
     assertEquals (1, HCAcronym.create (HCB.create ("Bold")).getChildCount ());

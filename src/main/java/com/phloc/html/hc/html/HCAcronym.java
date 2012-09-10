@@ -98,6 +98,19 @@ public class HCAcronym extends AbstractHCElementWithChildren <HCAcronym>
   }
 
   /**
+   * Create a new ACRONYM element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCAcronym element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCAcronym create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCAcronym ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new ACRONYM element with the passed child text
    * 
    * @param sChild

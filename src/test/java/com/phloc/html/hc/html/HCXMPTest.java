@@ -41,6 +41,8 @@ public final class HCXMPTest
   {
     assertFalse (new HCXMP ().hasChildren ());
     assertEquals (0, HCXMP.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCXMP.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCXMP.create ("Text").getChildCount ());
     assertEquals (0, HCXMP.create ((String) null).getChildCount ());
     assertEquals (1, HCXMP.create (HCB.create ("Bold")).getChildCount ());

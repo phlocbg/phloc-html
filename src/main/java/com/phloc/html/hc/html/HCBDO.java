@@ -98,6 +98,19 @@ public class HCBDO extends AbstractHCElementWithChildren <HCBDO>
   }
 
   /**
+   * Create a new BDO element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCBDO element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCBDO create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCBDO ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new BDO element with the passed child text
    * 
    * @param sChild

@@ -41,6 +41,8 @@ public final class HCEMTest
   {
     assertFalse (new HCEM ().hasChildren ());
     assertEquals (0, HCEM.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCEM.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                         .getChildCount ());
     assertEquals (1, HCEM.create ("Text").getChildCount ());
     assertEquals (0, HCEM.create ((String) null).getChildCount ());
     assertEquals (1, HCEM.create (HCB.create ("Bold")).getChildCount ());

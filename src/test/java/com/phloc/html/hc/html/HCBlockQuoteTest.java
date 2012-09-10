@@ -41,6 +41,8 @@ public final class HCBlockQuoteTest
   {
     assertFalse (new HCBlockQuote ().hasChildren ());
     assertEquals (0, HCBlockQuote.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCBlockQuote.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                                 .getChildCount ());
     assertEquals (1, HCBlockQuote.create ("Text").getChildCount ());
     assertEquals (0, HCBlockQuote.create ((String) null).getChildCount ());
     assertEquals (1, HCBlockQuote.create (HCB.create ("Bold")).getChildCount ());

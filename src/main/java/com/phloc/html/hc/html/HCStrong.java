@@ -98,6 +98,19 @@ public class HCStrong extends AbstractHCElementWithChildren <HCStrong>
   }
 
   /**
+   * Create a new STRONG element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCStrong element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCStrong create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCStrong ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new STRONG element with the passed child text
    * 
    * @param sChild

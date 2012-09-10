@@ -41,6 +41,8 @@ public final class HCAbbrTest
   {
     assertFalse (new HCAbbr ().hasChildren ());
     assertEquals (0, HCAbbr.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCAbbr.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                           .getChildCount ());
     assertEquals (1, HCAbbr.create ("Text").getChildCount ());
     assertEquals (0, HCAbbr.create ((String) null).getChildCount ());
     assertEquals (1, HCAbbr.create (HCB.create ("Bold")).getChildCount ());

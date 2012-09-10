@@ -41,6 +41,8 @@ public final class HCPreTest
   {
     assertFalse (new HCPre ().hasChildren ());
     assertEquals (0, HCPre.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCPre.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCPre.create ("Text").getChildCount ());
     assertEquals (0, HCPre.create ((String) null).getChildCount ());
     assertEquals (1, HCPre.create (HCB.create ("Bold")).getChildCount ());

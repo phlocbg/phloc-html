@@ -107,6 +107,17 @@ public class MainCreateHCClasses
                                               "  }\r\n" +
                                               "\r\n" +
                                               "  /**\r\n" +
+                                              "   * Create a new $$$ element with the passed child texts\r\n" +
+                                              "   * @param aChildren The child texts to be appended. May be <code>null</code>\r\n" +
+                                              "   * @return The created HC$$ element and never <code>null</code>\r\n" +
+                                              "   */\r\n" +
+                                              "  @Nonnull\r\n" +
+                                              "  public static HC$$ create (@Nullable final IPredefinedLocaleTextProvider... aChildren)\r\n" +
+                                              "  {\r\n" +
+                                              "    return new HC$$ ().addChildren (aChildren);\r\n" +
+                                              "  }\r\n" +
+                                              "\r\n" +
+                                              "  /**\r\n" +
                                               "   * Create a new $$$ element with the passed child text\r\n" +
                                               "   * @param sChild The child to be appended. May be <code>null</code>\r\n" +
                                               "   * @return The created HC$$ element and never <code>null</code>\r\n" +
@@ -191,6 +202,7 @@ public class MainCreateHCClasses
                                               "  {\r\n" +
                                               "    assertFalse (new HC$$ ().hasChildren ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
+                                              "    assertEquals (0, HC$$.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (\"Text\").getChildCount ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((String) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (HCB.create (\"Bold\")).getChildCount ());\r\n" +

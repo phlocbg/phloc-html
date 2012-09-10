@@ -41,6 +41,8 @@ public final class HCDivTest
   {
     assertFalse (new HCDiv ().hasChildren ());
     assertEquals (0, HCDiv.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCDiv.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCDiv.create ("Text").getChildCount ());
     assertEquals (0, HCDiv.create ((String) null).getChildCount ());
     assertEquals (1, HCDiv.create (HCB.create ("Bold")).getChildCount ());

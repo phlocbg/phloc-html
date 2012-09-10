@@ -98,6 +98,19 @@ public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
   }
 
   /**
+   * Create a new ADDRESS element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCAddress element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCAddress create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCAddress ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new ADDRESS element with the passed child text
    * 
    * @param sChild
