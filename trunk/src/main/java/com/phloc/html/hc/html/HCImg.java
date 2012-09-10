@@ -189,8 +189,14 @@ public class HCImg extends AbstractHCElement <HCImg>
   }
 
   @Nonnull
-  public static HCImg create (@Nonnull final ISimpleURL aSrc)
+  public static HCImg create (@Nullable final ISimpleURL aSrc)
   {
     return new HCImg ().setSrc (aSrc);
+  }
+
+  @Nonnull
+  public static HCImg create (@Nullable final String sSrc)
+  {
+    return new HCImg ().setSrc (sSrc);
   }
 }
