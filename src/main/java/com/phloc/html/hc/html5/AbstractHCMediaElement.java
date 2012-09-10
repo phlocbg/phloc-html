@@ -37,8 +37,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
-public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaElement <THISTYPE>> extends
-                                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, AbstractHCMediaElementChild <?>>
+public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaElement <THISTYPE>> extends AbstractHCElementWithInternalChildren <THISTYPE, AbstractHCMediaElementChild <?>>
 {
   public static final boolean DEFAULT_AUTOPLAY = false;
   public static final boolean DEFAULT_CONTROLS = false;

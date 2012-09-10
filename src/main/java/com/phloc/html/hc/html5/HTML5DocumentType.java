@@ -30,7 +30,7 @@ import com.phloc.html.EHTMLElement;
 
 /**
  * HTML5 document type representation
- *
+ * 
  * @author philip
  */
 @Immutable

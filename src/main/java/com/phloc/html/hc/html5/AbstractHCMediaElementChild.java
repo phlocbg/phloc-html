@@ -31,8 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  *        Implementation type
  */
 @SinceHTML5
-public abstract class AbstractHCMediaElementChild <THISTYPE extends AbstractHCMediaElementChild <THISTYPE>> extends
-                                                                                                            AbstractHCElement <THISTYPE>
+public abstract class AbstractHCMediaElementChild <THISTYPE extends AbstractHCMediaElementChild <THISTYPE>> extends AbstractHCElement <THISTYPE>
 {
   public AbstractHCMediaElementChild (@Nonnull final EHTMLElement eElement)
   {

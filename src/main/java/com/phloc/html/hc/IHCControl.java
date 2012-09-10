@@ -22,10 +22,7 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.name.IHasName;
 import com.phloc.html.hc.api.IHCHasFocus;
 
-public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
-                                                                     IHCElement <THISTYPE>,
-                                                                     IHasName,
-                                                                     IHCHasFocus <THISTYPE>
+public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCElement <THISTYPE>, IHasName, IHCHasFocus <THISTYPE>
 {
   @Nonnull
   THISTYPE setName (String sName);
