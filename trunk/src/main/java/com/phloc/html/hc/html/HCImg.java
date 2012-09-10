@@ -187,4 +187,10 @@ public class HCImg extends AbstractHCElement <HCImg>
                             .appendIfNotNull ("alt", m_sAlt)
                             .toString ();
   }
+
+  @Nonnull
+  public static HCImg create (@Nonnull final ISimpleURL aSrc)
+  {
+    return new HCImg ().setSrc (aSrc);
+  }
 }

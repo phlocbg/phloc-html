@@ -128,4 +128,10 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
                             .append ("async", m_bAsync)
                             .toString ();
   }
+
+  @Nonnull
+  public static HCScriptFile create (@Nullable final ISimpleURL aSrc)
+  {
+    return new HCScriptFile ().setSrc (aSrc);
+  }
 }
