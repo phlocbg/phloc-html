@@ -41,6 +41,8 @@ public final class HCPTest
   {
     assertFalse (new HCP ().hasChildren ());
     assertEquals (0, HCP.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCP.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                        .getChildCount ());
     assertEquals (1, HCP.create ("Text").getChildCount ());
     assertEquals (0, HCP.create ((String) null).getChildCount ());
     assertEquals (1, HCP.create (HCB.create ("Bold")).getChildCount ());

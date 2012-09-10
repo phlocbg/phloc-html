@@ -156,6 +156,22 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
 
   @Deprecated
   @Nonnull
+  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    if (aChildren != null)
+      for (final IPredefinedLocaleTextProvider aChild : aChildren)
+        addChild (new HCTextNode (aChild));
+    return this;
+  }
+
+  @Deprecated
+  @Nonnull
   public HCNodeList addChildren (@Nullable final String sChild)
   {
     return addChild (sChild);

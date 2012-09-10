@@ -41,6 +41,8 @@ public final class HCH3Test
   {
     assertFalse (new HCH3 ().hasChildren ());
     assertEquals (0, HCH3.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCH3.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                         .getChildCount ());
     assertEquals (1, HCH3.create ("Text").getChildCount ());
     assertEquals (0, HCH3.create ((String) null).getChildCount ());
     assertEquals (1, HCH3.create (HCB.create ("Bold")).getChildCount ());

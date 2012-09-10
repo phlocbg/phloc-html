@@ -98,6 +98,19 @@ public class HCQ extends AbstractHCElementWithChildren <HCQ>
   }
 
   /**
+   * Create a new Q element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCQ element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCQ create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCQ ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new Q element with the passed child text
    * 
    * @param sChild

@@ -98,6 +98,19 @@ public class HCNoScript extends AbstractHCElementWithChildren <HCNoScript>
   }
 
   /**
+   * Create a new NOSCRIPT element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCNoScript element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCNoScript create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCNoScript ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new NOSCRIPT element with the passed child text
    * 
    * @param sChild

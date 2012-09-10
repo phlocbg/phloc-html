@@ -98,6 +98,19 @@ public class HCListing extends AbstractHCElementWithChildren <HCListing>
   }
 
   /**
+   * Create a new LISTING element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCListing element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCListing create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCListing ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new LISTING element with the passed child text
    * 
    * @param sChild

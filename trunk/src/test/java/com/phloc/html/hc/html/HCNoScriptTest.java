@@ -41,6 +41,8 @@ public final class HCNoScriptTest
   {
     assertFalse (new HCNoScript ().hasChildren ());
     assertEquals (0, HCNoScript.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCNoScript.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                               .getChildCount ());
     assertEquals (1, HCNoScript.create ("Text").getChildCount ());
     assertEquals (0, HCNoScript.create ((String) null).getChildCount ());
     assertEquals (1, HCNoScript.create (HCB.create ("Bold")).getChildCount ());

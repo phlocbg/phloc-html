@@ -98,6 +98,19 @@ public class HCPre extends AbstractHCElementWithChildren <HCPre>
   }
 
   /**
+   * Create a new PRE element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCPre element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCPre create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCPre ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new PRE element with the passed child text
    * 
    * @param sChild

@@ -41,6 +41,8 @@ public final class HCSubTest
   {
     assertFalse (new HCSub ().hasChildren ());
     assertEquals (0, HCSub.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCSub.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCSub.create ("Text").getChildCount ());
     assertEquals (0, HCSub.create ((String) null).getChildCount ());
     assertEquals (1, HCSub.create (HCB.create ("Bold")).getChildCount ());

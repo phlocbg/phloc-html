@@ -98,6 +98,19 @@ public class HCS extends AbstractHCElementWithChildren <HCS>
   }
 
   /**
+   * Create a new S element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCS element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCS create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCS ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new S element with the passed child text
    * 
    * @param sChild

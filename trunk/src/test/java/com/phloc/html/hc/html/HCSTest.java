@@ -41,6 +41,8 @@ public final class HCSTest
   {
     assertFalse (new HCS ().hasChildren ());
     assertEquals (0, HCS.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCS.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                        .getChildCount ());
     assertEquals (1, HCS.create ("Text").getChildCount ());
     assertEquals (0, HCS.create ((String) null).getChildCount ());
     assertEquals (1, HCS.create (HCB.create ("Bold")).getChildCount ());

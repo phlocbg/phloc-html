@@ -98,6 +98,19 @@ public class HCP extends AbstractHCElementWithChildren <HCP>
   }
 
   /**
+   * Create a new P element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCP create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCP ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new P element with the passed child text
    * 
    * @param sChild

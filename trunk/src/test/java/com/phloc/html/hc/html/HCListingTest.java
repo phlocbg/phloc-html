@@ -41,6 +41,8 @@ public final class HCListingTest
   {
     assertFalse (new HCListing ().hasChildren ());
     assertEquals (0, HCListing.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCListing.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                              .getChildCount ());
     assertEquals (1, HCListing.create ("Text").getChildCount ());
     assertEquals (0, HCListing.create ((String) null).getChildCount ());
     assertEquals (1, HCListing.create (HCB.create ("Bold")).getChildCount ());

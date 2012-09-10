@@ -98,6 +98,19 @@ public class HCIns extends AbstractHCElementWithChildren <HCIns>
   }
 
   /**
+   * Create a new INS element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCIns element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCIns create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCIns ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new INS element with the passed child text
    * 
    * @param sChild

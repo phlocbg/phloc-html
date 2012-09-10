@@ -41,6 +41,8 @@ public final class HCSupTest
   {
     assertFalse (new HCSup ().hasChildren ());
     assertEquals (0, HCSup.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCSup.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCSup.create ("Text").getChildCount ());
     assertEquals (0, HCSup.create ((String) null).getChildCount ());
     assertEquals (1, HCSup.create (HCB.create ("Bold")).getChildCount ());

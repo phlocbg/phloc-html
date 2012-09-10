@@ -98,6 +98,19 @@ public class HCNoEmbed extends AbstractHCElementWithChildren <HCNoEmbed>
   }
 
   /**
+   * Create a new NOEMBED element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCNoEmbed element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCNoEmbed create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCNoEmbed ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new NOEMBED element with the passed child text
    * 
    * @param sChild

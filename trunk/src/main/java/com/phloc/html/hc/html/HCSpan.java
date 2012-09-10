@@ -96,6 +96,19 @@ public class HCSpan extends AbstractHCSpan <HCSpan>
   }
 
   /**
+   * Create a new SPAN element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCSpan element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCSpan create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCSpan ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new SPAN element with the passed child text
    * 
    * @param sChild

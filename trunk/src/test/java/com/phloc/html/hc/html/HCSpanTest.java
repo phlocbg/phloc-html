@@ -41,6 +41,8 @@ public final class HCSpanTest
   {
     assertFalse (new HCSpan ().hasChildren ());
     assertEquals (0, HCSpan.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCSpan.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                           .getChildCount ());
     assertEquals (1, HCSpan.create ("Text").getChildCount ());
     assertEquals (0, HCSpan.create ((String) null).getChildCount ());
     assertEquals (1, HCSpan.create (HCB.create ("Bold")).getChildCount ());

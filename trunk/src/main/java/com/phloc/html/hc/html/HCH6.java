@@ -98,6 +98,19 @@ public class HCH6 extends AbstractHCElementWithChildren <HCH6>
   }
 
   /**
+   * Create a new H6 element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCH6 element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCH6 create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCH6 ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new H6 element with the passed child text
    * 
    * @param sChild

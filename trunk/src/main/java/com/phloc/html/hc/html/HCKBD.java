@@ -98,6 +98,19 @@ public class HCKBD extends AbstractHCElementWithChildren <HCKBD>
   }
 
   /**
+   * Create a new KBD element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCKBD element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCKBD create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCKBD ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new KBD element with the passed child text
    * 
    * @param sChild

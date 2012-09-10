@@ -41,6 +41,8 @@ public final class HCBDOTest
   {
     assertFalse (new HCBDO ().hasChildren ());
     assertEquals (0, HCBDO.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCBDO.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                          .getChildCount ());
     assertEquals (1, HCBDO.create ("Text").getChildCount ());
     assertEquals (0, HCBDO.create ((String) null).getChildCount ());
     assertEquals (1, HCBDO.create (HCB.create ("Bold")).getChildCount ());

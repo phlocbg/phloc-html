@@ -41,6 +41,8 @@ public final class HCH5Test
   {
     assertFalse (new HCH5 ().hasChildren ());
     assertEquals (0, HCH5.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCH5.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                         .getChildCount ());
     assertEquals (1, HCH5.create ("Text").getChildCount ());
     assertEquals (0, HCH5.create ((String) null).getChildCount ());
     assertEquals (1, HCH5.create (HCB.create ("Bold")).getChildCount ());

@@ -98,6 +98,19 @@ public class HCEM extends AbstractHCElementWithChildren <HCEM>
   }
 
   /**
+   * Create a new EM element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCEM element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCEM create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCEM ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new EM element with the passed child text
    * 
    * @param sChild

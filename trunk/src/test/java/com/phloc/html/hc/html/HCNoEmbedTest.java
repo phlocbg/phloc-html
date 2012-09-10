@@ -41,6 +41,8 @@ public final class HCNoEmbedTest
   {
     assertFalse (new HCNoEmbed ().hasChildren ());
     assertEquals (0, HCNoEmbed.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCNoEmbed.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                              .getChildCount ());
     assertEquals (1, HCNoEmbed.create ("Text").getChildCount ());
     assertEquals (0, HCNoEmbed.create ((String) null).getChildCount ());
     assertEquals (1, HCNoEmbed.create (HCB.create ("Bold")).getChildCount ());

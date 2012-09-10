@@ -98,6 +98,19 @@ public class HCSub extends AbstractHCElementWithChildren <HCSub>
   }
 
   /**
+   * Create a new SUB element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCSub element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCSub create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCSub ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new SUB element with the passed child text
    * 
    * @param sChild

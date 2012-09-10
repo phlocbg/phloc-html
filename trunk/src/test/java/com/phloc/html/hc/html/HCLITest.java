@@ -41,6 +41,8 @@ public final class HCLITest
   {
     assertFalse (new HCLI ().hasChildren ());
     assertEquals (0, HCLI.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCLI.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                         .getChildCount ());
     assertEquals (1, HCLI.create ("Text").getChildCount ());
     assertEquals (0, HCLI.create ((String) null).getChildCount ());
     assertEquals (1, HCLI.create (HCB.create ("Bold")).getChildCount ());

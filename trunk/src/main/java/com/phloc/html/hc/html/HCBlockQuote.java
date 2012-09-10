@@ -98,6 +98,19 @@ public class HCBlockQuote extends AbstractHCElementWithChildren <HCBlockQuote>
   }
 
   /**
+   * Create a new BLOCKQUOTE element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCBlockQuote element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCBlockQuote create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCBlockQuote ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new BLOCKQUOTE element with the passed child text
    * 
    * @param sChild

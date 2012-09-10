@@ -98,6 +98,19 @@ public class HCH2 extends AbstractHCElementWithChildren <HCH2>
   }
 
   /**
+   * Create a new H2 element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCH2 element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCH2 create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCH2 ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new H2 element with the passed child text
    * 
    * @param sChild

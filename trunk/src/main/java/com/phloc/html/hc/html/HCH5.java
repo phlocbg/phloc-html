@@ -98,6 +98,19 @@ public class HCH5 extends AbstractHCElementWithChildren <HCH5>
   }
 
   /**
+   * Create a new H5 element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCH5 element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCH5 create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCH5 ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new H5 element with the passed child text
    * 
    * @param sChild

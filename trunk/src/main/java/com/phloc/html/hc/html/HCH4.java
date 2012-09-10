@@ -98,6 +98,19 @@ public class HCH4 extends AbstractHCElementWithChildren <HCH4>
   }
 
   /**
+   * Create a new H4 element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCH4 element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCH4 create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCH4 ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new H4 element with the passed child text
    * 
    * @param sChild

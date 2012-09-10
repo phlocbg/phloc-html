@@ -98,6 +98,19 @@ public class HCI extends AbstractHCElementWithChildren <HCI>
   }
 
   /**
+   * Create a new I element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCI element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCI create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCI ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new I element with the passed child text
    * 
    * @param sChild

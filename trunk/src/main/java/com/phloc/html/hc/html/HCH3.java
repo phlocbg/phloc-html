@@ -98,6 +98,19 @@ public class HCH3 extends AbstractHCElementWithChildren <HCH3>
   }
 
   /**
+   * Create a new H3 element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCH3 element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCH3 create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCH3 ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new H3 element with the passed child text
    * 
    * @param sChild

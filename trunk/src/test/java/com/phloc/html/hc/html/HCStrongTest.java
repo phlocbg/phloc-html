@@ -41,6 +41,8 @@ public final class HCStrongTest
   {
     assertFalse (new HCStrong ().hasChildren ());
     assertEquals (0, HCStrong.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
+    assertEquals (0, HCStrong.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
+                             .getChildCount ());
     assertEquals (1, HCStrong.create ("Text").getChildCount ());
     assertEquals (0, HCStrong.create ((String) null).getChildCount ());
     assertEquals (1, HCStrong.create (HCB.create ("Bold")).getChildCount ());

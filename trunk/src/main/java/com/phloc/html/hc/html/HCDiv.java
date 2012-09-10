@@ -96,6 +96,19 @@ public class HCDiv extends AbstractHCDiv <HCDiv>
   }
 
   /**
+   * Create a new DIV element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCDiv element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCDiv create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCDiv ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new DIV element with the passed child text
    * 
    * @param sChild
