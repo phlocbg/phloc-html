@@ -26,6 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -98,6 +99,19 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   }
 
   /**
+   * Create a new LABEL element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCLabel ().addChildren (aChildren);
+  }
+
+  /**
    * Create a new LABEL element with the passed child text
    * 
    * @param sChild
@@ -108,5 +122,57 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   public static HCLabel create (@Nullable final String sChild)
   {
     return new HCLabel ().addChild (sChild);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final String... aChildren)
+  {
+    return new HCLabel ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IHCNode aChild)
+  {
+    return new HCLabel ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IHCNode... aChildren)
+  {
+    return new HCLabel ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    return new HCLabel ().addChildren (aChildren);
   }
 }
