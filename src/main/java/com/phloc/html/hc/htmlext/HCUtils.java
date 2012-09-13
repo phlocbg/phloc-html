@@ -45,15 +45,18 @@ import com.phloc.html.hc.impl.HCTextNode;
 @Immutable
 public final class HCUtils
 {
-  private static final String PATTERN_NEWLINE = "\n";
+  private static final char PATTERN_NEWLINE = '\n';
+  private static final String PATTERN_NEWLINE_STR = Character.toString (PATTERN_NEWLINE);
+  private static final int PATTERN_NEWLINE_LENGTH = 1;
 
   private HCUtils ()
   {}
 
+  @Deprecated
   @Nullable
   public static String nl2br (@Nullable final String sText)
   {
-    return StringHelper.replaceAll (sText, PATTERN_NEWLINE, "<br/>");
+    return StringHelper.replaceAll (sText, PATTERN_NEWLINE_STR, "<br/>");
   }
 
   @Nonnull
@@ -63,16 +66,15 @@ public final class HCUtils
     if (StringHelper.hasText (sText))
     {
       int nIndex = 0;
-      int nNext = 0;
       while (nIndex < sText.length ())
       {
-        nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
+        final int nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
         if (nNext >= 0)
         {
           if (nNext > nIndex)
             ret.add (new HCTextNode (sText.substring (nIndex, nNext)));
           ret.add (new HCBR ());
-          nIndex = nNext + PATTERN_NEWLINE.length ();
+          nIndex = nNext + PATTERN_NEWLINE_LENGTH;
         }
         else
         {
@@ -91,23 +93,48 @@ public final class HCUtils
     if (StringHelper.hasText (sText))
     {
       int nIndex = 0;
-      int nNext = 0;
       while (nIndex < sText.length ())
       {
-        nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
+        final int nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
         if (nNext >= 0)
         {
           if (nNext > nIndex)
-            ret.add (new HCDiv ().addChild (sText.substring (nIndex, nNext)));
-          nIndex = nNext + PATTERN_NEWLINE.length ();
+            ret.add (HCDiv.create (sText.substring (nIndex, nNext)));
+          nIndex = nNext + PATTERN_NEWLINE_LENGTH;
         }
         else
         {
-          ret.add (new HCDiv ().addChild (sText.substring (nIndex)));
+          ret.add (HCDiv.create (sText.substring (nIndex)));
           break;
         }
       }
     }
+    return ret;
+  }
+
+  @Nonnull
+  public static List <IHCNode> list2brList (@Nullable final Iterable <String> aCont)
+  {
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
+    if (aCont != null)
+    {
+      for (final String sText : aCont)
+      {
+        if (!ret.isEmpty ())
+          ret.add (new HCBR ());
+        ret.add (new HCTextNode (sText));
+      }
+    }
+    return ret;
+  }
+
+  @Nonnull
+  public static List <IHCNode> list2divList (@Nullable final Iterable <String> aCont)
+  {
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
+    if (aCont != null)
+      for (final String sText : aCont)
+        ret.add (HCDiv.create (sText));
     return ret;
   }
 
