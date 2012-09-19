@@ -46,6 +46,7 @@ public final class DefaultCSSClassProvider implements ICSSClassProvider
   private static final Map <String, DefaultCSSClassProvider> s_aAll = new HashMap <String, DefaultCSSClassProvider> ();
 
   private final String m_sCSSClass;
+  private Integer m_aHashCode;
 
   private DefaultCSSClassProvider (@Nonnull @Nonempty final String sCSSClass)
   {
@@ -86,7 +87,9 @@ public final class DefaultCSSClassProvider implements ICSSClassProvider
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sCSSClass).getHashCode ();
+    if (m_aHashCode == null)
+      m_aHashCode = new HashCodeGenerator (this).append (m_sCSSClass).getHashCodeObj ();
+    return m_aHashCode.intValue ();
   }
 
   @Override
