@@ -145,7 +145,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
       if (aCtrl.isDisabled ())
         aCtrl.addClass (CSS_CLASS_DISABLED);
 
-      // Readonly?
+      // Read only?
       if (aCtrl.isReadonly ())
         aCtrl.addClass (CSS_CLASS_READONLY);
     }

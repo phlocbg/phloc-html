@@ -34,7 +34,7 @@ public interface IHCCustomizer
    * @param eHTMLVersion
    *        The HTML version to be used. Never <code>null</code>.
    */
-  void customizeHCElement (@Nonnull final IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
+  void customizeHCElement (@Nonnull IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
 
   /**
    * Get a custom out of band node
@@ -46,5 +46,5 @@ public interface IHCCustomizer
    * @return <code>null</code> if there is no custom out-of-band node
    */
   @Nullable
-  IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
+  IHCBaseNode getCustomOutOfBandNode (@Nonnull IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
 }

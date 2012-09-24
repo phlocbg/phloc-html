@@ -37,7 +37,6 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCConditionalCommentNode;
 import com.phloc.html.hc.impl.HCNodeList;
-import com.phloc.html.resource.js.IJSHTMLDefinition;
 
 /**
  * Represents an HTML &lt;body&gt; element
@@ -48,7 +47,7 @@ import com.phloc.html.resource.js.IJSHTMLDefinition;
 public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IHasJSDeclarations
 {
   private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-  private final List <Object> m_aJS = new ArrayList <Object> ();
+  private final List <IHCNode> m_aJS = new ArrayList <IHCNode> ();
   private IHCBodyOutOfBandNodeHandler m_aOutOfBandHandler = new HCBodyDefaultJQueryOutOfBandHandler ();
 
   public HCBody ()
@@ -94,6 +93,17 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
       m_aOutOfBandHandler.handleOutOfBandNode (this, aOutOfBandNode);
   }
 
+  private static boolean _isValidJSNode (@Nonnull final IHCBaseNode aNode)
+  {
+    // Direct JS node?
+    if (aNode instanceof IHCJSNode)
+      return true;
+    // Conditional comment?
+    if (aNode instanceof HCConditionalCommentNode)
+      return _isValidJSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    return false;
+  }
+
   /**
    * Append some JavaScript code
    * 
@@ -109,6 +119,26 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
     if (!_isValidJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (aJS);
+    return this;
+  }
+
+  /**
+   * Append some JavaScript code at the specified index
+   * 
+   * @param nIndex
+   *        The index where the JS should be added (counting only JS elements)
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCBody addJS (@Nonnegative final int nIndex, @Nonnull final IHCNode aJS)
+  {
+    if (aJS == null)
+      throw new NullPointerException ("js");
+    if (!_isValidJSNode (aJS))
+      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
+    m_aJS.add (nIndex, aJS);
     return this;
   }
 
@@ -137,37 +167,6 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
   {
     m_aJS.clear ();
     return this;
-  }
-
-  /**
-   * Append some JavaScript code at the specified index
-   * 
-   * @param nIndex
-   *        The index where the JS should be added (counting only JS elements)
-   * @param aJS
-   *        The JS to be added. May not be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  public HCBody addJS (@Nonnegative final int nIndex, @Nonnull final IHCNode aJS)
-  {
-    if (aJS == null)
-      throw new NullPointerException ("js");
-    if (!_isValidJSNode (aJS))
-      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
-    m_aJS.add (nIndex, aJS);
-    return this;
-  }
-
-  private static boolean _isValidJSNode (@Nonnull final IHCBaseNode aNode)
-  {
-    // Direct JS node?
-    if (aNode instanceof IHCJSNode)
-      return true;
-    // Conditional comment?
-    if (aNode instanceof HCConditionalCommentNode)
-      return _isValidJSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
-    return false;
   }
 
   public void addOutOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
@@ -213,13 +212,8 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
   @OverrideOnDemand
   protected void emitJS (@Nonnull final IMicroElement eBody, @Nonnull final IHCConversionSettings aConversionSettings)
   {
-    for (final Object aJS : m_aJS)
-    {
-      if (aJS instanceof IJSHTMLDefinition)
-        eBody.appendChild (((IJSHTMLDefinition) aJS).getAsNode (aConversionSettings));
-      else
-        eBody.appendChild (((IHCNode) aJS).getAsNode (aConversionSettings));
-    }
+    for (final IHCNode aJS : m_aJS)
+      eBody.appendChild (aJS.getAsNode (aConversionSettings));
   }
 
   @Override
