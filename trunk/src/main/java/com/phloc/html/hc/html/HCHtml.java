@@ -17,6 +17,9 @@
  */
 package com.phloc.html.hc.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -31,11 +34,13 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConversionSettings;
-import com.phloc.html.hc.conversion.HCPerformanceSettings;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.customize.IHCCustomizer;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 
 /**
@@ -52,7 +57,7 @@ public class HCHtml extends AbstractHCBaseNode
   private HCBody m_aBody;
 
   // status
-  private boolean m_bCopiedOutOfBandNodes = false;
+  private boolean m_bPrepared = false;
 
   /**
    * Create a new HTML object, using the default HTML version.
@@ -144,25 +149,52 @@ public class HCHtml extends AbstractHCBaseNode
     return m_aBody;
   }
 
+  private void _recursiveCustomizeElements (@Nonnull final IHCNodeWithChildren <?> aParentElement,
+                                            @Nonnull final IHCCustomizer aCustomizer,
+                                            @Nonnull final EHTMLVersion eHTMLVersion)
+  {
+    if (aParentElement.hasChildren ())
+    {
+      for (final IHCBaseNode aChild : aParentElement.getChildren ())
+      {
+        if (aChild instanceof IHCElement <?>)
+          aCustomizer.customizeHCElement (aParentElement, (IHCElement <?>) aChild, eHTMLVersion);
+
+        // Recurse deeper?
+        if (aChild instanceof IHCNodeWithChildren <?>)
+          _recursiveCustomizeElements ((IHCNodeWithChildren <?>) aChild, aCustomizer, eHTMLVersion);
+      }
+    }
+  }
+
+  private void _performCustomizations (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    if (!m_bPrepared)
+    {
+      m_bPrepared = true;
+      final IHCCustomizer aCustomizer = aConversionSettings.getCustomizer ();
+
+      // Ensure they are not null
+      final HCBody aBody = getBody ();
+      final HCHead aHead = getHead ();
+
+      // Customize element, before extracting out-of-band nodes, in case the
+      // customizer adds some out-of-band nodes as well
+      _recursiveCustomizeElements (aBody, aCustomizer, aConversionSettings.getHTMLVersion ());
+
+      // Extract all out-of-band nodes
+      final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
+      OutOfBandHandler.recursiveExtractOutOfBandNodes (aBody, aExtractedOutOfBandNodes);
+
+      // Call out-of-band node handler
+      aCustomizer.handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
+    }
+  }
+
   @Nonnull
   public final IMicroDocument getAsNode ()
   {
     return getAsNode (new HCConversionSettings (m_eHTMLVersion));
-  }
-
-  public final void copyOutOfBandNodesFromBodyToHead (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    // If no body is present, there can be no out-of-band nodes!
-    if (!m_bCopiedOutOfBandNodes && m_aBody != null)
-    {
-      // Ensure that out-of-band nodes are handled only once, so that
-      // consecutive calls to this method result in the same result!
-      m_bCopiedOutOfBandNodes = true;
-
-      // Handle the out of band nodes of the body in the head
-      final IHCBaseNode aOutOfBandNode = m_aBody.getOutOfBandNode (aConversionSettings);
-      getHead ().handleOutOfBandNode (aOutOfBandNode);
-    }
   }
 
   @Nonnull
@@ -182,22 +214,14 @@ public class HCHtml extends AbstractHCBaseNode
     }
     aRoot.setAttribute (CXML.XML_ATTR_XMLNS, m_eHTMLVersion.getXMLNamespace ());
 
+    _performCustomizations (aConversionSettings);
+
     // Use the getter, to ensure the elements are not null
-    final HCHead aHead = getHead ();
-    final HCBody aBody = getBody ();
-
-    // Create body first
-    if (HCPerformanceSettings.isJavaScriptAtEnd ())
-      aBody.handleOutOfBandNode (aBody.getOutOfBandNode (aConversionSettings));
-
-    final IMicroNode eBody = aBody.getAsNode (aConversionSettings);
+    final IMicroNode eBody = getBody ().getAsNode (aConversionSettings);
     aRoot.appendChild (eBody);
 
-    if (!HCPerformanceSettings.isJavaScriptAtEnd ())
-      copyOutOfBandNodesFromBodyToHead (aConversionSettings);
-
     // Create head after body but insert it before the body
-    final IMicroNode eHead = aHead.getAsNode (aConversionSettings);
+    final IMicroNode eHead = getHead ().getAsNode (aConversionSettings);
     aRoot.insertAtIndex (0, eHead);
 
     // Done!
@@ -219,7 +243,7 @@ public class HCHtml extends AbstractHCBaseNode
                             .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)
                             .appendIfNotNull ("body", m_aBody)
-                            .append ("copiedOutOfBandNodes", m_bCopiedOutOfBandNodes)
+                            .append ("prepared", m_bPrepared)
                             .toString ();
   }
 }

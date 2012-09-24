@@ -18,13 +18,10 @@
 package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Implementation of a node that is ONLY an out-of-band node!
@@ -32,7 +29,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * @author philip
  */
 @OutOfBandNode
-public final class HCOutOfBandNode extends AbstractHCNode
+public final class HCOutOfBandNode extends AbstractHCWrappingNode
 {
   private final IHCBaseNode m_aOutOfBandNode;
 
@@ -43,26 +40,8 @@ public final class HCOutOfBandNode extends AbstractHCNode
     m_aOutOfBandNode = aOutOfBandNode;
   }
 
-  @Nullable
-  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    return null;
-  }
-
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Nonnull
-  public IHCBaseNode getOutOfBandNode ()
-  {
-    return m_aOutOfBandNode;
-  }
-
-  @Nonnull
-  @Override
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public IHCBaseNode getWrappedNode ()
   {
     return m_aOutOfBandNode;
   }

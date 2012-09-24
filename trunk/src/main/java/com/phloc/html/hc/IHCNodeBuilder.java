@@ -15,28 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc;
 
-import java.io.Serializable;
-
-import javax.annotation.Nonnull;
-
-import com.phloc.html.hc.IHCBaseNode;
+import javax.annotation.Nullable;
 
 /**
- * Interface for handling custom out-of-band nodes in the HEAD elements
+ * Builder pattern for HC* nodes.
  * 
  * @author philip
  */
-public interface IHCHeadOutOfBandNodeHandler extends Serializable
+public interface IHCNodeBuilder
 {
   /**
-   * Handle ouf-of-band nodes in an &lt;head> element
-   * 
-   * @param aHead
-   *        The head node that has the out-of-band-node
-   * @param aOutOfBandNode
-   *        The out of band node to be handled. Never <code>null</code>.
+   * @return The built HC node. May be <code>null</code>.
    */
-  void handleOutOfBandNode (@Nonnull HCHead aHead, @Nonnull IHCBaseNode aOutOfBandNode);
+  @Nullable
+  IHCNode build ();
 }

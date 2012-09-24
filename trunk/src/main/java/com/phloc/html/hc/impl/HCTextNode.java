@@ -82,8 +82,9 @@ public class HCTextNode extends AbstractHCNode
     return m_sText;
   }
 
+  @Override
   @Nonnull
-  public IMicroText getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroText internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return new MicroText (m_sText).setEscape (m_bEscape);
   }

@@ -15,28 +15,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
-
-import java.io.Serializable;
+package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.html.hc.IHCWrappingNode;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
- * Interface for handling custom out-of-band nodes in the BODY elements
+ * Abstract implementation of {@link IHCWrappingNode}
  * 
  * @author philip
  */
-public interface IHCBodyOutOfBandNodeHandler extends Serializable
+public abstract class AbstractHCWrappingNode extends AbstractHCNode implements IHCWrappingNode
 {
-  /**
-   * Handle ouf-of-band nodes in an &lt;body> element
-   * 
-   * @param aBody
-   *        The body node that has the out-of-band-node
-   * @param aOutOfBandNode
-   *        The out of band node to be handled. Never <code>null</code>.
-   */
-  void handleOutOfBandNode (@Nonnull HCBody aBody, @Nonnull IHCBaseNode aOutOfBandNode);
+  @Nonnull
+  public String getPlainText ()
+  {
+    return getWrappedNode ().getPlainText ();
+  }
+
+  @Override
+  @Nullable
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return getWrappedNode ().getAsNode (aConversionSettings);
+  }
 }

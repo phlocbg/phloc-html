@@ -48,23 +48,22 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
-import com.phloc.html.hc.impl.HCConditionalCommentNode;
-import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 
 /**
  * Represents an HTML &lt;head&gt; element
- *
+ * 
  * @author philip
  */
-public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
+public class HCHead extends AbstractHCBaseNode
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
 
@@ -76,8 +75,6 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
   private final List <IHCNode> m_aCSS = new ArrayList <IHCNode> ();
   private final List <IHCNode> m_aJS = new ArrayList <IHCNode> ();
-  private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-  private IHCHeadOutOfBandNodeHandler m_aOutOfBandHandler = new HCHeadDefaultJQueryOutOfBandHandler ();
 
   public HCHead ()
   {}
@@ -194,7 +191,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Add a link object to the head.
-   *
+   * 
    * @param aLink
    *        The link to be added. May not be <code>null</code>.
    * @return this
@@ -210,7 +207,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Add a link object to the head at the specified position.
-   *
+   * 
    * @param nIndex
    *        The index where the links should be added (counting link elements
    *        only)
@@ -260,7 +257,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   // CSS handling
   //
 
-  private static boolean _isValidCSSNode (@Nonnull final IHCBaseNode aNode)
+  public static boolean isValidCSSNode (@Nonnull final IHCBaseNode aNode)
   {
     // Direct CSS node?
     if (aNode instanceof IHCCSSNode)
@@ -271,8 +268,8 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
       return true;
     }
     // Conditional comment?
-    if (aNode instanceof HCConditionalCommentNode)
-      return _isValidCSSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    if (aNode instanceof IHCWrappingNode)
+      return isValidCSSNode (((IHCWrappingNode) aNode).getWrappedNode ());
     return false;
   }
 
@@ -281,7 +278,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
-    if (!_isValidCSSNode (aCSS))
+    if (!isValidCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (aCSS);
     return this;
@@ -292,7 +289,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
-    if (!_isValidCSSNode (aCSS))
+    if (!isValidCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (nIndex, aCSS);
     return this;
@@ -326,20 +323,20 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   // JS handling
   //
 
-  private static boolean _isValidJSNode (@Nonnull final IHCBaseNode aNode)
+  public static boolean isValidJSNode (@Nonnull final IHCBaseNode aNode)
   {
     // Direct JS node?
     if (aNode instanceof IHCJSNode)
       return true;
     // Conditional comment?
-    if (aNode instanceof HCConditionalCommentNode)
-      return _isValidJSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    if (aNode instanceof IHCWrappingNode)
+      return isValidJSNode (((IHCWrappingNode) aNode).getWrappedNode ());
     return false;
   }
 
   /**
    * Append some JavaScript code
-   *
+   * 
    * @param aJS
    *        The JS to be added. May not be <code>null</code>.
    * @return this
@@ -349,7 +346,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   {
     if (aJS == null)
       throw new NullPointerException ("js");
-    if (!_isValidJSNode (aJS))
+    if (!isValidJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (aJS);
     return this;
@@ -357,7 +354,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Append some JavaScript code at the specified index
-   *
+   * 
    * @param nIndex
    *        The index where the JS should be added (counting only JS elements)
    * @param aJS
@@ -369,7 +366,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   {
     if (aJS == null)
       throw new NullPointerException ("js");
-    if (!_isValidJSNode (aJS))
+    if (!isValidJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (nIndex, aJS);
     return this;
@@ -400,64 +397,6 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
   {
     m_aJS.clear ();
     return this;
-  }
-
-  //
-  // out-of-band-node handling
-  //
-
-  /**
-   * Set a custom of of band handler, that performs the actions
-   *
-   * @param aOutOfBandHandler
-   *        The new out of band handler. May not be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  public HCHead setOutOfBandHandler (@Nonnull final IHCHeadOutOfBandNodeHandler aOutOfBandHandler)
-  {
-    if (aOutOfBandHandler == null)
-      throw new NullPointerException ("outOfBandNodeHandler");
-    m_aOutOfBandHandler = aOutOfBandHandler;
-    return this;
-  }
-
-  /**
-   * @return the installed out-of-band-node handler. Never <code>null</code> .
-   */
-  @Nonnull
-  public IHCHeadOutOfBandNodeHandler getOutOfBandHandler ()
-  {
-    return m_aOutOfBandHandler;
-  }
-
-  @Nonnull
-  public HCHead addOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
-  {
-    if (aOutOfBandNode != null)
-      m_aOutOfBandNodes.add (aOutOfBandNode);
-    return this;
-  }
-
-  /**
-   * Handle an out-of-band node as created by the HTML body.
-   *
-   * @param aOutOfBandNode
-   *        The out-of-band-node to handle. May be <code>null</code>.
-   */
-  public void handleOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
-  {
-    // Only do something if there is something out of band
-    if (aOutOfBandNode != null)
-      m_aOutOfBandHandler.handleOutOfBandNode (this, aOutOfBandNode);
-  }
-
-  public IHCBaseNode getOutOfBandNode ()
-  {
-    final HCNodeList ret = new HCNodeList ();
-    if (!m_aOutOfBandNodes.isEmpty ())
-      ret.addChildren (m_aOutOfBandNodes);
-    return ret.getAsSimpleNode ();
   }
 
   //
@@ -569,10 +508,6 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
     // JS files
     emitJS (eHead, aConversionSettings);
 
-    // out-of-band-nodes at the end
-    for (final IHCBaseNode aCustomNode : m_aOutOfBandNodes)
-      eHead.appendChild (aCustomNode.getAsNode (aConversionSettings));
-
     // Ensure tag is not self-closed
     if (!eHead.hasChildren () && EHTMLElement.HEAD.mayNotBeSelfClosed ())
       eHead.appendText ("");
@@ -599,8 +534,6 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
                             .appendIfNotNull ("links", m_aLinks)
                             .appendIfNotNull ("CSS", m_aCSS)
                             .appendIfNotNull ("JS", m_aJS)
-                            .appendIfNotNull ("outOfBandNodes", m_aOutOfBandNodes)
-                            .appendIfNotNull ("outOfBandHandler", m_aOutOfBandHandler)
                             .toString ();
   }
 }

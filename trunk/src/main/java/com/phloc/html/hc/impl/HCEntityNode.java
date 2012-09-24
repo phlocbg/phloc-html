@@ -52,8 +52,9 @@ public class HCEntityNode extends AbstractHCNode
     return m_aEntity;
   }
 
+  @Override
   @Nonnull
-  public IMicroEntityReference getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroEntityReference internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return new MicroEntityReference (m_aEntity.getEntityName ());
   }

@@ -17,10 +17,16 @@
  */
 package com.phloc.html.hc.customize;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
@@ -30,6 +36,10 @@ import com.phloc.html.hc.CHCParam;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.api.IHCJSNode;
+import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCButton_Submit;
 import com.phloc.html.hc.html.HCCheckBox;
@@ -37,13 +47,18 @@ import com.phloc.html.hc.html.HCEdit;
 import com.phloc.html.hc.html.HCEditFile;
 import com.phloc.html.hc.html.HCEditPassword;
 import com.phloc.html.hc.html.HCForm;
+import com.phloc.html.hc.html.HCHead;
 import com.phloc.html.hc.html.HCHiddenField;
+import com.phloc.html.hc.html.HCLink;
+import com.phloc.html.hc.html.HCNoScript;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.HCScriptOnDocumentReady;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSInvocation;
 import com.phloc.html.js.builder.jquery.JQuery;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
  * A helper class that centrally adds all non-common customizations
@@ -53,33 +68,36 @@ import com.phloc.html.js.builder.jquery.JQuery;
 @Immutable
 public class HCDefaultCustomizer implements IHCCustomizer
 {
-  private static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
-  private static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
-  private static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit");
-  private static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file");
-  private static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password");
-  private static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden");
-  private static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
+  protected static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
+  protected static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
+  protected static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit");
+  protected static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file");
+  protected static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password");
+  protected static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden");
+  protected static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
 
   // For controls only
-  private static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
-  private static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
+  protected static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
+  protected static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
 
   // For buttons
-  private static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
+  protected static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
 
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCDefaultCustomizer.class);
   private static final JSInvocation JS_BLUR = JSExpr.invoke ("blur");
 
   public HCDefaultCustomizer ()
   {}
 
   @Nonnull
-  private static HCButton _createFakeSubmitButton ()
+  protected HCButton createFakeSubmitButton ()
   {
     return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
   }
 
-  public void customizeHCElement (@Nonnull final IHCElement <?> aElement, @Nonnull final EHTMLVersion eHTMLVersion)
+  public void customizeHCElement (@Nonnull final IHCNodeWithChildren <?> aParentElement,
+                                  @Nonnull final IHCElement <?> aElement,
+                                  @Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (aElement instanceof HCButton)
     {
@@ -116,7 +134,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
                 final HCForm aForm = (HCForm) aElement;
                 if (aForm.isSubmitPressingEnter ())
                 {
-                  final HCButton aButton = _createFakeSubmitButton ();
+                  final HCButton aButton = createFakeSubmitButton ();
                   aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
                   aForm.addChild (aButton);
                 }
@@ -148,17 +166,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
       // Read only?
       if (aCtrl.isReadonly ())
         aCtrl.addClass (CSS_CLASS_READONLY);
-    }
-  }
 
-  @Nullable
-  public IHCBaseNode getCustomOutOfBandNode (@Nonnull final IHCElement <?> aElement,
-                                             @Nonnull final EHTMLVersion eHTMLVersion)
-  {
-    if (aElement instanceof IHCControl <?>)
-    {
-      // Specific control stuff
-      final IHCControl <?> aCtrl = (IHCControl <?>) aElement;
       if (aCtrl.isFocused ())
       {
         // for focusing we need an ID!
@@ -167,10 +175,83 @@ public class HCDefaultCustomizer implements IHCCustomizer
 
         // Add this out of band node
         // Note: assuming jQuery
-        return new HCScript (JQuery.idRef (aCtrl.getID ()).focus ());
+        aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl.getID ()).focus ()));
       }
     }
-    return null;
+  }
+
+  @Nonnull
+  @OverrideOnDemand
+  protected List <IHCBaseNode> assembleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
+                                                       @Nonnull final HCHead aHead)
+  {
+    // Add all existing JS nodes from the head, as <script> is known to be out
+    // of band
+    final List <IHCBaseNode> aNodes = new ArrayList <IHCBaseNode> ();
+    aNodes.addAll (aHead.getAllJSNodes ());
+    aHead.removeAllJS ();
+
+    final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
+    for (final IHCBaseNode aOOBNode : aOutOfBandNodes)
+    {
+      if (aOOBNode instanceof HCScriptOnDocumentReady)
+        aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
+      else
+        if (aOOBNode instanceof HCScript)
+          aInlineJS.append ((HCScript) aOOBNode);
+        else
+          aNodes.add (aOOBNode);
+    }
+
+    if (!aInlineJS.isEmpty ())
+      aNodes.add (new HCScript (aInlineJS));
+
+    // on document ready always as last!
+    if (!aOnDocumentReadyJS.isEmpty ())
+      aNodes.add (new HCScript (JQuery.onDocumentReady (aOnDocumentReadyJS)));
+
+    return aNodes;
+  }
+
+  @OverrideOnDemand
+  protected boolean isBodyNode (@Nonnull final IHCBaseNode aOOBNode)
+  {
+    // This is the central place to change the location of JS code
+    if (aOOBNode instanceof IHCJSNode)
+      return false;
+
+    if (aOOBNode instanceof HCNoScript)
+      return true;
+
+    return false;
+  }
+
+  public void handleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
+                                    @Nonnull final HCHead aHead,
+                                    @Nonnull final HCBody aBody)
+  {
+    final List <IHCBaseNode> aNodes = assembleOutOfBandNodes (aOutOfBandNodes, aHead);
+
+    for (final IHCBaseNode aNode : aNodes)
+    {
+      if (isBodyNode (aNode))
+        aBody.addChild (aNode);
+      else
+      {
+        // It's a head node
+        if (HCHead.isValidCSSNode (aNode))
+          aHead.addCSS ((IHCNode) aNode);
+        else
+          if (HCHead.isValidJSNode (aNode))
+            aHead.addJS ((IHCNode) aNode);
+          else
+            if (aNode instanceof HCLink)
+              aHead.addLink ((HCLink) aNode);
+            else
+              s_aLogger.error ("Illegal head node: " + aNode);
+      }
+    }
   }
 
   @Override
