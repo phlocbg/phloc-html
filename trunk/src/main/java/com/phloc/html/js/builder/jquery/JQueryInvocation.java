@@ -43,6 +43,14 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
     super (lhs, method);
   }
 
+  /**
+   * Invoke an arbitrary function on this jQuery object.
+   * 
+   * @param sMethod
+   *        The method to be invoked. May neither be <code>null</code> nor
+   *        empty.
+   * @return A new jQuery invocation object. Never <code>null</code>.
+   */
   @Nonnull
   public JQueryInvocation jqinvoke (@Nonnull @Nonempty final String sMethod)
   {

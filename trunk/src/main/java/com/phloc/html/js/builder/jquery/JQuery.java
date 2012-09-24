@@ -531,6 +531,14 @@ public class JQuery
     return jQuery (JSExpr.THIS);
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aSelector
+   *        The selector to be used. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed selector:
+   *         <code>$('selector')</code>
+   */
   @Nonnull
   public static JQueryInvocation select (@Nonnull final IJQuerySelector aSelector)
   {
@@ -539,6 +547,14 @@ public class JQuery
     return jQuery (JSExpr.lit (aSelector.getAsString ()));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aSelectorList
+   *        The selector list to be used. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed selector:
+   *         <code>$('selector selector2')</code>
+   */
   @Nonnull
   public static JQueryInvocation select (@Nonnull final JQuerySelectorList aSelectorList)
   {
@@ -547,12 +563,27 @@ public class JQuery
     return jQuery (JSExpr.lit (aSelectorList.getAsString ()));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param sID
+   *        The ID to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed ID: <code>$('#id')</code>
+   */
   @Nonnull
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
     return select (JQuerySelector.id (sID));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aIDs
+   *        The IDs to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed IDs:
+   *         <code>$('#id1,#id2,#id3')</code>
+   */
   @Nonnull
   public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final String... aIDs)
   {
@@ -565,6 +596,14 @@ public class JQuery
     return select (JQuerySelector.multiple (aSelectors));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aIDs
+   *        The IDs to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed IDs:
+   *         <code>$('#id1,#id2,#id3')</code>
+   */
   @Nonnull
   public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final Iterable <String> aIDs)
   {
@@ -577,12 +616,27 @@ public class JQuery
     return select (JQuerySelector.multiple (aSelectors));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aCSSClass
+   *        The class to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed class: <code>$('.class')</code>
+   */
   @Nonnull
   public static JQueryInvocation classRef (@Nonnull final ICSSClassProvider aCSSClass)
   {
     return select (JQuerySelector.clazz (aCSSClass));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aCSSClasses
+   *        The classes to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed classes:
+   *         <code>$('.class1,.class2,.class3')</code>
+   */
   @Nonnull
   public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final ICSSClassProvider... aCSSClasses)
   {
@@ -595,6 +649,14 @@ public class JQuery
     return select (JQuerySelector.multiple (aSelectors));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aCSSClasses
+   *        The classes to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed classes:
+   *         <code>$('.class1,.class2,.class3')</code>
+   */
   @Nonnull
   public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final Iterable <ICSSClassProvider> aCSSClasses)
   {
@@ -607,25 +669,63 @@ public class JQuery
     return select (JQuerySelector.multiple (aSelectors));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param eElement
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element:
+   *         <code>$('element')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement)
   {
     return select (JQuerySelector.elementName (eElement));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param sElementName
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element:
+   *         <code>$('element')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
     return select (JQuerySelector.elementName (sElementName));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param eElement
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param aSelector
+   *        The additional selector to be appended to the element. E.g an ID or
+   *        a class selector. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element and selector:
+   *         <code>$('element#id')</code> or <code>$('element.class')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement,
                                                  @Nonnull final IJQuerySelector aSelector)
   {
-    return elementNameRef (eElement.getElementNameLowerCase (), aSelector);
+    return select (JQuerySelector.elementName (eElement).chain (aSelector));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param sElementName
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param aSelector
+   *        The additional selector to be appended to the element. E.g an ID or
+   *        a class selector. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element and selector:
+   *         <code>$('element#id')</code> or <code>$('element.class')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName,
                                                  @Nonnull final IJQuerySelector aSelector)
@@ -633,6 +733,16 @@ public class JQuery
     return select (JQuerySelector.elementName (sElementName).chain (aSelector));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param eElement
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param sID
+   *        The ID to be appended to the element. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element and ID:
+   *         <code>$('element#id')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameWithIDRef (@Nonnull final EHTMLElement eElement,
                                                        @Nonnull @Nonempty final String sID)
@@ -640,6 +750,16 @@ public class JQuery
     return elementNameRef (eElement, JQuerySelector.id (sID));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param sElementName
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param sID
+   *        The ID to be appended to the element. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed element and ID:
+   *         <code>$('element#id')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameWithIDRef (@Nonnull @Nonempty final String sElementName,
                                                        @Nonnull @Nonempty final String sID)
@@ -647,6 +767,17 @@ public class JQuery
     return elementNameRef (sElementName, JQuerySelector.id (sID));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param eElement
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param aCSSClass
+   *        The class to be appended to the element. May not be
+   *        <code>null</code>.
+   * @return A jQuery invocation with the passed element and class:
+   *         <code>$('element.class')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull final EHTMLElement eElement,
                                                           @Nonnull final ICSSClassProvider aCSSClass)
@@ -654,6 +785,17 @@ public class JQuery
     return elementNameRef (eElement, JQuerySelector.clazz (aCSSClass));
   }
 
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param sElementName
+   *        The HTML element to be selected. May not be <code>null</code>.
+   * @param aCSSClass
+   *        The class to be appended to the element. May not be
+   *        <code>null</code>.
+   * @return A jQuery invocation with the passed element and class:
+   *         <code>$('element.class')</code>
+   */
   @Nonnull
   public static JQueryInvocation elementNameWithClassRef (@Nonnull @Nonempty final String sElementName,
                                                           @Nonnull final ICSSClassProvider aCSSClass)

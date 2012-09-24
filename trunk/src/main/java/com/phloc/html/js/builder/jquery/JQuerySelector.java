@@ -254,6 +254,13 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("*");
   }
 
+  /**
+   * jQuery ID selection
+   * 
+   * @param sID
+   *        The ID to select
+   * @return <code>#id</code>
+   */
   @Nonnull
   public static IJQuerySelector id (@Nonnull @Nonempty final String sID)
   {
@@ -264,6 +271,13 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ('#' + RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1"));
   }
 
+  /**
+   * jQuery class selection
+   * 
+   * @param aCSSClass
+   *        The CSS class to select
+   * @return <code>.class</code>
+   */
   @Nonnull
   public static IJQuerySelector clazz (@Nonnull final ICSSClassProvider aCSSClass)
   {
@@ -272,6 +286,13 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ('.' + aCSSClass.getCSSClass ());
   }
 
+  /**
+   * jQuery element name selection
+   * 
+   * @param eHTMLElement
+   *        The HTML element to select
+   * @return <code>element</code>
+   */
   @Nonnull
   public static IJQuerySelector elementName (@Nonnull final EHTMLElement eHTMLElement)
   {
@@ -280,6 +301,13 @@ public final class JQuerySelector implements IJQuerySelector
     return elementName (eHTMLElement.getElementNameLowerCase ());
   }
 
+  /**
+   * jQuery element name selection
+   * 
+   * @param sElementName
+   *        The HTML element to select
+   * @return <code>element</code>
+   */
   @Nonnull
   public static IJQuerySelector elementName (@Nonnull @Nonempty final String sElementName)
   {
@@ -419,6 +447,10 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector (aPrevSelector.getAsString () + " ~ " + aSiblingsSelector.getAsString ());
   }
 
+  /**
+   * @param sAttrName
+   * @return <code>[attrName]</code>
+   */
   @Nonnull
   public static IJQuerySelector hasAttr (@Nonnull @Nonempty final String sAttrName)
   {
@@ -427,6 +459,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName|='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrContainsPrefix (@Nonnull @Nonempty final String sAttrName,
                                                     @Nonnull final String sAttrValue)
@@ -438,6 +475,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "|=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName*='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrContains (@Nonnull @Nonempty final String sAttrName,
                                               @Nonnull final String sAttrValue)
@@ -449,6 +491,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "*=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName~='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrContainsWord (@Nonnull @Nonempty final String sAttrName,
                                                   @Nonnull final String sAttrValue)
@@ -460,6 +507,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "~=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName$='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrEndsWith (@Nonnull @Nonempty final String sAttrName,
                                               @Nonnull final String sAttrValue)
@@ -471,6 +523,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "$=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrEquals (@Nonnull @Nonempty final String sAttrName, @Nonnull final String sAttrValue)
   {
@@ -481,6 +538,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName!='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrNotEquals (@Nonnull @Nonempty final String sAttrName,
                                                @Nonnull final String sAttrValue)
@@ -492,6 +554,11 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("[" + sAttrName + "!=" + JSStringLiteral.getAsString (sAttrValue) + "]");
   }
 
+  /**
+   * @param sAttrName
+   * @param sAttrValue
+   * @return <code>[attrName^='attrValue']</code>
+   */
   @Nonnull
   public static IJQuerySelector attrStartsWith (@Nonnull @Nonempty final String sAttrName,
                                                 @Nonnull final String sAttrValue)
