@@ -42,13 +42,6 @@ public class HCSource extends AbstractHCMediaElementChild <HCSource> implements 
     super (EHTMLElement.SOURCE);
   }
 
-  @Deprecated
-  public HCSource (@Nullable final ISimpleURL aSrc)
-  {
-    this ();
-    setSrc (aSrc);
-  }
-
   @Nullable
   public String getMedia ()
   {

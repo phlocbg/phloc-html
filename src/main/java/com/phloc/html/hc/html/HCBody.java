@@ -40,10 +40,9 @@ import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Represents an HTML &lt;body&gt; element
- * 
+ *
  * @author philip
  */
-@SuppressWarnings ("deprecation")
 public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IHasJSDeclarations
 {
   private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
@@ -57,7 +56,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
 
   /**
    * Set a custom of of band handler, that performs the actions
-   * 
+   *
    * @param aOutOfBandHandler
    *        The new out of band handler. May not be <code>null</code>.
    * @return this
@@ -82,7 +81,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
 
   /**
    * Handle an out-of-band node as created by the HTML body.
-   * 
+   *
    * @param aOutOfBandNode
    *        The out-of-band-node to handle. May be <code>null</code>.
    */
@@ -106,7 +105,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
 
   /**
    * Append some JavaScript code
-   * 
+   *
    * @param aJS
    *        The JS to be added. May not be <code>null</code>.
    * @return this
@@ -124,7 +123,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IH
 
   /**
    * Append some JavaScript code at the specified index
-   * 
+   *
    * @param nIndex
    *        The index where the JS should be added (counting only JS elements)
    * @param aJS

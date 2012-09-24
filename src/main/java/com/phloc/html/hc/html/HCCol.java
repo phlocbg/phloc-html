@@ -61,12 +61,6 @@ public class HCCol extends AbstractHCElement <HCCol>
     return CHTMLAttributeValues.STAR.equals (m_sWidth);
   }
 
-  @Deprecated
-  public boolean isStarWidth ()
-  {
-    return isStar ();
-  }
-
   /**
    * @return The width definition or <code>null</code> if no width is present
    */

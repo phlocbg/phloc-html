@@ -30,7 +30,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
 /**
  * Represents an HTML &lt;script&gt; element that loads the code from a source
  * URL.
- * 
+ *
  * @author philip
  * @see HCScript
  */
@@ -46,20 +46,6 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
   public HCScriptFile ()
   {
     super ();
-  }
-
-  @Deprecated
-  public HCScriptFile (@Nullable final ISimpleURL aSrc)
-  {
-    super ();
-    setSrc (aSrc);
-  }
-
-  @Deprecated
-  public HCScriptFile (@Nullable final ISimpleURL aSrc, final boolean bDefer)
-  {
-    this (aSrc);
-    setDefer (bDefer);
   }
 
   public boolean isInlineJS ()

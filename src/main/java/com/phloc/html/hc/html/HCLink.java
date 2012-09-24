@@ -38,7 +38,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;link&gt; element
- * 
+ *
  * @author philip
  */
 public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
@@ -55,21 +55,6 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   public HCLink ()
   {
     super (EHTMLElement.LINK);
-  }
-
-  @Deprecated
-  public HCLink (@Nullable final IHCLinkType aRel, @Nullable final ISimpleURL aHref)
-  {
-    this ();
-    setRel (aRel);
-    setHref (aHref);
-  }
-
-  @Deprecated
-  public HCLink (@Nullable final IHCLinkType eRel, @Nullable final IMimeType aType, @Nullable final ISimpleURL aHref)
-  {
-    this (eRel, aHref);
-    setType (aType);
   }
 
   public boolean isInlineCSS ()
@@ -248,7 +233,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 
   /**
    * Shortcut to create a &lt;link&gt; element specific to CSS
-   * 
+   *
    * @param aCSSURL
    *        The CSS URL to be referenced
    * @return Never <code>null</code>.

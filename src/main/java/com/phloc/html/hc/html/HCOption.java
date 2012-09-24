@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -50,19 +49,6 @@ public class HCOption extends AbstractHCElementWithChildren <HCOption>
   public HCOption ()
   {
     super (EHTMLElement.OPTION);
-  }
-
-  @Deprecated
-  public HCOption (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  @Deprecated
-  public HCOption (@Nullable final String sValue)
-  {
-    this ();
-    setValue (sValue);
   }
 
   public boolean isDisabled ()

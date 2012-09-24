@@ -51,7 +51,6 @@ import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CSSDeclarationList;
 import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.media.CSSMediaList;
@@ -98,14 +97,6 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   {
     super (EHTMLElement.STYLE);
     m_sContent = sContent;
-  }
-
-  @Deprecated
-  public HCStyle (@Nonnull final CascadingStyleSheet aCSS,
-                  @Nonnull final ECSSVersion eVersion,
-                  final boolean bOptimizedOutput) throws IOException
-  {
-    this (new CSSWriter (eVersion, bOptimizedOutput).getCSSAsString (aCSS));
   }
 
   public HCStyle (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException

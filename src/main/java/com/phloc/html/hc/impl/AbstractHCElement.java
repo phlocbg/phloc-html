@@ -65,7 +65,6 @@ import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
-@SuppressWarnings ("deprecation")
 public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
                                                                                                               IHCElement <THISTYPE>
 {
@@ -554,7 +553,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   /**
    * This method checks whether the node is suitable for conversion to an
    * IMicroElement.
-   * 
+   *
    * @param aConversionSettings
    *        The conversion settings to be used
    * @return <code>true</code> if the node can be converted to a node,
@@ -570,7 +569,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called once for each instead before the element itself is
    * created. Overwrite this method to perform actions that can only be done
    * when the element is build finally.
-   * 
+   *
    * @param aConversionSettings
    *        The conversion settings to be used
    */
@@ -582,7 +581,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called before the element itself is created. Overwrite this
    * method to perform actions that can only be done when the element is build
    * finally.
-   * 
+   *
    * @param aConversionSettings
    *        The conversion settings to be used
    */
@@ -604,7 +603,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   /**
    * Set all attributes and child elements of this object
-   * 
+   *
    * @param aElement
    *        The current micro element to be filled
    * @param aConversionSettings
@@ -705,7 +704,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called after the element itself was created and filled.
    * Overwrite this method to perform actions that can only be done after the
    * element was build finally.
-   * 
+   *
    * @param eElement
    *        The created micro element
    * @param aConversionSettings
