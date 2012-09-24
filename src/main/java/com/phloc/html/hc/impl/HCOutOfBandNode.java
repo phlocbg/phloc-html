@@ -30,7 +30,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
-public class HCOutOfBandNode extends AbstractHCNode
+public final class HCOutOfBandNode extends AbstractHCNode
 {
   private final IHCBaseNode m_aOutOfBandNode;
 
