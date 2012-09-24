@@ -26,8 +26,8 @@ import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
- * Settings interface that is used to convert HC* nodes to micro nodes, to text
- * and for consistency check.
+ * Settings interface that is used to convert HC* nodes to micro nodes, to plain
+ * text and for consistency checks.
  * 
  * @author philip
  */

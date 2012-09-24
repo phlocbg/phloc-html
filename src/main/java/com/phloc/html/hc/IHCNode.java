@@ -43,9 +43,10 @@ public interface IHCNode extends IHCBaseNode
    * Adds an out-of-band node to this node
    * 
    * @param aNode
-   *        The out-of-band node to add
+   *        The out-of-band node to add. May be <code>null</code> in which case
+   *        nothing happens.
    */
-  void addOutOfBandNode (IHCNode aNode);
+  void addOutOfBandNode (@Nullable IHCNode aNode);
 
   /**
    * Get this node wrapped in a conditional comment

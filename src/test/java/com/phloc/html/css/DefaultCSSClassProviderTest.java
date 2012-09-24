@@ -15,23 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource;
+package com.phloc.html.css;
 
-import javax.annotation.Nonnull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
-import com.phloc.html.condcomment.IHasConditionalComment;
-import com.phloc.html.hc.IHCConvertible;
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import org.junit.Test;
+
+import com.phloc.commons.mock.PhlocTestUtils;
 
 /**
- * Base interface for both CSS and JS declarations in HTML.
+ * Test class for class {@link DefaultCSSClassProvider}.
  * 
  * @author philip
  */
-@Deprecated
-public interface IHTMLResourceObject extends IHasConditionalComment, IHCConvertible
+public final class DefaultCSSClassProviderTest
 {
-  @Nonnull
-  IHCNode getAsHCNode (@Nonnull IHCConversionSettings aConversionSettings);
+  @Test
+  public void testBasic ()
+  {
+    final DefaultCSSClassProvider x = DefaultCSSClassProvider.create ("any");
+    assertNotNull (x);
+    assertEquals ("any", x.getCSSClass ());
+    assertSame (x, DefaultCSSClassProvider.create ("any"));
+    PhlocTestUtils.testDefaultImplementationWithDifferentContentObject (x, DefaultCSSClassProvider.create ("anyOther"));
+  }
 }

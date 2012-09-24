@@ -45,13 +45,14 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
     return new HCNodeList (false).addChildren (m_aOutOfBandNodes).getAsSimpleNode ();
   }
 
-  public void addOutOfBandNode (@Nonnull final IHCNode aNode)
+  public final void addOutOfBandNode (@Nullable final IHCNode aNode)
   {
-    if (aNode == null)
-      throw new NullPointerException ("node");
-    if (m_aOutOfBandNodes == null)
-      m_aOutOfBandNodes = new ArrayList <IHCNode> ();
-    m_aOutOfBandNodes.add (aNode);
+    if (aNode != null)
+    {
+      if (m_aOutOfBandNodes == null)
+        m_aOutOfBandNodes = new ArrayList <IHCNode> ();
+      m_aOutOfBandNodes.add (aNode);
+    }
   }
 
   @Nonnull
