@@ -57,25 +57,4 @@ public final class HCCenterTest
                              .getChildCount ());
     assertEquals (0, HCCenter.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCCenter ().hasChildren ());
-    assertEquals (0, new HCCenter ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCCenter ("Text").getChildCount ());
-    assertEquals (0, new HCCenter ((String) null).getChildCount ());
-    assertEquals (1, new HCCenter (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCCenter ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCCenter ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCCenter (new String [0]).getChildCount ());
-    assertEquals (0, new HCCenter ((String []) null).getChildCount ());
-    assertEquals (2, new HCCenter (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCCenter (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCCenter ((IHCNode []) null).getChildCount ());
-    assertEquals (2,
-                  new HCCenter (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCCenter (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

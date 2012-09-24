@@ -42,48 +42,6 @@ public class HCH5 extends AbstractHCElementWithChildren <HCH5>
     super (EHTMLElement.H5);
   }
 
-  @Deprecated
-  public HCH5 (@Nullable final IPredefinedLocaleTextProvider aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCH5 (@Nullable final String sChild)
-  {
-    this ();
-    addChild (sChild);
-  }
-
-  @Deprecated
-  public HCH5 (@Nullable final String... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCH5 (@Nullable final IHCNode aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCH5 (@Nullable final IHCNode... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCH5 (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
   /**
    * Create a new H5 element with the passed child text
    * 

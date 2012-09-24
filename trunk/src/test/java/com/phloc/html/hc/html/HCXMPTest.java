@@ -57,24 +57,4 @@ public final class HCXMPTest
                           .getChildCount ());
     assertEquals (0, HCXMP.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCXMP ().hasChildren ());
-    assertEquals (0, new HCXMP ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCXMP ("Text").getChildCount ());
-    assertEquals (0, new HCXMP ((String) null).getChildCount ());
-    assertEquals (1, new HCXMP (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCXMP ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCXMP ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCXMP (new String [0]).getChildCount ());
-    assertEquals (0, new HCXMP ((String []) null).getChildCount ());
-    assertEquals (2, new HCXMP (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCXMP (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCXMP ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCXMP (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCXMP (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

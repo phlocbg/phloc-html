@@ -57,24 +57,4 @@ public final class HCAbbrTest
                            .getChildCount ());
     assertEquals (0, HCAbbr.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCAbbr ().hasChildren ());
-    assertEquals (0, new HCAbbr ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCAbbr ("Text").getChildCount ());
-    assertEquals (0, new HCAbbr ((String) null).getChildCount ());
-    assertEquals (1, new HCAbbr (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCAbbr ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCAbbr ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCAbbr (new String [0]).getChildCount ());
-    assertEquals (0, new HCAbbr ((String []) null).getChildCount ());
-    assertEquals (2, new HCAbbr (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCAbbr (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCAbbr ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCAbbr (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCAbbr (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

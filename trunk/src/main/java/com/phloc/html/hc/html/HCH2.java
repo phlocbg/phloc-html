@@ -42,48 +42,6 @@ public class HCH2 extends AbstractHCElementWithChildren <HCH2>
     super (EHTMLElement.H2);
   }
 
-  @Deprecated
-  public HCH2 (@Nullable final IPredefinedLocaleTextProvider aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCH2 (@Nullable final String sChild)
-  {
-    this ();
-    addChild (sChild);
-  }
-
-  @Deprecated
-  public HCH2 (@Nullable final String... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCH2 (@Nullable final IHCNode aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCH2 (@Nullable final IHCNode... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCH2 (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
   /**
    * Create a new H2 element with the passed child text
    * 

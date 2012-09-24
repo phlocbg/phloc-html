@@ -57,25 +57,4 @@ public final class HCAddressTest
                               .getChildCount ());
     assertEquals (0, HCAddress.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCAddress ().hasChildren ());
-    assertEquals (0, new HCAddress ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCAddress ("Text").getChildCount ());
-    assertEquals (0, new HCAddress ((String) null).getChildCount ());
-    assertEquals (1, new HCAddress (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCAddress ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCAddress ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCAddress (new String [0]).getChildCount ());
-    assertEquals (0, new HCAddress ((String []) null).getChildCount ());
-    assertEquals (2, new HCAddress (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCAddress (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCAddress ((IHCNode []) null).getChildCount ());
-    assertEquals (2,
-                  new HCAddress (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCAddress (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

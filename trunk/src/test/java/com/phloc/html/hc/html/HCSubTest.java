@@ -57,24 +57,4 @@ public final class HCSubTest
                           .getChildCount ());
     assertEquals (0, HCSub.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCSub ().hasChildren ());
-    assertEquals (0, new HCSub ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCSub ("Text").getChildCount ());
-    assertEquals (0, new HCSub ((String) null).getChildCount ());
-    assertEquals (1, new HCSub (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCSub ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCSub ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCSub (new String [0]).getChildCount ());
-    assertEquals (0, new HCSub ((String []) null).getChildCount ());
-    assertEquals (2, new HCSub (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCSub (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCSub ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCSub (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCSub (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

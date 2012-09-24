@@ -35,18 +35,22 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
 {
-  private final List <IHCNode> m_aOutOfBandNodes = new ArrayList <IHCNode> ();
+  private List <IHCNode> m_aOutOfBandNodes;
 
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    if (m_aOutOfBandNodes.isEmpty ())
+    if (m_aOutOfBandNodes == null || m_aOutOfBandNodes.isEmpty ())
       return null;
     return new HCNodeList (false).addChildren (m_aOutOfBandNodes).getAsSimpleNode ();
   }
 
-  public void addOutOfBandNode (final IHCNode aNode)
+  public void addOutOfBandNode (@Nonnull final IHCNode aNode)
   {
+    if (aNode == null)
+      throw new NullPointerException ("node");
+    if (m_aOutOfBandNodes == null)
+      m_aOutOfBandNodes = new ArrayList <IHCNode> ();
     m_aOutOfBandNodes.add (aNode);
   }
 

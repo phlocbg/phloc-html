@@ -42,48 +42,6 @@ public class HCIns extends AbstractHCElementWithChildren <HCIns>
     super (EHTMLElement.INS);
   }
 
-  @Deprecated
-  public HCIns (@Nullable final IPredefinedLocaleTextProvider aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCIns (@Nullable final String sChild)
-  {
-    this ();
-    addChild (sChild);
-  }
-
-  @Deprecated
-  public HCIns (@Nullable final String... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCIns (@Nullable final IHCNode aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCIns (@Nullable final IHCNode... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCIns (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
   /**
    * Create a new INS element with the passed child text
    * 

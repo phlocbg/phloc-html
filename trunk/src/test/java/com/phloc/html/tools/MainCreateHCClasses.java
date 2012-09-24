@@ -53,48 +53,6 @@ public class MainCreateHCClasses
                                               "    super ($SUPERPARAM$);\r\n" +
                                               "  }\r\n" +
                                               "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final IPredefinedLocaleTextProvider aChild)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChild (aChild);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final String sChild)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChild (sChild);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final String... aChildren)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChildren (aChildren);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final IHCNode aChild)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChild (aChild);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final IHCNode... aChildren)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChildren (aChildren);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
-                                              "  @Deprecated\r\n" +
-                                              "  public HC$$ (@Nullable final Iterable <? extends IHCNode> aChildren)\r\n" +
-                                              "  {\r\n" +
-                                              "    this ();\r\n" +
-                                              "    addChildren (aChildren);\r\n" +
-                                              "  }\r\n" +
-                                              "\r\n" +
                                               "  /**\r\n" +
                                               "   * Create a new $$$ element with the passed child text\r\n" +
                                               "   * @param aChild The child text provider to be appended. May be <code>null</code>\r\n" +
@@ -217,28 +175,7 @@ public class MainCreateHCClasses
                                               "                         .getChildCount ());\r\n" +
                                               "    assertEquals (0, HC$$.create (new ArrayList <IHCNode> ()).getChildCount ());\r\n" +
                                               "  }\r\n" +
-                                              "\r\n" +
-                                              "  @SuppressWarnings (\"deprecation\")\r\n" +
-                                              "  @Test\r\n" +
-                                              "  public void testDeprecated ()\r\n" +
-                                              "  {\r\n" +
-                                              "    assertFalse (new HC$$ ().hasChildren ());\r\n" +
-                                              "    assertEquals (0, new HC$$ ((IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
-                                              "    assertEquals (1, new HC$$ (\"Text\").getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ ((String) null).getChildCount ());\r\n" +
-                                              "    assertEquals (1, new HC$$ (HCB.create (\"Bold\")).getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ ((IHCNode) null).getChildCount ());\r\n" +
-                                              "    assertEquals (3, new HC$$ (\"Hallo\", \"Welt\", \"!!!\").getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ (new String [0]).getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ ((String []) null).getChildCount ());\r\n" +
-                                              "    assertEquals (2, new HC$$ (HCB.create (\"Bold\"), HCI.create (\"Italic\")).getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ (new IHCNode [0]).getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ ((IHCNode []) null).getChildCount ());\r\n" +
-                                              "    assertEquals (2, new HC$$ (ContainerHelper.newList (HCB.create (\"Bold\"), HCI.create (\"Italic\"))).getChildCount ());\r\n" +
-                                              "    assertEquals (0, new HC$$ (new ArrayList <IHCNode> ()).getChildCount ());\r\n" +
-                                              "  }\r\n" +
-                                              "}\r\n" +
-                                              "";
+                                              "}\r\n";
 
   public static void main (final String [] args)
   {
