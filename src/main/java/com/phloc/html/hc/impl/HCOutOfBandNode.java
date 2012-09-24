@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
@@ -30,6 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
+@OutOfBandNode
 public final class HCOutOfBandNode extends AbstractHCNode
 {
   private final IHCBaseNode m_aOutOfBandNode;

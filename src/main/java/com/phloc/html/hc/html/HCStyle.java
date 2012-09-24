@@ -59,6 +59,7 @@ import com.phloc.css.writer.CSSWriter;
 import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -68,6 +69,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * 
  * @author philip
  */
+@OutOfBandNode
 public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
 {
   public static enum EMode
