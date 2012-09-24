@@ -218,8 +218,12 @@ public class HCDefaultCustomizer implements IHCCustomizer
   protected boolean isBodyNode (@Nonnull final IHCBaseNode aOOBNode)
   {
     // This is the central place to change the location of JS code
-    if (aOOBNode instanceof IHCJSNode)
-      return false;
+    {
+      if (aOOBNode instanceof HCScript)
+        return true;
+      if (aOOBNode instanceof IHCJSNode)
+        return false;
+    }
 
     if (aOOBNode instanceof HCNoScript)
       return true;
