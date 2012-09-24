@@ -61,10 +61,9 @@ import com.phloc.html.meta.IMetaElement;
 
 /**
  * Represents an HTML &lt;head&gt; element
- * 
+ *
  * @author philip
  */
-@SuppressWarnings ("deprecation")
 public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
@@ -186,16 +185,16 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
     }
     else
     {
-      addLink (new HCLink (EHCLinkType.SHORTCUT_ICON, aShortcutIconHref));
+      addLink (new HCLink ().setRel (EHCLinkType.SHORTCUT_ICON).setHref (aShortcutIconHref));
       // Required for IE:
-      addLink (new HCLink (EHCLinkType.ICON, CMimeType.IMAGE_ICON, aShortcutIconHref));
+      addLink (new HCLink ().setRel (EHCLinkType.ICON).setType (CMimeType.IMAGE_ICON).setHref (aShortcutIconHref));
     }
     return this;
   }
 
   /**
    * Add a link object to the head.
-   * 
+   *
    * @param aLink
    *        The link to be added. May not be <code>null</code>.
    * @return this
@@ -211,7 +210,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Add a link object to the head at the specified position.
-   * 
+   *
    * @param nIndex
    *        The index where the links should be added (counting link elements
    *        only)
@@ -340,7 +339,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Append some JavaScript code
-   * 
+   *
    * @param aJS
    *        The JS to be added. May not be <code>null</code>.
    * @return this
@@ -358,7 +357,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Append some JavaScript code at the specified index
-   * 
+   *
    * @param nIndex
    *        The index where the JS should be added (counting only JS elements)
    * @param aJS
@@ -409,7 +408,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Set a custom of of band handler, that performs the actions
-   * 
+   *
    * @param aOutOfBandHandler
    *        The new out of band handler. May not be <code>null</code>.
    * @return this
@@ -442,7 +441,7 @@ public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 
   /**
    * Handle an out-of-band node as created by the HTML body.
-   * 
+   *
    * @param aOutOfBandNode
    *        The out-of-band-node to handle. May be <code>null</code>.
    */

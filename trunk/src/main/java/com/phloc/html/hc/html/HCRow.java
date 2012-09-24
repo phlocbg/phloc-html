@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
@@ -503,20 +502,6 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, Abstrac
       for (final IHCNode aCellChild : aCellChildren)
         addCell (aCellChild);
     return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public HCRow addNonEmptyCell (@Nullable final String sCellText)
-  {
-    return addCell (StringHelper.hasNoText (sCellText) ? " " : sCellText);
-  }
-
-  @Deprecated
-  @Nonnull
-  public HCRow addNonEmptyCell (@Nonnegative final int nIndex, @Nullable final String sCellText)
-  {
-    return addCell (nIndex, StringHelper.hasNoText (sCellText) ? " " : sCellText);
   }
 
   /**

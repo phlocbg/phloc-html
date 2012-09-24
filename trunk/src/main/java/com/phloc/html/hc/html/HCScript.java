@@ -37,7 +37,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
- * 
+ *
  * @author philip
  * @see HCScriptFile
  */
@@ -95,16 +95,6 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   public IJSCodeProvider getJSCodeProvider ()
   {
     return m_aProvider;
-  }
-
-  /**
-   * @deprecated Use {@link #getJSCode()} instead
-   */
-  @Deprecated
-  @Nullable
-  public String getJSContent ()
-  {
-    return getJSCode ();
   }
 
   @Nullable
@@ -196,7 +186,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
    * Set how the content of script elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   * 
+   *
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */

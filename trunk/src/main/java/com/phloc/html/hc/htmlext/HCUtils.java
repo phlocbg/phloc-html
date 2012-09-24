@@ -46,18 +46,10 @@ import com.phloc.html.hc.impl.HCTextNode;
 public final class HCUtils
 {
   private static final char PATTERN_NEWLINE = '\n';
-  private static final String PATTERN_NEWLINE_STR = Character.toString (PATTERN_NEWLINE);
   private static final int PATTERN_NEWLINE_LENGTH = 1;
 
   private HCUtils ()
   {}
-
-  @Deprecated
-  @Nullable
-  public static String nl2br (@Nullable final String sText)
-  {
-    return StringHelper.replaceAll (sText, PATTERN_NEWLINE_STR, "<br/>");
-  }
 
   @Nonnull
   public static List <IHCNode> nl2brList (@Nullable final String sText)

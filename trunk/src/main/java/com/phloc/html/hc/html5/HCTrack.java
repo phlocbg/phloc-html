@@ -45,13 +45,6 @@ public class HCTrack extends AbstractHCMediaElementChild <HCTrack>
     super (EHTMLElement.TRACK);
   }
 
-  @Deprecated
-  public HCTrack (@Nullable final ISimpleURL aSrc)
-  {
-    this ();
-    setSrc (aSrc);
-  }
-
   @Nullable
   public String getKind ()
   {

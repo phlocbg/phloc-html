@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;img&gt; element
- * 
+ *
  * @author philip
  */
 public class HCImg extends AbstractHCElement <HCImg>
@@ -46,20 +46,6 @@ public class HCImg extends AbstractHCElement <HCImg>
   public HCImg ()
   {
     super (EHTMLElement.IMG);
-  }
-
-  @Deprecated
-  public HCImg (@Nullable final String sSrc)
-  {
-    this ();
-    setSrc (sSrc);
-  }
-
-  @Deprecated
-  public HCImg (@Nonnull final ISimpleURL aSrc)
-  {
-    this ();
-    setSrc (aSrc);
   }
 
   @Nullable
@@ -122,7 +108,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   /**
    * Scales the image so that neither with nor height are exceeded, keeping the
    * aspect ratio.
-   * 
+   *
    * @param nMaxWidth
    * @param nMaxHeight
    * @return the correctly resized image tag
