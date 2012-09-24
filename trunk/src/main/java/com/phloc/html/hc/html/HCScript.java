@@ -31,16 +31,18 @@ import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline content.
- *
+ * 
  * @author philip
  * @see HCScriptFile
  */
+@OutOfBandNode
 public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProvider
 {
   public static enum EMode
@@ -186,7 +188,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
    * Set how the content of script elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   *
+   * 
    * @param eMode
    *        The new mode to set. May not be <code>null</code>.
    */

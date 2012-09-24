@@ -30,6 +30,7 @@ import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCLinkType;
@@ -38,9 +39,10 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;link&gt; element
- *
+ * 
  * @author philip
  */
+@OutOfBandNode
 public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 {
   private IHCLinkType m_aRel;
@@ -233,7 +235,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 
   /**
    * Shortcut to create a &lt;link&gt; element specific to CSS
-   *
+   * 
    * @param aCSSURL
    *        The CSS URL to be referenced
    * @return Never <code>null</code>.

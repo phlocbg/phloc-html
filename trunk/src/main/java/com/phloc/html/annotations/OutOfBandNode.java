@@ -26,12 +26,12 @@ import java.lang.annotation.Target;
 /**
  * Marker annotation that a type is an out-of-band node.
  * 
- * @author boris
+ * @author philip
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
 @Target ({ ElementType.TYPE })
-public @interface OutOfBandNodes
+public @interface OutOfBandNode
 {
   String value() default "";
 }

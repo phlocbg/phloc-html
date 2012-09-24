@@ -25,15 +25,17 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
  * Represents an HTML &lt;script&gt; element that loads the code from a source
  * URL.
- *
+ * 
  * @author philip
  * @see HCScript
  */
+@OutOfBandNode
 public class HCScriptFile extends AbstractHCScript <HCScriptFile>
 {
   public static final boolean DEFAULT_DEFER = false;

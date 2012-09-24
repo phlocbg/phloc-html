@@ -19,6 +19,7 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.jquery.JQuery;
 
@@ -28,6 +29,7 @@ import com.phloc.html.js.builder.jquery.JQuery;
  * 
  * @author philip
  */
+@OutOfBandNode
 public class HCScriptOnDocumentReady extends HCScript
 {
   private final IJSCodeProvider m_aOnDocumentReadyCode;
