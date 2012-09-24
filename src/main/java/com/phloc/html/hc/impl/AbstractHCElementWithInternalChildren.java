@@ -41,7 +41,9 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <CHILDTYPE>
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
+                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
+                                                                                                                                                                                                      IHasChildrenSorted <CHILDTYPE>
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -214,7 +216,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final HCNodeList aCont = new HCNodeList ();
+    final HCNodeList aCont = new HCNodeList (false);
 
     // Of this
     aCont.addChild (super.getOutOfBandNode (aConversionSettings));

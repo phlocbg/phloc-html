@@ -49,7 +49,9 @@ import com.phloc.html.hc.impl.HCNodeList;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <IHCNode>
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
+                                                                                            AbstractHCElement <THISTYPE> implements
+                                                                                                                        IHasChildrenSorted <IHCNode>
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -679,7 +681,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nullable
   public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final HCNodeList aCont = new HCNodeList ();
+    final HCNodeList aCont = new HCNodeList (false);
     if (m_aHeaderRow != null)
       aCont.addChild (m_aHeaderRow.getOutOfBandNode (aConversionSettings));
     for (final HCRow aBodyRow : m_aBodyRows)

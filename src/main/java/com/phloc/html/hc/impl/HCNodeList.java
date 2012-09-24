@@ -24,6 +24,9 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
@@ -33,7 +36,10 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.conversion.HCConsistencyChecker;
+import com.phloc.html.hc.conversion.HCPerformanceSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.html.HCScript;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without
@@ -43,26 +49,38 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
 {
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCNodeList.class);
   private final List <IHCBaseNode> m_aNodes = new ArrayList <IHCBaseNode> ();
+  private final boolean m_bAutoHandleOutOfBoundNodes;
 
   public HCNodeList ()
-  {}
+  {
+    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
+  }
+
+  public HCNodeList (final boolean bAutoHandleOutOfBoundNodes)
+  {
+    m_bAutoHandleOutOfBoundNodes = bAutoHandleOutOfBoundNodes;
+  }
 
   @Deprecated
   public HCNodeList (@Nullable final IHCBaseNode aNode)
   {
+    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
     addChild (aNode);
   }
 
   @Deprecated
   public HCNodeList (@Nullable final IHCBaseNode... aNodes)
   {
+    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
     addChildren (aNodes);
   }
 
   @Deprecated
   public HCNodeList (@Nullable final Iterable <? extends IHCBaseNode> aNodes)
   {
+    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
     addChildren (aNodes);
   }
 
@@ -100,7 +118,13 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
           m_aNodes.add (aContainedNode);
       }
       else
-        m_aNodes.add (aNode);
+        if (m_bAutoHandleOutOfBoundNodes && aNode instanceof HCScript)
+        {
+          HCConsistencyChecker.warnInBandScript ((HCScript) aNode);
+          addOutOfBandNode ((HCScript) aNode);
+        }
+        else
+          m_aNodes.add (aNode);
     }
     return this;
   }
@@ -294,7 +318,8 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final HCNodeList aCont = new HCNodeList ();
+    final HCNodeList aCont = new HCNodeList (false);
+    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
     for (final IHCBaseNode aNode : m_aNodes)
       if (aNode instanceof IHCNode)
         aCont.addChild (((IHCNode) aNode).getOutOfBandNode (aConversionSettings));

@@ -56,6 +56,7 @@ import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.hc.impl.HCConditionalCommentNode;
+import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 import com.phloc.html.resource.css.ICSSExternal;
@@ -68,7 +69,7 @@ import com.phloc.html.resource.js.IJSHTMLDefinition;
  * @author philip
  */
 @SuppressWarnings ("deprecation")
-public class HCHead extends AbstractHCBaseNode
+public class HCHead extends AbstractHCBaseNode implements IHasJSDeclarations
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
 
@@ -562,6 +563,14 @@ public class HCHead extends AbstractHCBaseNode
     // Only do something if there is something out of band
     if (aOutOfBandNode != null)
       m_aOutOfBandHandler.handleOutOfBandNode (this, aOutOfBandNode);
+  }
+
+  public IHCBaseNode getOutOfBandNode ()
+  {
+    final HCNodeList ret = new HCNodeList ();
+    if (!m_aOutOfBandNodes.isEmpty ())
+      ret.addChildren (m_aOutOfBandNodes);
+    return ret.getAsSimpleNode ();
   }
 
   //

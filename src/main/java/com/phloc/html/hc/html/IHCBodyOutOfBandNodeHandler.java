@@ -15,34 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.resource.js;
+package com.phloc.html.hc.html;
+
+import java.io.Serializable;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.hc.IHCBaseNode;
 
 /**
- * Provides a path to an external JS object.
+ * Interface for handling custom out-of-band nodes in the BODY elements
  * 
  * @author philip
  */
-public interface IJSPathProvider
+public interface IHCBodyOutOfBandNodeHandler extends Serializable
 {
   /**
-   * Get the path to this JavaScript resource. It is always classpath relative.
+   * Handle ouf-of-band nodes in an &lt;body> element
    * 
-   * @param bRegular
-   *        if <code>true</code> the regular version of item should be
-   *        retrieved, otherwise the minified version of the file.
-   * @return The path to the external JS item.
+   * @param aBody
+   *        The body node that has the out-of-band-node
+   * @param aOutOfBandNode
+   *        The out of band node to be handled. Never <code>null</code>.
    */
-  @Nonnull
-  @Nonempty
-  String getJSItemPath (boolean bRegular);
-
-  /**
-   * @return Whether or not this script can be bundled to a big JS profile. For
-   *         some files this is not possible (e.g. tinyMCE)
-   */
-  boolean canBeBundled ();
+  void handleOutOfBandNode (@Nonnull HCBody aBody, @Nonnull IHCBaseNode aOutOfBandNode);
 }

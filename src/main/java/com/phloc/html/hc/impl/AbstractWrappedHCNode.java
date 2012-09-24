@@ -74,7 +74,7 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
   }
 
   @Override
-  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getContainedHCNode ().getOutOfBandNode (aConversionSettings);
   }

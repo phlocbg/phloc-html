@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.GlobalDebug;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.annotations.DeprecatedInHTML32;
@@ -37,6 +38,7 @@ import com.phloc.html.hc.html.HCA;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCForm;
 import com.phloc.html.hc.html.HCPre;
+import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html5.HCMeter;
 import com.phloc.html.hc.html5.HCProgress;
 import com.phloc.html.hc.htmlext.HCUtils;
@@ -195,5 +197,13 @@ public final class HCConsistencyChecker
                                                     sHref +
                                                     "' seems to be already escaped - please use an unescaped URL!!");
     }
+  }
+
+  public static void warnInBandScript (@Nonnull final HCScript aScript)
+  {
+    if (GlobalDebug.isDebugMode ())
+      s_aLogger.warn ("Adding script as out-of-band node instead of child:" +
+                          aScript.getAsHTMLString (HCSettings.getConversionSettings (false)),
+                      new Exception ());
   }
 }

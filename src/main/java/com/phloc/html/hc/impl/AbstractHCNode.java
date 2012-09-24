@@ -17,6 +17,9 @@
  */
 package com.phloc.html.hc.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -32,10 +35,19 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
 {
+  private final List <IHCNode> m_aOutOfBandNodes = new ArrayList <IHCNode> ();
+
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return null;
+    if (m_aOutOfBandNodes.isEmpty ())
+      return null;
+    return new HCNodeList (false).addChildren (m_aOutOfBandNodes).getAsSimpleNode ();
+  }
+
+  public void addOutOfBandNode (final IHCNode aNode)
+  {
+    m_aOutOfBandNodes.add (aNode);
   }
 
   @Nonnull
