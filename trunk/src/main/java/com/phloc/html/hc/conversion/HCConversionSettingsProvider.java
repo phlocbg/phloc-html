@@ -70,27 +70,35 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
     return bIndentAndAlign ? m_aCS : _getOptimized ();
   }
 
-  public void setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
+  @Nonnull
+  public HCConversionSettingsProvider setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
   {
     m_aCS.setXMLWriterSettings (aXMLWriterSettings);
     m_aCSOptimized = null;
+    return this;
   }
 
-  public void setCSSWriterSettings (@Nonnull final CSSWriterSettings aCSSWriterSettings)
+  @Nonnull
+  public HCConversionSettingsProvider setCSSWriterSettings (@Nonnull final CSSWriterSettings aCSSWriterSettings)
   {
     m_aCS.setCSSWriterSettings (aCSSWriterSettings);
     m_aCSOptimized = null;
+    return this;
   }
 
-  public void setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
+  @Nonnull
+  public HCConversionSettingsProvider setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
   {
     m_aCS.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
     m_aCSOptimized = null;
+    return this;
   }
 
-  public void setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
+  @Nonnull
+  public HCConversionSettingsProvider setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
   {
     m_aCS.setCustomizer (aCustomizer);
     m_aCSOptimized = null;
+    return this;
   }
 }
