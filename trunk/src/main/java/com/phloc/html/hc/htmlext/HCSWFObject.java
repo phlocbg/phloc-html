@@ -26,7 +26,9 @@ import javax.annotation.Nullable;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.ECSSUnit;
+import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.impl.AbstractWrappedHCNode;
@@ -283,6 +285,14 @@ public class HCSWFObject extends AbstractWrappedHCNode
     if (StringHelper.hasNoText (m_sRequiredSWFVersion))
       throw new IllegalStateException ("No required SWF version present");
 
+    final HCNodeList ret = new HCNodeList ();
+    ret.addChild (new HCDiv ().setID (m_sHTMLContainerID));
+    return ret;
+  }
+
+  @Override
+  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
     final JSAssocArray jsFlashvars = new JSAssocArray ();
     if (m_aFlashVars != null)
       for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
@@ -314,8 +324,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
       aInvocation.argNull ();
     aInvocation.arg (jsFlashvars).arg (jsParams).arg (jsAttributes);
 
-    final HCNodeList ret = new HCNodeList ();
-    ret.addChild (new HCDiv ().setID (m_sHTMLContainerID));
+    final HCNodeList ret = new HCNodeList (false);
     ret.addChild (new HCScript (aInvocation));
     return ret;
   }

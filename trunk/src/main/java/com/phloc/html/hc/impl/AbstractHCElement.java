@@ -66,7 +66,8 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
 @SuppressWarnings ("deprecation")
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
+                                                                                                              IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -760,7 +761,15 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Nullable
   public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this, aConversionSettings.getHTMLVersion ());
+    final HCNodeList aCont = new HCNodeList (false);
+
+    // Of this
+    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
+
+    // customized nodes
+    aCont.addChild (aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this,
+                                                                                 aConversionSettings.getHTMLVersion ()));
+    return aCont.getAsSimpleNode ();
   }
 
   @Override

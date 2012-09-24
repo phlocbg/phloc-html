@@ -33,6 +33,7 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConversionSettings;
+import com.phloc.html.hc.conversion.HCPerformanceSettings;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
@@ -186,11 +187,14 @@ public class HCHtml extends AbstractHCBaseNode
     final HCBody aBody = getBody ();
 
     // Create body first
+    if (HCPerformanceSettings.isJavaScriptAtEnd ())
+      aBody.handleOutOfBandNode (aBody.getOutOfBandNode (aConversionSettings));
+
     final IMicroNode eBody = aBody.getAsNode (aConversionSettings);
     aRoot.appendChild (eBody);
 
-    // Handle out of band nodes
-    copyOutOfBandNodesFromBodyToHead (aConversionSettings);
+    if (!HCPerformanceSettings.isJavaScriptAtEnd ())
+      copyOutOfBandNodesFromBodyToHead (aConversionSettings);
 
     // Create head after body but insert it before the body
     final IMicroNode eHead = aHead.getAsNode (aConversionSettings);

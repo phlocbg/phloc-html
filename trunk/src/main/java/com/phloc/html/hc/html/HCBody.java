@@ -20,27 +20,154 @@ package com.phloc.html.hc.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+import com.phloc.commons.annotations.OverrideOnDemand;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.HCConditionalCommentNode;
 import com.phloc.html.hc.impl.HCNodeList;
+import com.phloc.html.resource.js.IJSHTMLDefinition;
 
 /**
  * Represents an HTML &lt;body&gt; element
  * 
  * @author philip
  */
-public class HCBody extends AbstractHCElementWithChildren <HCBody>
+@SuppressWarnings ("deprecation")
+public class HCBody extends AbstractHCElementWithChildren <HCBody> implements IHasJSDeclarations
 {
   private final List <IHCBaseNode> m_aOutOfBandNodes = new ArrayList <IHCBaseNode> ();
+  private final List <Object> m_aJS = new ArrayList <Object> ();
+  private IHCBodyOutOfBandNodeHandler m_aOutOfBandHandler = new HCBodyDefaultJQueryOutOfBandHandler ();
 
   public HCBody ()
   {
     super (EHTMLElement.BODY);
+  }
+
+  /**
+   * Set a custom of of band handler, that performs the actions
+   * 
+   * @param aOutOfBandHandler
+   *        The new out of band handler. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCBody setOutOfBandHandler (@Nonnull final IHCBodyOutOfBandNodeHandler aOutOfBandHandler)
+  {
+    if (aOutOfBandHandler == null)
+      throw new NullPointerException ("outOfBandNodeHandler");
+    m_aOutOfBandHandler = aOutOfBandHandler;
+    return this;
+  }
+
+  /**
+   * @return the installed out-of-band-node handler. Never <code>null</code> .
+   */
+  @Nonnull
+  public IHCBodyOutOfBandNodeHandler getOutOfBandHandler ()
+  {
+    return m_aOutOfBandHandler;
+  }
+
+  /**
+   * Handle an out-of-band node as created by the HTML body.
+   * 
+   * @param aOutOfBandNode
+   *        The out-of-band-node to handle. May be <code>null</code>.
+   */
+  public void handleOutOfBandNode (@Nullable final IHCBaseNode aOutOfBandNode)
+  {
+    // Only do something if there is something out of band
+    if (aOutOfBandNode != null)
+      m_aOutOfBandHandler.handleOutOfBandNode (this, aOutOfBandNode);
+  }
+
+  /**
+   * Append some JavaScript code
+   * 
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCBody addJS (@Nonnull final IHCNode aJS)
+  {
+    if (aJS == null)
+      throw new NullPointerException ("js");
+    if (!_isValidJSNode (aJS))
+      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
+    m_aJS.add (aJS);
+    return this;
+  }
+
+  /**
+   * @return The number of contained JS elements
+   */
+  @Nonnegative
+  public int getJSCount ()
+  {
+    return m_aJS.size ();
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IHCNode> getAllJSNodes ()
+  {
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
+    for (final Object aObj : m_aJS)
+      if (aObj instanceof IHCNode)
+        ret.add ((IHCNode) aObj);
+    return ret;
+  }
+
+  @Nonnull
+  public HCBody removeAllJS ()
+  {
+    m_aJS.clear ();
+    return this;
+  }
+
+  /**
+   * Append some JavaScript code at the specified index
+   * 
+   * @param nIndex
+   *        The index where the JS should be added (counting only JS elements)
+   * @param aJS
+   *        The JS to be added. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  public HCBody addJS (@Nonnegative final int nIndex, @Nonnull final IHCNode aJS)
+  {
+    if (aJS == null)
+      throw new NullPointerException ("js");
+    if (!_isValidJSNode (aJS))
+      throw new IllegalArgumentException (aJS + " is not a valid JS node!");
+    m_aJS.add (nIndex, aJS);
+    return this;
+  }
+
+  private static boolean _isValidJSNode (@Nonnull final IHCBaseNode aNode)
+  {
+    // Direct JS node?
+    if (aNode instanceof IHCJSNode)
+      return true;
+    // Conditional comment?
+    if (aNode instanceof HCConditionalCommentNode)
+      return _isValidJSNode (((HCConditionalCommentNode) aNode).getWrappedNode ());
+    return false;
   }
 
   public void addOutOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
@@ -69,7 +196,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     }
 
     // Concatenate nodes
-    final HCNodeList ret = new HCNodeList ();
+    final HCNodeList ret = new HCNodeList (false);
     ret.addChild (aOutOfBandNode);
     ret.addChildren (m_aOutOfBandNodes);
     return ret.getAsSimpleNode ();
@@ -81,5 +208,28 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("outOfBandNodes", m_aOutOfBandNodes)
                             .toString ();
+  }
+
+  @OverrideOnDemand
+  protected void emitJS (@Nonnull final IMicroElement eBody, @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    for (final Object aJS : m_aJS)
+    {
+      if (aJS instanceof IJSHTMLDefinition)
+        eBody.appendChild (((IJSHTMLDefinition) aJS).getAsNode (aConversionSettings));
+      else
+        eBody.appendChild (((IHCNode) aJS).getAsNode (aConversionSettings));
+    }
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void applyProperties (@Nonnull final IMicroElement eHead,
+                                  @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    super.applyProperties (eHead, aConversionSettings);
+    // JS files
+    emitJS (eHead, aConversionSettings);
   }
 }

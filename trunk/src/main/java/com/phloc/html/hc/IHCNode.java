@@ -40,6 +40,14 @@ public interface IHCNode extends IHCBaseNode
   IHCBaseNode getOutOfBandNode (@Nonnull IHCConversionSettings aConversionSettings);
 
   /**
+   * Adds an out-of-band node to this node
+   * 
+   * @param aNode
+   *        The out-of-band node to add
+   */
+  void addOutOfBandNode (IHCNode aNode);
+
+  /**
    * Get this node wrapped in a conditional comment
    * 
    * @param sCondition
