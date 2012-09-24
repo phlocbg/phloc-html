@@ -155,7 +155,7 @@ public final class HCSettings
   }
 
   /**
-   * Get the out-of-band node for the passed HC node using the conversion
+   * Get the out-of-band node for the passed HC node using this conversion
    * settings provider.
    * 
    * @param aHCNode
