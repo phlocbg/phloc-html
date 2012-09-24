@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 public final class ConstantJSPathProvider implements IJSPathProvider
 {
   private final String m_sPath;
-  private final boolean m_bBundle;
+  private final boolean m_bCanBeBundled;
 
   public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath)
   {
@@ -40,7 +40,7 @@ public final class ConstantJSPathProvider implements IJSPathProvider
     if (!JSFilenameHelper.isJSFilename (sPath))
       throw new IllegalArgumentException ("path");
     m_sPath = sPath;
-    m_bBundle = bCanBeBundled;
+    m_bCanBeBundled = bCanBeBundled;
   }
 
   @Nonnull
@@ -51,14 +51,14 @@ public final class ConstantJSPathProvider implements IJSPathProvider
   }
 
   @Override
-  public String toString ()
+  public boolean canBeBundled ()
   {
-    return new ToStringGenerator (this).append ("path", m_sPath).toString ();
+    return m_bCanBeBundled;
   }
 
   @Override
-  public boolean canBeBundled ()
+  public String toString ()
   {
-    return m_bBundle;
+    return new ToStringGenerator (this).append ("path", m_sPath).append ("canBeBundled", m_bCanBeBundled).toString ();
   }
 }
