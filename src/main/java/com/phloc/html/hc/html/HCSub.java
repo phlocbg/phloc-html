@@ -42,48 +42,6 @@ public class HCSub extends AbstractHCElementWithChildren <HCSub>
     super (EHTMLElement.SUB);
   }
 
-  @Deprecated
-  public HCSub (@Nullable final IPredefinedLocaleTextProvider aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCSub (@Nullable final String sChild)
-  {
-    this ();
-    addChild (sChild);
-  }
-
-  @Deprecated
-  public HCSub (@Nullable final String... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCSub (@Nullable final IHCNode aChild)
-  {
-    this ();
-    addChild (aChild);
-  }
-
-  @Deprecated
-  public HCSub (@Nullable final IHCNode... aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
-  @Deprecated
-  public HCSub (@Nullable final Iterable <? extends IHCNode> aChildren)
-  {
-    this ();
-    addChildren (aChildren);
-  }
-
   /**
    * Create a new SUB element with the passed child text
    * 

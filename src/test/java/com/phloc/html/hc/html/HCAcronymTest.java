@@ -57,25 +57,4 @@ public final class HCAcronymTest
                               .getChildCount ());
     assertEquals (0, HCAcronym.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCAcronym ().hasChildren ());
-    assertEquals (0, new HCAcronym ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCAcronym ("Text").getChildCount ());
-    assertEquals (0, new HCAcronym ((String) null).getChildCount ());
-    assertEquals (1, new HCAcronym (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCAcronym ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCAcronym ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCAcronym (new String [0]).getChildCount ());
-    assertEquals (0, new HCAcronym ((String []) null).getChildCount ());
-    assertEquals (2, new HCAcronym (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCAcronym (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCAcronym ((IHCNode []) null).getChildCount ());
-    assertEquals (2,
-                  new HCAcronym (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCAcronym (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

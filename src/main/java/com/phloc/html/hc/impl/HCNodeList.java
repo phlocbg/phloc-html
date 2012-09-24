@@ -24,9 +24,6 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
@@ -49,39 +46,17 @@ import com.phloc.html.hc.html.HCScript;
  */
 public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCNodeList.class);
   private final List <IHCBaseNode> m_aNodes = new ArrayList <IHCBaseNode> ();
   private final boolean m_bAutoHandleOutOfBoundNodes;
 
   public HCNodeList ()
   {
-    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
+    this (HCPerformanceSettings.isJavaScriptAtEnd ());
   }
 
   public HCNodeList (final boolean bAutoHandleOutOfBoundNodes)
   {
     m_bAutoHandleOutOfBoundNodes = bAutoHandleOutOfBoundNodes;
-  }
-
-  @Deprecated
-  public HCNodeList (@Nullable final IHCBaseNode aNode)
-  {
-    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
-    addChild (aNode);
-  }
-
-  @Deprecated
-  public HCNodeList (@Nullable final IHCBaseNode... aNodes)
-  {
-    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
-    addChildren (aNodes);
-  }
-
-  @Deprecated
-  public HCNodeList (@Nullable final Iterable <? extends IHCBaseNode> aNodes)
-  {
-    m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
-    addChildren (aNodes);
   }
 
   public boolean hasChildren ()

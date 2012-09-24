@@ -57,24 +57,4 @@ public final class HCDivTest
                           .getChildCount ());
     assertEquals (0, HCDiv.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCDiv ().hasChildren ());
-    assertEquals (0, new HCDiv ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCDiv ("Text").getChildCount ());
-    assertEquals (0, new HCDiv ((String) null).getChildCount ());
-    assertEquals (1, new HCDiv (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCDiv ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCDiv ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCDiv (new String [0]).getChildCount ());
-    assertEquals (0, new HCDiv ((String []) null).getChildCount ());
-    assertEquals (2, new HCDiv (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCDiv (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCDiv ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCDiv (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCDiv (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

@@ -57,24 +57,4 @@ public final class HCEMTest
                          .getChildCount ());
     assertEquals (0, HCEM.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCEM ().hasChildren ());
-    assertEquals (0, new HCEM ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCEM ("Text").getChildCount ());
-    assertEquals (0, new HCEM ((String) null).getChildCount ());
-    assertEquals (1, new HCEM (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCEM ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCEM ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCEM (new String [0]).getChildCount ());
-    assertEquals (0, new HCEM ((String []) null).getChildCount ());
-    assertEquals (2, new HCEM (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCEM (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCEM ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCEM (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCEM (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

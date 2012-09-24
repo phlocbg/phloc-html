@@ -56,24 +56,4 @@ public final class HCBTest
     assertEquals (2, HCB.create (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
     assertEquals (0, HCB.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCB ().hasChildren ());
-    assertEquals (0, new HCB ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCB ("Text").getChildCount ());
-    assertEquals (0, new HCB ((String) null).getChildCount ());
-    assertEquals (1, new HCB (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCB ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCB ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCB (new String [0]).getChildCount ());
-    assertEquals (0, new HCB ((String []) null).getChildCount ());
-    assertEquals (2, new HCB (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCB (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCB ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCB (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCB (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

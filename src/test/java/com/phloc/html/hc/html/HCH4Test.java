@@ -57,24 +57,4 @@ public final class HCH4Test
                          .getChildCount ());
     assertEquals (0, HCH4.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCH4 ().hasChildren ());
-    assertEquals (0, new HCH4 ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCH4 ("Text").getChildCount ());
-    assertEquals (0, new HCH4 ((String) null).getChildCount ());
-    assertEquals (1, new HCH4 (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCH4 ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCH4 ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCH4 (new String [0]).getChildCount ());
-    assertEquals (0, new HCH4 ((String []) null).getChildCount ());
-    assertEquals (2, new HCH4 (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCH4 (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCH4 ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCH4 (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCH4 (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

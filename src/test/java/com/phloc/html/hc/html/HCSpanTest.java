@@ -57,24 +57,4 @@ public final class HCSpanTest
                            .getChildCount ());
     assertEquals (0, HCSpan.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCSpan ().hasChildren ());
-    assertEquals (0, new HCSpan ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCSpan ("Text").getChildCount ());
-    assertEquals (0, new HCSpan ((String) null).getChildCount ());
-    assertEquals (1, new HCSpan (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCSpan ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCSpan ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCSpan (new String [0]).getChildCount ());
-    assertEquals (0, new HCSpan ((String []) null).getChildCount ());
-    assertEquals (2, new HCSpan (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCSpan (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCSpan ((IHCNode []) null).getChildCount ());
-    assertEquals (2, new HCSpan (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCSpan (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

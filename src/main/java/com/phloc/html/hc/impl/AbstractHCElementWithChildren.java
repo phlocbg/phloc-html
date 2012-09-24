@@ -27,9 +27,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.OverrideOnDemand;
@@ -47,11 +44,8 @@ import com.phloc.html.hc.conversion.HCPerformanceSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCScript;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElementWithChildren.class);
   private List <IHCBaseNode> m_aChildren;
   private boolean m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
 
@@ -65,9 +59,10 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     return !ContainerHelper.isEmpty (m_aChildren);
   }
 
-  public THISTYPE setAutoHandleOutOfBounds (final boolean bAuto)
+  @Nonnull
+  public final THISTYPE setAutoHandleOutOfBounds (final boolean bAutoHandleOutOfBoundNodes)
   {
-    m_bAutoHandleOutOfBoundNodes = bAuto;
+    m_bAutoHandleOutOfBoundNodes = bAutoHandleOutOfBoundNodes;
     return thisAsT ();
   }
 

@@ -57,25 +57,4 @@ public final class HCNoEmbedTest
                               .getChildCount ());
     assertEquals (0, HCNoEmbed.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCNoEmbed ().hasChildren ());
-    assertEquals (0, new HCNoEmbed ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCNoEmbed ("Text").getChildCount ());
-    assertEquals (0, new HCNoEmbed ((String) null).getChildCount ());
-    assertEquals (1, new HCNoEmbed (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCNoEmbed ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCNoEmbed ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCNoEmbed (new String [0]).getChildCount ());
-    assertEquals (0, new HCNoEmbed ((String []) null).getChildCount ());
-    assertEquals (2, new HCNoEmbed (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCNoEmbed (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCNoEmbed ((IHCNode []) null).getChildCount ());
-    assertEquals (2,
-                  new HCNoEmbed (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCNoEmbed (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }

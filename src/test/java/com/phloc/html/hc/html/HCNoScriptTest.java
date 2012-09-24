@@ -57,25 +57,4 @@ public final class HCNoScriptTest
                                .getChildCount ());
     assertEquals (0, HCNoScript.create (new ArrayList <IHCNode> ()).getChildCount ());
   }
-
-  @SuppressWarnings ("deprecation")
-  @Test
-  public void testDeprecated ()
-  {
-    assertFalse (new HCNoScript ().hasChildren ());
-    assertEquals (0, new HCNoScript ((IPredefinedLocaleTextProvider) null).getChildCount ());
-    assertEquals (1, new HCNoScript ("Text").getChildCount ());
-    assertEquals (0, new HCNoScript ((String) null).getChildCount ());
-    assertEquals (1, new HCNoScript (HCB.create ("Bold")).getChildCount ());
-    assertEquals (0, new HCNoScript ((IHCNode) null).getChildCount ());
-    assertEquals (3, new HCNoScript ("Hallo", "Welt", "!!!").getChildCount ());
-    assertEquals (0, new HCNoScript (new String [0]).getChildCount ());
-    assertEquals (0, new HCNoScript ((String []) null).getChildCount ());
-    assertEquals (2, new HCNoScript (HCB.create ("Bold"), HCI.create ("Italic")).getChildCount ());
-    assertEquals (0, new HCNoScript (new IHCNode [0]).getChildCount ());
-    assertEquals (0, new HCNoScript ((IHCNode []) null).getChildCount ());
-    assertEquals (2,
-                  new HCNoScript (ContainerHelper.newList (HCB.create ("Bold"), HCI.create ("Italic"))).getChildCount ());
-    assertEquals (0, new HCNoScript (new ArrayList <IHCNode> ()).getChildCount ());
-  }
 }
