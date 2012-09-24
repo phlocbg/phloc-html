@@ -29,8 +29,6 @@ import org.junit.Test;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.hc.conversion.HCSettings;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 import com.phloc.html.meta.MetaElement;
 
 /**
@@ -54,7 +52,6 @@ public final class HCHeadTest
     assertEquals (0, aHead.getLinkCount ());
     assertTrue (aHead.getAllCSSNodes ().isEmpty ());
     assertTrue (aHead.getAllJSNodes ().isEmpty ());
-    assertNotNull (aHead.getOutOfBandHandler ());
     assertEquals ("", aHead.getPlainText ());
 
     assertSame (aHead, aHead.setProfile ("any"));
@@ -140,50 +137,5 @@ public final class HCHeadTest
     aHead.addCSS (HCLink.createCSSLink (new SimpleURL ("/my.css")));
     assertEquals ("<head><title>phloc</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/my.css\"></link><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
-  }
-
-  @Test
-  public void testOutOfBandNodes1 ()
-  {
-    final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
-    final HCHtml aHtml = new HCHtml ();
-    aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
-    aHtml.getBody ().addOutOfBandNode (new HCStyle ("h1{color:red;}"));
-    // Ensure that the out-of-band nodes are handled, because we're not calling
-    // aHtml.getAsNode ()
-    aHtml.copyOutOfBandNodesFromBodyToHead (aCS);
-    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>", aHtml.getHead ()
-                                                                                       .getAsHTMLString (aCS));
-    // Do it again and check for node consistency
-    assertEquals ("<head><style type=\"text/css\">h1{color:red;}</style></head>", aHtml.getHead ()
-                                                                                       .getAsHTMLString (aCS));
-
-    // Call it twice
-    assertNotNull (aHtml.getAsHTMLString (aCS));
-    assertNotNull (aHtml.getAsHTMLString (aCS));
-  }
-
-  @Test
-  public void testOutOfBandNodes2 ()
-  {
-    final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
-    final HCHtml aHtml = new HCHtml ();
-    aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
-    aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
-    aHtml.getBody ().addOutOfBandNode (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
-    // Ensure that the out-of-band nodes are handled, because we're not calling
-    // aHtml.getAsNode ()
-    aHtml.copyOutOfBandNodesFromBodyToHead (aCS);
-    assertEquals ("<head><script type=\"text/javascript\"><!--\n"
-                  + "$(document).ready(function(){a=b;c=d;});\n"
-                  + "//--></script></head>", aHtml.getHead ().getAsHTMLString (aCS));
-    // Do it again and check for node consistency
-    assertEquals ("<head><script type=\"text/javascript\"><!--\n"
-                  + "$(document).ready(function(){a=b;c=d;});\n"
-                  + "//--></script></head>", aHtml.getHead ().getAsHTMLString (aCS));
-
-    // Call it twice
-    assertNotNull (aHtml.getAsHTMLString (aCS));
-    assertNotNull (aHtml.getAsHTMLString (aCS));
   }
 }

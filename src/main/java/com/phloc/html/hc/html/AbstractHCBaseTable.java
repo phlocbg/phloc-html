@@ -34,12 +34,10 @@ import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.AbstractHCElement;
-import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * This is the common base class for regular HC tables as well as for more
@@ -673,20 +671,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     if (m_aFooterRow != null)
       ret.append (m_aFooterRow.getPlainText ()).append (' ');
     return ret.toString ();
-  }
-
-  @Override
-  @Nullable
-  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final HCNodeList aCont = new HCNodeList (false);
-    if (m_aHeaderRow != null)
-      aCont.addChild (m_aHeaderRow.getOutOfBandNode (aConversionSettings));
-    for (final HCRow aBodyRow : m_aBodyRows)
-      aCont.addChild (aBodyRow.getOutOfBandNode (aConversionSettings));
-    if (m_aFooterRow != null)
-      aCont.addChild (m_aFooterRow.getOutOfBandNode (aConversionSettings));
-    return aCont.getAsSimpleNode ();
   }
 
   @Override

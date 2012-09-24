@@ -26,12 +26,10 @@ import javax.annotation.Nullable;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.css.ECSSUnit;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.html.HCScript;
-import com.phloc.html.hc.impl.AbstractWrappedHCNode;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.builder.JSAssocArray;
 import com.phloc.html.js.builder.JSExpr;
@@ -44,7 +42,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * 
  * @author philip
  */
-public class HCSWFObject extends AbstractWrappedHCNode
+public class HCSWFObject implements IHCNodeBuilder
 {
   // Required:
   private ISimpleURL m_aSWFURL;
@@ -272,7 +270,7 @@ public class HCSWFObject extends AbstractWrappedHCNode
   }
 
   @Override
-  protected final IHCNode getContainedHCNode ()
+  public final IHCNode build ()
   {
     if (m_aSWFURL == null)
       throw new IllegalStateException ("No SWF URL present");
@@ -287,45 +285,43 @@ public class HCSWFObject extends AbstractWrappedHCNode
 
     final HCNodeList ret = new HCNodeList ();
     ret.addChild (new HCDiv ().setID (m_sHTMLContainerID));
-    return ret;
-  }
 
-  @Override
-  public final IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final JSAssocArray jsFlashvars = new JSAssocArray ();
-    if (m_aFlashVars != null)
-      for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
-        jsFlashvars.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
+    {
+      // JS init code
+      final JSAssocArray jsFlashvars = new JSAssocArray ();
+      if (m_aFlashVars != null)
+        for (final Map.Entry <String, Object> aEntry : m_aFlashVars.entrySet ())
+          jsFlashvars.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
-    final JSAssocArray jsParams = new JSAssocArray ();
-    if (m_aObjectParams != null)
-      for (final Map.Entry <String, String> aEntry : m_aObjectParams.entrySet ())
-        jsParams.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
+      final JSAssocArray jsParams = new JSAssocArray ();
+      if (m_aObjectParams != null)
+        for (final Map.Entry <String, String> aEntry : m_aObjectParams.entrySet ())
+          jsParams.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
-    final JSAssocArray jsAttributes = new JSAssocArray ();
-    if (m_aObjectAttrs != null)
-      for (final Map.Entry <String, String> aEntry : m_aObjectAttrs.entrySet ())
-        jsAttributes.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
+      final JSAssocArray jsAttributes = new JSAssocArray ();
+      if (m_aObjectAttrs != null)
+        for (final Map.Entry <String, String> aEntry : m_aObjectAttrs.entrySet ())
+          jsAttributes.add (aEntry.getKey (), JSExpr.direct (JSMarshaller.objectToJSString (aEntry.getValue ())));
 
-    // Call embedder
-    final JSInvocation aInvocation = JSExpr.ref ("swfobject")
-                                           .invoke ("embedSWF")
-                                           .arg (m_aSWFURL.getAsString ())
-                                           .arg (m_sHTMLContainerID)
-                                           .arg (m_sWidth)
-                                           .arg (m_sHeight)
-                                           .arg (m_sRequiredSWFVersion);
-    // only supported by Flash Player 6.0.65; m_nWidth >= 310 && m_nHeight >=
-    // 147;
-    if (m_aExpressInstallSWFURL != null)
-      aInvocation.arg (m_aExpressInstallSWFURL.getAsString ());
-    else
-      aInvocation.argNull ();
-    aInvocation.arg (jsFlashvars).arg (jsParams).arg (jsAttributes);
+      // Call embedder
+      final JSInvocation aInvocation = JSExpr.ref ("swfobject")
+                                             .invoke ("embedSWF")
+                                             .arg (m_aSWFURL.getAsString ())
+                                             .arg (m_sHTMLContainerID)
+                                             .arg (m_sWidth)
+                                             .arg (m_sHeight)
+                                             .arg (m_sRequiredSWFVersion);
+      // only supported by Flash Player 6.0.65; m_nWidth >= 310 && m_nHeight >=
+      // 147;
+      if (m_aExpressInstallSWFURL != null)
+        aInvocation.arg (m_aExpressInstallSWFURL.getAsString ());
+      else
+        aInvocation.argNull ();
+      aInvocation.arg (jsFlashvars).arg (jsParams).arg (jsAttributes);
 
-    final HCNodeList ret = new HCNodeList (false);
-    ret.addChild (new HCScript (aInvocation));
+      ret.addChild (new HCScript (aInvocation));
+    }
+
     return ret;
   }
 }

@@ -53,7 +53,6 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
@@ -65,8 +64,7 @@ import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                              IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -102,7 +100,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   // Must be a LinkedHashMap_
   private Map <String, String> m_aCustomAttrs;
-  private boolean m_bPreparedOnce = false;
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
   {
@@ -545,51 +542,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  public final boolean isPreparedBeforeCreateElement ()
-  {
-    return m_bPreparedOnce;
-  }
-
-  /**
-   * This method checks whether the node is suitable for conversion to an
-   * IMicroElement.
-   *
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   * @return <code>true</code> if the node can be converted to a node,
-   *         <code>false</code> otherwise.
-   */
-  @OverrideOnDemand
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    return true;
-  }
-
-  /**
-   * This method is called once for each instead before the element itself is
-   * created. Overwrite this method to perform actions that can only be done
-   * when the element is build finally.
-   *
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   */
-  @OverrideOnDemand
-  protected void prepareOnceBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
-  {}
-
-  /**
-   * This method is called before the element itself is created. Overwrite this
-   * method to perform actions that can only be done when the element is build
-   * finally.
-   *
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   */
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void prepareBeforeCreateElement (@Nonnull final IHCConversionSettings aConversionSettings)
-  {}
-
   /**
    * @return The created micro element for this HC element. May not be
    *         <code>null</code>.
@@ -603,7 +555,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   /**
    * Set all attributes and child elements of this object
-   *
+   * 
    * @param aElement
    *        The current micro element to be filled
    * @param aConversionSettings
@@ -704,7 +656,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called after the element itself was created and filled.
    * Overwrite this method to perform actions that can only be done after the
    * element was build finally.
-   *
+   * 
    * @param eElement
    *        The created micro element
    * @param aConversionSettings
@@ -719,29 +671,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * Note: return type cannot by IMicroElement since the checkbox object
    * delivers an IMicroNodeList!
    */
+  @Override
   @Nullable
-  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    if (!canConvertToNode (aConversionSettings))
-      return null;
-
     // Run some consistency checks if desired
     if (aConversionSettings.areConsistencyChecksEnabled ())
       HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
-
-    // Do standard customization
-    aConversionSettings.getCustomizer ().customizeHCElement (this, aConversionSettings.getHTMLVersion ());
-
-    // Prepare object once per instance - before first rendering (implementation
-    // dependent)
-    if (!m_bPreparedOnce)
-    {
-      prepareOnceBeforeCreateElement (aConversionSettings);
-      m_bPreparedOnce = true;
-    }
-
-    // Prepare object for each rendering (implementation dependent)
-    prepareBeforeCreateElement (aConversionSettings);
 
     // Create the element
     final IMicroElement ret = createElement ();
@@ -754,21 +690,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     // Optional callback after everything was done (implementation dependent)
     finishAfterApplyProperties (ret, aConversionSettings);
     return ret;
-  }
-
-  @Override
-  @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final HCNodeList aCont = new HCNodeList (false);
-
-    // Of this
-    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
-
-    // customized nodes
-    aCont.addChild (aConversionSettings.getCustomizer ().getCustomOutOfBandNode (this,
-                                                                                 aConversionSettings.getHTMLVersion ()));
-    return aCont.getAsSimpleNode ();
   }
 
   @Override

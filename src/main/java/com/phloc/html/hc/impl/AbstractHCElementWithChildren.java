@@ -38,16 +38,11 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElementWithChildren;
-import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.HCPerformanceSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
-import com.phloc.html.hc.html.HCScript;
 
 public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
   private List <IHCBaseNode> m_aChildren;
-  private boolean m_bAutoHandleOutOfBoundNodes = HCPerformanceSettings.isJavaScriptAtEnd ();
 
   protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement)
   {
@@ -57,13 +52,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final boolean hasChildren ()
   {
     return !ContainerHelper.isEmpty (m_aChildren);
-  }
-
-  @Nonnull
-  public final THISTYPE setAutoHandleOutOfBounds (final boolean bAutoHandleOutOfBoundNodes)
-  {
-    m_bAutoHandleOutOfBoundNodes = bAutoHandleOutOfBoundNodes;
-    return thisAsT ();
   }
 
   /**
@@ -94,12 +82,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
     if (aChild != null)
     {
-      if (m_bAutoHandleOutOfBoundNodes && aChild instanceof HCScript)
-      {
-        HCConsistencyChecker.warnInBandScript ((HCScript) aChild);
-        addOutOfBandNode ((HCScript) aChild);
-        return thisAsT ();
-      }
       beforeAddChild (aChild);
       if (m_aChildren == null)
         m_aChildren = new ArrayList <IHCBaseNode> ();
@@ -311,23 +293,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     for (final IHCBaseNode aChild : m_aChildren)
       ret.append (aChild.getPlainText ());
     return ret.toString ();
-  }
-
-  @Override
-  @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final HCNodeList aCont = new HCNodeList (false);
-
-    // Of this
-    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
-
-    // Of all children
-    if (hasChildren ())
-      for (final IHCBaseNode aChild : m_aChildren)
-        if (aChild instanceof IHCNode)
-          aCont.addChild (((IHCNode) aChild).getOutOfBandNode (aConversionSettings));
-    return aCont.getAsSimpleNode ();
   }
 
   @Override

@@ -55,8 +55,9 @@ public class HCDOMWrapper extends AbstractHCNode
     return m_aNode;
   }
 
+  @Override
   @Nonnull
-  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return m_aNode;
   }

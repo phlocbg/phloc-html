@@ -25,7 +25,6 @@ import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.charset.CharsetManager;
-import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
@@ -33,7 +32,6 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
 /**
@@ -48,7 +46,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * @author philip
  */
 @Immutable
-public class HCConditionalCommentNode extends AbstractHCNode implements IHCWrappingNode
+public class HCConditionalCommentNode extends AbstractHCWrappingNode
 {
   public static final String DEFAULT_LINE_SEPARATOR = CGlobal.LINE_SEPARATOR;
   private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
@@ -132,14 +130,9 @@ public class HCConditionalCommentNode extends AbstractHCNode implements IHCWrapp
     return new HCCommentNode (_getCommentText (m_aWrappedNode.getAsNode (aConversionSettings)));
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return m_aWrappedNode.getPlainText ();
-  }
-
+  @Override
   @Nullable
-  public IMicroComment getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     return getCommentNode (aConversionSettings).getAsNode (aConversionSettings);
   }

@@ -19,10 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
@@ -32,56 +29,22 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  * 
  * @author philip
  */
+@Deprecated
 public abstract class AbstractWrappedHCNode extends AbstractHCNode
 {
-  private boolean m_bPrepared = false;
-
-  public final boolean isPrepared ()
-  {
-    return m_bPrepared;
-  }
-
-  /**
-   * This method is called before the element itself is created. Overwrite this
-   * method to perform actions that can only be done when the element is build
-   * finally. This method is only called once before the first call to
-   * {@link #getContainedHCNode()}!
-   * 
-   * @param aConversionSettings
-   *        Conversion settings to be applied
-   */
-  @OverrideOnDemand
-  protected void prepareBeforeGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {}
-
   @Nonnull
   protected abstract IHCNode getContainedHCNode ();
 
+  @Override
   @Nonnull
-  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    if (!m_bPrepared)
-    {
-      prepareBeforeGetAsNode (aConversionSettings);
-      m_bPrepared = true;
-    }
     return getContainedHCNode ().getAsNode (aConversionSettings);
   }
 
+  @Nonnull
   public final String getPlainText ()
   {
     return getContainedHCNode ().getPlainText ();
-  }
-
-  @Override
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    return getContainedHCNode ().getOutOfBandNode (aConversionSettings);
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ()).append ("prepared", m_bPrepared).toString ();
   }
 }

@@ -89,15 +89,6 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   }
 
   @Override
-  public IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final IMicroContainer aCont = new MicroContainer ();
-    aCont.appendChild (super.getAsNode (aConversionSettings));
-    aCont.appendChild (new HCHiddenField (getHiddenFieldName (getName ()), getValue ()).getAsNode (aConversionSettings));
-    return aCont;
-  }
-
-  @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
@@ -105,6 +96,15 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bChecked)
       aElement.setAttribute (CHTMLAttributes.CHECKED, CHTMLAttributeValues.CHECKED);
+  }
+
+  @Override
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    final IMicroContainer aCont = new MicroContainer ();
+    aCont.appendChild (super.internalGetAsNode (aConversionSettings));
+    aCont.appendChild (new HCHiddenField (getHiddenFieldName (getName ()), getValue ()).getAsNode (aConversionSettings));
+    return aCont;
   }
 
   /**

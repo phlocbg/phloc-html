@@ -17,34 +17,44 @@
  */
 package com.phloc.html.hc.customize;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.html.HCBody;
+import com.phloc.html.hc.html.HCHead;
 
 public interface IHCCustomizer
 {
   /**
-   * Customize with some predefined classes etc.
+   * Customize HC elements with some predefined classes etc.
    * 
+   * @param aParentElement
+   *        The parent element of the element to be customized. Never
+   *        <code>null</code>.
    * @param aElement
    *        The element to be customized. Never <code>null</code>.
    * @param eHTMLVersion
    *        The HTML version to be used. Never <code>null</code>.
    */
-  void customizeHCElement (@Nonnull IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
+  void customizeHCElement (@Nonnull IHCNodeWithChildren <?> aParentElement,
+                           @Nonnull IHCElement <?> aElement,
+                           @Nonnull EHTMLVersion eHTMLVersion);
 
   /**
-   * Get a custom out of band node
+   * This callback is called, when the main HTML element is assembled, to move
+   * the out-of-band nodes to the correct place.
    * 
-   * @param aElement
-   *        The element to be customized
-   * @param eHTMLVersion
-   *        The HTML version to be used. Never <code>null</code>.
-   * @return <code>null</code> if there is no custom out-of-band node
+   * @param aOutOfBandNodes
+   *        The non-<code>null</code> list of out-of-band nodes. May be empty.
+   * @param aHead
+   *        The head element. Never <code>null</code>.
+   * @param aBody
+   *        The body element. Never <code>null</code>.
    */
-  @Nullable
-  IHCBaseNode getCustomOutOfBandNode (@Nonnull IHCElement <?> aElement, @Nonnull EHTMLVersion eHTMLVersion);
+  void handleOutOfBandNodes (@Nonnull List <IHCBaseNode> aOutOfBandNodes, @Nonnull HCHead aHead, @Nonnull HCBody aBody);
 }

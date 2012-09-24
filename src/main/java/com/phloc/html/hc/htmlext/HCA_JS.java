@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.htmlext;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.url.ISimpleURL;
@@ -31,7 +32,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 public class HCA_JS extends HCA
 {
-  private static final ISimpleURL JS_URL = new ReadonlySimpleURL (CJS.JS_VOID);
+  public static final ISimpleURL JS_URL = new ReadonlySimpleURL (CJS.JS_VOID);
 
   public HCA_JS (@Nullable final IJSCodeProvider aJSOnClick)
   {
@@ -40,6 +41,11 @@ public class HCA_JS extends HCA
      * href gets called (due to double click etc.) it has no effect.
      **/
     super (JS_URL);
-    addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));
+    setOnClickReturnFalse (this, aJSOnClick);
+  }
+
+  public static void setOnClickReturnFalse (@Nonnull final HCA aLink, @Nullable final IJSCodeProvider aJSOnClick)
+  {
+    aLink.addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));
   }
 }

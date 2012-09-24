@@ -27,7 +27,6 @@ import javax.annotation.concurrent.ThreadSafe;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCNode;
 
 @ThreadSafe
 public final class HCSettings
@@ -152,39 +151,5 @@ public final class HCSettings
                                         @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.getAsHTMLString (aConversionSettings);
-  }
-
-  /**
-   * Get the out-of-band node for the passed HC node using this conversion
-   * settings provider.
-   * 
-   * @param aHCNode
-   *        The node for which the out-of-band nodes are to be retrieved. May
-   *        not be <code>null</code>.
-   * @return <code>null</code> if no out-of-band node is present.
-   */
-  @Nullable
-  public static IHCBaseNode getOutOfBandNode (@Nonnull final IHCNode aHCNode)
-  {
-    // No indent/align required for retrieving out of band node
-    return getOutOfBandNode (aHCNode, getConversionSettings (false));
-  }
-
-  /**
-   * Get the out-of-band node for the passed HC node using the passed conversion
-   * settings.
-   * 
-   * @param aHCNode
-   *        The node for which the out-of-band nodes are to be retrieved. May
-   *        not be <code>null</code>.
-   * @param aConversionSettings
-   *        The conversion settings to be used. May not be <code>null</code>.
-   * @return <code>null</code> if no out-of-band node is present.
-   */
-  @Nullable
-  public static IHCBaseNode getOutOfBandNode (@Nonnull final IHCNode aHCNode,
-                                              @Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    return aHCNode.getOutOfBandNode (aConversionSettings);
   }
 }

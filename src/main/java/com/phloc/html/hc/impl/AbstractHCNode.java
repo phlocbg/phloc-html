@@ -17,14 +17,13 @@
  */
 package com.phloc.html.hc.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.commons.annotations.OverrideOnDemand;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 
@@ -35,24 +34,77 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
 {
-  private List <IHCNode> m_aOutOfBandNodes;
+  private boolean m_bPreparedOnce = false;
 
-  @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public final boolean isPreparedOnce ()
   {
-    if (m_aOutOfBandNodes == null || m_aOutOfBandNodes.isEmpty ())
-      return null;
-    return new HCNodeList (false).addChildren (m_aOutOfBandNodes).getAsSimpleNode ();
+    return m_bPreparedOnce;
   }
 
-  public final void addOutOfBandNode (@Nullable final IHCNode aNode)
+  /**
+   * This method checks whether the node is suitable for conversion to an
+   * IMicroElement.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   * @return <code>true</code> if the node can be converted to a node,
+   *         <code>false</code> otherwise.
+   */
+  @OverrideOnDemand
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    if (aNode != null)
+    return true;
+  }
+
+  /**
+   * This method is called once for each instead before the note itself is
+   * created. Overwrite this method to perform actions that can only be done
+   * when the node is build finally.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  @OverrideOnDemand
+  protected void prepareOnce (@Nonnull final IHCConversionSettings aConversionSettings)
+  {}
+
+  /**
+   * This method is called everytime the node itself is created. Overwrite this
+   * method to perform actions that can only be done when the node is build.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void prepare (@Nonnull final IHCConversionSettings aConversionSettings)
+  {}
+
+  @Nonnull
+  protected abstract IMicroNode internalGetAsNode (@Nonnull IHCConversionSettings aConversionSettings);
+
+  /*
+   * Note: return type cannot by IMicroElement since the checkbox object
+   * delivers an IMicroNodeList!
+   */
+  @Nullable
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    if (!canConvertToNode (aConversionSettings))
+      return null;
+
+    // Prepare object once per instance - before first rendering (implementation
+    // dependent)
+    if (!m_bPreparedOnce)
     {
-      if (m_aOutOfBandNodes == null)
-        m_aOutOfBandNodes = new ArrayList <IHCNode> ();
-      m_aOutOfBandNodes.add (aNode);
+      prepareOnce (aConversionSettings);
+      m_bPreparedOnce = true;
     }
+
+    // Prepare object for each rendering (implementation dependent)
+    prepare (aConversionSettings);
+
+    return internalGetAsNode (aConversionSettings);
   }
 
   @Nonnull

@@ -37,13 +37,10 @@ import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
-                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
-                                                                                                                                                                                                      IHasChildrenSorted <CHILDTYPE>
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <CHILDTYPE>
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -210,23 +207,6 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     for (final CHILDTYPE aChild : m_aChildren)
       ret.append (aChild.getPlainText ());
     return ret.toString ();
-  }
-
-  @Override
-  @Nullable
-  public IHCBaseNode getOutOfBandNode (@Nonnull final IHCConversionSettings aConversionSettings)
-  {
-    final HCNodeList aCont = new HCNodeList (false);
-
-    // Of this
-    aCont.addChild (super.getOutOfBandNode (aConversionSettings));
-
-    // Of all children
-    if (hasChildren ())
-      for (final CHILDTYPE aChild : m_aChildren)
-        if (aChild instanceof IHCNode)
-          aCont.addChild (((IHCNode) aChild).getOutOfBandNode (aConversionSettings));
-    return aCont.getAsSimpleNode ();
   }
 
   @Override
