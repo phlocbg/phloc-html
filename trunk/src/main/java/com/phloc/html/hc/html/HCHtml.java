@@ -44,6 +44,7 @@ import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.customize.IHCCustomizer;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
+import com.phloc.html.hc.utils.HCOutOfBandHandler;
 
 /**
  * The node that represents a full HTML document.
@@ -186,7 +187,7 @@ public class HCHtml extends AbstractHCBaseNode
                                    aConversionSettings.getHTMLVersion ());
 
       // Extract all out-of-band nodes
-      OutOfBandHandler.recursiveExtractOutOfBandNodes (aHasChildren, aExtractedOutOfBandNodes);
+      HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aHasChildren, aExtractedOutOfBandNodes);
     }
   }
 

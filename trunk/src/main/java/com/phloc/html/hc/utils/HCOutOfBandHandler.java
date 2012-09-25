@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +36,11 @@ import com.phloc.html.hc.IHCWrappingNode;
  * 
  * @author philip
  */
-public final class OutOfBandHandler
+public final class HCOutOfBandHandler
 {
   private static Map <String, Boolean> s_aOOBNAnnotationCache = new HashMap <String, Boolean> ();
 
-  private OutOfBandHandler ()
+  private HCOutOfBandHandler ()
   {}
 
   /**
