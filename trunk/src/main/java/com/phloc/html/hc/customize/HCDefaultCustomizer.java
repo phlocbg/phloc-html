@@ -38,7 +38,6 @@ import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCButton_Submit;
@@ -185,9 +184,10 @@ public class HCDefaultCustomizer implements IHCCustomizer
   protected List <IHCBaseNode> assembleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
                                                        @Nonnull final HCHead aHead)
   {
+    final List <IHCBaseNode> aNodes = new ArrayList <IHCBaseNode> ();
+
     // Add all existing JS nodes from the head, as <script> is known to be out
     // of band
-    final List <IHCBaseNode> aNodes = new ArrayList <IHCBaseNode> ();
     aNodes.addAll (aHead.getAllJSNodes ());
     aHead.removeAllJS ();
 
@@ -204,12 +204,12 @@ public class HCDefaultCustomizer implements IHCCustomizer
           aNodes.add (aOOBNode);
     }
 
-    if (!aInlineJS.isEmpty ())
-      aNodes.add (new HCScript (aInlineJS));
-
     // on document ready always as last!
     if (!aOnDocumentReadyJS.isEmpty ())
-      aNodes.add (new HCScript (JQuery.onDocumentReady (aOnDocumentReadyJS)));
+      aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
+
+    if (!aInlineJS.isEmpty ())
+      aNodes.add (new HCScript (aInlineJS));
 
     return aNodes;
   }
@@ -217,7 +217,8 @@ public class HCDefaultCustomizer implements IHCCustomizer
   @OverrideOnDemand
   protected boolean isBodyNode (@Nonnull final IHCBaseNode aOOBNode)
   {
-    if (aOOBNode instanceof IHCJSNode)
+    // JS nodes
+    if (HCHead.isValidJSNode (aOOBNode))
       return true;
 
     if (aOOBNode instanceof HCNoScript)
@@ -230,8 +231,10 @@ public class HCDefaultCustomizer implements IHCCustomizer
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {
+    // First assemble
     final List <IHCBaseNode> aNodes = assembleOutOfBandNodes (aOutOfBandNodes, aHead);
 
+    // And now move either to head or body
     for (final IHCBaseNode aNode : aNodes)
     {
       if (isBodyNode (aNode))
