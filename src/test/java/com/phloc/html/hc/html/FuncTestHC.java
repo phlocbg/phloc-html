@@ -34,7 +34,7 @@ import com.phloc.html.js.builder.JSExpr;
  * 
  * @author philip
  */
-public final class HCTest
+public final class FuncTestHC
 {
   @Test
   public void testMainHC ()

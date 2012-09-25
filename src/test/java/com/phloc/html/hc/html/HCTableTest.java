@@ -17,8 +17,13 @@
  */
 package com.phloc.html.hc.html;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -195,5 +200,58 @@ public final class HCTableTest
     assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (), new HCCol (), new HCCol (27)).setBodyID ("any")));
     assertNotNull (HCSettings.getAsNode (new HCTable (HCCol.star (), new HCCol (), new HCCol ()).setBodyID ("any")));
     assertNotNull (HCSettings.getAsNode (new HCTable (new HCCol (), new HCCol (), HCCol.star ()).setBodyID ("any")));
+  }
+
+  @Test
+  public void testHeaderAndFooter ()
+  {
+    final HCTable t = new HCTable (new HCCol (170), HCCol.star ());
+    assertNull (t.getHeaderID ());
+    assertFalse (t.hasHeaderID ());
+    assertFalse (t.hasHeaderRow ());
+    assertSame (t, t.removeHeaderRow ());
+    assertSame (t, t.removeHeaderRow ());
+    assertSame (t, t.setHeaderID ("any"));
+    assertEquals ("any", t.getHeaderID ());
+    assertFalse (t.hasHeaderRow ());
+    assertNotNull (t.addHeaderRow ());
+    assertTrue (t.hasHeaderRow ());
+    try
+    {
+      // Already present
+      t.addHeaderRow ();
+      fail ();
+    }
+    catch (final IllegalStateException ex)
+    {}
+    assertTrue (t.hasHeaderRow ());
+    assertSame (t, t.removeHeaderRow ());
+    assertFalse (t.hasHeaderRow ());
+    assertNotNull (t.addHeaderRow ());
+    assertTrue (t.hasHeaderRow ());
+
+    assertNull (t.getFooterID ());
+    assertFalse (t.hasFooterID ());
+    assertFalse (t.hasFooterRow ());
+    assertSame (t, t.removeFooterRow ());
+    assertSame (t, t.removeFooterRow ());
+    assertSame (t, t.setFooterID ("any"));
+    assertEquals ("any", t.getFooterID ());
+    assertFalse (t.hasFooterRow ());
+    assertNotNull (t.addFooterRow ());
+    assertTrue (t.hasFooterRow ());
+    try
+    {
+      // Already present
+      t.addFooterRow ();
+      fail ();
+    }
+    catch (final IllegalStateException ex)
+    {}
+    assertTrue (t.hasFooterRow ());
+    assertSame (t, t.removeFooterRow ());
+    assertFalse (t.hasFooterRow ());
+    assertNotNull (t.addFooterRow ());
+    assertTrue (t.hasFooterRow ());
   }
 }
