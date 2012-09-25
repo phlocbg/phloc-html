@@ -27,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.customize.IHCCustomizer;
 
 @ThreadSafe
 public final class HCSettings
@@ -151,5 +152,18 @@ public final class HCSettings
                                         @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.getAsHTMLString (aConversionSettings);
+  }
+
+  /**
+   * Convert the passed HC node to a micro node using the conversion settings
+   * provider.
+   * 
+   * @return The customizer to use
+   */
+  @Nullable
+  public static IHCCustomizer getCustomizer ()
+  {
+    // No indent/align required for conversion to IHCCustomizer
+    return getConversionSettings (false).getCustomizer ();
   }
 }

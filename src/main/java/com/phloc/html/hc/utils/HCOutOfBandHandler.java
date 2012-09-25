@@ -80,10 +80,10 @@ public final class HCOutOfBandHandler
    * @return The unwrapped node. Never <code>null</code>.
    */
   @Nonnull
-  private static IHCBaseNode _getUnwrappedOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
+  public static IHCBaseNode getUnwrappedOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
   {
     if (aHCNode instanceof IHCWrappingNode)
-      return _getUnwrappedOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
+      return getUnwrappedOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
 
     return aHCNode;
   }
@@ -102,8 +102,7 @@ public final class HCOutOfBandHandler
 
         if (isOutOfBandNode (aChild))
         {
-          // Add to target list unwrapped
-          aTargetList.add (_getUnwrappedOutOfBandNode (aChild));
+          aTargetList.add (aChild);
           if (aParentElement instanceof IHCNodeWithChildren <?>)
             ((IHCNodeWithChildren <?>) aParentElement).removeChild (nNodeIndex);
           else
