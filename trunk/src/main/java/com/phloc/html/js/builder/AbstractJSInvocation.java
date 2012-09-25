@@ -499,10 +499,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("object", m_aObject)
-                                       .append ("ctorType", m_aCtorType)
-                                       .append ("callee", m_aCallee)
-                                       .append ("name", m_sName)
+    return new ToStringGenerator (this).appendIfNotNull ("object", m_aObject)
+                                       .appendIfNotNull ("ctorType", m_aCtorType)
+                                       .appendIfNotNull ("callee", m_aCallee)
+                                       .appendIfNotNull ("name", m_sName)
                                        .append ("args", m_aArgs)
                                        .toString ();
   }
