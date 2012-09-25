@@ -226,5 +226,7 @@ public final class JSBlockTest
     aSubBlock._return (false);
     assertEquals ("{var a=5;a*=2.5;a*=3.3;a*=4;a*=56;a/=4.5;a/=22.0;a/=3;a/=11;a%=101;a%=56;a='Test';a.length();if(1===1){return false;}}",
                   aBlock.getJSCode ());
+
+    assertEquals (aBlock.toString (), aBlock.toString ());
   }
 }

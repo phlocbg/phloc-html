@@ -141,9 +141,9 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   public int pos (@Nonnegative final int nNewPos)
   {
-    final int nOldPos = m_nPos;
     if (nNewPos > m_aContent.size () || nNewPos < 0)
       throw new IllegalArgumentException ("New position " + nNewPos + " is not valid!");
+    final int nOldPos = m_nPos;
     m_nPos = nNewPos;
     return nOldPos;
   }
