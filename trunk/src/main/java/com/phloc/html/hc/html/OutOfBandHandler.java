@@ -24,10 +24,10 @@ import java.util.Map;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.parent.IHasChildren;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 
@@ -88,43 +88,40 @@ public final class OutOfBandHandler
     return aHCNode;
   }
 
-  private static void _recursiveExtractOutOfBandNodes (@Nonnull final IHasChildren <?> aParentElement,
+  private static void _recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
                                                        @Nonnull final List <IHCBaseNode> aTargetList,
                                                        @Nonnegative final int nLevel)
   {
     if (aParentElement.hasChildren ())
     {
       int nNodeIndex = 0;
-      for (final Object aChildObj : aParentElement.getChildren ())
-        if (aChildObj instanceof IHCBaseNode)
+      for (final IHCBaseNode aChild : aParentElement.getChildren ())
+      {
+        if (false)
+          System.out.println (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
+
+        if (isOutOfBandNode (aChild))
         {
-          final IHCBaseNode aChild = (IHCBaseNode) aChildObj;
-
-          if (false)
-            System.out.println (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
-
-          if (isOutOfBandNode (aChild))
-          {
-            // Add to target list unwrapped
-            aTargetList.add (_getUnwrappedOutOfBandNode (aChild));
-            if (aParentElement instanceof IHCNodeWithChildren <?>)
-              ((IHCNodeWithChildren <?>) aParentElement).removeChild (nNodeIndex);
-            else
-              throw new IllegalStateException ("Cannot have out-of-band nodes at " + aParentElement);
-          }
+          // Add to target list unwrapped
+          aTargetList.add (_getUnwrappedOutOfBandNode (aChild));
+          if (aParentElement instanceof IHCNodeWithChildren <?>)
+            ((IHCNodeWithChildren <?>) aParentElement).removeChild (nNodeIndex);
           else
-          {
-            ++nNodeIndex;
-          }
-
-          // Recurse deeper?
-          if (aChild instanceof IHasChildren <?>)
-            _recursiveExtractOutOfBandNodes ((IHasChildren <?>) aChild, aTargetList, nLevel + 1);
+            throw new IllegalStateException ("Cannot have out-of-band nodes at " + aParentElement);
         }
+        else
+        {
+          ++nNodeIndex;
+        }
+
+        // Recurse deeper?
+        if (aChild instanceof IHCHasChildren)
+          _recursiveExtractOutOfBandNodes ((IHCHasChildren) aChild, aTargetList, nLevel + 1);
+      }
     }
   }
 
-  public static void recursiveExtractOutOfBandNodes (@Nonnull final IHasChildren <?> aParentElement,
+  public static void recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
                                                      @Nonnull final List <IHCBaseNode> aTargetList)
   {
     if (aParentElement == null)

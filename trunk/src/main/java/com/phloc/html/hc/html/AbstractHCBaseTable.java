@@ -30,10 +30,10 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.parent.IHasChildrenSorted;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -47,7 +47,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHasChildrenSorted <IHCNode>
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
+                                                                                            AbstractHCElement <THISTYPE> implements
+                                                                                                                        IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
