@@ -176,7 +176,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("type", m_aType)
+    return new ToStringGenerator (this).appendIfNotNull ("type", m_aType)
                                        .append ("params", m_aParams)
                                        .append ("body", m_aBody)
                                        .toString ();

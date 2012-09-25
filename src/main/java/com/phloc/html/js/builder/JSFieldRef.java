@@ -78,9 +78,9 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("object", m_aObject)
+    return new ToStringGenerator (this).appendIfNotNull ("object", m_aObject)
                                        .append ("name", m_sName)
-                                       .append ("var", m_aVar)
+                                       .appendIfNotNull ("var", m_aVar)
                                        .toString ();
   }
 }

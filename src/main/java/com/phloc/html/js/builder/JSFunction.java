@@ -231,11 +231,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("jsDoc", m_aJSDoc)
-                                       .append ("type", m_aType)
+    return new ToStringGenerator (this).appendIfNotNull ("jsDoc", m_aJSDoc)
+                                       .appendIfNotNull ("type", m_aType)
                                        .append ("name", m_sName)
                                        .append ("params", m_aParams)
-                                       .append ("body", m_aBody)
+                                       .appendIfNotNull ("body", m_aBody)
                                        .toString ();
   }
 }
