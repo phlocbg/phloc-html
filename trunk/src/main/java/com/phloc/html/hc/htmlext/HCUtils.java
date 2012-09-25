@@ -37,6 +37,7 @@ import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.impl.HCNodeList;
@@ -313,5 +314,21 @@ public final class HCUtils
     final List <IHCBaseNode> ret = new ArrayList <IHCBaseNode> ();
     _recursiveAddFlattened (aNode, ret);
     return ret;
+  }
+
+  /**
+   * Resolve all wrappings when adding to the result list.
+   * 
+   * @param aHCNode
+   *        The node to be unwrapped. Never <code>null</code>.
+   * @return The unwrapped node. Never <code>null</code>.
+   */
+  @Nonnull
+  public static IHCBaseNode getUnwrappedOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
+  {
+    if (aHCNode instanceof IHCWrappingNode)
+      return getUnwrappedOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
+
+    return aHCNode;
   }
 }

@@ -72,22 +72,6 @@ public final class HCOutOfBandHandler
     return false;
   }
 
-  /**
-   * Resolve all wrappings when adding to the result list.
-   * 
-   * @param aHCNode
-   *        The node to be unwrapped. Never <code>null</code>.
-   * @return The unwrapped node. Never <code>null</code>.
-   */
-  @Nonnull
-  public static IHCBaseNode getUnwrappedOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
-  {
-    if (aHCNode instanceof IHCWrappingNode)
-      return getUnwrappedOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
-
-    return aHCNode;
-  }
-
   private static void _recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
                                                        @Nonnull final List <IHCBaseNode> aTargetList,
                                                        @Nonnegative final int nLevel)
