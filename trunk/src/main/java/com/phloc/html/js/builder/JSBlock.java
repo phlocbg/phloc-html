@@ -20,12 +20,15 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -46,6 +49,10 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    * {@link IJSStatement} or {@link IJSDeclaration}.
    */
   private final List <IJSCodeProvider> m_aContent = new ArrayList <IJSCodeProvider> ();
+  /**
+   * Current position.
+   */
+  private int m_nPos;
 
   /**
    * Whether or not this block must be braced and indented
@@ -53,11 +60,6 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   private boolean m_bBracesRequired;
   private boolean m_bIndentRequired;
   private boolean m_bNewLineAtEnd = true;
-
-  /**
-   * Current position.
-   */
-  private int m_nPos;
 
   public JSBlock ()
   {
@@ -96,6 +98,19 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
     return ContainerHelper.newList (m_aContent);
   }
 
+  /**
+   * Remove all contents of the block. Sets the position to 0.
+   * 
+   * @return this
+   */
+  @Nonnull
+  public JSBlock clear ()
+  {
+    m_aContent.clear ();
+    m_nPos = 0;
+    return this;
+  }
+
   @Nonnull
   private <T extends IJSCodeProvider> T _insert (@Nonnull final T aElement)
   {
@@ -124,13 +139,24 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    *         if the new position value is illegal.
    * @see #pos()
    */
-  public int pos (final int newPos)
+  public int pos (@Nonnegative final int nNewPos)
   {
     final int nOldPos = m_nPos;
-    if (newPos > m_aContent.size () || newPos < 0)
-      throw new IllegalArgumentException ();
-    m_nPos = newPos;
+    if (nNewPos > m_aContent.size () || nNewPos < 0)
+      throw new IllegalArgumentException ("New position " + nNewPos + " is not valid!");
+    m_nPos = nNewPos;
     return nOldPos;
+  }
+
+  /**
+   * Sets the current position to the end of the block.
+   * 
+   * @return the old value of the current position.
+   * @see #pos()
+   */
+  public int posEnd ()
+  {
+    return pos (m_aContent.size ());
   }
 
   /**
@@ -271,24 +297,44 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final double v)
   {
+    // No add with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
+    if (v < 0)
+      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
     return assignPlus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final float v)
   {
+    // No add with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
+    if (v < 0)
+      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
     return assignPlus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final int v)
   {
+    // No add with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
+    if (v < 0)
+      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
     return assignPlus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final long v)
   {
+    // No add with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
+    if (v < 0)
+      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
     return assignPlus (lhs, JSExpr.lit (v));
   }
 
@@ -308,24 +354,36 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final double v)
   {
+    // No subtract with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
     return assignMinus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final float v)
   {
+    // No subtract with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
     return assignMinus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final int v)
   {
+    // No subtract with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
     return assignMinus (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final long v)
   {
+    // No subtract with 0
+    if (EqualsUtils.equals (v, 0))
+      return this;
     return assignMinus (lhs, JSExpr.lit (v));
   }
 
@@ -339,24 +397,36 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final double v)
   {
+    // No multiply with 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignMultiply (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final float v)
   {
+    // No multiply with 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignMultiply (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final int v)
   {
+    // No multiply with 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignMultiply (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final long v)
   {
+    // No multiply with 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignMultiply (lhs, JSExpr.lit (v));
   }
 
@@ -370,24 +440,36 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final double v)
   {
+    // No divide by 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignDivide (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final float v)
   {
+    // No divide by 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignDivide (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final int v)
   {
+    // No divide by 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignDivide (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
   public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final long v)
   {
+    // No divide by 1
+    if (EqualsUtils.equals (v, 1))
+      return this;
     return assignDivide (lhs, JSExpr.lit (v));
   }
 
@@ -411,77 +493,77 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   @Nonnull
-  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignModulo (lhs, exp));
+    _insert (JSExpr.assignModulo (lhs, aExpr));
     return this;
   }
 
   /**
    * Creates an invocation statement and adds it to this block.
    * 
-   * @param expr
+   * @param aExpr
    *        JExpression evaluating to the class or object upon which the named
    *        method will be invoked
-   * @param method
+   * @param sMethod
    *        Name of method to invoke
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull @Nonempty final String method)
+  public JSInvocation invoke (@Nullable final IJSExpression aExpr, @Nonnull @Nonempty final String sMethod)
   {
-    return _insert (new JSInvocation (expr, method));
+    return _insert (new JSInvocation (aExpr, sMethod));
   }
 
   /**
    * Creates an invocation statement and adds it to this block.
    * 
-   * @param expr
+   * @param aExpr
    *        JExpression evaluating to the class or object upon which the method
    *        will be invoked
-   * @param method
+   * @param aMethod
    *        JMethod to invoke
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nullable final IJSExpression expr, @Nonnull final JSMethod method)
+  public JSInvocation invoke (@Nullable final IJSExpression aExpr, @Nonnull final JSMethod aMethod)
   {
-    return _insert (new JSInvocation (expr, method));
+    return _insert (new JSInvocation (aExpr, aMethod));
   }
 
   /**
    * Creates a static invocation statement.
    */
   @Nonnull
-  public JSInvocation staticInvoke (@Nullable final AbstractJSClass type, @Nonnull final String method)
+  public JSInvocation staticInvoke (@Nullable final AbstractJSClass aType, @Nonnull final String sMethod)
   {
-    return _insert (new JSInvocation (type, method));
+    return _insert (new JSInvocation (aType, sMethod));
   }
 
   /**
    * Creates an invocation statement and adds it to this block.
    * 
-   * @param method
+   * @param sMethod
    *        Name of method to invoke
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nonnull @Nonempty final String method)
+  public JSInvocation invoke (@Nonnull @Nonempty final String sMethod)
   {
-    return _insert (new JSInvocation ((IJSExpression) null, method));
+    return _insert (new JSInvocation ((IJSExpression) null, sMethod));
   }
 
   /**
    * Creates an invocation statement and adds it to this block.
    * 
-   * @param method
+   * @param aMethod
    *        JMethod to invoke
    * @return Newly generated {@link JSInvocation}
    */
   @Nonnull
-  public JSInvocation invoke (@Nonnull final JSMethod method)
+  public JSInvocation invoke (@Nonnull final JSMethod aMethod)
   {
-    return _insert (new JSInvocation ((IJSExpression) null, method));
+    return _insert (new JSInvocation ((IJSExpression) null, aMethod));
   }
 
   /**
@@ -529,14 +611,14 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   /**
    * Create an If statement and add it to this block
    * 
-   * @param expr
+   * @param aExpr
    *        {@link IJSExpression} to be tested to determine branching
    * @return Newly generated conditional statement
    */
   @Nonnull
-  public JSConditional _if (@Nonnull final IJSExpression expr)
+  public JSConditional _if (@Nonnull final IJSExpression aExpr)
   {
-    return _insert (new JSConditional (expr));
+    return _insert (new JSConditional (aExpr));
   }
 
   /**
@@ -551,11 +633,11 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   @Nonnull
-  public JSForIn forIn (@Nullable final AbstractJSType varType,
-                        @Nonnull final String name,
-                        @Nonnull final IJSExpression collection)
+  public JSForIn forIn (@Nullable final AbstractJSType aVarType,
+                        @Nonnull final String sName,
+                        @Nonnull final IJSExpression aCollection)
   {
-    return _insert (new JSForIn (varType, name, collection));
+    return _insert (new JSForIn (aVarType, sName, aCollection));
   }
 
   /**
@@ -601,7 +683,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   /**
-   * Insert a <code>delete expr;</code> statement
+   * Insert a <code>delete aExpr;</code> statement
    * 
    * @param aExpr
    *        the expression to be deleted. May not be <code>null</code>.
@@ -714,10 +796,10 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock block ()
   {
-    final JSBlock b = new JSBlock ();
-    b.m_bBracesRequired = false;
-    b.m_bIndentRequired = false;
-    return _insert (b);
+    final JSBlock aSubBlock = new JSBlock ();
+    aSubBlock.m_bBracesRequired = false;
+    aSubBlock.m_bIndentRequired = false;
+    return _insert (aSubBlock);
   }
 
   @Nonnull
