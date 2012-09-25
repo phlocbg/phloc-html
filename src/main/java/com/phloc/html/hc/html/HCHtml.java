@@ -35,6 +35,8 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.HCConversionSettings;
@@ -149,21 +151,42 @@ public class HCHtml extends AbstractHCBaseNode
     return m_aBody;
   }
 
-  private void _recursiveCustomizeElements (@Nonnull final IHCNodeWithChildren <?> aParentElement,
-                                            @Nonnull final IHCCustomizer aCustomizer,
-                                            @Nonnull final EHTMLVersion eHTMLVersion)
+  private static void _recursiveCustomizeElements (@Nonnull final IHCHasChildren aParentElement,
+                                                   @Nonnull final IHCCustomizer aCustomizer,
+                                                   @Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (aParentElement.hasChildren ())
     {
+      final boolean bParentIsElement = aParentElement instanceof IHCNodeWithChildren <?>;
       for (final IHCBaseNode aChild : aParentElement.getChildren ())
       {
-        if (aChild instanceof IHCElement <?>)
-          aCustomizer.customizeHCElement (aParentElement, (IHCElement <?>) aChild, eHTMLVersion);
+        if (bParentIsElement && aChild instanceof IHCElement <?>)
+          aCustomizer.customizeHCElement ((IHCNodeWithChildren <?>) aParentElement,
+                                          (IHCElement <?>) aChild,
+                                          eHTMLVersion);
 
         // Recurse deeper?
-        if (aChild instanceof IHCNodeWithChildren <?>)
-          _recursiveCustomizeElements ((IHCNodeWithChildren <?>) aChild, aCustomizer, eHTMLVersion);
+        if (aChild instanceof IHCHasChildren)
+          _recursiveCustomizeElements ((IHCHasChildren) aChild, aCustomizer, eHTMLVersion);
       }
+    }
+  }
+
+  public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNode aBaseNode,
+                                                        @Nonnull final IHCConversionSettings aConversionSettings,
+                                                        @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
+  {
+    if (aBaseNode instanceof IHCHasChildren)
+    {
+      final IHCHasChildren aHasChildren = (IHCHasChildren) aBaseNode;
+      // Customize element, before extracting out-of-band nodes, in case the
+      // customizer adds some out-of-band nodes as well
+      _recursiveCustomizeElements (aHasChildren,
+                                   aConversionSettings.getCustomizer (),
+                                   aConversionSettings.getHTMLVersion ());
+
+      // Extract all out-of-band nodes
+      OutOfBandHandler.recursiveExtractOutOfBandNodes (aHasChildren, aExtractedOutOfBandNodes);
     }
   }
 
@@ -172,22 +195,17 @@ public class HCHtml extends AbstractHCBaseNode
     if (!m_bPrepared)
     {
       m_bPrepared = true;
-      final IHCCustomizer aCustomizer = aConversionSettings.getCustomizer ();
 
       // Ensure they are not null
       final HCBody aBody = getBody ();
       final HCHead aHead = getHead ();
 
-      // Customize element, before extracting out-of-band nodes, in case the
-      // customizer adds some out-of-band nodes as well
-      _recursiveCustomizeElements (aBody, aCustomizer, aConversionSettings.getHTMLVersion ());
-
       // Extract all out-of-band nodes
       final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-      OutOfBandHandler.recursiveExtractOutOfBandNodes (aBody, aExtractedOutOfBandNodes);
+      customizeAndExtractOutOfBandNodes (aBody, aConversionSettings, aExtractedOutOfBandNodes);
 
       // Call out-of-band node handler
-      aCustomizer.handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
+      aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
     }
   }
 
