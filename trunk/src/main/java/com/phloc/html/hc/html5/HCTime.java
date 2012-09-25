@@ -33,6 +33,7 @@ import org.joda.time.Period;
 import org.joda.time.format.ISODateTimeFormat;
 import org.joda.time.format.ISOPeriodFormat;
 
+import com.phloc.commons.CGlobal;
 import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -46,6 +47,14 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 @SinceHTML5
 public class HCTime extends AbstractHCElementWithChildren <HCTime>
 {
+  public static final int LENGTH_YEAR = 4;
+  public static final int LENGTH_MONTH = 2;
+  public static final int LENGTH_DAY = 2;
+  public static final int LENGTH_WEEKINYEAR = 2;
+  public static final int LENGTH_HOUR = 2;
+  public static final int LENGTH_MIN = 2;
+  public static final int LENGTH_SEC = 2;
+
   private String m_sDatetime;
 
   public HCTime ()
@@ -62,18 +71,20 @@ public class HCTime extends AbstractHCElementWithChildren <HCTime>
   @Nonnull
   public HCTime setAsMonth (@Nonnegative final int nYear, @Nonnegative final int nMonth)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nYear, 4) + "-" + StringHelper.getLeadingZero (nMonth, 2);
+    m_sDatetime = StringHelper.getLeadingZero (nYear, LENGTH_YEAR) +
+                  "-" +
+                  StringHelper.getLeadingZero (nMonth, LENGTH_MONTH);
     return this;
   }
 
   @Nonnull
   public HCTime setAsDate (@Nonnegative final int nYear, @Nonnegative final int nMonth, @Nonnegative final int nDay)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nYear, 4) +
+    m_sDatetime = StringHelper.getLeadingZero (nYear, LENGTH_YEAR) +
                   "-" +
-                  StringHelper.getLeadingZero (nMonth, 2) +
+                  StringHelper.getLeadingZero (nMonth, LENGTH_MONTH) +
                   "-" +
-                  StringHelper.getLeadingZero (nDay, 2);
+                  StringHelper.getLeadingZero (nDay, LENGTH_DAY);
     return this;
   }
 
@@ -93,25 +104,29 @@ public class HCTime extends AbstractHCElementWithChildren <HCTime>
   @Nonnull
   public HCTime setAsYearlessDate (@Nonnegative final int nMonth, @Nonnegative final int nDay)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nMonth, 2) + "-" + StringHelper.getLeadingZero (nDay, 2);
+    m_sDatetime = StringHelper.getLeadingZero (nMonth, LENGTH_MONTH) +
+                  "-" +
+                  StringHelper.getLeadingZero (nDay, LENGTH_DAY);
     return this;
   }
 
   @Nonnull
   public HCTime setAsTime (@Nonnegative final int nHour, @Nonnegative final int nMinute)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nHour, 2) + ":" + StringHelper.getLeadingZero (nMinute, 2);
+    m_sDatetime = StringHelper.getLeadingZero (nHour, LENGTH_HOUR) +
+                  ":" +
+                  StringHelper.getLeadingZero (nMinute, LENGTH_MIN);
     return this;
   }
 
   @Nonnull
   public HCTime setAsTime (@Nonnegative final int nHour, @Nonnegative final int nMinute, @Nonnegative final int nSecond)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nHour, 2) +
+    m_sDatetime = StringHelper.getLeadingZero (nHour, LENGTH_HOUR) +
                   ":" +
-                  StringHelper.getLeadingZero (nMinute, 2) +
+                  StringHelper.getLeadingZero (nMinute, LENGTH_MIN) +
                   ":" +
-                  StringHelper.getLeadingZero (nSecond, 2);
+                  StringHelper.getLeadingZero (nSecond, LENGTH_SEC);
     return this;
   }
 
@@ -121,11 +136,11 @@ public class HCTime extends AbstractHCElementWithChildren <HCTime>
                            @Nonnegative final int nSecond,
                            @Nonnegative final int nMilliSeconds)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nHour, 2) +
+    m_sDatetime = StringHelper.getLeadingZero (nHour, LENGTH_HOUR) +
                   ":" +
-                  StringHelper.getLeadingZero (nMinute, 2) +
+                  StringHelper.getLeadingZero (nMinute, LENGTH_MIN) +
                   ":" +
-                  StringHelper.getLeadingZero (nSecond, 2) +
+                  StringHelper.getLeadingZero (nSecond, LENGTH_SEC) +
                   "." +
                   nMilliSeconds;
     return this;
@@ -161,26 +176,28 @@ public class HCTime extends AbstractHCElementWithChildren <HCTime>
   @Nonnull
   public HCTime setAsTimezone (@CheckForSigned final int nMinutes)
   {
-    final int nHours = nMinutes / 60;
-    final int nRestMinutes = nMinutes % 60;
+    final int nHours = nMinutes / CGlobal.MINUTES_PER_HOUR;
+    final int nRestMinutes = nMinutes % CGlobal.MINUTES_PER_HOUR;
     m_sDatetime = (nHours < 0 ? "-" : "+") +
-                  StringHelper.getLeadingZero (MathHelper.abs (nHours), 2) +
+                  StringHelper.getLeadingZero (MathHelper.abs (nHours), LENGTH_HOUR) +
                   ":" +
-                  StringHelper.getLeadingZero (MathHelper.abs (nRestMinutes), 2);
+                  StringHelper.getLeadingZero (MathHelper.abs (nRestMinutes), LENGTH_MIN);
     return this;
   }
 
   @Nonnull
   public HCTime setAsWeekInYear (@Nonnegative final int nYear, @Nonnegative final int nWeekInYear)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nYear, 4) + "-W" + StringHelper.getLeadingZero (nWeekInYear, 2);
+    m_sDatetime = StringHelper.getLeadingZero (nYear, LENGTH_YEAR) +
+                  "-W" +
+                  StringHelper.getLeadingZero (nWeekInYear, LENGTH_WEEKINYEAR);
     return this;
   }
 
   @Nonnull
   public HCTime setAsYear (@Nonnegative final int nYear)
   {
-    m_sDatetime = StringHelper.getLeadingZero (nYear, 4);
+    m_sDatetime = StringHelper.getLeadingZero (nYear, LENGTH_YEAR);
     return this;
   }
 

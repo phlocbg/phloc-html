@@ -85,9 +85,9 @@ public class JSConditional implements IJSStatement
    * Creates <tt>... else if(...) ...</tt> code.
    */
   @Nonnull
-  public JSConditional _elseif (@Nonnull final IJSExpression boolExp)
+  public JSConditional _elseif (@Nonnull final IJSExpression aBoolExp)
   {
-    return _else ()._if (boolExp);
+    return _else ()._if (aBoolExp);
   }
 
   public void state (final JSFormatter f)
@@ -97,7 +97,7 @@ public class JSConditional implements IJSStatement
       m_aThen.generateBody (f);
       return;
     }
-    if (m_aTest == JSExpr.FALSE)
+    if (m_aTest == JSExpr.FALSE && m_aElse != null)
     {
       m_aElse.generateBody (f);
       return;
@@ -124,7 +124,7 @@ public class JSConditional implements IJSStatement
   {
     return new ToStringGenerator (this).append ("test", m_aTest)
                                        .append ("then", m_aThen)
-                                       .append ("else", m_aElse)
+                                       .appendIfNotNull ("else", m_aElse)
                                        .toString ();
   }
 }

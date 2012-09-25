@@ -65,6 +65,7 @@ import com.phloc.html.meta.IMetaElement;
  */
 public class HCHead extends AbstractHCBaseNode
 {
+  private static final int MAX_CSS_IE = 31;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
 
   private String m_sProfile;
@@ -424,7 +425,7 @@ public class HCHead extends AbstractHCBaseNode
     // Sources:
     // http://acidmartin.wordpress.com/2008/11/25/the-32-external-css-files-limitation-of-internet-explorer-and-more/
     // http://social.msdn.microsoft.com/Forums/en-US/iewebdevelopment/thread/ad1b6e88-bbfa-4cc4-9e95-3889b82a7c1d
-    if (nCSSExternals > 31 && !GlobalDebug.isDebugMode ())
+    if (nCSSExternals > MAX_CSS_IE && !GlobalDebug.isDebugMode ())
       s_aLogger.warn ("You are including more than 31 CSS files (" +
                       nCSSExternals +
                       ") in your request, which will be ignored by Internet Explorer (at least up to version 8)!");
