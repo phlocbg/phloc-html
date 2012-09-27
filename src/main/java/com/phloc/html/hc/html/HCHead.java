@@ -48,12 +48,12 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
@@ -260,17 +260,17 @@ public class HCHead extends AbstractHCBaseNode
 
   public static boolean isValidCSSNode (@Nonnull final IHCBaseNode aNode)
   {
+    final IHCBaseNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+
     // Direct CSS node?
-    if (aNode instanceof IHCCSSNode)
+    if (aUnwrappedNode instanceof IHCCSSNode)
     {
       // Special case
-      if (aNode instanceof HCLink && !EHCLinkType.STYLESHEET.equals (((HCLink) aNode).getRel ()))
+      if (aUnwrappedNode instanceof HCLink && !EHCLinkType.STYLESHEET.equals (((HCLink) aUnwrappedNode).getRel ()))
         return false;
       return true;
     }
-    // Conditional comment?
-    if (aNode instanceof IHCWrappingNode)
-      return isValidCSSNode (((IHCWrappingNode) aNode).getWrappedNode ());
+
     return false;
   }
 
@@ -326,13 +326,10 @@ public class HCHead extends AbstractHCBaseNode
 
   public static boolean isValidJSNode (@Nonnull final IHCBaseNode aNode)
   {
+    final IHCBaseNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+
     // Direct JS node?
-    if (aNode instanceof IHCJSNode)
-      return true;
-    // Conditional comment?
-    if (aNode instanceof IHCWrappingNode)
-      return isValidJSNode (((IHCWrappingNode) aNode).getWrappedNode ());
-    return false;
+    return aUnwrappedNode instanceof IHCJSNode;
   }
 
   /**

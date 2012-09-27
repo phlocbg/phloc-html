@@ -40,9 +40,7 @@ import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
-                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
-                                                                                                                                                                                                      IHCHasChildren
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -181,6 +179,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Override
+  @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
   {
