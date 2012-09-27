@@ -317,17 +317,18 @@ public final class HCUtils
   }
 
   /**
-   * Resolve all wrappings when adding to the result list.
+   * Resolve all wrappings via {@link IHCWrappingNode} of the passed node.
    * 
    * @param aHCNode
    *        The node to be unwrapped. Never <code>null</code>.
-   * @return The unwrapped node. Never <code>null</code>.
+   * @return The unwrapped node. May be the same as the parameter, if the node
+   *         is not wrapped. Never <code>null</code>.
    */
   @Nonnull
-  public static IHCBaseNode getUnwrappedOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
+  public static IHCBaseNode getUnwrappedNode (@Nonnull final IHCBaseNode aHCNode)
   {
     if (aHCNode instanceof IHCWrappingNode)
-      return getUnwrappedOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
+      return getUnwrappedNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
 
     return aHCNode;
   }

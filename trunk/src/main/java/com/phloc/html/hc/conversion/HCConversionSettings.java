@@ -32,7 +32,7 @@ import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @NotThreadSafe
-public final class HCConversionSettings implements IHCConversionSettings, ICloneable <HCConversionSettings>
+public class HCConversionSettings implements IHCConversionSettings, ICloneable <HCConversionSettings>
 {
   // Is implied from default XMLWriter settings
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;

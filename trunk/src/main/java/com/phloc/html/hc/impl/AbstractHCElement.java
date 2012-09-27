@@ -672,7 +672,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * delivers an IMicroNodeList!
    */
   @Override
-  @Nullable
+  @Nonnull
   protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
     // Run some consistency checks if desired
