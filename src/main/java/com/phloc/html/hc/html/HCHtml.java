@@ -213,7 +213,9 @@ public class HCHtml extends AbstractHCBaseNode
   @Nonnull
   public final IMicroDocument getAsNode ()
   {
-    return getAsNode (new HCConversionSettings (m_eHTMLVersion));
+    // Use the default conversion settings, but with the HTML version specified
+    // in the header
+    return getAsNode (new HCConversionSettings (HCSettings.getConversionSettings (false), m_eHTMLVersion));
   }
 
   @Nonnull

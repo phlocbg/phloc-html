@@ -68,9 +68,24 @@ public class HCConversionSettings implements IHCConversionSettings, ICloneable <
    */
   public HCConversionSettings (@Nonnull final IHCConversionSettings aBase)
   {
+    this (aBase, aBase.getHTMLVersion ());
+  }
+
+  /**
+   * Kind of copy ctor.
+   * 
+   * @param aBase
+   *        Object to copy the settings from. May not be <code>null</code>.
+   * @param eHTMLVersion
+   *        A different HTML version to use than the one from the base settings
+   */
+  public HCConversionSettings (@Nonnull final IHCConversionSettings aBase, @Nonnull final EHTMLVersion eHTMLVersion)
+  {
     if (aBase == null)
       throw new NullPointerException ("base");
-    m_eHTMLVersion = aBase.getHTMLVersion ();
+    if (eHTMLVersion == null)
+      throw new NullPointerException ("HTMLVersion");
+    m_eHTMLVersion = eHTMLVersion;
     m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
     m_aCSSWriterSettings = new CSSWriterSettings (aBase.getCSSWriterSettings ());
     m_bConsistencyChecksEnabled = aBase.areConsistencyChecksEnabled ();
