@@ -166,14 +166,15 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
    * This can e.g. be used for sorting or ordering.
    * 
    * @param aChildren
-   *        The children to be emitted
+   *        The children to be emitted. Is a direct reference to the container
+   *        where the children are stored. So handle with care!
    * @return The non-<code>null</code> list with all child elements to be
    *         emitted.
    */
   @Nonnull
   @Nonempty
   @OverrideOnDemand
-  protected List <CHILDTYPE> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
+  protected List <? extends IHCBaseNode> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
   {
     return aChildren;
   }
@@ -185,7 +186,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
-      for (final CHILDTYPE aChild : getChildrenFormEmitting (m_aChildren))
+      for (final IHCBaseNode aChild : getChildrenFormEmitting (m_aChildren))
         aElement.appendChild (aChild.getAsNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
