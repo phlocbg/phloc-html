@@ -28,14 +28,22 @@ import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
 
+/**
+ * A special customization interface, that lets you modify existing elements
+ * before they are assembled and emitted in the HTML code.
+ * 
+ * @author philip
+ */
 public interface IHCCustomizer
 {
   /**
-   * Customize HC elements with some predefined classes etc.
+   * Customize HC elements with some predefined classes etc. This is only called
+   * from within <code>HCHtml.getAsNode()</code>
    * 
    * @param aParentElement
    *        The parent element of the element to be customized. Never
-   *        <code>null</code>.
+   *        <code>null</code>. This implies that this method is never called for
+   *        the root HTML element (HCHtml).
    * @param aElement
    *        The element to be customized. Never <code>null</code>.
    * @param eHTMLVersion
@@ -47,7 +55,8 @@ public interface IHCCustomizer
 
   /**
    * This callback is called, when the main HTML element is assembled, to move
-   * the out-of-band nodes to the correct place.
+   * the out-of-band nodes to the correct place. It is only called from within
+   * <code>HCHtml.getAsNode()</code>
    * 
    * @param aOutOfBandNodes
    *        The non-<code>null</code> list of out-of-band nodes. May be empty.

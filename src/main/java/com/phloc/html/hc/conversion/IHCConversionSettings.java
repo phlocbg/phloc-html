@@ -19,6 +19,7 @@ package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ICloneable;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.css.ICSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
@@ -31,7 +32,7 @@ import com.phloc.html.hc.customize.IHCCustomizer;
  * 
  * @author philip
  */
-public interface IHCConversionSettings
+public interface IHCConversionSettings extends ICloneable <IHCConversionSettings>
 {
   /**
    * @return The HTML version to be used to transform HC nodes into XML nodes.
@@ -58,9 +59,26 @@ public interface IHCConversionSettings
   boolean areConsistencyChecksEnabled ();
 
   /**
+   * @return <code>true</code> if out-of-band nodes should be extracted,
+   *         <code>false</code> if not. By default <code>true</code> is
+   *         returned.
+   */
+  boolean extractOutOfBandNodes ();
+
+  /**
    * @return The current customizer to be used. Never <code>null</code>. By
    *         default a {@link HCDefaultCustomizer} object is returned.
    */
   @Nonnull
   IHCCustomizer getCustomizer ();
+
+  /**
+   * Get a clone of this settings, but with a different HTML version.
+   * 
+   * @param eHTMLVersion
+   *        The new HTML version to use. May not be <code>null</code>.
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  IHCConversionSettings getClone (@Nonnull EHTMLVersion eHTMLVersion);
 }
