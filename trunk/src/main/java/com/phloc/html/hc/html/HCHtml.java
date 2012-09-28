@@ -261,7 +261,7 @@ public class HCHtml extends AbstractHCBaseNode
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("HTMLversion", m_eHTMLVersion)
+                            .appendIfNotNull ("HTMLVersion", m_eHTMLVersion)
                             .appendIfNotNull ("dir", m_eDir)
                             .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)
