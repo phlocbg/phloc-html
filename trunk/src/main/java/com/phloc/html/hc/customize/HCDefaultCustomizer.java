@@ -60,12 +60,13 @@ import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
- * A helper class that centrally adds all non-common customizations
+ * The default implementation of {@link IHCCustomizer} performing some default
+ * class assignments etc.
  * 
  * @author philip
  */
 @Immutable
-public class HCDefaultCustomizer implements IHCCustomizer
+public class HCDefaultCustomizer extends HCEmptyCustomizer
 {
   protected static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
   protected static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
@@ -94,6 +95,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
     return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
   }
 
+  @Override
   public void customizeHCElement (@Nonnull final IHCNodeWithChildren <?> aParentElement,
                                   @Nonnull final IHCElement <?> aElement,
                                   @Nonnull final EHTMLVersion eHTMLVersion)
@@ -227,6 +229,7 @@ public class HCDefaultCustomizer implements IHCCustomizer
     return false;
   }
 
+  @Override
   public void handleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)

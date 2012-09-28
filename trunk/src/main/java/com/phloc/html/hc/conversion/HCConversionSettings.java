@@ -20,7 +20,6 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.phloc.commons.ICloneable;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
@@ -32,19 +31,21 @@ import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @NotThreadSafe
-public class HCConversionSettings implements IHCConversionSettings, ICloneable <HCConversionSettings>
+public class HCConversionSettings implements IHCConversionSettings
 {
   // Is implied from default XMLWriter settings
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
   public static final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
   public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
   public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
+  public static final boolean DEFAULT_EXTRACT_OUT_OF_BAND_NODES = true;
 
   private final EHTMLVersion m_eHTMLVersion;
   private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ();
   private CSSWriterSettings m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION,
                                                                           !DEFAULT_INDENT_AND_ALIGN_CSS);
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
+  private boolean m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
   private IHCCustomizer m_aCustomizer = new HCDefaultCustomizer ();
 
   /**
@@ -89,6 +90,7 @@ public class HCConversionSettings implements IHCConversionSettings, ICloneable <
     m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
     m_aCSSWriterSettings = new CSSWriterSettings (aBase.getCSSWriterSettings ());
     m_bConsistencyChecksEnabled = aBase.areConsistencyChecksEnabled ();
+    m_bExtractOutOfBandNodes = aBase.extractOutOfBandNodes ();
     m_aCustomizer = aBase.getCustomizer ();
   }
 
@@ -165,6 +167,25 @@ public class HCConversionSettings implements IHCConversionSettings, ICloneable <
   }
 
   /**
+   * Enable or disable the extraction of out-of-band nodes.
+   * 
+   * @param bExtractOutOfBandNodes
+   *        The new value.
+   * @return this
+   */
+  @Nonnull
+  public HCConversionSettings setExtractOutOfBandNodes (final boolean bExtractOutOfBandNodes)
+  {
+    m_bExtractOutOfBandNodes = bExtractOutOfBandNodes;
+    return this;
+  }
+
+  public boolean extractOutOfBandNodes ()
+  {
+    return m_bExtractOutOfBandNodes;
+  }
+
+  /**
    * Set the global customizer to be used to globally customize created
    * elements.
    * 
@@ -193,6 +214,12 @@ public class HCConversionSettings implements IHCConversionSettings, ICloneable <
     return new HCConversionSettings (this);
   }
 
+  @Nonnull
+  public HCConversionSettings getClone (@Nonnull final EHTMLVersion eHTMLVersion)
+  {
+    return new HCConversionSettings (this, eHTMLVersion);
+  }
+
   @Override
   public String toString ()
   {
@@ -200,6 +227,7 @@ public class HCConversionSettings implements IHCConversionSettings, ICloneable <
                                        .append ("XMLWriterSettings", m_aXMLWriterSettings)
                                        .append ("CSSWriterSettings", m_aCSSWriterSettings)
                                        .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
+                                       .append ("extractOutOfBandNodes", m_bExtractOutOfBandNodes)
                                        .append ("customizer", m_aCustomizer)
                                        .toString ();
   }
