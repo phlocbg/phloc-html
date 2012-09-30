@@ -760,6 +760,11 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
     _break (null);
   }
 
+  public void _debugger ()
+  {
+    _insert (new JSDebugger ());
+  }
+
   public void _break (@Nullable final JSLabel label)
   {
     _insert (new JSBreak (label));
