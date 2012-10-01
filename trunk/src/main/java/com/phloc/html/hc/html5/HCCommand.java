@@ -27,12 +27,13 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.api5.EHCCommandType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
-public class HCCommand extends AbstractHCElement <HCCommand>
+public class HCCommand extends AbstractHCElement <HCCommand> implements IHCCanBeDisabled <HCCommand>
 {
   public static final boolean DEFAULT_CHECKED = false;
   public static final boolean DEFAULT_DEFAULT = false;

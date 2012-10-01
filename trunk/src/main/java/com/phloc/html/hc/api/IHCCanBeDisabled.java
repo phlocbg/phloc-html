@@ -15,31 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.api;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import com.phloc.html.hc.api.IHCCanBeDisabled;
-import com.phloc.html.hc.api.IHCHasFocus;
+import com.phloc.html.hc.IHCElement;
 
-/**
- * Base interface for controls like edit, checkbox, radio button, select or text
- * area.
- * 
- * @author philip
- * @param <THISTYPE>
- */
-public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>
+public interface IHCCanBeDisabled <THISTYPE extends IHCCanBeDisabled <THISTYPE>> extends IHCElement <THISTYPE>
 {
-  @Nullable
-  String getName ();
+  boolean isDisabled ();
 
   @Nonnull
-  THISTYPE setName (@Nullable String sName);
-
-  boolean isReadonly ();
-
-  @Nonnull
-  THISTYPE setReadonly (boolean bReadOnly);
+  THISTYPE setDisabled (boolean bDisabled);
 }

@@ -26,12 +26,13 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.api5.EHCKeyGenType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 @SinceHTML5
-public class HCKeyGen extends AbstractHCElement <HCKeyGen>
+public class HCKeyGen extends AbstractHCElement <HCKeyGen> implements IHCCanBeDisabled <HCKeyGen>
 {
   public static final EHCKeyGenType DEFAULT_KEY_TYPE = EHCKeyGenType.DEFAULT;
   public static final boolean DEFAULT_AUTOFOCUS = false;
