@@ -79,6 +79,32 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return (m_aHeaderRow != null ? 1 : 0) + m_aBodyRows.size () + (m_aFooterRow != null ? 1 : 0);
   }
 
+  @Nullable
+  public final IHCNode getFirstChild ()
+  {
+    IHCNode ret = m_aHeaderRow;
+    if (ret == null)
+    {
+      ret = getFirstBodyRow ();
+      if (ret == null)
+        ret = m_aFooterRow;
+    }
+    return ret;
+  }
+
+  @Nullable
+  public final IHCNode getLastChild ()
+  {
+    IHCNode ret = m_aFooterRow;
+    if (ret == null)
+    {
+      ret = getLastBodyRow ();
+      if (ret == null)
+        ret = m_aHeaderRow;
+    }
+    return ret;
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public final List <IHCNode> getChildren ()

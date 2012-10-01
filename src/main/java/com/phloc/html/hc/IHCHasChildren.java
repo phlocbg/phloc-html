@@ -26,5 +26,7 @@ import com.phloc.commons.parent.IHasChildrenSorted;
  */
 public interface IHCHasChildren extends IHCNode, IHasChildrenSorted <IHCBaseNode>
 {
-  /* empty */
+  IHCBaseNode getFirstChild ();
+
+  IHCBaseNode getLastChild ();
 }
