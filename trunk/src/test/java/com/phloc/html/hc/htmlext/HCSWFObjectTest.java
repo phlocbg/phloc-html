@@ -44,6 +44,7 @@ public final class HCSWFObjectTest
     x.addFlashVar ("flash1", "Wert");
     final IMicroNode aNode = x.build ().getAsNode (HCSettings.getConversionSettings (false));
     assertNotNull (aNode);
-    System.out.println (MicroWriter.getXMLString (aNode));
+    if (false)
+      System.out.println (MicroWriter.getXMLString (aNode));
   }
 }

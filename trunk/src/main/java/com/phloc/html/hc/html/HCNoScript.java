@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -33,7 +32,6 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-@OutOfBandNode
 public class HCNoScript extends AbstractHCElementWithChildren <HCNoScript>
 {
   /**
