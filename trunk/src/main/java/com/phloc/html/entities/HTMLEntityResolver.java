@@ -32,8 +32,8 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.resource.ClassPathResource;
-import com.phloc.commons.io.streams.NonBlockingByteArrayInputStream;
 import com.phloc.commons.io.streams.StreamUtils;
+import com.phloc.commons.xml.sax.InputSourceFactory;
 import com.phloc.html.CHTMLDocTypes;
 
 /**
@@ -124,15 +124,15 @@ public final class HTMLEntityResolver implements EntityResolver
   }
 
   @Nullable
-  public InputSource resolveEntity (final String sPublicId, final String sSystemId)
+  public InputSource resolveEntity (@Nullable final String sPublicId, @Nullable final String sSystemId)
   {
     return resolveEntity (sPublicId);
   }
 
   @Nullable
-  public InputSource resolveEntity (final String sPublicId)
+  public InputSource resolveEntity (@Nullable final String sPublicId)
   {
     final byte [] aBytes = m_aResolveMap.get (sPublicId);
-    return aBytes == null ? null : new InputSource (new NonBlockingByteArrayInputStream (aBytes));
+    return aBytes == null ? null : InputSourceFactory.create (aBytes);
   }
 }
