@@ -18,14 +18,24 @@
 package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import com.phloc.commons.name.IHasName;
 import com.phloc.html.hc.api.IHCHasFocus;
 
-public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCElement <THISTYPE>, IHasName, IHCHasFocus <THISTYPE>
+/**
+ * Base interface for controls like edit, checkbox, radio button, select or text
+ * area.
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ */
+public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCElement <THISTYPE>, IHCHasFocus <THISTYPE>
 {
+  @Nullable
+  String getName ();
+
   @Nonnull
-  THISTYPE setName (String sName);
+  THISTYPE setName (@Nullable String sName);
 
   boolean isDisabled ();
 

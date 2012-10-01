@@ -28,7 +28,10 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.idfactory.GlobalIDFactory;
+import com.phloc.commons.string.StringParser;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.css.ECSSUnit;
+import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
@@ -38,10 +41,14 @@ import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.html.AbstractHCCell;
+import com.phloc.html.hc.html.AbstractHCTable;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCButton_Submit;
 import com.phloc.html.hc.html.HCCheckBox;
+import com.phloc.html.hc.html.HCCol;
+import com.phloc.html.hc.html.HCColGroup;
 import com.phloc.html.hc.html.HCEdit;
 import com.phloc.html.hc.html.HCEditFile;
 import com.phloc.html.hc.html.HCEditPassword;
@@ -51,8 +58,10 @@ import com.phloc.html.hc.html.HCHiddenField;
 import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCNoScript;
 import com.phloc.html.hc.html.HCRadioButton;
+import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html.HCScriptOnDocumentReady;
+import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSInvocation;
@@ -68,20 +77,23 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 @Immutable
 public class HCDefaultCustomizer extends HCEmptyCustomizer
 {
-  protected static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
-  protected static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
-  protected static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit");
-  protected static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file");
-  protected static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password");
-  protected static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden");
-  protected static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
+  public static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
+  public static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
+  public static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit");
+  public static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file");
+  public static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password");
+  public static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden");
+  public static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
 
   // For controls only
-  protected static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
-  protected static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
+  public static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
+  public static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
 
   // For buttons
-  protected static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
+  public static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
+
+  // For tables
+  public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCDefaultCustomizer.class);
   private static final JSInvocation JS_BLUR = JSExpr.invoke ("blur");
@@ -150,6 +162,33 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                   {
                     aElement.addClass (CSS_CLASS_RADIO);
                   }
+                  else
+                    if (aElement instanceof AbstractHCTable <?>)
+                    {
+                      final AbstractHCTable <?> aTable = (AbstractHCTable <?>) aElement;
+                      final HCColGroup aColGroup = aTable.getColGroup ();
+                      // bug fix for IE9 table layout bug
+                      // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
+                      // IE9 only interprets column widths if the first row does
+                      // not use colspan (i.e. at least one row does not use
+                      // colspan)
+                      if (aColGroup != null &&
+                          aColGroup.hasColumns () &&
+                          aTable.hasBodyRows () &&
+                          aTable.getFirstBodyRow ().isColspanUsed ())
+                      {
+                        // Create a dummy row with explicit widths
+                        final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
+                        for (final HCCol aCol : aColGroup.getAllColumns ())
+                        {
+                          final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
+                          final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
+                          if (nWidth >= 0)
+                            aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
+                        }
+                        aTable.addBodyRow (0, aRow);
+                      }
+                    }
 
     // Unfocusable?
     if (aElement.isUnfocusable ())
