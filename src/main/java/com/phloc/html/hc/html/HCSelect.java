@@ -38,6 +38,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCControl;
@@ -54,7 +55,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
 
   private boolean m_bMultiple = DEFAULT_MULTIPLE;
   private int m_nSize = CGlobal.ILLEGAL_UINT;
-  private List <HCOption> m_aOptions;
+  private List <IHCNode> m_aOptions;
   private Set <String> m_aPreselectedValues;
 
   public HCSelect ()
@@ -138,7 +139,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
 
     // Ensure list is present
     if (m_aOptions == null)
-      m_aOptions = new ArrayList <HCOption> ();
+      m_aOptions = new ArrayList <IHCNode> ();
 
     // Handle preselection (if no manual selection state was defined so far)
     if (!aOption.isSelectionDefined ())
@@ -157,7 +158,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
 
     // Ensure list is present
     if (m_aOptions == null)
-      m_aOptions = new ArrayList <HCOption> ();
+      m_aOptions = new ArrayList <IHCNode> ();
 
     // Handle preselection (if no manual selection state was defined so far)
     if (!aOption.isSelectionDefined ())
@@ -216,9 +217,43 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   }
 
   @Nonnull
+  public final HCSelect addOptionGroup (@Nullable final HCOptGroup aOptGroup)
+  {
+    if (aOptGroup != null)
+    {
+      // Ensure list is present
+      if (m_aOptions == null)
+        m_aOptions = new ArrayList <IHCNode> ();
+      m_aOptions.add (aOptGroup);
+    }
+    return this;
+  }
+
+  @Nonnull
   public final HCSelect removeAllOptions ()
   {
-    m_aOptions = null;
+    if (m_aOptions != null)
+    {
+      final List <IHCNode> aRest = new ArrayList <IHCNode> ();
+      for (final IHCNode aChild : m_aOptions)
+        if (!(aChild instanceof HCOption))
+          aRest.add (aChild);
+      m_aOptions = aRest;
+    }
+    return this;
+  }
+
+  @Nonnull
+  public final HCSelect removeAllOptionGroups ()
+  {
+    if (m_aOptions != null)
+    {
+      final List <IHCNode> aRest = new ArrayList <IHCNode> ();
+      for (final IHCNode aChild : m_aOptions)
+        if (!(aChild instanceof HCOptGroup))
+          aRest.add (aChild);
+      m_aOptions = aRest;
+    }
     return this;
   }
 
@@ -226,7 +261,41 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   public final HCSelect removeOptionAtIndex (@Nonnegative final int nIndex)
   {
     if (m_aOptions != null)
-      m_aOptions.remove (nIndex);
+    {
+      int nMatch = 0;
+      int nTotalIndex = 0;
+      for (final IHCNode aChild : m_aOptions)
+      {
+        if (aChild instanceof HCOption)
+          if (nMatch++ == nIndex)
+          {
+            m_aOptions.remove (nTotalIndex);
+            break;
+          }
+        ++nTotalIndex;
+      }
+    }
+    return this;
+  }
+
+  @Nonnull
+  public final HCSelect removeOptionGroupAtIndex (@Nonnegative final int nIndex)
+  {
+    if (m_aOptions != null)
+    {
+      int nMatch = 0;
+      int nTotalIndex = 0;
+      for (final IHCNode aChild : m_aOptions)
+      {
+        if (aChild instanceof HCOptGroup)
+          if (nMatch++ == nIndex)
+          {
+            m_aOptions.remove (nTotalIndex);
+            break;
+          }
+        ++nTotalIndex;
+      }
+    }
     return this;
   }
 
@@ -236,7 +305,26 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnegative
   public final int getOptionCount ()
   {
-    return ContainerHelper.getSize (m_aOptions);
+    int ret = 0;
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption)
+          ret++;
+    return ret;
+  }
+
+  /**
+   * @return The number of available option groups.
+   */
+  @Nonnegative
+  public final int getOptionGroupCount ()
+  {
+    int ret = 0;
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOptGroup)
+          ret++;
+    return ret;
   }
 
   /**
@@ -246,7 +334,27 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @ReturnsMutableCopy
   public final List <HCOption> getOptions ()
   {
-    return ContainerHelper.newList (m_aOptions);
+    final List <HCOption> ret = new ArrayList <HCOption> ();
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption)
+          ret.add ((HCOption) aChild);
+    return ret;
+  }
+
+  /**
+   * @return A non-<code>null</code> list of all available option groups.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <HCOptGroup> getOptionGroups ()
+  {
+    final List <HCOptGroup> ret = new ArrayList <HCOptGroup> ();
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOptGroup)
+          ret.add ((HCOptGroup) aChild);
+    return ret;
   }
 
   /**
@@ -260,7 +368,45 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nullable
   public final HCOption getOptionAtIndex (@Nonnegative final int nIndex)
   {
-    return ContainerHelper.getSafe (m_aOptions, nIndex);
+    HCOption ret = null;
+    if (m_aOptions != null)
+    {
+      int nMatch = 0;
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption)
+          if (nMatch++ == nIndex)
+          {
+            ret = (HCOption) aChild;
+            break;
+          }
+    }
+    return ret;
+  }
+
+  /**
+   * Get the option group at the specified index
+   * 
+   * @param nIndex
+   *        The index to retrieve. Should always be &ge; 0.
+   * @return <code>null</code> if no option group is available for the specified
+   *         index.
+   */
+  @Nullable
+  public final HCOptGroup getOptionGroupAtIndex (@Nonnegative final int nIndex)
+  {
+    HCOptGroup ret = null;
+    if (m_aOptions != null)
+    {
+      int nMatch = 0;
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOptGroup)
+          if (nMatch++ == nIndex)
+          {
+            ret = (HCOptGroup) aChild;
+            break;
+          }
+    }
+    return ret;
   }
 
   /**
@@ -268,7 +414,23 @@ public class HCSelect extends AbstractHCControl <HCSelect>
    */
   public final boolean hasOptions ()
   {
-    return !ContainerHelper.isEmpty (m_aOptions);
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption)
+          return true;
+    return false;
+  }
+
+  /**
+   * @return <code>true</code> if this select has at least one option group.
+   */
+  public final boolean hasOptionGroups ()
+  {
+    if (m_aOptions != null)
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOptGroup)
+          return true;
+    return false;
   }
 
   /**
@@ -280,9 +442,9 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   {
     final List <HCOption> ret = new ArrayList <HCOption> ();
     if (m_aOptions != null)
-      for (final HCOption aOption : m_aOptions)
-        if (aOption.isSelected ())
-          ret.add (aOption);
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption && ((HCOption) aChild).isSelected ())
+          ret.add ((HCOption) aChild);
     return ret;
   }
 
@@ -294,9 +456,9 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   {
     int ret = 0;
     if (m_aOptions != null)
-      for (final HCOption aOption : m_aOptions)
-        if (aOption.isSelected ())
-          ret++;
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption && ((HCOption) aChild).isSelected ())
+          ++ret;
     return ret;
   }
 
@@ -308,8 +470,8 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   public final boolean hasSelectedOption ()
   {
     if (m_aOptions != null)
-      for (final HCOption aOption : m_aOptions)
-        if (aOption.isSelected ())
+      for (final IHCNode aChild : m_aOptions)
+        if (aChild instanceof HCOption && ((HCOption) aChild).isSelected ())
           return true;
     return false;
   }
@@ -323,9 +485,9 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     if (m_nSize > 1)
       aElement.setAttribute (CHTMLAttributes.SIZE, m_nSize);
 
-    if (hasOptions ())
+    if (ContainerHelper.isNotEmpty (m_aOptions))
     {
-      for (final HCOption aOption : m_aOptions)
+      for (final IHCNode aOption : m_aOptions)
         aElement.appendChild (aOption.getAsNode (aConversionSettings));
     }
     else

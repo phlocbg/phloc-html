@@ -26,14 +26,14 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
  * Represents an HTML &lt;optgroup&gt; element
  * 
  * @author philip
  */
-public class HCOptGroup extends AbstractHCElementWithChildren <HCOptGroup>
+public class HCOptGroup extends AbstractHCElementWithInternalChildren <HCOptGroup, HCOption>
 {
   public static final boolean DEFAULT_DISABLED = false;
 

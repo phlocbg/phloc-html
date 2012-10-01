@@ -26,17 +26,18 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.callback.INonThrowingRunnableWithParameter;
+import com.phloc.commons.callback.INonThrowingCallableWithParameter;
 import com.phloc.commons.collections.ArrayHelper;
-import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.parent.IHasChildren;
+import com.phloc.commons.mutable.MutableBoolean;
+import com.phloc.commons.mutable.Wrapper;
+import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.html.HCDiv;
@@ -141,51 +142,97 @@ public final class HCUtils
    *         <code>null</code> if no such element exists.
    */
   @Nullable
-  public static IHCElement <?> recursiveGetChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
-                                                             @Nonnull @Nonempty final EHTMLElement... aElements)
+  public static IHCElement <?> recursiveGetFirstChildWithTagName (@Nonnull final IHCHasChildren aOwner,
+                                                                  @Nonnull @Nonempty final EHTMLElement... aElements)
   {
     if (aOwner == null)
       throw new NullPointerException ("owner");
     if (ArrayHelper.isEmpty (aElements))
       throw new IllegalArgumentException ("No tag name to search was provided");
 
-    if (aOwner.hasChildren ())
+    final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
+    iterateTree (aOwner, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
     {
-      final List <IHCBaseNode> aOpen = new ArrayList <IHCBaseNode> (aOwner.getChildren ());
-      while (!aOpen.isEmpty ())
+      @Nullable
+      public EFinish call (final IHCBaseNode aNode)
       {
-        // get current node
-        final IHCBaseNode aCurrent = aOpen.remove (0);
-
-        // is it an element
-        if (aCurrent instanceof IHCElement <?>)
+        if (aNode instanceof IHCElement <?>)
         {
-          final IHCElement <?> aCurrentElement = (IHCElement <?>) aCurrent;
+          final IHCElement <?> aCurrentElement = (IHCElement <?>) aNode;
           final String sCurrentTagName = aCurrentElement.getTagName ();
           for (final EHTMLElement aElement : aElements)
             if (sCurrentTagName.equalsIgnoreCase (aElement.getElementName ()))
-              return aCurrentElement;
+            {
+              ret.set (aCurrentElement);
+              return EFinish.FINISHED;
+            }
         }
-
-        // does the node has children
-        if (aCurrent instanceof IHasChildren <?>)
-        {
-          final IHasChildren <IHCBaseNode> aHasChildren = GenericReflection.<IHCBaseNode, IHasChildren <IHCBaseNode>> uncheckedCast (aCurrent);
-          if (aHasChildren.hasChildren ())
-            aOpen.addAll (0, aHasChildren.getChildren ());
-        }
+        return EFinish.UNFINISHED;
       }
-    }
-    return null;
+    });
+    return ret.get ();
   }
 
-  public static boolean recursiveContainsChildWithTagName (@Nonnull final IHasChildren <? extends IHCBaseNode> aOwner,
+  public static boolean recursiveContainsChildWithTagName (@Nonnull final IHCHasChildren aOwner,
                                                            @Nonnull @Nonempty final EHTMLElement... aElements)
   {
-    return recursiveGetChildWithTagName (aOwner, aElements) != null;
+    return recursiveGetFirstChildWithTagName (aOwner, aElements) != null;
   }
 
-  public static boolean recursivelyContainsAtLeastOneTextNode (@Nullable final IHCBaseNode aStartNode)
+  /**
+   * Helper method to enforce correct element nesting. See
+   * http://www.w3.org/TR/xhtml1#prohibitions
+   * 
+   * @param aElements
+   *        The tag names to search. May not be <code>null</code>.
+   * @return The first element with a different than the passed tag name on any
+   *         level, or <code>null</code> if no such element exists.
+   */
+  @Nullable
+  public static IHCElement <?> recursiveGetFirstChildWithDifferentTagName (@Nonnull final IHCHasChildren aOwner,
+                                                                           @Nonnull @Nonempty final EHTMLElement... aElements)
+  {
+    if (aOwner == null)
+      throw new NullPointerException ("owner");
+    if (ArrayHelper.isEmpty (aElements))
+      throw new IllegalArgumentException ("No tag name to search was provided");
+
+    final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
+    iterateTree (aOwner, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
+    {
+      @Nullable
+      public EFinish call (final IHCBaseNode aNode)
+      {
+        if (aNode instanceof IHCElement <?>)
+        {
+          final IHCElement <?> aCurrentElement = (IHCElement <?>) aNode;
+          final String sCurrentTagName = aCurrentElement.getTagName ();
+          boolean bFound = false;
+          for (final EHTMLElement aElement : aElements)
+            if (sCurrentTagName.equalsIgnoreCase (aElement.getElementName ()))
+            {
+              bFound = true;
+              break;
+            }
+          if (!bFound)
+          {
+            ret.set (aCurrentElement);
+            return EFinish.FINISHED;
+          }
+        }
+        return EFinish.UNFINISHED;
+      }
+    });
+    return ret.get ();
+  }
+
+  public static boolean recursiveContainsChildWithDifferentTagName (@Nonnull final IHCHasChildren aOwner,
+                                                                    @Nonnull @Nonempty final EHTMLElement... aElements)
+  {
+    return recursiveGetFirstChildWithDifferentTagName (aOwner, aElements) != null;
+  }
+
+  public static boolean recursiveContainsAtLeastOneTextNode (@Nullable final IHCBaseNode aStartNode)
   {
     if (aStartNode == null)
       return false;
@@ -193,20 +240,30 @@ public final class HCUtils
     if (aStartNode instanceof HCTextNode)
       return true;
 
-    if (aStartNode instanceof IHCNodeWithChildren <?>)
+    if (aStartNode instanceof IHCHasChildren)
     {
-      final IHCNodeWithChildren <?> aStartNodeHC = (IHCNodeWithChildren <?>) aStartNode;
-      if (aStartNodeHC.hasChildren ())
-        for (final IHCBaseNode aChildNode : aStartNodeHC.getChildren ())
-          if (recursivelyContainsAtLeastOneTextNode (aChildNode))
-            return true;
+      final MutableBoolean ret = new MutableBoolean (false);
+      iterateTree ((IHCHasChildren) aStartNode, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
+      {
+        @Nullable
+        public EFinish call (final IHCBaseNode aNode)
+        {
+          if (aNode instanceof HCTextNode)
+          {
+            ret.set (true);
+            return EFinish.FINISHED;
+          }
+          return EFinish.UNFINISHED;
+        }
+      });
+      return ret.booleanValue ();
     }
 
     return false;
   }
 
-  public static void iterateTree (@Nonnull final IHasChildren <? extends IHCBaseNode> aNode,
-                                  @Nonnull final INonThrowingRunnableWithParameter <IHCBaseNode> aCallback)
+  public static void iterateTree (@Nonnull final IHCHasChildren aNode,
+                                  @Nonnull final INonThrowingCallableWithParameter <EFinish, IHCBaseNode> aCallback)
   {
     if (aNode == null)
       throw new NullPointerException ("node");
@@ -222,12 +279,13 @@ public final class HCUtils
         final IHCBaseNode aCurrent = aOpen.remove (0);
 
         // call callback
-        aCallback.run (aCurrent);
+        if (aCallback.call (aCurrent).isFinished ())
+          break;
 
         // does the node has children
-        if (aCurrent instanceof IHasChildren <?>)
+        if (aCurrent instanceof IHCHasChildren)
         {
-          final IHasChildren <IHCBaseNode> aHasChildren = GenericReflection.<IHCBaseNode, IHasChildren <IHCBaseNode>> uncheckedCast (aCurrent);
+          final IHCHasChildren aHasChildren = (IHCHasChildren) aCurrent;
           if (aHasChildren.hasChildren ())
             aOpen.addAll (0, aHasChildren.getChildren ());
         }
@@ -300,7 +358,7 @@ public final class HCUtils
   /**
    * Inline all contained node lists so that a "flat" list results. This only
    * flattens something if the passed node is an {@link HCNodeList} and all
-   * node-lists directly contained in the other nodelists. Node-lists that are
+   * node-lists directly contained in the other node lists. Node-lists that are
    * hidden deep inside the tree are not considered!
    * 
    * @param aNode

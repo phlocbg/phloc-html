@@ -15,25 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.html5;
 
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.DeprecatedInHTML4;
-import com.phloc.html.annotations.DeprecatedInHTML5;
-import com.phloc.html.annotations.DeprecatedInXHTML1;
+import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Represents an HTML &lt;dir&gt; element
+ * Summary element may be the first child of {@link HCDetails}
  * 
  * @author philip
  */
-@DeprecatedInHTML4
-@DeprecatedInXHTML1
-@DeprecatedInHTML5
-public class HCDir extends AbstractHCList <HCDir>
+@SinceHTML5
+public class HCSummary extends AbstractHCElementWithChildren <HCSummary>
 {
-  public HCDir ()
+  public HCSummary ()
   {
-    super (EHTMLElement.DIR);
+    super (EHTMLElement.SUMMARY);
   }
 }

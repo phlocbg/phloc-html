@@ -92,7 +92,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   // HTML5 global attributes
   private EHCContentEditable m_eContentEditable;
-  private String m_sContextMenu;
+  private String m_sContextMenuID;
   private EHCDraggable m_eDraggable;
   private EHCDropZone m_eDropZone;
   private boolean m_bHidden = false;
@@ -467,13 +467,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Nullable
   public final String getContextMenu ()
   {
-    return m_sContextMenu;
+    return m_sContextMenuID;
   }
 
   @Nonnull
-  public final THISTYPE setContextMenu (@Nullable final String sContextMenu)
+  public final THISTYPE setContextMenu (@Nullable final String sContextMenuID)
   {
-    m_sContextMenu = sContextMenu;
+    m_sContextMenuID = sContextMenuID;
     return thisAsT ();
   }
 
@@ -622,8 +622,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     {
       if (m_eContentEditable != null)
         aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
-      if (StringHelper.hasNoText (m_sContextMenu))
-        aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenu);
+      if (StringHelper.hasNoText (m_sContextMenuID))
+        aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenuID);
       if (m_eDraggable != null)
         aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
       if (m_eDropZone != null)
@@ -707,7 +707,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
                                        .append ("tabIndex", m_nTabIndex)
                                        .appendIfNotNull ("accessKey", m_sAccessKey)
                                        .appendIfNotNull ("contentEditable", m_eContentEditable)
-                                       .appendIfNotNull ("contextMenu", m_sContextMenu)
+                                       .appendIfNotNull ("contextMenu", m_sContextMenuID)
                                        .appendIfNotNull ("draggable", m_eDraggable)
                                        .appendIfNotNull ("dropZone", m_eDropZone)
                                        .append ("hidden", m_bHidden)

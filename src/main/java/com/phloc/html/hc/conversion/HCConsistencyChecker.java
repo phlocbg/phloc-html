@@ -101,16 +101,15 @@ public final class HCConsistencyChecker
 
   private static void _checkButton (final HCButton aButton)
   {
-    final IHCElement <?> aChild = HCUtils.recursiveGetChildWithTagName (aButton,
-                                                                        EHTMLElement.INPUT,
-                                                                        EHTMLElement.SELECT,
-                                                                        EHTMLElement.TEXTAREA,
-                                                                        EHTMLElement.LABEL,
-                                                                        EHTMLElement.BUTTON,
-                                                                        EHTMLElement.FORM,
-                                                                        EHTMLElement.FIELDSET,
-                                                                        EHTMLElement.IFRAME,
-                                                                        EHTMLElement.ISINDEX);
+    final IHCElement <?> aChild = HCUtils.recursiveGetFirstChildWithTagName (aButton,
+                                                                             EHTMLElement.INPUT,
+                                                                             EHTMLElement.SELECT,
+                                                                             EHTMLElement.TEXTAREA,
+                                                                             EHTMLElement.LABEL,
+                                                                             EHTMLElement.BUTTON,
+                                                                             EHTMLElement.FORM,
+                                                                             EHTMLElement.FIELDSET,
+                                                                             EHTMLElement.IFRAME);
     if (aChild != null)
       consistencyWarning ("Button element contains forbidden tag " + aChild.getElement ());
   }
@@ -123,13 +122,12 @@ public final class HCConsistencyChecker
 
   private static void _checkPre (final HCPre aPre)
   {
-    final IHCElement <?> aChild = HCUtils.recursiveGetChildWithTagName (aPre,
-                                                                        EHTMLElement.IMG,
-                                                                        EHTMLElement.OBJECT,
-                                                                        EHTMLElement.BIG,
-                                                                        EHTMLElement.SMALL,
-                                                                        EHTMLElement.SUB,
-                                                                        EHTMLElement.SUP);
+    final IHCElement <?> aChild = HCUtils.recursiveGetFirstChildWithTagName (aPre,
+                                                                             EHTMLElement.IMG,
+                                                                             EHTMLElement.OBJECT,
+                                                                             EHTMLElement.SMALL,
+                                                                             EHTMLElement.SUB,
+                                                                             EHTMLElement.SUP);
     if (aChild != null)
       consistencyWarning ("PRE elements contains forbidden tag " + aChild.getElement ());
   }
@@ -165,20 +163,20 @@ public final class HCConsistencyChecker
     if (aElement instanceof AbstractHCBaseTable <?>)
       _checkTable ((AbstractHCBaseTable <?>) aElement);
     else
-      if (aElement instanceof HCButton)
-        _checkButton ((HCButton) aElement);
+      if (aElement instanceof HCA)
+        _checkA ((HCA) aElement);
       else
-        if (aElement instanceof HCA)
-          _checkA ((HCA) aElement);
+        if (aElement instanceof HCButton)
+          _checkButton ((HCButton) aElement);
         else
-          if (aElement instanceof HCPre)
-            _checkPre ((HCPre) aElement);
+          if (aElement instanceof HCForm)
+            _checkForm ((HCForm) aElement);
           else
-            if (aElement instanceof HCForm)
-              _checkForm ((HCForm) aElement);
+            if (aElement instanceof HCMeter)
+              _checkMeter ((HCMeter) aElement);
             else
-              if (aElement instanceof HCMeter)
-                _checkMeter ((HCMeter) aElement);
+              if (aElement instanceof HCPre)
+                _checkPre ((HCPre) aElement);
               else
                 if (aElement instanceof HCProgress)
                   _checkProgress ((HCProgress) aElement);

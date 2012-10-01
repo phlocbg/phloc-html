@@ -43,7 +43,6 @@ public final class FuncTestHC
     final HCBody b = h.getBody ();
     b.addChild (new HCA (new SimpleURL ("http://www.phloc.com")).setTarget (HCA_Target.SELF).addChild ("phloc"));
     b.addChild (new HCAbbr ().addChild ("abbr"));
-    b.addChild (new HCAcronym ().addChild ("acronym"));
     b.addChild (new HCAddress ().addChild ("address"));
     b.addChild (new HCB ().addChild ("echt fett"));
     b.addChild (new HCBDO ().addChild ("bdo"));
@@ -67,7 +66,6 @@ public final class FuncTestHC
     aDL.addItem (new HCDT ().addChild ("term"));
     b.addChild (new HCDel ());
     b.addChild (new HCDel ().addChild ("gelöscht"));
-    b.addChild (new HCDir ().addItem (new HCLI ().addChild ("punkt")));
     b.addChild (new HCDiv ());
     b.addChild (new HCDiv ().addChild ("Absatz"));
     b.addChild (new HCEdit ("filename", "autoexec.bat"));
@@ -115,13 +113,10 @@ public final class FuncTestHC
     b.addChild (new HCLink ().setRel (EHCLinkType.ALTERNATE)
                              .setType (CMimeType.TEXT_HTML)
                              .setHref (new SimpleURL ("any.html")));
-    b.addChild (new HCListing ());
-    b.addChild (new HCListing ().addChild ("List"));
     final HCMenu aMenu = new HCMenu ();
     aMenu.addItem ("File");
     aMenu.addItem ("Settings");
     b.addChild (aMenu);
-    b.addChild (new HCNoEmbed ().addChild ("Plugin missing"));
     b.addChild (new HCNoScript ().addChild ("JS missing"));
     final HCObject aObject = new HCObject ().setClassID ("classID{567}");
     aObject.addChild (new HCParam ("par1"));
@@ -133,8 +128,6 @@ public final class FuncTestHC
     b.addChild (new HCOptGroup ());
     b.addChild (new HCP ());
     b.addChild (new HCP ().addChild ("List"));
-    b.addChild (new HCPlainText ());
-    b.addChild (new HCPlainText ().addChild ("List"));
     b.addChild (new HCPre ());
     b.addChild (new HCPre ().addChild ("List"));
     b.addChild (new HCQ ());
@@ -172,8 +165,6 @@ public final class FuncTestHC
     b.addChild (aUL);
     b.addChild (new HCVar ());
     b.addChild (new HCVar ().addChild ("zzz"));
-    b.addChild (new HCXMP ());
-    b.addChild (new HCXMP ().addChild ("Das wäre also ein Beispiel"));
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.DEFAULT);
     assertNotNull (h.getAsNode (aCS));

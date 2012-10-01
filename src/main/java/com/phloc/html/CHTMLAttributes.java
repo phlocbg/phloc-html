@@ -121,6 +121,7 @@ public final class CHTMLAttributes
   public static final String NOSHADE = "noshade";
   public static final String NOWRAP = "nowrap";
   public static final String OBJECT = "object";
+  public static final String OPEN = "open";
   public static final String OPTIMUM = "optimum";
   public static final String PALETTE = "palette";
   public static final String PLACEHOLDER = "placeholder";
