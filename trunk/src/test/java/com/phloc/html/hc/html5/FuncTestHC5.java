@@ -33,7 +33,7 @@ import com.phloc.html.hc.html.HCHtml;
  * 
  * @author philip
  */
-public final class HC5Test
+public final class FuncTestHC5
 {
   @Test
   public void testMainHC ()
@@ -76,7 +76,9 @@ public final class HC5Test
     b.addChild (new HCRT ());
     b.addChild (new HCRT ().addChild ("Bla foo"));
     b.addChild (new HCRuby ());
-    b.addChild (new HCRuby ().addChild ("Bla foo"));
+    b.addChild (new HCRuby ().addItem (HCRP.create ("1")));
+    b.addChild (new HCRuby ().addItem (HCRT.create ("Bla foo")));
+    b.addChild (new HCRuby ().addItem (HCRP.create ("2")));
     b.addChild (new HCSection ());
     b.addChild (new HCSection ().addChild ("Bla foo"));
     b.addChild (new HCTime ());
@@ -89,6 +91,7 @@ public final class HC5Test
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.HTML5);
     assertNotNull (h.getAsNode (aCS));
-    System.out.print (h.getAsHTMLString (aCS));
+    if (false)
+      System.out.print (h.getAsHTMLString (aCS));
   }
 }

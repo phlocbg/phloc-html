@@ -17,15 +17,31 @@
  */
 package com.phloc.html.hc.html5;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
-public class HCRuby extends AbstractHCElementWithChildren <HCRuby>
+public class HCRuby extends AbstractHCElementWithInternalChildren <HCRuby, AbstractHCRubyChild <?>>
 {
   public HCRuby ()
   {
     super (EHTMLElement.RUBY);
+  }
+
+  public final boolean hasItems ()
+  {
+    return hasChildren ();
+  }
+
+  @Nonnull
+  public final HCRuby addItem (@Nullable final AbstractHCRubyChild <?> aChild)
+  {
+    if (aChild != null)
+      addChild (aChild);
+    return this;
   }
 }

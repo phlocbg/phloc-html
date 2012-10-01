@@ -17,15 +17,110 @@
  */
 package com.phloc.html.hc.html5;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.IHCNode;
 
 @SinceHTML5
-public class HCRP extends AbstractHCElementWithChildren <HCRP>
+public class HCRP extends AbstractHCRubyChild <HCRP>
 {
   public HCRP ()
   {
     super (EHTMLElement.RP);
+  }
+
+  /**
+   * Create a new RP element with the passed child text
+   * 
+   * @param aChild
+   *        The child text provider to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return new HCRP ().addChild (aChild);
+  }
+
+  /**
+   * Create a new RP element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCRP ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new RP element with the passed child text
+   * 
+   * @param sChild
+   *        The child to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final String sChild)
+  {
+    return new HCRP ().addChild (sChild);
+  }
+
+  /**
+   * Create a new RP element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final String... aChildren)
+  {
+    return new HCRP ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new RP element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final IHCNode aChild)
+  {
+    return new HCRP ().addChild (aChild);
+  }
+
+  /**
+   * Create a new RP element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final IHCNode... aChildren)
+  {
+    return new HCRP ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new RP element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCRP element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCRP create (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    return new HCRP ().addChildren (aChildren);
   }
 }

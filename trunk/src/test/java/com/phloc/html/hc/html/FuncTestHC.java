@@ -109,7 +109,7 @@ public final class FuncTestHC
     b.addChild (new HCLabel ());
     b.addChild (new HCLabel ().addChild ("Feldname"));
     b.addChild (new HCLegend ());
-    b.addChild (new HCLegend ("Legend"));
+    b.addChild (new HCLegend ().addChild ("Legend"));
     b.addChild (new HCLink ().setRel (EHCLinkType.ALTERNATE)
                              .setType (CMimeType.TEXT_HTML)
                              .setHref (new SimpleURL ("any.html")));
@@ -168,6 +168,7 @@ public final class FuncTestHC
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.DEFAULT);
     assertNotNull (h.getAsNode (aCS));
-    System.out.print (h.getAsHTMLString (aCS));
+    if (false)
+      System.out.print (h.getAsHTMLString (aCS));
   }
 }

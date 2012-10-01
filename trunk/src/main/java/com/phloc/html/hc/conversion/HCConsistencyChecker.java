@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.GlobalDebug;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.annotations.DeprecatedInHTML32;
 import com.phloc.html.annotations.DeprecatedInHTML4;
 import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
@@ -37,6 +36,7 @@ import com.phloc.html.hc.html.AbstractHCBaseTable;
 import com.phloc.html.hc.html.HCA;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCForm;
+import com.phloc.html.hc.html.HCObject;
 import com.phloc.html.hc.html.HCPre;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html5.HCMeter;
@@ -71,32 +71,32 @@ public final class HCConsistencyChecker
                                          final String sElementName,
                                          final EHTMLVersion eHTMLVersion)
   {
-    if (aElementClass.getAnnotation (DeprecatedInHTML32.class) != null)
-      consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 3.2");
+    if (aElementClass.getAnnotation (DeprecatedInHTML4.class) != null)
+      consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 4.0");
     else
-      if (aElementClass.getAnnotation (DeprecatedInHTML4.class) != null)
-        consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 4.0");
+      if (aElementClass.getAnnotation (DeprecatedInXHTML1.class) != null)
+        consistencyWarning ("The element '" + sElementName + "' is deprecated in XHTML1");
       else
-        if (aElementClass.getAnnotation (DeprecatedInXHTML1.class) != null)
-          consistencyWarning ("The element '" + sElementName + "' is deprecated in XHTML1");
+        if (eHTMLVersion.isAtLeastHTML5 ())
+        {
+          // HTML5 specifics checks
+          if (aElementClass.getAnnotation (DeprecatedInHTML5.class) != null)
+            consistencyWarning ("The element '" + sElementName + "' is deprecated in HTML5");
+        }
         else
-          if (eHTMLVersion.isAtLeastHTML5 ())
-          {
-            // HTML5 specifics checks
-            if (aElementClass.getAnnotation (DeprecatedInHTML5.class) != null)
-              consistencyWarning ("The element '" + sElementName + "' is deprecated in HTML5");
-          }
-          else
-          {
-            // pre-HTML5 checks
-            if (aElementClass.getAnnotation (SinceHTML5.class) != null)
-              consistencyWarning ("The element '" + sElementName + "' is only available in HTML5");
-          }
+        {
+          // pre-HTML5 checks
+          if (aElementClass.getAnnotation (SinceHTML5.class) != null)
+            consistencyWarning ("The element '" + sElementName + "' is only available in HTML5");
+        }
   }
 
-  private static void _checkTable (final AbstractHCBaseTable <?> aTable)
+  private static void _checkA (final HCA aA)
   {
-    AbstractHCBaseTable.checkInternalConsistency (aTable);
+    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.A))
+      consistencyWarning ("A may never contain other links!");
+    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.SELECT))
+      consistencyWarning ("A contains invalid child element!");
   }
 
   private static void _checkButton (final HCButton aButton)
@@ -112,15 +112,25 @@ public final class HCConsistencyChecker
                                                                              EHTMLElement.FIELDSET,
                                                                              EHTMLElement.IFRAME);
     if (aChild != null)
-      consistencyWarning ("Button element contains forbidden tag " + aChild.getElement ());
+      consistencyWarning ("BUTTON element contains forbidden tag " + aChild.getElement ());
   }
 
-  private static void _checkA (final HCA aA)
+  private static void _checkForm (final HCForm aForm)
   {
-    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.A))
-      consistencyWarning ("Links may never contain other links!");
-    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.SELECT))
-      consistencyWarning ("Link contains invalid child element!");
+    if (HCUtils.recursiveContainsChildWithTagName (aForm, EHTMLElement.FORM))
+      consistencyWarning ("FORM contains other nested form");
+  }
+
+  private static void _checkMeter (final HCMeter aMeter)
+  {
+    if (HCUtils.recursiveContainsChildWithTagName (aMeter, EHTMLElement.METER))
+      consistencyWarning ("METER contains other nested meter");
+  }
+
+  private static void _checkObject (final HCObject aValue)
+  {
+    if (aValue.getData () == null && aValue.getType () == null)
+      consistencyWarning ("OBJECT contains neither type nor data");
   }
 
   private static void _checkPre (final HCPre aPre)
@@ -135,22 +145,15 @@ public final class HCConsistencyChecker
       consistencyWarning ("PRE elements contains forbidden tag " + aChild.getElement ());
   }
 
-  private static void _checkForm (final HCForm aForm)
-  {
-    if (HCUtils.recursiveContainsChildWithTagName (aForm, EHTMLElement.FORM))
-      consistencyWarning ("Form contains other nested form");
-  }
-
-  private static void _checkMeter (final HCMeter aMeter)
-  {
-    if (HCUtils.recursiveContainsChildWithTagName (aMeter, EHTMLElement.METER))
-      consistencyWarning ("Meter contains other nested meter");
-  }
-
   private static void _checkProgress (final HCProgress aProgress)
   {
     if (HCUtils.recursiveContainsChildWithTagName (aProgress, EHTMLElement.PROGRESS))
-      consistencyWarning ("Progress contains other nested progress");
+      consistencyWarning ("PROGRESS contains other nested progress");
+  }
+
+  private static void _checkTable (final AbstractHCBaseTable <?> aTable)
+  {
+    AbstractHCBaseTable.checkInternalConsistency (aTable);
   }
 
   public static void runConsistencyCheckBeforeCreation (@Nonnull final IHCElement <?> aElement,
@@ -163,26 +166,29 @@ public final class HCConsistencyChecker
     _checkDeprecation (aElementClass, sElementName, eHTMLVersion);
 
     // Special checks based on the implementation
-    if (aElement instanceof AbstractHCBaseTable <?>)
-      _checkTable ((AbstractHCBaseTable <?>) aElement);
+    if (aElement instanceof HCA)
+      _checkA ((HCA) aElement);
     else
-      if (aElement instanceof HCA)
-        _checkA ((HCA) aElement);
+      if (aElement instanceof HCButton)
+        _checkButton ((HCButton) aElement);
       else
-        if (aElement instanceof HCButton)
-          _checkButton ((HCButton) aElement);
+        if (aElement instanceof HCForm)
+          _checkForm ((HCForm) aElement);
         else
-          if (aElement instanceof HCForm)
-            _checkForm ((HCForm) aElement);
+          if (aElement instanceof HCMeter)
+            _checkMeter ((HCMeter) aElement);
           else
-            if (aElement instanceof HCMeter)
-              _checkMeter ((HCMeter) aElement);
+            if (aElement instanceof HCObject)
+              _checkObject ((HCObject) aElement);
             else
               if (aElement instanceof HCPre)
                 _checkPre ((HCPre) aElement);
               else
                 if (aElement instanceof HCProgress)
                   _checkProgress ((HCProgress) aElement);
+                else
+                  if (aElement instanceof AbstractHCBaseTable <?>)
+                    _checkTable ((AbstractHCBaseTable <?>) aElement);
   }
 
   public static void checkIfLinkIsMasked (@Nullable final String sHref)

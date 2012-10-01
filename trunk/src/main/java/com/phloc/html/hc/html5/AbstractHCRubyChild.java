@@ -15,25 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.annotations;
+package com.phloc.html.hc.html5;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.annotation.Nonnull;
 
-/**
- * Marker annotation that denotes all HTML elements that are marked deprecated
- * in HTML 3.2.<br>
- * Source: http://www.w3.org/TR/REC-html32
- * 
- * @author philip
- */
-@Documented
-@Retention (RetentionPolicy.RUNTIME)
-@Target ({ ElementType.TYPE })
-public @interface DeprecatedInHTML32
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.annotations.SinceHTML5;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+
+@SinceHTML5
+public abstract class AbstractHCRubyChild <THISTYPE extends AbstractHCRubyChild <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
 {
-  String value() default "";
+  public AbstractHCRubyChild (@Nonnull final EHTMLElement aElement)
+  {
+    super (aElement);
+  }
 }
