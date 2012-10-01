@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.commons.string.StringParser;
-import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.ECSSUnit;
 import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.EHTMLVersion;
@@ -110,115 +109,120 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   }
 
   @Override
-  public void customizeHCElement (@Nonnull final IHCNodeWithChildren <?> aParentElement,
-                                  @Nonnull final IHCElement <?> aElement,
-                                  @Nonnull final EHTMLVersion eHTMLVersion)
+  public void customizeNode (@Nonnull final IHCNodeWithChildren <?> aParentElement,
+                             @Nonnull final IHCBaseNode aNode,
+                             @Nonnull final EHTMLVersion eHTMLVersion)
   {
-    if (aElement instanceof HCButton)
+    if (aNode instanceof IHCElement <?>)
     {
-      aElement.addClass (CSS_CLASS_BUTTON);
-    }
-    else
-      if (aElement instanceof HCCheckBox)
+      final IHCElement <?> aElement = (IHCElement <?>) aNode;
+      if (aElement instanceof HCButton)
       {
-        final HCCheckBox aCheckBox = (HCCheckBox) aElement;
-        aCheckBox.addClass (CSS_CLASS_CHECKBOX);
-
-        // If no value is present, assign the default value
-        if (aCheckBox.getValue () == null)
-          aCheckBox.setValue (CHCParam.VALUE_CHECKED);
+        aElement.addClass (CSS_CLASS_BUTTON);
       }
       else
-        if (aElement instanceof HCEdit)
+        if (aElement instanceof HCCheckBox)
         {
-          aElement.addClass (CSS_CLASS_EDIT);
+          final HCCheckBox aCheckBox = (HCCheckBox) aElement;
+          aCheckBox.addClass (CSS_CLASS_CHECKBOX);
+
+          // If no value is present, assign the default value
+          if (aCheckBox.getValue () == null)
+            aCheckBox.setValue (CHCParam.VALUE_CHECKED);
         }
         else
-          if (aElement instanceof HCEditFile)
+          if (aElement instanceof HCEdit)
           {
-            aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_FILE);
+            aElement.addClass (CSS_CLASS_EDIT);
           }
           else
-            if (aElement instanceof HCEditPassword)
+            if (aElement instanceof HCEditFile)
             {
-              aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_PASSWORD);
+              aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_FILE);
             }
             else
-              if (aElement instanceof HCForm)
+              if (aElement instanceof HCEditPassword)
               {
-                final HCForm aForm = (HCForm) aElement;
-                if (aForm.isSubmitPressingEnter ())
-                {
-                  final HCButton aButton = createFakeSubmitButton ();
-                  aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
-                  aForm.addChild (aButton);
-                }
+                aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_PASSWORD);
               }
               else
-                if (aElement instanceof HCHiddenField)
+                if (aElement instanceof HCForm)
                 {
-                  aElement.addClass (CSS_CLASS_HIDDEN);
+                  final HCForm aForm = (HCForm) aElement;
+                  if (aForm.isSubmitPressingEnter ())
+                  {
+                    final HCButton aButton = createFakeSubmitButton ();
+                    aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
+                    aForm.addChild (aButton);
+                  }
                 }
                 else
-                  if (aElement instanceof HCRadioButton)
+                  if (aElement instanceof HCHiddenField)
                   {
-                    aElement.addClass (CSS_CLASS_RADIO);
+                    aElement.addClass (CSS_CLASS_HIDDEN);
                   }
                   else
-                    if (aElement instanceof AbstractHCTable <?>)
+                    if (aElement instanceof HCRadioButton)
                     {
-                      final AbstractHCTable <?> aTable = (AbstractHCTable <?>) aElement;
-                      final HCColGroup aColGroup = aTable.getColGroup ();
-                      // bug fix for IE9 table layout bug
-                      // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
-                      // IE9 only interprets column widths if the first row does
-                      // not use colspan (i.e. at least one row does not use
-                      // colspan)
-                      if (aColGroup != null &&
-                          aColGroup.hasColumns () &&
-                          aTable.hasBodyRows () &&
-                          aTable.getFirstBodyRow ().isColspanUsed ())
-                      {
-                        // Create a dummy row with explicit widths
-                        final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
-                        for (final HCCol aCol : aColGroup.getAllColumns ())
-                        {
-                          final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
-                          final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
-                          if (nWidth >= 0)
-                            aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
-                        }
-                        aTable.addBodyRow (0, aRow);
-                      }
+                      aElement.addClass (CSS_CLASS_RADIO);
                     }
+                    else
+                      if (aElement instanceof AbstractHCTable <?>)
+                      {
+                        final AbstractHCTable <?> aTable = (AbstractHCTable <?>) aElement;
+                        final HCColGroup aColGroup = aTable.getColGroup ();
+                        // bug fix for IE9 table layout bug
+                        // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
+                        // IE9 only interprets column widths if the first row
+                        // does
+                        // not use colspan (i.e. at least one row does not use
+                        // colspan)
+                        if (aColGroup != null &&
+                            aColGroup.hasColumns () &&
+                            aTable.hasBodyRows () &&
+                            aTable.getFirstBodyRow ().isColspanUsed ())
+                        {
+                          // Create a dummy row with explicit widths
+                          final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
+                          for (final HCCol aCol : aColGroup.getAllColumns ())
+                          {
+                            final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
+                            final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
+                            if (nWidth >= 0)
+                              aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
+                          }
+                          aTable.addBodyRow (0, aRow);
+                        }
+                      }
 
-    // Unfocusable?
-    if (aElement.isUnfocusable ())
-      aElement.setEventHandler (EJSEvent.ONFOCUS, JS_BLUR);
+      // Unfocusable?
+      if (aElement.isUnfocusable ())
+        aElement.setEventHandler (EJSEvent.ONFOCUS, JS_BLUR);
 
-    // Disable
-    if (aElement instanceof IHCCanBeDisabled <?>)
-      if (((IHCCanBeDisabled <?>) aElement).isDisabled ())
-        aElement.addClass (CSS_CLASS_DISABLED);
+      // Disable
+      if (aElement instanceof IHCCanBeDisabled <?>)
+        if (((IHCCanBeDisabled <?>) aElement).isDisabled ())
+          aElement.addClass (CSS_CLASS_DISABLED);
 
-    if (aElement instanceof IHCControl <?>)
-    {
-      // Specific control stuff
-      final IHCControl <?> aCtrl = (IHCControl <?>) aElement;
-
-      // Read only?
-      if (aCtrl.isReadonly ())
-        aCtrl.addClass (CSS_CLASS_READONLY);
-
-      if (aCtrl.isFocused ())
+      if (aElement instanceof IHCControl <?>)
       {
-        // for focusing we need an ID!
-        if (aCtrl.getID () == null)
-          aCtrl.setID (GlobalIDFactory.getNewStringID ());
+        // Specific control stuff
+        final IHCControl <?> aCtrl = (IHCControl <?>) aElement;
 
-        // Add this out of band node
-        // Note: assuming jQuery
-        aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl.getID ()).focus ()));
+        // Read only?
+        if (aCtrl.isReadonly ())
+          aCtrl.addClass (CSS_CLASS_READONLY);
+
+        if (aCtrl.isFocused ())
+        {
+          // for focusing we need an ID!
+          if (aCtrl.getID () == null)
+            aCtrl.setID (GlobalIDFactory.getNewStringID ());
+
+          // Add this out of band node
+          // Note: assuming jQuery
+          aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl.getID ()).focus ()));
+        }
       }
     }
   }
@@ -304,11 +308,5 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
               s_aLogger.error ("Illegal head node: " + aNode);
       }
     }
-  }
-
-  @Override
-  public String toString ()
-  {
-    return new ToStringGenerator (this).toString ();
   }
 }

@@ -35,6 +35,20 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public interface IHCBaseNode extends IHasPlainText, Serializable
 {
   /**
+   * Apply customization as defined by
+   * {@link IHCConversionSettingsToNode#getCustomizer()}. This is done only for
+   * this node and not for child nodes!
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to use. May not be <code>null</code>.
+   * @param aParentNode
+   *        The parent node where additional elements should be added. May not
+   *        be <code>null</code>.
+   */
+  void applyCustomization (@Nonnull IHCConversionSettingsToNode aConversionSettings,
+                           @Nonnull IHCNodeWithChildren <?> aParentNode);
+
+  /**
    * This method checks whether the node is suitable for conversion to an
    * {@link IMicroNode}.
    * 

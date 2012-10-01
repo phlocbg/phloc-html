@@ -35,9 +35,7 @@ import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCHasChildren;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -141,35 +139,26 @@ public class HCHtml extends AbstractHCBaseNode
     return m_aBody;
   }
 
-  public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNode aBaseNode,
+  public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
                                                         @Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                                         @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
   {
-    if (aBaseNode instanceof IHCHasChildren)
+    // Customize element, before extracting out-of-band nodes, in case the
+    // customizer adds some out-of-band nodes as well
+    HCUtils.iterateTree (aBaseNode, new IHCIteratorCallback ()
     {
-      final IHCHasChildren aHasChildren = (IHCHasChildren) aBaseNode;
-
-      // Customize element, before extracting out-of-band nodes, in case the
-      // customizer adds some out-of-band nodes as well
-      HCUtils.iterateTree (aHasChildren, new IHCIteratorCallback ()
+      @Nonnull
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
       {
-        @Nonnull
-        public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
-        {
-          final boolean bParentIsElement = aParentNode instanceof IHCNodeWithChildren <?>;
-          if (bParentIsElement && aChildNode instanceof IHCElement <?>)
-            aConversionSettings.getCustomizer ().customizeHCElement ((IHCNodeWithChildren <?>) aParentNode,
-                                                                     (IHCElement <?>) aChildNode,
-                                                                     aConversionSettings.getHTMLVersion ());
-          return EFinish.UNFINISHED;
-        }
-      });
-
-      if (aConversionSettings.extractOutOfBandNodes ())
-      {
-        // Extract all out-of-band nodes
-        HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aHasChildren, aExtractedOutOfBandNodes);
+        aChildNode.applyCustomization (aConversionSettings, aBaseNode);
+        return EFinish.UNFINISHED;
       }
+    });
+
+    if (aConversionSettings.extractOutOfBandNodes ())
+    {
+      // Extract all out-of-band nodes
+      HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode, aExtractedOutOfBandNodes);
     }
   }
 
