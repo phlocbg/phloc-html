@@ -56,9 +56,6 @@ public class HCHtml extends AbstractHCBaseNode
   private HCHead m_aHead;
   private HCBody m_aBody;
 
-  // status
-  private boolean m_bPreparedOnce = false;
-
   /**
    * Create a new HTML object
    */
@@ -139,9 +136,8 @@ public class HCHtml extends AbstractHCBaseNode
     return m_aBody;
   }
 
-  public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
-                                                        @Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                                        @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
+  public static void customizeNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+                                     @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Customize element, before extracting out-of-band nodes, in case the
     // customizer adds some out-of-band nodes as well
@@ -154,7 +150,12 @@ public class HCHtml extends AbstractHCBaseNode
         return EFinish.UNFINISHED;
       }
     });
+  }
 
+  public static void extractOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+                                            @Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                            @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
+  {
     if (aConversionSettings.extractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
@@ -162,8 +163,24 @@ public class HCHtml extends AbstractHCBaseNode
     }
   }
 
+  @Override
+  protected void prepareOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    // Customize element, before extracting out-of-band nodes, in case the
+    // customizer adds some out-of-band nodes as well
+    customizeNodes (getBody (), aConversionSettings);
+
+    // Extract all out-of-band nodes
+    final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
+    extractOutOfBandNodes (getBody (), aConversionSettings, aExtractedOutOfBandNodes);
+
+    // Call out-of-band node handler
+    aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, getHead (), getBody ());
+  }
+
+  @Override
   @Nonnull
-  public final IMicroDocument getAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected final IMicroDocument internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final EHTMLVersion eHTMLVersion = aConversionSettings.getHTMLVersion ();
 
@@ -181,37 +198,16 @@ public class HCHtml extends AbstractHCBaseNode
     }
     aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getXMLNamespace ());
 
-    // Ensure they are not null
-    final HCBody aBody = getBody ();
-    final HCHead aHead = getHead ();
-
-    if (!m_bPreparedOnce)
-    {
-      m_bPreparedOnce = true;
-
-      // Extract all out-of-band nodes
-      final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-      customizeAndExtractOutOfBandNodes (aBody, aConversionSettings, aExtractedOutOfBandNodes);
-
-      // Call out-of-band node handler
-      aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
-    }
-
     // Use the getter, to ensure the elements are not null
-    final IMicroNode eBody = aBody.getAsNode (aConversionSettings);
+    final IMicroNode eBody = getBody ().convertToNode (aConversionSettings);
     aRoot.appendChild (eBody);
 
     // Create head after body but insert it before the body
-    final IMicroNode eHead = aHead.getAsNode (aConversionSettings);
+    final IMicroNode eHead = getHead ().convertToNode (aConversionSettings);
     aRoot.insertAtIndex (0, eHead);
 
     // Done!
     return aDoc;
-  }
-
-  public boolean isPrepared ()
-  {
-    return m_bPreparedOnce;
   }
 
   @Override
@@ -229,7 +225,6 @@ public class HCHtml extends AbstractHCBaseNode
                             .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)
                             .appendIfNotNull ("body", m_aBody)
-                            .append ("prepared", m_bPreparedOnce)
                             .toString ();
   }
 }

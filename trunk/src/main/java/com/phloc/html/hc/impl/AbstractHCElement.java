@@ -673,7 +673,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   @Override
   @Nonnull
-  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Run some consistency checks if desired
     if (aConversionSettings.areConsistencyChecksEnabled ())

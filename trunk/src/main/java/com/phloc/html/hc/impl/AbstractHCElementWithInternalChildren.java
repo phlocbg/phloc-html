@@ -188,7 +188,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
       for (final IHCBaseNode aChild : getChildrenFormEmitting (m_aChildren))
-        aElement.appendChild (aChild.getAsNode (aConversionSettings));
+        aElement.appendChild (aChild.convertToNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
     {

@@ -37,9 +37,9 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected final IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return getContainedHCNode ().getAsNode (aConversionSettings);
+    return getContainedHCNode ().convertToNode (aConversionSettings);
   }
 
   @Override

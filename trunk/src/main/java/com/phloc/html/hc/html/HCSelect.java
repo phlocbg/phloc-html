@@ -488,7 +488,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
     if (ContainerHelper.isNotEmpty (m_aOptions))
     {
       for (final IHCNode aOption : m_aOptions)
-        aElement.appendChild (aOption.getAsNode (aConversionSettings));
+        aElement.appendChild (aOption.convertToNode (aConversionSettings));
     }
     else
     {

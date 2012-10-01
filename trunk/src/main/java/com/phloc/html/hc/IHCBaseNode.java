@@ -65,7 +65,7 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
    * @return The fully created HTML node
    */
   @Nullable
-  IMicroNode getAsNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+  IMicroNode convertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
    * @param aConversionSettings

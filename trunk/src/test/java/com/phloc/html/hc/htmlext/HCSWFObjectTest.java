@@ -42,7 +42,7 @@ public final class HCSWFObjectTest
     x.setWidth (500).setHeight (300);
     x.setRequiredSWFVersion ("9.0.0");
     x.addFlashVar ("flash1", "Wert");
-    final IMicroNode aNode = x.build ().getAsNode (HCSettings.getConversionSettings (false));
+    final IMicroNode aNode = x.build ().convertToNode (HCSettings.getConversionSettings (false));
     assertNotNull (aNode);
     if (false)
       System.out.println (MicroWriter.getXMLString (aNode));

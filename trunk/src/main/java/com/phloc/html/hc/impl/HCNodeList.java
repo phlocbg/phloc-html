@@ -257,11 +257,11 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
 
   @Override
   @Nonnull
-  protected IMicroContainer internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
     for (final IHCBaseNode aNode : m_aNodes)
-      ret.appendChild (aNode.getAsNode (aConversionSettings));
+      ret.appendChild (aNode.convertToNode (aConversionSettings));
     return ret;
   }
 
