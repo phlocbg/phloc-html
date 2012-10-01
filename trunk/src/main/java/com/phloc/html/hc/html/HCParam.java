@@ -120,11 +120,6 @@ public class HCParam extends AbstractHCElement <HCParam>
     aElement.appendText ("");
   }
 
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

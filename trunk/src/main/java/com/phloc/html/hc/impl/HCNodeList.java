@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.impl.MicroContainer;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
@@ -264,12 +265,21 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
     return ret;
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
     for (final IHCBaseNode aNode : m_aNodes)
-      ret.append (aNode.getPlainText ());
+    {
+      final String sPlainText = aNode.getPlainText ();
+      if (StringHelper.hasText (sPlainText))
+      {
+        if (ret.length () > 0)
+          ret.append (' ');
+        ret.append (sPlainText);
+      }
+    }
     return ret.toString ();
   }
 

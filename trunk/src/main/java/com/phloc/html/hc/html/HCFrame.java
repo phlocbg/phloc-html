@@ -183,11 +183,6 @@ public class HCFrame extends AbstractHCElement <HCFrame>
       aElement.setAttribute (CHTMLAttributes.SRC, m_sSrc);
   }
 
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

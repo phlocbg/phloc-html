@@ -17,12 +17,36 @@
  */
 package com.phloc.html.hc;
 
+import java.io.Serializable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.IHasPlainText;
+import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+
 /**
- * Base interface for HTML controls.
+ * Base interface for HC* node objects.
  * 
  * @author philip
  */
-public interface IHCBaseNode extends IHC, IHCConvertible
+public interface IHCBaseNode extends IHasPlainText, Serializable
 {
-  /* empty */
+  /**
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The fully created HTML node
+   */
+  @Nullable
+  IMicroNode getAsNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /**
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The node as XML optionally without indentation.
+   */
+  @Nonnull
+  String getAsHTMLString (@Nonnull IHCConversionSettings aConversionSettings);
 }

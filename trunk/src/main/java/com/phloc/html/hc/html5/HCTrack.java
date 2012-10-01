@@ -124,9 +124,4 @@ public class HCTrack extends AbstractHCMediaElementChild <HCTrack>
     if (m_bDefault)
       aElement.setAttribute (CHTMLAttributes.DEFAULT, CHTMLAttributeValues.DEFAULT);
   }
-
-  public String getPlainText ()
-  {
-    return "";
-  }
 }

@@ -42,6 +42,7 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
     return getContainedHCNode ().getAsNode (aConversionSettings);
   }
 
+  @Override
   @Nonnull
   public final String getPlainText ()
   {

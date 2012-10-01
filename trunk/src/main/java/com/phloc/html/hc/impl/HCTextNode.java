@@ -57,7 +57,9 @@ public class HCTextNode extends AbstractHCNode
   }
 
   /**
-   * Enable or disable XML escaping in the final document
+   * Enable or disable XML escaping in the final document. By default all text
+   * is escaped, but for certain special cases (like script elements in HTML),
+   * XML escaping must be disabled.
    * 
    * @param bEscape
    *        <code>true</code> to enable escaping (default), <code>false</code>
@@ -89,6 +91,7 @@ public class HCTextNode extends AbstractHCNode
     return new MicroText (m_sText).setEscape (m_bEscape);
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;img&gt; element
- *
+ * 
  * @author philip
  */
 public class HCImg extends AbstractHCElement <HCImg>
@@ -108,7 +108,7 @@ public class HCImg extends AbstractHCElement <HCImg>
   /**
    * Scales the image so that neither with nor height are exceeded, keeping the
    * aspect ratio.
-   *
+   * 
    * @param nMaxWidth
    * @param nMaxHeight
    * @return the correctly resized image tag
@@ -156,12 +156,6 @@ public class HCImg extends AbstractHCElement <HCImg>
     // The default "title" attribute is set in a base class!
     if (StringHelper.hasNoText (sTitle) && StringHelper.hasText (m_sAlt))
       aElement.setAttribute (CHTMLAttributes.TITLE, m_sAlt);
-  }
-
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
   }
 
   @Override

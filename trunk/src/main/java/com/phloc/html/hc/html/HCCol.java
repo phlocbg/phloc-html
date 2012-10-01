@@ -85,12 +85,6 @@ public class HCCol extends AbstractHCElement <HCCol>
       aElement.setAttribute (CHTMLAttributes.WIDTH, m_sWidth);
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

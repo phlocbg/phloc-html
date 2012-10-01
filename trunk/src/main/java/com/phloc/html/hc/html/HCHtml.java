@@ -233,10 +233,11 @@ public class HCHtml extends AbstractHCBaseNode
     return m_bPrepared;
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
-    return getBody ().getPlainText ();
+    return StringHelper.getConcatenatedOnDemand (getHead ().getPlainText (), " ", getBody ().getPlainText ());
   }
 
   @Override

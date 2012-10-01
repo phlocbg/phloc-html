@@ -660,6 +660,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     }
   }
 
+  @Override
   @Nonnull
   public final String getPlainText ()
   {

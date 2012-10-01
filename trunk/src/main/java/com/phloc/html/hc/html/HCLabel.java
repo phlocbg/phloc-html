@@ -32,7 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Represents an HTML &lt;label&gt; element
- *
+ * 
  * @author philip
  */
 public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
@@ -52,7 +52,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Indicates that this label is used as the description for another object.
-   *
+   * 
    * @param sFor
    *        The HTML ID of the other object.
    * @return this
@@ -80,7 +80,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child text
-   *
+   * 
    * @param aChild
    *        The child text provider to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -93,7 +93,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child texts
-   *
+   * 
    * @param aChildren
    *        The child texts to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -106,7 +106,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child text
-   *
+   * 
    * @param sChild
    *        The child to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -119,7 +119,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child texts
-   *
+   * 
    * @param aChildren
    *        The child texts to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -132,7 +132,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child node
-   *
+   * 
    * @param aChild
    *        The child node to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -145,7 +145,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child nodes
-   *
+   * 
    * @param aChildren
    *        The child nodes to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>
@@ -158,7 +158,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 
   /**
    * Create a new LABEL element with the passed child nodes
-   *
+   * 
    * @param aChildren
    *        The child nodes to be appended. May be <code>null</code>
    * @return The created HCLabel element and never <code>null</code>

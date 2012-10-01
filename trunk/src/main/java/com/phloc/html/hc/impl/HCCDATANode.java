@@ -58,6 +58,7 @@ public final class HCCDATANode extends AbstractHCNode
     return new MicroCDATA (m_sText);
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

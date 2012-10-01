@@ -62,6 +62,7 @@ public class HCHR extends AbstractHCElement <HCHR>
       aElement.setAttribute (CHTMLAttributes.NOSHADE, CHTMLAttributes.NOSHADE);
   }
 
+  @Override
   public String getPlainText ()
   {
     return "------------------------------\n";

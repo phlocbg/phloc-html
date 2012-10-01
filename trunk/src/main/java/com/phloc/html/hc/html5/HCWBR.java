@@ -31,6 +31,7 @@ public class HCWBR extends AbstractHCElement <HCWBR>
     super (EHTMLElement.WBR);
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

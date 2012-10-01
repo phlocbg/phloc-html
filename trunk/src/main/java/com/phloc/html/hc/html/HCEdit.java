@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
@@ -118,7 +119,7 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
   @Override
   public String getPlainText ()
   {
-    return m_sValue != null ? m_sValue : "";
+    return StringHelper.getNotNull (m_sValue);
   }
 
   @Override

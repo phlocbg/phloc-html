@@ -212,12 +212,6 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     }
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

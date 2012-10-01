@@ -33,6 +33,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
@@ -200,6 +201,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     }
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
@@ -207,7 +209,15 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
       return "";
     final StringBuilder ret = new StringBuilder ();
     for (final CHILDTYPE aChild : m_aChildren)
-      ret.append (aChild.getPlainText ());
+    {
+      final String sPlainText = aChild.getPlainText ();
+      if (StringHelper.hasText (sPlainText))
+      {
+        if (ret.length () > 0)
+          ret.append (' ');
+        ret.append (sPlainText);
+      }
+    }
     return ret.toString ();
   }
 

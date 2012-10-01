@@ -23,6 +23,7 @@ import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.utils.MicroRecursiveIterator;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -62,23 +63,33 @@ public class HCDOMWrapper extends AbstractHCNode
     return m_aNode;
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
     for (final IMicroNode aNode : new MicroRecursiveIterator (m_aNode))
+    {
+      CharSequence sPlainText = null;
       if (aNode instanceof IMicroText)
       {
         final IMicroText aTextNode = (IMicroText) aNode;
         if (!aTextNode.isElementContentWhitespace ())
-          ret.append (aTextNode.getData ()).append (' ');
+          sPlainText = aTextNode.getData ();
       }
       else
         if (aNode instanceof IMicroCDATA)
         {
           final IMicroCDATA aCDATANode = (IMicroCDATA) aNode;
-          ret.append (aCDATANode.getData ()).append (' ');
+          sPlainText = aCDATANode.getData ();
         }
+      if (StringHelper.hasText (sPlainText))
+      {
+        if (ret.length () > 0)
+          ret.append (' ');
+        ret.append (sPlainText);
+      }
+    }
     return ret.toString ();
   }
 

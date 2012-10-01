@@ -24,6 +24,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -111,5 +112,11 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   public IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
   {
     return new HCConditionalCommentNode (sCondition, this);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("preparedOnce", m_bPreparedOnce).toString ();
   }
 }

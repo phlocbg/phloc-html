@@ -34,6 +34,7 @@ public class HCBR extends AbstractHCElement <HCBR>
     super (EHTMLElement.BR);
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

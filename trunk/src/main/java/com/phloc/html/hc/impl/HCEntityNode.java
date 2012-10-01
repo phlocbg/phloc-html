@@ -59,6 +59,7 @@ public class HCEntityNode extends AbstractHCNode
     return new MicroEntityReference (m_aEntity.getEntityName ());
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
