@@ -86,8 +86,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   public static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
 
   // For controls only
-  public static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
-  public static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
+  public static final ICSSClassProvider CSS_CLASS_CONTROL_DISABLED = DefaultCSSClassProvider.create ("disabled");
+  public static final ICSSClassProvider CSS_CLASS_CONTROL_READONLY = DefaultCSSClassProvider.create ("readonly");
 
   // For buttons
   public static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
@@ -95,8 +95,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   // For tables
   public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
 
+  // JS Code
+  public static final JSInvocation JS_BLUR = JSExpr.invoke ("blur");
+
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCDefaultCustomizer.class);
-  private static final JSInvocation JS_BLUR = JSExpr.invoke ("blur");
 
   public HCDefaultCustomizer ()
   {}
@@ -201,11 +203,11 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
       // Disable
       if (aCtrl.isDisabled ())
-        aCtrl.addClass (CSS_CLASS_DISABLED);
+        aCtrl.addClass (CSS_CLASS_CONTROL_DISABLED);
 
       // Read only?
       if (aCtrl.isReadonly ())
-        aCtrl.addClass (CSS_CLASS_READONLY);
+        aCtrl.addClass (CSS_CLASS_CONTROL_READONLY);
 
       if (aCtrl.isFocused ())
       {

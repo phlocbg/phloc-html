@@ -39,14 +39,17 @@ import com.phloc.commons.string.StringHelper;
 @Immutable
 public final class HTMLEntities
 {
+  private static final String HTML_ENTITY_MAPPING_FILENAME = "codelists/html-entity-mapping.xml";
   private static final Map <String, String> s_aEntityToChar = new HashMap <String, String> ();
   private static final Map <String, String> s_aCharToEntity;
 
   static
   {
-    if (XMLMapHandler.readMap (new ClassPathResource ("codelists/html-entity-mapping.xml"), s_aEntityToChar)
-                     .isFailure ())
-      throw new InitializationException ("Failed to init HTML entity mapping file");
+    if (XMLMapHandler.readMap (new ClassPathResource (HTML_ENTITY_MAPPING_FILENAME), s_aEntityToChar).isFailure ())
+      throw new InitializationException ("Failed to init HTML entity mapping file '" +
+                                         HTML_ENTITY_MAPPING_FILENAME +
+                                         "'");
+
     s_aCharToEntity = ContainerHelper.getSwappedKeyValues (s_aEntityToChar);
     if (s_aEntityToChar.size () != s_aCharToEntity.size ())
       throw new InitializationException ("Internal error initializing char to entity mapping");
@@ -101,9 +104,8 @@ public final class HTMLEntities
       return null;
 
     final StringBuilder aSB = new StringBuilder (sInput.length () * 2);
-    for (int i = 0; i < sInput.length (); i++)
+    for (final char c : sInput.toCharArray ())
     {
-      final char c = sInput.charAt (i);
       final String sEntity = getEntityOfChar (c);
       if (sEntity != null)
         aSB.append (sEntity);
