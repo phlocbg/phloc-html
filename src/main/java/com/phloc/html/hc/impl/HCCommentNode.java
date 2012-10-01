@@ -59,7 +59,7 @@ public class HCCommentNode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected IMicroComment internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected IMicroComment internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return new MicroComment (m_sText);
   }

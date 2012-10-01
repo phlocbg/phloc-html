@@ -406,7 +406,7 @@ public class HCHead extends AbstractHCNode
                             @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     for (final HCLink aLink : m_aLinks)
-      eHead.appendChild (aLink.getAsNode (aConversionSettings));
+      eHead.appendChild (aLink.convertToNode (aConversionSettings));
   }
 
   @OverrideOnDemand
@@ -418,7 +418,7 @@ public class HCHead extends AbstractHCNode
     {
       if (aCSS instanceof IHCCSSNode && !((IHCCSSNode) aCSS).isInlineCSS ())
         ++nCSSExternals;
-      eHead.appendChild (aCSS.getAsNode (aConversionSettings));
+      eHead.appendChild (aCSS.convertToNode (aConversionSettings));
     }
 
     // Sources:
@@ -435,12 +435,12 @@ public class HCHead extends AbstractHCNode
                          @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     for (final IHCNode aJS : m_aJS)
-      eHead.appendChild (aJS.getAsNode (aConversionSettings));
+      eHead.appendChild (aJS.convertToNode (aConversionSettings));
   }
 
   @Override
   @Nonnull
-  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected final IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 

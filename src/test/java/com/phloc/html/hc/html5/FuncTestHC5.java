@@ -90,7 +90,7 @@ public final class FuncTestHC5
     b.addChild (new HCWBR ());
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.HTML5);
-    assertNotNull (h.getAsNode (aCS));
+    assertNotNull (h.convertToNode (aCS));
     if (false)
       System.out.print (h.getAsHTMLString (aCS));
   }

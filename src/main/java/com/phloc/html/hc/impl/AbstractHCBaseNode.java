@@ -18,6 +18,8 @@
 package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
@@ -37,6 +39,13 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
   private boolean m_bCustomized = false;
+  private boolean m_bPreparedOnce = false;
+
+  @OverrideOnDemand
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return true;
+  }
 
   public final boolean isCustomized ()
   {
@@ -53,16 +62,63 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     }
   }
 
-  @OverrideOnDemand
-  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  public final boolean isPreparedOnce ()
   {
-    return true;
+    return m_bPreparedOnce;
+  }
+
+  /**
+   * This method is called once for each instead before the note itself is
+   * created. Overwrite this method to perform actions that can only be done
+   * when the node is build finally.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   */
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void prepareOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {}
+
+  public final void prepareConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    // Prepare object once per instance - before first rendering (implementation
+    // dependent)
+    if (!m_bPreparedOnce)
+    {
+      prepareOnce (aConversionSettings);
+      m_bPreparedOnce = true;
+    }
+  }
+
+  @Nonnull
+  protected abstract IMicroNode internalConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /*
+   * Note: return type cannot by IMicroElement since the checkbox object
+   * delivers an IMicroNodeList!
+   */
+  @Nullable
+  public final IMicroNode convertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (!canConvertToNode (aConversionSettings))
+      return null;
+
+    // Prepare object once per instance - before first rendering (implementation
+    // dependent)
+    if (!m_bPreparedOnce)
+    {
+      prepareOnce (aConversionSettings);
+      m_bPreparedOnce = true;
+    }
+
+    return internalConvertToNode (aConversionSettings);
   }
 
   @Nonnull
   public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)
   {
-    final IMicroNode aNode = getAsNode (aConversionSettings);
+    final IMicroNode aNode = convertToNode (aConversionSettings);
     if (aNode == null)
       return "";
     return MicroWriter.getNodeAsString (aNode, aConversionSettings.getXMLWriterSettings ());
@@ -78,6 +134,8 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("customized", m_bCustomized).toString ();
+    return new ToStringGenerator (this).append ("customized", m_bCustomized)
+                                       .append ("preparedOnce", m_bPreparedOnce)
+                                       .toString ();
   }
 }

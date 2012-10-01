@@ -272,7 +272,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
       for (final IHCBaseNode aChild : m_aChildren)
-        aElement.appendChild (aChild.getAsNode (aConversionSettings));
+        aElement.appendChild (aChild.convertToNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
     {

@@ -69,7 +69,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                  final HCRow aRow,
                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    aTHead.appendChild (aRow.getAsNode (aConversionSettings));
+    aTHead.appendChild (aRow.convertToNode (aConversionSettings));
   }
 
   @OverrideOnDemand
@@ -77,7 +77,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                  final HCRow aRow,
                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    aTFoot.appendChild (aRow.getAsNode (aConversionSettings));
+    aTFoot.appendChild (aRow.convertToNode (aConversionSettings));
   }
 
   @OverrideOnDemand
@@ -85,7 +85,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                final HCRow aRow,
                                @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    aTBody.appendChild (aRow.getAsNode (aConversionSettings));
+    aTBody.appendChild (aRow.convertToNode (aConversionSettings));
   }
 
   @Override
@@ -118,7 +118,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
 
     // Append colgroup
     if (m_aColGroup != null && m_aColGroup.hasColumns ())
-      aElement.appendChild (m_aColGroup.getAsNode (aConversionSettings));
+      aElement.appendChild (m_aColGroup.convertToNode (aConversionSettings));
 
     // Table header?
     if (hasHeaderRow ())

@@ -119,7 +119,7 @@ public final class HCSettings
   public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode,
                                       @Nonnull final IHCConversionSettings aConversionSettings)
   {
-    return aHCNode.getAsNode (aConversionSettings);
+    return aHCNode.convertToNode (aConversionSettings);
   }
 
   /**

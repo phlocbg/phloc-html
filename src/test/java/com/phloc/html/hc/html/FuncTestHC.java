@@ -168,7 +168,7 @@ public final class FuncTestHC
     b.addChild (new HCVar ().addChild ("zzz"));
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.DEFAULT);
-    assertNotNull (h.getAsNode (aCS));
+    assertNotNull (h.convertToNode (aCS));
     if (false)
       System.out.print (h.getAsHTMLString (aCS));
   }
