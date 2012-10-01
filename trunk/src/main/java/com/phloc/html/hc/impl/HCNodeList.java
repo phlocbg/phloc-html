@@ -238,7 +238,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   /**
-   * Try to simplify this nodelist as much as possible.
+   * Try to simplify this node list as much as possible.
    * 
    * @return the most simple representation of this list. If the list is empty,
    *         <code>null</code> is returned. If exactly one element is contained,
