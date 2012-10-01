@@ -33,6 +33,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
@@ -284,6 +285,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     }
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {
@@ -291,7 +293,15 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
       return "";
     final StringBuilder ret = new StringBuilder ();
     for (final IHCBaseNode aChild : m_aChildren)
-      ret.append (aChild.getPlainText ());
+    {
+      final String sPlainText = aChild.getPlainText ();
+      if (StringHelper.hasText (sPlainText))
+      {
+        if (ret.length () > 0)
+          ret.append (' ');
+        ret.append (sPlainText);
+      }
+    }
     return ret.toString ();
   }
 

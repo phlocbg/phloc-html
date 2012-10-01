@@ -87,11 +87,6 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
       aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
   }
 
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

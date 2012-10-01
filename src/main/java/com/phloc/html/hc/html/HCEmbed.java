@@ -193,11 +193,6 @@ public class HCEmbed extends AbstractHCElement <HCEmbed>
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
   }
 
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

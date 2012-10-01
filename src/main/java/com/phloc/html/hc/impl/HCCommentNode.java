@@ -64,12 +64,6 @@ public class HCCommentNode extends AbstractHCNode
     return new MicroComment (m_sText);
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

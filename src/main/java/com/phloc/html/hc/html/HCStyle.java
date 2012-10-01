@@ -216,12 +216,6 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     setInlineStyle (aElement, m_sContent, m_eMode);
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

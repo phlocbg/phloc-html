@@ -160,6 +160,7 @@ public class HCCommand extends AbstractHCElement <HCCommand>
     aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

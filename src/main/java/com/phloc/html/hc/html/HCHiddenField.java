@@ -115,13 +115,6 @@ public class HCHiddenField extends AbstractHCInput <HCHiddenField>
   }
 
   @Override
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
-  @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("value", m_sValue).toString ();

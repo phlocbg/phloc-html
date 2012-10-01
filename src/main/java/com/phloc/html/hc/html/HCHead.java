@@ -516,6 +516,7 @@ public class HCHead extends AbstractHCBaseNode
     return eHead;
   }
 
+  @Override
   @Nonnull
   public String getPlainText ()
   {

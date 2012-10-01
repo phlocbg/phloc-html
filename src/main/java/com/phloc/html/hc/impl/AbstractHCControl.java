@@ -109,12 +109,6 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
   }
 
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
-
   @Override
   public String toString ()
   {

@@ -92,9 +92,4 @@ public class HCSource extends AbstractHCMediaElementChild <HCSource> implements 
     if (m_aType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
   }
-
-  public String getPlainText ()
-  {
-    return "";
-  }
 }

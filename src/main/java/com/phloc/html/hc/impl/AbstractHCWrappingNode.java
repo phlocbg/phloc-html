@@ -31,6 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public abstract class AbstractHCWrappingNode extends AbstractHCNode implements IHCWrappingNode
 {
+  @Override
   @Nonnull
   public String getPlainText ()
   {

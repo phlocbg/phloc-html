@@ -42,6 +42,12 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     return MicroWriter.getNodeAsString (aNode, aConversionSettings.getXMLWriterSettings ());
   }
 
+  @Nonnull
+  public String getPlainText ()
+  {
+    return "";
+  }
+
   @Override
   public String toString ()
   {

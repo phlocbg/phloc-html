@@ -149,10 +149,4 @@ public class HCKeyGen extends AbstractHCElement <HCKeyGen>
     if (StringHelper.hasText (m_sForm))
       aElement.setAttribute (CHTMLAttributes.FORM, m_sForm);
   }
-
-  @Nonnull
-  public String getPlainText ()
-  {
-    return "";
-  }
 }
