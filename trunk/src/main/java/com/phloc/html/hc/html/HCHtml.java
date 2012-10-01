@@ -28,6 +28,7 @@ import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroDocument;
+import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.xml.CXML;
@@ -41,6 +42,8 @@ import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.customize.IHCCustomizer;
+import com.phloc.html.hc.htmlext.HCUtils;
+import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.hc.utils.HCOutOfBandHandler;
 
@@ -143,21 +146,19 @@ public class HCHtml extends AbstractHCBaseNode
                                                    @Nonnull final IHCCustomizer aCustomizer,
                                                    @Nonnull final EHTMLVersion eHTMLVersion)
   {
-    if (aParentElement.hasChildren ())
+    HCUtils.iterateChildren (aParentElement, new IHCIteratorCallback ()
     {
-      final boolean bParentIsElement = aParentElement instanceof IHCNodeWithChildren <?>;
-      for (final IHCBaseNode aChild : aParentElement.getChildren ())
+      @Nonnull
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
       {
-        if (bParentIsElement && aChild instanceof IHCElement <?>)
+        final boolean bParentIsElement = aParentElement instanceof IHCNodeWithChildren <?>;
+        if (bParentIsElement && aChildNode instanceof IHCElement <?>)
           aCustomizer.customizeHCElement ((IHCNodeWithChildren <?>) aParentElement,
-                                          (IHCElement <?>) aChild,
+                                          (IHCElement <?>) aChildNode,
                                           eHTMLVersion);
-
-        // Recurse deeper?
-        if (aChild instanceof IHCHasChildren)
-          _recursiveCustomizeElements ((IHCHasChildren) aChild, aCustomizer, eHTMLVersion);
+        return EFinish.UNFINISHED;
       }
-    }
+    });
   }
 
   public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNode aBaseNode,
