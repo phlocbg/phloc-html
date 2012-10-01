@@ -36,8 +36,6 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.locale.LocaleUtils;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.commons.microdom.impl.MicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.StringHelper;
@@ -54,7 +52,7 @@ import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
-import com.phloc.html.hc.impl.AbstractHCNode;
+import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 
@@ -63,7 +61,7 @@ import com.phloc.html.meta.IMetaElement;
  * 
  * @author philip
  */
-public class HCHead extends AbstractHCNode
+public class HCHead extends AbstractHCElement <HCHead>
 {
   private static final int MAX_CSS_IE = 31;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
@@ -78,7 +76,9 @@ public class HCHead extends AbstractHCNode
   private final List <IHCNode> m_aJS = new ArrayList <IHCNode> ();
 
   public HCHead ()
-  {}
+  {
+    super (EHTMLElement.HEAD);
+  }
 
   //
   // Head fields/attributes
@@ -439,12 +439,12 @@ public class HCHead extends AbstractHCNode
   }
 
   @Override
-  @Nonnull
-  protected final IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected void applyProperties (@Nonnull final IMicroElement eHead,
+                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
+    super.applyProperties (eHead, aConversionSettings);
 
-    final IMicroElement eHead = new MicroElement (EHTMLElement.HEAD.getElementName ());
+    final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
     if (StringHelper.hasText (m_sProfile))
       eHead.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
 
@@ -513,8 +513,6 @@ public class HCHead extends AbstractHCNode
     // Ensure tag is not self-closed
     if (!eHead.hasChildren () && EHTMLElement.HEAD.mayNotBeSelfClosed ())
       eHead.appendText ("");
-
-    return eHead;
   }
 
   @Override

@@ -32,7 +32,7 @@ import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.xml.CXML;
-import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
@@ -41,7 +41,7 @@ import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.htmlext.IHCIteratorCallback;
-import com.phloc.html.hc.impl.AbstractHCBaseNode;
+import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.hc.utils.HCOutOfBandHandler;
 
 /**
@@ -49,10 +49,8 @@ import com.phloc.html.hc.utils.HCOutOfBandHandler;
  * 
  * @author philip
  */
-public class HCHtml extends AbstractHCBaseNode
+public class HCHtml extends AbstractHCElement <HCHtml>
 {
-  private EHCTextDirection m_eDir;
-  private String m_sLang;
   private HCHead m_aHead;
   private HCBody m_aBody;
 
@@ -60,7 +58,12 @@ public class HCHtml extends AbstractHCBaseNode
    * Create a new HTML object
    */
   public HCHtml ()
-  {}
+  {
+    super (EHTMLElement.HTML);
+
+    // Set default direction
+    setDirection (EHCTextDirection.LTR);
+  }
 
   /**
    * Overwrite this method to create a custom {@link HCHead} implementation
@@ -84,32 +87,6 @@ public class HCHtml extends AbstractHCBaseNode
   protected HCBody createBody ()
   {
     return new HCBody ();
-  }
-
-  @Nullable
-  public final EHCTextDirection getDir ()
-  {
-    return m_eDir;
-  }
-
-  @Nonnull
-  public final HCHtml setDir (@Nullable final EHCTextDirection eDir)
-  {
-    m_eDir = eDir;
-    return this;
-  }
-
-  @Nullable
-  public final String getLang ()
-  {
-    return m_sLang;
-  }
-
-  @Nonnull
-  public final HCHtml setLang (@Nullable final String sLang)
-  {
-    m_sLang = sLang;
-    return this;
   }
 
   @Nonnull
@@ -188,15 +165,8 @@ public class HCHtml extends AbstractHCBaseNode
     // already have a parent assigned if "getAsNode" is called more than once!
     final IMicroDocument aDoc = new MicroDocument (eHTMLVersion.getDocType ().getClone ());
     final IMicroElement aRoot = aDoc.appendElement (eHTMLVersion.getDocType ().getQualifiedName ());
-    if (m_eDir != null)
-      aRoot.setAttribute (CHTMLAttributes.DIR, m_eDir.getAttrValue ());
-    if (StringHelper.hasText (m_sLang))
-    {
-      // Both "xml:lang" and "lang"
-      aRoot.setAttribute (CXML.XML_ATTR_LANG, m_sLang);
-      aRoot.setAttribute ("lang", m_sLang);
-    }
     aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getXMLNamespace ());
+    applyProperties (aRoot, aConversionSettings);
 
     // Use the getter, to ensure the elements are not null
     final IMicroNode eBody = getBody ().convertToNode (aConversionSettings);
@@ -221,8 +191,6 @@ public class HCHtml extends AbstractHCBaseNode
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("dir", m_eDir)
-                            .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)
                             .appendIfNotNull ("body", m_aBody)
                             .toString ();

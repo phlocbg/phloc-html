@@ -575,7 +575,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       aElement.setAttribute (CHTMLAttributes.TITLE, m_sTitle);
 
     if (StringHelper.hasText (m_sLanguage))
+    {
+      // Both "xml:lang" and "lang"
       aElement.setAttribute (CXML.XML_ATTR_LANG, m_sLanguage);
+      aElement.setAttribute (CHTMLAttributes.LANG, m_sLanguage);
+    }
 
     if (m_eDirection != null)
       aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
