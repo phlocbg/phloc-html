@@ -54,7 +54,7 @@ import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
-import com.phloc.html.hc.impl.AbstractHCBaseNode;
+import com.phloc.html.hc.impl.AbstractHCNode;
 import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 
@@ -63,7 +63,7 @@ import com.phloc.html.meta.IMetaElement;
  * 
  * @author philip
  */
-public class HCHead extends AbstractHCBaseNode
+public class HCHead extends AbstractHCNode
 {
   private static final int MAX_CSS_IE = 31;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
@@ -438,8 +438,9 @@ public class HCHead extends AbstractHCBaseNode
       eHead.appendChild (aJS.getAsNode (aConversionSettings));
   }
 
+  @Override
   @Nonnull
-  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 
