@@ -129,10 +129,10 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     });
   }
 
-  public static void handleOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
-                                           @Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                           @Nonnull final HCHead aHead,
-                                           @Nonnull final HCBody aBody)
+  public static void extractAndHandleOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+                                                     @Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                                     @Nonnull final HCHead aHead,
+                                                     @Nonnull final HCBody aBody)
   {
     if (aConversionSettings.extractOutOfBandNodes ())
     {
@@ -160,7 +160,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     aBody.beforeConvertToNode (aConversionSettings);
 
     // Extract all out-of-band nodes
-    handleOutOfBandNodes (aBody, aConversionSettings, aHead, aBody);
+    extractAndHandleOutOfBandNodes (aBody, aConversionSettings, aHead, aBody);
   }
 
   @Override

@@ -24,6 +24,9 @@ import java.util.Map;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCBaseNode;
@@ -38,7 +41,8 @@ import com.phloc.html.hc.IHCWrappingNode;
  */
 public final class HCOutOfBandHandler
 {
-  private static Map <String, Boolean> s_aOOBNAnnotationCache = new HashMap <String, Boolean> ();
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCOutOfBandHandler.class);
+  private static final Map <String, Boolean> s_aOOBNAnnotationCache = new HashMap <String, Boolean> ();
 
   private HCOutOfBandHandler ()
   {}
@@ -82,7 +86,7 @@ public final class HCOutOfBandHandler
       for (final IHCBaseNode aChild : aParentElement.getChildren ())
       {
         if (false)
-          System.out.println (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
+          s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
 
         if (isOutOfBandNode (aChild))
         {
@@ -104,6 +108,18 @@ public final class HCOutOfBandHandler
     }
   }
 
+  /**
+   * Extract all out-of-band child nodes for the passed element. Ensure to call
+   * {@link com.phloc.html.hc.IHCNode#beforeConvertToNode(com.phloc.html.hc.conversion.IHCConversionSettingsToNode)}
+   * before calling this method!
+   * 
+   * @param aParentElement
+   *        The parent element to extract the nodes from. May not be
+   *        <code>null</code>.
+   * @param aTargetList
+   *        The list to add the out-of-band nodes to. May not be
+   *        <code>null</code>.
+   */
   public static void recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
                                                      @Nonnull final List <IHCBaseNode> aTargetList)
   {
@@ -113,6 +129,10 @@ public final class HCOutOfBandHandler
       throw new NullPointerException ("targetList");
 
     // Using HCUtils.iterateTree would be too tedious here
+    final int n = aTargetList.size ();
     _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
+
+    if (false)
+      s_aLogger.info ("--- +" + (aTargetList.size () - n) + " for " + aParentElement.getClass ().getSimpleName ());
   }
 }
