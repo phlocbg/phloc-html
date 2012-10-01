@@ -43,21 +43,6 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   }
 
   /**
-   * This method checks whether the node is suitable for conversion to an
-   * {@link IMicroNode}.
-   * 
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   * @return <code>true</code> if the node can be converted to a node,
-   *         <code>false</code> otherwise.
-   */
-  @OverrideOnDemand
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    return true;
-  }
-
-  /**
    * This method is called once for each instead before the note itself is
    * created. Overwrite this method to perform actions that can only be done
    * when the node is build finally.
@@ -95,7 +80,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   }
 
   @Nonnull
-  public IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
+  public final IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
   {
     return new HCConditionalCommentNode (sCondition, this);
   }

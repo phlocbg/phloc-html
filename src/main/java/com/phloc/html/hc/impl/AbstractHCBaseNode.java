@@ -19,12 +19,14 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Default implementation of the {@link IHCNode} interface.
@@ -33,6 +35,12 @@ import com.phloc.html.hc.conversion.IHCConversionSettings;
  */
 public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
+  @OverrideOnDemand
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return true;
+  }
+
   @Nonnull
   public final String getAsHTMLString (@Nonnull final IHCConversionSettings aConversionSettings)
   {
@@ -42,6 +50,7 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     return MicroWriter.getNodeAsString (aNode, aConversionSettings.getXMLWriterSettings ());
   }
 
+  @OverrideOnDemand
   @Nonnull
   public String getPlainText ()
   {
