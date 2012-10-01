@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
@@ -113,6 +114,12 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     }
 
     return internalConvertToNode (aConversionSettings);
+  }
+
+  @Nonnull
+  public final IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
+  {
+    return new HCConditionalCommentNode (sCondition, this);
   }
 
   @Nonnull

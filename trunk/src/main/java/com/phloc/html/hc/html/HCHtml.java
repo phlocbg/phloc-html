@@ -129,14 +129,19 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     });
   }
 
-  public static void extractOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
-                                            @Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                            @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
+  public static void handleOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+                                           @Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                           @Nonnull final HCHead aHead,
+                                           @Nonnull final HCBody aBody)
   {
     if (aConversionSettings.extractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
+      final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
       HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode, aExtractedOutOfBandNodes);
+
+      // Call out-of-band node handler
+      aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
     }
   }
 
@@ -148,11 +153,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     customizeNodes (getBody (), aConversionSettings);
 
     // Extract all out-of-band nodes
-    final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
-    extractOutOfBandNodes (getBody (), aConversionSettings, aExtractedOutOfBandNodes);
-
-    // Call out-of-band node handler
-    aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, getHead (), getBody ());
+    handleOutOfBandNodes (getBody (), aConversionSettings, getHead (), getBody ());
   }
 
   @Override

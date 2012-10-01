@@ -17,9 +17,6 @@
  */
 package com.phloc.html.hc;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.commons.annotations.Nonempty;
 
 /**
  * Base interface for a main HC node.
@@ -27,14 +24,4 @@ import com.phloc.commons.annotations.Nonempty;
  * @author philip
  */
 public interface IHCNode extends IHCBaseNode
-{
-  /**
-   * Get this node wrapped in a conditional comment
-   * 
-   * @param sCondition
-   *        The condition to us
-   * @return Never <code>null</code>.
-   */
-  @Nonnull
-  IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
-}
+{}
