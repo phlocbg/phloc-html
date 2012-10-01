@@ -26,7 +26,6 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.callback.INonThrowingCallableWithParameter;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mutable.MutableBoolean;
@@ -151,14 +150,14 @@ public final class HCUtils
       throw new IllegalArgumentException ("No tag name to search was provided");
 
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
-    iterateTree (aOwner, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
+    iterateChildren (aOwner, new IHCIteratorCallback ()
     {
       @Nullable
-      public EFinish call (final IHCBaseNode aNode)
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
       {
-        if (aNode instanceof IHCElement <?>)
+        if (aChildNode instanceof IHCElement <?>)
         {
-          final IHCElement <?> aCurrentElement = (IHCElement <?>) aNode;
+          final IHCElement <?> aCurrentElement = (IHCElement <?>) aChildNode;
           final String sCurrentTagName = aCurrentElement.getTagName ();
           for (final EHTMLElement aElement : aElements)
             if (sCurrentTagName.equalsIgnoreCase (aElement.getElementName ()))
@@ -198,14 +197,14 @@ public final class HCUtils
       throw new IllegalArgumentException ("No tag name to search was provided");
 
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
-    iterateTree (aOwner, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
+    iterateChildren (aOwner, new IHCIteratorCallback ()
     {
       @Nullable
-      public EFinish call (final IHCBaseNode aNode)
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
       {
-        if (aNode instanceof IHCElement <?>)
+        if (aChildNode instanceof IHCElement <?>)
         {
-          final IHCElement <?> aCurrentElement = (IHCElement <?>) aNode;
+          final IHCElement <?> aCurrentElement = (IHCElement <?>) aChildNode;
           final String sCurrentTagName = aCurrentElement.getTagName ();
           boolean bFound = false;
           for (final EHTMLElement aElement : aElements)
@@ -243,12 +242,12 @@ public final class HCUtils
     if (aStartNode instanceof IHCHasChildren)
     {
       final MutableBoolean ret = new MutableBoolean (false);
-      iterateTree ((IHCHasChildren) aStartNode, new INonThrowingCallableWithParameter <EFinish, IHCBaseNode> ()
+      iterateChildren ((IHCHasChildren) aStartNode, new IHCIteratorCallback ()
       {
         @Nullable
-        public EFinish call (final IHCBaseNode aNode)
+        public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
         {
-          if (aNode instanceof HCTextNode)
+          if (aChildNode instanceof HCTextNode)
           {
             ret.set (true);
             return EFinish.FINISHED;
@@ -262,35 +261,65 @@ public final class HCUtils
     return false;
   }
 
-  public static void iterateTree (@Nonnull final IHCHasChildren aNode,
-                                  @Nonnull final INonThrowingCallableWithParameter <EFinish, IHCBaseNode> aCallback)
+  @Nonnull
+  private static EFinish _recursiveIterateTree (@Nonnull final IHCHasChildren aNode,
+                                                @Nonnull final IHCIteratorCallback aCallback)
+  {
+    if (aNode.hasChildren ())
+    {
+      for (final IHCBaseNode aChild : aNode.getChildren ())
+      {
+        // call callback
+        if (aCallback.call (aNode, aChild).isFinished ())
+          return EFinish.FINISHED;
+
+        // does the node has children
+        if (aChild instanceof IHCHasChildren)
+          if (_recursiveIterateTree ((IHCHasChildren) aChild, aCallback).isFinished ())
+            return EFinish.FINISHED;
+      }
+    }
+    return EFinish.UNFINISHED;
+  }
+
+  /**
+   * Recursively iterate the node and all child nodes of the passed node. The
+   * difference to {@link #iterateChildren(IHCHasChildren, IHCIteratorCallback)}
+   * is, that the callback is also invoked on the passed node.
+   * 
+   * @param aNode
+   *        The node to be iterated.
+   * @param aCallback
+   *        The callback to be invoked on every child
+   */
+  public static void iterateTree (@Nonnull final IHCHasChildren aNode, @Nonnull final IHCIteratorCallback aCallback)
   {
     if (aNode == null)
       throw new NullPointerException ("node");
     if (aCallback == null)
       throw new NullPointerException ("callback");
 
-    if (aNode.hasChildren ())
-    {
-      final List <IHCBaseNode> aOpen = new ArrayList <IHCBaseNode> (aNode.getChildren ());
-      while (!aOpen.isEmpty ())
-      {
-        // get current node
-        final IHCBaseNode aCurrent = aOpen.remove (0);
+    // call callback on start node
+    if (aCallback.call (null, aNode).isUnfinished ())
+      _recursiveIterateTree (aNode, aCallback);
+  }
 
-        // call callback
-        if (aCallback.call (aCurrent).isFinished ())
-          break;
+  /**
+   * Recursively iterate all child nodes of the passed node.
+   * 
+   * @param aNode
+   *        The node who's children should be iterated.
+   * @param aCallback
+   *        The callback to be invoked on every child
+   */
+  public static void iterateChildren (@Nonnull final IHCHasChildren aNode, @Nonnull final IHCIteratorCallback aCallback)
+  {
+    if (aNode == null)
+      throw new NullPointerException ("node");
+    if (aCallback == null)
+      throw new NullPointerException ("callback");
 
-        // does the node has children
-        if (aCurrent instanceof IHCHasChildren)
-        {
-          final IHCHasChildren aHasChildren = (IHCHasChildren) aCurrent;
-          if (aHasChildren.hasChildren ())
-            aOpen.addAll (0, aHasChildren.getChildren ());
-        }
-      }
-    }
+    _recursiveIterateTree (aNode, aCallback);
   }
 
   /**

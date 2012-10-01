@@ -57,7 +57,6 @@ import com.phloc.html.hc.html.HCForm;
 import com.phloc.html.hc.html.HCHead;
 import com.phloc.html.hc.html.HCHiddenField;
 import com.phloc.html.hc.html.HCLink;
-import com.phloc.html.hc.html.HCNoScript;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
@@ -270,11 +269,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   @OverrideOnDemand
   protected boolean isOutOfBandBodyNode (@Nonnull final IHCBaseNode aOOBNode)
   {
-    // JS nodes
+    // JS nodes go to body
     if (HCHead.isValidJSNode (aOOBNode))
-      return true;
-
-    if (aOOBNode instanceof HCNoScript)
       return true;
 
     return false;
