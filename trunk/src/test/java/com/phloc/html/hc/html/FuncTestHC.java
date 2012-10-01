@@ -139,7 +139,7 @@ public final class FuncTestHC
     b.addChild (new HCSamp ());
     b.addChild (new HCSamp ().addChild ("List"));
     b.addChild (new HCScript (JSExpr.ref ("i").assign (17)));
-    b.addChild (new HCScriptFile ().setSrc (new SimpleURL ("a.js")));
+    b.addChild (HCScriptFile.create (new SimpleURL ("a.js")));
     final HCSelect aSelect = new HCSelect ("x");
     aSelect.addOption ("y", "Ypsilon");
     aSelect.addOption ("z", "Zet");
