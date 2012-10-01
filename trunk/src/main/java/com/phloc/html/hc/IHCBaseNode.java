@@ -35,6 +35,17 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public interface IHCBaseNode extends IHasPlainText, Serializable
 {
   /**
+   * This method checks whether the node is suitable for conversion to an
+   * {@link IMicroNode}.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used
+   * @return <code>true</code> if the node can be converted to a node,
+   *         <code>false</code> otherwise.
+   */
+  boolean canConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /**
    * @param aConversionSettings
    *        The conversion settings to be used. May not be <code>null</code>.
    * @return The fully created HTML node

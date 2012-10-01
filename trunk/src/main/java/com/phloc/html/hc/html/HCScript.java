@@ -159,7 +159,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     m_sJSCode = getJSCode ();
     // Don't create script elements with empty content....

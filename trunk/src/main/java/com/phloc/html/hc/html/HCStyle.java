@@ -182,7 +182,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Don't create style elements with empty content....
     return StringHelper.hasText (m_sContent);

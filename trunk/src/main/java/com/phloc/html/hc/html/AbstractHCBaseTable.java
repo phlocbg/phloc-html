@@ -571,7 +571,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
     return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;
