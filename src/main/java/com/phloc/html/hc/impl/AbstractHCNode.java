@@ -70,18 +70,6 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   protected void prepareNodeOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
-  /**
-   * This method is called everytime the node itself is created. Overwrite this
-   * method to perform actions that can only be done when the node is build.
-   * 
-   * @param aConversionSettings
-   *        The conversion settings to be used
-   */
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void prepareNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {}
-
   @Nonnull
   protected abstract IMicroNode internalGetAsNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
@@ -102,9 +90,6 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
       prepareNodeOnce (aConversionSettings);
       m_bPreparedOnce = true;
     }
-
-    // Prepare object for each rendering (implementation dependent)
-    prepareNode (aConversionSettings);
 
     return internalGetAsNode (aConversionSettings);
   }
