@@ -18,14 +18,15 @@
 package com.phloc.html.hc.api;
 
 /**
- * Base interface for link types (used in HCLink)
+ * Base interface for link types (used in com.phloc.html.hc.html.HCLink)
  * 
  * @author philip
  */
 public interface IHCLinkType extends IHCHasHTMLAttributeValue
 {
   /**
-   * @return <code>true</code> if links of this type can occur more than once
+   * @return <code>true</code> if links of this type can occur more than once,
+   *         <code>false</code> if it may occur only once.
    */
   boolean isAllowedMoreThanOnce ();
 }

@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.conversion;
 
+import java.nio.charset.Charset;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -152,6 +153,19 @@ public final class HCSettings
                                         @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.getAsHTMLString (aConversionSettings);
+  }
+
+  /**
+   * Get the {@link Charset} that was used in creating the HTML code
+   * 
+   * @param bIndentAndAlign
+   *        Indent and align?
+   * @return The non-<code>null</code> Charset object
+   */
+  @Nonnull
+  public static Charset getHTMLCharset (final boolean bIndentAndAlign)
+  {
+    return getConversionSettings (bIndentAndAlign).getXMLWriterSettings ().getCharsetObj ();
   }
 
   /**

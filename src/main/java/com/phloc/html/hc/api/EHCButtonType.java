@@ -21,6 +21,11 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 
+/**
+ * Type of an {@link com.phloc.html.hc.html.HCButton}
+ * 
+ * @author philip
+ */
 public enum EHCButtonType implements IHCHasHTMLAttributeValue
 {
   SUBMIT ("submit"),

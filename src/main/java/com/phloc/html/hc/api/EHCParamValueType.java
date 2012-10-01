@@ -20,11 +20,10 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.hc.html.HCParam;
 
 /**
- * An enumeration that can be used in {@link HCParam} objects to define the used
- * valuetype.
+ * An enumeration that can be used in {@link com.phloc.html.hc.html.HCParam}
+ * objects to define the used value type.
  * 
  * @author philip
  */

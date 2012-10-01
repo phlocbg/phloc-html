@@ -20,11 +20,10 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.hc.html.HCForm;
 
 /**
- * An enumeration that can be used in {@link HCForm} objects to define the used
- * method.
+ * An enumeration that can be used in {@link com.phloc.html.hc.html.HCForm}
+ * objects to define the used method.
  * 
  * @author philip
  */
