@@ -28,6 +28,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCButtonType;
+import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
@@ -38,7 +39,7 @@ import com.phloc.html.js.builder.IJSStatement;
  * 
  * @author philip
  */
-public class HCButton extends AbstractHCElementWithChildren <HCButton>
+public class HCButton extends AbstractHCElementWithChildren <HCButton> implements IHCCanBeDisabled <HCButton>
 {
   private EHCButtonType m_eType = EHCButtonType.BUTTON;
   private String m_sName;

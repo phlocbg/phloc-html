@@ -25,6 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -33,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public class HCOption extends AbstractHCElementWithChildren <HCOption>
+public class HCOption extends AbstractHCElementWithChildren <HCOption> implements IHCCanBeDisabled <HCOption>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_SELECTED = false;

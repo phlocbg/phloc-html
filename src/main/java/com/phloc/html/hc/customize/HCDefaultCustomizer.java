@@ -41,6 +41,7 @@ import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.html.AbstractHCCell;
 import com.phloc.html.hc.html.AbstractHCTable;
 import com.phloc.html.hc.html.HCBody;
@@ -86,8 +87,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   public static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
 
   // For controls only
-  public static final ICSSClassProvider CSS_CLASS_CONTROL_DISABLED = DefaultCSSClassProvider.create ("disabled");
-  public static final ICSSClassProvider CSS_CLASS_CONTROL_READONLY = DefaultCSSClassProvider.create ("readonly");
+  public static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
+  public static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
 
   // For buttons
   public static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
@@ -196,18 +197,19 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aElement.isUnfocusable ())
       aElement.setEventHandler (EJSEvent.ONFOCUS, JS_BLUR);
 
+    // Disable
+    if (aElement instanceof IHCCanBeDisabled <?>)
+      if (((IHCCanBeDisabled <?>) aElement).isDisabled ())
+        aElement.addClass (CSS_CLASS_DISABLED);
+
     if (aElement instanceof IHCControl <?>)
     {
       // Specific control stuff
       final IHCControl <?> aCtrl = (IHCControl <?>) aElement;
 
-      // Disable
-      if (aCtrl.isDisabled ())
-        aCtrl.addClass (CSS_CLASS_CONTROL_DISABLED);
-
       // Read only?
       if (aCtrl.isReadonly ())
-        aCtrl.addClass (CSS_CLASS_CONTROL_READONLY);
+        aCtrl.addClass (CSS_CLASS_READONLY);
 
       if (aCtrl.isFocused ())
       {
