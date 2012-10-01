@@ -135,6 +135,7 @@ public final class CHTMLAttributes
   public static final String READONLY = "readonly";
   public static final String REL = "rel";
   public static final String REV = "rev";
+  public static final String REVERSED = "reversed";
   public static final String ROWS = "rows";
   public static final String ROWSPAN = "rowspan";
   public static final String RULES = "rules";

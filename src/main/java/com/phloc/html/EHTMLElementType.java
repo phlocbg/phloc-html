@@ -45,7 +45,8 @@ public enum EHTMLElementType
   PHRASING (CHTMLElementType.VALUE_PHRASING),
   CHILD (0),
   SPECIAL (0),
-  UNDEFINED (0);
+  UNDEFINED (0),
+  UNDEFINED_PHRASING (CHTMLElementType.VALUE_PHRASING);
 
   private int m_nValue;
 

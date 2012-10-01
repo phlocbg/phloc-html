@@ -49,6 +49,7 @@ public final class CHTMLAttributeValues
   public static final String DRAGGABLE = CHTMLAttributes.DRAGGABLE;
   public static final String SPELLCHECK = CHTMLAttributes.SPELLCHECK;
   public static final String OPEN = CHTMLAttributes.OPEN;
+  public static final String REVERSED = CHTMLAttributes.REVERSED;
 
   // HTML5 audio
   public static final String AUTOPLAY = CHTMLAttributes.AUTOPLAY;

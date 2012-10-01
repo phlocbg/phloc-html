@@ -50,7 +50,7 @@ public enum EHTMLElement
   BUTTON ("button", false, EHTMLElementType.PHRASING),
   CANVAS ("canvas", false, EHTMLElementType.FLOW),
   CAPTION ("caption", false, EHTMLElementType.CHILD),
-  CENTER ("center", false, EHTMLElementType.UNDEFINED),
+  CENTER ("center", false, EHTMLElementType.UNDEFINED_PHRASING),
   CITE ("cite", false, EHTMLElementType.PHRASING),
   CODE ("code", false, EHTMLElementType.PHRASING),
   COL ("col", true, EHTMLElementType.CHILD),
@@ -152,14 +152,16 @@ public enum EHTMLElement
   private final String m_sElementNameLC;
   private final String m_sElementNameUC;
   private final boolean m_bMayBeSelfClosed;
+  private final EHTMLElementType m_eType;
 
   private EHTMLElement (@Nonnull @Nonempty final String sElementName,
                         final boolean bMayBeSelfClosed,
-                        final EHTMLElementType eType)
+                        @Nonnull final EHTMLElementType eType)
   {
     m_sElementNameLC = sElementName.toLowerCase (CHTMLCharset.LOCALE);
     m_sElementNameUC = sElementName.toUpperCase (CHTMLCharset.LOCALE);
     m_bMayBeSelfClosed = bMayBeSelfClosed;
+    m_eType = eType;
   }
 
   /**
@@ -212,6 +214,21 @@ public enum EHTMLElement
   public boolean mayNotBeSelfClosed ()
   {
     return !m_bMayBeSelfClosed;
+  }
+
+  public boolean isFlowElement ()
+  {
+    return m_eType.isFlowElement ();
+  }
+
+  public boolean isMetadataElement ()
+  {
+    return m_eType.isMetadataElement ();
+  }
+
+  public boolean isPhrasingElement ()
+  {
+    return m_eType.isPhrasingElement ();
   }
 
   @Nonnull

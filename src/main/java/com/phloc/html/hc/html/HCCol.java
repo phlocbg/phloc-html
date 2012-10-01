@@ -21,6 +21,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
@@ -39,6 +40,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 public class HCCol extends AbstractHCElement <HCCol>
 {
   private String m_sWidth;
+  private int m_nSpan = CGlobal.ILLEGAL_UINT;
 
   public HCCol ()
   {
@@ -77,18 +79,35 @@ public class HCCol extends AbstractHCElement <HCCol>
     return this;
   }
 
+  public int getSpan ()
+  {
+    return m_nSpan;
+  }
+
+  @Nonnull
+  public HCCol setSpan (final int nSpan)
+  {
+    m_nSpan = nSpan;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sWidth))
       aElement.setAttribute (CHTMLAttributes.WIDTH, m_sWidth);
+    if (m_nSpan > 0)
+      aElement.setAttribute (CHTMLAttributes.SPAN, m_nSpan);
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("width", m_sWidth).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("width", m_sWidth)
+                            .append ("span", m_nSpan)
+                            .toString ();
   }
 
   /**
