@@ -163,7 +163,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  public final boolean containsClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final boolean containsClass (@Nullable final ICSSClassProvider aCSSClassProvider)
   {
     return m_aCSSClassProviders != null &&
            aCSSClassProvider != null &&
@@ -208,7 +208,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
-  public final THISTYPE removeClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final THISTYPE removeClass (@Nullable final ICSSClassProvider aCSSClassProvider)
   {
     if (m_aCSSClassProviders != null && aCSSClassProvider != null)
       m_aCSSClassProviders.remove (aCSSClassProvider);
