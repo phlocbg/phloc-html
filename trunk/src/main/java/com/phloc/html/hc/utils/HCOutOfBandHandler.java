@@ -112,6 +112,7 @@ public final class HCOutOfBandHandler
     if (aTargetList == null)
       throw new NullPointerException ("targetList");
 
+    // Using HCUtils.iterateTree would be too tedious here
     _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
   }
 }
