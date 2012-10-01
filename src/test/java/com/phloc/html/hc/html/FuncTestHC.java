@@ -25,7 +25,7 @@ import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.api.EHCLinkType;
-import com.phloc.html.hc.conversion.HCConversionSettingsProvider;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.builder.JSExpr;
 
@@ -175,7 +175,7 @@ public final class FuncTestHC
     b.addChild (new HCXMP ());
     b.addChild (new HCXMP ().addChild ("Das wäre also ein Beispiel"));
 
-    final IHCConversionSettings aCS = new HCConversionSettingsProvider (EHTMLVersion.DEFAULT).getConversionSettings (true);
+    final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.DEFAULT);
     assertNotNull (h.getAsNode (aCS));
     System.out.print (h.getAsHTMLString (aCS));
   }

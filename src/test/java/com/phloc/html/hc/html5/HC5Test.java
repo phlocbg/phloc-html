@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.conversion.HCConversionSettingsProvider;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHtml;
@@ -87,7 +87,7 @@ public final class HC5Test
     b.addChild (aVideo);
     b.addChild (new HCWBR ());
 
-    final IHCConversionSettings aCS = new HCConversionSettingsProvider (EHTMLVersion.HTML5).getConversionSettings (true);
+    final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.HTML5);
     assertNotNull (h.getAsNode (aCS));
     System.out.print (h.getAsHTMLString (aCS));
   }

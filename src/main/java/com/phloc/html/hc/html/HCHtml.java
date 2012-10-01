@@ -57,7 +57,7 @@ public class HCHtml extends AbstractHCBaseNode
   private HCBody m_aBody;
 
   // status
-  private boolean m_bPrepared = false;
+  private boolean m_bPreparedOnce = false;
 
   /**
    * Create a new HTML object
@@ -204,9 +204,9 @@ public class HCHtml extends AbstractHCBaseNode
     final HCBody aBody = getBody ();
     final HCHead aHead = getHead ();
 
-    if (!m_bPrepared)
+    if (!m_bPreparedOnce)
     {
-      m_bPrepared = true;
+      m_bPreparedOnce = true;
 
       // Extract all out-of-band nodes
       final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
@@ -230,7 +230,7 @@ public class HCHtml extends AbstractHCBaseNode
 
   public boolean isPrepared ()
   {
-    return m_bPrepared;
+    return m_bPreparedOnce;
   }
 
   @Override
@@ -248,7 +248,7 @@ public class HCHtml extends AbstractHCBaseNode
                             .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)
                             .appendIfNotNull ("body", m_aBody)
-                            .append ("prepared", m_bPrepared)
+                            .append ("prepared", m_bPreparedOnce)
                             .toString ();
   }
 }
