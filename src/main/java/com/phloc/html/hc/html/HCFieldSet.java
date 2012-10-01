@@ -45,6 +45,6 @@ public class HCFieldSet extends AbstractHCElementWithChildren <HCFieldSet>
   {
     this ();
     if (sLabel != null)
-      addChild (new HCLegend (sLabel));
+      addChild (HCLegend.create (sLabel));
   }
 }

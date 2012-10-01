@@ -205,7 +205,8 @@ public class MainCreateHCClasses
                                               "Span",
                                               "Strong",
                                               "Sub",
-                                              "Sup" };
+                                              "Sup",
+                                              "Var" };
     final File aMainDir = new File ("src/main/java/com/phloc/html/hc/html");
     final File aTestDir = new File ("src/test/java/com/phloc/html/hc/html");
     for (final String s : ELEMENTS)

@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -36,14 +37,107 @@ public class HCLegend extends AbstractHCElementWithChildren <HCLegend>
     super (EHTMLElement.LEGEND);
   }
 
+  @Deprecated
   public HCLegend (@Nonnull final IPredefinedLocaleTextProvider aChild)
   {
     this (aChild.getText ());
   }
 
+  @Deprecated
   public HCLegend (@Nullable final String sLabel)
   {
     this ();
     addChild (sLabel);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child text
+   * 
+   * @param aChild
+   *        The child text provider to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return new HCLegend ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCLegend ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child text
+   * 
+   * @param sChild
+   *        The child to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final String sChild)
+  {
+    return new HCLegend ().addChild (sChild);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child texts
+   * 
+   * @param aChildren
+   *        The child texts to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final String... aChildren)
+  {
+    return new HCLegend ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final IHCNode aChild)
+  {
+    return new HCLegend ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final IHCNode... aChildren)
+  {
+    return new HCLegend ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LEGEND element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLegend element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLegend create (@Nullable final Iterable <? extends IHCNode> aChildren)
+  {
+    return new HCLegend ().addChildren (aChildren);
   }
 }
