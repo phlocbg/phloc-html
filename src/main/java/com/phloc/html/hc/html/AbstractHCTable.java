@@ -26,15 +26,9 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.string.StringParser;
-import com.phloc.css.ECSSUnit;
-import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.css.DefaultCSSClassProvider;
-import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.impl.HCEntityNode;
 
 /**
  * Represents an HTML &lt;table&gt; element with open semantics.
@@ -45,7 +39,6 @@ import com.phloc.html.hc.impl.HCEntityNode;
  */
 public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
-  public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 
   public AbstractHCTable ()
@@ -155,24 +148,6 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     final IMicroElement aTBody = aElement.appendElement (EHTMLElement.TBODY.getElementName ());
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
-
-    // bug fix for IE9 table layout bug
-    // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
-    // IE9 only interprets column widths if the first row does not use colspan
-    // (i.e. at least one row does not use colspan)
-    if (m_aColGroup != null && m_aColGroup.hasColumns () && hasBodyRows () && getFirstBodyRow ().isColspanUsed ())
-    {
-      // Create a dummy row with explicit widths
-      final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
-      for (final HCCol aCol : m_aColGroup.getAllColumns ())
-      {
-        final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
-        final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
-        if (nWidth >= 0)
-          aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
-      }
-      applyBodyRow (aTBody, aRow, aConversionSettings);
-    }
 
     // Main body rows
     for (final HCRow aRow : directGetBodyRowList ())
