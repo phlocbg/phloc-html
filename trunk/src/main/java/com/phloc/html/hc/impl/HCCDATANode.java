@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.impl.MicroCDATA;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single CDATA node as HC node.
@@ -53,7 +53,7 @@ public final class HCCDATANode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected IMicroCDATA internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroCDATA internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return new MicroCDATA (m_sText);
   }

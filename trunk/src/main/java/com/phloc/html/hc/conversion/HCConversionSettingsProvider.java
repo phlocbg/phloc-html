@@ -95,6 +95,14 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   }
 
   @Nonnull
+  public HCConversionSettingsProvider setExtractOutOfBandNodes (final boolean bExtractOutOfBandNodes)
+  {
+    m_aCS.setExtractOutOfBandNodes (bExtractOutOfBandNodes);
+    m_aCSOptimized = null;
+    return this;
+  }
+
+  @Nonnull
   public HCConversionSettingsProvider setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
   {
     m_aCS.setCustomizer (aCustomizer);

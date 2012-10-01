@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Interface for HC elements that can be converted to micro XML (and therefore
@@ -37,7 +38,7 @@ public interface IHCConvertible
    * @return The fully created HTML node
    */
   @Nullable
-  IMicroNode getAsNode (@Nonnull IHCConversionSettings aConversionSettings);
+  IMicroNode getAsNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
    * @param aConversionSettings

@@ -59,7 +59,7 @@ import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.hc.api5.EHCDropZone;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
@@ -564,7 +564,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement aElement,
-                                  @Nonnull final IHCConversionSettings aConversionSettings)
+                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final boolean bHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 
@@ -664,7 +664,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   @OverrideOnDemand
   protected void finishAfterApplyProperties (@Nonnull final IMicroElement eElement,
-                                             @Nonnull final IHCConversionSettings aConversionSettings)
+                                             @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
   /*
@@ -673,7 +673,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   @Override
   @Nonnull
-  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Run some consistency checks if desired
     if (aConversionSettings.areConsistencyChecksEnabled ())

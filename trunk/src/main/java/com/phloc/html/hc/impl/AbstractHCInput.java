@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCInputType;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
 public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends AbstractHCControl <THISTYPE>
@@ -64,7 +64,7 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());

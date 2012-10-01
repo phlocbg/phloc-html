@@ -39,7 +39,7 @@ import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.customize.IHCCustomizer;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.hc.utils.HCOutOfBandHandler;
@@ -161,7 +161,7 @@ public class HCHtml extends AbstractHCBaseNode
   }
 
   public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNode aBaseNode,
-                                                        @Nonnull final IHCConversionSettings aConversionSettings,
+                                                        @Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                                         @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
   {
     if (aBaseNode instanceof IHCHasChildren)
@@ -182,7 +182,7 @@ public class HCHtml extends AbstractHCBaseNode
   }
 
   @Nonnull
-  public final IMicroDocument getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public final IMicroDocument getAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final EHTMLVersion eHTMLVersion = aConversionSettings.getHTMLVersion ();
 

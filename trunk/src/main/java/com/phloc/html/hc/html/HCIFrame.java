@@ -30,7 +30,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCIFrameAlign;
 import com.phloc.html.hc.api.EHCScrolling;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -210,7 +210,7 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aSrc != null)

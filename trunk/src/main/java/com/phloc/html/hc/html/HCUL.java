@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCULType;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML &lt;ul&gt; element
@@ -59,7 +59,7 @@ public class HCUL extends AbstractHCList <HCUL>
   @Override
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 

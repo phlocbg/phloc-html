@@ -33,7 +33,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.api5.EHCCORSSettings;
 import com.phloc.html.hc.api5.EHCPreload;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
@@ -177,7 +177,7 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bAutoPlay)

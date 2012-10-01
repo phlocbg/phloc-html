@@ -32,7 +32,7 @@ import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.annotations.OutOfBandNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
@@ -159,7 +159,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     m_sJSCode = getJSCode ();
     // Don't create script elements with empty content....
@@ -167,7 +167,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 
