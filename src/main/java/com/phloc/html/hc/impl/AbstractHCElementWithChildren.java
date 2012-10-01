@@ -42,9 +42,7 @@ import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
   private List <IHCBaseNode> m_aChildren;
 
@@ -275,8 +273,21 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
                                              @Nonnull final IHCNodeWithChildren <?> aParentNode)
   {
     if (hasChildren ())
-      for (final IHCBaseNode aChild : m_aChildren)
+    {
+      // We need to work on a copy of the children!
+      for (final IHCBaseNode aChild : getChildren ())
         aChild.applyCustomization (aConversionSettings, aParentNode);
+    }
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (hasChildren ())
+      for (final IHCBaseNode aChild : m_aChildren)
+        aChild.beforeConvertToNode (aConversionSettings);
   }
 
   @Override

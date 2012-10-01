@@ -49,9 +49,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
-                                                                                            AbstractHCElement <THISTYPE> implements
-                                                                                                                        IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -698,10 +696,24 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   {
     if (m_aHeaderRow != null)
       m_aHeaderRow.applyCustomization (aConversionSettings, aParentNode);
-    for (final HCRow aBodyRow : m_aBodyRows)
+    // We need to work on a copy of the children!
+    for (final HCRow aBodyRow : ContainerHelper.newList (m_aBodyRows))
       aBodyRow.applyCustomization (aConversionSettings, aParentNode);
     if (m_aFooterRow != null)
       m_aFooterRow.applyCustomization (aConversionSettings, aParentNode);
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (m_aHeaderRow != null)
+      m_aHeaderRow.beforeConvertToNode (aConversionSettings);
+    for (final HCRow aBodyRow : m_aBodyRows)
+      aBodyRow.beforeConvertToNode (aConversionSettings);
+    if (m_aFooterRow != null)
+      m_aFooterRow.beforeConvertToNode (aConversionSettings);
   }
 
   @Override
