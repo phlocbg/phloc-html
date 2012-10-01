@@ -130,7 +130,7 @@ public final class HCHeadTest
                   HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setShortcutIconHref (null);
-    aHead.addJS (new HCScriptFile ().setSrc (new SimpleURL ("/my.js")));
+    aHead.addJS (HCScriptFile.create (new SimpleURL ("/my.js")));
     assertEquals ("<head><title>phloc</title><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
