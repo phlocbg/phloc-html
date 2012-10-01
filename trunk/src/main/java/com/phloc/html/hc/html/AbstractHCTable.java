@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML &lt;table&gt; element with open semantics.
- * 
+ *
  * @author philip
  * @param <THISTYPE>
  *        The implementing type

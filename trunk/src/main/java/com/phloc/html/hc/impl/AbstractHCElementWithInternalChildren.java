@@ -38,10 +38,13 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
+                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
+                                                                                                                                                                                                      IHCHasChildren
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -160,6 +163,17 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
   {
     return HCUtils.recursiveGetFirstChildWithTagName (this, aElements) != null;
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
+  {
+    if (hasChildren ())
+      for (final IHCBaseNode aChild : m_aChildren)
+        aChild.applyCustomization (aConversionSettings, aParentNode);
   }
 
   /**

@@ -18,7 +18,6 @@
 package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -48,7 +47,7 @@ public final class HCHtmlTest
                       CRLF +
                       "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
-                      "<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\">" +
                       "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
                       "<body><h1>Test</h1></body>" +
                       "</html>",
@@ -58,15 +57,11 @@ public final class HCHtmlTest
                       CRLF +
                       "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
-                      "<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\">" +
                       "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
                       "<body><h1>Test</h1></body>" +
                       "</html>",
                   aHtml.getAsHTMLString (aCS));
-
-    // Call it twice
-    assertNotNull (aHtml.getAsHTMLString (aCS));
-    assertNotNull (aHtml.getAsHTMLString (aCS));
   }
 
   @Test
@@ -81,7 +76,7 @@ public final class HCHtmlTest
                       CRLF +
                       "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
-                      "<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\">" +
                       "<head></head>" +
                       "<body><h1>Test</h1>" +
                       "<script type=\"text/javascript\"><!--\n" +
@@ -95,7 +90,7 @@ public final class HCHtmlTest
                       CRLF +
                       "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
-                      "<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\">" +
                       "<head></head>" +
                       "<body><h1>Test</h1>" +
                       "<script type=\"text/javascript\"><!--\n" +
@@ -104,9 +99,5 @@ public final class HCHtmlTest
                       "</body>" +
                       "</html>",
                   aHtml.getAsHTMLString (aCS));
-
-    // Call it twice
-    assertNotNull (aHtml.getAsHTMLString (aCS));
-    assertNotNull (aHtml.getAsHTMLString (aCS));
   }
 }
