@@ -159,7 +159,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
   {
-    return HCUtils.recursiveGetChildWithTagName (this, aElements) != null;
+    return HCUtils.recursiveGetFirstChildWithTagName (this, aElements) != null;
   }
 
   /**

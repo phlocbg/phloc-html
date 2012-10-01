@@ -180,7 +180,6 @@ public class MainCreateHCClasses
   public static void main (final String [] args)
   {
     final String [] ELEMENTS = new String [] { "Abbr",
-                                              "Acronym",
                                               "Address",
                                               "B",
                                               "BDO",
@@ -198,8 +197,6 @@ public class MainCreateHCClasses
                                               "Ins",
                                               "KBD",
                                               "LI",
-                                              "Listing",
-                                              "NoEmbed",
                                               "NoScript",
                                               "P",
                                               "Pre",
@@ -209,8 +206,7 @@ public class MainCreateHCClasses
                                               "Span",
                                               "Strong",
                                               "Sub",
-                                              "Sup",
-                                              "XMP" };
+                                              "Sup" };
     final File aMainDir = new File ("src/main/java/com/phloc/html/hc/html");
     final File aTestDir = new File ("src/test/java/com/phloc/html/hc/html");
     for (final String s : ELEMENTS)

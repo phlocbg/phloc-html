@@ -48,6 +48,7 @@ public final class CHTMLAttributeValues
   public static final String AUTOFOCUS = CHTMLAttributes.AUTOFOCUS;
   public static final String DRAGGABLE = CHTMLAttributes.DRAGGABLE;
   public static final String SPELLCHECK = CHTMLAttributes.SPELLCHECK;
+  public static final String OPEN = CHTMLAttributes.OPEN;
 
   // HTML5 audio
   public static final String AUTOPLAY = CHTMLAttributes.AUTOPLAY;

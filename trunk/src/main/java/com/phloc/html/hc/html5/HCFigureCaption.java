@@ -15,22 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.html5;
 
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.annotations.DeprecatedInHTML32;
+import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Represents an HTML &lt;plaintext&gt; element
+ * Represents the caption of a {@link HCFigure}. Must be the first child there.
  * 
  * @author philip
  */
-@DeprecatedInHTML32
-public class HCPlainText extends AbstractHCElementWithChildren <HCPlainText>
+@SinceHTML5
+public class HCFigureCaption extends AbstractHCElementWithChildren <HCFigureCaption>
 {
-  public HCPlainText ()
+  public HCFigureCaption ()
   {
-    super (EHTMLElement.PLAINTEXT);
+    super (EHTMLElement.FIGCAPTION);
   }
 }
