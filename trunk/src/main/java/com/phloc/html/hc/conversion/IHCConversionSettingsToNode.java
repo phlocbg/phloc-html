@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 
 import com.phloc.css.ICSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.customize.HCDefaultCustomizer;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
@@ -32,13 +31,14 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 public interface IHCConversionSettingsToNode
 {
   /**
-   * @return The HTML version to be used to transform HC nodes into XML nodes.
+   * @return The HTML version to be used to transform HC nodes into micro nodes.
+   *         Never <code>null</code>.
    */
   @Nonnull
   EHTMLVersion getHTMLVersion ();
 
   /**
-   * @return The CSS writer settings to be used.
+   * @return The CSS writer settings to be used. Never <code>null</code>.
    */
   @Nonnull
   ICSSWriterSettings getCSSWriterSettings ();
@@ -58,7 +58,8 @@ public interface IHCConversionSettingsToNode
 
   /**
    * @return The current customizer to be used. Never <code>null</code>. By
-   *         default a {@link HCDefaultCustomizer} object is returned.
+   *         default a {@link com.phloc.html.hc.customize.HCDefaultCustomizer}
+   *         object is returned.
    */
   @Nonnull
   IHCCustomizer getCustomizer ();

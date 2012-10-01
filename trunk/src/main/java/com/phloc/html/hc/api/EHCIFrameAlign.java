@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
- * Enumeration for IFrame alignment.
+ * Enumeration for {@link com.phloc.html.hc.html.HCIFrame} alignment.
  * 
  * @author philip
  */

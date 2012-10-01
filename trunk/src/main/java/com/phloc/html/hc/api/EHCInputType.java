@@ -21,6 +21,11 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 
+/**
+ * The type of an {@link com.phloc.html.hc.impl.AbstractHCInput} element.
+ * 
+ * @author philip
+ */
 public enum EHCInputType implements IHCHasHTMLAttributeValue
 {
   TEXT ("text"),

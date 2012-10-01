@@ -20,11 +20,10 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.html.hc.html.HCOL;
 
 /**
- * An enumeration that can be used in {@link HCOL} objects to define the used
- * type.
+ * An enumeration that can be used in {@link com.phloc.html.hc.html.HCOL}
+ * objects to define the used type.
  * 
  * @author philip
  */

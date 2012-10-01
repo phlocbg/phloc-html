@@ -22,8 +22,8 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
- * The possible values of the <code>rel</code> attribute of a <code>link</code>
- * element.<br>
+ * The possible values of the <code>rel</code> attribute of a
+ * {@link com.phloc.html.hc.html.HCLink} element.<br>
  * Source: http://de.selfhtml.org/html/kopfdaten/beziehungen.htm
  * 
  * @author philip

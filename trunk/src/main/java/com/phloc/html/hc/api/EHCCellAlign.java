@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
- * Table cell alignment.
+ * Alignment of an {@link com.phloc.html.hc.html.AbstractHCCell} element.
  * 
  * @author philip
  */

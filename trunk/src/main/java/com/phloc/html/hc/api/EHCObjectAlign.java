@@ -22,7 +22,8 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
- * Enumeration for the possible "alignment" values in HTML object tags.
+ * Enumeration for the possible "alignment" values in HTML
+ * {@link com.phloc.html.hc.html.HCObject} tags.
  * 
  * @author philip
  */

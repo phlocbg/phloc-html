@@ -19,7 +19,9 @@ package com.phloc.html.hc.api;
 
 import javax.annotation.Nonnull;
 
-public interface IHCHasFocus <THISTYPE extends IHCHasFocus <THISTYPE>>
+import com.phloc.html.hc.IHCNode;
+
+public interface IHCHasFocus <THISTYPE extends IHCHasFocus <THISTYPE>> extends IHCNode
 {
   /**
    * @return <code>true</code> if this element is focused, <code>false</code>
