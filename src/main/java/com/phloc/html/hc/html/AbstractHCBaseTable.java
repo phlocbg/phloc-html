@@ -27,6 +27,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
@@ -35,6 +36,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -47,7 +49,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
+                                                                                            AbstractHCElement <THISTYPE> implements
+                                                                                                                        IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -684,6 +688,20 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
                                                  nCols +
                                                  " cells");
     }
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
+  {
+    if (m_aHeaderRow != null)
+      m_aHeaderRow.applyCustomization (aConversionSettings, aParentNode);
+    for (final HCRow aBodyRow : m_aBodyRows)
+      aBodyRow.applyCustomization (aConversionSettings, aParentNode);
+    if (m_aFooterRow != null)
+      m_aFooterRow.applyCustomization (aConversionSettings, aParentNode);
   }
 
   @Override

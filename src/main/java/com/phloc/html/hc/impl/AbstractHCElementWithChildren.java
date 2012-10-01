@@ -39,9 +39,12 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElementWithChildren;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
+                                                                                                                AbstractHCElement <THISTYPE> implements
+                                                                                                                                            IHCElementWithChildren <THISTYPE>
 {
   private List <IHCBaseNode> m_aChildren;
 
@@ -263,6 +266,17 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final IHCBaseNode getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aChildren);
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
+  {
+    if (hasChildren ())
+      for (final IHCBaseNode aChild : m_aChildren)
+        aChild.applyCustomization (aConversionSettings, aParentNode);
   }
 
   @Override

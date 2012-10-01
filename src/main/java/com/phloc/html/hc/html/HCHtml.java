@@ -146,14 +146,21 @@ public class HCHtml extends AbstractHCElement <HCHtml>
   }
 
   @Override
-  protected void prepareOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    final HCHead aHead = getHead ();
+    final HCBody aBody = getBody ();
+
     // Customize element, before extracting out-of-band nodes, in case the
     // customizer adds some out-of-band nodes as well
-    customizeNodes (getBody (), aConversionSettings);
+    customizeNodes (aBody, aConversionSettings);
+
+    // Prepare head and body before performing the OOB extraction
+    aHead.beforeConvertToNode (aConversionSettings);
+    aBody.beforeConvertToNode (aConversionSettings);
 
     // Extract all out-of-band nodes
-    handleOutOfBandNodes (getBody (), aConversionSettings, getHead (), getBody ());
+    handleOutOfBandNodes (aBody, aConversionSettings, aHead, aBody);
   }
 
   @Override

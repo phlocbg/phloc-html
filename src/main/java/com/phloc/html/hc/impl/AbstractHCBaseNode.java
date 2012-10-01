@@ -19,7 +19,6 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
@@ -53,6 +52,20 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     return m_bCustomized;
   }
 
+  /**
+   * Protected method that is invoked upon customization. Override e.f. for
+   * objects having private children.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to use. Never <code>null</code>.
+   * @param aParentNode
+   *        The parent node, where the customizer might add children.
+   */
+  @OverrideOnDemand
+  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
+  {}
+
   public final void applyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                         @Nonnull final IHCNodeWithChildren <?> aParentNode)
   {
@@ -60,6 +73,7 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
     {
       m_bCustomized = true;
       aConversionSettings.getCustomizer ().customizeNode (aParentNode, this, aConversionSettings.getHTMLVersion ());
+      internalApplyCustomization (aConversionSettings, aParentNode);
     }
   }
 
@@ -77,18 +91,17 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
    *        The conversion settings to be used
    */
   @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void prepareOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
-  public final void prepareConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  public final void beforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Prepare object once per instance - before first rendering (implementation
     // dependent)
     if (!m_bPreparedOnce)
     {
-      prepareOnce (aConversionSettings);
       m_bPreparedOnce = true;
+      internalBeforeConvertToNode (aConversionSettings);
     }
   }
 
@@ -107,12 +120,9 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
 
     // Prepare object once per instance - before first rendering (implementation
     // dependent)
-    if (!m_bPreparedOnce)
-    {
-      prepareOnce (aConversionSettings);
-      m_bPreparedOnce = true;
-    }
+    beforeConvertToNode (aConversionSettings);
 
+    // Main conversion
     return internalConvertToNode (aConversionSettings);
   }
 

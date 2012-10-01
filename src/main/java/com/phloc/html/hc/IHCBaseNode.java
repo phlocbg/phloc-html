@@ -51,7 +51,8 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
 
   /**
    * This method checks whether the node is suitable for conversion to an
-   * {@link IMicroNode}.
+   * {@link IMicroNode}. If this node cannot be converted, no child node will be
+   * converted as well!
    * 
    * @param aConversionSettings
    *        The conversion settings to be used
@@ -59,6 +60,17 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
    *         <code>false</code> otherwise.
    */
   boolean canConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /**
+   * Special "before" method that is invoked once per instance before the main
+   * {@link #convertToNode(IHCConversionSettingsToNode)} method is invoked. This
+   * is implicitly invoked on child nodes, since it is automatically called
+   * within convertToNode.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to use. May not be <code>null</code>.
+   */
+  void beforeConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
    * @param aConversionSettings
@@ -69,7 +81,8 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
   IMicroNode convertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
-   * Get this node wrapped in a conditional comment
+   * Get this node wrapped in a conditional comment. This is a sanity method for
+   * <code>new HCConditionalCommentNode (this, sCondition)</code>
    * 
    * @param sCondition
    *        The condition to us
@@ -79,9 +92,12 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
   IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
 
   /**
+   * Convert the passed node to it's HTML representation. First this HC-node is
+   * converted to a micro node, which is than
+   * 
    * @param aConversionSettings
    *        The conversion settings to be used. May not be <code>null</code>.
-   * @return The node as XML optionally without indentation.
+   * @return The node as HTML string and never null.
    */
   @Nonnull
   String getAsHTMLString (@Nonnull IHCConversionSettings aConversionSettings);
