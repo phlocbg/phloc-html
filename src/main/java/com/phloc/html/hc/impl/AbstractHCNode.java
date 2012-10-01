@@ -17,9 +17,6 @@
  */
 package com.phloc.html.hc.impl;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.hc.IHCNode;
 
 /**
@@ -28,10 +25,4 @@ import com.phloc.html.hc.IHCNode;
  * @author philip
  */
 public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNode
-{
-  @Nonnull
-  public final IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
-  {
-    return new HCConditionalCommentNode (sCondition, this);
-  }
-}
+{}

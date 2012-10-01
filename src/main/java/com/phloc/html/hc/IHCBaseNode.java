@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.IHasPlainText;
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -66,6 +67,16 @@ public interface IHCBaseNode extends IHasPlainText, Serializable
    */
   @Nullable
   IMicroNode convertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /**
+   * Get this node wrapped in a conditional comment
+   * 
+   * @param sCondition
+   *        The condition to us
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
 
   /**
    * @param aConversionSettings
