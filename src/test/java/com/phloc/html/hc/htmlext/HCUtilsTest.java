@@ -29,6 +29,11 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.impl.HCTextNode;
 
+/**
+ * Test class for class {@link HCUtils}.
+ * 
+ * @author philip
+ */
 public final class HCUtilsTest
 {
   private static final String HTML_STRING6 = "this is a \nlinebreak test.";
@@ -36,7 +41,7 @@ public final class HCUtilsTest
   private static final String HTML_STRING8 = "\n";
 
   @Test
-  public void testNl2brListUnmasked ()
+  public void testNl2brList ()
   {
     final List <IHCNode> ret = HCUtils.nl2brList ("a\nb");
     assertNotNull (ret);

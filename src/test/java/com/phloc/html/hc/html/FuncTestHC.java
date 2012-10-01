@@ -118,7 +118,8 @@ public final class FuncTestHC
     aMenu.addItem ("Settings");
     b.addChild (aMenu);
     b.addChild (new HCNoScript ().addChild ("JS missing"));
-    final HCObject aObject = new HCObject ().setClassID ("classID{567}");
+    final HCObject aObject = new HCObject ().setType (CMimeType.APPLICATION_SHOCKWAVE_FLASH)
+                                            .setClassID ("classID{567}");
     aObject.addChild (new HCParam ("par1"));
     b.addChild (aObject);
     final HCOL aOL = new HCOL ();
