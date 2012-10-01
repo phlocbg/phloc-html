@@ -21,10 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.ICloneable;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
-import com.phloc.css.ICSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.customize.HCDefaultCustomizer;
-import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
  * Settings interface that is used to convert HC* nodes to micro nodes, to plain
@@ -32,45 +29,13 @@ import com.phloc.html.hc.customize.IHCCustomizer;
  * 
  * @author philip
  */
-public interface IHCConversionSettings extends ICloneable <IHCConversionSettings>
+public interface IHCConversionSettings extends IHCConversionSettingsToNode, ICloneable <IHCConversionSettings>
 {
-  /**
-   * @return The HTML version to be used to transform HC nodes into XML nodes.
-   */
-  @Nonnull
-  EHTMLVersion getHTMLVersion ();
-
   /**
    * @return The XML writer settings to be used. Never <code>null</code>.
    */
   @Nonnull
   IXMLWriterSettings getXMLWriterSettings ();
-
-  /**
-   * @return The CSS writer settings to be used.
-   */
-  @Nonnull
-  ICSSWriterSettings getCSSWriterSettings ();
-
-  /**
-   * @return <code>true</code> if the consistency checks are enabled,
-   *         <code>false</code> otherwise.
-   */
-  boolean areConsistencyChecksEnabled ();
-
-  /**
-   * @return <code>true</code> if out-of-band nodes should be extracted,
-   *         <code>false</code> if not. By default <code>true</code> is
-   *         returned.
-   */
-  boolean extractOutOfBandNodes ();
-
-  /**
-   * @return The current customizer to be used. Never <code>null</code>. By
-   *         default a {@link HCDefaultCustomizer} object is returned.
-   */
-  @Nonnull
-  IHCCustomizer getCustomizer ();
 
   /**
    * Get a clone of this settings, but with a different HTML version.

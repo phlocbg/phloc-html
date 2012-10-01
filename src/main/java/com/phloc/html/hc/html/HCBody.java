@@ -23,7 +23,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -42,7 +42,7 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement eHead,
-                                  @Nonnull final IHCConversionSettings aConversionSettings)
+                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (eHead, aConversionSettings);
   }

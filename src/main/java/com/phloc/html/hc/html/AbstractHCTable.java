@@ -33,7 +33,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.HCEntityNode;
 
 /**
@@ -74,7 +74,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   @OverrideOnDemand
   protected void applyHeaderRow (final IMicroElement aTHead,
                                  final HCRow aRow,
-                                 @Nonnull final IHCConversionSettings aConversionSettings)
+                                 @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTHead.appendChild (aRow.getAsNode (aConversionSettings));
   }
@@ -82,7 +82,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   @OverrideOnDemand
   protected void applyFooterRow (final IMicroElement aTFoot,
                                  final HCRow aRow,
-                                 @Nonnull final IHCConversionSettings aConversionSettings)
+                                 @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTFoot.appendChild (aRow.getAsNode (aConversionSettings));
   }
@@ -90,13 +90,13 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   @OverrideOnDemand
   protected void applyBodyRow (final IMicroElement aTBody,
                                final HCRow aRow,
-                               @Nonnull final IHCConversionSettings aConversionSettings)
+                               @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTBody.appendChild (aRow.getAsNode (aConversionSettings));
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
     return hasHeaderRow () || hasBodyRows () || hasBodyID () || hasFooterRow ();
@@ -105,7 +105,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   @Override
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement aElement,
-                                  @Nonnull final IHCConversionSettings aConversionSettings)
+                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
 

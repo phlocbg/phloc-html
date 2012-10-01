@@ -26,7 +26,7 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.annotations.OutOfBandNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML &lt;script&gt; element that loads the code from a source
@@ -93,7 +93,7 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aSrc != null)

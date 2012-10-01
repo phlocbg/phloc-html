@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML conditional comment for IE specific usage. E.g.
@@ -125,14 +125,14 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
    * @return The wrapped node. Never <code>null</code>.
    */
   @Nonnull
-  public HCCommentNode getCommentNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public HCCommentNode getCommentNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return new HCCommentNode (_getCommentText (m_aWrappedNode.getAsNode (aConversionSettings)));
   }
 
   @Override
   @Nullable
-  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return getCommentNode (aConversionSettings).getAsNode (aConversionSettings);
   }

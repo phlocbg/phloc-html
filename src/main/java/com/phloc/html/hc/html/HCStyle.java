@@ -61,7 +61,7 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.api.IHCCSSNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
@@ -182,7 +182,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   }
 
   @Override
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Don't create style elements with empty content....
     return StringHelper.hasText (m_sContent);
@@ -207,7 +207,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());

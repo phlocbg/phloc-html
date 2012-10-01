@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.impl.MicroEntityReference;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.entities.EHTMLEntity;
 import com.phloc.html.entities.IHTMLEntity;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an entity reference as HC node.
@@ -54,7 +54,7 @@ public class HCEntityNode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected IMicroEntityReference internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroEntityReference internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return new MicroEntityReference (m_aEntity.getEntityName ());
   }

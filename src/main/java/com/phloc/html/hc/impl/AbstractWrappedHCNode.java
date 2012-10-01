@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Base class for an HTML control that consists only of another HC node (e.g.
@@ -37,7 +37,7 @@ public abstract class AbstractWrappedHCNode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected final IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return getContainedHCNode ().getAsNode (aConversionSettings);
   }

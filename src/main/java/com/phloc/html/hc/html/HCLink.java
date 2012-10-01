@@ -34,7 +34,7 @@ import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCLinkType;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
@@ -185,7 +185,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aRel != null)

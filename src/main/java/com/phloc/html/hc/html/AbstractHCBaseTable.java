@@ -36,7 +36,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
@@ -545,7 +545,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Override
   @OverridingMethodsMustInvokeSuper
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
     return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;

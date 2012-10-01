@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Default implementation of the {@link IHCNode} interface.
@@ -51,7 +51,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    *         <code>false</code> otherwise.
    */
   @OverrideOnDemand
-  protected boolean canConvertToNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return true;
   }
@@ -65,7 +65,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    *        The conversion settings to be used
    */
   @OverrideOnDemand
-  protected void prepareNodeOnce (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected void prepareNodeOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
   /**
@@ -77,18 +77,18 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void prepare (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected void prepare (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
   @Nonnull
-  protected abstract IMicroNode internalGetAsNode (@Nonnull IHCConversionSettings aConversionSettings);
+  protected abstract IMicroNode internalGetAsNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /*
    * Note: return type cannot by IMicroElement since the checkbox object
    * delivers an IMicroNodeList!
    */
   @Nullable
-  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (!canConvertToNode (aConversionSettings))
       return null;

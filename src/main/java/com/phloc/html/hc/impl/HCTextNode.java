@@ -24,7 +24,7 @@ import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single text node as HC node.
@@ -84,7 +84,7 @@ public class HCTextNode extends AbstractHCNode
 
   @Override
   @Nonnull
-  protected IMicroText internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroText internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return new MicroText (m_sText).setEscape (m_bEscape);
   }

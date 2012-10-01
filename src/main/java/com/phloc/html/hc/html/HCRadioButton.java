@@ -26,7 +26,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.IHCRequestFieldBoolean;
 import com.phloc.html.hc.api.EHCInputType;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCInput;
 
 /**
@@ -96,7 +96,7 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_sValue != null)

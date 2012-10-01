@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCWrappingNode;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Abstract implementation of {@link IHCWrappingNode}
@@ -39,7 +39,7 @@ public abstract class AbstractHCWrappingNode extends AbstractHCNode implements I
 
   @Override
   @Nullable
-  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroNode internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     return getWrappedNode ().getAsNode (aConversionSettings);
   }

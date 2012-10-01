@@ -33,7 +33,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without
@@ -256,7 +256,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
 
   @Override
   @Nonnull
-  protected IMicroContainer internalGetAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected IMicroContainer internalGetAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
     for (final IHCBaseNode aNode : m_aNodes)

@@ -52,7 +52,7 @@ import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
 import com.phloc.html.meta.EStandardMetaElement;
@@ -402,14 +402,16 @@ public class HCHead extends AbstractHCBaseNode
   //
 
   @OverrideOnDemand
-  protected void emitLinks (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
+  protected void emitLinks (@Nonnull final IMicroElement eHead,
+                            @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     for (final HCLink aLink : m_aLinks)
       eHead.appendChild (aLink.getAsNode (aConversionSettings));
   }
 
   @OverrideOnDemand
-  protected void emitCSS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
+  protected void emitCSS (@Nonnull final IMicroElement eHead,
+                          @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     int nCSSExternals = 0;
     for (final IHCNode aCSS : m_aCSS)
@@ -429,14 +431,15 @@ public class HCHead extends AbstractHCBaseNode
   }
 
   @OverrideOnDemand
-  protected void emitJS (@Nonnull final IMicroElement eHead, @Nonnull final IHCConversionSettings aConversionSettings)
+  protected void emitJS (@Nonnull final IMicroElement eHead,
+                         @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     for (final IHCNode aJS : m_aJS)
       eHead.appendChild (aJS.getAsNode (aConversionSettings));
   }
 
   @Nonnull
-  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
+  public final IMicroNode getAsNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
 

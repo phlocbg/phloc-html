@@ -25,7 +25,7 @@ import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.hc.conversion.IHCConversionSettings;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.js.builder.IJSStatement;
 
 /**
@@ -56,7 +56,7 @@ public class HCForm_FileUpload extends HCForm
   }
 
   @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettings aConversionSettings)
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.ENCTYPE, getEncType ().getAsString ());
