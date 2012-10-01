@@ -41,7 +41,6 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.customize.IHCCustomizer;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
@@ -142,25 +141,6 @@ public class HCHtml extends AbstractHCBaseNode
     return m_aBody;
   }
 
-  private static void _recursiveCustomizeElements (@Nonnull final IHCHasChildren aParentElement,
-                                                   @Nonnull final IHCCustomizer aCustomizer,
-                                                   @Nonnull final EHTMLVersion eHTMLVersion)
-  {
-    HCUtils.iterateChildren (aParentElement, new IHCIteratorCallback ()
-    {
-      @Nonnull
-      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
-      {
-        final boolean bParentIsElement = aParentElement instanceof IHCNodeWithChildren <?>;
-        if (bParentIsElement && aChildNode instanceof IHCElement <?>)
-          aCustomizer.customizeHCElement ((IHCNodeWithChildren <?>) aParentElement,
-                                          (IHCElement <?>) aChildNode,
-                                          eHTMLVersion);
-        return EFinish.UNFINISHED;
-      }
-    });
-  }
-
   public static void customizeAndExtractOutOfBandNodes (@Nonnull final IHCNode aBaseNode,
                                                         @Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                                         @Nonnull final List <IHCBaseNode> aExtractedOutOfBandNodes)
@@ -168,11 +148,22 @@ public class HCHtml extends AbstractHCBaseNode
     if (aBaseNode instanceof IHCHasChildren)
     {
       final IHCHasChildren aHasChildren = (IHCHasChildren) aBaseNode;
+
       // Customize element, before extracting out-of-band nodes, in case the
       // customizer adds some out-of-band nodes as well
-      _recursiveCustomizeElements (aHasChildren,
-                                   aConversionSettings.getCustomizer (),
-                                   aConversionSettings.getHTMLVersion ());
+      HCUtils.iterateTree (aHasChildren, new IHCIteratorCallback ()
+      {
+        @Nonnull
+        public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
+        {
+          final boolean bParentIsElement = aParentNode instanceof IHCNodeWithChildren <?>;
+          if (bParentIsElement && aChildNode instanceof IHCElement <?>)
+            aConversionSettings.getCustomizer ().customizeHCElement ((IHCNodeWithChildren <?>) aParentNode,
+                                                                     (IHCElement <?>) aChildNode,
+                                                                     aConversionSettings.getHTMLVersion ());
+          return EFinish.UNFINISHED;
+        }
+      });
 
       if (aConversionSettings.extractOutOfBandNodes ())
       {
