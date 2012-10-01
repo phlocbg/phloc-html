@@ -39,7 +39,6 @@ import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
-import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.customize.IHCCustomizer;
 import com.phloc.html.hc.impl.AbstractHCBaseNode;
@@ -52,7 +51,6 @@ import com.phloc.html.hc.utils.HCOutOfBandHandler;
  */
 public class HCHtml extends AbstractHCBaseNode
 {
-  private final EHTMLVersion m_eHTMLVersion;
   private EHCTextDirection m_eDir;
   private String m_sLang;
   private HCHead m_aHead;
@@ -62,20 +60,10 @@ public class HCHtml extends AbstractHCBaseNode
   private boolean m_bPrepared = false;
 
   /**
-   * Create a new HTML object, using the default HTML version.
+   * Create a new HTML object
    */
   public HCHtml ()
-  {
-    // Use the default from the conversion settings provider
-    this (HCSettings.getConversionSettingsProvider ().getHTMLVersion ());
-  }
-
-  public HCHtml (@Nonnull final EHTMLVersion eHTMLVersion)
-  {
-    if (eHTMLVersion == null)
-      throw new NullPointerException ("docType");
-    m_eHTMLVersion = eHTMLVersion;
-  }
+  {}
 
   /**
    * Overwrite this method to create a custom {@link HCHead} implementation
@@ -194,20 +182,14 @@ public class HCHtml extends AbstractHCBaseNode
   }
 
   @Nonnull
-  public final IMicroDocument getAsNode ()
-  {
-    // Use the default conversion settings, but with the HTML version specified
-    // in the header
-    return getAsNode (HCSettings.getConversionSettings (false).getClone (m_eHTMLVersion));
-  }
-
-  @Nonnull
   public final IMicroDocument getAsNode (@Nonnull final IHCConversionSettings aConversionSettings)
   {
+    final EHTMLVersion eHTMLVersion = aConversionSettings.getHTMLVersion ();
+
     // Note: we need to clone the doctype, because otherwise the object would
     // already have a parent assigned if "getAsNode" is called more than once!
-    final IMicroDocument aDoc = new MicroDocument (m_eHTMLVersion.getDocType ().getClone ());
-    final IMicroElement aRoot = aDoc.appendElement (m_eHTMLVersion.getDocType ().getQualifiedName ());
+    final IMicroDocument aDoc = new MicroDocument (eHTMLVersion.getDocType ().getClone ());
+    final IMicroElement aRoot = aDoc.appendElement (eHTMLVersion.getDocType ().getQualifiedName ());
     if (m_eDir != null)
       aRoot.setAttribute (CHTMLAttributes.DIR, m_eDir.getAttrValue ());
     if (StringHelper.hasText (m_sLang))
@@ -216,7 +198,7 @@ public class HCHtml extends AbstractHCBaseNode
       aRoot.setAttribute (CXML.XML_ATTR_LANG, m_sLang);
       aRoot.setAttribute ("lang", m_sLang);
     }
-    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, m_eHTMLVersion.getXMLNamespace ());
+    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getXMLNamespace ());
 
     // Ensure they are not null
     final HCBody aBody = getBody ();
@@ -261,7 +243,6 @@ public class HCHtml extends AbstractHCBaseNode
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("HTMLVersion", m_eHTMLVersion)
                             .appendIfNotNull ("dir", m_eDir)
                             .appendIfNotNull ("lang", m_sLang)
                             .appendIfNotNull ("head", m_aHead)

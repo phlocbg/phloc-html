@@ -38,7 +38,7 @@ public final class HC5Test
   @Test
   public void testMainHC ()
   {
-    final HCHtml h = new HCHtml (EHTMLVersion.HTML5);
+    final HCHtml h = new HCHtml ();
     final HCBody b = h.getBody ();
 
     b.addChild (new HCArticle ());
