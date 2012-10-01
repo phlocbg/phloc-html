@@ -66,6 +66,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    *        The conversion settings to be used
    */
   @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
   protected void prepareNodeOnce (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
@@ -78,7 +79,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void prepare (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  protected void prepareNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {}
 
   @Nonnull
@@ -103,7 +104,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
     }
 
     // Prepare object for each rendering (implementation dependent)
-    prepare (aConversionSettings);
+    prepareNode (aConversionSettings);
 
     return internalGetAsNode (aConversionSettings);
   }
