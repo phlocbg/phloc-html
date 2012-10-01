@@ -98,12 +98,12 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE addClasses (ICSSClassProvider... aProviders);
 
   @Nonnull
-  THISTYPE removeClass (@Nonnull ICSSClassProvider aProvider);
+  THISTYPE removeClass (@Nullable ICSSClassProvider aProvider);
 
   @Nonnull
   THISTYPE removeAllClasses ();
 
-  boolean containsClass (@Nonnull ICSSClassProvider aProvider);
+  boolean containsClass (@Nullable ICSSClassProvider aProvider);
 
   @Nonnull
   @ReturnsMutableCopy
