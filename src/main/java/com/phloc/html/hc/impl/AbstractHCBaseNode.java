@@ -25,6 +25,7 @@ import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -35,6 +36,23 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public abstract class AbstractHCBaseNode implements IHCBaseNode
 {
+  private boolean m_bCustomized = false;
+
+  public final boolean isCustomized ()
+  {
+    return m_bCustomized;
+  }
+
+  public final void applyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                        @Nonnull final IHCNodeWithChildren <?> aParentNode)
+  {
+    if (!m_bCustomized)
+    {
+      m_bCustomized = true;
+      aConversionSettings.getCustomizer ().customizeNode (aParentNode, this, aConversionSettings.getHTMLVersion ());
+    }
+  }
+
   @OverrideOnDemand
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
@@ -60,6 +78,6 @@ public abstract class AbstractHCBaseNode implements IHCBaseNode
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).toString ();
+    return new ToStringGenerator (this).append ("customized", m_bCustomized).toString ();
   }
 }

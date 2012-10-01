@@ -88,6 +88,6 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("preparedOnce", m_bPreparedOnce).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("preparedOnce", m_bPreparedOnce).toString ();
   }
 }

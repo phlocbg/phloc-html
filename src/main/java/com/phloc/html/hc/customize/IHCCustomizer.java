@@ -23,7 +23,6 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
@@ -37,26 +36,23 @@ import com.phloc.html.hc.html.HCHead;
 public interface IHCCustomizer
 {
   /**
-   * Customize HC elements with some predefined classes etc. This is only called
-   * from within <code>HCHtml.getAsNode()</code>
+   * Customize HC node with some predefined classes etc.
    * 
    * @param aParentElement
-   *        The parent element of the element to be customized. Never
-   *        <code>null</code>. This implies that this method is never called for
-   *        the root HTML element (HCHtml).
-   * @param aElement
+   *        The parent element of the element to be customized. May not be
+   *        <code>null</code>.
+   * @param aNode
    *        The element to be customized. Never <code>null</code>.
    * @param eHTMLVersion
    *        The HTML version to be used. Never <code>null</code>.
    */
-  void customizeHCElement (@Nonnull IHCNodeWithChildren <?> aParentElement,
-                           @Nonnull IHCElement <?> aElement,
-                           @Nonnull EHTMLVersion eHTMLVersion);
+  void customizeNode (@Nonnull IHCNodeWithChildren <?> aParentElement,
+                      @Nonnull IHCBaseNode aNode,
+                      @Nonnull EHTMLVersion eHTMLVersion);
 
   /**
    * This callback is called, when the main HTML element is assembled, to move
-   * the out-of-band nodes to the correct place. It is only called from within
-   * <code>HCHtml.getAsNode()</code>
+   * the out-of-band nodes to the correct place.
    * 
    * @param aOutOfBandNodes
    *        The non-<code>null</code> list of out-of-band nodes. May be empty.
