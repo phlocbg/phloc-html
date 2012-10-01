@@ -255,8 +255,16 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     return aNodes;
   }
 
+  /**
+   * Check if the passed out-of-band node belongs to the body or to the head.
+   * 
+   * @param aOOBNode
+   *        The node to check. Never <code>null</code>.
+   * @return <code>true</code> if it belongs to the body, <code>false</code> if
+   *         it belongs to the head.
+   */
   @OverrideOnDemand
-  protected boolean isBodyNode (@Nonnull final IHCBaseNode aOOBNode)
+  protected boolean isOutOfBandBodyNode (@Nonnull final IHCBaseNode aOOBNode)
   {
     // JS nodes
     if (HCHead.isValidJSNode (aOOBNode))
@@ -279,7 +287,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     // And now move either to head or body
     for (final IHCBaseNode aNode : aNodes)
     {
-      if (isBodyNode (aNode))
+      if (isOutOfBandBodyNode (aNode))
         aBody.addChild (aNode);
       else
       {
