@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCOLType;
@@ -35,6 +36,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public class HCOL extends AbstractHCList <HCOL>
 {
   private Integer m_aStart;
+  private boolean m_bReversed = false;
   private EHCOLType m_eType;
 
   public HCOL ()
@@ -61,6 +63,18 @@ public class HCOL extends AbstractHCList <HCOL>
     return this;
   }
 
+  public final boolean getReversed ()
+  {
+    return m_bReversed;
+  }
+
+  @Nonnull
+  public final HCOL setReversed (final boolean bReversed)
+  {
+    m_bReversed = bReversed;
+    return this;
+  }
+
   @Nullable
   public final EHCOLType getType ()
   {
@@ -81,6 +95,8 @@ public class HCOL extends AbstractHCList <HCOL>
 
     if (m_aStart != null)
       aElement.setAttribute (CHTMLAttributes.START, m_aStart.toString ());
+    if (m_bReversed)
+      aElement.setAttribute (CHTMLAttributes.REVERSED, CHTMLAttributeValues.REVERSED);
     if (m_eType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
   }

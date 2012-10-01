@@ -27,9 +27,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * @author philip
  */
 @SinceHTML5
-public class HCFigureCaption extends AbstractHCElementWithChildren <HCFigureCaption>
+public class HCFigCaption extends AbstractHCElementWithChildren <HCFigCaption>
 {
-  public HCFigureCaption ()
+  public HCFigCaption ()
   {
     super (EHTMLElement.FIGCAPTION);
   }

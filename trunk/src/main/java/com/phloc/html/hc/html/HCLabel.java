@@ -38,6 +38,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 {
   private String m_sFor;
+  private String m_sForm;
 
   public HCLabel ()
   {
@@ -64,18 +65,44 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
     return this;
   }
 
+  @Nullable
+  public String getForm ()
+  {
+    return m_sForm;
+  }
+
+  /**
+   * The value of the id attribute on the form with which to associate the
+   * element.
+   * 
+   * @param sForm
+   *        The HTML ID of the form.
+   * @return this
+   */
+  @Nonnull
+  public HCLabel setForm (@Nullable final String sForm)
+  {
+    m_sForm = sForm;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sFor))
       aElement.setAttribute (CHTMLAttributes.FOR, m_sFor);
+    if (StringHelper.hasText (m_sForm))
+      aElement.setAttribute (CHTMLAttributes.FORM, m_sForm);
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("for", m_sFor).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("for", m_sFor)
+                            .appendIfNotNull ("form", m_sForm)
+                            .toString ();
   }
 
   /**

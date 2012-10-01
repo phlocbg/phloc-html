@@ -102,6 +102,7 @@ public final class HCConsistencyChecker
   private static void _checkButton (final HCButton aButton)
   {
     final IHCElement <?> aChild = HCUtils.recursiveGetFirstChildWithTagName (aButton,
+                                                                             EHTMLElement.A,
                                                                              EHTMLElement.INPUT,
                                                                              EHTMLElement.SELECT,
                                                                              EHTMLElement.TEXTAREA,
@@ -118,6 +119,8 @@ public final class HCConsistencyChecker
   {
     if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.A))
       consistencyWarning ("Links may never contain other links!");
+    if (HCUtils.recursiveContainsChildWithTagName (aA, EHTMLElement.SELECT))
+      consistencyWarning ("Link contains invalid child element!");
   }
 
   private static void _checkPre (final HCPre aPre)

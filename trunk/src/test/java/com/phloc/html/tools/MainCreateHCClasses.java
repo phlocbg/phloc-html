@@ -198,7 +198,6 @@ public class MainCreateHCClasses
                                               "KBD",
                                               "LI",
                                               "NoScript",
-                                              "P",
                                               "Pre",
                                               "Q",
                                               "S",
