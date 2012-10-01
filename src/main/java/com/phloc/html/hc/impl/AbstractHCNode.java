@@ -43,7 +43,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
 
   /**
    * This method checks whether the node is suitable for conversion to an
-   * IMicroElement.
+   * {@link IMicroNode}.
    * 
    * @param aConversionSettings
    *        The conversion settings to be used
@@ -65,7 +65,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
    *        The conversion settings to be used
    */
   @OverrideOnDemand
-  protected void prepareOnce (@Nonnull final IHCConversionSettings aConversionSettings)
+  protected void prepareNodeOnce (@Nonnull final IHCConversionSettings aConversionSettings)
   {}
 
   /**
@@ -97,7 +97,7 @@ public abstract class AbstractHCNode extends AbstractHCBaseNode implements IHCNo
     // dependent)
     if (!m_bPreparedOnce)
     {
-      prepareOnce (aConversionSettings);
+      prepareNodeOnce (aConversionSettings);
       m_bPreparedOnce = true;
     }
 
