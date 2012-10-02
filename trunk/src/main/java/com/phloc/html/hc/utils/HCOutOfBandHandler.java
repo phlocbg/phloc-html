@@ -128,11 +128,18 @@ public final class HCOutOfBandHandler
     if (aTargetList == null)
       throw new NullPointerException ("targetList");
 
-    // Using HCUtils.iterateTree would be too tedious here
-    final int n = aTargetList.size ();
-    _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
+    if (true)
+    {
+      // Using HCUtils.iterateTree would be too tedious here
+      _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
+    }
+    else
+    {
+      final int n = aTargetList.size ();
 
-    if (false)
+      // Using HCUtils.iterateTree would be too tedious here
+      _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
       s_aLogger.info ("--- +" + (aTargetList.size () - n) + " for " + aParentElement.getClass ().getSimpleName ());
+    }
   }
 }
