@@ -92,7 +92,7 @@ public final class JSOpTest
 
     assertFalse (JSOp.hasOperator (null));
     assertFalse (JSOp.hasOperator (n5));
-    assertTrue (JSOp.hasOperator (JSOp.minus (n5)));
+    assertTrue (JSOp.hasOperator (JSOp.minus (a)));
     assertTrue (JSOp.hasOperator (JSOp.not (a)));
     assertTrue (JSOp.hasOperator (JSOp.xor (a, b)));
     assertTrue (JSOp.hasOperator (JSOp.cond (a, b, n5)));

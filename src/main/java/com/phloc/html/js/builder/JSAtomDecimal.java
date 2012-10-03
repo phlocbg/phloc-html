@@ -30,6 +30,11 @@ public class JSAtomDecimal extends AbstractJSAtomNumeric
 {
   private final double m_dValue;
 
+  public JSAtomDecimal (final float fValue)
+  {
+    m_dValue = fValue;
+  }
+
   public JSAtomDecimal (final double dValue)
   {
     m_dValue = dValue;
