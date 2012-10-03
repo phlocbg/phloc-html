@@ -40,6 +40,15 @@ public class JSStringLiteral extends AbstractJSExpression
     m_sStr = sStr;
   }
 
+  /**
+   * @return The contained string.
+   */
+  @Nonnull
+  public String getContainedString ()
+  {
+    return m_sStr;
+  }
+
   @Nonnull
   @Nonempty
   public static String getAsString (@Nonnull final String sStr)

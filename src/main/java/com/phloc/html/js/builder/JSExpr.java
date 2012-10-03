@@ -218,15 +218,15 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAtom lit (final int n)
+  public static JSAtomInt lit (final int n)
   {
-    return new JSAtom (Integer.toString (n));
+    return new JSAtomInt (n);
   }
 
   @Nonnull
-  public static JSAtom lit (final long n)
+  public static JSAtomInt lit (final long n)
   {
-    return new JSAtom (Long.toString (n));
+    return new JSAtomInt (n);
   }
 
   @Nonnull
@@ -234,7 +234,7 @@ public final class JSExpr
   {
     if (Float.isNaN (f))
       return JSPrimitiveType.NUMBER.nan ();
-    return new JSAtom (Float.toString (f));
+    return new JSAtomDecimal (f);
   }
 
   @Nonnull
@@ -242,7 +242,7 @@ public final class JSExpr
   {
     if (Double.isNaN (d))
       return JSPrimitiveType.NUMBER.nan ();
-    return new JSAtom (Double.toString (d));
+    return new JSAtomDecimal (d);
   }
 
   @Nonnull

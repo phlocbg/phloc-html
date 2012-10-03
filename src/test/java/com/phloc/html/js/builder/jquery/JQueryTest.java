@@ -112,7 +112,7 @@ public final class JQueryTest
   }
 
   @Test
-  public void testSelectprs ()
+  public void testSelectors ()
   {
     assertEquals ("$('#abc');", JQuery.idRef ("abc").getJSCode ());
     assertEquals ("$('#abc');", JQuery.idRefMultiple ("abc").getJSCode ());

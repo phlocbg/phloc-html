@@ -544,7 +544,7 @@ public class JQuery
   {
     if (aSelector == null)
       throw new NullPointerException ("selector");
-    return jQuery (JSExpr.lit (aSelector.getAsString ()));
+    return jQuery (aSelector.getExpression ());
   }
 
   /**
@@ -560,7 +560,7 @@ public class JQuery
   {
     if (aSelectorList == null)
       throw new NullPointerException ("selectorList");
-    return jQuery (JSExpr.lit (aSelectorList.getAsString ()));
+    return jQuery (aSelectorList.getAsExpression ());
   }
 
   /**
