@@ -20,7 +20,6 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 public class JSOpBinary extends AbstractJSExpression
@@ -28,34 +27,72 @@ public class JSOpBinary extends AbstractJSExpression
   private final IJSExpression m_aLeft;
   private final String m_sOp;
   private final IJSGeneratable m_aRight;
-  private boolean m_bUseBraces = true;
+  private boolean m_bUseBraces;
 
-  public JSOpBinary (@Nonnull final IJSExpression aLeft,
-                     @Nonnull @Nonempty final String sOp,
-                     @Nonnull final IJSGeneratable aRight)
+  private static boolean _useBraces (@Nonnull final IJSExpression aLeft,
+                                     @Nonnull final String sOp,
+                                     @Nonnull final IJSGeneratable aRight)
   {
-    if (aLeft == null)
-      throw new NullPointerException ("left");
-    if (StringHelper.hasNoText (sOp))
-      throw new IllegalArgumentException ("empty operator");
-    if (aRight == null)
-      throw new NullPointerException ("right");
-    m_aLeft = aLeft;
-    m_sOp = sOp;
-    m_aRight = aRight;
-
     if (aLeft instanceof JSOpBinary)
     {
       final JSOpBinary r = (JSOpBinary) aLeft;
-      if (m_sOp.equals (r.m_sOp))
+      if (sOp.equals (r.m_sOp))
         r.m_bUseBraces = false;
     }
     if (aRight instanceof JSOpBinary)
     {
       final JSOpBinary r = (JSOpBinary) aRight;
-      if (m_sOp.equals (r.m_sOp))
+      if (sOp.equals (r.m_sOp))
         r.m_bUseBraces = false;
     }
+    return true;
+  }
+
+  /**
+   * Constructor
+   * 
+   * @param aLeft
+   *        Left side. May not be <code>null</code>.
+   * @param sOp
+   *        Operator. May be empty string in very rare cases (e.g. JQuery
+   *        selector chaining). May not be <code>null</code>.
+   * @param aRight
+   *        Right side. May not be <code>null</code>.
+   */
+  public JSOpBinary (@Nonnull final IJSExpression aLeft, @Nonnull final String sOp, @Nonnull final IJSGeneratable aRight)
+  {
+    this (aLeft, sOp, aRight, _useBraces (aLeft, sOp, aRight));
+  }
+
+  /**
+   * Constructor
+   * 
+   * @param aLeft
+   *        Left side. May not be <code>null</code>.
+   * @param sOp
+   *        Operator. May be empty string in very rare cases (e.g. JQuery
+   *        selector chaining). May not be <code>null</code>.
+   * @param aRight
+   *        Right side. May not be <code>null</code>.
+   * @param bUseBraces
+   *        <code>true</code> to indicate usage of braces, <code>false</code> to
+   *        disable it
+   */
+  public JSOpBinary (@Nonnull final IJSExpression aLeft,
+                     @Nonnull final String sOp,
+                     @Nonnull final IJSGeneratable aRight,
+                     final boolean bUseBraces)
+  {
+    if (aLeft == null)
+      throw new NullPointerException ("left");
+    if (sOp == null)
+      throw new NullPointerException ("empty operator");
+    if (aRight == null)
+      throw new NullPointerException ("right");
+    m_aLeft = aLeft;
+    m_sOp = sOp;
+    m_aRight = aRight;
+    m_bUseBraces = bUseBraces;
   }
 
   @Nonnull

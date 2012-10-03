@@ -33,22 +33,23 @@ public final class JQuerySelectorListTest
   @Test
   public void testBasic ()
   {
-    assertEquals ("#id5", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id5")).getAsString ());
+    assertEquals ("'#id5'", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id5")).getJSCode ());
     // Check masking
-    assertEquals ("#id\\.value", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id.value")).getAsString ());
-    assertEquals (".basic",
+    assertEquals ("'#id\\\\.value'", new JQuerySelectorList ().addSelector (JQuerySelector.id ("id.value"))
+                                                              .getJSCode ());
+    assertEquals ("'.basic'",
                   new JQuerySelectorList ().addSelector (JQuerySelector.clazz (DefaultCSSClassProvider.create ("basic")))
-                                           .getAsString ());
-    assertEquals ("td", new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")).getAsString ());
-    assertEquals ("td:gt(3)",
+                                           .getJSCode ());
+    assertEquals ("'td'", new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")).getJSCode ());
+    assertEquals ("'td:gt(3)'",
                   new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
-                                                                       .chain (JQuerySelector.gt (3))).getAsString ());
-    assertEquals ("td:checked",
+                                                                       .chain (JQuerySelector.gt (3))).getJSCode ());
+    assertEquals ("'td:checked'",
                   new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
-                                                                       .chain (JQuerySelector.checked)).getAsString ());
-    assertEquals ("td span",
+                                                                       .chain (JQuerySelector.checked)).getJSCode ());
+    assertEquals ("'td span'",
                   new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td"))
                                            .addSelector (JQuerySelector.elementName ("span"))
-                                           .getAsString ());
+                                           .getJSCode ());
   }
 }

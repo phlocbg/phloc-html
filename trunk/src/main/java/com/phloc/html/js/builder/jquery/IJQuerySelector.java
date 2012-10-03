@@ -19,10 +19,8 @@ package com.phloc.html.js.builder.jquery;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import com.phloc.commons.IHasStringRepresentation;
-import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
 
 /**
@@ -30,21 +28,13 @@ import com.phloc.html.js.builder.IJSExpression;
  * 
  * @author philip
  */
-public interface IJQuerySelector extends IHasStringRepresentation
+public interface IJQuerySelector extends IJSCodeProvider
 {
   /**
-   * @return The selector string without an optional expression parameter (e.g.
-   *         for <code>:gt(5)</code> "gt" is returned")
-   */
-  @Nonnull
-  @Nonempty
-  String getSelector ();
-
-  /**
-   * @return The optional expression that was used as the parameter to this
+   * @return The contained expression that was used as the parameter to this
    *         selector. May be <code>null</code>.
    */
-  @Nullable
+  @Nonnull
   IJSExpression getExpression ();
 
   /**

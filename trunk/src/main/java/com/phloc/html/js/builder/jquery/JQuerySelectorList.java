@@ -23,12 +23,14 @@ import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.IHasStringRepresentation;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
+import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.IJSExpression;
+import com.phloc.html.js.builder.JSExpr;
 
-public class JQuerySelectorList implements IHasStringRepresentation
+public class JQuerySelectorList implements IJSCodeProvider
 {
   private final List <IJQuerySelector> m_aElements = new ArrayList <IJQuerySelector> ();
 
@@ -73,18 +75,25 @@ public class JQuerySelectorList implements IHasStringRepresentation
   }
 
   @Nonnull
-  public String getAsString ()
+  public IJSExpression getAsExpression ()
   {
-    if (m_aElements.isEmpty ())
+    final int nSize = m_aElements.size ();
+    if (nSize == 0)
       throw new IllegalStateException ("Empty jQuery selector is not allowed!");
 
-    final StringBuilder aSB = new StringBuilder ();
-    for (final IJQuerySelector aSelector : m_aElements)
-    {
-      if (aSB.length () > 0)
-        aSB.append (' ');
-      aSB.append (aSelector.getAsString ());
-    }
-    return aSB.toString ();
+    if (nSize == 1)
+      return m_aElements.get (0).getExpression ();
+
+    // Concatenate with ' '
+    IJSExpression ret = m_aElements.get (0).getExpression ();
+    for (int i = 1; i < nSize; ++i)
+      ret = ret.plus (JSExpr.lit (' ')).plus (m_aElements.get (i).getExpression ());
+    return ret;
+  }
+
+  @Nonnull
+  public String getJSCode ()
+  {
+    return getAsExpression ().getJSCode ();
   }
 }

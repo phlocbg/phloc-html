@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -24,24 +26,23 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
-public class JSAtomBoolean extends JSAtom
+public class JSAtomBoolean extends AbstractJSExpression
 {
   private final boolean m_bValue;
 
   public JSAtomBoolean (final boolean bValue)
   {
-    super (bValue ? "true" : "false");
     m_bValue = bValue;
   }
 
-  public boolean getValue ()
+  public void generate (@Nonnull final JSFormatter f)
   {
-    return m_bValue;
+    f.plain (Boolean.toString (m_bValue));
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("value", m_bValue).toString ();
+    return new ToStringGenerator (this).append ("value", m_bValue).toString ();
   }
 }

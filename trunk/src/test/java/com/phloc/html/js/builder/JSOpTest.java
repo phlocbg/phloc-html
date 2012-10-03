@@ -39,23 +39,30 @@ public final class JSOpTest
   @Test
   public void testBasic ()
   {
-    final JSAtom n5 = JSExpr.lit (5);
+    final JSAtomInt n5 = JSExpr.lit (5);
     final JSFieldRef a = JSExpr.ref ("a");
     final JSFieldRef b = JSExpr.ref ("b");
-    _test ("(-5)", JSOp.minus (n5));
+    _test ("-5", JSOp.minus (n5));
     _test ("(5)", JSOp.inParantheses (n5));
     _test ("false", JSOp.not (JSExpr.TRUE));
     _test ("true", JSOp.not (JSExpr.FALSE));
     _test ("(!a)", JSOp.not (a));
     _test ("(~5)", JSOp.complement (n5));
     _test ("a++", JSOp.incr (a));
+    _test ("6", JSOp.incr (n5));
     _test ("a--", JSOp.decr (a));
+    _test ("4", JSOp.decr (n5));
     _test ("typeof a", JSOp.typeof (a));
     _test ("(a+b)", JSOp.plus (a, b));
+    _test ("10", JSOp.plus (n5, n5));
     _test ("(a-b)", JSOp.minus (a, b));
+    _test ("0", JSOp.minus (n5, n5));
     _test ("(a*b)", JSOp.mul (a, b));
+    _test ("25", JSOp.mul (n5, n5));
     _test ("(a/b)", JSOp.div (a, b));
+    _test ("1.0", JSOp.div (n5, n5));
     _test ("(a%b)", JSOp.mod (a, b));
+    _test ("0", JSOp.mod (n5, n5));
     _test ("(a<<b)", JSOp.shl (a, b));
     _test ("(a>>b)", JSOp.shr (a, b));
     _test ("(a>>>b)", JSOp.shrz (a, b));

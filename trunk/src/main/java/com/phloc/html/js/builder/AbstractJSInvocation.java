@@ -115,7 +115,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    * Invokes a method on an object.
    * 
    * @param object
-   *        JExpression for the object upon which the named method will be
+   *        Expression for the object upon which the named method will be
    *        invoked, or null if none
    * @param name
    *        Name of method to invoke

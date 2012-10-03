@@ -17,9 +17,10 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import java.util.List;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
@@ -32,7 +33,6 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
-import com.phloc.html.js.builder.JSPrinter;
 import com.phloc.html.js.builder.JSStringLiteral;
 
 @Immutable
@@ -67,53 +67,47 @@ public final class JQuerySelector implements IJQuerySelector
   public static final IJQuerySelector text = new JQuerySelector (":text");
   public static final IJQuerySelector visible = new JQuerySelector (":visible");
 
-  private final String m_sSelector;
   private final IJSExpression m_aExpr;
+
+  private JQuerySelector (@Nonnull @Nonempty final String sSelectorName, @Nonnull final IJSExpression aSelectorExpr)
+  {
+    // Is used as a literal!!
+    this (sSelectorName + '(' + aSelectorExpr.getJSCode () + ')');
+    if (StringHelper.hasNoText (sSelectorName))
+      throw new IllegalArgumentException ("selectorName");
+  }
 
   private JQuerySelector (@Nonnull @Nonempty final String sSelectorName)
   {
+    // Treat as literal!!!
+    this (JSExpr.lit (sSelectorName));
     if (StringHelper.hasNoText (sSelectorName))
       throw new IllegalArgumentException ("selectorName");
-    m_sSelector = sSelectorName;
-    m_aExpr = null;
   }
 
-  private JQuerySelector (@Nonnull @Nonempty final String sSelectorName, @Nonnull final IJSExpression aExpr)
+  public JQuerySelector (@Nonnull final IJSExpression aExpr)
   {
-    if (StringHelper.hasNoText (sSelectorName))
-      throw new IllegalArgumentException ("selectorName");
     if (aExpr == null)
       throw new NullPointerException ("expr");
-    m_sSelector = sSelectorName;
     m_aExpr = aExpr;
   }
 
   @Nonnull
-  @Nonempty
-  public String getSelector ()
-  {
-    return m_sSelector;
-  }
-
-  @Nullable
   public IJSExpression getExpression ()
   {
     return m_aExpr;
   }
 
   @Nonnull
-  @Nonempty
-  public String getAsString ()
+  public String getJSCode ()
   {
-    if (m_aExpr == null)
-      return m_sSelector;
-    return m_sSelector + '(' + JSPrinter.getAsString (m_aExpr) + ')';
+    return m_aExpr.getJSCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("selector", m_sSelector).appendIfNotNull ("expr", m_aExpr).toString ();
+    return new ToStringGenerator (this).append ("expr", m_aExpr).toString ();
   }
 
   @Nonnull
@@ -254,6 +248,17 @@ public final class JQuerySelector implements IJQuerySelector
     return new JQuerySelector ("*");
   }
 
+  @Nonnull
+  @Nonempty
+  public static String getValidJQueryID (@Nonnull @Nonempty final String sID)
+  {
+    if (StringHelper.hasNoText (sID))
+      throw new IllegalArgumentException ("ID");
+    // Replace all illegal characters in IDs: ":" and "." with "\:" and "\."
+    // http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
+    return RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1");
+  }
+
   /**
    * jQuery ID selection
    * 
@@ -264,11 +269,8 @@ public final class JQuerySelector implements IJQuerySelector
   @Nonnull
   public static IJQuerySelector id (@Nonnull @Nonempty final String sID)
   {
-    if (StringHelper.hasNoText (sID))
-      throw new IllegalArgumentException ("ID");
-    // Replace all illegal characters in IDs: ":" and "." with "\:" and "\."
-    // http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
-    return new JQuerySelector ('#' + RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1"));
+    final String sMaskedID = getValidJQueryID (sID);
+    return new JQuerySelector ('#' + sMaskedID);
   }
 
   /**
@@ -334,7 +336,7 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("firstSelector");
     if (aSecondSelector == null)
       throw new NullPointerException ("secondSelector");
-    return new JQuerySelector (aFirstSelector.getAsString () + aSecondSelector.getAsString ());
+    return new JQuerySelector (aFirstSelector.getExpression ().plus (aSecondSelector.getExpression ()));
   }
 
   /**
@@ -345,19 +347,20 @@ public final class JQuerySelector implements IJQuerySelector
   @Nonnull
   public static IJQuerySelector multiple (@Nonnull @Nonempty final IJQuerySelector... aSelectors)
   {
-    if (ArrayHelper.isEmpty (aSelectors))
+    final int nSize = ArrayHelper.getSize (aSelectors);
+    if (nSize == 0)
       throw new IllegalArgumentException ("empty selectors");
     if (ArrayHelper.containsAnyNullElement (aSelectors))
       throw new IllegalArgumentException ("selectors array contains null element");
 
-    final StringBuilder aSB = new StringBuilder ();
-    for (final IJQuerySelector aSelector : aSelectors)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append (aSelector.getAsString ());
-    }
-    return new JQuerySelector (aSB.toString ());
+    if (nSize == 1)
+      return aSelectors[0];
+
+    // Concatenate with ','
+    IJSExpression ret = aSelectors[0].getExpression ();
+    for (int i = 1; i < nSize; ++i)
+      ret = ret.plus (JSExpr.lit (',')).plus (aSelectors[i].getExpression ());
+    return new JQuerySelector (ret);
   }
 
   /**
@@ -366,21 +369,22 @@ public final class JQuerySelector implements IJQuerySelector
    * @return <code>sel, sel, sel, ...</code>
    */
   @Nonnull
-  public static IJQuerySelector multiple (@Nonnull @Nonempty final Iterable <IJQuerySelector> aSelectors)
+  public static IJQuerySelector multiple (@Nonnull @Nonempty final List <IJQuerySelector> aSelectors)
   {
-    if (ContainerHelper.isEmpty (aSelectors))
+    final int nSize = ContainerHelper.getSize (aSelectors);
+    if (nSize == 0)
       throw new IllegalArgumentException ("empty selectors");
     if (ContainerHelper.containsAnyNullElement (aSelectors))
       throw new IllegalArgumentException ("selectors collection contains null element");
 
-    final StringBuilder aSB = new StringBuilder ();
-    for (final IJQuerySelector aSelector : aSelectors)
-    {
-      if (aSB.length () > 0)
-        aSB.append (',');
-      aSB.append (aSelector.getAsString ());
-    }
-    return new JQuerySelector (aSB.toString ());
+    if (nSize == 1)
+      return ContainerHelper.getFirstElement (aSelectors);
+
+    // Concatenate with ','
+    IJSExpression ret = aSelectors.get (0).getExpression ();
+    for (int i = 1; i < nSize; ++i)
+      ret = ret.plus (JSExpr.lit (',')).plus (aSelectors.get (i).getExpression ());
+    return new JQuerySelector (ret);
   }
 
   /**
@@ -396,7 +400,9 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("parentSelector");
     if (aChildSelector == null)
       throw new NullPointerException ("childSelector");
-    return new JQuerySelector (aParentSelector.getAsString () + " > " + aChildSelector.getAsString ());
+    return new JQuerySelector (aParentSelector.getExpression ()
+                                              .plus (JSExpr.lit (" > "))
+                                              .plus (aChildSelector.getExpression ()));
   }
 
   /**
@@ -412,7 +418,9 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("ancestorSelector");
     if (aDescendantSelector == null)
       throw new NullPointerException ("descendantSelector");
-    return new JQuerySelector (aAncestorSelector.getAsString () + " " + aDescendantSelector.getAsString ());
+    return new JQuerySelector (aAncestorSelector.getExpression ()
+                                                .plus (JSExpr.lit (" "))
+                                                .plus (aDescendantSelector.getExpression ()));
   }
 
   /**
@@ -428,7 +436,9 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("prevSelector");
     if (aNextSelector == null)
       throw new NullPointerException ("nextSelector");
-    return new JQuerySelector (aPrevSelector.getAsString () + " + " + aNextSelector.getAsString ());
+    return new JQuerySelector (aPrevSelector.getExpression ()
+                                            .plus (JSExpr.lit (" + "))
+                                            .plus (aNextSelector.getExpression ()));
   }
 
   /**
@@ -444,7 +454,9 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("prevSelector");
     if (aSiblingsSelector == null)
       throw new NullPointerException ("siblingsSelector");
-    return new JQuerySelector (aPrevSelector.getAsString () + " ~ " + aSiblingsSelector.getAsString ());
+    return new JQuerySelector (aPrevSelector.getExpression ()
+                                            .plus (JSExpr.lit (" ~ "))
+                                            .plus (aSiblingsSelector.getExpression ()));
   }
 
   /**
