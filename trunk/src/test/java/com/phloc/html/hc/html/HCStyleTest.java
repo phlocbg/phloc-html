@@ -34,22 +34,23 @@ public final class HCStyleTest
   public void testSimple ()
   {
     final HCStyle aStyle = new HCStyle ("div{color:red;}");
-    assertEquals ("<style type=\"text/css\">div{color:red;}</style>", HCSettings.getAsHTMLString (aStyle, false));
+    assertEquals ("<style type=\"text/css\" xmlns=\"http://www.w3.org/1999/xhtml\">div{color:red;}</style>",
+                  HCSettings.getAsHTMLString (aStyle, false));
   }
 
   @Test
   public void testQuoted ()
   {
     HCStyle aStyle = new HCStyle ("div{background:url('foo.gif');}");
-    assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
+    assertEquals ("<style type=\"text/css\" xmlns=\"http://www.w3.org/1999/xhtml\">div{background:url('foo.gif');}</style>",
                   HCSettings.getAsHTMLString (aStyle, false));
     HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
-    assertEquals ("<style type=\"text/css\">div{background:url(&#39;foo.gif&#39;);}</style>",
+    assertEquals ("<style type=\"text/css\" xmlns=\"http://www.w3.org/1999/xhtml\">div{background:url(&#39;foo.gif&#39;);}</style>",
                   HCSettings.getAsHTMLString (aStyle, false));
     HCStyle.setDefaultMode (HCStyle.EMode.PLAIN_TEXT_NO_ESCAPE);
     aStyle = new HCStyle ("div{background:url('foo.gif');}");
-    assertEquals ("<style type=\"text/css\">div{background:url('foo.gif');}</style>",
+    assertEquals ("<style type=\"text/css\" xmlns=\"http://www.w3.org/1999/xhtml\">div{background:url('foo.gif');}</style>",
                   HCSettings.getAsHTMLString (aStyle, false));
   }
 }

@@ -56,20 +56,22 @@ public final class HCHeadTest
 
     assertSame (aHead, aHead.setProfile ("any"));
     assertEquals ("any", aHead.getProfile ());
-    assertEquals ("<head profile=\"any\"></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head profile=\"any\" xmlns=\"http://www.w3.org/1999/xhtml\"></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
 
     assertSame (aHead, aHead.setPageTitle ("Title"));
     assertEquals ("Title", aHead.getPageTitle ());
-    assertEquals ("<head profile=\"any\"><title>Title</title></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head profile=\"any\" xmlns=\"http://www.w3.org/1999/xhtml\"><title>Title</title></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
 
     assertSame (aHead, aHead.setBaseHref ("/"));
     assertEquals ("/", aHead.getBaseHref ());
-    assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" /></head>",
+    assertEquals ("<head profile=\"any\" xmlns=\"http://www.w3.org/1999/xhtml\"><title>Title</title><base href=\"/\" /></head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
     assertSame (aHead, aHead.setBaseTarget (HCA_Target.BLANK));
     assertEquals (HCA_Target.BLANK, aHead.getBaseTarget ());
-    assertEquals ("<head profile=\"any\"><title>Title</title><base href=\"/\" target=\"_blank\" /></head>",
+    assertEquals ("<head profile=\"any\" xmlns=\"http://www.w3.org/1999/xhtml\"><title>Title</title><base href=\"/\" target=\"_blank\" /></head>",
                   HCSettings.getAsHTMLString (aHead, false));
     assertNotNull (aHead.toString ());
   }
@@ -84,12 +86,12 @@ public final class HCHeadTest
     assertSame (aHead, aHead.addMetaElement (new MetaElement ("foo", "bar")));
     assertFalse (aHead.getAllMetaElements ().isEmpty ());
     assertEquals (1, aHead.getMetaElementCount ());
-    assertEquals ("<head>" + "<meta name=\"foo\" content=\"bar\" />" + "</head>",
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\">" + "<meta name=\"foo\" content=\"bar\" />" + "</head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
     assertSame (aHead, aHead.addMetaElement (new MetaElement ("goo", true, "car")));
     assertEquals (2, aHead.getMetaElementCount ());
-    assertEquals ("<head>"
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\">"
                   + "<meta name=\"foo\" content=\"bar\" />"
                   + "<meta http-equiv=\"goo\" content=\"car\" />"
                   + "</head>", HCSettings.getAsHTMLString (aHead, false));
@@ -100,42 +102,46 @@ public final class HCHeadTest
     assertEquals (1, aHead.getMetaElementCount ());
     assertEquals (EChange.UNCHANGED, aHead.removeMetaElement ("foo"));
     assertEquals (1, aHead.getMetaElementCount ());
-    assertEquals ("<head>" + "<meta http-equiv=\"goo\" content=\"car\" />" + "</head>",
-                  HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\">"
+                  + "<meta http-equiv=\"goo\" content=\"car\" />"
+                  + "</head>", HCSettings.getAsHTMLString (aHead, false));
     assertEquals (EChange.CHANGED, aHead.removeMetaElement ("goo"));
     assertEquals (0, aHead.getMetaElementCount ());
-    assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"></head>", HCSettings.getAsHTMLString (aHead, false));
   }
 
   @Test
   public void testGenerate ()
   {
     final HCHead aHead = new HCHead ();
-    assertEquals ("<head></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"></head>", HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setPageTitle ("phloc");
-    assertEquals ("<head><title>phloc</title></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setBaseHref ("/root");
-    assertEquals ("<head><title>phloc</title><base href=\"/root\" /></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title><base href=\"/root\" /></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
     aHead.setBaseHref (null);
     aHead.setBaseTarget (HCA_Target.BLANK);
-    assertEquals ("<head><title>phloc</title><base target=\"_blank\" /></head>",
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title><base target=\"_blank\" /></head>",
                   HCSettings.getAsHTMLString (aHead, false));
     aHead.setBaseTarget (null);
-    assertEquals ("<head><title>phloc</title></head>", HCSettings.getAsHTMLString (aHead, false));
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title></head>",
+                  HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setShortcutIconHref (new SimpleURL ("/favicon.ico"));
-    assertEquals ("<head><title>phloc</title><link rel=\"shortcut icon\" href=\"/favicon.ico\"></link><link rel=\"icon\" type=\"image/icon\" href=\"/favicon.ico\"></link></head>",
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title><link rel=\"shortcut icon\" href=\"/favicon.ico\"></link><link rel=\"icon\" type=\"image/icon\" href=\"/favicon.ico\"></link></head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
     aHead.setShortcutIconHref (null);
     aHead.addJS (HCScriptFile.create (new SimpleURL ("/my.js")));
-    assertEquals ("<head><title>phloc</title><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
 
     aHead.addCSS (HCLink.createCSSLink (new SimpleURL ("/my.css")));
-    assertEquals ("<head><title>phloc</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/my.css\"></link><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
+    assertEquals ("<head xmlns=\"http://www.w3.org/1999/xhtml\"><title>phloc</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/my.css\"></link><script type=\"text/javascript\" src=\"/my.js\"></script></head>",
                   HCSettings.getAsHTMLString (aHead, false));
   }
 }

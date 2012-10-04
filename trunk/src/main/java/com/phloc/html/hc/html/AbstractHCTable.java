@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML &lt;table&gt; element with open semantics.
- *
+ * 
  * @author philip
  * @param <THISTYPE>
  *        The implementing type
@@ -123,7 +123,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // Table header?
     if (hasHeaderRow ())
     {
-      final IMicroElement aTHead = aElement.appendElement (EHTMLElement.THEAD.getElementName ());
+      final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                                                           EHTMLElement.THEAD.getElementName ());
       if (hasHeaderID ())
         aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
       applyHeaderRow (aTHead, getHeaderRow (), aConversionSettings);
@@ -134,7 +135,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // Table footer?
     if (hasFooterRow ())
     {
-      final IMicroElement aTFoot = aElement.appendElement (EHTMLElement.TFOOT.getElementName ());
+      final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                                                           EHTMLElement.TFOOT.getElementName ());
       if (hasFooterID ())
         aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
       applyFooterRow (aTFoot, getFooterRow (), aConversionSettings);
@@ -145,7 +147,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // add the tbody anyway - helpful for JS tables
 
     // Table body
-    final IMicroElement aTBody = aElement.appendElement (EHTMLElement.TBODY.getElementName ());
+    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                                                         EHTMLElement.TBODY.getElementName ());
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
 

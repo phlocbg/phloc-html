@@ -463,7 +463,8 @@ public class HCHead extends AbstractHCElement <HCHead>
       else
         for (final Map.Entry <Locale, String> aMetaEntry : aContent.entrySet ())
         {
-          final IMicroElement aMeta = eHead.appendElement (EHTMLElement.META.getElementName ());
+          final IMicroElement aMeta = eHead.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                                                           EHTMLElement.META.getElementName ());
           aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : CHTMLAttributes.NAME, sName);
           aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
           final Locale aContentLocale = aMetaEntry.getKey ();
@@ -489,12 +490,14 @@ public class HCHead extends AbstractHCElement <HCHead>
 
     // page title
     if (StringHelper.hasText (m_sPageTitle))
-      eHead.appendElement (EHTMLElement.TITLE.getElementName ()).appendText (m_sPageTitle);
+      eHead.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                           EHTMLElement.TITLE.getElementName ()).appendText (m_sPageTitle);
 
     // base
     if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)
     {
-      final IMicroElement eBase = eHead.appendElement (EHTMLElement.BASE.getElementName ());
+      final IMicroElement eBase = eHead.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+                                                       EHTMLElement.BASE.getElementName ());
       if (StringHelper.hasText (m_sBaseHref))
         eBase.setAttribute (CHTMLAttributes.HREF, m_sBaseHref);
       if (m_aBaseTarget != null)

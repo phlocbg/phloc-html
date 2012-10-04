@@ -40,7 +40,7 @@ public enum EHTMLVersion
 
     @Override
     @Nonnull
-    public String getXMLNamespace ()
+    public String getNamespaceURI ()
     {
       return CHTMLDocTypes.DOCTYPE_XHTML_URI;
     }
@@ -56,7 +56,7 @@ public enum EHTMLVersion
 
     @Override
     @Nonnull
-    public String getXMLNamespace ()
+    public String getNamespaceURI ()
     {
       return CHTMLDocTypes.DOCTYPE_XHTML_URI;
     }
@@ -72,7 +72,7 @@ public enum EHTMLVersion
 
     @Override
     @Nonnull
-    public String getXMLNamespace ()
+    public String getNamespaceURI ()
     {
       return CHTMLDocTypes.DOCTYPE_XHTML_URI;
     }
@@ -88,7 +88,7 @@ public enum EHTMLVersion
 
     @Override
     @Nullable
-    public String getXMLNamespace ()
+    public String getNamespaceURI ()
     {
       return null;
     }
@@ -111,7 +111,7 @@ public enum EHTMLVersion
    * @return The XML namespace URI to use. May be <code>null</code>.
    */
   @Nullable
-  public abstract String getXMLNamespace ();
+  public abstract String getNamespaceURI ();
 
   public boolean isXHTML10 ()
   {

@@ -31,7 +31,7 @@ public final class HCBodyTest
   public void testBody ()
   {
     final HCBody aBody = new HCBody ();
-    assertEquals ("<body></body>", HCSettings.getAsHTMLString (aBody, false));
+    assertEquals ("<body xmlns=\"http://www.w3.org/1999/xhtml\"></body>", HCSettings.getAsHTMLString (aBody, false));
 
     // With semicolon at the end
     aBody.addEventHandler (EJSEvent.ONLOAD, JSExpr.invoke ("onLoad"));
@@ -40,7 +40,7 @@ public final class HCBodyTest
     // With prefix
     aBody.setEventHandler (EJSEvent.ONCLICK, JSExpr.invoke ("onClick"));
     aBody.setCustomAttr ("bla", "foo");
-    assertEquals ("<body onload=\"javascript:onLoad();\" onclick=\"javascript:onClick();\" bla=\"foo\"></body>",
+    assertEquals ("<body onload=\"javascript:onLoad();\" onclick=\"javascript:onClick();\" bla=\"foo\" xmlns=\"http://www.w3.org/1999/xhtml\"></body>",
                   HCSettings.getAsHTMLString (aBody, false));
   }
 }

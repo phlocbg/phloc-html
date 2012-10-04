@@ -55,7 +55,7 @@ public final class HCNodeListTest
     x.addChild (new HCSpan ().addChild ("span"));
     final HCDiv div = x.addAndReturnChild (new HCDiv ().addChild ("d3"));
     assertNotNull (div);
-    assertTrue (HCSettings.getAsHTMLString (div, false).startsWith ("<div>d3</div>"));
+    assertEquals ("<div xmlns=\"http://www.w3.org/1999/xhtml\">d3</div>", HCSettings.getAsHTMLString (div, false));
     assertEquals (2, x.getChildCount ());
   }
 
@@ -65,7 +65,10 @@ public final class HCNodeListTest
     final HCTable table = new HCTable ();
     final HCRow tr = table.addBodyRow ();
     tr.addCell (new HCNodeList ().addChild (new HCDiv ().addChild ("dd2")).addChild (new HCDiv ().addChild ("dd1")));
-    assertTrue (HCSettings.getAsHTMLString (table, false).contains ("<div>dd2</div>"));
+    assertEquals ("<table xmlns=\"http://www.w3.org/1999/xhtml\"><tbody><tr><td>"
+                  + "<div>dd2</div>"
+                  + "<div>dd1</div>"
+                  + "</td></tr></tbody></table>", HCSettings.getAsHTMLString (table, false));
   }
 
   @Test
@@ -75,7 +78,9 @@ public final class HCNodeListTest
     x.addChild (new HCDiv ().addChild ("Na so was"));
     x.addChild (new HCDiv ().addChild ("aber auch"));
     assertNotNull (HCSettings.getAsNode (x));
-    assertEquals ("<div>Na so was</div>" + CGlobal.LINE_SEPARATOR + "<div>aber auch</div>" + CGlobal.LINE_SEPARATOR,
-                  HCSettings.getAsHTMLString (x, true));
+    assertEquals ("<div xmlns=\"http://www.w3.org/1999/xhtml\">Na so was</div>" +
+                  CGlobal.LINE_SEPARATOR +
+                  "<div xmlns=\"http://www.w3.org/1999/xhtml\">aber auch</div>" +
+                  CGlobal.LINE_SEPARATOR, HCSettings.getAsHTMLString (x, true));
   }
 }

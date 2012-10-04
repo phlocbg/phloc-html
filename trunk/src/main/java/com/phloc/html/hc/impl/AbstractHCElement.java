@@ -543,14 +543,16 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   /**
+   * @param aConversionSettings
+   *        The conversion settings to be used
    * @return The created micro element for this HC element. May not be
    *         <code>null</code>.
    */
   @OverrideOnDemand
   @Nonnull
-  protected IMicroElement createElement ()
+  protected IMicroElement createElement (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return new MicroElement (m_sElementName);
+    return new MicroElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (), m_sElementName);
   }
 
   /**
@@ -684,7 +686,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       HCConsistencyChecker.runConsistencyCheckBeforeCreation (this, aConversionSettings.getHTMLVersion ());
 
     // Create the element
-    final IMicroElement ret = createElement ();
+    final IMicroElement ret = createElement (aConversionSettings);
     if (ret == null)
       throw new IllegalStateException ("Created a null element!");
 
