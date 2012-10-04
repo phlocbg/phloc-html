@@ -53,7 +53,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   public final boolean hasChildren ()
   {
-    return !ContainerHelper.isEmpty (m_aChildren);
+    return ContainerHelper.isNotEmpty (m_aChildren);
   }
 
   private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
