@@ -53,7 +53,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   public final boolean hasChildren ()
   {
-    return !ContainerHelper.isEmpty (m_aChildren);
+    return ContainerHelper.isNotEmpty (m_aChildren);
   }
 
   /**
