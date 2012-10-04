@@ -121,15 +121,12 @@ public final class XHTMLParser
 
     // Build mini HTML and insert fragment in the middle.
     // If parsing succeeds, it is considered valid HTML.
+    final String sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
     final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
                           "<html" +
-                          (eHTMLVersion.getNamespaceURI () != null ? ' ' +
-                                                                     CXML.XML_ATTR_XMLNS +
-                                                                     "=\"" +
-                                                                     eHTMLVersion.getNamespaceURI () +
-                                                                     "\"" : "") +
+                          (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
                           "><head><title></title></head><body>" +
                           StringHelper.getNotNull (sXHTMLFragment) +
                           "</body></html>";

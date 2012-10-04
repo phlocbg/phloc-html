@@ -18,6 +18,7 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.string.ToStringGenerator;
@@ -41,6 +42,7 @@ public class HCConversionSettings implements IHCConversionSettings
   public static final boolean DEFAULT_EXTRACT_OUT_OF_BAND_NODES = true;
 
   private final EHTMLVersion m_eHTMLVersion;
+  private final String m_sHTMLNamespaceURI;
   private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ();
   private CSSWriterSettings m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION,
                                                                           !DEFAULT_INDENT_AND_ALIGN_CSS);
@@ -59,6 +61,7 @@ public class HCConversionSettings implements IHCConversionSettings
     if (eHTMLVersion == null)
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
+    m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
   }
 
   /**
@@ -87,6 +90,7 @@ public class HCConversionSettings implements IHCConversionSettings
     if (eHTMLVersion == null)
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
+    m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
     m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
     m_aCSSWriterSettings = new CSSWriterSettings (aBase.getCSSWriterSettings ());
     m_bConsistencyChecksEnabled = aBase.areConsistencyChecksEnabled ();
@@ -98,6 +102,12 @@ public class HCConversionSettings implements IHCConversionSettings
   public EHTMLVersion getHTMLVersion ()
   {
     return m_eHTMLVersion;
+  }
+
+  @Nullable
+  public String getHTMLNamespaceURI ()
+  {
+    return m_sHTMLNamespaceURI;
   }
 
   /**

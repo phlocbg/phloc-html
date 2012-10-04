@@ -18,6 +18,7 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.css.ICSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
@@ -36,6 +37,13 @@ public interface IHCConversionSettingsToNode
    */
   @Nonnull
   EHTMLVersion getHTMLVersion ();
+
+  /**
+   * @return The namespace URI of the HTML version. This should result in the
+   *         same as calling <code>getHTMLVersion().getNamespaceURI()</code>
+   */
+  @Nullable
+  String getHTMLNamespaceURI ();
 
   /**
    * @return The CSS writer settings to be used. Never <code>null</code>.
