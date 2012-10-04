@@ -123,7 +123,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // Table header?
     if (hasHeaderRow ())
     {
-      final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+      final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.THEAD.getElementName ());
       if (hasHeaderID ())
         aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
@@ -135,7 +135,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // Table footer?
     if (hasFooterRow ())
     {
-      final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+      final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.TFOOT.getElementName ());
       if (hasFooterID ())
         aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
@@ -147,7 +147,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // add the tbody anyway - helpful for JS tables
 
     // Table body
-    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (),
+    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                          EHTMLElement.TBODY.getElementName ());
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());

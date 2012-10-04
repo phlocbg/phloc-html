@@ -552,7 +552,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Nonnull
   protected IMicroElement createElement (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return new MicroElement (aConversionSettings.getHTMLVersion ().getNamespaceURI (), m_sElementName);
+    return new MicroElement (aConversionSettings.getHTMLNamespaceURI (), m_sElementName);
   }
 
   /**
