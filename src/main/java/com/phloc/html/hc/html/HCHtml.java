@@ -31,7 +31,6 @@ import com.phloc.commons.microdom.impl.MicroDocument;
 import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.xml.CXML;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCBaseNode;
@@ -172,8 +171,8 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     // Note: we need to clone the doctype, because otherwise the object would
     // already have a parent assigned if "getAsNode" is called more than once!
     final IMicroDocument aDoc = new MicroDocument (eHTMLVersion.getDocType ().getClone ());
-    final IMicroElement aRoot = aDoc.appendElement (eHTMLVersion.getDocType ().getQualifiedName ());
-    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getNamespaceURI ());
+    final IMicroElement aRoot = aDoc.appendElement (eHTMLVersion.getNamespaceURI (), eHTMLVersion.getDocType ()
+                                                                                                 .getQualifiedName ());
     applyProperties (aRoot, aConversionSettings);
 
     // Use the getter, to ensure the elements are not null
