@@ -173,7 +173,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     // already have a parent assigned if "getAsNode" is called more than once!
     final IMicroDocument aDoc = new MicroDocument (eHTMLVersion.getDocType ().getClone ());
     final IMicroElement aRoot = aDoc.appendElement (eHTMLVersion.getDocType ().getQualifiedName ());
-    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getXMLNamespace ());
+    aRoot.setAttribute (CXML.XML_ATTR_XMLNS, eHTMLVersion.getNamespaceURI ());
     applyProperties (aRoot, aConversionSettings);
 
     // Use the getter, to ensure the elements are not null

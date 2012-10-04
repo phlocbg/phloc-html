@@ -125,10 +125,10 @@ public final class XHTMLParser
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
                           "<html" +
-                          (eHTMLVersion.getXMLNamespace () != null ? ' ' +
+                          (eHTMLVersion.getNamespaceURI () != null ? ' ' +
                                                                      CXML.XML_ATTR_XMLNS +
                                                                      "=\"" +
-                                                                     eHTMLVersion.getXMLNamespace () +
+                                                                     eHTMLVersion.getNamespaceURI () +
                                                                      "\"" : "") +
                           "><head><title></title></head><body>" +
                           StringHelper.getNotNull (sXHTMLFragment) +
