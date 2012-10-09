@@ -1,7 +1,13 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>9/20/12</td><td>update</td><td>performance</td><td></td><td>Performance improvement by using [http://code.google.com/p/phloc-commons phloc-commons] 3.8.4</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>10/8/12</td><td colspan="4">_Release *3.7.0*_</td></tr>
+<tr><td>10/4/12</td><td>change</td><td>tech</td><td>*yes*</td><td>Using the correct HTML namespace URIs for element creation</td></tr>
+<tr><td>10/1/12</td><td>add</td><td>api</td><td></td><td>Improved available HTML5 element set</td></tr>
+<tr><td>10/1/12</td><td>change</td><td>api</td><td>*yes*</td><td>Changed class hierarchy - IHCNode is only a stub for IHCBaseNode</td></tr>
+<tr><td>9/24/12</td><td>change</td><td>api</td><td>*yes*</td><td>Reworked out-of-band-node handling</td></tr>
+<tr><td>9/25/12</td><td>add</td><td>api</td><td></td><td>Added new base interface IHCNodeBuilder for the builder pattern</td></tr>
+<tr><td>9/20/12</td><td>update</td><td>performance</td><td></td><td>Performance improvement by using [http://code.google.com/p/phloc-commons phloc-commons] 3.8.4</td></tr>
 <tr border="1"><td>9/18/12</td><td colspan="4">_Release *3.6.1*_</td></tr>
 <tr><td>9/10/12</td><td>add</td><td>api</td><td></td><td>Extended HCUtils with list2brList and list2divList methods</td></tr>
 <tr><td>9/10/12</td><td>add</td><td>api</td><td></td><td>Added new HCLabel factory methods</td></tr>
