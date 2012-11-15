@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.xml.serialize.EXMLSerializeFormat;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ECSSVersion;
@@ -43,7 +44,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   private final EHTMLVersion m_eHTMLVersion;
   private final String m_sHTMLNamespaceURI;
-  private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ();
+  private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML);
   private CSSWriterSettings m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION,
                                                                           !DEFAULT_INDENT_AND_ALIGN_CSS);
   private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;

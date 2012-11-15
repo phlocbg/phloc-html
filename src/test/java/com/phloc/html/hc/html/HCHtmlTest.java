@@ -25,6 +25,7 @@ import com.phloc.commons.CGlobal;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
+import com.phloc.html.meta.MetaElement;
 
 /**
  * Test class for class {@link HCHtml}
@@ -43,9 +44,7 @@ public final class HCHtmlTest
     aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addChild (new HCStyle ("h1{color:red;}"));
 
-    assertEquals ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                      CRLF +
-                      "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
                       "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
                       "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
@@ -53,9 +52,7 @@ public final class HCHtmlTest
                       "</html>",
                   aHtml.getAsHTMLString (aCS));
     // Do it again and check for node consistency
-    assertEquals ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                      CRLF +
-                      "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
                       "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
                       "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
@@ -69,15 +66,14 @@ public final class HCHtmlTest
   {
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (false);
     final HCHtml aHtml = new HCHtml ();
+    aHtml.getHead ().addMetaElement (new MetaElement ("foo", "bar"));
     aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
-    assertEquals ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                      CRLF +
-                      "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
                       "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head></head>" +
+                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
                       "<body><h1>Test</h1>" +
                       "<script type=\"text/javascript\"><!--\n" +
                       "$(document).ready(function(){a=b;c=d;});\n" +
@@ -86,12 +82,10 @@ public final class HCHtmlTest
                       "</html>",
                   aHtml.getAsHTMLString (aCS));
     // Do it again and check for node consistency
-    assertEquals ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                      CRLF +
-                      "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
                       CRLF +
                       "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head></head>" +
+                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
                       "<body><h1>Test</h1>" +
                       "<script type=\"text/javascript\"><!--\n" +
                       "$(document).ready(function(){a=b;c=d;});\n" +
