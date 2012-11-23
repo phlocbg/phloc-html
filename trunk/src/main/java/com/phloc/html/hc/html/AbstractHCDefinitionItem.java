@@ -29,7 +29,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends
+                                                                                                      AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement)
   {

@@ -34,7 +34,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCDiv <THISTYPE extends AbstractHCDiv <THISTYPE>> extends
+                                                                                AbstractHCElementWithChildren <THISTYPE>
 {
   private String m_sName;
 

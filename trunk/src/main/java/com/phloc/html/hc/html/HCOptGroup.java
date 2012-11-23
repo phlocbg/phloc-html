@@ -34,7 +34,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
  * 
  * @author philip
  */
-public class HCOptGroup extends AbstractHCElementWithInternalChildren <HCOptGroup, HCOption> implements IHCCanBeDisabled <HCOptGroup>
+public class HCOptGroup extends AbstractHCElementWithInternalChildren <HCOptGroup, HCOption> implements
+                                                                                            IHCCanBeDisabled <HCOptGroup>
 {
   public static final boolean DEFAULT_DISABLED = false;
 

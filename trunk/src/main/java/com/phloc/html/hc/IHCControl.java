@@ -30,7 +30,9 @@ import com.phloc.html.hc.api.IHCHasFocus;
  * @author philip
  * @param <THISTYPE>
  */
-public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>
+public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends
+                                                                     IHCHasFocus <THISTYPE>,
+                                                                     IHCCanBeDisabled <THISTYPE>
 {
   @Nullable
   String getName ();

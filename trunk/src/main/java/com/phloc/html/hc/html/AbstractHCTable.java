@@ -37,7 +37,8 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
+                                                                                    AbstractHCBaseTable <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 

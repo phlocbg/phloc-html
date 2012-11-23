@@ -322,7 +322,8 @@ public final class JSMarshaller
           break;
         case STRING:
           // Note: use single quotes for use in HTML attributes!
-          final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
+          final String sValue = aObject instanceof IPredefinedLocaleTextProvider
+                                                                                ? ((IPredefinedLocaleTextProvider) aObject).getText ()
                                                                                 : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
           break;

@@ -42,7 +42,9 @@ import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
+                                                                                                                AbstractHCElement <THISTYPE> implements
+                                                                                                                                            IHCElementWithChildren <THISTYPE>
 {
   private List <IHCBaseNode> m_aChildren;
 
