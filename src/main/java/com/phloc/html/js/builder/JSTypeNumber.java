@@ -31,30 +31,46 @@ public class JSTypeNumber extends JSPrimitiveType
     super ("Number");
   }
 
+  /**
+   * @return Global field <code>Number.MAX_VALUE</code>
+   */
   @Nonnull
   public JSFieldRef maxValue ()
   {
     return global ().ref ("MAX_VALUE");
   }
 
+  /**
+   * @return Global field <code>Number.MIN_VALUE</code>
+   */
   @Nonnull
   public JSFieldRef minValue ()
   {
     return global ().ref ("MIN_VALUE");
   }
 
+  /**
+   * @return Global field <code>Number.NaN</code> - same as <Code>NaN</code>
+   * @see JSGlobal#nan
+   */
   @Nonnull
   public JSFieldRef nan ()
   {
     return global ().ref ("NaN");
   }
 
+  /**
+   * @return Global field <code>Number.NEGATIVE_INFINITY</code>
+   */
   @Nonnull
   public JSFieldRef negativeInfinity ()
   {
     return global ().ref ("NEGATIVE_INFINITY");
   }
 
+  /**
+   * @return Global field <code>Number.POSITIVE_INFINITY</code>
+   */
   @Nonnull
   public JSFieldRef positiveInfinity ()
   {

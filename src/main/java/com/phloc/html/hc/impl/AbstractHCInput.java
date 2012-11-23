@@ -30,7 +30,8 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
-public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends AbstractHCControl <THISTYPE>
+public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends
+                                                                                    AbstractHCControl <THISTYPE>
 {
   private final EHCInputType m_eType;
   private String m_sPlaceholder;

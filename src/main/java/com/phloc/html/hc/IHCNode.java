@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc;
 
-
 /**
  * Base interface for a main HC node.
  * 

@@ -24,7 +24,8 @@ import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 @SinceHTML5
-public abstract class AbstractHCRubyChild <THISTYPE extends AbstractHCRubyChild <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCRubyChild <THISTYPE extends AbstractHCRubyChild <THISTYPE>> extends
+                                                                                            AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCRubyChild (@Nonnull final EHTMLElement aElement)
   {

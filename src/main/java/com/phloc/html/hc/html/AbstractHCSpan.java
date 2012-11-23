@@ -25,7 +25,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author philip
  */
-public abstract class AbstractHCSpan <THISTYPE extends AbstractHCSpan <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCSpan <THISTYPE extends AbstractHCSpan <THISTYPE>> extends
+                                                                                  AbstractHCElementWithChildren <THISTYPE>
 {
   public AbstractHCSpan ()
   {

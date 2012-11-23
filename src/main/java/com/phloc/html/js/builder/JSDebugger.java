@@ -22,7 +22,10 @@ import javax.annotation.Nullable;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Debugger statement
+ * Debugger statement.<br>
+ * <a href=
+ * "https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Statements/debugger"
+ * >Source</a>
  * 
  * @author boris
  */
