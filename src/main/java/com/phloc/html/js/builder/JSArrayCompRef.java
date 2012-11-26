@@ -41,22 +41,22 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
   /**
    * JArray component reference constructor given an array expression and index.
    * 
-   * @param array
+   * @param aArray
    *        JExpression for the array upon which the component will be accessed,
-   * @param index
+   * @param aIndex
    *        JExpression for index of component to access
    */
-  JSArrayCompRef (@Nonnull final IJSExpression array, @Nonnull final IJSExpression index)
+  JSArrayCompRef (@Nonnull final IJSExpression aArray, @Nonnull final IJSExpression aIndex)
   {
-    if (array == null)
+    if (aArray == null)
       throw new NullPointerException ("array");
-    if (index == null)
+    if (aIndex == null)
       throw new NullPointerException ("index");
-    m_aArray = array;
-    m_aIndex = index;
+    m_aArray = aArray;
+    m_aIndex = aIndex;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
   }

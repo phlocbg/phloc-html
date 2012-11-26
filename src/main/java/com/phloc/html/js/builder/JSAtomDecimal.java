@@ -75,37 +75,37 @@ public class JSAtomDecimal extends AbstractJSAtomNumeric
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericPlus (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericPlus (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    return new JSAtomDecimal (m_dValue + rhs.doubleValue ());
+    return new JSAtomDecimal (m_dValue + aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMinus (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMinus (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    return new JSAtomDecimal (m_dValue - rhs.doubleValue ());
+    return new JSAtomDecimal (m_dValue - aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMul (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMul (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    return new JSAtomDecimal (m_dValue * rhs.doubleValue ());
+    return new JSAtomDecimal (m_dValue * aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericDiv (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericDiv (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    return new JSAtomDecimal (m_dValue / rhs.doubleValue ());
+    return new JSAtomDecimal (m_dValue / aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMod (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMod (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    return new JSAtomDecimal (m_dValue % rhs.doubleValue ());
+    return new JSAtomDecimal (m_dValue % aRhs.doubleValue ());
   }
 
   public double getContainedValue ()

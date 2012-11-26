@@ -70,46 +70,46 @@ public class JSAtomInt extends AbstractJSAtomNumeric
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericPlus (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericPlus (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    if (rhs.isDecimalValue ())
-      return new JSAtomDecimal (m_nValue + rhs.doubleValue ());
-    return new JSAtomInt (m_nValue + (long) rhs.doubleValue ());
+    if (aRhs.isDecimalValue ())
+      return new JSAtomDecimal (m_nValue + aRhs.doubleValue ());
+    return new JSAtomInt (m_nValue + (long) aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMinus (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMinus (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    if (rhs.isDecimalValue ())
-      return new JSAtomDecimal (m_nValue - rhs.doubleValue ());
-    return new JSAtomInt (m_nValue - (long) rhs.doubleValue ());
+    if (aRhs.isDecimalValue ())
+      return new JSAtomDecimal (m_nValue - aRhs.doubleValue ());
+    return new JSAtomInt (m_nValue - (long) aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMul (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMul (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    if (rhs.isDecimalValue ())
-      return new JSAtomDecimal (m_nValue * rhs.doubleValue ());
-    return new JSAtomInt (m_nValue * (long) rhs.doubleValue ());
+    if (aRhs.isDecimalValue ())
+      return new JSAtomDecimal (m_nValue * aRhs.doubleValue ());
+    return new JSAtomInt (m_nValue * (long) aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericDiv (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericDiv (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
     // In JS there is by default no integer division: 5/2===2.5
-    return new JSAtomDecimal (m_nValue / rhs.doubleValue ());
+    return new JSAtomDecimal (m_nValue / aRhs.doubleValue ());
   }
 
   @Override
   @Nonnull
-  public AbstractJSAtomNumeric numericMod (@Nonnull final AbstractJSAtomNumeric rhs)
+  public AbstractJSAtomNumeric numericMod (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
-    if (rhs.isDecimalValue ())
-      return new JSAtomDecimal (m_nValue % rhs.doubleValue ());
-    return new JSAtomInt (m_nValue % (long) rhs.doubleValue ());
+    if (aRhs.isDecimalValue ())
+      return new JSAtomDecimal (m_nValue % aRhs.doubleValue ());
+    return new JSAtomInt (m_nValue % (long) aRhs.doubleValue ());
   }
 
   public long getContainedValue ()

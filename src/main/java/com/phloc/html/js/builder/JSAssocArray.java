@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
+import com.phloc.json.IJSON;
 
 /**
  * array creation and initialization.
@@ -75,9 +76,15 @@ public class JSAssocArray extends AbstractJSExpression
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, @Nonnull final String aValue)
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final String aValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final IJSON aValue)
+  {
+    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
 
   @Nonnull
@@ -124,7 +131,7 @@ public class JSAssocArray extends AbstractJSExpression
     return this;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.plain ('{').nl ().indent ();
     if (m_aExprs != null)

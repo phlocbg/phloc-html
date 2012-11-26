@@ -47,14 +47,14 @@ public class JSConditional implements IJSStatement
   /**
    * Constructor
    * 
-   * @param test
+   * @param aTest
    *        Expression which will determine branching
    */
-  public JSConditional (@Nonnull final IJSExpression test)
+  public JSConditional (@Nonnull final IJSExpression aTest)
   {
-    if (test == null)
+    if (aTest == null)
       throw new NullPointerException ("test");
-    m_aTest = test;
+    m_aTest = aTest;
   }
 
   /**

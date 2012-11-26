@@ -17,8 +17,10 @@
  */
 package com.phloc.html.resource.css;
 
+import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
 import com.phloc.html.resource.IHasDependencies;
 
+@MustImplementEqualsAndHashcode
 public interface ICSSPathProviderWithDependencies extends ICSSPathProvider, IHasDependencies <ICSSPathProvider>
 {
   /* empty */

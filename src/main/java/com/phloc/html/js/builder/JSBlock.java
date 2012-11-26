@@ -31,6 +31,7 @@ import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.json.IJSON;
 
 /**
  * A block of JS code, which may contain statements and local declarations.
@@ -183,319 +184,327 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   /**
    * Adds a local variable declaration to this block
    * 
-   * @param type
+   * @param aType
    *        JType of the variable
-   * @param name
+   * @param sName
    *        Name of the variable
    * @return Newly generated {@link JSVar}
    */
   @Nonnull
-  public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name)
+  public JSVar decl (@Nullable final AbstractJSType aType, @Nonnull final String sName)
   {
-    return decl (type, name, null);
+    return decl (aType, sName, null);
   }
 
   /**
    * Adds a local variable declaration to this block
    * 
-   * @param name
+   * @param sName
    *        Name of the variable
-   * @param init
+   * @param aInit
    *        Initialization expression for this variable. May be null.
    * @return Newly generated {@link JSVar}
    */
   @Nonnull
-  public JSVar decl (@Nonnull final String name, @Nullable final IJSExpression init)
+  public JSVar decl (@Nonnull final String sName, @Nullable final IJSExpression aInit)
   {
-    return decl (null, name, init);
+    return decl (null, sName, aInit);
   }
 
   /**
    * Adds a local variable declaration to this block
    * 
-   * @param type
+   * @param aType
    *        JType of the variable
-   * @param name
+   * @param sName
    *        Name of the variable
-   * @param init
+   * @param aInit
    *        Initialization expression for this variable. May be null.
    * @return Newly generated {@link JSVar}
    */
   @Nonnull
-  public JSVar decl (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
+  public JSVar decl (@Nullable final AbstractJSType aType,
+                     @Nonnull final String sName,
+                     @Nullable final IJSExpression aInit)
   {
-    final JSVar v = new JSVar (type, name, init);
-    _insert (v);
+    final JSVar aVar = new JSVar (aType, sName, aInit);
+    _insert (aVar);
     m_bBracesRequired = true;
     m_bIndentRequired = true;
-    return v;
+    return aVar;
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final boolean v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final boolean v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final char v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final char v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final double v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final float v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nullable final String v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, v == null ? JSExpr.NULL : JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nullable final IJSON v)
+  {
+    return assign (aLhs, v == null ? JSExpr.NULL : JSExpr.json (v));
   }
 
   /**
    * Creates an assignment statement and adds it to this block.
    * 
-   * @param lhs
+   * @param aLhs
    *        Assignable variable or field for left hand side of expression
-   * @param exp
+   * @param aExpr
    *        Right hand side expression
    */
   @Nonnull
-  public JSBlock assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assign (lhs, exp));
+    _insert (JSExpr.assign (aLhs, aExpr));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final char v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, final char v)
   {
-    return assignPlus (lhs, JSExpr.lit (v));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, final double v)
   {
     // No add with 0
     if (EqualsUtils.equals (v, 0))
       return this;
     if (v < 0)
-      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
-    return assignPlus (lhs, JSExpr.lit (v));
+      return assignMinus (aLhs, JSExpr.lit (MathHelper.abs (v)));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, final float v)
   {
     // No add with 0
     if (EqualsUtils.equals (v, 0))
       return this;
     if (v < 0)
-      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
-    return assignPlus (lhs, JSExpr.lit (v));
+      return assignMinus (aLhs, JSExpr.lit (MathHelper.abs (v)));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
     // No add with 0
     if (EqualsUtils.equals (v, 0))
       return this;
     if (v < 0)
-      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
-    return assignPlus (lhs, JSExpr.lit (v));
+      return assignMinus (aLhs, JSExpr.lit (MathHelper.abs (v)));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
     // No add with 0
     if (EqualsUtils.equals (v, 0))
       return this;
     if (v < 0)
-      return assignMinus (lhs, JSExpr.lit (MathHelper.abs (v)));
-    return assignPlus (lhs, JSExpr.lit (v));
+      return assignMinus (aLhs, JSExpr.lit (MathHelper.abs (v)));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final String v)
   {
-    return assignPlus (lhs, JSExpr.lit (v));
+    return assignPlus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignPlus (lhs, exp));
+    _insert (JSExpr.assignPlus (aLhs, aExpr));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, final double v)
   {
     // No subtract with 0
     if (EqualsUtils.equals (v, 0))
       return this;
-    return assignMinus (lhs, JSExpr.lit (v));
+    return assignMinus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, final float v)
   {
     // No subtract with 0
     if (EqualsUtils.equals (v, 0))
       return this;
-    return assignMinus (lhs, JSExpr.lit (v));
+    return assignMinus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
     // No subtract with 0
     if (EqualsUtils.equals (v, 0))
       return this;
-    return assignMinus (lhs, JSExpr.lit (v));
+    return assignMinus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
     // No subtract with 0
     if (EqualsUtils.equals (v, 0))
       return this;
-    return assignMinus (lhs, JSExpr.lit (v));
+    return assignMinus (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignMinus (lhs, exp));
+    _insert (JSExpr.assignMinus (aLhs, aExpr));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, final double v)
   {
     // No multiply with 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignMultiply (lhs, JSExpr.lit (v));
+    return assignMultiply (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, final float v)
   {
     // No multiply with 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignMultiply (lhs, JSExpr.lit (v));
+    return assignMultiply (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
     // No multiply with 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignMultiply (lhs, JSExpr.lit (v));
+    return assignMultiply (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
     // No multiply with 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignMultiply (lhs, JSExpr.lit (v));
+    return assignMultiply (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignMultiply (lhs, exp));
+    _insert (JSExpr.assignMultiply (aLhs, aExpr));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final double v)
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, final double v)
   {
     // No divide by 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignDivide (lhs, JSExpr.lit (v));
+    return assignDivide (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final float v)
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, final float v)
   {
     // No divide by 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignDivide (lhs, JSExpr.lit (v));
+    return assignDivide (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
     // No divide by 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignDivide (lhs, JSExpr.lit (v));
+    return assignDivide (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
     // No divide by 1
     if (EqualsUtils.equals (v, 1))
       return this;
-    return assignDivide (lhs, JSExpr.lit (v));
+    return assignDivide (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression exp)
+  public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignDivide (lhs, exp));
+    _insert (JSExpr.assignDivide (aLhs, aExpr));
     return this;
   }
 
   @Nonnull
-  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, final int v)
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget aLhs, final int v)
   {
-    return assignModulo (lhs, JSExpr.lit (v));
+    return assignModulo (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, final long v)
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget aLhs, final long v)
   {
-    return assignModulo (lhs, JSExpr.lit (v));
+    return assignModulo (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression aExpr)
+  public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignModulo (lhs, aExpr));
+    _insert (JSExpr.assignModulo (aLhs, aExpr));
     return this;
   }
 
@@ -646,18 +655,18 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    * @return Newly generated While statement
    */
   @Nonnull
-  public JSWhileLoop _while (final IJSExpression test)
+  public JSWhileLoop _while (@Nonnull final IJSExpression aTest)
   {
-    return _insert (new JSWhileLoop (test));
+    return _insert (new JSWhileLoop (aTest));
   }
 
   /**
    * Create a switch/case statement and add it to this block
    */
   @Nonnull
-  public JSSwitch _switch (@Nonnull final IJSExpression test)
+  public JSSwitch _switch (@Nonnull final IJSExpression aTest)
   {
-    return _insert (new JSSwitch (test));
+    return _insert (new JSSwitch (aTest));
   }
 
   /**
@@ -666,9 +675,9 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    * @return Newly generated Do statement
    */
   @Nonnull
-  public JSDoLoop _do (final IJSExpression test)
+  public JSDoLoop _do (@Nonnull final IJSExpression aTest)
   {
-    return _insert (new JSDoLoop (test));
+    return _insert (new JSDoLoop (aTest));
   }
 
   /**
@@ -731,25 +740,35 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
     _return (JSExpr.lit (v));
   }
 
-  public void _return (@Nonnull final String v)
+  public void _return (@Nullable final String v)
   {
-    _return (JSExpr.lit (v));
+    _return (v == null ? JSExpr.NULL : JSExpr.lit (v));
+  }
+
+  public void _return (@Nullable final IJSON v)
+  {
+    _return (v == null ? JSExpr.NULL : JSExpr.json (v));
   }
 
   /**
    * Create a return statement and add it to this block
    */
-  public void _return (@Nullable final IJSExpression exp)
+  public void _return (@Nullable final IJSExpression aExpr)
   {
-    _insert (new JSReturn (exp));
+    _insert (new JSReturn (aExpr));
   }
 
   /**
    * Create a throw statement and add it to this block
    */
-  public void _throw (final IJSExpression exp)
+  public void _throw (@Nonnull final IJSExpression aExpr)
   {
-    _insert (new JSThrow (exp));
+    _insert (new JSThrow (aExpr));
+  }
+
+  public void _debugger ()
+  {
+    _insert (new JSDebugger ());
   }
 
   /**
@@ -760,14 +779,9 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
     _break (null);
   }
 
-  public void _debugger ()
+  public void _break (@Nullable final JSLabel aLabel)
   {
-    _insert (new JSDebugger ());
-  }
-
-  public void _break (@Nullable final JSLabel label)
-  {
-    _insert (new JSBreak (label));
+    _insert (new JSBreak (aLabel));
   }
 
   /**
@@ -775,11 +789,11 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    * <code>break</code> statements.
    */
   @Nonnull
-  public JSLabel label (@Nonnull @Nonempty final String name)
+  public JSLabel label (@Nonnull @Nonempty final String sName)
   {
-    final JSLabel l = new JSLabel (name);
-    _insert (l);
-    return l;
+    final JSLabel aLabel = new JSLabel (sName);
+    _insert (aLabel);
+    return aLabel;
   }
 
   public void _continue ()
@@ -790,9 +804,9 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   /**
    * Create a continue statement and add it to this block
    */
-  public void _continue (@Nullable final JSLabel label)
+  public void _continue (@Nullable final JSLabel aLabel)
   {
-    _insert (new JSContinue (label));
+    _insert (new JSContinue (aLabel));
   }
 
   /**
@@ -808,15 +822,15 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   @Nonnull
-  public JSFunction function (@Nonnull final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nonnull final String sName) throws JSNameAlreadyExistsException
   {
-    return function (null, name);
+    return function (null, sName);
   }
 
   @Nonnull
-  public JSFunction function (@Nullable final AbstractJSType aReturnType, @Nonnull final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nullable final AbstractJSType aReturnType, @Nonnull final String sName) throws JSNameAlreadyExistsException
   {
-    return _insert (new JSFunction (aReturnType, name));
+    return _insert (new JSFunction (aReturnType, sName));
   }
 
   public void comment (@Nonnull final String sComment)
@@ -834,13 +848,13 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   @Nonnull
   @Deprecated
-  public IJSStatement directStatement (final String source)
+  public IJSStatement directStatement (final String sSource)
   {
-    final IJSStatement s = new IJSStatement ()
+    final IJSStatement aStmt = new IJSStatement ()
     {
-      public void state (final JSFormatter f)
+      public void state (@Nonnull final JSFormatter f)
       {
-        f.plain (source).nl ();
+        f.plain (sSource).nl ();
       }
 
       @Nullable
@@ -849,8 +863,8 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
         return JSPrinter.getAsString (this);
       }
     };
-    add (s);
-    return s;
+    add (aStmt);
+    return aStmt;
   }
 
   public void generate (@Nonnull final JSFormatter f)
@@ -868,19 +882,19 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
 
   void generateBody (@Nonnull final JSFormatter f)
   {
-    for (final IJSCodeProvider o : m_aContent)
+    for (final IJSCodeProvider aJSCode : m_aContent)
     {
-      if (o instanceof IJSDeclaration)
-        f.decl ((IJSDeclaration) o);
+      if (aJSCode instanceof IJSDeclaration)
+        f.decl ((IJSDeclaration) aJSCode);
       else
-        if (o instanceof IJSStatement)
-          f.stmt ((IJSStatement) o);
+        if (aJSCode instanceof IJSStatement)
+          f.stmt ((IJSStatement) aJSCode);
         else
-          f.plain (o.getJSCode ());
+          f.plain (aJSCode.getJSCode ());
     }
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.generatable (this);
     if (m_bBracesRequired && m_bNewLineAtEnd)

@@ -20,6 +20,7 @@ package com.phloc.html.resource.css;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.CSSFilenameHelper;
@@ -42,6 +43,23 @@ public final class ConstantCSSPathProvider implements ICSSPathProvider
   public String getCSSItemPath (final boolean bRegular)
   {
     return bRegular ? m_sPath : CSSFilenameHelper.getMinifiedCSSFilename (m_sPath);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!(o instanceof ConstantCSSPathProvider))
+      return false;
+    final ConstantCSSPathProvider rhs = (ConstantCSSPathProvider) o;
+    return m_sPath.equals (rhs.m_sPath);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sPath).getHashCode ();
   }
 
   @Override

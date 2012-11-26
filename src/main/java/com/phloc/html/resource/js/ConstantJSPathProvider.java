@@ -20,6 +20,7 @@ package com.phloc.html.resource.js;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -54,6 +55,23 @@ public final class ConstantJSPathProvider implements IJSPathProvider
   public boolean canBeBundled ()
   {
     return m_bCanBeBundled;
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!(o instanceof ConstantJSPathProvider))
+      return false;
+    final ConstantJSPathProvider rhs = (ConstantJSPathProvider) o;
+    return m_sPath.equals (rhs.m_sPath) && m_bCanBeBundled == rhs.m_bCanBeBundled;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sPath).append (m_bCanBeBundled).getHashCode ();
   }
 
   @Override

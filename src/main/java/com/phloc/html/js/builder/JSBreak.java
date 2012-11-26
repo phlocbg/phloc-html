@@ -17,6 +17,7 @@
  */
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
@@ -31,17 +32,25 @@ public class JSBreak implements IJSStatement
   private final JSLabel m_aLabel;
 
   /**
-   * JBreak constructor
+   * Constructor
+   */
+  public JSBreak ()
+  {
+    this (null);
+  }
+
+  /**
+   * Constructor
    * 
    * @param aLabel
-   *        break label or null.
+   *        break label or <code>null</code>.
    */
   public JSBreak (@Nullable final JSLabel aLabel)
   {
     m_aLabel = aLabel;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     if (m_aLabel == null)
       f.plain ("break;").nl ();

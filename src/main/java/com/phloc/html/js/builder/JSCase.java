@@ -47,21 +47,31 @@ public class JSCase implements IJSStatement
   /**
    * Construct a case statement
    */
-  public JSCase (@Nonnull final IJSExpression label)
+  public JSCase (@Nonnull final IJSExpression aLabel)
   {
-    this (label, false);
-    if (label == null)
-      throw new NullPointerException ("Only the default case may not have a label!");
+    this (aLabel, false);
   }
 
   /**
    * Construct a case statement. If isDefaultCase is true, then label should be
    * null since default cases don't have a label.
+   * 
+   * @param aLabel
+   *        May be <code>null</code> if this is the default case
+   * @param bIsDefaultCase
+   *        <code>true</code> if this is the default case!
    */
-  public JSCase (@Nullable final IJSExpression label, final boolean isDefaultCase)
+  public JSCase (@Nullable final IJSExpression aLabel, final boolean bIsDefaultCase)
   {
-    m_aLabel = label;
-    m_bIsDefaultCase = isDefaultCase;
+    if (!bIsDefaultCase && aLabel == null)
+      throw new NullPointerException ("Only the default case may not have a label!");
+    m_aLabel = aLabel;
+    m_bIsDefaultCase = bIsDefaultCase;
+  }
+
+  public boolean isDefaultCase ()
+  {
+    return m_bIsDefaultCase;
   }
 
   @Nullable

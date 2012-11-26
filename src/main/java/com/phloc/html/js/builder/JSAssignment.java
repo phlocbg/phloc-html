@@ -51,12 +51,12 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
     m_aRhs = rhs;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.generatable (m_aLhs).plain (m_sOp).generatable (m_aRhs);
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.generatable (this).plain (';').nl ();
   }

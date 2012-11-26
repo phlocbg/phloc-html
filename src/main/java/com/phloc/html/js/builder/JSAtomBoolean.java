@@ -35,6 +35,11 @@ public class JSAtomBoolean extends AbstractJSExpression
     m_bValue = bValue;
   }
 
+  public boolean getContainedValue ()
+  {
+    return m_bValue;
+  }
+
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (Boolean.toString (m_bValue));

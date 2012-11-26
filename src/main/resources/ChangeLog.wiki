@@ -1,7 +1,8 @@
 #summary Change log of phloc-html
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>11/23/12</td><td>add</td><td>api</td><td></td><td>Added new class JSGlobal with global JS functions like parseFloat, escape, decodeURI etc.</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr><td>11/26/12</td><td>change</td><td>api</td><td></td><td>ConstantJSPathProvider and ConstantCSSPathProvider now implement equals and hashCode</td></tr>
+<tr><td>11/23/12</td><td>add</td><td>api</td><td></td><td>Added new class JSGlobal with global JS functions like parseFloat, escape, decodeURI etc.</td></tr>
 <tr border="1"><td>10/8/12</td><td colspan="4">_Release *3.7.0*_</td></tr>
 <tr><td>10/4/12</td><td>change</td><td>tech</td><td>*yes*</td><td>Using the correct HTML namespace URIs for element creation</td></tr>
 <tr><td>10/1/12</td><td>add</td><td>api</td><td></td><td>Improved available HTML5 element set</td></tr>
