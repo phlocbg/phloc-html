@@ -35,9 +35,9 @@ public class JSCatchBlock implements IJSGeneratable
   public JSCatchBlock ()
   {}
 
-  public JSCatchBlock (@Nonnull final String name)
+  public JSCatchBlock (@Nonnull final String sName)
   {
-    m_aVar = new JSVar (null, name, null);
+    m_aVar = new JSVar (null, sName, null);
   }
 
   @Nullable
@@ -47,11 +47,11 @@ public class JSCatchBlock implements IJSGeneratable
   }
 
   @Nonnull
-  public JSVar param (@Nonnull final String name)
+  public JSVar param (@Nonnull final String sName)
   {
     if (m_aVar != null)
-      throw new IllegalStateException ();
-    m_aVar = new JSVar (null, name, null);
+      throw new IllegalStateException ("Catch block already has a variable");
+    m_aVar = new JSVar (null, sName, null);
     return m_aVar;
   }
 
@@ -61,7 +61,7 @@ public class JSCatchBlock implements IJSGeneratable
     return m_aBody;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     if (m_aVar == null)
       m_aVar = new JSVar (null, "e", null);

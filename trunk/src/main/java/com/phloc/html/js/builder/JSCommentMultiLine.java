@@ -50,9 +50,9 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 
   @Override
   @Nonnull
-  public JSCommentMultiLine append (final Object o)
+  public JSCommentMultiLine append (final Object aObj)
   {
-    add (o);
+    add (aObj);
     return this;
   }
 
@@ -60,13 +60,13 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * Append a text to a @-param tag to the JSDoc
    */
   @Nonnull
-  public JSCommentPart addParam (final String param)
+  public JSCommentPart addParam (final String sParam)
   {
-    JSCommentPart p = m_aParams.get (param);
+    JSCommentPart p = m_aParams.get (sParam);
     if (p == null)
     {
       p = new JSCommentPart ();
-      m_aParams.put (param, p);
+      m_aParams.put (sParam, p);
     }
     return p;
   }
@@ -75,9 +75,9 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * Append a text to an @-param tag.
    */
   @Nonnull
-  public JSCommentPart addParam (@Nonnull final JSVar param)
+  public JSCommentPart addParam (@Nonnull final JSVar aParam)
   {
-    return addParam (param.name ());
+    return addParam (aParam.name ());
   }
 
   /**
@@ -106,13 +106,13 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * add an xdoclet.
    */
   @Nonnull
-  public Map <String, String> addXdoclet (final String name)
+  public Map <String, String> addXdoclet (final String sName)
   {
-    Map <String, String> p = m_aXdoclets.get (name);
+    Map <String, String> p = m_aXdoclets.get (sName);
     if (p == null)
     {
       p = new HashMap <String, String> ();
-      m_aXdoclets.put (name, p);
+      m_aXdoclets.put (sName, p);
     }
     return p;
   }
@@ -121,31 +121,31 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * add an xdoclet.
    */
   @Nonnull
-  public Map <String, String> addXdoclet (final String name, @Nonnull final Map <String, String> attributes)
+  public Map <String, String> addXdoclet (final String sName, @Nonnull final Map <String, String> aAttributes)
   {
-    final Map <String, String> p = addXdoclet (name);
-    p.putAll (attributes);
+    final Map <String, String> p = addXdoclet (sName);
+    p.putAll (aAttributes);
     return p;
   }
 
   /**
    * add an xdoclet.
    */
-  public Map <String, String> addXdoclet (final String name, final String attribute, final String value)
+  public Map <String, String> addXdoclet (final String sName, final String sAttributeName, final String sAttributeValue)
   {
-    final Map <String, String> p = addXdoclet (name);
-    p.put (attribute, value);
+    final Map <String, String> p = addXdoclet (sName);
+    p.put (sAttributeName, sAttributeValue);
     return p;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter f)
   {
     if (!f.generateComments ())
       return;
 
     f.plain ("/**").nlFix ();
 
-    // Main content
+    // Main content start
     format (f, " * ");
 
     if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXdoclets.isEmpty ())

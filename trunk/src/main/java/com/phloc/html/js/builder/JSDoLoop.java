@@ -42,9 +42,11 @@ public class JSDoLoop implements IJSStatement
   /**
    * Constructor
    */
-  public JSDoLoop (@Nonnull final IJSExpression test)
+  public JSDoLoop (@Nonnull final IJSExpression aTest)
   {
-    m_aTest = test;
+    if (aTest == null)
+      throw new NullPointerException ("test");
+    m_aTest = aTest;
   }
 
   @Nonnull

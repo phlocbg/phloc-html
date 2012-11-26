@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.json.IJSON;
 
 /**
  * array creation and initialization.
@@ -73,9 +75,15 @@ public class JSArray extends AbstractJSExpression
   }
 
   @Nonnull
-  public JSArray add (@Nonnull final String v)
+  public JSArray add (@Nullable final String v)
   {
-    return add (JSExpr.lit (v));
+    return add (v == null ? JSExpr.NULL : JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public JSArray add (@Nullable final IJSON v)
+  {
+    return add (v == null ? JSExpr.NULL : JSExpr.json (v));
   }
 
   @Nonnull

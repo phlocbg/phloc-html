@@ -116,50 +116,50 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   /**
    * Invokes a method on an object.
    * 
-   * @param object
+   * @param aLhs
    *        Expression for the object upon which the named method will be
    *        invoked, or null if none
-   * @param name
+   * @param sMethod
    *        Name of method to invoke
    */
-  protected AbstractJSInvocation (@Nullable final IJSExpression object, @Nonnull @Nonempty final String name)
+  protected AbstractJSInvocation (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String sMethod)
   {
-    this ((IJSGeneratable) object, name);
+    this ((IJSGeneratable) aLhs, sMethod);
   }
 
-  protected AbstractJSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
+  protected AbstractJSInvocation (@Nullable final IJSExpression aLhs, @Nonnull final JSMethod aMethod)
   {
-    this ((IJSGeneratable) object, method);
+    this ((IJSGeneratable) aLhs, aMethod);
   }
 
   /**
    * Invokes a static method on a class.
    */
-  protected AbstractJSInvocation (@Nullable final AbstractJSClass type, @Nonnull @Nonempty final String name)
+  protected AbstractJSInvocation (@Nullable final AbstractJSClass aType, @Nonnull @Nonempty final String sMethod)
   {
-    this ((IJSGeneratable) type, name);
+    this ((IJSGeneratable) aType, sMethod);
   }
 
-  protected AbstractJSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
+  protected AbstractJSInvocation (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
   {
-    this ((IJSGeneratable) type, method);
+    this ((IJSGeneratable) aType, aMethod);
   }
 
-  private AbstractJSInvocation (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String sName)
+  private AbstractJSInvocation (@Nullable final IJSGeneratable aLhs, @Nonnull @Nonempty final String sMethod)
   {
-    if (!JSMarshaller.isJSIdentifier (sName))
+    if (!JSMarshaller.isJSIdentifier (sMethod))
       throw new IllegalArgumentException ("name");
-    m_aObject = object;
-    m_sName = sName;
+    m_aObject = aLhs;
+    m_sName = sMethod;
     m_aCallee = null;
     m_aCtorType = null;
   }
 
-  private AbstractJSInvocation (@Nullable final IJSGeneratable aObject, @Nonnull final JSMethod aMethod)
+  private AbstractJSInvocation (@Nullable final IJSGeneratable aLhs, @Nonnull final JSMethod aMethod)
   {
     if (aMethod == null)
       throw new NullPointerException ("method");
-    m_aObject = aObject;
+    m_aObject = aLhs;
     m_sName = null;
     m_aCallee = aMethod;
     m_aCtorType = null;

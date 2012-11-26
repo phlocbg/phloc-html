@@ -39,6 +39,13 @@ public class JSAtom extends AbstractJSExpression
     m_sAtom = sAtom;
   }
 
+  @Nonnull
+  @Nonempty
+  public String getContainedAtom ()
+  {
+    return m_sAtom;
+  }
+
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sAtom);

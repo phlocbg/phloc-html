@@ -42,11 +42,11 @@ public class JSWhileLoop implements IJSStatement
   /**
    * Construct a While statement
    */
-  public JSWhileLoop (@Nonnull final IJSExpression test)
+  public JSWhileLoop (@Nonnull final IJSExpression aTest)
   {
-    if (test == null)
+    if (aTest == null)
       throw new NullPointerException ("test");
-    m_aTest = test;
+    m_aTest = aTest;
   }
 
   @Nonnull

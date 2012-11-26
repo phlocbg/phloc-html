@@ -19,6 +19,7 @@ package com.phloc.html.resource.js;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
@@ -26,6 +27,7 @@ import com.phloc.commons.annotations.Nonempty;
  * 
  * @author philip
  */
+@MustImplementEqualsAndHashcode
 public interface IJSPathProvider
 {
   /**

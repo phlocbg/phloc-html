@@ -52,11 +52,11 @@ public class JSSwitch implements IJSStatement
   /**
    * Construct a switch statement
    */
-  public JSSwitch (@Nonnull final IJSExpression test)
+  public JSSwitch (@Nonnull final IJSExpression aTest)
   {
-    if (test == null)
+    if (aTest == null)
       throw new NullPointerException ("test");
-    m_aTest = test;
+    m_aTest = aTest;
   }
 
   @Nonnull

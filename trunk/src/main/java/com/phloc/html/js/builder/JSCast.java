@@ -41,22 +41,28 @@ public class JSCast extends AbstractJSExpression
   /**
    * JCast constructor
    * 
-   * @param type
+   * @param aType
    *        JType to which the expression is cast
-   * @param object
+   * @param aObject
    *        JExpression for the object upon which the cast is applied
    */
-  public JSCast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression object)
+  public JSCast (@Nonnull final AbstractJSType aType, @Nonnull final IJSExpression aObject)
   {
-    if (type == null)
+    if (aType == null)
       throw new NullPointerException ("type");
-    if (object == null)
+    if (aObject == null)
       throw new NullPointerException ("object");
-    m_aType = type;
-    m_aObject = object;
+    m_aType = aType;
+    m_aObject = aObject;
   }
 
-  public void generate (final JSFormatter f)
+  @Nonnull
+  public AbstractJSType type ()
+  {
+    return m_aType;
+  }
+
+  public void generate (@Nonnull final JSFormatter f)
   {
     f.plain ("((").generatable (m_aType).plain (')').generatable (m_aObject).plain (')');
   }

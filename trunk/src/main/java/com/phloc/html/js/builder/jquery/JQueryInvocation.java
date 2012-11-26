@@ -38,9 +38,9 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
     super (aFunction);
   }
 
-  public JQueryInvocation (@Nullable final IJSExpression lhs, @Nonnull @Nonempty final String method)
+  public JQueryInvocation (@Nullable final IJSExpression lhs, @Nonnull @Nonempty final String sMethod)
   {
-    super (lhs, method);
+    super (lhs, sMethod);
   }
 
   /**
