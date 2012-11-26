@@ -47,20 +47,20 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
    */
   private JSVar m_aVar;
 
-  public JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull @Nonempty final String name)
+  public JSFieldRef (@Nullable final IJSGeneratable aObject, @Nonnull @Nonempty final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Name '" + name + "' is not a valid JSIdentifier!");
-    m_aObject = object;
-    m_sName = name;
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("Name '" + sName + "' is not a valid JSIdentifier!");
+    m_aObject = aObject;
+    m_sName = sName;
   }
 
-  public JSFieldRef (@Nullable final IJSGeneratable object, @Nonnull final JSVar var)
+  public JSFieldRef (@Nullable final IJSGeneratable aObject, @Nonnull final JSVar aVar)
   {
-    if (var == null)
+    if (aVar == null)
       throw new NullPointerException ("var");
-    m_aObject = object;
-    m_aVar = var;
+    m_aObject = aObject;
+    m_aVar = aVar;
   }
 
   public void generate (@Nonnull final JSFormatter f)

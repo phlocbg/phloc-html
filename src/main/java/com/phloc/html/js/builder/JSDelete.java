@@ -34,17 +34,17 @@ public class JSDelete implements IJSStatement
   /**
    * constructor
    * 
-   * @param expr
+   * @param aExpr
    *        expression to delete. May not be <code>null</code>.
    */
-  public JSDelete (@Nonnull final IJSExpression expr)
+  public JSDelete (@Nonnull final IJSExpression aExpr)
   {
-    if (expr == null)
+    if (aExpr == null)
       throw new NullPointerException ("expr");
-    m_aExpr = expr;
+    m_aExpr = aExpr;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.plain ("delete ").generatable (m_aExpr).plain (';').nl ();
   }

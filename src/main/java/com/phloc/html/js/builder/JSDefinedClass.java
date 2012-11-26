@@ -67,19 +67,19 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * constructor
    * 
-   * @param parent
+   * @param aPackage
    *        Owning package. May be <code>null</code>.
-   * @param name
+   * @param sName
    *        Name of this class
    */
-  public JSDefinedClass (@Nullable final JSPackage parent, @Nonnull @Nonempty final String name)
+  public JSDefinedClass (@Nullable final JSPackage aPackage, @Nonnull @Nonempty final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Illegal class name: " + name);
-    if (!Character.isUpperCase (name.charAt (0)))
-      s_aLogger.warn ("Class names should always start with an upper-case character: " + name);
-    m_aPackage = parent;
-    m_sName = name;
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("Illegal class name: " + sName);
+    if (!Character.isUpperCase (sName.charAt (0)))
+      s_aLogger.warn ("Class names should always start with an upper-case character: " + sName);
+    m_aPackage = aPackage;
+    m_sName = sName;
   }
 
   @Override
