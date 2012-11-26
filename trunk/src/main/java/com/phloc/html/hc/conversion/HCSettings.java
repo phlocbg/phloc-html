@@ -172,7 +172,7 @@ public final class HCSettings
    * Convert the passed HC node to a micro node using the conversion settings
    * provider.
    * 
-   * @return The customizer to use
+   * @return The customizer to use. May be <code>null</code>.
    */
   @Nullable
   public static IHCCustomizer getCustomizer ()

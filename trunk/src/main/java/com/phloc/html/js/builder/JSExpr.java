@@ -44,45 +44,45 @@ public final class JSExpr
   {}
 
   @Nonnull
-  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final String v)
   {
-    return assign (lhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "=", rhs);
+    return new JSAssignment (aLhs, "=", rhs);
   }
 
   @Nonnull
-  public static JSAssignment assignPlus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "+=", rhs);
+    return new JSAssignment (aLhs, "+=", rhs);
   }
 
   @Nonnull
-  public static JSAssignment assignMinus (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignMinus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "-=", rhs);
+    return new JSAssignment (aLhs, "-=", rhs);
   }
 
   @Nonnull
-  public static JSAssignment assignMultiply (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "*=", rhs);
+    return new JSAssignment (aLhs, "*=", rhs);
   }
 
   @Nonnull
-  public static JSAssignment assignDivide (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignDivide (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "/=", rhs);
+    return new JSAssignment (aLhs, "/=", rhs);
   }
 
   @Nonnull
-  public static JSAssignment assignModulo (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignModulo (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
   {
-    return new JSAssignment (lhs, "%=", rhs);
+    return new JSAssignment (aLhs, "%=", rhs);
   }
 
   @Nonnull
@@ -104,15 +104,15 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression lhs, @Nonnull @Nonempty final String method)
+  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String method)
   {
-    return new JSInvocation (lhs, method);
+    return new JSInvocation (aLhs, method);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression lhs, @Nonnull final JSMethod method)
+  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull final JSMethod method)
   {
-    return new JSInvocation (lhs, method);
+    return new JSInvocation (aLhs, method);
   }
 
   @Nonnull
@@ -140,23 +140,23 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final JSVar field)
+  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final JSVar field)
   {
-    return new JSFieldRef (lhs, field);
+    return new JSFieldRef (aLhs, field);
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final String field)
+  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final String field)
   {
-    return new JSFieldRef (lhs, field);
+    return new JSFieldRef (aLhs, field);
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression lhs, @Nonnull final String... fields)
+  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final String... fields)
   {
     if (ArrayHelper.isEmpty (fields))
       throw new IllegalArgumentException ("fields may not be empty");
-    JSFieldRef ret = new JSFieldRef (lhs, fields[0]);
+    JSFieldRef ret = new JSFieldRef (aLhs, fields[0]);
     for (int i = 1; i < fields.length; ++i)
       ret = new JSFieldRef (ret, fields[i]);
     return ret;
@@ -181,9 +181,9 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSArrayCompRef component (@Nonnull final IJSExpression lhs, @Nonnull final IJSExpression index)
+  public static JSArrayCompRef component (@Nonnull final IJSExpression aLhs, @Nonnull final IJSExpression index)
   {
-    return new JSArrayCompRef (lhs, index);
+    return new JSArrayCompRef (aLhs, index);
   }
 
   @Nonnull

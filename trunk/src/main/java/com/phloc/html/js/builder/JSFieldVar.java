@@ -40,22 +40,22 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   /**
    * Field constructor
    * 
-   * @param type
+   * @param aType
    *        data type of this variable
-   * @param name
+   * @param sName
    *        Name of this variable
-   * @param init
+   * @param aInit
    *        Value to initialize this variable to
    */
-  public JSFieldVar (@Nonnull final JSDefinedClass owner,
-                     @Nullable final AbstractJSType type,
-                     @Nonnull final String name,
-                     @Nullable final IJSExpression init)
+  public JSFieldVar (@Nonnull final JSDefinedClass aOwner,
+                     @Nullable final AbstractJSType aType,
+                     @Nonnull final String sName,
+                     @Nullable final IJSExpression aInit)
   {
-    super (type, name, init);
-    if (owner == null)
+    super (aType, sName, aInit);
+    if (aOwner == null)
       throw new NullPointerException ("owner");
-    m_aOwner = owner;
+    m_aOwner = aOwner;
   }
 
   @Nonnull

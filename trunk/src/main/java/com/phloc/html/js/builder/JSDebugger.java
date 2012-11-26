@@ -17,6 +17,7 @@
  */
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.string.ToStringGenerator;
@@ -31,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSDebugger implements IJSStatement
 {
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.plain ("debugger;").nl ();
   }
