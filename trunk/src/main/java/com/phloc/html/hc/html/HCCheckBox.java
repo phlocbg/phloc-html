@@ -108,7 +108,9 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   {
     final IMicroContainer aCont = new MicroContainer ();
     aCont.appendChild (super.internalConvertToNode (aConversionSettings));
-    aCont.appendChild (new HCHiddenField (getHiddenFieldName (getName ()), getValue ()).convertToNode (aConversionSettings));
+    final String sName = getName ();
+    if (StringHelper.hasText (sName))
+      aCont.appendChild (new HCHiddenField (getHiddenFieldName (sName), getValue ()).convertToNode (aConversionSettings));
     return aCont;
   }
 
