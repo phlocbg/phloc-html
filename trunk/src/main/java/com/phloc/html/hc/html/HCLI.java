@@ -20,8 +20,12 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -34,12 +38,21 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCLI extends AbstractHCElementWithChildren <HCLI>
 {
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCLI.class);
+
   /**
    * Create a new LI element
    */
   public HCLI ()
   {
     super (EHTMLElement.LI);
+  }
+
+  @Override
+  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
+  {
+    if (aChild instanceof HCLI)
+      s_aLogger.warn ("Creating nested LI elements is not allowed!");
   }
 
   /**

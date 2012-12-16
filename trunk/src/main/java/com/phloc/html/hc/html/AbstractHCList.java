@@ -32,8 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
  * @param <THISTYPE>
  *        The real implementation type.
  */
-public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends
-                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
+public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
 {
   protected AbstractHCList (@Nonnull @Nonempty final EHTMLElement aElement)
   {
@@ -73,6 +72,10 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   @Nonnull
   public final HCLI addAndReturnItem (@Nullable final IHCNode aChild)
   {
+    // Avoid directly nested LI elements
+    if (aChild instanceof HCLI)
+      return addAndReturnItem ((HCLI) aChild);
+
     final HCLI aItem = addItem ();
     aItem.addChild (aChild);
     return aItem;
