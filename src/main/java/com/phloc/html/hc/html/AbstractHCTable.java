@@ -37,8 +37,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
-                                                                                    AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 
@@ -93,7 +92,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return hasHeaderRow () || hasBodyRows () || hasBodyID () || hasFooterRow ();
+    return hasHeaderRow () || hasBodyRows () || hasBodyID () || hasBodyClasses () || hasFooterRow ();
   }
 
   @Override
@@ -152,6 +151,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                                          EHTMLElement.TBODY.getElementName ());
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
+    if (hasBodyClasses ())
+      aTBody.setAttribute (CHTMLAttributes.CLASS, getBodyClassesAsString ());
 
     // Main body rows
     for (final HCRow aRow : directGetBodyRowList ())

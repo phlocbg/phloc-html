@@ -34,6 +34,7 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
@@ -49,9 +50,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
-                                                                                            AbstractHCElement <THISTYPE> implements
-                                                                                                                        IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -60,6 +59,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   private String m_sHeaderID;
   private final List <HCRow> m_aBodyRows = new ArrayList <HCRow> ();
   private String m_sBodyID;
+  private List <ICSSClassProvider> m_aBodyClasses;
   private HCRow m_aFooterRow;
   private String m_sFooterID;
 
@@ -471,6 +471,52 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final boolean hasBodyID ()
   {
     return StringHelper.hasText (m_sBodyID);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <ICSSClassProvider> getBodyClasses ()
+  {
+    return ContainerHelper.newList (m_aBodyClasses);
+  }
+
+  @Nonnull
+  public final String getBodyClassesAsString ()
+  {
+    if (m_aBodyClasses == null || m_aBodyClasses.isEmpty ())
+      return "";
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClass : m_aBodyClasses)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (aCSSClass.getCSSClass ());
+    }
+    return aSB.toString ();
+  }
+
+  @Nonnull
+  public final THISTYPE addBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (aCSSClassProvider == null)
+      throw new NullPointerException ("CSSClassProvider");
+    if (m_aBodyClasses == null)
+      m_aBodyClasses = new ArrayList <ICSSClassProvider> ();
+    m_aBodyClasses.add (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (m_aBodyClasses != null)
+      m_aBodyClasses.remove (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  public final boolean hasBodyClasses ()
+  {
+    return ContainerHelper.isNotEmpty (m_aBodyClasses);
   }
 
   public final boolean hasBodyRows ()
