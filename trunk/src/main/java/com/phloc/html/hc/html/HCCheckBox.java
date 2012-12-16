@@ -46,9 +46,14 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   private String m_sValue;
   private boolean m_bChecked = DEFAULT_CHECKED;
 
-  public HCCheckBox (@Nullable final String sName)
+  public HCCheckBox ()
   {
     super (EHCInputType.CHECKBOX);
+  }
+
+  public HCCheckBox (@Nullable final String sName)
+  {
+    this ();
     setName (sName);
   }
 
