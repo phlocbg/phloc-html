@@ -116,7 +116,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     super.applyProperties (aElement, aConversionSettings);
 
     // Required by XHTML 1.1
-    if (!hasBodyRows () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
+    if (!hasBodyRows () && !hasBodyID () && !hasBodyClasses () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
       s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
 
     // Table specific attributes
