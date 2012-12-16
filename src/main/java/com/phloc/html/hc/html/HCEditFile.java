@@ -17,9 +17,14 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.html.CHTMLAttributeValues;
+import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "file"
@@ -28,8 +33,32 @@ import com.phloc.html.hc.api.EHCInputType;
  */
 public class HCEditFile extends AbstractHCEdit <HCEditFile>
 {
+  public static final boolean DEFAULT_MULTIPLE = false;
+
+  private boolean m_bMultiple = DEFAULT_MULTIPLE;
+
   public HCEditFile (@Nullable final String sName)
   {
     super (EHCInputType.FILE, sName);
+  }
+
+  public boolean isMultiple ()
+  {
+    return m_bMultiple;
+  }
+
+  @Nonnull
+  public HCEditFile setMultiple (final boolean bMultiple)
+  {
+    m_bMultiple = bMultiple;
+    return this;
+  }
+
+  @Override
+  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
+  {
+    super.applyProperties (aElement, aConversionSettings);
+    if (m_bMultiple)
+      aElement.setAttribute (CHTMLAttributes.MULTIPLE, CHTMLAttributeValues.MULTIPLE);
   }
 }
