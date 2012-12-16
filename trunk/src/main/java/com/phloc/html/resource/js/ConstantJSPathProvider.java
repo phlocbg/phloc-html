@@ -24,23 +24,48 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
+/**
+ * An implementation of {@link IJSPathProvider} using constant paths.
+ * 
+ * @author philip
+ */
 public final class ConstantJSPathProvider implements IJSPathProvider
 {
+  public static final boolean DEFAULT_CAN_BE_BUNDLED = true;
+
   private final String m_sPath;
+  private final String m_sMinifiedPath;
   private final boolean m_bCanBeBundled;
 
   public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath)
   {
-    this (sPath, true);
+    this (sPath, DEFAULT_CAN_BE_BUNDLED);
   }
 
   public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath, final boolean bCanBeBundled)
+  {
+    this (sPath, JSFilenameHelper.getMinifiedJSPath (sPath), bCanBeBundled);
+  }
+
+  public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath, @Nonnull @Nonempty final String sMinifiedPath)
+  {
+    this (sPath, sMinifiedPath, DEFAULT_CAN_BE_BUNDLED);
+  }
+
+  public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath,
+                                 @Nonnull @Nonempty final String sMinifiedPath,
+                                 final boolean bCanBeBundled)
   {
     if (StringHelper.hasNoText (sPath))
       throw new IllegalArgumentException ("path is empty");
     if (!JSFilenameHelper.isJSFilename (sPath))
       throw new IllegalArgumentException ("path");
+    if (StringHelper.hasNoText (sMinifiedPath))
+      throw new IllegalArgumentException ("minified path is empty");
+    if (!JSFilenameHelper.isJSFilename (sMinifiedPath))
+      throw new IllegalArgumentException ("minified path");
     m_sPath = sPath;
+    m_sMinifiedPath = sMinifiedPath;
     m_bCanBeBundled = bCanBeBundled;
   }
 
@@ -48,7 +73,21 @@ public final class ConstantJSPathProvider implements IJSPathProvider
   @Nonempty
   public String getJSItemPath (final boolean bRegular)
   {
-    return bRegular ? m_sPath : JSFilenameHelper.getMinifiedJSPath (m_sPath);
+    return bRegular ? m_sPath : m_sMinifiedPath;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getJSItemPathRegular ()
+  {
+    return m_sPath;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getJSItemPathMinified ()
+  {
+    return m_sMinifiedPath;
   }
 
   @Override
@@ -65,18 +104,26 @@ public final class ConstantJSPathProvider implements IJSPathProvider
     if (!(o instanceof ConstantJSPathProvider))
       return false;
     final ConstantJSPathProvider rhs = (ConstantJSPathProvider) o;
-    return m_sPath.equals (rhs.m_sPath) && m_bCanBeBundled == rhs.m_bCanBeBundled;
+    return m_sPath.equals (rhs.m_sPath) &&
+           m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
+           m_bCanBeBundled == rhs.m_bCanBeBundled;
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sPath).append (m_bCanBeBundled).getHashCode ();
+    return new HashCodeGenerator (this).append (m_sPath)
+                                       .append (m_sMinifiedPath)
+                                       .append (m_bCanBeBundled)
+                                       .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("path", m_sPath).append ("canBeBundled", m_bCanBeBundled).toString ();
+    return new ToStringGenerator (this).append ("path", m_sPath)
+                                       .append ("minifiedPath", m_sMinifiedPath)
+                                       .append ("canBeBundled", m_bCanBeBundled)
+                                       .toString ();
   }
 }
