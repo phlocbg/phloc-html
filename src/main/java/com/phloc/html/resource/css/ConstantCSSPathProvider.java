@@ -25,24 +25,40 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.CSSFilenameHelper;
 
+/**
+ * Implementation of {@link ICSSPathProvider} with constant paths.
+ * 
+ * @author philip
+ */
 public final class ConstantCSSPathProvider implements ICSSPathProvider
 {
   private final String m_sPath;
+  private final String m_sMinifiedPath;
 
   public ConstantCSSPathProvider (@Nonnull @Nonempty final String sPath)
+  {
+    this (sPath, CSSFilenameHelper.getMinifiedCSSFilename (sPath));
+  }
+
+  public ConstantCSSPathProvider (@Nonnull @Nonempty final String sPath, @Nonnull @Nonempty final String sMinifiedPath)
   {
     if (StringHelper.hasNoText (sPath))
       throw new IllegalArgumentException ("path is empty");
     if (!CSSFilenameHelper.isCSSFilename (sPath))
       throw new IllegalArgumentException ("path");
+    if (StringHelper.hasNoText (sMinifiedPath))
+      throw new IllegalArgumentException ("minified path is empty");
+    if (!CSSFilenameHelper.isCSSFilename (sMinifiedPath))
+      throw new IllegalArgumentException ("minified path");
     m_sPath = sPath;
+    m_sMinifiedPath = sMinifiedPath;
   }
 
   @Nonnull
   @Nonempty
   public String getCSSItemPath (final boolean bRegular)
   {
-    return bRegular ? m_sPath : CSSFilenameHelper.getMinifiedCSSFilename (m_sPath);
+    return bRegular ? m_sPath : m_sMinifiedPath;
   }
 
   @Override
@@ -53,18 +69,18 @@ public final class ConstantCSSPathProvider implements ICSSPathProvider
     if (!(o instanceof ConstantCSSPathProvider))
       return false;
     final ConstantCSSPathProvider rhs = (ConstantCSSPathProvider) o;
-    return m_sPath.equals (rhs.m_sPath);
+    return m_sPath.equals (rhs.m_sPath) && m_sMinifiedPath.equals (rhs.m_sMinifiedPath);
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sPath).getHashCode ();
+    return new HashCodeGenerator (this).append (m_sPath).append (m_sMinifiedPath).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("path", m_sPath).toString ();
+    return new ToStringGenerator (this).append ("path", m_sPath).append ("minifiedPath", m_sMinifiedPath).toString ();
   }
 }
