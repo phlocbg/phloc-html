@@ -65,24 +65,37 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   }
 
   @OverrideOnDemand
-  protected void applyHeaderRow (final IMicroElement aTHead,
-                                 final HCRow aRow,
+  protected void applyHeaderRow (@Nonnull final IMicroElement aTHead,
+                                 @Nonnull final HCRow aRow,
                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTHead.appendChild (aRow.convertToNode (aConversionSettings));
   }
 
   @OverrideOnDemand
-  protected void applyFooterRow (final IMicroElement aTFoot,
-                                 final HCRow aRow,
+  protected void applyFooterRow (@Nonnull final IMicroElement aTFoot,
+                                 @Nonnull final HCRow aRow,
                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTFoot.appendChild (aRow.convertToNode (aConversionSettings));
   }
 
+  /**
+   * @param aTBody
+   *        TBody micro element
+   * @param aConversionSettings
+   *        The conversion settings to use
+   */
   @OverrideOnDemand
-  protected void applyBodyRow (final IMicroElement aTBody,
-                               final HCRow aRow,
+  protected void applyBody (@Nonnull final IMicroElement aTBody,
+                            @Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    /* empty */
+  }
+
+  @OverrideOnDemand
+  protected void applyBodyRow (@Nonnull final IMicroElement aTBody,
+                               @Nonnull final HCRow aRow,
                                @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     aTBody.appendChild (aRow.convertToNode (aConversionSettings));
@@ -153,6 +166,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
     if (hasBodyClasses ())
       aTBody.setAttribute (CHTMLAttributes.CLASS, getBodyClassesAsString ());
+    applyBody (aTBody, aConversionSettings);
 
     // Main body rows
     for (final HCRow aRow : directGetBodyRowList ())
