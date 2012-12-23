@@ -164,6 +164,22 @@ public class JSArray extends AbstractJSExpression
     return this;
   }
 
+  @Nonnull
+  public JSArray addAllExpr (@Nonnull final IJSExpression... aCont)
+  {
+    for (final IJSExpression v : aCont)
+      add (v);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAllExpr (@Nonnull final Iterable <? extends IJSExpression> aCont)
+  {
+    for (final IJSExpression v : aCont)
+      add (v);
+    return this;
+  }
+
   /**
    * Add an element to the array initializer
    */
