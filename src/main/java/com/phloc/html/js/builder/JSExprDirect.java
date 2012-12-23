@@ -18,30 +18,26 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
-public class JSExprParanthesis extends AbstractJSExpression
+@Immutable
+public final class JSExprDirect extends AbstractJSExpression
 {
-  private final IJSExpression m_aExpr;
+  private final String m_sSource;
 
-  public JSExprParanthesis (@Nonnull final IJSExpression aExpr)
+  public JSExprDirect (@Nonnull final String sSource)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
-    m_aExpr = aExpr;
+    if (sSource == null)
+      throw new NullPointerException ("source");
+    m_sSource = sSource;
   }
 
-  @Nonnull
-  public IJSExpression expr ()
+  public void generate (final JSFormatter f)
   {
-    return m_aExpr;
-  }
-
-  public void generate (@Nonnull final JSFormatter f)
-  {
-    f.plain ('(').generatable (m_aExpr).plain (')');
+    f.plain (m_sSource);
   }
 
   @Override
@@ -51,19 +47,19 @@ public class JSExprParanthesis extends AbstractJSExpression
       return true;
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
-    final JSExprParanthesis rhs = (JSExprParanthesis) o;
-    return m_aExpr.equals (rhs.m_aExpr);
+    final JSExprDirect rhs = (JSExprDirect) o;
+    return m_sSource.equals (rhs.m_sSource);
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aExpr).getHashCode ();
+    return new HashCodeGenerator (this).append (m_sSource).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("expr", m_aExpr).toString ();
+    return new ToStringGenerator (this).append ("source", m_sSource).toString ();
   }
 }

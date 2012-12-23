@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -94,6 +95,30 @@ public class JSRegExLiteral extends AbstractJSExpression
       f.plain ('i');
     if (m_bMultiLine)
       f.plain ('m');
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSRegExLiteral rhs = (JSRegExLiteral) o;
+    return m_sRegEx.equals (rhs.m_sRegEx) &&
+           m_bGlobal == rhs.m_bGlobal &&
+           m_bCaseInsensitive == rhs.m_bCaseInsensitive &&
+           m_bMultiLine == rhs.m_bMultiLine;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sRegEx)
+                                       .append (m_bGlobal)
+                                       .append (m_bCaseInsensitive)
+                                       .append (m_bMultiLine)
+                                       .getHashCode ();
   }
 
   @Override

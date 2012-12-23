@@ -20,9 +20,12 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.json.IJSON;
 
@@ -37,6 +40,17 @@ public class JSArray extends AbstractJSExpression
 
   public JSArray ()
   {}
+
+  public boolean isEmpty ()
+  {
+    return m_aExprs == null || m_aExprs.isEmpty ();
+  }
+
+  @Nonnegative
+  public int size ()
+  {
+    return m_aExprs == null ? 0 : m_aExprs.size ();
+  }
 
   @Nonnull
   public JSArray add (final boolean v)
@@ -164,12 +178,37 @@ public class JSArray extends AbstractJSExpression
     return this;
   }
 
+  @Nonnull
+  public JSArray remove (@Nonnegative final int nIndex)
+  {
+    if (m_aExprs != null)
+      m_aExprs.remove (nIndex);
+    return this;
+  }
+
   public void generate (final JSFormatter f)
   {
     f.plain ('[');
     if (m_aExprs != null)
       f.generatable (m_aExprs);
     f.plain (']');
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSArray rhs = (JSArray) o;
+    return EqualsUtils.equals (m_aExprs, rhs.m_aExprs);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aExprs).getHashCode ();
   }
 
   @Override

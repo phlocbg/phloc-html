@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -65,6 +66,23 @@ public class JSCast extends AbstractJSExpression
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain ("((").generatable (m_aType).plain (')').generatable (m_aObject).plain (')');
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSCast rhs = (JSCast) o;
+    return m_aType.equals (rhs.m_aType) && m_aObject.equals (rhs.m_aObject);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aType).append (m_aObject).getHashCode ();
   }
 
   @Override

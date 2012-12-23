@@ -46,7 +46,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /** class JSDoc */
   private JSCommentMultiLine m_aJSDoc;
 
-  /** Ownining package */
+  /** Owning package */
   private final JSPackage m_aPackage;
 
   /** Name of this class. */

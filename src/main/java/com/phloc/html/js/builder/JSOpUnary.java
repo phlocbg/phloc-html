@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -76,6 +77,23 @@ public class JSOpUnary extends AbstractJSExpression
       f.plain (m_sOp).generatable (m_aExpr);
     else
       f.generatable (m_aExpr).plain (m_sOp);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSOpUnary rhs = (JSOpUnary) o;
+    return m_sOp.equals (rhs.m_sOp) && m_aExpr.equals (rhs.m_aExpr) && m_bOpFirst == rhs.m_bOpFirst;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sOp).append (m_aExpr).append (m_bOpFirst).getHashCode ();
   }
 
   @Override
