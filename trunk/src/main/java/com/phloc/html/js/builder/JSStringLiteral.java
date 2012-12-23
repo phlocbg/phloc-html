@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -59,6 +60,23 @@ public class JSStringLiteral extends AbstractJSExpression
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (getAsString (m_sStr));
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSStringLiteral rhs = (JSStringLiteral) o;
+    return m_sStr.equals (rhs.m_sStr);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sStr).getHashCode ();
   }
 
   @Override

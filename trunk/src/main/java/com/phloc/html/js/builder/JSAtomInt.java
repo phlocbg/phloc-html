@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -120,6 +122,23 @@ public class JSAtomInt extends AbstractJSAtomNumeric
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (Long.toString (m_nValue));
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSAtomInt rhs = (JSAtomInt) o;
+    return EqualsUtils.equals (m_nValue, rhs.m_nValue);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_nValue).getHashCode ();
   }
 
   @Override

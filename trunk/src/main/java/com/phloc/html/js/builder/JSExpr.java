@@ -264,7 +264,7 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static AbstractJSExpression json (@Nonnull final IJSON aJSON)
+  public static JSExprDirect json (@Nonnull final IJSON aJSON)
   {
     return direct (aJSON.getJSONString (JSPrinter.isIndentAndAlign ()));
   }
@@ -280,14 +280,8 @@ public final class JSExpr
    * object model.
    */
   @Nonnull
-  public static AbstractJSExpression direct (@Nonnull final String source)
+  public static JSExprDirect direct (@Nonnull final String sSource)
   {
-    return new AbstractJSExpression ()
-    {
-      public void generate (final JSFormatter f)
-      {
-        f.plain (source);
-      }
-    };
+    return new JSExprDirect (sSource);
   }
 }

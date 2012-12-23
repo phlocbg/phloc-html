@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -49,6 +50,23 @@ public class JSAtom extends AbstractJSExpression
   public void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sAtom);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSAtom rhs = (JSAtom) o;
+    return m_sAtom.equals (rhs.m_sAtom);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_sAtom).getHashCode ();
   }
 
   @Override

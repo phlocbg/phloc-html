@@ -20,9 +20,12 @@ package com.phloc.html.js.builder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
@@ -38,6 +41,17 @@ public class JSAssocArray extends AbstractJSExpression
 
   public JSAssocArray ()
   {}
+
+  public boolean isEmpty ()
+  {
+    return m_aExprs == null || m_aExprs.isEmpty ();
+  }
+
+  @Nonnegative
+  public int size ()
+  {
+    return m_aExprs == null ? 0 : m_aExprs.size ();
+  }
 
   @Nonnull
   public JSAssocArray add (@Nonnull final String sKey, final boolean aValue)
@@ -119,15 +133,31 @@ public class JSAssocArray extends AbstractJSExpression
    * Add an element to the array initializer
    */
   @Nonnull
-  public JSAssocArray add (@Nonnull final IJSExpression sKey, @Nonnull final IJSExpression aValue)
+  public JSAssocArray add (@Nonnull final IJSExpression aKey, @Nonnull final IJSExpression aValue)
   {
-    if (sKey == null)
+    if (aKey == null)
       throw new NullPointerException ("key");
     if (aValue == null)
       throw new NullPointerException ("value");
     if (m_aExprs == null)
       m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
-    m_aExprs.put (sKey, aValue);
+    m_aExprs.put (aKey, aValue);
+    return this;
+  }
+
+  @Nonnull
+  public JSAssocArray remove (@Nonnull final String sKey)
+  {
+    if (m_aExprs != null)
+      remove (JSExpr.lit (sKey));
+    return this;
+  }
+
+  @Nonnull
+  public JSAssocArray remove (@Nullable final IJSExpression aKey)
+  {
+    if (m_aExprs != null)
+      m_aExprs.remove (aKey);
     return this;
   }
 
@@ -147,6 +177,23 @@ public class JSAssocArray extends AbstractJSExpression
       }
     }
     f.nl ().outdent ().plain ('}');
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSAssocArray rhs = (JSAssocArray) o;
+    return EqualsUtils.equals (m_aExprs, rhs.m_aExprs);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aExprs).getHashCode ();
   }
 
   @Override

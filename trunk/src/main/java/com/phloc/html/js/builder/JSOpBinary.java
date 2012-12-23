@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 public class JSOpBinary extends AbstractJSExpression
@@ -123,6 +124,23 @@ public class JSOpBinary extends AbstractJSExpression
     f.generatable (m_aLeft).plain (m_sOp).generatable (m_aRight);
     if (bUseBraces)
       f.plain (')');
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSOpBinary rhs = (JSOpBinary) o;
+    return m_aLeft.equals (rhs.m_aLeft) && m_sOp.equals (rhs.m_sOp) && m_aRight.equals (rhs.m_aRight);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aLeft).append (m_sOp).append (m_aRight).getHashCode ();
   }
 
   @Override

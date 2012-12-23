@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -53,6 +55,23 @@ public class JSContinue implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSContinue rhs = (JSContinue) o;
+    return EqualsUtils.equals (m_aLabel, rhs.m_aLabel);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aLabel).getHashCode ();
   }
 
   @Override
