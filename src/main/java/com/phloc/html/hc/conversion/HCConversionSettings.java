@@ -231,6 +231,12 @@ public class HCConversionSettings implements IHCConversionSettings
     return new HCConversionSettings (this, eHTMLVersion);
   }
 
+  @Nonnull
+  public HCConversionSettings getCloneIfNecessary (@Nonnull final EHTMLVersion eHTMLVersion)
+  {
+    return m_eHTMLVersion.equals (eHTMLVersion) ? this : getClone (eHTMLVersion);
+  }
+
   @Override
   public String toString ()
   {

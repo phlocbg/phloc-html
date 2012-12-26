@@ -20,6 +20,7 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.ICloneable;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.html.EHTMLVersion;
 
@@ -45,5 +46,18 @@ public interface IHCConversionSettings extends IHCConversionSettingsToNode, IClo
    * @return Never <code>null</code>.
    */
   @Nonnull
+  @ReturnsMutableCopy
   IHCConversionSettings getClone (@Nonnull EHTMLVersion eHTMLVersion);
+
+  /**
+   * Get a clone of this settings, but with a different HTML version. If the
+   * passed HTML version equals this HTML version than this is returned
+   * unchanged.
+   * 
+   * @param eHTMLVersion
+   *        The new HTML version to use. May not be <code>null</code>.
+   * @return this or a clone of this.
+   */
+  @Nonnull
+  IHCConversionSettings getCloneIfNecessary (@Nonnull EHTMLVersion eHTMLVersion);
 }
