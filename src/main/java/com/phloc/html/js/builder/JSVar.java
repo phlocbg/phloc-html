@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -181,6 +183,25 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSDeclaration) this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSVar rhs = (JSVar) o;
+    return EqualsUtils.equals (m_aType, rhs.m_aType) &&
+           EqualsUtils.equals (m_sName, rhs.m_sName) &&
+           EqualsUtils.equals (m_aInit, rhs.m_aInit);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aType).append (m_sName).append (m_aInit).getHashCode ();
   }
 
   @Override
