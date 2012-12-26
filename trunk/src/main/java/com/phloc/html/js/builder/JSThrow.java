@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -37,27 +38,42 @@ public class JSThrow implements IJSStatement
   /**
    * constructor
    * 
-   * @param expr
+   * @param aExpr
    *        JExpression which evaluates to JThrow value
    */
-  public JSThrow (@Nonnull final IJSExpression expr)
+  public JSThrow (@Nonnull final IJSExpression aExpr)
   {
-    if (expr == null)
+    if (aExpr == null)
       throw new NullPointerException ("expr");
-    m_aExpr = expr;
+    m_aExpr = aExpr;
   }
 
   public void state (@Nonnull final JSFormatter f)
   {
-    f.plain ("throw ");
-    f.generatable (m_aExpr);
-    f.plain (';').nl ();
+    f.plain ("throw ").generatable (m_aExpr).plain (';').nl ();
   }
 
   @Nullable
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSThrow rhs = (JSThrow) o;
+    return m_aExpr.equals (rhs.m_aExpr);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aExpr).getHashCode ();
   }
 
   @Override
