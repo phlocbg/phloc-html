@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -107,6 +109,25 @@ public class JSSwitch implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSSwitch rhs = (JSSwitch) o;
+    return m_aTest.equals (rhs.m_aTest) &&
+           m_aCases.equals (rhs.m_aCases) &&
+           EqualsUtils.equals (m_aDefaultCase, rhs.m_aDefaultCase);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aTest).append (m_aCases).append (m_aDefaultCase).getHashCode ();
   }
 
   @Override

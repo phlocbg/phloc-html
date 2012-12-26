@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -88,6 +90,25 @@ public class JSTryBlock implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSTryBlock rhs = (JSTryBlock) o;
+    return EqualsUtils.equals (m_aBody, rhs.m_aBody) &&
+           EqualsUtils.equals (m_aCatch, rhs.m_aCatch) &&
+           EqualsUtils.equals (m_aFinally, rhs.m_aFinally);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aBody).append (m_aCatch).append (m_aFinally).getHashCode ();
   }
 
   @Override
