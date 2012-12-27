@@ -74,9 +74,9 @@ public class JSDoLoop implements IJSStatement
       f.plain ("{}");
 
     if (JSOp.hasOperator (m_aTest))
-      f.plain ("while ").generatable (m_aTest);
+      f.plain ("while").generatable (m_aTest);
     else
-      f.plain ("while (").generatable (m_aTest).plain (')');
+      f.plain ("while(").generatable (m_aTest).plain (')');
     f.plain (';').nl ();
   }
 

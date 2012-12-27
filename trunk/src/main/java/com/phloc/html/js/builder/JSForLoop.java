@@ -43,21 +43,38 @@ public class JSForLoop implements IJSStatement
   {}
 
   @Nonnull
-  public JSVar init (@Nonnull final String var, final int v)
+  public JSForLoop simpleLoop (@Nonnull final String sVarName, final int nStartIncl, final int nEndExcl)
   {
-    return init (var, JSExpr.lit (v));
+    final JSVar aLoopVar = init (sVarName, nStartIncl);
+    if (nEndExcl >= nStartIncl)
+    {
+      test (aLoopVar.lt (nEndExcl));
+      update (aLoopVar.incr ());
+    }
+    else
+    {
+      test (aLoopVar.gt (nEndExcl));
+      update (aLoopVar.decr ());
+    }
+    return this;
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String sVar, final long nValue)
+  public JSVar init (@Nonnull final String sVarName, final int nValue)
   {
-    return init (sVar, JSExpr.lit (nValue));
+    return init (sVarName, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String sVar, @Nonnull final IJSExpression aExpr)
+  public JSVar init (@Nonnull final String sVarName, final long nValue)
   {
-    return init (null, sVar, aExpr);
+    return init (sVarName, JSExpr.lit (nValue));
+  }
+
+  @Nonnull
+  public JSVar init (@Nonnull final String sVarName, @Nonnull final IJSExpression aExpr)
+  {
+    return init (null, sVarName, aExpr);
   }
 
   @Nonnull
@@ -75,7 +92,7 @@ public class JSForLoop implements IJSStatement
 
   public void init (@Nonnull final JSVar aVar, @Nonnull final IJSExpression aExpr)
   {
-    m_aInits.add (JSExpr.assign (aVar, aExpr));
+    m_aInits.add (aVar.assign (aExpr));
   }
 
   public void test (@Nonnull final IJSExpression aTest)

@@ -163,7 +163,7 @@ public final class JSPackageTest
       aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
 
-    // Loops
+    // for-in-loop
     {
       final JSVar aI = new JSVar ("i");
       final JSLabel aLabel = aPkg.label ("loop");
@@ -171,6 +171,30 @@ public final class JSPackageTest
       final JSConditional aIf = aFI.body ()._if (aI.eq (2));
       aIf._then ()._break ();
       aIf._else ()._continue (aLabel);
+    }
+
+    // for-loop
+    {
+      final JSForLoop aFor = aPkg._for ();
+      final JSVar aI = aFor.init ("i", 0);
+      aFor.test (aI.lt (5));
+      aFor.update (aI.incr ());
+      aFor.body ()._continue ();
+
+      aPkg._for ().simpleLoop ("i", 5, 0);
+      aPkg._for ().simpleLoop ("i", 0, 5);
+    }
+
+    // do-loop
+    {
+      final JSRef aI = JSExpr.ref ("i");
+      aPkg._do (aI.lt (1000)).body ().incr (aI);
+    }
+
+    // while-loop
+    {
+      final JSRef aI = JSExpr.ref ("i");
+      aPkg._while (aI.gt (0)).body ().decr (aI);
     }
 
     return aPkg;
@@ -218,6 +242,17 @@ public final class JSPackageTest
                       + "loop:for(var i in [1,2,4]){"
                       + "if(i==2){break;}"
                       + "else{continue loop;}"
+                      + "}"
+                      + "for(var i=0;(i<5);i++){"
+                      + "continue;"
+                      + "}"
+                      + "for(var i=5;(i>0);i--);"
+                      + "for(var i=0;(i<5);i++);"
+                      + "do{"
+                      + "i++;"
+                      + "}while(i<1000);"
+                      + "while(i>0){"
+                      + "i--;"
                       + "}",
                   sCompressedCode);
     System.out.println ("Saved " +

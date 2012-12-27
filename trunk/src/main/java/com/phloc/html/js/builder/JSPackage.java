@@ -252,6 +252,28 @@ public class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   }
 
   /**
+   * Create a While statement and add it to this block
+   * 
+   * @return Newly generated While statement
+   */
+  @Nonnull
+  public JSWhileLoop _while (@Nonnull final IJSExpression aTest)
+  {
+    return addStatement (new JSWhileLoop (aTest));
+  }
+
+  /**
+   * Create a Do statement and add it to this block
+   * 
+   * @return Newly generated Do statement
+   */
+  @Nonnull
+  public JSDoLoop _do (@Nonnull final IJSExpression aTest)
+  {
+    return addStatement (new JSDoLoop (aTest));
+  }
+
+  /**
    * Create a label, which can be referenced from <code>continue</code> and
    * <code>break</code> statements.
    */

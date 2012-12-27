@@ -134,7 +134,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   @Nonnull
-  private <T extends IJSCodeProvider> T _insert (@Nonnull final T aElement)
+  private <T extends IJSCodeProvider> T _add (@Nonnull final T aElement)
   {
     m_aContent.add (m_nPos, aElement);
     m_nPos++;
@@ -249,7 +249,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
                      @Nullable final IJSExpression aInit)
   {
     final JSVar aVar = new JSVar (aType, sName, aInit);
-    _insert (aVar);
+    _add (aVar);
     m_bBracesRequired = true;
     m_bIndentRequired = true;
     return aVar;
@@ -314,7 +314,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assign (aLhs, aExpr));
+    _add (JSExpr.assign (aLhs, aExpr));
     return this;
   }
 
@@ -377,7 +377,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignPlus (aLhs, aExpr));
+    _add (JSExpr.assignPlus (aLhs, aExpr));
     return this;
   }
 
@@ -420,7 +420,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignMinus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignMinus (aLhs, aExpr));
+    _add (JSExpr.assignMinus (aLhs, aExpr));
     return this;
   }
 
@@ -463,7 +463,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignMultiply (aLhs, aExpr));
+    _add (JSExpr.assignMultiply (aLhs, aExpr));
     return this;
   }
 
@@ -506,7 +506,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignDivide (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignDivide (aLhs, aExpr));
+    _add (JSExpr.assignDivide (aLhs, aExpr));
     return this;
   }
 
@@ -525,7 +525,21 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSBlock assignModulo (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
-    _insert (JSExpr.assignModulo (aLhs, aExpr));
+    _add (JSExpr.assignModulo (aLhs, aExpr));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock incr (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    _add (new JSIncr (aLhs));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock decr (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    _add (new JSDecr (aLhs));
     return this;
   }
 
@@ -542,7 +556,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nullable final IJSExpression aExpr, @Nonnull @Nonempty final String sMethod)
   {
-    return _insert (new JSInvocation (aExpr, sMethod));
+    return _add (new JSInvocation (aExpr, sMethod));
   }
 
   /**
@@ -558,7 +572,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nullable final IJSExpression aExpr, @Nonnull final JSMethod aMethod)
   {
-    return _insert (new JSInvocation (aExpr, aMethod));
+    return _add (new JSInvocation (aExpr, aMethod));
   }
 
   /**
@@ -567,7 +581,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation staticInvoke (@Nullable final AbstractJSClass aType, @Nonnull final String sMethod)
   {
-    return _insert (new JSInvocation (aType, sMethod));
+    return _add (new JSInvocation (aType, sMethod));
   }
 
   /**
@@ -580,7 +594,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nonnull @Nonempty final String sMethod)
   {
-    return _insert (new JSInvocation ((IJSExpression) null, sMethod));
+    return _add (new JSInvocation ((IJSExpression) null, sMethod));
   }
 
   /**
@@ -593,7 +607,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSMethod aMethod)
   {
-    return _insert (new JSInvocation ((IJSExpression) null, aMethod));
+    return _add (new JSInvocation ((IJSExpression) null, aMethod));
   }
 
   /**
@@ -606,7 +620,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSFunction aFunction)
   {
-    return _insert (new JSInvocation (aFunction));
+    return _add (new JSInvocation (aFunction));
   }
 
   /**
@@ -619,7 +633,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
-    return _insert (new JSInvocation (aAnonymousFunction));
+    return _add (new JSInvocation (aAnonymousFunction));
   }
 
   /**
@@ -634,7 +648,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   {
     if (aJSCodeProvider == null)
       throw new NullPointerException ("JSCodeProvider");
-    _insert (aJSCodeProvider);
+    _add (aJSCodeProvider);
     return this;
   }
 
@@ -648,7 +662,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSConditional _if (@Nonnull final IJSExpression aExpr)
   {
-    return _insert (new JSConditional (aExpr));
+    return _add (new JSConditional (aExpr));
   }
 
   /**
@@ -659,7 +673,19 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSForLoop _for ()
   {
-    return _insert (new JSForLoop ());
+    return _add (new JSForLoop ());
+  }
+
+  @Nonnull
+  public JSForIn forIn (@Nonnull final JSVar aVar, @Nonnull final IJSExpression aCollection)
+  {
+    return _add (new JSForIn (aVar, aCollection));
+  }
+
+  @Nonnull
+  public JSForIn forIn (@Nonnull final String sVarName, @Nonnull final IJSExpression aCollection)
+  {
+    return forIn (null, sVarName, aCollection);
   }
 
   @Nonnull
@@ -667,7 +693,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
                         @Nonnull final String sName,
                         @Nonnull final IJSExpression aCollection)
   {
-    return _insert (new JSForIn (aVarType, sName, aCollection));
+    return _add (new JSForIn (aVarType, sName, aCollection));
   }
 
   /**
@@ -678,16 +704,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSWhileLoop _while (@Nonnull final IJSExpression aTest)
   {
-    return _insert (new JSWhileLoop (aTest));
-  }
-
-  /**
-   * Create a switch/case statement and add it to this block
-   */
-  @Nonnull
-  public JSSwitch _switch (@Nonnull final IJSExpression aTest)
-  {
-    return _insert (new JSSwitch (aTest));
+    return _add (new JSWhileLoop (aTest));
   }
 
   /**
@@ -698,7 +715,16 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSDoLoop _do (@Nonnull final IJSExpression aTest)
   {
-    return _insert (new JSDoLoop (aTest));
+    return _add (new JSDoLoop (aTest));
+  }
+
+  /**
+   * Create a switch/case statement and add it to this block
+   */
+  @Nonnull
+  public JSSwitch _switch (@Nonnull final IJSExpression aTest)
+  {
+    return _add (new JSSwitch (aTest));
   }
 
   /**
@@ -709,7 +735,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSTryBlock _try ()
   {
-    return _insert (new JSTryBlock ());
+    return _add (new JSTryBlock ());
   }
 
   /**
@@ -720,7 +746,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   public void delete (@Nonnull final IJSExpression aExpr)
   {
-    _insert (new JSDelete (aExpr));
+    _add (new JSDelete (aExpr));
   }
 
   /**
@@ -776,7 +802,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   public void _return (@Nullable final IJSExpression aExpr)
   {
-    _insert (new JSReturn (aExpr));
+    _add (new JSReturn (aExpr));
   }
 
   /**
@@ -784,12 +810,12 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   public void _throw (@Nonnull final IJSExpression aExpr)
   {
-    _insert (new JSThrow (aExpr));
+    _add (new JSThrow (aExpr));
   }
 
   public void _debugger ()
   {
-    _insert (new JSDebugger ());
+    _add (new JSDebugger ());
   }
 
   /**
@@ -802,7 +828,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
 
   public void _break (@Nullable final JSLabel aLabel)
   {
-    _insert (new JSBreak (aLabel));
+    _add (new JSBreak (aLabel));
   }
 
   /**
@@ -813,7 +839,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   public JSLabel label (@Nonnull @Nonempty final String sName)
   {
     final JSLabel aLabel = new JSLabel (sName);
-    _insert (aLabel);
+    _add (aLabel);
     return aLabel;
   }
 
@@ -827,7 +853,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   public void _continue (@Nullable final JSLabel aLabel)
   {
-    _insert (new JSContinue (aLabel));
+    _add (new JSContinue (aLabel));
   }
 
   /**
@@ -839,7 +865,7 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
     final JSBlock aSubBlock = new JSBlock ();
     aSubBlock.m_bBracesRequired = false;
     aSubBlock.m_bIndentRequired = false;
-    return _insert (aSubBlock);
+    return _add (aSubBlock);
   }
 
   @Nonnull
@@ -851,12 +877,12 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   @Nonnull
   public JSFunction function (@Nullable final AbstractJSType aReturnType, @Nonnull final String sName) throws JSNameAlreadyExistsException
   {
-    return _insert (new JSFunction (aReturnType, sName));
+    return _add (new JSFunction (aReturnType, sName));
   }
 
   public void comment (@Nonnull final String sComment)
   {
-    _insert (new JSCommentSingleLine (sComment));
+    _add (new JSCommentSingleLine (sComment));
   }
 
   /**
