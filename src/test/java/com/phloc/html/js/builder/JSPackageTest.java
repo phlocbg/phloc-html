@@ -19,6 +19,8 @@ package com.phloc.html.js.builder;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 
 import com.phloc.commons.mock.PhlocTestUtils;
@@ -31,11 +33,10 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
  */
 public final class JSPackageTest
 {
-  @Test
-  public void test () throws Exception
+  @Nonnull
+  private JSPackage _createMockPackage ()
   {
     final JSPackage aPkg = new JSPackage ();
-    PhlocTestUtils.testDefaultImplementationWithEqualContentObject (aPkg, new JSPackage ());
 
     // Global variable
     aPkg.var (JSPrimitiveType.NUMBER, "g_aRoot", JSExpr.lit (0));
@@ -161,6 +162,14 @@ public final class JSPackageTest
 
       aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
+    return aPkg;
+  }
+
+  @Test
+  public void test () throws Exception
+  {
+    final JSPackage aPkg = _createMockPackage ();
+    PhlocTestUtils.testDefaultImplementationWithEqualContentObject (aPkg, _createMockPackage ());
 
     JSPrinter.setMinimumCodeSize (false);
     final String sCode = aPkg.getJSCode ();
