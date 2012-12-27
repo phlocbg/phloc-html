@@ -103,11 +103,11 @@ public class JSForLoop implements IJSStatement
   public void state (final JSFormatter f)
   {
     f.plain ("for(");
-    boolean first = true;
+    boolean bFirst = true;
     for (final Object o : m_aInits)
     {
-      if (first)
-        first = false;
+      if (bFirst)
+        bFirst = false;
       else
         f.plain (',');
       if (o instanceof JSVar)

@@ -162,6 +162,17 @@ public final class JSPackageTest
 
       aPkg.invoke (aFuncMain).arg ("<div>Test</div>");
     }
+
+    // Loops
+    {
+      final JSVar aI = new JSVar ("i");
+      final JSLabel aLabel = aPkg.label ("loop");
+      final JSForIn aFI = aPkg.forIn (aI, new JSArray ().add (1).add (2).add (4));
+      final JSConditional aIf = aFI.body ()._if (aI.eq (2));
+      aIf._then ()._break ();
+      aIf._else ()._continue (aLabel);
+    }
+
     return aPkg;
   }
 
@@ -203,7 +214,11 @@ public final class JSPackageTest
                       + "var sComments='';"
                       + "sHTML=sHTML.replace(/<!--([\\s\\S]*?)-->/g,function(all,sComment){sComments+=(sComment+'\\n');return '';});"
                       + "return {html:sHTML,comments:sComments};}"
-                      + "sajax_extract_htmlcomments('<div>Test<\\/div>');",
+                      + "sajax_extract_htmlcomments('<div>Test<\\/div>');"
+                      + "loop:for(var i in [1,2,4]){"
+                      + "if(i==2){break;}"
+                      + "else{continue loop;}"
+                      + "}",
                   sCompressedCode);
     System.out.println ("Saved " +
                         (sCode.length () - sCompressedCode.length ()) +

@@ -232,11 +232,33 @@ public class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   }
 
   @Nonnull
-  public JSForIn forIn (@Nullable final AbstractJSType varType,
-                        @Nonnull final String name,
-                        @Nonnull final IJSExpression collection)
+  public JSForIn forIn (@Nonnull final JSVar aVar, @Nonnull final IJSExpression aCollection)
   {
-    return addStatement (new JSForIn (varType, name, collection));
+    return addStatement (new JSForIn (aVar, aCollection));
+  }
+
+  @Nonnull
+  public JSForIn forIn (@Nonnull final String sVarName, @Nonnull final IJSExpression aCollection)
+  {
+    return forIn (null, sVarName, aCollection);
+  }
+
+  @Nonnull
+  public JSForIn forIn (@Nullable final AbstractJSType aVarType,
+                        @Nonnull final String sVarName,
+                        @Nonnull final IJSExpression aCollection)
+  {
+    return addStatement (new JSForIn (aVarType, sVarName, aCollection));
+  }
+
+  /**
+   * Create a label, which can be referenced from <code>continue</code> and
+   * <code>break</code> statements.
+   */
+  @Nonnull
+  public JSLabel label (@Nonnull @Nonempty final String sName)
+  {
+    return addStatement (new JSLabel (sName));
   }
 
   /**
