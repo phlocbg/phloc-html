@@ -625,6 +625,18 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression isTypeof (@Nonnull final AbstractJSType aType)
+  {
+    return typeof ().eeq (aType.typeName ());
+  }
+
+  @Nonnull
+  public final AbstractJSExpression isNotTypeof (@Nonnull final AbstractJSType aType)
+  {
+    return typeof ().ene (aType.typeName ());
+  }
+
+  @Nonnull
   public final AbstractJSExpression isUndefined ()
   {
     if (this instanceof JSArrayCompRef)

@@ -69,26 +69,6 @@ public class JSPrimitiveType extends AbstractJSType
     return m_aGlobal;
   }
 
-  /**
-   * @return The type to be used in "typeof" expressions. A string literal with
-   *         the name in it. For {@link #NUMBER} this returns
-   *         <code>"Number"</code>
-   */
-  @Nonnull
-  public final JSStringLiteral typeName ()
-  {
-    return JSExpr.lit (m_sName);
-  }
-
-  /**
-   * @return A "new type" invocation object
-   */
-  @Nonnull
-  public final JSInvocation _new ()
-  {
-    return JSExpr._new (this);
-  }
-
   public final void generate (@Nonnull final JSFormatter f)
   {
     f.plain (m_sName);
