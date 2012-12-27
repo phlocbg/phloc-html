@@ -641,51 +641,51 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
-  public final JSInvocation invoke (@Nonnull final JSMethod method)
+  public final JSInvocation invoke (@Nonnull final JSMethod aMethod)
   {
-    return JSExpr.invoke (this, method);
+    return JSExpr.invoke (this, aMethod);
   }
 
   @Nonnull
-  public final JSInvocation invoke (@Nonnull @Nonempty final String method)
+  public final JSInvocation invoke (@Nonnull @Nonempty final String sMethod)
   {
-    return JSExpr.invoke (this, method);
+    return JSExpr.invoke (this, sMethod);
   }
 
   @Nonnull
-  public final JSFieldRef ref (@Nonnull final JSVar field)
+  public final JSFieldRef ref (@Nonnull final JSVar aField)
   {
-    return JSExpr.ref (this, field);
+    return JSExpr.ref (this, aField);
   }
 
   @Nonnull
-  public final JSFieldRef ref (@Nonnull final String field)
+  public final JSFieldRef ref (@Nonnull final String sField)
   {
-    return JSExpr.ref (this, field);
+    return JSExpr.ref (this, sField);
   }
 
   @Nonnull
-  public final JSArrayCompRef component (final char index)
+  public final JSArrayCompRef component (final char cIndex)
   {
-    return component (JSExpr.lit (index));
+    return component (JSExpr.lit (cIndex));
   }
 
   @Nonnull
-  public final JSArrayCompRef component (final int index)
+  public final JSArrayCompRef component (final int nIndex)
   {
-    return component (JSExpr.lit (index));
+    return component (JSExpr.lit (nIndex));
   }
 
   @Nonnull
-  public final JSArrayCompRef component (final long index)
+  public final JSArrayCompRef component (final long nIndex)
   {
-    return component (JSExpr.lit (index));
+    return component (JSExpr.lit (nIndex));
   }
 
   @Nonnull
-  public final JSArrayCompRef component (@Nonnull final String index)
+  public final JSArrayCompRef component (@Nonnull final String sIndex)
   {
-    return component (JSExpr.lit (index));
+    return component (JSExpr.lit (sIndex));
   }
 
   @Nonnull

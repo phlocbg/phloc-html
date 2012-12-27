@@ -50,7 +50,7 @@ public final class JSPackageTest
       aFuncMain.jsDoc ().addParam (m1).add ("Any kind of value");
 
       // function variable
-      final JSVar aRoot = aFuncMain.body ().decl (JSPrimitiveType.NUMBER, "root", JSExpr.lit (5));
+      final JSVar aRoot = aFuncMain.body ().var (JSPrimitiveType.NUMBER, "root", JSExpr.lit (5));
 
       // inline function
       final JSFunction aFunc = aFuncMain.body ().function ("add");
@@ -66,11 +66,11 @@ public final class JSPackageTest
 
       // Dynamic function
       {
-        final JSVar aAdd2 = aFuncMain.body ().decl ("add2",
-                                                    JSPrimitiveType.FUNCTION._new ()
-                                                                            .arg ("x")
-                                                                            .arg ("y")
-                                                                            .arg ("return x+y"));
+        final JSVar aAdd2 = aFuncMain.body ().var ("add2",
+                                                   JSPrimitiveType.FUNCTION._new ()
+                                                                           .arg ("x")
+                                                                           .arg ("y")
+                                                                           .arg ("return x+y"));
         aFuncMain.body ().invoke (aAdd2.name ()).arg (1).arg (2);
       }
 
@@ -101,21 +101,21 @@ public final class JSPackageTest
       }
 
       // Array
-      final JSVar aArray1 = aFuncMain.body ().decl ("array1", new JSArray ().add (5));
+      final JSVar aArray1 = aFuncMain.body ().var ("array1", new JSArray ().add (5));
       aFuncMain.body ().assign (aArray1.component (0), 6);
 
-      final JSVar aArray1a = aFuncMain.body ().decl ("array1a", JSPrimitiveType.ARRAY._new ().arg (5));
+      final JSVar aArray1a = aFuncMain.body ().var ("array1a", JSPrimitiveType.ARRAY._new ().arg (5));
       aFuncMain.body ().assign (aArray1a.component (0), 7);
       aFuncMain.body ().invoke (aArray1a, "push").arg ("pushed");
 
       // Associative Array
-      final JSVar aArray2 = aFuncMain.body ()
-                                     .decl ("array2",
-                                            new JSAssocArray ().add ("num", 1)
-                                                               .add ("array", aArray1)
-                                                               .add ("assocarray",
-                                                                     new JSAssocArray ().add ("key", "value")
-                                                                                        .add ("key2", "anything else")));
+      final JSVar aArray2 = aFuncMain.body ().var ("array2",
+                                                   new JSAssocArray ().add ("num", 1)
+                                                                      .add ("array", aArray1)
+                                                                      .add ("assocarray",
+                                                                            new JSAssocArray ().add ("key", "value")
+                                                                                               .add ("key2",
+                                                                                                     "anything else")));
       aFuncMain.body ().assign (aArray2.component ("num"), 6);
 
       // concatenate misc things
@@ -146,7 +146,7 @@ public final class JSPackageTest
        */
       final JSFunction aFuncMain = aPkg.function ("sajax_extract_htmlcomments");
       final JSVar sHTML = aFuncMain.param ("sHTML");
-      final JSVar sComments = aFuncMain.body ().decl ("sComments", JSExpr.lit (""));
+      final JSVar sComments = aFuncMain.body ().var ("sComments", "");
       aFuncMain.body ().comment ("Lazy quantifier \"*?\"");
       final JSAnonymousFunction anonFunction = new JSAnonymousFunction ();
       anonFunction.param ("all");

@@ -104,33 +104,33 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String method)
+  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String sMethod)
   {
-    return new JSInvocation (aLhs, method);
+    return new JSInvocation (aLhs, sMethod);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull final JSMethod method)
+  public static JSInvocation invoke (@Nullable final IJSExpression aLhs, @Nonnull final JSMethod aMethod)
   {
-    return new JSInvocation (aLhs, method);
+    return new JSInvocation (aLhs, aMethod);
   }
 
   @Nonnull
-  public static JSInvocation invokeThis (@Nonnull @Nonempty final String method)
+  public static JSInvocation invokeThis (@Nonnull @Nonempty final String sMethod)
   {
-    return invoke (THIS, method);
+    return invoke (THIS, sMethod);
   }
 
   @Nonnull
-  public static JSInvocation invokeThis (@Nonnull final JSMethod method)
+  public static JSInvocation invokeThis (@Nonnull final JSMethod aMethod)
   {
-    return invoke (THIS, method);
+    return invoke (THIS, aMethod);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nonnull final JSFunction function)
+  public static JSInvocation invoke (@Nonnull final JSFunction aFunction)
   {
-    return new JSInvocation (function);
+    return new JSInvocation (aFunction);
   }
 
   @Nonnull
