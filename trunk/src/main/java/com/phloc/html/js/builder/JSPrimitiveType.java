@@ -105,7 +105,7 @@ public class JSPrimitiveType extends AbstractJSType
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSPrimitiveType rhs = (JSPrimitiveType) o;
     return m_sName.equals (rhs.m_sName);
@@ -114,12 +114,12 @@ public class JSPrimitiveType extends AbstractJSType
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sName).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sName).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("name", m_sName).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("name", m_sName).toString ();
   }
 }

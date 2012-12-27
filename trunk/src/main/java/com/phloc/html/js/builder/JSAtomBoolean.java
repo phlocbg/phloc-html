@@ -51,7 +51,7 @@ public class JSAtomBoolean extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSAtomBoolean rhs = (JSAtomBoolean) o;
     return m_bValue == rhs.m_bValue;
@@ -60,12 +60,12 @@ public class JSAtomBoolean extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_bValue).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_bValue).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("value", m_bValue).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("value", m_bValue).toString ();
   }
 }

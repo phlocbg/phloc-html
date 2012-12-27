@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -42,22 +43,24 @@ public class JSMethod extends JSFunction
    * 
    * @param aClass
    *        Owning class
-   * @param type
+   * @param aType
    *        Return type for the method
-   * @param name
+   * @param sName
    *        Name of this method
    */
-  public JSMethod (@Nonnull final JSDefinedClass aClass, @Nullable final AbstractJSType type, @Nonnull final String name)
+  public JSMethod (@Nonnull final JSDefinedClass aClass,
+                   @Nullable final AbstractJSType aType,
+                   @Nonnull final String sName)
   {
-    super (type, name);
+    super (aType, sName);
     if (aClass == null)
       throw new NullPointerException ("class");
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Illegal method name: " + name);
-    if (name.equals (aClass.name ()))
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("Illegal method name: " + sName);
+    if (sName.equals (aClass.name ()))
       throw new IllegalArgumentException ("You cannot name a method like the constructor!");
-    if (!Character.isLowerCase (name.charAt (0)))
-      s_aLogger.warn ("Method names should always start with a lowercase character: " + name);
+    if (!Character.isLowerCase (sName.charAt (0)))
+      s_aLogger.warn ("Method names should always start with a lowercase character: " + sName);
     m_aClass = aClass;
     body ().newlineAtEnd (false);
   }
@@ -73,6 +76,23 @@ public class JSMethod extends JSFunction
   {
     // No name required for anonymous function
     return new JSAnonymousFunction (type (), params (), body ());
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSMethod rhs = (JSMethod) o;
+    return m_aClass.name ().equals (rhs.m_aClass.name ());
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aClass.name ()).getHashCode ();
   }
 
   @Override

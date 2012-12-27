@@ -45,7 +45,7 @@ public final class JSExprDirect extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSExprDirect rhs = (JSExprDirect) o;
     return m_sSource.equals (rhs.m_sSource);
@@ -54,12 +54,12 @@ public final class JSExprDirect extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sSource).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sSource).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("source", m_sSource).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("source", m_sSource).toString ();
   }
 }

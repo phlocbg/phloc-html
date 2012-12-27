@@ -49,7 +49,7 @@ public class JSExprParanthesis extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSExprParanthesis rhs = (JSExprParanthesis) o;
     return m_aExpr.equals (rhs.m_aExpr);
@@ -58,12 +58,12 @@ public class JSExprParanthesis extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aExpr).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aExpr).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("expr", m_aExpr).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("expr", m_aExpr).toString ();
   }
 }

@@ -30,6 +30,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
@@ -310,8 +311,25 @@ public class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSPackage rhs = (JSPackage) o;
+    return m_aObjs.equals (rhs.m_aObjs) && m_aDecls.equals (rhs.m_aDecls);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aObjs).append (m_aDecls).getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("objs", m_aObjs).toString ();
+    return new ToStringGenerator (this).append ("objs", m_aObjs).append ("decls", m_aDecls).toString ();
   }
 }

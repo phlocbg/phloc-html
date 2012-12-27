@@ -23,6 +23,11 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
+/**
+ * This class represents a single binary operator
+ * 
+ * @author philip
+ */
 public class JSOpBinary extends AbstractJSExpression
 {
   private final IJSExpression m_aLeft;
@@ -131,7 +136,7 @@ public class JSOpBinary extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSOpBinary rhs = (JSOpBinary) o;
     return m_aLeft.equals (rhs.m_aLeft) && m_sOp.equals (rhs.m_sOp) && m_aRight.equals (rhs.m_aRight);
@@ -140,15 +145,20 @@ public class JSOpBinary extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aLeft).append (m_sOp).append (m_aRight).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aLeft)
+                            .append (m_sOp)
+                            .append (m_aRight)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("lhs", m_aLeft)
-                                       .append ("op", m_sOp)
-                                       .append ("rhs", m_aRight)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("lhs", m_aLeft)
+                            .append ("op", m_sOp)
+                            .append ("rhs", m_aRight)
+                            .toString ();
   }
 }

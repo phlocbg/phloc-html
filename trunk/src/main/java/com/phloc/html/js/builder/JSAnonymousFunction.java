@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -174,11 +176,35 @@ public class JSAnonymousFunction extends AbstractJSExpression
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSAnonymousFunction rhs = (JSAnonymousFunction) o;
+    return EqualsUtils.equals (m_aType, rhs.m_aType) &&
+           m_aParams.equals (rhs.m_aParams) &&
+           EqualsUtils.equals (m_aBody, rhs.m_aBody);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aType)
+                            .append (m_aParams)
+                            .append (m_aBody)
+                            .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).appendIfNotNull ("type", m_aType)
-                                       .append ("params", m_aParams)
-                                       .append ("body", m_aBody)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("type", m_aType)
+                            .append ("params", m_aParams)
+                            .append ("body", m_aBody)
+                            .toString ();
   }
 }

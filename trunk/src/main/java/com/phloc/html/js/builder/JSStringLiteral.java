@@ -67,7 +67,7 @@ public class JSStringLiteral extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSStringLiteral rhs = (JSStringLiteral) o;
     return m_sStr.equals (rhs.m_sStr);
@@ -76,12 +76,12 @@ public class JSStringLiteral extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sStr).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sStr).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("string", m_sStr).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("string", m_sStr).toString ();
   }
 }

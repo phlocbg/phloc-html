@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -72,6 +73,23 @@ public class JSCatchBlock implements IJSGeneratable
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSCatchBlock rhs = (JSCatchBlock) o;
+    return m_aVar.equals (rhs.m_aVar) && m_aBody.equals (rhs.m_aBody);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aVar).append (m_aBody).getHashCode ();
   }
 
   @Override

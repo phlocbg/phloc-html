@@ -50,33 +50,44 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   /**
    * Constructor
    * 
-   * @param name
-   *        Name of this variable
-   * @param init
-   *        Value to initialize this variable to
+   * @param sName
+   *        name of the variable
    */
-  public JSVar (@Nonnull final String name, @Nullable final IJSExpression init)
+  public JSVar (@Nonnull final String sName)
   {
-    this (null, name, init);
+    this (sName, (IJSExpression) null);
   }
 
   /**
    * Constructor
    * 
-   * @param type
-   *        Datatype of this variable
-   * @param name
+   * @param sName
    *        Name of this variable
-   * @param init
+   * @param aInit
    *        Value to initialize this variable to
    */
-  public JSVar (@Nullable final AbstractJSType type, @Nonnull final String name, @Nullable final IJSExpression init)
+  public JSVar (@Nonnull final String sName, @Nullable final IJSExpression aInit)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
+    this (null, sName, aInit);
+  }
+
+  /**
+   * Constructor
+   * 
+   * @param aType
+   *        Datatype of this variable
+   * @param sName
+   *        Name of this variable
+   * @param aInit
+   *        Value to initialize this variable to
+   */
+  public JSVar (@Nullable final AbstractJSType aType, @Nonnull final String sName, @Nullable final IJSExpression aInit)
+  {
+    if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ();
-    m_aType = type;
-    m_sName = name;
-    m_aInit = init;
+    m_aType = aType;
+    m_sName = sName;
+    m_aInit = aInit;
   }
 
   /**
@@ -91,16 +102,16 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   /**
    * Sets the type of this variable.
    * 
-   * @param newType
-   *        must not be null.
+   * @param aNewType
+   *        new type. may be <code>null</code>.
    * @return the old type value.
    */
   @Nullable
-  public AbstractJSType type (@Nullable final AbstractJSType newType)
+  public AbstractJSType type (@Nullable final AbstractJSType aNewType)
   {
-    final AbstractJSType r = m_aType;
-    m_aType = newType;
-    return r;
+    final AbstractJSType ret = m_aType;
+    m_aType = aNewType;
+    return ret;
   }
 
   /**
@@ -118,11 +129,11 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * Changes the name of this variable.
    */
   @Nonnull
-  public JSVar name (@Nonnull final String name)
+  public JSVar name (@Nonnull final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ();
-    m_sName = name;
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("Illegal variable name passed!");
+    m_sName = sName;
     return this;
   }
 
@@ -147,13 +158,14 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   /**
    * Initialize this variable
    * 
-   * @param init
-   *        JExpression to be used to initialize this field
+   * @param aNewInit
+   *        Expression to be used to initialize this field. May be
+   *        <code>null</code>.
    */
   @Nonnull
-  public JSVar init (@Nullable final IJSExpression init)
+  public JSVar init (@Nullable final IJSExpression aNewInit)
   {
-    m_aInit = init;
+    m_aInit = aNewInit;
     return this;
   }
 
@@ -190,7 +202,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSVar rhs = (JSVar) o;
     return EqualsUtils.equals (m_aType, rhs.m_aType) &&
@@ -201,15 +213,20 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aType).append (m_sName).append (m_aInit).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aType)
+                            .append (m_sName)
+                            .append (m_aInit)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("type", m_aType)
-                                       .append ("name", m_sName)
-                                       .append ("init", m_aInit)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("type", m_aType)
+                            .append ("name", m_sName)
+                            .append ("init", m_aInit)
+                            .toString ();
   }
 }

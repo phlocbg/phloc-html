@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -76,11 +78,35 @@ public class JSFieldRef extends AbstractJSAssignmentTarget
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSFieldRef rhs = (JSFieldRef) o;
+    return EqualsUtils.equals (m_aObject, rhs.m_aObject) &&
+           EqualsUtils.equals (m_sName, rhs.m_sName) &&
+           EqualsUtils.equals (m_aVar, rhs.m_aVar);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aObject)
+                            .append (m_sName)
+                            .append (m_aVar)
+                            .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).appendIfNotNull ("object", m_aObject)
-                                       .append ("name", m_sName)
-                                       .appendIfNotNull ("var", m_aVar)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("object", m_aObject)
+                            .append ("name", m_sName)
+                            .appendIfNotNull ("var", m_aVar)
+                            .toString ();
   }
 }

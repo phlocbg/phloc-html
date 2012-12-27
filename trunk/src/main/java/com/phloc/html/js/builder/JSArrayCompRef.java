@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -62,8 +63,28 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSArrayCompRef rhs = (JSArrayCompRef) o;
+    return m_aArray.equals (rhs.m_aArray) && m_aIndex.equals (rhs.m_aIndex);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aArray).append (m_aIndex).getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("array", m_aArray).append ("index", m_aIndex).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("array", m_aArray)
+                            .append ("index", m_aIndex)
+                            .toString ();
   }
 }

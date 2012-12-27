@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
@@ -45,11 +46,16 @@ import com.phloc.json.IJSON;
  */
 public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContainer
 {
+  public static final boolean DEFAULT_BRACES_REQUIRED = true;
+  public static final boolean DEFAULT_INDENT_REQUIRED = true;
+  public static final boolean DEFAULT_NEWLINE_AT_END = true;
+
   /**
    * Declarations and statements contained in this block. Either
    * {@link IJSStatement} or {@link IJSDeclaration}.
    */
   private final List <IJSCodeProvider> m_aContent = new ArrayList <IJSCodeProvider> ();
+
   /**
    * Current position.
    */
@@ -60,17 +66,32 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
    */
   private boolean m_bBracesRequired;
   private boolean m_bIndentRequired;
-  private boolean m_bNewLineAtEnd = true;
+  private boolean m_bNewLineAtEnd = DEFAULT_NEWLINE_AT_END;
 
   public JSBlock ()
   {
-    this (true, true);
+    this (DEFAULT_BRACES_REQUIRED, DEFAULT_INDENT_REQUIRED);
   }
 
   public JSBlock (final boolean bBracesRequired, final boolean bIndentRequired)
   {
     m_bBracesRequired = bBracesRequired;
     m_bIndentRequired = bIndentRequired;
+  }
+
+  public boolean bracesRequired ()
+  {
+    return m_bBracesRequired;
+  }
+
+  public boolean indentRequired ()
+  {
+    return m_bIndentRequired;
+  }
+
+  public boolean newlineAtEnd ()
+  {
+    return m_bNewLineAtEnd;
   }
 
   /**
@@ -908,9 +929,36 @@ public class JSBlock implements IJSGeneratable, IJSStatement, IJSFunctionContain
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSBlock rhs = (JSBlock) o;
+    return m_aContent.equals (rhs.m_aContent) &&
+           m_nPos == rhs.m_nPos &&
+           m_bBracesRequired == rhs.m_bBracesRequired &&
+           m_bIndentRequired == rhs.m_bIndentRequired &&
+           m_bNewLineAtEnd == rhs.m_bNewLineAtEnd;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aContent)
+                                       .append (m_nPos)
+                                       .append (m_bBracesRequired)
+                                       .append (m_bIndentRequired)
+                                       .append (m_bNewLineAtEnd)
+                                       .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
     return new ToStringGenerator (this).append ("content", m_aContent)
+                                       .append ("pos", m_nPos)
                                        .append ("bracesRequired", m_bBracesRequired)
                                        .append ("identRequired", m_bIndentRequired)
                                        .append ("newLineAtEnd", m_bNewLineAtEnd)

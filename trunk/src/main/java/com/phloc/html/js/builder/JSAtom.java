@@ -57,7 +57,7 @@ public class JSAtom extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSAtom rhs = (JSAtom) o;
     return m_sAtom.equals (rhs.m_sAtom);
@@ -66,12 +66,12 @@ public class JSAtom extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sAtom).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sAtom).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("atom", m_sAtom).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("atom", m_sAtom).toString ();
   }
 }

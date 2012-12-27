@@ -33,12 +33,6 @@ public abstract class AbstractJSClass extends AbstractJSType
   {}
 
   /**
-   * Gets the package to which this class belongs.
-   */
-  @Nonnull
-  public abstract JSPackage _package ();
-
-  /**
    * Gets the super class of this class.
    * 
    * @return Returns the JClass representing the superclass of the entity (class

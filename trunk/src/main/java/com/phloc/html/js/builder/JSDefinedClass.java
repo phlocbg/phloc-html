@@ -32,6 +32,9 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
@@ -45,9 +48,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /** class JSDoc */
   private JSCommentMultiLine m_aJSDoc;
-
-  /** Owning package */
-  private final JSPackage m_aPackage;
 
   /** Name of this class. */
   private final String m_sName;
@@ -72,37 +72,41 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @param sName
    *        Name of this class
    */
+  @Deprecated
   public JSDefinedClass (@Nullable final JSPackage aPackage, @Nonnull @Nonempty final String sName)
+  {
+    this (sName);
+  }
+
+  /**
+   * constructor
+   * 
+   * @param sName
+   *        Name of this class
+   */
+  public JSDefinedClass (@Nonnull @Nonempty final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("Illegal class name: " + sName);
     if (!Character.isUpperCase (sName.charAt (0)))
       s_aLogger.warn ("Class names should always start with an upper-case character: " + sName);
-    m_aPackage = aPackage;
     m_sName = sName;
-  }
-
-  @Override
-  @Nullable
-  public final JSPackage _package ()
-  {
-    return m_aPackage;
   }
 
   /**
    * This class extends the specified class.
    * 
-   * @param superClass
+   * @param aSuperClass
    *        Superclass for this class
    * @return This class
    */
   @Nonnull
-  public JSDefinedClass _extends (@Nonnull final AbstractJSClass superClass)
+  public JSDefinedClass _extends (@Nonnull final AbstractJSClass aSuperClass)
   {
-    if (superClass == null)
-      throw new NullPointerException ();
+    if (aSuperClass == null)
+      throw new NullPointerException ("superClass");
 
-    m_aSuperClass = superClass;
+    m_aSuperClass = aSuperClass;
     return this;
   }
 
@@ -110,6 +114,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * Returns the class extended by this class.
    */
   @Override
+  @Nullable
   public AbstractJSClass _extends ()
   {
     return m_aSuperClass;
@@ -124,6 +129,8 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @return Name of this class
    */
   @Override
+  @Nonnull
+  @Nonempty
   public String name ()
   {
     return m_sName;
@@ -132,74 +139,74 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Adds a field to the list of field members of this defined class.
    * 
-   * @param name
+   * @param sName
    *        Name of this field
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (@Nonnull @Nonempty final String name)
+  public JSFieldVar field (@Nonnull @Nonempty final String sName)
   {
-    return field (null, name, null);
+    return field (null, sName, null);
   }
 
   /**
    * Adds a field to the list of field members of this defined class.
    * 
-   * @param type
+   * @param aType
    *        type of this field
-   * @param name
+   * @param sName
    *        Name of this field
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (@Nullable final AbstractJSType type, @Nonnull @Nonempty final String name)
+  public JSFieldVar field (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
-    return field (type, name, null);
+    return field (aType, sName, null);
   }
 
   /**
    * Adds a field to the list of field members of this defined class.
    * 
-   * @param name
+   * @param sName
    *        Name of this field.
-   * @param init
+   * @param aInit
    *        Initial value of this field.
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (@Nonnull @Nonempty final String name, @Nullable final IJSExpression init)
+  public JSFieldVar field (@Nonnull @Nonempty final String sName, @Nullable final IJSExpression aInit)
   {
-    return field (null, name, init);
+    return field (null, sName, aInit);
   }
 
   /**
    * Adds a field to the list of field members of this defined class.
    * 
-   * @param type
+   * @param aType
    *        type of this field.
-   * @param name
+   * @param sName
    *        Name of this field.
-   * @param init
+   * @param aInit
    *        Initial value of this field.
    * @return Newly generated field
    */
   @Nonnull
-  public JSFieldVar field (@Nullable final AbstractJSType type,
-                           @Nonnull @Nonempty final String name,
-                           @Nullable final IJSExpression init)
+  public JSFieldVar field (@Nullable final AbstractJSType aType,
+                           @Nonnull @Nonempty final String sName,
+                           @Nullable final IJSExpression aInit)
   {
-    final JSFieldVar f = new JSFieldVar (this, type, name, init);
+    final JSFieldVar f = new JSFieldVar (this, aType, sName, aInit);
     return addField (f);
   }
 
   @Nonnull
   public JSFieldVar addField (@Nonnull final JSFieldVar aField)
   {
-    final String name = aField.name ();
-    if (m_aFields.containsKey (name))
-      throw new IllegalArgumentException ("trying to create the same field twice: " + name);
+    final String sName = aField.name ();
+    if (m_aFields.containsKey (sName))
+      throw new IllegalArgumentException ("trying to create the same field twice: " + sName);
 
-    m_aFields.put (name, aField);
+    m_aFields.put (sName, aField);
     return aField;
   }
 
@@ -216,7 +223,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return ContainerHelper.newMap (m_aFields);
   }
 
-  public boolean containsField (final String sName)
+  public boolean containsField (@Nullable final String sName)
   {
     return m_aFields.containsKey (sName);
   }
@@ -251,29 +258,29 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Add a method to the list of method members of this JS class instance.
    * 
-   * @param name
+   * @param sName
    *        Name of the method
    * @return Newly generated method
    */
   @Nonnull
-  public JSMethod method (@Nonnull @Nonempty final String name)
+  public JSMethod method (@Nonnull @Nonempty final String sName)
   {
-    return method (null, name);
+    return method (null, sName);
   }
 
   /**
    * Add a method to the list of method members of this JS class instance.
    * 
-   * @param type
+   * @param aType
    *        Return type for this method
-   * @param name
+   * @param sName
    *        Name of the method
    * @return Newly generated method
    */
   @Nonnull
-  public JSMethod method (@Nullable final AbstractJSType type, @Nonnull @Nonempty final String name)
+  public JSMethod method (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
-    final JSMethod m = new JSMethod (this, type, name);
+    final JSMethod m = new JSMethod (this, aType, sName);
     m_aMethods.add (m);
     return m;
   }
@@ -333,5 +340,47 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public String getJSCode ()
   {
     return JSPrinter.getAsString ((IJSDeclaration) this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSDefinedClass rhs = (JSDefinedClass) o;
+    return EqualsUtils.equals (m_aJSDoc, rhs.m_aJSDoc) &&
+           m_sName.equals (rhs.m_sName) &&
+           EqualsUtils.equals (m_aSuperClass, rhs.m_aSuperClass) &&
+           m_aFields.equals (rhs.m_aFields) &&
+           EqualsUtils.equals (m_aConstructor, rhs.m_aConstructor) &&
+           m_aMethods.equals (rhs.m_aMethods);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aJSDoc)
+                            .append (m_sName)
+                            .append (m_aSuperClass)
+                            .append (m_aFields)
+                            .append (m_aConstructor)
+                            .append (m_aMethods)
+                            .getHashCode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("jsDoc", m_aJSDoc)
+                            .append ("name", m_sName)
+                            .appendIfNotNull ("superClass", m_aSuperClass)
+                            .append ("fields", m_aFields)
+                            .appendIfNotNull ("constructor", m_aConstructor)
+                            .append ("methods", m_aMethods)
+                            .toString ();
   }
 }
