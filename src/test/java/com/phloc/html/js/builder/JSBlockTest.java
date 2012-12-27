@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -233,18 +234,19 @@ public final class JSBlockTest
   @Test
   public void testCoverage ()
   {
-    final JSRef a = JSExpr.ref ("a");
-    a.plus ('a').plus (1d).plus (2f).plus (5).plus (6l).plus ("abc");
-    a.minus (1d).minus (2f).minus (5).minus (6l).minus ();
-    a.mul (1d).mul (2f).mul (5).mul (6l);
-    a.div (1d).div (2f).div (5).div (6l);
-    a.gt (1d).gt (2f).gt (5).gt (6l);
-    a.gte (1d).gte (2f).gte (5).gte (6l);
-    a.lt (1d).lt (2f).lt (5).lt (6l);
-    a.lte (1d).lte (2f).lte (5).lte (6l);
-    a.eq (true).eq ('a').eq (1d).eq (2f).eq (5).eq (6l).eq ("abc");
-    a.eeq (true).eeq ('a').eeq (1d).eeq (2f).eeq (5).eeq (6l).eeq ("abc");
-    a.ne (true).ne ('a').ne (1d).ne (2f).ne (5).ne (6l).ne ("abc");
-    a.ene (true).ene ('a').ene (1d).ene (2f).ene (5).ene (6l).ene ("abc");
+    AbstractJSExpression a = JSExpr.ref ("a");
+    a = a.plus ('a').plus (1d).plus (2f).plus (5).plus (6l).plus ("abc");
+    a = a.minus (1d).minus (2f).minus (5).minus (6l).minus ();
+    a = a.mul (1d).mul (2f).mul (5).mul (6l);
+    a = a.div (1d).div (2f).div (5).div (6l);
+    a = a.gt (1d).gt (2f).gt (5).gt (6l);
+    a = a.gte (1d).gte (2f).gte (5).gte (6l);
+    a = a.lt (1d).lt (2f).lt (5).lt (6l);
+    a = a.lte (1d).lte (2f).lte (5).lte (6l);
+    a = a.eq (true).eq ('a').eq (1d).eq (2f).eq (5).eq (6l).eq ("abc");
+    a = a.eeq (true).eeq ('a').eeq (1d).eeq (2f).eeq (5).eeq (6l).eeq ("abc");
+    a = a.ne (true).ne ('a').ne (1d).ne (2f).ne (5).ne (6l).ne ("abc");
+    a = a.ene (true).ene ('a').ene (1d).ene (2f).ene (5).ene (6l).ene ("abc");
+    assertNotNull (a);
   }
 }
