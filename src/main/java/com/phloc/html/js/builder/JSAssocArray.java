@@ -184,7 +184,7 @@ public class JSAssocArray extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSAssocArray rhs = (JSAssocArray) o;
     return EqualsUtils.equals (m_aExprs, rhs.m_aExprs);
@@ -193,12 +193,12 @@ public class JSAssocArray extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aExprs).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aExprs).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("exprs", m_aExprs).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("exprs", m_aExprs).toString ();
   }
 }

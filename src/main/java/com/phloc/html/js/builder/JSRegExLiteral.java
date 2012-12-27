@@ -102,7 +102,7 @@ public class JSRegExLiteral extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSRegExLiteral rhs = (JSRegExLiteral) o;
     return m_sRegEx.equals (rhs.m_sRegEx) &&
@@ -114,20 +114,22 @@ public class JSRegExLiteral extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sRegEx)
-                                       .append (m_bGlobal)
-                                       .append (m_bCaseInsensitive)
-                                       .append (m_bMultiLine)
-                                       .getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_sRegEx)
+                            .append (m_bGlobal)
+                            .append (m_bCaseInsensitive)
+                            .append (m_bMultiLine)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("regex", m_sRegEx)
-                                       .append ("global", m_bGlobal)
-                                       .append ("caseInsensitive", m_bCaseInsensitive)
-                                       .append ("multiLine", m_bMultiLine)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("regex", m_sRegEx)
+                            .append ("global", m_bGlobal)
+                            .append ("caseInsensitive", m_bCaseInsensitive)
+                            .append ("multiLine", m_bMultiLine)
+                            .toString ();
   }
 }

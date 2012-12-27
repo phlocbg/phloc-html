@@ -27,6 +27,8 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
@@ -499,13 +501,41 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final AbstractJSInvocation <?> rhs = (AbstractJSInvocation <?>) o;
+    return EqualsUtils.equals (m_aObject, rhs.m_aObject) &&
+           EqualsUtils.equals (m_aCtorType, rhs.m_aCtorType) &&
+           EqualsUtils.equals (m_aCallee, rhs.m_aCallee) &&
+           EqualsUtils.equals (m_sName, rhs.m_sName) &&
+           m_aArgs.equals (rhs.m_aArgs);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aObject)
+                            .append (m_aCtorType)
+                            .append (m_aCallee)
+                            .append (m_sName)
+                            .append (m_aArgs)
+                            .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).appendIfNotNull ("object", m_aObject)
-                                       .appendIfNotNull ("ctorType", m_aCtorType)
-                                       .appendIfNotNull ("callee", m_aCallee)
-                                       .appendIfNotNull ("name", m_sName)
-                                       .append ("args", m_aArgs)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("object", m_aObject)
+                            .appendIfNotNull ("ctorType", m_aCtorType)
+                            .appendIfNotNull ("callee", m_aCallee)
+                            .appendIfNotNull ("name", m_sName)
+                            .append ("args", m_aArgs)
+                            .toString ();
   }
 }

@@ -24,6 +24,11 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
+/**
+ * This class represents a single ternary operator.
+ * 
+ * @author philip
+ */
 public class JSOpTernary extends AbstractJSExpression
 {
   private final IJSExpression m_aExpr1;
@@ -104,7 +109,7 @@ public class JSOpTernary extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSOpTernary rhs = (JSOpTernary) o;
     return m_aExpr1.equals (rhs.m_aExpr1) &&
@@ -117,22 +122,24 @@ public class JSOpTernary extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aExpr1)
-                                       .append (m_sOp1)
-                                       .append (m_aExpr2)
-                                       .append (m_sOp2)
-                                       .append (m_aExpr3)
-                                       .getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aExpr1)
+                            .append (m_sOp1)
+                            .append (m_aExpr2)
+                            .append (m_sOp2)
+                            .append (m_aExpr3)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("expr1", m_aExpr1)
-                                       .append ("op1", m_sOp1)
-                                       .append ("expr2", m_aExpr2)
-                                       .append ("op2", m_sOp2)
-                                       .append ("expr3", m_aExpr3)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("expr1", m_aExpr1)
+                            .append ("op1", m_sOp1)
+                            .append ("expr2", m_aExpr2)
+                            .append ("op2", m_sOp2)
+                            .append ("expr3", m_aExpr3)
+                            .toString ();
   }
 }

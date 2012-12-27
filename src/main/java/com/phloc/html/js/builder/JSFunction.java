@@ -26,6 +26,8 @@ import javax.annotation.Nullable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 
@@ -226,6 +228,32 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSFunction rhs = (JSFunction) o;
+    return EqualsUtils.equals (m_aJSDoc, rhs.m_aJSDoc) &&
+           EqualsUtils.equals (m_aType, rhs.m_aType) &&
+           m_sName.equals (rhs.m_sName) &&
+           m_aParams.equals (rhs.m_aParams) &&
+           EqualsUtils.equals (m_aBody, rhs.m_aBody);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aJSDoc)
+                                       .append (m_aType)
+                                       .append (m_sName)
+                                       .append (m_aParams)
+                                       .append (m_aBody)
+                                       .getHashCode ();
   }
 
   @Override

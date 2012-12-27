@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -50,6 +52,12 @@ public class JSDoLoop implements IJSStatement
   }
 
   @Nonnull
+  public IJSExpression test ()
+  {
+    return m_aTest;
+  }
+
+  @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)
@@ -76,6 +84,23 @@ public class JSDoLoop implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSDoLoop rhs = (JSDoLoop) o;
+    return m_aTest.equals (rhs.m_aTest) && EqualsUtils.equals (m_aBody, rhs.m_aBody);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aTest).append (m_aBody).getHashCode ();
   }
 
   @Override

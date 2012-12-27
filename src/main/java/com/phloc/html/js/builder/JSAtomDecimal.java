@@ -125,7 +125,7 @@ public class JSAtomDecimal extends AbstractJSAtomNumeric
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSAtomDecimal rhs = (JSAtomDecimal) o;
     return EqualsUtils.equals (m_dValue, rhs.m_dValue);
@@ -134,12 +134,12 @@ public class JSAtomDecimal extends AbstractJSAtomNumeric
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_dValue).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_dValue).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("value", m_dValue).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("value", m_dValue).toString ();
   }
 }

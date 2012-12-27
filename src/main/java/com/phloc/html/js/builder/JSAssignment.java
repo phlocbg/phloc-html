@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -69,8 +70,33 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSAssignment rhs = (JSAssignment) o;
+    return m_aLhs.equals (rhs.m_aLhs) && m_sOp.equals (rhs.m_sOp) && m_aRhs.equals (rhs.m_aRhs);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aLhs)
+                            .append (m_sOp)
+                            .append (m_aRhs)
+                            .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("lhs", m_aLhs).append ("op", m_sOp).append ("rhs", m_aRhs).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("lhs", m_aLhs)
+                            .append ("op", m_sOp)
+                            .append ("rhs", m_aRhs)
+                            .toString ();
   }
 }

@@ -25,6 +25,11 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
+/**
+ * This class represents a single unary operator
+ * 
+ * @author philip
+ */
 @Immutable
 public class JSOpUnary extends AbstractJSExpression
 {
@@ -84,7 +89,7 @@ public class JSOpUnary extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSOpUnary rhs = (JSOpUnary) o;
     return m_sOp.equals (rhs.m_sOp) && m_aExpr.equals (rhs.m_aExpr) && m_bOpFirst == rhs.m_bOpFirst;
@@ -93,15 +98,20 @@ public class JSOpUnary extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sOp).append (m_aExpr).append (m_bOpFirst).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_sOp)
+                            .append (m_aExpr)
+                            .append (m_bOpFirst)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("op", m_sOp)
-                                       .append ("expr", m_aExpr)
-                                       .append ("opFirst", m_bOpFirst)
-                                       .toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("op", m_sOp)
+                            .append ("expr", m_aExpr)
+                            .append ("opFirst", m_bOpFirst)
+                            .toString ();
   }
 }

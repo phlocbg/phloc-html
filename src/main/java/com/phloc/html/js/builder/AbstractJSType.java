@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -39,9 +40,25 @@ public abstract class AbstractJSType implements IJSGeneratable
   public abstract String name ();
 
   @Nonnull
-  public JSCast casted (@Nonnull final IJSExpression expr)
+  public JSCast casted (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.cast (this, expr);
+    return JSExpr.cast (this, aExpr);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    return true;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).getHashCode ();
   }
 
   @Override

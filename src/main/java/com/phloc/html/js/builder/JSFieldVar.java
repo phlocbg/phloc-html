@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -94,6 +96,23 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
     if (m_aJSDoc != null)
       f.generatable (m_aJSDoc);
     super.declare (f);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSFieldVar rhs = (JSFieldVar) o;
+    return m_aOwner.name ().equals (rhs.m_aOwner.name ()) && EqualsUtils.equals (m_aJSDoc, rhs.m_aJSDoc);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aOwner.name ()).append (m_aJSDoc).getHashCode ();
   }
 
   @Override

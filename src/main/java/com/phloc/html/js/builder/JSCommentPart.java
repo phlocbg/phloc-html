@@ -24,6 +24,7 @@ import java.util.Iterator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -130,6 +131,22 @@ public class JSCommentPart extends ArrayList <Object>
 
       s = s.substring (0, idx + 1) + "<!-- -->" + s.substring (idx + 1);
     }
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    return super.equals (o);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ()).getHashCode ();
   }
 
   @Override

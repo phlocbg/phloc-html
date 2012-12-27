@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -107,9 +109,28 @@ public class JSCase implements IJSStatement
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSCase rhs = (JSCase) o;
+    return EqualsUtils.equals (m_aLabel, rhs.m_aLabel) &&
+           EqualsUtils.equals (m_aBody, rhs.m_aBody) &&
+           m_bIsDefaultCase == rhs.m_bIsDefaultCase;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aLabel).append (m_aBody).append (m_bIsDefaultCase).getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("label", m_aLabel)
+    return new ToStringGenerator (this).appendIfNotNull ("label", m_aLabel)
                                        .append ("body", m_aBody)
                                        .append ("isDefaultCase", m_bIsDefaultCase)
                                        .toString ();

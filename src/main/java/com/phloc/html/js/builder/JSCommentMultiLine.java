@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -37,7 +39,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   private final Map <String, JSCommentPart> m_aParams = new HashMap <String, JSCommentPart> ();
 
   /** list of xdoclets */
-  private final Map <String, Map <String, String>> m_aXdoclets = new HashMap <String, Map <String, String>> ();
+  private final Map <String, Map <String, String>> m_aXDoclets = new HashMap <String, Map <String, String>> ();
 
   /** The @-return tag part. */
   private JSCommentPart m_aReturn;
@@ -108,11 +110,11 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   @Nonnull
   public Map <String, String> addXdoclet (final String sName)
   {
-    Map <String, String> p = m_aXdoclets.get (sName);
+    Map <String, String> p = m_aXDoclets.get (sName);
     if (p == null)
     {
       p = new HashMap <String, String> ();
-      m_aXdoclets.put (sName, p);
+      m_aXDoclets.put (sName, p);
     }
     return p;
   }
@@ -148,7 +150,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
     // Main content start
     format (f, " * ");
 
-    if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXdoclets.isEmpty ())
+    if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXDoclets.isEmpty ())
     {
       f.plain (" * ").nlFix ();
       for (final Map.Entry <String, JSCommentPart> e : m_aParams.entrySet ())
@@ -166,7 +168,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
         f.plain (" * @deprecated").nlFix ();
         m_aDeprecated.format (f, INDENT);
       }
-      for (final Map.Entry <String, Map <String, String>> e : m_aXdoclets.entrySet ())
+      for (final Map.Entry <String, Map <String, String>> e : m_aXDoclets.entrySet ())
       {
         f.plain (" * @").plain (e.getKey ());
         if (e.getValue () != null)
@@ -187,10 +189,34 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   }
 
   @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSCommentMultiLine rhs = (JSCommentMultiLine) o;
+    return m_aParams.equals (rhs.m_aParams) &&
+           m_aXDoclets.equals (rhs.m_aXDoclets) &&
+           EqualsUtils.equals (m_aReturn, rhs.m_aReturn) &&
+           EqualsUtils.equals (m_aDeprecated, rhs.m_aDeprecated);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aParams)
+                                       .append (m_aXDoclets)
+                                       .append (m_aReturn)
+                                       .append (m_aDeprecated)
+                                       .getHashCode ();
+  }
+
+  @Override
   public String toString ()
   {
     return new ToStringGenerator (this).append ("params", m_aParams)
-                                       .append ("xdoclets", m_aXdoclets)
+                                       .append ("xdoclets", m_aXDoclets)
                                        .append ("return", m_aReturn)
                                        .append ("deprecated", m_aDeprecated)
                                        .toString ();

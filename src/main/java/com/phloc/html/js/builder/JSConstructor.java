@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -34,7 +35,7 @@ public class JSConstructor extends JSFunction
    * Constructor constructor
    * 
    * @param aClass
-   *        JClass containing this constructor
+   *        Class containing this constructor
    */
   public JSConstructor (@Nonnull final JSDefinedClass aClass)
   {
@@ -46,6 +47,23 @@ public class JSConstructor extends JSFunction
   public JSDefinedClass parentClass ()
   {
     return m_aClass;
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSConstructor rhs = (JSConstructor) o;
+    return m_aClass.name ().equals (rhs.m_aClass.name ());
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aClass.name ()).getHashCode ();
   }
 
   @Override

@@ -23,6 +23,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -47,41 +49,47 @@ public class JSForLoop implements IJSStatement
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String var, final long v)
+  public JSVar init (@Nonnull final String sVar, final long nValue)
   {
-    return init (var, JSExpr.lit (v));
+    return init (sVar, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String var, @Nonnull final IJSExpression e)
+  public JSVar init (@Nonnull final String sVar, @Nonnull final IJSExpression aExpr)
   {
-    return init (null, var, e);
+    return init (null, sVar, aExpr);
   }
 
   @Nonnull
-  public JSVar init (@Nullable final AbstractJSType type, @Nonnull final String var, @Nonnull final IJSExpression e)
+  public JSVar init (@Nullable final AbstractJSType aType,
+                     @Nonnull final String sVar,
+                     @Nonnull final IJSExpression aExpr)
   {
-    if (e == null)
+    if (aExpr == null)
       throw new NullPointerException ("initExpression");
 
-    final JSVar v = new JSVar (type, var, e);
+    final JSVar v = new JSVar (aType, sVar, aExpr);
     m_aInits.add (v);
     return v;
   }
 
-  public void init (@Nonnull final JSVar v, @Nonnull final IJSExpression e)
+  public void init (@Nonnull final JSVar aVar, @Nonnull final IJSExpression aExpr)
   {
-    m_aInits.add (JSExpr.assign (v, e));
+    m_aInits.add (JSExpr.assign (aVar, aExpr));
   }
 
-  public void test (@Nonnull final IJSExpression e)
+  public void test (@Nonnull final IJSExpression aTest)
   {
-    m_aTest = e;
+    if (aTest == null)
+      throw new NullPointerException ("test");
+    m_aTest = aTest;
   }
 
-  public void update (@Nonnull final IJSExpression e)
+  public void update (@Nonnull final IJSExpression aExpr)
   {
-    m_aUpdates.add (e);
+    if (aExpr == null)
+      throw new NullPointerException ("expr");
+    m_aUpdates.add (aExpr);
   }
 
   @Nonnull
@@ -118,6 +126,30 @@ public class JSForLoop implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSForLoop rhs = (JSForLoop) o;
+    return m_aInits.equals (rhs.m_aInits) &&
+           EqualsUtils.equals (m_aTest, rhs.m_aTest) &&
+           m_aUpdates.equals (rhs.m_aUpdates) &&
+           EqualsUtils.equals (m_aBody, rhs.m_aBody);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aInits)
+                                       .append (m_aTest)
+                                       .append (m_aUpdates)
+                                       .append (m_aBody)
+                                       .getHashCode ();
   }
 
   @Override

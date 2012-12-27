@@ -20,6 +20,8 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -55,6 +57,12 @@ public class JSConditional implements IJSStatement
     if (aTest == null)
       throw new NullPointerException ("test");
     m_aTest = aTest;
+  }
+
+  @Nonnull
+  public IJSExpression test ()
+  {
+    return m_aTest;
   }
 
   /**
@@ -117,6 +125,23 @@ public class JSConditional implements IJSStatement
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (o == null || !getClass ().equals (o.getClass ()))
+      return false;
+    final JSConditional rhs = (JSConditional) o;
+    return m_aTest.equals (rhs.m_aTest) && m_aThen.equals (rhs.m_aThen) && EqualsUtils.equals (m_aElse, rhs.m_aElse);
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return new HashCodeGenerator (this).append (m_aTest).append (m_aThen).append (m_aElse).getHashCode ();
   }
 
   @Override

@@ -73,7 +73,7 @@ public class JSCast extends AbstractJSExpression
   {
     if (o == this)
       return true;
-    if (o == null || !getClass ().equals (o.getClass ()))
+    if (!super.equals (o))
       return false;
     final JSCast rhs = (JSCast) o;
     return m_aType.equals (rhs.m_aType) && m_aObject.equals (rhs.m_aObject);
@@ -82,12 +82,15 @@ public class JSCast extends AbstractJSExpression
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aType).append (m_aObject).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aType).append (m_aObject).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("type", m_aType).append ("object", m_aObject).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("type", m_aType)
+                            .append ("object", m_aObject)
+                            .toString ();
   }
 }
