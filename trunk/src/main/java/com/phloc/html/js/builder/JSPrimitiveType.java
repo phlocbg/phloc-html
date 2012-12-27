@@ -45,7 +45,7 @@ public class JSPrimitiveType extends AbstractJSType
   public static final JSPrimitiveType STRING = new JSPrimitiveType ("String");
 
   private final String m_sName;
-  private final JSFieldRef m_aGlobal;
+  private final JSRef m_aGlobal;
 
   protected JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
@@ -64,7 +64,7 @@ public class JSPrimitiveType extends AbstractJSType
   }
 
   @Nonnull
-  public final JSFieldRef global ()
+  public final JSRef global ()
   {
     return m_aGlobal;
   }

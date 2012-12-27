@@ -184,13 +184,13 @@ public class JSArray extends AbstractJSExpression
    * Add an element to the array initializer
    */
   @Nonnull
-  public JSArray add (@Nonnull final IJSExpression e)
+  public JSArray add (@Nonnull final IJSExpression aExpr)
   {
-    if (e == null)
+    if (aExpr == null)
       throw new NullPointerException ("expr");
     if (m_aExprs == null)
       m_aExprs = new ArrayList <IJSExpression> ();
-    m_aExprs.add (e);
+    m_aExprs.add (aExpr);
     return this;
   }
 

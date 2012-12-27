@@ -76,22 +76,22 @@ public class JSPackage implements IJSFunctionContainer, IJSCodeProvider
   /**
    * Add a class to this package.
    * 
-   * @param name
+   * @param sName
    *        Name of class to be added to this package
    * @return Newly generated class
    * @exception JSNameAlreadyExistsException
    *            When the specified class/interface was already created.
    */
   @Nonnull
-  public JSDefinedClass _class (final String name) throws JSNameAlreadyExistsException
+  public JSDefinedClass _class (@Nonnull @Nonempty final String sName) throws JSNameAlreadyExistsException
   {
-    return addDeclaration (new JSDefinedClass (this, name));
+    return addDeclaration (new JSDefinedClass (sName));
   }
 
   @Nonnull
-  public JSFunction function (@Nonnull final String name) throws JSNameAlreadyExistsException
+  public JSFunction function (@Nonnull final String sName) throws JSNameAlreadyExistsException
   {
-    return function (null, name);
+    return function (null, sName);
   }
 
   /**

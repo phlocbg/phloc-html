@@ -36,6 +36,7 @@ import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
+import com.phloc.html.js.builder.JSRef;
 import com.phloc.html.js.builder.html.JSHtml;
 
 /**
@@ -55,7 +56,7 @@ public class JQuery
    * @return <code>$</code> as a field
    */
   @Nonnull
-  public static JSFieldRef jQueryField ()
+  public static JSRef jQueryField ()
   {
     return JSExpr.ref ("$");
   }

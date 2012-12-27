@@ -36,7 +36,7 @@ public final class JSGlobal
    * @return Global field <code>Infinity</code>
    */
   @Nonnull
-  public static JSFieldRef infinity ()
+  public static JSRef infinity ()
   {
     return JSExpr.ref ("Infinity");
   }
@@ -45,7 +45,7 @@ public final class JSGlobal
    * @return Global field <code>NaN</code>
    */
   @Nonnull
-  public static JSFieldRef nan ()
+  public static JSRef nan ()
   {
     return JSExpr.ref ("NaN");
   }
@@ -54,7 +54,7 @@ public final class JSGlobal
    * @return Global field <code>undefined</code>
    */
   @Nonnull
-  public static JSFieldRef undefined ()
+  public static JSRef undefined ()
   {
     return JSExpr.ref ("undefined");
   }

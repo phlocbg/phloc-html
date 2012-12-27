@@ -51,90 +51,45 @@ public abstract class AbstractJSClass extends AbstractJSType
    * This method works in the same way as {@link Class#isAssignableFrom(Class)}
    * works. For example, baseClass.isAssignableFrom(derivedClass)==true.
    */
-  public final boolean isAssignableFrom (@Nonnull final AbstractJSClass derived)
+  public final boolean isAssignableFrom (@Nonnull final AbstractJSClass aDerived)
   {
     // to avoid the confusion, always use "this" explicitly in this method.
-
-    if (this == derived)
+    if (this == aDerived)
       return true;
 
-    final AbstractJSClass b = derived._extends ();
+    final AbstractJSClass b = aDerived._extends ();
     if (b != null && isAssignableFrom (b))
       return true;
 
     return false;
   }
 
-  /**
-   * Gets the parameterization of the given base type.
-   * <p>
-   * For example, given the following
-   * 
-   * <pre>
-   * <xmp>
-   * interface Foo<T> extends List<List<T>> {}
-   * interface Bar extends Foo<String> {}
-   * </xmp>
-   * </pre>
-   * 
-   * This method works like this:
-   * 
-   * <pre>
-   * <xmp>
-   * getBaseClass( Bar, List ) = List<List<String>
-   * getBaseClass( Bar, Foo  ) = Foo<String>
-   * getBaseClass( Foo<? extends Number>, Collection ) = Collection<List<? extends Number>>
-   * getBaseClass( ArrayList<? extends BigInteger>, List ) = List<? extends BigInteger>
-   * </xmp>
-   * </pre>
-   * 
-   * @param baseType
-   *        The class whose parameterization we are interested in.
-   * @return The use of {@code baseType} in {@code this} type. or null if the
-   *         type is not assignable to the base type.
-   */
-  public final AbstractJSClass getBaseClass (@Nonnull final AbstractJSClass baseType)
+  /** Generates a static method invocation. */
+  @Nonnull
+  public final JSInvocation staticInvoke (@Nonnull final JSMethod aMethod)
   {
-    if (equals (baseType))
-      return this;
-
-    final AbstractJSClass b = _extends ();
-    if (b != null)
-    {
-      final AbstractJSClass bc = b.getBaseClass (baseType);
-      if (bc != null)
-        return bc;
-    }
-
-    return null;
+    return new JSInvocation (this, aMethod);
   }
 
   /** Generates a static method invocation. */
   @Nonnull
-  public final JSInvocation staticInvoke (@Nonnull final JSMethod method)
+  public final JSInvocation staticInvoke (@Nonnull @Nonempty final String sMethod)
   {
-    return new JSInvocation (this, method);
-  }
-
-  /** Generates a static method invocation. */
-  @Nonnull
-  public final JSInvocation staticInvoke (@Nonnull @Nonempty final String method)
-  {
-    return new JSInvocation (this, method);
+    return new JSInvocation (this, sMethod);
   }
 
   /** Static field reference. */
   @Nonnull
-  public final JSFieldRef staticRef (@Nonnull @Nonempty final String field)
+  public final JSFieldRef staticRef (@Nonnull @Nonempty final String sField)
   {
-    return new JSFieldRef (this, field);
+    return new JSFieldRef (this, sField);
   }
 
   /** Static field reference. */
   @Nonnull
-  public final JSFieldRef staticRef (@Nonnull final JSVar field)
+  public final JSFieldRef staticRef (@Nonnull final JSVar aField)
   {
-    return new JSFieldRef (this, field);
+    return new JSFieldRef (this, aField);
   }
 
   public void generate (@Nonnull final JSFormatter f)

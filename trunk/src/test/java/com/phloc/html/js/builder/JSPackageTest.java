@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.phloc.commons.mock.PhlocTestUtils;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
@@ -34,6 +35,7 @@ public final class JSPackageTest
   public void test () throws Exception
   {
     final JSPackage aPkg = new JSPackage ();
+    PhlocTestUtils.testDefaultImplementationWithEqualContentObject (aPkg, new JSPackage ());
 
     // Global variable
     aPkg.var (JSPrimitiveType.NUMBER, "g_aRoot", JSExpr.lit (0));
