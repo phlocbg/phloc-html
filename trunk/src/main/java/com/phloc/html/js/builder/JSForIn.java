@@ -39,10 +39,15 @@ public class JSForIn implements IJSStatement
                   @Nonnull final String sVarName,
                   @Nonnull final IJSExpression aCollection)
   {
+    this (new JSVar (aVarType, sVarName), aCollection);
+  }
+
+  public JSForIn (@Nonnull final JSVar aLoopVar, @Nonnull final IJSExpression aCollection)
+  {
     if (aCollection == null)
       throw new NullPointerException ("Collection");
 
-    m_aLoopVar = new JSVar (aVarType, sVarName, null);
+    m_aLoopVar = aLoopVar;
     m_aCollection = aCollection;
   }
 
@@ -56,6 +61,12 @@ public class JSForIn implements IJSStatement
   }
 
   @Nonnull
+  public IJSExpression collection ()
+  {
+    return m_aCollection;
+  }
+
+  @Nonnull
   public JSBlock body ()
   {
     if (m_aBody == null)
@@ -65,7 +76,7 @@ public class JSForIn implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.plain ("for (var ").decl (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
+    f.plain ("for(var ").var (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
     if (m_aBody != null)
       f.generatable (m_aBody).nl ();
     else

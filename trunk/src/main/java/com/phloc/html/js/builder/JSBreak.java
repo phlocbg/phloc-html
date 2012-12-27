@@ -57,7 +57,7 @@ public class JSBreak implements IJSStatement
     if (m_aLabel == null)
       f.plain ("break;").nl ();
     else
-      f.plain ("break").plain (m_aLabel.label ()).plain (';').nl ();
+      f.plain ("break ").plain (m_aLabel.label ()).plain (';').nl ();
   }
 
   @Nullable

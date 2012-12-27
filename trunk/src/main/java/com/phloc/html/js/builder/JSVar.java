@@ -68,7 +68,20 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    */
   public JSVar (@Nonnull final String sName, @Nullable final IJSExpression aInit)
   {
-    this (null, sName, aInit);
+    this ((AbstractJSType) null, sName, aInit);
+  }
+
+  /**
+   * Constructor
+   * 
+   * @param aType
+   *        Datatype of this variable
+   * @param sName
+   *        Name of this variable
+   */
+  public JSVar (@Nullable final AbstractJSType aType, @Nonnull final String sName)
+  {
+    this (aType, sName, (IJSExpression) null);
   }
 
   /**
