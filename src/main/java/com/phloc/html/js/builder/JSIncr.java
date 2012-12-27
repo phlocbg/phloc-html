@@ -20,61 +20,40 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * While statement
+ * Increment (++) statement
  * 
  * @author philip
  */
-public class JSWhileLoop implements IJSStatement
+public class JSIncr implements IJSStatement
 {
-  /**
-   * Test part of While statement for determining exit state
-   */
-  private final IJSExpression m_aTest;
+  private final IJSAssignmentTarget m_aExpr;
 
   /**
-   * Block of statements which makes up body of this While statement
+   * constructor
+   * 
+   * @param aExpr
+   *        expression to be incremented
    */
-  private JSBlock m_aBody;
-
-  /**
-   * Construct a While statement
-   */
-  public JSWhileLoop (@Nonnull final IJSExpression aTest)
+  public JSIncr (@Nonnull final IJSAssignmentTarget aExpr)
   {
-    if (aTest == null)
-      throw new NullPointerException ("test");
-    m_aTest = aTest;
+    if (aExpr == null)
+      throw new NullPointerException ("Expr");
+    m_aExpr = aExpr;
   }
 
   @Nonnull
-  public IJSExpression test ()
+  public IJSAssignmentTarget expr ()
   {
-    return m_aTest;
+    return m_aExpr;
   }
 
-  @Nonnull
-  public JSBlock body ()
+  public void state (final JSFormatter f)
   {
-    if (m_aBody == null)
-      m_aBody = new JSBlock ();
-    return m_aBody;
-  }
-
-  public void state (@Nonnull final JSFormatter f)
-  {
-    if (JSOp.hasOperator (m_aTest))
-      f.plain ("while").generatable (m_aTest);
-    else
-      f.plain ("while(").generatable (m_aTest).plain (')');
-    if (m_aBody != null)
-      f.stmt (m_aBody);
-    else
-      f.plain (';').nl ();
+    f.generatable (m_aExpr).plain ("++;").nl ();
   }
 
   @Nullable
@@ -90,19 +69,19 @@ public class JSWhileLoop implements IJSStatement
       return true;
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
-    final JSWhileLoop rhs = (JSWhileLoop) o;
-    return m_aTest.equals (rhs.m_aTest) && EqualsUtils.equals (m_aBody, rhs.m_aBody);
+    final JSIncr rhs = (JSIncr) o;
+    return m_aExpr.equals (rhs.m_aExpr);
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aTest).append (m_aBody).getHashCode ();
+    return new HashCodeGenerator (this).append (m_aExpr).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("test", m_aTest).append ("body", m_aBody).toString ();
+    return new ToStringGenerator (this).append ("expr", m_aExpr).toString ();
   }
 }
