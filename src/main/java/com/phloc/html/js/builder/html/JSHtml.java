@@ -25,6 +25,7 @@ import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSInvocation;
+import com.phloc.html.js.builder.JSRef;
 
 /**
  * This class contains JS builder default constructs that are used very commonly
@@ -40,7 +41,7 @@ public final class JSHtml
   // --- console ---
 
   @Nonnull
-  public static JSFieldRef console ()
+  public static JSRef console ()
   {
     return JSExpr.ref ("console");
   }
@@ -60,7 +61,7 @@ public final class JSHtml
   // --- document ---
 
   @Nonnull
-  public static JSFieldRef document ()
+  public static JSRef document ()
   {
     return JSExpr.ref ("document");
   }
@@ -176,7 +177,7 @@ public final class JSHtml
   // --- event ---
 
   @Nonnull
-  public static JSFieldRef event ()
+  public static JSRef event ()
   {
     return JSExpr.ref ("event");
   }
@@ -184,7 +185,7 @@ public final class JSHtml
   // --- history ---
 
   @Nonnull
-  public static JSFieldRef history ()
+  public static JSRef history ()
   {
     return JSExpr.ref ("history");
   }
@@ -222,7 +223,7 @@ public final class JSHtml
   // --- navigator ---
 
   @Nonnull
-  public static JSFieldRef navigator ()
+  public static JSRef navigator ()
   {
     return JSExpr.ref ("navigator");
   }
@@ -292,7 +293,7 @@ public final class JSHtml
   // --- screen ---
 
   @Nonnull
-  public static JSFieldRef screen ()
+  public static JSRef screen ()
   {
     return JSExpr.ref ("screen");
   }
@@ -336,7 +337,7 @@ public final class JSHtml
   // --- window ---
 
   @Nonnull
-  public static JSFieldRef window ()
+  public static JSRef window ()
   {
     return JSExpr.ref ("window");
   }

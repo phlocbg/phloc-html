@@ -20,48 +20,52 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
- * Field Reference
+ * Global Reference
  * 
  * @author philip
  */
-public class JSFieldRef extends JSRef
+public class JSRef extends AbstractJSAssignmentTarget
 {
   /**
-   * Object expression upon which this field will be accessed, or null for the
-   * implicit 'this'.
+   * Name of the field to be accessed. Either this or {@link #m_aVar} is set.
    */
-  private final IJSGeneratable m_aObject;
+  private String m_sName;
 
-  public JSFieldRef (@Nonnull final IJSGeneratable aObject, @Nonnull @Nonempty final String sName)
+  /**
+   * Variable to be accessed.
+   */
+  private JSVar m_aVar;
+
+  public JSRef (@Nonnull @Nonempty final String sName)
   {
-    super (sName);
-    if (aObject == null)
-      throw new NullPointerException ("object");
-    m_aObject = aObject;
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("Name '" + sName + "' is not a valid JSIdentifier!");
+    m_sName = sName;
   }
 
-  public JSFieldRef (@Nonnull final IJSGeneratable aObject, @Nonnull final JSVar aVar)
+  public JSRef (@Nonnull final JSVar aVar)
   {
-    super (aVar);
-    if (aObject == null)
-      throw new NullPointerException ("object");
-    m_aObject = aObject;
+    if (aVar == null)
+      throw new NullPointerException ("var");
+    m_aVar = aVar;
   }
 
   @Nonnull
-  public IJSGeneratable object ()
+  @Nonempty
+  public final String name ()
   {
-    return m_aObject;
+    return m_sName != null ? m_sName : m_aVar.name ();
   }
 
-  @Override
   public void generate (@Nonnull final JSFormatter f)
   {
-    f.generatable (m_aObject).plain ('.').plain (name ());
+    f.plain (name ());
   }
 
   @Override
@@ -71,19 +75,22 @@ public class JSFieldRef extends JSRef
       return true;
     if (!super.equals (o))
       return false;
-    final JSFieldRef rhs = (JSFieldRef) o;
-    return m_aObject.equals (rhs.m_aObject);
+    final JSRef rhs = (JSRef) o;
+    return EqualsUtils.equals (m_sName, rhs.m_sName) && EqualsUtils.equals (m_aVar, rhs.m_aVar);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aObject).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_sName).append (m_aVar).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("object", m_aObject).toString ();
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("name", m_sName)
+                            .appendIfNotNull ("var", m_aVar)
+                            .toString ();
   }
 }

@@ -40,8 +40,8 @@ public final class JSOpTest
   public void testBasic ()
   {
     final JSAtomInt n5 = JSExpr.lit (5);
-    final JSFieldRef a = JSExpr.ref ("a");
-    final JSFieldRef b = JSExpr.ref ("b");
+    final JSRef a = JSExpr.ref ("a");
+    final JSRef b = JSExpr.ref ("b");
     _test ("-5", JSOp.minus (n5));
     _test ("(5)", JSOp.inParantheses (n5));
     _test ("false", JSOp.not (JSExpr.TRUE));

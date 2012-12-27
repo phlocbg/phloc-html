@@ -134,50 +134,66 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nonnull final String field)
+  public static JSRef ref (@Nonnull final String sField)
   {
-    return new JSFieldRef ((IJSExpression) null, field);
+    return new JSRef (sField);
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final JSVar field)
+  public static JSFieldRef ref (@Nonnull final IJSExpression aLhs, @Nonnull final JSVar aField)
   {
-    return new JSFieldRef (aLhs, field);
+    return new JSFieldRef (aLhs, aField);
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final String field)
+  public static JSFieldRef ref (@Nonnull final IJSExpression aLhs, @Nonnull final String sField)
   {
-    return new JSFieldRef (aLhs, field);
+    return new JSFieldRef (aLhs, sField);
   }
 
   @Nonnull
-  public static JSFieldRef ref (@Nullable final IJSExpression aLhs, @Nonnull final String... fields)
+  public static JSFieldRef ref (@Nonnull final IJSExpression aLhs, @Nonnull final String... aFields)
   {
-    if (ArrayHelper.isEmpty (fields))
-      throw new IllegalArgumentException ("fields may not be empty");
-    JSFieldRef ret = new JSFieldRef (aLhs, fields[0]);
-    for (int i = 1; i < fields.length; ++i)
-      ret = new JSFieldRef (ret, fields[i]);
+    if (ArrayHelper.isEmpty (aFields))
+      throw new IllegalArgumentException ("Fields may not be empty");
+
+    JSFieldRef ret = new JSFieldRef (aLhs, aFields[0]);
+    for (int i = 1; i < aFields.length; ++i)
+      ret = new JSFieldRef (ret, aFields[i]);
     return ret;
   }
 
+  /**
+   * @param aField
+   *        Field to reference
+   * @return <code>this.<i>aField</i></code>
+   */
   @Nonnull
-  public static JSFieldRef refThis (@Nonnull final JSVar field)
+  public static JSFieldRef refThis (@Nonnull final JSVar aField)
   {
-    return ref (THIS, field);
+    return ref (THIS, aField);
   }
 
+  /**
+   * @param sField
+   *        Field name to reference
+   * @return <code>this.<i>sField</i></code>
+   */
   @Nonnull
-  public static JSFieldRef refThis (@Nonnull final String field)
+  public static JSFieldRef refThis (@Nonnull final String sField)
   {
-    return ref (THIS, field);
+    return ref (THIS, sField);
   }
 
+  /**
+   * @param aFields
+   *        Field names to reference
+   * @return <code>this.<i>aFields[0]</i>.<i>aFields[1]</i>....</code>
+   */
   @Nonnull
-  public static JSFieldRef refThis (@Nonnull final String... fields)
+  public static JSFieldRef refThis (@Nonnull final String... aFields)
   {
-    return ref (THIS, fields);
+    return ref (THIS, aFields);
   }
 
   @Nonnull
