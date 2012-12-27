@@ -75,7 +75,7 @@ public final class JSPackageTest
       }
 
       // if
-      final JSConditional aCond = aFuncMain.body ()._if (m1.typeof ().eeq (JSPrimitiveType.STRING.typeName ()));
+      final JSConditional aCond = aFuncMain.body ()._if (m1.isTypeof (JSPrimitiveType.STRING));
 
       // try catch finally
       aCond._then ().comment ("Test try/catch/finally");

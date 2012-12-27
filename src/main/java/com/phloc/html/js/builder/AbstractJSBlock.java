@@ -236,6 +236,17 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return addDeclaration (new JSDefinedClass (sName));
   }
 
+  /**
+   * @param aType
+   *        The type to be instantiated
+   * @return A "new type" invocation object
+   */
+  @Nonnull
+  public JSInvocation _new (@Nonnull final AbstractJSType aType)
+  {
+    return aType._new ();
+  }
+
   @Nonnull
   public JSFunction function (@Nonnull final String sName) throws JSNameAlreadyExistsException
   {
@@ -277,12 +288,87 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * 
    * @param sName
    *        Name of the variable
+   * @param bInitValue
+   *        Initialization value for this variable.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar var (@Nonnull final String sName, final boolean bInitValue) throws JSNameAlreadyExistsException
+  {
+    return var (null, sName, JSExpr.lit (bInitValue));
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param sName
+   *        Name of the variable
+   * @param cInitValue
+   *        Initialization value for this variable.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar var (@Nonnull final String sName, final char cInitValue) throws JSNameAlreadyExistsException
+  {
+    return var (null, sName, JSExpr.lit (cInitValue));
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param sName
+   *        Name of the variable
+   * @param dInitValue
+   *        Initialization value for this variable.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar var (@Nonnull final String sName, final double dInitValue) throws JSNameAlreadyExistsException
+  {
+    return var (null, sName, JSExpr.lit (dInitValue));
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param sName
+   *        Name of the variable
+   * @param fInitValue
+   *        Initialization value for this variable.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar var (@Nonnull final String sName, final float fInitValue) throws JSNameAlreadyExistsException
+  {
+    return var (null, sName, JSExpr.lit (fInitValue));
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param sName
+   *        Name of the variable
    * @param nInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final int nInitValue) throws JSNameAlreadyExistsException
+  {
+    return var (null, sName, JSExpr.lit (nInitValue));
+  }
+
+  /**
+   * Adds a local variable declaration to this block
+   * 
+   * @param sName
+   *        Name of the variable
+   * @param nInitValue
+   *        Initialization value for this variable.
+   * @return Newly generated {@link JSVar}
+   */
+  @Nonnull
+  public JSVar var (@Nonnull final String sName, final long nInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (nInitValue));
   }
@@ -490,44 +576,53 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return addStatement (new JSInvocation (aType, sMethod));
   }
 
+  /**
+   * Creates a static invocation statement.
+   */
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final boolean v)
+  public JSInvocation staticInvoke (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
+  {
+    return addStatement (new JSInvocation (aType, aMethod));
+  }
+
+  @Nonnull
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final boolean v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final char v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final char v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final double v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final double v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final float v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final float v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final int v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final int v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, final long v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, final long v)
   {
     return assign (lhs, JSExpr.lit (v));
   }
 
   @Nonnull
-  public AbstractJSBlock assign (@Nonnull final AbstractJSAssignmentTarget lhs, @Nonnull final String v)
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget lhs, @Nonnull final String v)
   {
     return assign (lhs, v == null ? JSExpr.NULL : JSExpr.lit (v));
   }
