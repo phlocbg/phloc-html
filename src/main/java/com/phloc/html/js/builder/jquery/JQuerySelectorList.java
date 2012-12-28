@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -36,6 +37,36 @@ public class JQuerySelectorList implements IJSCodeProvider
 
   public JQuerySelectorList ()
   {}
+
+  public JQuerySelectorList (@Nonnull final IJQuerySelector aSelector)
+  {
+    addSelector (aSelector);
+  }
+
+  public JQuerySelectorList (@Nullable final IJQuerySelector... aSelectors)
+  {
+    if (aSelectors != null)
+      for (final IJQuerySelector aSelector : aSelectors)
+        addSelector (aSelector);
+  }
+
+  public JQuerySelectorList (@Nullable final Iterable <? extends IJQuerySelector> aSelectors)
+  {
+    if (aSelectors != null)
+      for (final IJQuerySelector aSelector : aSelectors)
+        addSelector (aSelector);
+  }
+
+  public boolean hasSelectors ()
+  {
+    return !m_aElements.isEmpty ();
+  }
+
+  @Nonnegative
+  public int getSelectorCount ()
+  {
+    return m_aElements.size ();
+  }
 
   @Nonnull
   public JQuerySelectorList addSelector (@Nonnull final IJQuerySelector aSelector)
