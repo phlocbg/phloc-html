@@ -851,17 +851,51 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return this;
   }
 
+  /**
+   * @deprecated Use {@link #incrPostfix(IJSAssignmentTarget)} instead
+   */
+  @Deprecated
   @Nonnull
   public AbstractJSBlock incr (@Nonnull final IJSAssignmentTarget aLhs)
   {
-    addStatement (new JSIncr (aLhs));
+    return incrPostfix (aLhs);
+  }
+
+  @Nonnull
+  public AbstractJSBlock incrPostfix (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    addStatement (new JSIncrPostfix (aLhs));
     return this;
   }
 
   @Nonnull
+  public AbstractJSBlock incrPrefix (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    addStatement (new JSIncrPrefix (aLhs));
+    return this;
+  }
+
+  /**
+   * @deprecated Use {@link #decrPostfix(IJSAssignmentTarget)} instead
+   */
+  @Deprecated
+  @Nonnull
   public AbstractJSBlock decr (@Nonnull final IJSAssignmentTarget aLhs)
   {
-    addStatement (new JSDecr (aLhs));
+    return decrPostfix (aLhs);
+  }
+
+  @Nonnull
+  public AbstractJSBlock decrPostfix (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    addStatement (new JSDecrPostfix (aLhs));
+    return this;
+  }
+
+  @Nonnull
+  public AbstractJSBlock decrPrefix (@Nonnull final IJSAssignmentTarget aLhs)
+  {
+    addStatement (new JSDecrPrefix (aLhs));
     return this;
   }
 

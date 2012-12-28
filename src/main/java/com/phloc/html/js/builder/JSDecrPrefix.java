@@ -24,11 +24,11 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Decrement (--) statement
+ * Prefix decrement (--x) statement
  * 
  * @author philip
  */
-public class JSDecr implements IJSStatement
+public class JSDecrPrefix implements IJSStatement
 {
   private final IJSAssignmentTarget m_aExpr;
 
@@ -38,7 +38,7 @@ public class JSDecr implements IJSStatement
    * @param aExpr
    *        expression to be incremented
    */
-  public JSDecr (@Nonnull final IJSAssignmentTarget aExpr)
+  public JSDecrPrefix (@Nonnull final IJSAssignmentTarget aExpr)
   {
     if (aExpr == null)
       throw new NullPointerException ("Expr");
@@ -53,7 +53,7 @@ public class JSDecr implements IJSStatement
 
   public void state (final JSFormatter f)
   {
-    f.generatable (m_aExpr).plain ("--;").nl ();
+    f.plain ("--").generatable (m_aExpr).plain (';').nl ();
   }
 
   @Nullable
@@ -69,7 +69,7 @@ public class JSDecr implements IJSStatement
       return true;
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
-    final JSDecr rhs = (JSDecr) o;
+    final JSDecrPrefix rhs = (JSDecrPrefix) o;
     return m_aExpr.equals (rhs.m_aExpr);
   }
 

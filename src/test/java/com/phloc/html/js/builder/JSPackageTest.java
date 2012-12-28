@@ -178,7 +178,7 @@ public final class JSPackageTest
       final JSForLoop aFor = aPkg._for ();
       final JSVar aI = aFor.init ("i", 0);
       aFor.test (aI.lt (5));
-      aFor.update (aI.incr ());
+      aFor.update (aI.incrPostfix ());
       aFor.body ()._continue ();
 
       aPkg._for ().simpleLoop ("i", 5, 0);
@@ -188,13 +188,13 @@ public final class JSPackageTest
     // do-loop
     {
       final JSRef aI = JSExpr.ref ("i");
-      aPkg._do (aI.lt (1000)).body ().incr (aI);
+      aPkg._do (aI.lt (1000)).body ().incrPostfix (aI);
     }
 
     // while-loop
     {
       final JSRef aI = JSExpr.ref ("i");
-      aPkg._while (aI.gt (0)).body ().decr (aI);
+      aPkg._while (aI.gt (0)).body ().decrPostfix (aI);
     }
 
     return aPkg;
