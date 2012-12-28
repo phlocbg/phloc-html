@@ -30,6 +30,7 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 
@@ -296,6 +297,12 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     return v == null ? argNull () : arg (JSExpr.json (v));
   }
 
+  @Nonnull
+  public IMPLTYPE arg (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return arg (eHTMLElement.getElementName ());
+  }
+
   /**
    * Adds a null argument. Short for {@code arg(JSExpr.NULL)}
    */
@@ -417,6 +424,12 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJSON v)
   {
     return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (v));
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final EHTMLElement eHTMLElement)
+  {
+    return arg (nIndex, eHTMLElement.getElementName ());
   }
 
   /**

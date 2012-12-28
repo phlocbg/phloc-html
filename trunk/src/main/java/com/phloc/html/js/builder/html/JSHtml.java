@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
@@ -85,6 +86,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation documentCreateElement (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return documentCreateElement ().arg (eHTMLElement);
+  }
+
+  @Nonnull
   public static JSInvocation documentCreateTextNode ()
   {
     return document ().invoke ("createTextNode");
@@ -115,6 +122,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation documentGetElementsByName (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return documentGetElementsByName (eHTMLElement.getElementName ());
+  }
+
+  @Nonnull
   public static JSInvocation documentGetElementsByName (@Nonnull final String sElementName)
   {
     return documentGetElementsByName (JSExpr.lit (sElementName));
@@ -124,6 +137,12 @@ public final class JSHtml
   public static JSInvocation documentGetElementsByName (@Nonnull final IJSExpression aElementName)
   {
     return document ().invoke ("getElementsByName").arg (aElementName);
+  }
+
+  @Nonnull
+  public static JSInvocation documentGetElementsByTagName (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return documentGetElementsByTagName (eHTMLElement.getElementName ());
   }
 
   @Nonnull
