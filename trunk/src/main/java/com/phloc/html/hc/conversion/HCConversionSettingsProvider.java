@@ -52,7 +52,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   }
 
   @Nonnull
-  private IHCConversionSettings _getOptimized ()
+  private HCConversionSettings _getOptimized ()
   {
     if (m_aCSOptimized == null)
     {
@@ -65,7 +65,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   }
 
   @Nonnull
-  public IHCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
+  public HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
     return bIndentAndAlign ? m_aCS : _getOptimized ();
   }
