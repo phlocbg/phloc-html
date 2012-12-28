@@ -54,15 +54,43 @@ public interface IJSExpression extends IJSGeneratable
 
   /**
    * @return "[this]++" from "[this]".
+   * @deprecated Use {@link #incrPostfix()} instead
    */
+  @Deprecated
   @Nonnull
   IJSExpression incr ();
+
+  /**
+   * @return "[this]++" from "[this]".
+   */
+  @Nonnull
+  IJSExpression incrPostfix ();
+
+  /**
+   * @return "++[this]" from "[this]".
+   */
+  @Nonnull
+  IJSExpression incrPrefix ();
+
+  /**
+   * @return "[this]--" from "[this]".
+   * @deprecated Use {@link #decrPostfix()} instead
+   */
+  @Deprecated
+  @Nonnull
+  IJSExpression decr ();
 
   /**
    * @return "[this]--" from "[this]".
    */
   @Nonnull
-  IJSExpression decr ();
+  IJSExpression decrPostfix ();
+
+  /**
+   * @return "--[this]" from "[this]".
+   */
+  @Nonnull
+  IJSExpression decrPrefix ();
 
   /**
    * @return "typeof [this]" from "[this]"

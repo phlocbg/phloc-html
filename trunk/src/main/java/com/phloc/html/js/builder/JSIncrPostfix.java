@@ -24,11 +24,11 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
- * Increment (++) statement
+ * Postfix increment (x++) statement
  * 
  * @author philip
  */
-public class JSIncr implements IJSStatement
+public class JSIncrPostfix implements IJSStatement
 {
   private final IJSAssignmentTarget m_aExpr;
 
@@ -38,7 +38,7 @@ public class JSIncr implements IJSStatement
    * @param aExpr
    *        expression to be incremented
    */
-  public JSIncr (@Nonnull final IJSAssignmentTarget aExpr)
+  public JSIncrPostfix (@Nonnull final IJSAssignmentTarget aExpr)
   {
     if (aExpr == null)
       throw new NullPointerException ("Expr");
@@ -69,7 +69,7 @@ public class JSIncr implements IJSStatement
       return true;
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
-    final JSIncr rhs = (JSIncr) o;
+    final JSIncrPostfix rhs = (JSIncrPostfix) o;
     return m_aExpr.equals (rhs.m_aExpr);
   }
 

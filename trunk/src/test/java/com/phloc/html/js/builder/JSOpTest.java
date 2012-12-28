@@ -48,10 +48,10 @@ public final class JSOpTest
     _test ("true", JSOp.not (JSExpr.FALSE));
     _test ("(!a)", JSOp.not (a));
     _test ("(~5)", JSOp.complement (n5));
-    _test ("a++", JSOp.incr (a));
-    _test ("6", JSOp.incr (n5));
-    _test ("a--", JSOp.decr (a));
-    _test ("4", JSOp.decr (n5));
+    _test ("a++", JSOp.incrPostfix (a));
+    _test ("6", JSOp.incrPostfix (n5));
+    _test ("a--", JSOp.decrPostfix (a));
+    _test ("4", JSOp.decrPostfix (n5));
     _test ("typeof a", JSOp.typeof (a));
     _test ("(a+b)", JSOp.plus (a, b));
     _test ("10", JSOp.plus (n5, n5));

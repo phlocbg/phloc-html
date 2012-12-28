@@ -49,12 +49,12 @@ public class JSForLoop implements IJSStatement
     if (nEndExcl >= nStartIncl)
     {
       test (aLoopVar.lt (nEndExcl));
-      update (aLoopVar.incr ());
+      update (aLoopVar.incrPostfix ());
     }
     else
     {
       test (aLoopVar.gt (nEndExcl));
-      update (aLoopVar.decr ());
+      update (aLoopVar.decrPostfix ());
     }
     return this;
   }
