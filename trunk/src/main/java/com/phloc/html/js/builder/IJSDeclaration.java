@@ -30,6 +30,10 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public interface IJSDeclaration extends IJSCodeProvider
 {
+  /**
+   * @return The name of the declared object. Neither <code>null</code> nor
+   *         empty.
+   */
   @Nonnull
   @Nonempty
   String name ();

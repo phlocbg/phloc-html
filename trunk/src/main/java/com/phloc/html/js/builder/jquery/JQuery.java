@@ -551,6 +551,20 @@ public class JQuery
   /**
    * Get the result of a jQuery selection
    * 
+   * @param aSelectors
+   *        The selectors to be used. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed selector:
+   *         <code>$('selector')</code>
+   */
+  @Nonnull
+  public static JQueryInvocation select (@Nonnull final IJQuerySelector... aSelectors)
+  {
+    return select (new JQuerySelectorList (aSelectors));
+  }
+
+  /**
+   * Get the result of a jQuery selection
+   * 
    * @param aSelectorList
    *        The selector list to be used. May not be <code>null</code>.
    * @return A jQuery invocation with the passed selector:
