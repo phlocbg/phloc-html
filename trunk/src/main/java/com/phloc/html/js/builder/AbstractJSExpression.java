@@ -22,6 +22,7 @@ import javax.annotation.Nonnull;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.json.IJSON;
 
 /**
  * Provides default implementations for {@link IJSExpression}.
@@ -271,9 +272,33 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression band (final int v)
+  {
+    return band (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression band (final long v)
+  {
+    return band (JSExpr.lit (v));
+  }
+
+  @Nonnull
   public final AbstractJSExpression band (@Nonnull final IJSExpression right)
   {
     return JSOp.band (this, right);
+  }
+
+  @Nonnull
+  public final AbstractJSExpression bor (final int v)
+  {
+    return bor (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression bor (final long v)
+  {
+    return bor (JSExpr.lit (v));
   }
 
   @Nonnull
@@ -292,6 +317,18 @@ public abstract class AbstractJSExpression implements IJSExpression
   public final IJSExpression cor (@Nonnull final IJSExpression right)
   {
     return JSOp.cor (this, right);
+  }
+
+  @Nonnull
+  public final AbstractJSExpression xor (final int v)
+  {
+    return xor (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression xor (final long v)
+  {
+    return xor (JSExpr.lit (v));
   }
 
   @Nonnull
@@ -463,6 +500,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression eq (@Nonnull final IJSON v)
+  {
+    return eq (JSExpr.json (v));
+  }
+
+  @Nonnull
   public final AbstractJSExpression eq (@Nonnull final IJSExpression right)
   {
     return JSOp.eq (this, right);
@@ -508,6 +551,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   public final AbstractJSExpression eeq (@Nonnull final String v)
   {
     return eeq (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression eeq (@Nonnull final IJSON v)
+  {
+    return eeq (JSExpr.json (v));
   }
 
   @Nonnull
@@ -559,6 +608,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression ne (@Nonnull final IJSON v)
+  {
+    return ne (JSExpr.json (v));
+  }
+
+  @Nonnull
   public final AbstractJSExpression ne (@Nonnull final IJSExpression right)
   {
     return JSOp.ne (this, right);
@@ -604,6 +659,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   public final AbstractJSExpression ene (@Nonnull final String v)
   {
     return ene (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression ene (@Nonnull final IJSON v)
+  {
+    return ene (JSExpr.json (v));
   }
 
   @Nonnull
