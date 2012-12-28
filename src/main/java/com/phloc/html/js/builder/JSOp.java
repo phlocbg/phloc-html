@@ -183,18 +183,45 @@ public final class JSOp
     return new JSOpBinary (aLeft, ">>>", aRight);
   }
 
+  /**
+   * Binary-and
+   * 
+   * @param aLeft
+   *        lhs
+   * @param aRight
+   *        rhs
+   * @return operator
+   */
   @Nonnull
   public static JSOpBinary band (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
     return new JSOpBinary (aLeft, "&", aRight);
   }
 
+  /**
+   * Binary-or
+   * 
+   * @param aLeft
+   *        lhs
+   * @param aRight
+   *        rhs
+   * @return operator
+   */
   @Nonnull
   public static JSOpBinary bor (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
     return new JSOpBinary (aLeft, "|", aRight);
   }
 
+  /**
+   * Logical-and
+   * 
+   * @param aLeft
+   *        lhs
+   * @param aRight
+   *        rhs
+   * @return operator
+   */
   @Nonnull
   public static IJSExpression cand (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
@@ -209,6 +236,15 @@ public final class JSOp
     return new JSOpBinary (aLeft, "&&", aRight);
   }
 
+  /**
+   * Logical-or
+   * 
+   * @param aLeft
+   *        lhs
+   * @param aRight
+   *        rhs
+   * @return operator
+   */
   @Nonnull
   public static IJSExpression cor (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
@@ -223,6 +259,15 @@ public final class JSOp
     return new JSOpBinary (aLeft, "||", aRight);
   }
 
+  /**
+   * Exclusive-or
+   * 
+   * @param aLeft
+   *        lhs
+   * @param aRight
+   *        rhs
+   * @return operator
+   */
   @Nonnull
   public static JSOpBinary xor (@Nonnull final IJSExpression aLeft, @Nonnull final IJSExpression aRight)
   {
