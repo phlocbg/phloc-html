@@ -40,6 +40,11 @@ public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>
   private int m_nMaxLength = CGlobal.ILLEGAL_UINT;
   private int m_nSize = CGlobal.ILLEGAL_UINT;
 
+  protected AbstractHCEdit (@Nonnull final EHCInputType eType)
+  {
+    super (eType);
+  }
+
   protected AbstractHCEdit (@Nonnull final EHCInputType eType, @Nullable final String sName)
   {
     super (eType);

@@ -37,6 +37,11 @@ public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
 {
   private boolean m_bDisableAutoComplete = HCDefaultSettings.isAutoCompleteOffForPasswordEdits ();
 
+  public HCEditPassword ()
+  {
+    super (EHCInputType.PASSWORD);
+  }
+
   public HCEditPassword (@Nullable final String sName)
   {
     super (EHCInputType.PASSWORD, sName);

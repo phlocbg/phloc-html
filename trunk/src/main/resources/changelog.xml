@@ -22,6 +22,11 @@
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
   <entry date="2013-01-03" category="api" action="add">
     <change>
+      <text locale="en">Added support for 'accept' attribute in HCEditFile</text>
+    </change>
+  </entry>
+  <entry date="2013-01-03" category="api" action="add">
+    <change>
       <text locale="en">Added new class HCMultiCustomizer that can wrap several customizers</text>
     </change>
   </entry>

@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.hc.api.EHCInputType;
@@ -36,6 +37,12 @@ public class HCEditFile extends AbstractHCEdit <HCEditFile>
   public static final boolean DEFAULT_MULTIPLE = false;
 
   private boolean m_bMultiple = DEFAULT_MULTIPLE;
+  private IMimeType m_aAccept;
+
+  public HCEditFile ()
+  {
+    super (EHCInputType.FILE);
+  }
 
   public HCEditFile (@Nullable final String sName)
   {
@@ -54,11 +61,26 @@ public class HCEditFile extends AbstractHCEdit <HCEditFile>
     return this;
   }
 
+  @Nullable
+  public IMimeType getAccept ()
+  {
+    return m_aAccept;
+  }
+
+  @Nonnull
+  public HCEditFile setAccept (@Nullable final IMimeType aAccept)
+  {
+    m_aAccept = aAccept;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_bMultiple)
       aElement.setAttribute (CHTMLAttributes.MULTIPLE, CHTMLAttributeValues.MULTIPLE);
+    if (m_aAccept != null)
+      aElement.setAttribute (CHTMLAttributes.ACCEPT, m_aAccept.getAsString ());
   }
 }

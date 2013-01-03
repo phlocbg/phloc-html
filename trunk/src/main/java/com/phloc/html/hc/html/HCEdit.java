@@ -41,6 +41,11 @@ public class HCEdit extends AbstractHCEdit <HCEdit>
   private String m_sValue;
   private boolean m_bDisableAutoComplete = DEFAULT_DISABLE_AUTO_COMPLETE;
 
+  public HCEdit ()
+  {
+    super (EHCInputType.TEXT);
+  }
+
   public HCEdit (@Nullable final String sName)
   {
     super (EHCInputType.TEXT, sName);
