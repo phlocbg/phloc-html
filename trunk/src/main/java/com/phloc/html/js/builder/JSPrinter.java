@@ -20,7 +20,6 @@ package com.phloc.html.js.builder;
 import java.io.Writer;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
@@ -154,7 +153,7 @@ public final class JSPrinter
     }
   }
 
-  @Nullable
+  @Nonnull
   public static String getAsString (@Nonnull final IJSGeneratable aGeneratable)
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
@@ -162,7 +161,7 @@ public final class JSPrinter
     return aSW.getAsString ();
   }
 
-  @Nullable
+  @Nonnull
   public static String getAsString (@Nonnull final IJSDeclaration aDecl)
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
@@ -170,7 +169,7 @@ public final class JSPrinter
     return aSW.getAsString ();
   }
 
-  @Nullable
+  @Nonnull
   public static String getAsString (@Nonnull final IJSStatement aStatement)
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
@@ -178,11 +177,11 @@ public final class JSPrinter
     return aSW.getAsString ();
   }
 
-  @Nullable
+  @Nonnull
   public static String getAsString (@Nonnull final JSPackage aPackage)
   {
     if (aPackage.memberCount () == 0)
-      return null;
+      return "";
 
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writePackage (aPackage, aSW);

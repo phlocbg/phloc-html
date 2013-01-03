@@ -305,4 +305,11 @@ public final class JSPackageTest
     assertEquals ("{a=b;}",
                   JSPrinter.getAsString ((IJSGeneratable) new JSBlock ().add (new UnparsedJSCodeProvider ("a=b;"))));
   }
+
+  @Test
+  public void testEmpty ()
+  {
+    final JSPackage aPkg = new JSPackage ();
+    assertEquals ("", JSPrinter.getAsString (aPkg));
+  }
 }
