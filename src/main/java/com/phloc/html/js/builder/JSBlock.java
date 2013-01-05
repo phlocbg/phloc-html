@@ -23,7 +23,6 @@ import javax.annotation.Nullable;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
-import com.phloc.json.IJSON;
 
 /**
  * A block of JS code, which may contain statements and local declarations.
@@ -97,73 +96,6 @@ public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSState
       m_bBracesRequired = true;
       m_bIndentRequired = true;
     }
-  }
-
-  /**
-   * Create a return statement and add it to this block
-   */
-  @Nonnull
-  public JSBlock _return ()
-  {
-    return _return ((IJSExpression) null);
-  }
-
-  @Nonnull
-  public JSBlock _return (final boolean v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (final char v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (final double v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (final float v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (final int v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (final long v)
-  {
-    return _return (JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (@Nullable final String v)
-  {
-    return _return (v == null ? JSExpr.NULL : JSExpr.lit (v));
-  }
-
-  @Nonnull
-  public JSBlock _return (@Nullable final IJSON v)
-  {
-    return _return (v == null ? JSExpr.NULL : JSExpr.json (v));
-  }
-
-  /**
-   * Create a return statement and add it to this block
-   */
-  @Nonnull
-  public JSBlock _return (@Nullable final IJSExpression aExpr)
-  {
-    addStatement (new JSReturn (aExpr));
-    return this;
   }
 
   /**

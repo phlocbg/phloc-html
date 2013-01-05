@@ -1033,6 +1033,73 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   }
 
   /**
+   * Create a return statement and add it to this block
+   */
+  @Nonnull
+  public AbstractJSBlock _return ()
+  {
+    return _return ((IJSExpression) null);
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final boolean v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final char v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final double v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final float v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final int v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (final long v)
+  {
+    return _return (JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (@Nullable final String v)
+  {
+    return _return (v == null ? JSExpr.NULL : JSExpr.lit (v));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (@Nullable final IJSON v)
+  {
+    return _return (v == null ? JSExpr.NULL : JSExpr.json (v));
+  }
+
+  /**
+   * Create a return statement and add it to this block
+   */
+  @Nonnull
+  public AbstractJSBlock _return (@Nullable final IJSExpression aExpr)
+  {
+    addStatement (new JSReturn (aExpr));
+    return this;
+  }
+
+  /**
    * Create a sub-block and add it to this block
    * 
    * @return The newly created block
