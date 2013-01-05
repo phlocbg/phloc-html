@@ -26,6 +26,8 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.css.ECSSUnit;
+import com.phloc.css.property.CCSSProperties;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
@@ -132,6 +134,19 @@ public class HCImg extends AbstractHCElement <HCImg>
   {
     m_sAlt = sAlt;
     return this;
+  }
+
+  @Override
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    // Workaround for IE if a CSS contains "width:auto" and/or "height:auto"
+    // See e.g. https://github.com/twitter/bootstrap/issues/1899
+    if (m_aExtent != null)
+    {
+      addStyles (CCSSProperties.WIDTH.newValue (ECSSUnit.px (m_aExtent.getWidth ())),
+                 CCSSProperties.HEIGHT.newValue (ECSSUnit.px (m_aExtent.getHeight ())));
+    }
+    return super.canConvertToNode (aConversionSettings);
   }
 
   @Override
