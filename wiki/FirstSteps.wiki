@@ -32,7 +32,7 @@ To use phloc-html put the following to your pom.xml:
     <dependency>
       <groupId>com.phloc</groupId>
       <artifactId>phloc-html</artifactId>
-      <version>3.7.2</version>
+      <version>3.7.3</version>
     </dependency>
   </dependencies>
 ...
