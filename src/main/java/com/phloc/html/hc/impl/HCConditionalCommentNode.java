@@ -30,7 +30,6 @@ import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -52,10 +51,10 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
 
   private String m_sCondition;
-  private final IHCBaseNode m_aWrappedNode;
+  private final IHCNode m_aWrappedNode;
   private String m_sLineSeparator = s_sDefaultLineSeparator;
 
-  public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCBaseNode aWrappedNode)
+  public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCNode aWrappedNode)
   {
     if (StringHelper.hasNoText (sCondition))
       throw new IllegalArgumentException ("Passed condition may not be empty!");
@@ -89,7 +88,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   }
 
   @Nonnull
-  public IHCBaseNode getWrappedNode ()
+  public IHCNode getWrappedNode ()
   {
     return m_aWrappedNode;
   }

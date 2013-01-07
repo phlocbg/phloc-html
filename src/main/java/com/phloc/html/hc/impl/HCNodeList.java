@@ -31,7 +31,6 @@ import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -44,7 +43,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
 {
-  private final List <IHCBaseNode> m_aNodes = new ArrayList <IHCBaseNode> ();
+  private final List <IHCNode> m_aNodes = new ArrayList <IHCNode> ();
 
   public HCNodeList ()
   {}
@@ -69,7 +68,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
-  public HCNodeList addChild (@Nullable final IHCBaseNode aNode)
+  public HCNodeList addChild (@Nullable final IHCNode aNode)
   {
     if (aNode == this)
       throw new IllegalArgumentException ("Cannot append to self!");
@@ -79,7 +78,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       {
         // Directly add all contained nodes of the node list, to avoid building
         // a hierarchy of node lists
-        for (final IHCBaseNode aContainedNode : ((HCNodeList) aNode).m_aNodes)
+        for (final IHCNode aContainedNode : ((HCNodeList) aNode).m_aNodes)
           m_aNodes.add (aContainedNode);
       }
       else
@@ -89,7 +88,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
-  public HCNodeList addChild (@Nonnegative final int nIndex, @Nullable final IHCBaseNode aChildNode)
+  public HCNodeList addChild (@Nonnegative final int nIndex, @Nullable final IHCNode aChildNode)
   {
     if (aChildNode == this)
       throw new IllegalArgumentException ("Cannot append to self!");
@@ -99,7 +98,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       {
         // The child node is itself a list -> inline the content
         int i = nIndex;
-        for (final IHCBaseNode aContainedNode : ((HCNodeList) aChildNode).m_aNodes)
+        for (final IHCNode aContainedNode : ((HCNodeList) aChildNode).m_aNodes)
         {
           m_aNodes.add (i, aContainedNode);
           ++i;
@@ -116,25 +115,25 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
    */
   @Nonnull
   @Deprecated
-  public HCNodeList addChildren (@Nullable final IHCBaseNode aNode)
+  public HCNodeList addChildren (@Nullable final IHCNode aNode)
   {
     return addChild (aNode);
   }
 
   @Nonnull
-  public HCNodeList addChildren (@Nullable final IHCBaseNode... aNodes)
+  public HCNodeList addChildren (@Nullable final IHCNode... aNodes)
   {
     if (aNodes != null)
-      for (final IHCBaseNode aNode : aNodes)
+      for (final IHCNode aNode : aNodes)
         addChild (aNode);
     return this;
   }
 
   @Nonnull
-  public HCNodeList addChildren (@Nullable final Iterable <? extends IHCBaseNode> aNodes)
+  public HCNodeList addChildren (@Nullable final Iterable <? extends IHCNode> aNodes)
   {
     if (aNodes != null)
-      for (final IHCBaseNode aNode : aNodes)
+      for (final IHCNode aNode : aNodes)
         addChild (aNode);
     return this;
   }
@@ -172,14 +171,14 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nullable
-  public <T extends IHCBaseNode> T addAndReturnChild (@Nullable final T aChild)
+  public <T extends IHCNode> T addAndReturnChild (@Nullable final T aChild)
   {
     addChild (aChild);
     return aChild;
   }
 
   @Nullable
-  public <T extends IHCBaseNode> T addAndReturnChild (@Nonnegative final int nIndex, @Nullable final T aChild)
+  public <T extends IHCNode> T addAndReturnChild (@Nonnegative final int nIndex, @Nullable final T aChild)
   {
     addChild (nIndex, aChild);
     return aChild;
@@ -193,7 +192,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
-  public HCNodeList removeChild (@Nullable final IHCBaseNode aNode)
+  public HCNodeList removeChild (@Nullable final IHCNode aNode)
   {
     m_aNodes.remove (aNode);
     return this;
@@ -214,25 +213,25 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
 
   @Nonnull
   @ReturnsMutableCopy
-  public List <IHCBaseNode> getChildren ()
+  public List <IHCNode> getChildren ()
   {
     return ContainerHelper.newList (m_aNodes);
   }
 
   @Nullable
-  public IHCBaseNode getChildAtIndex (@Nonnegative final int nIndex)
+  public IHCNode getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aNodes, nIndex);
   }
 
   @Nullable
-  public IHCBaseNode getFirstChild ()
+  public IHCNode getFirstChild ()
   {
     return ContainerHelper.getFirstElement (m_aNodes);
   }
 
   @Nullable
-  public IHCBaseNode getLastChild ()
+  public IHCNode getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aNodes);
   }
@@ -246,7 +245,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
    *         contained no simplification can be performed.
    */
   @Nullable
-  public IHCBaseNode getAsSimpleNode ()
+  public IHCNode getAsSimpleNode ()
   {
     if (m_aNodes.isEmpty ())
       return null;
@@ -260,7 +259,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
-    for (final IHCBaseNode aNode : m_aNodes)
+    for (final IHCNode aNode : m_aNodes)
       ret.appendChild (aNode.convertToNode (aConversionSettings));
     return ret;
   }
@@ -270,7 +269,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   public String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
-    for (final IHCBaseNode aNode : m_aNodes)
+    for (final IHCNode aNode : m_aNodes)
     {
       final String sPlainText = aNode.getPlainText ();
       if (StringHelper.hasText (sPlainText))

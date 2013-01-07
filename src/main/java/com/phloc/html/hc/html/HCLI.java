@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -49,7 +48,7 @@ public class HCLI extends AbstractHCElementWithChildren <HCLI>
   }
 
   @Override
-  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
+  protected void beforeAddChild (@Nonnull final IHCNode aChild)
   {
     if (aChild instanceof HCLI)
       s_aLogger.warn ("Creating nested LI elements is not allowed!");

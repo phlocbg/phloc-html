@@ -30,5 +30,5 @@ public interface IHCWrappingNode extends IHCNode
    * @return The wrapped node and never <code>null</code>.
    */
   @Nonnull
-  IHCBaseNode getWrappedNode ();
+  IHCNode getWrappedNode ();
 }

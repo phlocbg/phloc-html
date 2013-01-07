@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 
@@ -55,7 +55,7 @@ public final class HCOutOfBandHandler
    * @return <code>true</code> if it is an out-of-band node, <code>false</code>
    *         if not.
    */
-  public static boolean isOutOfBandNode (@Nonnull final IHCBaseNode aHCNode)
+  public static boolean isOutOfBandNode (@Nonnull final IHCNode aHCNode)
   {
     // Is the @OutOfBandNode annotation present?
     final String sClassName = aHCNode.getClass ().getName ();
@@ -77,13 +77,13 @@ public final class HCOutOfBandHandler
   }
 
   private static void _recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
-                                                       @Nonnull final List <IHCBaseNode> aTargetList,
+                                                       @Nonnull final List <IHCNode> aTargetList,
                                                        @Nonnegative final int nLevel)
   {
     if (aParentElement.hasChildren ())
     {
       int nNodeIndex = 0;
-      for (final IHCBaseNode aChild : aParentElement.getChildren ())
+      for (final IHCNode aChild : aParentElement.getChildren ())
       {
         if (false)
           s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
@@ -121,7 +121,7 @@ public final class HCOutOfBandHandler
    *        <code>null</code>.
    */
   public static void recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
-                                                     @Nonnull final List <IHCBaseNode> aTargetList)
+                                                     @Nonnull final List <IHCNode> aTargetList)
   {
     if (aParentElement == null)
       throw new NullPointerException ("parentElement");

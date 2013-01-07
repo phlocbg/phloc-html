@@ -27,7 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @ThreadSafe
@@ -102,7 +102,7 @@ public final class HCSettings
    * @return The fully created HTML node
    */
   @Nullable
-  public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode)
+  public static IMicroNode getAsNode (@Nonnull final IHCNode aHCNode)
   {
     // No indent/align required for conversion to IMicroNode
     return getAsNode (aHCNode, getConversionSettings (false));
@@ -116,7 +116,7 @@ public final class HCSettings
    * @return The fully created HTML node
    */
   @Nullable
-  public static IMicroNode getAsNode (@Nonnull final IHCBaseNode aHCNode,
+  public static IMicroNode getAsNode (@Nonnull final IHCNode aHCNode,
                                       @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.convertToNode (aConversionSettings);
@@ -133,7 +133,7 @@ public final class HCSettings
    * @return The node as XML with or without indentation.
    */
   @Nonnull
-  public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode, final boolean bIndentAndAlign)
+  public static String getAsHTMLString (@Nonnull final IHCNode aHCNode, final boolean bIndentAndAlign)
   {
     return getAsHTMLString (aHCNode, getConversionSettings (bIndentAndAlign));
   }
@@ -149,7 +149,7 @@ public final class HCSettings
    * @return The node as XML optionally without indentation.
    */
   @Nonnull
-  public static String getAsHTMLString (@Nonnull final IHCBaseNode aHCNode,
+  public static String getAsHTMLString (@Nonnull final IHCNode aHCNode,
                                         @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.getAsHTMLString (aConversionSettings);

@@ -36,15 +36,13 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCBaseNode> extends
-                                                                                                                                                                          AbstractHCElement <THISTYPE> implements
-                                                                                                                                                                                                      IHCHasChildren
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -174,7 +172,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     if (hasChildren ())
     {
       // We need to work on a copy of the children!
-      for (final IHCBaseNode aChild : getChildren ())
+      for (final IHCNode aChild : getChildren ())
         aChild.applyCustomization (aConversionSettings, aParentNode);
     }
   }
@@ -185,7 +183,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (hasChildren ())
-      for (final IHCBaseNode aChild : m_aChildren)
+      for (final IHCNode aChild : m_aChildren)
         aChild.beforeConvertToNode (aConversionSettings);
   }
 
@@ -202,7 +200,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nonnull
   @Nonempty
   @OverrideOnDemand
-  protected List <? extends IHCBaseNode> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
+  protected List <? extends IHCNode> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
   {
     return aChildren;
   }
@@ -214,7 +212,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
-      for (final IHCBaseNode aChild : getChildrenFormEmitting (m_aChildren))
+      for (final IHCNode aChild : getChildrenFormEmitting (m_aChildren))
         aElement.appendChild (aChild.convertToNode (aConversionSettings));
 
     if (!aElement.hasChildren ())

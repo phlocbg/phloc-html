@@ -44,7 +44,6 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
@@ -258,9 +257,9 @@ public class HCHead extends AbstractHCElement <HCHead>
   // CSS handling
   //
 
-  public static boolean isValidCSSNode (@Nonnull final IHCBaseNode aNode)
+  public static boolean isValidCSSNode (@Nonnull final IHCNode aNode)
   {
-    final IHCBaseNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
 
     // Direct CSS node?
     if (aUnwrappedNode instanceof IHCCSSNode)
@@ -324,9 +323,9 @@ public class HCHead extends AbstractHCElement <HCHead>
   // JS handling
   //
 
-  public static boolean isValidJSNode (@Nonnull final IHCBaseNode aNode)
+  public static boolean isValidJSNode (@Nonnull final IHCNode aNode)
   {
-    final IHCBaseNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
 
     // Direct JS node?
     return aUnwrappedNode instanceof IHCJSNode;

@@ -24,7 +24,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
@@ -41,13 +41,13 @@ public class HCEmptyCustomizer implements IHCCustomizer
   {}
 
   public void customizeNode (@Nonnull final IHCNodeWithChildren <?> aParentElement,
-                             @Nonnull final IHCBaseNode aNode,
+                             @Nonnull final IHCNode aNode,
                              @Nonnull final EHTMLVersion eHTMLVersion)
   {
     // Nada
   }
 
-  public void handleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
+  public void handleOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {

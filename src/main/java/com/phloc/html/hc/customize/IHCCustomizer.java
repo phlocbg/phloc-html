@@ -22,7 +22,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
@@ -47,7 +47,7 @@ public interface IHCCustomizer
    *        The HTML version to be used. Never <code>null</code>.
    */
   void customizeNode (@Nonnull IHCNodeWithChildren <?> aParentElement,
-                      @Nonnull IHCBaseNode aNode,
+                      @Nonnull IHCNode aNode,
                       @Nonnull EHTMLVersion eHTMLVersion);
 
   /**
@@ -61,5 +61,5 @@ public interface IHCCustomizer
    * @param aBody
    *        The body element. Never <code>null</code>.
    */
-  void handleOutOfBandNodes (@Nonnull List <IHCBaseNode> aOutOfBandNodes, @Nonnull HCHead aHead, @Nonnull HCBody aBody);
+  void handleOutOfBandNodes (@Nonnull List <IHCNode> aOutOfBandNodes, @Nonnull HCHead aHead, @Nonnull HCBody aBody);
 }

@@ -33,8 +33,8 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -120,7 +120,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     HCUtils.iterateTree (aBaseNode, new IHCIteratorCallback ()
     {
       @Nonnull
-      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
         aChildNode.applyCustomization (aConversionSettings, aBaseNode);
         return EFinish.UNFINISHED;
@@ -136,7 +136,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     if (aConversionSettings.extractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
-      final List <IHCBaseNode> aExtractedOutOfBandNodes = new ArrayList <IHCBaseNode> ();
+      final List <IHCNode> aExtractedOutOfBandNodes = new ArrayList <IHCNode> ();
       HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode, aExtractedOutOfBandNodes);
 
       // Call out-of-band node handler
