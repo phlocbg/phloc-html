@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc;
 
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.CheckForSigned;
@@ -228,6 +229,43 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   @Nonnull
   THISTYPE setSpellCheck (boolean bSpellCheck);
+
+  /**
+   * @return <code>true</code> if at least one custom attribute is contained
+   */
+  boolean hasCustomAttrs ();
+
+  /**
+   * @return The number of contained custom attributes. Always &ge; 0.
+   */
+  @Nonnegative
+  int getCustomAttrCount ();
+
+  /**
+   * Check if a certain custom attribute is contained
+   * 
+   * @param sName
+   *        The name of the custom attribute to check
+   * @return <code>true</code> if such a custom attribute is contained.
+   */
+  boolean containsCustomAttr (@Nullable String sName);
+
+  /**
+   * Get the value of a certain custom attribute
+   * 
+   * @param sName
+   *        The name of the custom attribute to retrieve the value from
+   * @return <code>null</code> if no such custom attribute is contained.
+   */
+  @Nullable
+  String getCustomAttrValue (@Nullable String sName);
+
+  /**
+   * @return All custom attributes contained. Never <code>null</code>.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  Map <String, String> getAllCustomAttrs ();
 
   /**
    * Set a custom attribute that is serialized as is.
