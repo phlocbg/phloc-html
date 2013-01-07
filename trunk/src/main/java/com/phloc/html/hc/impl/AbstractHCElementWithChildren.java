@@ -37,16 +37,14 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElementWithChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
-  private List <IHCBaseNode> m_aChildren;
+  private List <IHCNode> m_aChildren;
 
   protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement)
   {
@@ -65,7 +63,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
    *        The child that was added
    */
   @OverrideOnDemand
-  protected void beforeAddChild (@Nonnull final IHCBaseNode aChild)
+  protected void beforeAddChild (@Nonnull final IHCNode aChild)
   {}
 
   /**
@@ -75,11 +73,11 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
    *        The child that was added
    */
   @OverrideOnDemand
-  protected void afterAddChild (@Nonnull final IHCBaseNode aChild)
+  protected void afterAddChild (@Nonnull final IHCNode aChild)
   {}
 
   @Nonnull
-  private THISTYPE _addChild (@CheckForSigned final int nIndex, @Nullable final IHCBaseNode aChild)
+  private THISTYPE _addChild (@CheckForSigned final int nIndex, @Nullable final IHCNode aChild)
   {
     if (aChild == this)
       throw new IllegalArgumentException ("Cannot append to self!");
@@ -88,7 +86,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     {
       beforeAddChild (aChild);
       if (m_aChildren == null)
-        m_aChildren = new ArrayList <IHCBaseNode> ();
+        m_aChildren = new ArrayList <IHCNode> ();
       if (nIndex < 0)
         m_aChildren.add (aChild);
       else
@@ -99,13 +97,13 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
-  public final THISTYPE addChild (@Nullable final IHCBaseNode aChild)
+  public final THISTYPE addChild (@Nullable final IHCNode aChild)
   {
     return _addChild (CGlobal.ILLEGAL_UINT, aChild);
   }
 
   @Nonnull
-  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final IHCBaseNode aChild)
+  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final IHCNode aChild)
   {
     if (nIndex < 0 || nIndex > getChildCount ())
       throw new IllegalArgumentException ("Illegal index " + nIndex + " passed!");
@@ -149,25 +147,25 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   @Deprecated
   @DevelopersNote ("Use addChild instead!")
   @Nonnull
-  public final THISTYPE addChildren (@Nullable final IHCBaseNode aChild)
+  public final THISTYPE addChildren (@Nullable final IHCNode aChild)
   {
     return addChild (aChild);
   }
 
   @Nonnull
-  public final THISTYPE addChildren (@Nullable final IHCBaseNode... aChildren)
+  public final THISTYPE addChildren (@Nullable final IHCNode... aChildren)
   {
     if (aChildren != null)
-      for (final IHCBaseNode aChild : aChildren)
+      for (final IHCNode aChild : aChildren)
         addChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE addChildren (@Nullable final Iterable <? extends IHCBaseNode> aChildren)
+  public final THISTYPE addChildren (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
     if (aChildren != null)
-      for (final IHCBaseNode aChild : aChildren)
+      for (final IHCNode aChild : aChildren)
         addChild (aChild);
     return thisAsT ();
   }
@@ -191,7 +189,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   @Nullable
   @CheckReturnValue
-  public final <V extends IHCBaseNode> V addAndReturnChild (@Nullable final V aChild)
+  public final <V extends IHCNode> V addAndReturnChild (@Nullable final V aChild)
   {
     addChild (aChild);
     return aChild;
@@ -199,14 +197,14 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   @Nullable
   @CheckReturnValue
-  public final <V extends IHCBaseNode> V addAndReturnChild (@Nonnegative final int nIndex, @Nullable final V aChild)
+  public final <V extends IHCNode> V addAndReturnChild (@Nonnegative final int nIndex, @Nullable final V aChild)
   {
     addChild (nIndex, aChild);
     return aChild;
   }
 
   @Nonnull
-  public final THISTYPE removeChild (@Nullable final IHCBaseNode aChild)
+  public final THISTYPE removeChild (@Nullable final IHCNode aChild)
   {
     if (aChild != null && m_aChildren != null)
       m_aChildren.remove (aChild);
@@ -230,7 +228,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nullable
-  public final IHCBaseNode getChild (final int nIndex)
+  public final IHCNode getChild (final int nIndex)
   {
     if (m_aChildren != null && nIndex >= 0 && nIndex < m_aChildren.size ())
       return m_aChildren.get (nIndex);
@@ -245,25 +243,25 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   @Nullable
   @ReturnsMutableCopy
-  public final List <IHCBaseNode> getChildren ()
+  public final List <IHCNode> getChildren ()
   {
     return ContainerHelper.newList (m_aChildren);
   }
 
   @Nullable
-  public final IHCBaseNode getChildAtIndex (@Nonnegative final int nIndex)
+  public final IHCNode getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aChildren, nIndex);
   }
 
   @Nullable
-  public final IHCBaseNode getFirstChild ()
+  public final IHCNode getFirstChild ()
   {
     return ContainerHelper.getFirstElement (m_aChildren);
   }
 
   @Nullable
-  public final IHCBaseNode getLastChild ()
+  public final IHCNode getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aChildren);
   }
@@ -277,7 +275,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     if (hasChildren ())
     {
       // We need to work on a copy of the children!
-      for (final IHCBaseNode aChild : getChildren ())
+      for (final IHCNode aChild : getChildren ())
         aChild.applyCustomization (aConversionSettings, aParentNode);
     }
   }
@@ -288,7 +286,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (hasChildren ())
-      for (final IHCBaseNode aChild : m_aChildren)
+      for (final IHCNode aChild : m_aChildren)
         aChild.beforeConvertToNode (aConversionSettings);
   }
 
@@ -298,7 +296,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   {
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
-      for (final IHCBaseNode aChild : m_aChildren)
+      for (final IHCNode aChild : m_aChildren)
         aElement.appendChild (aChild.convertToNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
@@ -319,7 +317,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     if (!hasChildren ())
       return "";
     final StringBuilder ret = new StringBuilder ();
-    for (final IHCBaseNode aChild : m_aChildren)
+    for (final IHCNode aChild : m_aChildren)
     {
       final String sPlainText = aChild.getPlainText ();
       if (StringHelper.hasText (sPlainText))

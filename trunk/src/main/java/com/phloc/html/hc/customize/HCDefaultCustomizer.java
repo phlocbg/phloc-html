@@ -35,7 +35,6 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.CHCParam;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
@@ -110,7 +109,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
   @Override
   public void customizeNode (@Nonnull final IHCNodeWithChildren <?> aParentElement,
-                             @Nonnull final IHCBaseNode aNode,
+                             @Nonnull final IHCNode aNode,
                              @Nonnull final EHTMLVersion eHTMLVersion)
   {
     if (aNode instanceof IHCElement <?>)
@@ -229,10 +228,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
   @Nonnull
   @OverrideOnDemand
-  protected List <IHCBaseNode> assembleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
-                                                       @Nonnull final HCHead aHead)
+  protected List <IHCNode> assembleOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
+                                                   @Nonnull final HCHead aHead)
   {
-    final List <IHCBaseNode> aNodes = new ArrayList <IHCBaseNode> ();
+    final List <IHCNode> aNodes = new ArrayList <IHCNode> ();
 
     // Add all existing JS nodes from the head, as <script> is known to be out
     // of band
@@ -241,7 +240,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
     final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
-    for (final IHCBaseNode aOOBNode : aOutOfBandNodes)
+    for (final IHCNode aOOBNode : aOutOfBandNodes)
     {
       if (aOOBNode instanceof HCScriptOnDocumentReady)
         aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
@@ -271,7 +270,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
    *         it belongs to the head.
    */
   @OverrideOnDemand
-  protected boolean isOutOfBandBodyNode (@Nonnull final IHCBaseNode aOOBNode)
+  protected boolean isOutOfBandBodyNode (@Nonnull final IHCNode aOOBNode)
   {
     // JS nodes go to body
     if (HCHead.isValidJSNode (aOOBNode))
@@ -281,15 +280,15 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   }
 
   @Override
-  public void handleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
+  public void handleOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {
     // First assemble
-    final List <IHCBaseNode> aNodes = assembleOutOfBandNodes (aOutOfBandNodes, aHead);
+    final List <IHCNode> aNodes = assembleOutOfBandNodes (aOutOfBandNodes, aHead);
 
     // And now move either to head or body
-    for (final IHCBaseNode aNode : aNodes)
+    for (final IHCNode aNode : aNodes)
     {
       if (isOutOfBandBodyNode (aNode))
         aBody.addChild (aNode);
@@ -297,10 +296,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
       {
         // It's a head node
         if (HCHead.isValidCSSNode (aNode))
-          aHead.addCSS ((IHCNode) aNode);
+          aHead.addCSS (aNode);
         else
           if (HCHead.isValidJSNode (aNode))
-            aHead.addJS ((IHCNode) aNode);
+            aHead.addJS (aNode);
           else
             if (aNode instanceof HCLink)
               aHead.addLink ((HCLink) aNode);

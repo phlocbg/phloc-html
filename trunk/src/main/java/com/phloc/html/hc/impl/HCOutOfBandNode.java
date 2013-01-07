@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.annotations.OutOfBandNode;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 
 /**
  * Implementation of a node that is ONLY an out-of-band node!
@@ -31,9 +31,9 @@ import com.phloc.html.hc.IHCBaseNode;
 @OutOfBandNode
 public final class HCOutOfBandNode extends AbstractHCWrappingNode
 {
-  private final IHCBaseNode m_aOutOfBandNode;
+  private final IHCNode m_aOutOfBandNode;
 
-  public HCOutOfBandNode (@Nonnull final IHCBaseNode aOutOfBandNode)
+  public HCOutOfBandNode (@Nonnull final IHCNode aOutOfBandNode)
   {
     if (aOutOfBandNode == null)
       throw new NullPointerException ("outOfBandNode");
@@ -41,7 +41,7 @@ public final class HCOutOfBandNode extends AbstractHCWrappingNode
   }
 
   @Nonnull
-  public IHCBaseNode getWrappedNode ()
+  public IHCNode getWrappedNode ()
   {
     return m_aOutOfBandNode;
   }

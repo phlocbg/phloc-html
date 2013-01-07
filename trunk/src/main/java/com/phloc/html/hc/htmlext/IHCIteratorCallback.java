@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.state.EFinish;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 
 /**
  * Callback interface to be used when iterating an HC tree.
@@ -43,5 +43,5 @@ public interface IHCIteratorCallback
    *         {@link EFinish#UNFINISHED} to continue iteration.
    */
   @Nonnull
-  EFinish call (@Nullable IHCHasChildren aParentNode, @Nonnull IHCBaseNode aChildNode);
+  EFinish call (@Nullable IHCHasChildren aParentNode, @Nonnull IHCNode aChildNode);
 }

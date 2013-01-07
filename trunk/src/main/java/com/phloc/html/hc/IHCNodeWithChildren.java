@@ -55,7 +55,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE addChild (@Nullable IHCBaseNode aChild);
+  THISTYPE addChild (@Nullable IHCNode aChild);
 
   /**
    * @param nIndex
@@ -65,10 +65,10 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCBaseNode aChild);
+  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNode aChild);
 
   /**
-   * Use {@link #addChild(IHCBaseNode)} instead.
+   * Use {@link #addChild(IHCNode)} instead.
    * 
    * @param aChild
    *        The child to add. May be <code>null</code>.
@@ -76,7 +76,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Deprecated
   @DevelopersNote ("Use addChild instead")
-  THISTYPE addChildren (@Nullable IHCBaseNode aChild);
+  THISTYPE addChildren (@Nullable IHCNode aChild);
 
   /**
    * @param aChildren
@@ -84,7 +84,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE addChildren (@Nullable IHCBaseNode... aChildren);
+  THISTYPE addChildren (@Nullable IHCNode... aChildren);
 
   /**
    * Use {@link #addChild(IPredefinedLocaleTextProvider)} instead
@@ -130,7 +130,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE addChildren (@Nullable Iterable <? extends IHCBaseNode> aChildren);
+  THISTYPE addChildren (@Nullable Iterable <? extends IHCNode> aChildren);
 
   /**
    * @param aChild
@@ -140,7 +140,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return the added child
    */
   @Nullable
-  <V extends IHCBaseNode> V addAndReturnChild (@Nullable V aChild);
+  <V extends IHCNode> V addAndReturnChild (@Nullable V aChild);
 
   /**
    * @param nIndex
@@ -152,7 +152,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return the added child
    */
   @Nullable
-  <V extends IHCBaseNode> V addAndReturnChild (@Nonnegative int nIndex, @Nullable V aChild);
+  <V extends IHCNode> V addAndReturnChild (@Nonnegative int nIndex, @Nullable V aChild);
 
   /**
    * Remove the child at the specified index.
@@ -172,7 +172,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE removeChild (@Nullable IHCBaseNode aNode);
+  THISTYPE removeChild (@Nullable IHCNode aNode);
 
   /**
    * Remove all children of this object.

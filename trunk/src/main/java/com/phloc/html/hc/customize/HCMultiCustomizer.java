@@ -28,7 +28,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCBaseNode;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
@@ -65,14 +65,14 @@ public final class HCMultiCustomizer implements IHCCustomizer
   }
 
   public void customizeNode (@Nonnull final IHCNodeWithChildren <?> aParentElement,
-                             @Nonnull final IHCBaseNode aNode,
+                             @Nonnull final IHCNode aNode,
                              @Nonnull final EHTMLVersion eHTMLVersion)
   {
     for (final IHCCustomizer aCustomizer : m_aCustomizers)
       aCustomizer.customizeNode (aParentElement, aNode, eHTMLVersion);
   }
 
-  public void handleOutOfBandNodes (@Nonnull final List <IHCBaseNode> aOutOfBandNodes,
+  public void handleOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {

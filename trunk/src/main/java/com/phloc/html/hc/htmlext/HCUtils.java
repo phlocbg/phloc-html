@@ -33,7 +33,6 @@ import com.phloc.commons.mutable.Wrapper;
 import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCBaseNode;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
@@ -153,7 +152,7 @@ public final class HCUtils
     iterateChildren (aOwner, new IHCIteratorCallback ()
     {
       @Nullable
-      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
         if (aChildNode instanceof IHCElement <?>)
         {
@@ -200,7 +199,7 @@ public final class HCUtils
     iterateChildren (aOwner, new IHCIteratorCallback ()
     {
       @Nullable
-      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
         if (aChildNode instanceof IHCElement <?>)
         {
@@ -231,7 +230,7 @@ public final class HCUtils
     return recursiveGetFirstChildWithDifferentTagName (aOwner, aElements) != null;
   }
 
-  public static boolean recursiveContainsAtLeastOneTextNode (@Nullable final IHCBaseNode aStartNode)
+  public static boolean recursiveContainsAtLeastOneTextNode (@Nullable final IHCNode aStartNode)
   {
     if (aStartNode == null)
       return false;
@@ -245,7 +244,7 @@ public final class HCUtils
       iterateChildren ((IHCHasChildren) aStartNode, new IHCIteratorCallback ()
       {
         @Nullable
-        public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCBaseNode aChildNode)
+        public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
         {
           if (aChildNode instanceof HCTextNode)
           {
@@ -267,7 +266,7 @@ public final class HCUtils
   {
     if (aNode.hasChildren ())
     {
-      for (final IHCBaseNode aChild : aNode.getChildren ())
+      for (final IHCNode aChild : aNode.getChildren ())
       {
         // call callback
         if (aCallback.call (aNode, aChild).isFinished ())
@@ -365,8 +364,7 @@ public final class HCUtils
     return ret;
   }
 
-  private static void _recursiveAddFlattened (@Nullable final IHCBaseNode aNode,
-                                              @Nonnull final List <IHCBaseNode> aRealList)
+  private static void _recursiveAddFlattened (@Nullable final IHCNode aNode, @Nonnull final List <IHCNode> aRealList)
   {
     if (aNode != null)
     {
@@ -376,7 +374,7 @@ public final class HCUtils
       {
         final HCNodeList x = (HCNodeList) aNode;
         if (x.hasChildren ())
-          for (final IHCBaseNode aChild : x.getChildren ())
+          for (final IHCNode aChild : x.getChildren ())
             _recursiveAddFlattened (aChild, aRealList);
       }
       else
@@ -396,9 +394,9 @@ public final class HCUtils
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCBaseNode> getAsFlattenedList (@Nullable final IHCBaseNode aNode)
+  public static List <IHCNode> getAsFlattenedList (@Nullable final IHCNode aNode)
   {
-    final List <IHCBaseNode> ret = new ArrayList <IHCBaseNode> ();
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
     _recursiveAddFlattened (aNode, ret);
     return ret;
   }
@@ -412,7 +410,7 @@ public final class HCUtils
    *         is not wrapped. Never <code>null</code>.
    */
   @Nonnull
-  public static IHCBaseNode getUnwrappedNode (@Nonnull final IHCBaseNode aHCNode)
+  public static IHCNode getUnwrappedNode (@Nonnull final IHCNode aHCNode)
   {
     if (aHCNode instanceof IHCWrappingNode)
       return getUnwrappedNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
