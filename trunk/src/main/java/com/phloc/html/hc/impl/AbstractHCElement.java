@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.CheckForSigned;
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -64,8 +65,7 @@ import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                              IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -516,9 +516,42 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  /**
+   * @deprecated Use {@link #getAllCustomAttrs()} instead
+   */
+  @Deprecated
   @Nonnull
   @ReturnsMutableCopy
   public final Map <String, String> getCustomAttrs ()
+  {
+    return getAllCustomAttrs ();
+  }
+
+  public boolean hasCustomAttrs ()
+  {
+    return ContainerHelper.isNotEmpty (m_aCustomAttrs);
+  }
+
+  @Nonnegative
+  public int getCustomAttrCount ()
+  {
+    return ContainerHelper.getSize (m_aCustomAttrs);
+  }
+
+  public boolean containsCustomAttr (@Nullable final String sName)
+  {
+    return m_aCustomAttrs != null && StringHelper.hasText (sName) ? m_aCustomAttrs.containsKey (sName) : false;
+  }
+
+  @Nullable
+  public final String getCustomAttrValue (@Nullable final String sName)
+  {
+    return m_aCustomAttrs != null && StringHelper.hasText (sName) ? m_aCustomAttrs.get (sName) : null;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final Map <String, String> getAllCustomAttrs ()
   {
     return ContainerHelper.newOrderedMap (m_aCustomAttrs);
   }
