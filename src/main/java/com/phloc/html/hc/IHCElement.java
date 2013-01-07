@@ -281,6 +281,13 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE setCustomAttr (@Nullable String sName, @Nullable String sValue);
 
+  /**
+   * Remove the custom attribute with the specified name
+   * 
+   * @param sName
+   *        The name of the custom attribute to be removed
+   * @return this
+   */
   @Nonnull
   THISTYPE removeCustomAttr (@Nullable String sName);
 }
