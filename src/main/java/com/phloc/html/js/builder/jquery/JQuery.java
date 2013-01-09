@@ -89,12 +89,21 @@ public class JQuery
   }
 
   /**
+   * @return <code>$.fx</code>
+   */
+  @Nonnull
+  public static JSFieldRef fx ()
+  {
+    return jQueryField ().ref ("fx");
+  }
+
+  /**
    * @return <code>$.fx.interval</code>
    */
   @Nonnull
   public static JSFieldRef fxInterval ()
   {
-    return jQueryField ().ref ("fx").ref ("interval");
+    return fx ().ref ("interval");
   }
 
   /**
@@ -103,7 +112,7 @@ public class JQuery
   @Nonnull
   public static JSFieldRef fxOff ()
   {
-    return jQueryField ().ref ("fx").ref ("off");
+    return fx ().ref ("off");
   }
 
   /**
