@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -90,6 +91,32 @@ public class HCEM extends AbstractHCElementWithChildren <HCEM>
    */
   @Nonnull
   public static HCEM create (@Nullable final String... aChildren)
+  {
+    return new HCEM ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new EM element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCEM element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCEM create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCEM ().addChild (aChild);
+  }
+
+  /**
+   * Create a new EM element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCEM element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCEM create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCEM ().addChildren (aChildren);
   }

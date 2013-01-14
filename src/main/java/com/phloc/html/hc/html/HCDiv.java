@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 
 /**
  * Represents an HTML &lt;DIV&gt; element<br>
@@ -88,6 +89,32 @@ public class HCDiv extends AbstractHCDiv <HCDiv>
    */
   @Nonnull
   public static HCDiv create (@Nullable final String... aChildren)
+  {
+    return new HCDiv ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new DIV element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCDiv element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCDiv create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCDiv ().addChild (aChild);
+  }
+
+  /**
+   * Create a new DIV element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCDiv element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCDiv create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCDiv ().addChildren (aChildren);
   }

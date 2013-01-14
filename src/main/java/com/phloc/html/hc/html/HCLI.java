@@ -20,12 +20,10 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -37,21 +35,12 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCLI extends AbstractHCElementWithChildren <HCLI>
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCLI.class);
-
   /**
    * Create a new LI element
    */
   public HCLI ()
   {
     super (EHTMLElement.LI);
-  }
-
-  @Override
-  protected void beforeAddChild (@Nonnull final IHCNode aChild)
-  {
-    if (aChild instanceof HCLI)
-      s_aLogger.warn ("Creating nested LI elements is not allowed!");
   }
 
   /**
@@ -102,6 +91,32 @@ public class HCLI extends AbstractHCElementWithChildren <HCLI>
    */
   @Nonnull
   public static HCLI create (@Nullable final String... aChildren)
+  {
+    return new HCLI ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LI element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCLI element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLI create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCLI ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LI element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLI element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLI create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCLI ().addChildren (aChildren);
   }

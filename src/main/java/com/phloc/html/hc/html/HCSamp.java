@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -90,6 +91,32 @@ public class HCSamp extends AbstractHCElementWithChildren <HCSamp>
    */
   @Nonnull
   public static HCSamp create (@Nullable final String... aChildren)
+  {
+    return new HCSamp ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new SAMP element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCSamp element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCSamp create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCSamp ().addChild (aChild);
+  }
+
+  /**
+   * Create a new SAMP element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCSamp element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCSamp create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCSamp ().addChildren (aChildren);
   }
