@@ -22,7 +22,9 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -36,6 +38,18 @@ public class HCBody extends AbstractHCElementWithChildren <HCBody>
   public HCBody ()
   {
     super (EHTMLElement.BODY);
+  }
+
+  @Override
+  protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    final IMicroNode ret = super.internalConvertToNode (aConversionSettings);
+
+    // Check if only unique IDs are used
+    if (aConversionSettings.areConsistencyChecksEnabled ())
+      HCConsistencyChecker.checkForUniqueIDs (this);
+
+    return ret;
   }
 
   @Override

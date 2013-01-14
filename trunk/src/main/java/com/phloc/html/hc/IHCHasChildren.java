@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc;
 
+import javax.annotation.Nullable;
+
 import com.phloc.commons.parent.IHasChildrenSorted;
 
 /**
@@ -26,7 +28,9 @@ import com.phloc.commons.parent.IHasChildrenSorted;
  */
 public interface IHCHasChildren extends IHCNode, IHasChildrenSorted <IHCNode>
 {
+  @Nullable
   IHCNode getFirstChild ();
 
+  @Nullable
   IHCNode getLastChild ();
 }
