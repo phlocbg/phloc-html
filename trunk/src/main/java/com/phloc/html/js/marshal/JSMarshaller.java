@@ -306,7 +306,7 @@ public final class JSMarshaller
           break;
         case HTML:
           if (aObject instanceof IHCNode)
-            aSB.append (HCSettings.getAsHTMLString ((IHCNode) aObject, false));
+            aSB.append (HCSettings.getAsHTMLString ((IHCNode) aObject));
           else
             aSB.append ((String) aObject);
           break;
