@@ -39,7 +39,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    * @return this
    */
   @Nonnull
-  THISTYPE addChild (@Nonnull IPredefinedLocaleTextProvider aTextProvider);
+  THISTYPE addChild (@Nullable IPredefinedLocaleTextProvider aTextProvider);
 
   /**
    * @param sText
@@ -50,41 +50,60 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
   THISTYPE addChild (@Nullable String sText);
 
   /**
-   * @param aChild
+   * @param aNodeBuilder
    *        Child to add. May be <code>null</code>.
    * @return this
    */
   @Nonnull
-  THISTYPE addChild (@Nullable IHCNode aChild);
+  THISTYPE addChild (@Nullable IHCNodeBuilder aNodeBuilder);
+
+  /**
+   * @param aNode
+   *        Child to add. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addChild (@Nullable IHCNode aNode);
 
   /**
    * @param nIndex
    *        The index to where the element should be inserted.
-   * @param aChild
+   * @param aTextProvider
+   *        Child text to add. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IPredefinedLocaleTextProvider aTextProvider);
+
+  /**
+   * @param nIndex
+   *        The index to where the element should be inserted.
+   * @param sText
+   *        Child text to add. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addChild (@Nonnegative int nIndex, @Nullable String sText);
+
+  /**
+   * @param nIndex
+   *        The index to where the element should be inserted.
+   * @param aNodeBuilder
    *        Child to add. May be <code>null</code>.
    * @return this
    */
   @Nonnull
-  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNode aChild);
+  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNodeBuilder aNodeBuilder);
 
   /**
-   * Use {@link #addChild(IHCNode)} instead.
-   * 
-   * @param aChild
-   *        The child to add. May be <code>null</code>.
-   * @return this
-   */
-  @Deprecated
-  @DevelopersNote ("Use addChild instead")
-  THISTYPE addChildren (@Nullable IHCNode aChild);
-
-  /**
-   * @param aChildren
-   *        Children to add. May be <code>null</code>.
+   * @param nIndex
+   *        The index to where the element should be inserted.
+   * @param aNode
+   *        Child to add. May be <code>null</code>.
    * @return this
    */
   @Nonnull
-  THISTYPE addChildren (@Nullable IHCNode... aChildren);
+  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNode aNode);
 
   /**
    * Use {@link #addChild(IPredefinedLocaleTextProvider)} instead
@@ -123,6 +142,44 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE addChildren (@Nullable String... aChildren);
+
+  /**
+   * Use {@link #addChild(IHCNodeBuilder)} instead.
+   * 
+   * @param aChild
+   *        The child to add. May be <code>null</code>.
+   * @return this
+   */
+  @Deprecated
+  @DevelopersNote ("Use addChild instead")
+  THISTYPE addChildren (@Nullable IHCNodeBuilder aChild);
+
+  /**
+   * @param aChildren
+   *        Children to add. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addChildren (@Nullable IHCNodeBuilder... aChildren);
+
+  /**
+   * Use {@link #addChild(IHCNode)} instead.
+   * 
+   * @param aChild
+   *        The child to add. May be <code>null</code>.
+   * @return this
+   */
+  @Deprecated
+  @DevelopersNote ("Use addChild instead")
+  THISTYPE addChildren (@Nullable IHCNode aChild);
+
+  /**
+   * @param aChildren
+   *        Children to add. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addChildren (@Nullable IHCNode... aChildren);
 
   /**
    * @param aChildren
