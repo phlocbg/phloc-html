@@ -39,10 +39,13 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
+                                                                                                                AbstractHCElement <THISTYPE> implements
+                                                                                                                                            IHCElementWithChildren <THISTYPE>
 {
   private List <IHCNode> m_aChildren;
 
@@ -97,9 +100,60 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
+  public final THISTYPE addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
+  {
+    if (aTextProvider != null)
+      return addChild (aTextProvider.getText ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nullable final String sText)
+  {
+    // Empty text is OK!!!
+    if (sText != null)
+      addChild (new HCTextNode (sText));
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nullable final IHCNodeBuilder aNodeBuilder)
+  {
+    if (aNodeBuilder != null)
+      addChild (aNodeBuilder.build ());
+    return thisAsT ();
+  }
+
+  @Nonnull
   public final THISTYPE addChild (@Nullable final IHCNode aChild)
   {
     return _addChild (CGlobal.ILLEGAL_UINT, aChild);
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nonnegative final int nIndex,
+                                  @Nullable final IPredefinedLocaleTextProvider aTextProvider)
+  {
+    if (aTextProvider != null)
+      return addChild (nIndex, aTextProvider.getText ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final String sText)
+  {
+    // Empty text is OK!!!
+    if (sText != null)
+      addChild (nIndex, new HCTextNode (sText));
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final IHCNodeBuilder aNodeBuilder)
+  {
+    if (aNodeBuilder != null)
+      addChild (nIndex, aNodeBuilder.build ());
+    return thisAsT ();
   }
 
   @Nonnull
@@ -108,14 +162,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     if (nIndex < 0 || nIndex > getChildCount ())
       throw new IllegalArgumentException ("Illegal index " + nIndex + " passed!");
     return _addChild (nIndex, aChild);
-  }
-
-  @Nonnull
-  public final THISTYPE addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
-  {
-    if (aTextProvider != null)
-      return addChild (aTextProvider.getText ());
-    return thisAsT ();
   }
 
   @Nonnull
@@ -136,11 +182,36 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
-  public final THISTYPE addChild (@Nullable final String sText)
+  @DevelopersNote ("Use addChild instead!")
+  @Deprecated
+  public final THISTYPE addChildren (@Nullable final String sChild)
   {
-    // Empty text is OK!!!
-    if (sText != null)
-      addChild (new HCTextNode (sText));
+    return addChild (sChild);
+  }
+
+  @Nonnull
+  public final THISTYPE addChildren (@Nullable final String... aChildren)
+  {
+    if (aChildren != null)
+      for (final String sChild : aChildren)
+        addChild (sChild);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  @DevelopersNote ("Use addChild instead!")
+  @Deprecated
+  public final THISTYPE addChildren (@Nullable final IHCNodeBuilder aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
+  public final THISTYPE addChildren (@Nullable final IHCNodeBuilder... aChildren)
+  {
+    if (aChildren != null)
+      for (final IHCNodeBuilder aChild : aChildren)
+        addChild (aChild);
     return thisAsT ();
   }
 
@@ -166,23 +237,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   {
     if (aChildren != null)
       for (final IHCNode aChild : aChildren)
-        addChild (aChild);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  @DevelopersNote ("Use addChild instead!")
-  @Deprecated
-  public final THISTYPE addChildren (@Nullable final String sChild)
-  {
-    return addChild (sChild);
-  }
-
-  @Nonnull
-  public final THISTYPE addChildren (@Nullable final String... aChildren)
-  {
-    if (aChildren != null)
-      for (final String aChild : aChildren)
         addChild (aChild);
     return thisAsT ();
   }

@@ -32,6 +32,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -64,16 +65,28 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   @Nonnull
   public HCNodeList addChild (@Nullable final String sText)
   {
-    return addChild (new HCTextNode (sText));
+    // Empty text is OK!
+    if (sText != null)
+      addChild (new HCTextNode (sText));
+    return this;
+  }
+
+  @Nonnull
+  public HCNodeList addChild (@Nullable final IHCNodeBuilder aNodeBuilder)
+  {
+    if (aNodeBuilder != null)
+      addChild (aNodeBuilder.build ());
+    return this;
   }
 
   @Nonnull
   public HCNodeList addChild (@Nullable final IHCNode aNode)
   {
-    if (aNode == this)
-      throw new IllegalArgumentException ("Cannot append to self!");
     if (aNode != null)
     {
+      if (aNode == this)
+        throw new IllegalArgumentException ("Cannot append to self!");
+
       if (aNode instanceof HCNodeList)
       {
         // Directly add all contained nodes of the node list, to avoid building
@@ -84,6 +97,32 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       else
         m_aNodes.add (aNode);
     }
+    return this;
+  }
+
+  @Nonnull
+  public final HCNodeList addChild (@Nonnegative final int nIndex,
+                                    @Nullable final IPredefinedLocaleTextProvider aTextProvider)
+  {
+    if (aTextProvider != null)
+      return addChild (nIndex, aTextProvider.getText ());
+    return this;
+  }
+
+  @Nonnull
+  public HCNodeList addChild (@Nonnegative final int nIndex, @Nullable final String sText)
+  {
+    // Empty text is OK!
+    if (sText != null)
+      addChild (nIndex, new HCTextNode (sText));
+    return this;
+  }
+
+  @Nonnull
+  public HCNodeList addChild (@Nonnegative final int nIndex, @Nullable final IHCNodeBuilder aNodeBuilder)
+  {
+    if (aNodeBuilder != null)
+      addChild (nIndex, aNodeBuilder.build ());
     return this;
   }
 
@@ -107,6 +146,54 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       else
         m_aNodes.add (nIndex, aChildNode);
     }
+    return this;
+  }
+
+  @Deprecated
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    if (aChildren != null)
+      for (final IPredefinedLocaleTextProvider aChild : aChildren)
+        addChild (aChild);
+    return this;
+  }
+
+  @Deprecated
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final String sChild)
+  {
+    return addChild (sChild);
+  }
+
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final String... aChildren)
+  {
+    if (aChildren != null)
+      for (final String sChild : aChildren)
+        addChild (sChild);
+    return this;
+  }
+
+  @Deprecated
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final IHCNodeBuilder aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
+  public HCNodeList addChildren (@Nullable final IHCNodeBuilder... aChildren)
+  {
+    if (aChildren != null)
+      for (final IHCNodeBuilder aChild : aChildren)
+        addChild (aChild);
     return this;
   }
 
@@ -135,38 +222,6 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
     if (aNodes != null)
       for (final IHCNode aNode : aNodes)
         addChild (aNode);
-    return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider aChild)
-  {
-    return addChild (aChild);
-  }
-
-  @Nonnull
-  public HCNodeList addChildren (@Nullable final IPredefinedLocaleTextProvider... aChildren)
-  {
-    if (aChildren != null)
-      for (final IPredefinedLocaleTextProvider aChild : aChildren)
-        addChild (new HCTextNode (aChild));
-    return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public HCNodeList addChildren (@Nullable final String sChild)
-  {
-    return addChild (sChild);
-  }
-
-  @Nonnull
-  public HCNodeList addChildren (@Nullable final String... aChildren)
-  {
-    if (aChildren != null)
-      for (final String sChild : aChildren)
-        addChild (new HCTextNode (sChild));
     return this;
   }
 
