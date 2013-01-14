@@ -29,6 +29,7 @@ import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 @ThreadSafe
@@ -95,6 +96,20 @@ public final class HCSettings
   }
 
   /**
+   * Convert the passed HC node builder to a micro node using the conversion
+   * settings provider.
+   * 
+   * @param aNodeBuilder
+   *        The node to be converted. May not be <code>null</code>.
+   * @return The fully created HTML node
+   */
+  @Nullable
+  public static IMicroNode getAsNode (@Nonnull final IHCNodeBuilder aNodeBuilder)
+  {
+    return getAsNode (aNodeBuilder.build ());
+  }
+
+  /**
    * Convert the passed HC node to a micro node using the conversion settings
    * provider.
    * 
@@ -121,6 +136,39 @@ public final class HCSettings
                                       @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.convertToNode (aConversionSettings);
+  }
+
+  /**
+   * Convert the passed HC node builder to an HTML string using the conversion
+   * settings factory.
+   * 
+   * @param aNodeBuilder
+   *        The node to be converted. May not be <code>null</code>.
+   * @param bIndentAndAlign
+   *        Indent and align?
+   * @return The node as XML with or without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLString (@Nonnull final IHCNodeBuilder aNodeBuilder, final boolean bIndentAndAlign)
+  {
+    return getAsHTMLString (aNodeBuilder.build (), bIndentAndAlign);
+  }
+
+  /**
+   * Convert the passed HC node builder to an HTML string using the passed
+   * conversion settings.
+   * 
+   * @param aNodeBuilder
+   *        The node to be converted. May not be <code>null</code>.
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return The node as XML optionally without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLString (@Nonnull final IHCNodeBuilder aNodeBuilder,
+                                        @Nonnull final IHCConversionSettings aConversionSettings)
+  {
+    return getAsHTMLString (aNodeBuilder.build (), aConversionSettings);
   }
 
   /**
