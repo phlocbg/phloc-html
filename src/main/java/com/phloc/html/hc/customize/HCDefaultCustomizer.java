@@ -291,7 +291,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     for (final IHCNode aNode : aNodes)
     {
       if (isOutOfBandBodyNode (aNode))
+      {
+        // It's a body node
         aBody.addChild (aNode);
+      }
       else
       {
         // It's a head node

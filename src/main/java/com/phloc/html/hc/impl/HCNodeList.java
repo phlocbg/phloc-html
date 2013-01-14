@@ -58,7 +58,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   public HCNodeList addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
   {
     if (aTextProvider != null)
-      addChild (aTextProvider.getText ());
+      addChild (new HCTextNode (aTextProvider));
     return this;
   }
 
@@ -344,6 +344,18 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   }
 
   @Nonnull
+  public static HCNodeList create (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return new HCNodeList ().addChild (aChild);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return new HCNodeList ().addChildren (aChildren);
+  }
+
+  @Nonnull
   public static HCNodeList create (@Nullable final String sChild)
   {
     return new HCNodeList ().addChild (sChild);
@@ -351,6 +363,18 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
 
   @Nonnull
   public static HCNodeList create (@Nullable final String... aChildren)
+  {
+    return new HCNodeList ().addChildren (aChildren);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCNodeList ().addChild (aChild);
+  }
+
+  @Nonnull
+  public static HCNodeList create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCNodeList ().addChildren (aChildren);
   }
