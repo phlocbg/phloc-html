@@ -17,6 +17,9 @@
  */
 package com.phloc.html.hc.conversion;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -25,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.state.EFinish;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.annotations.DeprecatedInHTML4;
@@ -32,8 +37,11 @@ import com.phloc.html.annotations.DeprecatedInHTML5;
 import com.phloc.html.annotations.DeprecatedInXHTML1;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.AbstractHCBaseTable;
 import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCForm;
 import com.phloc.html.hc.html.HCObject;
@@ -42,6 +50,7 @@ import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html5.HCMeter;
 import com.phloc.html.hc.html5.HCProgress;
 import com.phloc.html.hc.htmlext.HCUtils;
+import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 
 /**
  * This class performs some consistency checks on HCNodes
@@ -212,5 +221,25 @@ public final class HCConsistencyChecker
       s_aLogger.warn ("Adding script as out-of-band node instead of child:" +
                           aScript.getAsHTMLString (HCSettings.getConversionSettings (false)),
                       new Exception ());
+  }
+
+  public static void checkForUniqueIDs (@Nonnull final HCBody aBody)
+  {
+    final Set <String> aUsedIDs = new HashSet <String> ();
+    HCUtils.iterateTree (aBody, new IHCIteratorCallback ()
+    {
+      @Nonnull
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
+      {
+        if (aChildNode instanceof IHCElement <?>)
+        {
+          final IHCElement <?> aElement = (IHCElement <?>) aChildNode;
+          final String sID = aElement.getID ();
+          if (StringHelper.hasText (sID) && !aUsedIDs.add (sID))
+            consistencyWarning ("The ID '" + sID + "' is used more than once within a single HTML page!");
+        }
+        return EFinish.UNFINISHED;
+      }
+    });
   }
 }

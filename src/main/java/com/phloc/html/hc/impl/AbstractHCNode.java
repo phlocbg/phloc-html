@@ -38,7 +38,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public abstract class AbstractHCNode implements IHCNode
 {
   private boolean m_bCustomized = false;
-  private boolean m_bPreparedOnce = false;
+  private boolean m_bConvertedToNode = false;
 
   @OverrideOnDemand
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
@@ -46,6 +46,10 @@ public abstract class AbstractHCNode implements IHCNode
     return true;
   }
 
+  /**
+   * @return <code>true</code> if the customizer was already run on this node,
+   *         <code>false</code> if not.
+   */
   public final boolean isCustomized ()
   {
     return m_bCustomized;
@@ -71,14 +75,31 @@ public abstract class AbstractHCNode implements IHCNode
     if (!m_bCustomized)
     {
       m_bCustomized = true;
+
+      // Run the global customizer
       aConversionSettings.getCustomizer ().customizeNode (aParentNode, this, aConversionSettings.getHTMLVersion ());
+
+      // Internal callback if needed
       internalApplyCustomization (aConversionSettings, aParentNode);
     }
   }
 
+  /**
+   * @deprecated Use {@link #isConvertedToNode()} instead
+   */
+  @Deprecated
   public final boolean isPreparedOnce ()
   {
-    return m_bPreparedOnce;
+    return isConvertedToNode ();
+  }
+
+  /**
+   * @return <code>true</code> if this node was already converted to a micro
+   *         node, <code>false</code> if not
+   */
+  public final boolean isConvertedToNode ()
+  {
+    return m_bConvertedToNode;
   }
 
   /**
@@ -97,9 +118,9 @@ public abstract class AbstractHCNode implements IHCNode
   {
     // Prepare object once per instance - before first rendering (implementation
     // dependent)
-    if (!m_bPreparedOnce)
+    if (!m_bConvertedToNode)
     {
-      m_bPreparedOnce = true;
+      m_bConvertedToNode = true;
       internalBeforeConvertToNode (aConversionSettings);
     }
   }
@@ -151,7 +172,7 @@ public abstract class AbstractHCNode implements IHCNode
   public String toString ()
   {
     return new ToStringGenerator (this).append ("customized", m_bCustomized)
-                                       .append ("preparedOnce", m_bPreparedOnce)
+                                       .append ("preparedOnce", m_bConvertedToNode)
                                        .toString ();
   }
 }

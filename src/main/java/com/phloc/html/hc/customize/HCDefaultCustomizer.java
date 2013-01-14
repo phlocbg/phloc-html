@@ -304,7 +304,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
             if (aNode instanceof HCLink)
               aHead.addLink ((HCLink) aNode);
             else
-              s_aLogger.error ("Illegal head node: " + aNode);
+              s_aLogger.error ("Found illegal out-of-band head node: " + aNode);
       }
     }
   }
