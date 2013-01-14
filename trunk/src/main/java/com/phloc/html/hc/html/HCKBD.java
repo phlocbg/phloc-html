@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -90,6 +91,32 @@ public class HCKBD extends AbstractHCElementWithChildren <HCKBD>
    */
   @Nonnull
   public static HCKBD create (@Nullable final String... aChildren)
+  {
+    return new HCKBD ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new KBD element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCKBD element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCKBD create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCKBD ().addChild (aChild);
+  }
+
+  /**
+   * Create a new KBD element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCKBD element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCKBD create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCKBD ().addChildren (aChildren);
   }

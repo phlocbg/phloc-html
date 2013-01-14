@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -90,6 +91,32 @@ public class HCAddress extends AbstractHCElementWithChildren <HCAddress>
    */
   @Nonnull
   public static HCAddress create (@Nullable final String... aChildren)
+  {
+    return new HCAddress ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new ADDRESS element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCAddress element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCAddress create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCAddress ().addChild (aChild);
+  }
+
+  /**
+   * Create a new ADDRESS element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCAddress element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCAddress create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCAddress ().addChildren (aChildren);
   }

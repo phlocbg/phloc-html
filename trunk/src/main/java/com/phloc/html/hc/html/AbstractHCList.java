@@ -32,7 +32,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
  * @param <THISTYPE>
  *        The real implementation type.
  */
-public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
+public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends
+                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
 {
   protected AbstractHCList (@Nonnull @Nonempty final EHTMLElement aElement)
   {

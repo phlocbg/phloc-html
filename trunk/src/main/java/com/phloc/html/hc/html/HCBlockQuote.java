@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
@@ -90,6 +91,32 @@ public class HCBlockQuote extends AbstractHCElementWithChildren <HCBlockQuote>
    */
   @Nonnull
   public static HCBlockQuote create (@Nullable final String... aChildren)
+  {
+    return new HCBlockQuote ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new BLOCKQUOTE element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCBlockQuote element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCBlockQuote create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCBlockQuote ().addChild (aChild);
+  }
+
+  /**
+   * Create a new BLOCKQUOTE element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCBlockQuote element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCBlockQuote create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCBlockQuote ().addChildren (aChildren);
   }

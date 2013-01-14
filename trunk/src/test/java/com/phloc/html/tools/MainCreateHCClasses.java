@@ -33,6 +33,7 @@ public class MainCreateHCClasses
                                               + "import com.phloc.commons.text.IPredefinedLocaleTextProvider;\r\n"
                                               + "import com.phloc.html.EHTMLElement;\r\n"
                                               + "import com.phloc.html.hc.IHCNode;\r\n"
+                                              + "import com.phloc.html.hc.IHCNodeBuilder;\r\n"
                                               + "import com.phloc.html.hc.impl.AbstractHCElementWithChildren;\r\n"
                                               + "\r\n"
                                               + "/**\r\n"
@@ -103,6 +104,28 @@ public class MainCreateHCClasses
                                               "   * @return The created HC$$ element and never <code>null</code>\r\n" +
                                               "   */\r\n" +
                                               "  @Nonnull\r\n" +
+                                              "  public static HC$$ create (@Nullable final IHCNodeBuilder aChild)\r\n" +
+                                              "  {\r\n" +
+                                              "    return new HC$$ ().addChild (aChild);\r\n" +
+                                              "  }\r\n" +
+                                              "\r\n" +
+                                              "  /**\r\n" +
+                                              "   * Create a new $$$ element with the passed child nodes\r\n" +
+                                              "   * @param aChildren The child nodes to be appended. May be <code>null</code>\r\n" +
+                                              "   * @return The created HC$$ element and never <code>null</code>\r\n" +
+                                              "   */\r\n" +
+                                              "  @Nonnull\r\n" +
+                                              "  public static HC$$ create (@Nullable final IHCNodeBuilder... aChildren)\r\n" +
+                                              "  {\r\n" +
+                                              "    return new HC$$ ().addChildren (aChildren);\r\n" +
+                                              "  }\r\n" +
+                                              "\r\n" +
+                                              "  /**\r\n" +
+                                              "   * Create a new $$$ element with the passed child node\r\n" +
+                                              "   * @param aChild The child node to be appended. May be <code>null</code>\r\n" +
+                                              "   * @return The created HC$$ element and never <code>null</code>\r\n" +
+                                              "   */\r\n" +
+                                              "  @Nonnull\r\n" +
                                               "  public static HC$$ create (@Nullable final IHCNode aChild)\r\n" +
                                               "  {\r\n" +
                                               "    return new HC$$ ().addChild (aChild);\r\n" +
@@ -144,6 +167,7 @@ public class MainCreateHCClasses
                                               + "import com.phloc.commons.collections.ContainerHelper;\r\n"
                                               + "import com.phloc.commons.text.IPredefinedLocaleTextProvider;\r\n"
                                               + "import com.phloc.html.hc.IHCNode;\r\n"
+                                              + "import com.phloc.html.hc.IHCNodeBuilder;\r\n"
                                               + "\r\n"
                                               + "/**\r\n"
                                               + " * Test class for class {@link HC$$}\r\n"
@@ -161,6 +185,8 @@ public class MainCreateHCClasses
                                               "    assertFalse (new HC$$ ().hasChildren ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null).getChildCount ());\r\n" +
+                                              "    assertEquals (0, HC$$.create ((IHCNodeBuilder) null).getChildCount ());\r\n" +
+                                              "    assertEquals (0, HC$$.create ((IHCNodeBuilder) null, (IHCNodeBuilder) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (\"Text\").getChildCount ());\r\n" +
                                               "    assertEquals (0, HC$$.create ((String) null).getChildCount ());\r\n" +
                                               "    assertEquals (1, HC$$.create (HCB.create (\"Bold\")).getChildCount ());\r\n" +

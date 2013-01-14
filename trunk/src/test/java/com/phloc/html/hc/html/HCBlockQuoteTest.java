@@ -27,6 +27,7 @@ import org.junit.Test;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 
 /**
  * Test class for class {@link HCBlockQuote} This file is automatically
@@ -43,6 +44,8 @@ public final class HCBlockQuoteTest
     assertEquals (0, HCBlockQuote.create ((IPredefinedLocaleTextProvider) null).getChildCount ());
     assertEquals (0, HCBlockQuote.create ((IPredefinedLocaleTextProvider) null, (IPredefinedLocaleTextProvider) null)
                                  .getChildCount ());
+    assertEquals (0, HCBlockQuote.create ((IHCNodeBuilder) null).getChildCount ());
+    assertEquals (0, HCBlockQuote.create ((IHCNodeBuilder) null, (IHCNodeBuilder) null).getChildCount ());
     assertEquals (1, HCBlockQuote.create ("Text").getChildCount ());
     assertEquals (0, HCBlockQuote.create ((String) null).getChildCount ());
     assertEquals (1, HCBlockQuote.create (HCB.create ("Bold")).getChildCount ());

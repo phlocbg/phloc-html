@@ -27,6 +27,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
@@ -153,6 +154,32 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
    */
   @Nonnull
   public static HCLabel create (@Nullable final String... aChildren)
+  {
+    return new HCLabel ().addChildren (aChildren);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child node
+   * 
+   * @param aChild
+   *        The child node to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IHCNodeBuilder aChild)
+  {
+    return new HCLabel ().addChild (aChild);
+  }
+
+  /**
+   * Create a new LABEL element with the passed child nodes
+   * 
+   * @param aChildren
+   *        The child nodes to be appended. May be <code>null</code>
+   * @return The created HCLabel element and never <code>null</code>
+   */
+  @Nonnull
+  public static HCLabel create (@Nullable final IHCNodeBuilder... aChildren)
   {
     return new HCLabel ().addChildren (aChildren);
   }
