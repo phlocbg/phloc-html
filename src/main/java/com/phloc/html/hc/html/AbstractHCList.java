@@ -17,12 +17,15 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 /**
@@ -55,22 +58,49 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   }
 
   @Nonnull
+  @CheckReturnValue
+  public final HCLI addAndReturnItem (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    return addItem ().addChild (aChild);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public final HCLI addAndReturnItem (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    return addItem ().addChildren (aChildren);
+  }
+
+  @Nonnull
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final String sChild)
   {
-    final HCLI aItem = addItem ();
-    aItem.addChild (sChild);
-    return aItem;
+    return addItem ().addChild (sChild);
   }
 
   @Nonnull
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final String... aChildren)
   {
-    final HCLI aItem = addItem ();
-    aItem.addChildren (aChildren);
-    return aItem;
+    return addItem ().addChildren (aChildren);
   }
 
   @Nonnull
+  @CheckReturnValue
+  public final HCLI addAndReturnItem (@Nullable final IHCNodeBuilder aChild)
+  {
+    return addAndReturnItem (aChild == null ? null : aChild.build ());
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public final HCLI addAndReturnItem (@Nullable final IHCNodeBuilder... aChildren)
+  {
+    return addItem ().addChildren (aChildren);
+  }
+
+  @Nonnull
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final IHCNode aChild)
   {
     // Avoid directly nested LI elements
@@ -83,6 +113,7 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   }
 
   @Nonnull
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final IHCNode... aChildren)
   {
     final HCLI aItem = addItem ();
@@ -91,6 +122,7 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   }
 
   @Nonnull
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
     final HCLI aItem = addItem ();
@@ -99,9 +131,24 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   }
 
   @Nullable
+  @CheckReturnValue
   public final HCLI addAndReturnItem (@Nullable final HCLI aItem)
   {
     return _addItem (aItem);
+  }
+
+  @Nonnull
+  public final THISTYPE addItem (@Nullable final IPredefinedLocaleTextProvider aChild)
+  {
+    addAndReturnItem (aChild);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addItem (@Nullable final IPredefinedLocaleTextProvider... aChildren)
+  {
+    addAndReturnItem (aChildren);
+    return thisAsT ();
   }
 
   @Nonnull
@@ -113,6 +160,20 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final String... aChildren)
+  {
+    addAndReturnItem (aChildren);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addItem (@Nullable final IHCNodeBuilder aChild)
+  {
+    addAndReturnItem (aChild);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addItem (@Nullable final IHCNodeBuilder... aChildren)
   {
     addAndReturnItem (aChildren);
     return thisAsT ();
