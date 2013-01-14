@@ -20,6 +20,7 @@ package com.phloc.html.hc.htmlext;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.email.IEmailAddress;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.EURLProtocol;
 import com.phloc.commons.url.ReadonlySimpleURL;
@@ -36,6 +37,12 @@ public class HCA_MailTo extends HCA
   public static HCA_MailTo createLinkedEmail (@Nullable final String sAddress)
   {
     return createLinkedEmail (sAddress, sAddress);
+  }
+
+  @Nullable
+  public static HCA_MailTo createLinkedEmail (@Nullable final IEmailAddress aAddress)
+  {
+    return aAddress == null ? null : createLinkedEmail (aAddress.getAddress (), aAddress.getDisplayName ());
   }
 
   @Nullable
