@@ -25,6 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCNode;
@@ -120,6 +121,21 @@ public final class HCSettings
                                       @Nonnull final IHCConversionSettings aConversionSettings)
   {
     return aHCNode.convertToNode (aConversionSettings);
+  }
+
+  /**
+   * Convert the passed HC node to an HTML string using the conversion settings
+   * factory. Indent and align status is determined from
+   * {@link GlobalDebug#isDebugMode()}
+   * 
+   * @param aHCNode
+   *        The node to be converted. May not be <code>null</code>.
+   * @return The node as XML with or without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLString (@Nonnull final IHCNode aHCNode)
+  {
+    return getAsHTMLString (aHCNode, GlobalDebug.isDebugMode ());
   }
 
   /**
