@@ -23,6 +23,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.builder.IJSExpression;
+import com.phloc.html.js.builder.JSAssignment;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSInvocation;
@@ -407,6 +408,12 @@ public final class JSHtml
   public static JSFieldRef windowLocationHref ()
   {
     return windowLocation ().ref ("href");
+  }
+
+  @Nonnull
+  public static JSAssignment windowLocationHref (@Nonnull final ISimpleURL aURL)
+  {
+    return windowLocationHref ().assign (aURL.getAsString ());
   }
 
   @Nonnull

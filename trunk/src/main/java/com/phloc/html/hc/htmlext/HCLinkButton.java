@@ -30,7 +30,7 @@ public class HCLinkButton extends HCButton
 {
   public HCLinkButton (final String sLabel, @Nonnull final ISimpleURL aURL)
   {
-    super (sLabel, JSHtml.windowLocationHref ().assign (aURL.getAsString ()));
+    super (sLabel, JSHtml.windowLocationHref (aURL));
   }
 
   public HCLinkButton (final String sLabel, final IJSStatement aJS)
