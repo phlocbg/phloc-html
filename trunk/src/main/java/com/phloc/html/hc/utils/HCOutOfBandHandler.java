@@ -85,7 +85,7 @@ public final class HCOutOfBandHandler
       int nNodeIndex = 0;
       for (final IHCNode aChild : aParentElement.getChildren ())
       {
-        if (true)
+        if (false)
           s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
 
         if (isOutOfBandNode (aChild))
