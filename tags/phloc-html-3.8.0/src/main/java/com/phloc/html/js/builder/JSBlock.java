@@ -1,0 +1,205 @@
+/**
+ * Copyright (C) 2006-2013 phloc systems
+ * http://www.phloc.com
+ * office[at]phloc[dot]com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.phloc.html.js.builder;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.IJSCodeProvider;
+
+/**
+ * A block of JS code, which may contain statements and local declarations.
+ * <p>
+ * {@link JSBlock} contains a large number of factory methods that creates new
+ * statements/declarations. Those newly created statements/declarations are
+ * inserted into the {@link #pos() "current position"}. The position advances
+ * one every time you add a new instruction.
+ * 
+ * @author philip
+ */
+public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSStatement
+{
+  public static final boolean DEFAULT_BRACES_REQUIRED = true;
+  public static final boolean DEFAULT_INDENT_REQUIRED = true;
+  public static final boolean DEFAULT_NEWLINE_AT_END = true;
+
+  /**
+   * Whether or not this block must be braced and indented
+   */
+  private boolean m_bBracesRequired;
+  private boolean m_bIndentRequired;
+  private boolean m_bNewLineAtEnd = DEFAULT_NEWLINE_AT_END;
+
+  public JSBlock ()
+  {
+    this (DEFAULT_BRACES_REQUIRED, DEFAULT_INDENT_REQUIRED);
+  }
+
+  public JSBlock (final boolean bBracesRequired, final boolean bIndentRequired)
+  {
+    m_bBracesRequired = bBracesRequired;
+    m_bIndentRequired = bIndentRequired;
+  }
+
+  public boolean bracesRequired ()
+  {
+    return m_bBracesRequired;
+  }
+
+  public boolean indentRequired ()
+  {
+    return m_bIndentRequired;
+  }
+
+  public boolean newlineAtEnd ()
+  {
+    return m_bNewLineAtEnd;
+  }
+
+  /**
+   * Determine whether a newline should be printed at the end of the block. This
+   * is only set to false for anonymous functions
+   * 
+   * @param bNewLineAtEnd
+   *        <code>true</code> to enable newline at the end
+   * @return this
+   */
+  @Nonnull
+  public JSBlock newlineAtEnd (final boolean bNewLineAtEnd)
+  {
+    m_bNewLineAtEnd = bNewLineAtEnd;
+    return this;
+  }
+
+  @Override
+  protected void onAddDeclaration (@Nonnull final IJSDeclaration aDeclaration)
+  {
+    if (aDeclaration instanceof JSVar)
+    {
+      m_bBracesRequired = true;
+      m_bIndentRequired = true;
+    }
+  }
+
+  /**
+   * Create a break statement and add it to this block
+   */
+  @Nonnull
+  public JSBlock _break ()
+  {
+    return _break (null);
+  }
+
+  @Nonnull
+  public JSBlock _break (@Nullable final JSLabel aLabel)
+  {
+    addStatement (new JSBreak (aLabel));
+    return this;
+  }
+
+  @Nonnull
+  public JSBlock _continue ()
+  {
+    return _continue (null);
+  }
+
+  /**
+   * Create a continue statement and add it to this block
+   */
+  @Nonnull
+  public JSBlock _continue (@Nullable final JSLabel aLabel)
+  {
+    addStatement (new JSContinue (aLabel));
+    return this;
+  }
+
+  public void generate (@Nonnull final JSFormatter f)
+  {
+    if (m_bBracesRequired)
+      f.plain ('{').nl ();
+    if (m_bIndentRequired)
+      f.indent ();
+    generateBody (f);
+    if (m_bIndentRequired)
+      f.outdent ();
+    if (m_bBracesRequired)
+      f.plain ('}');
+  }
+
+  void generateBody (@Nonnull final JSFormatter f)
+  {
+    for (final IJSCodeProvider aJSCode : directMembers ())
+    {
+      if (aJSCode instanceof IJSDeclaration)
+        f.decl ((IJSDeclaration) aJSCode);
+      else
+        if (aJSCode instanceof IJSStatement)
+          f.stmt ((IJSStatement) aJSCode);
+        else
+          f.plain (aJSCode.getJSCode ());
+    }
+  }
+
+  public void state (@Nonnull final JSFormatter f)
+  {
+    f.generatable (this);
+    if (m_bBracesRequired && m_bNewLineAtEnd)
+      f.nl ();
+  }
+
+  @Nullable
+  public String getJSCode ()
+  {
+    return JSPrinter.getAsString ((IJSGeneratable) this);
+  }
+
+  @Override
+  public boolean equals (final Object o)
+  {
+    if (o == this)
+      return true;
+    if (!super.equals (o))
+      return false;
+    final JSBlock rhs = (JSBlock) o;
+    return m_bBracesRequired == rhs.m_bBracesRequired &&
+           m_bIndentRequired == rhs.m_bIndentRequired &&
+           m_bNewLineAtEnd == rhs.m_bNewLineAtEnd;
+  }
+
+  @Override
+  public int hashCode ()
+  {
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_bBracesRequired)
+                            .append (m_bIndentRequired)
+                            .append (m_bNewLineAtEnd)
+                            .getHashCode ();
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .append ("bracesRequired", m_bBracesRequired)
+                            .append ("identRequired", m_bIndentRequired)
+                            .append ("newLineAtEnd", m_bNewLineAtEnd)
+                            .toString ();
+  }
+}
