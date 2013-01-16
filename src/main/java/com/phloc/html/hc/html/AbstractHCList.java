@@ -35,8 +35,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
  * @param <THISTYPE>
  *        The real implementation type.
  */
-public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends
-                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
+public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>> extends AbstractHCElementWithInternalChildren <THISTYPE, HCLI>
 {
   protected AbstractHCList (@Nonnull @Nonempty final EHTMLElement aElement)
   {
@@ -140,63 +139,63 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
   @Nonnull
   public final THISTYPE addItem (@Nullable final IPredefinedLocaleTextProvider aChild)
   {
-    addAndReturnItem (aChild);
+    addItem ().addChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final IPredefinedLocaleTextProvider... aChildren)
   {
-    addAndReturnItem (aChildren);
+    addItem ().addChildren (aChildren);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final String sChild)
   {
-    addAndReturnItem (sChild);
+    addItem ().addChild (sChild);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final String... aChildren)
   {
-    addAndReturnItem (aChildren);
+    addItem ().addChildren (aChildren);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final IHCNodeBuilder aChild)
   {
-    addAndReturnItem (aChild);
+    addItem ().addChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final IHCNodeBuilder... aChildren)
   {
-    addAndReturnItem (aChildren);
+    addItem ().addChildren (aChildren);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final IHCNode aChild)
   {
-    addAndReturnItem (aChild);
+    addItem ().addChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final IHCNode... aChildren)
   {
-    addAndReturnItem (aChildren);
+    addItem ().addChildren (aChildren);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE addItem (@Nullable final Iterable <? extends IHCNode> aChildren)
   {
-    addAndReturnItem (aChildren);
+    addItem ().addChildren (aChildren);
     return thisAsT ();
   }
 
