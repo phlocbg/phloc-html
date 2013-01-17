@@ -2,7 +2,11 @@
 #labels Featured
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
-<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>1/6/13</td><td colspan="4">_Release *3.7.3*_</td></tr>
+<table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody><tr border="1"><td>1/16/13</td><td colspan="4">_Release *3.8.0*_</td></tr>
+<tr><td>1/14/13</td><td>add</td><td>api</td><td></td><td>Extended APIs to support IHCNodeBuilder more easily</td></tr>
+<tr><td>1/7/13</td><td>add</td><td>api</td><td></td><td>Added missing custom attribute access methods in IHCElement</td></tr>
+<tr><td>1/7/13</td><td>change</td><td>api</td><td>*yes*</td><td>Merged IHCBaseNode and IHCNode into IHCNode and deleted IHCBaseNode</td></tr>
+<tr border="1"><td>1/6/13</td><td colspan="4">_Release *3.7.3*_</td></tr>
 <tr><td>1/5/13</td><td>change</td><td>api</td><td>*yes*</td><td>Moved `_`return methods from JSBlock to AbstractJSBlock</td></tr>
 <tr><td>1/3/13</td><td>add</td><td>api</td><td></td><td>Added support for 'accept' attribute in HCEditFile</td></tr>
 <tr><td>1/3/13</td><td>add</td><td>api</td><td></td><td>Added new class HCMultiCustomizer that can wrap several customizers</td></tr>
