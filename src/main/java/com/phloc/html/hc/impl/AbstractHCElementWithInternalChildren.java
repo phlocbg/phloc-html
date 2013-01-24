@@ -18,6 +18,8 @@
 package com.phloc.html.hc.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.CheckForSigned;
@@ -42,9 +44,7 @@ import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends
-                                                                                                                                                                      AbstractHCElement <THISTYPE> implements
-                                                                                                                                                                                                  IHCHasChildren
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -163,6 +163,16 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
   {
     return HCUtils.recursiveGetFirstChildWithTagName (this, aElements) != null;
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    if (m_aChildren != null)
+      Collections.sort (m_aChildren, aComparator);
+    return thisAsT ();
   }
 
   @Override
