@@ -18,6 +18,8 @@
 package com.phloc.html.hc.html;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nonnegative;
@@ -50,9 +52,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
-                                                                                            AbstractHCElement <THISTYPE> implements
-                                                                                                                        IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -614,6 +614,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final THISTYPE removeAllBodyRows ()
   {
     m_aBodyRows.clear ();
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllBodyRows (@Nonnull final Comparator <HCRow> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    Collections.sort (m_aBodyRows, aComparator);
     return thisAsT ();
   }
 

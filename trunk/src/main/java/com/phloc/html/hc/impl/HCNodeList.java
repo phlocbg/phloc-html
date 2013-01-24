@@ -18,6 +18,8 @@
 package com.phloc.html.hc.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nonnegative;
@@ -44,14 +46,14 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <HCNodeList>
 {
-  private final List <IHCNode> m_aNodes = new ArrayList <IHCNode> ();
+  private final List <IHCNode> m_aChildren = new ArrayList <IHCNode> ();
 
   public HCNodeList ()
   {}
 
   public boolean hasChildren ()
   {
-    return !m_aNodes.isEmpty ();
+    return !m_aChildren.isEmpty ();
   }
 
   @Nonnull
@@ -91,11 +93,11 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       {
         // Directly add all contained nodes of the node list, to avoid building
         // a hierarchy of node lists
-        for (final IHCNode aContainedNode : ((HCNodeList) aNode).m_aNodes)
-          m_aNodes.add (aContainedNode);
+        for (final IHCNode aContainedNode : ((HCNodeList) aNode).m_aChildren)
+          m_aChildren.add (aContainedNode);
       }
       else
-        m_aNodes.add (aNode);
+        m_aChildren.add (aNode);
     }
     return this;
   }
@@ -137,14 +139,14 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
       {
         // The child node is itself a list -> inline the content
         int i = nIndex;
-        for (final IHCNode aContainedNode : ((HCNodeList) aChildNode).m_aNodes)
+        for (final IHCNode aContainedNode : ((HCNodeList) aChildNode).m_aChildren)
         {
-          m_aNodes.add (i, aContainedNode);
+          m_aChildren.add (i, aContainedNode);
           ++i;
         }
       }
       else
-        m_aNodes.add (nIndex, aChildNode);
+        m_aChildren.add (nIndex, aChildNode);
     }
     return this;
   }
@@ -242,53 +244,53 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   @Nonnull
   public HCNodeList removeChild (@Nonnegative final int nIndex)
   {
-    m_aNodes.remove (nIndex);
+    m_aChildren.remove (nIndex);
     return this;
   }
 
   @Nonnull
   public HCNodeList removeChild (@Nullable final IHCNode aNode)
   {
-    m_aNodes.remove (aNode);
+    m_aChildren.remove (aNode);
     return this;
   }
 
   @Nonnull
   public HCNodeList removeAllChildren ()
   {
-    m_aNodes.clear ();
+    m_aChildren.clear ();
     return this;
   }
 
   @Nonnegative
   public int getChildCount ()
   {
-    return m_aNodes.size ();
+    return m_aChildren.size ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public List <IHCNode> getChildren ()
   {
-    return ContainerHelper.newList (m_aNodes);
+    return ContainerHelper.newList (m_aChildren);
   }
 
   @Nullable
   public IHCNode getChildAtIndex (@Nonnegative final int nIndex)
   {
-    return ContainerHelper.getSafe (m_aNodes, nIndex);
+    return ContainerHelper.getSafe (m_aChildren, nIndex);
   }
 
   @Nullable
   public IHCNode getFirstChild ()
   {
-    return ContainerHelper.getFirstElement (m_aNodes);
+    return ContainerHelper.getFirstElement (m_aChildren);
   }
 
   @Nullable
   public IHCNode getLastChild ()
   {
-    return ContainerHelper.getLastElement (m_aNodes);
+    return ContainerHelper.getLastElement (m_aChildren);
   }
 
   /**
@@ -302,10 +304,19 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   @Nullable
   public IHCNode getAsSimpleNode ()
   {
-    if (m_aNodes.isEmpty ())
+    if (m_aChildren.isEmpty ())
       return null;
-    if (m_aNodes.size () == 1)
-      return ContainerHelper.getFirstElement (m_aNodes);
+    if (m_aChildren.size () == 1)
+      return ContainerHelper.getFirstElement (m_aChildren);
+    return this;
+  }
+
+  @Nonnull
+  public final HCNodeList sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    Collections.sort (m_aChildren, aComparator);
     return this;
   }
 
@@ -314,7 +325,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
-    for (final IHCNode aNode : m_aNodes)
+    for (final IHCNode aNode : m_aChildren)
       ret.appendChild (aNode.convertToNode (aConversionSettings));
     return ret;
   }
@@ -324,7 +335,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   public String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
-    for (final IHCNode aNode : m_aNodes)
+    for (final IHCNode aNode : m_aChildren)
     {
       final String sPlainText = aNode.getPlainText ();
       if (StringHelper.hasText (sPlainText))
@@ -340,7 +351,7 @@ public class HCNodeList extends AbstractHCNode implements IHCNodeWithChildren <H
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("nodes", m_aNodes).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("nodes", m_aChildren).toString ();
   }
 
   @Nonnull

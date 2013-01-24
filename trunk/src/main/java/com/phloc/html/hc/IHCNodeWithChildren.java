@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc;
 
+import java.util.Comparator;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -238,4 +240,14 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE removeAllChildren ();
+
+  /**
+   * Sort all children with the passed comparator
+   * 
+   * @param aComparator
+   *        The comparator to be used. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE sortAllChildren (@Nonnull Comparator <IHCNode> aComparator);
 }

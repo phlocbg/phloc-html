@@ -18,6 +18,8 @@
 package com.phloc.html.hc.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.CheckForSigned;
@@ -43,9 +45,7 @@ import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
   private List <IHCNode> m_aChildren;
 
@@ -318,6 +318,16 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final IHCNode getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aChildren);
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    if (m_aChildren != null)
+      Collections.sort (m_aChildren, aComparator);
+    return thisAsT ();
   }
 
   @Override
