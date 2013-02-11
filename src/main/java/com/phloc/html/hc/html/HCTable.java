@@ -41,7 +41,7 @@ public class HCTable extends AbstractHCTable <HCTable>
     super (aCols);
   }
 
-  public HCTable (@Nullable final Iterable <HCCol> aCols)
+  public HCTable (@Nullable final Iterable <? extends HCCol> aCols)
   {
     super (aCols);
   }
