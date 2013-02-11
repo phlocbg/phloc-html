@@ -59,7 +59,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     addColumns (aCols);
   }
 
-  public AbstractHCTable (@Nullable final Iterable <HCCol> aCols)
+  public AbstractHCTable (@Nullable final Iterable <? extends HCCol> aCols)
   {
     this ();
     addColumns (aCols);

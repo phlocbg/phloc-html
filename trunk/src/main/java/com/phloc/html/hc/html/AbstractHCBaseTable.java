@@ -52,7 +52,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
+                                                                                            AbstractHCElement <THISTYPE> implements
+                                                                                                                        IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
@@ -215,7 +217,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumns (@Nullable final Iterable <HCCol> aCols)
+  public final THISTYPE addColumns (@Nullable final Iterable <? extends HCCol> aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
