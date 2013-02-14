@@ -114,6 +114,15 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @ReturnsMutableCopy
   Set <String> getAllClassNames ();
 
+  /**
+   * Get the string representation of all contained classes as it should be set
+   * to the HTML class attribute.
+   * 
+   * @return <code>null</code> if no classes are present.
+   */
+  @Nullable
+  String getAllClassesAsString ();
+
   @Nullable
   EHCTextDirection getDirection ();
 
