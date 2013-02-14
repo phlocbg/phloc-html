@@ -23,7 +23,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -208,50 +207,44 @@ public final class HCTableTest
     final HCTable t = new HCTable (new HCCol (170), HCCol.star ());
     assertNull (t.getHeaderID ());
     assertFalse (t.hasHeaderID ());
-    assertFalse (t.hasHeaderRow ());
-    assertSame (t, t.removeHeaderRow ());
-    assertSame (t, t.removeHeaderRow ());
+    assertFalse (t.hasHeaderRows ());
+    assertSame (t, t.removeHeaderRowAtIndex (0));
+    assertSame (t, t.removeHeaderRowAtIndex (0));
     assertSame (t, t.setHeaderID ("any"));
     assertEquals ("any", t.getHeaderID ());
-    assertFalse (t.hasHeaderRow ());
+    assertFalse (t.hasHeaderRows ());
     assertNotNull (t.addHeaderRow ());
-    assertTrue (t.hasHeaderRow ());
-    try
-    {
-      // Already present
-      t.addHeaderRow ();
-      fail ();
-    }
-    catch (final IllegalStateException ex)
-    {}
-    assertTrue (t.hasHeaderRow ());
-    assertSame (t, t.removeHeaderRow ());
-    assertFalse (t.hasHeaderRow ());
+    assertTrue (t.hasHeaderRows ());
+    // Already present
     assertNotNull (t.addHeaderRow ());
-    assertTrue (t.hasHeaderRow ());
+    assertEquals (2, t.getHeaderRowCount ());
+    assertTrue (t.hasHeaderRows ());
+    assertSame (t, t.removeHeaderRowAtIndex (0));
+    assertEquals (1, t.getHeaderRowCount ());
+    assertSame (t, t.removeHeaderRowAtIndex (0));
+    assertFalse (t.hasHeaderRows ());
+    assertNotNull (t.addHeaderRow ());
+    assertTrue (t.hasHeaderRows ());
 
     assertNull (t.getFooterID ());
     assertFalse (t.hasFooterID ());
-    assertFalse (t.hasFooterRow ());
-    assertSame (t, t.removeFooterRow ());
-    assertSame (t, t.removeFooterRow ());
+    assertFalse (t.hasFooterRows ());
+    assertSame (t, t.removeFooterRowAtIndex (0));
+    assertSame (t, t.removeFooterRowAtIndex (0));
     assertSame (t, t.setFooterID ("any"));
     assertEquals ("any", t.getFooterID ());
-    assertFalse (t.hasFooterRow ());
+    assertFalse (t.hasFooterRows ());
     assertNotNull (t.addFooterRow ());
-    assertTrue (t.hasFooterRow ());
-    try
-    {
-      // Already present
-      t.addFooterRow ();
-      fail ();
-    }
-    catch (final IllegalStateException ex)
-    {}
-    assertTrue (t.hasFooterRow ());
-    assertSame (t, t.removeFooterRow ());
-    assertFalse (t.hasFooterRow ());
+    assertTrue (t.hasFooterRows ());
+    // Already present
     assertNotNull (t.addFooterRow ());
-    assertTrue (t.hasFooterRow ());
+    assertEquals (2, t.getFooterRowCount ());
+    assertTrue (t.hasFooterRows ());
+    assertSame (t, t.removeFooterRowAtIndex (0));
+    assertEquals (1, t.getFooterRowCount ());
+    assertSame (t, t.removeFooterRowAtIndex (0));
+    assertFalse (t.hasFooterRows ());
+    assertNotNull (t.addFooterRow ());
+    assertTrue (t.hasFooterRows ());
   }
 }

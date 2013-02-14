@@ -37,8 +37,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
-                                                                                    AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 
@@ -106,7 +105,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return hasHeaderRow () || hasBodyRows () || hasBodyID () || hasBodyClasses () || hasFooterRow ();
+    return hasHeaderRows () || hasBodyRows () || hasBodyID () || hasBodyClasses () || hasFooterRows ();
   }
 
   @Override
@@ -135,25 +134,31 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       aElement.appendChild (m_aColGroup.convertToNode (aConversionSettings));
 
     // Table header?
-    if (hasHeaderRow ())
+    if (hasHeaderRows ())
     {
       final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.THEAD.getElementName ());
       if (hasHeaderID ())
         aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
-      applyHeaderRow (aTHead, getHeaderRow (), aConversionSettings);
+      if (hasHeaderClasses ())
+        aTHead.setAttribute (CHTMLAttributes.CLASS, getHeaderClassesAsString ());
+      for (final HCRow aRow : directGetHeaderRowList ())
+        applyHeaderRow (aTHead, aRow, aConversionSettings);
       if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
         aTHead.appendText ("");
     }
 
     // Table footer?
-    if (hasFooterRow ())
+    if (hasFooterRows ())
     {
       final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.TFOOT.getElementName ());
       if (hasFooterID ())
         aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
-      applyFooterRow (aTFoot, getFooterRow (), aConversionSettings);
+      if (hasFooterClasses ())
+        aTFoot.setAttribute (CHTMLAttributes.CLASS, getFooterClassesAsString ());
+      for (final HCRow aRow : directGetFooterRowList ())
+        applyFooterRow (aTFoot, aRow, aConversionSettings);
       if (!aTFoot.hasChildren () && !EHTMLElement.TFOOT.mayBeSelfClosed ())
         aTFoot.appendText ("");
     }
