@@ -65,8 +65,7 @@ import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.JSEventMap;
 
-public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements
-                                                                                                              IHCElement <THISTYPE>
+public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
@@ -247,6 +246,26 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return ret;
   }
 
+  @Nullable
+  public final String getAllClassesAsString ()
+  {
+    if (m_aCSSClassProviders == null || m_aCSSClassProviders.isEmpty ())
+      return null;
+
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
+    {
+      final String sCSSClass = aCSSClassProvider.getCSSClass ();
+      if (StringHelper.hasText (sCSSClass))
+      {
+        if (aSB.length () > 0)
+          aSB.append (' ');
+        aSB.append (sCSSClass);
+      }
+    }
+    return aSB.toString ();
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public final Map <ECSSProperty, ICSSValue> getAllStyles ()
@@ -332,6 +351,17 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   {
     m_aStyles.clear ();
     return thisAsT ();
+  }
+
+  @Nullable
+  public final String getAllStylesAsString (@Nonnull final ICSSWriterSettings aCSSSettings)
+  {
+    if (m_aStyles == null || m_aStyles.isEmpty ())
+      return null;
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSValue aValue : m_aStyles.values ())
+      aSB.append (aValue.getAsCSSString (aCSSSettings, 0));
+    return aSB.toString ();
   }
 
   @Nullable
@@ -621,30 +651,9 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     if (m_eDirection != null)
       aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
 
-    if (m_aCSSClassProviders != null && !m_aCSSClassProviders.isEmpty ())
-    {
-      final StringBuilder aSB = new StringBuilder ();
-      for (final ICSSClassProvider aCSSClassProvider : m_aCSSClassProviders)
-      {
-        final String sCSSClass = aCSSClassProvider.getCSSClass ();
-        if (StringHelper.hasText (sCSSClass))
-        {
-          if (aSB.length () > 0)
-            aSB.append (' ');
-          aSB.append (sCSSClass);
-        }
-      }
-      aElement.setAttribute (CHTMLAttributes.CLASS, aSB.toString ());
-    }
+    aElement.setAttribute (CHTMLAttributes.CLASS, getAllClassesAsString ());
 
-    if (m_aStyles != null && !m_aStyles.isEmpty ())
-    {
-      final ICSSWriterSettings aCSSSettings = aConversionSettings.getCSSWriterSettings ();
-      final StringBuilder aSB = new StringBuilder ();
-      for (final ICSSValue aValue : m_aStyles.values ())
-        aSB.append (aValue.getAsCSSString (aCSSSettings, 0));
-      aElement.setAttribute (CHTMLAttributes.STYLE, aSB.toString ());
-    }
+    aElement.setAttribute (CHTMLAttributes.STYLE, getAllStylesAsString (aConversionSettings.getCSSWriterSettings ()));
 
     // Emit all JS events
     if (m_aJSHandler != null)

@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.css.ICSSWriterSettings;
 import com.phloc.css.property.ECSSProperty;
 import com.phloc.css.propertyvalue.ICSSValue;
 
@@ -99,4 +100,14 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
    *         <code>false</code> otherwise
    */
   boolean hasStyle (@Nullable ICSSValue aValue);
+
+  /**
+   * The value to be set to the HTML style attribute
+   * 
+   * @param aCSSSettings
+   *        The CSS settings to use
+   * @return <code>null</code> if no styles are present
+   */
+  @Nullable
+  String getAllStylesAsString (@Nonnull ICSSWriterSettings aCSSSettings);
 }
