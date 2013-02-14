@@ -52,20 +52,23 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends
-                                                                                            AbstractHCElement <THISTYPE> implements
-                                                                                                                        IHCHasChildren
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {
   protected HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
   private int m_nCellPadding = CGlobal.ILLEGAL_UINT;
-  private HCRow m_aHeaderRow;
+
+  private final List <HCRow> m_aHeaderRows = new ArrayList <HCRow> ();
   private String m_sHeaderID;
+  private List <ICSSClassProvider> m_aHeaderClasses;
+
   private final List <HCRow> m_aBodyRows = new ArrayList <HCRow> ();
   private String m_sBodyID;
   private List <ICSSClassProvider> m_aBodyClasses;
-  private HCRow m_aFooterRow;
+
+  private final List <HCRow> m_aFooterRows = new ArrayList <HCRow> ();
   private String m_sFooterID;
+  private List <ICSSClassProvider> m_aFooterClasses;
 
   /**
    * This constructor is used to create elements with logic like a table but
@@ -78,37 +81,37 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   public final boolean hasChildren ()
   {
-    return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_aFooterRow != null;
+    return !m_aHeaderRows.isEmpty () || !m_aBodyRows.isEmpty () || !m_aFooterRows.isEmpty ();
   }
 
   @Nonnegative
   public final int getChildCount ()
   {
-    return (m_aHeaderRow != null ? 1 : 0) + m_aBodyRows.size () + (m_aFooterRow != null ? 1 : 0);
+    return m_aHeaderRows.size () + m_aBodyRows.size () + m_aFooterRows.size ();
   }
 
   @Nullable
-  public final IHCNode getFirstChild ()
+  public final HCRow getFirstChild ()
   {
-    IHCNode ret = m_aHeaderRow;
+    HCRow ret = getFirstHeaderRow ();
     if (ret == null)
     {
       ret = getFirstBodyRow ();
       if (ret == null)
-        ret = m_aFooterRow;
+        ret = getFirstFooterRow ();
     }
     return ret;
   }
 
   @Nullable
-  public final IHCNode getLastChild ()
+  public final HCRow getLastChild ()
   {
-    IHCNode ret = m_aFooterRow;
+    HCRow ret = getLastFooterRow ();
     if (ret == null)
     {
       ret = getLastBodyRow ();
       if (ret == null)
-        ret = m_aHeaderRow;
+        ret = getLastHeaderRow ();
     }
     return ret;
   }
@@ -118,27 +121,24 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final List <IHCNode> getChildren ()
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
-    if (m_aHeaderRow != null)
-      ret.add (m_aHeaderRow);
+    ret.addAll (m_aHeaderRows);
     ret.addAll (m_aBodyRows);
-    if (m_aFooterRow != null)
-      ret.add (m_aFooterRow);
+    ret.addAll (m_aFooterRows);
     return ret;
   }
 
   @Nullable
   public final HCRow getChildAtIndex (@Nonnegative final int nIndex)
   {
-    int nRealIndex = 0;
-    if (m_aHeaderRow != null)
-      if (nRealIndex++ == nIndex)
-        return m_aHeaderRow;
-    for (final HCRow aBodyRow : m_aBodyRows)
-      if (nRealIndex++ == nIndex)
-        return aBodyRow;
-    if (m_aFooterRow != null)
-      if (nRealIndex++ == nIndex)
-        return m_aFooterRow;
+    int nRealIndex = nIndex;
+    if (nRealIndex < getHeaderRowCount ())
+      return getHeaderRowAtIndex (nRealIndex);
+    nRealIndex -= getHeaderRowCount ();
+    if (nRealIndex < getBodyRowCount ())
+      return getBodyRowAtIndex (nRealIndex);
+    nRealIndex -= getBodyRowCount ();
+    if (nRealIndex < getFooterRowCount ())
+      return getFooterRowAtIndex (nRealIndex);
     return null;
   }
 
@@ -267,22 +267,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // header row handling
   //
 
-  /**
-   * @return The ID of the header row. May be <code>null</code>.
-   */
   @Nullable
   public final String getHeaderID ()
   {
     return m_sHeaderID;
   }
 
-  /**
-   * Set the table header ID
-   * 
-   * @param sID
-   *        The ID ot be set. May be <code>null</code>.
-   * @return this
-   */
   @Nonnull
   public final THISTYPE setHeaderID (@Nullable final String sID)
   {
@@ -291,7 +281,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   /**
-   * @return <code>true</code> if a header ID is present, <code>false</code>
+   * @return <code>true</code> if a Header ID is present, <code>false</code>
    *         otherwise
    */
   public final boolean hasHeaderID ()
@@ -299,61 +289,154 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return StringHelper.hasText (m_sHeaderID);
   }
 
-  /**
-   * @return The current set header row or <code>null</code> if no header row is
-   *         present
-   */
-  @Nullable
-  public final HCRow getHeaderRow ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <ICSSClassProvider> getHeaderClasses ()
   {
-    return m_aHeaderRow;
+    return ContainerHelper.newList (m_aHeaderClasses);
+  }
+
+  @Nonnull
+  public final String getHeaderClassesAsString ()
+  {
+    if (m_aHeaderClasses == null || m_aHeaderClasses.isEmpty ())
+      return "";
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClass : m_aHeaderClasses)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (aCSSClass.getCSSClass ());
+    }
+    return aSB.toString ();
+  }
+
+  @Nonnull
+  public final THISTYPE addHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (aCSSClassProvider == null)
+      throw new NullPointerException ("CSSClassProvider");
+    if (m_aHeaderClasses == null)
+      m_aHeaderClasses = new ArrayList <ICSSClassProvider> ();
+    m_aHeaderClasses.add (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (m_aHeaderClasses != null)
+      m_aHeaderClasses.remove (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  public final boolean hasHeaderClasses ()
+  {
+    return ContainerHelper.isNotEmpty (m_aHeaderClasses);
+  }
+
+  public final boolean hasHeaderRows ()
+  {
+    return !m_aHeaderRows.isEmpty ();
+  }
+
+  @Nonnegative
+  public final int getHeaderRowCount ()
+  {
+    return m_aHeaderRows.size ();
   }
 
   /**
-   * @return <code>true</code> if a header row is present, <code>false</code> if
-   *         not
-   */
-  public final boolean hasHeaderRow ()
-  {
-    return m_aHeaderRow != null;
-  }
-
-  /**
-   * Add a new header row.
+   * Get the contained list object that holds all the rows. Handle with care
+   * because it alters the internal data structures of this table.
    * 
-   * @return The created header row
-   * @throws IllegalStateException
-   *         if a header row is already present
+   * @return The contained list object for external row order handling.
    */
+  @Nonnull
+  @ReturnsMutableObject (reason = "For performance reasons in derived classes")
+  protected final List <HCRow> directGetHeaderRowList ()
+  {
+    return m_aHeaderRows;
+  }
+
+  @Nullable
+  public final HCRow getFirstHeaderRow ()
+  {
+    return ContainerHelper.getFirstElement (m_aHeaderRows);
+  }
+
+  @Nullable
+  public final HCRow getHeaderRowAtIndex (@Nonnegative final int nIndex)
+  {
+    return ContainerHelper.getSafe (m_aHeaderRows, nIndex);
+  }
+
+  @Nullable
+  public final HCRow getLastHeaderRow ()
+  {
+    return ContainerHelper.getLastElement (m_aHeaderRows);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <HCRow> getAllHeaderRows ()
+  {
+    return ContainerHelper.newList (m_aHeaderRows);
+  }
+
   @Nonnull
   public final HCRow addHeaderRow ()
   {
-    if (m_aHeaderRow != null)
-      throw new IllegalStateException ("A header row is already present! You cannot have more than one!");
-    m_aHeaderRow = new HCRow (true);
-    return m_aHeaderRow;
+    final HCRow ret = new HCRow (false);
+    m_aHeaderRows.add (ret);
+    return ret;
   }
 
-  /**
-   * Create a new header row, or reuse it if it is already existing.
-   * 
-   * @return The header row and never <code>null</code>.
-   */
   @Nonnull
-  public final HCRow getOrAddHeaderRow ()
+  public final HCRow addHeaderRow (@Nonnegative final int nIndex)
   {
-    return m_aHeaderRow != null ? m_aHeaderRow : addHeaderRow ();
+    final HCRow ret = new HCRow (false);
+    m_aHeaderRows.add (nIndex, ret);
+    return ret;
   }
 
-  /**
-   * Remove the header row, if it is present. The header ID is not modified.
-   * 
-   * @return this
-   */
   @Nonnull
-  public final THISTYPE removeHeaderRow ()
+  public final THISTYPE addHeaderRow (@Nullable final HCRow aRow)
   {
-    m_aHeaderRow = null;
+    if (aRow != null)
+      m_aHeaderRows.add (aRow);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addHeaderRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
+  {
+    if (aRow != null)
+      m_aHeaderRows.add (nIndex, aRow);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeHeaderRowAtIndex (@Nonnegative final int nIndex)
+  {
+    if (nIndex >= 0 && nIndex < m_aHeaderRows.size ())
+      m_aHeaderRows.remove (nIndex);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeAllHeaderRows ()
+  {
+    m_aHeaderRows.clear ();
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllHeaderRows (@Nonnull final Comparator <HCRow> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    Collections.sort (m_aHeaderRows, aComparator);
     return thisAsT ();
   }
 
@@ -361,31 +444,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // footer row handling
   //
 
-  /**
-   * @return The ID of the footer row. May be <code>null</code>.
-   */
   @Nullable
   public final String getFooterID ()
   {
     return m_sFooterID;
   }
 
-  /**
-   * @return <code>true</code> if a footer ID is present, <code>false</code>
-   *         otherwise
-   */
-  public final boolean hasFooterID ()
-  {
-    return StringHelper.hasText (m_sFooterID);
-  }
-
-  /**
-   * Set the table footer ID
-   * 
-   * @param sID
-   *        The ID ot be set. May be <code>null</code>.
-   * @return this
-   */
   @Nonnull
   public final THISTYPE setFooterID (@Nullable final String sID)
   {
@@ -394,60 +458,162 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   /**
-   * @return The current set footer row or <code>null</code> if no footer row is
-   *         present
+   * @return <code>true</code> if a Footer ID is present, <code>false</code>
+   *         otherwise
    */
-  @Nullable
-  public final HCRow getFooterRow ()
+  public final boolean hasFooterID ()
   {
-    return m_aFooterRow;
+    return StringHelper.hasText (m_sFooterID);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <ICSSClassProvider> getFooterClasses ()
+  {
+    return ContainerHelper.newList (m_aFooterClasses);
+  }
+
+  @Nonnull
+  public final String getFooterClassesAsString ()
+  {
+    if (m_aFooterClasses == null || m_aFooterClasses.isEmpty ())
+      return "";
+    final StringBuilder aSB = new StringBuilder ();
+    for (final ICSSClassProvider aCSSClass : m_aFooterClasses)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (aCSSClass.getCSSClass ());
+    }
+    return aSB.toString ();
+  }
+
+  @Nonnull
+  public final THISTYPE addFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (aCSSClassProvider == null)
+      throw new NullPointerException ("CSSClassProvider");
+    if (m_aFooterClasses == null)
+      m_aFooterClasses = new ArrayList <ICSSClassProvider> ();
+    m_aFooterClasses.add (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  {
+    if (m_aFooterClasses != null)
+      m_aFooterClasses.remove (aCSSClassProvider);
+    return thisAsT ();
+  }
+
+  public final boolean hasFooterClasses ()
+  {
+    return ContainerHelper.isNotEmpty (m_aFooterClasses);
+  }
+
+  public final boolean hasFooterRows ()
+  {
+    return !m_aFooterRows.isEmpty ();
+  }
+
+  @Nonnegative
+  public final int getFooterRowCount ()
+  {
+    return m_aFooterRows.size ();
   }
 
   /**
-   * @return <code>true</code> if a footer row is present, <code>false</code> if
-   *         not
-   */
-  public final boolean hasFooterRow ()
-  {
-    return m_aFooterRow != null;
-  }
-
-  /**
-   * Add a new footer row.
+   * Get the contained list object that holds all the rows. Handle with care
+   * because it alters the internal data structures of this table.
    * 
-   * @return The created footer row
-   * @throws IllegalStateException
-   *         if a footer row is already present
+   * @return The contained list object for external row order handling.
    */
+  @Nonnull
+  @ReturnsMutableObject (reason = "For performance reasons in derived classes")
+  protected final List <HCRow> directGetFooterRowList ()
+  {
+    return m_aFooterRows;
+  }
+
+  @Nullable
+  public final HCRow getFirstFooterRow ()
+  {
+    return ContainerHelper.getFirstElement (m_aFooterRows);
+  }
+
+  @Nullable
+  public final HCRow getFooterRowAtIndex (@Nonnegative final int nIndex)
+  {
+    return ContainerHelper.getSafe (m_aFooterRows, nIndex);
+  }
+
+  @Nullable
+  public final HCRow getLastFooterRow ()
+  {
+    return ContainerHelper.getLastElement (m_aFooterRows);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public final List <HCRow> getAllFooterRows ()
+  {
+    return ContainerHelper.newList (m_aFooterRows);
+  }
+
   @Nonnull
   public final HCRow addFooterRow ()
   {
-    if (m_aFooterRow != null)
-      throw new IllegalStateException ("A footer row is already present! You cannot have more than one!");
-    m_aFooterRow = new HCRow (true);
-    return m_aFooterRow;
+    final HCRow ret = new HCRow (false);
+    m_aFooterRows.add (ret);
+    return ret;
   }
 
-  /**
-   * Create a new footer row, or reuse it if it is already existing.
-   * 
-   * @return The footer row and never <code>null</code>.
-   */
   @Nonnull
-  public final HCRow getOrAddFooterRow ()
+  public final HCRow addFooterRow (@Nonnegative final int nIndex)
   {
-    return m_aFooterRow != null ? m_aFooterRow : addFooterRow ();
+    final HCRow ret = new HCRow (false);
+    m_aFooterRows.add (nIndex, ret);
+    return ret;
   }
 
-  /**
-   * Remove the footer row, if it is present. The footer ID is not modified.
-   * 
-   * @return this
-   */
   @Nonnull
-  public final THISTYPE removeFooterRow ()
+  public final THISTYPE addFooterRow (@Nullable final HCRow aRow)
   {
-    m_aFooterRow = null;
+    if (aRow != null)
+      m_aFooterRows.add (aRow);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addFooterRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
+  {
+    if (aRow != null)
+      m_aFooterRows.add (nIndex, aRow);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeFooterRowAtIndex (@Nonnegative final int nIndex)
+  {
+    if (nIndex >= 0 && nIndex < m_aFooterRows.size ())
+      m_aFooterRows.remove (nIndex);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeAllFooterRows ()
+  {
+    m_aFooterRows.clear ();
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllFooterRows (@Nonnull final Comparator <HCRow> aComparator)
+  {
+    if (aComparator == null)
+      throw new NullPointerException ("comparator");
+    Collections.sort (m_aFooterRows, aComparator);
     return thisAsT ();
   }
 
@@ -637,7 +803,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return m_aHeaderRow != null || !m_aBodyRows.isEmpty () || m_sBodyID != null || m_aFooterRow != null;
+    return !m_aHeaderRows.isEmpty () ||
+           m_sHeaderID != null ||
+           !m_aBodyRows.isEmpty () ||
+           m_sBodyID != null ||
+           !m_aFooterRows.isEmpty () ||
+           m_sFooterID != null;
   }
 
   private static int _getApplicableRowspan (final int nCellIndex, @Nullable final List <int []> aRowSpans)
@@ -673,38 +844,20 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return nCellIndex;
   }
 
-  public static void checkInternalConsistency (@Nonnull final AbstractHCBaseTable <?> aBaseTable)
+  private static void _checkConsistency (@Nonnull final String sContext,
+                                         @Nonnull final List <HCRow> aRows,
+                                         @Nonnegative final int nCols)
   {
-    // Determine number of columns to use
-    int nCols = 0;
-    if (aBaseTable.m_aColGroup != null)
-      nCols = aBaseTable.m_aColGroup.getColumnCount ();
-    if (nCols == 0 && aBaseTable.m_aHeaderRow != null)
-      nCols = aBaseTable.m_aHeaderRow.getEffectiveCellCount ();
-    if (nCols == 0 && !aBaseTable.m_aBodyRows.isEmpty ())
-      nCols = aBaseTable.getFirstBodyRow ().getEffectiveCellCount ();
-    if (nCols == 0 && aBaseTable.m_aFooterRow != null)
-      nCols = aBaseTable.m_aFooterRow.getEffectiveCellCount ();
-
-    if (aBaseTable.m_aHeaderRow != null)
-    {
-      final int nRowCols = aBaseTable.m_aHeaderRow.getEffectiveCellCount ();
-      if (nRowCols != nCols)
-        HCConsistencyChecker.consistencyWarning ("header row has " +
-                                                 nRowCols +
-                                                 " cells but was expecting " +
-                                                 nCols +
-                                                 " cells");
-    }
     int nRowIndex = 0;
     boolean bTotalHasRowSpans = false;
-    final List <int []> aTotalRowSpans = new ArrayList <int []> (aBaseTable.m_aBodyRows.size ());
-    for (final HCRow aBodyRow : aBaseTable.m_aBodyRows)
+    final List <int []> aTotalRowSpans = new ArrayList <int []> (aRows.size ());
+    for (final HCRow aBodyRow : aRows)
     {
       // Pass null if no row spans are defined!
       final int nRowCols = _getEffectiveCellCount (aBodyRow, bTotalHasRowSpans ? aTotalRowSpans : null);
       if (nRowCols != nCols)
-        HCConsistencyChecker.consistencyWarning ("body row #" +
+        HCConsistencyChecker.consistencyWarning (sContext +
+                                                 " row #" +
                                                  (nRowIndex + 1) +
                                                  " has " +
                                                  nRowCols +
@@ -737,16 +890,24 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
       }
       nRowIndex++;
     }
-    if (aBaseTable.m_aFooterRow != null)
-    {
-      final int nRowCols = aBaseTable.m_aFooterRow.getEffectiveCellCount ();
-      if (nRowCols != nCols)
-        HCConsistencyChecker.consistencyWarning ("footer row has " +
-                                                 nRowCols +
-                                                 " cells but was expecting " +
-                                                 nCols +
-                                                 " cells");
-    }
+  }
+
+  public static void checkInternalConsistency (@Nonnull final AbstractHCBaseTable <?> aBaseTable)
+  {
+    // Determine number of columns to use
+    int nCols = 0;
+    if (aBaseTable.m_aColGroup != null)
+      nCols = aBaseTable.m_aColGroup.getColumnCount ();
+    if (nCols == 0 && !aBaseTable.m_aHeaderRows.isEmpty ())
+      nCols = aBaseTable.getFirstHeaderRow ().getEffectiveCellCount ();
+    if (nCols == 0 && !aBaseTable.m_aBodyRows.isEmpty ())
+      nCols = aBaseTable.getFirstBodyRow ().getEffectiveCellCount ();
+    if (nCols == 0 && !aBaseTable.m_aFooterRows.isEmpty ())
+      nCols = aBaseTable.getFirstFooterRow ().getEffectiveCellCount ();
+
+    _checkConsistency ("header", aBaseTable.m_aHeaderRows, nCols);
+    _checkConsistency ("body", aBaseTable.m_aBodyRows, nCols);
+    _checkConsistency ("footer", aBaseTable.m_aFooterRows, nCols);
   }
 
   @Override
@@ -755,13 +916,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                              @Nonnull final IHCNodeWithChildren <?> aParentNode)
   {
-    if (m_aHeaderRow != null)
-      m_aHeaderRow.applyCustomization (aConversionSettings, aParentNode);
     // We need to work on a copy of the children!
+    for (final HCRow aHeaderRow : ContainerHelper.newList (m_aHeaderRows))
+      aHeaderRow.applyCustomization (aConversionSettings, aParentNode);
     for (final HCRow aBodyRow : ContainerHelper.newList (m_aBodyRows))
       aBodyRow.applyCustomization (aConversionSettings, aParentNode);
-    if (m_aFooterRow != null)
-      m_aFooterRow.applyCustomization (aConversionSettings, aParentNode);
+    for (final HCRow aFooterRow : ContainerHelper.newList (m_aFooterRows))
+      aFooterRow.applyCustomization (aConversionSettings, aParentNode);
   }
 
   @Override
@@ -769,12 +930,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @OverridingMethodsMustInvokeSuper
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    if (m_aHeaderRow != null)
-      m_aHeaderRow.beforeConvertToNode (aConversionSettings);
+    for (final HCRow aHeaderRow : m_aHeaderRows)
+      aHeaderRow.beforeConvertToNode (aConversionSettings);
     for (final HCRow aBodyRow : m_aBodyRows)
       aBodyRow.beforeConvertToNode (aConversionSettings);
-    if (m_aFooterRow != null)
-      m_aFooterRow.beforeConvertToNode (aConversionSettings);
+    for (final HCRow aFooterRow : m_aFooterRows)
+      aFooterRow.beforeConvertToNode (aConversionSettings);
   }
 
   @Override
@@ -782,12 +943,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
-    if (m_aHeaderRow != null)
-      ret.append (m_aHeaderRow.getPlainText ()).append (' ');
+    for (final HCRow aHeaderRow : m_aHeaderRows)
+      ret.append (aHeaderRow.getPlainText ()).append (' ');
     for (final HCRow aBodyRow : m_aBodyRows)
       ret.append (aBodyRow.getPlainText ()).append (' ');
-    if (m_aFooterRow != null)
-      ret.append (m_aFooterRow.getPlainText ()).append (' ');
+    for (final HCRow aFooterRow : m_aFooterRows)
+      ret.append (aFooterRow.getPlainText ()).append (' ');
     return ret.toString ();
   }
 
@@ -798,12 +959,69 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
                             .appendIfNotNull ("colGroup", m_aColGroup)
                             .append ("cellSpacing", m_nCellSpacing)
                             .append ("cellPadding", m_nCellPadding)
-                            .appendIfNotNull ("headerRow", m_aHeaderRow)
+                            .append ("headerRows", m_aHeaderRows)
                             .appendIfNotNull ("headerID", m_sHeaderID)
+                            .appendIfNotNull ("headerClasses", m_aHeaderClasses)
                             .append ("bodyRows", m_aBodyRows)
                             .appendIfNotNull ("bodyID", m_sBodyID)
-                            .appendIfNotNull ("footerRow", m_aFooterRow)
+                            .appendIfNotNull ("bodyClasses", m_aBodyClasses)
+                            .append ("footerRows", m_aFooterRows)
                             .appendIfNotNull ("footerID", m_sFooterID)
+                            .appendIfNotNull ("footerClasses", m_aFooterClasses)
                             .toString ();
+  }
+
+  @Deprecated
+  public final boolean hasHeaderRow ()
+  {
+    return hasHeaderRows ();
+  }
+
+  @Deprecated
+  @Nullable
+  public final HCRow getHeaderRow ()
+  {
+    return getFirstHeaderRow ();
+  }
+
+  @Deprecated
+  @Nullable
+  public final HCRow getOrAddHeaderRow ()
+  {
+    return hasHeaderRows () ? getFirstHeaderRow () : addHeaderRow ();
+  }
+
+  @Deprecated
+  @Nonnull
+  public final THISTYPE removeHeaderRow ()
+  {
+    return removeHeaderRowAtIndex (0);
+  }
+
+  @Deprecated
+  public final boolean hasFooterRow ()
+  {
+    return hasFooterRows ();
+  }
+
+  @Deprecated
+  @Nullable
+  public final HCRow getFooterRow ()
+  {
+    return getFirstFooterRow ();
+  }
+
+  @Deprecated
+  @Nullable
+  public final HCRow getOrAddFooterRow ()
+  {
+    return hasFooterRows () ? getFirstFooterRow () : addFooterRow ();
+  }
+
+  @Deprecated
+  @Nonnull
+  public final THISTYPE removeFooterRow ()
+  {
+    return removeFooterRowAtIndex (0);
   }
 }
