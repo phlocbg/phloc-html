@@ -45,7 +45,9 @@ import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
+                                                                                                                AbstractHCElement <THISTYPE> implements
+                                                                                                                                            IHCElementWithChildren <THISTYPE>
 {
   private List <IHCNode> m_aChildren;
 
@@ -300,6 +302,12 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final List <IHCNode> getChildren ()
   {
     return ContainerHelper.newList (m_aChildren);
+  }
+
+  @Nonnull
+  public final HCNodeList getAllChildrenAsNodeList ()
+  {
+    return new HCNodeList ().addChildren (m_aChildren);
   }
 
   @Nullable
