@@ -37,7 +37,8 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
+                                                                                    AbstractHCBaseTable <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 
@@ -105,7 +106,15 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return hasHeaderRows () || hasBodyRows () || hasBodyID () || hasBodyClasses () || hasFooterRows ();
+    return hasHeaderRows () ||
+           hasHeaderID () ||
+           hasHeaderClasses () ||
+           hasBodyRows () ||
+           hasBodyID () ||
+           hasBodyClasses () ||
+           hasFooterRows () ||
+           hasFooterID () ||
+           hasFooterClasses ();
   }
 
   @Override
@@ -138,7 +147,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       aElement.appendChild (m_aColGroup.convertToNode (aConversionSettings));
 
     // Table header?
-    if (hasHeaderRows ())
+    if (hasHeaderRows () || hasHeaderID () || hasHeaderClasses ())
     {
       final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.THEAD.getElementName ());
@@ -153,7 +162,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     }
 
     // Table footer?
-    if (hasFooterRows ())
+    if (hasFooterRows () || hasFooterID () || hasFooterClasses ())
     {
       final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.TFOOT.getElementName ());
