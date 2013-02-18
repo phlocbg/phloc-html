@@ -33,6 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 @Immutable
 public final class JSToStringConverter implements IJSToStringConverter
 {
+  /** By default a surrounding variable is created */
   public static final boolean DEFAULT_WITH_SURROUNDING_VAR = true;
 
   private final boolean m_bWithSurroundingVar;

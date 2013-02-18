@@ -24,6 +24,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
+// ESCA-JAVA0116:
 /**
  * Contains the JS built-in primitive types
  * 

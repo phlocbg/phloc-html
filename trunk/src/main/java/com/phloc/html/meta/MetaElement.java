@@ -44,6 +44,7 @@ import com.phloc.commons.string.ToStringGenerator;
 @NotThreadSafe
 public final class MetaElement implements IMetaElement
 {
+  /** By default the meta element is not an HTTP equivalent */
   public static final boolean DEFAULT_IS_HTTP_EQUIV = false;
 
   /** tag name. */

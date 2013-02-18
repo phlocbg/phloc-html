@@ -32,8 +32,11 @@ import com.phloc.html.js.builder.JSAssocArray;
  */
 public class JQueryAjaxBuilder
 {
+  /** By default asynchronous AJAX is enabled */
   public static final boolean DEFAULT_ASYNC = true;
+  /** By default HTTP caching is enabled */
   public static final boolean DEFAULT_CACHE = true;
+  /** By default global events are triggered */
   public static final boolean DEFAULT_GLOBAL_EVENTS = true;
 
   // modifier
