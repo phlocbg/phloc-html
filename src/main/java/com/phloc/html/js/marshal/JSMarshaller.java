@@ -176,6 +176,7 @@ public final class JSMarshaller
    * @return The unescaped string.
    * @see #javaScriptEscape(String)
    */
+  // ESCA-JAVA0119:
   @Nullable
   public static String javaScriptUnescape (@Nullable final String sInput)
   {
@@ -322,8 +323,7 @@ public final class JSMarshaller
           break;
         case STRING:
           // Note: use single quotes for use in HTML attributes!
-          final String sValue = aObject instanceof IPredefinedLocaleTextProvider
-                                                                                ? ((IPredefinedLocaleTextProvider) aObject).getText ()
+          final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
                                                                                 : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
           break;

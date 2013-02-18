@@ -123,6 +123,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @ReturnsMutableObject (reason = "speed")
   List <IJSCodeProvider> directMembers ()
   {
+    // ESCA-JAVA0259:
     return m_aObjs;
   }
 
@@ -276,6 +277,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param sName
    *        Name of the variable
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName) throws JSNameAlreadyExistsException
@@ -291,6 +294,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param bInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final boolean bInitValue) throws JSNameAlreadyExistsException
@@ -306,6 +311,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param cInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final char cInitValue) throws JSNameAlreadyExistsException
@@ -321,6 +328,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param dInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final double dInitValue) throws JSNameAlreadyExistsException
@@ -336,6 +345,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param fInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final float fInitValue) throws JSNameAlreadyExistsException
@@ -351,6 +362,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param nInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final int nInitValue) throws JSNameAlreadyExistsException
@@ -366,6 +379,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param nInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final long nInitValue) throws JSNameAlreadyExistsException
@@ -381,6 +396,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param sInitValue
    *        Initialization value for this variable.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, final String sInitValue) throws JSNameAlreadyExistsException
@@ -396,6 +413,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param aInitExpression
    *        Initialization expression for this variable. May be null.
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nonnull final String sName, @Nullable final IJSExpression aInitExpression) throws JSNameAlreadyExistsException
@@ -411,6 +430,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @param sName
    *        Name of the variable
    * @return Newly generated {@link JSVar}
+   * @throws JSNameAlreadyExistsException
+   *         if the name is not unique
    */
   @Nonnull
   public JSVar var (@Nullable final AbstractJSType aType, @Nonnull final String sName) throws JSNameAlreadyExistsException

@@ -35,6 +35,7 @@ import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSStringLiteral;
 
+// ESCA-JAVA0116:
 @Immutable
 public final class JQuerySelector implements IJQuerySelector
 {
