@@ -33,6 +33,7 @@ public enum EHCCommandType implements IHCHasHTMLAttributeValue
   COMMAND ("command"),
   RADIO ("radio");
 
+  /** Default command: command */
   @Nonnull
   public static final EHCCommandType DEFAULT = COMMAND;
 

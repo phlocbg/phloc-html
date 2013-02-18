@@ -84,7 +84,9 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     PLAIN_TEXT_NO_ESCAPE;
   }
 
+  /** By default plain text without escape is used */
   public static final EMode DEFAULT_MODE = EMode.PLAIN_TEXT_NO_ESCAPE;
+  /** The default MIME type is text/css */
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_CSS;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCStyle.class);
 

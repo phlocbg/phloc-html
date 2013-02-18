@@ -47,6 +47,7 @@ public enum EHCKeyGenType implements IHCHasHTMLAttributeValue
    */
   EC ("ec");
 
+  /** Default KeyGen type: RSA */
   public static final EHCKeyGenType DEFAULT = RSA;
 
   private final String m_sAttrValue;

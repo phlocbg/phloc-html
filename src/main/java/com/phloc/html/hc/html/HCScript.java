@@ -65,6 +65,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     CDATA;
   }
 
+  /** By default inline scripts are emitted in mode "wrap in comment" */
   public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
 

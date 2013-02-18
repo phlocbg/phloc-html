@@ -35,8 +35,11 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 @SinceHTML5
 public class HCCommand extends AbstractHCElement <HCCommand> implements IHCCanBeDisabled <HCCommand>
 {
+  /** By default checked is disabled */
   public static final boolean DEFAULT_CHECKED = false;
+  /** By default default is disabled */
   public static final boolean DEFAULT_DEFAULT = false;
+  /** By default disabled is disabled */
   public static final boolean DEFAULT_DISABLED = false;
 
   private boolean m_bChecked = DEFAULT_CHECKED;

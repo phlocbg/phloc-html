@@ -37,12 +37,15 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 
 @SinceHTML5
-public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaElement <THISTYPE>> extends
-                                                                                                  AbstractHCElementWithInternalChildren <THISTYPE, AbstractHCMediaElementChild <?>>
+public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaElement <THISTYPE>> extends AbstractHCElementWithInternalChildren <THISTYPE, AbstractHCMediaElementChild <?>>
 {
+  /** By default auto play is disabled */
   public static final boolean DEFAULT_AUTOPLAY = false;
+  /** By default controls are disabled */
   public static final boolean DEFAULT_CONTROLS = false;
+  /** By default loop is disabled */
   public static final boolean DEFAULT_LOOP = false;
+  /** By default muted is disabled */
   public static final boolean DEFAULT_MUTED = false;
 
   private boolean m_bAutoPlay = DEFAULT_AUTOPLAY;

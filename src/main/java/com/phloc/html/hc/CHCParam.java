@@ -19,6 +19,7 @@ package com.phloc.html.hc;
 
 import javax.annotation.concurrent.Immutable;
 
+// ESCA-JAVA0116:
 /**
  * Contains default request parameters for typical use cases.
  * 

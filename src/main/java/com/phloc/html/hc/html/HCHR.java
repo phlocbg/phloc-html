@@ -33,6 +33,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  */
 public class HCHR extends AbstractHCElement <HCHR>
 {
+  /** By default a shade is present */
   public static final boolean DEFAULT_NO_SHADE = false;
 
   private boolean m_bNoShade = DEFAULT_NO_SHADE;

@@ -41,6 +41,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
  */
 public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 {
+  /** Checkbox is not check by default */
   public static final boolean DEFAULT_CHECKED = false;
 
   private String m_sValue;

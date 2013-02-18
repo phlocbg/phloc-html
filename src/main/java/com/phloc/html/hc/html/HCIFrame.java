@@ -40,7 +40,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
 {
+  /** Default scrolling is auto */
   public static final EHCScrolling DEFAULT_SCROLLING = EHCScrolling.AUTO;
+  /** By default a frame border is visible */
   public static final boolean DEFAULT_FRAME_BORDER = true;
 
   private ISimpleURL m_aSrc;

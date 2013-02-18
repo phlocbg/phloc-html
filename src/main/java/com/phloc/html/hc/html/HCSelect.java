@@ -51,6 +51,7 @@ import com.phloc.html.hc.impl.AbstractHCControl;
 // TODO change hierarchy to http://dev.w3.org/html5/markup/select.html#select
 public class HCSelect extends AbstractHCControl <HCSelect>
 {
+  /** By default multi select is disabled */
   public static final boolean DEFAULT_MULTIPLE = false;
 
   private boolean m_bMultiple = DEFAULT_MULTIPLE;
