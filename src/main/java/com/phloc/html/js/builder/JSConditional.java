@@ -91,6 +91,10 @@ public class JSConditional implements IJSStatement
 
   /**
    * Creates <tt>... else if(...) ...</tt> code.
+   * 
+   * @param aBoolExp
+   *        The boolean expression
+   * @return The conditional for the next "if"
    */
   @Nonnull
   public JSConditional _elseif (@Nonnull final IJSExpression aBoolExp)
