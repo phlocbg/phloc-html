@@ -37,9 +37,13 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 public class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
 {
   // See http://de.selfhtml.org/html/verweise/definieren.htm#zielfenster
+  /** New window */
   public static final HCA_Target BLANK = new HCA_Target ("_blank");
+  /** This window */
   public static final HCA_Target SELF = new HCA_Target ("_self");
+  /** Parent frame */
   public static final HCA_Target PARENT = new HCA_Target ("_parent");
+  /** Out of frames */
   public static final HCA_Target TOP = new HCA_Target ("_top");
 
   private final String m_sName;

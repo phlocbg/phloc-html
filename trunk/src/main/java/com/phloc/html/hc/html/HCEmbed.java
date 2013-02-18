@@ -38,7 +38,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  */
 public class HCEmbed extends AbstractHCElement <HCEmbed>
 {
+  /** By default auto start is disabled */
   public static final boolean DEFAULT_AUTO_START = false;
+  /** By default loop is disabled */
   public static final boolean DEFAULT_LOOP = false;
 
   private ISimpleURL m_aSrc;

@@ -36,7 +36,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCOption extends AbstractHCElementWithChildren <HCOption> implements IHCCanBeDisabled <HCOption>
 {
+  /** By default the option is not disabled */
   public static final boolean DEFAULT_DISABLED = false;
+  /** By default the option is not selected */
   public static final boolean DEFAULT_SELECTED = false;
 
   private boolean m_bDisabled = DEFAULT_DISABLED;

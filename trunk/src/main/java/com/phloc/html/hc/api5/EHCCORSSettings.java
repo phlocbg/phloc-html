@@ -32,6 +32,7 @@ public enum EHCCORSSettings implements IHCHasHTMLAttributeValue
   ANONYMOUS ("anonymous"),
   USE_CREDENTIALS ("use-credentials");
 
+  /** Default CORS settings: anonymous */
   @Nonnull
   public static final EHCCORSSettings DEFAULT = ANONYMOUS;
 

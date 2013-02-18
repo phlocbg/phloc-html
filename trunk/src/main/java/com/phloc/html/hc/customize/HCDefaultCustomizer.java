@@ -66,6 +66,7 @@ import com.phloc.html.js.builder.JSInvocation;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
+// ESCA-JAVA0116:
 /**
  * The default implementation of {@link IHCCustomizer} performing some default
  * class assignments etc.

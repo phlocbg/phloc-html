@@ -40,6 +40,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class HCObject extends AbstractHCElementWithChildren <HCObject>
 {
+  /** By default declare is disabled */
   public static final boolean DEFAULT_DECLARE = false;
 
   private int m_nWidth = CGlobal.ILLEGAL_UINT;

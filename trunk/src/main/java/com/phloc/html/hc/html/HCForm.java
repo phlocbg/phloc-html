@@ -42,8 +42,11 @@ import com.phloc.html.js.builder.IJSStatement;
  */
 public class HCForm extends AbstractHCElementWithChildren <HCForm>
 {
+  /** Default form submission method is POST */
   public static final EHCFormMethod DEFAULT_METHOD = EHCFormMethod.POST;
+  /** By default auto complete is not disabled */
   public static final boolean DEFAULT_DISABLE_AUTO_COMPLETE = false;
+  /** By default form are not submitted by pressing Enter key */
   public static final boolean DEFAULT_SUBMIT_PRESSING_ENTER = false;
 
   private String m_sAction;

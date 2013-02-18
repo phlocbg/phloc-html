@@ -34,6 +34,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCEditFile extends AbstractHCEdit <HCEditFile>
 {
+  /** By default a single file can be selected */
   public static final boolean DEFAULT_MULTIPLE = false;
 
   private boolean m_bMultiple = DEFAULT_MULTIPLE;

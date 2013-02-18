@@ -24,6 +24,7 @@ import com.phloc.commons.microdom.impl.MicroDocumentType;
 import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.html5.HTML5DocumentType;
 
+// ESCA-JAVA0116:
 /**
  * Contains a list of predefined (X)HTML document types.
  * 

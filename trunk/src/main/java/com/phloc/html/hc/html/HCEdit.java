@@ -36,6 +36,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCEdit extends AbstractHCEdit <HCEdit>
 {
+  /** By default auto complete is not disabled */
   public static final boolean DEFAULT_DISABLE_AUTO_COMPLETE = false;
 
   private String m_sValue;

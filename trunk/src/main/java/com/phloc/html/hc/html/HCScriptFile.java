@@ -38,7 +38,9 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 @OutOfBandNode
 public class HCScriptFile extends AbstractHCScript <HCScriptFile>
 {
+  /** By default external scripts are not deferred */
   public static final boolean DEFAULT_DEFER = false;
+  /** By default external scripts are not loaded asynchronously */
   public static final boolean DEFAULT_ASYNC = false;
 
   private ISimpleURL m_aSrc;

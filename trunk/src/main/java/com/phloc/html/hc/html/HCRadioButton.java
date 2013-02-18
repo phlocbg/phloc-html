@@ -37,6 +37,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
  */
 public class HCRadioButton extends AbstractHCInput <HCRadioButton>
 {
+  /** By default the radio button is not checked */
   public static final boolean DEFAULT_CHECKED = false;
 
   private String m_sValue;

@@ -19,6 +19,7 @@ package com.phloc.html;
 
 import javax.annotation.concurrent.Immutable;
 
+// ESCA-JAVA0116:
 /**
  * List of constant HTML attribute values.
  * 

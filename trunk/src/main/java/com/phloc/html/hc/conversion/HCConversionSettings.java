@@ -36,10 +36,15 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 public class HCConversionSettings implements IHCConversionSettings
 {
   // Is implied from default XMLWriter settings
+  /** Default indent and align HTML: true */
   public static final boolean DEFAULT_INDENT_AND_ALIGN_HTML = true;
+  /** Default CSS version 3.0 */
   public static final ECSSVersion DEFAULT_CSS_VERSION = ECSSVersion.CSS30;
+  /** Default indent and align CSS: true */
   public static final boolean DEFAULT_INDENT_AND_ALIGN_CSS = true;
+  /** Default consistency checks: true */
   public static final boolean DEFAULT_CONSISTENCY_CHECKS = true;
+  /** Default extract out-of-band nodes: true */
   public static final boolean DEFAULT_EXTRACT_OUT_OF_BAND_NODES = true;
 
   private final EHTMLVersion m_eHTMLVersion;

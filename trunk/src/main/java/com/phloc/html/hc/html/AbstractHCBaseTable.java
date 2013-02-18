@@ -73,6 +73,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   /**
    * This constructor is used to create elements with logic like a table but
    * actually not having a top 'table' element
+   * 
+   * @param aElement
+   *        The HTML element to be used to create the table
    */
   protected AbstractHCBaseTable (@Nonnull @Nonempty final EHTMLElement aElement)
   {
@@ -356,6 +359,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @ReturnsMutableObject (reason = "For performance reasons in derived classes")
   protected final List <HCRow> directGetHeaderRowList ()
   {
+    // ESCA-JAVA0259:
     return m_aHeaderRows;
   }
 

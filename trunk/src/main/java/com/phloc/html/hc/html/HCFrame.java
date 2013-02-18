@@ -39,7 +39,9 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 @DeprecatedInHTML5
 public class HCFrame extends AbstractHCElement <HCFrame>
 {
+  /** By default a frame border is visible */
   public static final boolean DEFAULT_FRAME_BORDER = true;
+  /** By default resize is allowed */
   public static final boolean DEFAULT_NO_RESIZE = false;
 
   private boolean m_bFrameBorder = DEFAULT_FRAME_BORDER;

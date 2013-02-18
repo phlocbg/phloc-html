@@ -33,6 +33,7 @@ public enum EHCParamValueType implements IHCHasHTMLAttributeValue
   REF ("ref"),
   OBJECT ("object");
 
+  /** Default param value type is data */
   public static final EHCParamValueType DEFAULT = DATA;
 
   private final String m_sAttrValue;
