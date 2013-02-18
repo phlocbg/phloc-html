@@ -453,8 +453,10 @@ public class HCHead extends AbstractHCElement <HCHead>
       final String sName = aEntry.getKey ();
       final IMetaElement aMetaElement = aEntry.getValue ();
 
-      // determine whether the key is an "http-equiv" or a "name"
+      // determine whether the key is an "http-equiv" or a "name" or a
+      // "property"
       final boolean bIsHttpEquiv = aMetaElement.isHttpEquiv () || EStandardMetaElement.isHttpEquivMetaElement (sName);
+      final boolean bProperty = aMetaElement.isProperty ();
 
       final Map <Locale, String> aContent = aMetaElement.getContent ();
       if (aContent.isEmpty ())
@@ -464,7 +466,8 @@ public class HCHead extends AbstractHCElement <HCHead>
         {
           final IMicroElement aMeta = eHead.appendElement (aConversionSettings.getHTMLNamespaceURI (),
                                                            EHTMLElement.META.getElementName ());
-          aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : CHTMLAttributes.NAME, sName);
+          aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : (bProperty ? CHTMLAttributes.PROPERTY
+                                                                                    : CHTMLAttributes.NAME), sName);
           aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
           final Locale aContentLocale = aMetaEntry.getKey ();
           if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
