@@ -95,4 +95,9 @@ public interface IMetaElement extends IMetaElementDeclaration
    */
   @Nonnull
   List <IMetaElementValue> getAsMetaElementValueList ();
+
+  /**
+   * @return Whether or not this element should use "property" instead of "name"
+   */
+  boolean isProperty ();
 }

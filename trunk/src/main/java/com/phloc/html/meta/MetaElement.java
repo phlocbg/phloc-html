@@ -42,7 +42,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * @author philip
  */
 @NotThreadSafe
-public final class MetaElement implements IMetaElement
+public class MetaElement implements IMetaElement
 {
   /** By default the meta element is not an HTTP equivalent */
   public static final boolean DEFAULT_IS_HTTP_EQUIV = false;
@@ -226,5 +226,11 @@ public final class MetaElement implements IMetaElement
                                        .append ("contents", m_aContents)
                                        .append ("isHttpEquiv", m_bIsHttpEquiv)
                                        .toString ();
+  }
+
+  @Override
+  public boolean isProperty ()
+  {
+    return false;
   }
 }
