@@ -28,13 +28,28 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.locale.LocaleUtils;
+import com.phloc.commons.microdom.IMicroContainer;
+import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.state.EChange;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.xml.CXML;
+import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single HTML meta element.
@@ -47,6 +62,7 @@ public class MetaElement implements IMetaElement
   /** By default the meta element is not an HTTP equivalent */
   public static final boolean DEFAULT_IS_HTTP_EQUIV = false;
 
+  private static final Logger s_aLogger = LoggerFactory.getLogger (MetaElement.class);
   /** tag name. */
   private final String m_sName;
 
@@ -194,6 +210,81 @@ public class MetaElement implements IMetaElement
     return ret;
   }
 
+  @Nonnull
+  @Nonempty
+  @OverrideOnDemand
+  protected String getNamespaceURI (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return aConversionSettings.getHTMLNamespaceURI ();
+  }
+
+  /**
+   * @return The attribute name that contains the meta element name. May neither
+   *         be <code>null</code> nor empty
+   */
+  @Nonnull
+  @Nonempty
+  @OverrideOnDemand
+  protected String getNodeNameAttribute ()
+  {
+    return CHTMLAttributes.NAME;
+  }
+
+  /**
+   * @return The attribute name that contains the meta element content. May
+   *         neither be <code>null</code> nor empty
+   */
+  @Nonnull
+  @Nonempty
+  @OverrideOnDemand
+  protected String getNodeContentAttribute ()
+  {
+    return CHTMLAttributes.CONTENT;
+  }
+
+  @Nullable
+  public IMicroNode convertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (m_aContents.isEmpty ())
+    {
+      s_aLogger.info ("Meta element '" + m_sName + "' has no content!");
+      return null;
+    }
+
+    final String sNamespaceURI = getNamespaceURI (aConversionSettings);
+    final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
+
+    // determine whether the key is an "http-equiv" or a "name" or a
+    // "property"
+    final boolean bIsHttpEquiv = m_bIsHttpEquiv || EStandardMetaElement.isHttpEquivMetaElement (m_sName);
+
+    final IMicroContainer ret = new MicroContainer ();
+    for (final Map.Entry <Locale, String> aMetaEntry : m_aContents.entrySet ())
+    {
+      final IMicroElement aMeta = ret.appendElement (sNamespaceURI, EHTMLElement.META);
+      aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : getNodeNameAttribute (), m_sName);
+      aMeta.setAttribute (getNodeContentAttribute (), aMetaEntry.getValue ());
+      final Locale aContentLocale = aMetaEntry.getKey ();
+      if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
+      {
+        final String sLang = aContentLocale.toString ();
+        aMeta.setAttribute (CXML.XML_ATTR_LANG, sLang);
+        if (bAtLeastHTML5)
+        {
+          // When the attribute xml:lang in no namespace is specified, the
+          // element must also have the attribute lang present with the same
+          // value
+          aMeta.setAttribute (CHTMLAttributes.LANG, sLang);
+        }
+      }
+
+      // No scheme attr in HTML5
+      if (!bAtLeastHTML5 && StringHelper.hasText (m_sScheme))
+        aMeta.setAttribute (CHTMLAttributes.SCHEME, m_sScheme);
+    }
+    return ret;
+  }
+
   @Override
   public boolean equals (final Object o)
   {
@@ -226,11 +317,5 @@ public class MetaElement implements IMetaElement
                                        .append ("contents", m_aContents)
                                        .append ("isHttpEquiv", m_bIsHttpEquiv)
                                        .toString ();
-  }
-
-  @Override
-  public boolean isProperty ()
-  {
-    return false;
   }
 }

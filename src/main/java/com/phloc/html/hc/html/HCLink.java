@@ -189,9 +189,9 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   {
     super.applyProperties (aElement, aConversionSettings);
     if (m_aRel != null)
-      aElement.setAttribute (CHTMLAttributes.REL, m_aRel.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.REL, m_aRel);
     if (m_aRev != null)
-      aElement.setAttribute (CHTMLAttributes.REV, m_aRev.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.REV, m_aRev);
     if (m_aType != null)
       aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
     if (m_aHref != null)
@@ -199,7 +199,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     if (StringHelper.hasText (m_sHrefLang))
       aElement.setAttribute (CHTMLAttributes.HREFLANG, m_sHrefLang);
     if (m_aTarget != null)
-      aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget);
     if (StringHelper.hasText (m_sCharset))
       aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
     if (m_aMediaList != null && m_aMediaList.hasAnyMedia ())

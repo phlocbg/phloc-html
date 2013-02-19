@@ -125,7 +125,7 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sValue))

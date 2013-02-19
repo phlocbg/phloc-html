@@ -180,7 +180,7 @@ public class HCFrame extends AbstractHCElement <HCFrame>
     if (m_bNoResize)
       aElement.setAttribute (CHTMLAttributes.NORESIZE, CHTMLAttributes.NORESIZE);
     if (m_eScrolling != null)
-      aElement.setAttribute (CHTMLAttributes.SCROLLING, m_eScrolling.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.SCROLLING, m_eScrolling);
     if (StringHelper.hasText (m_sSrc))
       aElement.setAttribute (CHTMLAttributes.SRC, m_sSrc);
   }

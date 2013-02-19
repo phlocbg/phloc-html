@@ -187,7 +187,7 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     if (m_bAutoPlay)
       aElement.setAttribute (CHTMLAttributes.AUTOPLAY, CHTMLAttributeValues.AUTOPLAY);
     if (m_ePreload != null)
-      aElement.setAttribute (CHTMLAttributes.PRELOAD, m_ePreload.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.PRELOAD, m_ePreload);
     if (m_bControls)
       aElement.setAttribute (CHTMLAttributes.CONTROLS, CHTMLAttributeValues.CONTROLS);
     if (m_bLoop)
@@ -197,6 +197,6 @@ public abstract class AbstractHCMediaElement <THISTYPE extends AbstractHCMediaEl
     if (m_aSrc != null)
       aElement.setAttribute (CHTMLAttributes.SRC, m_aSrc.getAsString ());
     if (m_eCrossOrigin != null)
-      aElement.setAttribute (CHTMLAttributes.CROSSORIGIN, m_eCrossOrigin.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.CROSSORIGIN, m_eCrossOrigin);
   }
 }

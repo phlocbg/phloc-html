@@ -67,6 +67,15 @@ import com.phloc.html.js.JSEventMap;
 
 public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THISTYPE>> extends AbstractHCNode implements IHCElement <THISTYPE>
 {
+  /** By default an element is not unfocusable */
+  public static final boolean DEFAULT_UNFOCUSABLE = false;
+
+  /** By default an element is not hidden */
+  public static final boolean DEFAULT_HIDDEN = false;
+
+  /** By default an element is not spell checked */
+  public static final boolean DEFAULT_SPELLCHECK = false;
+
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCElement.class);
 
   /** The HTML enum element */
@@ -87,7 +96,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * (which happens quite often)!
    */
   private JSEventMap m_aJSHandler;
-  private boolean m_bUnfocusable = false;
+  private boolean m_bUnfocusable = DEFAULT_UNFOCUSABLE;
   private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
   private String m_sAccessKey;
 
@@ -96,8 +105,8 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private String m_sContextMenuID;
   private EHCDraggable m_eDraggable;
   private EHCDropZone m_eDropZone;
-  private boolean m_bHidden = false;
-  private boolean m_bSpellCheck = false;
+  private boolean m_bHidden = DEFAULT_HIDDEN;
+  private boolean m_bSpellCheck = DEFAULT_SPELLCHECK;
 
   // Must be a LinkedHashMap_
   private Map <String, String> m_aCustomAttrs;
@@ -649,7 +658,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     }
 
     if (m_eDirection != null)
-      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.DIR, m_eDirection);
 
     aElement.setAttribute (CHTMLAttributes.CLASS, getAllClassesAsString ());
 
@@ -671,13 +680,13 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     if (bHTML5)
     {
       if (m_eContentEditable != null)
-        aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable.getAttrValue ());
+        aElement.setAttribute (CHTMLAttributes.CONTENTEDITABLE, m_eContentEditable);
       if (StringHelper.hasNoText (m_sContextMenuID))
         aElement.setAttribute (CHTMLAttributes.CONTEXTMENU, m_sContextMenuID);
       if (m_eDraggable != null)
-        aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable.getAttrValue ());
+        aElement.setAttribute (CHTMLAttributes.DRAGGABLE, m_eDraggable);
       if (m_eDropZone != null)
-        aElement.setAttribute (CHTMLAttributes.DROPZONE, m_eDropZone.getAttrValue ());
+        aElement.setAttribute (CHTMLAttributes.DROPZONE, m_eDropZone);
       if (m_bHidden)
         aElement.setAttribute (CHTMLAttributes.HIDDEN, CHTMLAttributeValues.HIDDEN);
       if (m_bSpellCheck)

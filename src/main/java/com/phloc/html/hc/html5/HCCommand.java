@@ -161,7 +161,7 @@ public class HCCommand extends AbstractHCElement <HCCommand> implements IHCCanBe
       aElement.setAttribute (CHTMLAttributes.LABEL, m_sLabel);
     if (StringHelper.hasText (m_sRadioGroup) && EHCCommandType.RADIO.equals (m_eType))
       aElement.setAttribute (CHTMLAttributes.RADIOGROUP, m_sRadioGroup);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
   }
 
   @Override

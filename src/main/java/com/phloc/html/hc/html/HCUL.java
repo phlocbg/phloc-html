@@ -64,7 +64,7 @@ public class HCUL extends AbstractHCList <HCUL>
     super.applyProperties (aElement, aConversionSettings);
 
     if (m_eType != null)
-      aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
   }
 
   @Override

@@ -222,9 +222,9 @@ public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
     if (StringHelper.hasText (m_sLongDesc))
       aElement.setAttribute (CHTMLAttributes.LONGDESC, m_sLongDesc);
     if (m_eScrolling != null)
-      aElement.setAttribute (CHTMLAttributes.SCROLLING, m_eScrolling.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.SCROLLING, m_eScrolling);
     if (m_eAlign != null)
-      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign);
     aElement.setAttribute (CHTMLAttributes.FRAMEBORDER, m_bFrameBorder ? "1" : "0");
     if (StringHelper.hasText (m_sWidth))
       aElement.setAttribute (CHTMLAttributes.WIDTH, m_sWidth);

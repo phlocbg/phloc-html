@@ -17,18 +17,14 @@
  */
 package com.phloc.html.hc.api;
 
-import javax.annotation.Nonnull;
+import com.phloc.commons.microdom.IHasAttributeValue;
 
 /**
  * Base interface for an HTML attribute value provider.
  * 
  * @author philip
  */
-public interface IHCHasHTMLAttributeValue
+public interface IHCHasHTMLAttributeValue extends IHasAttributeValue
 {
-  /**
-   * @return The non-<code>null</code> attribute value.
-   */
-  @Nonnull
-  String getAttrValue ();
+  /* empty */
 }

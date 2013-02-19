@@ -284,7 +284,7 @@ public class HCObject extends AbstractHCElementWithChildren <HCObject>
     if (StringHelper.hasText (m_sVSpace))
       aElement.setAttribute (CHTMLAttributes.VSPACE, m_sVSpace);
     if (m_eAlign != null)
-      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign);
     if (StringHelper.hasText (m_sArchive))
       aElement.setAttribute (CHTMLAttributes.ARCHIVE, m_sArchive);
     if (StringHelper.hasText (m_sBorder))

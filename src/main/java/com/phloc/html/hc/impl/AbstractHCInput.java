@@ -30,8 +30,7 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
-public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends
-                                                                                    AbstractHCControl <THISTYPE>
+public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends AbstractHCControl <THISTYPE>
 {
   private final EHCInputType m_eType;
   private String m_sPlaceholder;
@@ -68,7 +67,7 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
     if (StringHelper.hasText (m_sPlaceholder))
       aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
   }

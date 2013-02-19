@@ -20,7 +20,6 @@ package com.phloc.html.hc.html;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nonnegative;
@@ -34,14 +33,12 @@ import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.locale.LocaleUtils;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
-import com.phloc.commons.xml.CXML;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
@@ -52,7 +49,6 @@ import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElement;
-import com.phloc.html.meta.EStandardMetaElement;
 import com.phloc.html.meta.IMetaElement;
 
 /**
@@ -443,67 +439,27 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     super.applyProperties (eHead, aConversionSettings);
 
-    final boolean bAtLeastHTML5 = aConversionSettings.getHTMLVersion ().isAtLeastHTML5 ();
+    final String sNamespaceURI = aConversionSettings.getHTMLNamespaceURI ();
+
     if (StringHelper.hasText (m_sProfile))
       eHead.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
 
     // Append meta element first for charset encoding!
-    for (final Map.Entry <String, IMetaElement> aEntry : m_aMetaElements.entrySet ())
-    {
-      final String sName = aEntry.getKey ();
-      final IMetaElement aMetaElement = aEntry.getValue ();
-
-      // determine whether the key is an "http-equiv" or a "name" or a
-      // "property"
-      final boolean bIsHttpEquiv = aMetaElement.isHttpEquiv () || EStandardMetaElement.isHttpEquivMetaElement (sName);
-      final boolean bProperty = aMetaElement.isProperty ();
-
-      final Map <Locale, String> aContent = aMetaElement.getContent ();
-      if (aContent.isEmpty ())
-        s_aLogger.info ("Meta element '" + sName + "' has no content!");
-      else
-        for (final Map.Entry <Locale, String> aMetaEntry : aContent.entrySet ())
-        {
-          final IMicroElement aMeta = eHead.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                           EHTMLElement.META.getElementName ());
-          aMeta.setAttribute (bIsHttpEquiv ? CHTMLAttributes.HTTP_EQUIV : (bProperty ? CHTMLAttributes.PROPERTY
-                                                                                    : CHTMLAttributes.NAME), sName);
-          aMeta.setAttribute (CHTMLAttributes.CONTENT, aMetaEntry.getValue ());
-          final Locale aContentLocale = aMetaEntry.getKey ();
-          if (aContentLocale != null && !LocaleUtils.isSpecialLocale (aContentLocale))
-          {
-            aMeta.setAttribute (CXML.XML_ATTR_LANG, aContentLocale.toString ());
-            if (bAtLeastHTML5)
-            {
-              // When the attribute xml:lang in no namespace is specified, the
-              // element must also have the attribute lang present with the same
-              // value
-              aMeta.setAttribute (CHTMLAttributes.LANG, aContentLocale.toString ());
-            }
-          }
-          if (!bAtLeastHTML5)
-          {
-            // No scheme attr in HTML5
-            if (aMetaElement.getScheme () != null)
-              aMeta.setAttribute (CHTMLAttributes.SCHEME, aMetaElement.getScheme ());
-          }
-        }
-    }
+    for (final IMetaElement aMetaElement : m_aMetaElements.values ())
+      eHead.appendChild (aMetaElement.convertToNode (aConversionSettings));
 
     // page title
     if (StringHelper.hasText (m_sPageTitle))
-      eHead.appendElement (aConversionSettings.getHTMLNamespaceURI (), EHTMLElement.TITLE.getElementName ())
-           .appendText (m_sPageTitle);
+      eHead.appendElement (sNamespaceURI, EHTMLElement.TITLE).appendText (m_sPageTitle);
 
     // base
     if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)
     {
-      final IMicroElement eBase = eHead.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                       EHTMLElement.BASE.getElementName ());
+      final IMicroElement eBase = eHead.appendElement (sNamespaceURI, EHTMLElement.BASE);
       if (StringHelper.hasText (m_sBaseHref))
         eBase.setAttribute (CHTMLAttributes.HREF, m_sBaseHref);
       if (m_aBaseTarget != null)
-        eBase.setAttribute (CHTMLAttributes.TARGET, m_aBaseTarget.getAttrValue ());
+        eBase.setAttribute (CHTMLAttributes.TARGET, m_aBaseTarget);
     }
 
     // links

@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.microdom.IHasElementName;
 import com.phloc.commons.string.StringHelper;
 
 /**
@@ -31,7 +32,7 @@ import com.phloc.commons.string.StringHelper;
  * 
  * @author philip
  */
-public enum EHTMLElement
+public enum EHTMLElement implements IHasElementName
 {
   A ("a", false, EHTMLElementType.FLOW),
   ABBR ("abbr", false, EHTMLElementType.PHRASING),

@@ -48,7 +48,7 @@ public enum EHTMLElementType
   UNDEFINED (0),
   LEGACY_PHRASING (CHTMLElementType.VALUE_PHRASING);
 
-  private int m_nValue;
+  private final int m_nValue;
 
   private EHTMLElementType (final int nValue)
   {
