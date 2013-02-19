@@ -37,8 +37,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @param <THISTYPE>
  *        The implementing type
  */
-public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends
-                                                                                    AbstractHCBaseTable <THISTYPE>
+public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
 
@@ -150,7 +149,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     if (hasHeaderRows () || hasHeaderID () || hasHeaderClasses ())
     {
       final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                           EHTMLElement.THEAD.getElementName ());
+                                                           EHTMLElement.THEAD);
       if (hasHeaderID ())
         aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
       if (hasHeaderClasses ())
@@ -165,7 +164,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     if (hasFooterRows () || hasFooterID () || hasFooterClasses ())
     {
       final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                           EHTMLElement.TFOOT.getElementName ());
+                                                           EHTMLElement.TFOOT);
       if (hasFooterID ())
         aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
       if (hasFooterClasses ())
@@ -179,8 +178,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     // add the tbody anyway - helpful for JS tables
 
     // Table body
-    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                         EHTMLElement.TBODY.getElementName ());
+    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (), EHTMLElement.TBODY);
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
     if (hasBodyClasses ())

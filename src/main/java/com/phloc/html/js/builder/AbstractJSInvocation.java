@@ -29,8 +29,8 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
+import com.phloc.commons.microdom.IHasElementName;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 
@@ -39,9 +39,7 @@ import com.phloc.json.IJSON;
  * 
  * @author philip
  */
-public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends
-                                                                                              AbstractJSExpression implements
-                                                                                                                  IJSStatement
+public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends AbstractJSExpression implements IJSStatement
 {
   /**
    * Object expression upon which this method will be invoked, or null if this
@@ -298,9 +296,9 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnull final EHTMLElement eHTMLElement)
+  public IMPLTYPE arg (@Nonnull final IHasElementName aElementNameProvider)
   {
-    return arg (eHTMLElement.getElementName ());
+    return arg (aElementNameProvider.getElementName ());
   }
 
   /**
@@ -427,9 +425,9 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final EHTMLElement eHTMLElement)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final IHasElementName aElementNameProvider)
   {
-    return arg (nIndex, eHTMLElement.getElementName ());
+    return arg (nIndex, aElementNameProvider.getElementName ());
   }
 
   /**
