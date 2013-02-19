@@ -391,7 +391,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final HCRow addHeaderRow ()
   {
-    final HCRow ret = new HCRow (false);
+    final HCRow ret = new HCRow (true);
     m_aHeaderRows.add (ret);
     return ret;
   }
@@ -399,7 +399,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final HCRow addHeaderRow (@Nonnegative final int nIndex)
   {
-    final HCRow ret = new HCRow (false);
+    final HCRow ret = new HCRow (true);
     m_aHeaderRows.add (nIndex, ret);
     return ret;
   }
@@ -568,7 +568,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final HCRow addFooterRow ()
   {
-    final HCRow ret = new HCRow (false);
+    final HCRow ret = new HCRow (true);
     m_aFooterRows.add (ret);
     return ret;
   }
@@ -576,7 +576,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final HCRow addFooterRow (@Nonnegative final int nIndex)
   {
-    final HCRow ret = new HCRow (false);
+    final HCRow ret = new HCRow (true);
     m_aFooterRows.add (nIndex, ret);
     return ret;
   }
