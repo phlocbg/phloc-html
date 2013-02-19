@@ -98,7 +98,7 @@ public class HCOL extends AbstractHCList <HCOL>
     if (m_bReversed)
       aElement.setAttribute (CHTMLAttributes.REVERSED, CHTMLAttributeValues.REVERSED);
     if (m_eType != null)
-      aElement.setAttribute (CHTMLAttributes.TYPE, m_eType.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
   }
 
   @Override

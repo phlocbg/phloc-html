@@ -131,7 +131,6 @@ public final class CHTMLAttributes
   public static final String PLUGINURL = "pluginurl";
   public static final String PRELOAD = "preload";
   public static final String PROFILE = "profile";
-  public static final String PROPERTY = "property";
   public static final String QUALITY = "quality";
   public static final String RADIOGROUP = "radiogroup";
   public static final String READONLY = "readonly";

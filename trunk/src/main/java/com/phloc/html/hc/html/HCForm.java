@@ -211,13 +211,13 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
         aElement.setAttribute (CHTMLAttributes.ACTION, m_sAction);
 
     if (m_eMethod != null)
-      aElement.setAttribute (CHTMLAttributes.METHOD, m_eMethod.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.METHOD, m_eMethod);
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
     if (StringHelper.hasText (m_sAcceptCharset))
       aElement.setAttribute (CHTMLAttributes.ACCEPTCHARSET, m_sAcceptCharset);
     if (m_aLinkTarget != null)
-      aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget);
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
   }

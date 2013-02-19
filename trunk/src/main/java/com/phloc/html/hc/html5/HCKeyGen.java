@@ -140,7 +140,7 @@ public class HCKeyGen extends AbstractHCElement <HCKeyGen> implements IHCCanBeDi
     super.applyProperties (aElement, aConversionSettings);
     if (StringHelper.hasText (m_sChallenge))
       aElement.setAttribute (CHTMLAttributes.CHALLENGE, m_sChallenge);
-    aElement.setAttribute (CHTMLAttributes.KEYTYPE, m_eKeyType.getAttrValue ());
+    aElement.setAttribute (CHTMLAttributes.KEYTYPE, m_eKeyType);
     if (m_bAutofocus)
       aElement.setAttribute (CHTMLAttributes.AUTOFOCUS, CHTMLAttributeValues.AUTOFOCUS);
     if (StringHelper.hasText (m_sName))

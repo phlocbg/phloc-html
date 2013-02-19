@@ -25,7 +25,9 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.state.EChange;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single meta element
@@ -96,8 +98,6 @@ public interface IMetaElement extends IMetaElementDeclaration
   @Nonnull
   List <IMetaElementValue> getAsMetaElementValueList ();
 
-  /**
-   * @return Whether or not this element should use "property" instead of "name"
-   */
-  boolean isProperty ();
+  @Nullable
+  IMicroNode convertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 }

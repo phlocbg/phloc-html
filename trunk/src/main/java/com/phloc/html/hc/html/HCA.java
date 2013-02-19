@@ -131,7 +131,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     {
       // Note: attribute "target" is not allowed in XHTML 1.0 strict (but in
       // 1.1)
-      aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget);
     }
     if (StringHelper.hasText (m_sName))
       aElement.setAttribute (CHTMLAttributes.NAME, m_sName);

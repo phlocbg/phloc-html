@@ -110,7 +110,7 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
     if (m_nRowspan > 1)
       aElement.setAttribute (CHTMLAttributes.ROWSPAN, m_nRowspan);
     if (m_eAlign != null)
-      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign.getAttrValue ());
+      aElement.setAttribute (CHTMLAttributes.ALIGN, m_eAlign);
   }
 
   @Override
