@@ -28,7 +28,14 @@ import com.phloc.css.ICSSWriterSettings;
 import com.phloc.css.property.ECSSProperty;
 import com.phloc.css.propertyvalue.ICSSValue;
 
-public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> extends IHCNode
+/**
+ * Base interface for objects having CSS styles
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ *        Implementation type
+ */
+public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>>
 {
   /**
    * Add an element specific style.
@@ -100,6 +107,12 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>> e
    *         <code>false</code> otherwise
    */
   boolean hasStyle (@Nullable ICSSValue aValue);
+
+  /**
+   * @return <code>true</code> if at least one CSS style is assigned,
+   *         <code>false</code> otherwise.
+   */
+  boolean hasAnyStyle ();
 
   /**
    * The value to be set to the HTML style attribute
