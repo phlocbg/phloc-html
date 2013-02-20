@@ -255,6 +255,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return ret;
   }
 
+  public final boolean hasAnyClass ()
+  {
+    return m_aCSSClassProviders != null && !m_aCSSClassProviders.isEmpty ();
+  }
+
   @Nullable
   public final String getAllClassesAsString ()
   {
@@ -273,11 +278,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       }
     }
     return aSB.toString ();
-  }
-
-  public final boolean hasClass ()
-  {
-    return m_aCSSClassProviders != null && !m_aCSSClassProviders.isEmpty ();
   }
 
   @Nonnull
@@ -313,6 +313,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     // Contained styles can never have a null value!
     final ECSSProperty eProp = aValue.getProp ();
     return EqualsUtils.equals (m_aStyles.get (eProp), aValue);
+  }
+
+  public final boolean hasAnyStyle ()
+  {
+    return m_aStyles != null && !m_aStyles.isEmpty ();
   }
 
   @Nonnull

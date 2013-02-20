@@ -18,26 +18,30 @@
 package com.phloc.html.hc;
 
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
-public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCHasCSSStyles <THISTYPE>
+/**
+ * Base interface for an HC element
+ * 
+ * @author philip
+ * @param <THISTYPE>
+ *        The implementation type
+ */
+public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCNode, IHCHasCSSStyles <THISTYPE>, IHCHasCSSClasses <THISTYPE>
 {
   /**
    * @return The contained HTML element. Never <code>null</code>.
@@ -78,56 +82,6 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   @Nonnull
   THISTYPE setTitle (String sTitle);
-
-  @Nonnull
-  THISTYPE addClass (ICSSClassProvider aProvider);
-
-  @Deprecated
-  @DevelopersNote ("Use addClass instead!")
-  @Nonnull
-  THISTYPE addClasses (ICSSClassProvider aProvider);
-
-  /**
-   * Add multiple unique CSS classes at once. Each CSS class that is already
-   * present, is ignored.
-   * 
-   * @param aProviders
-   *        The CSS classed to add. May neither be <code>null</code> nor empty.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addClasses (ICSSClassProvider... aProviders);
-
-  @Nonnull
-  THISTYPE removeClass (@Nullable ICSSClassProvider aProvider);
-
-  @Nonnull
-  THISTYPE removeAllClasses ();
-
-  boolean containsClass (@Nullable ICSSClassProvider aProvider);
-
-  @Nonnull
-  @ReturnsMutableCopy
-  Set <ICSSClassProvider> getAllClasses ();
-
-  @Nonnull
-  @ReturnsMutableCopy
-  Set <String> getAllClassNames ();
-
-  /**
-   * Get the string representation of all contained classes as it should be set
-   * to the HTML class attribute.
-   * 
-   * @return <code>null</code> if no classes are present.
-   */
-  @Nullable
-  String getAllClassesAsString ();
-
-  /**
-   * @return <code>true</code> if at least one CSS class is assigned,
-   *         <code>false</code> otherwise.
-   */
-  boolean hasClass ();
 
   @Nullable
   EHCTextDirection getDirection ();
