@@ -275,6 +275,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return aSB.toString ();
   }
 
+  public final boolean hasClass ()
+  {
+    return m_aCSSClassProviders != null && !m_aCSSClassProviders.isEmpty ();
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public final Map <ECSSProperty, ICSSValue> getAllStyles ()
