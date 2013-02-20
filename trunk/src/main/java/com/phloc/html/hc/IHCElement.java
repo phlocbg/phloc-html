@@ -123,6 +123,12 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nullable
   String getAllClassesAsString ();
 
+  /**
+   * @return <code>true</code> if at least one CSS class is assigned,
+   *         <code>false</code> otherwise.
+   */
+  boolean hasClass ();
+
   @Nullable
   EHCTextDirection getDirection ();
 
