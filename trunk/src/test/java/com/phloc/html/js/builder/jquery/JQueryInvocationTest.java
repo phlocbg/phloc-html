@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.phloc.html.EHTMLElement;
+
 /**
  * Test class for class {@link JQueryInvocation}
  * 
@@ -28,6 +30,7 @@ import org.junit.Test;
  */
 public final class JQueryInvocationTest
 {
+  @SuppressWarnings ("deprecation")
   @Test
   public void testInvokeAll ()
   {
@@ -175,5 +178,21 @@ public final class JQueryInvocationTest
     assertEquals ("$(document).disable(5);", JQuery.jQueryDocument ().disable ().arg (5).getJSCode ());
     assertEquals ("$(document).check(5);", JQuery.jQueryDocument ().check ().arg (5).getJSCode ());
     assertEquals ("$(document).uncheck(5);", JQuery.jQueryDocument ().uncheck ().arg (5).getJSCode ());
+  }
+
+  @Test
+  public void testArgs ()
+  {
+    assertEquals ("$(document).on($('#abc'));", JQuery.jQueryDocument ().on ().arg (JQuery.idRef ("abc")).getJSCode ());
+    assertEquals ("$(document).on('#abc');", JQuery.jQueryDocument ()
+                                                   .on ()
+                                                   .arg (JQuerySelector.id ("abc"))
+                                                   .getJSCode ());
+    assertEquals ("$(document).on('#abc td');",
+                  JQuery.jQueryDocument ()
+                        .on ()
+                        .arg (new JQuerySelectorList (JQuerySelector.id ("abc"),
+                                                      JQuerySelector.elementName (EHTMLElement.TD)))
+                        .getJSCode ());
   }
 }

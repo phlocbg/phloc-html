@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSFieldRef;
@@ -55,6 +56,32 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   public JQueryInvocation jqinvoke (@Nonnull @Nonempty final String sMethod)
   {
     return new JQueryInvocation (this, sMethod);
+  }
+
+  /**
+   * Adds a JQuery selector as a string argument.
+   * 
+   * @param aArgument
+   *        value to be added as an argument
+   * @return this
+   */
+  @Nonnull
+  public JQueryInvocation arg (@Nullable final IJQuerySelector aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument.getExpression ());
+  }
+
+  /**
+   * Adds a JQuery selector list as a string argument.
+   * 
+   * @param aArgument
+   *        value to be added as an argument
+   * @return this
+   */
+  @Nonnull
+  public JQueryInvocation arg (@Nullable final JQuerySelectorList aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument.getAsExpression ());
   }
 
   /**
@@ -661,9 +688,12 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * Deprecated in jQuery 1.7, removed in 1.9
+   * 
    * @return The invocation of the jQuery function <code>live()</code>
    */
   @Nonnull
+  @Deprecated
   public JQueryInvocation live ()
   {
     return jqinvoke ("live");
@@ -815,12 +845,38 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * Added in jQuery 1.7
+   * 
    * @return The invocation of the jQuery function <code>on()</code>
    */
   @Nonnull
   public JQueryInvocation on ()
   {
     return jqinvoke ("on");
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
+   * @return The invocation of the jQuery function <code>on('click')</code>
+   * @see #on()
+   */
+  @Nonnull
+  public JQueryInvocation onClick ()
+  {
+    return on ().arg ("click");
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
+   * @return The invocation of the jQuery function <code>on('submit')</code>
+   * @see #on()
+   */
+  @Nonnull
+  public JQueryInvocation onSubmit ()
+  {
+    return on ().arg ("submit");
   }
 
   /**
@@ -860,12 +916,41 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * @since jQuery 1.0
    * @return The invocation of the jQuery function <code>parents()</code>
    */
   @Nonnull
   public JQueryInvocation parents ()
   {
     return jqinvoke ("parents");
+  }
+
+  /**
+   * Get the matching parent elements.
+   * 
+   * @since jQuery 1.0
+   * @param aSelector
+   *        The selector to use
+   * @return The invocation of the jQuery function <code>parents()</code>
+   */
+  @Nonnull
+  public JQueryInvocation parents (@Nonnull final IJQuerySelector aSelector)
+  {
+    return parents ().arg (aSelector);
+  }
+
+  /**
+   * Get the matching parent elements.
+   * 
+   * @since jQuery 1.0
+   * @param eHTMLElement
+   *        The HTML elements to retrieve
+   * @return The invocation of the jQuery function <code>parents()</code>
+   */
+  @Nonnull
+  public JQueryInvocation parents (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return parents (JQuerySelector.elementName (eHTMLElement));
   }
 
   /**
@@ -941,12 +1026,23 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * @since jQuery 1.6
    * @return The invocation of the jQuery function <code>prop()</code>
    */
   @Nonnull
   public JQueryInvocation prop ()
   {
     return jqinvoke ("prop");
+  }
+
+  /**
+   * @since jQuery 1.6
+   * @return The invocation of the jQuery function <code>prop('checked')</code>
+   */
+  @Nonnull
+  public JQueryInvocation propChecked ()
+  {
+    return prop ().arg ("checked");
   }
 
   /**

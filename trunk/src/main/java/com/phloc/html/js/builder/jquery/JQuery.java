@@ -28,11 +28,13 @@ import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
+import com.phloc.commons.id.IHasID;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
+import com.phloc.html.js.builder.JSAssocArray;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
@@ -149,6 +151,17 @@ public class JQuery
   public static JQueryInvocation ajax ()
   {
     return new JQueryInvocation (jQueryField (), "ajax");
+  }
+
+  /**
+   * @param aArgs
+   *        The array with the AJAX arguments
+   * @return <code>$.ajax</code>
+   */
+  @Nonnull
+  public static JQueryInvocation ajax (@Nonnull final JSAssocArray aArgs)
+  {
+    return ajax ().arg (aArgs);
   }
 
   /**
@@ -532,7 +545,7 @@ public class JQuery
   }
 
   /**
-   * @return a {@link JQueryInvocation} with <code>this</code>.
+   * @return a {@link JQueryInvocation} with <code>this</code>:
    *         <code>$(this)</code>
    */
   @Nonnull
@@ -598,6 +611,20 @@ public class JQuery
   public static JQueryInvocation idRef (@Nonnull @Nonempty final String sID)
   {
     return select (JQuerySelector.id (sID));
+  }
+
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aIDProvider
+   *        The provider that has the ID to be selected. May not be
+   *        <code>null</code>.
+   * @return A jQuery invocation with the passed ID: <code>$('#id')</code>
+   */
+  @Nonnull
+  public static JQueryInvocation idRef (@Nonnull @Nonempty final IHasID <String> aIDProvider)
+  {
+    return idRef (aIDProvider.getID ());
   }
 
   /**

@@ -234,6 +234,6 @@ public class JQueryAjaxBuilder
     if (m_aSuccess != null)
       aSettings.add ("success", m_aSuccess);
 
-    return JQuery.ajax ().arg (aSettings);
+    return JQuery.ajax (aSettings);
   }
 }

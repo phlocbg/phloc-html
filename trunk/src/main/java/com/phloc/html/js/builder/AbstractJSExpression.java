@@ -800,6 +800,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final JSArrayCompRef component0 ()
+  {
+    return component (JSExpr.lit (0));
+  }
+
+  @Nonnull
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);
