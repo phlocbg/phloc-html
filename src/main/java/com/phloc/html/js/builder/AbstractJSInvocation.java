@@ -182,19 +182,6 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     m_aCtorType = aType;
   }
 
-  /**
-   * Add an expression to this invocation's argument list or "null" if it is
-   * <code>null</code>
-   * 
-   * @param aArgument
-   *        Argument to add to argument list
-   */
-  @Nonnull
-  public IMPLTYPE argOrNull (@Nullable final IJSExpression aArgument)
-  {
-    return aArgument == null ? argNull () : arg (aArgument);
-  }
-
   @SuppressWarnings ("unchecked")
   @Nonnull
   private IMPLTYPE _thisAsT ()
@@ -207,6 +194,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    * 
    * @param aArgument
    *        Argument to add to argument list
+   * @return this
    */
   @Nonnull
   public IMPLTYPE arg (@Nonnull final IJSExpression aArgument)
@@ -218,57 +206,95 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(bArgument))}
+   * 
+   * @param bArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final boolean v)
+  public IMPLTYPE arg (final boolean bArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (bArgument));
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(cArgument))}
+   * 
+   * @param cArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final char v)
+  public IMPLTYPE arg (final char cArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (cArgument));
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(dArgument))}
+   * 
+   * @param dArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final double v)
+  public IMPLTYPE arg (final double dArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (dArgument));
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(fArgument))}
+   * 
+   * @param fArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final float v)
+  public IMPLTYPE arg (final float fArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (fArgument));
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
+   * 
+   * @param nArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final int v)
+  public IMPLTYPE arg (final int nArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (nArgument));
   }
 
   /**
-   * Adds a literal argument. Short for {@code arg(JSExpr.lit(v))}
+   * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
+   * 
+   * @param nArgument
+   *        value to be added as an argument
+   * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final long v)
+  public IMPLTYPE arg (final long nArgument)
   {
-    return arg (JSExpr.lit (v));
+    return arg (JSExpr.lit (nArgument));
+  }
+
+  /**
+   * Add an expression to this invocation's argument list or "null" if it is
+   * <code>null</code>
+   * 
+   * @param aArgument
+   *        Argument to add to argument list
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE argOrNull (@Nullable final IJSExpression aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument);
   }
 
   @Nonnull
