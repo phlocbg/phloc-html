@@ -909,9 +909,12 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     if (nCols == 0 && !aBaseTable.m_aFooterRows.isEmpty ())
       nCols = aBaseTable.getFirstFooterRow ().getEffectiveCellCount ();
 
-    _checkConsistency ("header", aBaseTable.m_aHeaderRows, nCols);
-    _checkConsistency ("body", aBaseTable.m_aBodyRows, nCols);
-    _checkConsistency ("footer", aBaseTable.m_aFooterRows, nCols);
+    String sPrefix = "Table";
+    if (StringHelper.hasText (aBaseTable.getID ()))
+      sPrefix += " with ID " + aBaseTable.getID ();
+    _checkConsistency (sPrefix + " header", aBaseTable.m_aHeaderRows, nCols);
+    _checkConsistency (sPrefix + " body", aBaseTable.m_aBodyRows, nCols);
+    _checkConsistency (sPrefix + " footer", aBaseTable.m_aFooterRows, nCols);
   }
 
   @Override
