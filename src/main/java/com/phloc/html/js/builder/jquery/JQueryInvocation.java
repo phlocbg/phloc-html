@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSFieldRef;
@@ -184,12 +186,37 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * @since jQuery 1.0
    * @return The invocation of the jQuery function <code>append()</code>
    */
   @Nonnull
   public JQueryInvocation append ()
   {
     return jqinvoke ("append");
+  }
+
+  /**
+   * @param sHTML
+   *        the HTML code to be appended
+   * @since jQuery 1.0
+   * @return The invocation of the jQuery function <code>append()</code>
+   */
+  @Nonnull
+  final public JQueryInvocation append (@Nonnull final String sHTML)
+  {
+    return append ().arg (sHTML);
+  }
+
+  /**
+   * @param aNode
+   *        the HC node to be appended
+   * @since jQuery 1.0
+   * @return The invocation of the jQuery function <code>append()</code>
+   */
+  @Nonnull
+  final public JQueryInvocation append (@Nonnull final IHCNode aNode)
+  {
+    return append (HCSettings.getAsHTMLString (aNode));
   }
 
   /**
@@ -265,7 +292,10 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * This method is a shortcut for <code>.on('click', handler)</code>
+   * 
    * @return The invocation of the jQuery function <code>click()</code>
+   * @since jQuery 1.0
    */
   @Nonnull
   public JQueryInvocation click ()
@@ -858,13 +888,38 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   /**
    * Added in jQuery 1.7
    * 
+   * @param sEventName
+   *        The event name to be bound
+   * @return The invocation of the jQuery function <code>on()</code>
+   */
+  @Nonnull
+  public JQueryInvocation on (@Nonnull final String sEventName)
+  {
+    return on ().arg (sEventName);
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
    * @return The invocation of the jQuery function <code>on('click')</code>
    * @see #on()
    */
   @Nonnull
   public JQueryInvocation onClick ()
   {
-    return on ().arg ("click");
+    return on ("click");
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
+   * @return The invocation of the jQuery function <code>on('select')</code>
+   * @see #on()
+   */
+  @Nonnull
+  public JQueryInvocation onSelect ()
+  {
+    return on ("select");
   }
 
   /**
@@ -876,7 +931,7 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   @Nonnull
   public JQueryInvocation onSubmit ()
   {
-    return on ().arg ("submit");
+    return on ("submit");
   }
 
   /**
@@ -1172,6 +1227,8 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * This method is a shortcut for <code>.on('select', handler)</code>
+   * 
    * @return The invocation of the jQuery function <code>select()</code>
    */
   @Nonnull
@@ -1299,6 +1356,7 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
 
   /**
    * @return The invocation of the jQuery function <code>toggle()</code>
+   * @since jQuery 1.0
    */
   @Nonnull
   public JQueryInvocation toggle ()

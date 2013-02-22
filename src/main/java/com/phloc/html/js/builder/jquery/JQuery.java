@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
@@ -46,7 +47,8 @@ import com.phloc.html.js.builder.html.JSHtml;
  * 
  * @author philip
  */
-public class JQuery
+@Immutable
+public final class JQuery
 {
   @PresentForCodeCoverage
   private static final JQuery s_aInstance = new JQuery ();
@@ -555,7 +557,7 @@ public class JQuery
   }
 
   /**
-   * Get the result of a jQuery selection
+   * Get the result of a jQuery selection.
    * 
    * @param aSelector
    *        The selector to be used. May not be <code>null</code>.
