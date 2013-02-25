@@ -45,7 +45,7 @@ public class JSRef extends AbstractJSAssignmentTarget
   public JSRef (@Nonnull @Nonempty final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
-      throw new IllegalArgumentException ("Name '" + sName + "' is not a valid JSIdentifier!");
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     m_sName = sName;
   }
 

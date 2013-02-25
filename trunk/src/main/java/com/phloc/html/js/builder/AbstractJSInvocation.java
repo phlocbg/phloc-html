@@ -149,7 +149,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   private AbstractJSInvocation (@Nullable final IJSGeneratable aLhs, @Nonnull @Nonempty final String sMethod)
   {
     if (!JSMarshaller.isJSIdentifier (sMethod))
-      throw new IllegalArgumentException ("name");
+      throw new IllegalArgumentException ("The name '" + sMethod + "' is not a legal JS identifier!");
     m_aObject = aLhs;
     m_sName = sMethod;
     m_aCallee = null;

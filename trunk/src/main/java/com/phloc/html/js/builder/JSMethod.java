@@ -56,7 +56,7 @@ public class JSMethod extends JSFunction
     if (aClass == null)
       throw new NullPointerException ("class");
     if (!JSMarshaller.isJSIdentifier (sName))
-      throw new IllegalArgumentException ("Illegal method name: " + sName);
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     if (sName.equals (aClass.name ()))
       throw new IllegalArgumentException ("You cannot name a method like the constructor!");
     if (!Character.isLowerCase (sName.charAt (0)))
