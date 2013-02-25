@@ -66,26 +66,26 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * function constructor
    * 
-   * @param name
+   * @param sName
    *        Name of this function
    */
-  public JSFunction (@Nonnull @Nonempty final String name)
+  public JSFunction (@Nonnull @Nonempty final String sName)
   {
-    this (null, name);
+    this (null, sName);
   }
 
   /**
    * function constructor
    * 
-   * @param name
+   * @param sName
    *        Name of this function
    */
-  public JSFunction (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String name)
+  public JSFunction (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Name must a valid identifier!");
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     m_aType = aType;
-    m_sName = name;
+    m_sName = sName;
   }
 
   /**
@@ -117,11 +117,11 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * Changes the name of the function.
    */
   @Nonnull
-  public JSFunction name (@Nonnull final String name)
+  public JSFunction name (@Nonnull final String sName)
   {
-    if (!JSMarshaller.isJSIdentifier (name))
-      throw new IllegalArgumentException ("Name must a valid identifier!");
-    m_sName = name;
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
+    m_sName = sName;
     return this;
   }
 

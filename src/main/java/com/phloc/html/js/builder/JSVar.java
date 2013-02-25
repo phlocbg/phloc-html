@@ -97,7 +97,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public JSVar (@Nullable final AbstractJSType aType, @Nonnull final String sName, @Nullable final IJSExpression aInit)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
-      throw new IllegalArgumentException ();
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     m_aType = aType;
     m_sName = sName;
     m_aInit = aInit;
@@ -145,7 +145,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public JSVar name (@Nonnull final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
-      throw new IllegalArgumentException ("Illegal variable name passed!");
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     m_sName = sName;
     return this;
   }

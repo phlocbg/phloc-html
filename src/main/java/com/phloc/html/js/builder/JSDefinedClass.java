@@ -87,7 +87,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   public JSDefinedClass (@Nonnull @Nonempty final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
-      throw new IllegalArgumentException ("Illegal class name: " + sName);
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     if (!Character.isUpperCase (sName.charAt (0)))
       s_aLogger.warn ("Class names should always start with an upper-case character: " + sName);
     m_sName = sName;
