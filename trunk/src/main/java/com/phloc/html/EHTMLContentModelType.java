@@ -17,56 +17,44 @@
  */
 package com.phloc.html;
 
-import javax.annotation.concurrent.Immutable;
-
-@Immutable
-final class CHTMLElementType
-{
-  static final int VALUE_FLOW = 0x1;
-  static final int VALUE_METADATA = 0x2;
-  static final int VALUE_PHRASING = 0x4;
-
-  private CHTMLElementType ()
-  {}
-}
-
 /**
  * Contains the potential element meta types.<br>
  * See http://dev.w3.org/html5/markup/common-models.html#common-models
  * 
  * @author philip
  */
-public enum EHTMLElementType
+public enum EHTMLContentModelType
 {
-  FLOW (CHTMLElementType.VALUE_FLOW | CHTMLElementType.VALUE_PHRASING),
-  FLOW_METADATA (CHTMLElementType.VALUE_FLOW | CHTMLElementType.VALUE_PHRASING | CHTMLElementType.VALUE_METADATA),
-  PHRASING_METADATA (CHTMLElementType.VALUE_PHRASING | CHTMLElementType.VALUE_METADATA),
-  METADATA (CHTMLElementType.VALUE_METADATA),
-  PHRASING (CHTMLElementType.VALUE_PHRASING),
+  FLOW (CHTMLContentModel.VALUE_FLOW | CHTMLContentModel.VALUE_PHRASING),
+  FLOW_METADATA (CHTMLContentModel.VALUE_METADATA | CHTMLContentModel.VALUE_FLOW | CHTMLContentModel.VALUE_PHRASING),
+  PHRASING_METADATA (CHTMLContentModel.VALUE_METADATA | CHTMLContentModel.VALUE_PHRASING),
+  METADATA (CHTMLContentModel.VALUE_METADATA),
+  PHRASING (CHTMLContentModel.VALUE_PHRASING),
+  EMPTY (0),
   CHILD (0),
   SPECIAL (0),
   UNDEFINED (0),
-  LEGACY_PHRASING (CHTMLElementType.VALUE_PHRASING);
+  LEGACY_PHRASING (CHTMLContentModel.VALUE_PHRASING);
 
   private final int m_nValue;
 
-  private EHTMLElementType (final int nValue)
+  private EHTMLContentModelType (final int nValue)
   {
     m_nValue = nValue;
   }
 
   public boolean isFlowElement ()
   {
-    return (m_nValue & CHTMLElementType.VALUE_FLOW) > 0;
+    return (m_nValue & CHTMLContentModel.VALUE_FLOW) > 0;
   }
 
   public boolean isMetadataElement ()
   {
-    return (m_nValue & CHTMLElementType.VALUE_METADATA) > 0;
+    return (m_nValue & CHTMLContentModel.VALUE_METADATA) > 0;
   }
 
   public boolean isPhrasingElement ()
   {
-    return (m_nValue & CHTMLElementType.VALUE_PHRASING) > 0;
+    return (m_nValue & CHTMLContentModel.VALUE_PHRASING) > 0;
   }
 }
