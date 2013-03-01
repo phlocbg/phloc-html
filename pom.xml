@@ -116,6 +116,22 @@
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+	  <groupId>org.apache.httpcomponents</groupId>
+	  <artifactId>httpclient</artifactId>
+	  <version>4.2.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>fluent-hc</artifactId>
+      <version>4.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>nu.validator.htmlparser</groupId>
+	  <artifactId>htmlparser</artifactId>
+	  <version>1.4</version>
+    </dependency>
   </dependencies>
   
   <build>
