@@ -370,7 +370,7 @@ public final class JSMarshallerTest
       aUnescaped[i] = '\'' + JSMarshaller.javaScriptEscape (JSMarshaller.javaScriptUnescape (aStrings[i])) + '\'';
 
     String sJSFile = SimpleFileIO.readFileAsString (new File ("src/test/resources/test.js"),
-                                                    CCharset.CHARSET_ISO_8859_1);
+                                                    CCharset.CHARSET_ISO_8859_1_OBJ);
 
     // Inline all texts
     for (int i = 0; i < aStrings.length; ++i)
@@ -379,7 +379,7 @@ public final class JSMarshallerTest
     // Cleanup (replace e.g. "['join']" with ".join"
     sJSFile = RegExHelper.stringReplacePattern ("\\['([a-zA-Z]+)'\\]", sJSFile, ".$1");
 
-    SimpleFileIO.writeFile (new File ("src/test/resources/cleaned.js"), sJSFile, CCharset.CHARSET_ISO_8859_1);
+    SimpleFileIO.writeFile (new File ("src/test/resources/cleaned.js"), sJSFile, CCharset.CHARSET_ISO_8859_1_OBJ);
   }
 
   @Test
