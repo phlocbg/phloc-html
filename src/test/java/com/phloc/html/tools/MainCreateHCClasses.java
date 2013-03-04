@@ -262,14 +262,14 @@ public class MainCreateHCClasses
         final File aFile = new File (aMainDir, "HC" + s + ".java");
         if (!aFile.exists ())
           throw new IllegalStateException (aFile.getPath () + " does not exist");
-        SimpleFileIO.writeFile (aFile, sMainCode, CCharset.CHARSET_UTF_8);
+        SimpleFileIO.writeFile (aFile, sMainCode, CCharset.CHARSET_UTF_8_OBJ);
       }
 
       {
         String sTestCode = TEMPLATE_TEST;
         sTestCode = sTestCode.replace ("$$", s);
         final File aFile = new File (aTestDir, "HC" + s + "Test.java");
-        SimpleFileIO.writeFile (aFile, sTestCode, CCharset.CHARSET_UTF_8);
+        SimpleFileIO.writeFile (aFile, sTestCode, CCharset.CHARSET_UTF_8_OBJ);
       }
     }
     System.out.println ("Done");
