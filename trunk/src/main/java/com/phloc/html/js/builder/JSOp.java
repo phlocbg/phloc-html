@@ -31,6 +31,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
 @Immutable
 public final class JSOp
 {
+  @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final JSOp s_aInstance = new JSOp ();
 

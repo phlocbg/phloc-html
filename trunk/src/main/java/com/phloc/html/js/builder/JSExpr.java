@@ -34,6 +34,7 @@ import com.phloc.json.IJSON;
 @Immutable
 public final class JSExpr
 {
+  @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final JSExpr s_aInstance = new JSExpr ();
 

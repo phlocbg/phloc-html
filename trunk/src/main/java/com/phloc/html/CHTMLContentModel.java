@@ -16,6 +16,7 @@ public final class CHTMLContentModel
   public static final int VALUE_FLOW = CHTMLContentKind.VALUE_FLOW;
   public static final int VALUE_PHRASING = CHTMLContentKind.VALUE_PHRASING;
 
+  @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final CHTMLContentModel s_aInstance = new CHTMLContentModel ();
 
