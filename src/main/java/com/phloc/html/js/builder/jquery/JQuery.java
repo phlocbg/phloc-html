@@ -50,6 +50,7 @@ import com.phloc.html.js.builder.html.JSHtml;
 @Immutable
 public final class JQuery
 {
+  @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final JQuery s_aInstance = new JQuery ();
 

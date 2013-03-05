@@ -21,6 +21,7 @@ public final class CHTMLContentKind
   public static final int VALUE_EMBEDDED = 0x20;
   public static final int VALUE_INTERACTIVE = 0x40;
 
+  @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final CHTMLContentKind s_aInstance = new CHTMLContentKind ();
 
