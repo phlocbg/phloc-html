@@ -113,6 +113,7 @@ public final class XHTMLParser
    *        The XHTML fragment to parse.
    * @return <code>null</code> if parsing failed.
    */
+  @Nullable
   public static IMicroDocument parseXHTMLFragment (@Nonnull final EHTMLVersion eHTMLVersion,
                                                    @Nullable final String sXHTMLFragment)
   {
