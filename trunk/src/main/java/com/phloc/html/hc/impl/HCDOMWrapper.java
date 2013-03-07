@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.microdom.EMicroNodeType;
 import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.IMicroText;
@@ -71,14 +72,15 @@ public class HCDOMWrapper extends AbstractHCNode
     for (final IMicroNode aNode : new MicroRecursiveIterator (m_aNode))
     {
       CharSequence sPlainText = null;
-      if (aNode instanceof IMicroText)
+      final EMicroNodeType eType = aNode.getType ();
+      if (eType == EMicroNodeType.TEXT)
       {
         final IMicroText aTextNode = (IMicroText) aNode;
         if (!aTextNode.isElementContentWhitespace ())
           sPlainText = aTextNode.getData ();
       }
       else
-        if (aNode instanceof IMicroCDATA)
+        if (eType == EMicroNodeType.CDATA)
         {
           final IMicroCDATA aCDATANode = (IMicroCDATA) aNode;
           sPlainText = aCDATANode.getData ();
