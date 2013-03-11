@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.phloc</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>22.3</version>
+    <version>22.4</version>
     <relativePath>../phloc-parent-pom/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -117,9 +117,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-	  <groupId>org.apache.httpcomponents</groupId>
-	  <artifactId>httpclient</artifactId>
-	  <version>4.2.3</version>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.2.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -130,8 +130,8 @@
     </dependency>
     <dependency>
       <groupId>nu.validator.htmlparser</groupId>
-	  <artifactId>htmlparser</artifactId>
-	  <version>1.4</version>
+    <artifactId>htmlparser</artifactId>
+    <version>1.4</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
