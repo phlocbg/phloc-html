@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder.html;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.url.ISimpleURL;
@@ -42,6 +43,10 @@ public final class JSHtml
 
   // --- console ---
 
+  /**
+   * @return Global console object
+   * @see #windowConsole()
+   */
   @Nonnull
   public static JSRef console ()
   {
@@ -49,19 +54,65 @@ public final class JSHtml
   }
 
   @Nonnull
-  public static JSInvocation consoleLog (@Nonnull final String sText)
+  public static JSInvocation consoleAssert ()
   {
-    return consoleLog (JSExpr.lit (sText));
+    return console ().invoke ("assert");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleClear ()
+  {
+    return console ().invoke ("clear");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleDebug ()
+  {
+    return console ().invoke ("debug");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleError ()
+  {
+    return console ().invoke ("error");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleInfo ()
+  {
+    return console ().invoke ("info");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleLog ()
+  {
+    return console ().invoke ("log");
+  }
+
+  @Nonnull
+  public static JSInvocation consoleLog (@Nullable final String sText)
+  {
+    return consoleLog ().arg (sText);
   }
 
   @Nonnull
   public static JSInvocation consoleLog (@Nonnull final IJSExpression aExpr)
   {
-    return console ().invoke ("log").arg (aExpr);
+    return consoleLog ().arg (aExpr);
+  }
+
+  @Nonnull
+  public static JSInvocation consoleWarn ()
+  {
+    return console ().invoke ("warn");
   }
 
   // --- document ---
 
+  /**
+   * @return Global document object
+   * @see #windowDocument()
+   */
   @Nonnull
   public static JSRef document ()
   {
@@ -204,6 +255,10 @@ public final class JSHtml
 
   // --- history ---
 
+  /**
+   * @return The history object
+   * @see #windowHistory()
+   */
   @Nonnull
   public static JSRef history ()
   {
@@ -242,6 +297,10 @@ public final class JSHtml
 
   // --- navigator ---
 
+  /**
+   * @return Global navigator object
+   * @see #windowNavigator()
+   */
   @Nonnull
   public static JSRef navigator ()
   {
@@ -286,6 +345,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSFieldRef navigatorOnLine ()
+  {
+    return navigator ().ref ("onLine");
+  }
+
+  @Nonnull
   public static JSFieldRef navigatorPlatform ()
   {
     return navigator ().ref ("platform");
@@ -310,8 +375,21 @@ public final class JSHtml
     return navigator ().invoke ("javaEnabled");
   }
 
+  /*
+   * IE and Opera only
+   */
+  @Nonnull
+  public static JSInvocation navigatorTaintEnabled ()
+  {
+    return navigator ().invoke ("taintEnabled");
+  }
+
   // --- screen ---
 
+  /**
+   * @return Global screen object
+   * @see #windowScreen()
+   */
   @Nonnull
   public static JSRef screen ()
   {
@@ -363,9 +441,93 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation windowAlert ()
+  {
+    return window ().invoke ("alert");
+  }
+
+  @Nonnull
+  public static JSInvocation windowAlert (@Nullable final String sMessage)
+  {
+    return windowAlert ().arg (sMessage);
+  }
+
+  @Nonnull
+  public static JSInvocation windowBlur ()
+  {
+    return window ().invoke ("blur");
+  }
+
+  @Nonnull
+  public static JSInvocation windowClearInterval ()
+  {
+    return window ().invoke ("clearInterval");
+  }
+
+  @Nonnull
+  public static JSInvocation windowClearTimeout ()
+  {
+    return window ().invoke ("clearTimeout");
+  }
+
+  @Nonnull
+  public static JSInvocation windowClose ()
+  {
+    return window ().invoke ("close");
+  }
+
+  @Nonnull
   public static JSFieldRef windowClosed ()
   {
     return window ().ref ("closed");
+  }
+
+  @Nonnull
+  public static JSInvocation windowConfirm ()
+  {
+    return window ().invoke ("confirm");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowConsole ()
+  {
+    return window ().ref ("console");
+  }
+
+  @Nonnull
+  public static JSInvocation windowCreatePopup ()
+  {
+    return window ().invoke ("createPopup");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowDefaultStatus ()
+  {
+    return window ().ref ("defaultStatus");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowDocument ()
+  {
+    return window ().ref ("document");
+  }
+
+  @Nonnull
+  public static JSInvocation windowFocus ()
+  {
+    return window ().invoke ("focus");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowFrames ()
+  {
+    return window ().ref ("frames");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowHistory ()
+  {
+    return window ().ref ("history");
   }
 
   @Nonnull
@@ -378,6 +540,12 @@ public final class JSHtml
   public static JSFieldRef windowInnerWidth ()
   {
     return window ().ref ("innerWidth");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowLength ()
+  {
+    return window ().ref ("length");
   }
 
   @Nonnull
@@ -459,9 +627,39 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation windowMoveBy ()
+  {
+    return window ().invoke ("moveBy");
+  }
+
+  @Nonnull
+  public static JSInvocation windowMoveTo ()
+  {
+    return window ().invoke ("moveTo");
+  }
+
+  @Nonnull
   public static JSFieldRef windowName ()
   {
     return window ().ref ("name");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowNavigator ()
+  {
+    return window ().ref ("navigator");
+  }
+
+  @Nonnull
+  public static JSInvocation windowOpen ()
+  {
+    return window ().invoke ("open");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowOpener ()
+  {
+    return window ().ref ("opener");
   }
 
   @Nonnull
@@ -507,9 +705,99 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation windowPrompt ()
+  {
+    return window ().invoke ("prompt");
+  }
+
+  @Nonnull
+  public static JSInvocation windowResizeBy ()
+  {
+    return window ().invoke ("resizeBy");
+  }
+
+  @Nonnull
+  public static JSInvocation windowResizeTo ()
+  {
+    return window ().invoke ("resizeTo");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowScreen ()
+  {
+    return window ().ref ("screen");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowScreenLeft ()
+  {
+    return window ().ref ("screenLeft");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowScreenTop ()
+  {
+    return window ().ref ("screenTop");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowScreenX ()
+  {
+    return window ().ref ("screenX");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowScreenY ()
+  {
+    return window ().ref ("screenY");
+  }
+
+  @Nonnull
+  public static JSInvocation windowScroll ()
+  {
+    return window ().invoke ("scroll");
+  }
+
+  @Nonnull
+  public static JSInvocation windowScrollBy ()
+  {
+    return window ().invoke ("scrollBy");
+  }
+
+  @Nonnull
+  public static JSInvocation windowScrollTo ()
+  {
+    return window ().invoke ("scrollTo");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowSelf ()
+  {
+    return window ().ref ("self");
+  }
+
+  @Nonnull
+  public static JSInvocation windowSetInterval ()
+  {
+    return window ().invoke ("setInterval");
+  }
+
+  @Nonnull
+  public static JSInvocation windowSetTimeout ()
+  {
+    return window ().invoke ("setTimeout");
+  }
+
+  @Nonnull
   public static JSFieldRef windowStatus ()
   {
     return window ().ref ("status");
+  }
+
+  @Nonnull
+  public static JSFieldRef windowTop ()
+  {
+    return window ().ref ("top");
   }
 
   @Nonnull
