@@ -72,9 +72,21 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
     this (aRF.getFieldName (), aRF.isChecked ());
   }
 
+  public HCRadioButton (@Nonnull final IHCRequestFieldBoolean aRF, @Nullable final String sValue)
+  {
+    this (aRF);
+    setValue (sValue);
+  }
+
   public HCRadioButton (@Nonnull final IHCRequestField aRF)
   {
     this (aRF.getFieldName (), aRF.getRequestValue ());
+  }
+
+  public HCRadioButton (@Nonnull final IHCRequestField aRF, final boolean bChecked)
+  {
+    this (aRF);
+    setChecked (bChecked);
   }
 
   @Nullable
