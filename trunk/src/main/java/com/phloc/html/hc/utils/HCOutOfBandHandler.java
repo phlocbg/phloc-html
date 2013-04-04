@@ -37,6 +37,7 @@ import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html.HCScriptOnDocumentReady;
+import com.phloc.html.hc.html.HCStyle;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
@@ -150,8 +151,8 @@ public final class HCOutOfBandHandler
   }
 
   /**
-   * Merge all inline JS elements contained in aSourceOutOfBandNodes into one
-   * script elements
+   * Merge all inline CSS and JS elements contained in aSourceOutOfBandNodes
+   * into one script elements
    * 
    * @param aSourceOutOfBandNodes
    *        Source list of OOB nodes. May not be <code>null</code>.
@@ -160,10 +161,11 @@ public final class HCOutOfBandHandler
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> mergeOutOfBandJS (@Nonnull final List <IHCNode> aSourceOutOfBandNodes)
+  public static List <IHCNode> mergeOutOfBandInlineCSSAndJS (@Nonnull final List <IHCNode> aSourceOutOfBandNodes)
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
 
+    final StringBuilder aInlineCSS = new StringBuilder ();
     final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
     for (final IHCNode aOOBNode : aSourceOutOfBandNodes)
@@ -178,8 +180,18 @@ public final class HCOutOfBandHandler
           aInlineJS.append (((HCScript) aOOBNode).getJSCodeProvider ());
         }
         else
-          ret.add (aOOBNode);
+          if (aOOBNode instanceof HCStyle && ((HCStyle) aOOBNode).hasNoMediaOrAll ())
+          {
+            // Merge only inline CSS nodes, that are media-independent
+            aInlineCSS.append (((HCStyle) aOOBNode).getStyleContent ());
+          }
+          else
+            ret.add (aOOBNode);
     }
+
+    // Add all inline CSS
+    if (aInlineCSS.length () > 0)
+      ret.add (new HCStyle (aInlineCSS.toString ()));
 
     // on document ready always as last inline JS!
     if (!aOnDocumentReadyJS.isEmpty ())
