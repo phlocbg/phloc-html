@@ -261,7 +261,7 @@ public class HCHead extends AbstractHCElement <HCHead>
     if (aUnwrappedNode instanceof IHCCSSNode)
     {
       // Special case
-      if (aUnwrappedNode instanceof HCLink && !EHCLinkType.STYLESHEET.equals (((HCLink) aUnwrappedNode).getRel ()))
+      if (aUnwrappedNode instanceof HCLink && !((HCLink) aUnwrappedNode).isCSSLink ())
         return false;
       return true;
     }

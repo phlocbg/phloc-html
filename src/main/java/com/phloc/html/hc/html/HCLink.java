@@ -64,6 +64,15 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     return false;
   }
 
+  /**
+   * @return <code>true</code> if this &lt;link>-element is a CSS Stylesheet,
+   *         <code>false</code> if not
+   */
+  public boolean isCSSLink ()
+  {
+    return EHCLinkType.STYLESHEET.equals (m_aRel);
+  }
+
   @Nullable
   public IHCLinkType getRel ()
   {

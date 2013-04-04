@@ -38,6 +38,7 @@ package com.phloc.html.hc.html;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -162,6 +163,43 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     return this;
   }
 
+  /**
+   * Check if the passed medium is explicitly specified
+   * 
+   * @param eMedium
+   *        The medium to be checked. May be <code>null</code>.
+   * @return <code>true</code> if it is contained, <code>false</code> otherwise
+   */
+  public boolean containsMedium (@Nullable final ECSSMedium eMedium)
+  {
+    return m_aMediaList != null && m_aMediaList.containsMedium (eMedium);
+  }
+
+  @Nonnegative
+  public int getMediaCount ()
+  {
+    return m_aMediaList == null ? 0 : m_aMediaList.size ();
+  }
+
+  public boolean hasAnyMedia ()
+  {
+    return m_aMediaList != null && m_aMediaList.hasAnyMedia ();
+  }
+
+  public boolean hasNoMedia ()
+  {
+    return m_aMediaList == null || !m_aMediaList.hasAnyMedia ();
+  }
+
+  /**
+   * @return <code>true</code> if no explicit media is defined or if
+   *         {@link ECSSMedium#ALL} is contained.
+   */
+  public boolean hasNoMediaOrAll ()
+  {
+    return hasNoMedia () || containsMedium (ECSSMedium.ALL);
+  }
+
   @Nullable
   public String getStyleContent ()
   {
@@ -213,7 +251,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   {
     super.applyProperties (aElement, aConversionSettings);
     aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    if (m_aMediaList != null && m_aMediaList.hasAnyMedia ())
+    if (hasAnyMedia ())
       aElement.setAttribute (CHTMLAttributes.MEDIA, m_aMediaList.getMediaString ());
     setInlineStyle (aElement, m_sContent, m_eMode);
   }
