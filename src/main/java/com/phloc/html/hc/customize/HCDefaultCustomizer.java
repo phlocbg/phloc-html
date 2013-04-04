@@ -58,13 +58,12 @@ import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
-import com.phloc.html.hc.html.HCScriptOnDocumentReady;
 import com.phloc.html.hc.impl.HCEntityNode;
+import com.phloc.html.hc.utils.HCOutOfBandHandler;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSInvocation;
 import com.phloc.html.js.builder.jquery.JQuery;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 // ESCA-JAVA0116:
 /**
@@ -227,31 +226,6 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     }
   }
 
-  public static void mergeOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
-                                          @Nonnull final List <IHCNode> aMergedOOBNodes)
-  {
-    final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
-    final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
-    for (final IHCNode aOOBNode : aOutOfBandNodes)
-    {
-      if (aOOBNode instanceof HCScriptOnDocumentReady)
-        aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
-      else
-        if (aOOBNode instanceof HCScript)
-          aInlineJS.append (((HCScript) aOOBNode).getJSCodeProvider ());
-        else
-          aMergedOOBNodes.add (aOOBNode);
-    }
-
-    // on document ready always as last inline JS!
-    if (!aOnDocumentReadyJS.isEmpty ())
-      aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
-
-    // Finally add the inline JS
-    if (!aInlineJS.isEmpty ())
-      aMergedOOBNodes.add (new HCScript (aInlineJS));
-  }
-
   /**
    * Check if the passed out-of-band node belongs to the body or to the head.
    * 
@@ -288,8 +262,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     aMergedOOBNodes.addAll (aHead.getAllJSNodes ());
     aHead.removeAllJS ();
 
-    // First assemble
-    mergeOutOfBandNodes (aOutOfBandNodes, aMergedOOBNodes);
+    // First merge all JS
+    HCOutOfBandHandler.mergeOutOfBandJS (aOutOfBandNodes, aMergedOOBNodes);
 
     // And now move either to head or body
     for (final IHCNode aNode : aMergedOOBNodes)

@@ -33,6 +33,10 @@ import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
+import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.HCScriptOnDocumentReady;
+import com.phloc.html.js.builder.jquery.JQuery;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
  * This class is used to centrally handle the out-of-band nodes.
@@ -141,5 +145,51 @@ public final class HCOutOfBandHandler
       _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
       s_aLogger.info ("--- +" + (aTargetList.size () - n) + " for " + aParentElement.getClass ().getSimpleName ());
     }
+  }
+
+  /**
+   * Merge all inline JS elements contained in aSourceOutOfBandNodes into one
+   * script element in aMergedOOBNodes
+   * 
+   * @param aSourceOutOfBandNodes
+   *        Source list of OOB nodes. May not be <code>null</code>.
+   * @param aMergedOOBNodes
+   *        Target list. After the call to this method, the list contains all
+   *        source nodes and at last one JS inline node (HCScript).
+   * @return The number of merged nodes. Always &ge; 0.
+   */
+  @Nonnegative
+  public static int mergeOutOfBandJS (@Nonnull final List <IHCNode> aSourceOutOfBandNodes,
+                                      @Nonnull final List <IHCNode> aMergedOOBNodes)
+  {
+    int nMerged = 0;
+    final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
+    for (final IHCNode aOOBNode : aSourceOutOfBandNodes)
+    {
+      if (aOOBNode instanceof HCScriptOnDocumentReady)
+      {
+        aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
+        nMerged++;
+      }
+      else
+        if (aOOBNode instanceof HCScript)
+        {
+          aInlineJS.append (((HCScript) aOOBNode).getJSCodeProvider ());
+          nMerged++;
+        }
+        else
+          aMergedOOBNodes.add (aOOBNode);
+    }
+
+    // on document ready always as last inline JS!
+    if (!aOnDocumentReadyJS.isEmpty ())
+      aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
+
+    // Finally add the inline JS
+    if (!aInlineJS.isEmpty ())
+      aMergedOOBNodes.add (new HCScript (aInlineJS));
+
+    return nMerged;
   }
 }
