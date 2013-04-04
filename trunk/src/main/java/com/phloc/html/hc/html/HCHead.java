@@ -253,7 +253,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   // CSS handling
   //
 
-  public static boolean isValidCSSNode (@Nonnull final IHCNode aNode)
+  public static boolean isValidCSSNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
 
@@ -301,11 +301,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @ReturnsMutableCopy
   public List <IHCNode> getAllCSSNodes ()
   {
-    final List <IHCNode> ret = new ArrayList <IHCNode> ();
-    for (final Object aObj : m_aCSS)
-      if (aObj instanceof IHCNode)
-        ret.add ((IHCNode) aObj);
-    return ret;
+    return ContainerHelper.newList (m_aCSS);
   }
 
   @Nonnull
@@ -319,7 +315,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   // JS handling
   //
 
-  public static boolean isValidJSNode (@Nonnull final IHCNode aNode)
+  public static boolean isValidJSNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
 
@@ -378,11 +374,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @ReturnsMutableCopy
   public List <IHCNode> getAllJSNodes ()
   {
-    final List <IHCNode> ret = new ArrayList <IHCNode> ();
-    for (final Object aObj : m_aJS)
-      if (aObj instanceof IHCNode)
-        ret.add ((IHCNode) aObj);
-    return ret;
+    return ContainerHelper.newList (m_aJS);
   }
 
   @Nonnull

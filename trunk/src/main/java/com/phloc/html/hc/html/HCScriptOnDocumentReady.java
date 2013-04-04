@@ -24,8 +24,8 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.jquery.JQuery;
 
 /**
- * Regular inline JS script elements with the special semantics, that the
- * contained code will be collected
+ * Regular inline JS script elements with the special semantics, that stuff will
+ * be executed on document.ready. This requires jQuery to be present!
  * 
  * @author philip
  */
@@ -40,6 +40,9 @@ public class HCScriptOnDocumentReady extends HCScript
     m_aOnDocumentReadyCode = aOnDocumentReadyCode;
   }
 
+  /**
+   * @return The contained code, to be executed on document.ready
+   */
   @Nonnull
   public IJSCodeProvider getOnDocumentReadyCode ()
   {
