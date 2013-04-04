@@ -49,12 +49,11 @@ public class HCConversionSettings implements IHCConversionSettings
 
   private final EHTMLVersion m_eHTMLVersion;
   private final String m_sHTMLNamespaceURI;
-  private XMLWriterSettings m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML);
-  private CSSWriterSettings m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION,
-                                                                          !DEFAULT_INDENT_AND_ALIGN_CSS);
-  private boolean m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
-  private boolean m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
-  private IHCCustomizer m_aCustomizer = new HCDefaultCustomizer ();
+  private XMLWriterSettings m_aXMLWriterSettings;
+  private CSSWriterSettings m_aCSSWriterSettings;
+  private boolean m_bConsistencyChecksEnabled;
+  private boolean m_bExtractOutOfBandNodes;
+  private IHCCustomizer m_aCustomizer;
 
   /**
    * Constructor
@@ -68,10 +67,16 @@ public class HCConversionSettings implements IHCConversionSettings
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
     m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
+    m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML);
+    m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION, !DEFAULT_INDENT_AND_ALIGN_CSS);
+    m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
+    m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
+    m_aCustomizer = new HCDefaultCustomizer ();
   }
 
   /**
-   * Copy ctor.
+   * Copy ctor. Also creates a copy of the {@link XMLWriterSettings} and the
+   * {@link CSSWriterSettings}.
    * 
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
@@ -82,7 +87,8 @@ public class HCConversionSettings implements IHCConversionSettings
   }
 
   /**
-   * Kind of copy ctor.
+   * Kind of copy ctor. Also creates a copy of the {@link XMLWriterSettings} and
+   * the {@link CSSWriterSettings}.
    * 
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
