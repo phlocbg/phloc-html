@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCHasChildren;
@@ -149,20 +151,19 @@ public final class HCOutOfBandHandler
 
   /**
    * Merge all inline JS elements contained in aSourceOutOfBandNodes into one
-   * script element in aMergedOOBNodes
+   * script elements
    * 
    * @param aSourceOutOfBandNodes
    *        Source list of OOB nodes. May not be <code>null</code>.
-   * @param aMergedOOBNodes
-   *        Target list. After the call to this method, the list contains all
-   *        source nodes and at last one JS inline node (HCScript).
-   * @return The number of merged nodes. Always &ge; 0.
+   * @return Target list. It contains all non-script nodes and at last one JS
+   *         inline node (HCScript).
    */
-  @Nonnegative
-  public static int mergeOutOfBandJS (@Nonnull final List <IHCNode> aSourceOutOfBandNodes,
-                                      @Nonnull final List <IHCNode> aMergedOOBNodes)
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCNode> mergeOutOfBandJS (@Nonnull final List <IHCNode> aSourceOutOfBandNodes)
   {
-    int nMerged = 0;
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
+
     final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
     for (final IHCNode aOOBNode : aSourceOutOfBandNodes)
@@ -170,16 +171,14 @@ public final class HCOutOfBandHandler
       if (aOOBNode instanceof HCScriptOnDocumentReady)
       {
         aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
-        nMerged++;
       }
       else
         if (aOOBNode instanceof HCScript)
         {
           aInlineJS.append (((HCScript) aOOBNode).getJSCodeProvider ());
-          nMerged++;
         }
         else
-          aMergedOOBNodes.add (aOOBNode);
+          ret.add (aOOBNode);
     }
 
     // on document ready always as last inline JS!
@@ -188,8 +187,8 @@ public final class HCOutOfBandHandler
 
     // Finally add the inline JS
     if (!aInlineJS.isEmpty ())
-      aMergedOOBNodes.add (new HCScript (aInlineJS));
+      ret.add (new HCScript (aInlineJS));
 
-    return nMerged;
+    return ret;
   }
 }

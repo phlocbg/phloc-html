@@ -106,7 +106,7 @@ public class HCConversionSettings implements IHCConversionSettings
     m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
     m_aCSSWriterSettings = new CSSWriterSettings (aBase.getCSSWriterSettings ());
     m_bConsistencyChecksEnabled = aBase.areConsistencyChecksEnabled ();
-    m_bExtractOutOfBandNodes = aBase.extractOutOfBandNodes ();
+    m_bExtractOutOfBandNodes = aBase.isExtractOutOfBandNodes ();
     m_aCustomizer = aBase.getCustomizer ();
   }
 
@@ -202,7 +202,16 @@ public class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
+  /**
+   * @deprecated Use {@link #isExtractOutOfBandNodes()} instead
+   */
+  @Deprecated
   public boolean extractOutOfBandNodes ()
+  {
+    return isExtractOutOfBandNodes ();
+  }
+
+  public boolean isExtractOutOfBandNodes ()
   {
     return m_bExtractOutOfBandNodes;
   }

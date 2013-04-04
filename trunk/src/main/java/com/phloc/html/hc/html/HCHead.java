@@ -305,6 +305,15 @@ public class HCHead extends AbstractHCElement <HCHead>
   }
 
   @Nonnull
+  @ReturnsMutableCopy
+  public List <IHCNode> getAllAndRemoveAllCSSNodes ()
+  {
+    final List <IHCNode> ret = ContainerHelper.newList (m_aCSS);
+    m_aCSS.clear ();
+    return ret;
+  }
+
+  @Nonnull
   public HCHead removeAllCSS ()
   {
     m_aCSS.clear ();
@@ -375,6 +384,15 @@ public class HCHead extends AbstractHCElement <HCHead>
   public List <IHCNode> getAllJSNodes ()
   {
     return ContainerHelper.newList (m_aJS);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IHCNode> getAllAndRemoveAllJSNodes ()
+  {
+    final List <IHCNode> ret = ContainerHelper.newList (m_aJS);
+    m_aJS.clear ();
+    return ret;
   }
 
   @Nonnull

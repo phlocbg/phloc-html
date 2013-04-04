@@ -150,7 +150,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     if (aConversionSettings == null)
       throw new NullPointerException ("ConversionSettings");
 
-    if (aConversionSettings.extractOutOfBandNodes ())
+    if (aConversionSettings.isExtractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
       final List <IHCNode> aExtractedOutOfBandNodes = new ArrayList <IHCNode> ();
