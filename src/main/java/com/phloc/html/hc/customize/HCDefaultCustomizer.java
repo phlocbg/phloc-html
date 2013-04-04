@@ -256,14 +256,15 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aBody == null)
       throw new NullPointerException ("Body");
 
-    // Add all existing JS nodes from the head, as <script> is known to be out
-    // of band
-    final List <IHCNode> aMergedOOBNodes = new ArrayList <IHCNode> ();
-    aMergedOOBNodes.addAll (aHead.getAllJSNodes ());
-    aHead.removeAllJS ();
+    // Add all existing JS and CSS nodes from the head, as they are known to be
+    // out-of-band
+    final List <IHCNode> aCompleteOOBList = new ArrayList <IHCNode> ();
+    aCompleteOOBList.addAll (aHead.getAllAndRemoveAllJSNodes ());
+    aCompleteOOBList.addAll (aHead.getAllAndRemoveAllCSSNodes ());
+    aCompleteOOBList.addAll (aOutOfBandNodes);
 
     // First merge all JS
-    HCOutOfBandHandler.mergeOutOfBandJS (aOutOfBandNodes, aMergedOOBNodes);
+    final List <IHCNode> aMergedOOBNodes = HCOutOfBandHandler.mergeOutOfBandJS (aCompleteOOBList);
 
     // And now move either to head or body
     for (final IHCNode aNode : aMergedOOBNodes)

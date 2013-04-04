@@ -61,8 +61,17 @@ public interface IHCConversionSettingsToNode
    * @return <code>true</code> if out-of-band nodes should be extracted,
    *         <code>false</code> if not. By default <code>true</code> is
    *         returned.
+   * @deprecated Use {@link #isExtractOutOfBandNodes()} instead
    */
+  @Deprecated
   boolean extractOutOfBandNodes ();
+
+  /**
+   * @return <code>true</code> if out-of-band nodes should be extracted,
+   *         <code>false</code> if not. By default <code>true</code> is
+   *         returned.
+   */
+  boolean isExtractOutOfBandNodes ();
 
   /**
    * @return The current customizer to be used. Never <code>null</code>. By
