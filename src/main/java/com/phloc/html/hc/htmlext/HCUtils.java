@@ -405,12 +405,12 @@ public final class HCUtils
    * Resolve all wrappings via {@link IHCWrappingNode} of the passed node.
    * 
    * @param aHCNode
-   *        The node to be unwrapped. Never <code>null</code>.
+   *        The node to be unwrapped. May be <code>null</code>.
    * @return The unwrapped node. May be the same as the parameter, if the node
    *         is not wrapped. Never <code>null</code>.
    */
-  @Nonnull
-  public static IHCNode getUnwrappedNode (@Nonnull final IHCNode aHCNode)
+  @Nullable
+  public static IHCNode getUnwrappedNode (@Nullable final IHCNode aHCNode)
   {
     if (aHCNode instanceof IHCWrappingNode)
       return getUnwrappedNode (((IHCWrappingNode) aHCNode).getWrappedNode ());

@@ -228,7 +228,9 @@ public final class HCSettings
   public static String getAsHTMLStringWithoutNamespaces (@Nonnull final IHCNode aHCNode, final boolean bIndentAndAlign)
   {
     final IHCConversionSettings aCS = getConversionSettings (bIndentAndAlign);
+    // Create a copy
     final HCConversionSettings aRealCS = new HCConversionSettings (aCS);
+    // And modify the copied XML settings
     aRealCS.getXMLWriterSettings ().setEmitNamespaces (false);
     return getAsHTMLString (aHCNode, aRealCS);
   }

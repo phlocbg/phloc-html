@@ -227,18 +227,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     }
   }
 
-  @Nonnull
-  @OverrideOnDemand
-  protected List <IHCNode> assembleOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
-                                                   @Nonnull final HCHead aHead)
+  public static void mergeOutOfBandNodes (@Nonnull final List <IHCNode> aOutOfBandNodes,
+                                          @Nonnull final List <IHCNode> aMergedOOBNodes)
   {
-    final List <IHCNode> aNodes = new ArrayList <IHCNode> ();
-
-    // Add all existing JS nodes from the head, as <script> is known to be out
-    // of band
-    aNodes.addAll (aHead.getAllJSNodes ());
-    aHead.removeAllJS ();
-
     final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
     for (final IHCNode aOOBNode : aOutOfBandNodes)
@@ -247,19 +238,18 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
         aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aOOBNode).getOnDocumentReadyCode ());
       else
         if (aOOBNode instanceof HCScript)
-          aInlineJS.append ((HCScript) aOOBNode);
+          aInlineJS.append (((HCScript) aOOBNode).getJSCodeProvider ());
         else
-          aNodes.add (aOOBNode);
+          aMergedOOBNodes.add (aOOBNode);
     }
 
-    // on document ready always as last!
+    // on document ready always as last inline JS!
     if (!aOnDocumentReadyJS.isEmpty ())
       aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
 
+    // Finally add the inline JS
     if (!aInlineJS.isEmpty ())
-      aNodes.add (new HCScript (aInlineJS));
-
-    return aNodes;
+      aMergedOOBNodes.add (new HCScript (aInlineJS));
   }
 
   /**
@@ -285,11 +275,24 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {
+    if (aOutOfBandNodes == null)
+      throw new NullPointerException ("OutOfBandNodes");
+    if (aHead == null)
+      throw new NullPointerException ("Head");
+    if (aBody == null)
+      throw new NullPointerException ("Body");
+
+    // Add all existing JS nodes from the head, as <script> is known to be out
+    // of band
+    final List <IHCNode> aMergedOOBNodes = new ArrayList <IHCNode> ();
+    aMergedOOBNodes.addAll (aHead.getAllJSNodes ());
+    aHead.removeAllJS ();
+
     // First assemble
-    final List <IHCNode> aNodes = assembleOutOfBandNodes (aOutOfBandNodes, aHead);
+    mergeOutOfBandNodes (aOutOfBandNodes, aMergedOOBNodes);
 
     // And now move either to head or body
-    for (final IHCNode aNode : aNodes)
+    for (final IHCNode aNode : aMergedOOBNodes)
     {
       if (isOutOfBandBodyNode (aNode))
       {
@@ -306,7 +309,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
             aHead.addJS (aNode);
           else
             if (aNode instanceof HCLink)
+            {
+              // Manually add all non-stylesheet LINK elements
               aHead.addLink ((HCLink) aNode);
+            }
             else
               s_aLogger.error ("Found illegal out-of-band head node: " + aNode);
       }
