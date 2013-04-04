@@ -172,9 +172,8 @@ public final class HCSettings
   }
 
   /**
-   * Convert the passed HC node to an HTML string using the conversion settings
-   * factory. Indent and align status is determined from
-   * {@link GlobalDebug#isDebugMode()}
+   * Convert the passed HC node to an HTML string. Indent and align status is
+   * determined from {@link GlobalDebug#isDebugMode()}
    * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
@@ -200,6 +199,38 @@ public final class HCSettings
   public static String getAsHTMLString (@Nonnull final IHCNode aHCNode, final boolean bIndentAndAlign)
   {
     return getAsHTMLString (aHCNode, getConversionSettings (bIndentAndAlign));
+  }
+
+  /**
+   * Convert the passed HC node to an HTML string without namespaces. Indent and
+   * align status is determined from {@link GlobalDebug#isDebugMode()}
+   * 
+   * @param aHCNode
+   *        The node to be converted. May not be <code>null</code>.
+   * @return The node as XML with or without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLStringWithoutNamespaces (@Nonnull final IHCNode aHCNode)
+  {
+    return getAsHTMLStringWithoutNamespaces (aHCNode, GlobalDebug.isDebugMode ());
+  }
+
+  /**
+   * Convert the passed HC node to an HTML string without namespaces.
+   * 
+   * @param aHCNode
+   *        The node to be converted. May not be <code>null</code>.
+   * @param bIndentAndAlign
+   *        Indent and align?
+   * @return The node as XML with or without indentation.
+   */
+  @Nonnull
+  public static String getAsHTMLStringWithoutNamespaces (@Nonnull final IHCNode aHCNode, final boolean bIndentAndAlign)
+  {
+    final IHCConversionSettings aCS = getConversionSettings (bIndentAndAlign);
+    final HCConversionSettings aRealCS = new HCConversionSettings (aCS);
+    aRealCS.getXMLWriterSettings ().setEmitNamespaces (false);
+    return getAsHTMLString (aHCNode, aRealCS);
   }
 
   /**
