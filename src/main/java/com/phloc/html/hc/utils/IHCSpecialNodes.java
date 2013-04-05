@@ -23,7 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.html.js.provider.CollectingJSCodeProvider;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * This interface represents all special nodes that can occur in an HTML
@@ -40,27 +40,27 @@ public interface IHCSpecialNodes extends Serializable
    * @return <code>true</code> if CSS files are present, <code>false</code> if
    *         not
    */
-  boolean hasCSSFiles ();
+  boolean hasExternalCSSs ();
 
   /**
    * @return All CSS files. Never <code>null</code>.
    */
   @Nonnull
   @ReturnsMutableCopy
-  List <String> getAllCSSFiles ();
+  List <String> getAllExternalCSSs ();
 
   /**
    * @return <code>true</code> if JS files are present, <code>false</code> if
    *         not
    */
-  boolean hasJSFiles ();
+  boolean hasExternalJSs ();
 
   /**
    * @return All JS files. Never <code>null</code>.
    */
   @Nonnull
   @ReturnsMutableCopy
-  List <String> getAllJSFiles ();
+  List <String> getAllExternalJSs ();
 
   /**
    * @return <code>true</code> if inline JS is present, <code>false</code> if
@@ -73,5 +73,5 @@ public interface IHCSpecialNodes extends Serializable
    */
   @Nonnull
   @ReturnsMutableCopy
-  CollectingJSCodeProvider getInlineJS ();
+  IJSCodeProvider getInlineJS ();
 }
