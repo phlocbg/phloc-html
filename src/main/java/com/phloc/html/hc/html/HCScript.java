@@ -37,7 +37,7 @@ import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
- * This class represents an HTML &lt;script&gt; element with inline content.
+ * This class represents an HTML &lt;script&gt; element with inline JS content.
  * 
  * @author philip
  * @see HCScriptFile
