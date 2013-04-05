@@ -402,12 +402,14 @@ public final class HCUtils
   }
 
   /**
-   * Resolve all wrappings via {@link IHCWrappingNode} of the passed node.
+   * Resolve all wrappings via {@link IHCWrappingNode} of the passed node. This
+   * is usually either an HCOutOfBandNode or a HCConditionalCommentNode.
    * 
    * @param aHCNode
    *        The node to be unwrapped. May be <code>null</code>.
    * @return The unwrapped node. May be the same as the parameter, if the node
-   *         is not wrapped. Never <code>null</code>.
+   *         is not wrapped. May be <code>null</code> if the parameter node is
+   *         <code>null</code>.
    */
   @Nullable
   public static IHCNode getUnwrappedNode (@Nullable final IHCNode aHCNode)
