@@ -55,7 +55,7 @@ public final class HCSpecialNodeHandler
   {}
 
   /**
-   * Check if the passed node is a CSS node.
+   * Check if the passed node is a CSS node after unwrapping.
    * 
    * @param aNode
    *        The node to be checked - may be <code>null</code>.
@@ -65,17 +65,42 @@ public final class HCSpecialNodeHandler
   public static boolean isCSSNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+    return isDirectCSSNode (aUnwrappedNode);
+  }
 
+  /**
+   * Check if the passed node is a CSS node.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link IHCCSSNode} (and
+   *         not a special case).
+   */
+  public static boolean isDirectCSSNode (@Nullable final IHCNode aNode)
+  {
     // Direct CSS node?
-    if (aUnwrappedNode instanceof IHCCSSNode)
+    if (aNode instanceof IHCCSSNode)
     {
       // Special case
-      if (aUnwrappedNode instanceof HCLink && !((HCLink) aUnwrappedNode).isCSSLink ())
+      if (aNode instanceof HCLink && !((HCLink) aNode).isCSSLink ())
         return false;
       return true;
     }
 
     return false;
+  }
+
+  /**
+   * Check if the passed node is an inline CSS node after unwrapping.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link HCStyle}.
+   */
+  public static boolean isCSSInlineNode (@Nullable final IHCNode aNode)
+  {
+    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
+    return isDirectCSSInlineNode (aUnwrappedNode);
   }
 
   /**
@@ -85,12 +110,23 @@ public final class HCSpecialNodeHandler
    *        The node to be checked - may be <code>null</code>.
    * @return <code>true</code> if the node implements {@link HCStyle}.
    */
-  public static boolean isCSSInlineNode (@Nullable final IHCNode aNode)
+  public static boolean isDirectCSSInlineNode (@Nullable final IHCNode aNode)
+  {
+    // Inline CSS node?
+    return aNode instanceof HCStyle;
+  }
+
+  /**
+   * Check if the passed node is a file CSS node after unwrapping.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link HCStyle}.
+   */
+  public static boolean isCSSFileNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // Inline CSS node?
-    return aUnwrappedNode instanceof HCStyle;
+    return isDirectCSSFileNode (aUnwrappedNode);
   }
 
   /**
@@ -100,12 +136,23 @@ public final class HCSpecialNodeHandler
    *        The node to be checked - may be <code>null</code>.
    * @return <code>true</code> if the node implements {@link HCStyle}.
    */
-  public static boolean isCSSFileNode (@Nullable final IHCNode aNode)
+  public static boolean isDirectCSSFileNode (@Nullable final IHCNode aNode)
+  {
+    // File CSS node?
+    return aNode instanceof HCLink && ((HCLink) aNode).isCSSLink ();
+  }
+
+  /**
+   * Check if the passed node is a JS node after unwrapping.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link IHCJSNode}.
+   */
+  public static boolean isJSNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // File CSS node?
-    return aUnwrappedNode instanceof HCLink && ((HCLink) aUnwrappedNode).isCSSLink ();
+    return isDirectJSNode (aUnwrappedNode);
   }
 
   /**
@@ -115,12 +162,23 @@ public final class HCSpecialNodeHandler
    *        The node to be checked - may be <code>null</code>.
    * @return <code>true</code> if the node implements {@link IHCJSNode}.
    */
-  public static boolean isJSNode (@Nullable final IHCNode aNode)
+  public static boolean isDirectJSNode (@Nullable final IHCNode aNode)
+  {
+    // Direct JS node?
+    return aNode instanceof IHCJSNode;
+  }
+
+  /**
+   * Check if the passed node is an inline JS node after unwrapping.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link HCScript}.
+   */
+  public static boolean isJSInlineNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // Direct JS node?
-    return aUnwrappedNode instanceof IHCJSNode;
+    return isDirectJSInlineNode (aUnwrappedNode);
   }
 
   /**
@@ -130,12 +188,23 @@ public final class HCSpecialNodeHandler
    *        The node to be checked - may be <code>null</code>.
    * @return <code>true</code> if the node implements {@link HCScript}.
    */
-  public static boolean isJSInlineNode (@Nullable final IHCNode aNode)
+  public static boolean isDirectJSInlineNode (@Nullable final IHCNode aNode)
+  {
+    // Inline JS node?
+    return aNode instanceof HCScript;
+  }
+
+  /**
+   * Check if the passed node is a file JS node after unwrapping.
+   * 
+   * @param aNode
+   *        The node to be checked - may be <code>null</code>.
+   * @return <code>true</code> if the node implements {@link HCScriptFile}.
+   */
+  public static boolean isJSFileNode (@Nullable final IHCNode aNode)
   {
     final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // Inline JS node?
-    return aUnwrappedNode instanceof HCScript;
+    return isDirectJSFileNode (aUnwrappedNode);
   }
 
   /**
@@ -145,12 +214,10 @@ public final class HCSpecialNodeHandler
    *        The node to be checked - may be <code>null</code>.
    * @return <code>true</code> if the node implements {@link HCScriptFile}.
    */
-  public static boolean isJSFileNode (@Nullable final IHCNode aNode)
+  public static boolean isDirectJSFileNode (@Nullable final IHCNode aNode)
   {
-    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
     // File JS node?
-    return aUnwrappedNode instanceof HCScriptFile;
+    return aNode instanceof HCScriptFile;
   }
 
   /**
