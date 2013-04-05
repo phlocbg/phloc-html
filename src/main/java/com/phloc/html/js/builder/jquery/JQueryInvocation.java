@@ -26,6 +26,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
+import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
 
@@ -1125,6 +1126,18 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   public JQueryInvocation ready ()
   {
     return jqinvoke ("ready");
+  }
+
+  /**
+   * @param aCallback
+   *        The callback to be invoked on document.ready() May not be
+   *        <code>null</code>.
+   * @return The invocation of the jQuery function <code>ready()</code>
+   */
+  @Nonnull
+  public JQueryInvocation ready (@Nonnull final JSAnonymousFunction aCallback)
+  {
+    return ready ().arg (aCallback);
   }
 
   /**

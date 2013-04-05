@@ -276,6 +276,28 @@ public final class JQuery
   }
 
   /**
+   * @param sEval
+   *        JS code to be evaluated
+   * @return <code>$.globalEval</code>
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval (@Nonnull final String sEval)
+  {
+    return globalEval ().arg (sEval);
+  }
+
+  /**
+   * @param aEval
+   *        JS code to be evaluated
+   * @return <code>$.globalEval</code>
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval (@Nonnull final IJSExpression aEval)
+  {
+    return globalEval ().arg (aEval);
+  }
+
+  /**
    * @return <code>$.grep</code>
    */
   @Nonnull
@@ -861,7 +883,7 @@ public final class JQuery
   public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
   {
     final JSAnonymousFunction aAnonFunction = new JSAnonymousFunction ();
-    final JQueryInvocation aInvocation = jQueryDocument ().ready ().arg (aAnonFunction);
+    final JQueryInvocation aInvocation = jQueryDocument ().ready (aAnonFunction);
     return ReadonlyPair.create (aInvocation, aAnonFunction);
   }
 
