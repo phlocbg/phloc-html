@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCHasChildren;
@@ -118,22 +120,22 @@ public final class HCOutOfBandHandler
   /**
    * Extract all out-of-band child nodes for the passed element. Ensure to call
    * {@link com.phloc.html.hc.IHCNode#beforeConvertToNode(com.phloc.html.hc.conversion.IHCConversionSettingsToNode)}
-   * before calling this method!
+   * before calling this method! All out-of-band nodes are detached from their
+   * parent so that the original node can be reused.
    * 
    * @param aParentElement
    *        The parent element to extract the nodes from. May not be
    *        <code>null</code>.
-   * @param aTargetList
-   *        The list to add the out-of-band nodes to. May not be
-   *        <code>null</code>.
+   * @return The list with out-of-band nodes. Never <code>null</code>.
    */
-  public static void recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
-                                                     @Nonnull final List <IHCNode> aTargetList)
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCNode> recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement)
   {
     if (aParentElement == null)
       throw new NullPointerException ("parentElement");
-    if (aTargetList == null)
-      throw new NullPointerException ("targetList");
+
+    final List <IHCNode> aTargetList = new ArrayList <IHCNode> ();
 
     if (true)
     {
@@ -148,5 +150,7 @@ public final class HCOutOfBandHandler
       _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
       s_aLogger.info ("--- +" + (aTargetList.size () - n) + " for " + aParentElement.getClass ().getSimpleName ());
     }
+
+    return aTargetList;
   }
 }

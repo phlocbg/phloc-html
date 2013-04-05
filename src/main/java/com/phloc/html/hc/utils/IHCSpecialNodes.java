@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -33,7 +34,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
  * 
  * @author philip
  */
-public interface IHCSpecialNodes
+public interface IHCSpecialNodes extends Serializable
 {
   /**
    * @return <code>true</code> if CSS files are present, <code>false</code> if

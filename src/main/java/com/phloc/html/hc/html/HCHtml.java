@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc.html;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -153,8 +152,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     if (aConversionSettings.isExtractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
-      final List <IHCNode> aExtractedOutOfBandNodes = new ArrayList <IHCNode> ();
-      HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode, aExtractedOutOfBandNodes);
+      final List <IHCNode> aExtractedOutOfBandNodes = HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode);
 
       // Call out-of-band node handler
       aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
