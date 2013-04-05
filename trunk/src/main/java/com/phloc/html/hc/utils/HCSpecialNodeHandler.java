@@ -20,6 +20,7 @@ package com.phloc.html.hc.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -231,8 +232,12 @@ public final class HCSpecialNodeHandler
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> mergeInlineCSSAndJS (@Nonnull final List <IHCNode> aNodes)
+  @CheckReturnValue
+  public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final List <IHCNode> aNodes)
   {
+    if (aNodes == null)
+      throw new NullPointerException ("nodes");
+
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
 
     final StringBuilder aInlineCSS = new StringBuilder ();
@@ -275,6 +280,42 @@ public final class HCSpecialNodeHandler
     // Finally add the inline JS
     if (!aInlineJS.isEmpty ())
       ret.add (new HCScript (aInlineJS));
+
+    return ret;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  @CheckReturnValue
+  public static List <IHCNode> getWithoutSpecialNodes (@Nonnull final List <IHCNode> aNodes,
+                                                       @Nonnull final HCSpecialNodes aSpecialNodes)
+  {
+    if (aNodes == null)
+      throw new NullPointerException ("nodes");
+    if (aSpecialNodes == null)
+      throw new NullPointerException ("specialNodes");
+
+    final List <IHCNode> ret = new ArrayList <IHCNode> ();
+
+    for (final IHCNode aNode : aNodes)
+    {
+      if (isDirectCSSFileNode (aNode))
+      {
+        aSpecialNodes.addCSSFile (((HCLink) aNode).getHrefString ());
+      }
+      else
+        if (isDirectJSFileNode (aNode))
+        {
+          aSpecialNodes.addJSFile (((HCScriptFile) aNode).getSrcString ());
+        }
+        else
+          if (isDirectJSInlineNode (aNode))
+          {
+            aSpecialNodes.addInlineJS (((HCScript) aNode).getJSCodeProvider ());
+          }
+          else
+            ret.add (aNode);
+    }
 
     return ret;
   }

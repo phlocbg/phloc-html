@@ -264,7 +264,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     aCompleteOOBList.addAll (aOutOfBandNodes);
 
     // First merge all JS and CSS nodes
-    final List <IHCNode> aMergedOOBNodes = HCSpecialNodeHandler.mergeInlineCSSAndJS (aCompleteOOBList);
+    final List <IHCNode> aMergedOOBNodes = HCSpecialNodeHandler.getMergedInlineCSSAndJSNodes (aCompleteOOBList);
 
     // And now move either to head or body
     for (final IHCNode aNode : aMergedOOBNodes)

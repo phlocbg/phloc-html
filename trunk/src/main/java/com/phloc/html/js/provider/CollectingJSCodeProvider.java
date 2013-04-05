@@ -23,7 +23,9 @@ import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ICloneable;
 import com.phloc.commons.IHasSize;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -35,7 +37,8 @@ import com.phloc.html.js.IJSCodeProvider;
  * 
  * @author philip
  */
-public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
+@NotThreadSafe
+public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize, ICloneable <CollectingJSCodeProvider>
 {
   private final List <IJSCodeProvider> m_aList = new ArrayList <IJSCodeProvider> ();
 
@@ -97,6 +100,12 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
     for (final IJSCodeProvider aJSCodeProvider : m_aList)
       aSB.append (aJSCodeProvider.getJSCode ());
     return aSB.toString ();
+  }
+
+  @Nonnull
+  public CollectingJSCodeProvider getClone ()
+  {
+    return new CollectingJSCodeProvider (m_aList);
   }
 
   @Override
