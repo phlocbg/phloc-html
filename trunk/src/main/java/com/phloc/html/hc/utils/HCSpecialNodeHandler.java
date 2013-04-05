@@ -305,12 +305,12 @@ public final class HCSpecialNodeHandler
     {
       if (isDirectCSSFileNode (aNode))
       {
-        aSpecialNodes.addCSSFile (((HCLink) aNode).getHrefString ());
+        aSpecialNodes.addExternalCSS (((HCLink) aNode).getHrefString ());
       }
       else
         if (isDirectJSFileNode (aNode))
         {
-          aSpecialNodes.addJSFile (((HCScriptFile) aNode).getSrcString ());
+          aSpecialNodes.addExternalJS (((HCScriptFile) aNode).getSrcString ());
         }
         else
           if (isDirectJSInlineNode (aNode))
