@@ -24,6 +24,7 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSAssocArray;
+import com.phloc.html.js.builder.JSExpr;
 
 /**
  * Utility class handling <code>$.ajax</code>
@@ -40,12 +41,13 @@ public class JQueryAjaxBuilder
   public static final boolean DEFAULT_GLOBAL_EVENTS = true;
 
   // modifier
-  private boolean m_bAsync = DEFAULT_ASYNC;
-  private boolean m_bCache = DEFAULT_CACHE;
+  private IJSExpression m_aAsync;
+  private IJSExpression m_aCache;
   private IJSExpression m_aData;
-  private String m_sDataType;
-  private boolean m_bGlobalEvents = DEFAULT_GLOBAL_EVENTS;
-  private String m_sURL;
+  private IJSExpression m_aDataType;
+  private IJSExpression m_aGlobalEvents;
+  private IJSExpression m_aURL;
+  private IJSExpression m_aType;
 
   // Callbacks
   private IJSExpression m_aCallbackContext;
@@ -57,27 +59,41 @@ public class JQueryAjaxBuilder
   public JQueryAjaxBuilder ()
   {}
 
-  public boolean async ()
+  @Nullable
+  public IJSExpression async ()
   {
-    return m_bAsync;
+    return m_aAsync;
   }
 
   @Nonnull
   public JQueryAjaxBuilder async (final boolean bAsync)
   {
-    m_bAsync = bAsync;
+    return async (JSExpr.lit (bAsync));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder async (@Nullable final IJSExpression aAsync)
+  {
+    m_aAsync = aAsync;
     return this;
   }
 
-  public boolean cache ()
+  @Nullable
+  public IJSExpression cache ()
   {
-    return m_bCache;
+    return m_aCache;
   }
 
   @Nonnull
   public JQueryAjaxBuilder cache (final boolean bCache)
   {
-    m_bCache = bCache;
+    return cache (JSExpr.lit (bCache));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder cache (@Nullable final IJSExpression aCache)
+  {
+    m_aCache = aCache;
     return this;
   }
 
@@ -95,34 +111,47 @@ public class JQueryAjaxBuilder
   }
 
   @Nullable
-  public String dataType ()
+  public IJSExpression dataType ()
   {
-    return m_sDataType;
+    return m_aDataType;
   }
 
   @Nonnull
   public JQueryAjaxBuilder dataType (@Nullable final String sDataType)
   {
-    m_sDataType = sDataType;
+    return dataType (sDataType == null ? null : JSExpr.lit (sDataType));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder dataType (@Nullable final IJSExpression aDataType)
+  {
+    m_aDataType = aDataType;
     return this;
   }
 
-  public boolean global ()
+  @Nullable
+  public IJSExpression global ()
   {
-    return m_bGlobalEvents;
+    return m_aGlobalEvents;
   }
 
   @Nonnull
   public JQueryAjaxBuilder global (final boolean bGlobalEvents)
   {
-    m_bGlobalEvents = bGlobalEvents;
+    return global (JSExpr.lit (bGlobalEvents));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder global (@Nullable final IJSExpression aGlobalEvents)
+  {
+    m_aGlobalEvents = aGlobalEvents;
     return this;
   }
 
   @Nullable
-  public String url ()
+  public IJSExpression url ()
   {
-    return m_sURL;
+    return m_aURL;
   }
 
   @Nonnull
@@ -134,7 +163,32 @@ public class JQueryAjaxBuilder
   @Nonnull
   public JQueryAjaxBuilder url (@Nullable final String sURL)
   {
-    m_sURL = sURL;
+    return url (sURL == null ? null : JSExpr.lit (sURL));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder url (@Nullable final IJSExpression aURL)
+  {
+    m_aURL = aURL;
+    return this;
+  }
+
+  @Nullable
+  public IJSExpression type ()
+  {
+    return m_aType;
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder type (@Nullable final String sType)
+  {
+    return type (sType == null ? null : JSExpr.lit (sType));
+  }
+
+  @Nonnull
+  public JQueryAjaxBuilder type (@Nullable final IJSExpression aType)
+  {
+    m_aType = aType;
     return this;
   }
 
@@ -209,18 +263,20 @@ public class JQueryAjaxBuilder
   public JQueryInvocation build ()
   {
     final JSAssocArray aSettings = new JSAssocArray ();
-    if (m_bAsync != DEFAULT_ASYNC)
-      aSettings.add ("async", m_bAsync);
-    if (m_bCache != DEFAULT_CACHE)
-      aSettings.add ("cache", m_bCache);
+    if (m_aAsync != null)
+      aSettings.add ("async", m_aAsync);
+    if (m_aCache != null)
+      aSettings.add ("cache", m_aCache);
     if (m_aData != null)
       aSettings.add ("data", m_aData);
-    if (m_sDataType != null)
-      aSettings.add ("dataType", m_sDataType);
-    if (m_bGlobalEvents != DEFAULT_GLOBAL_EVENTS)
-      aSettings.add ("global", m_bGlobalEvents);
-    if (m_sURL != null)
-      aSettings.add ("url", m_sURL);
+    if (m_aDataType != null)
+      aSettings.add ("dataType", m_aDataType);
+    if (m_aGlobalEvents != null)
+      aSettings.add ("global", m_aGlobalEvents);
+    if (m_aURL != null)
+      aSettings.add ("url", m_aURL);
+    if (m_aType != null)
+      aSettings.add ("type", m_aType);
 
     // Callbacks
     if (m_aCallbackContext != null)
