@@ -24,9 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.IHCCSSNode;
@@ -49,7 +47,9 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 @NotThreadSafe
 public final class HCSpecialNodeHandler
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCSpecialNodeHandler.class);
+  @PresentForCodeCoverage
+  @SuppressWarnings ("unused")
+  private static final HCSpecialNodeHandler s_aInstance = new HCSpecialNodeHandler ();
 
   private HCSpecialNodeHandler ()
   {}
@@ -175,6 +175,9 @@ public final class HCSpecialNodeHandler
     {
       // Note: do not unwrap the node, because it is not allowed to merge JS/CSS
       // with a conditional comment with JS/CSS without a conditional comment!
+
+      // Check HCScriptOnDocumentReady first, because it is a subclass of
+      // HCScript
       if (aNode instanceof HCScriptOnDocumentReady)
       {
         aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aNode).getOnDocumentReadyCode ());

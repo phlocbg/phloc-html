@@ -28,6 +28,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCHasChildren;
@@ -45,6 +46,10 @@ public final class HCOutOfBandHandler
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCOutOfBandHandler.class);
   private static final Map <String, Boolean> s_aOOBNAnnotationCache = new HashMap <String, Boolean> ();
+
+  @PresentForCodeCoverage
+  @SuppressWarnings ("unused")
+  private static final HCOutOfBandHandler s_aInstance = new HCOutOfBandHandler ();
 
   private HCOutOfBandHandler ()
   {}
