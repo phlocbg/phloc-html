@@ -20,10 +20,9 @@ package com.phloc.html.hc.utils;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
  * This interface represents all special nodes that can occur in an HTML
@@ -51,8 +50,9 @@ public interface IHCSpecialNodes
   List <String> getAllJSFiles ();
 
   /**
-   * @return The inline JS. May be <code>null</code>.
+   * @return The inline JS. May not be <code>null</code>.
    */
-  @Nullable
-  IJSCodeProvider getInlineJS ();
+  @Nonnull
+  @ReturnsMutableCopy
+  CollectingJSCodeProvider getInlineJS ();
 }

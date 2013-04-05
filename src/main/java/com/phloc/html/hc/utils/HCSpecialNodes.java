@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -29,17 +29,19 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
 /**
  * Default implementation of {@link IHCSpecialNodes}.
  * 
  * @author philip
  */
+@NotThreadSafe
 public class HCSpecialNodes implements IHCSpecialNodes
 {
   private final List <String> m_aCSSFiles = new ArrayList <String> ();
   private final List <String> m_aJSFiles = new ArrayList <String> ();
-  private IJSCodeProvider m_aInlineJS;
+  private final CollectingJSCodeProvider m_aInlineJS = new CollectingJSCodeProvider ();
 
   public HCSpecialNodes ()
   {}
@@ -77,20 +79,19 @@ public class HCSpecialNodes implements IHCSpecialNodes
   }
 
   @Nonnull
-  public IHCSpecialNodes setInlineJS (@Nonnull final IJSCodeProvider aInlineJS)
+  public IHCSpecialNodes addInlineJS (@Nonnull final IJSCodeProvider aInlineJS)
   {
     if (aInlineJS == null)
       throw new NullPointerException ("InlineJS");
-    if (m_aInlineJS != null)
-      throw new NullPointerException ("InlineJS is already present!");
-    m_aInlineJS = aInlineJS;
+    m_aInlineJS.append (aInlineJS);
     return this;
   }
 
-  @Nullable
-  public IJSCodeProvider getInlineJS ()
+  @Nonnull
+  @ReturnsMutableCopy
+  public CollectingJSCodeProvider getInlineJS ()
   {
-    return m_aInlineJS;
+    return m_aInlineJS.getClone ();
   }
 
   @Override

@@ -414,9 +414,23 @@ public final class HCUtils
   @Nullable
   public static IHCNode getUnwrappedNode (@Nullable final IHCNode aHCNode)
   {
-    if (aHCNode instanceof IHCWrappingNode)
+    if (isWrappedNode (aHCNode))
       return getUnwrappedNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
 
     return aHCNode;
+  }
+
+  /**
+   * Check if the passed node is a wrapped node by checking if it implements
+   * {@link IHCWrappingNode}.
+   * 
+   * @param aHCNode
+   *        The node to be checked. May be <code>null</code>.
+   * @return <code>true</code> if the node is not <code>null</code> and if it
+   *         implements {@link IHCWrappingNode}.
+   */
+  public static boolean isWrappedNode (@Nullable final IHCNode aHCNode)
+  {
+    return aHCNode instanceof IHCWrappingNode;
   }
 }

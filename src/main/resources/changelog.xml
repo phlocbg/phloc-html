@@ -20,6 +20,16 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2013-04-05" category="api" action="add">
+    <change>
+      <text locale="en">CollectingJSCodeProvider now implements ICloneable</text>
+    </change>
+  </entry>
+  <entry date="2013-04-05" category="api" action="add">
+    <change>
+      <text locale="en">Added new class HCSpecialNodeHandler for JS/CSS node handling</text>
+    </change>
+  </entry>
   <entry date="2013-04-04" category="api" action="add">
     <change>
       <text locale="en">Added new method HCSetting.getAsHTMLStringWithoutNamespaces</text>

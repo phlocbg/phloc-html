@@ -34,7 +34,7 @@ import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.IHCWrappingNode;
+import com.phloc.html.hc.htmlext.HCUtils;
 
 /**
  * This class is used to centrally handle the out-of-band nodes.
@@ -76,8 +76,8 @@ public final class HCOutOfBandHandler
       return true;
 
     // If it is a wrapped node, look into it
-    if (aHCNode instanceof IHCWrappingNode)
-      return isOutOfBandNode (((IHCWrappingNode) aHCNode).getWrappedNode ());
+    if (HCUtils.isWrappedNode (aHCNode))
+      return isOutOfBandNode (HCUtils.getUnwrappedNode (aHCNode));
 
     // Not an out of band node
     return false;
