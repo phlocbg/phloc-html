@@ -102,7 +102,7 @@ public class HCSpecialNodes implements IHCSpecialNodes
   {
     if (aInlineJS == null)
       throw new NullPointerException ("InlineJS");
-    m_aInlineJS.append (aInlineJS);
+    m_aInlineJS.appendFlattened (aInlineJS);
     return this;
   }
 
