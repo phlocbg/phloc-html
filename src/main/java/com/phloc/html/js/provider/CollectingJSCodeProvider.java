@@ -87,6 +87,11 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
     return m_aList.isEmpty ();
   }
 
+  public boolean isNotEmpty ()
+  {
+    return !m_aList.isEmpty ();
+  }
+
   @Nonnegative
   public int size ()
   {

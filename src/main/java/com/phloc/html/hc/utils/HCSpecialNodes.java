@@ -55,6 +55,11 @@ public class HCSpecialNodes implements IHCSpecialNodes
     return this;
   }
 
+  public boolean hasCSSFiles ()
+  {
+    return !m_aCSSFiles.isEmpty ();
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public List <String> getAllCSSFiles ()
@@ -71,6 +76,11 @@ public class HCSpecialNodes implements IHCSpecialNodes
     return this;
   }
 
+  public boolean hasJSFiles ()
+  {
+    return !m_aJSFiles.isEmpty ();
+  }
+
   @Nonnull
   @ReturnsMutableCopy
   public List <String> getAllJSFiles ()
@@ -85,6 +95,11 @@ public class HCSpecialNodes implements IHCSpecialNodes
       throw new NullPointerException ("InlineJS");
     m_aInlineJS.append (aInlineJS);
     return this;
+  }
+
+  public boolean hasInlineJS ()
+  {
+    return m_aInlineJS.isNotEmpty ();
   }
 
   @Nonnull
