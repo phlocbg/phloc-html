@@ -25,6 +25,7 @@ import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -45,8 +46,8 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * 
  * @author philip
  */
-public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <THISTYPE>> extends AbstractHCNode implements
-                                                                                                                IHCNodeWithChildren <THISTYPE>
+@NotThreadSafe
+public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <THISTYPE>> extends AbstractHCNode implements IHCNodeWithChildren <THISTYPE>
 {
   private final List <IHCNode> m_aChildren = new ArrayList <IHCNode> ();
 

@@ -28,6 +28,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.DevelopersNote;
@@ -45,9 +46,8 @@ import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends
-                                                                                                                AbstractHCElement <THISTYPE> implements
-                                                                                                                                            IHCElementWithChildren <THISTYPE>
+@NotThreadSafe
+public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHCElementWithChildren <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCElementWithChildren <THISTYPE>
 {
   private List <IHCNode> m_aChildren;
 

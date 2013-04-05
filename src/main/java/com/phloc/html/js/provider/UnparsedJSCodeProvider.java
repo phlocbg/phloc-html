@@ -68,6 +68,6 @@ public final class UnparsedJSCodeProvider implements IJSCodeProvider
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("code", m_sJSCode).toString ();
+    return new ToStringGenerator (this).append ("jsCode", m_sJSCode).toString ();
   }
 }

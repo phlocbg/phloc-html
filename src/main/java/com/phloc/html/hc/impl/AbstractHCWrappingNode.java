@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.IHCWrappingNode;
@@ -29,6 +30,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * 
  * @author philip
  */
+@NotThreadSafe
 public abstract class AbstractHCWrappingNode extends AbstractHCNode implements IHCWrappingNode
 {
   @Override

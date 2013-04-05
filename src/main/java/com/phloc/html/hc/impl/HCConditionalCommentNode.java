@@ -209,9 +209,20 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
     return new HCConditionalCommentNode ("if gte IE " + aVersion.getAsString (), aWrappedNode);
   }
 
+  /**
+   * @deprecated Use {@link #getFromStringOrNull(String,IHCNode)} instead
+   */
+  @Deprecated
   @Nullable
   public static HCConditionalCommentNode fromStringOrNull (@Nullable final String sValue,
                                                            @Nonnull final IHCNode aWrappedNode)
+  {
+    return getFromStringOrNull (sValue, aWrappedNode);
+  }
+
+  @Nullable
+  public static HCConditionalCommentNode getFromStringOrNull (@Nullable final String sValue,
+                                                              @Nonnull final IHCNode aWrappedNode)
   {
     if (StringHelper.hasNoText (sValue))
       return null;

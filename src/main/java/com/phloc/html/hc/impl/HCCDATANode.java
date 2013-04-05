@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * 
  * @author philip
  */
-public final class HCCDATANode extends AbstractHCNode
+public class HCCDATANode extends AbstractHCNode
 {
   private final String m_sText;
 

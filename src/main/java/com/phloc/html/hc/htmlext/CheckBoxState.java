@@ -24,6 +24,11 @@ import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
+/**
+ * Represents the state of a single checkbox.
+ * 
+ * @author philip
+ */
 @Immutable
 public final class CheckBoxState
 {
