@@ -59,7 +59,7 @@ import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.impl.HCEntityNode;
-import com.phloc.html.hc.utils.HCOutOfBandHandler;
+import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSInvocation;
@@ -238,7 +238,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   protected boolean isOutOfBandBodyNode (@Nonnull final IHCNode aOOBNode)
   {
     // JS nodes go to body
-    if (HCHead.isValidJSNode (aOOBNode))
+    if (HCSpecialNodeHandler.isJSNode (aOOBNode))
       return true;
 
     return false;
@@ -263,8 +263,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     aCompleteOOBList.addAll (aHead.getAllAndRemoveAllCSSNodes ());
     aCompleteOOBList.addAll (aOutOfBandNodes);
 
-    // First merge all JS
-    final List <IHCNode> aMergedOOBNodes = HCOutOfBandHandler.mergeOutOfBandInlineCSSAndJS (aCompleteOOBList);
+    // First merge all JS and CSS nodes
+    final List <IHCNode> aMergedOOBNodes = HCSpecialNodeHandler.mergeInlineCSSAndJS (aCompleteOOBList);
 
     // And now move either to head or body
     for (final IHCNode aNode : aMergedOOBNodes)
@@ -277,10 +277,10 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
       else
       {
         // It's a head node
-        if (HCHead.isValidCSSNode (aNode))
+        if (HCSpecialNodeHandler.isCSSNode (aNode))
           aHead.addCSS (aNode);
         else
-          if (HCHead.isValidJSNode (aNode))
+          if (HCSpecialNodeHandler.isJSNode (aNode))
             aHead.addJS (aNode);
           else
             if (aNode instanceof HCLink)

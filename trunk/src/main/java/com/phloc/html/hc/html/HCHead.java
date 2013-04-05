@@ -44,11 +44,10 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCCSSNode;
-import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.meta.IMetaElement;
 
 /**
@@ -253,20 +252,14 @@ public class HCHead extends AbstractHCElement <HCHead>
   // CSS handling
   //
 
+  /**
+   * @deprecated Use {@link HCSpecialNodeHandler#isCSSNode(IHCNode)}
+   *             instead
+   */
+  @Deprecated
   public static boolean isValidCSSNode (@Nullable final IHCNode aNode)
   {
-    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // Direct CSS node?
-    if (aUnwrappedNode instanceof IHCCSSNode)
-    {
-      // Special case
-      if (aUnwrappedNode instanceof HCLink && !((HCLink) aUnwrappedNode).isCSSLink ())
-        return false;
-      return true;
-    }
-
-    return false;
+    return HCSpecialNodeHandler.isCSSNode (aNode);
   }
 
   @Nonnull
@@ -274,7 +267,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
-    if (!isValidCSSNode (aCSS))
+    if (!HCSpecialNodeHandler.isCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (aCSS);
     return this;
@@ -285,7 +278,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     if (aCSS == null)
       throw new NullPointerException ("css");
-    if (!isValidCSSNode (aCSS))
+    if (!HCSpecialNodeHandler.isCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (nIndex, aCSS);
     return this;
@@ -324,12 +317,13 @@ public class HCHead extends AbstractHCElement <HCHead>
   // JS handling
   //
 
+  /**
+   * @deprecated Use {@link HCSpecialNodeHandler#isJSNode(IHCNode)} instead
+   */
+  @Deprecated
   public static boolean isValidJSNode (@Nullable final IHCNode aNode)
   {
-    final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aNode);
-
-    // Direct JS node?
-    return aUnwrappedNode instanceof IHCJSNode;
+    return HCSpecialNodeHandler.isJSNode (aNode);
   }
 
   /**
@@ -344,7 +338,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     if (aJS == null)
       throw new NullPointerException ("js");
-    if (!isValidJSNode (aJS))
+    if (!HCSpecialNodeHandler.isJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (aJS);
     return this;
@@ -364,7 +358,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     if (aJS == null)
       throw new NullPointerException ("js");
-    if (!isValidJSNode (aJS))
+    if (!HCSpecialNodeHandler.isJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (nIndex, aJS);
     return this;
