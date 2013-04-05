@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -167,6 +168,18 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     final JSVar v = new JSVar (type, name, null);
     m_aParams.add (v);
     return v;
+  }
+
+  @Nonnegative
+  public int getParamCount ()
+  {
+    return m_aParams.size ();
+  }
+
+  @Nullable
+  public JSVar getParamAtIndex (final int nIndex)
+  {
+    return ContainerHelper.getSafe (m_aParams, nIndex);
   }
 
   /**

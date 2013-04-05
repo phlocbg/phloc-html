@@ -233,12 +233,19 @@ public final class HCSpecialNodeHandler
    * 
    * @param aNodes
    *        Source list of nodes. May not be <code>null</code>.
+   * @param bKeepOnDocumentReady
+   *        if <code>true</code> than all combined document.ready() scripts are
+   *        kept as document.ready() scripts. If <code>false</code> than all
+   *        document.ready() scripts are converted to regular scripts and are
+   *        executed after all other scripts. For AJAX calls, this should be
+   *        <code>false</code>.
    * @return Target list. It contains all non-script nodes and at last one JS
    *         inline node (HCScript).
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final List <IHCNode> aNodes)
+  public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final List <IHCNode> aNodes,
+                                                             final boolean bKeepOnDocumentReady)
   {
     if (aNodes == null)
       throw new NullPointerException ("nodes");
@@ -257,12 +264,12 @@ public final class HCSpecialNodeHandler
       // HCScript
       if (aNode instanceof HCScriptOnDocumentReady)
       {
-        aOnDocumentReadyJS.append (((HCScriptOnDocumentReady) aNode).getOnDocumentReadyCode ());
+        aOnDocumentReadyJS.appendFlattened (((HCScriptOnDocumentReady) aNode).getOnDocumentReadyCode ());
       }
       else
         if (aNode instanceof HCScript)
         {
-          aInlineJS.append (((HCScript) aNode).getJSCodeProvider ());
+          aInlineJS.appendFlattened (((HCScript) aNode).getJSCodeProvider ());
         }
         else
           if (aNode instanceof HCStyle && ((HCStyle) aNode).hasNoMediaOrAll ())
@@ -280,7 +287,10 @@ public final class HCSpecialNodeHandler
 
     // on document ready always as last inline JS!
     if (!aOnDocumentReadyJS.isEmpty ())
-      aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
+      if (bKeepOnDocumentReady)
+        aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
+      else
+        aInlineJS.append (aOnDocumentReadyJS);
 
     // Finally add the inline JS
     if (!aInlineJS.isEmpty ())
@@ -333,11 +343,18 @@ public final class HCSpecialNodeHandler
    * @param aSpecialNodes
    *        Target special node object to be filled. May not be
    *        <code>null</code>.
+   * @param bKeepOnDocumentReady
+   *        if <code>true</code> than all combined document.ready() scripts are
+   *        kept as document.ready() scripts. If <code>false</code> than all
+   *        document.ready() scripts are converted to regular scripts and are
+   *        executed after all other scripts. For AJAX calls, this should be
+   *        <code>false</code>.
    * @return A node list with all remaining nodes. Never <code>null</code>.
    */
   @Nonnull
   public static HCNodeList extractSpecialContent (@Nonnull final IHCHasChildren aNode,
-                                                  @Nonnull final HCSpecialNodes aSpecialNodes)
+                                                  @Nonnull final HCSpecialNodes aSpecialNodes,
+                                                  final boolean bKeepOnDocumentReady)
   {
     if (aNode == null)
       throw new NullPointerException ("Node");
@@ -348,7 +365,7 @@ public final class HCSpecialNodeHandler
     List <IHCNode> aExtractedOutOfBandNodes = HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aNode);
 
     // Merge JS/CSS nodes
-    aExtractedOutOfBandNodes = getMergedInlineCSSAndJSNodes (aExtractedOutOfBandNodes);
+    aExtractedOutOfBandNodes = getMergedInlineCSSAndJSNodes (aExtractedOutOfBandNodes, bKeepOnDocumentReady);
 
     // Extract the special nodes
     aExtractedOutOfBandNodes = getWithoutSpecialNodes (aExtractedOutOfBandNodes, aSpecialNodes);
