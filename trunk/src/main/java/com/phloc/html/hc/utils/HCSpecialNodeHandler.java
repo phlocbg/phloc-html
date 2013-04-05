@@ -20,13 +20,16 @@ package com.phloc.html.hc.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.api.IHCCSSNode;
 import com.phloc.html.hc.api.IHCJSNode;
@@ -36,6 +39,7 @@ import com.phloc.html.hc.html.HCScriptFile;
 import com.phloc.html.hc.html.HCScriptOnDocumentReady;
 import com.phloc.html.hc.html.HCStyle;
 import com.phloc.html.hc.htmlext.HCUtils;
+import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 
@@ -48,6 +52,8 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 @NotThreadSafe
 public final class HCSpecialNodeHandler
 {
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCSpecialNodeHandler.class);
+
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
   private static final HCSpecialNodeHandler s_aInstance = new HCSpecialNodeHandler ();
@@ -232,7 +238,6 @@ public final class HCSpecialNodeHandler
    */
   @Nonnull
   @ReturnsMutableCopy
-  @CheckReturnValue
   public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final List <IHCNode> aNodes)
   {
     if (aNodes == null)
@@ -286,7 +291,6 @@ public final class HCSpecialNodeHandler
 
   @Nonnull
   @ReturnsMutableCopy
-  @CheckReturnValue
   public static List <IHCNode> getWithoutSpecialNodes (@Nonnull final List <IHCNode> aNodes,
                                                        @Nonnull final HCSpecialNodes aSpecialNodes)
   {
@@ -317,6 +321,44 @@ public final class HCSpecialNodeHandler
             ret.add (aNode);
     }
 
+    return ret;
+  }
+
+  /**
+   * Extract all out-of-band nodes of the source node, merge JS and CSS and
+   * finally extract all special nodes into the passed object.
+   * 
+   * @param aNode
+   *        Source node. May not be <code>null</code>.
+   * @param aSpecialNodes
+   *        Target special node object to be filled. May not be
+   *        <code>null</code>.
+   * @return A node list with all remaining nodes. Never <code>null</code>.
+   */
+  @Nonnull
+  public static HCNodeList extractSpecialContent (@Nonnull final IHCHasChildren aNode,
+                                                  @Nonnull final HCSpecialNodes aSpecialNodes)
+  {
+    if (aNode == null)
+      throw new NullPointerException ("Node");
+    if (aSpecialNodes == null)
+      throw new NullPointerException ("SpecialNodes");
+
+    // Handle out of band nodes
+    List <IHCNode> aExtractedOutOfBandNodes = HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aNode);
+
+    // Merge JS/CSS nodes
+    aExtractedOutOfBandNodes = getMergedInlineCSSAndJSNodes (aExtractedOutOfBandNodes);
+
+    // Extract the special nodes
+    aExtractedOutOfBandNodes = getWithoutSpecialNodes (aExtractedOutOfBandNodes, aSpecialNodes);
+    if (!aExtractedOutOfBandNodes.isEmpty ())
+      s_aLogger.warn ("Out-of-band nodes are left after merging and extraction: " + aExtractedOutOfBandNodes);
+
+    // Add the content without the out-of-band nodes
+    final HCNodeList ret = HCNodeList.create (aNode);
+    // And to be sure, add all remaining out-of-band nodes at the end
+    ret.addChildren (aExtractedOutOfBandNodes);
     return ret;
   }
 }
