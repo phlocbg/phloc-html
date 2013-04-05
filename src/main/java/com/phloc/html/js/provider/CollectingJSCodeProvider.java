@@ -70,6 +70,17 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
   }
 
   @Nonnull
+  public CollectingJSCodeProvider appendFlattened (@Nullable final IJSCodeProvider aProvider)
+  {
+    if (aProvider != null)
+      if (aProvider instanceof CollectingJSCodeProvider)
+        m_aList.addAll (((CollectingJSCodeProvider) aProvider).m_aList);
+      else
+        m_aList.add (aProvider);
+    return this;
+  }
+
+  @Nonnull
   public CollectingJSCodeProvider removeAtIndex (@Nonnegative final int nIndex)
   {
     if (nIndex >= 0 && nIndex < m_aList.size ())
