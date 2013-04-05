@@ -63,33 +63,33 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
   /**
    * Invokes a method on an object.
    * 
-   * @param object
+   * @param aObject
    *        JExpression for the object upon which the named method will be
    *        invoked, or null if none
-   * @param name
+   * @param sName
    *        Name of method to invoke
    */
-  protected JSInvocation (@Nullable final IJSExpression object, @Nonnull @Nonempty final String name)
+  protected JSInvocation (@Nullable final IJSExpression aObject, @Nonnull @Nonempty final String sName)
   {
-    super (object, name);
+    super (aObject, sName);
   }
 
-  protected JSInvocation (@Nullable final IJSExpression object, @Nonnull final JSMethod method)
+  protected JSInvocation (@Nullable final IJSExpression aObject, @Nonnull final JSMethod aMethod)
   {
-    super (object, method);
+    super (aObject, aMethod);
   }
 
   /**
    * Invokes a static method on a class.
    */
-  protected JSInvocation (@Nullable final AbstractJSClass type, @Nonnull @Nonempty final String name)
+  protected JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull @Nonempty final String sName)
   {
-    super (type, name);
+    super (aType, sName);
   }
 
-  protected JSInvocation (@Nullable final AbstractJSClass type, @Nonnull final JSMethod method)
+  protected JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
   {
-    super (type, method);
+    super (aType, aMethod);
   }
 
   /**
