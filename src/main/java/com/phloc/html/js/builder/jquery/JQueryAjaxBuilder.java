@@ -213,6 +213,14 @@ public class JQueryAjaxBuilder
     return m_aBeforeSend;
   }
 
+  /**
+   * Set an anonymous beforeSend function. Type: Function( jqXHR jqXHR,
+   * PlainObject settings )
+   * 
+   * @param aBeforeSend
+   *        May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public JQueryAjaxBuilder beforeSend (@Nullable final JSAnonymousFunction aBeforeSend)
   {
@@ -226,6 +234,14 @@ public class JQueryAjaxBuilder
     return m_aComplete;
   }
 
+  /**
+   * Set an anonymous complete function. Type: Function( jqXHR jqXHR, String
+   * textStatus )
+   * 
+   * @param aComplete
+   *        May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public JQueryAjaxBuilder complete (@Nullable final JSAnonymousFunction aComplete)
   {
@@ -239,6 +255,14 @@ public class JQueryAjaxBuilder
     return m_aError;
   }
 
+  /**
+   * Set an anonymous error function. Type: Function( jqXHR jqXHR, String
+   * textStatus, String errorThrown )
+   * 
+   * @param aError
+   *        May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public JQueryAjaxBuilder error (@Nullable final JSAnonymousFunction aError)
   {
@@ -252,6 +276,14 @@ public class JQueryAjaxBuilder
     return m_aSuccess;
   }
 
+  /**
+   * Set an anonymous success function. Type: Function( PlainObject data, String
+   * textStatus, jqXHR jqXHR )
+   * 
+   * @param aSuccess
+   *        May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public JQueryAjaxBuilder success (@Nullable final JSAnonymousFunction aSuccess)
   {
