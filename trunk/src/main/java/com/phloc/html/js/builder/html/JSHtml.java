@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.js.builder.IJSExpression;
@@ -38,6 +39,10 @@ import com.phloc.html.js.builder.JSRef;
 @Immutable
 public final class JSHtml
 {
+  @PresentForCodeCoverage
+  @SuppressWarnings ("unused")
+  private static final JSHtml s_aInstance = new JSHtml ();
+
   private JSHtml ()
   {}
 

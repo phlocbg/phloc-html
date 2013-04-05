@@ -19,6 +19,7 @@ package com.phloc.html.js;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.url.EURLProtocol;
 
 /**
@@ -41,6 +42,10 @@ public final class CJS
 
   /** Minified JS file extension */
   public static final String FILE_EXTENSION_MIN_JS = ".min.js";
+
+  @PresentForCodeCoverage
+  @SuppressWarnings ("unused")
+  private static final CJS s_aInstance = new CJS ();
 
   private CJS ()
   {}

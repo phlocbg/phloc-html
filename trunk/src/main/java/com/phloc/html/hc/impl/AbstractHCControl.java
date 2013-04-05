@@ -20,6 +20,7 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroElement;
@@ -31,9 +32,8 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
-public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends
-                                                                                        AbstractHCElement <THISTYPE> implements
-                                                                                                                    IHCControl <THISTYPE>
+@NotThreadSafe
+public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCControl <THISTYPE>
 {
   public static final boolean DEFAULT_DISABLED = false;
   public static final boolean DEFAULT_READONLY = false;

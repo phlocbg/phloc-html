@@ -20,6 +20,7 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
@@ -30,6 +31,7 @@ import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
+@NotThreadSafe
 public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends AbstractHCControl <THISTYPE>
 {
   private final EHCInputType m_eType;
