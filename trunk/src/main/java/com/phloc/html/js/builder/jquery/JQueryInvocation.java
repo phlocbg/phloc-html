@@ -17,6 +17,7 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -557,6 +558,17 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * @param nIndex
+   *        The index to get. Must be &ge; 0.
+   * @return The invocation of the jQuery function <code>get()</code>
+   */
+  @Nonnull
+  public JQueryInvocation get (@Nonnegative final int nIndex)
+  {
+    return get ().arg (nIndex);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>has()</code>
    */
   @Nonnull
@@ -969,6 +981,34 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   public JQueryInvocation parent ()
   {
     return jqinvoke ("parent");
+  }
+
+  /**
+   * Get the matching parent element.
+   * 
+   * @since jQuery 1.0
+   * @param aSelector
+   *        The selector to use
+   * @return The invocation of the jQuery function <code>parent()</code>
+   */
+  @Nonnull
+  public JQueryInvocation parent (@Nonnull final IJQuerySelector aSelector)
+  {
+    return parent ().arg (aSelector);
+  }
+
+  /**
+   * Get the matching parent element.
+   * 
+   * @since jQuery 1.0
+   * @param eHTMLElement
+   *        The HTML element to retrieve
+   * @return The invocation of the jQuery function <code>parent()</code>
+   */
+  @Nonnull
+  public JQueryInvocation parent (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return parent (JQuerySelector.elementName (eHTMLElement));
   }
 
   /**
