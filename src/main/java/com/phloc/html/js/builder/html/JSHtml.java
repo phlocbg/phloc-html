@@ -458,6 +458,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSInvocation windowAlert (@Nonnull final IJSExpression aExpr)
+  {
+    return windowAlert ().arg (aExpr);
+  }
+
+  @Nonnull
   public static JSInvocation windowBlur ()
   {
     return window ().invoke ("blur");
