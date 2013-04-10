@@ -222,6 +222,18 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   }
 
   /**
+   * @param aContent
+   *        the content to be appended
+   * @since jQuery 1.0
+   * @return The invocation of the jQuery function <code>append()</code>
+   */
+  @Nonnull
+  final public JQueryInvocation append (@Nonnull final IJSExpression aContent)
+  {
+    return append ().arg (aContent);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>appendTo()</code>
    */
   @Nonnull
@@ -1098,6 +1110,18 @@ public class JQueryInvocation extends AbstractJSInvocation <JQueryInvocation>
   final public JQueryInvocation prepend (@Nonnull final IHCNode aNode)
   {
     return prepend (HCSettings.getAsHTMLStringWithoutNamespaces (aNode));
+  }
+
+  /**
+   * @param aContent
+   *        the node to be prepended
+   * @since jQuery 1.0
+   * @return The invocation of the jQuery function <code>prepend()</code>
+   */
+  @Nonnull
+  final public JQueryInvocation prepend (@Nonnull final IJSExpression aContent)
+  {
+    return prepend ().arg (aContent);
   }
 
   /**
