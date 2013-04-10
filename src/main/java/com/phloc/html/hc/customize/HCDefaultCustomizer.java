@@ -220,7 +220,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
           // Add this out of band node
           // Note: assuming jQuery
-          aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl.getID ()).focus ()));
+          aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl).focus ()));
         }
       }
     }

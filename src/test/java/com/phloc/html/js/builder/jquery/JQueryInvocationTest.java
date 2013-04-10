@@ -194,5 +194,10 @@ public final class JQueryInvocationTest
                         .arg (new JQuerySelectorList (JQuerySelector.id ("abc"),
                                                       JQuerySelector.elementName (EHTMLElement.TD)))
                         .getJSCode ());
+    assertEquals ("$(document).on('#abc td');",
+                  JQuery.jQueryDocument ()
+                        .on ()
+                        .arg (JQuerySelector.id ("abc").descendant (JQuerySelector.elementName (EHTMLElement.TD)))
+                        .getJSCode ());
   }
 }
