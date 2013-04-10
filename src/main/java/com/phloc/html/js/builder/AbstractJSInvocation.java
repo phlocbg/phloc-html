@@ -486,6 +486,17 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     return ContainerHelper.newList (m_aArgs);
   }
 
+  @Nonnegative
+  public int getArgCount ()
+  {
+    return m_aArgs.size ();
+  }
+
+  public boolean hasArgs ()
+  {
+    return !m_aArgs.isEmpty ();
+  }
+
   public void generate (final JSFormatter f)
   {
     if (m_aCallee instanceof JSAnonymousFunction)
