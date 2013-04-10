@@ -621,6 +621,18 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  public final THISTYPE setCustomAttr (@Nullable final String sName, final int nValue)
+  {
+    return setCustomAttr (sName, Integer.toString (nValue));
+  }
+
+  @Nonnull
+  public final THISTYPE setCustomAttr (@Nullable final String sName, final long nValue)
+  {
+    return setCustomAttr (sName, Long.toString (nValue));
+  }
+
+  @Nonnull
   public final THISTYPE removeCustomAttr (@Nullable final String sName)
   {
     if (m_aCustomAttrs != null && sName != null)
