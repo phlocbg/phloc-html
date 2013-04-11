@@ -63,12 +63,12 @@ public class JSBreak implements IJSStatement
     return m_aLabel != null;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aLabel == null)
-      f.plain ("break;").nl ();
+      aFormatter.plain ("break;").nl ();
     else
-      f.plain ("break ").plain (m_aLabel.label ()).plain (';').nl ();
+      aFormatter.plain ("break ").plain (m_aLabel.label ()).plain (';').nl ();
   }
 
   @Nullable

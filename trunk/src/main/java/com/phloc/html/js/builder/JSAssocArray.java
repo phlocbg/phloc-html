@@ -54,45 +54,45 @@ public class JSAssocArray extends AbstractJSExpression
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final boolean aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final boolean bValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final char aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final char cValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final double aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final double dValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final float aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final float fValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final int aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final int nValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, final long aValue)
+  public JSAssocArray add (@Nonnull final String sKey, final long nValue)
   {
-    return add (sKey, JSExpr.lit (aValue));
+    return add (sKey, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, @Nullable final String aValue)
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final String sValue)
   {
-    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
+    return add (sKey, sValue == null ? JSExpr.NULL : JSExpr.lit (sValue));
   }
 
   @Nonnull
@@ -139,6 +139,7 @@ public class JSAssocArray extends AbstractJSExpression
       throw new NullPointerException ("key");
     if (aValue == null)
       throw new NullPointerException ("value");
+
     if (m_aExprs == null)
       m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
     m_aExprs.put (aKey, aValue);
@@ -161,9 +162,9 @@ public class JSAssocArray extends AbstractJSExpression
     return this;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ('{').nl ().indent ();
+    aFormatter.plain ('{').nl ().indent ();
     if (m_aExprs != null)
     {
       boolean bFirst = true;
@@ -172,11 +173,11 @@ public class JSAssocArray extends AbstractJSExpression
         if (bFirst)
           bFirst = false;
         else
-          f.plain (',').nl ();
-        f.generatable (aEntry.getKey ()).plain (':').generatable (aEntry.getValue ());
+          aFormatter.plain (',').nl ();
+        aFormatter.generatable (aEntry.getKey ()).plain (':').generatable (aEntry.getValue ());
       }
     }
-    f.nl ().outdent ().plain ('}');
+    aFormatter.nl ().outdent ().plain ('}');
   }
 
   @Override

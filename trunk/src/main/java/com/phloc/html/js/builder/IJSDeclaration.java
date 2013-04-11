@@ -38,5 +38,5 @@ public interface IJSDeclaration extends IJSCodeProvider
   @Nonempty
   String name ();
 
-  void declare (@Nonnull JSFormatter f);
+  void declare (@Nonnull JSFormatter aFormatter);
 }

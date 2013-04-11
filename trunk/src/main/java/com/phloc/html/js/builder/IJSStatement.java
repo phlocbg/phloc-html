@@ -29,5 +29,5 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public interface IJSStatement extends IJSCodeProvider
 {
-  void state (@Nonnull JSFormatter f);
+  void state (@Nonnull JSFormatter aFormatter);
 }

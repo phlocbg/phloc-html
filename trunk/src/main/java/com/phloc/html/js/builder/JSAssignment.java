@@ -36,20 +36,20 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   private final String m_sOp;
   private final IJSExpression m_aRhs;
 
-  public JSAssignment (@Nonnull final IJSAssignmentTarget lhs,
-                       @Nonnull @Nonempty final String op,
-                       @Nonnull final IJSExpression rhs)
+  public JSAssignment (@Nonnull final IJSAssignmentTarget aLhs,
+                       @Nonnull @Nonempty final String sOp,
+                       @Nonnull final IJSExpression aRhs)
   {
-    if (lhs == null)
+    if (aLhs == null)
       throw new NullPointerException ("lhs");
-    if (StringHelper.hasNoText (op))
+    if (StringHelper.hasNoText (sOp))
       throw new IllegalArgumentException ("operator is empty");
-    if (rhs == null)
+    if (aRhs == null)
       throw new NullPointerException ("rhs");
 
-    m_aLhs = lhs;
-    m_sOp = op;
-    m_aRhs = rhs;
+    m_aLhs = aLhs;
+    m_sOp = sOp;
+    m_aRhs = aRhs;
   }
 
   @Nonnull
@@ -71,14 +71,14 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
     return m_aRhs;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (m_aLhs).plain (m_sOp).generatable (m_aRhs);
+    aFormatter.generatable (m_aLhs).plain (m_sOp).generatable (m_aRhs);
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (this).plain (';').nl ();
+    aFormatter.generatable (this).plain (';').nl ();
   }
 
   @Override

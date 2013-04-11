@@ -92,16 +92,16 @@ public class JSCase implements IJSStatement
     return m_aBody;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.indent ();
+    aFormatter.indent ();
     if (!m_bIsDefaultCase)
-      f.plain ("case ").generatable (m_aLabel).plain (':').nl ();
+      aFormatter.plain ("case ").generatable (m_aLabel).plain (':').nl ();
     else
-      f.plain ("default:").nl ();
+      aFormatter.plain ("default:").nl ();
     if (m_aBody != null)
-      f.stmt (m_aBody);
-    f.outdent ();
+      aFormatter.stmt (m_aBody);
+    aFormatter.outdent ();
   }
 
   @Nullable

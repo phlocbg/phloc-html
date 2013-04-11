@@ -143,25 +143,25 @@ public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSState
       f.plain ('}');
   }
 
-  void generateBody (@Nonnull final JSFormatter f)
+  void generateBody (@Nonnull final JSFormatter aFormatter)
   {
     for (final IJSCodeProvider aJSCode : directMembers ())
     {
       if (aJSCode instanceof IJSDeclaration)
-        f.decl ((IJSDeclaration) aJSCode);
+        aFormatter.decl ((IJSDeclaration) aJSCode);
       else
         if (aJSCode instanceof IJSStatement)
-          f.stmt ((IJSStatement) aJSCode);
+          aFormatter.stmt ((IJSStatement) aJSCode);
         else
-          f.plain (aJSCode.getJSCode ());
+          aFormatter.plain (aJSCode.getJSCode ());
     }
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (this);
+    aFormatter.generatable (this);
     if (m_bBracesRequired && m_bNewLineAtEnd)
-      f.nl ();
+      aFormatter.nl ();
   }
 
   @Nullable

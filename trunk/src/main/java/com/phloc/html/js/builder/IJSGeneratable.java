@@ -28,5 +28,5 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public interface IJSGeneratable extends IJSCodeProvider
 {
-  void generate (@Nonnull JSFormatter f);
+  void generate (@Nonnull JSFormatter aFormatter);
 }

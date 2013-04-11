@@ -69,9 +69,9 @@ public class JSCast extends AbstractJSExpression
     return m_aExpr;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("((").generatable (m_aType).plain (')').generatable (m_aExpr).plain (')');
+    aFormatter.plain ("((").generatable (m_aType).plain (')').generatable (m_aExpr).plain (')');
   }
 
   @Override
