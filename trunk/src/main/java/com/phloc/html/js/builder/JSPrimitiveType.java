@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.js.marshal.JSMarshaller;
 
 // ESCA-JAVA0116:
 /**
@@ -50,8 +50,8 @@ public class JSPrimitiveType extends AbstractJSType
 
   protected JSPrimitiveType (@Nonnull @Nonempty final String sName)
   {
-    if (StringHelper.hasNoText (sName))
-      throw new IllegalArgumentException ("name");
+    if (!JSMarshaller.isJSIdentifier (sName))
+      throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     m_sName = sName;
     m_aGlobal = JSExpr.ref (sName);
   }

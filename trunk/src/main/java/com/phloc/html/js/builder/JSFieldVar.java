@@ -51,7 +51,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    */
   public JSFieldVar (@Nonnull final JSDefinedClass aOwnerClass,
                      @Nullable final AbstractJSType aType,
-                     @Nonnull final String sName,
+                     @Nonnull @Nonempty final String sName,
                      @Nullable final IJSExpression aInit)
   {
     super (aType, sName, aInit);

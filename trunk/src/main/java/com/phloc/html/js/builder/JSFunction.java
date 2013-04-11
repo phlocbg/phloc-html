@@ -118,7 +118,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * Changes the name of the function.
    */
   @Nonnull
-  public JSFunction name (@Nonnull final String sName)
+  public JSFunction name (@Nonnull @Nonempty final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
@@ -147,7 +147,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nonnull final String sName)
+  public JSVar param (@Nonnull @Nonempty final String sName)
   {
     return param (null, sName);
   }
@@ -163,7 +163,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull final String sName)
+  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
     final JSVar aVar = new JSVar (aType, sName, null);
     m_aParams.add (aVar);

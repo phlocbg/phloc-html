@@ -165,7 +165,7 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSRef ref (@Nonnull final String sField)
+  public static JSRef ref (@Nonnull @Nonempty final String sField)
   {
     return new JSRef (sField);
   }
