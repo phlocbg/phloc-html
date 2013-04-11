@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Contains the JS built-in type Number
@@ -86,9 +87,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation abs (@Nonnull final IJSExpression aExpr)
+  {
+    return abs ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation acos ()
   {
     return global ().invoke ("acos");
+  }
+
+  @Nonnull
+  public JSInvocation acos (@Nonnull final IJSExpression aExpr)
+  {
+    return acos ().arg (aExpr);
   }
 
   @Nonnull
@@ -98,9 +111,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation asin (@Nonnull final IJSExpression aExpr)
+  {
+    return asin ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation atan ()
   {
     return global ().invoke ("atan");
+  }
+
+  @Nonnull
+  public JSInvocation atan (@Nonnull final IJSExpression aExpr)
+  {
+    return atan ().arg (aExpr);
   }
 
   @Nonnull
@@ -110,9 +135,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation atan2 (@Nonnull final IJSExpression aExprY, @Nonnull final IJSExpression aExprX)
+  {
+    return atan2 ().arg (aExprY).arg (aExprX);
+  }
+
+  @Nonnull
   public JSInvocation ceil ()
   {
     return global ().invoke ("ceil");
+  }
+
+  @Nonnull
+  public JSInvocation ceil (@Nonnull final IJSExpression aExpr)
+  {
+    return ceil ().arg (aExpr);
   }
 
   @Nonnull
@@ -122,9 +159,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation cos (@Nonnull final IJSExpression aExpr)
+  {
+    return cos ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation exp ()
   {
     return global ().invoke ("exp");
+  }
+
+  @Nonnull
+  public JSInvocation exp (@Nonnull final IJSExpression aExpr)
+  {
+    return exp ().arg (aExpr);
   }
 
   @Nonnull
@@ -134,9 +183,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation floor (@Nonnull final IJSExpression aExpr)
+  {
+    return floor ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation log ()
   {
     return global ().invoke ("log");
+  }
+
+  @Nonnull
+  public JSInvocation log (@Nonnull final IJSExpression aExpr)
+  {
+    return log ().arg (aExpr);
   }
 
   @Nonnull
@@ -146,15 +207,45 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation max (@Nullable final Iterable <? extends IJSExpression> aExprs)
+  {
+    return max ().args (aExprs);
+  }
+
+  @Nonnull
+  public JSInvocation max (@Nullable final IJSExpression... aExprs)
+  {
+    return max ().args (aExprs);
+  }
+
+  @Nonnull
   public JSInvocation min ()
   {
     return global ().invoke ("min");
   }
 
   @Nonnull
+  public JSInvocation min (@Nullable final Iterable <? extends IJSExpression> aExprs)
+  {
+    return min ().args (aExprs);
+  }
+
+  @Nonnull
+  public JSInvocation min (@Nullable final IJSExpression... aExprs)
+  {
+    return min ().args (aExprs);
+  }
+
+  @Nonnull
   public JSInvocation pow ()
   {
     return global ().invoke ("pow");
+  }
+
+  @Nonnull
+  public JSInvocation pow (@Nonnull final IJSExpression aExprX, @Nonnull final IJSExpression aExprY)
+  {
+    return pow ().arg (aExprX).arg (aExprY);
   }
 
   @Nonnull
@@ -170,9 +261,21 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation round (@Nonnull final IJSExpression aExpr)
+  {
+    return round ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation sin ()
   {
     return global ().invoke ("sin");
+  }
+
+  @Nonnull
+  public JSInvocation sin (@Nonnull final IJSExpression aExpr)
+  {
+    return sin ().arg (aExpr);
   }
 
   @Nonnull
@@ -182,8 +285,20 @@ public class JSTypeMath extends JSPrimitiveType
   }
 
   @Nonnull
+  public JSInvocation sqrt (@Nonnull final IJSExpression aExpr)
+  {
+    return sqrt ().arg (aExpr);
+  }
+
+  @Nonnull
   public JSInvocation tan ()
   {
     return global ().invoke ("tan");
+  }
+
+  @Nonnull
+  public JSInvocation tan (@Nonnull final IJSExpression aExpr)
+  {
+    return tan ().arg (aExpr);
   }
 }

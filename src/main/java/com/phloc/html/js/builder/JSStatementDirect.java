@@ -37,9 +37,16 @@ public class JSStatementDirect implements IJSStatement
     m_sSource = sSource;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  @Nonnull
+  @Nonempty
+  public String source ()
   {
-    f.plain (m_sSource).nl ();
+    return m_sSource;
+  }
+
+  public void state (@Nonnull final JSFormatter aFormatter)
+  {
+    aFormatter.plain (m_sSource).nl ();
   }
 
   @Nullable

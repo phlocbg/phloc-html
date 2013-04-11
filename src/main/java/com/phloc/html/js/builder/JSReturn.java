@@ -37,6 +37,14 @@ public class JSReturn implements IJSStatement
   private final IJSExpression m_aExpr;
 
   /**
+   * Return constructor without an expression
+   */
+  public JSReturn ()
+  {
+    this (null);
+  }
+
+  /**
    * Return constructor
    * 
    * @param aExpr
@@ -47,12 +55,18 @@ public class JSReturn implements IJSStatement
     m_aExpr = aExpr;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  @Nullable
+  public IJSExpression expr ()
   {
-    f.plain ("return");
+    return m_aExpr;
+  }
+
+  public void state (@Nonnull final JSFormatter aFormatter)
+  {
+    aFormatter.plain ("return");
     if (m_aExpr != null)
-      f.plain (' ').generatable (m_aExpr);
-    f.plain (';').nl ();
+      aFormatter.plain (' ').generatable (m_aExpr);
+    aFormatter.plain (';').nl ();
   }
 
   @Nullable

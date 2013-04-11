@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -53,7 +54,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * @param sName
    *        name of the variable
    */
-  public JSVar (@Nonnull final String sName)
+  public JSVar (@Nonnull @Nonempty final String sName)
   {
     this (sName, (IJSExpression) null);
   }
@@ -66,7 +67,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * @param aInit
    *        Value to initialize this variable to
    */
-  public JSVar (@Nonnull final String sName, @Nullable final IJSExpression aInit)
+  public JSVar (@Nonnull @Nonempty final String sName, @Nullable final IJSExpression aInit)
   {
     this ((AbstractJSType) null, sName, aInit);
   }
@@ -94,7 +95,9 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * @param aInit
    *        Value to initialize this variable to
    */
-  public JSVar (@Nullable final AbstractJSType aType, @Nonnull final String sName, @Nullable final IJSExpression aInit)
+  public JSVar (@Nullable final AbstractJSType aType,
+                @Nonnull @Nonempty final String sName,
+                @Nullable final IJSExpression aInit)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
@@ -122,9 +125,9 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   @Nullable
   public AbstractJSType type (@Nullable final AbstractJSType aNewType)
   {
-    final AbstractJSType ret = m_aType;
+    final AbstractJSType aOldType = m_aType;
     m_aType = aNewType;
-    return ret;
+    return aOldType;
   }
 
   /**
@@ -133,6 +136,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * @return Name of the variable
    */
   @Nonnull
+  @Nonempty
   public String name ()
   {
     return m_sName;
@@ -142,7 +146,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
    * Changes the name of this variable.
    */
   @Nonnull
-  public JSVar name (@Nonnull final String sName)
+  public JSVar name (@Nonnull @Nonempty final String sName)
   {
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
@@ -182,25 +186,25 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
     return this;
   }
 
-  void bind (@Nonnull final JSFormatter f)
+  void bind (@Nonnull final JSFormatter aFormatter)
   {
-    if (m_aType != null && f.generateTypeNames ())
-      f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.plain (m_sName);
+    if (m_aType != null && aFormatter.generateTypeNames ())
+      aFormatter.plain ("/*").generatable (m_aType).plain ("*/");
+    aFormatter.plain (m_sName);
     if (m_aInit != null)
-      f.plain ('=').generatable (m_aInit);
+      aFormatter.plain ('=').generatable (m_aInit);
   }
 
-  public void declare (@Nonnull final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("var ");
-    bind (f);
-    f.plain (';').nl ();
+    aFormatter.plain ("var ");
+    bind (aFormatter);
+    aFormatter.plain (';').nl ();
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (m_sName);
+    aFormatter.plain (m_sName);
   }
 
   @Override

@@ -65,16 +65,16 @@ public class JSWhileLoop implements IJSStatement
     return m_aBody;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     if (JSOp.hasOperator (m_aTest))
-      f.plain ("while").generatable (m_aTest);
+      aFormatter.plain ("while").generatable (m_aTest);
     else
-      f.plain ("while(").generatable (m_aTest).plain (')');
+      aFormatter.plain ("while(").generatable (m_aTest).plain (')');
     if (m_aBody != null)
-      f.stmt (m_aBody);
+      aFormatter.stmt (m_aBody);
     else
-      f.plain (';').nl ();
+      aFormatter.plain (';').nl ();
   }
 
   @Nullable

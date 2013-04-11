@@ -475,6 +475,70 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   /**
+   * Add 0-n expressions to this invocation's argument list
+   * 
+   * @param aExprs
+   *        Argument to add to argument list
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE args (@Nullable final Iterable <? extends IJSExpression> aExprs)
+  {
+    if (aExprs != null)
+      for (final IJSExpression aExpr : aExprs)
+        arg (aExpr);
+    return _thisAsT ();
+  }
+
+  /**
+   * Add 0-n expressions to this invocation's argument list
+   * 
+   * @param aExprs
+   *        Argument to add to argument list
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE args (@Nullable final IJSExpression... aExprs)
+  {
+    if (aExprs != null)
+      for (final IJSExpression aExpr : aExprs)
+        arg (aExpr);
+    return _thisAsT ();
+  }
+
+  /**
+   * Add 0-n expressions to this invocation's argument list
+   * 
+   * @param aExprs
+   *        Argument to add to argument list
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE argsOrNull (@Nullable final Iterable <? extends IJSExpression> aExprs)
+  {
+    if (aExprs != null)
+      for (final IJSExpression aExpr : aExprs)
+        argOrNull (aExpr);
+    return _thisAsT ();
+  }
+
+  /**
+   * Add 0-n expressions to this invocation's argument list
+   * 
+   * @param aExprs
+   *        Argument to add to argument list
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE argssOrNull (@Nullable final IJSExpression... aExprs)
+  {
+    if (aExprs != null)
+      for (final IJSExpression aExpr : aExprs)
+        argOrNull (aExpr);
+    return _thisAsT ();
+  }
+
+  /**
    * Returns all arguments of the invocation.
    * 
    * @return If there's no arguments, an empty array will be returned.
