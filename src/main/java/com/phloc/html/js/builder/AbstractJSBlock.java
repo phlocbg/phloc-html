@@ -297,7 +297,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName) throws JSNameAlreadyExistsException
   {
     return var (null, sName, null);
   }
@@ -314,7 +314,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final boolean bInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final boolean bInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (bInitValue));
   }
@@ -331,7 +331,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final char cInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final char cInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (cInitValue));
   }
@@ -348,7 +348,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final double dInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final double dInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (dInitValue));
   }
@@ -365,7 +365,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final float fInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final float fInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (fInitValue));
   }
@@ -382,7 +382,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final int nInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final int nInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (nInitValue));
   }
@@ -399,7 +399,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, final long nInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, final long nInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, JSExpr.lit (nInitValue));
   }
@@ -416,7 +416,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, @Nullable final String sInitValue) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, @Nullable final String sInitValue) throws JSNameAlreadyExistsException
   {
     return var (null, sName, sInitValue == null ? JSExpr.NULL : JSExpr.lit (sInitValue));
   }
@@ -433,7 +433,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nonnull final String sName, @Nullable final IJSExpression aInitExpression) throws JSNameAlreadyExistsException
+  public JSVar var (@Nonnull @Nonempty final String sName, @Nullable final IJSExpression aInitExpression) throws JSNameAlreadyExistsException
   {
     return var (null, sName, aInitExpression);
   }
@@ -450,7 +450,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    *         if the name is not unique
    */
   @Nonnull
-  public JSVar var (@Nullable final AbstractJSType aType, @Nonnull final String sName) throws JSNameAlreadyExistsException
+  public JSVar var (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName) throws JSNameAlreadyExistsException
   {
     return var (aType, sName, null);
   }
@@ -470,7 +470,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    */
   @Nonnull
   public JSVar var (@Nullable final AbstractJSType aType,
-                    @Nonnull final String sName,
+                    @Nonnull @Nonempty final String sName,
                     @Nullable final IJSExpression aInitExpression) throws JSNameAlreadyExistsException
   {
     final JSVar aVar = new JSVar (aType, sName, aInitExpression);
@@ -537,7 +537,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Deprecated
   @Nonnull
   public JSVar decl (@Nullable final AbstractJSType aType,
-                     @Nonnull final String sName,
+                     @Nonnull @Nonempty final String sName,
                      @Nullable final IJSExpression aInitExpression)
   {
     return var (aType, sName, aInitExpression);
@@ -968,14 +968,14 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   }
 
   @Nonnull
-  public JSForIn forIn (@Nonnull final String sVarName, @Nonnull final IJSExpression aCollection)
+  public JSForIn forIn (@Nonnull @Nonempty final String sVarName, @Nonnull final IJSExpression aCollection)
   {
     return forIn (null, sVarName, aCollection);
   }
 
   @Nonnull
   public JSForIn forIn (@Nullable final AbstractJSType aVarType,
-                        @Nonnull final String sVarName,
+                        @Nonnull @Nonempty final String sVarName,
                         @Nonnull final IJSExpression aCollection)
   {
     return addStatement (new JSForIn (aVarType, sVarName, aCollection));

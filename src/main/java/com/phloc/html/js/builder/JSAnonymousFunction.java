@@ -24,6 +24,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
@@ -119,7 +120,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nonnull final String sName)
+  public JSVar param (@Nonnull @Nonempty final String sName)
   {
     return param (null, sName);
   }
@@ -135,7 +136,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull final String sName)
+  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
     final JSVar aVar = new JSVar (aType, sName, null);
     m_aParams.add (aVar);

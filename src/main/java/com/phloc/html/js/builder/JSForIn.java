@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -36,7 +37,7 @@ public class JSForIn implements IJSStatement
   private JSBlock m_aBody;
 
   public JSForIn (@Nullable final AbstractJSType aVarType,
-                  @Nonnull final String sVarName,
+                  @Nonnull @Nonempty final String sVarName,
                   @Nonnull final IJSExpression aCollection)
   {
     this (new JSVar (aVarType, sVarName), aCollection);

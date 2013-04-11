@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
@@ -45,7 +46,7 @@ public class JSForLoop implements IJSStatement
   {}
 
   @Nonnull
-  public JSForLoop simpleLoop (@Nonnull final String sVarName, final int nStartIncl, final int nEndExcl)
+  public JSForLoop simpleLoop (@Nonnull @Nonempty final String sVarName, final int nStartIncl, final int nEndExcl)
   {
     final JSVar aLoopVar = init (sVarName, nStartIncl);
     if (nEndExcl >= nStartIncl)
@@ -62,26 +63,26 @@ public class JSForLoop implements IJSStatement
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String sVarName, final int nValue)
+  public JSVar init (@Nonnull @Nonempty final String sVarName, final int nValue)
   {
     return init (sVarName, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String sVarName, final long nValue)
+  public JSVar init (@Nonnull @Nonempty final String sVarName, final long nValue)
   {
     return init (sVarName, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSVar init (@Nonnull final String sVarName, @Nonnull final IJSExpression aExpr)
+  public JSVar init (@Nonnull @Nonempty final String sVarName, @Nonnull final IJSExpression aExpr)
   {
     return init (null, sVarName, aExpr);
   }
 
   @Nonnull
   public JSVar init (@Nullable final AbstractJSType aType,
-                     @Nonnull final String sVarName,
+                     @Nonnull @Nonempty final String sVarName,
                      @Nonnull final IJSExpression aExpr)
   {
     if (aExpr == null)
