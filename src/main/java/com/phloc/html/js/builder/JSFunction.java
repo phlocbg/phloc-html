@@ -182,6 +182,13 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return ContainerHelper.getSafe (m_aParams, nIndex);
   }
 
+  @Nonnull
+  public JSFunction removeAllParams ()
+  {
+    m_aParams.clear ();
+    return this;
+  }
+
   /**
    * Get the block that makes up body of this function
    * 

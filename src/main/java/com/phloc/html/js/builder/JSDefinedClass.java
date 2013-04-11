@@ -67,20 +67,6 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * constructor
    * 
-   * @param aPackage
-   *        Owning package. May be <code>null</code>.
-   * @param sName
-   *        Name of this class
-   */
-  @Deprecated
-  public JSDefinedClass (@Nullable final JSPackage aPackage, @Nonnull @Nonempty final String sName)
-  {
-    this (sName);
-  }
-
-  /**
-   * constructor
-   * 
    * @param sName
    *        Name of this class
    */
@@ -231,13 +217,25 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Removes a {@link JSFieldVar} from this class.
    * 
+   * @return this
    * @throws IllegalArgumentException
    *         if the given field is not a field on this class.
    */
-  public void removeField (@Nonnull final JSFieldVar field)
+  @Nonnull
+  public JSDefinedClass removeField (@Nonnull final JSFieldVar aField)
   {
-    if (m_aFields.remove (field.name ()) != field)
-      throw new IllegalArgumentException ();
+    if (aField == null)
+      throw new NullPointerException ("field");
+    if (m_aFields.remove (aField.name ()) != aField)
+      throw new IllegalArgumentException ("Failed to remove field '" + aField.name () + "' from " + m_aFields.keySet ());
+    return this;
+  }
+
+  @Nonnull
+  public JSDefinedClass removeAllFields ()
+  {
+    m_aFields.clear ();
+    return this;
   }
 
   /**

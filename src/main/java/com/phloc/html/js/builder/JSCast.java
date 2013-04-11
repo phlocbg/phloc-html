@@ -37,7 +37,7 @@ public class JSCast extends AbstractJSExpression
   /**
    * JExpression to be cast.
    */
-  private final IJSExpression m_aObject;
+  private final IJSExpression m_aExpr;
 
   /**
    * JCast constructor
@@ -54,7 +54,7 @@ public class JSCast extends AbstractJSExpression
     if (aObject == null)
       throw new NullPointerException ("object");
     m_aType = aType;
-    m_aObject = aObject;
+    m_aExpr = aObject;
   }
 
   @Nonnull
@@ -63,9 +63,15 @@ public class JSCast extends AbstractJSExpression
     return m_aType;
   }
 
+  @Nonnull
+  public IJSExpression expr ()
+  {
+    return m_aExpr;
+  }
+
   public void generate (@Nonnull final JSFormatter f)
   {
-    f.plain ("((").generatable (m_aType).plain (')').generatable (m_aObject).plain (')');
+    f.plain ("((").generatable (m_aType).plain (')').generatable (m_aExpr).plain (')');
   }
 
   @Override
@@ -76,13 +82,13 @@ public class JSCast extends AbstractJSExpression
     if (!super.equals (o))
       return false;
     final JSCast rhs = (JSCast) o;
-    return m_aType.equals (rhs.m_aType) && m_aObject.equals (rhs.m_aObject);
+    return m_aType.equals (rhs.m_aType) && m_aExpr.equals (rhs.m_aExpr);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aType).append (m_aObject).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aType).append (m_aExpr).getHashCode ();
   }
 
   @Override
@@ -90,7 +96,7 @@ public class JSCast extends AbstractJSExpression
   {
     return ToStringGenerator.getDerived (super.toString ())
                             .append ("type", m_aType)
-                            .append ("object", m_aObject)
+                            .append ("object", m_aExpr)
                             .toString ();
   }
 }

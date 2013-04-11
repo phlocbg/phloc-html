@@ -100,615 +100,616 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (final char v)
+  public final AbstractJSExpression plus (final char cValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (final double v)
+  public final AbstractJSExpression plus (final double dValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (final float v)
+  public final AbstractJSExpression plus (final float fValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (final int v)
+  public final AbstractJSExpression plus (final int nValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (final long v)
+  public final AbstractJSExpression plus (final long nValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (@Nonnull final String v)
+  public final AbstractJSExpression plus (@Nonnull final String sValue)
   {
-    return plus (JSExpr.lit (v));
+    return plus (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression plus (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression plus (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.plus (this, right);
+    return JSOp.plus (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression minus (final double v)
+  public final AbstractJSExpression minus (final double dValue)
   {
-    return minus (JSExpr.lit (v));
+    return minus (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression minus (final float v)
+  public final AbstractJSExpression minus (final float fValue)
   {
-    return minus (JSExpr.lit (v));
+    return minus (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression minus (final int v)
+  public final AbstractJSExpression minus (final int nValue)
   {
-    return minus (JSExpr.lit (v));
+    return minus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression minus (final long v)
+  public final AbstractJSExpression minus (final long nValue)
   {
-    return minus (JSExpr.lit (v));
+    return minus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression minus (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression minus (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.minus (this, right);
+    return JSOp.minus (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression mul (final double v)
+  public final AbstractJSExpression mul (final double dValue)
   {
-    return mul (JSExpr.lit (v));
+    return mul (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mul (final float v)
+  public final AbstractJSExpression mul (final float fValue)
   {
-    return mul (JSExpr.lit (v));
+    return mul (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mul (final int v)
+  public final AbstractJSExpression mul (final int nValue)
   {
-    return mul (JSExpr.lit (v));
+    return mul (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mul (final long v)
+  public final AbstractJSExpression mul (final long nValue)
   {
-    return mul (JSExpr.lit (v));
+    return mul (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mul (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression mul (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.mul (this, right);
+    return JSOp.mul (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression div (final double v)
+  public final AbstractJSExpression div (final double dValue)
   {
-    return div (JSExpr.lit (v));
+    return div (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression div (final float v)
+  public final AbstractJSExpression div (final float fValue)
   {
-    return div (JSExpr.lit (v));
+    return div (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression div (final int v)
+  public final AbstractJSExpression div (final int nValue)
   {
-    return div (JSExpr.lit (v));
+    return div (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression div (final long v)
+  public final AbstractJSExpression div (final long nValue)
   {
-    return div (JSExpr.lit (v));
+    return div (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression div (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression div (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.div (this, right);
+    return JSOp.div (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression mod (final int v)
+  public final AbstractJSExpression mod (final int nValue)
   {
-    return mod (JSExpr.lit (v));
+    return mod (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mod (final long v)
+  public final AbstractJSExpression mod (final long nValue)
   {
-    return mod (JSExpr.lit (v));
+    return mod (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression mod (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression mod (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.mod (this, right);
+    return JSOp.mod (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression shl (final int v)
+  public final AbstractJSExpression shl (final int nValue)
   {
-    return shl (JSExpr.lit (v));
+    return shl (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shl (final long v)
+  public final AbstractJSExpression shl (final long nValue)
   {
-    return shl (JSExpr.lit (v));
+    return shl (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shl (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression shl (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.shl (this, right);
+    return JSOp.shl (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression shr (final int v)
+  public final AbstractJSExpression shr (final int nValue)
   {
-    return shr (JSExpr.lit (v));
+    return shr (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shr (final long v)
+  public final AbstractJSExpression shr (final long nValue)
   {
-    return shr (JSExpr.lit (v));
+    return shr (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shr (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression shr (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.shr (this, right);
+    return JSOp.shr (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression shrz (final int v)
+  public final AbstractJSExpression shrz (final int nValue)
   {
-    return shrz (JSExpr.lit (v));
+    return shrz (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shrz (final long v)
+  public final AbstractJSExpression shrz (final long nValue)
   {
-    return shrz (JSExpr.lit (v));
+    return shrz (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression shrz (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression shrz (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.shrz (this, right);
+    return JSOp.shrz (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression band (final int v)
+  public final AbstractJSExpression band (final int nValue)
   {
-    return band (JSExpr.lit (v));
+    return band (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression band (final long v)
+  public final AbstractJSExpression band (final long nValue)
   {
-    return band (JSExpr.lit (v));
+    return band (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression band (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression band (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.band (this, right);
+    return JSOp.band (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression bor (final int v)
+  public final AbstractJSExpression bor (final int nValue)
   {
-    return bor (JSExpr.lit (v));
+    return bor (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression bor (final long v)
+  public final AbstractJSExpression bor (final long nValue)
   {
-    return bor (JSExpr.lit (v));
+    return bor (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression bor (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression bor (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.bor (this, right);
+    return JSOp.bor (this, aExpr);
   }
 
   @Nonnull
-  public final IJSExpression cand (@Nonnull final IJSExpression right)
+  public final IJSExpression cand (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.cand (this, right);
+    return JSOp.cand (this, aExpr);
   }
 
   @Nonnull
-  public final IJSExpression cor (@Nonnull final IJSExpression right)
+  public final IJSExpression cor (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.cor (this, right);
+    return JSOp.cor (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression xor (final int v)
+  public final AbstractJSExpression xor (final int nValue)
   {
-    return xor (JSExpr.lit (v));
+    return xor (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression xor (final long v)
+  public final AbstractJSExpression xor (final long nValue)
   {
-    return xor (JSExpr.lit (v));
+    return xor (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression xor (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression xor (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.xor (this, right);
+    return JSOp.xor (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression lt (final double v)
+  public final AbstractJSExpression lt (final double dValue)
   {
-    return lt (JSExpr.lit (v));
+    return lt (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lt (final float v)
+  public final AbstractJSExpression lt (final float fValue)
   {
-    return lt (JSExpr.lit (v));
+    return lt (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lt (final int v)
+  public final AbstractJSExpression lt (final int nValue)
   {
-    return lt (JSExpr.lit (v));
+    return lt (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lt (final long v)
+  public final AbstractJSExpression lt (final long nValue)
   {
-    return lt (JSExpr.lit (v));
+    return lt (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lt (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression lt (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.lt (this, right);
+    return JSOp.lt (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression lte (final double v)
+  public final AbstractJSExpression lte (final double dValue)
   {
-    return lte (JSExpr.lit (v));
+    return lte (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lte (final float v)
+  public final AbstractJSExpression lte (final float fValue)
   {
-    return lte (JSExpr.lit (v));
+    return lte (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lte (final int v)
+  public final AbstractJSExpression lte (final int nValue)
   {
-    return lte (JSExpr.lit (v));
+    return lte (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lte (final long v)
+  public final AbstractJSExpression lte (final long nValue)
   {
-    return lte (JSExpr.lit (v));
+    return lte (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression lte (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression lte (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.lte (this, right);
+    return JSOp.lte (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression gt (final double v)
+  public final AbstractJSExpression gt (final double dValue)
   {
-    return gt (JSExpr.lit (v));
+    return gt (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gt (final float v)
+  public final AbstractJSExpression gt (final float fValue)
   {
-    return gt (JSExpr.lit (v));
+    return gt (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gt (final int v)
+  public final AbstractJSExpression gt (final int nValue)
   {
-    return gt (JSExpr.lit (v));
+    return gt (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gt (final long v)
+  public final AbstractJSExpression gt (final long nValue)
   {
-    return gt (JSExpr.lit (v));
+    return gt (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gt (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression gt (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.gt (this, right);
+    return JSOp.gt (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression gte (final double v)
+  public final AbstractJSExpression gte (final double dValue)
   {
-    return gte (JSExpr.lit (v));
+    return gte (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gte (final float v)
+  public final AbstractJSExpression gte (final float fValue)
   {
-    return gte (JSExpr.lit (v));
+    return gte (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gte (final int v)
+  public final AbstractJSExpression gte (final int nValue)
   {
-    return gte (JSExpr.lit (v));
+    return gte (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gte (final long v)
+  public final AbstractJSExpression gte (final long nValue)
   {
-    return gte (JSExpr.lit (v));
+    return gte (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression gte (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression gte (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.gte (this, right);
+    return JSOp.gte (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final boolean v)
+  public final AbstractJSExpression eq (final boolean bValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final char v)
+  public final AbstractJSExpression eq (final char cValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final float v)
+  public final AbstractJSExpression eq (final float fValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final double v)
+  public final AbstractJSExpression eq (final double dValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final int v)
+  public final AbstractJSExpression eq (final int nValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (final long v)
+  public final AbstractJSExpression eq (final long nValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (@Nonnull final String v)
+  public final AbstractJSExpression eq (@Nonnull final String sValue)
   {
-    return eq (JSExpr.lit (v));
+    return eq (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (@Nonnull final IJSON v)
+  public final AbstractJSExpression eq (@Nonnull final IJSON aValue)
   {
-    return eq (JSExpr.json (v));
+    return eq (JSExpr.json (aValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eq (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression eq (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.eq (this, right);
+    return JSOp.eq (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final boolean v)
+  public final AbstractJSExpression eeq (final boolean bValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final char v)
+  public final AbstractJSExpression eeq (final char cValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final float v)
+  public final AbstractJSExpression eeq (final float fValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final double v)
+  public final AbstractJSExpression eeq (final double dValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final int v)
+  public final AbstractJSExpression eeq (final int nValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (final long v)
+  public final AbstractJSExpression eeq (final long nValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (@Nonnull final String v)
+  public final AbstractJSExpression eeq (@Nonnull final String sValue)
   {
-    return eeq (JSExpr.lit (v));
+    return eeq (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (@Nonnull final IJSON v)
+  public final AbstractJSExpression eeq (@Nonnull final IJSON aValue)
   {
-    return eeq (JSExpr.json (v));
+    return eeq (JSExpr.json (aValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression eeq (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression eeq (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.eeq (this, right);
+    return JSOp.eeq (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final boolean v)
+  public final AbstractJSExpression ne (final boolean bValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final char v)
+  public final AbstractJSExpression ne (final char cValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final float v)
+  public final AbstractJSExpression ne (final float fValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final double v)
+  public final AbstractJSExpression ne (final double dValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final int v)
+  public final AbstractJSExpression ne (final int nValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (final long v)
+  public final AbstractJSExpression ne (final long nValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (@Nonnull final String v)
+  public final AbstractJSExpression ne (@Nonnull final String sValue)
   {
-    return ne (JSExpr.lit (v));
+    return ne (JSExpr.lit (sValue));
+
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (@Nonnull final IJSON v)
+  public final AbstractJSExpression ne (@Nonnull final IJSON aValue)
   {
-    return ne (JSExpr.json (v));
+    return ne (JSExpr.json (aValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ne (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression ne (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.ne (this, right);
+    return JSOp.ne (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final boolean v)
+  public final AbstractJSExpression ene (final boolean bValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final char v)
+  public final AbstractJSExpression ene (final char cValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final float v)
+  public final AbstractJSExpression ene (final double dValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final double v)
+  public final AbstractJSExpression ene (final float fValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final int v)
+  public final AbstractJSExpression ene (final int nValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (final long v)
+  public final AbstractJSExpression ene (final long nValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (@Nonnull final String v)
+  public final AbstractJSExpression ene (@Nonnull final String sValue)
   {
-    return ene (JSExpr.lit (v));
+    return ene (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (@Nonnull final IJSON v)
+  public final AbstractJSExpression ene (@Nonnull final IJSON aValue)
   {
-    return ene (JSExpr.json (v));
+    return ene (JSExpr.json (aValue));
   }
 
   @Nonnull
-  public final AbstractJSExpression ene (@Nonnull final IJSExpression right)
+  public final AbstractJSExpression ene (@Nonnull final IJSExpression aExpr)
   {
-    return JSOp.ene (this, right);
+    return JSOp.ene (this, aExpr);
   }
 
   @Nonnull
-  public final AbstractJSExpression _instanceof (@Nonnull final AbstractJSType right)
+  public final AbstractJSExpression _instanceof (@Nonnull final AbstractJSType aType)
   {
-    return JSOp._instanceof (this, right);
+    return JSOp._instanceof (this, aType);
   }
 
   @Nonnull
@@ -794,9 +795,9 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
-  public final JSArrayCompRef component (@Nonnull final IJSExpression index)
+  public final JSArrayCompRef component (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.component (this, index);
+    return JSExpr.component (this, aExpr);
   }
 
   @Nonnull

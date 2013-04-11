@@ -192,133 +192,133 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   /**
    * Add an expression to this invocation's argument list
    * 
-   * @param aArgument
+   * @param aExpr
    *        Argument to add to argument list
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnull final IJSExpression aArgument)
+  public IMPLTYPE arg (@Nonnull final IJSExpression aExpr)
   {
-    if (aArgument == null)
+    if (aExpr == null)
       throw new NullPointerException ("argument");
-    m_aArgs.add (aArgument);
+    m_aArgs.add (aExpr);
     return _thisAsT ();
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(bArgument))}
    * 
-   * @param bArgument
+   * @param bValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final boolean bArgument)
+  public IMPLTYPE arg (final boolean bValue)
   {
-    return arg (JSExpr.lit (bArgument));
+    return arg (JSExpr.lit (bValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(cArgument))}
    * 
-   * @param cArgument
+   * @param cValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final char cArgument)
+  public IMPLTYPE arg (final char cValue)
   {
-    return arg (JSExpr.lit (cArgument));
+    return arg (JSExpr.lit (cValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(dArgument))}
    * 
-   * @param dArgument
+   * @param dValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final double dArgument)
+  public IMPLTYPE arg (final double dValue)
   {
-    return arg (JSExpr.lit (dArgument));
+    return arg (JSExpr.lit (dValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(fArgument))}
    * 
-   * @param fArgument
+   * @param fValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final float fArgument)
+  public IMPLTYPE arg (final float fValue)
   {
-    return arg (JSExpr.lit (fArgument));
+    return arg (JSExpr.lit (fValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
    * 
-   * @param nArgument
+   * @param nValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final int nArgument)
+  public IMPLTYPE arg (final int nValue)
   {
-    return arg (JSExpr.lit (nArgument));
+    return arg (JSExpr.lit (nValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
    * 
-   * @param nArgument
+   * @param nValue
    *        value to be added as an argument
    * @return this
    */
   @Nonnull
-  public IMPLTYPE arg (final long nArgument)
+  public IMPLTYPE arg (final long nValue)
   {
-    return arg (JSExpr.lit (nArgument));
+    return arg (JSExpr.lit (nValue));
   }
 
   /**
    * Add an expression to this invocation's argument list or "null" if it is
    * <code>null</code>
    * 
-   * @param aArgument
+   * @param aExpr
    *        Argument to add to argument list
    * @return this
    */
   @Nonnull
-  public IMPLTYPE argOrNull (@Nullable final IJSExpression aArgument)
+  public IMPLTYPE argOrNull (@Nullable final IJSExpression aExpr)
   {
-    return aArgument == null ? argNull () : arg (aArgument);
+    return aExpr == null ? argNull () : arg (aExpr);
   }
 
   @Nonnull
-  public IMPLTYPE argOrNull (@Nullable final Integer v)
+  public IMPLTYPE argOrNull (@Nullable final Integer aValue)
   {
-    return v == null ? argNull () : arg (v.intValue ());
+    return aValue == null ? argNull () : arg (aValue.intValue ());
   }
 
   @Nonnull
-  public IMPLTYPE argOrNull (@Nullable final Long v)
+  public IMPLTYPE argOrNull (@Nullable final Long aValue)
   {
-    return v == null ? argNull () : arg (v.longValue ());
+    return aValue == null ? argNull () : arg (aValue.longValue ());
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nullable final String v)
+  public IMPLTYPE arg (@Nullable final String sValue)
   {
-    return v == null ? argNull () : arg (JSExpr.lit (v));
+    return sValue == null ? argNull () : arg (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nullable final IJSON v)
+  public IMPLTYPE arg (@Nullable final IJSON aValue)
   {
-    return v == null ? argNull () : arg (JSExpr.json (v));
+    return aValue == null ? argNull () : arg (JSExpr.json (aValue));
   }
 
   @Nonnull
@@ -376,78 +376,78 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final boolean v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final boolean bValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (bValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final char v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final char cValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (cValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final double v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final double dValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (dValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final float v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final float fValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (fValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final int v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final int nValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (nValue));
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(nIndex, JSExpr.lit(v))}
    */
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, final long v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, final long nValue)
   {
-    return arg (nIndex, JSExpr.lit (v));
+    return arg (nIndex, JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final Integer v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final Integer aValue)
   {
-    return v == null ? argNull (nIndex) : arg (nIndex, v.intValue ());
+    return aValue == null ? argNull (nIndex) : arg (nIndex, aValue.intValue ());
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final Long v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final Long aValue)
   {
-    return v == null ? argNull (nIndex) : arg (nIndex, v.longValue ());
+    return aValue == null ? argNull (nIndex) : arg (nIndex, aValue.longValue ());
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final String v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final String sValue)
   {
-    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.lit (v));
+    return sValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJSON v)
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJSON aValue)
   {
-    return v == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (v));
+    return aValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (aValue));
   }
 
   @Nonnull
@@ -497,7 +497,20 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     return !m_aArgs.isEmpty ();
   }
 
-  public void generate (final JSFormatter f)
+  @Nullable
+  public IJSExpression getArgAtIndex (final int nIndex)
+  {
+    return ContainerHelper.getSafe (m_aArgs, nIndex);
+  }
+
+  @Nonnull
+  public IMPLTYPE removeAllArgs ()
+  {
+    m_aArgs.clear ();
+    return _thisAsT ();
+  }
+
+  public void generate (@Nonnull final JSFormatter f)
   {
     if (m_aCallee instanceof JSAnonymousFunction)
     {

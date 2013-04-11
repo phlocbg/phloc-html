@@ -20,7 +20,6 @@ package com.phloc.html.hc;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.id.IHasID;
 import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.api.IHCHasFocus;
 
@@ -31,7 +30,7 @@ import com.phloc.html.hc.api.IHCHasFocus;
  * @author philip
  * @param <THISTYPE>
  */
-public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>, IHasID <String>
+public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>
 {
   @Nullable
   String getName ();

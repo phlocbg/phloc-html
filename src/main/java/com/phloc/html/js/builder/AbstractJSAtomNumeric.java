@@ -47,17 +47,17 @@ public abstract class AbstractJSAtomNumeric extends AbstractJSExpression
   public abstract AbstractJSAtomNumeric numericDecr ();
 
   @Nonnull
-  public abstract AbstractJSAtomNumeric numericPlus (@Nonnull AbstractJSAtomNumeric rhs);
+  public abstract AbstractJSAtomNumeric numericPlus (@Nonnull AbstractJSAtomNumeric aExpr);
 
   @Nonnull
-  public abstract AbstractJSAtomNumeric numericMinus (@Nonnull AbstractJSAtomNumeric rhs);
+  public abstract AbstractJSAtomNumeric numericMinus (@Nonnull AbstractJSAtomNumeric aExpr);
 
   @Nonnull
-  public abstract AbstractJSAtomNumeric numericMul (@Nonnull AbstractJSAtomNumeric rhs);
+  public abstract AbstractJSAtomNumeric numericMul (@Nonnull AbstractJSAtomNumeric aExpr);
 
   @Nonnull
-  public abstract AbstractJSAtomNumeric numericDiv (@Nonnull AbstractJSAtomNumeric rhs);
+  public abstract AbstractJSAtomNumeric numericDiv (@Nonnull AbstractJSAtomNumeric aExpr);
 
   @Nonnull
-  public abstract AbstractJSAtomNumeric numericMod (@Nonnull AbstractJSAtomNumeric rhs);
+  public abstract AbstractJSAtomNumeric numericMod (@Nonnull AbstractJSAtomNumeric aExpr);
 }

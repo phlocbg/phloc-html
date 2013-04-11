@@ -39,12 +39,12 @@ public class JSReturn implements IJSStatement
   /**
    * Return constructor
    * 
-   * @param expr
+   * @param aExpr
    *        JExpression which evaluates to return value
    */
-  public JSReturn (@Nullable final IJSExpression expr)
+  public JSReturn (@Nullable final IJSExpression aExpr)
   {
-    m_aExpr = expr;
+    m_aExpr = aExpr;
   }
 
   public void state (@Nonnull final JSFormatter f)
