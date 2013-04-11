@@ -59,9 +59,9 @@ public class JSFieldRef extends JSRef
   }
 
   @Override
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (m_aObject).plain ('.').plain (name ());
+    aFormatter.generatable (m_aObject).plain ('.').plain (name ());
   }
 
   @Override

@@ -76,12 +76,12 @@ public class JSOpUnary extends AbstractJSExpression
     return m_bOpFirst;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
     if (m_bOpFirst)
-      f.plain (m_sOp).generatable (m_aExpr);
+      aFormatter.plain (m_sOp).generatable (m_aExpr);
     else
-      f.generatable (m_aExpr).plain (m_sOp);
+      aFormatter.generatable (m_aExpr).plain (m_sOp);
   }
 
   @Override

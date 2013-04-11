@@ -18,7 +18,6 @@
 package com.phloc.html.js.builder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -181,16 +180,26 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
                            @Nonnull @Nonempty final String sName,
                            @Nullable final IJSExpression aInit)
   {
-    final JSFieldVar f = new JSFieldVar (this, aType, sName, aInit);
-    return addField (f);
+    final JSFieldVar aField = new JSFieldVar (this, aType, sName, aInit);
+    return addField (aField);
+  }
+
+  @Nullable
+  public JSFieldVar getFieldOfName (@Nullable final String sName)
+  {
+    return m_aFields.get (sName);
   }
 
   @Nonnull
-  public JSFieldVar addField (@Nonnull final JSFieldVar aField)
+  public JSFieldVar addField (@Nonnull final JSFieldVar aField) throws JSNameAlreadyExistsException
   {
+    if (aField == null)
+      throw new NullPointerException ("Field");
+
     final String sName = aField.name ();
-    if (m_aFields.containsKey (sName))
-      throw new IllegalArgumentException ("trying to create the same field twice: " + sName);
+    final JSFieldVar aOldField = getFieldOfName (sName);
+    if (aOldField != null)
+      throw new JSNameAlreadyExistsException (aOldField);
 
     m_aFields.put (sName, aField);
     return aField;
@@ -226,6 +235,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   {
     if (aField == null)
       throw new NullPointerException ("field");
+
     if (m_aFields.remove (aField.name ()) != aField)
       throw new IllegalArgumentException ("Failed to remove field '" + aField.name () + "' from " + m_aFields.keySet ());
     return this;
@@ -246,11 +256,9 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   @Nonnull
   public JSConstructor constructor ()
   {
-    if (m_aConstructor != null)
-      return m_aConstructor;
-    final JSConstructor aConstructor = new JSConstructor (this);
-    m_aConstructor = aConstructor;
-    return aConstructor;
+    if (m_aConstructor == null)
+      m_aConstructor = new JSConstructor (this);
+    return m_aConstructor;
   }
 
   /**
@@ -278,9 +286,9 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   @Nonnull
   public JSMethod method (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName)
   {
-    final JSMethod m = new JSMethod (this, aType, sName);
-    m_aMethods.add (m);
-    return m;
+    final JSMethod aMethod = new JSMethod (this, aType, sName);
+    m_aMethods.add (aMethod);
+    return aMethod;
   }
 
   /**
@@ -288,7 +296,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <JSMethod> methods ()
+  public List <JSMethod> methods ()
   {
     return ContainerHelper.newList (m_aMethods);
   }
@@ -312,13 +320,13 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
     return staticRef ("prototype");
   }
 
-  public void declare (final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aJSDoc != null)
-      f.nl ().generatable (m_aJSDoc);
+      aFormatter.nl ().generatable (m_aJSDoc);
 
     // Emit the constructor first (a function)
-    f.decl (constructor ());
+    aFormatter.decl (constructor ());
 
     final JSAssocArray aPrototypefields = new JSAssocArray ();
 
@@ -331,7 +339,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
       aPrototypefields.add (aMethod.name (), aMethod.getAsAnonymousFunction ());
 
     // Start with the prototype methods
-    JSExpr.assign (prototype (), aPrototypefields).generate (f);
+    JSExpr.assign (prototype (), aPrototypefields).generate (aFormatter);
   }
 
   @Nullable

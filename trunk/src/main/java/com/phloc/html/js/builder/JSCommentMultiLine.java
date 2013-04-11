@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -37,10 +38,10 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   private static final String INDENT = " *     ";
 
   /** list of @-param tags */
-  private final Map <String, JSCommentPart> m_aParams = new HashMap <String, JSCommentPart> ();
+  private final Map <String, JSCommentPart> m_aParams = new LinkedHashMap <String, JSCommentPart> ();
 
   /** list of xdoclets */
-  private final Map <String, Map <String, String>> m_aXDoclets = new HashMap <String, Map <String, String>> ();
+  private final Map <String, Map <String, String>> m_aXDoclets = new LinkedHashMap <String, Map <String, String>> ();
 
   /** The @-return tag part. */
   private JSCommentPart m_aReturn;
@@ -162,10 +163,10 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
     if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXDoclets.isEmpty ())
     {
       aFormatter.plain (" * ").nlFix ();
-      for (final Map.Entry <String, JSCommentPart> e : m_aParams.entrySet ())
+      for (final Map.Entry <String, JSCommentPart> aEntry : m_aParams.entrySet ())
       {
-        aFormatter.plain (" * @param ").plain (e.getKey ()).nlFix ();
-        e.getValue ().format (aFormatter, INDENT);
+        aFormatter.plain (" * @param ").plain (aEntry.getKey ()).nlFix ();
+        aEntry.getValue ().format (aFormatter, INDENT);
       }
       if (m_aReturn != null)
       {
@@ -177,13 +178,13 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
         aFormatter.plain (" * @deprecated").nlFix ();
         m_aDeprecated.format (aFormatter, INDENT);
       }
-      for (final Map.Entry <String, Map <String, String>> e : m_aXDoclets.entrySet ())
+      for (final Map.Entry <String, Map <String, String>> aEntry : m_aXDoclets.entrySet ())
       {
-        aFormatter.plain (" * @").plain (e.getKey ());
-        if (e.getValue () != null)
+        aFormatter.plain (" * @").plain (aEntry.getKey ());
+        if (aEntry.getValue () != null)
         {
-          for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
-            aFormatter.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
+          for (final Map.Entry <String, String> aEntry2 : aEntry.getValue ().entrySet ())
+            aFormatter.plain (" ").plain (aEntry2.getKey ()).plain ("= \"").plain (aEntry2.getValue ()).plain ("\"");
         }
         aFormatter.nlFix ();
       }

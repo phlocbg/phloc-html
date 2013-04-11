@@ -25,8 +25,6 @@ import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.commons.string.StringHelper;
-
 /**
  * This is a utility class for managing indentation and other basic formatting
  * for {@link PrintWriter}.
@@ -51,6 +49,8 @@ public class JSFormatter implements Closeable
    */
   private int m_nIndentLevel;
 
+  private String m_sIndentCache = "";
+
   private boolean m_bAtBeginningOfLine = true;
 
   private boolean m_bIndentAndAlign = true;
@@ -60,33 +60,38 @@ public class JSFormatter implements Closeable
   private boolean m_bGenerateComments = true;
 
   /**
-   * Creates a formatter with default incremental indentations of four spaces.
+   * Creates a formatter with default incremental indentations of 2 spaces.
    */
-  public JSFormatter (final Writer w)
+  public JSFormatter (@Nonnull final Writer aWriter)
   {
-    this (new PrintWriter (w));
+    this (aWriter instanceof PrintWriter ? (PrintWriter) aWriter : new PrintWriter (aWriter));
   }
 
   /**
-   * Creates a formatter with default incremental indentations of four spaces.
+   * Creates a formatter with default incremental indentations of 2 spaces.
    */
-  public JSFormatter (final PrintWriter s)
+  public JSFormatter (@Nonnull final PrintWriter aPrintWriter)
   {
-    this (s, DEFAULT_INDENT);
+    this (aPrintWriter, DEFAULT_INDENT);
   }
 
   /**
    * Creates a JFormatter.
    * 
-   * @param s
-   *        PrintWriter to JFormatter to use.
-   * @param space
+   * @param aPrintWriter
+   *        PrintWriter to use.
+   * @param sIndentSpace
    *        Incremental indentation string, similar to tab value.
    */
-  public JSFormatter (@Nonnull final PrintWriter s, @Nonnull final String space)
+  public JSFormatter (@Nonnull final PrintWriter aPrintWriter, @Nonnull final String sIndentSpace)
   {
-    m_aPW = s;
-    m_sIndentSpace = space;
+    if (aPrintWriter == null)
+      throw new NullPointerException ("printWriter");
+    if (sIndentSpace == null)
+      throw new NullPointerException ("indentSpace");
+
+    m_aPW = aPrintWriter;
+    m_sIndentSpace = sIndentSpace;
   }
 
   public boolean indentAndAlign ()
@@ -154,7 +159,10 @@ public class JSFormatter implements Closeable
   @Nonnull
   public JSFormatter outdentFix ()
   {
+    if (m_nIndentLevel == 0)
+      throw new IllegalStateException ("Nothing left to outdent!");
     m_nIndentLevel--;
+    m_sIndentCache = m_sIndentCache.substring (0, m_nIndentLevel * m_sIndentSpace.length ());
     return this;
   }
 
@@ -180,6 +188,7 @@ public class JSFormatter implements Closeable
   public JSFormatter indentFix ()
   {
     m_nIndentLevel++;
+    m_sIndentCache += m_sIndentSpace;
     return this;
   }
 
@@ -188,7 +197,7 @@ public class JSFormatter implements Closeable
     if (m_bAtBeginningOfLine)
     {
       if (m_nIndentLevel > 0)
-        m_aPW.print (StringHelper.getRepeated (m_sIndentSpace, m_nIndentLevel));
+        m_aPW.print (m_sIndentCache);
       m_bAtBeginningOfLine = false;
     }
   }
@@ -196,41 +205,41 @@ public class JSFormatter implements Closeable
   /**
    * Print a char into the stream
    * 
-   * @param c
+   * @param cChar
    *        the char
    */
   @Nonnull
-  public JSFormatter plain (final char c)
+  public JSFormatter plain (final char cChar)
   {
     _spaceIfNeeded ();
-    m_aPW.print (c);
+    m_aPW.print (cChar);
     return this;
   }
 
   /**
    * Print a {@link String} into the stream
    * 
-   * @param s
+   * @param sText
    *        the {@link String}
    */
   @Nonnull
-  public JSFormatter plain (@Nonnull final String s)
+  public JSFormatter plain (@Nonnull final String sText)
   {
     _spaceIfNeeded ();
-    m_aPW.print (s);
+    m_aPW.print (sText);
     return this;
   }
 
   /**
    * Print a type name.
    * 
-   * @param type
+   * @param aType
    *        The type whose name is to be printed
    */
   @Nonnull
-  public JSFormatter type (@Nonnull final AbstractJSType type)
+  public JSFormatter type (@Nonnull final AbstractJSType aType)
   {
-    plain (type.name ());
+    plain (aType.name ());
     return this;
   }
 
@@ -279,14 +288,14 @@ public class JSFormatter implements Closeable
   @Nonnull
   public JSFormatter generatable (@Nonnull final Collection <? extends IJSGeneratable> aCont)
   {
-    boolean first = true;
-    for (final IJSGeneratable item : aCont)
+    boolean bFirst = true;
+    for (final IJSGeneratable aItem : aCont)
     {
-      if (first)
-        first = false;
+      if (bFirst)
+        bFirst = false;
       else
         plain (',');
-      generatable (item);
+      generatable (aItem);
     }
     return this;
   }

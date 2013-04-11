@@ -87,9 +87,9 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAssignment assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignPlus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "+=", rhs);
+    return new JSAssignment (aLhs, "+=", aRhs);
   }
 
   @Nonnull
@@ -294,6 +294,9 @@ public final class JSExpr
   @Nonnull
   public static JSExprDirect json (@Nonnull final IJSON aJSON)
   {
+    if (aJSON == null)
+      throw new NullPointerException ("JSON");
+
     return direct (aJSON.getJSONString (JSPrinter.isIndentAndAlign ()));
   }
 

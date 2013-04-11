@@ -102,9 +102,9 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * Overrides the return type.
    */
   @Nonnull
-  public JSFunction type (@Nullable final AbstractJSType t)
+  public JSFunction type (@Nullable final AbstractJSType aType)
   {
-    m_aType = t;
+    m_aType = aType;
     return this;
   }
 
@@ -142,32 +142,32 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
    * Add the specified variable to the list of parameters for this function
    * signature.
    * 
-   * @param name
+   * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nonnull final String name)
+  public JSVar param (@Nonnull final String sName)
   {
-    return param (null, name);
+    return param (null, sName);
   }
 
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
    * 
-   * @param type
+   * @param aType
    *        Type of the parameter being added
-   * @param name
+   * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nullable final AbstractJSType type, @Nonnull final String name)
+  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull final String sName)
   {
-    final JSVar v = new JSVar (type, name, null);
-    m_aParams.add (v);
-    return v;
+    final JSVar aVar = new JSVar (aType, sName, null);
+    m_aParams.add (aVar);
+    return aVar;
   }
 
   @Nonnegative
@@ -221,27 +221,33 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return new JSInvocation (this);
   }
 
+  @Nonnull
+  public JSAnonymousFunction getAsAnonymousFunction ()
+  {
+    // No name required for anonymous function
+    return new JSAnonymousFunction (type (), params (), body ());
+  }
+
   @Override
-  public void declare (@Nonnull final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aJSDoc != null)
-      f.generatable (m_aJSDoc);
+      aFormatter.generatable (m_aJSDoc);
 
-    f.plain ("function ");
-    if (m_aType != null && f.generateTypeNames ())
-      f.plain ("/*").generatable (m_aType).plain ("*/");
-    f.plain (m_sName).plain ('(');
-    boolean first = true;
+    aFormatter.plain ("function ");
+    if (m_aType != null && aFormatter.generateTypeNames ())
+      aFormatter.plain ("/*").generatable (m_aType).plain ("*/");
+    aFormatter.plain (m_sName).plain ('(');
+    boolean bFirst = true;
     for (final JSVar aParam : m_aParams)
     {
-      if (first)
-        first = false;
+      if (bFirst)
+        bFirst = false;
       else
-        f.plain (',');
-      f.var (aParam);
+        aFormatter.plain (',');
+      aFormatter.var (aParam);
     }
-    f.plain (')');
-    f.stmt (body ());
+    aFormatter.plain (')').stmt (body ());
   }
 
   @Nullable

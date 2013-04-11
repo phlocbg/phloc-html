@@ -86,15 +86,15 @@ public class JSRegExLiteral extends AbstractJSExpression
     return this;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ('/').plain (m_sRegEx).plain ('/');
+    aFormatter.plain ('/').plain (m_sRegEx).plain ('/');
     if (m_bGlobal)
-      f.plain ('g');
+      aFormatter.plain ('g');
     if (m_bCaseInsensitive)
-      f.plain ('i');
+      aFormatter.plain ('i');
     if (m_bMultiLine)
-      f.plain ('m');
+      aFormatter.plain ('m');
   }
 
   @Override

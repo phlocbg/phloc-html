@@ -54,9 +54,9 @@ public class JSLabel implements IJSStatement
     return m_sLabel;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (m_sLabel).plain (':').nl ();
+    aFormatter.plain (m_sLabel).plain (':').nl ();
   }
 
   @Nullable

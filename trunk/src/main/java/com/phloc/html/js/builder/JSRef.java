@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
@@ -63,9 +64,31 @@ public class JSRef extends AbstractJSAssignmentTarget
     return m_sName != null ? m_sName : m_aVar.name ();
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public boolean isFixedName ()
   {
-    f.plain (name ());
+    return m_sName != null;
+  }
+
+  @Nullable
+  public String fixedName ()
+  {
+    return m_sName;
+  }
+
+  public boolean isFixedVar ()
+  {
+    return m_aVar != null;
+  }
+
+  @Nullable
+  public JSVar fixedVar ()
+  {
+    return m_aVar;
+  }
+
+  public void generate (@Nonnull final JSFormatter aFormatter)
+  {
+    aFormatter.plain (name ());
   }
 
   @Override

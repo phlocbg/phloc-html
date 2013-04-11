@@ -33,9 +33,9 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSDebugger implements IJSStatement
 {
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("debugger;").nl ();
+    aFormatter.plain ("debugger;").nl ();
   }
 
   @Nullable

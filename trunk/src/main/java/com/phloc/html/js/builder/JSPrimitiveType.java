@@ -70,9 +70,9 @@ public class JSPrimitiveType extends AbstractJSType
     return m_aGlobal;
   }
 
-  public final void generate (@Nonnull final JSFormatter f)
+  public final void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (m_sName);
+    aFormatter.plain (m_sName);
   }
 
   @Nonnull

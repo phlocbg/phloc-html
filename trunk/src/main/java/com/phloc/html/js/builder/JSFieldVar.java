@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
 {
-  private final JSDefinedClass m_aOwner;
+  private final JSDefinedClass m_aOwnerClass;
 
   /**
    * JSdoc comments for this field
@@ -49,30 +49,37 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
    * @param aInit
    *        Value to initialize this variable to
    */
-  public JSFieldVar (@Nonnull final JSDefinedClass aOwner,
+  public JSFieldVar (@Nonnull final JSDefinedClass aOwnerClass,
                      @Nullable final AbstractJSType aType,
                      @Nonnull final String sName,
                      @Nullable final IJSExpression aInit)
   {
     super (aType, sName, aInit);
-    if (aOwner == null)
-      throw new NullPointerException ("owner");
-    m_aOwner = aOwner;
+    if (aOwnerClass == null)
+      throw new NullPointerException ("OwnerClass");
+    m_aOwnerClass = aOwnerClass;
+  }
+
+  @Nonnull
+  public JSDefinedClass parentClass ()
+  {
+    return m_aOwnerClass;
   }
 
   @Nonnull
   @Override
-  public JSFieldVar name (@Nonnull @Nonempty final String sNewName)
+  public JSFieldVar name (@Nonnull @Nonempty final String sNewName) throws JSNameAlreadyExistsException
   {
     final String sOldName = name ();
     if (!sOldName.equals (sNewName))
     {
       // make sure that the new name is available
-      if (m_aOwner.containsField (sNewName))
-        throw new IllegalArgumentException ("name " + sNewName + " is already in use");
-      m_aOwner.removeField (this);
+      final JSFieldVar aExistingField = m_aOwnerClass.getFieldOfName (sNewName);
+      if (aExistingField != null)
+        throw new JSNameAlreadyExistsException (aExistingField);
+      m_aOwnerClass.removeField (this);
       super.name (sNewName);
-      m_aOwner.addField (this);
+      m_aOwnerClass.addField (this);
     }
     return this;
   }
@@ -91,11 +98,11 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
   }
 
   @Override
-  public void declare (@Nonnull final JSFormatter f)
+  public void declare (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aJSDoc != null)
-      f.generatable (m_aJSDoc);
-    super.declare (f);
+      aFormatter.generatable (m_aJSDoc);
+    super.declare (aFormatter);
   }
 
   @Override
@@ -106,21 +113,24 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
     if (!super.equals (o))
       return false;
     final JSFieldVar rhs = (JSFieldVar) o;
-    return m_aOwner.name ().equals (rhs.m_aOwner.name ()) && EqualsUtils.equals (m_aJSDoc, rhs.m_aJSDoc);
+    return m_aOwnerClass.name ().equals (rhs.m_aOwnerClass.name ()) && EqualsUtils.equals (m_aJSDoc, rhs.m_aJSDoc);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aOwner.name ()).append (m_aJSDoc).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ())
+                            .append (m_aOwnerClass.name ())
+                            .append (m_aJSDoc)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("owner", m_aOwner)
-                            .append ("jsDoc", m_aJSDoc)
+                            .append ("ownerClass", m_aOwnerClass)
+                            .appendIfNotNull ("jsDoc", m_aJSDoc)
                             .toString ();
   }
 }

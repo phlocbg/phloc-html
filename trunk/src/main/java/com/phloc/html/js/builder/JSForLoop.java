@@ -23,6 +23,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -34,7 +36,7 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSForLoop implements IJSStatement
 {
-  private final List <Object> m_aInits = new ArrayList <Object> ();
+  private final List <IJSExpression> m_aInits = new ArrayList <IJSExpression> ();
   private IJSExpression m_aTest;
   private final List <IJSExpression> m_aUpdates = new ArrayList <IJSExpression> ();
   private JSBlock m_aBody;
@@ -79,15 +81,15 @@ public class JSForLoop implements IJSStatement
 
   @Nonnull
   public JSVar init (@Nullable final AbstractJSType aType,
-                     @Nonnull final String sVar,
+                     @Nonnull final String sVarName,
                      @Nonnull final IJSExpression aExpr)
   {
     if (aExpr == null)
       throw new NullPointerException ("initExpression");
 
-    final JSVar v = new JSVar (aType, sVar, aExpr);
-    m_aInits.add (v);
-    return v;
+    final JSVar aVar = new JSVar (aType, sVarName, aExpr);
+    m_aInits.add (aVar);
+    return aVar;
   }
 
   public void init (@Nonnull final JSVar aVar, @Nonnull final IJSExpression aExpr)
@@ -99,6 +101,7 @@ public class JSForLoop implements IJSStatement
   {
     if (aTest == null)
       throw new NullPointerException ("test");
+
     m_aTest = aTest;
   }
 
@@ -106,7 +109,15 @@ public class JSForLoop implements IJSStatement
   {
     if (aExpr == null)
       throw new NullPointerException ("expr");
+
     m_aUpdates.add (aExpr);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <IJSExpression> updates ()
+  {
+    return ContainerHelper.newList (m_aUpdates);
   }
 
   @Nonnull
@@ -117,26 +128,26 @@ public class JSForLoop implements IJSStatement
     return m_aBody;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("for(");
+    aFormatter.plain ("for(");
     boolean bFirst = true;
-    for (final Object o : m_aInits)
+    for (final IJSExpression aInit : m_aInits)
     {
       if (bFirst)
         bFirst = false;
       else
-        f.plain (',');
-      if (o instanceof JSVar)
-        f.plain ("var ").var ((JSVar) o);
+        aFormatter.plain (',');
+      if (aInit instanceof JSVar)
+        aFormatter.plain ("var ").var ((JSVar) aInit);
       else
-        f.generatable ((IJSExpression) o);
+        aFormatter.generatable (aInit);
     }
-    f.plain (';').generatable (m_aTest).plain (';').generatable (m_aUpdates).plain (')');
+    aFormatter.plain (';').generatable (m_aTest).plain (';').generatable (m_aUpdates).plain (')');
     if (m_aBody != null)
-      f.generatable (m_aBody).nl ();
+      aFormatter.generatable (m_aBody).nl ();
     else
-      f.plain (';').nl ();
+      aFormatter.plain (';').nl ();
   }
 
   @Nullable

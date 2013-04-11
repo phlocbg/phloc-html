@@ -37,28 +37,28 @@ public class JSOpTernary extends AbstractJSExpression
   private final String m_sOp2;
   private final IJSExpression m_aExpr3;
 
-  public JSOpTernary (@Nonnull final IJSExpression e1,
-                      @Nonnull @Nonempty final String op1,
-                      @Nonnull final IJSExpression e2,
-                      @Nonnull @Nonempty final String op2,
-                      @Nonnull final IJSExpression e3)
+  public JSOpTernary (@Nonnull final IJSExpression aExpr1,
+                      @Nonnull @Nonempty final String sOp1,
+                      @Nonnull final IJSExpression aExpr2,
+                      @Nonnull @Nonempty final String sOp2,
+                      @Nonnull final IJSExpression aExpr3)
   {
-    if (e1 == null)
+    if (aExpr1 == null)
       throw new NullPointerException ("expr1");
-    if (StringHelper.hasNoText (op1))
+    if (StringHelper.hasNoText (sOp1))
       throw new IllegalArgumentException ("empty operator1");
-    if (e2 == null)
+    if (aExpr2 == null)
       throw new NullPointerException ("expr2");
-    if (StringHelper.hasNoText (op2))
+    if (StringHelper.hasNoText (sOp2))
       throw new IllegalArgumentException ("empty operator1");
-    if (e3 == null)
+    if (aExpr3 == null)
       throw new NullPointerException ("expr3");
 
-    m_aExpr1 = e1;
-    m_sOp1 = op1;
-    m_aExpr2 = e2;
-    m_sOp2 = op2;
-    m_aExpr3 = e3;
+    m_aExpr1 = aExpr1;
+    m_sOp1 = sOp1;
+    m_aExpr2 = aExpr2;
+    m_sOp2 = sOp2;
+    m_aExpr3 = aExpr3;
   }
 
   @Nonnull
@@ -93,15 +93,15 @@ public class JSOpTernary extends AbstractJSExpression
     return m_aExpr3;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ('(')
-     .generatable (m_aExpr1)
-     .plain (m_sOp1)
-     .generatable (m_aExpr2)
-     .plain (m_sOp2)
-     .generatable (m_aExpr3)
-     .plain (')');
+    aFormatter.plain ('(')
+              .generatable (m_aExpr1)
+              .plain (m_sOp1)
+              .generatable (m_aExpr2)
+              .plain (m_sOp2)
+              .generatable (m_aExpr3)
+              .plain (')');
   }
 
   @Override
