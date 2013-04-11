@@ -62,11 +62,11 @@ public class JSCatchBlock implements IJSGeneratable
     return m_aBody;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aVar == null)
       m_aVar = new JSVar (null, "e", null);
-    f.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
+    aFormatter.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
   }
 
   @Nonnull

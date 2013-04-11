@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -27,6 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
+@Immutable
 public class JSAtomBoolean extends AbstractJSExpression
 {
   private final boolean m_bValue;
@@ -41,9 +43,9 @@ public class JSAtomBoolean extends AbstractJSExpression
     return m_bValue;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (Boolean.toString (m_bValue));
+    aFormatter.plain (Boolean.toString (m_bValue));
   }
 
   @Override

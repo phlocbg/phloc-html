@@ -117,9 +117,9 @@ public class JSAtomDecimal extends AbstractJSAtomNumeric
     return m_dValue;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (Double.toString (m_dValue));
+    aFormatter.plain (Double.toString (m_dValue));
   }
 
   @Override

@@ -57,9 +57,9 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
     m_aIndex = aIndex;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
+    aFormatter.generatable (m_aArray).plain ('[').generatable (m_aIndex).plain (']');
   }
 
   @Override

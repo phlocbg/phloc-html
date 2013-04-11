@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -52,7 +53,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 
   @Override
   @Nonnull
-  public JSCommentMultiLine append (final Object aObj)
+  public JSCommentMultiLine append (@Nullable final Object aObj)
   {
     add (aObj);
     return this;
@@ -62,15 +63,18 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * Append a text to a @-param tag to the JSDoc
    */
   @Nonnull
-  public JSCommentPart addParam (final String sParam)
+  public JSCommentPart addParam (@Nonnull final String sParam)
   {
-    JSCommentPart p = m_aParams.get (sParam);
-    if (p == null)
+    if (sParam == null)
+      throw new NullPointerException ("param");
+
+    JSCommentPart aPart = m_aParams.get (sParam);
+    if (aPart == null)
     {
-      p = new JSCommentPart ();
-      m_aParams.put (sParam, p);
+      aPart = new JSCommentPart ();
+      m_aParams.put (sParam, aPart);
     }
-    return p;
+    return aPart;
   }
 
   /**
@@ -108,22 +112,25 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
    * add an xdoclet.
    */
   @Nonnull
-  public Map <String, String> addXdoclet (final String sName)
+  public Map <String, String> addXdoclet (@Nonnull final String sName)
   {
-    Map <String, String> p = m_aXDoclets.get (sName);
-    if (p == null)
+    if (sName == null)
+      throw new NullPointerException ("name");
+
+    Map <String, String> aMap = m_aXDoclets.get (sName);
+    if (aMap == null)
     {
-      p = new HashMap <String, String> ();
-      m_aXDoclets.put (sName, p);
+      aMap = new HashMap <String, String> ();
+      m_aXDoclets.put (sName, aMap);
     }
-    return p;
+    return aMap;
   }
 
   /**
    * add an xdoclet.
    */
   @Nonnull
-  public Map <String, String> addXdoclet (final String sName, @Nonnull final Map <String, String> aAttributes)
+  public Map <String, String> addXdoclet (@Nonnull final String sName, @Nonnull final Map <String, String> aAttributes)
   {
     final Map <String, String> p = addXdoclet (sName);
     p.putAll (aAttributes);
@@ -133,53 +140,55 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   /**
    * add an xdoclet.
    */
-  public Map <String, String> addXdoclet (final String sName, final String sAttributeName, final String sAttributeValue)
+  public Map <String, String> addXdoclet (@Nonnull final String sName,
+                                          @Nonnull final String sAttributeName,
+                                          @Nonnull final String sAttributeValue)
   {
     final Map <String, String> p = addXdoclet (sName);
     p.put (sAttributeName, sAttributeValue);
     return p;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    if (!f.generateComments ())
+    if (!aFormatter.generateComments ())
       return;
 
-    f.plain ("/**").nlFix ();
+    aFormatter.plain ("/**").nlFix ();
 
     // Main content start
-    format (f, " * ");
+    format (aFormatter, " * ");
 
     if (!m_aParams.isEmpty () || m_aReturn != null || m_aDeprecated != null || !m_aXDoclets.isEmpty ())
     {
-      f.plain (" * ").nlFix ();
+      aFormatter.plain (" * ").nlFix ();
       for (final Map.Entry <String, JSCommentPart> e : m_aParams.entrySet ())
       {
-        f.plain (" * @param ").plain (e.getKey ()).nlFix ();
-        e.getValue ().format (f, INDENT);
+        aFormatter.plain (" * @param ").plain (e.getKey ()).nlFix ();
+        e.getValue ().format (aFormatter, INDENT);
       }
       if (m_aReturn != null)
       {
-        f.plain (" * @return").nlFix ();
-        m_aReturn.format (f, INDENT);
+        aFormatter.plain (" * @return").nlFix ();
+        m_aReturn.format (aFormatter, INDENT);
       }
       if (m_aDeprecated != null)
       {
-        f.plain (" * @deprecated").nlFix ();
-        m_aDeprecated.format (f, INDENT);
+        aFormatter.plain (" * @deprecated").nlFix ();
+        m_aDeprecated.format (aFormatter, INDENT);
       }
       for (final Map.Entry <String, Map <String, String>> e : m_aXDoclets.entrySet ())
       {
-        f.plain (" * @").plain (e.getKey ());
+        aFormatter.plain (" * @").plain (e.getKey ());
         if (e.getValue () != null)
         {
           for (final Map.Entry <String, String> a : e.getValue ().entrySet ())
-            f.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
+            aFormatter.plain (" ").plain (a.getKey ()).plain ("= \"").plain (a.getValue ()).plain ("\"");
         }
-        f.nlFix ();
+        aFormatter.nlFix ();
       }
     }
-    f.plain (" */").nlFix ();
+    aFormatter.plain (" */").nlFix ();
   }
 
   @Nonnull

@@ -60,22 +60,22 @@ public class JSAnonymousFunction extends AbstractJSExpression
   /**
    * constructor
    * 
-   * @param type
+   * @param aType
    *        Type to which the expression is cast
    */
-  public JSAnonymousFunction (@Nullable final AbstractJSType type)
+  public JSAnonymousFunction (@Nullable final AbstractJSType aType)
   {
-    m_aType = type;
+    m_aType = aType;
   }
 
-  JSAnonymousFunction (@Nullable final AbstractJSType type,
-                       @Nullable final List <JSVar> params,
-                       @Nullable final JSBlock body)
+  JSAnonymousFunction (@Nullable final AbstractJSType aType,
+                       @Nullable final List <JSVar> aParams,
+                       @Nullable final JSBlock aBody)
   {
-    this (type);
-    if (params != null)
-      m_aParams.addAll (params);
-    m_aBody = body;
+    this (aType);
+    if (aParams != null)
+      m_aParams.addAll (aParams);
+    m_aBody = aBody;
   }
 
   /**
@@ -89,10 +89,13 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Overrides the return type.
+   * 
+   * @param aType
+   *        the new return type.
    */
-  public void type (@Nullable final AbstractJSType t)
+  public void type (@Nullable final AbstractJSType aType)
   {
-    m_aType = t;
+    m_aType = aType;
   }
 
   /**
@@ -111,32 +114,32 @@ public class JSAnonymousFunction extends AbstractJSExpression
    * Add the specified variable to the list of parameters for this function
    * signature.
    * 
-   * @param name
+   * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nonnull final String name)
+  public JSVar param (@Nonnull final String sName)
   {
-    return param (null, name);
+    return param (null, sName);
   }
 
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
    * 
-   * @param type
+   * @param aType
    *        type of the parameter being added
-   * @param name
+   * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
    */
   @Nonnull
-  public JSVar param (@Nullable final AbstractJSType type, @Nonnull final String name)
+  public JSVar param (@Nullable final AbstractJSType aType, @Nonnull final String sName)
   {
-    final JSVar v = new JSVar (type, name, null);
-    m_aParams.add (v);
-    return v;
+    final JSVar aVar = new JSVar (aType, sName, null);
+    m_aParams.add (aVar);
+    return aVar;
   }
 
   @Nonnegative
@@ -170,22 +173,22 @@ public class JSAnonymousFunction extends AbstractJSExpression
     return new JSInvocation (this);
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (final JSFormatter aFormatter)
   {
-    f.plain ("function");
-    if (m_aType != null && f.generateTypeNames ())
-      f.plain (" /*").generatable (m_aType).plain ("*/");
-    f.plain ('(');
-    boolean first = true;
+    aFormatter.plain ("function");
+    if (m_aType != null && aFormatter.generateTypeNames ())
+      aFormatter.plain (" /*").generatable (m_aType).plain ("*/");
+    aFormatter.plain ('(');
+    boolean bFirst = true;
     for (final JSVar aParam : m_aParams)
     {
-      if (first)
-        first = false;
+      if (bFirst)
+        bFirst = false;
       else
-        f.plain (',');
-      f.var (aParam);
+        aFormatter.plain (',');
+      aFormatter.var (aParam);
     }
-    f.plain (')').stmt (body ());
+    aFormatter.plain (')').stmt (body ());
   }
 
   @Override

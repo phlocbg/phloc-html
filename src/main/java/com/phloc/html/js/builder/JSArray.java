@@ -53,130 +53,130 @@ public class JSArray extends AbstractJSExpression
   }
 
   @Nonnull
-  public JSArray add (final boolean v)
+  public JSArray add (final boolean bValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public JSArray add (final char v)
+  public JSArray add (final char cValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public JSArray add (final double v)
+  public JSArray add (final double dValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public JSArray add (final float v)
+  public JSArray add (final float fValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public JSArray add (final int v)
+  public JSArray add (final int nValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSArray add (final long v)
+  public JSArray add (final long nValue)
   {
-    return add (JSExpr.lit (v));
+    return add (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public JSArray add (@Nullable final String v)
+  public JSArray add (@Nullable final String sValue)
   {
-    return add (v == null ? JSExpr.NULL : JSExpr.lit (v));
+    return add (sValue == null ? JSExpr.NULL : JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public JSArray add (@Nullable final IJSON v)
+  public JSArray add (@Nullable final IJSON aValue)
   {
-    return add (v == null ? JSExpr.NULL : JSExpr.json (v));
+    return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final boolean... aCont)
   {
-    for (final boolean v : aCont)
-      add (v);
+    for (final boolean bValue : aCont)
+      add (bValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final char... aCont)
   {
-    for (final char v : aCont)
-      add (v);
+    for (final char cValue : aCont)
+      add (cValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final double... aCont)
   {
-    for (final double v : aCont)
-      add (v);
+    for (final double dValue : aCont)
+      add (dValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final float... aCont)
   {
-    for (final float v : aCont)
-      add (v);
+    for (final float fValue : aCont)
+      add (fValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final int... aCont)
   {
-    for (final int v : aCont)
-      add (v);
+    for (final int nValue : aCont)
+      add (nValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final long... aCont)
   {
-    for (final long v : aCont)
-      add (v);
+    for (final long nValue : aCont)
+      add (nValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final String... aCont)
   {
-    for (final String v : aCont)
-      add (v);
+    for (final String sValue : aCont)
+      add (sValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAll (@Nonnull final Iterable <String> aCont)
   {
-    for (final String v : aCont)
-      add (v);
+    for (final String sValue : aCont)
+      add (sValue);
     return this;
   }
 
   @Nonnull
   public JSArray addAllExpr (@Nonnull final IJSExpression... aCont)
   {
-    for (final IJSExpression v : aCont)
-      add (v);
+    for (final IJSExpression aExpr : aCont)
+      add (aExpr);
     return this;
   }
 
   @Nonnull
   public JSArray addAllExpr (@Nonnull final Iterable <? extends IJSExpression> aCont)
   {
-    for (final IJSExpression v : aCont)
-      add (v);
+    for (final IJSExpression aExpr : aCont)
+      add (aExpr);
     return this;
   }
 
@@ -188,6 +188,7 @@ public class JSArray extends AbstractJSExpression
   {
     if (aExpr == null)
       throw new NullPointerException ("expr");
+
     if (m_aExprs == null)
       m_aExprs = new ArrayList <IJSExpression> ();
     m_aExprs.add (aExpr);
@@ -202,12 +203,12 @@ public class JSArray extends AbstractJSExpression
     return this;
   }
 
-  public void generate (final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ('[');
+    aFormatter.plain ('[');
     if (m_aExprs != null)
-      f.generatable (m_aExprs);
-    f.plain (']');
+      aFormatter.generatable (m_aExprs);
+    aFormatter.plain (']');
   }
 
   @Override

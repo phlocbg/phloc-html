@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -29,6 +30,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
+@Immutable
 public class JSAtom extends AbstractJSExpression
 {
   private final String m_sAtom;
@@ -47,9 +49,9 @@ public class JSAtom extends AbstractJSExpression
     return m_sAtom;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (m_sAtom);
+    aFormatter.plain (m_sAtom);
   }
 
   @Override

@@ -121,9 +121,9 @@ public class JSAtomInt extends AbstractJSAtomNumeric
     return m_nValue;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (Long.toString (m_nValue));
+    aFormatter.plain (Long.toString (m_nValue));
   }
 
   @Override

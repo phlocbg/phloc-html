@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import javax.annotation.Nonnull;
+
 /**
  * Program elements that can have JSDoc
  * 
@@ -27,5 +29,6 @@ public interface IJSDocCommentable
   /**
    * @return the JavaDoc of the Element
    */
+  @Nonnull
   JSCommentMultiLine jsDoc ();
 }
