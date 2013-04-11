@@ -29,101 +29,101 @@ import javax.annotation.Nonnull;
 public interface IJSAssignmentTarget extends IJSExpression
 {
   @Nonnull
-  JSAssignment assign (boolean v);
+  JSAssignment assign (boolean bValue);
 
   @Nonnull
-  JSAssignment assign (char v);
+  JSAssignment assign (char cValue);
 
   @Nonnull
-  JSAssignment assign (double v);
+  JSAssignment assign (double dValue);
 
   @Nonnull
-  JSAssignment assign (float v);
+  JSAssignment assign (float fValue);
 
   @Nonnull
-  JSAssignment assign (int v);
+  JSAssignment assign (int nValue);
 
   @Nonnull
-  JSAssignment assign (long v);
+  JSAssignment assign (long nValue);
 
   @Nonnull
-  JSAssignment assign (@Nonnull String v);
+  JSAssignment assign (@Nonnull String sValue);
 
   @Nonnull
-  JSAssignment assign (@Nonnull IJSExpression rhs);
+  JSAssignment assign (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  JSAssignment assignPlus (char v);
+  JSAssignment assignPlus (char cValue);
 
   @Nonnull
-  JSAssignment assignPlus (double v);
+  JSAssignment assignPlus (double dValue);
 
   @Nonnull
-  JSAssignment assignPlus (float v);
+  JSAssignment assignPlus (float fValue);
 
   @Nonnull
-  JSAssignment assignPlus (int v);
+  JSAssignment assignPlus (int nValue);
 
   @Nonnull
-  JSAssignment assignPlus (long v);
+  JSAssignment assignPlus (long nValue);
 
   @Nonnull
-  JSAssignment assignPlus (@Nonnull String v);
+  JSAssignment assignPlus (@Nonnull String sValue);
 
   @Nonnull
-  JSAssignment assignPlus (@Nonnull IJSExpression rhs);
+  JSAssignment assignPlus (@Nonnull IJSExpression aRhs);
 
   @Nonnull
-  JSAssignment assignMinus (double v);
+  JSAssignment assignMinus (double dValue);
 
   @Nonnull
-  JSAssignment assignMinus (float v);
+  JSAssignment assignMinus (float fValue);
 
   @Nonnull
-  JSAssignment assignMinus (int v);
+  JSAssignment assignMinus (int nValue);
 
   @Nonnull
-  JSAssignment assignMinus (long v);
+  JSAssignment assignMinus (long nValue);
 
   @Nonnull
-  JSAssignment assignMinus (@Nonnull IJSExpression rhs);
+  JSAssignment assignMinus (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  JSAssignment assignMultiply (double v);
+  JSAssignment assignMultiply (double dValue);
 
   @Nonnull
-  JSAssignment assignMultiply (float v);
+  JSAssignment assignMultiply (float fValue);
 
   @Nonnull
-  JSAssignment assignMultiply (int v);
+  JSAssignment assignMultiply (int nValue);
 
   @Nonnull
-  JSAssignment assignMultiply (long v);
+  JSAssignment assignMultiply (long nValue);
 
   @Nonnull
-  JSAssignment assignMultiply (@Nonnull IJSExpression rhs);
+  JSAssignment assignMultiply (@Nonnull IJSExpression aRhs);
 
   @Nonnull
-  JSAssignment assignDivide (double v);
+  JSAssignment assignDivide (double dValue);
 
   @Nonnull
-  JSAssignment assignDivide (float v);
+  JSAssignment assignDivide (float fValue);
 
   @Nonnull
-  JSAssignment assignDivide (int v);
+  JSAssignment assignDivide (int nValue);
 
   @Nonnull
-  JSAssignment assignDivide (long v);
+  JSAssignment assignDivide (long nValue);
 
   @Nonnull
-  JSAssignment assignDivide (@Nonnull IJSExpression rhs);
+  JSAssignment assignDivide (@Nonnull IJSExpression aRhs);
 
   @Nonnull
-  JSAssignment assignModulo (int v);
+  JSAssignment assignModulo (int nValue);
 
   @Nonnull
-  JSAssignment assignModulo (long v);
+  JSAssignment assignModulo (long nValue);
 
   @Nonnull
-  JSAssignment assignModulo (@Nonnull IJSExpression rhs);
+  JSAssignment assignModulo (@Nonnull IJSExpression aRhs);
 }

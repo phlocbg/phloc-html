@@ -31,6 +31,8 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSCase implements IJSStatement
 {
+  public static final boolean DEFAULT_DEFAULT_CASE = false;
+
   /**
    * label part of the case statement
    */
@@ -44,7 +46,7 @@ public class JSCase implements IJSStatement
   /**
    * is this a regular case statement or a default case statement?
    */
-  private boolean m_bIsDefaultCase = false;
+  private boolean m_bIsDefaultCase = DEFAULT_DEFAULT_CASE;
 
   /**
    * Construct a case statement

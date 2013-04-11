@@ -53,6 +53,9 @@ public abstract class AbstractJSClass extends AbstractJSType
    */
   public final boolean isAssignableFrom (@Nonnull final AbstractJSClass aDerived)
   {
+    if (aDerived == null)
+      throw new NullPointerException ("derived");
+
     // to avoid the confusion, always use "this" explicitly in this method.
     if (this == aDerived)
       return true;
@@ -92,16 +95,16 @@ public abstract class AbstractJSClass extends AbstractJSType
     return new JSFieldRef (this, aField);
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.type (this);
+    aFormatter.type (this);
   }
 
   /**
    * Prints the class name in JSDoc @link format.
    */
-  void printLink (@Nonnull final JSFormatter f)
+  void printLink (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("{@link ").generatable (this).plain ('}');
+    aFormatter.plain ("{@link ").generatable (this).plain ('}');
   }
 }

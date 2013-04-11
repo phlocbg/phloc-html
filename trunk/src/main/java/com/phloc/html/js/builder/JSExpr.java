@@ -34,6 +34,36 @@ import com.phloc.json.IJSON;
 @Immutable
 public final class JSExpr
 {
+  public static final IJSExpression THIS = new JSAtom ("this");
+
+  public static final IJSExpression NULL = new JSAtom ("null");
+
+  /**
+   * Boolean constant that represents <code>true</code>
+   */
+  public static final JSAtomBoolean TRUE = new JSAtomBoolean (true);
+
+  /**
+   * Boolean constant that represents <code>false</code>
+   */
+  public static final JSAtomBoolean FALSE = new JSAtomBoolean (false);
+
+  /**
+   * Boolean constant that represents <code>undefined</code>
+   */
+  public static final JSAtom UNDEFINED = new JSAtom ("undefined");
+
+  /** Number of int atoms cached */
+  private static final int MAX_ATOM_INT_CACHE = 256;
+
+  private static final JSAtomInt [] INT_CACHE = new JSAtomInt [MAX_ATOM_INT_CACHE];
+
+  static
+  {
+    for (int i = 0; i < INT_CACHE.length; ++i)
+      INT_CACHE[i] = new JSAtomInt (i);
+  }
+
   @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final JSExpr s_aInstance = new JSExpr ();
@@ -45,15 +75,15 @@ public final class JSExpr
   {}
 
   @Nonnull
-  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final String v)
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final String sValue)
   {
-    return assign (aLhs, JSExpr.lit (v));
+    return assign (aLhs, JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "=", rhs);
+    return new JSAssignment (aLhs, "=", aRhs);
   }
 
   @Nonnull
@@ -63,45 +93,45 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAssignment assignMinus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignMinus (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "-=", rhs);
+    return new JSAssignment (aLhs, "-=", aRhs);
   }
 
   @Nonnull
-  public static JSAssignment assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignMultiply (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "*=", rhs);
+    return new JSAssignment (aLhs, "*=", aRhs);
   }
 
   @Nonnull
-  public static JSAssignment assignDivide (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignDivide (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "/=", rhs);
+    return new JSAssignment (aLhs, "/=", aRhs);
   }
 
   @Nonnull
-  public static JSAssignment assignModulo (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression rhs)
+  public static JSAssignment assignModulo (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aRhs)
   {
-    return new JSAssignment (aLhs, "%=", rhs);
+    return new JSAssignment (aLhs, "%=", aRhs);
   }
 
   @Nonnull
-  public static JSInvocation _new (@Nonnull final AbstractJSType t)
+  public static JSInvocation _new (@Nonnull final AbstractJSType aType)
   {
-    return new JSInvocation (t);
+    return new JSInvocation (aType);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nonnull @Nonempty final String method)
+  public static JSInvocation invoke (@Nonnull @Nonempty final String sMethod)
   {
-    return new JSInvocation ((IJSExpression) null, method);
+    return new JSInvocation ((IJSExpression) null, sMethod);
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nonnull final JSMethod method)
+  public static JSInvocation invoke (@Nonnull final JSMethod aMethod)
   {
-    return new JSInvocation ((IJSExpression) null, method);
+    return new JSInvocation ((IJSExpression) null, aMethod);
   }
 
   @Nonnull
@@ -198,86 +228,67 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSArrayCompRef component (@Nonnull final IJSExpression aLhs, @Nonnull final IJSExpression index)
+  public static JSArrayCompRef component (@Nonnull final IJSExpression aLhs, @Nonnull final IJSExpression aIndex)
   {
-    return new JSArrayCompRef (aLhs, index);
+    return new JSArrayCompRef (aLhs, aIndex);
   }
 
   @Nonnull
-  public static JSCast cast (@Nonnull final AbstractJSType type, @Nonnull final IJSExpression expr)
+  public static JSCast cast (@Nonnull final AbstractJSType aType, @Nonnull final IJSExpression aExpr)
   {
-    return new JSCast (type, expr);
-  }
-
-  public static final IJSExpression THIS = new JSAtom ("this");
-
-  public static final IJSExpression NULL = new JSAtom ("null");
-
-  /**
-   * Boolean constant that represents <code>true</code>
-   */
-  public static final JSAtomBoolean TRUE = new JSAtomBoolean (true);
-
-  /**
-   * Boolean constant that represents <code>false</code>
-   */
-  public static final JSAtomBoolean FALSE = new JSAtomBoolean (false);
-
-  /**
-   * Boolean constant that represents <code>undefined</code>
-   */
-  public static final JSAtom UNDEFINED = new JSAtom ("undefined");
-
-  @Nonnull
-  public static JSAtomBoolean lit (final boolean b)
-  {
-    return b ? TRUE : FALSE;
+    return new JSCast (aType, aExpr);
   }
 
   @Nonnull
-  public static JSAtomInt lit (final int n)
+  public static JSAtomBoolean lit (final boolean bValue)
   {
-    return new JSAtomInt (n);
+    return bValue ? TRUE : FALSE;
   }
 
   @Nonnull
-  public static JSAtomInt lit (final long n)
+  public static JSAtomInt lit (final int nValue)
   {
-    return new JSAtomInt (n);
+    return nValue >= 0 && nValue < MAX_ATOM_INT_CACHE ? INT_CACHE[nValue] : new JSAtomInt (nValue);
   }
 
   @Nonnull
-  public static AbstractJSExpression lit (final float f)
+  public static JSAtomInt lit (final long nValue)
   {
-    if (Float.isNaN (f))
+    return nValue >= 0 && nValue < MAX_ATOM_INT_CACHE ? INT_CACHE[(int) nValue] : new JSAtomInt (nValue);
+  }
+
+  @Nonnull
+  public static AbstractJSExpression lit (final float fValue)
+  {
+    if (Float.isNaN (fValue))
       return JSPrimitiveType.NUMBER.nan ();
-    return new JSAtomDecimal (f);
+    return new JSAtomDecimal (fValue);
   }
 
   @Nonnull
-  public static AbstractJSExpression lit (final double d)
+  public static AbstractJSExpression lit (final double dValue)
   {
-    if (Double.isNaN (d))
+    if (Double.isNaN (dValue))
       return JSPrimitiveType.NUMBER.nan ();
-    return new JSAtomDecimal (d);
+    return new JSAtomDecimal (dValue);
   }
 
   @Nonnull
-  public static JSStringLiteral lit (final char c)
+  public static JSStringLiteral lit (final char cValue)
   {
-    return new JSStringLiteral (Character.toString (c));
+    return new JSStringLiteral (Character.toString (cValue));
   }
 
   @Nonnull
-  public static JSStringLiteral lit (@Nonnull final String s)
+  public static JSStringLiteral lit (@Nonnull final String sValue)
   {
-    return new JSStringLiteral (s);
+    return new JSStringLiteral (sValue);
   }
 
   @Nonnull
-  public static JSRegExLiteral regex (@Nonnull final String s)
+  public static JSRegExLiteral regex (@Nonnull final String sRegEx)
   {
-    return new JSRegExLiteral (s);
+    return new JSRegExLiteral (sRegEx);
   }
 
   @Nonnull

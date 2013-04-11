@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -28,6 +29,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * 
  * @author philip
  */
+@Immutable
 public class JSAtomDecimal extends AbstractJSAtomNumeric
 {
   private final double m_dValue;

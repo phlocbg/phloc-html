@@ -43,6 +43,17 @@ public class JSContinue implements IJSStatement
     m_aLabel = aLabel;
   }
 
+  @Nullable
+  public JSLabel label ()
+  {
+    return m_aLabel;
+  }
+
+  public boolean hasLabel ()
+  {
+    return m_aLabel != null;
+  }
+
   public void state (final JSFormatter f)
   {
     if (m_aLabel == null)

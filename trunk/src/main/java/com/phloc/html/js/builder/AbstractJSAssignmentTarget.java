@@ -27,200 +27,200 @@ import javax.annotation.Nonnull;
 public abstract class AbstractJSAssignmentTarget extends AbstractJSExpression implements IJSAssignmentTarget
 {
   @Nonnull
-  public final JSAssignment assign (final boolean v)
+  public final JSAssignment assign (final boolean bValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (bValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (final char v)
+  public final JSAssignment assign (final char cValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (final double v)
+  public final JSAssignment assign (final double dValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (final float v)
+  public final JSAssignment assign (final float fValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (final int v)
+  public final JSAssignment assign (final int nValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (final long v)
+  public final JSAssignment assign (final long nValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final String v)
+  public final JSAssignment assign (@Nonnull final String sValue)
   {
-    return assign (JSExpr.lit (v));
+    return assign (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final JSAssignment assign (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assign (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assign (this, rhs);
+    return JSExpr.assign (this, aExpr);
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (final char v)
+  public final JSAssignment assignPlus (final char cValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (cValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (final double v)
+  public final JSAssignment assignPlus (final double dValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (final float v)
+  public final JSAssignment assignPlus (final float fValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (final int v)
+  public final JSAssignment assignPlus (final int nValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (final long v)
+  public final JSAssignment assignPlus (final long nValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final String v)
+  public final JSAssignment assignPlus (@Nonnull final String sValue)
   {
-    return assignPlus (JSExpr.lit (v));
+    return assignPlus (JSExpr.lit (sValue));
   }
 
   @Nonnull
-  public final JSAssignment assignPlus (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assignPlus (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assignPlus (this, rhs);
+    return JSExpr.assignPlus (this, aExpr);
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (final double v)
+  public final JSAssignment assignMinus (final double dValue)
   {
-    return assignMinus (JSExpr.lit (v));
+    return assignMinus (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (final float v)
+  public final JSAssignment assignMinus (final float fValue)
   {
-    return assignMinus (JSExpr.lit (v));
+    return assignMinus (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (final int v)
+  public final JSAssignment assignMinus (final int nValue)
   {
-    return assignMinus (JSExpr.lit (v));
+    return assignMinus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (final long v)
+  public final JSAssignment assignMinus (final long nValue)
   {
-    return assignMinus (JSExpr.lit (v));
+    return assignMinus (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMinus (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assignMinus (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assignMinus (this, rhs);
+    return JSExpr.assignMinus (this, aExpr);
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (final double v)
+  public final JSAssignment assignMultiply (final double dValue)
   {
-    return assignMultiply (JSExpr.lit (v));
+    return assignMultiply (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (final float v)
+  public final JSAssignment assignMultiply (final float fValue)
   {
-    return assignMultiply (JSExpr.lit (v));
+    return assignMultiply (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (final int v)
+  public final JSAssignment assignMultiply (final int nValue)
   {
-    return assignMultiply (JSExpr.lit (v));
+    return assignMultiply (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (final long v)
+  public final JSAssignment assignMultiply (final long nValue)
   {
-    return assignMultiply (JSExpr.lit (v));
+    return assignMultiply (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignMultiply (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assignMultiply (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assignMultiply (this, rhs);
+    return JSExpr.assignMultiply (this, aExpr);
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (final double v)
+  public final JSAssignment assignDivide (final double dValue)
   {
-    return assignDivide (JSExpr.lit (v));
+    return assignDivide (JSExpr.lit (dValue));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (final float v)
+  public final JSAssignment assignDivide (final float fValue)
   {
-    return assignDivide (JSExpr.lit (v));
+    return assignDivide (JSExpr.lit (fValue));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (final int v)
+  public final JSAssignment assignDivide (final int nValue)
   {
-    return assignDivide (JSExpr.lit (v));
+    return assignDivide (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (final long v)
+  public final JSAssignment assignDivide (final long nValue)
   {
-    return assignDivide (JSExpr.lit (v));
+    return assignDivide (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignDivide (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assignDivide (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assignDivide (this, rhs);
+    return JSExpr.assignDivide (this, aExpr);
   }
 
   @Nonnull
-  public final JSAssignment assignModulo (final int v)
+  public final JSAssignment assignModulo (final int nValue)
   {
-    return assignModulo (JSExpr.lit (v));
+    return assignModulo (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignModulo (final long v)
+  public final JSAssignment assignModulo (final long nValue)
   {
-    return assignModulo (JSExpr.lit (v));
+    return assignModulo (JSExpr.lit (nValue));
   }
 
   @Nonnull
-  public final JSAssignment assignModulo (@Nonnull final IJSExpression rhs)
+  public final JSAssignment assignModulo (@Nonnull final IJSExpression aExpr)
   {
-    return JSExpr.assignModulo (this, rhs);
+    return JSExpr.assignModulo (this, aExpr);
   }
 }

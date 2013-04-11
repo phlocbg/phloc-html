@@ -128,431 +128,431 @@ public interface IJSExpression extends IJSGeneratable
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (char v);
+  IJSExpression plus (char cValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (double v);
+  IJSExpression plus (double dValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (float v);
+  IJSExpression plus (float fValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (int v);
+  IJSExpression plus (int nValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (long v);
+  IJSExpression plus (long nValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (@Nonnull String v);
+  IJSExpression plus (@Nonnull String sValue);
 
   /**
    * @return "[this]+[right]"
    */
   @Nonnull
-  IJSExpression plus (@Nonnull IJSExpression right);
+  IJSExpression plus (@Nonnull IJSExpression aExpr);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (double v);
+  IJSExpression minus (double dValue);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (float v);
+  IJSExpression minus (float fValue);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (int v);
+  IJSExpression minus (int nValue);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (long v);
+  IJSExpression minus (long nValue);
 
   /**
    * @return "[this]-[right]"
    */
   @Nonnull
-  IJSExpression minus (@Nonnull IJSExpression right);
+  IJSExpression minus (@Nonnull IJSExpression aExpr);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (double v);
+  IJSExpression mul (double dValue);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (float v);
+  IJSExpression mul (float fValue);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (int v);
+  IJSExpression mul (int nValue);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (long v);
+  IJSExpression mul (long nValue);
 
   /**
    * @return "[this]*[right]"
    */
   @Nonnull
-  IJSExpression mul (@Nonnull IJSExpression right);
+  IJSExpression mul (@Nonnull IJSExpression aExpr);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (double v);
+  IJSExpression div (double dValue);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (float v);
+  IJSExpression div (float fValue);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (int v);
+  IJSExpression div (int nValue);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (long v);
+  IJSExpression div (long nValue);
 
   /**
    * @return "[this]/[right]"
    */
   @Nonnull
-  IJSExpression div (@Nonnull IJSExpression right);
+  IJSExpression div (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression mod (int v);
+  IJSExpression mod (int nValue);
 
   @Nonnull
-  IJSExpression mod (long v);
+  IJSExpression mod (long nValue);
 
   /**
    * @return "[this]%[right]"
    */
   @Nonnull
-  IJSExpression mod (@Nonnull IJSExpression right);
+  IJSExpression mod (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression shl (int v);
+  IJSExpression shl (int nValue);
 
   @Nonnull
-  IJSExpression shl (long v);
+  IJSExpression shl (long nValue);
 
   /**
    * @return "[this]&lt;&lt;[right]"
    */
   @Nonnull
-  IJSExpression shl (@Nonnull IJSExpression right);
+  IJSExpression shl (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression shr (int v);
+  IJSExpression shr (int nValue);
 
   @Nonnull
-  IJSExpression shr (long v);
+  IJSExpression shr (long nValue);
 
   /**
    * @return "[this]>>[right]"
    */
   @Nonnull
-  IJSExpression shr (@Nonnull IJSExpression right);
+  IJSExpression shr (@Nonnull IJSExpression aExpr);
 
   /**
    * @return "[this]>>>[right]"
    */
   @Nonnull
-  IJSExpression shrz (int v);
+  IJSExpression shrz (int nValue);
 
   /**
    * @return "[this]>>>[right]"
    */
   @Nonnull
-  IJSExpression shrz (long v);
+  IJSExpression shrz (long nValue);
 
   /**
    * @return "[this]>>>[right]"
    */
   @Nonnull
-  IJSExpression shrz (@Nonnull IJSExpression right);
+  IJSExpression shrz (@Nonnull IJSExpression aExpr);
 
   /** Bit-wise AND '&amp;'. */
   @Nonnull
-  IJSExpression band (int v);
+  IJSExpression band (int nValue);
 
   /** Bit-wise AND '&amp;'. */
   @Nonnull
-  IJSExpression band (long v);
+  IJSExpression band (long nValue);
 
   /** Bit-wise AND '&amp;'. */
   @Nonnull
-  IJSExpression band (@Nonnull IJSExpression right);
+  IJSExpression band (@Nonnull IJSExpression aExpr);
 
   /** Bit-wise OR '|'. */
   @Nonnull
-  IJSExpression bor (int v);
+  IJSExpression bor (int nValue);
 
   /** Bit-wise OR '|'. */
   @Nonnull
-  IJSExpression bor (long v);
+  IJSExpression bor (long nValue);
 
   /** Bit-wise OR '|'. */
   @Nonnull
-  IJSExpression bor (@Nonnull IJSExpression right);
+  IJSExpression bor (@Nonnull IJSExpression aExpr);
 
   /** Logical AND '&amp;&amp;'. */
   @Nonnull
-  IJSExpression cand (@Nonnull IJSExpression right);
+  IJSExpression cand (@Nonnull IJSExpression aExpr);
 
   /** Logical OR '||'. */
   @Nonnull
-  IJSExpression cor (@Nonnull IJSExpression right);
+  IJSExpression cor (@Nonnull IJSExpression aExpr);
 
   /** XOR '^'. */
   @Nonnull
-  IJSExpression xor (int v);
+  IJSExpression xor (int nValue);
 
   /** XOR '^'. */
   @Nonnull
-  IJSExpression xor (long v);
+  IJSExpression xor (long nValue);
 
   /** XOR '^'. */
   @Nonnull
-  IJSExpression xor (@Nonnull IJSExpression right);
+  IJSExpression xor (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression lt (double v);
+  IJSExpression lt (double dValue);
 
   @Nonnull
-  IJSExpression lt (float v);
+  IJSExpression lt (float fValue);
 
   @Nonnull
-  IJSExpression lt (int v);
+  IJSExpression lt (int nValue);
 
   @Nonnull
-  IJSExpression lt (long v);
+  IJSExpression lt (long nValue);
 
   /** Lower than '&lt;'. */
   @Nonnull
-  IJSExpression lt (@Nonnull IJSExpression right);
+  IJSExpression lt (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression lte (double v);
+  IJSExpression lte (double dValue);
 
   @Nonnull
-  IJSExpression lte (float v);
+  IJSExpression lte (float fValue);
 
   @Nonnull
-  IJSExpression lte (int v);
+  IJSExpression lte (int nValue);
 
   @Nonnull
-  IJSExpression lte (long v);
+  IJSExpression lte (long nValue);
 
   /** Lower than or equal '&lt;='. */
   @Nonnull
-  IJSExpression lte (@Nonnull IJSExpression right);
+  IJSExpression lte (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression gt (double v);
+  IJSExpression gt (double dValue);
 
   @Nonnull
-  IJSExpression gt (float v);
+  IJSExpression gt (float fValue);
 
   @Nonnull
-  IJSExpression gt (int v);
+  IJSExpression gt (int nValue);
 
   @Nonnull
-  IJSExpression gt (long v);
+  IJSExpression gt (long nValue);
 
   /** Greater than '>'. */
   @Nonnull
-  IJSExpression gt (@Nonnull IJSExpression right);
+  IJSExpression gt (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression gte (double v);
+  IJSExpression gte (double dValue);
 
   @Nonnull
-  IJSExpression gte (float v);
+  IJSExpression gte (float fValue);
 
   @Nonnull
-  IJSExpression gte (int v);
+  IJSExpression gte (int nValue);
 
   @Nonnull
-  IJSExpression gte (long v);
+  IJSExpression gte (long nValue);
 
   /** Greater than or equal '>='. */
   @Nonnull
-  IJSExpression gte (@Nonnull IJSExpression right);
+  IJSExpression gte (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression eq (boolean v);
+  IJSExpression eq (boolean bValue);
 
   @Nonnull
-  IJSExpression eq (char v);
+  IJSExpression eq (char cValue);
 
   @Nonnull
-  IJSExpression eq (float v);
+  IJSExpression eq (float fValue);
 
   @Nonnull
-  IJSExpression eq (double v);
+  IJSExpression eq (double dValue);
 
   @Nonnull
-  IJSExpression eq (int v);
+  IJSExpression eq (int nValue);
 
   @Nonnull
-  IJSExpression eq (long v);
+  IJSExpression eq (long nValue);
 
   @Nonnull
-  IJSExpression eq (@Nonnull String v);
+  IJSExpression eq (@Nonnull String sValue);
 
   @Nonnull
-  IJSExpression eq (@Nonnull IJSON v);
+  IJSExpression eq (@Nonnull IJSON aValue);
 
   /** Equals '=='. */
   @Nonnull
-  IJSExpression eq (@Nonnull IJSExpression right);
+  IJSExpression eq (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression eeq (boolean v);
+  IJSExpression eeq (boolean bValue);
 
   @Nonnull
-  IJSExpression eeq (char v);
+  IJSExpression eeq (char cValue);
 
   @Nonnull
-  IJSExpression eeq (float v);
+  IJSExpression eeq (float fValue);
 
   @Nonnull
-  IJSExpression eeq (double v);
+  IJSExpression eeq (double dValue);
 
   @Nonnull
-  IJSExpression eeq (int v);
+  IJSExpression eeq (int nValue);
 
   @Nonnull
-  IJSExpression eeq (long v);
+  IJSExpression eeq (long nValue);
 
   @Nonnull
-  IJSExpression eeq (@Nonnull String v);
+  IJSExpression eeq (@Nonnull String sValue);
 
   @Nonnull
-  IJSExpression eeq (@Nonnull IJSON v);
+  IJSExpression eeq (@Nonnull IJSON aValue);
 
   /** Exactly equals '==='. */
   @Nonnull
-  IJSExpression eeq (@Nonnull IJSExpression right);
+  IJSExpression eeq (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression ne (boolean v);
+  IJSExpression ne (boolean bValue);
 
   @Nonnull
-  IJSExpression ne (char v);
+  IJSExpression ne (char cValue);
 
   @Nonnull
-  IJSExpression ne (float v);
+  IJSExpression ne (float fValue);
 
   @Nonnull
-  IJSExpression ne (double v);
+  IJSExpression ne (double dValue);
 
   @Nonnull
-  IJSExpression ne (int v);
+  IJSExpression ne (int nValue);
 
   @Nonnull
-  IJSExpression ne (long v);
+  IJSExpression ne (long nValue);
 
   @Nonnull
-  IJSExpression ne (@Nonnull String v);
+  IJSExpression ne (@Nonnull String sValue);
 
   @Nonnull
-  IJSExpression ne (@Nonnull IJSON v);
+  IJSExpression ne (@Nonnull IJSON aValue);
 
   /** Not equals '!='. */
   @Nonnull
-  IJSExpression ne (@Nonnull IJSExpression right);
+  IJSExpression ne (@Nonnull IJSExpression aExpr);
 
   @Nonnull
-  IJSExpression ene (boolean v);
+  IJSExpression ene (boolean bValue);
 
   @Nonnull
-  IJSExpression ene (char v);
+  IJSExpression ene (char cValue);
 
   @Nonnull
-  IJSExpression ene (float v);
+  IJSExpression ene (float fValue);
 
   @Nonnull
-  IJSExpression ene (double v);
+  IJSExpression ene (double dValue);
 
   @Nonnull
-  IJSExpression ene (int v);
+  IJSExpression ene (int nValue);
 
   @Nonnull
-  IJSExpression ene (long v);
+  IJSExpression ene (long nValue);
 
   @Nonnull
-  IJSExpression ene (@Nonnull String v);
+  IJSExpression ene (@Nonnull String sValue);
 
   @Nonnull
-  IJSExpression ene (@Nonnull IJSON v);
+  IJSExpression ene (@Nonnull IJSON aValue);
 
   /** Exactly not equals '!=='. */
   @Nonnull
-  IJSExpression ene (@Nonnull IJSExpression right);
+  IJSExpression ene (@Nonnull IJSExpression aExpr);
 
   /** instanceof */
   @Nonnull
-  IJSExpression _instanceof (@Nonnull AbstractJSType right);
+  IJSExpression _instanceof (@Nonnull AbstractJSType aType);
 
   /**
    * @return "[this].[method]". Arguments shall be added to the returned
    *         {@link JSInvocation} object.
    */
   @Nonnull
-  JSInvocation invoke (@Nonnull JSMethod method);
+  JSInvocation invoke (@Nonnull JSMethod aMethod);
 
   /**
    * @return "[this].[method]". Arguments shall be added to the returned
    *         {@link JSInvocation} object.
    */
   @Nonnull
-  JSInvocation invoke (@Nonnull String method);
+  JSInvocation invoke (@Nonnull String sMethod);
 
   @Nonnull
-  JSFieldRef ref (@Nonnull JSVar field);
+  JSFieldRef ref (@Nonnull JSVar aField);
 
   @Nonnull
-  JSFieldRef ref (@Nonnull String field);
+  JSFieldRef ref (@Nonnull String sField);
 
   @Nonnull
   JSArrayCompRef component (char cIndex);
@@ -567,5 +567,5 @@ public interface IJSExpression extends IJSGeneratable
   JSArrayCompRef component (@Nonnull String sIndex);
 
   @Nonnull
-  JSArrayCompRef component (@Nonnull IJSExpression index);
+  JSArrayCompRef component (@Nonnull IJSExpression aExpr);
 }
