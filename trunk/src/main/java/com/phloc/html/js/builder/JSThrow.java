@@ -48,9 +48,15 @@ public class JSThrow implements IJSStatement
     m_aExpr = aExpr;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  @Nonnull
+  public IJSExpression expr ()
   {
-    f.plain ("throw ").generatable (m_aExpr).plain (';').nl ();
+    return m_aExpr;
+  }
+
+  public void state (@Nonnull final JSFormatter aFormatter)
+  {
+    aFormatter.plain ("throw ").generatable (m_aExpr).plain (';').nl ();
   }
 
   @Nullable

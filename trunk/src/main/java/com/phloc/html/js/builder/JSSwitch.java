@@ -75,34 +75,32 @@ public class JSSwitch implements IJSStatement
   }
 
   @Nonnull
-  public JSCase _case (@Nonnull final IJSExpression label)
+  public JSCase _case (@Nonnull final IJSExpression aLabel)
   {
-    final JSCase c = new JSCase (label);
-    m_aCases.add (c);
-    return c;
+    final JSCase aCase = new JSCase (aLabel);
+    m_aCases.add (aCase);
+    return aCase;
   }
 
   @Nonnull
   public JSCase _default ()
   {
-    // what if (default != null) ???
-
-    // default cases statements don't have a label
-    m_aDefaultCase = new JSCase (null, true);
+    if (m_aDefaultCase == null)
+      m_aDefaultCase = new JSCase (null, true);
     return m_aDefaultCase;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     if (JSOp.hasOperator (m_aTest))
-      f.plain ("switch ").generatable (m_aTest).plain ('{').nl ();
+      aFormatter.plain ("switch ").generatable (m_aTest).plain ('{').nl ();
     else
-      f.plain ("switch (").generatable (m_aTest).plain ("){").nl ();
+      aFormatter.plain ("switch (").generatable (m_aTest).plain ("){").nl ();
     for (final JSCase aCase : m_aCases)
-      f.stmt (aCase);
+      aFormatter.stmt (aCase);
     if (m_aDefaultCase != null)
-      f.stmt (m_aDefaultCase);
-    f.plain ('}').nl ();
+      aFormatter.stmt (m_aDefaultCase);
+    aFormatter.plain ('}').nl ();
   }
 
   @Nullable

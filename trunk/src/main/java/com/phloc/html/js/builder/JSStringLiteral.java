@@ -57,9 +57,9 @@ public class JSStringLiteral extends AbstractJSExpression
     return '\'' + JSMarshaller.javaScriptEscape (sStr) + '\'';
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain (getAsString (m_sStr));
+    aFormatter.plain (getAsString (m_sStr));
   }
 
   @Override

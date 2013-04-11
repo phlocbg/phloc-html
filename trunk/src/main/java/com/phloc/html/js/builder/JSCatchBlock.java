@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -30,13 +31,15 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSCatchBlock implements IJSGeneratable
 {
+  public static final String DEFAULT_VAR_NAME = "e";
+
   private JSVar m_aVar;
   private final JSBlock m_aBody = new JSBlock ();
 
   public JSCatchBlock ()
   {}
 
-  public JSCatchBlock (@Nonnull final String sName)
+  public JSCatchBlock (@Nonnull @Nonempty final String sName)
   {
     m_aVar = new JSVar (null, sName, null);
   }
@@ -48,7 +51,7 @@ public class JSCatchBlock implements IJSGeneratable
   }
 
   @Nonnull
-  public JSVar param (@Nonnull final String sName)
+  public JSVar param (@Nonnull @Nonempty final String sName)
   {
     if (m_aVar != null)
       throw new IllegalStateException ("Catch block already has a variable");
@@ -65,7 +68,7 @@ public class JSCatchBlock implements IJSGeneratable
   public void generate (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aVar == null)
-      m_aVar = new JSVar (null, "e", null);
+      m_aVar = new JSVar (null, DEFAULT_VAR_NAME, null);
     aFormatter.plain ("catch (").var (m_aVar).plain (')').generatable (m_aBody);
   }
 

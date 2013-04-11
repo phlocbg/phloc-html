@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -53,11 +54,16 @@ public class JSTryBlock implements IJSStatement
   }
 
   @Nonnull
-  public JSCatchBlock _catch (@Nonnull final String name)
+  public JSCatchBlock _catch (@Nonnull @Nonempty final String sName)
   {
     if (m_aCatch == null)
-      m_aCatch = new JSCatchBlock (name);
+      m_aCatch = new JSCatchBlock (sName);
     return m_aCatch;
+  }
+
+  public boolean hasCatch ()
+  {
+    return m_aCatch != null;
   }
 
   @Nonnull
@@ -68,21 +74,26 @@ public class JSTryBlock implements IJSStatement
     return m_aFinally;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public boolean hasFinally ()
+  {
+    return m_aFinally != null;
+  }
+
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aCatch == null && m_aFinally == null)
     {
       // no try necessary when there is no catch and no finally
-      f.generatable (m_aBody);
+      aFormatter.generatable (m_aBody);
     }
     else
     {
-      f.plain ("try").generatable (m_aBody);
+      aFormatter.plain ("try").generatable (m_aBody);
       if (m_aCatch != null)
-        f.generatable (m_aCatch);
+        aFormatter.generatable (m_aCatch);
       if (m_aFinally != null)
-        f.plain ("finally").generatable (m_aFinally);
-      f.nl ();
+        aFormatter.plain ("finally").generatable (m_aFinally);
+      aFormatter.nl ();
     }
   }
 

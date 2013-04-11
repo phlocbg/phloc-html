@@ -83,10 +83,10 @@ public final class JSStatementList implements IJSStatement
   }
 
   @Override
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     for (final IJSStatement aStatement : m_aStatements)
-      f.stmt (aStatement);
+      aFormatter.stmt (aStatement);
   }
 
   @Nullable
