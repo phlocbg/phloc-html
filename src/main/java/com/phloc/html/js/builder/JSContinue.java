@@ -54,12 +54,12 @@ public class JSContinue implements IJSStatement
     return m_aLabel != null;
   }
 
-  public void state (final JSFormatter f)
+  public void state (final JSFormatter aFormatter)
   {
     if (m_aLabel == null)
-      f.plain ("continue;").nl ();
+      aFormatter.plain ("continue;").nl ();
     else
-      f.plain ("continue ").plain (m_aLabel.label ()).plain (';').nl ();
+      aFormatter.plain ("continue ").plain (m_aLabel.label ()).plain (';').nl ();
   }
 
   @Nullable

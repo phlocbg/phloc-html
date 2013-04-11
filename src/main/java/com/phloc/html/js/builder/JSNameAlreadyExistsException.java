@@ -30,6 +30,9 @@ public class JSNameAlreadyExistsException extends RuntimeException
 
   public JSNameAlreadyExistsException (@Nonnull final IJSDeclaration aExisting)
   {
+    if (aExisting == null)
+      throw new NullPointerException ("existing");
+
     m_aExisting = aExisting;
   }
 

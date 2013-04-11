@@ -51,9 +51,9 @@ public class JSIncrPrefix implements IJSStatement
     return m_aExpr;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("++").generatable (m_aExpr).plain (';').nl ();
+    aFormatter.plain ("++").generatable (m_aExpr).plain (';').nl ();
   }
 
   @Nullable

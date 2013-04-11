@@ -102,27 +102,27 @@ public class JSConditional implements IJSStatement
     return _else ()._if (aBoolExp);
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
     if (m_aTest == JSExpr.TRUE)
     {
-      m_aThen.generateBody (f);
+      m_aThen.generateBody (aFormatter);
       return;
     }
     if (m_aTest == JSExpr.FALSE && m_aElse != null)
     {
-      m_aElse.generateBody (f);
+      m_aElse.generateBody (aFormatter);
       return;
     }
 
     if (JSOp.hasOperator (m_aTest))
-      f.plain ("if").generatable (m_aTest);
+      aFormatter.plain ("if").generatable (m_aTest);
     else
-      f.plain ("if(").generatable (m_aTest).plain (')');
-    f.generatable (m_aThen);
+      aFormatter.plain ("if(").generatable (m_aTest).plain (')');
+    aFormatter.generatable (m_aThen);
     if (m_aElse != null)
-      f.plain ("else").generatable (m_aElse);
-    f.nl ();
+      aFormatter.plain ("else").generatable (m_aElse);
+    aFormatter.nl ();
   }
 
   @Nullable

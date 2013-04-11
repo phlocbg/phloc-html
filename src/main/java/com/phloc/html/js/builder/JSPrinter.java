@@ -20,10 +20,12 @@ package com.phloc.html.js.builder;
 import java.io.Writer;
 
 import javax.annotation.Nonnull;
+import javax.annotation.WillClose;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
 import com.phloc.commons.io.streams.StreamUtils;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Helper class to get the textual representation of JSDOM objects
@@ -89,67 +91,69 @@ public final class JSPrinter
   }
 
   @Nonnull
-  public static JSFormatter createFormatter (@Nonnull final Writer w)
+  public static JSFormatter createFormatter (@Nonnull final Writer aWriter)
   {
-    return new JSFormatter (w).indentAndAlign (s_bIndentAndAlign)
-                              .generateTypeNames (s_bGenerateTypeNames)
-                              .generateComments (s_bGenerateComments);
+    return new JSFormatter (aWriter).indentAndAlign (s_bIndentAndAlign)
+                                    .generateTypeNames (s_bGenerateTypeNames)
+                                    .generateComments (s_bGenerateComments);
   }
 
-  public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable, @Nonnull final Writer w)
+  public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable,
+                                       @Nonnull @WillClose final Writer aWriter)
   {
-    final JSFormatter f = createFormatter (w);
+    final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
-      f.generatable (aGeneratable);
+      aFormatter.generatable (aGeneratable);
     }
     finally
     {
-      StreamUtils.close (f);
+      StreamUtils.close (aFormatter);
     }
   }
 
-  public static void writeDeclaration (@Nonnull final IJSDeclaration aDeclaration, @Nonnull final Writer w)
+  public static void writeDeclaration (@Nonnull final IJSDeclaration aDeclaration,
+                                       @Nonnull @WillClose final Writer aWriter)
   {
-    final JSFormatter f = createFormatter (w);
+    final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
-      f.decl (aDeclaration);
+      aFormatter.decl (aDeclaration);
     }
     finally
     {
-      StreamUtils.close (f);
+      StreamUtils.close (aFormatter);
     }
   }
 
-  public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull final Writer w)
+  public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull @WillClose final Writer aWriter)
   {
-    final JSFormatter f = createFormatter (w);
+    final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
-      f.stmt (aStatement);
+      aFormatter.stmt (aStatement);
     }
     finally
     {
-      StreamUtils.close (f);
+      StreamUtils.close (aFormatter);
     }
   }
 
-  public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull final Writer w)
+  public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull @WillClose final Writer aWriter)
   {
-    final JSFormatter f = createFormatter (w);
+    final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
       // for all declarations in the current package
-      for (final Object aObj : aPackage.members ())
+      for (final IJSCodeProvider aObj : aPackage.members ())
         if (aObj instanceof IJSDeclaration)
-          f.decl ((IJSDeclaration) aObj);
+          aFormatter.decl ((IJSDeclaration) aObj);
         else
-          f.stmt ((IJSStatement) aObj);
+          aFormatter.stmt ((IJSStatement) aObj);
     }
     finally
     {
-      StreamUtils.close (f);
+      StreamUtils.close (aFormatter);
     }
   }
 

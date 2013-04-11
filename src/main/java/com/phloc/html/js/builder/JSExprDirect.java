@@ -35,9 +35,15 @@ public final class JSExprDirect extends AbstractJSExpression
     m_sSource = sSource;
   }
 
-  public void generate (final JSFormatter f)
+  @Nonnull
+  public String source ()
   {
-    f.plain (m_sSource);
+    return m_sSource;
+  }
+
+  public void generate (@Nonnull final JSFormatter aFormatter)
+  {
+    aFormatter.plain (m_sSource);
   }
 
   @Override

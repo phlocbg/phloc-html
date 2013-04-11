@@ -74,13 +74,13 @@ public class JSForIn implements IJSStatement
     return m_aBody;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("for(var ").var (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
+    aFormatter.plain ("for(var ").var (m_aLoopVar).plain (" in ").generatable (m_aCollection).plain (')');
     if (m_aBody != null)
-      f.generatable (m_aBody).nl ();
+      aFormatter.generatable (m_aBody).nl ();
     else
-      f.plain (';').nl ();
+      aFormatter.plain (';').nl ();
   }
 
   @Nullable

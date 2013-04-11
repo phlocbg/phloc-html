@@ -41,14 +41,14 @@ public class JSCommentSingleLine implements IJSStatement
   }
 
   @Override
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    if (f.generateComments ())
-      for (final String sLine : RegExHelper.getSplitToArray (m_sComment, "[\\r\\n]+"))
-        if (f.indentAndAlign ())
-          f.plain ("// ").plain (sLine).nl ();
+    if (aFormatter.generateComments ())
+      for (final String sLine : RegExHelper.getSplitToArray (m_sComment, "(\\r\\n|\\r|\\n)"))
+        if (aFormatter.indentAndAlign ())
+          aFormatter.plain ("// ").plain (sLine).nl ();
         else
-          f.plain ("/*").plain (sLine).plain ("*/");
+          aFormatter.plain ("/*").plain (sLine).plain ("*/");
   }
 
   @Nullable

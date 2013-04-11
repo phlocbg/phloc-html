@@ -120,15 +120,20 @@ public class JSOpBinary extends AbstractJSExpression
     return m_aRight;
   }
 
-  public void generate (@Nonnull final JSFormatter f)
+  public boolean useBraces ()
+  {
+    return m_bUseBraces;
+  }
+
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
     final boolean bUseBraces = m_bUseBraces;
 
     if (bUseBraces)
-      f.plain ('(');
-    f.generatable (m_aLeft).plain (m_sOp).generatable (m_aRight);
+      aFormatter.plain ('(');
+    aFormatter.generatable (m_aLeft).plain (m_sOp).generatable (m_aRight);
     if (bUseBraces)
-      f.plain (')');
+      aFormatter.plain (')');
   }
 
   @Override

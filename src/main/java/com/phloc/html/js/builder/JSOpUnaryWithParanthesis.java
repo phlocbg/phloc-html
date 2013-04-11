@@ -34,10 +34,10 @@ public class JSOpUnaryWithParanthesis extends JSOpUnary
   }
 
   @Override
-  public void generate (@Nonnull final JSFormatter f)
+  public void generate (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ('(');
-    super.generate (f);
-    f.plain (')');
+    aFormatter.plain ('(');
+    super.generate (aFormatter);
+    aFormatter.plain (')');
   }
 }

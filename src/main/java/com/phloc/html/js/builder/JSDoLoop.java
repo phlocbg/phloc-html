@@ -65,19 +65,19 @@ public class JSDoLoop implements IJSStatement
     return m_aBody;
   }
 
-  public void state (@Nonnull final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.plain ("do");
+    aFormatter.plain ("do");
     if (m_aBody != null)
-      f.generatable (m_aBody);
+      aFormatter.generatable (m_aBody);
     else
-      f.plain ("{}");
+      aFormatter.plain ("{}");
 
     if (JSOp.hasOperator (m_aTest))
-      f.plain ("while").generatable (m_aTest);
+      aFormatter.plain ("while").generatable (m_aTest);
     else
-      f.plain ("while(").generatable (m_aTest).plain (')');
-    f.plain (';').nl ();
+      aFormatter.plain ("while(").generatable (m_aTest).plain (')');
+    aFormatter.plain (';').nl ();
   }
 
   @Nullable

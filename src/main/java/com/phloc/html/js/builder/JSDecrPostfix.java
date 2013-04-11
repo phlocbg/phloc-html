@@ -51,9 +51,9 @@ public class JSDecrPostfix implements IJSStatement
     return m_aExpr;
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter aFormatter)
   {
-    f.generatable (m_aExpr).plain ("--;").nl ();
+    aFormatter.generatable (m_aExpr).plain ("--;").nl ();
   }
 
   @Nullable

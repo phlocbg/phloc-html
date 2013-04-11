@@ -39,97 +39,98 @@ public class JSCommentPart extends ArrayList <Object>
    * printed as a @link tag. Otherwise it will be converted to String via
    * {@link Object#toString()} .
    */
-  public JSCommentPart append (final Object o)
+  public JSCommentPart append (@Nullable final Object aValue)
   {
-    add (o);
+    add (aValue);
     return this;
   }
 
   @Override
-  public boolean add (@Nullable final Object o)
+  public boolean add (@Nullable final Object aValue)
   {
-    _flattenAppend (o);
+    _flattenAppend (aValue);
     return true;
   }
 
-  private void _flattenAppend (@Nullable final Object value)
+  private void _flattenAppend (@Nullable final Object aValue)
   {
-    if (value == null)
+    if (aValue == null)
       return;
-    if (value instanceof Object [])
+    if (aValue instanceof Object [])
     {
-      for (final Object o : (Object []) value)
-        _flattenAppend (o);
+      for (final Object aChild : (Object []) aValue)
+        _flattenAppend (aChild);
     }
     else
-      if (value instanceof Collection <?>)
+      if (aValue instanceof Collection <?>)
       {
-        for (final Object o : (Collection <?>) value)
-          _flattenAppend (o);
+        for (final Object aChild : (Collection <?>) aValue)
+          _flattenAppend (aChild);
       }
       else
-        super.add (value);
+        super.add (aValue);
   }
 
   /**
    * Writes this part into the formatter by using the specified indentation.
    */
-  protected void format (@Nonnull final JSFormatter f, @Nonnull final String indent)
+  protected void format (@Nonnull final JSFormatter aFormatter, @Nonnull final String sIndent)
   {
     if (!isEmpty ())
-      f.plain (indent);
+      aFormatter.plain (sIndent);
 
-    final Iterator <Object> itr = iterator ();
-    while (itr.hasNext ())
+    final Iterator <Object> aIter = iterator ();
+    while (aIter.hasNext ())
     {
-      final Object o = itr.next ();
+      final Object aValue = aIter.next ();
 
-      if (o instanceof String)
+      if (aValue instanceof String)
       {
-        int idx;
-        String s = (String) o;
-        while ((idx = s.indexOf ('\n')) != -1)
+        int nIdx;
+        String sValue = (String) aValue;
+        while ((nIdx = sValue.indexOf ('\n')) != -1)
         {
-          final String line = s.substring (0, idx);
-          if (line.length () > 0)
-            f.plain (_escape (line));
-          s = s.substring (idx + 1);
-          f.nlFix ().plain (indent);
+          final String sLine = sValue.substring (0, nIdx);
+          if (sLine.length () > 0)
+            aFormatter.plain (_escape (sLine));
+          sValue = sValue.substring (nIdx + 1);
+          aFormatter.nlFix ().plain (sIndent);
         }
-        if (s.length () != 0)
-          f.plain (_escape (s));
+        if (sValue.length () != 0)
+          aFormatter.plain (_escape (sValue));
       }
       else
-        if (o instanceof AbstractJSClass)
+        if (aValue instanceof AbstractJSClass)
         {
-          ((AbstractJSClass) o).printLink (f);
+          ((AbstractJSClass) aValue).printLink (aFormatter);
         }
         else
-          if (o instanceof AbstractJSType)
+          if (aValue instanceof AbstractJSType)
           {
-            f.generatable ((AbstractJSType) o);
+            aFormatter.generatable ((AbstractJSType) aValue);
           }
           else
-            throw new IllegalStateException ();
+            throw new IllegalStateException ("Unsupported value: " + aValue);
     }
 
     if (!isEmpty ())
-      f.nlFix ();
+      aFormatter.nlFix ();
   }
 
   /**
    * Escapes the appearance of the comment terminator.
    */
-  private static String _escape (final String ps)
+  @Nonnull
+  private static String _escape (@Nonnull final String sStr)
   {
-    String s = ps;
+    String ret = sStr;
     while (true)
     {
-      final int idx = s.indexOf ("*/");
+      final int idx = ret.indexOf ("*/");
       if (idx < 0)
-        return s;
+        return ret;
 
-      s = s.substring (0, idx + 1) + "<!-- -->" + s.substring (idx + 1);
+      ret = ret.substring (0, idx + 1) + "<!-- -->" + ret.substring (idx + 1);
     }
   }
 
