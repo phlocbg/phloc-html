@@ -359,8 +359,8 @@ public final class HCUtils
                                                        @Nonnull final EHTMLElement eHTMLElement)
   {
     final List <IMicroElement> ret = new ArrayList <IMicroElement> ();
-    ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameLowerCase ()));
-    ret.addAll (aElement.getChildElements (eHTMLElement.getElementNameUpperCase ()));
+    ret.addAll (aElement.getAllChildElements (eHTMLElement.getElementNameLowerCase ()));
+    ret.addAll (aElement.getAllChildElements (eHTMLElement.getElementNameUpperCase ()));
     return ret;
   }
 

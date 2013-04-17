@@ -141,23 +141,23 @@ public final class MainReadHTMLElementList
     // /html/body/div[3]/div/ul
     final IMicroElement eUL = aDoc.getDocumentElement ()
                                   .getFirstChildElement (EHTMLElement.BODY)
-                                  .getChildElements (EHTMLElement.DIV)
+                                  .getAllChildElements (EHTMLElement.DIV)
                                   .get (2)
                                   .getFirstChildElement (EHTMLElement.DIV)
                                   .getFirstChildElement (EHTMLElement.UL);
 
     final List <Element> aElements = new ArrayList <Element> ();
-    for (final IMicroElement eLI : eUL.getChildElements (EHTMLElement.LI))
+    for (final IMicroElement eLI : eUL.getAllChildElements (EHTMLElement.LI))
     {
       final IMicroElement eA = eLI.getFirstChildElement (EHTMLElement.A);
       final String sHref = eA.getAttribute (CHTMLAttributes.HREF);
-      final IMicroElement eSectionName = eA.getChildElements (EHTMLElement.SPAN).get (1);
+      final IMicroElement eSectionName = eA.getAllChildElements (EHTMLElement.SPAN).get (1);
 
       String sElementName = null;
       String sAttributeName = null;
       String sEqualsValue = null;
       String sShortDesc = null;
-      for (final IMicroElement eSpan : eSectionName.getChildElements (EHTMLElement.SPAN))
+      for (final IMicroElement eSpan : eSectionName.getAllChildElements (EHTMLElement.SPAN))
       {
         final String sClass = eSpan.getAttribute (CHTMLAttributes.CLASS);
         final String sContent = eSpan.getTextContent ().trim ();
@@ -166,7 +166,7 @@ public final class MainReadHTMLElementList
         else
           if (sClass.equals ("elem-qualifier"))
           {
-            for (final IMicroElement eChildSpan : eSpan.getChildElements (EHTMLElement.SPAN))
+            for (final IMicroElement eChildSpan : eSpan.getAllChildElements (EHTMLElement.SPAN))
             {
               final String sChildClass = eChildSpan.getAttribute (CHTMLAttributes.CLASS);
               final String sChildContent = eChildSpan.getTextContent ().trim ();
