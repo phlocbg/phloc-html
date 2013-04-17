@@ -18,6 +18,7 @@
 package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -59,6 +60,24 @@ public abstract class AbstractJSType implements IJSGeneratable
     return JSExpr._new (this);
   }
 
+  /**
+   * @param aExprs
+   *        Expressions used as arguments
+   * @return A "new type" invocation object
+   */
+  @Nonnull
+  public final JSInvocation _new (@Nullable final IJSExpression... aExprs)
+  {
+    return _new ().args (aExprs);
+  }
+
+  /**
+   * Create a cast from the passed expression to this type
+   * 
+   * @param aExpr
+   *        The expression to be casted. May not be <code>null</code>.
+   * @return The {@link JSCast} object
+   */
   @Nonnull
   public JSCast casted (@Nonnull final IJSExpression aExpr)
   {

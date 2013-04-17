@@ -550,12 +550,19 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     return ContainerHelper.newList (m_aArgs);
   }
 
+  /**
+   * @return Number of currently contained arguments. Always &ge; 0.
+   */
   @Nonnegative
   public int getArgCount ()
   {
     return m_aArgs.size ();
   }
 
+  /**
+   * @return <code>true</code> if at least 1 arg is present, <code>false</code>
+   *         otherwise.
+   */
   public boolean hasArgs ()
   {
     return !m_aArgs.isEmpty ();
@@ -567,6 +574,11 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     return ContainerHelper.getSafe (m_aArgs, nIndex);
   }
 
+  /**
+   * Remove all arguments
+   * 
+   * @return this
+   */
   @Nonnull
   public IMPLTYPE removeAllArgs ()
   {
@@ -613,7 +625,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     f.generatable (m_aArgs).plain (')');
   }
 
-  public void state (final JSFormatter f)
+  public void state (@Nonnull final JSFormatter f)
   {
     f.generatable (this).plain (';').nl ();
   }
