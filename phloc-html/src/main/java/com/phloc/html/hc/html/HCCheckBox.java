@@ -44,8 +44,12 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   /** Checkbox is not check by default */
   public static final boolean DEFAULT_CHECKED = false;
 
+  /** Emit a hidden field that indicates that the checkbox was in the request. */
+  public static final boolean DEFAULT_EMIT_HIDDEN_FIELD = true;
+
   private String m_sValue;
   private boolean m_bChecked = DEFAULT_CHECKED;
+  private boolean m_bEmitHiddenField = DEFAULT_EMIT_HIDDEN_FIELD;
 
   public HCCheckBox ()
   {
@@ -94,6 +98,18 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
     return this;
   }
 
+  public final boolean isEmitHiddenField ()
+  {
+    return m_bEmitHiddenField;
+  }
+
+  @Nonnull
+  public final HCCheckBox setEmitHiddenField (final boolean bEmitHiddenField)
+  {
+    m_bEmitHiddenField = bEmitHiddenField;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
@@ -107,6 +123,10 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   @Override
   protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    if (!m_bEmitHiddenField)
+      return super.internalConvertToNode (aConversionSettings);
+
+    // Create a container with the main checkbox and a hidden field
     final IMicroContainer aCont = new MicroContainer ();
     aCont.appendChild (super.internalConvertToNode (aConversionSettings));
     final String sName = getName ();
