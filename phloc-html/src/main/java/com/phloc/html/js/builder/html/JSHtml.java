@@ -560,6 +560,12 @@ public final class JSHtml
   }
 
   @Nonnull
+  public static JSFieldRef windowLocalStorage ()
+  {
+    return window ().ref ("localStorage");
+  }
+
+  @Nonnull
   public static JSFieldRef windowLocation ()
   {
     return window ().ref ("location");
