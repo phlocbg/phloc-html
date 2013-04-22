@@ -24,7 +24,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Type of an {@link com.phloc.html.hc.html.HCButton}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCButtonType implements IHCHasHTMLAttributeValue
 {

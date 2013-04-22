@@ -23,7 +23,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;del&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCDel extends AbstractHCElementWithChildren <HCDel>
 {

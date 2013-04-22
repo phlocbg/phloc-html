@@ -26,7 +26,7 @@ import com.phloc.commons.string.StringHelper;
 /**
  * Test class for class {@link EHTMLEntity}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class EHTMLEntityTest
 {

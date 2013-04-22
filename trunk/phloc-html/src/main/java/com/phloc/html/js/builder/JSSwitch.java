@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Switch statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSSwitch implements IJSStatement
 {

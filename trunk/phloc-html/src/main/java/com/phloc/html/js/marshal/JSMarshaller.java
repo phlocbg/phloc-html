@@ -45,7 +45,7 @@ import com.phloc.json.IJSON;
  * Marshaler class that converts Java Objects to their respective JavaScript
  * notation.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSMarshaller

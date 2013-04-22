@@ -43,7 +43,7 @@ import com.phloc.html.js.builder.JSExpr;
 /**
  * JUnit test for class {@link JSMarshaller}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JSMarshallerTest
 {

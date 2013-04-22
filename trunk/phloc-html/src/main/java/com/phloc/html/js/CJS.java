@@ -25,7 +25,7 @@ import com.phloc.commons.url.EURLProtocol;
 /**
  * JavaScript constants.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CJS

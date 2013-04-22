@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * An atomic integer number
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class JSAtomInt extends AbstractJSAtomNumeric

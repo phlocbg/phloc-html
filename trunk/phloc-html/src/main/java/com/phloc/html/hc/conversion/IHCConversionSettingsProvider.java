@@ -24,7 +24,7 @@ import com.phloc.html.EHTMLVersion;
 /**
  * Provider interface for {@link HCConversionSettings} objects.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCConversionSettingsProvider
 {

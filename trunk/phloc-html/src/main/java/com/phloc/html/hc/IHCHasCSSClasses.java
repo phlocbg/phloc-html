@@ -29,7 +29,7 @@ import com.phloc.html.css.ICSSClassProvider;
 /**
  * Base interface for objects having CSS classes
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
  */

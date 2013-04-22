@@ -27,7 +27,7 @@ import com.phloc.html.hc.api.IHCHasFocus;
  * Base interface for controls like edit, checkbox, radio button, select or text
  * area.
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  */
 public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>

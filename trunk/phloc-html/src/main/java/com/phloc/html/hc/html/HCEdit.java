@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents an HTML &lt;input&gt; element with type "text"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCEdit extends AbstractHCEdit <HCEdit>
 {

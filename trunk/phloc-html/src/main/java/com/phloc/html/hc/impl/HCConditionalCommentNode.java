@@ -42,7 +42,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * &lt;![endif]-->
  * </pre>
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class HCConditionalCommentNode extends AbstractHCWrappingNode

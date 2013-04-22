@@ -33,7 +33,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
 /**
  * Represents an HTML &lt;input&gt; element of type "radio"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCRadioButton extends AbstractHCInput <HCRadioButton>
 {

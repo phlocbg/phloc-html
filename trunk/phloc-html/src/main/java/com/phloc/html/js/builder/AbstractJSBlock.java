@@ -42,7 +42,7 @@ import com.phloc.json.IJSON;
 /**
  * A JS block. It contains a list of statements and declarations.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSBlock implements IJSFunctionContainer
 {

@@ -20,7 +20,7 @@ package com.phloc.html.hc;
 /**
  * Interface for elements having children.
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  */
 public interface IHCElementWithChildren <THISTYPE extends IHCElementWithChildren <THISTYPE>> extends

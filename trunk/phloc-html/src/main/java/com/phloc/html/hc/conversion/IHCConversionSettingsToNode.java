@@ -27,7 +27,7 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 /**
  * Settings interface that is used to convert HC* nodes to micro nodes.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCConversionSettingsToNode
 {

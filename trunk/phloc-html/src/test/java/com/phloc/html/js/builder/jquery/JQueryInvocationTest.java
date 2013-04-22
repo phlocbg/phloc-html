@@ -26,7 +26,7 @@ import com.phloc.html.EHTMLElement;
 /**
  * Test class for class {@link JQueryInvocation}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JQueryInvocationTest
 {

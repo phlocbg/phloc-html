@@ -32,7 +32,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * inserted into the {@link #pos() "current position"}. The position advances
  * one every time you add a new instruction.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSStatement
 {

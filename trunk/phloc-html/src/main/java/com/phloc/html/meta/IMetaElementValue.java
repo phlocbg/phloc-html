@@ -27,7 +27,7 @@ import com.phloc.commons.name.IHasName;
 /**
  * Represents the value of a single meta element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IMetaElementValue extends IHasName
 {

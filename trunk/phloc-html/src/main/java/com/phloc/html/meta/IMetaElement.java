@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents a single meta element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IMetaElement extends IMetaElementDeclaration
 {

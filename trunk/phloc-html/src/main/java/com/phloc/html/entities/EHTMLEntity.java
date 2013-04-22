@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Contains some predefined entities.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @CodingStyleguideUnaware
 public enum EHTMLEntity implements IHTMLEntity

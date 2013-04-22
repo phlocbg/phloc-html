@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * If statement, with optional else clause
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSConditional implements IJSStatement
 {

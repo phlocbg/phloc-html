@@ -20,7 +20,7 @@ package com.phloc.html.js.marshal;
 /**
  * Basic JavaScript object types.
  * 
- * @author philip
+ * @author Philip Helger
  */
 enum EJSType
 {

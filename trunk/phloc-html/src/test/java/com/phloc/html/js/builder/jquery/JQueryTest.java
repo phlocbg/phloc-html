@@ -32,7 +32,7 @@ import com.phloc.html.js.builder.JSExpr;
 /**
  * Test class for class {@link JQuery}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JQueryTest
 {

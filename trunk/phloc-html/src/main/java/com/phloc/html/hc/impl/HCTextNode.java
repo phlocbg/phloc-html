@@ -29,7 +29,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents a single text node as HC node.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCTextNode extends AbstractHCNode
 {

@@ -24,7 +24,7 @@ import com.phloc.html.hc.api.EHCButtonType;
 /**
  * Represents an HTML &lt;button&gt; element with type "reset"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCButton_Reset extends HCButton
 {

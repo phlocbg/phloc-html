@@ -27,7 +27,7 @@ import com.phloc.html.js.builder.jquery.JQuery;
  * Regular inline JS script elements with the special semantics, that stuff will
  * be executed on document.ready. This requires jQuery to be present!
  * 
- * @author philip
+ * @author Philip Helger
  */
 @OutOfBandNode
 public class HCScriptOnDocumentReady extends HCScript

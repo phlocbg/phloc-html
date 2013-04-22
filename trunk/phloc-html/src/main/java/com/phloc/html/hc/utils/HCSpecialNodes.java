@@ -22,7 +22,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 /**
  * Default implementation of {@link IHCSpecialNodes}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public class HCSpecialNodes extends AbstractHCSpecialNodes <HCSpecialNodes>

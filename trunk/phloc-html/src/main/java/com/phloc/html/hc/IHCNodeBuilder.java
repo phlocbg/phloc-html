@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 /**
  * Builder pattern for HC* nodes.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCNodeBuilder
 {

@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Postfix increment (x++) statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSIncrPostfix implements IJSStatement
 {

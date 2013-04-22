@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Interface for nodes that wrap other nodes (e.g. conditional comment)
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCWrappingNode extends IHCNode
 {

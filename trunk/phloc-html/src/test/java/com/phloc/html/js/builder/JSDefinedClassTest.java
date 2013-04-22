@@ -24,7 +24,7 @@ import com.phloc.html.js.builder.html.JSHtml;
 /**
  * Test class for class {@link JSDefinedClass}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JSDefinedClassTest
 {

@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Continue statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSContinue implements IJSStatement
 {

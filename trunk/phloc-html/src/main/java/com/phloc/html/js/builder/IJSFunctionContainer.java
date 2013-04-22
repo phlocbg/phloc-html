@@ -26,7 +26,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * The common aspect of a package and a function.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJSFunctionContainer extends IJSCodeProvider
 {

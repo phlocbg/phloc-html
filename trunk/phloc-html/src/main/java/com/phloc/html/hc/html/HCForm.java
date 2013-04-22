@@ -38,7 +38,7 @@ import com.phloc.html.js.builder.IJSStatement;
 /**
  * Represents an HTML &lt;form&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCForm extends AbstractHCElementWithChildren <HCForm>
 {

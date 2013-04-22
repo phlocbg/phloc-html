@@ -38,7 +38,7 @@ import com.phloc.html.hc.impl.HCNodeList;
 /**
  * Represents an HTML &lt;tr&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, AbstractHCCell>
 {

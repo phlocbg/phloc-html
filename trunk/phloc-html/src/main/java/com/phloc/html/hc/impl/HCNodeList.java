@@ -28,7 +28,7 @@ import com.phloc.html.hc.IHCNodeBuilder;
  * This class is an abstract HC node that represents a list of nodes without
  * creating an HTML element by itself.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCNodeList extends AbstractHCNodeList <HCNodeList>
 {

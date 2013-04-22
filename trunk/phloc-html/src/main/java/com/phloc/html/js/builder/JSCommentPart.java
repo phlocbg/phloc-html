@@ -30,7 +30,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * A part is a part of a JSDoc comment, and it is a list of values.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCommentPart extends ArrayList <Object>
 {

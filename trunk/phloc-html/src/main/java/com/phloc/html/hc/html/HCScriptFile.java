@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * Represents an HTML &lt;script&gt; element that loads the code from a source
  * URL.
  * 
- * @author philip
+ * @author Philip Helger
  * @see HCScript
  */
 @OutOfBandNode

@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Break statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSBreak implements IJSStatement
 {

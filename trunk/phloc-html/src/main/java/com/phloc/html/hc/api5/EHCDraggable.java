@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Draggable?
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCDraggable implements IHCHasHTMLAttributeValue
 {

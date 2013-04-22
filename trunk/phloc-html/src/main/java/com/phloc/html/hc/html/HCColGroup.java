@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 /**
  * Represents an HTML &lt;colgroup&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCColGroup extends AbstractHCElementWithInternalChildren <HCColGroup, HCCol>
 {

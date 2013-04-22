@@ -31,7 +31,7 @@ import com.phloc.html.hc.html.HCHead;
  * A special customization interface, that lets you modify existing elements
  * before they are assembled and emitted in the HTML code.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCCustomizer
 {

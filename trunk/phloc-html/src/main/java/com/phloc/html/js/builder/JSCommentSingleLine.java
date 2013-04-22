@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Single line comments
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCommentSingleLine implements IJSStatement
 {

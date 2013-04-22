@@ -33,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * For statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSForLoop implements IJSStatement
 {

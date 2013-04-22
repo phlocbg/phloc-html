@@ -31,7 +31,7 @@ import com.phloc.html.hc.customize.HCDefaultSettings;
 /**
  * Represents an HTML &lt;input&gt; element with type "password"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCEditPassword extends AbstractHCEdit <HCEditPassword>
 {

@@ -29,7 +29,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents an entity reference as HC node.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCEntityNode extends AbstractHCNode
 {

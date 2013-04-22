@@ -28,7 +28,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;P&gt; element<br>
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCP extends AbstractHCElementWithChildren <HCP>
 {

@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Base interface for a main HC node.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCNode extends IHasPlainText, Serializable
 {

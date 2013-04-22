@@ -34,7 +34,7 @@ import com.phloc.html.js.builder.JSRef;
 /**
  * This class contains JS builder default constructs that are used very commonly
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSHtml

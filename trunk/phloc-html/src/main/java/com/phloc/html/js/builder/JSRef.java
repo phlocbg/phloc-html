@@ -29,7 +29,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * Global Reference
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSRef extends AbstractJSAssignmentTarget
 {

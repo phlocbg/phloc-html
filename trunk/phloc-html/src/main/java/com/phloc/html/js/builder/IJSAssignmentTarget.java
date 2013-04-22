@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
  * an assignment. A left hand value can always be a right hand value, so this
  * interface derives from {@link IJSExpression}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJSAssignmentTarget extends IJSExpression
 {

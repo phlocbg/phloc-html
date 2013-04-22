@@ -30,7 +30,7 @@ import com.phloc.html.meta.MetaElement;
 /**
  * Test class for class {@link HCHtml}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCHtmlTest
 {

@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * Source: http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd<br>
  * Source: http://webdesign.about.com/od/htmltags/a/bltags_deprctag.htm
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)

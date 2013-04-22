@@ -31,7 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
 /**
  * Base class for an HTML &lt;input&gt; element to be used as an edit
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        The implementing type
  */

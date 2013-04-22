@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * While statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSWhileLoop implements IJSStatement
 {

@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Catch block for a try/catch/finally statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCatchBlock implements IJSGeneratable
 {

@@ -36,7 +36,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;a&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMedia <HCA>
 {

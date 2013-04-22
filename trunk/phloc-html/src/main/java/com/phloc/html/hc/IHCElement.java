@@ -37,7 +37,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * Base interface for an HC element
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        The implementation type
  */

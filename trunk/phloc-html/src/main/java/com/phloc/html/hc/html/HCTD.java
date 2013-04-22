@@ -22,7 +22,7 @@ import com.phloc.html.EHTMLElement;
 /**
  * Represents an HTML &lt;td&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCTD extends AbstractHCCell
 {

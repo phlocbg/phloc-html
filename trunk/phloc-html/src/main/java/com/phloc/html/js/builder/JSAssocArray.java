@@ -33,7 +33,7 @@ import com.phloc.json.IJSON;
 /**
  * array creation and initialization.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSAssocArray extends AbstractJSExpression
 {

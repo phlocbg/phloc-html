@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
 /**
  * Basic interface for object providing JavaScript code.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
 public interface IJSCodeProvider extends Serializable

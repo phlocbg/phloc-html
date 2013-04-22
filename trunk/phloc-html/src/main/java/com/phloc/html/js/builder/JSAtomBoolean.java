@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * An atom for boolean values
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class JSAtomBoolean extends AbstractJSExpression

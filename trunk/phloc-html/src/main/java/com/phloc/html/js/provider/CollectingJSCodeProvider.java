@@ -35,7 +35,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * A JSCode provider that encapsulates a list of {@link IJSCodeProvider}
  * elements and itself implements {@link IJSCodeProvider}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize, ICloneable <CollectingJSCodeProvider>

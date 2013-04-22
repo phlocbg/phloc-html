@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Do loops
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSDoLoop implements IJSStatement
 {

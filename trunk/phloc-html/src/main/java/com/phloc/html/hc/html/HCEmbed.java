@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;embed&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCEmbed extends AbstractHCElement <HCEmbed>
 {

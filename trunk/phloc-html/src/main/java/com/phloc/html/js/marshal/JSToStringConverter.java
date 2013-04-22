@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * Default implementation of the {@link IJSToStringConverter} interface, using
  * {@link JSMarshaller} to convert an object to a string representation.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSToStringConverter implements IJSToStringConverter

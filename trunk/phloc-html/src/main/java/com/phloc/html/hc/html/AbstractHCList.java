@@ -31,7 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 /**
  * Abstract base class for UL and OL elements.
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        The real implementation type.
  */

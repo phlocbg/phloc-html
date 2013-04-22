@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * A list of JS statements that is itself a statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JSStatementList implements IJSStatement
 {

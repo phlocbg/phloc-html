@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
  * Enumeration for the possible "alignment" values in HTML
  * {@link com.phloc.html.hc.html.HCObject} tags.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCObjectAlign implements IHCHasHTMLAttributeValue
 {

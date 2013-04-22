@@ -26,7 +26,7 @@ import com.phloc.html.hc.IHCNode;
 /**
  * Implementation of a node that is ONLY an out-of-band node!
  * 
- * @author philip
+ * @author Philip Helger
  */
 @OutOfBandNode
 public final class HCOutOfBandNode extends AbstractHCWrappingNode

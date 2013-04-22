@@ -27,7 +27,7 @@ import com.phloc.html.hc.html.HCBR;
 /**
  * Test class for class {final @link HCSettings}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCSettingsTest
 {

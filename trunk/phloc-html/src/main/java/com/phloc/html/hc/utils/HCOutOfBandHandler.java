@@ -41,7 +41,7 @@ import com.phloc.html.hc.htmlext.HCUtils;
 /**
  * This class is used to centrally handle the out-of-band nodes.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public final class HCOutOfBandHandler

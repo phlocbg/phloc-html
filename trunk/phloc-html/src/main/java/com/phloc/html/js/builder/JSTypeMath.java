@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 /**
  * Contains the JS built-in type Number
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSTypeMath extends JSPrimitiveType
 {

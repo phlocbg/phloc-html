@@ -24,7 +24,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Summary element may be the first child of {@link HCDetails}
  * 
- * @author philip
+ * @author Philip Helger
  */
 @SinceHTML5
 public class HCSummary extends AbstractHCElementWithChildren <HCSummary>

@@ -39,7 +39,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 /**
  * Abstract implementation of {@link IHCSpecialNodes}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecialNodes <IMPLTYPE>> implements IHCSpecialNodes

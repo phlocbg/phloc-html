@@ -32,7 +32,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * href="..."></code>) and inline JS code (
  * <code>&lt;script>...&lt;/script></code>).
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCSpecialNodes extends Serializable
 {

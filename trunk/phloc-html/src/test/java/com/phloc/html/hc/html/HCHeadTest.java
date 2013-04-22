@@ -34,7 +34,7 @@ import com.phloc.html.meta.MetaElement;
 /**
  * Test class for class {@link HCHead}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCHeadTest
 {

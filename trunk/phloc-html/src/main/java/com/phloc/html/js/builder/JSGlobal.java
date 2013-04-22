@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
  * This contains global JS function wrappers.<br>
  * Source: http://www.w3schools.com/jsref/jsref_obj_global.asp
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSGlobal

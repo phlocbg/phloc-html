@@ -39,7 +39,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 /**
  * This class represents an HTML &lt;script&gt; element with inline JS content.
  * 
- * @author philip
+ * @author Philip Helger
  * @see HCScriptFile
  */
 @OutOfBandNode

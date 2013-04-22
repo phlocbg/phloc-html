@@ -30,7 +30,7 @@ import com.phloc.html.hc.customize.IHCCustomizer;
  * Default implementation of {@link IHCConversionSettingsProvider} using a
  * provided {@link EHTMLVersion}
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class HCConversionSettingsProvider implements IHCConversionSettingsProvider

@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 /**
  * A JS package. This is the entry point for all functions, declarations etc.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSPackage extends AbstractJSBlock
 {

@@ -27,7 +27,7 @@ import com.phloc.html.js.builder.JSFunction;
 /**
  * Special invocation semantics for jQuery
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JQueryInvocation extends AbstractJQueryInvocation <JQueryInvocation>
 {

@@ -27,7 +27,7 @@ import com.phloc.json.IJSON;
 /**
  * Provides default implementations for {@link IJSExpression}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSExpression implements IJSExpression
 {

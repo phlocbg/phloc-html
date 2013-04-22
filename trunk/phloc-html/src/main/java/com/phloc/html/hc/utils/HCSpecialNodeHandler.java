@@ -47,7 +47,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
  * This class is used to handle the special nodes (JS and CSS, inline and
  * reference).
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public final class HCSpecialNodeHandler

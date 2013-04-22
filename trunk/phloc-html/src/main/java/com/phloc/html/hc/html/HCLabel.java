@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;label&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
 {

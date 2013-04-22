@@ -34,7 +34,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Default implementation of the {@link IHCNode} interface.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public abstract class AbstractHCNode implements IHCNode

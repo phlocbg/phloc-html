@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Represents the state of a single checkbox.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CheckBoxState

@@ -31,7 +31,7 @@ import com.phloc.css.propertyvalue.ICSSValue;
 /**
  * Base interface for objects having CSS styles
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
  */

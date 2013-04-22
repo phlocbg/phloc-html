@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents a single CDATA node as HC node.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCCommentNode extends AbstractHCNode
 {

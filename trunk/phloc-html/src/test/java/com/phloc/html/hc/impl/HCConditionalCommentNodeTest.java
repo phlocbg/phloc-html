@@ -28,7 +28,7 @@ import com.phloc.html.hc.html.HCB;
 /**
  * Test class for class {@link HCConditionalCommentNode}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCConditionalCommentNodeTest
 {

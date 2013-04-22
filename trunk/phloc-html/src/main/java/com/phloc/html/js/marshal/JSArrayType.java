@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Specific JavaScript array type.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSArrayType extends JSType implements IHasChildJSType

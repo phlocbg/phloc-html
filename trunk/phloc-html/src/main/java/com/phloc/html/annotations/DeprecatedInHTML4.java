@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * in HTML4.<br>
  * Source: http://www.w3.org/TR/html4/index/elements.html
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)

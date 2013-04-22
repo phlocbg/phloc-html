@@ -24,7 +24,7 @@ import com.phloc.commons.parent.IHasChildrenSorted;
 /**
  * Special node interface for objects containing other objects
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCHasChildren extends IHCNode, IHasChildrenSorted <IHCNode>
 {

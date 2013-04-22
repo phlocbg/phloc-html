@@ -24,7 +24,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Enumeration for {@link com.phloc.html.hc.html.HCIFrame} alignment.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCIFrameAlign implements IHCHasHTMLAttributeValue
 {

@@ -26,7 +26,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * you're looking for the HTML <code>&lt;head&gt;</code> element please refer to
  * the class {@link com.phloc.html.hc.html.HCHead}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @SinceHTML5
 public class HCHeader extends AbstractHCElementWithChildren <HCHeader>

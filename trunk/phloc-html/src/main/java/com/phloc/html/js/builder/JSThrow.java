@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Throw statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSThrow implements IJSStatement
 {

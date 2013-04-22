@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * Implementation of custom {@link IHCLinkType} objects that cannot be found in
  * {@link EHCLinkType}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCLinkTypeCustom implements IHCLinkType
 {

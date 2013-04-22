@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Prefix decrement (--x) statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSDecrPrefix implements IJSStatement
 {

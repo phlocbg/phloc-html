@@ -29,7 +29,7 @@ import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 /**
  * Special node interface for objects containing other objects
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        The type of the contained child objects.
  */

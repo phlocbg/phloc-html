@@ -21,7 +21,7 @@ package com.phloc.html;
  * Contains the potential element meta types.<br>
  * See http://dev.w3.org/html5/markup/common-models.html#common-models
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHTMLContentModelType
 {

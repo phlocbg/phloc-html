@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * in HTML5.<br>
  * Source: http://www.w3.org/TR/html5-diff/
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)

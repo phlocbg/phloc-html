@@ -42,7 +42,7 @@ public class MainCreateHCClasses
                                               MainCreateHCClasses.class.getName () +
                                               " so DO NOT EDIT!\r\n" +
                                               " * \r\n" +
-                                              " * @author philip\r\n" +
+                                              " * @author Philip Helger\r\n" +
                                               " */\r\n" +
                                               "public class HC$$ extends $SUPERCLASS$ <HC$$>\r\n" +
                                               "{\r\n" +
@@ -175,7 +175,7 @@ public class MainCreateHCClasses
                                               MainCreateHCClasses.class.getName () +
                                               " so DO NOT EDIT!\r\n" +
                                               " * \r\n" +
-                                              " * @author philip\r\n" +
+                                              " * @author Philip Helger\r\n" +
                                               " */\r\n" +
                                               "public final class HC$$Test\r\n" +
                                               "{\r\n" +

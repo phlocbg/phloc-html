@@ -28,7 +28,7 @@ import com.phloc.html.js.builder.JSExpr;
 /**
  * Test class for class {@link JQuerySelector}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JQuerySelectorTest
 {

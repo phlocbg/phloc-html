@@ -25,7 +25,7 @@ import com.phloc.html.annotations.SinceHTML5;
 /**
  * Enum for HTML text directions.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCTextDirection implements IHCHasHTMLAttributeValue
 {

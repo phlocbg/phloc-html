@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Label that can be used for continue and break.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSLabel implements IJSStatement
 {

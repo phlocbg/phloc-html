@@ -34,7 +34,7 @@ import com.phloc.commons.string.StringHelper;
 /**
  * Contains a list of known HTML entities and their character representation.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class HTMLEntities

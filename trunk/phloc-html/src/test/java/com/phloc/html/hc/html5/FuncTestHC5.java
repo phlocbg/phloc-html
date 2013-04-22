@@ -31,7 +31,7 @@ import com.phloc.html.hc.html.HCHtml;
 /**
  * Instantiate and generate code for all HTML5 elements available
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class FuncTestHC5
 {

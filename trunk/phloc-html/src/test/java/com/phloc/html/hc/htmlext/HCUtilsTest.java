@@ -32,7 +32,7 @@ import com.phloc.html.hc.impl.HCTextNode;
 /**
  * Test class for class {@link HCUtils}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCUtilsTest
 {

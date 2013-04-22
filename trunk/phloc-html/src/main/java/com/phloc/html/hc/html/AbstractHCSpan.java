@@ -23,7 +23,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;span&gt; element with open semantics.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractHCSpan <THISTYPE extends AbstractHCSpan <THISTYPE>> extends
                                                                                   AbstractHCElementWithChildren <THISTYPE>

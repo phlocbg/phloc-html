@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Postfix decrement (x--) statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSDecrPostfix implements IJSStatement
 {

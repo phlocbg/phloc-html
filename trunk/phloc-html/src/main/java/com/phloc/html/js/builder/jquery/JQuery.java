@@ -45,7 +45,7 @@ import com.phloc.html.js.builder.html.JSHtml;
 /**
  * Wrapper around jQuery to allow for easy function calls
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JQuery

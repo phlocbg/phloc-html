@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
  * An enumeration that can be used in {@link com.phloc.html.hc.html.HCOL}
  * objects to define the used type.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCOLType implements IHCHasHTMLAttributeValue
 {

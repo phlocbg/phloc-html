@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * A representation of a type in JS.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSType implements IJSGeneratable
 {

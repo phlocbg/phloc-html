@@ -29,7 +29,7 @@ import com.phloc.html.js.builder.JSExpr;
 /**
  * Utility class handling <code>$.ajax</code>
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JQueryAjaxBuilder
 {

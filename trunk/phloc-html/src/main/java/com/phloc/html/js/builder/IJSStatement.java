@@ -25,7 +25,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * Common interface for code components that can generate uses of themselves as
  * statements.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJSStatement extends IJSCodeProvider
 {
