@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Specific JavaScript list type.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSListType extends JSType implements IHasChildJSType

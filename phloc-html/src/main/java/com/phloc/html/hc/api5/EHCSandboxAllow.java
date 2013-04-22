@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Sandbox allowance?
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCSandboxAllow implements IHCHasHTMLAttributeValue
 {

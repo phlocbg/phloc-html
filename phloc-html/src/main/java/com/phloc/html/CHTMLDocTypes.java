@@ -28,7 +28,7 @@ import com.phloc.html.hc.html5.HTML5DocumentType;
 /**
  * Contains a list of predefined (X)HTML document types.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CHTMLDocTypes

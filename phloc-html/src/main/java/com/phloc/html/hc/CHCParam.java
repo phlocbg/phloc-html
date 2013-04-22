@@ -23,7 +23,7 @@ import javax.annotation.concurrent.Immutable;
 /**
  * Contains default request parameters for typical use cases.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CHCParam

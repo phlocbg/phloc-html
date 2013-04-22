@@ -48,7 +48,7 @@ import com.phloc.html.hc.impl.HCTextNode;
 /**
  * Utility class for parsing stuff as HTML.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class XHTMLParser

@@ -32,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * a value. If the meta tag is locale independent, the constant
  * {@link com.phloc.commons.CGlobal#LOCALE_INDEPENDENT} is used.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class MetaElementValue implements IMetaElementValue

@@ -25,7 +25,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Abstract base class for DD and DT tags ({@link HCDD} and {@link HCDT})
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        The implementing type
  */

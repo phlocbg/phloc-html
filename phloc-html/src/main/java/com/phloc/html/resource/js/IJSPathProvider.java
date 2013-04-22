@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Provides a path to an external JS object.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
 public interface IJSPathProvider

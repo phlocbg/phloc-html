@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Base class for numeric values
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSAtomNumeric extends AbstractJSExpression
 {

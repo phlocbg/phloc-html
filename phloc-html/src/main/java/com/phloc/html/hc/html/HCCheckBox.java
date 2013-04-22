@@ -37,7 +37,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
 /**
  * Represents an HTML &lt;input&gt; element with type "checkbox"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 {

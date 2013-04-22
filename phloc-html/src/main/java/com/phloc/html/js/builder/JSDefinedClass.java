@@ -39,7 +39,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * A generated JS class.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
 {

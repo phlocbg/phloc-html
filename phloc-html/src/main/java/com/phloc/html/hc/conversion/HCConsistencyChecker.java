@@ -55,7 +55,7 @@ import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 /**
  * This class performs some consistency checks on HCNodes
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class HCConsistencyChecker

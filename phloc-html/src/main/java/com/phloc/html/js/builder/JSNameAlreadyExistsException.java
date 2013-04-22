@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Indicates that a declaration is already created.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSNameAlreadyExistsException extends RuntimeException
 {

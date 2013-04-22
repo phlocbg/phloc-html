@@ -26,7 +26,7 @@ import com.phloc.commons.string.StringHelper;
 /**
  * A class with a set of predefined meta tag names.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EStandardMetaElement implements IMetaElementDeclaration
 {

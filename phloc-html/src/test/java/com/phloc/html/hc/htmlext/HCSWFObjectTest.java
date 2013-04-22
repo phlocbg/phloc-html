@@ -29,7 +29,7 @@ import com.phloc.html.hc.conversion.HCSettings;
 /**
  * Test class for class {@link HCSWFObject}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCSWFObjectTest
 {

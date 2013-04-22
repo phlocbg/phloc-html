@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Content editable?
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCContentEditable implements IHCHasHTMLAttributeValue
 {

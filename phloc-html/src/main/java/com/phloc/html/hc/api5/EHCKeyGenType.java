@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Keygen type?
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCKeyGenType implements IHCHasHTMLAttributeValue
 {

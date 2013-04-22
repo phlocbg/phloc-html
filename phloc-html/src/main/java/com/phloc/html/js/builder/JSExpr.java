@@ -29,7 +29,7 @@ import com.phloc.json.IJSON;
 /**
  * Factory methods that generate various {@link IJSExpression}s.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSExpr

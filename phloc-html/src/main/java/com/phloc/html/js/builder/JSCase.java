@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Case statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCase implements IJSStatement
 {

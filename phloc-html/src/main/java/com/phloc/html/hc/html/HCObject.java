@@ -36,7 +36,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;object&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCObject extends AbstractHCElementWithChildren <HCObject>
 {

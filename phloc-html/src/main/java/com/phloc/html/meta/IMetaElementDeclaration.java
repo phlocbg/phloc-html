@@ -24,7 +24,7 @@ import com.phloc.commons.name.IHasName;
 /**
  * Defines the properties for a meta tag declaration.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IMetaElementDeclaration extends IHasName
 {

@@ -20,7 +20,7 @@ package com.phloc.html.hc.api;
 /**
  * Base interface for link types (used in com.phloc.html.hc.html.HCLink)
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCLinkType extends IHCHasHTMLAttributeValue
 {

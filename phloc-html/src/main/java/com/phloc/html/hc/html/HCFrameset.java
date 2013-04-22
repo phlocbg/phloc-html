@@ -31,7 +31,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;frameset&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 @DeprecatedInHTML5
 public class HCFrameset extends AbstractHCElementWithChildren <HCFrameset>

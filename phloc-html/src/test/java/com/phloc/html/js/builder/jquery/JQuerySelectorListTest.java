@@ -26,7 +26,7 @@ import com.phloc.html.css.DefaultCSSClassProvider;
 /**
  * Test class for class {@link JQuerySelectorList}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JQuerySelectorListTest
 {

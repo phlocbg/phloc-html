@@ -48,7 +48,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
  * This is the common base class for regular HC tables as well as for more
  * complex constructs (e.g. PUI)
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
  */

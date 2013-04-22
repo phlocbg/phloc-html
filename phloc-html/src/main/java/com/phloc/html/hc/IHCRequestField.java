@@ -28,7 +28,7 @@ import com.phloc.commons.annotations.Nonempty;
  * Defines an abstract request field for input controls. It encapsulates a name
  * and a request value.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCRequestField
 {

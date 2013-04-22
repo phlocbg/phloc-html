@@ -22,7 +22,7 @@ import com.phloc.html.hc.IHCNode;
 /**
  * Marker interface for nodes that can contain JS code (inline or external)
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCJSNode extends IHCNode
 {

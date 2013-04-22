@@ -26,7 +26,7 @@ import com.phloc.commons.compare.AbstractCollationComparator;
 /**
  * Compare meta tags according to their (locale independent) name.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class ComparatorMetaElementName extends AbstractCollationComparator <IMetaElementDeclaration>
 {

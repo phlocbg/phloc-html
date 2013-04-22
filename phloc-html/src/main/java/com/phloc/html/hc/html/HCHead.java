@@ -53,7 +53,7 @@ import com.phloc.html.meta.IMetaElement;
 /**
  * Represents an HTML &lt;head&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCHead extends AbstractHCElement <HCHead>
 {

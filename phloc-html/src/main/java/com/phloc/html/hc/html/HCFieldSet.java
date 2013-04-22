@@ -27,7 +27,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;fieldset&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCFieldSet extends AbstractHCElementWithChildren <HCFieldSet>
 {

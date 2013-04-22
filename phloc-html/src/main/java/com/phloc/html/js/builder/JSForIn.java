@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * For in Statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSForIn implements IJSStatement
 {

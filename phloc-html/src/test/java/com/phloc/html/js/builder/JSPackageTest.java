@@ -29,7 +29,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 /**
  * Test class for class {@link JSPackage}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JSPackageTest
 {

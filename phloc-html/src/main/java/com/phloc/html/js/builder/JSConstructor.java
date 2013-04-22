@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * JS constructor.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSConstructor extends JSFunction
 {

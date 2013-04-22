@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * This class represents a single unary operator
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class JSOpUnary extends AbstractJSExpression

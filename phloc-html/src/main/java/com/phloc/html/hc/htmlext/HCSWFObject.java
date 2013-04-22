@@ -40,7 +40,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
  * Create the necessary tags for embedding a flash files using SWFObject.<br>
  * See <a href="http://code.google.com/p/swfobject/">SWFObject web site</a>
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCSWFObject implements IHCNodeBuilder
 {

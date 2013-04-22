@@ -28,7 +28,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * Contains the JS built-in primitive types
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSPrimitiveType extends AbstractJSType
 {

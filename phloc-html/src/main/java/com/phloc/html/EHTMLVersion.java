@@ -25,7 +25,7 @@ import com.phloc.commons.microdom.IMicroDocumentType;
 /**
  * Enum of supported HTML versions.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHTMLVersion
 {

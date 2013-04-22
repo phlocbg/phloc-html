@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * An implementation of {@link IJSPathProvider} using constant paths.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class ConstantJSPathProvider implements IJSPathProvider
 {

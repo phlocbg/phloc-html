@@ -26,7 +26,7 @@ import com.phloc.html.hc.conversion.HCSettings;
 /**
  * Test class for class {@link HCStyle}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCStyleTest
 {

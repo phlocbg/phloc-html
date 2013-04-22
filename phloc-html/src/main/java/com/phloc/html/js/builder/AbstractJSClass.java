@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Represents an abstract JS class.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSClass extends AbstractJSType
 {

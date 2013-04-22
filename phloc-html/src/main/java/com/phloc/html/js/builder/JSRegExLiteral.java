@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * RegEx literal.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSRegExLiteral extends AbstractJSExpression
 {

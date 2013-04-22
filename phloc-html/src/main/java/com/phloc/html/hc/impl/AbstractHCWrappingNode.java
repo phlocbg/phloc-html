@@ -28,7 +28,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Abstract implementation of {@link IHCWrappingNode}
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public abstract class AbstractHCWrappingNode extends AbstractHCNode implements IHCWrappingNode

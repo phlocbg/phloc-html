@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;script&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  * @see HCScript
  * @see HCScriptFile
  */

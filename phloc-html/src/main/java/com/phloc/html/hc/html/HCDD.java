@@ -22,7 +22,7 @@ import com.phloc.html.EHTMLElement;
 /**
  * Represents an HTML &lt;dd&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCDD extends AbstractHCDefinitionItem <HCDD>
 {

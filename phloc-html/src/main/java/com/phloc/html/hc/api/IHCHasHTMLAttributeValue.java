@@ -22,7 +22,7 @@ import com.phloc.commons.microdom.IHasAttributeValue;
 /**
  * Base interface for an HTML attribute value provider.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCHasHTMLAttributeValue extends IHasAttributeValue
 {

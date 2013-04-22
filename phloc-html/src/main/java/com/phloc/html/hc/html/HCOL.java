@@ -31,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents an HTML &lt;ol&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCOL extends AbstractHCList <HCOL>
 {

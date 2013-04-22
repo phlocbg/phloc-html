@@ -28,7 +28,7 @@ import com.phloc.html.EHTMLVersion;
  * Settings interface that is used to convert HC* nodes to micro nodes, to plain
  * text and for consistency checks.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCConversionSettings extends IHCConversionSettingsToNode, ICloneable <IHCConversionSettings>
 {

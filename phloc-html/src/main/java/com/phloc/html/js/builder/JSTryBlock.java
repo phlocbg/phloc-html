@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Try statement with Catch and/or Finally clause
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSTryBlock implements IJSStatement
 {

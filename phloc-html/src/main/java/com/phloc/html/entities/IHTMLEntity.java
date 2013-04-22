@@ -24,7 +24,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Base interface for a single HTML entity.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHTMLEntity
 {

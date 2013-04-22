@@ -41,7 +41,7 @@ import com.phloc.html.hc.impl.HCTextNode;
 /**
  * Test class for class {@link XHTMLParser}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class XHTMLParserTest
 {

@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * array component reference.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSArrayCompRef extends AbstractJSAssignmentTarget
 {

@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Object invocation
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSInvocation extends AbstractJSInvocation <JSInvocation>
 {

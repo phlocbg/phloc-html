@@ -37,7 +37,7 @@ import com.phloc.json.IJSON;
 /**
  * Object invocation
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends AbstractJSExpression implements IJSStatement
 {

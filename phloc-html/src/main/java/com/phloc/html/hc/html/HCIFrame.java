@@ -36,7 +36,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;iframe&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCIFrame extends AbstractHCElementWithChildren <HCIFrame>
 {

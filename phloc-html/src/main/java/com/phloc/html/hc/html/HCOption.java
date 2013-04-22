@@ -32,7 +32,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents a single option within a select box.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCOption extends AbstractHCElementWithChildren <HCOption> implements IHCCanBeDisabled <HCOption>
 {

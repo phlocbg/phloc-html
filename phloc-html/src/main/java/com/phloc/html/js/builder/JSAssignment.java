@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Assignment statements, which are also expressions.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSAssignment extends AbstractJSExpression implements IJSStatement
 {

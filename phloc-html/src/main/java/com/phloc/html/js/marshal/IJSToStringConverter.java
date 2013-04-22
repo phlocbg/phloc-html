@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
  * Interface that defines the conversion routines to convert an arbitrary Java
  * object to a valid JavaScript object.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
 public interface IJSToStringConverter

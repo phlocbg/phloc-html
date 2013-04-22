@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Prefix increment (++x) statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSIncrPrefix implements IJSStatement
 {

@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Command type
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCCommandType implements IHCHasHTMLAttributeValue
 {

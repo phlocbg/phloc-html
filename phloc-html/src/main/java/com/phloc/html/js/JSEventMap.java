@@ -34,7 +34,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
  * {@link IJSCodeProvider} that represents the code. This is mainly meant for
  * managing HTML element JS event handler.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class JSEventMap implements Serializable
 {

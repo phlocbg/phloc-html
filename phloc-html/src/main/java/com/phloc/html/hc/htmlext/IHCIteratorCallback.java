@@ -27,7 +27,7 @@ import com.phloc.html.hc.IHCNode;
 /**
  * Callback interface to be used when iterating an HC tree.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IHCIteratorCallback
 {

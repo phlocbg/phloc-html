@@ -32,7 +32,7 @@ import com.phloc.html.js.builder.JSExpr;
 /**
  * Instantiate and generate code for all HTML elements available
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class FuncTestHC
 {

@@ -45,7 +45,7 @@ import com.phloc.html.hc.utils.HCOutOfBandHandler;
 /**
  * The node that represents a full HTML document.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCHtml extends AbstractHCElement <HCHtml>
 {

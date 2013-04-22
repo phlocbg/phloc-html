@@ -44,7 +44,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * This class is an abstract HC node that represents a list of nodes without
  * creating an HTML element by itself.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <THISTYPE>> extends AbstractHCNode implements IHCNodeWithChildren <THISTYPE>

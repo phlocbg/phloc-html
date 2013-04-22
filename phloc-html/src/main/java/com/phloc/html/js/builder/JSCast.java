@@ -25,7 +25,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * A cast operation.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCast extends AbstractJSExpression
 {

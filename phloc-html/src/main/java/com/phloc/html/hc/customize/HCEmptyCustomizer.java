@@ -32,7 +32,7 @@ import com.phloc.html.hc.html.HCHead;
 /**
  * An implementation of {@link IHCCustomizer} that does nothing.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class HCEmptyCustomizer implements IHCCustomizer

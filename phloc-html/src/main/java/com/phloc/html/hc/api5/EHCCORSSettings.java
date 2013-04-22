@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * CORS settings
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCCORSSettings implements IHCHasHTMLAttributeValue
 {

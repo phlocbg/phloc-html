@@ -27,7 +27,7 @@ import com.phloc.html.js.CJS;
 /**
  * Utility class for handling JavaScript file names.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSFilenameHelper

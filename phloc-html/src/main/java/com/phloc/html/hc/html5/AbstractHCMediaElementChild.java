@@ -26,7 +26,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Base class for &lt;source> and &lt;track
  * 
- * @author philip
+ * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
  */

@@ -24,7 +24,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents the caption of a {@link HCFigure}. Must be the first child there.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @SinceHTML5
 public class HCFigCaption extends AbstractHCElementWithChildren <HCFigCaption>

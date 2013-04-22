@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * A field of a class
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
 {

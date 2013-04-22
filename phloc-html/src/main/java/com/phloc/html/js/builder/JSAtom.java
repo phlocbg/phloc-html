@@ -28,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Simple code components that merely generate themselves.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class JSAtom extends AbstractJSExpression

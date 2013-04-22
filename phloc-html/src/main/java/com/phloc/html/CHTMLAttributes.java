@@ -23,7 +23,7 @@ import javax.annotation.concurrent.Immutable;
 /**
  * Contains constant HTML attribute names.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CHTMLAttributes

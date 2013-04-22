@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Track type (read-only property in JS)
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCTrackType implements IHCHasHTMLAttributeValue
 {

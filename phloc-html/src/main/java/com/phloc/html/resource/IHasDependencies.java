@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 /**
  * Base interface for objects with dependencies.
  * 
- * @author philip
+ * @author Philip Helger
  * @param <T>
  */
 public interface IHasDependencies <T>

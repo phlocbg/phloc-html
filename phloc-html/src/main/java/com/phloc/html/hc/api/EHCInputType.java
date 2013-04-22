@@ -24,7 +24,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * The type of an {@link com.phloc.html.hc.impl.AbstractHCInput} element.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCInputType implements IHCHasHTMLAttributeValue
 {

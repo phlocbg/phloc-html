@@ -54,7 +54,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents a single HTML meta element.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public class MetaElement implements IMetaElement

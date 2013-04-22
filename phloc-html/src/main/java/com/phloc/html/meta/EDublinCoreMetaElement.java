@@ -26,7 +26,7 @@ import com.phloc.commons.string.StringHelper;
 /**
  * An enumeration with all DublinCore meta tag names.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EDublinCoreMetaElement implements IMetaElementDeclaration
 {

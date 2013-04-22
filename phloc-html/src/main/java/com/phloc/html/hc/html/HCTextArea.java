@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCControl;
 /**
  * Represents an HTML &lt;textarea&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCTextArea extends AbstractHCControl <HCTextArea>
 {

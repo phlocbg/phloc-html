@@ -23,7 +23,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Represents an HTML &lt;dfn&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCDFN extends AbstractHCElementWithChildren <HCDFN>
 {

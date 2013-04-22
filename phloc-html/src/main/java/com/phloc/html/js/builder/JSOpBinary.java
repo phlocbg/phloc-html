@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * This class represents a single binary operator
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSOpBinary extends AbstractJSExpression
 {

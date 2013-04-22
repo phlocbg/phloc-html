@@ -68,7 +68,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;style&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 @OutOfBandNode
 public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode

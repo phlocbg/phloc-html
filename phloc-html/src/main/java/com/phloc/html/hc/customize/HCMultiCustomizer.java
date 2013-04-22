@@ -36,7 +36,7 @@ import com.phloc.html.hc.html.HCHead;
 /**
  * An implementation of {@link IHCCustomizer} that handles multiple customizers.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class HCMultiCustomizer implements IHCCustomizer

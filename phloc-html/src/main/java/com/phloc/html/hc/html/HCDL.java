@@ -26,7 +26,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
 /**
  * Represents an HTML &lt;dl&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCDL extends AbstractHCElementWithInternalChildren <HCDL, AbstractHCDefinitionItem <?>>
 {

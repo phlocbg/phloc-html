@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;frame&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 @DeprecatedInHTML5
 public class HCFrame extends AbstractHCElement <HCFrame>

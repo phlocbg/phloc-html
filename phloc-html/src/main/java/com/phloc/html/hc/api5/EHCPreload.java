@@ -25,7 +25,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Audio preload?
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCPreload implements IHCHasHTMLAttributeValue
 {

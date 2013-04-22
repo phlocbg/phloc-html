@@ -30,7 +30,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * Helper class to get the textual representation of JSDOM objects
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public final class JSPrinter

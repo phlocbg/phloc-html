@@ -29,7 +29,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;hr&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCHR extends AbstractHCElement <HCHR>
 {

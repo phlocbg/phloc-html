@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Specific JavaScript map type.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSMapType extends JSType

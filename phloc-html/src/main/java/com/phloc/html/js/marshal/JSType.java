@@ -30,7 +30,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * Wrapper around JavaScript types.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 @MustImplementEqualsAndHashcode

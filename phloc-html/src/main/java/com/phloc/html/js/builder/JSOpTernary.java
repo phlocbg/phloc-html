@@ -27,7 +27,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * This class represents a single ternary operator.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSOpTernary extends AbstractJSExpression
 {

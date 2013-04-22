@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.Nonempty;
  * An enumeration that can be used in {@link com.phloc.html.hc.html.HCParam}
  * objects to define the used value type.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCParamValueType implements IHCHasHTMLAttributeValue
 {

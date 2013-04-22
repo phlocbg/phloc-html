@@ -31,7 +31,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * JS method.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSMethod extends JSFunction
 {

@@ -28,7 +28,7 @@ import com.phloc.css.CSSFilenameHelper;
 /**
  * Implementation of {@link ICSSPathProvider} with constant paths.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class ConstantCSSPathProvider implements ICSSPathProvider
 {

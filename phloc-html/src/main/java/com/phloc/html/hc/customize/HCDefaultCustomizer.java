@@ -70,7 +70,7 @@ import com.phloc.html.js.builder.jquery.JQuery;
  * The default implementation of {@link IHCCustomizer} performing some default
  * class assignments etc.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class HCDefaultCustomizer extends HCEmptyCustomizer

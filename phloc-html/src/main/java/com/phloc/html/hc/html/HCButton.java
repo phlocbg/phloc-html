@@ -37,7 +37,7 @@ import com.phloc.html.js.builder.IJSStatement;
 /**
  * Represents an HTML &lt;button&gt; element with type "button"
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCButton extends AbstractHCElementWithChildren <HCButton> implements IHCCanBeDisabled <HCButton>
 {

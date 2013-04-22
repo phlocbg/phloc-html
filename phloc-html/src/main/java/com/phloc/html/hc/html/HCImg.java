@@ -35,7 +35,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;img&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCImg extends AbstractHCElement <HCImg>
 {

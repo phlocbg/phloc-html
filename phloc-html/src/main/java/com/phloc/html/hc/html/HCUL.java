@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 /**
  * Represents an HTML &lt;ul&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCUL extends AbstractHCList <HCUL>
 {

@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
  * This is a utility class for managing indentation and other basic formatting
  * for {@link PrintWriter}.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSFormatter implements Closeable
 {

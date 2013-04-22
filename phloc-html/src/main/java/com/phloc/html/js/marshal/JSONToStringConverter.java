@@ -29,7 +29,7 @@ import com.phloc.json.IJSON;
  * Implementation of the {@link IJSToStringConverter} interface, for converting
  * native {@link IJSON} objects.
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSONToStringConverter implements IJSToStringConverter

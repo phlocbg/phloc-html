@@ -28,7 +28,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * Implementation of {@link IJSCodeProvider} that takes an arbitrary string from
  * any sources
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class UnparsedJSCodeProvider implements IJSCodeProvider

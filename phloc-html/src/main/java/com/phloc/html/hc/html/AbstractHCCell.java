@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Abstract base class for table cells. Works for header, body and footer cells.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public abstract class AbstractHCCell extends AbstractHCElementWithChildren <AbstractHCCell>
 {

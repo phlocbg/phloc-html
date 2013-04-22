@@ -40,7 +40,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 /**
  * Represents an HTML &lt;link&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 @OutOfBandNode
 public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode

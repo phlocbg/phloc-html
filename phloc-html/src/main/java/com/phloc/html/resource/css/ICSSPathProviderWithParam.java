@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.Nonempty;
  * An explicit {@link ICSSPathProvider} that supports an parameters. This is
  * e.g. useful if a language-specific CSS file is present!
  * 
- * @author philip
+ * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
 public interface ICSSPathProviderWithParam extends ICSSPathProvider

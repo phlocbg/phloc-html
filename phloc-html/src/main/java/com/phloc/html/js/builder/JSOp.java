@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
 /**
  * Class for generating expressions containing operators
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class JSOp

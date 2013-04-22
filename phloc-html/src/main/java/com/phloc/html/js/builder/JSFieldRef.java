@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * Field Reference
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSFieldRef extends JSRef
 {

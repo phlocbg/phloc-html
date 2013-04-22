@@ -26,7 +26,7 @@ import com.phloc.commons.annotations.Nonempty;
  * An explicit {@link IJSPathProvider} that supports an parameters. This is e.g.
  * useful if a language-specific JS file is present!
  * 
- * @author philip
+ * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
 public interface IJSPathProviderWithParam extends IJSPathProvider

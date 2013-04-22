@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Contains the JS built-in type Number
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSTypeNumber extends JSPrimitiveType
 {

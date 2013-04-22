@@ -35,7 +35,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 /**
  * JS function
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
 {

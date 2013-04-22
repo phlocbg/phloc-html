@@ -24,7 +24,7 @@ import com.phloc.commons.GlobalDebug;
 /**
  * Default settings for HTML controls
  * 
- * @author philip
+ * @author Philip Helger
  */
 @NotThreadSafe
 public final class HCDefaultSettings

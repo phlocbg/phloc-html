@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * delete statement
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSDelete implements IJSStatement
 {

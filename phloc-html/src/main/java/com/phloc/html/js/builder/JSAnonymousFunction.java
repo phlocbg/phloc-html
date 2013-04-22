@@ -34,7 +34,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * An anonymous function (a function without a name)
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSAnonymousFunction extends AbstractJSExpression
 {

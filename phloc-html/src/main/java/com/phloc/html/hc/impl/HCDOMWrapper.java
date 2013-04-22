@@ -32,7 +32,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * This is a simple wrapper around any {@link IMicroNode} so it can easily be
  * used in a HC* construction!
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCDOMWrapper extends AbstractHCNode
 {

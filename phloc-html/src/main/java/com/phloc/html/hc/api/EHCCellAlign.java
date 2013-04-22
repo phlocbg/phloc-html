@@ -24,7 +24,7 @@ import com.phloc.commons.annotations.Nonempty;
 /**
  * Alignment of an {@link com.phloc.html.hc.html.AbstractHCCell} element.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHCCellAlign implements IHCHasHTMLAttributeValue
 {

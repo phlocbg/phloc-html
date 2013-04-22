@@ -24,7 +24,7 @@ import com.phloc.json.IJSON;
 /**
  * A JS expression.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJSExpression extends IJSGeneratable
 {

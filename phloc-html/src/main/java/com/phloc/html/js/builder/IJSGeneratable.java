@@ -24,7 +24,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * Common interface for code components that can generate uses of themselves.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJSGeneratable extends IJSCodeProvider
 {

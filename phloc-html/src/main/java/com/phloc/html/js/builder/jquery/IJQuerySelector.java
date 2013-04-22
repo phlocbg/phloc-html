@@ -26,7 +26,7 @@ import com.phloc.html.js.builder.IJSExpression;
 /**
  * A single jQuery selector
  * 
- * @author philip
+ * @author Philip Helger
  */
 public interface IJQuerySelector extends IJSCodeProvider
 {

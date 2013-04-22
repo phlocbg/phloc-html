@@ -30,7 +30,7 @@ import com.phloc.commons.string.StringHelper;
 /**
  * Contains a list of all HTML element names.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public enum EHTMLElement implements IHasElementName
 {

@@ -31,7 +31,7 @@ import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 /**
  * Represents the value of the "target" attribute of an HTML &lt;a&gt; element
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public class HCA_Target implements IHCHasHTMLAttributeValue, Serializable

@@ -25,7 +25,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
  * Source:
  * http://www.w3.org/html/wg/drafts/html/master/dom.html#kinds-of-content
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class CHTMLContentKind

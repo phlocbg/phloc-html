@@ -37,7 +37,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * internal cache to reuse existing objects. Use
  * {@link DefaultCSSClassProvider#create(String)} to create objects!
  * 
- * @author philip
+ * @author Philip Helger
  */
 @Immutable
 public final class DefaultCSSClassProvider implements ICSSClassProvider

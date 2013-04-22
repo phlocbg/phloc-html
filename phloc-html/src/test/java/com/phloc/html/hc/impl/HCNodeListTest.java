@@ -35,7 +35,7 @@ import com.phloc.html.hc.html.HCTable;
 /**
  * Test class for class {@link HCNodeList}
  * 
- * @author philip
+ * @author Philip Helger
  */
 public final class HCNodeListTest
 {

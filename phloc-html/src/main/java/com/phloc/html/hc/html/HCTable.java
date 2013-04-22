@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 /**
  * Class for representing a simple HTML &lt;table&gt;.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class HCTable extends AbstractHCTable <HCTable>
 {

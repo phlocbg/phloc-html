@@ -31,7 +31,7 @@ import com.phloc.commons.string.ToStringGenerator;
 /**
  * JSDoc comment.
  * 
- * @author philip
+ * @author Philip Helger
  */
 public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
 {
