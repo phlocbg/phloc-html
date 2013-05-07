@@ -146,6 +146,12 @@ public final class JSGlobal
     return JSExpr.invoke ("Number");
   }
 
+  @Nonnull
+  public static JSInvocation number (@Nonnull final IJSExpression aExpr)
+  {
+    return number ().arg (aExpr);
+  }
+
   /**
    * @return Global function <code>parseFloat(string)</code>
    */
