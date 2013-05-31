@@ -210,7 +210,8 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
    * Set the role attribute of this element.
    * 
    * @param eRole
-   *        The role to set. May be <code>null</code>.
+   *        The role to set. May be <code>null</code>. According to the specs,
+   *        abstract roles should not be used!
    * @return this
    */
   @Nonnull
