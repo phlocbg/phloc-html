@@ -19,6 +19,7 @@ package com.phloc.html.hc.html;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -179,7 +180,9 @@ public final class HCTest
   public void testRole ()
   {
     final HCDiv aDiv = new HCDiv ();
+    assertNull (aDiv.getRole ());
     aDiv.setRole (EHTMLRole.DIALOG);
+    assertEquals (EHTMLRole.DIALOG, aDiv.getRole ());
     assertEquals ("<div role=\"dialog\" xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
                   HCSettings.getAsHTMLString (aDiv));
   }
