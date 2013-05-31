@@ -177,6 +177,42 @@ public final class CHTMLAttributes
   /** The standard prefix for ARIA attributes */
   public static final String PREFIX_ARIA = "aria-";
 
+  public static final String ARIA_ACTIVEDESCENDANT = "aria-activedescendant";
+  public static final String ARIA_ATOMIC = "aria-atomic";
+  public static final String ARIA_AUTOCOMPLETE = "aria-autocomplete";
+  public static final String ARIA_BUSY = "aria-busy";
+  public static final String ARIA_CHECKED = "aria-checked";
+  public static final String ARIA_CONTROLS = "aria-controls";
+  public static final String ARIA_DESCRIBEDBY = "aria-describedby";
+  public static final String ARIA_DISABLED = "aria-disabled";
+  public static final String ARIA_DROPEFFECT = "aria-dropeffect";
+  public static final String ARIA_EXPANDED = "aria-expanded";
+  public static final String ARIA_FLOWTO = "aria-flowto";
+  public static final String ARIA_GRABBED = "aria-grabbed";
+  public static final String ARIA_HASPOPUP = "aria-haspopup";
+  public static final String ARIA_HIDDEN = "aria-hidden";
+  public static final String ARIA_INVALID = "aria-invalid";
+  public static final String ARIA_LABEL = "aria-label";
+  public static final String ARIA_LABELLEDBY = "aria-labelledby";
+  public static final String ARIA_LEVEL = "aria-level";
+  public static final String ARIA_LIVE = "aria-live";
+  public static final String ARIA_MULTILINE = "aria-multiline";
+  public static final String ARIA_MULTISELECTABLE = "aria-multiselectable";
+  public static final String ARIA_ORIENTATION = "aria-orientation";
+  public static final String ARIA_OWNS = "aria-owns";
+  public static final String ARIA_POSINSET = "aria-posinset";
+  public static final String ARIA_PRESSED = "aria-pressed";
+  public static final String ARIA_READONLY = "aria-readonly";
+  public static final String ARIA_RELEVANT = "aria-relevant";
+  public static final String ARIA_REQUIRED = "aria-required";
+  public static final String ARIA_SELECTED = "aria-selected";
+  public static final String ARIA_SETSIZE = "aria-setsize";
+  public static final String ARIA_SORT = "aria-sort";
+  public static final String ARIA_VALUEMAX = "aria-valuemax";
+  public static final String ARIA_VALUEMIN = "aria-valuemin";
+  public static final String ARIA_VALUENOW = "aria-valuenow";
+  public static final String ARIA_VALUETEXT = "aria-valuetext";
+
   private CHTMLAttributes ()
   {}
 }
