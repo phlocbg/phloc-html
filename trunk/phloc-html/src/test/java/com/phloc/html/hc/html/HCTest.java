@@ -17,12 +17,14 @@
  */
 package com.phloc.html.hc.html;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.url.SimpleURL;
+import com.phloc.html.EHTMLRole;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.conversion.HCSettings;
@@ -34,7 +36,7 @@ import com.phloc.html.js.builder.JSExpr;
  * 
  * @author Philip Helger
  */
-public final class FuncTestHC
+public final class HCTest
 {
   @Test
   public void testMainHC ()
@@ -171,5 +173,14 @@ public final class FuncTestHC
     assertNotNull (h.convertToNode (aCS));
     if (false)
       System.out.print (h.getAsHTMLString (aCS));
+  }
+
+  @Test
+  public void testRole ()
+  {
+    final HCDiv aDiv = new HCDiv ();
+    aDiv.setRole (EHTMLRole.DIALOG);
+    assertEquals ("<div role=\"dialog\" xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
+                  HCSettings.getAsHTMLString (aDiv));
   }
 }
