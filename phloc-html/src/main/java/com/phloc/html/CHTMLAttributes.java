@@ -137,6 +137,7 @@ public final class CHTMLAttributes
   public static final String REL = "rel";
   public static final String REV = "rev";
   public static final String REVERSED = "reversed";
+  public static final String ROLE = "role";
   public static final String ROWS = "rows";
   public static final String ROWSPAN = "rowspan";
   public static final String RULES = "rules";
@@ -170,8 +171,11 @@ public final class CHTMLAttributes
   public static final String VOLUME = "volume";
   public static final String WIDTH = "width";
 
-  /** The proposed standard prefix for HTML5 custom attributes */
+  /** The standard prefix for HTML5 custom attributes */
   public static final String HTML5_PREFIX_DATA = "data-";
+
+  /** The standard prefix for ARIA attributes */
+  public static final String PREFIX_ARIA = "aria-";
 
   private CHTMLAttributes ()
   {}
