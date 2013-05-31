@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.EHTMLRole;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
@@ -198,6 +199,22 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   @Nonnull
   THISTYPE setSpellCheck (boolean bSpellCheck);
+
+  /**
+   * @return The role of this element. May be <code>null</code>.
+   */
+  @Nullable
+  EHTMLRole getRole ();
+
+  /**
+   * Set the role attribute of this element.
+   * 
+   * @param eRole
+   *        The role to set. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setRole (@Nullable EHTMLRole eRole);
 
   /**
    * @return <code>true</code> if at least one custom attribute is contained

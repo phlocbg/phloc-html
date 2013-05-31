@@ -54,6 +54,7 @@ import com.phloc.css.propertyvalue.ICSSValue;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.EHTMLRole;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.api.EHCTextDirection;
@@ -109,6 +110,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   private EHCDropZone m_eDropZone;
   private boolean m_bHidden = DEFAULT_HIDDEN;
   private boolean m_bSpellCheck = DEFAULT_SPELLCHECK;
+  private EHTMLRole m_eRole;
 
   // Must be a LinkedHashMap_
   private Map <String, String> m_aCustomAttrs;
@@ -568,6 +570,19 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  @Nullable
+  public final EHTMLRole getRole ()
+  {
+    return m_eRole;
+  }
+
+  @Nonnull
+  public final THISTYPE setRole (@Nullable final EHTMLRole eRole)
+  {
+    m_eRole = eRole;
+    return thisAsT ();
+  }
+
   /**
    * @deprecated Use {@link #getAllCustomAttrs()} instead
    */
@@ -717,18 +732,24 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
         aElement.setAttribute (CHTMLAttributes.SPELLCHECK, CHTMLAttributeValues.SPELLCHECK);
     }
 
+    if (m_eRole != null)
+      aElement.setAttribute (CHTMLAttributes.ROLE, m_eRole.getID ());
+
     if (m_aCustomAttrs != null && !m_aCustomAttrs.isEmpty ())
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
       {
         final String sAttrName = aEntry.getKey ();
         if (bHTML5 &&
             aConversionSettings.areConsistencyChecksEnabled () &&
-            !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA))
+            !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA) &&
+            !StringHelper.startsWith (sAttrName, CHTMLAttributes.PREFIX_ARIA))
         {
           s_aLogger.warn ("Custom attribute '" +
                           sAttrName +
                           "' does not start with proposed prefix '" +
                           CHTMLAttributes.HTML5_PREFIX_DATA +
+                          "' or '" +
+                          CHTMLAttributes.PREFIX_ARIA +
                           "'");
         }
         aElement.setAttribute (sAttrName, aEntry.getValue ());
