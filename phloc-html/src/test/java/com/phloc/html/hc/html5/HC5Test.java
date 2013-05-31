@@ -33,7 +33,7 @@ import com.phloc.html.hc.html.HCHtml;
  * 
  * @author Philip Helger
  */
-public final class FuncTestHC5
+public final class HC5Test
 {
   @Test
   public void testMainHC ()
