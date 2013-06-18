@@ -42,7 +42,7 @@ public final class JSEventMap implements Serializable
 
   /**
    * Add an additional handler for the given JS event. If an existing handler is
-   * present, the new handler is appended.
+   * present, the new handler is appended at the end.
    * 
    * @param eJSEvent
    *        The JS event. May not be <code>null</code>.
@@ -66,6 +66,31 @@ public final class JSEventMap implements Serializable
   }
 
   /**
+   * Add an additional handler for the given JS event. If an existing handler is
+   * present, the new handler is appended at front.
+   * 
+   * @param eJSEvent
+   *        The JS event. May not be <code>null</code>.
+   * @param aNewHandler
+   *        The new handler to be added. May not be <code>null</code>.
+   */
+  public void prependHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
+  {
+    if (eJSEvent == null)
+      throw new NullPointerException ("JSEvent");
+    if (aNewHandler == null)
+      throw new NullPointerException ("newHandler");
+
+    CollectingJSCodeProvider aCode = m_aEvents.get (eJSEvent);
+    if (aCode == null)
+    {
+      aCode = new CollectingJSCodeProvider ();
+      m_aEvents.put (eJSEvent, aCode);
+    }
+    aCode.prepend (aNewHandler);
+  }
+
+  /**
    * Set a handler for the given JS event. If an existing handler is present, it
    * is automatically overridden.
    * 
@@ -86,10 +111,10 @@ public final class JSEventMap implements Serializable
   }
 
   @Nonnull
-  public EChange removeHandler (@Nonnull final EJSEvent eJSEvent)
+  public EChange removeHandler (@Nullable final EJSEvent eJSEvent)
   {
     if (eJSEvent == null)
-      throw new NullPointerException ("JSEvent");
+      return EChange.UNCHANGED;
 
     return EChange.valueOf (m_aEvents.remove (eJSEvent) != null);
   }

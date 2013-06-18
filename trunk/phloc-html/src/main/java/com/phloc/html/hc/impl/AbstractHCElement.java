@@ -413,6 +413,17 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  @Nullable
+  public final IJSCodeProvider getEventHandler (@Nullable final EJSEvent eJSEvent)
+  {
+    return m_aJSHandler == null ? null : m_aJSHandler.getHandler (eJSEvent);
+  }
+
+  public final boolean containsEventHandler (@Nullable final EJSEvent eJSEvent)
+  {
+    return m_aJSHandler != null && m_aJSHandler.containsHandler (eJSEvent);
+  }
+
   @Nonnull
   public final THISTYPE addEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
@@ -426,6 +437,18 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
+  public final THISTYPE prependEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
+  {
+    if (aJSCode != null)
+    {
+      if (m_aJSHandler == null)
+        m_aJSHandler = new JSEventMap ();
+      m_aJSHandler.prependHandler (eJSEvent, aJSCode);
+    }
+    return thisAsT ();
+  }
+
+  @Nonnull
   public final THISTYPE setEventHandler (@Nonnull final EJSEvent eJSEvent, @Nullable final IJSCodeProvider aJSCode)
   {
     if (aJSCode != null)
@@ -434,26 +457,18 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
         m_aJSHandler = new JSEventMap ();
       m_aJSHandler.setHandler (eJSEvent, aJSCode);
     }
+    else
+      if (m_aJSHandler != null)
+        m_aJSHandler.removeHandler (eJSEvent);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeAllEventHandler (@Nonnull final EJSEvent eJSEvent)
+  public final THISTYPE removeAllEventHandler (@Nullable final EJSEvent eJSEvent)
   {
     if (m_aJSHandler != null)
       m_aJSHandler.removeHandler (eJSEvent);
     return thisAsT ();
-  }
-
-  @Nullable
-  public final IJSCodeProvider getEventHandler (@Nullable final EJSEvent eJSEvent)
-  {
-    return m_aJSHandler == null ? null : m_aJSHandler.getHandler (eJSEvent);
-  }
-
-  public final boolean containsEventHandler (@Nullable final EJSEvent eJSEvent)
-  {
-    return m_aJSHandler != null && m_aJSHandler.containsHandler (eJSEvent);
   }
 
   public final boolean isUnfocusable ()
