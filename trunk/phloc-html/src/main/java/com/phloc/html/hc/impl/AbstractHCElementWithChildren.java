@@ -284,11 +284,10 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nullable
+  @Deprecated
   public final IHCNode getChild (final int nIndex)
   {
-    if (m_aChildren != null && nIndex >= 0 && nIndex < m_aChildren.size ())
-      return m_aChildren.get (nIndex);
-    return null;
+    return getChildAtIndex (nIndex);
   }
 
   @Nonnegative

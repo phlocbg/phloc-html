@@ -330,6 +330,12 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return thisAsT ();
   }
 
+  @Nonnull
+  public HCNodeList getAllChildrenAsNodeList ()
+  {
+    return new HCNodeList ().addChildren (m_aChildren);
+  }
+
   @Override
   @Nonnull
   protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
