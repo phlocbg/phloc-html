@@ -32,6 +32,7 @@ import com.phloc.html.EHTMLRole;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.api5.EHCContentEditable;
 import com.phloc.html.hc.api5.EHCDraggable;
+import com.phloc.html.hc.api5.EHCDropZone;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -96,14 +97,76 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE setLanguage (@Nullable String sLanguage);
 
+  /**
+   * Get the event handler of the specified event.
+   * 
+   * @param eJSEvent
+   *        The event to query. May be <code>null</code>.
+   * @return <code>null</code> if no such event handler is registered.
+   */
+  @Nullable
+  IJSCodeProvider getEventHandler (@Nullable EJSEvent eJSEvent);
+
+  /**
+   * Check if any event handler is registered for the specified event.
+   * 
+   * @param eJSEvent
+   *        The event to be queried. May be <code>null</code>.
+   * @return <code>true</code> of a non-<code>null</code> event is specified,
+   *         and if a handler is present.
+   */
+  boolean containsEventHandler (@Nullable EJSEvent eJSEvent);
+
+  /**
+   * Add a JS event handler at the end.
+   * 
+   * @param eJSEvent
+   *        The event to use. May not be <code>null</code>.
+   * @param aJSHandler
+   *        The JSCode to be executed on the specified event. May be
+   *        <code>null</code> in which case nothing happens.
+   * @return this.
+   */
   @Nonnull
   THISTYPE addEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
 
+  /**
+   * Add a JS event handler at the front.
+   * 
+   * @param eJSEvent
+   *        The event to use. May not be <code>null</code>.
+   * @param aJSHandler
+   *        The JSCode to be executed on the specified event. May be
+   *        <code>null</code> in which case nothing happens.
+   * @return this.
+   */
+  @Nonnull
+  THISTYPE prependEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
+
+  /**
+   * Set a JS event handler. All eventually present event handlers are
+   * overwritten.
+   * 
+   * @param eJSEvent
+   *        The event to set. May not be <code>null</code>.
+   * @param aJSHandler
+   *        The JSCode to be executed on the specified event. May be
+   *        <code>null</code> in which case no event handler will be present
+   *        after the call.
+   * @return this.
+   */
   @Nonnull
   THISTYPE setEventHandler (@Nonnull EJSEvent eJSEvent, @Nullable IJSCodeProvider aJSHandler);
 
+  /**
+   * Remove all event handler for the specified JS event.
+   * 
+   * @param eJSEvent
+   *        The JS event to remove the handler. May be <code>null</code>.
+   * @return this
+   */
   @Nonnull
-  THISTYPE removeAllEventHandler (@Nonnull EJSEvent eJSEvent);
+  THISTYPE removeAllEventHandler (@Nullable EJSEvent eJSEvent);
 
   boolean isUnfocusable ();
 
@@ -147,7 +210,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setAccessKey (@Nullable String sAccessKey);
 
   /**
-   * @return the draggable state
+   * @return the draggable state. May be <code>null</code>.
    */
   @Nullable
   EHCDraggable getDraggable ();
@@ -156,11 +219,27 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
    * Set the draggable state of this element
    * 
    * @param eDraggable
-   *        value to set
+   *        Value to set. May be <code>null</code>.
    * @return this
    */
   @Nonnull
   THISTYPE setDraggable (@Nullable EHCDraggable eDraggable);
+
+  /**
+   * @return The drop zone value. May be <code>null</code>.
+   */
+  @Nullable
+  EHCDropZone getDropZone ();
+
+  /**
+   * Set the drop zone value of this element.
+   * 
+   * @param eDropZone
+   *        Value to set. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setDropZone (@Nullable EHCDropZone eDropZone);
 
   /**
    * @return The current state of content editable
@@ -253,6 +332,32 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   @ReturnsMutableCopy
   Map <String, String> getAllCustomAttrs ();
+
+  /**
+   * Set a custom attribute that is serialized as is.
+   * 
+   * @param sName
+   *        The name of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @param nValue
+   *        The value of the attribute that is converted to a String.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setCustomAttr (@Nullable String sName, int nValue);
+
+  /**
+   * Set a custom attribute that is serialized as is.
+   * 
+   * @param sName
+   *        The name of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @param nValue
+   *        The value of the attribute that is converted to a String.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setCustomAttr (@Nullable String sName, long nValue);
 
   /**
    * Set a custom attribute that is serialized as is.
