@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
+import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Special node interface for objects containing other objects
@@ -250,4 +251,11 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE sortAllChildren (@Nonnull Comparator <IHCNode> aComparator);
+
+  /**
+   * @return A new node list with all contained children. Never
+   *         <code>null</code> nor empty.
+   */
+  @Nonnull
+  HCNodeList getAllChildrenAsNodeList ();
 }
