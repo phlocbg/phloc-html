@@ -244,7 +244,7 @@ public final class HCSpecialNodeHandler
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final List <IHCNode> aNodes,
+  public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final Iterable <? extends IHCNode> aNodes,
                                                              final boolean bKeepOnDocumentReady)
   {
     if (aNodes == null)
@@ -301,8 +301,8 @@ public final class HCSpecialNodeHandler
 
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> getWithoutSpecialNodes (@Nonnull final List <IHCNode> aNodes,
-                                                       @Nonnull final HCSpecialNodes aSpecialNodes)
+  public static List <IHCNode> getWithoutSpecialNodes (@Nonnull final Iterable <? extends IHCNode> aNodes,
+                                                       @Nonnull final AbstractHCSpecialNodes <?> aSpecialNodes)
   {
     if (aNodes == null)
       throw new NullPointerException ("nodes");
@@ -353,7 +353,7 @@ public final class HCSpecialNodeHandler
    */
   @Nonnull
   public static HCNodeList extractSpecialContent (@Nonnull final IHCHasChildren aNode,
-                                                  @Nonnull final HCSpecialNodes aSpecialNodes,
+                                                  @Nonnull final AbstractHCSpecialNodes <?> aSpecialNodes,
                                                   final boolean bKeepOnDocumentReady)
   {
     if (aNode == null)
