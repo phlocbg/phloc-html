@@ -1535,6 +1535,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aExpr
+   *        The expression to be used as an argument to <code>val()</code>
+   * @return The invocation of the jQuery function <code>val()</code>
+   */
+  @Nonnull
+  public IMPLTYPE val (@Nonnull final IJSExpression aExpr)
+  {
+    return val ().arg (aExpr);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>width()</code>
    */
   @Nonnull
