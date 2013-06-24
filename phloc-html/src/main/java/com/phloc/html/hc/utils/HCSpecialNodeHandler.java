@@ -349,7 +349,8 @@ public final class HCSpecialNodeHandler
    *        document.ready() scripts are converted to regular scripts and are
    *        executed after all other scripts. For AJAX calls, this should be
    *        <code>false</code>.
-   * @return A node list with all remaining nodes. Never <code>null</code>.
+   * @return A node list with all remaining (non-special) nodes. Never
+   *         <code>null</code>.
    */
   @Nonnull
   public static HCNodeList extractSpecialContent (@Nonnull final IHCHasChildren aNode,
@@ -369,12 +370,16 @@ public final class HCSpecialNodeHandler
 
     // Extract the special nodes
     aExtractedOutOfBandNodes = getWithoutSpecialNodes (aExtractedOutOfBandNodes, aSpecialNodes);
+
+    // Now the aExtractedOutOfBandNodes list should be empty - otherwise we have
+    // an internal inconsistency (see the warning below)
     if (!aExtractedOutOfBandNodes.isEmpty ())
       s_aLogger.warn ("Out-of-band nodes are left after merging and extraction: " + aExtractedOutOfBandNodes);
 
     // Add the content without the out-of-band nodes
     final HCNodeList ret = HCNodeList.create (aNode);
-    // And to be sure, add all remaining out-of-band nodes at the end
+    // And to be sure, add all remaining out-of-band nodes at the end so that no
+    // node will get lost!
     ret.addChildren (aExtractedOutOfBandNodes);
     return ret;
   }
