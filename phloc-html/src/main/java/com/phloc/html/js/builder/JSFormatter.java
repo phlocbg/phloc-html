@@ -24,6 +24,7 @@ import java.io.Writer;
 import java.util.Collection;
 
 import javax.annotation.Nonnull;
+import javax.annotation.WillCloseWhenClosed;
 
 /**
  * This is a utility class for managing indentation and other basic formatting
@@ -62,7 +63,7 @@ public class JSFormatter implements Closeable
   /**
    * Creates a formatter with default incremental indentations of 2 spaces.
    */
-  public JSFormatter (@Nonnull final Writer aWriter)
+  public JSFormatter (@Nonnull @WillCloseWhenClosed final Writer aWriter)
   {
     this (aWriter instanceof PrintWriter ? (PrintWriter) aWriter : new PrintWriter (aWriter));
   }
@@ -70,7 +71,7 @@ public class JSFormatter implements Closeable
   /**
    * Creates a formatter with default incremental indentations of 2 spaces.
    */
-  public JSFormatter (@Nonnull final PrintWriter aPrintWriter)
+  public JSFormatter (@Nonnull @WillCloseWhenClosed final PrintWriter aPrintWriter)
   {
     this (aPrintWriter, DEFAULT_INDENT);
   }
@@ -83,7 +84,7 @@ public class JSFormatter implements Closeable
    * @param sIndentSpace
    *        Incremental indentation string, similar to tab value.
    */
-  public JSFormatter (@Nonnull final PrintWriter aPrintWriter, @Nonnull final String sIndentSpace)
+  public JSFormatter (@Nonnull @WillCloseWhenClosed final PrintWriter aPrintWriter, @Nonnull final String sIndentSpace)
   {
     if (aPrintWriter == null)
       throw new NullPointerException ("printWriter");
