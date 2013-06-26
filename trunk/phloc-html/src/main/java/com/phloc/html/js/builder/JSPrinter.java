@@ -21,6 +21,7 @@ import java.io.Writer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.WillClose;
+import javax.annotation.WillNotClose;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
@@ -90,8 +91,9 @@ public final class JSPrinter
     setGenerateComments (!bMinimumCodeSize);
   }
 
+  @SuppressWarnings ("resource")
   @Nonnull
-  public static JSFormatter createFormatter (@Nonnull final Writer aWriter)
+  public static JSFormatter createFormatter (@Nonnull @WillNotClose final Writer aWriter)
   {
     return new JSFormatter (aWriter).indentAndAlign (s_bIndentAndAlign)
                                     .generateTypeNames (s_bGenerateTypeNames)
