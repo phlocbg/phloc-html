@@ -53,6 +53,16 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   public AbstractHCSpecialNodes ()
   {}
 
+  /**
+   * Remove all contained content.
+   */
+  public void clear ()
+  {
+    m_aExternalCSSs.clear ();
+    m_aExternalJSs.clear ();
+    m_aInlineJS.reset ();
+  }
+
   @SuppressWarnings ("unchecked")
   @Nonnull
   protected final IMPLTYPE thisAsT ()
