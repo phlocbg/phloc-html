@@ -26,6 +26,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.id.IHasID;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
@@ -258,6 +259,19 @@ public final class JQuerySelector implements IJQuerySelector
     // Replace all illegal characters in IDs: ":" and "." with "\:" and "\."
     // http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
     return RegExHelper.stringReplacePattern ("(:|\\.)", sID, "\\\\$1");
+  }
+
+  /**
+   * jQuery ID selection
+   * 
+   * @param aID
+   *        The object with an ID to select
+   * @return <code>#id</code>
+   */
+  @Nonnull
+  public static IJQuerySelector id (@Nonnull final IHasID <String> aID)
+  {
+    return id (aID.getID ());
   }
 
   /**
