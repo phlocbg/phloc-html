@@ -249,6 +249,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param sAttrName
+   *        The name of the attribute
+   * @return The invocation of the jQuery function <code>attr()</code>
+   */
+  @Nonnull
+  public IMPLTYPE attr (@Nonnull @Nonempty final String sAttrName)
+  {
+    return attr ().arg (sAttrName);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>before()</code>
    */
   @Nonnull
