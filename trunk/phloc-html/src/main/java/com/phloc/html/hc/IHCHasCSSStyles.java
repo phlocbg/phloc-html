@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.css.ICSSWriterSettings;
 import com.phloc.css.property.ECSSProperty;
@@ -37,6 +38,18 @@ import com.phloc.css.propertyvalue.ICSSValue;
  */
 public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>>
 {
+  /**
+   * Add an element specific style (that is not consistency checked).
+   * 
+   * @param eProperty
+   *        The CSS property to be added. May not be <code>null</code>.
+   * @param sPropertyValue
+   *        The property value to be used. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addStyle (@Nonnull ECSSProperty eProperty, @Nonnull @Nonempty String sPropertyValue);
+
   /**
    * Add an element specific style.
    * 
