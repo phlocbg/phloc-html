@@ -49,6 +49,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.commons.xml.CXML;
 import com.phloc.css.ICSSWriterSettings;
+import com.phloc.css.property.CSSPropertyFree;
 import com.phloc.css.property.ECSSProperty;
 import com.phloc.css.propertyvalue.ICSSValue;
 import com.phloc.html.CHTMLAttributeValues;
@@ -322,6 +323,12 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   public final boolean hasAnyStyle ()
   {
     return m_aStyles != null && !m_aStyles.isEmpty ();
+  }
+
+  @Nonnull
+  public final THISTYPE addStyle (@Nonnull final ECSSProperty eProperty, @Nonnull @Nonempty final String sPropertyValue)
+  {
+    return addStyle (new CSSPropertyFree (eProperty).newValue (sPropertyValue));
   }
 
   @Nonnull
