@@ -32,6 +32,8 @@ import com.phloc.html.hc.api5.IHCHasMedia;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.js.EJSEvent;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Represents an HTML &lt;a&gt; element
@@ -118,6 +120,32 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
   {
     m_sMediaQuery = sMediaQuery;
     return this;
+  }
+
+  /**
+   * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
+   * 
+   * @param aOnClick
+   *        JS event to trigger
+   * @return this
+   */
+  @Nonnull
+  public HCA setOnClick (@Nullable final IJSCodeProvider aOnClick)
+  {
+    return setEventHandler (EJSEvent.ONCLICK, aOnClick);
+  }
+
+  /**
+   * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
+   * 
+   * @param aOnClick
+   *        JS event to trigger
+   * @return this
+   */
+  @Nonnull
+  public HCA addOnClick (@Nullable final IJSCodeProvider aOnClick)
+  {
+    return addEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
   @Override
