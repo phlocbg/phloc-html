@@ -24,7 +24,6 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.url.ReadonlySimpleURL;
 import com.phloc.html.hc.html.HCA;
 import com.phloc.html.js.CJS;
-import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSReturn;
@@ -46,6 +45,6 @@ public class HCA_JS extends HCA
 
   public static void setOnClickReturnFalse (@Nonnull final HCA aLink, @Nullable final IJSCodeProvider aJSOnClick)
   {
-    aLink.addEventHandler (EJSEvent.ONCLICK, new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));
+    aLink.addOnClick (new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));
   }
 }

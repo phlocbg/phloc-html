@@ -32,7 +32,7 @@ import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
-import com.phloc.html.js.builder.IJSStatement;
+import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Represents an HTML &lt;button&gt; element with type "button"
@@ -62,10 +62,10 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
     addChild (sLabel);
   }
 
-  public HCButton (@Nullable final String sLabel, @Nullable final IJSStatement aOnClick)
+  public HCButton (@Nullable final String sLabel, @Nullable final IJSCodeProvider aOnClick)
   {
     this (sLabel);
-    setEventHandler (EJSEvent.ONCLICK, aOnClick);
+    setOnClick (aOnClick);
   }
 
   @Nullable
@@ -119,6 +119,32 @@ public class HCButton extends AbstractHCElementWithChildren <HCButton> implement
       throw new NullPointerException ("type");
     m_eType = eType;
     return this;
+  }
+
+  /**
+   * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
+   * 
+   * @param aOnClick
+   *        JS event to trigger
+   * @return this
+   */
+  @Nonnull
+  public HCButton setOnClick (@Nullable final IJSCodeProvider aOnClick)
+  {
+    return setEventHandler (EJSEvent.ONCLICK, aOnClick);
+  }
+
+  /**
+   * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
+   * 
+   * @param aOnClick
+   *        JS event to trigger
+   * @return this
+   */
+  @Nonnull
+  public HCButton addOnClick (@Nullable final IJSCodeProvider aOnClick)
+  {
+    return addEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
   @Override
