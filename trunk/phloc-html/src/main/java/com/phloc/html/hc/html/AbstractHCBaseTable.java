@@ -43,6 +43,7 @@ import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * This is the common base class for regular HC tables as well as for more
@@ -1030,5 +1031,70 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final THISTYPE removeFooterRow ()
   {
     return removeFooterRowAtIndex (0);
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
+  {
+    return setSpanningHeaderContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
+  {
+    removeAllHeaderRows ();
+    return addSpanningHeaderContent (aNode);
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
+  {
+    return addSpanningHeaderContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
+  {
+    addHeaderRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningBodyContent (@Nullable final String sText)
+  {
+    return addSpanningBodyContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
+  {
+    addBodyRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningFooterContent (@Nullable final String sText)
+  {
+    return setSpanningFooterContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
+  {
+    removeAllFooterRows ();
+    return addSpanningFooterContent (aNode);
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningFooterContent (@Nullable final String sText)
+  {
+    return addSpanningFooterContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
+  {
+    addFooterRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
+    return thisAsT ();
   }
 }
