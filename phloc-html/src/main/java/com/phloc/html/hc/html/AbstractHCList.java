@@ -22,6 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
@@ -42,11 +43,25 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
     super (aElement);
   }
 
+  /**
+   * Callback method to be implemented in derived classes. Called everytime
+   * after an item was added.
+   * 
+   * @param aItem
+   *        The added item.
+   */
+  @OverrideOnDemand
+  protected void onAddItem (@Nonnull final HCLI aItem)
+  {}
+
   @Nullable
   private HCLI _addItem (@Nullable final HCLI aItem)
   {
     if (aItem != null)
+    {
       addChild (aItem);
+      onAddItem (aItem);
+    }
     return aItem;
   }
 
