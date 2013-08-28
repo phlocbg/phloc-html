@@ -48,7 +48,7 @@ public abstract class AbstractHCList <THISTYPE extends AbstractHCList <THISTYPE>
    * after an item was added.
    * 
    * @param aItem
-   *        The added item.
+   *        The added item. Never <code>null</code>.
    */
   @OverrideOnDemand
   protected void onAddItem (@Nonnull final HCLI aItem)

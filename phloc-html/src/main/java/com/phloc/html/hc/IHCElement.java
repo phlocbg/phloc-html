@@ -280,7 +280,8 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setSpellCheck (boolean bSpellCheck);
 
   /**
-   * @return The role of this element. May be <code>null</code>.
+   * @return The role of this element. May be <code>null</code>. By default an
+   *         element has no role.
    */
   @Nullable
   EHTMLRole getRole ();
