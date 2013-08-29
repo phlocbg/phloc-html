@@ -35,7 +35,6 @@
  */
 package com.phloc.html.hc.html;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import javax.annotation.Nonnegative;
@@ -104,12 +103,12 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     m_sContent = sContent;
   }
 
-  public HCStyle (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
+  public HCStyle (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings)
   {
     this (new CSSWriter (aSettings).getCSSAsString (aCSS));
   }
 
-  public HCStyle (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings) throws IOException
+  public HCStyle (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings)
   {
     this (new CSSWriter (aSettings).getCSSAsString (aCSS));
   }
