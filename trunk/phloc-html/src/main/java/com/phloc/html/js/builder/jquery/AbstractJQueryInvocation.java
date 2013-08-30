@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.builder.AbstractJSInvocation;
@@ -101,6 +102,28 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE addClass ()
   {
     return jqinvoke ("addClass");
+  }
+
+  /**
+   * @param aCSSClass
+   *        The class to add. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>addClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE addClass (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return addClass (aCSSClass.getCSSClass ());
+  }
+
+  /**
+   * @param sCSSClass
+   *        The class to add. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>addClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE addClass (@Nonnull @Nonempty final String sCSSClass)
+  {
+    return addClass ().arg (sCSSClass);
   }
 
   /**
@@ -287,12 +310,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>blur()</code>
+   */
+  @Nonnull
+  public IMPLTYPE blur (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return blur ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>change()</code>
    */
   @Nonnull
   public IMPLTYPE change ()
   {
     return jqinvoke ("change");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>change()</code>
+   */
+  @Nonnull
+  public IMPLTYPE change (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return change ().arg (aHandler);
   }
 
   /**
@@ -323,6 +368,20 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE click ()
   {
     return jqinvoke ("click");
+  }
+
+  /**
+   * This method is a shortcut for <code>.on('click', handler)</code>
+   * 
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>click()</code>
+   * @since jQuery 1.0
+   */
+  @Nonnull
+  public IMPLTYPE click (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return click ().arg (aHandler);
   }
 
   /**
@@ -386,6 +445,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE dblclick ()
   {
     return jqinvoke ("dblclick");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>dblclick()</code>
+   */
+  @Nonnull
+  public IMPLTYPE dblclick (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return dblclick ().arg (aHandler);
   }
 
   /**
@@ -479,6 +549,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>error()</code>
+   */
+  @Nonnull
+  public IMPLTYPE error (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return error ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>fadeIn()</code>
    */
   @Nonnull
@@ -551,6 +632,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>focus()</code>
+   */
+  @Nonnull
+  public IMPLTYPE focus (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return focus ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>focusin()</code>
    */
   @Nonnull
@@ -560,12 +652,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>focusin()</code>
+   */
+  @Nonnull
+  public IMPLTYPE focusin (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return focusin ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>focusout()</code>
    */
   @Nonnull
   public IMPLTYPE focusout ()
   {
     return jqinvoke ("focusout");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>focusout()</code>
+   */
+  @Nonnull
+  public IMPLTYPE focusout (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return focusout ().arg (aHandler);
   }
 
   /**
@@ -604,6 +718,28 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE hasClass ()
   {
     return jqinvoke ("hasClass");
+  }
+
+  /**
+   * @param aCSSClass
+   *        The class to check. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>hasClass
+   */
+  @Nonnull
+  public IMPLTYPE hasClass (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return hasClass (aCSSClass.getCSSClass ());
+  }
+
+  /**
+   * @param sCSSClass
+   *        The class to check. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>hasClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE hasClass (@Nonnull @Nonempty final String sCSSClass)
+  {
+    return hasClass ().arg (sCSSClass);
   }
 
   /**
@@ -715,6 +851,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>keydown()</code>
+   */
+  @Nonnull
+  public IMPLTYPE keydown (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return keydown ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>keypress()</code>
    */
   @Nonnull
@@ -724,12 +871,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>keypress()</code>
+   */
+  @Nonnull
+  public IMPLTYPE keypress (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return keypress ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>keyup()</code>
    */
   @Nonnull
   public IMPLTYPE keyup ()
   {
     return jqinvoke ("keyup");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>keyup()</code>
+   */
+  @Nonnull
+  public IMPLTYPE keyup (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return keyup ().arg (aHandler);
   }
 
   /**
@@ -790,12 +959,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mousedown()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mousedown (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mousedown ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>mouseenter()</code>
    */
   @Nonnull
   public IMPLTYPE mouseenter ()
   {
     return jqinvoke ("mouseenter");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mouseenter()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mouseenter (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mouseenter ().arg (aHandler);
   }
 
   /**
@@ -808,12 +999,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mouseleave()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mouseleave (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mouseleave ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>mousemove()</code>
    */
   @Nonnull
   public IMPLTYPE mousemove ()
   {
     return jqinvoke ("mousemove");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mousemove()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mousemove (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mousemove ().arg (aHandler);
   }
 
   /**
@@ -826,6 +1039,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mouseout()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mouseout (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mouseout ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>mouseover()</code>
    */
   @Nonnull
@@ -835,12 +1059,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mouseover()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mouseover (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mouseover ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>mouseup()</code>
    */
   @Nonnull
   public IMPLTYPE mouseup ()
   {
     return jqinvoke ("mouseup");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>mouseup()</code>
+   */
+  @Nonnull
+  public IMPLTYPE mouseup (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return mouseup ().arg (aHandler);
   }
 
   /**
@@ -1264,6 +1510,28 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aCSSClass
+   *        The class to remove. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>removeClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE removeClass (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return removeClass (aCSSClass.getCSSClass ());
+  }
+
+  /**
+   * @param sCSSClass
+   *        The class to remove. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>removeClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE removeClass (@Nonnull @Nonempty final String sCSSClass)
+  {
+    return removeClass ().arg (sCSSClass);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>removeData()</code>
    */
   @Nonnull
@@ -1309,12 +1577,34 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>resize()</code>
+   */
+  @Nonnull
+  public IMPLTYPE resize (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return resize ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>scroll()</code>
    */
   @Nonnull
   public IMPLTYPE scroll ()
   {
     return jqinvoke ("scroll");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>scroll()</code>
+   */
+  @Nonnull
+  public IMPLTYPE scroll (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return scroll ().arg (aHandler);
   }
 
   /**
@@ -1344,6 +1634,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE select ()
   {
     return jqinvoke ("select");
+  }
+
+  /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>select()</code>
+   */
+  @Nonnull
+  public IMPLTYPE select (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return select ().arg (aHandler);
   }
 
   /**
@@ -1446,6 +1747,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>submit()</code>
+   */
+  @Nonnull
+  public IMPLTYPE submit (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return submit ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>text()</code>
    */
   @Nonnull
@@ -1474,12 +1786,45 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aHandler
+   *        callback handler
+   * @return The invocation of the jQuery function <code>toggle()</code>
+   */
+  @Nonnull
+  public IMPLTYPE toggle (@Nonnull final JSAnonymousFunction aHandler)
+  {
+    return toggle ().arg (aHandler);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>toggleClass()</code>
    */
   @Nonnull
   public IMPLTYPE toggleClass ()
   {
     return jqinvoke ("toggleClass");
+  }
+
+  /**
+   * @param aCSSClass
+   *        The class to toggle. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>toggleClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE toggleClass (@Nonnull final ICSSClassProvider aCSSClass)
+  {
+    return toggleClass (aCSSClass.getCSSClass ());
+  }
+
+  /**
+   * @param sCSSClass
+   *        The class to toggle. May not be <code>null</code>.
+   * @return The invocation of the jQuery function <code>toggleClass()</code>
+   */
+  @Nonnull
+  public IMPLTYPE toggleClass (@Nonnull @Nonempty final String sCSSClass)
+  {
+    return toggleClass ().arg (sCSSClass);
   }
 
   /**
