@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -193,18 +194,16 @@ public final class JSMarshallerTest
                   JSMarshaller.objectToJSString (ContainerHelper.<Object> newList (Integer.valueOf (1),
                                                                                    "xx",
                                                                                    Character.valueOf ('y'))));
-    assertEquals ("{1:'xx',2:'y'}",
-                  JSMarshaller.objectToJSString (ContainerHelper.<Object> newMap (Integer.valueOf (1),
-                                                                                  "xx",
-                                                                                  Integer.valueOf (2),
-                                                                                  Character.valueOf ('y'))));
-    assertEquals ("{1:[1,'xx','y'],2:'y'}",
-                  JSMarshaller.objectToJSString (ContainerHelper.<Object> newMap (Integer.valueOf (1),
-                                                                                  ContainerHelper.<Object> newList (Integer.valueOf (1),
-                                                                                                                    "xx",
-                                                                                                                    Character.valueOf ('y')),
-                                                                                  Integer.valueOf (2),
-                                                                                  Character.valueOf ('y'))));
+    Map <Object, Object> aMap = new LinkedHashMap <Object, Object> ();
+    aMap.put (Integer.valueOf (1), "xx");
+    aMap.put (Integer.valueOf (2), Character.valueOf ('y'));
+    assertEquals ("{1:'xx',2:'y'}", JSMarshaller.objectToJSString (aMap));
+
+    aMap = new LinkedHashMap <Object, Object> ();
+    aMap.put (Integer.valueOf (1),
+              ContainerHelper.<Object> newList (Integer.valueOf (1), "xx", Character.valueOf ('y')));
+    aMap.put (Integer.valueOf (2), Character.valueOf ('y'));
+    assertEquals ("{1:[1,'xx','y'],2:'y'}", JSMarshaller.objectToJSString (aMap));
   }
 
   private static String _buildRandomString (final int nLength)
