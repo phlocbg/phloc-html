@@ -53,10 +53,11 @@ public class JSAnonymousFunction extends AbstractJSExpression
    */
   private JSBlock m_aBody;
 
+  /**
+   * Default constructor
+   */
   public JSAnonymousFunction ()
-  {
-    this (null);
-  }
+  {}
 
   /**
    * constructor
@@ -67,6 +68,18 @@ public class JSAnonymousFunction extends AbstractJSExpression
   public JSAnonymousFunction (@Nullable final AbstractJSType aType)
   {
     m_aType = aType;
+  }
+
+  /**
+   * Constructor for simple functions
+   * 
+   * @param aBody
+   *        The body statement. May be <code>null</code>.
+   */
+  public JSAnonymousFunction (@Nullable final IJSStatement aBody)
+  {
+    if (aBody != null)
+      body ().add (aBody);
   }
 
   JSAnonymousFunction (@Nullable final AbstractJSType aType,
@@ -80,7 +93,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   }
 
   /**
-   * Returns the return type.
+   * @return The return type. May be <code>null</code>.
    */
   @Nullable
   public AbstractJSType type ()
