@@ -29,7 +29,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCControl;
+import com.phloc.html.hc.api.IHCControl;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 @NotThreadSafe
