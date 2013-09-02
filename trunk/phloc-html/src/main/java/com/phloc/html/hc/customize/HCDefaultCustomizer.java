@@ -35,12 +35,11 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.CHCParam;
+import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.IHCCanBeDisabled;
-import com.phloc.html.hc.api.IHCControl;
-import com.phloc.html.hc.html.AbstractHCCell;
 import com.phloc.html.hc.html.AbstractHCTable;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
@@ -58,6 +57,7 @@ import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.IHCCell;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.js.EJSEvent;
@@ -185,7 +185,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                           final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
                           for (final HCCol aCol : aColGroup.getAllColumns ())
                           {
-                            final AbstractHCCell aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
+                            final IHCCell <?> aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
                             final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
                             if (nWidth >= 0)
                               aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));

@@ -36,7 +36,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author Philip Helger
  */
-public abstract class AbstractHCCell extends AbstractHCElementWithChildren <AbstractHCCell>
+public abstract class AbstractHCCell <IMPLTYPE extends AbstractHCCell <IMPLTYPE>> extends AbstractHCElementWithChildren <IMPLTYPE> implements IHCCell <IMPLTYPE>
 {
   private HCRow m_aParentRow;
   private int m_nColspan = CGlobal.ILLEGAL_UINT;
@@ -55,10 +55,10 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Nonnull
-  final AbstractHCCell internalSetParentRow (@Nullable final HCRow aParentRow)
+  final IMPLTYPE internalSetParentRow (@Nullable final HCRow aParentRow)
   {
     m_aParentRow = aParentRow;
-    return this;
+    return thisAsT ();
   }
 
   @Nonnegative
@@ -68,10 +68,10 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Nonnull
-  public final AbstractHCCell setColspan (final int nColspan)
+  public final IMPLTYPE setColspan (final int nColspan)
   {
     m_nColspan = nColspan;
-    return this;
+    return thisAsT ();
   }
 
   @Nonnegative
@@ -81,10 +81,10 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Nonnull
-  public final AbstractHCCell setRowspan (final int nRowspan)
+  public final IMPLTYPE setRowspan (final int nRowspan)
   {
     m_nRowspan = nRowspan;
-    return this;
+    return thisAsT ();
   }
 
   @Nullable
@@ -94,10 +94,10 @@ public abstract class AbstractHCCell extends AbstractHCElementWithChildren <Abst
   }
 
   @Nonnull
-  public final AbstractHCCell setAlign (final EHCCellAlign eAlign)
+  public final IMPLTYPE setAlign (@Nullable final EHCCellAlign eAlign)
   {
     m_eAlign = eAlign;
-    return this;
+    return thisAsT ();
   }
 
   @Override
