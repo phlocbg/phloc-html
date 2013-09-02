@@ -93,6 +93,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aHeaderRows.size () + m_aBodyRows.size () + m_aFooterRows.size ();
   }
 
+  @Nullable
   public final HCRow getFirstChild ()
   {
     HCRow ret = getFirstHeaderRow ();
@@ -105,6 +106,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return ret;
   }
 
+  @Nullable
   public final HCRow getLastChild ()
   {
     HCRow ret = getLastFooterRow ();
@@ -128,6 +130,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return ret;
   }
 
+  @Nullable
   public final HCRow getChildAtIndex (@Nonnegative final int nIndex)
   {
     int nRealIndex = nIndex;
@@ -170,13 +173,14 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // column handling
   //
 
+  @Nullable
   public final HCColGroup getColGroup ()
   {
     return m_aColGroup;
   }
 
   @Nonnull
-  public final THISTYPE addColumn (final HCCol aCol)
+  public final THISTYPE addColumn (@Nullable final HCCol aCol)
   {
     if (aCol != null)
     {
@@ -188,7 +192,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumn (@Nonnegative final int nIndex, final HCCol aCol)
+  public final THISTYPE addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
   {
     if (aCol != null)
     {
@@ -201,13 +205,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @Deprecated
-  public final THISTYPE addColumns (final HCCol aCol)
+  public final THISTYPE addColumns (@Nullable final HCCol aCol)
   {
     return addColumn (aCol);
   }
 
   @Nonnull
-  public final THISTYPE addColumns (final HCCol... aCols)
+  public final THISTYPE addColumns (@Nullable final HCCol... aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -216,7 +220,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumns (final Iterable <? extends HCCol> aCols)
+  public final THISTYPE addColumns (@Nullable final Iterable <? extends HCCol> aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -266,13 +270,14 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // header row handling
   //
 
+  @Nullable
   public final String getHeaderID ()
   {
     return m_sHeaderID;
   }
 
   @Nonnull
-  public final THISTYPE setHeaderID (final String sID)
+  public final THISTYPE setHeaderID (@Nullable final String sID)
   {
     m_sHeaderID = sID;
     return thisAsT ();
@@ -358,16 +363,19 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aHeaderRows;
   }
 
+  @Nullable
   public final HCRow getFirstHeaderRow ()
   {
     return ContainerHelper.getFirstElement (m_aHeaderRows);
   }
 
+  @Nullable
   public final HCRow getHeaderRowAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aHeaderRows, nIndex);
   }
 
+  @Nullable
   public final HCRow getLastHeaderRow ()
   {
     return ContainerHelper.getLastElement (m_aHeaderRows);
@@ -397,7 +405,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addHeaderRow (final HCRow aRow)
+  public final THISTYPE addHeaderRow (@Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aHeaderRows.add (aRow);
@@ -405,7 +413,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addHeaderRow (@Nonnegative final int nIndex, final HCRow aRow)
+  public final THISTYPE addHeaderRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aHeaderRows.add (nIndex, aRow);
@@ -439,14 +447,14 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   //
   // footer row handling
   //
-
+  @Nullable
   public final String getFooterID ()
   {
     return m_sFooterID;
   }
 
   @Nonnull
-  public final THISTYPE setFooterID (final String sID)
+  public final THISTYPE setFooterID (@Nullable final String sID)
   {
     m_sFooterID = sID;
     return thisAsT ();
@@ -531,16 +539,19 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aFooterRows;
   }
 
+  @Nullable
   public final HCRow getFirstFooterRow ()
   {
     return ContainerHelper.getFirstElement (m_aFooterRows);
   }
 
+  @Nullable
   public final HCRow getFooterRowAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aFooterRows, nIndex);
   }
 
+  @Nullable
   public final HCRow getLastFooterRow ()
   {
     return ContainerHelper.getLastElement (m_aFooterRows);
@@ -570,7 +581,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addFooterRow (final HCRow aRow)
+  public final THISTYPE addFooterRow (@Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aFooterRows.add (aRow);
@@ -578,7 +589,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addFooterRow (@Nonnegative final int nIndex, final HCRow aRow)
+  public final THISTYPE addFooterRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aFooterRows.add (nIndex, aRow);
@@ -613,13 +624,14 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   // body row handling
   //
 
+  @Nullable
   public final String getBodyID ()
   {
     return m_sBodyID;
   }
 
   @Nonnull
-  public final THISTYPE setBodyID (final String sID)
+  public final THISTYPE setBodyID (@Nullable final String sID)
   {
     m_sBodyID = sID;
     return thisAsT ();
@@ -704,16 +716,19 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return m_aBodyRows;
   }
 
+  @Nullable
   public final HCRow getFirstBodyRow ()
   {
     return ContainerHelper.getFirstElement (m_aBodyRows);
   }
 
+  @Nullable
   public final HCRow getBodyRowAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aBodyRows, nIndex);
   }
 
+  @Nullable
   public final HCRow getLastBodyRow ()
   {
     return ContainerHelper.getLastElement (m_aBodyRows);
@@ -743,7 +758,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addBodyRow (final HCRow aRow)
+  public final THISTYPE addBodyRow (@Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aBodyRows.add (aRow);
@@ -751,7 +766,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addBodyRow (@Nonnegative final int nIndex, final HCRow aRow)
+  public final THISTYPE addBodyRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
     if (aRow != null)
       m_aBodyRows.add (nIndex, aRow);
@@ -1013,65 +1028,65 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public THISTYPE setSpanningHeaderContent (final String sText)
+  public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
   {
     return setSpanningHeaderContent (new HCTextNode (sText));
   }
 
   @Nonnull
-  public THISTYPE setSpanningHeaderContent (final IHCNode aNode)
+  public THISTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
   {
     removeAllHeaderRows ();
     return addSpanningHeaderContent (aNode);
   }
 
   @Nonnull
-  public THISTYPE addSpanningHeaderContent (final String sText)
+  public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
   {
     return addSpanningHeaderContent (new HCTextNode (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningHeaderContent (final IHCNode aNode)
+  public THISTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
   {
     addHeaderRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE addSpanningBodyContent (final String sText)
+  public THISTYPE addSpanningBodyContent (@Nullable final String sText)
   {
     return addSpanningBodyContent (new HCTextNode (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningBodyContent (final IHCNode aNode)
+  public THISTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
   {
     addBodyRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE setSpanningFooterContent (final String sText)
+  public THISTYPE setSpanningFooterContent (@Nullable final String sText)
   {
     return setSpanningFooterContent (new HCTextNode (sText));
   }
 
   @Nonnull
-  public THISTYPE setSpanningFooterContent (final IHCNode aNode)
+  public THISTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
   {
     removeAllFooterRows ();
     return addSpanningFooterContent (aNode);
   }
 
   @Nonnull
-  public THISTYPE addSpanningFooterContent (final String sText)
+  public THISTYPE addSpanningFooterContent (@Nullable final String sText)
   {
     return addSpanningFooterContent (new HCTextNode (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningFooterContent (final IHCNode aNode)
+  public THISTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
   {
     addFooterRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
