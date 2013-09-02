@@ -15,10 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import com.phloc.html.hc.api.IHCCanBeDisabled;
+import com.phloc.html.hc.api.IHCHasFocus;
 
 /**
  * Base interface for controls like edit, checkbox, radio button, select or text

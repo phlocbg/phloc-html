@@ -825,7 +825,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   private static int _getEffectiveCellCount (@Nonnull final HCRow aRow, @Nullable final List <int []> aRowSpans)
   {
     int nCellIndex = 0;
-    for (final AbstractHCCell aCell : aRow.getChildren ())
+    for (final IHCCell <?> aCell : aRow.getChildren ())
       nCellIndex += _getApplicableRowspan (nCellIndex, aRowSpans) + aCell.getColspan ();
     // Any rowspan after the last cell?
     nCellIndex += _getApplicableRowspan (nCellIndex, aRowSpans);
@@ -857,7 +857,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
         final int [] aRowRowSpans = new int [aBodyRow.getCellCount ()];
         int nCellIndex = 0;
         boolean bRowHasRowSpans = false;
-        for (final AbstractHCCell aCell : aBodyRow.getChildren ())
+        for (final IHCCell <?> aCell : aBodyRow.getChildren ())
         {
           final int nRowSpan = aCell.getRowspan ();
           aRowRowSpans[nCellIndex++] = nRowSpan;

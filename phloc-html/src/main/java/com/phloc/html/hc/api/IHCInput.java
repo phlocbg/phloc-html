@@ -20,6 +20,8 @@ package com.phloc.html.hc.api;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.html.hc.IHCControl;
+
 /**
  * Base interface for controls base on &lt;input&gt; area.
  * 

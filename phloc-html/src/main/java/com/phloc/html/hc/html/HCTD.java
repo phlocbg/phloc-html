@@ -24,7 +24,7 @@ import com.phloc.html.EHTMLElement;
  * 
  * @author Philip Helger
  */
-public class HCTD extends AbstractHCCell
+public class HCTD extends AbstractHCCell <HCTD>
 {
   public HCTD ()
   {
