@@ -30,10 +30,12 @@ import com.phloc.html.js.builder.IJSStatement;
 
 /**
  * A specialized form that adds the required attribute for handling file
- * uploads.
+ * uploads. Was deprecated in 4.0. Use {@link #setFileUploadEncType()} in the
+ * base class instead
  * 
  * @author Philip Helger
  */
+@Deprecated
 public class HCForm_FileUpload extends HCForm
 {
   public HCForm_FileUpload ()
@@ -49,6 +51,7 @@ public class HCForm_FileUpload extends HCForm
     super (aJSStatement);
   }
 
+  @Override
   @Nonnull
   public IMimeType getEncType ()
   {

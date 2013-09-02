@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
 import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.mime.CMimeType;
+import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
@@ -56,6 +58,7 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
   private String m_sAcceptCharset;
   private HCA_Target m_aLinkTarget;
   private boolean m_bDisableAutoComplete = DEFAULT_DISABLE_AUTO_COMPLETE;
+  private IMimeType m_aEncType;
 
   // Must be handled externally!
   private boolean m_bSubmitPressingEnter = DEFAULT_SUBMIT_PRESSING_ENTER;
@@ -199,6 +202,30 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
     return this;
   }
 
+  @Nullable
+  public IMimeType getEncType ()
+  {
+    return m_aEncType;
+  }
+
+  /**
+   * Make this form a file-upload form.
+   * 
+   * @return this
+   */
+  @Nonnull
+  public HCForm setFileUploadEncType ()
+  {
+    return setEncType (CMimeType.MULTIPART_FORMDATA);
+  }
+
+  @Nonnull
+  public HCForm setEncType (@Nullable final IMimeType aEncType)
+  {
+    m_aEncType = aEncType;
+    return this;
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
@@ -220,6 +247,8 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
       aElement.setAttribute (CHTMLAttributes.TARGET, m_aLinkTarget);
     if (m_bDisableAutoComplete)
       aElement.setAttribute (CHTMLAttributes.AUTOCOMPLETE, CHTMLAttributeValues.OFF);
+    if (m_aEncType != null)
+      aElement.setAttribute (CHTMLAttributes.ENCTYPE, m_aEncType.getAsString ());
   }
 
   @Override
@@ -235,6 +264,7 @@ public class HCForm extends AbstractHCElementWithChildren <HCForm>
                             .append ("disableAutoComplete", m_bDisableAutoComplete)
                             .append ("submitPressingEnter", m_bSubmitPressingEnter)
                             .append ("submitButtonTabIndex", m_nSubmitButtonTabIndex)
+                            .appendIfNotNull ("encType", m_aEncType)
                             .toString ();
   }
 }
