@@ -81,8 +81,6 @@ public final class HCTest
     b.addChild (new HCFieldSet ("Gruppe"));
     b.addChild (new HCForm ("?").setSubmitPressingEnter (false));
     b.addChild (new HCForm (new SimpleURL ()).setSubmitPressingEnter (false));
-    b.addChild (new HCForm_FileUpload ().setSubmitPressingEnter (false));
-    b.addChild (new HCForm_FileUpload (new SimpleURL ()).setSubmitPressingEnter (false));
     b.addChild (new HCFrame ("frame1"));
     b.addChild (new HCFrameset ());
     b.addChild (new HCH1 ());
