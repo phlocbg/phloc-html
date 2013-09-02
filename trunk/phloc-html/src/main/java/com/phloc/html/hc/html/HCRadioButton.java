@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
@@ -87,6 +88,11 @@ public class HCRadioButton extends AbstractHCInput <HCRadioButton>
   {
     this (aRF);
     setChecked (bChecked);
+  }
+
+  public HCRadioButton (@Nonnull final IHCRequestField aRF, @Nullable final String sValue)
+  {
+    this (aRF.getFieldName (), sValue, EqualsUtils.equals (sValue, aRF.getRequestValue ()));
   }
 
   @Nullable
