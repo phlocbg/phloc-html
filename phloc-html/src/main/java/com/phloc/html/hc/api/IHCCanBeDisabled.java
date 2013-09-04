@@ -21,10 +21,10 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.hc.IHCElement;
 
-public interface IHCCanBeDisabled <THISTYPE extends IHCCanBeDisabled <THISTYPE>> extends IHCElement <THISTYPE>
+public interface IHCCanBeDisabled <IMPLTYPE extends IHCCanBeDisabled <IMPLTYPE>> extends IHCElement <IMPLTYPE>
 {
   boolean isDisabled ();
 
   @Nonnull
-  THISTYPE setDisabled (boolean bDisabled);
+  IMPLTYPE setDisabled (boolean bDisabled);
 }

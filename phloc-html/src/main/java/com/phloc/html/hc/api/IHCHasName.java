@@ -17,16 +17,26 @@
  */
 package com.phloc.html.hc.api;
 
-import com.phloc.html.hc.IHCElementWithChildren;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-/**
- * Interface for DIVs
- * 
- * @author Philip Helger
- * @param <IMPLTYPE>
- *        Implementation type
- */
-public interface IHCDiv <IMPLTYPE extends IHCDiv <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCHasName <IMPLTYPE>
+import com.phloc.html.hc.IHCElement;
+
+public interface IHCHasName <IMPLTYPE extends IHCHasName <IMPLTYPE>> extends IHCElement <IMPLTYPE>
 {
-  /* empty */
+  /**
+   * @return The name of the element. May be <code>null</code>.
+   */
+  @Nullable
+  String getName ();
+
+  /**
+   * Set the name of the element.
+   * 
+   * @param sName
+   *        The new name. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  IMPLTYPE setName (@Nullable String sName);
 }
