@@ -17,6 +17,7 @@
  */
 package com.phloc.html.hc;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -30,7 +31,7 @@ import com.phloc.commons.annotations.Nonempty;
  * 
  * @author Philip Helger
  */
-public interface IHCRequestField
+public interface IHCRequestField extends Serializable
 {
   /**
    * @return The field name of this request field

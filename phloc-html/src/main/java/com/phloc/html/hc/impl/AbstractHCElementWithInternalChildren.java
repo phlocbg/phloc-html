@@ -103,8 +103,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   protected final void removeChild (@Nonnegative final int nIndex)
   {
-    if (m_aChildren != null && m_aChildren.size () > nIndex)
-      m_aChildren.remove (nIndex);
+    ContainerHelper.removeElementAtIndex (m_aChildren, nIndex);
   }
 
   protected final void removeAllChildren ()
@@ -119,9 +118,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nullable
   public final CHILDTYPE getChild (final int nIndex)
   {
-    if (m_aChildren != null && nIndex >= 0 && nIndex < m_aChildren.size ())
-      return m_aChildren.get (nIndex);
-    return null;
+    return ContainerHelper.getSafe (m_aChildren, nIndex, null);
   }
 
   @Nonnegative

@@ -85,16 +85,6 @@ public final class JSOp
     return new JSOpUnaryWithParanthesis ("~", aExpr);
   }
 
-  /**
-   * @deprecated Use {@link #incrPostfix(IJSExpression)} instead
-   */
-  @Deprecated
-  @Nonnull
-  public static AbstractJSExpression incr (@Nonnull final IJSExpression aExpr)
-  {
-    return incrPostfix (aExpr);
-  }
-
   @Nonnull
   public static AbstractJSExpression incrPostfix (@Nonnull final IJSExpression aExpr)
   {
@@ -113,16 +103,6 @@ public final class JSOp
       return ((AbstractJSAtomNumeric) aExpr).numericIncr ();
 
     return new JSOpUnary ("++", aExpr);
-  }
-
-  /**
-   * @deprecated Use {@link #decrPostfix(IJSExpression)} instead
-   */
-  @Deprecated
-  @Nonnull
-  public static AbstractJSExpression decr (@Nonnull final IJSExpression aExpr)
-  {
-    return decrPostfix (aExpr);
   }
 
   @Nonnull

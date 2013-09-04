@@ -55,16 +55,6 @@ public abstract class AbstractJSExpression implements IJSExpression
     return JSOp.complement (this);
   }
 
-  /**
-   * @deprecated Use {@link #incrPostfix()} instead
-   */
-  @Deprecated
-  @Nonnull
-  public final AbstractJSExpression incr ()
-  {
-    return incrPostfix ();
-  }
-
   @Nonnull
   public final AbstractJSExpression incrPostfix ()
   {
@@ -75,16 +65,6 @@ public abstract class AbstractJSExpression implements IJSExpression
   public final AbstractJSExpression incrPrefix ()
   {
     return JSOp.incrPrefix (this);
-  }
-
-  /**
-   * @deprecated Use {@link #decrPostfix()} instead
-   */
-  @Deprecated
-  @Nonnull
-  public final AbstractJSExpression decr ()
-  {
-    return decrPostfix ();
   }
 
   @Nonnull

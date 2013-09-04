@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.annotations.PresentForCodeCoverage;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
@@ -61,6 +63,10 @@ import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 public final class HCConsistencyChecker
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCConsistencyChecker.class);
+
+  @SuppressWarnings ("unused")
+  @PresentForCodeCoverage
+  private static final HCConsistencyChecker s_aInstance = new HCConsistencyChecker ();
 
   private HCConsistencyChecker ()
   {}
@@ -160,7 +166,7 @@ public final class HCConsistencyChecker
       consistencyWarning ("PROGRESS contains other nested progress");
   }
 
-  private static void _checkTable (final AbstractHCBaseTable <?> aTable)
+  private static void _checkTable (@Nonnull final AbstractHCBaseTable <?> aTable)
   {
     AbstractHCBaseTable.checkInternalConsistency (aTable);
   }
@@ -215,6 +221,7 @@ public final class HCConsistencyChecker
     }
   }
 
+  @Deprecated
   public static void warnInBandScript (@Nonnull final HCScript aScript)
   {
     if (GlobalDebug.isDebugMode ())
@@ -223,9 +230,21 @@ public final class HCConsistencyChecker
                       new Exception ());
   }
 
-  public static void checkForUniqueIDs (@Nonnull final HCBody aBody)
+  /**
+   * Check all nodes inside the passed HTML body whether they have unique IDs or
+   * not.
+   * 
+   * @param aBody
+   *        The HTML body to check. May not be <code>null</code>.
+   * @return A set with all IDs used more than once. Never <code>null</code> but
+   *         maybe empty.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static Set <String> checkForUniqueIDs (@Nonnull final HCBody aBody)
   {
     final Set <String> aUsedIDs = new HashSet <String> ();
+    final Set <String> aDuplicateIDs = new HashSet <String> ();
     HCUtils.iterateTree (aBody, new IHCIteratorCallback ()
     {
       @Nonnull
@@ -236,10 +255,14 @@ public final class HCConsistencyChecker
           final IHCElement <?> aElement = (IHCElement <?>) aChildNode;
           final String sID = aElement.getID ();
           if (StringHelper.hasText (sID) && !aUsedIDs.add (sID))
+          {
             consistencyWarning ("The ID '" + sID + "' is used more than once within a single HTML page!");
+            aDuplicateIDs.add (sID);
+          }
         }
         return EFinish.UNFINISHED;
       }
     });
+    return aDuplicateIDs;
   }
 }

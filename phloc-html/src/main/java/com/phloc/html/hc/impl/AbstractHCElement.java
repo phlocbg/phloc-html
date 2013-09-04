@@ -605,17 +605,6 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
-  /**
-   * @deprecated Use {@link #getAllCustomAttrs()} instead
-   */
-  @Deprecated
-  @Nonnull
-  @ReturnsMutableCopy
-  public final Map <String, String> getCustomAttrs ()
-  {
-    return getAllCustomAttrs ();
-  }
-
   public boolean hasCustomAttrs ()
   {
     return ContainerHelper.isNotEmpty (m_aCustomAttrs);

@@ -477,72 +477,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return addDeclaration (aVar);
   }
 
-  /**
-   * Adds a local variable declaration to this block
-   * 
-   * @param sName
-   *        Name of the variable
-   * @return Newly generated {@link JSVar}
-   */
-  @Deprecated
-  @Nonnull
-  public JSVar decl (@Nonnull final String sName)
-  {
-    return var (sName);
-  }
-
-  /**
-   * Adds a local variable declaration to this block
-   * 
-   * @param aType
-   *        Type of the variable
-   * @param sName
-   *        Name of the variable
-   * @return Newly generated {@link JSVar}
-   */
-  @Deprecated
-  @Nonnull
-  public JSVar decl (@Nullable final AbstractJSType aType, @Nonnull final String sName)
-  {
-    return var (aType, sName);
-  }
-
-  /**
-   * Adds a local variable declaration to this block
-   * 
-   * @param sName
-   *        Name of the variable
-   * @param aInitExpression
-   *        Initialization expression for this variable. May be null.
-   * @return Newly generated {@link JSVar}
-   */
-  @Deprecated
-  @Nonnull
-  public JSVar decl (@Nonnull final String sName, @Nullable final IJSExpression aInitExpression)
-  {
-    return var (sName, aInitExpression);
-  }
-
-  /**
-   * Adds a local variable declaration to this block
-   * 
-   * @param aType
-   *        JType of the variable
-   * @param sName
-   *        Name of the variable
-   * @param aInitExpression
-   *        Initialization expression for this variable. May be null.
-   * @return Newly generated {@link JSVar}
-   */
-  @Deprecated
-  @Nonnull
-  public JSVar decl (@Nullable final AbstractJSType aType,
-                     @Nonnull @Nonempty final String sName,
-                     @Nullable final IJSExpression aInitExpression)
-  {
-    return var (aType, sName, aInitExpression);
-  }
-
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonFunction)
   {
@@ -902,16 +836,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return this;
   }
 
-  /**
-   * @deprecated Use {@link #incrPostfix(IJSAssignmentTarget)} instead
-   */
-  @Deprecated
-  @Nonnull
-  public AbstractJSBlock incr (@Nonnull final IJSAssignmentTarget aLhs)
-  {
-    return incrPostfix (aLhs);
-  }
-
   @Nonnull
   public AbstractJSBlock incrPostfix (@Nonnull final IJSAssignmentTarget aLhs)
   {
@@ -924,16 +848,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   {
     addStatement (new JSIncrPrefix (aLhs));
     return this;
-  }
-
-  /**
-   * @deprecated Use {@link #decrPostfix(IJSAssignmentTarget)} instead
-   */
-  @Deprecated
-  @Nonnull
-  public AbstractJSBlock decr (@Nonnull final IJSAssignmentTarget aLhs)
-  {
-    return decrPostfix (aLhs);
   }
 
   @Nonnull
@@ -1044,13 +958,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   {
     addStatement (new JSThrow (aExpr));
     return this;
-  }
-
-  @Deprecated
-  @Nonnull
-  public AbstractJSBlock _debugger ()
-  {
-    return debugger ();
   }
 
   @Nonnull
@@ -1165,22 +1072,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   public AbstractJSBlock comment (@Nonnull final String sComment)
   {
     addStatement (new JSCommentSingleLine (sComment));
-    return this;
-  }
-
-  /**
-   * Creates a "literal" statement directly.
-   * <p>
-   * Specified string is printed as-is. This is useful as a short-cut.
-   * <p>
-   * For example, you can invoke this method as:
-   * <code>directStatement("a=b+c;")</code>.
-   */
-  @Nonnull
-  @Deprecated
-  public AbstractJSBlock directStatement (@Nonnull @Nonempty final String sSource)
-  {
-    addStatement (new JSStatementDirect (sSource));
     return this;
   }
 
