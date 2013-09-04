@@ -58,9 +58,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 {
   private static final class RowSet
   {
+    private final boolean m_bHeader;
     private final List <HCRow> m_aRows = new ArrayList <HCRow> ();
     private String m_sID;
     private List <ICSSClassProvider> m_aClasses;
+
+    public RowSet (final boolean bHeader)
+    {
+      m_bHeader = bHeader;
+    }
 
     @Nullable
     public String getID ()
@@ -177,7 +183,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     @Nonnull
     public HCRow addRow ()
     {
-      final HCRow ret = new HCRow (true);
+      final HCRow ret = new HCRow (m_bHeader);
       m_aRows.add (ret);
       return ret;
     }
@@ -185,7 +191,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     @Nonnull
     public HCRow addRow (@Nonnegative final int nIndex)
     {
-      final HCRow ret = new HCRow (true);
+      final HCRow ret = new HCRow (m_bHeader);
       m_aRows.add (nIndex, ret);
       return ret;
     }
@@ -242,13 +248,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     }
   }
 
-  protected HCColGroup m_aColGroup;
+  private HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
   private int m_nCellPadding = CGlobal.ILLEGAL_UINT;
 
-  private final RowSet m_aHeader = new RowSet ();
-  private final RowSet m_aBody = new RowSet ();
-  private final RowSet m_aFooter = new RowSet ();
+  private final RowSet m_aHeader = new RowSet (true);
+  private final RowSet m_aBody = new RowSet (false);
+  private final RowSet m_aFooter = new RowSet (true);
 
   /**
    * This constructor is used to create elements with logic like a table but
