@@ -1,4 +1,4 @@
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.api;
 
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +11,9 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.html.HCCol;
+import com.phloc.html.hc.html.HCColGroup;
+import com.phloc.html.hc.html.HCRow;
 
 /**
  * Base interface for HTML tables

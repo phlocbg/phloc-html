@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.html;
+package com.phloc.html.hc.api;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

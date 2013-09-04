@@ -27,6 +27,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCButtonType;
+import com.phloc.html.hc.api.IHCButton;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
