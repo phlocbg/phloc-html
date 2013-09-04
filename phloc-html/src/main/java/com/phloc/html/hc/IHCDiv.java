@@ -15,16 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
-import javax.annotation.Nonnull;
 
-import com.phloc.html.hc.IHCElement;
-
-public interface IHCCanBeDisabled <IMPLTYPE extends IHCCanBeDisabled <IMPLTYPE>> extends IHCElement <IMPLTYPE>
+/**
+ * Interface for DIVs
+ * 
+ * @author Philip Helger
+ * @param <IMPLTYPE>
+ *        Implementation type
+ */
+public interface IHCDiv <IMPLTYPE extends IHCDiv <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCHasName <IMPLTYPE>
 {
-  boolean isDisabled ();
-
-  @Nonnull
-  IMPLTYPE setDisabled (boolean bDisabled);
+  /* empty */
 }

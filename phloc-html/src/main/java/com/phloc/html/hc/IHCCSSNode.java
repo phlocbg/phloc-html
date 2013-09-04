@@ -15,20 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
-import com.phloc.html.hc.IHCNode;
 
 /**
- * Marker interface for nodes that can contain JS code (inline or external)
+ * Marker interface for nodes that can contain CSS code (inline or external)
  * 
  * @author Philip Helger
  */
-public interface IHCJSNode extends IHCNode
+public interface IHCCSSNode extends IHCNode
 {
   /**
-   * @return <code>true</code> if this is an inline JS node, <code>false</code>
-   *         if it is an externally referenced JS node
+   * @return <code>true</code> if this is an inline CSS node, <code>false</code>
+   *         if it is an externally referenced CSS node
    */
-  boolean isInlineJS ();
+  boolean isInlineCSS ();
 }

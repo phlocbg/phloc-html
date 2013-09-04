@@ -25,11 +25,11 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.hc.IHCRequestField;
-import com.phloc.html.hc.IHCRequestFieldBoolean;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCInput;
+import com.phloc.html.request.IHCRequestField;
+import com.phloc.html.request.IHCRequestFieldBoolean;
 
 /**
  * Represents an HTML &lt;input&gt; element of type "radio"

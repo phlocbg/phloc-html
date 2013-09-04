@@ -27,7 +27,7 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.SinceHTML5;
-import com.phloc.html.hc.api.IHCCanBeDisabled;
+import com.phloc.html.hc.IHCCanBeDisabled;
 import com.phloc.html.hc.api5.EHCCommandType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;

@@ -15,27 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.phloc.html.hc.IHCControl;
 
 /**
- * Base interface for controls base on &lt;input&gt; area.
+ * Marker interface for nodes that can contain JS code (inline or external)
  * 
  * @author Philip Helger
- * @param <IMPLTYPE>
  */
-public interface IHCInput <IMPLTYPE extends IHCInput <IMPLTYPE>> extends IHCControl <IMPLTYPE>
+public interface IHCJSNode extends IHCNode
 {
-  @Nonnull
-  EHCInputType getType ();
-
-  @Nullable
-  String getPlaceholder ();
-
-  @Nonnull
-  IMPLTYPE setPlaceholder (@Nullable String sPlaceholder);
+  /**
+   * @return <code>true</code> if this is an inline JS node, <code>false</code>
+   *         if it is an externally referenced JS node
+   */
+  boolean isInlineJS ();
 }

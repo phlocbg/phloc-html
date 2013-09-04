@@ -1,4 +1,4 @@
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,8 +9,6 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.html.css.ICSSClassProvider;
-import com.phloc.html.hc.IHCHasChildren;
-import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCCol;
 import com.phloc.html.hc.html.HCColGroup;
 import com.phloc.html.hc.html.HCRow;

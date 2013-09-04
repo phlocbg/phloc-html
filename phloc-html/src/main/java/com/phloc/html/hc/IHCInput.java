@@ -17,17 +17,25 @@
  */
 package com.phloc.html.hc;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.phloc.html.hc.api.EHCInputType;
+
 /**
- * Special request field for check boxes and radio buttons.
+ * Base interface for controls base on &lt;input&gt; area.
  * 
  * @author Philip Helger
+ * @param <IMPLTYPE>
  */
-public interface IHCRequestFieldBoolean extends IHCRequestField
+public interface IHCInput <IMPLTYPE extends IHCInput <IMPLTYPE>> extends IHCControl <IMPLTYPE>
 {
-  /**
-   * @return <code>true</code> if the checkbox is checked or if no such request
-   *         parameter is present and the fallback is <code>true</code>,
-   *         <code>false</code> otherwise.
-   */
-  boolean isChecked ();
+  @Nonnull
+  EHCInputType getType ();
+
+  @Nullable
+  String getPlaceholder ();
+
+  @Nonnull
+  IMPLTYPE setPlaceholder (@Nullable String sPlaceholder);
 }

@@ -15,20 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
-import com.phloc.html.hc.IHCNode;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-/**
- * Marker interface for nodes that can contain CSS code (inline or external)
- * 
- * @author Philip Helger
- */
-public interface IHCCSSNode extends IHCNode
+public interface IHCHasName <IMPLTYPE extends IHCHasName <IMPLTYPE>> extends IHCElement <IMPLTYPE>
 {
   /**
-   * @return <code>true</code> if this is an inline CSS node, <code>false</code>
-   *         if it is an externally referenced CSS node
+   * @return The name of the element. May be <code>null</code>.
    */
-  boolean isInlineCSS ();
+  @Nullable
+  String getName ();
+
+  /**
+   * Set the name of the element.
+   * 
+   * @param sName
+   *        The new name. May be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  IMPLTYPE setName (@Nullable String sName);
 }

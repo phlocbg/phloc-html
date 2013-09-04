@@ -1,9 +1,9 @@
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.html.hc.IHCElementWithChildren;
+import com.phloc.html.hc.api.EHCCellAlign;
 import com.phloc.html.hc.html.HCRow;
 
 public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>

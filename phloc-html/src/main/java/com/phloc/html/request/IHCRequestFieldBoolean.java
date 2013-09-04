@@ -15,28 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.request;
 
-import javax.annotation.Nonnull;
-
-import com.phloc.html.hc.IHCElement;
-
-public interface IHCHasFocus <IMPLTYPE extends IHCHasFocus <IMPLTYPE>> extends IHCElement <IMPLTYPE>
+/**
+ * Special request field for check boxes and radio buttons.
+ * 
+ * @author Philip Helger
+ */
+public interface IHCRequestFieldBoolean extends IHCRequestField
 {
   /**
-   * @return <code>true</code> if this element is focused, <code>false</code>
-   *         otherwise. By default an element is not focused.
+   * @return <code>true</code> if the checkbox is checked or if no such request
+   *         parameter is present and the fallback is <code>true</code>,
+   *         <code>false</code> otherwise.
    */
-  boolean isFocused ();
-
-  /**
-   * Change the focused state of this element.
-   * 
-   * @param bFocused
-   *        <code>true</code> to focus this element, <code>false</code> to not
-   *        focus the element.
-   * @return this
-   */
-  @Nonnull
-  IMPLTYPE setFocused (boolean bFocused);
+  boolean isChecked ();
 }
