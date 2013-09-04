@@ -26,9 +26,9 @@ import com.phloc.html.hc.IHCControl;
  * Base interface for controls base on &lt;input&gt; area.
  * 
  * @author Philip Helger
- * @param <THISTYPE>
+ * @param <IMPLTYPE>
  */
-public interface IHCInput <THISTYPE extends IHCInput <THISTYPE>> extends IHCControl <THISTYPE>
+public interface IHCInput <IMPLTYPE extends IHCInput <IMPLTYPE>> extends IHCControl <IMPLTYPE>
 {
   @Nonnull
   EHCInputType getType ();
@@ -37,5 +37,5 @@ public interface IHCInput <THISTYPE extends IHCInput <THISTYPE>> extends IHCCont
   String getPlaceholder ();
 
   @Nonnull
-  THISTYPE setPlaceholder (@Nullable String sPlaceholder);
+  IMPLTYPE setPlaceholder (@Nullable String sPlaceholder);
 }

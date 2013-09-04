@@ -19,19 +19,19 @@ import com.phloc.html.hc.html.HCRow;
  * Base interface for HTML tables
  * 
  * @author Philip Helger
- * @param <THISTYPE>
+ * @param <IMPLTYPE>
  */
-public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends IHCHasChildren
+public interface IHCBaseTable <IMPLTYPE extends IHCBaseTable <IMPLTYPE>> extends IHCHasChildren
 {
   int getCellSpacing ();
 
   @Nonnull
-  THISTYPE setCellSpacing (int nCellSpacing);
+  IMPLTYPE setCellSpacing (int nCellSpacing);
 
   int getCellPadding ();
 
   @Nonnull
-  THISTYPE setCellPadding (int nCellPadding);
+  IMPLTYPE setCellPadding (int nCellPadding);
 
   // Column handling
 
@@ -39,19 +39,19 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCColGroup getColGroup ();
 
   @Nonnull
-  THISTYPE addColumn (@Nullable HCCol aCol);
+  IMPLTYPE addColumn (@Nullable HCCol aCol);
 
   @Nonnull
-  THISTYPE addColumn (@Nonnegative int nIndex, @Nullable HCCol aCol);
+  IMPLTYPE addColumn (@Nonnegative int nIndex, @Nullable HCCol aCol);
 
   @Nonnull
-  THISTYPE addColumns (@Nullable HCCol aCol);
+  IMPLTYPE addColumns (@Nullable HCCol aCol);
 
   @Nonnull
-  THISTYPE addColumns (@Nullable HCCol... aCols);
+  IMPLTYPE addColumns (@Nullable HCCol... aCols);
 
   @Nonnull
-  THISTYPE addColumns (@Nullable Iterable <? extends HCCol> aCols);
+  IMPLTYPE addColumns (@Nullable Iterable <? extends HCCol> aCols);
 
   /**
    * Remove the column definition at the specified index. This does not affect
@@ -62,7 +62,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
    * @return this
    */
   @Nonnull
-  THISTYPE removeColumnAtIndex (@Nonnegative int nColumnIndex);
+  IMPLTYPE removeColumnAtIndex (@Nonnegative int nColumnIndex);
 
   /**
    * Remove all column definitions. This does not affect any row contents.
@@ -70,7 +70,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
    * @return this
    */
   @Nonnull
-  THISTYPE removeAllColumns ();
+  IMPLTYPE removeAllColumns ();
 
   /**
    * @return The number of columns as specified in the column group. If no
@@ -85,7 +85,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getHeaderID ();
 
   @Nonnull
-  THISTYPE setHeaderID (@Nullable String sID);
+  IMPLTYPE setHeaderID (@Nullable String sID);
 
   /**
    * @return <code>true</code> if a Header ID is present, <code>false</code>
@@ -101,10 +101,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getAllHeaderClassesAsString ();
 
   @Nonnull
-  THISTYPE addHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE addHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE removeHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasHeaderClasses ();
 
@@ -133,19 +133,19 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addHeaderRow (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE addHeaderRow (@Nullable HCRow aRow);
+  IMPLTYPE addHeaderRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addHeaderRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
+  IMPLTYPE addHeaderRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeHeaderRowAtIndex (@Nonnegative int nIndex);
+  IMPLTYPE removeHeaderRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE removeAllHeaderRows ();
+  IMPLTYPE removeAllHeaderRows ();
 
   @Nonnull
-  THISTYPE sortAllHeaderRows (@Nonnull Comparator <? super HCRow> aComparator);
+  IMPLTYPE sortAllHeaderRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   // Footer rows
 
@@ -153,7 +153,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getFooterID ();
 
   @Nonnull
-  THISTYPE setFooterID (@Nullable String sID);
+  IMPLTYPE setFooterID (@Nullable String sID);
 
   /**
    * @return <code>true</code> if a Footer ID is present, <code>false</code>
@@ -169,10 +169,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getAllFooterClassesAsString ();
 
   @Nonnull
-  THISTYPE addFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE addFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE removeFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasFooterClasses ();
 
@@ -201,19 +201,19 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addFooterRow (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE addFooterRow (@Nullable HCRow aRow);
+  IMPLTYPE addFooterRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addFooterRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
+  IMPLTYPE addFooterRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeFooterRowAtIndex (@Nonnegative int nIndex);
+  IMPLTYPE removeFooterRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE removeAllFooterRows ();
+  IMPLTYPE removeAllFooterRows ();
 
   @Nonnull
-  THISTYPE sortAllFooterRows (@Nonnull Comparator <? super HCRow> aComparator);
+  IMPLTYPE sortAllFooterRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   // Body rows
 
@@ -221,7 +221,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getBodyID ();
 
   @Nonnull
-  THISTYPE setBodyID (@Nullable String sID);
+  IMPLTYPE setBodyID (@Nullable String sID);
 
   /**
    * @return <code>true</code> if a body ID is present, <code>false</code>
@@ -237,10 +237,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getAllBodyClassesAsString ();
 
   @Nonnull
-  THISTYPE addBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE addBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
+  IMPLTYPE removeBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasBodyClasses ();
 
@@ -269,47 +269,47 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addBodyRow (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE addBodyRow (@Nullable HCRow aRow);
+  IMPLTYPE addBodyRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addBodyRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
+  IMPLTYPE addBodyRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeBodyRowAtIndex (@Nonnegative int nIndex);
+  IMPLTYPE removeBodyRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
-  THISTYPE removeAllBodyRows ();
+  IMPLTYPE removeAllBodyRows ();
 
   @Nonnull
-  THISTYPE sortAllBodyRows (@Nonnull Comparator <? super HCRow> aComparator);
+  IMPLTYPE sortAllBodyRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   @Nonnull
-  THISTYPE setSpanningHeaderContent (@Nullable String sText);
+  IMPLTYPE setSpanningHeaderContent (@Nullable String sText);
 
   @Nonnull
-  THISTYPE setSpanningHeaderContent (@Nullable IHCNode aNode);
+  IMPLTYPE setSpanningHeaderContent (@Nullable IHCNode aNode);
 
   @Nonnull
-  THISTYPE addSpanningHeaderContent (@Nullable String sText);
+  IMPLTYPE addSpanningHeaderContent (@Nullable String sText);
 
   @Nonnull
-  THISTYPE addSpanningHeaderContent (@Nullable IHCNode aNode);
+  IMPLTYPE addSpanningHeaderContent (@Nullable IHCNode aNode);
 
   @Nonnull
-  THISTYPE addSpanningBodyContent (@Nullable String sText);
+  IMPLTYPE addSpanningBodyContent (@Nullable String sText);
 
   @Nonnull
-  THISTYPE addSpanningBodyContent (@Nullable IHCNode aNode);
+  IMPLTYPE addSpanningBodyContent (@Nullable IHCNode aNode);
 
   @Nonnull
-  THISTYPE setSpanningFooterContent (@Nullable String sText);
+  IMPLTYPE setSpanningFooterContent (@Nullable String sText);
 
   @Nonnull
-  THISTYPE setSpanningFooterContent (@Nullable IHCNode aNode);
+  IMPLTYPE setSpanningFooterContent (@Nullable IHCNode aNode);
 
   @Nonnull
-  THISTYPE addSpanningFooterContent (@Nullable String sText);
+  IMPLTYPE addSpanningFooterContent (@Nullable String sText);
 
   @Nonnull
-  THISTYPE addSpanningFooterContent (@Nullable IHCNode aNode);
+  IMPLTYPE addSpanningFooterContent (@Nullable IHCNode aNode);
 }

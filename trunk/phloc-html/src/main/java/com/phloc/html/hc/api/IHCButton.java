@@ -6,24 +6,8 @@ import javax.annotation.Nullable;
 import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.js.IJSCodeProvider;
 
-public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCCanBeDisabled <IMPLTYPE>
+public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCCanBeDisabled <IMPLTYPE>, IHCHasName <IMPLTYPE>
 {
-  /**
-   * @return The name of the button. May be <code>null</code>.
-   */
-  @Nullable
-  String getName ();
-
-  /**
-   * Set the name of the button.
-   * 
-   * @param sName
-   *        The new name. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  IMPLTYPE setName (@Nullable String sName);
-
   /**
    * @return The value of the button. May be <code>null</code>.
    */
