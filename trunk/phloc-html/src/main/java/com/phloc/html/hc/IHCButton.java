@@ -1,9 +1,9 @@
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.html.hc.IHCElementWithChildren;
+import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.js.IJSCodeProvider;
 
 public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCCanBeDisabled <IMPLTYPE>, IHCHasName <IMPLTYPE>

@@ -25,9 +25,9 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.hc.IHCRequestField;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.request.IHCRequestField;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "text"

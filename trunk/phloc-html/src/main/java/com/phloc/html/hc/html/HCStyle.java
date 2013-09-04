@@ -60,7 +60,7 @@ import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.annotations.OutOfBandNode;
-import com.phloc.html.hc.api.IHCCSSNode;
+import com.phloc.html.hc.IHCCSSNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
 

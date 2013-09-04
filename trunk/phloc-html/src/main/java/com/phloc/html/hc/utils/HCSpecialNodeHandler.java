@@ -29,10 +29,10 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.html.hc.IHCCSSNode;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCJSNode;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.api.IHCCSSNode;
-import com.phloc.html.hc.api.IHCJSNode;
 import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html.HCScriptFile;

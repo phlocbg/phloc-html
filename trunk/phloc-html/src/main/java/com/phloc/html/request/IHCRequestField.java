@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.request;
 
 import java.io.Serializable;
 import java.util.List;

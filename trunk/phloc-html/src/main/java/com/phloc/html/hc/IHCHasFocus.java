@@ -15,28 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc.api;
+package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import com.phloc.html.hc.IHCElement;
-
-public interface IHCHasName <IMPLTYPE extends IHCHasName <IMPLTYPE>> extends IHCElement <IMPLTYPE>
+public interface IHCHasFocus <IMPLTYPE extends IHCHasFocus <IMPLTYPE>> extends IHCElement <IMPLTYPE>
 {
   /**
-   * @return The name of the element. May be <code>null</code>.
+   * @return <code>true</code> if this element is focused, <code>false</code>
+   *         otherwise. By default an element is not focused.
    */
-  @Nullable
-  String getName ();
+  boolean isFocused ();
 
   /**
-   * Set the name of the element.
+   * Change the focused state of this element.
    * 
-   * @param sName
-   *        The new name. May be <code>null</code>.
+   * @param bFocused
+   *        <code>true</code> to focus this element, <code>false</code> to not
+   *        focus the element.
    * @return this
    */
   @Nonnull
-  IMPLTYPE setName (@Nullable String sName);
+  IMPLTYPE setFocused (boolean bFocused);
 }

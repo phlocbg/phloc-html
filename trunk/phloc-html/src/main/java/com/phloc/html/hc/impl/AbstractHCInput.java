@@ -27,8 +27,8 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCInput;
 import com.phloc.html.hc.api.EHCInputType;
-import com.phloc.html.hc.api.IHCInput;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 // TODO change to http://dev.w3.org/html5/markup/input.text.html#input.text
