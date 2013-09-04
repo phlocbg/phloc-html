@@ -40,7 +40,6 @@ import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.IHCCanBeDisabled;
-import com.phloc.html.hc.html.AbstractHCButton;
 import com.phloc.html.hc.html.AbstractHCTable;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
@@ -58,6 +57,7 @@ import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.IHCButton;
 import com.phloc.html.hc.html.IHCCell;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
@@ -103,7 +103,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   {}
 
   @Nonnull
-  protected AbstractHCButton <?> createFakeSubmitButton ()
+  protected IHCButton <?> createFakeSubmitButton ()
   {
     return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
   }
@@ -151,7 +151,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                   final HCForm aForm = (HCForm) aElement;
                   if (aForm.isSubmitPressingEnter ())
                   {
-                    final AbstractHCButton <?> aButton = createFakeSubmitButton ();
+                    final IHCButton <?> aButton = createFakeSubmitButton ();
                     aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
                     aForm.addChild (aButton);
                   }

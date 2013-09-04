@@ -27,7 +27,6 @@ import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api.EHCButtonType;
-import com.phloc.html.hc.api.IHCCanBeDisabled;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
@@ -38,7 +37,7 @@ import com.phloc.html.js.IJSCodeProvider;
  * 
  * @author Philip Helger
  */
-public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLTYPE>> extends AbstractHCElementWithChildren <IMPLTYPE> implements IHCCanBeDisabled <IMPLTYPE>
+public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLTYPE>> extends AbstractHCElementWithChildren <IMPLTYPE> implements IHCButton <IMPLTYPE>
 {
   private EHCButtonType m_eType = EHCButtonType.BUTTON;
   private String m_sName;
@@ -62,27 +61,25 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
     setOnClick (aOnClick);
   }
 
-  @Nullable
   public final String getName ()
   {
     return m_sName;
   }
 
   @Nonnull
-  public final IMPLTYPE setName (@Nullable final String sName)
+  public final IMPLTYPE setName (final String sName)
   {
     m_sName = sName;
     return thisAsT ();
   }
 
-  @Nullable
   public final String getValue ()
   {
     return m_sValue;
   }
 
   @Nonnull
-  public final IMPLTYPE setValue (@Nullable final String sValue)
+  public final IMPLTYPE setValue (final String sValue)
   {
     m_sValue = sValue;
     return thisAsT ();
@@ -115,28 +112,14 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
     return thisAsT ();
   }
 
-  /**
-   * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
-   * @param aOnClick
-   *        JS event to trigger
-   * @return this
-   */
   @Nonnull
-  public IMPLTYPE setOnClick (@Nullable final IJSCodeProvider aOnClick)
+  public IMPLTYPE setOnClick (final IJSCodeProvider aOnClick)
   {
     return setEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
-  /**
-   * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
-   * @param aOnClick
-   *        JS event to trigger
-   * @return this
-   */
   @Nonnull
-  public IMPLTYPE addOnClick (@Nullable final IJSCodeProvider aOnClick)
+  public IMPLTYPE addOnClick (final IJSCodeProvider aOnClick)
   {
     return addEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
