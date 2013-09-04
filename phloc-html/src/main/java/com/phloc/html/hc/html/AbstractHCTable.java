@@ -142,8 +142,8 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     }
 
     // Append colgroup
-    if (m_aColGroup != null && m_aColGroup.hasColumns ())
-      aElement.appendChild (m_aColGroup.convertToNode (aConversionSettings));
+    if (getColGroup () != null && getColGroup ().hasColumns ())
+      aElement.appendChild (getColGroup ().convertToNode (aConversionSettings));
 
     // Table header?
     if (hasHeaderRows () || hasHeaderID () || hasHeaderClasses ())
