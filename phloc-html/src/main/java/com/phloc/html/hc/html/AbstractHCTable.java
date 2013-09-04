@@ -153,7 +153,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       if (hasHeaderID ())
         aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
       if (hasHeaderClasses ())
-        aTHead.setAttribute (CHTMLAttributes.CLASS, getHeaderClassesAsString ());
+        aTHead.setAttribute (CHTMLAttributes.CLASS, getAllHeaderClassesAsString ());
       for (final HCRow aRow : directGetHeaderRowList ())
         applyHeaderRow (aTHead, aRow, aConversionSettings);
       if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
@@ -168,7 +168,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
       if (hasFooterID ())
         aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
       if (hasFooterClasses ())
-        aTFoot.setAttribute (CHTMLAttributes.CLASS, getFooterClassesAsString ());
+        aTFoot.setAttribute (CHTMLAttributes.CLASS, getAllFooterClassesAsString ());
       for (final HCRow aRow : directGetFooterRowList ())
         applyFooterRow (aTFoot, aRow, aConversionSettings);
       if (!aTFoot.hasChildren () && !EHTMLElement.TFOOT.mayBeSelfClosed ())
@@ -182,7 +182,7 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     if (hasBodyID ())
       aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
     if (hasBodyClasses ())
-      aTBody.setAttribute (CHTMLAttributes.CLASS, getBodyClassesAsString ());
+      aTBody.setAttribute (CHTMLAttributes.CLASS, getAllBodyClassesAsString ());
     applyBody (aTBody, aConversionSettings);
 
     // Main body rows

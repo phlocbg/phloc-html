@@ -406,14 +406,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * Remove the column definition at the specified index. This does not affect
-   * any row contents.
-   * 
-   * @param nColumnIndex
-   *        The index of the column to remove
-   * @return this
-   */
   @Nonnull
   public final THISTYPE removeColumnAtIndex (@Nonnegative final int nColumnIndex)
   {
@@ -422,11 +414,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * Remove all column definitions. This does not affect any row contents.
-   * 
-   * @return this
-   */
   @Nonnull
   public final THISTYPE removeAllColumns ()
   {
@@ -434,10 +421,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * @return The number of columns as specified in the column group. If no
-   *         column group is defined, 0 is returned.
-   */
   @Nonnegative
   public final int getColumnCount ()
   {
@@ -461,10 +444,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * @return <code>true</code> if a Header ID is present, <code>false</code>
-   *         otherwise
-   */
   public final boolean hasHeaderID ()
   {
     return m_aHeader.hasID ();
@@ -472,13 +451,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getHeaderClasses ()
+  public final List <ICSSClassProvider> getAllHeaderClasses ()
   {
     return m_aHeader.getAllClasses ();
   }
 
   @Nonnull
-  public final String getHeaderClassesAsString ()
+  public final String getAllHeaderClassesAsString ()
   {
     return m_aHeader.getAllClassesAsString ();
   }
@@ -614,10 +593,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * @return <code>true</code> if a Footer ID is present, <code>false</code>
-   *         otherwise
-   */
   public final boolean hasFooterID ()
   {
     return m_aFooter.hasID ();
@@ -625,13 +600,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getFooterClasses ()
+  public final List <ICSSClassProvider> getAllFooterClasses ()
   {
     return m_aFooter.getAllClasses ();
   }
 
   @Nonnull
-  public final String getFooterClassesAsString ()
+  public final String getAllFooterClassesAsString ()
   {
     return m_aFooter.getAllClassesAsString ();
   }
@@ -768,10 +743,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     return thisAsT ();
   }
 
-  /**
-   * @return <code>true</code> if a body ID is present, <code>false</code>
-   *         otherwise
-   */
   public final boolean hasBodyID ()
   {
     return m_aBody.hasID ();
@@ -779,13 +750,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getBodyClasses ()
+  public final List <ICSSClassProvider> getAllBodyClasses ()
   {
     return m_aBody.getAllClasses ();
   }
 
   @Nonnull
-  public final String getBodyClassesAsString ()
+  public final String getAllBodyClassesAsString ()
   {
     return m_aBody.getAllClassesAsString ();
   }

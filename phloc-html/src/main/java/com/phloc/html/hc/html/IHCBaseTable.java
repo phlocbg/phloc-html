@@ -30,6 +30,8 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   @Nonnull
   THISTYPE setCellPadding (int nCellPadding);
 
+  // Column handling
+
   @Nullable
   HCColGroup getColGroup ();
 
@@ -74,6 +76,8 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   @Nonnegative
   int getColumnCount ();
 
+  // Header rows
+
   @Nullable
   String getHeaderID ();
 
@@ -88,10 +92,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getHeaderClasses ();
+  List <ICSSClassProvider> getAllHeaderClasses ();
 
   @Nonnull
-  String getHeaderClassesAsString ();
+  String getAllHeaderClassesAsString ();
 
   @Nonnull
   THISTYPE addHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
@@ -140,6 +144,8 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   @Nonnull
   THISTYPE sortAllHeaderRows (@Nonnull Comparator <? super HCRow> aComparator);
 
+  // Footer rows
+
   @Nullable
   String getFooterID ();
 
@@ -154,10 +160,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getFooterClasses ();
+  List <ICSSClassProvider> getAllFooterClasses ();
 
   @Nonnull
-  String getFooterClassesAsString ();
+  String getAllFooterClassesAsString ();
 
   @Nonnull
   THISTYPE addFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
@@ -206,6 +212,8 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   @Nonnull
   THISTYPE sortAllFooterRows (@Nonnull Comparator <? super HCRow> aComparator);
 
+  // Body rows
+
   @Nullable
   String getBodyID ();
 
@@ -220,9 +228,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getBodyClasses ();
+  List <ICSSClassProvider> getAllBodyClasses ();
 
-  String getBodyClassesAsString ();
+  @Nonnull
+  String getAllBodyClassesAsString ();
 
   @Nonnull
   THISTYPE addBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
