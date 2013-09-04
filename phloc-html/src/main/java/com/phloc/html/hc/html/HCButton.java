@@ -20,18 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.CHTMLAttributeValues;
-import com.phloc.html.CHTMLAttributes;
-import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.api.EHCButtonType;
-import com.phloc.html.hc.api.IHCCanBeDisabled;
-import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
-import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
@@ -39,135 +28,23 @@ import com.phloc.html.js.IJSCodeProvider;
  * 
  * @author Philip Helger
  */
-public class HCButton extends AbstractHCElementWithChildren <HCButton> implements IHCCanBeDisabled <HCButton>
+public class HCButton extends AbstractHCButton <HCButton>
 {
-  private EHCButtonType m_eType = EHCButtonType.BUTTON;
-  private String m_sName;
-  private String m_sValue;
-  private boolean m_bDisabled = false;
-
   public HCButton ()
-  {
-    super (EHTMLElement.BUTTON);
-  }
+  {}
 
   public HCButton (@Nonnull final IPredefinedLocaleTextProvider aLabel)
   {
-    this (aLabel.getText ());
+    super (aLabel.getText ());
   }
 
   public HCButton (@Nullable final String sLabel)
   {
-    this ();
-    addChild (sLabel);
+    super (sLabel);
   }
 
   public HCButton (@Nullable final String sLabel, @Nullable final IJSCodeProvider aOnClick)
   {
-    this (sLabel);
-    setOnClick (aOnClick);
-  }
-
-  @Nullable
-  public final String getName ()
-  {
-    return m_sName;
-  }
-
-  @Nonnull
-  public final HCButton setName (@Nullable final String sName)
-  {
-    m_sName = sName;
-    return this;
-  }
-
-  @Nullable
-  public final String getValue ()
-  {
-    return m_sValue;
-  }
-
-  @Nonnull
-  public final HCButton setValue (@Nullable final String sValue)
-  {
-    m_sValue = sValue;
-    return this;
-  }
-
-  public final boolean isDisabled ()
-  {
-    return m_bDisabled;
-  }
-
-  @Nonnull
-  public final HCButton setDisabled (final boolean bDisabled)
-  {
-    m_bDisabled = bDisabled;
-    return this;
-  }
-
-  @Nonnull
-  public final EHCButtonType getType ()
-  {
-    return m_eType;
-  }
-
-  @Nonnull
-  public HCButton setType (@Nonnull final EHCButtonType eType)
-  {
-    if (eType == null)
-      throw new NullPointerException ("type");
-    m_eType = eType;
-    return this;
-  }
-
-  /**
-   * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
-   * @param aOnClick
-   *        JS event to trigger
-   * @return this
-   */
-  @Nonnull
-  public HCButton setOnClick (@Nullable final IJSCodeProvider aOnClick)
-  {
-    return setEventHandler (EJSEvent.ONCLICK, aOnClick);
-  }
-
-  /**
-   * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
-   * @param aOnClick
-   *        JS event to trigger
-   * @return this
-   */
-  @Nonnull
-  public HCButton addOnClick (@Nullable final IJSCodeProvider aOnClick)
-  {
-    return addEventHandler (EJSEvent.ONCLICK, aOnClick);
-  }
-
-  @Override
-  protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
-  {
-    super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
-    if (StringHelper.hasText (m_sName))
-      aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
-    if (StringHelper.hasText (m_sValue))
-      aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
-    if (m_bDisabled)
-      aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("type", m_eType)
-                            .appendIfNotNull ("name", m_sName)
-                            .appendIfNotNull ("value", m_sValue)
-                            .append ("disabled", m_bDisabled)
-                            .toString ();
+    super (sLabel, aOnClick);
   }
 }
