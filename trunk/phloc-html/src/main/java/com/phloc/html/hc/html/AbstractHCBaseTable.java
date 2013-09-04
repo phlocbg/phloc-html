@@ -423,8 +423,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final THISTYPE removeHeaderRowAtIndex (@Nonnegative final int nIndex)
   {
-    if (nIndex >= 0 && nIndex < m_aHeaderRows.size ())
-      m_aHeaderRows.remove (nIndex);
+    ContainerHelper.removeElementAtIndex (m_aHeaderRows, nIndex);
     return thisAsT ();
   }
 
@@ -436,7 +435,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE sortAllHeaderRows (@Nonnull final Comparator <HCRow> aComparator)
+  public final THISTYPE sortAllHeaderRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
     if (aComparator == null)
       throw new NullPointerException ("comparator");
@@ -599,8 +598,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final THISTYPE removeFooterRowAtIndex (@Nonnegative final int nIndex)
   {
-    if (nIndex >= 0 && nIndex < m_aFooterRows.size ())
-      m_aFooterRows.remove (nIndex);
+    ContainerHelper.removeElementAtIndex (m_aFooterRows, nIndex);
     return thisAsT ();
   }
 
@@ -612,7 +610,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE sortAllFooterRows (@Nonnull final Comparator <HCRow> aComparator)
+  public final THISTYPE sortAllFooterRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
     if (aComparator == null)
       throw new NullPointerException ("comparator");
@@ -776,8 +774,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final THISTYPE removeBodyRowAtIndex (@Nonnegative final int nIndex)
   {
-    if (nIndex >= 0 && nIndex < m_aBodyRows.size ())
-      m_aBodyRows.remove (nIndex);
+    ContainerHelper.removeElementAtIndex (m_aBodyRows, nIndex);
     return thisAsT ();
   }
 
@@ -789,11 +786,76 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE sortAllBodyRows (@Nonnull final Comparator <HCRow> aComparator)
+  public final THISTYPE sortAllBodyRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
     if (aComparator == null)
       throw new NullPointerException ("comparator");
     Collections.sort (m_aBodyRows, aComparator);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
+  {
+    return setSpanningHeaderContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
+  {
+    removeAllHeaderRows ();
+    return addSpanningHeaderContent (aNode);
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
+  {
+    return addSpanningHeaderContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
+  {
+    addHeaderRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningBodyContent (@Nullable final String sText)
+  {
+    return addSpanningBodyContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
+  {
+    addBodyRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningFooterContent (@Nullable final String sText)
+  {
+    return setSpanningFooterContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
+  {
+    removeAllFooterRows ();
+    return addSpanningFooterContent (aNode);
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningFooterContent (@Nullable final String sText)
+  {
+    return addSpanningFooterContent (new HCTextNode (sText));
+  }
+
+  @Nonnull
+  public THISTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
+  {
+    addFooterRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
   }
 
@@ -975,120 +1037,5 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
                             .appendIfNotNull ("footerID", m_sFooterID)
                             .appendIfNotNull ("footerClasses", m_aFooterClasses)
                             .toString ();
-  }
-
-  @Deprecated
-  public final boolean hasHeaderRow ()
-  {
-    return hasHeaderRows ();
-  }
-
-  @Deprecated
-  public final HCRow getHeaderRow ()
-  {
-    return getFirstHeaderRow ();
-  }
-
-  @Deprecated
-  public final HCRow getOrAddHeaderRow ()
-  {
-    return hasHeaderRows () ? getFirstHeaderRow () : addHeaderRow ();
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE removeHeaderRow ()
-  {
-    return removeHeaderRowAtIndex (0);
-  }
-
-  @Deprecated
-  public final boolean hasFooterRow ()
-  {
-    return hasFooterRows ();
-  }
-
-  @Deprecated
-  public final HCRow getFooterRow ()
-  {
-    return getFirstFooterRow ();
-  }
-
-  @Deprecated
-  public final HCRow getOrAddFooterRow ()
-  {
-    return hasFooterRows () ? getFirstFooterRow () : addFooterRow ();
-  }
-
-  @Deprecated
-  @Nonnull
-  public final THISTYPE removeFooterRow ()
-  {
-    return removeFooterRowAtIndex (0);
-  }
-
-  @Nonnull
-  public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
-  {
-    return setSpanningHeaderContent (new HCTextNode (sText));
-  }
-
-  @Nonnull
-  public THISTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
-  {
-    removeAllHeaderRows ();
-    return addSpanningHeaderContent (aNode);
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
-  {
-    return addSpanningHeaderContent (new HCTextNode (sText));
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
-  {
-    addHeaderRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningBodyContent (@Nullable final String sText)
-  {
-    return addSpanningBodyContent (new HCTextNode (sText));
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
-  {
-    addBodyRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE setSpanningFooterContent (@Nullable final String sText)
-  {
-    return setSpanningFooterContent (new HCTextNode (sText));
-  }
-
-  @Nonnull
-  public THISTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
-  {
-    removeAllFooterRows ();
-    return addSpanningFooterContent (aNode);
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningFooterContent (@Nullable final String sText)
-  {
-    return addSpanningFooterContent (new HCTextNode (sText));
-  }
-
-  @Nonnull
-  public THISTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
-  {
-    addFooterRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
-    return thisAsT ();
   }
 }

@@ -17,6 +17,11 @@
  */
 package com.phloc.html.hc;
 
+/**
+ * Special request field for check boxes and radio buttons.
+ * 
+ * @author Philip Helger
+ */
 public interface IHCRequestFieldBoolean extends IHCRequestField
 {
   /**

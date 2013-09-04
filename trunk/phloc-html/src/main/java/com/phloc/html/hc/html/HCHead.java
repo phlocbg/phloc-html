@@ -252,16 +252,6 @@ public class HCHead extends AbstractHCElement <HCHead>
   // CSS handling
   //
 
-  /**
-   * @deprecated Use {@link HCSpecialNodeHandler#isCSSNode(IHCNode)}
-   *             instead
-   */
-  @Deprecated
-  public static boolean isValidCSSNode (@Nullable final IHCNode aNode)
-  {
-    return HCSpecialNodeHandler.isCSSNode (aNode);
-  }
-
   @Nonnull
   public HCHead addCSS (@Nonnull final IHCNode aCSS)
   {
@@ -316,15 +306,6 @@ public class HCHead extends AbstractHCElement <HCHead>
   //
   // JS handling
   //
-
-  /**
-   * @deprecated Use {@link HCSpecialNodeHandler#isJSNode(IHCNode)} instead
-   */
-  @Deprecated
-  public static boolean isValidJSNode (@Nullable final IHCNode aNode)
-  {
-    return HCSpecialNodeHandler.isJSNode (aNode);
-  }
 
   /**
    * Append some JavaScript code

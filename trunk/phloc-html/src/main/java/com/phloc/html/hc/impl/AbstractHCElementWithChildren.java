@@ -283,13 +283,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     return thisAsT ();
   }
 
-  @Nullable
-  @Deprecated
-  public final IHCNode getChild (final int nIndex)
-  {
-    return getChildAtIndex (nIndex);
-  }
-
   @Nonnegative
   public final int getChildCount ()
   {

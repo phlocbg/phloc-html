@@ -37,7 +37,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   THISTYPE addColumn (@Nullable HCCol aCol);
 
   @Nonnull
-  THISTYPE addColumn (int nIndex, @Nullable HCCol aCol);
+  THISTYPE addColumn (@Nonnegative int nIndex, @Nullable HCCol aCol);
 
   @Nonnull
   THISTYPE addColumns (@Nullable HCCol aCol);
@@ -57,7 +57,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
    * @return this
    */
   @Nonnull
-  THISTYPE removeColumnAtIndex (int nColumnIndex);
+  THISTYPE removeColumnAtIndex (@Nonnegative int nColumnIndex);
 
   /**
    * Remove all column definitions. This does not affect any row contents.
@@ -94,10 +94,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getHeaderClassesAsString ();
 
   @Nonnull
-  THISTYPE addHeaderClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE addHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeHeaderClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE removeHeaderClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasHeaderClasses ();
 
@@ -110,7 +110,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow getFirstHeaderRow ();
 
   @Nullable
-  HCRow getHeaderRowAtIndex (int nIndex);
+  HCRow getHeaderRowAtIndex (@Nonnegative int nIndex);
 
   @Nullable
   HCRow getLastHeaderRow ();
@@ -123,22 +123,22 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addHeaderRow ();
 
   @Nonnull
-  HCRow addHeaderRow (int nIndex);
+  HCRow addHeaderRow (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE addHeaderRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addHeaderRow (int nIndex, @Nullable HCRow aRow);
+  THISTYPE addHeaderRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeHeaderRowAtIndex (int nIndex);
+  THISTYPE removeHeaderRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE removeAllHeaderRows ();
 
   @Nonnull
-  THISTYPE sortAllHeaderRows (Comparator <HCRow> aComparator);
+  THISTYPE sortAllHeaderRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   @Nullable
   String getFooterID ();
@@ -160,10 +160,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getFooterClassesAsString ();
 
   @Nonnull
-  THISTYPE addFooterClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE addFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeFooterClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE removeFooterClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasFooterClasses ();
 
@@ -176,7 +176,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow getFirstFooterRow ();
 
   @Nullable
-  HCRow getFooterRowAtIndex (int nIndex);
+  HCRow getFooterRowAtIndex (@Nonnegative int nIndex);
 
   @Nullable
   HCRow getLastFooterRow ();
@@ -189,22 +189,22 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addFooterRow ();
 
   @Nonnull
-  HCRow addFooterRow (int nIndex);
+  HCRow addFooterRow (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE addFooterRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addFooterRow (int nIndex, @Nullable HCRow aRow);
+  THISTYPE addFooterRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeFooterRowAtIndex (int nIndex);
+  THISTYPE removeFooterRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE removeAllFooterRows ();
 
   @Nonnull
-  THISTYPE sortAllFooterRows (Comparator <HCRow> aComparator);
+  THISTYPE sortAllFooterRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   @Nullable
   String getBodyID ();
@@ -225,10 +225,10 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   String getBodyClassesAsString ();
 
   @Nonnull
-  THISTYPE addBodyClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE addBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   @Nonnull
-  THISTYPE removeBodyClass (ICSSClassProvider aCSSClassProvider);
+  THISTYPE removeBodyClass (@Nonnull ICSSClassProvider aCSSClassProvider);
 
   boolean hasBodyClasses ();
 
@@ -241,7 +241,7 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow getFirstBodyRow ();
 
   @Nullable
-  HCRow getBodyRowAtIndex (int nIndex);
+  HCRow getBodyRowAtIndex (@Nonnegative int nIndex);
 
   @Nullable
   HCRow getLastBodyRow ();
@@ -254,44 +254,22 @@ public interface IHCBaseTable <THISTYPE extends IHCBaseTable <THISTYPE>> extends
   HCRow addBodyRow ();
 
   @Nonnull
-  HCRow addBodyRow (int nIndex);
+  HCRow addBodyRow (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE addBodyRow (@Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE addBodyRow (int nIndex, @Nullable HCRow aRow);
+  THISTYPE addBodyRow (@Nonnegative int nIndex, @Nullable HCRow aRow);
 
   @Nonnull
-  THISTYPE removeBodyRowAtIndex (int nIndex);
+  THISTYPE removeBodyRowAtIndex (@Nonnegative int nIndex);
 
   @Nonnull
   THISTYPE removeAllBodyRows ();
 
   @Nonnull
-  THISTYPE sortAllBodyRows (Comparator <HCRow> aComparator);
-
-  boolean hasHeaderRow ();
-
-  @Nullable
-  HCRow getHeaderRow ();
-
-  @Nullable
-  HCRow getOrAddHeaderRow ();
-
-  @Nonnull
-  THISTYPE removeHeaderRow ();
-
-  boolean hasFooterRow ();
-
-  @Nullable
-  HCRow getFooterRow ();
-
-  @Nullable
-  HCRow getOrAddFooterRow ();
-
-  @Nonnull
-  THISTYPE removeFooterRow ();
+  THISTYPE sortAllBodyRows (@Nonnull Comparator <? super HCRow> aComparator);
 
   @Nonnull
   THISTYPE setSpanningHeaderContent (@Nullable String sText);

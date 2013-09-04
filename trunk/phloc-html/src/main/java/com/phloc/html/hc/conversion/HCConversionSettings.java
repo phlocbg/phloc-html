@@ -202,15 +202,6 @@ public class HCConversionSettings implements IHCConversionSettings
     return this;
   }
 
-  /**
-   * @deprecated Use {@link #isExtractOutOfBandNodes()} instead
-   */
-  @Deprecated
-  public boolean extractOutOfBandNodes ()
-  {
-    return isExtractOutOfBandNodes ();
-  }
-
   public boolean isExtractOutOfBandNodes ()
   {
     return m_bExtractOutOfBandNodes;

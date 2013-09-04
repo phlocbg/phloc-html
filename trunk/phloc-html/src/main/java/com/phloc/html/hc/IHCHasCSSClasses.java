@@ -36,12 +36,12 @@ import com.phloc.html.css.ICSSClassProvider;
 public interface IHCHasCSSClasses <THISTYPE extends IHCHasCSSClasses <THISTYPE>>
 {
   @Nonnull
-  THISTYPE addClass (ICSSClassProvider aProvider);
+  THISTYPE addClass (@Nullable ICSSClassProvider aProvider);
 
   @Deprecated
   @DevelopersNote ("Use addClass instead!")
   @Nonnull
-  THISTYPE addClasses (ICSSClassProvider aProvider);
+  THISTYPE addClasses (@Nullable ICSSClassProvider aProvider);
 
   /**
    * Add multiple unique CSS classes at once. Each CSS class that is already
@@ -52,7 +52,7 @@ public interface IHCHasCSSClasses <THISTYPE extends IHCHasCSSClasses <THISTYPE>>
    * @return this
    */
   @Nonnull
-  THISTYPE addClasses (ICSSClassProvider... aProviders);
+  THISTYPE addClasses (@Nullable ICSSClassProvider... aProviders);
 
   @Nonnull
   THISTYPE removeClass (@Nullable ICSSClassProvider aProvider);

@@ -254,7 +254,7 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
 
   /**
    * @return A new node list with all contained children. Never
-   *         <code>null</code> nor empty.
+   *         <code>null</code> but maybe empty.
    */
   @Nonnull
   HCNodeList getAllChildrenAsNodeList ();

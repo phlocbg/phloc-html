@@ -87,15 +87,6 @@ public abstract class AbstractHCNode implements IHCNode
   }
 
   /**
-   * @deprecated Use {@link #isConvertedToNode()} instead
-   */
-  @Deprecated
-  public final boolean isPreparedOnce ()
-  {
-    return isConvertedToNode ();
-  }
-
-  /**
    * @return <code>true</code> if this node was already converted to a micro
    *         node, <code>false</code> if not
    */

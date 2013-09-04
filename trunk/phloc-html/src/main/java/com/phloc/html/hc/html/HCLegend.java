@@ -37,19 +37,6 @@ public class HCLegend extends AbstractHCElementWithChildren <HCLegend>
     super (EHTMLElement.LEGEND);
   }
 
-  @Deprecated
-  public HCLegend (@Nonnull final IPredefinedLocaleTextProvider aChild)
-  {
-    this (aChild.getText ());
-  }
-
-  @Deprecated
-  public HCLegend (@Nullable final String sLabel)
-  {
-    this ();
-    addChild (sLabel);
-  }
-
   /**
    * Create a new LEGEND element with the passed child text
    * 

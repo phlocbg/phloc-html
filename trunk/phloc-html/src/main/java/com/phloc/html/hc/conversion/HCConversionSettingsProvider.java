@@ -18,7 +18,7 @@
 package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
@@ -32,7 +32,7 @@ import com.phloc.html.hc.customize.IHCCustomizer;
  * 
  * @author Philip Helger
  */
-@Immutable
+@NotThreadSafe
 public class HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
   private final HCConversionSettings m_aCS;

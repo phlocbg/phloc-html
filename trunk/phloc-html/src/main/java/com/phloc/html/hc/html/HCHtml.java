@@ -127,20 +127,6 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     });
   }
 
-  /**
-   * @deprecated Use
-   *             {@link #extractAndHandleOutOfBandNodes(IHCConversionSettingsToNode, IHCNodeWithChildren,HCHead,HCBody)}
-   *             instead
-   */
-  @Deprecated
-  public static void extractAndHandleOutOfBandNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
-                                                     @Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                                     @Nonnull final HCHead aHead,
-                                                     @Nonnull final HCBody aBody)
-  {
-    extractAndHandleOutOfBandNodes (aConversionSettings, aBaseNode, aHead, aBody);
-  }
-
   public static void extractAndHandleOutOfBandNodes (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                                      @Nonnull final IHCNodeWithChildren <?> aBaseNode,
                                                      @Nonnull final HCHead aHead,
