@@ -26,7 +26,7 @@ import com.phloc.html.hc.api.EHCButtonType;
  * 
  * @author Philip Helger
  */
-public class HCButton_Submit extends HCButton
+public class HCButton_Submit extends AbstractHCButton <HCButton_Submit>
 {
   private void _init ()
   {

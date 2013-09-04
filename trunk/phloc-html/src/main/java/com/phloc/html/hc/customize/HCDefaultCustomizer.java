@@ -40,6 +40,7 @@ import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.IHCCanBeDisabled;
+import com.phloc.html.hc.html.AbstractHCButton;
 import com.phloc.html.hc.html.AbstractHCTable;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
@@ -102,7 +103,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   {}
 
   @Nonnull
-  protected HCButton createFakeSubmitButton ()
+  protected AbstractHCButton <?> createFakeSubmitButton ()
   {
     return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
   }
@@ -150,7 +151,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                   final HCForm aForm = (HCForm) aElement;
                   if (aForm.isSubmitPressingEnter ())
                   {
-                    final HCButton aButton = createFakeSubmitButton ();
+                    final AbstractHCButton <?> aButton = createFakeSubmitButton ();
                     aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
                     aForm.addChild (aButton);
                   }
