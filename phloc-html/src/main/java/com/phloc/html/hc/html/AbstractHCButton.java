@@ -68,7 +68,7 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
-  public final IMPLTYPE setName (final String sName)
+  public final IMPLTYPE setName (@Nullable final String sName)
   {
     m_sName = sName;
     return thisAsT ();
@@ -80,7 +80,7 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
-  public final IMPLTYPE setValue (final String sValue)
+  public final IMPLTYPE setValue (@Nullable final String sValue)
   {
     m_sValue = sValue;
     return thisAsT ();
@@ -114,13 +114,13 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
-  public IMPLTYPE setOnClick (final IJSCodeProvider aOnClick)
+  public IMPLTYPE setOnClick (@Nullable final IJSCodeProvider aOnClick)
   {
     return setEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
   @Nonnull
-  public IMPLTYPE addOnClick (final IJSCodeProvider aOnClick)
+  public IMPLTYPE addOnClick (@Nullable final IJSCodeProvider aOnClick)
   {
     return addEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
