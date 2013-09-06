@@ -40,6 +40,7 @@ import com.phloc.html.js.builder.JSStringLiteral;
 @Immutable
 public final class JQuerySelector implements IJQuerySelector
 {
+  public static final IJQuerySelector all = new JQuerySelector (":all");
   public static final IJQuerySelector animated = new JQuerySelector (":animated");
   public static final IJQuerySelector button = new JQuerySelector (":button");
   public static final IJQuerySelector checkbox = new JQuerySelector (":checkbox");
@@ -50,6 +51,7 @@ public final class JQuerySelector implements IJQuerySelector
   public static final IJQuerySelector even = new JQuerySelector (":even");
   public static final IJQuerySelector file = new JQuerySelector (":file");
   public static final IJQuerySelector first_child = new JQuerySelector (":first-child");
+  public static final IJQuerySelector first_of_type = new JQuerySelector (":first-of-type");
   public static final IJQuerySelector first = new JQuerySelector (":first");
   public static final IJQuerySelector focus = new JQuerySelector (":focus");
   public static final IJQuerySelector header = new JQuerySelector (":header");
@@ -57,15 +59,19 @@ public final class JQuerySelector implements IJQuerySelector
   public static final IJQuerySelector image = new JQuerySelector (":image");
   public static final IJQuerySelector input = new JQuerySelector (":input");
   public static final IJQuerySelector last_child = new JQuerySelector (":last-child");
+  public static final IJQuerySelector last_of_type = new JQuerySelector (":last-of-type");
   public static final IJQuerySelector last = new JQuerySelector (":last");
   public static final IJQuerySelector odd = new JQuerySelector (":odd");
   public static final IJQuerySelector only_child = new JQuerySelector (":only-child");
+  public static final IJQuerySelector only_of_type = new JQuerySelector (":only-of-type");
   public static final IJQuerySelector parent = new JQuerySelector (":parent");
   public static final IJQuerySelector password = new JQuerySelector (":password");
   public static final IJQuerySelector radio = new JQuerySelector (":radio");
   public static final IJQuerySelector reset = new JQuerySelector (":reset");
+  public static final IJQuerySelector root = new JQuerySelector (":root");
   public static final IJQuerySelector selected = new JQuerySelector (":selected");
   public static final IJQuerySelector submit = new JQuerySelector (":submit");
+  public static final IJQuerySelector target = new JQuerySelector (":target");
   public static final IJQuerySelector text = new JQuerySelector (":text");
   public static final IJQuerySelector visible = new JQuerySelector (":visible");
 
