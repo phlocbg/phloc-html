@@ -40,7 +40,6 @@ import com.phloc.html.js.builder.JSStringLiteral;
 @Immutable
 public final class JQuerySelector implements IJQuerySelector
 {
-  public static final IJQuerySelector all = new JQuerySelector (":all");
   public static final IJQuerySelector animated = new JQuerySelector (":animated");
   public static final IJQuerySelector button = new JQuerySelector (":button");
   public static final IJQuerySelector checkbox = new JQuerySelector (":checkbox");
@@ -357,6 +356,8 @@ public final class JQuerySelector implements IJQuerySelector
       throw new NullPointerException ("firstSelector");
     if (aSecondSelector == null)
       throw new NullPointerException ("secondSelector");
+
+    // expr + expr -> for Strings this chains the String!
     return new JQuerySelector (aFirstSelector.getExpression ().plus (aSecondSelector.getExpression ()));
   }
 
@@ -380,7 +381,7 @@ public final class JQuerySelector implements IJQuerySelector
     // Concatenate with ','
     IJSExpression ret = aSelectors[0].getExpression ();
     for (int i = 1; i < nSize; ++i)
-      ret = ret.plus (JSExpr.lit (',')).plus (aSelectors[i].getExpression ());
+      ret = ret.plus (',').plus (aSelectors[i].getExpression ());
     return new JQuerySelector (ret);
   }
 
@@ -404,7 +405,7 @@ public final class JQuerySelector implements IJQuerySelector
     // Concatenate with ','
     IJSExpression ret = aSelectors.get (0).getExpression ();
     for (int i = 1; i < nSize; ++i)
-      ret = ret.plus (JSExpr.lit (',')).plus (aSelectors.get (i).getExpression ());
+      ret = ret.plus (',').plus (aSelectors.get (i).getExpression ());
     return new JQuerySelector (ret);
   }
 
