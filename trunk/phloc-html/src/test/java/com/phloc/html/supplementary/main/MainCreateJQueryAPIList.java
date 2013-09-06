@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.file.filter.FilenameFilterEndsWith;
 import com.phloc.commons.io.file.iterate.FileSystemIterator;
@@ -67,6 +69,21 @@ public class MainCreateJQueryAPIList
       m_sName = sName;
       m_aTypes = aTypes;
     }
+
+    @Nonnull
+    @Nonempty
+    public String getName ()
+    {
+      return m_sName;
+    }
+
+    @Nonnull
+    @Nonempty
+    @ReturnsMutableCopy
+    public List <String> getAllTypes ()
+    {
+      return ContainerHelper.newList (m_aTypes);
+    }
   }
 
   private static final class Signature
@@ -76,12 +93,35 @@ public class MainCreateJQueryAPIList
 
     public Signature (@Nonnull final Version aAdded)
     {
+      if (aAdded == null)
+        throw new NullPointerException ("added");
       m_aAdded = aAdded;
     }
 
     void addArgument (@Nonnull final Argument aArg)
     {
+      if (aArg == null)
+        throw new NullPointerException ("arg");
       m_aArgs.add (aArg);
+    }
+
+    @Nonnull
+    public Version getAdded ()
+    {
+      return m_aAdded;
+    }
+
+    @Nonnegative
+    public int getArgumentCount ()
+    {
+      return m_aArgs.size ();
+    }
+
+    @Nonnull
+    @ReturnsMutableCopy
+    public List <Argument> getAllArguments ()
+    {
+      return ContainerHelper.newList (m_aArgs);
     }
   }
 
@@ -111,6 +151,65 @@ public class MainCreateJQueryAPIList
     {
       m_aSignatures.add (aSignature);
     }
+
+    @Nonnull
+    public EType getType ()
+    {
+      return m_eType;
+    }
+
+    @Nonnull
+    @Nonempty
+    public String getName ()
+    {
+      return m_sName;
+    }
+
+    public boolean hasReturn ()
+    {
+      return StringHelper.hasText (m_sReturn);
+    }
+
+    @Nullable
+    public String getReturn ()
+    {
+      return m_sReturn;
+    }
+
+    public boolean isDeprecated ()
+    {
+      return m_aDeprecated != null;
+    }
+
+    @Nullable
+    public Version getDeprecated ()
+    {
+      return m_aDeprecated;
+    }
+
+    public boolean isRemoved ()
+    {
+      return m_aRemoved != null;
+    }
+
+    @Nullable
+    public Version getRemoved ()
+    {
+      return m_aRemoved;
+    }
+
+    @Nonnegative
+    public int getSignatureCount ()
+    {
+      return m_aSignatures.size ();
+    }
+
+    @Nonnull
+    @ReturnsMutableCopy
+    public List <Signature> getAllSignatures ()
+    {
+      return ContainerHelper.newList (m_aSignatures);
+    }
   }
 
   public static void main (final String [] args)
@@ -128,6 +227,8 @@ public class MainCreateJQueryAPIList
     // Function, Integer, Number, Number/String, Object, PlainObject, Selector,
     // String, document, htmlString, jQuery, jQuery object]
     final Set <String> aAllArgTypes = new TreeSet <String> ();
+
+    final List <Entry> aAllEntries = new ArrayList <Entry> ();
 
     for (final File aFile : FileSystemIterator.create (new File ("src/test/resources/jqueryapi"),
                                                        new FilenameFilterEndsWith (".xml")))
@@ -157,18 +258,10 @@ public class MainCreateJQueryAPIList
         if (StringHelper.hasText (sReturn))
           aAllReturnTypes.add (sReturn);
 
-        if (false)
-          if (sType.equals ("selector"))
-            System.out.println ("public static final IJQuerySelector " +
-                                RegExHelper.getAsIdentifier (sName) +
-                                " = new JQuerySelector (\":" +
-                                sName +
-                                "\");");
-
         for (final IMicroElement eSignature : eEntry.getAllChildElements ("signature"))
         {
           final String sAdded = eSignature.getFirstChildElement ("added").getTextContent ();
-          final Version aAdded = new Version (sRemoved);
+          final Version aAdded = new Version (sAdded);
           final Signature aSignature = new Signature (aAdded);
 
           for (final IMicroElement eArg : eSignature.getAllChildElements ("argument"))
@@ -197,11 +290,34 @@ public class MainCreateJQueryAPIList
           aEntry.addSignature (aSignature);
           ++nSignatures;
         }
+        aAllEntries.add (aEntry);
       }
       ++nFiles;
     }
-    System.out.println ("Scanned " + nFiles + " files, " + nSignatures + " signatures and " + nArguments + " arguments");
+
+    System.out.println ("Scanned " +
+                        nFiles +
+                        " files, " +
+                        aAllEntries.size () +
+                        " entries, " +
+                        nSignatures +
+                        " signatures and " +
+                        nArguments +
+                        " arguments");
     System.out.println ("Returns: " + aAllReturnTypes);
     System.out.println ("Arg Types: " + aAllArgTypes);
+
+    for (final Entry aEntry : aAllEntries)
+      if (aEntry.getType () == EType.SELECTOR && aEntry.getSignatureCount () == 1)
+      {
+        final Signature aSignature = aEntry.getAllSignatures ().get (0);
+        if (aSignature.getArgumentCount () == 0)
+          System.out.println ("public static final IJQuerySelector " +
+                              RegExHelper.getAsIdentifier (aEntry.getName ()) +
+                              " = new JQuerySelector (\":" +
+                              aEntry.getName () +
+                              "\");");
+      }
+
   }
 }
