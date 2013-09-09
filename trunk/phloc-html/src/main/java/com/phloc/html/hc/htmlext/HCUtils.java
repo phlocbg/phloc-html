@@ -33,9 +33,11 @@ import com.phloc.commons.mutable.Wrapper;
 import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.html.HCDiv;
@@ -432,5 +434,36 @@ public final class HCUtils
   public static boolean isWrappedNode (@Nullable final IHCNode aHCNode)
   {
     return aHCNode instanceof IHCWrappingNode;
+  }
+
+  /**
+   * Find the first instance of {@link IHCControl} that is either the passed
+   * element or a child of the passed element.
+   * 
+   * @param aNode
+   *        The source node to start searching. May be <code>null</code>.
+   * @return <code>null</code> if no {@link IHCControl} can be found below the
+   *         passed node.
+   */
+  @Nullable
+  public static IHCControl <?> getFirstHCControl (@Nullable final IHCNode aNode)
+  {
+    if (aNode instanceof IHCControl <?>)
+      return (IHCControl <?>) aNode;
+
+    if (aNode instanceof IHCNodeWithChildren <?>)
+    {
+      // E.g. HCNodeList
+      final IHCNodeWithChildren <?> aParent = (IHCNodeWithChildren <?>) aNode;
+      if (aParent.hasChildren ())
+        for (final IHCNode aChild : aParent.getChildren ())
+        {
+          final IHCControl <?> aNestedCtrl = getFirstHCControl (aChild);
+          if (aNestedCtrl != null)
+            return aNestedCtrl;
+        }
+    }
+
+    return null;
   }
 }
