@@ -51,18 +51,6 @@ public final class JQueryTest
   }
 
   @Test
-  public void testFields ()
-  {
-    assertEquals ("$.fn", JQuery.fn ().getJSCode ());
-    assertEquals ("$.error", JQuery.error ().getJSCode ());
-    assertEquals ("$.fx.interval", JQuery.fxInterval ().getJSCode ());
-    assertEquals ("$.fx.off", JQuery.fxOff ().getJSCode ());
-    assertEquals ("$.cssHooks", JQuery.cssHooks ().getJSCode ());
-    assertEquals ("$.parseJSON", JQuery.parseJSON ().getJSCode ());
-    assertEquals ("$.support", JQuery.support ().getJSCode ());
-  }
-
-  @Test
   public void testMethods ()
   {
     assertEquals ("$.ajax(5);", JQuery.ajax ().arg (5).getJSCode ());
@@ -130,11 +118,5 @@ public final class JQueryTest
     assertEquals ("$('bla#foo');", JQuery.elementNameWithIDRef ("bla", "foo").getJSCode ());
     assertEquals ("$('div.any');", JQuery.elementNameWithClassRef (EHTMLElement.DIV, aClass).getJSCode ());
     assertEquals ("$('bla.any');", JQuery.elementNameWithClassRef ("bla", aClass).getJSCode ());
-    assertEquals ("$(':checked');", JQuery.select (JQuerySelector.checked).getJSCode ());
-    assertEquals ("$(':checked');", JQuery.select (new JQuerySelectorList ().addSelector (JQuerySelector.checked))
-                                          .getJSCode ());
-    assertEquals ("$(':checked :animated');",
-                  JQuery.select (new JQuerySelectorList ().addSelector (JQuerySelector.checked)
-                                                          .addSelector (JQuerySelector.animated)).getJSCode ());
   }
 }
