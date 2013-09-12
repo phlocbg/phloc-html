@@ -60,6 +60,40 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   @Nonnull
   public abstract IMPLTYPE jqinvoke (@Nonnull @Nonempty final String sMethod);
 
+  // Properties of jQuery Object Instances
+
+  /**
+   * @return The invocation of the jQuery function <code>context()</code>
+   * @since jQuery 1.3
+   * @deprecated Deprecated since jQuery 1.10
+   */
+  @Deprecated
+  @Nonnull
+  public JSFieldRef context ()
+  {
+    return ref ("context");
+  }
+
+  /**
+   * @return The invocation of the jQuery field <code>jquery</code>
+   */
+  @Nonnull
+  public JSFieldRef jquery ()
+  {
+    return ref ("jquery");
+  }
+
+  /**
+   * @return The invocation of the jQuery field <code>length()</code>
+   */
+  @Nonnull
+  public JSFieldRef length ()
+  {
+    return ref ("length");
+  }
+
+  // Rest
+
   /**
    * Adds a JQuery selector as a string argument.
    * 
@@ -409,15 +443,6 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE contents ()
   {
     return jqinvoke ("contents");
-  }
-
-  /**
-   * @return The invocation of the jQuery function <code>context()</code>
-   */
-  @Nonnull
-  public JSFieldRef context ()
-  {
-    return ref ("context");
   }
 
   /**
@@ -833,15 +858,6 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
-   * @return The invocation of the jQuery field <code>jquery</code>
-   */
-  @Nonnull
-  public JSFieldRef jquery ()
-  {
-    return ref ("jquery");
-  }
-
-  /**
    * @return The invocation of the jQuery function <code>keydown()</code>
    */
   @Nonnull
@@ -908,15 +924,6 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE last ()
   {
     return jqinvoke ("last");
-  }
-
-  /**
-   * @return The invocation of the jQuery function <code>length()</code>
-   */
-  @Nonnull
-  public JSFieldRef length ()
-  {
-    return ref ("length");
   }
 
   /**

@@ -390,7 +390,12 @@ public class MainCreateJQueryAPIList
           if (aSignature.getArgumentCount () == 0)
           {
             if (aSignature.isAddedAfter10 ())
-              aLines.add ("// @since " + aSignature.getAdded ().getAsString (false));
+              aLines.add ("// @since jQuery " + aSignature.getAdded ().getAsString (false));
+            if (aEntry.isDeprecated ())
+            {
+              aLines.add ("// @deprecated");
+              aLines.add ("// Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false));
+            }
             aLines.add ("public static final IJQuerySelector " +
                         aEntry.getIdentifier () +
                         " = new JQuerySelector (\":" +
@@ -408,8 +413,14 @@ public class MainCreateJQueryAPIList
           for (final Signature aSignature : aEntry.getAllSignatures ())
           {
             String sRealPrefix = sPrefix;
+            if (aEntry.isDeprecated ())
+              sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
+                            aEntry.getDeprecated ().getAsString (false) +
+                            "\n" +
+                            sRealPrefix;
             if (aSignature.isAddedAfter10 ())
-              sRealPrefix = "// @since " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+              sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+
             if (aSignature.getArgumentCount () == 0)
             {
               aLines.add (sRealPrefix + "();");
@@ -439,6 +450,25 @@ public class MainCreateJQueryAPIList
           }
         }
 
+    for (final Entry aEntry : aAllEntries)
+      if (aEntry.getAPIType () == EAPIType.PROPERTY)
+        for (final Signature aSignature : aEntry.getAllSignatures ())
+        {
+          String sLine = "JSFieldRef " + aEntry.getName () + "();";
+          if (aEntry.isRemoved ())
+            sLine = " Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
+          if (aEntry.isDeprecated ())
+            sLine = "// @deprecated Deprecated since jQuery " +
+                    aEntry.getDeprecated ().getAsString (false) +
+                    "\n" +
+                    sLine;
+          if (aSignature.isAddedAfter10 ())
+            sLine = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sLine;
+
+          if (aSignature.getArgumentCount () > 0)
+            throw new IllegalStateException (aEntry.getName ());
+          aLines.add (sLine);
+        }
     for (final String sLine : aLines)
       System.out.println (sLine);
   }
