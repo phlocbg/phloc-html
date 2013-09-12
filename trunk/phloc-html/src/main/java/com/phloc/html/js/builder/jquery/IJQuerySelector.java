@@ -32,7 +32,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 {
   /**
    * @return The contained expression that was used as the parameter to this
-   *         selector. May be <code>null</code>.
+   *         selector. Never <code>null</code>.
    */
   @Nonnull
   IJSExpression getExpression ();

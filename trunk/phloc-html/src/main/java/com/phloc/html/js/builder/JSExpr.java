@@ -17,6 +17,9 @@
  */
 package com.phloc.html.js.builder;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -258,6 +261,12 @@ public final class JSExpr
   }
 
   @Nonnull
+  public static JSAtom lit (@Nonnull final BigInteger aValue)
+  {
+    return new JSAtom (aValue.toString ());
+  }
+
+  @Nonnull
   public static AbstractJSExpression lit (final float fValue)
   {
     if (Float.isNaN (fValue))
@@ -271,6 +280,12 @@ public final class JSExpr
     if (Double.isNaN (dValue))
       return JSPrimitiveType.NUMBER.nan ();
     return new JSAtomDecimal (dValue);
+  }
+
+  @Nonnull
+  public static JSAtom lit (@Nonnull final BigDecimal aValue)
+  {
+    return new JSAtom (aValue.toString ());
   }
 
   @Nonnull

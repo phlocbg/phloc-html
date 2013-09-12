@@ -756,7 +756,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement)
   {
-    return select (JQuerySelector.elementName (eElement));
+    return select (JQuerySelector.element (eElement));
   }
 
   /**
@@ -770,7 +770,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName)
   {
-    return select (JQuerySelector.elementName (sElementName));
+    return select (JQuerySelector.element (sElementName));
   }
 
   /**
@@ -788,7 +788,7 @@ public final class JQuery
   public static JQueryInvocation elementNameRef (@Nonnull final EHTMLElement eElement,
                                                  @Nonnull final IJQuerySelector aSelector)
   {
-    return select (JQuerySelector.elementName (eElement).chain (aSelector));
+    return select (JQuerySelector.element (eElement).chain (aSelector));
   }
 
   /**
@@ -806,7 +806,7 @@ public final class JQuery
   public static JQueryInvocation elementNameRef (@Nonnull @Nonempty final String sElementName,
                                                  @Nonnull final IJQuerySelector aSelector)
   {
-    return select (JQuerySelector.elementName (sElementName).chain (aSelector));
+    return select (JQuerySelector.element (sElementName).chain (aSelector));
   }
 
   /**

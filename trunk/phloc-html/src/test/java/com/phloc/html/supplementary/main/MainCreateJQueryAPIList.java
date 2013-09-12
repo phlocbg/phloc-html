@@ -381,52 +381,41 @@ public class MainCreateJQueryAPIList
     System.out.println ("Arg Types: " + aAllArgTypes);
 
     final List <String> aLines = new ArrayList <String> ();
-    for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.SELECTOR && aEntry.getSignatureCount () == 1)
-      {
-        final Signature aSignature = aEntry.getSignatureAtIndex (0);
-        if (aSignature.getArgumentCount () == 0)
-        {
-          if (aSignature.isAddedAfter10 ())
-            aLines.add ("// @since " + aSignature.getAdded ().getAsString (false));
-          aLines.add ("public static final IJQuerySelector " +
-                      aEntry.getIdentifier () +
-                      " = new JQuerySelector (\":" +
-                      aEntry.getName () +
-                      "\");");
-        }
-      }
 
-    for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.SELECTOR &&
-          (aEntry.getSignatureCount () > 1 || aEntry.getSignatureAtIndex (0).getArgumentCount () > 0))
-      {
-        final String sPrefix = "public static IJQuerySelector " + aEntry.getIdentifier ();
-        for (final Signature aSignature : aEntry.getAllSignatures ())
+    if (false)
+      for (final Entry aEntry : aAllEntries)
+        if (aEntry.getAPIType () == EAPIType.SELECTOR && aEntry.getSignatureCount () == 1)
         {
-          String sRealPrefix = sPrefix;
-          if (aSignature.isAddedAfter10 ())
-            sRealPrefix = "// @since " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+          final Signature aSignature = aEntry.getSignatureAtIndex (0);
           if (aSignature.getArgumentCount () == 0)
           {
-            aLines.add (sRealPrefix + "();");
+            if (aSignature.isAddedAfter10 ())
+              aLines.add ("// @since " + aSignature.getAdded ().getAsString (false));
+            aLines.add ("public static final IJQuerySelector " +
+                        aEntry.getIdentifier () +
+                        " = new JQuerySelector (\":" +
+                        aEntry.getName () +
+                        "\");");
           }
-          else
-            if (aSignature.getArgumentCount () == 1)
+        }
+
+    if (false)
+      for (final Entry aEntry : aAllEntries)
+        if (aEntry.getAPIType () == EAPIType.SELECTOR &&
+            (aEntry.getSignatureCount () > 1 || aEntry.getSignatureAtIndex (0).getArgumentCount () > 0))
+        {
+          final String sPrefix = "public static IJQuerySelector " + aEntry.getIdentifier ();
+          for (final Signature aSignature : aEntry.getAllSignatures ())
+          {
+            String sRealPrefix = sPrefix;
+            if (aSignature.isAddedAfter10 ())
+              sRealPrefix = "// @since " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+            if (aSignature.getArgumentCount () == 0)
             {
-              final Argument aArg = aSignature.getArgumentAtIndex (0);
-              for (final String sType : aArg.getAllTypes ())
-              {
-                _getJavaTypes (sType);
-                aLines.add (sRealPrefix + "(" + sType + " " + aArg.getIdentifier () + ");");
-              }
+              aLines.add (sRealPrefix + "();");
             }
             else
             {
-              for (final Argument aArg : aSignature.getAllArguments ())
-                if (aArg.getTypeCount () > 1)
-                  throw new IllegalStateException ("Not supporting selectors with multiple types and multiple arguments");
-
               String sLine = sRealPrefix + "(";
               boolean bFirst = true;
               for (final Argument aArg : aSignature.getAllArguments ())
@@ -435,14 +424,20 @@ public class MainCreateJQueryAPIList
                   bFirst = false;
                 else
                   sLine += ", ";
-                final String sType = aArg.getTypeAtIndex (0);
-                _getJavaTypes (sType);
-                sLine += sType + " " + aArg.getIdentifier ();
+                final StringBuilder aTypes = new StringBuilder ();
+                for (final String sType : aArg.getAllTypes ())
+                {
+                  if (aTypes.length () > 0)
+                    aTypes.append (", ");
+                  aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
+                }
+
+                sLine += aTypes.toString () + " " + aArg.getIdentifier ();
               }
               aLines.add (sLine + ");");
             }
+          }
         }
-      }
 
     for (final String sLine : aLines)
       System.out.println (sLine);

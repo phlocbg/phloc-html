@@ -37,34 +37,34 @@ public final class JQuerySelectorTest
   {
     assertEquals ("':animated'", JQuerySelector.animated.getJSCode ());
     assertEquals ("':gt(5)'", JQuerySelector.gt (5).getJSCode ());
-    assertEquals ("'ul'", JQuerySelector.elementName (EHTMLElement.UL).getJSCode ());
+    assertEquals ("'ul'", JQuerySelector.element (EHTMLElement.UL).getJSCode ());
     assertEquals ("'#abc'", JQuerySelector.id ("abc").getJSCode ());
-    assertEquals ("'ul#abc'", JQuerySelector.elementName (EHTMLElement.UL)
+    assertEquals ("'ul#abc'", JQuerySelector.element (EHTMLElement.UL)
                                             .chain (JQuerySelector.id ("abc"))
                                             .getJSCode ());
-    assertEquals ("'ul,li'", JQuerySelector.elementName (EHTMLElement.UL)
-                                           .multiple (JQuerySelector.elementName ("li"))
+    assertEquals ("'ul,li'", JQuerySelector.element (EHTMLElement.UL)
+                                           .multiple (JQuerySelector.element ("li"))
                                            .getJSCode ());
-    assertEquals ("'ul > li'", JQuerySelector.elementName (EHTMLElement.UL)
-                                             .child (JQuerySelector.elementName ("li"))
+    assertEquals ("'ul > li'", JQuerySelector.element (EHTMLElement.UL)
+                                             .child (JQuerySelector.element ("li"))
                                              .getJSCode ());
-    assertEquals ("'ul li'", JQuerySelector.elementName (EHTMLElement.UL)
-                                           .descendant (JQuerySelector.elementName ("li"))
+    assertEquals ("'ul li'", JQuerySelector.element (EHTMLElement.UL)
+                                           .descendant (JQuerySelector.element ("li"))
                                            .getJSCode ());
     assertEquals ("'ul + li'",
-                  JQuerySelector.elementName (EHTMLElement.UL)
-                                .nextAdjacent (JQuerySelector.elementName ("li"))
+                  JQuerySelector.element (EHTMLElement.UL)
+                                .nextAdjacent (JQuerySelector.element ("li"))
                                 .getJSCode ());
     assertEquals ("'ul ~ li'",
-                  JQuerySelector.elementName (EHTMLElement.UL)
-                                .nextSiblings (JQuerySelector.elementName ("li"))
+                  JQuerySelector.element (EHTMLElement.UL)
+                                .nextSiblings (JQuerySelector.element ("li"))
                                 .getJSCode ());
 
     assertEquals ("'ul.any > li,ol#bla'",
-                  JQuerySelector.elementName (EHTMLElement.UL)
+                  JQuerySelector.element (EHTMLElement.UL)
                                 .chain (JQuerySelector.clazz (DefaultCSSClassProvider.create ("any")))
-                                .child (JQuerySelector.elementName ("li"))
-                                .multiple (JQuerySelector.elementName ("ol").chain (JQuerySelector.id ("bla")))
+                                .child (JQuerySelector.element ("li"))
+                                .multiple (JQuerySelector.element ("ol").chain (JQuerySelector.id ("bla")))
                                 .getJSCode ());
   }
 

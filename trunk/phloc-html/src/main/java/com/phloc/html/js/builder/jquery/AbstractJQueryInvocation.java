@@ -1274,7 +1274,7 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   @Nonnull
   public IMPLTYPE parent (@Nonnull final EHTMLElement eHTMLElement)
   {
-    return parent (JQuerySelector.elementName (eHTMLElement));
+    return parent (JQuerySelector.element (eHTMLElement));
   }
 
   /**
@@ -1312,7 +1312,7 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   @Nonnull
   public IMPLTYPE parents (@Nonnull final EHTMLElement eHTMLElement)
   {
-    return parents (JQuerySelector.elementName (eHTMLElement));
+    return parents (JQuerySelector.element (eHTMLElement));
   }
 
   /**

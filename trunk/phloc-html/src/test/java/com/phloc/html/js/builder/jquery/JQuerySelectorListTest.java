@@ -40,16 +40,16 @@ public final class JQuerySelectorListTest
     assertEquals ("'.basic'",
                   new JQuerySelectorList ().addSelector (JQuerySelector.clazz (DefaultCSSClassProvider.create ("basic")))
                                            .getJSCode ());
-    assertEquals ("'td'", new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")).getJSCode ());
+    assertEquals ("'td'", new JQuerySelectorList ().addSelector (JQuerySelector.element ("td")).getJSCode ());
     assertEquals ("'td:gt(3)'",
-                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
+                  new JQuerySelectorList ().addSelector (JQuerySelector.element ("td")
                                                                        .chain (JQuerySelector.gt (3))).getJSCode ());
     assertEquals ("'td:checked'",
-                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td")
+                  new JQuerySelectorList ().addSelector (JQuerySelector.element ("td")
                                                                        .chain (JQuerySelector.checked)).getJSCode ());
     assertEquals ("'td span'",
-                  new JQuerySelectorList ().addSelector (JQuerySelector.elementName ("td"))
-                                           .addSelector (JQuerySelector.elementName ("span"))
+                  new JQuerySelectorList ().addSelector (JQuerySelector.element ("td"))
+                                           .addSelector (JQuerySelector.element ("span"))
                                            .getJSCode ());
   }
 }
