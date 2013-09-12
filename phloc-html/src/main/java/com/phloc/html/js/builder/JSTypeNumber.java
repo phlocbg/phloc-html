@@ -51,7 +51,7 @@ public class JSTypeNumber extends JSPrimitiveType
 
   /**
    * @return Global field <code>Number.NaN</code> - same as <Code>NaN</code>
-   * @see JSGlobal#nan
+   * @see JSGlobal#NaN
    */
   @Nonnull
   public JSFieldRef nan ()
