@@ -174,6 +174,12 @@ public final class JQuerySelector implements IJQuerySelector
     return nextSiblings (this, aRhsSelector);
   }
 
+  @Nonnull
+  public JQueryInvocation invoke ()
+  {
+    return JQuery.jQuery (getExpression ());
+  }
+
   // static methods
 
   /**

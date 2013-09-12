@@ -29,7 +29,6 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
-import com.phloc.html.js.builder.JSExpr;
 
 public class JQuerySelectorList implements IJSCodeProvider
 {
@@ -118,8 +117,17 @@ public class JQuerySelectorList implements IJSCodeProvider
     // Concatenate with ' '
     IJSExpression ret = m_aElements.get (0).getExpression ();
     for (int i = 1; i < nSize; ++i)
-      ret = ret.plus (JSExpr.lit (' ')).plus (m_aElements.get (i).getExpression ());
+      ret = ret.plus (' ').plus (m_aElements.get (i).getExpression ());
     return ret;
+  }
+
+  /**
+   * @return <code>$(selectorString)</code>
+   */
+  @Nonnull
+  public JQueryInvocation invoke ()
+  {
+    return JQuery.jQuery (getAsExpression ());
   }
 
   @Nonnull

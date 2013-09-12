@@ -39,9 +39,7 @@ public final class JQuerySelectorTest
     assertEquals ("':gt(5)'", JQuerySelector.gt (5).getJSCode ());
     assertEquals ("'ul'", JQuerySelector.element (EHTMLElement.UL).getJSCode ());
     assertEquals ("'#abc'", JQuerySelector.id ("abc").getJSCode ());
-    assertEquals ("'ul#abc'", JQuerySelector.element (EHTMLElement.UL)
-                                            .chain (JQuerySelector.id ("abc"))
-                                            .getJSCode ());
+    assertEquals ("'ul#abc'", JQuerySelector.element (EHTMLElement.UL).chain (JQuerySelector.id ("abc")).getJSCode ());
     assertEquals ("'ul,li'", JQuerySelector.element (EHTMLElement.UL)
                                            .multiple (JQuerySelector.element ("li"))
                                            .getJSCode ());
@@ -51,14 +49,12 @@ public final class JQuerySelectorTest
     assertEquals ("'ul li'", JQuerySelector.element (EHTMLElement.UL)
                                            .descendant (JQuerySelector.element ("li"))
                                            .getJSCode ());
-    assertEquals ("'ul + li'",
-                  JQuerySelector.element (EHTMLElement.UL)
-                                .nextAdjacent (JQuerySelector.element ("li"))
-                                .getJSCode ());
-    assertEquals ("'ul ~ li'",
-                  JQuerySelector.element (EHTMLElement.UL)
-                                .nextSiblings (JQuerySelector.element ("li"))
-                                .getJSCode ());
+    assertEquals ("'ul + li'", JQuerySelector.element (EHTMLElement.UL)
+                                             .nextAdjacent (JQuerySelector.element ("li"))
+                                             .getJSCode ());
+    assertEquals ("'ul ~ li'", JQuerySelector.element (EHTMLElement.UL)
+                                             .nextSiblings (JQuerySelector.element ("li"))
+                                             .getJSCode ());
 
     assertEquals ("'ul.any > li,ol#bla'",
                   JQuerySelector.element (EHTMLElement.UL)
@@ -74,5 +70,15 @@ public final class JQuerySelectorTest
     assertEquals ("('#prefix_'+any)", JQuerySelector.id ("prefix_")
                                                     .chain (new JQuerySelector (JSExpr.ref ("any")))
                                                     .getJSCode ());
+  }
+
+  @Test
+  public void testInvoke ()
+  {
+    assertEquals ("$(':checked');", JQuerySelector.checked.invoke ().getJSCode ());
+    assertEquals ("$(':submit','form');", JQuerySelector.submit.invoke ().arg ("form").getJSCode ());
+    assertEquals ("$(':checked');", new JQuerySelectorList (JQuerySelector.checked).invoke ().getJSCode ());
+    assertEquals ("$(':checked :animated');",
+                  new JQuerySelectorList (JQuerySelector.checked, JQuerySelector.animated).invoke ().getJSCode ());
   }
 }
