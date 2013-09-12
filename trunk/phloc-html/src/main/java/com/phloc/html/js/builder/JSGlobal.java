@@ -42,7 +42,7 @@ public final class JSGlobal
    * @return Global field <code>Infinity</code>
    */
   @Nonnull
-  public static JSRef infinity ()
+  public static JSRef Infinity ()
   {
     return JSExpr.ref ("Infinity");
   }
@@ -51,7 +51,7 @@ public final class JSGlobal
    * @return Global field <code>NaN</code>
    */
   @Nonnull
-  public static JSRef nan ()
+  public static JSRef NaN ()
   {
     return JSExpr.ref ("NaN");
   }
@@ -75,12 +75,34 @@ public final class JSGlobal
   }
 
   /**
+   * @param aURI
+   *        parameter
+   * @return Global function <code>decodeURI(uri)</code>
+   */
+  @Nonnull
+  public static JSInvocation decodeURI (@Nonnull final IJSExpression aURI)
+  {
+    return decodeURI ().arg (aURI);
+  }
+
+  /**
    * @return Global function <code>decodeURIComponent(uri)</code>
    */
   @Nonnull
   public static JSInvocation decodeURIComponent ()
   {
     return JSExpr.invoke ("decodeURIComponent");
+  }
+
+  /**
+   * @param aURI
+   *        parameter
+   * @return Global function <code>decodeURIComponent(uri)</code>
+   */
+  @Nonnull
+  public static JSInvocation decodeURIComponent (@Nonnull final IJSExpression aURI)
+  {
+    return decodeURIComponent ().arg (aURI);
   }
 
   /**
@@ -93,12 +115,34 @@ public final class JSGlobal
   }
 
   /**
+   * @param aURI
+   *        parameter
+   * @return Global function <code>encodeURI(uri)</code>
+   */
+  @Nonnull
+  public static JSInvocation encodeURI (@Nonnull final IJSExpression aURI)
+  {
+    return encodeURI ().arg (aURI);
+  }
+
+  /**
    * @return Global function <code>encodeURIComponent(uri)</code>
    */
   @Nonnull
   public static JSInvocation encodeURIComponent ()
   {
     return JSExpr.invoke ("encodeURIComponent");
+  }
+
+  /**
+   * @param aURI
+   *        parameter
+   * @return Global function <code>encodeURIComponent(uri)</code>
+   */
+  @Nonnull
+  public static JSInvocation encodeURIComponent (@Nonnull final IJSExpression aURI)
+  {
+    return encodeURIComponent ().arg (aURI);
   }
 
   /**
@@ -111,12 +155,34 @@ public final class JSGlobal
   }
 
   /**
+   * @param aString
+   *        parameter
+   * @return Global function <code>escape(string)</code>
+   */
+  @Nonnull
+  public static JSInvocation escape (@Nonnull final IJSExpression aString)
+  {
+    return escape ().arg (aString);
+  }
+
+  /**
    * @return Global function <code>eval(string)</code>
    */
   @Nonnull
   public static JSInvocation eval ()
   {
     return JSExpr.invoke ("eval");
+  }
+
+  /**
+   * @param aString
+   *        parameter
+   * @return Global function <code>eval(string)</code>
+   */
+  @Nonnull
+  public static JSInvocation eval (@Nonnull final IJSExpression aString)
+  {
+    return eval ().arg (aString);
   }
 
   /**
@@ -129,6 +195,17 @@ public final class JSGlobal
   }
 
   /**
+   * @param aValue
+   *        parameter
+   * @return Global function <code>isFinite(value)</code>
+   */
+  @Nonnull
+  public static JSInvocation isFinite (@Nonnull final IJSExpression aValue)
+  {
+    return isFinite ().arg (aValue);
+  }
+
+  /**
    * @return Global function <code>isNaN(value)</code>
    */
   @Nonnull
@@ -138,18 +215,34 @@ public final class JSGlobal
   }
 
   /**
+   * @param aValue
+   *        parameter
+   * @return Global function <code>isNaN(value)</code>
+   */
+  @Nonnull
+  public static JSInvocation isNaN (@Nonnull final IJSExpression aValue)
+  {
+    return isNaN ().arg (aValue);
+  }
+
+  /**
    * @return Global function <code>Number(value)</code>
    */
   @Nonnull
-  public static JSInvocation number ()
+  public static JSInvocation Number ()
   {
     return JSExpr.invoke ("Number");
   }
 
+  /**
+   * @param aValue
+   *        parameter
+   * @return Global function <code>Number(aValue)</code>
+   */
   @Nonnull
-  public static JSInvocation number (@Nonnull final IJSExpression aExpr)
+  public static JSInvocation Number (@Nonnull final IJSExpression aValue)
   {
-    return number ().arg (aExpr);
+    return Number ().arg (aValue);
   }
 
   /**
@@ -162,6 +255,17 @@ public final class JSGlobal
   }
 
   /**
+   * @param aString
+   *        parameter
+   * @return Global function <code>eval(string)</code>
+   */
+  @Nonnull
+  public static JSInvocation parseFloat (@Nonnull final IJSExpression aString)
+  {
+    return parseFloat ().arg (aString);
+  }
+
+  /**
    * @return Global function <code>parseInt(string,radix)</code>
    */
   @Nonnull
@@ -171,12 +275,60 @@ public final class JSGlobal
   }
 
   /**
+   * @param aString
+   *        parameter
+   * @return Global function <code>parseInt(string, radix)</code>
+   */
+  @Nonnull
+  public static JSInvocation parseInt (@Nonnull final IJSExpression aString)
+  {
+    return parseInt ().arg (aString);
+  }
+
+  /**
+   * @param aString
+   *        parameter
+   * @param aRadix
+   *        parameter
+   * @return Global function <code>parseInt(string, radix)</code>
+   */
+  @Nonnull
+  public static JSInvocation parseInt (@Nonnull final IJSExpression aString, @Nonnull final IJSExpression aRadix)
+  {
+    return parseInt ().arg (aString).arg (aRadix);
+  }
+
+  /**
+   * @param aString
+   *        parameter
+   * @param nRadix
+   *        parameter
+   * @return Global function <code>parseInt(string, radix)</code>
+   */
+  @Nonnull
+  public static JSInvocation parseInt (@Nonnull final IJSExpression aString, final int nRadix)
+  {
+    return parseInt (aString, JSExpr.lit (nRadix));
+  }
+
+  /**
    * @return Global function <code>String(object)</code>
    */
   @Nonnull
-  public static JSInvocation string ()
+  public static JSInvocation String ()
   {
     return JSExpr.invoke ("String");
+  }
+
+  /**
+   * @param aObject
+   *        parameter
+   * @return Global function <code>unescape(string)</code>
+   */
+  @Nonnull
+  public static JSInvocation String (@Nonnull final IJSExpression aObject)
+  {
+    return String ().arg (aObject);
   }
 
   /**
@@ -186,5 +338,16 @@ public final class JSGlobal
   public static JSInvocation unescape ()
   {
     return JSExpr.invoke ("unescape");
+  }
+
+  /**
+   * @param aString
+   *        parameter
+   * @return Global function <code>unescape(string)</code>
+   */
+  @Nonnull
+  public static JSInvocation unescape (@Nonnull final IJSExpression aString)
+  {
+    return unescape ().arg (aString);
   }
 }

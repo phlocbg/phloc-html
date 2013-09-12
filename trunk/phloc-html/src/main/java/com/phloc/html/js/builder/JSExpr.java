@@ -162,12 +162,6 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSInvocation invoke (@Nonnull final JSFunction aFunction)
-  {
-    return new JSInvocation (aFunction);
-  }
-
-  @Nonnull
   public static JSRef ref (@Nonnull @Nonempty final String sField)
   {
     return new JSRef (sField);

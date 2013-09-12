@@ -456,7 +456,7 @@ public class MainCreateJQueryAPIList
         {
           String sLine = "JSFieldRef " + aEntry.getName () + "();";
           if (aEntry.isRemoved ())
-            sLine = " Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
+            sLine = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
           if (aEntry.isDeprecated ())
             sLine = "// @deprecated Deprecated since jQuery " +
                     aEntry.getDeprecated ().getAsString (false) +

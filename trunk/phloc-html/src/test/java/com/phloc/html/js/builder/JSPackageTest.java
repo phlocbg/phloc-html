@@ -121,7 +121,7 @@ public final class JSPackageTest
       // concatenate misc things
       aFuncMain.body ()._return (m1.plus (JSExpr.lit ("abc").ref ("length"))
                                    .plus (aRoot)
-                                   .plus (JSExpr.invoke (aFunc).arg (2).arg (4))
+                                   .plus (aFunc.invoke ().arg (2).arg (4))
                                    .plus (7)
                                    .mul (1.5)
                                    .plus (5)
