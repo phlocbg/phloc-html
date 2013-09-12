@@ -60,6 +60,32 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   @Nonnull
   public abstract IMPLTYPE jqinvoke (@Nonnull @Nonempty final String sMethod);
 
+  /**
+   * Adds a JQuery selector as a string argument.
+   * 
+   * @param aArgument
+   *        value to be added as an argument
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final IJQuerySelector aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument.getExpression ());
+  }
+
+  /**
+   * Adds a JQuery selector list as a string argument.
+   * 
+   * @param aArgument
+   *        value to be added as an argument
+   * @return this
+   */
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final JQuerySelectorList aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument.getAsExpression ());
+  }
+
   // Properties of jQuery Object Instances
 
   /**
@@ -93,32 +119,6 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   // Rest
-
-  /**
-   * Adds a JQuery selector as a string argument.
-   * 
-   * @param aArgument
-   *        value to be added as an argument
-   * @return this
-   */
-  @Nonnull
-  public IMPLTYPE arg (@Nullable final IJQuerySelector aArgument)
-  {
-    return aArgument == null ? argNull () : arg (aArgument.getExpression ());
-  }
-
-  /**
-   * Adds a JQuery selector list as a string argument.
-   * 
-   * @param aArgument
-   *        value to be added as an argument
-   * @return this
-   */
-  @Nonnull
-  public IMPLTYPE arg (@Nullable final JQuerySelectorList aArgument)
-  {
-    return aArgument == null ? argNull () : arg (aArgument.getAsExpression ());
-  }
 
   /**
    * @return The invocation of the jQuery function <code>add()</code>
