@@ -29,6 +29,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
  * @author Philip Helger
  */
 @Immutable
+@edu.umd.cs.findbugs.annotations.SuppressWarnings ("NM_METHOD_NAMING_CONVENTION")
 public final class JSGlobal
 {
   @PresentForCodeCoverage
