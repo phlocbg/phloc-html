@@ -104,6 +104,8 @@ public interface IJQuerySelector extends IJSCodeProvider
   IJQuerySelector nextSiblings (@Nonnull IJQuerySelector aRhsSelector);
 
   /**
+   * Create an invocation of this selector
+   * 
    * @return <code>$(selectorString)</code>
    */
   @Nonnull

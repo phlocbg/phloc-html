@@ -30,6 +30,11 @@ import com.phloc.commons.state.EChange;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
 
+/**
+ * A list of jQuery selectors that are chained with ' ' (space)
+ * 
+ * @author Philip Helger
+ */
 public class JQuerySelectorList implements IJSCodeProvider
 {
   private final List <IJQuerySelector> m_aElements = new ArrayList <IJQuerySelector> ();
