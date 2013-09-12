@@ -19,6 +19,7 @@ package com.phloc.html.js.builder.jquery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
@@ -50,6 +51,8 @@ import com.phloc.html.js.builder.html.JSHtml;
 @Immutable
 public final class JQuery
 {
+  public static final AtomicBoolean s_aUseDollar = new AtomicBoolean (true);
+
   @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final JQuery s_aInstance = new JQuery ();
@@ -58,13 +61,120 @@ public final class JQuery
   {}
 
   /**
-   * @return <code>$</code> as a field
+   * Globally decide, whether to use "$" or "jQuery" to access jQuery
+   * 
+   * @param bUseDollar
+   *        <code>true</code> to use "$", <code>false</code> to use "jQuery"
+   */
+  public static void setUseDollarForJQuery (final boolean bUseDollar)
+  {
+    s_aUseDollar.set (bUseDollar);
+  }
+
+  /**
+   * @return <code>true</code> if "$" is used, <code>false</code> if "jQuery" is
+   *         used for the global jQuery field
+   */
+  public static boolean isUseDollarForJQuery ()
+  {
+    return s_aUseDollar.get ();
+  }
+
+  // Properties of the Global jQuery Object
+
+  /**
+   * @return <code>$</code> or <code>jQuery</code> as a field
    */
   @Nonnull
   public static JSRef jQueryField ()
   {
-    return JSExpr.ref ("$");
+    return JSExpr.ref (isUseDollarForJQuery () ? "$" : "jQuery");
   }
+
+  /**
+   * @return <code>$.browser<code>
+   * @deprecated Deprecated since jQuery 1.3 Removed in jQuery 1.9
+   */
+  @Deprecated
+  @Nonnull
+  public static JSFieldRef browser ()
+  {
+    return jQueryField ().ref ("browser");
+  }
+
+  /**
+   * @return <code>$.fx</code>
+   */
+  @Nonnull
+  public static JSFieldRef fx ()
+  {
+    return jQueryField ().ref ("fx");
+  }
+
+  /**
+   * @return <code>$.fx.interval</code>
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  public static JSFieldRef fxInterval ()
+  {
+    return fx ().ref ("interval");
+  }
+
+  /**
+   * @return <code>$.fx.off</code>
+   * @since jQuery 1.3
+   */
+  @Nonnull
+  public static JSFieldRef fxOff ()
+  {
+    return fx ().ref ("off");
+  }
+
+  /**
+   * @return <code>$.support</code>
+   * @since jQuery 1.3
+   */
+  @Nonnull
+  public static JSFieldRef support ()
+  {
+    return jQueryField ().ref ("support");
+  }
+
+  /**
+   * @return <code>$.selector</code>
+   * @since jQuery 1.3
+   * @deprecated Deprecated since jQuery 1.7 Removed in jQuery 1.9
+   */
+  @Deprecated
+  @Nonnull
+  public static JSFieldRef selector ()
+  {
+    return jQueryField ().ref ("selector");
+  }
+
+  /**
+   * @return <code>$.cssHooks</code>
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  public static JSFieldRef cssHooks ()
+  {
+    return jQueryField ().ref ("cssHooks");
+  }
+
+  /**
+   * @return <code>$.boxModel</code>
+   * @deprecated Deprecated since jQuery 1.3
+   */
+  @Deprecated
+  @Nonnull
+  public static JSFieldRef boxModel ()
+  {
+    return jQueryField ().ref ("boxModel");
+  }
+
+  // todo
 
   /**
    * @return <code>$</code> as a function
@@ -94,57 +204,12 @@ public final class JQuery
   }
 
   /**
-   * @return <code>$.fx</code>
-   */
-  @Nonnull
-  public static JSFieldRef fx ()
-  {
-    return jQueryField ().ref ("fx");
-  }
-
-  /**
-   * @return <code>$.fx.interval</code>
-   */
-  @Nonnull
-  public static JSFieldRef fxInterval ()
-  {
-    return fx ().ref ("interval");
-  }
-
-  /**
-   * @return <code>$.fx.off</code>
-   */
-  @Nonnull
-  public static JSFieldRef fxOff ()
-  {
-    return fx ().ref ("off");
-  }
-
-  /**
-   * @return <code>$.cssHooks</code>
-   */
-  @Nonnull
-  public static JSFieldRef cssHooks ()
-  {
-    return jQueryField ().ref ("cssHooks");
-  }
-
-  /**
    * @return <code>$.parseJSON</code>
    */
   @Nonnull
   public static JSFieldRef parseJSON ()
   {
     return jQueryField ().ref ("parseJSON");
-  }
-
-  /**
-   * @return <code>$.support</code>
-   */
-  @Nonnull
-  public static JSFieldRef support ()
-  {
-    return jQueryField ().ref ("support");
   }
 
   /**

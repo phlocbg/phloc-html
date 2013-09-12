@@ -42,7 +42,7 @@ import com.phloc.html.js.builder.JSStringLiteral;
 public final class JQuerySelector implements IJQuerySelector
 {
   public static final IJQuerySelector all = new JQuerySelector ("*");
-  // @since 1.2
+  // @since jQuery 1.2
   public static final IJQuerySelector animated = new JQuerySelector (":animated");
   public static final IJQuerySelector button = new JQuerySelector (":button");
   public static final IJQuerySelector checkbox = new JQuerySelector (":checkbox");
@@ -53,36 +53,36 @@ public final class JQuerySelector implements IJQuerySelector
   public static final IJQuerySelector even = new JQuerySelector (":even");
   public static final IJQuerySelector file = new JQuerySelector (":file");
   public static final IJQuerySelector first = new JQuerySelector (":first");
-  // @since 1.1.4
+  // @since jQuery 1.1.4
   public static final IJQuerySelector first_child = new JQuerySelector (":first-child");
-  // @since 1.9
+  // @since jQuery 1.9
   public static final IJQuerySelector first_of_type = new JQuerySelector (":first-of-type");
-  // @since 1.6
+  // @since jQuery 1.6
   public static final IJQuerySelector focus = new JQuerySelector (":focus");
-  // @since 1.2
+  // @since jQuery 1.2
   public static final IJQuerySelector header = new JQuerySelector (":header");
   public static final IJQuerySelector hidden = new JQuerySelector (":hidden");
   public static final IJQuerySelector image = new JQuerySelector (":image");
   public static final IJQuerySelector input = new JQuerySelector (":input");
   public static final IJQuerySelector last = new JQuerySelector (":last");
-  // @since 1.1.4
+  // @since jQuery 1.1.4
   public static final IJQuerySelector last_child = new JQuerySelector (":last-child");
-  // @since 1.9
+  // @since jQuery 1.9
   public static final IJQuerySelector last_of_type = new JQuerySelector (":last-of-type");
   public static final IJQuerySelector odd = new JQuerySelector (":odd");
-  // @since 1.1.4
+  // @since jQuery 1.1.4
   public static final IJQuerySelector only_child = new JQuerySelector (":only-child");
-  // @since 1.9
+  // @since jQuery 1.9
   public static final IJQuerySelector only_of_type = new JQuerySelector (":only-of-type");
   public static final IJQuerySelector parent = new JQuerySelector (":parent");
   public static final IJQuerySelector password = new JQuerySelector (":password");
   public static final IJQuerySelector radio = new JQuerySelector (":radio");
   public static final IJQuerySelector reset = new JQuerySelector (":reset");
-  // @since 1.9
+  // @since jQuery 1.9
   public static final IJQuerySelector root = new JQuerySelector (":root");
   public static final IJQuerySelector selected = new JQuerySelector (":selected");
   public static final IJQuerySelector submit = new JQuerySelector (":submit");
-  // @since 1.9
+  // @since jQuery 1.9
   public static final IJQuerySelector target = new JQuerySelector (":target");
   public static final IJQuerySelector text = new JQuerySelector (":text");
   public static final IJQuerySelector visible = new JQuerySelector (":visible");
@@ -337,7 +337,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param sText
    *        text to check
    * @return <code>:contains(text)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector contains (@Nonnull final String sText)
@@ -349,7 +349,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        text to check
    * @return <code>:contains(text)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector contains (@Nonnull final IJSExpression aExpr)
@@ -484,7 +484,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aSelector
    *        Selector to use
    * @return <code>:has(selector)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector has (@Nonnull final IJQuerySelector aSelector)
@@ -499,7 +499,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        Selector to use
    * @return <code>:has(expr)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector has (@Nonnull final IJSExpression aExpr)
@@ -556,7 +556,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param sLanguage
    *        The language to select
    * @return <code>:lang(language)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector lang (@Nonnull @Nonempty final String sLanguage)
@@ -570,7 +570,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        The language to select
    * @return <code>:lang(expr)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector lang (@Nonnull @Nonempty final IJSExpression aExpr)
@@ -716,7 +716,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (final int v)
@@ -730,7 +730,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (final long v)
@@ -744,7 +744,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (@Nonnull final BigInteger v)
@@ -758,7 +758,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (final double v)
@@ -772,7 +772,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (@Nonnull final BigDecimal v)
@@ -786,7 +786,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        index
    * @return <code>:nth-child(aExpr)</code>
-   * @since 1.1.4
+   * @since jQuery 1.1.4
    */
   @Nonnull
   public static IJQuerySelector nthChild (@Nonnull final IJSExpression aExpr)
@@ -801,7 +801,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (final int v)
@@ -816,7 +816,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (final long v)
@@ -831,7 +831,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (@Nonnull final BigInteger v)
@@ -846,7 +846,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (final double v)
@@ -861,7 +861,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (@Nonnull final BigDecimal v)
@@ -876,7 +876,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        index
    * @return <code>:nth-last-child(aExpr)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastChild (@Nonnull final IJSExpression aExpr)
@@ -891,7 +891,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (final int v)
@@ -906,7 +906,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (final long v)
@@ -921,7 +921,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (@Nonnull final BigInteger v)
@@ -936,7 +936,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (final double v)
@@ -951,7 +951,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (@Nonnull final BigDecimal v)
@@ -966,7 +966,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        index
    * @return <code>:nth-last-of-type(aExpr)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthLastOfType (@Nonnull final IJSExpression aExpr)
@@ -981,7 +981,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (final int v)
@@ -996,7 +996,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (final long v)
@@ -1011,7 +1011,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (@Nonnull final BigInteger v)
@@ -1026,7 +1026,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (final double v)
@@ -1041,7 +1041,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (@Nonnull final BigDecimal v)
@@ -1056,7 +1056,7 @@ public final class JQuerySelector implements IJQuerySelector
    * @param aExpr
    *        index
    * @return <code>:nth-of-type(aExpr)</code>
-   * @since 1.9
+   * @since jQuery 1.9
    */
   @Nonnull
   public static IJQuerySelector nthOfType (@Nonnull final IJSExpression aExpr)
