@@ -12,6 +12,8 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.SystemProperties;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -25,6 +27,8 @@ import com.phloc.commons.name.IHasName;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.version.Version;
+import com.phloc.commons.xml.EXMLParserFeature;
+import com.phloc.commons.xml.serialize.XMLReader;
 
 public class MainCreateJQueryAPIList
 {
@@ -264,18 +268,54 @@ public class MainCreateJQueryAPIList
   @Nonnull
   private static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
   {
+    if (sType.equals ("Boolean"))
+      return new String [] { "boolean" };
     if (sType.equals ("String"))
       return new String [] { "String" };
+    if (sType.equals ("htmlString"))
+      return new String [] { "IHCNode", "String" };
     if (sType.equals ("Integer"))
       return new String [] { "int", "long", "BigInteger" };
     if (sType.equals ("Number"))
       return new String [] { "int", "long", "BigInteger", "double", "BigDecimal" };
     if (sType.equals ("Selector"))
       return new String [] { "IJQuerySelector" };
+    if (sType.equals ("Function"))
+      return new String [] { "JSAnonymousFunction" };
+    if (sType.equals ("Object"))
+      return new String [] { "IJSExpression" };
+    if (sType.equals ("PlainObject"))
+      return new String [] { "IJSExpression" };
+    if (sType.equals ("Anything"))
+      return new String [] { "IJSExpression" };
+    if (sType.equals ("Array"))
+      return new String [] { "JSArray" };
+    if (sType.equals ("Element"))
+      return new String [] { "EHTMLElementName", "String" };
+    if (sType.equals ("Elements"))
+      return new String [] { "EHTMLElementName...", "Iterable<EHTMLElementName>", "String...", "Iterable<String>" };
+    if (sType.equals ("jQuery"))
+      return new String [] { "JQueryInvocation" };
+
+    // DOM document
+    if (sType.equals ("document"))
+      return new String [] { "IJSExpression" };
+
+    // JQuery Deferred
+    if (sType.equals ("Deferred"))
+      return new String [] { "IJSExpression" };
+
+    // JQuery Event
+    if (sType.equals ("Event"))
+      return new String [] { "IJSExpression" };
+
+    // ????
+    if (sType.equals ("jQuery object"))
+      return new String [] { "JQueryInvocation" };
     throw new IllegalArgumentException ("Unknown type '" + sType + "'");
   }
 
-  public static void main (final String [] args)
+  public static void main (final String [] args) throws Exception
   {
     int nFiles = 0;
     int nSignatures = 0;
@@ -293,7 +333,14 @@ public class MainCreateJQueryAPIList
 
     final List <Entry> aAllEntries = new ArrayList <Entry> ();
 
-    for (final File aFile : FileSystemIterator.create (new File ("src/test/resources/jqueryapi"),
+    GlobalDebug.setDebugModeDirect (true);
+
+    if (false)
+      XMLReader.setDefaultSaxParserFeatureValue (EXMLParserFeature.XINCLUDE, Boolean.TRUE);
+    SystemProperties.setPropertyValue ("org.apache.xerces.xni.parser.XMLParserConfiguration",
+                                       "org.apache.xerces.parsers.XIncludeParserConfiguration");
+
+    for (final File aFile : FileSystemIterator.create (new File ("src/test/resources/jquery/api"),
                                                        new FilenameFilterEndsWith (".xml")))
     {
       final IMicroDocument aDoc = MicroReader.readMicroXML (aFile);
@@ -413,6 +460,8 @@ public class MainCreateJQueryAPIList
           for (final Signature aSignature : aEntry.getAllSignatures ())
           {
             String sRealPrefix = sPrefix;
+            if (aEntry.isRemoved ())
+              sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
             if (aEntry.isDeprecated ())
               sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
                             aEntry.getDeprecated ().getAsString (false) +
@@ -450,25 +499,72 @@ public class MainCreateJQueryAPIList
           }
         }
 
+    if (false)
+      for (final Entry aEntry : aAllEntries)
+        if (aEntry.getAPIType () == EAPIType.PROPERTY)
+          for (final Signature aSignature : aEntry.getAllSignatures ())
+          {
+            String sLine = "JSFieldRef " + aEntry.getName () + "();";
+            if (aEntry.isRemoved ())
+              sLine = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
+            if (aEntry.isDeprecated ())
+              sLine = "// @deprecated Deprecated since jQuery " +
+                      aEntry.getDeprecated ().getAsString (false) +
+                      "\n" +
+                      sLine;
+            if (aSignature.isAddedAfter10 ())
+              sLine = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sLine;
+
+            if (aSignature.getArgumentCount () > 0)
+              throw new IllegalStateException (aEntry.getName ());
+            aLines.add (sLine);
+          }
+
     for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.PROPERTY)
+      if (aEntry.getAPIType () == EAPIType.METHOD)
+      {
         for (final Signature aSignature : aEntry.getAllSignatures ())
         {
-          String sLine = "JSFieldRef " + aEntry.getName () + "();";
+          String sRealPrefix = (aEntry.hasReturn () ? aEntry.getReturn () : "void") + " " + aEntry.getIdentifier ();
           if (aEntry.isRemoved ())
-            sLine = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
+            sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
           if (aEntry.isDeprecated ())
-            sLine = "// @deprecated Deprecated since jQuery " +
-                    aEntry.getDeprecated ().getAsString (false) +
-                    "\n" +
-                    sLine;
+            sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
+                          aEntry.getDeprecated ().getAsString (false) +
+                          "\n" +
+                          sRealPrefix;
           if (aSignature.isAddedAfter10 ())
-            sLine = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sLine;
+            sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
 
-          if (aSignature.getArgumentCount () > 0)
-            throw new IllegalStateException (aEntry.getName ());
-          aLines.add (sLine);
+          if (aSignature.getArgumentCount () == 0)
+          {
+            aLines.add (sRealPrefix + "();");
+          }
+          else
+          {
+            String sLine = sRealPrefix + "(";
+            boolean bFirst = true;
+            for (final Argument aArg : aSignature.getAllArguments ())
+            {
+              if (bFirst)
+                bFirst = false;
+              else
+                sLine += ", ";
+              final StringBuilder aTypes = new StringBuilder ();
+              for (final String sType : aArg.getAllTypes ())
+              {
+                if (aTypes.length () > 0)
+                  aTypes.append ("/");
+                aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
+              }
+
+              sLine += "{" + aTypes.toString () + "} " + aArg.getIdentifier ();
+            }
+            aLines.add (sLine + ");");
+          }
         }
+      }
+
     for (final String sLine : aLines)
       System.out.println (sLine);
   }
