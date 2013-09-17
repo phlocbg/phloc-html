@@ -41,7 +41,6 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 
@@ -172,20 +171,6 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     if (m_aChildren != null)
       Collections.sort (m_aChildren, aComparator);
     return thisAsT ();
-  }
-
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
-  {
-    if (hasChildren ())
-    {
-      // We need to work on a copy of the children!
-      for (final IHCNode aChild : getChildren ())
-        aChild.applyCustomization (aConversionSettings, aParentNode);
-    }
   }
 
   @Override

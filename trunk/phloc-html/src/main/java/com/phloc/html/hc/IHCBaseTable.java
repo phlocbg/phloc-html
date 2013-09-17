@@ -38,15 +38,17 @@ import com.phloc.html.hc.html.HCRow;
  */
 public interface IHCBaseTable <IMPLTYPE extends IHCBaseTable <IMPLTYPE>> extends IHCHasChildren
 {
+  @Nonnegative
   int getCellSpacing ();
 
   @Nonnull
-  IMPLTYPE setCellSpacing (int nCellSpacing);
+  IMPLTYPE setCellSpacing (@Nonnegative int nCellSpacing);
 
+  @Nonnegative
   int getCellPadding ();
 
   @Nonnull
-  IMPLTYPE setCellPadding (int nCellPadding);
+  IMPLTYPE setCellPadding (@Nonnegative int nCellPadding);
 
   // Column handling
 

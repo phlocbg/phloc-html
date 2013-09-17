@@ -40,7 +40,6 @@ import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCBaseTable;
 import com.phloc.html.hc.IHCCell;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -1061,21 +1060,6 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     _checkConsistency (sPrefix + " header", aBaseTable.m_aHeader, nCols);
     _checkConsistency (sPrefix + " body", aBaseTable.m_aBody, nCols);
     _checkConsistency (sPrefix + " footer", aBaseTable.m_aFooter, nCols);
-  }
-
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
-  {
-    // We need to work on a copy of the children!
-    for (final HCRow aHeaderRow : m_aHeader.getAllRows ())
-      aHeaderRow.applyCustomization (aConversionSettings, aParentNode);
-    for (final HCRow aBodyRow : m_aBody.getAllRows ())
-      aBodyRow.applyCustomization (aConversionSettings, aParentNode);
-    for (final HCRow aFooterRow : m_aFooter.getAllRows ())
-      aFooterRow.applyCustomization (aConversionSettings, aParentNode);
   }
 
   @Override

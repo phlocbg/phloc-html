@@ -43,7 +43,6 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCElementWithChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeBuilder;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 @NotThreadSafe
@@ -328,20 +327,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     if (m_aChildren != null)
       Collections.sort (m_aChildren, aComparator);
     return thisAsT ();
-  }
-
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
-  {
-    if (hasChildren ())
-    {
-      // We need to work on a copy of the children!
-      for (final IHCNode aChild : getChildren ())
-        aChild.applyCustomization (aConversionSettings, aParentNode);
-    }
   }
 
   @Override

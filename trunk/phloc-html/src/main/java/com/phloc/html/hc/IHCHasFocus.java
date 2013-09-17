@@ -19,7 +19,14 @@ package com.phloc.html.hc;
 
 import javax.annotation.Nonnull;
 
-public interface IHCHasFocus <IMPLTYPE extends IHCHasFocus <IMPLTYPE>> extends IHCElement <IMPLTYPE>
+/**
+ * Base interface for focusable objects. Must not necessarily be an IHCElement!
+ * 
+ * @author Philip Helger
+ * @param <IMPLTYPE>
+ *        Implementation type
+ */
+public interface IHCHasFocus <IMPLTYPE extends IHCHasFocus <IMPLTYPE>>
 {
   /**
    * @return <code>true</code> if this element is focused, <code>false</code>

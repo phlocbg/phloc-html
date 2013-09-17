@@ -174,9 +174,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                         // bug fix for IE9 table layout bug
                         // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
                         // IE9 only interprets column widths if the first row
-                        // does
-                        // not use colspan (i.e. at least one row does not use
-                        // colspan)
+                        // does not use colspan (i.e. at least one row does not
+                        // use colspan)
                         if (aColGroup != null &&
                             aColGroup.hasColumns () &&
                             aTable.hasBodyRows () &&
@@ -242,6 +241,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (HCSpecialNodeHandler.isJSNode (aOOBNode))
       return true;
 
+    // All other nodes stay in the head
     return false;
   }
 
