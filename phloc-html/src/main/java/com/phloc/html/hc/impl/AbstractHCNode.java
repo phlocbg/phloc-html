@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc.impl;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -26,6 +28,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -57,20 +60,6 @@ public abstract class AbstractHCNode implements IHCNode
     return m_bCustomized;
   }
 
-  /**
-   * Protected method that is invoked upon customization. Override e.f. for
-   * objects having private children.
-   * 
-   * @param aConversionSettings
-   *        The conversion settings to use. Never <code>null</code>.
-   * @param aParentNode
-   *        The parent node, where the customizer might add children.
-   */
-  @OverrideOnDemand
-  protected void internalApplyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                             @Nonnull final IHCNodeWithChildren <?> aParentNode)
-  {}
-
   public final void applyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                         @Nonnull final IHCNodeWithChildren <?> aParentNode)
   {
@@ -81,8 +70,13 @@ public abstract class AbstractHCNode implements IHCNode
       // Run the global customizer
       aConversionSettings.getCustomizer ().customizeNode (aParentNode, this, aConversionSettings.getHTMLVersion ());
 
-      // Internal callback if needed
-      internalApplyCustomization (aConversionSettings, aParentNode);
+      if (this instanceof IHCHasChildren)
+      {
+        final List <? extends IHCNode> aChildNodes = ((IHCHasChildren) this).getChildren ();
+        if (aChildNodes != null)
+          for (final IHCNode aChildNode : aChildNodes)
+            aChildNode.applyCustomization (aConversionSettings, aParentNode);
+      }
     }
   }
 
@@ -96,9 +90,9 @@ public abstract class AbstractHCNode implements IHCNode
   }
 
   /**
-   * This method is called once for each instead before the note itself is
-   * created. Overwrite this method to perform actions that can only be done
-   * when the node is build finally.
+   * This method is called only once for each instance. It is called before the
+   * node itself is created. Overwrite this method to perform actions that can
+   * only be done when the node is build finally.
    * 
    * @param aConversionSettings
    *        The conversion settings to be used
@@ -119,7 +113,27 @@ public abstract class AbstractHCNode implements IHCNode
   }
 
   @Nonnull
+  @OverrideOnDemand
   protected abstract IMicroNode internalConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
+
+  /**
+   * Called after the main conversion. Can be used to modify the created micro
+   * node somehow. The default implementation just returns the passed node.
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @param aCreatedNode
+   *        The created node from
+   *        {@link #internalConvertToNode(IHCConversionSettingsToNode)}
+   * @return The result of {@link #convertToNode(IHCConversionSettingsToNode)}
+   */
+  @Nullable
+  @OverrideOnDemand
+  protected IMicroNode internalAfterConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
+                                                   @Nullable final IMicroNode aCreatedNode)
+  {
+    return aCreatedNode;
+  }
 
   /*
    * Note: return type cannot by IMicroElement since the checkbox object
@@ -131,12 +145,15 @@ public abstract class AbstractHCNode implements IHCNode
     if (!canConvertToNode (aConversionSettings))
       return null;
 
-    // Prepare object once per instance - before first rendering (implementation
-    // dependent)
     beforeConvertToNode (aConversionSettings);
 
     // Main conversion
-    return internalConvertToNode (aConversionSettings);
+    final IMicroNode aOriginalNode = internalConvertToNode (aConversionSettings);
+
+    // After convert
+    final IMicroNode ret = internalAfterConvertToNode (aConversionSettings, aOriginalNode);
+
+    return ret;
   }
 
   @Nonnull

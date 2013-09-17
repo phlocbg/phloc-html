@@ -62,13 +62,12 @@ public interface IHCNode extends IHasPlainText, Serializable
   boolean canConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
-   * Special "before" method that is invoked once per instance before the main
-   * {@link #convertToNode(IHCConversionSettingsToNode)} method is invoked. This
-   * is implicitly invoked on child nodes, since it is automatically called
-   * within convertToNode.
+   * This method is called only once for each instance. It is called before the
+   * node itself is created from within
+   * {@link #convertToNode(IHCConversionSettingsToNode)}.
    * 
    * @param aConversionSettings
-   *        The conversion settings to use. May not be <code>null</code>.
+   *        The conversion settings to be used
    */
   void beforeConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
@@ -85,7 +84,7 @@ public interface IHCNode extends IHasPlainText, Serializable
    * <code>new HCConditionalCommentNode (this, sCondition)</code>
    * 
    * @param sCondition
-   *        The condition to us
+   *        The condition to us. May neither be <code>null</code> nor empty.
    * @return Never <code>null</code>.
    */
   @Nonnull

@@ -121,6 +121,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
       @Nonnull
       public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
+        // Append all additional nodes to the passed base node
         aChildNode.applyCustomization (aConversionSettings, aBaseNode);
         return EFinish.UNFINISHED;
       }

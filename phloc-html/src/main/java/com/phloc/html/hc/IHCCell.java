@@ -17,27 +17,49 @@
  */
 package com.phloc.html.hc;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.html.hc.api.EHCCellAlign;
 import com.phloc.html.hc.html.HCRow;
 
+/**
+ * Base interface for a table cell.
+ * 
+ * @author Philip Helger
+ * @param <IMPLTYPE>
+ *        Implementation type
+ */
 public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>
 {
+  /**
+   * @return The owning parent row.
+   */
   @Nullable
   HCRow getParentRow ();
 
+  /**
+   * @return Current column spanning. Defaults to 1.
+   */
+  @Nonnegative
   int getColspan ();
 
   @Nonnull
-  IMPLTYPE setColspan (int nColspan);
+  IMPLTYPE setColspan (@Nonnegative int nColspan);
 
+  /**
+   * @return Current row spanning. Defaults to 1.
+   */
+  @Nonnegative
   int getRowspan ();
 
   @Nonnull
-  IMPLTYPE setRowspan (int nRowspan);
+  IMPLTYPE setRowspan (@Nonnegative int nRowspan);
 
+  /**
+   * @return The cell content alignment. Defaults to <code>null</code>.
+   */
   @Nullable
   EHCCellAlign getAlign ();
 
