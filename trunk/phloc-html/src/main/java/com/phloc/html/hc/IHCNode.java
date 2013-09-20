@@ -36,9 +36,15 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public interface IHCNode extends IHasPlainText, Serializable
 {
   /**
+   * @return <code>true</code> if the customizer was already run on this node,
+   *         <code>false</code> if not.
+   */
+  boolean isCustomized ();
+
+  /**
    * Apply customization as defined by
-   * {@link IHCConversionSettingsToNode#getCustomizer()}. This is done only for
-   * this node and not for child nodes!
+   * {@link IHCConversionSettingsToNode#getCustomizer()}. Customization is
+   * applied only once to every node.
    * 
    * @param aConversionSettings
    *        The conversion settings to use. May not be <code>null</code>.
@@ -48,6 +54,12 @@ public interface IHCNode extends IHasPlainText, Serializable
    */
   void applyCustomization (@Nonnull IHCConversionSettingsToNode aConversionSettings,
                            @Nonnull IHCNodeWithChildren <?> aParentNode);
+
+  /**
+   * @return <code>true</code> if this node was already converted to a micro
+   *         node, <code>false</code> if not
+   */
+  boolean isConvertedToNode ();
 
   /**
    * This method checks whether the node is suitable for conversion to an
@@ -72,6 +84,10 @@ public interface IHCNode extends IHasPlainText, Serializable
   void beforeConvertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 
   /**
+   * The main conversion to a micro node.<br>
+   * Note: return type cannot by IMicroElement since the checkbox object
+   * delivers an IMicroNodeList!
+   * 
    * @param aConversionSettings
    *        The conversion settings to be used. May not be <code>null</code>.
    * @return The fully created HTML node
