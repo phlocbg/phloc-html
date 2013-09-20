@@ -45,12 +45,6 @@ public abstract class AbstractHCNode implements IHCNode
   private boolean m_bCustomized = false;
   private boolean m_bConvertedToNode = false;
 
-  @OverrideOnDemand
-  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    return true;
-  }
-
   /**
    * @return <code>true</code> if the customizer was already run on this node,
    *         <code>false</code> if not.
@@ -80,13 +74,15 @@ public abstract class AbstractHCNode implements IHCNode
     }
   }
 
-  /**
-   * @return <code>true</code> if this node was already converted to a micro
-   *         node, <code>false</code> if not
-   */
   public final boolean isConvertedToNode ()
   {
     return m_bConvertedToNode;
+  }
+
+  @OverrideOnDemand
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return true;
   }
 
   /**
@@ -135,16 +131,13 @@ public abstract class AbstractHCNode implements IHCNode
     return aCreatedNode;
   }
 
-  /*
-   * Note: return type cannot by IMicroElement since the checkbox object
-   * delivers an IMicroNodeList!
-   */
   @Nullable
   public final IMicroNode convertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (!canConvertToNode (aConversionSettings))
       return null;
 
+    // Before conversion
     beforeConvertToNode (aConversionSettings);
 
     // Main conversion
