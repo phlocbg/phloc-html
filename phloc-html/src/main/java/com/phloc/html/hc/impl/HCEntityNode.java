@@ -92,4 +92,16 @@ public class HCEntityNode extends AbstractHCNode
   {
     return new HCEntityNode (EHTMLEntity.euro, "€");
   }
+
+  @Nonnull
+  public static HCEntityNode newLeftArrow ()
+  {
+    return new HCEntityNode (EHTMLEntity.larr, "<-");
+  }
+
+  @Nonnull
+  public static HCEntityNode newRightArrow ()
+  {
+    return new HCEntityNode (EHTMLEntity.rarr, "->");
+  }
 }

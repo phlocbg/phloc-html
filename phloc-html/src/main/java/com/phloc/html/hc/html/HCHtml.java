@@ -20,25 +20,21 @@ package com.phloc.html.hc.html;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroDocument;
-import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
-import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
-import com.phloc.html.hc.htmlext.IHCIteratorCallback;
 import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.hc.utils.HCOutOfBandHandler;
 
@@ -111,23 +107,6 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     return m_aBody;
   }
 
-  public static void customizeNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
-                                     @Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    // Customize element, before extracting out-of-band nodes, in case the
-    // customizer adds some out-of-band nodes as well
-    HCUtils.iterateTree (aBaseNode, new IHCIteratorCallback ()
-    {
-      @Nonnull
-      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
-      {
-        // Append all additional nodes to the passed base node
-        aChildNode.applyCustomization (aConversionSettings, aBaseNode);
-        return EFinish.UNFINISHED;
-      }
-    });
-  }
-
   public static void extractAndHandleOutOfBandNodes (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
                                                      @Nonnull final IHCNodeWithChildren <?> aBaseNode,
                                                      @Nonnull final HCHead aHead,
@@ -154,7 +133,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
 
     // Customize element, before extracting out-of-band nodes, in case the
     // customizer adds some out-of-band nodes as well
-    customizeNodes (aBody, aConversionSettings);
+    HCUtils.customizeNodes (aBody, aConversionSettings);
 
     // Prepare head and body before performing the OOB extraction
     aHead.beforeConvertToNode (aConversionSettings);
