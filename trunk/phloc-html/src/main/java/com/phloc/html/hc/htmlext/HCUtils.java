@@ -39,6 +39,7 @@ import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.impl.HCNodeList;
@@ -465,5 +466,31 @@ public final class HCUtils
     }
 
     return null;
+  }
+
+  /**
+   * Customize the passed base node and all child nodes recursively.
+   * 
+   * @param aBaseNode
+   *        Base node to start customizing (incl.). May not be <code>null</code>
+   *        .
+   * @param aConversionSettings
+   *        The conversion settings to use. May not be <code>null</code>.
+   */
+  public static void customizeNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+                                     @Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    // Customize element, before extracting out-of-band nodes, in case the
+    // customizer adds some out-of-band nodes as well
+    iterateTree (aBaseNode, new IHCIteratorCallback ()
+    {
+      @Nonnull
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
+      {
+        // Append all additional nodes to the passed base node
+        aChildNode.applyCustomization (aConversionSettings, aBaseNode);
+        return EFinish.UNFINISHED;
+      }
+    });
   }
 }
