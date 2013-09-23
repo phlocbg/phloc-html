@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.css.ICSSWriterSettings;
@@ -59,6 +60,11 @@ public interface IHCHasCSSStyles <THISTYPE extends IHCHasCSSStyles <THISTYPE>>
    */
   @Nonnull
   THISTYPE addStyle (@Nullable ICSSValue aValue);
+
+  @Nonnull
+  @Deprecated
+  @DevelopersNote ("Use addStyle instead!")
+  THISTYPE addStyles (@Nullable ICSSValue aValue);
 
   /**
    * Add element specific styles.

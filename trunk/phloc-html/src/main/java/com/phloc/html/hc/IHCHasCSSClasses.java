@@ -54,6 +54,17 @@ public interface IHCHasCSSClasses <THISTYPE extends IHCHasCSSClasses <THISTYPE>>
   @Nonnull
   THISTYPE addClasses (@Nullable ICSSClassProvider... aProviders);
 
+  /**
+   * Add multiple unique CSS classes at once. Each CSS class that is already
+   * present, is ignored.
+   * 
+   * @param aProviders
+   *        The CSS classed to add. May neither be <code>null</code> nor empty.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE addClasses (@Nullable Iterable <? extends ICSSClassProvider> aProviders);
+
   @Nonnull
   THISTYPE removeClass (@Nullable ICSSClassProvider aProvider);
 
