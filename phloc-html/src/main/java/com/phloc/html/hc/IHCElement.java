@@ -201,7 +201,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
    * @return this
    */
   @Nonnull
-  THISTYPE setTabIndex (@Nonnegative long nTabIndex);
+  THISTYPE setTabIndex (long nTabIndex);
 
   @Nullable
   String getAccessKey ();
