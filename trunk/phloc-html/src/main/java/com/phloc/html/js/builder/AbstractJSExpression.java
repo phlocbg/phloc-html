@@ -23,6 +23,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * Provides default implementations for {@link IJSExpression}.
@@ -518,6 +519,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression eq (@Nonnull final IJson aValue)
+  {
+    return eq (JSExpr.json (aValue));
+  }
+
+  @Nonnull
   public final AbstractJSExpression eq (@Nonnull final IJSExpression aExpr)
   {
     return JSOp.eq (this, aExpr);
@@ -567,6 +574,12 @@ public abstract class AbstractJSExpression implements IJSExpression
 
   @Nonnull
   public final AbstractJSExpression eeq (@Nonnull final IJSON aValue)
+  {
+    return eeq (JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression eeq (@Nonnull final IJson aValue)
   {
     return eeq (JSExpr.json (aValue));
   }
@@ -627,6 +640,12 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  public final AbstractJSExpression ne (@Nonnull final IJson aValue)
+  {
+    return ne (JSExpr.json (aValue));
+  }
+
+  @Nonnull
   public final AbstractJSExpression ne (@Nonnull final IJSExpression aExpr)
   {
     return JSOp.ne (this, aExpr);
@@ -676,6 +695,12 @@ public abstract class AbstractJSExpression implements IJSExpression
 
   @Nonnull
   public final AbstractJSExpression ene (@Nonnull final IJSON aValue)
+  {
+    return ene (JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public final AbstractJSExpression ene (@Nonnull final IJson aValue)
   {
     return ene (JSExpr.json (aValue));
   }

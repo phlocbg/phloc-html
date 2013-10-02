@@ -38,6 +38,7 @@ import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * A JS block. It contains a list of statements and declarations.
@@ -619,6 +620,12 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   }
 
   @Nonnull
+  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nullable final IJson aValue)
+  {
+    return assign (aLhs, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
+  }
+
+  @Nonnull
   public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nonnull final IJSExpression aExpr)
   {
     addStatement (aLhs.assign (aExpr));
@@ -1043,6 +1050,12 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   @Nonnull
   public AbstractJSBlock _return (@Nullable final IJSON aValue)
+  {
+    return _return (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public AbstractJSBlock _return (@Nullable final IJson aValue)
   {
     return _return (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
