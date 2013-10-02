@@ -106,4 +106,10 @@ public class HCTextNode extends AbstractHCNode
                             .append ("escape", m_bEscape)
                             .toString ();
   }
+
+  @Nullable
+  public static HCTextNode create (@Nullable final String sText)
+  {
+    return sText == null ? null : new HCTextNode (sText);
+  }
 }
