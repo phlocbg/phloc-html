@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.lang.EnumHelper;
 
 /**
  * An enumeration with all DublinCore meta tag names.
@@ -108,11 +108,7 @@ public enum EDublinCoreMetaElement implements IMetaElementDeclaration
   @Nullable
   public static EDublinCoreMetaElement getDCMetaTag (@Nullable final String sTagName)
   {
-    if (StringHelper.hasText (sTagName))
-      for (final EDublinCoreMetaElement eDC : values ())
-        if (eDC.getName ().equals (sTagName))
-          return eDC;
-    return null;
+    return EnumHelper.getFromNameOrNull (EDublinCoreMetaElement.class, sTagName);
   }
 
   public static boolean isDCMetaTag (@Nullable final String sTagName)
