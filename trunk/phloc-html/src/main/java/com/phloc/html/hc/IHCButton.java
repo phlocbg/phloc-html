@@ -20,6 +20,7 @@ package com.phloc.html.hc;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.js.IJSCodeProvider;
 
@@ -69,6 +70,16 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
   IMPLTYPE setOnClick (@Nullable IJSCodeProvider aOnClick);
 
   /**
+   * Shortcut for <code>setOnClick(JSHtml.windowLocationHref (aURL))</code>
+   * 
+   * @param aURL
+   *        URL to link to
+   * @return this
+   */
+  @Nonnull
+  IMPLTYPE setOnClick (@Nullable ISimpleURL aURL);
+
+  /**
    * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
    * 
    * @param aOnClick
@@ -77,4 +88,15 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    */
   @Nonnull
   IMPLTYPE addOnClick (@Nullable IJSCodeProvider aOnClick);
+
+  /**
+   * Shortcut for <code>addOnClick(JSHtml.windowLocationHref (aURL))</code>
+   * 
+   * @param aURL
+   *        URL to link to
+   * @return this
+   */
+  @Nonnull
+  IMPLTYPE addOnClick (@Nullable ISimpleURL aURL);
+
 }
