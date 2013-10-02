@@ -29,6 +29,7 @@ import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
@@ -97,6 +98,12 @@ public class JSAssocArray extends AbstractJSExpression
 
   @Nonnull
   public JSAssocArray add (@Nonnull final String sKey, @Nullable final IJSON aValue)
+  {
+    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final IJson aValue)
   {
     return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }

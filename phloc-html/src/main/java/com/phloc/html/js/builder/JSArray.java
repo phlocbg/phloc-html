@@ -28,6 +28,7 @@ import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
@@ -96,6 +97,12 @@ public class JSArray extends AbstractJSExpression
 
   @Nonnull
   public JSArray add (@Nullable final IJSON aValue)
+  {
+    return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public JSArray add (@Nullable final IJson aValue)
   {
     return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }

@@ -33,6 +33,7 @@ import com.phloc.commons.microdom.IHasElementName;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * Object invocation
@@ -322,6 +323,12 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   @Nonnull
+  public IMPLTYPE arg (@Nullable final IJson aValue)
+  {
+    return aValue == null ? argNull () : arg (JSExpr.json (aValue));
+  }
+
+  @Nonnull
   public IMPLTYPE arg (@Nonnull final IHasElementName aElementNameProvider)
   {
     return arg (aElementNameProvider.getElementName ());
@@ -446,6 +453,12 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   @Nonnull
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJSON aValue)
+  {
+    return aValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJson aValue)
   {
     return aValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (aValue));
   }

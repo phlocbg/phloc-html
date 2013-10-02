@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 
 import com.phloc.json.IJSON;
+import com.phloc.json2.IJson;
 
 /**
  * A JS expression.
@@ -426,6 +427,9 @@ public interface IJSExpression extends IJSGeneratable
   @Nonnull
   IJSExpression eq (@Nonnull IJSON aValue);
 
+  @Nonnull
+  IJSExpression eq (@Nonnull IJson aValue);
+
   /** Equals '=='. */
   @Nonnull
   IJSExpression eq (@Nonnull IJSExpression aExpr);
@@ -453,6 +457,9 @@ public interface IJSExpression extends IJSGeneratable
 
   @Nonnull
   IJSExpression eeq (@Nonnull IJSON aValue);
+
+  @Nonnull
+  IJSExpression eeq (@Nonnull IJson aValue);
 
   /** Exactly equals '==='. */
   @Nonnull
@@ -482,6 +489,9 @@ public interface IJSExpression extends IJSGeneratable
   @Nonnull
   IJSExpression ne (@Nonnull IJSON aValue);
 
+  @Nonnull
+  IJSExpression ne (@Nonnull IJson aValue);
+
   /** Not equals '!='. */
   @Nonnull
   IJSExpression ne (@Nonnull IJSExpression aExpr);
@@ -509,6 +519,9 @@ public interface IJSExpression extends IJSGeneratable
 
   @Nonnull
   IJSExpression ene (@Nonnull IJSON aValue);
+
+  @Nonnull
+  IJSExpression ene (@Nonnull IJson aValue);
 
   /** Exactly not equals '!=='. */
   @Nonnull
