@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.lang.EnumHelper;
 
 /**
  * A class with a set of predefined meta tag names.
@@ -98,21 +98,13 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
   @Nullable
   public static EStandardMetaElement getStandardElementOfNameOrNull (@Nullable final String sName)
   {
-    if (StringHelper.hasText (sName))
-      for (final EStandardMetaElement eStdMetaTag : values ())
-        if (eStdMetaTag.getName ().equals (sName))
-          return eStdMetaTag;
-    return null;
+    return EnumHelper.getFromNameOrNull (EStandardMetaElement.class, sName);
   }
 
   @Nullable
   public static EStandardMetaElement getStandardElementOfNameOrNullIgnoreCase (@Nullable final String sName)
   {
-    if (StringHelper.hasText (sName))
-      for (final EStandardMetaElement eStdMetaTag : values ())
-        if (eStdMetaTag.getName ().equalsIgnoreCase (sName))
-          return eStdMetaTag;
-    return null;
+    return EnumHelper.getFromNameCaseInsensitiveOrNull (EStandardMetaElement.class, sName);
   }
 
   public static boolean isHttpEquivMetaElement (@Nullable final String sName)
