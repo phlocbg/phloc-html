@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -32,6 +33,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.builder.html.JSHtml;
 
 /**
  * Represents an HTML &lt;button&gt; element with type "button"
@@ -120,9 +122,21 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
+  public IMPLTYPE setOnClick (@Nullable final ISimpleURL aURL)
+  {
+    return setOnClick (JSHtml.windowLocationHref (aURL));
+  }
+
+  @Nonnull
   public IMPLTYPE addOnClick (@Nullable final IJSCodeProvider aOnClick)
   {
     return addEventHandler (EJSEvent.ONCLICK, aOnClick);
+  }
+
+  @Nonnull
+  public IMPLTYPE addOnClick (@Nullable final ISimpleURL aURL)
+  {
+    return addOnClick (JSHtml.windowLocationHref (aURL));
   }
 
   @Override
