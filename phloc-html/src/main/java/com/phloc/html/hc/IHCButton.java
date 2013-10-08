@@ -77,7 +77,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE setOnClick (@Nullable ISimpleURL aURL);
+  IMPLTYPE setOnClick (@Nonnull ISimpleURL aURL);
 
   /**
    * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
@@ -97,6 +97,6 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE addOnClick (@Nullable ISimpleURL aURL);
+  IMPLTYPE addOnClick (@Nonnull ISimpleURL aURL);
 
 }
