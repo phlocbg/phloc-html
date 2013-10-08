@@ -122,7 +122,7 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
-  public IMPLTYPE setOnClick (@Nullable final ISimpleURL aURL)
+  public IMPLTYPE setOnClick (@Nonnull final ISimpleURL aURL)
   {
     return setOnClick (JSHtml.windowLocationHref (aURL));
   }
@@ -134,7 +134,7 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   }
 
   @Nonnull
-  public IMPLTYPE addOnClick (@Nullable final ISimpleURL aURL)
+  public IMPLTYPE addOnClick (@Nonnull final ISimpleURL aURL)
   {
     return addOnClick (JSHtml.windowLocationHref (aURL));
   }
