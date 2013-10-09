@@ -37,7 +37,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
-import com.phloc.html.hc.IHCBaseTable;
+import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.IHCCell;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
@@ -53,7 +53,7 @@ import com.phloc.html.hc.impl.HCTextNode;
  * @param <THISTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCBaseTable <THISTYPE>
+public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCTable <THISTYPE>
 {
   private static final class RowSet
   {

@@ -35,7 +35,7 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.CHCParam;
-import com.phloc.html.hc.IHCBaseTable;
+import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.IHCButton;
 import com.phloc.html.hc.IHCCanBeDisabled;
 import com.phloc.html.hc.IHCCell;
@@ -167,9 +167,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                       aElement.addClass (CSS_CLASS_RADIO);
                     }
                     else
-                      if (aElement instanceof IHCBaseTable <?>)
+                      if (aElement instanceof IHCTable <?>)
                       {
-                        final IHCBaseTable <?> aTable = (IHCBaseTable <?>) aElement;
+                        final IHCTable <?> aTable = (IHCTable <?>) aElement;
                         final HCColGroup aColGroup = aTable.getColGroup ();
                         // bug fix for IE9 table layout bug
                         // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
