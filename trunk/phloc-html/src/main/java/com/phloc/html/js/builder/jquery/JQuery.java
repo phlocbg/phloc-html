@@ -554,6 +554,19 @@ public final class JQuery
   /**
    * Get the result of a jQuery selection
    * 
+   * @param aID
+   *        The ID to be selected. May not be <code>null</code>.
+   * @return A jQuery invocation with the passed ID: <code>$('#'+id)</code>
+   */
+  @Nonnull
+  public static JQueryInvocation idRef (@Nonnull final IJSExpression aID)
+  {
+    return JQuerySelector.id (aID).invoke ();
+  }
+
+  /**
+   * Get the result of a jQuery selection
+   * 
    * @param aIDProvider
    *        The provider that has the ID to be selected. May not be
    *        <code>null</code>.

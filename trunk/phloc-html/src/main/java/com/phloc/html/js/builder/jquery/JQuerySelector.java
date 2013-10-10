@@ -557,6 +557,19 @@ public final class JQuerySelector implements IJQuerySelector
   }
 
   /**
+   * jQuery ID selection
+   * 
+   * @param aID
+   *        The ID to select
+   * @return <code>'#'+id</code>
+   */
+  @Nonnull
+  public static IJQuerySelector id (@Nonnull final IJSExpression aID)
+  {
+    return new JQuerySelector (JSExpr.lit ('#').plus (aID));
+  }
+
+  /**
    * jQuery language selection
    * 
    * @param sLanguage
