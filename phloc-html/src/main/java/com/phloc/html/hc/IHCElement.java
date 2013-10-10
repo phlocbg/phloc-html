@@ -79,6 +79,15 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE setID (String sID);
 
+  /**
+   * Set a unique HTML ID for this object. Equal to
+   * <code>setID (GlobalIDFactory.getNewStringID ())</code>
+   * 
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setUniqueID ();
+
   @Nonnull
   THISTYPE setTitle (IPredefinedLocaleTextProvider aTextProvider);
 

@@ -40,6 +40,7 @@ import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
+import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
@@ -157,6 +158,12 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     // Happens to often, since "[" and "]" occur very often and are not allowed
     m_sID = sID;
     return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE setUniqueID ()
+  {
+    return setID (GlobalIDFactory.getNewStringID ());
   }
 
   @Nullable
