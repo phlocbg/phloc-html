@@ -36,7 +36,7 @@ import com.phloc.html.hc.html.HCRow;
  * @author Philip Helger
  * @param <IMPLTYPE>
  */
-public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElement <IMPLTYPE>
+public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElement <IMPLTYPE>, IHCHasChildren
 {
   @Nonnegative
   int getCellSpacing ();
