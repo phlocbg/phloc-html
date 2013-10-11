@@ -952,6 +952,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aSelector
+   *        Selector to use
+   * @return The invocation of the jQuery function <code>index()</code>
+   */
+  @Nonnull
+  public IMPLTYPE index (@Nonnull final IJQuerySelector aSelector)
+  {
+    return index ().arg (aSelector);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>innerHeight()</code>
    */
   @Nonnull

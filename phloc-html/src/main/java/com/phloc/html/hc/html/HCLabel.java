@@ -80,11 +80,7 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
     if (aFor == null)
       m_sFor = null;
     else
-    {
-      if (!aFor.hasID ())
-        aFor.setUniqueID ();
-      m_sFor = aFor.getID ();
-    }
+      m_sFor = aFor.ensureID ().getID ();
     return this;
   }
 

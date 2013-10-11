@@ -554,9 +554,7 @@ public final class JQuerySelector implements IJQuerySelector
   public static IJQuerySelector id (@Nonnull final IHCElement <?> aElement)
   {
     // Ensure element has an ID
-    if (!aElement.hasID ())
-      aElement.setUniqueID ();
-    return id (aElement.getID ());
+    return id (aElement.ensureID ().getID ());
   }
 
   /**

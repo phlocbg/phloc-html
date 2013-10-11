@@ -94,6 +94,15 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   @Nonnull
   THISTYPE setUniqueID ();
 
+  /**
+   * Set a new ID if none is present. This is a shortcut for
+   * <code>if (!hasID())setUniqueID ();</code>
+   * 
+   * @return this
+   */
+  @Nonnull
+  THISTYPE ensureID ();
+
   @Nonnull
   THISTYPE setTitle (IPredefinedLocaleTextProvider aTextProvider);
 
