@@ -70,7 +70,7 @@ public final class JQueryInvocationTest
     assertEquals ("$(document).each(5);", JQuery.jQueryDocument ().each ().arg (5).getJSCode ());
     assertEquals ("$(document).empty(5);", JQuery.jQueryDocument ().empty ().arg (5).getJSCode ());
     assertEquals ("$(document).end(5);", JQuery.jQueryDocument ().end ().arg (5).getJSCode ());
-    assertEquals ("$(document).eq(5);", JQuery.jQueryDocument ().eq ().arg (5).getJSCode ());
+    assertEquals ("$(document).eq(5);", JQuery.jQueryDocument ().eq_ ().arg (5).getJSCode ());
     assertEquals ("$(document).error(5);", JQuery.jQueryDocument ().error ().arg (5).getJSCode ());
     assertEquals ("$(document).fadeIn(5);", JQuery.jQueryDocument ().fadeIn ().arg (5).getJSCode ());
     assertEquals ("$(document).fadeOut(5);", JQuery.jQueryDocument ().fadeOut ().arg (5).getJSCode ());
