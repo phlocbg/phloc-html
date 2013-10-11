@@ -632,7 +632,7 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
    * @return The invocation of the jQuery function <code>eq()</code>
    */
   @Nonnull
-  public IMPLTYPE eq_ ()
+  public IMPLTYPE _eq ()
   {
     return jqinvoke ("eq");
   }
@@ -643,9 +643,9 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
    * @return The invocation of the jQuery function <code>eq()</code>
    */
   @Nonnull
-  public IMPLTYPE eq_ (@Nonnull final int nIndex)
+  public IMPLTYPE _eq (@Nonnull final int nIndex)
   {
-    return eq_ (JSExpr.lit (nIndex));
+    return _eq (JSExpr.lit (nIndex));
   }
 
   /**
@@ -654,9 +654,9 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
    * @return The invocation of the jQuery function <code>eq()</code>
    */
   @Nonnull
-  public IMPLTYPE eq_ (@Nonnull final IJSExpression aExpr)
+  public IMPLTYPE _eq (@Nonnull final IJSExpression aExpr)
   {
-    return eq_ ().arg (aExpr);
+    return _eq ().arg (aExpr);
   }
 
   /**
