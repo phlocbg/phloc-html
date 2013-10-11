@@ -171,6 +171,14 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return setID (GlobalIDFactory.getNewStringID ());
   }
 
+  @Nonnull
+  public THISTYPE ensureID ()
+  {
+    if (!hasID ())
+      setUniqueID ();
+    return thisAsT ();
+  }
+
   @Nullable
   protected final String getTitle ()
   {
