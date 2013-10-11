@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.idfactory.GlobalIDFactory;
 import com.phloc.commons.string.StringParser;
 import com.phloc.css.ECSSUnit;
 import com.phloc.css.property.CCSSProperties;
@@ -35,7 +34,6 @@ import com.phloc.html.EHTMLVersion;
 import com.phloc.html.css.DefaultCSSClassProvider;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.CHCParam;
-import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.IHCButton;
 import com.phloc.html.hc.IHCCanBeDisabled;
 import com.phloc.html.hc.IHCCell;
@@ -43,6 +41,7 @@ import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
+import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCButton_Submit;
@@ -214,13 +213,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
         if (aCtrl.isFocused ())
         {
-          // for focusing we need an ID!
-          if (aCtrl.getID () == null)
-            aCtrl.setID (GlobalIDFactory.getNewStringID ());
-
           // Add this out of band node
           // Note: assuming jQuery
-          aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl.getID ()).focus ()));
+          aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl).focus ()));
         }
       }
     }

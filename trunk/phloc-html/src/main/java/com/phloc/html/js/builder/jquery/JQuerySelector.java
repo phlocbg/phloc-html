@@ -34,6 +34,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.hc.IHCElement;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSStringLiteral;
@@ -532,14 +533,30 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * jQuery ID selection
    * 
-   * @param aID
+   * @param aIDProvider
    *        The object with an ID to select
    * @return <code>#id</code>
    */
   @Nonnull
-  public static IJQuerySelector id (@Nonnull final IHasID <String> aID)
+  public static IJQuerySelector id (@Nonnull final IHasID <String> aIDProvider)
   {
-    return id (aID.getID ());
+    return id (aIDProvider.getID ());
+  }
+
+  /**
+   * jQuery ID selection
+   * 
+   * @param aElement
+   *        The object with an ID to select
+   * @return <code>#id</code>
+   */
+  @Nonnull
+  public static IJQuerySelector id (@Nonnull final IHCElement <?> aElement)
+  {
+    // Ensure element has an ID
+    if (!aElement.hasID ())
+      aElement.setUniqueID ();
+    return id (aElement.getID ());
   }
 
   /**

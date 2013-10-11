@@ -33,6 +33,9 @@ import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.commons.id.IHasID;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
+import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
@@ -519,6 +522,30 @@ public final class JQuery
   }
 
   /**
+   * @param sHTML
+   *        HTML code to use
+   * @return a {@link JQueryInvocation} with an HTML String.
+   *         <code>$(<i>html</i>)</code>
+   */
+  @Nonnull
+  public static JQueryInvocation jQuery (@Nonnull final String sHTML)
+  {
+    return jQuery (JSExpr.lit (sHTML));
+  }
+
+  /**
+   * @param aHCNode
+   *        HTML code to use
+   * @return a {@link JQueryInvocation} with an HTML String.
+   *         <code>$(<i>html</i>)</code>
+   */
+  @Nonnull
+  public static JQueryInvocation jQuery (@Nonnull final IHCNode aHCNode)
+  {
+    return jQuery (HCSettings.getAsHTMLStringWithoutNamespaces (aHCNode));
+  }
+
+  /**
    * @return a {@link JQueryInvocation} with an HTML document element.
    *         <code>$(document)</code>
    */
@@ -576,6 +603,20 @@ public final class JQuery
   public static JQueryInvocation idRef (@Nonnull @Nonempty final IHasID <String> aIDProvider)
   {
     return JQuerySelector.id (aIDProvider).invoke ();
+  }
+
+  /**
+   * Get the result of a jQuery selection
+   * 
+   * @param aElement
+   *        The element that has the ID to be selected. May not be
+   *        <code>null</code>.
+   * @return A jQuery invocation with the passed ID: <code>$('#id')</code>
+   */
+  @Nonnull
+  public static JQueryInvocation idRef (@Nonnull @Nonempty final IHCElement <?> aElement)
+  {
+    return JQuerySelector.id (aElement).invoke ();
   }
 
   /**
@@ -660,7 +701,7 @@ public final class JQuery
    *         <code>$('.class1,.class2,.class3')</code>
    */
   @Nonnull
-  public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final Iterable <ICSSClassProvider> aCSSClasses)
+  public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final Iterable <? extends ICSSClassProvider> aCSSClasses)
   {
     if (ContainerHelper.isEmpty (aCSSClasses))
       throw new IllegalArgumentException ("classes may not be empty");
@@ -805,6 +846,10 @@ public final class JQuery
     return elementNameRef (sElementName, JQuerySelector.clazz (aCSSClass));
   }
 
+  /**
+   * @return A pair consisting of the invocation and the anonymous function that
+   *         can be filled with code to be executed.
+   */
   @Nonnull
   public static IReadonlyPair <JQueryInvocation, JSAnonymousFunction> onDocumentReady ()
   {
