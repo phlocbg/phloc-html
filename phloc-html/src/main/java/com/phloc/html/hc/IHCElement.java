@@ -392,4 +392,91 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
    */
   @Nonnull
   THISTYPE removeCustomAttr (@Nullable String sName);
+
+  /**
+   * @return <code>true</code> if at least one data attribute is contained
+   */
+  boolean hasDataAttrs ();
+
+  /**
+   * Check if a certain data attribute is contained. Shortcut for
+   * <code>containsCustomAttr ("data-"+sName)</code>.
+   * 
+   * @param sName
+   *        The name of the data attribute to check
+   * @return <code>true</code> if such a data attribute is contained.
+   */
+  boolean containsDataAttr (@Nullable String sName);
+
+  /**
+   * Get the value of a certain data attribute. Shortcut for
+   * <code>getCustomAttrValue ("data-"+sName)</code>.
+   * 
+   * @param sName
+   *        The name of the data attribute to retrieve the value from
+   * @return <code>null</code> if no such data attribute is contained.
+   */
+  @Nullable
+  String getDataAttrValue (@Nullable String sName);
+
+  /**
+   * @return All data attributes contained. Never <code>null</code>.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  Map <String, String> getAllDataAttrs ();
+
+  /**
+   * Set a data attribute that is serialized as is. Shortcut for
+   * <code>setCustomAttr ("data-"+sName, nValue)</code>.
+   * 
+   * @param sName
+   *        The name of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @param nValue
+   *        The value of the attribute that is converted to a String.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setDataAttr (@Nullable String sName, int nValue);
+
+  /**
+   * Set a data attribute that is serialized as is. Shortcut for
+   * <code>setCustomAttr ("data-"+sName, nValue)</code>.
+   * 
+   * @param sName
+   *        The name of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @param nValue
+   *        The value of the attribute that is converted to a String.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setDataAttr (@Nullable String sName, long nValue);
+
+  /**
+   * Set a data attribute that is serialized as is. Shortcut for
+   * <code>setCustomAttr ("data-"+sName, sValue)</code>.
+   * 
+   * @param sName
+   *        The name of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @param sValue
+   *        The value of the attribute. If it is <code>null</code> nothing
+   *        happens
+   * @return this
+   */
+  @Nonnull
+  THISTYPE setDataAttr (@Nullable String sName, @Nullable String sValue);
+
+  /**
+   * Remove the data attribute with the specified name. Shortcut for
+   * <code>removeCustomAttr ("data-"+sName)</code>.
+   * 
+   * @param sName
+   *        The name of the data attribute to be removed
+   * @return this
+   */
+  @Nonnull
+  THISTYPE removeDataAttr (@Nullable String sName);
 }
