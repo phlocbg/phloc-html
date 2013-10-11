@@ -29,6 +29,7 @@ import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
+import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
 
@@ -317,6 +318,19 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param sAttrName
+   *        The name of the attribute
+   * @param aAttrValue
+   *        Attribute value
+   * @return The invocation of the jQuery function <code>attr()</code>
+   */
+  @Nonnull
+  public IMPLTYPE attr (@Nonnull @Nonempty final String sAttrName, @Nonnull final IJSExpression aAttrValue)
+  {
+    return attr ().arg (sAttrName).arg (aAttrValue);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>before()</code>
    */
   @Nonnull
@@ -381,6 +395,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE children ()
   {
     return jqinvoke ("children");
+  }
+
+  /**
+   * @param aSelector
+   *        Selector to use
+   * @return The invocation of the jQuery function <code>children()</code>
+   */
+  @Nonnull
+  public IMPLTYPE children (@Nonnull final IJQuerySelector aSelector)
+  {
+    return children ().arg (aSelector.invoke ());
   }
 
   /**
@@ -461,6 +486,54 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE data ()
   {
     return jqinvoke ("data");
+  }
+
+  /**
+   * @param sKey
+   *        data attribute to query
+   * @return The invocation of the jQuery function <code>data()</code>
+   */
+  @Nonnull
+  public IMPLTYPE data (@Nonnull final String sKey)
+  {
+    return data (JSExpr.lit (sKey));
+  }
+
+  /**
+   * @param aExpr
+   *        data attribute to query
+   * @return The invocation of the jQuery function <code>data()</code>
+   */
+  @Nonnull
+  public IMPLTYPE data (@Nonnull final IJSExpression aExpr)
+  {
+    return data ().arg (aExpr);
+  }
+
+  /**
+   * @param sKey
+   *        data attribute to query
+   * @param aValue
+   *        data attribute value
+   * @return The invocation of the jQuery function <code>data()</code>
+   */
+  @Nonnull
+  public IMPLTYPE data (@Nonnull final String sKey, @Nonnull final IJSExpression aValue)
+  {
+    return data (JSExpr.lit (sKey), aValue);
+  }
+
+  /**
+   * @param aExpr
+   *        data attribute to query
+   * @param aValue
+   *        data attribute value
+   * @return The invocation of the jQuery function <code>data()</code>
+   */
+  @Nonnull
+  public IMPLTYPE data (@Nonnull final IJSExpression aExpr, @Nonnull final IJSExpression aValue)
+  {
+    return data ().arg (aExpr).arg (aValue);
   }
 
   /**
@@ -559,9 +632,31 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
    * @return The invocation of the jQuery function <code>eq()</code>
    */
   @Nonnull
-  public IMPLTYPE eq ()
+  public IMPLTYPE eq_ ()
   {
     return jqinvoke ("eq");
+  }
+
+  /**
+   * @param nIndex
+   *        Index to use
+   * @return The invocation of the jQuery function <code>eq()</code>
+   */
+  @Nonnull
+  public IMPLTYPE eq_ (@Nonnull final int nIndex)
+  {
+    return eq_ (JSExpr.lit (nIndex));
+  }
+
+  /**
+   * @param aExpr
+   *        Expression as parameter
+   * @return The invocation of the jQuery function <code>eq()</code>
+   */
+  @Nonnull
+  public IMPLTYPE eq_ (@Nonnull final IJSExpression aExpr)
+  {
+    return eq_ ().arg (aExpr);
   }
 
   /**
