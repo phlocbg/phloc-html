@@ -298,6 +298,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param aExpr
+   *        Target to append to
+   * @return The invocation of the jQuery function <code>appendTo()</code>
+   */
+  @Nonnull
+  public IMPLTYPE appendTo (@Nonnull final IJSExpression aExpr)
+  {
+    return appendTo ().arg (aExpr);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>attr()</code>
    */
   @Nonnull
@@ -328,6 +339,17 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE attr (@Nonnull @Nonempty final String sAttrName, @Nonnull final IJSExpression aAttrValue)
   {
     return attr ().arg (sAttrName).arg (aAttrValue);
+  }
+
+  /**
+   * @param aExpr
+   *        Either the name of the attribute or a map with attributes to set.
+   * @return The invocation of the jQuery function <code>attr()</code>
+   */
+  @Nonnull
+  public IMPLTYPE attr (@Nonnull final IJSExpression aExpr)
+  {
+    return attr ().arg (aExpr);
   }
 
   /**
@@ -459,6 +481,28 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE closest ()
   {
     return jqinvoke ("closest");
+  }
+
+  /**
+   * @param eHTMLElement
+   *        HTML element to retrieve
+   * @return The invocation of the jQuery function <code>closest()</code>
+   */
+  @Nonnull
+  public IMPLTYPE closest (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return closest (JQuerySelector.element (eHTMLElement));
+  }
+
+  /**
+   * @param aSelector
+   *        Selector to use
+   * @return The invocation of the jQuery function <code>closest()</code>
+   */
+  @Nonnull
+  public IMPLTYPE closest (@Nonnull final IJQuerySelector aSelector)
+  {
+    return closest ().arg (aSelector);
   }
 
   /**

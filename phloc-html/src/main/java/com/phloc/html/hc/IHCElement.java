@@ -59,6 +59,12 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   String getTagName ();
 
   /**
+   * @return <code>true</code> if this element has an ID, <code>false</code> if
+   *         not.
+   */
+  boolean hasID ();
+
+  /**
    * Get the HTML ID of this object.<br>
    * Note: we cannot use <code>IHasID&lt;String></code> because the constraint
    * of IHasID is, that the returned ID may not be <code>null</code> whereas

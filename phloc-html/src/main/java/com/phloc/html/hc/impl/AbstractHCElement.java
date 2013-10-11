@@ -145,6 +145,11 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return GenericReflection.<AbstractHCElement <THISTYPE>, THISTYPE> uncheckedCast (this);
   }
 
+  public final boolean hasID ()
+  {
+    return StringHelper.hasText (m_sID);
+  }
+
   @Nullable
   public final String getID ()
   {

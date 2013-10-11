@@ -26,6 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -63,6 +64,27 @@ public class HCLabel extends AbstractHCElementWithChildren <HCLabel>
   public HCLabel setFor (@Nullable final String sFor)
   {
     m_sFor = sFor;
+    return this;
+  }
+
+  /**
+   * Indicates that this label is used as the description for another object.
+   * 
+   * @param aFor
+   *        The HTML of the other object.
+   * @return this
+   */
+  @Nonnull
+  public HCLabel setFor (@Nullable final IHCElement <?> aFor)
+  {
+    if (aFor == null)
+      m_sFor = null;
+    else
+    {
+      if (!aFor.hasID ())
+        aFor.setUniqueID ();
+      m_sFor = aFor.getID ();
+    }
     return this;
   }
 

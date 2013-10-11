@@ -29,10 +29,14 @@ import com.phloc.commons.string.ToStringGenerator;
  */
 public class JSRegExLiteral extends AbstractJSExpression
 {
+  public static final boolean DEFAULT_GLOBAL = false;
+  public static final boolean DEFAULT_CASE_INSENSITIVE = false;
+  public static final boolean DEFAULT_MULTI_LINE = false;
+
   private final String m_sRegEx;
-  private boolean m_bGlobal = false;
-  private boolean m_bCaseInsensitive = false;
-  private boolean m_bMultiLine = false;
+  private boolean m_bGlobal = DEFAULT_GLOBAL;
+  private boolean m_bCaseInsensitive = DEFAULT_CASE_INSENSITIVE;
+  private boolean m_bMultiLine = DEFAULT_MULTI_LINE;
 
   public JSRegExLiteral (@Nonnull final String sRegEx)
   {
@@ -77,13 +81,21 @@ public class JSRegExLiteral extends AbstractJSExpression
     return this;
   }
 
+  /**
+   * Set global, case insensitive and multi line at once
+   * 
+   * @param bGlobal
+   *        value for global
+   * @param bCaseInsensitive
+   *        value for case insensitive
+   * @param bMultiLine
+   *        value for multi line
+   * @return this
+   */
   @Nonnull
   public JSRegExLiteral gim (final boolean bGlobal, final boolean bCaseInsensitive, final boolean bMultiLine)
   {
-    global (bGlobal);
-    caseInsensitive (bCaseInsensitive);
-    multiLine (bMultiLine);
-    return this;
+    return global (bGlobal).caseInsensitive (bCaseInsensitive).multiLine (bMultiLine);
   }
 
   public void generate (@Nonnull final JSFormatter aFormatter)
