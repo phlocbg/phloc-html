@@ -673,6 +673,73 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     return thisAsT ();
   }
 
+  public static boolean isDataAttrName (@Nullable final String sName)
+  {
+    return StringHelper.startsWith (sName, CHTMLAttributes.HTML5_PREFIX_DATA);
+  }
+
+  @Nullable
+  public static String makeDataAttrName (@Nullable final String sName)
+  {
+    return StringHelper.hasNoText (sName) ? sName : sName + CHTMLAttributes.HTML5_PREFIX_DATA;
+  }
+
+  public boolean hasDataAttrs ()
+  {
+    if (m_aCustomAttrs != null)
+      for (final String sName : m_aCustomAttrs.keySet ())
+        if (isDataAttrName (sName))
+          return true;
+    return false;
+  }
+
+  public boolean containsDataAttr (@Nullable final String sName)
+  {
+    return containsCustomAttr (makeDataAttrName (sName));
+  }
+
+  @Nullable
+  public String getDataAttrValue (@Nullable final String sName)
+  {
+    return getCustomAttrValue (makeDataAttrName (sName));
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public Map <String, String> getAllDataAttrs ()
+  {
+    final Map <String, String> ret = new LinkedHashMap <String, String> ();
+    if (m_aCustomAttrs != null)
+      for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
+        if (isDataAttrName (aEntry.getKey ()))
+          ret.put (aEntry.getKey (), aEntry.getValue ());
+    return ret;
+  }
+
+  @Nonnull
+  public THISTYPE setDataAttr (@Nullable final String sName, final int nValue)
+  {
+    return setCustomAttr (makeDataAttrName (sName), nValue);
+  }
+
+  @Nonnull
+  public THISTYPE setDataAttr (@Nullable final String sName, final long nValue)
+  {
+    return setCustomAttr (makeDataAttrName (sName), nValue);
+  }
+
+  @Nonnull
+  public THISTYPE setDataAttr (@Nullable final String sName, @Nullable final String sValue)
+  {
+    return setCustomAttr (makeDataAttrName (sName), sValue);
+  }
+
+  @Nonnull
+  public THISTYPE removeDataAttr (@Nullable final String sName)
+  {
+    return removeCustomAttr (makeDataAttrName (sName));
+  }
+
   /**
    * @param aConversionSettings
    *        The conversion settings to be used
