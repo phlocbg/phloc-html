@@ -681,7 +681,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   @Nullable
   public static String makeDataAttrName (@Nullable final String sName)
   {
-    return StringHelper.hasNoText (sName) ? sName : sName + CHTMLAttributes.HTML5_PREFIX_DATA;
+    return StringHelper.hasNoText (sName) ? sName : CHTMLAttributes.HTML5_PREFIX_DATA + sName;
   }
 
   public boolean hasDataAttrs ()
