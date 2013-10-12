@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,7 @@ import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.multimap.IMultiMapListBased;
 import com.phloc.commons.collections.multimap.MultiTreeMapArrayListBased;
+import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.io.file.filter.FilenameFilterEndsWith;
 import com.phloc.commons.io.file.iterate.FileSystemIterator;
 import com.phloc.commons.lang.EnumHelper;
@@ -46,6 +48,8 @@ import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.name.IHasName;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.StringParser;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.commons.xml.EXMLParserFeature;
 import com.phloc.commons.xml.serialize.XMLReader;
@@ -81,14 +85,14 @@ public class MainCreateJQueryAPIList
     }
   }
 
+  private static final Set <String> FORBIDDEN_NAMES = ContainerHelper.newSet ("true", "false", "switch");
+
   static String _makeIdentifier (final String sName)
   {
-    // Skip function parameters
-    String sRealName = sName;
-    final int i = sRealName.indexOf ('(');
-    if (i > 0)
-      sRealName = sRealName.substring (0, i);
-    String sID = RegExHelper.getAsIdentifier (sRealName, "_").replaceAll ("_+", "_");
+    if (FORBIDDEN_NAMES.contains (sName))
+      return "_" + sName;
+
+    String sID = RegExHelper.getAsIdentifier (sName, "_").replaceAll ("_+", "_");
     sID = StringHelper.trimStart (sID, "_");
     sID = StringHelper.trimEnd (sID, "_");
     return sID;
@@ -99,8 +103,60 @@ public class MainCreateJQueryAPIList
     private final String m_sName;
     private final String m_sIdentifier;
     private final List <String> m_aTypes;
+    private final Set <String> m_aJavaTypes;
+    private final boolean m_bIsOptional;
 
-    public Argument (final String sName, final List <String> aTypes)
+    @Nonnull
+    private static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
+    {
+      if (sType.equals ("Boolean"))
+        return new String [] { "boolean" };
+      if (sType.equals ("String"))
+        return new String [] { "String" };
+      if (sType.equals ("htmlString"))
+        return new String [] { "IHCNode", "String" };
+      if (sType.equals ("Integer"))
+        return new String [] { "int", "long", "BigInteger" };
+      if (sType.equals ("Number"))
+        return new String [] { "int", "long", "BigInteger", "double", "BigDecimal" };
+      if (sType.equals ("Selector"))
+        return new String [] { "IJQuerySelector" };
+      if (sType.equals ("Function"))
+        return new String [] { "JSAnonymousFunction" };
+      if (sType.equals ("Object"))
+        return new String [] { "IJSExpression" };
+      if (sType.equals ("PlainObject"))
+        return new String [] { "IJSExpression" };
+      if (sType.equals ("Anything"))
+        return new String [] { "IJSExpression" };
+      if (sType.equals ("Array"))
+        return new String [] { "JSArray" };
+      if (sType.equals ("Element"))
+        return new String [] { "EHTMLElement", "String" };
+      if (sType.equals ("Elements"))
+        return new String [] { "EHTMLElement...", "Iterable<EHTMLElement>", "String..." };
+      if (sType.equals ("jQuery"))
+        return new String [] { "JQueryInvocation" };
+
+      // DOM document
+      if (sType.equals ("document"))
+        return new String [] { "IJSExpression" };
+
+      // JQuery Deferred
+      if (sType.equals ("Deferred"))
+        return new String [] { "IJSExpression" };
+
+      // JQuery Event
+      if (sType.equals ("Event"))
+        return new String [] { "IJSExpression" };
+
+      // ????
+      if (sType.equals ("jQuery object"))
+        return new String [] { "JQueryInvocation" };
+      throw new IllegalArgumentException ("Unknown type '" + sType + "'");
+    }
+
+    public Argument (final String sName, final List <String> aTypes, final boolean bIsOptional)
     {
       if (StringHelper.hasNoText (sName))
         throw new IllegalArgumentException ("name");
@@ -109,6 +165,11 @@ public class MainCreateJQueryAPIList
       m_sName = sName;
       m_sIdentifier = _makeIdentifier (sName);
       m_aTypes = aTypes;
+      m_aJavaTypes = new LinkedHashSet <String> ();
+      for (final String sType : aTypes)
+        for (final String sType0 : _getJavaTypes (sType))
+          m_aJavaTypes.add (sType0);
+      m_bIsOptional = bIsOptional;
     }
 
     @Nonnull
@@ -145,21 +206,59 @@ public class MainCreateJQueryAPIList
       return ContainerHelper.newList (m_aTypes);
     }
 
+    @Nonnegative
+    public int getJavaTypeCount ()
+    {
+      return m_aJavaTypes.size ();
+    }
+
     @Nonnull
     @Nonempty
     @ReturnsMutableCopy
     public Set <String> getAllJavaTypes ()
     {
-      final Set <String> aTypes = new LinkedHashSet <String> ();
-      for (final String sType : m_aTypes)
-        for (final String sType0 : _getJavaTypes (sType))
-          aTypes.add (sType0);
-      return aTypes;
+      return ContainerHelper.newOrderedSet (m_aJavaTypes);
+    }
+
+    @Nonnull
+    public String getFirstJavaType ()
+    {
+      return ContainerHelper.getFirstElement (m_aJavaTypes);
+    }
+
+    public boolean isOptional ()
+    {
+      return m_bIsOptional;
+    }
+
+    @Override
+    public boolean equals (final Object o)
+    {
+      if (o == this)
+        return true;
+      if (!(o instanceof Argument))
+        return false;
+      final Argument rhs = (Argument) o;
+      return m_aTypes.equals (rhs.m_aTypes);
+    }
+
+    @Override
+    public int hashCode ()
+    {
+      return new HashCodeGenerator (this).append (m_aTypes).getHashCode ();
+    }
+
+    @Override
+    public String toString ()
+    {
+      return new ToStringGenerator (null).append ("name", m_sName).append ("types", m_aTypes).toString ();
     }
   }
 
   private static final class Signature
   {
+    private static final Version V1 = new Version (1);
+
     private final Version m_aAdded;
     private final List <Argument> m_aArgs = new ArrayList <Argument> ();
 
@@ -185,7 +284,7 @@ public class MainCreateJQueryAPIList
 
     public boolean isAddedAfter10 ()
     {
-      return m_aAdded.isGreaterThan (new Version (1));
+      return m_aAdded.isGreaterThan (V1);
     }
 
     @Nonnegative
@@ -205,6 +304,57 @@ public class MainCreateJQueryAPIList
     public List <Argument> getAllArguments ()
     {
       return ContainerHelper.newList (m_aArgs);
+    }
+
+    @Nonnegative
+    public int getOptionalArgumentCount ()
+    {
+      int ret = 0;
+      for (final Argument aArg : m_aArgs)
+        if (aArg.isOptional ())
+          ++ret;
+      return ret;
+    }
+
+    public boolean containsArgumentWithName (final String sArgName)
+    {
+      for (final Argument aArg : m_aArgs)
+        if (aArg.getName ().equals (sArgName))
+          return true;
+      return false;
+    }
+
+    @Nonnegative
+    public int getArgumentsWithMultipleJavaTypesCount ()
+    {
+      int ret = 0;
+      for (final Argument aArg : m_aArgs)
+        if (aArg.getJavaTypeCount () > 1)
+          ++ret;
+      return ret;
+    }
+
+    @Override
+    public boolean equals (final Object o)
+    {
+      if (o == this)
+        return true;
+      if (!(o instanceof Signature))
+        return false;
+      final Signature rhs = (Signature) o;
+      return m_aArgs.equals (rhs.m_aArgs);
+    }
+
+    @Override
+    public int hashCode ()
+    {
+      return new HashCodeGenerator (this).append (m_aArgs).getHashCode ();
+    }
+
+    @Override
+    public String toString ()
+    {
+      return new ToStringGenerator (null).append ("added", m_aAdded).append ("args", m_aArgs).toString ();
     }
   }
 
@@ -237,6 +387,19 @@ public class MainCreateJQueryAPIList
     void addSignature (@Nonnull final Signature aSignature)
     {
       m_aSignatures.add (aSignature);
+    }
+
+    boolean containsSignature (@Nonnull final Signature aSignature)
+    {
+      final boolean b = m_aSignatures.contains (aSignature);
+      if (b && false)
+        System.out.println ("Duplicate: " + aSignature);
+      return b;
+    }
+
+    void addSignature (@Nonnegative final int nIndex, @Nonnull final Signature aSignature)
+    {
+      m_aSignatures.add (nIndex, aSignature);
     }
 
     @Nonnull
@@ -316,56 +479,11 @@ public class MainCreateJQueryAPIList
     {
       return ContainerHelper.newList (m_aSignatures);
     }
-  }
 
-  @Nonnull
-  static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
-  {
-    if (sType.equals ("Boolean"))
-      return new String [] { "boolean" };
-    if (sType.equals ("String"))
-      return new String [] { "String" };
-    if (sType.equals ("htmlString"))
-      return new String [] { "IHCNode", "String" };
-    if (sType.equals ("Integer"))
-      return new String [] { "int", "long", "BigInteger" };
-    if (sType.equals ("Number"))
-      return new String [] { "int", "long", "BigInteger", "double", "BigDecimal" };
-    if (sType.equals ("Selector"))
-      return new String [] { "IJQuerySelector" };
-    if (sType.equals ("Function"))
-      return new String [] { "JSAnonymousFunction" };
-    if (sType.equals ("Object"))
-      return new String [] { "IJSExpression" };
-    if (sType.equals ("PlainObject"))
-      return new String [] { "IJSExpression" };
-    if (sType.equals ("Anything"))
-      return new String [] { "IJSExpression" };
-    if (sType.equals ("Array"))
-      return new String [] { "JSArray" };
-    if (sType.equals ("Element"))
-      return new String [] { "EHTMLElementName", "String" };
-    if (sType.equals ("Elements"))
-      return new String [] { "EHTMLElementName...", "Iterable<EHTMLElementName>", "String...", "Iterable<String>" };
-    if (sType.equals ("jQuery"))
-      return new String [] { "JQueryInvocation" };
-
-    // DOM document
-    if (sType.equals ("document"))
-      return new String [] { "IJSExpression" };
-
-    // JQuery Deferred
-    if (sType.equals ("Deferred"))
-      return new String [] { "IJSExpression" };
-
-    // JQuery Event
-    if (sType.equals ("Event"))
-      return new String [] { "IJSExpression" };
-
-    // ????
-    if (sType.equals ("jQuery object"))
-      return new String [] { "JQueryInvocation" };
-    throw new IllegalArgumentException ("Unknown type '" + sType + "'");
+    public boolean isStaticMethod ()
+    {
+      return m_eAPIType == EAPIType.METHOD && m_sName.startsWith ("jQuery.");
+    }
   }
 
   public static void main (final String [] args) throws Exception
@@ -429,8 +547,11 @@ public class MainCreateJQueryAPIList
 
           for (final IMicroElement eArg : eSignature.getAllChildElements ("argument"))
           {
-            final String sArgName = eArg.getAttribute ("name");
+            final String sOrigArgName = eArg.getAttribute ("name");
             final String sArgType = eArg.getAttribute ("type");
+            final boolean bIsOptional = eArg.hasAttribute ("optional") ? StringParser.parseBool (eArg.getAttribute ("optional"))
+                                                                      : false;
+
             final List <String> aTypes = new ArrayList <String> ();
             if (StringHelper.hasNoTextAfterTrim (sArgType))
             {
@@ -447,15 +568,32 @@ public class MainCreateJQueryAPIList
               aTypes.add (TYPE_ANY);
 
             aAllArgTypes.addAll (aTypes);
-            aSignature.addArgument (new Argument (sArgName, aTypes));
+
+            // Make argument name unique
+            String sArgName = sOrigArgName;
+            // Skip function parameters
+            final int i = sArgName.indexOf ('(');
+            if (i > 0)
+              sArgName = sArgName.substring (0, i);
+            int nArgIndex = 1;
+            while (aSignature.containsArgumentWithName (sArgName))
+              sArgName = sOrigArgName + nArgIndex++;
+
+            aSignature.addArgument (new Argument (sArgName, aTypes, bIsOptional));
 
             ++nArguments;
           }
 
-          aEntry.addSignature (aSignature);
+          if (!aEntry.containsSignature (aSignature))
+            aEntry.addSignature (aSignature);
           ++nSignatures;
         }
-        aAllEntries.add (aEntry);
+        if (aEntry.getAPIType () == EAPIType.METHOD && aEntry.getName ().equals ("jQuery"))
+        {
+          // ignore this entry as this is explicitly handled in class JQuery
+        }
+        else
+          aAllEntries.add (aEntry);
       }
       ++nFiles;
     }
@@ -467,6 +605,32 @@ public class MainCreateJQueryAPIList
         return o1.getName ().compareTo (o2.getName ());
       }
     });
+
+    // Build unique signatures where optional arguments are present
+    for (final Entry aEntry : aAllEntries)
+    {
+      int nSigIndex = 0;
+      for (final Signature aSig : aEntry.getAllSignatures ())
+      {
+        final int nOptCount = aSig.getOptionalArgumentCount ();
+        if (nOptCount > 0)
+        {
+          final int nArgs = aSig.getArgumentCount ();
+          if (false)
+            System.out.println (aEntry.getName () + " " + nArgs + " - " + nOptCount);
+          for (int i = nOptCount; i >= 1; --i)
+          {
+            final int nRemainingArgs = nArgs - i;
+            final Signature aClone = new Signature (aSig.getAdded ());
+            for (int j = 0; j < nRemainingArgs; ++j)
+              aClone.addArgument (aSig.getArgumentAtIndex (j));
+            if (!aEntry.containsSignature (aClone))
+              aEntry.addSignature (nSigIndex++, aClone);
+          }
+        }
+        ++nSigIndex;
+      }
+    }
 
     System.out.println ("Scanned " +
                         nFiles +
@@ -539,15 +703,8 @@ public class MainCreateJQueryAPIList
                   bFirst = false;
                 else
                   sLine += ", ";
-                final StringBuilder aTypes = new StringBuilder ();
-                for (final String sType : aArg.getAllTypes ())
-                {
-                  if (aTypes.length () > 0)
-                    aTypes.append (", ");
-                  aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
-                }
 
-                sLine += aTypes.toString () + " " + aArg.getIdentifier ();
+                sLine += "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "} " + aArg.getIdentifier ();
               }
               aLines.add (sLine + ");");
             }
@@ -590,31 +747,30 @@ public class MainCreateJQueryAPIList
         if (aEntry.getAPIType () == EAPIType.METHOD)
           aUsed.putSingle (aEntry.getName (), aEntry);
 
-      // non static methods for AbstractJQueryInvocation
-      if (false)
-        for (final List <Entry> aEntries : aUsed.values ())
+      // non static methods for IJQueryInvocation
+      for (final List <Entry> aEntries : aUsed.values ())
+      {
+        boolean bIsDeprecated = true;
+        boolean bIsPartiallyDeprecated = false;
+        final Set <String> aReturnTypes = new LinkedHashSet <String> ();
+        final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
+        for (final Entry aEntry : aEntries)
         {
-          boolean bIsDeprecated = true;
-          boolean bIsPartiallyDeprecated = false;
-          final Set <String> aReturnTypes = new LinkedHashSet <String> ();
-          final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
-          for (final Entry aEntry : aEntries)
+          aReturnTypes.add (aEntry.getReturnOrVoid ());
+          if (aEntry.isDeprecated ())
           {
-            aReturnTypes.add (aEntry.getReturnOrVoid ());
-            if (aEntry.isDeprecated ())
-            {
-              aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
-              bIsPartiallyDeprecated = true;
-            }
-            else
-              bIsDeprecated = false;
+            aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
+            bIsPartiallyDeprecated = true;
           }
+          else
+            bIsDeprecated = false;
+        }
 
-          final Entry aEntry = aEntries.get (0);
+        final Entry aEntry = aEntries.get (0);
 
-          // Static methods are handled in class jQuery
-          final boolean bIsStatic = aEntry.getName ().startsWith ("jQuery.");
-          if (!bIsStatic)
+        // Static methods are handled in class jQuery
+        if (false)
+          if (!aEntry.isStaticMethod ())
           {
             // Remove implicit prefixes for non-static names
             String sPrefix = "";
@@ -651,110 +807,208 @@ public class MainCreateJQueryAPIList
             aLines.add ("@Nonnull");
             if (bIsDeprecated)
               aLines.add ("@Deprecated");
-            aLines.add ("public final IMPLTYPE " + aEntry.getIdentifier () + " ()");
-            aLines.add ("{ return jqinvoke (\"" + sRealName + "\"); }");
+            aLines.add ("IMPLTYPE " + aEntry.getIdentifier () + " ();");
           }
-        }
+      }
 
-      // static methods- for JQuery.java
+      // non static methods for AbstractJQueryInvocation
       for (final List <Entry> aEntries : aUsed.values ())
       {
         boolean bIsDeprecated = true;
-        boolean bIsPartiallyDeprecated = false;
-        final Set <String> aReturnTypes = new LinkedHashSet <String> ();
-        final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
         for (final Entry aEntry : aEntries)
-        {
-          aReturnTypes.add (aEntry.getReturnOrVoid ());
-          if (aEntry.isDeprecated ())
+          if (!aEntry.isDeprecated ())
           {
-            aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
-            bIsPartiallyDeprecated = true;
-          }
-          else
             bIsDeprecated = false;
-        }
+            break;
+          }
 
         final Entry aEntry = aEntries.get (0);
 
         // Static methods are handled in class jQuery
-        final boolean bIsStatic = aEntry.getName ().startsWith ("jQuery.");
-        if (bIsStatic)
+        if (!aEntry.isStaticMethod ())
         {
-          String sSince = null;
-          if (aEntries.size () == 1 &&
-              aEntry.getSignatureCount () == 1 &&
-              aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
-            sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
+          // Remove implicit prefixes for non-static names
+          String sRealName = aEntry.getName ();
+          final int i = sRealName.indexOf ('.');
+          if (i > 0)
+            sRealName = sRealName.substring (i + 1);
 
-          aLines.add ("/**");
-          if (!bIsDeprecated && bIsPartiallyDeprecated)
-            aLines.add ("* Certain versions of this method are deprecated since jQuery " +
-                        StringHelper.getImploded (" or ", aDeprecatedVersions));
-          aLines.add (" * @return The invocation of the static jQuery function <code>" +
-                      aEntry.getName () +
-                      "()</code> with return type " +
-                      StringHelper.getImploded (" or ", aReturnTypes));
-          if (bIsDeprecated)
-            aLines.add ("* @deprecated Deprecated since jQuery " +
-                        StringHelper.getImploded (" or ", aDeprecatedVersions));
-          if (sSince != null)
-            aLines.add (" * @since jQuery " + sSince);
-          aLines.add (" */");
           aLines.add ("@Nonnull");
           if (bIsDeprecated)
             aLines.add ("@Deprecated");
-          aLines.add ("public static JQueryInvocation " +
-                      StringHelper.trimStart (aEntry.getIdentifier (), "jQuery_") +
-                      " ()");
-          aLines.add ("{ return new JQueryInvocation (JQueryProperty.jQueryField (), \"" +
-                      aEntry.getName ().substring ("jQuery.".length ()) +
-                      "\"); }");
+          aLines.add ("public final IMPLTYPE " + aEntry.getIdentifier () + " ()");
+          aLines.add ("{ return jqinvoke (\"" + sRealName + "\"); }");
         }
       }
+
+      // static methods- for JQuery.java
+      if (false)
+        for (final List <Entry> aEntries : aUsed.values ())
+        {
+          boolean bIsDeprecated = true;
+          boolean bIsPartiallyDeprecated = false;
+          final Set <String> aReturnTypes = new LinkedHashSet <String> ();
+          final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
+          for (final Entry aEntry : aEntries)
+          {
+            aReturnTypes.add (aEntry.getReturnOrVoid ());
+            if (aEntry.isDeprecated ())
+            {
+              aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
+              bIsPartiallyDeprecated = true;
+            }
+            else
+              bIsDeprecated = false;
+          }
+
+          final Entry aEntry = aEntries.get (0);
+
+          // Static methods are handled in class jQuery
+          if (aEntry.isStaticMethod ())
+          {
+            String sSince = null;
+            if (aEntries.size () == 1 &&
+                aEntry.getSignatureCount () == 1 &&
+                aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
+              sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
+
+            aLines.add ("/**");
+            if (!bIsDeprecated && bIsPartiallyDeprecated)
+              aLines.add ("* Certain versions of this method are deprecated since jQuery " +
+                          StringHelper.getImploded (" or ", aDeprecatedVersions));
+            aLines.add (" * @return The invocation of the static jQuery function <code>" +
+                        aEntry.getName () +
+                        "()</code> with return type " +
+                        StringHelper.getImploded (" or ", aReturnTypes));
+            if (bIsDeprecated)
+              aLines.add ("* @deprecated Deprecated since jQuery " +
+                          StringHelper.getImploded (" or ", aDeprecatedVersions));
+            if (sSince != null)
+              aLines.add (" * @since jQuery " + sSince);
+            aLines.add (" */");
+            aLines.add ("@Nonnull");
+            if (bIsDeprecated)
+              aLines.add ("@Deprecated");
+            aLines.add ("public static JQueryInvocation " +
+                        StringHelper.trimStart (aEntry.getIdentifier (), "jQuery_") +
+                        " ()");
+            aLines.add ("{ return new JQueryInvocation (JQueryProperty.jQueryField (), \"" +
+                        aEntry.getName ().substring ("jQuery.".length ()) +
+                        "\"); }");
+          }
+        }
     }
 
+    // IJQueryInvocationExtended
+    final Set <String> aUsedJavaSignatures = new HashSet <String> ();
     for (final Entry aEntry : aAllEntries)
       if (aEntry.getAPIType () == EAPIType.METHOD)
       {
+        final String sEntryNamePrefix = aEntry.getName () + ":";
         for (final Signature aSignature : aEntry.getAllSignatures ())
         {
-          String sRealPrefix = aEntry.getReturnOrVoid () + " " + aEntry.getIdentifier ();
-          if (aSignature.isAddedAfter10 ())
-            sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
-
           if (aSignature.getArgumentCount () == 0)
           {
-            // No args
-            aLines.add (sRealPrefix + "();");
+            // No args - ignore as this is handled by the base method in
+            // IJQueryInvocation
+            continue;
+          }
+
+          // Build comment
+          String sComment = "";
+          for (final Argument aArg : aSignature.getAllArguments ())
+            sComment += "* @param " + aArg.getIdentifier () + " parameter value\n";
+          if (aEntry.isDeprecated ())
+            sComment += "* @deprecated Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false) + "\n";
+          if (aSignature.isAddedAfter10 ())
+            sComment += "* @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n";
+          if (sComment.length () > 0)
+            sComment = "/**\n" + sComment + "*/\n";
+
+          final String sRealPrefix = "@Nonnull IMPLTYPE " + aEntry.getIdentifier ();
+
+          if (aSignature.getArgumentCount () == 1)
+          {
+            // Only one argument
+            final Argument aArg = aSignature.getArgumentAtIndex (0);
+            for (final String sType : aArg.getAllJavaTypes ())
+              if (aUsedJavaSignatures.add (sEntryNamePrefix + sType))
+                aLines.add (sComment + sRealPrefix + "(" + sType + " " + aArg.getIdentifier () + ");");
           }
           else
-            if (aSignature.getArgumentCount () == 1)
+          {
+            // More than one argument
+            final int nMultiJavaTypeArgs = aSignature.getArgumentsWithMultipleJavaTypesCount ();
+            if (nMultiJavaTypeArgs == 0)
             {
-              // 1 arg
-              final Argument aArg = aSignature.getArgumentAtIndex (0);
-              for (final String sType : aArg.getAllJavaTypes ())
-                aLines.add (sRealPrefix + "(" + sType + " " + aArg.getIdentifier () + ");");
-            }
-            else
-            {
-              String sLine = sRealPrefix + "(";
-              boolean bFirst = true;
+              String sParams = "";
+              final List <String> aJavaTypeKey = new ArrayList <String> ();
               for (final Argument aArg : aSignature.getAllArguments ())
               {
-                if (bFirst)
-                  bFirst = false;
-                else
-                  sLine += ", ";
+                if (sParams.length () > 0)
+                  sParams += ", ";
 
-                final Set <String> aAllJavaTypes = aArg.getAllJavaTypes ();
-                if (aAllJavaTypes.size () > 1)
-                  sLine += "{" + StringHelper.getImploded ('/', aAllJavaTypes) + "} " + aArg.getIdentifier ();
-                else
-                  sLine += aAllJavaTypes.iterator ().next () + " " + aArg.getIdentifier ();
+                final String sJavaType = aArg.getFirstJavaType ();
+                sParams += sJavaType + " " + aArg.getIdentifier ();
+                aJavaTypeKey.add (sJavaType);
               }
-              aLines.add (sLine + ");");
+              if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
+                aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
             }
+            else
+              if (nMultiJavaTypeArgs == 1)
+              {
+                // One multi java-type argument
+                String sParams = "";
+                final List <String> aJavaTypeKey = new ArrayList <String> ();
+                for (final Argument aArg : aSignature.getAllArguments ())
+                {
+                  if (sParams.length () > 0)
+                    sParams += ", ";
+
+                  if (aArg.getJavaTypeCount () > 1)
+                  {
+                    final String sJavaType = "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "}";
+                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    aJavaTypeKey.add (sJavaType);
+                  }
+                  else
+                  {
+                    final String sJavaType = aArg.getFirstJavaType ();
+                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    aJavaTypeKey.add (sJavaType);
+                  }
+                }
+                if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
+                  aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
+              }
+              else
+              {
+                // Cannot handle currently :(
+                String sParams = "";
+                final List <String> aJavaTypeKey = new ArrayList <String> ();
+                for (final Argument aArg : aSignature.getAllArguments ())
+                {
+                  if (sParams.length () > 0)
+                    sParams += ", ";
+
+                  if (aArg.getJavaTypeCount () > 1)
+                  {
+                    final String sJavaType = "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "}";
+                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    aJavaTypeKey.add (sJavaType);
+                  }
+                  else
+                  {
+                    final String sJavaType = aArg.getFirstJavaType ();
+                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    aJavaTypeKey.add (sJavaType);
+                  }
+                }
+                if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
+                  aLines.add ("//" + sRealPrefix + "(" + sParams + ");");
+              }
+          }
         }
       }
 
