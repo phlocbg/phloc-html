@@ -24,6 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import org.w3c.dom.Node;
+
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
@@ -31,6 +33,9 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.commons.id.IHasID;
+import com.phloc.commons.microdom.IMicroNode;
+import com.phloc.commons.microdom.serialize.MicroWriter;
+import com.phloc.commons.xml.serialize.XMLWriter;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.IHCElement;
@@ -41,9 +46,10 @@ import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSAssocArray;
 import com.phloc.html.js.builder.JSExpr;
-import com.phloc.html.js.builder.JSFieldRef;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.html.JSHtml;
+import com.phloc.json2.IJson;
+import com.phloc.json2.serialize.JsonWriter;
 
 /**
  * Wrapper around jQuery to allow for easy function calls
@@ -89,426 +95,6 @@ public final class JQuery
   public static JSFunction jQueryFunction ()
   {
     return new JSFunction (isUseDollarForJQuery () ? "$" : "jQuery");
-  }
-
-  /**
-   * @return <code>$.parseJSON</code>
-   */
-  @Nonnull
-  public static JSFieldRef parseJSON ()
-  {
-    return JQueryProperty.jQueryField ().ref ("parseJSON");
-  }
-
-  /**
-   * @return <code>$.ajax</code>
-   */
-  @Nonnull
-  public static JQueryInvocation ajax ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajax");
-  }
-
-  /**
-   * @param aArgs
-   *        The array with the AJAX arguments
-   * @return <code>$.ajax</code>
-   */
-  @Nonnull
-  public static JQueryInvocation ajax (@Nonnull final JSAssocArray aArgs)
-  {
-    return ajax ().arg (aArgs);
-  }
-
-  /**
-   * @return <code>$.ajaxPrefilter</code>
-   */
-  @Nonnull
-  public static JQueryInvocation ajaxPrefilter ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajaxPrefilter");
-  }
-
-  /**
-   * @return <code>$.ajaxSetup</code>
-   */
-  @Nonnull
-  public static JQueryInvocation ajaxSetup ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajaxSetup");
-  }
-
-  /**
-   * @return <code>$.Callbacks</code>
-   */
-  @Nonnull
-  public static JQueryInvocation callbacks ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "Callbacks");
-  }
-
-  /**
-   * @return <code>$.contains</code>
-   */
-  @Nonnull
-  public static JQueryInvocation contains ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "contains");
-  }
-
-  /**
-   * @return <code>$.data</code>
-   */
-  @Nonnull
-  public static JQueryInvocation data ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "data");
-  }
-
-  /**
-   * @return <code>$.dequeue</code>
-   */
-  @Nonnull
-  public static JQueryInvocation dequeue ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "dequeue");
-  }
-
-  /**
-   * @return <code>$.each</code>
-   */
-  @Nonnull
-  public static JQueryInvocation each ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "each");
-  }
-
-  /**
-   * @return <code>$.error</code>
-   */
-  @Nonnull
-  public static JQueryInvocation error ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "error");
-  }
-
-  /**
-   * @return <code>$.extend</code>
-   */
-  @Nonnull
-  public static JQueryInvocation extend ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "extend");
-  }
-
-  /**
-   * @return <code>$.get</code>
-   */
-  @Nonnull
-  public static JQueryInvocation get ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "get");
-  }
-
-  /**
-   * @return <code>$.getJSON</code>
-   */
-  @Nonnull
-  public static JQueryInvocation getJSON ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "getJSON");
-  }
-
-  /**
-   * @return <code>$.getScript</code>
-   */
-  @Nonnull
-  public static JQueryInvocation getScript ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "getScript");
-  }
-
-  /**
-   * @return <code>$.globalEval</code>
-   */
-  @Nonnull
-  public static JQueryInvocation globalEval ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "globalEval");
-  }
-
-  /**
-   * @param sEval
-   *        JS code to be evaluated
-   * @return <code>$.globalEval</code>
-   */
-  @Nonnull
-  public static JQueryInvocation globalEval (@Nonnull final String sEval)
-  {
-    return globalEval ().arg (sEval);
-  }
-
-  /**
-   * @param aEval
-   *        JS code to be evaluated
-   * @return <code>$.globalEval</code>
-   */
-  @Nonnull
-  public static JQueryInvocation globalEval (@Nonnull final IJSExpression aEval)
-  {
-    return globalEval ().arg (aEval);
-  }
-
-  /**
-   * @return <code>$.grep</code>
-   */
-  @Nonnull
-  public static JQueryInvocation grep ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "grep");
-  }
-
-  /**
-   * @return <code>$.hasData</code>
-   */
-  @Nonnull
-  public static JQueryInvocation hasData ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "hasData");
-  }
-
-  /**
-   * @return <code>$.holdReady</code>
-   */
-  @Nonnull
-  public static JQueryInvocation holdReady ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "holdReady");
-  }
-
-  /**
-   * @return <code>$.inArray</code>
-   */
-  @Nonnull
-  public static JQueryInvocation inArray ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "inArray");
-  }
-
-  /**
-   * @return <code>$.isArray</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isArray ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isArray");
-  }
-
-  /**
-   * @return <code>$.isEmptyObject</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isEmptyObject ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isEmptyObject");
-  }
-
-  /**
-   * @return <code>$.isFunction</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isFunction ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isFunction");
-  }
-
-  /**
-   * @return <code>$.isNumeric</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isNumeric ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isNumeric");
-  }
-
-  /**
-   * @return <code>$.isPlainObject</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isPlainObject ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isPlainObject");
-  }
-
-  /**
-   * @return <code>$.isWindow</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isWindow ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isWindow");
-  }
-
-  /**
-   * @return <code>$.isXMLDoc</code>
-   */
-  @Nonnull
-  public static JQueryInvocation isXMLDoc ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "isXMLDoc");
-  }
-
-  /**
-   * @return <code>$.makeArray</code>
-   */
-  @Nonnull
-  public static JQueryInvocation makeArray ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "makeArray");
-  }
-
-  /**
-   * @return <code>$.map</code>
-   */
-  @Nonnull
-  public static JQueryInvocation map ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "map");
-  }
-
-  /**
-   * @return <code>$.merge</code>
-   */
-  @Nonnull
-  public static JQueryInvocation merge ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "merge");
-  }
-
-  /**
-   * @return <code>$.noConflict</code>
-   */
-  @Nonnull
-  public static JQueryInvocation noConflict ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "noConflict");
-  }
-
-  /**
-   * @return <code>$.noop</code>
-   */
-  @Nonnull
-  public static JQueryInvocation noop ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "noop");
-  }
-
-  /**
-   * @return <code>$.now</code>
-   */
-  @Nonnull
-  public static JQueryInvocation now ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "now");
-  }
-
-  /**
-   * @return <code>$.param</code>
-   */
-  @Nonnull
-  public static JQueryInvocation param ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "param");
-  }
-
-  /**
-   * @return <code>$.parseXML</code>
-   */
-  @Nonnull
-  public static JQueryInvocation parseXML ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "parseXML");
-  }
-
-  /**
-   * @return <code>$.post</code>
-   */
-  @Nonnull
-  public static JQueryInvocation post ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "post");
-  }
-
-  /**
-   * @return <code>$.proxy</code>
-   */
-  @Nonnull
-  public static JQueryInvocation proxy ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "proxy");
-  }
-
-  /**
-   * @return <code>$.queue</code>
-   */
-  @Nonnull
-  public static JQueryInvocation queue ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "queue");
-  }
-
-  /**
-   * @return <code>$.removeData</code>
-   */
-  @Nonnull
-  public static JQueryInvocation removeData ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "removeData");
-  }
-
-  /**
-   * @return <code>$.sub</code>
-   */
-  @Nonnull
-  public static JQueryInvocation sub ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "sub");
-  }
-
-  /**
-   * @return <code>$.trim</code>
-   */
-  @Nonnull
-  public static JQueryInvocation trim ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "trim");
-  }
-
-  /**
-   * @return <code>$.type</code>
-   */
-  @Nonnull
-  public static JQueryInvocation type ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "type");
-  }
-
-  /**
-   * @return <code>$.unique</code>
-   */
-  @Nonnull
-  public static JQueryInvocation unique ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "unique");
-  }
-
-  /**
-   * @return <code>$.when</code>
-   */
-  @Nonnull
-  public static JQueryInvocation when ()
-  {
-    return new JQueryInvocation (JQueryProperty.jQueryField (), "when");
   }
 
   /**
@@ -564,6 +150,115 @@ public final class JQuery
   {
     return jQuery (JSExpr.THIS);
   }
+
+  // Special cases
+
+  /**
+   * @param aArgs
+   *        The array with the AJAX arguments
+   * @return <code>$.ajax</code>
+   */
+  @Nonnull
+  public static JQueryInvocation ajax (@Nonnull final JSAssocArray aArgs)
+  {
+    return ajax ().arg (aArgs);
+  }
+
+  /**
+   * @param sEval
+   *        JS code to be evaluated
+   * @return <code>$.globalEval</code>
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval (@Nonnull final String sEval)
+  {
+    return globalEval ().arg (sEval);
+  }
+
+  /**
+   * @param aEval
+   *        JS code to be evaluated
+   * @return <code>$.globalEval</code>
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval (@Nonnull final IJSExpression aEval)
+  {
+    return globalEval ().arg (aEval);
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseHTML (@Nonnull final Node aHTML)
+  {
+    return parseHTML (XMLWriter.getXMLString (aHTML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseHTML (@Nonnull final IMicroNode aHTML)
+  {
+    return parseHTML (MicroWriter.getXMLString (aHTML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseHTML (@Nonnull final IHCNode aHTML)
+  {
+    return parseHTML (HCSettings.getAsHTMLStringWithoutNamespaces (aHTML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseHTML (@Nonnull final String sHTML)
+  {
+    return parseHTML (JSExpr.lit (sHTML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseHTML (@Nonnull final IJSExpression aExpr)
+  {
+    return parseHTML ().arg (aExpr);
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseJSON (@Nonnull final IJson aJson)
+  {
+    return parseJSON (JsonWriter.getAsString (aJson));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseJSON (@Nonnull final String sJSON)
+  {
+    return parseJSON (JSExpr.lit (sJSON));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseJSON (@Nonnull final IJSExpression aExpr)
+  {
+    return parseJSON ().arg (aExpr);
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseXML (@Nonnull final Node aXML)
+  {
+    return parseXML (XMLWriter.getXMLString (aXML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseXML (@Nonnull final IMicroNode aXML)
+  {
+    return parseXML (MicroWriter.getXMLString (aXML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseXML (@Nonnull final String sXML)
+  {
+    return parseXML (JSExpr.lit (sXML));
+  }
+
+  @Nonnull
+  public static JQueryInvocation parseXML (@Nonnull final IJSExpression aExpr)
+  {
+    return parseXML ().arg (aExpr);
+  }
+
+  // selectors start here
 
   /**
    * Get the result of a jQuery selection
@@ -871,5 +566,508 @@ public final class JQuery
     final IReadonlyPair <JQueryInvocation, JSAnonymousFunction> aPair = onDocumentReady ();
     aPair.getSecond ().body ().add (aJSCodeProvider);
     return aPair.getFirst ();
+  }
+
+  // Everything starting from here is automatically generated:
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.Callbacks()</code> with return type Callbacks
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  public static JQueryInvocation Callbacks ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "Callbacks");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.Deferred()</code> with return type Deferred
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation Deferred ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "Deferred");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.ajax()</code> with return type jqXHR
+   */
+  @Nonnull
+  public static JQueryInvocation ajax ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajax");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.ajaxPrefilter()</code> with return type undefined
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation ajaxPrefilter ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajaxPrefilter");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.ajaxSetup()</code> with return type
+   * @since jQuery 1.1
+   */
+  @Nonnull
+  public static JQueryInvocation ajaxSetup ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajaxSetup");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.ajaxTransport()</code> with return type undefined
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation ajaxTransport ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "ajaxTransport");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.contains()</code> with return type Boolean
+   * @since jQuery 1.4
+   */
+  @Nonnull
+  public static JQueryInvocation contains ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "contains");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.data()</code> with return type Object
+   */
+  @Nonnull
+  public static JQueryInvocation data ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "data");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.dequeue()</code> with return type undefined
+   * @since jQuery 1.3
+   */
+  @Nonnull
+  public static JQueryInvocation dequeue ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "dequeue");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.each()</code> with return type Object
+   */
+  @Nonnull
+  public static JQueryInvocation each ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "each");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.error()</code> with return type
+   * @since jQuery 1.4.1
+   */
+  @Nonnull
+  public static JQueryInvocation error ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "error");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.extend()</code> with return type Object
+   */
+  @Nonnull
+  public static JQueryInvocation extend ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "extend");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.fn.extend()</code> with return type Object
+   */
+  @Nonnull
+  public static JQueryInvocation fn_extend ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "fn.extend");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.get()</code> with return type jqXHR
+   */
+  @Nonnull
+  public static JQueryInvocation get ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "get");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.getJSON()</code> with return type jqXHR
+   */
+  @Nonnull
+  public static JQueryInvocation getJSON ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "getJSON");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.getScript()</code> with return type jqXHR
+   */
+  @Nonnull
+  public static JQueryInvocation getScript ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "getScript");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.globalEval()</code> with return type
+   * @since jQuery 1.0.4
+   */
+  @Nonnull
+  public static JQueryInvocation globalEval ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "globalEval");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.grep()</code> with return type Array
+   */
+  @Nonnull
+  public static JQueryInvocation grep ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "grep");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.hasData()</code> with return type Boolean
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation hasData ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "hasData");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.holdReady()</code> with return type undefined
+   * @since jQuery 1.6
+   */
+  @Nonnull
+  public static JQueryInvocation holdReady ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "holdReady");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.inArray()</code> with return type Number
+   * @since jQuery 1.2
+   */
+  @Nonnull
+  public static JQueryInvocation inArray ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "inArray");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isArray()</code> with return type boolean
+   * @since jQuery 1.3
+   */
+  @Nonnull
+  public static JQueryInvocation isArray ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isArray");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isEmptyObject()</code> with return type Boolean
+   * @since jQuery 1.4
+   */
+  @Nonnull
+  public static JQueryInvocation isEmptyObject ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isEmptyObject");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isFunction()</code> with return type boolean
+   * @since jQuery 1.2
+   */
+  @Nonnull
+  public static JQueryInvocation isFunction ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isFunction");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isNumeric()</code> with return type Boolean
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  public static JQueryInvocation isNumeric ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isNumeric");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isPlainObject()</code> with return type Boolean
+   * @since jQuery 1.4
+   */
+  @Nonnull
+  public static JQueryInvocation isPlainObject ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isPlainObject");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isWindow()</code> with return type boolean
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  public static JQueryInvocation isWindow ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isWindow");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.isXMLDoc()</code> with return type Boolean
+   * @since jQuery 1.1.4
+   */
+  @Nonnull
+  public static JQueryInvocation isXMLDoc ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "isXMLDoc");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.makeArray()</code> with return type Array
+   * @since jQuery 1.2
+   */
+  @Nonnull
+  public static JQueryInvocation makeArray ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "makeArray");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.map()</code> with return type Array
+   */
+  @Nonnull
+  public static JQueryInvocation map ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "map");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.merge()</code> with return type Array
+   */
+  @Nonnull
+  public static JQueryInvocation merge ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "merge");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.noConflict()</code> with return type Object
+   */
+  @Nonnull
+  public static JQueryInvocation noConflict ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "noConflict");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.noop()</code> with return type undefined
+   * @since jQuery 1.4
+   */
+  @Nonnull
+  public static JQueryInvocation noop ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "noop");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.now()</code> with return type Number
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  public static JQueryInvocation now ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "now");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.param()</code> with return type String
+   */
+  @Nonnull
+  public static JQueryInvocation param ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "param");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.parseHTML()</code> with return type Array
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  public static JQueryInvocation parseHTML ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "parseHTML");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.parseJSON()</code> with return type Object
+   * @since jQuery 1.4.1
+   */
+  @Nonnull
+  public static JQueryInvocation parseJSON ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "parseJSON");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.parseXML()</code> with return type XMLDocument
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation parseXML ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "parseXML");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.post()</code> with return type jqXHR
+   */
+  @Nonnull
+  public static JQueryInvocation post ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "post");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.proxy()</code> with return type Function
+   */
+  @Nonnull
+  public static JQueryInvocation proxy ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "proxy");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.queue()</code> with return type Array or jQuery
+   */
+  @Nonnull
+  public static JQueryInvocation queue ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "queue");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.removeData()</code> with return type jQuery
+   * @since jQuery 1.2.3
+   */
+  @Nonnull
+  public static JQueryInvocation removeData ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "removeData");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.sub()</code> with return type jQuery
+   * @deprecated Deprecated since jQuery 1.7
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  @Deprecated
+  public static JQueryInvocation sub ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "sub");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.trim()</code> with return type String
+   */
+  @Nonnull
+  public static JQueryInvocation trim ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "trim");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.type()</code> with return type String
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  public static JQueryInvocation type ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "type");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.unique()</code> with return type Array
+   * @since jQuery 1.1.3
+   */
+  @Nonnull
+  public static JQueryInvocation unique ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "unique");
+  }
+
+  /**
+   * @return The invocation of the static jQuery function
+   *         <code>jQuery.when()</code> with return type Promise
+   * @since jQuery 1.5
+   */
+  @Nonnull
+  public static JQueryInvocation when ()
+  {
+    return new JQueryInvocation (JQueryProperty.jQueryField (), "when");
   }
 }

@@ -56,7 +56,7 @@ public final class JQueryTest
     assertEquals ("$.ajax(5);", JQuery.ajax ().arg (5).getJSCode ());
     assertEquals ("$.ajaxPrefilter(5);", JQuery.ajaxPrefilter ().arg (5).getJSCode ());
     assertEquals ("$.ajaxSetup(5);", JQuery.ajaxSetup ().arg (5).getJSCode ());
-    assertEquals ("$.Callbacks(5);", JQuery.callbacks ().arg (5).getJSCode ());
+    assertEquals ("$.Callbacks(5);", JQuery.Callbacks ().arg (5).getJSCode ());
     assertEquals ("$.contains(5);", JQuery.contains ().arg (5).getJSCode ());
     assertEquals ("$.data(5);", JQuery.data ().arg (5).getJSCode ());
     assertEquals ("$.dequeue(5);", JQuery.dequeue ().arg (5).getJSCode ());
@@ -89,7 +89,6 @@ public final class JQueryTest
     assertEquals ("$.proxy(5);", JQuery.proxy ().arg (5).getJSCode ());
     assertEquals ("$.queue(5);", JQuery.queue ().arg (5).getJSCode ());
     assertEquals ("$.removeData(5);", JQuery.removeData ().arg (5).getJSCode ());
-    assertEquals ("$.sub(5);", JQuery.sub ().arg (5).getJSCode ());
     assertEquals ("$.trim(5);", JQuery.trim ().arg (5).getJSCode ());
     assertEquals ("$.type(5);", JQuery.type ().arg (5).getJSCode ());
     assertEquals ("$.unique(5);", JQuery.unique ().arg (5).getJSCode ());
