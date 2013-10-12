@@ -81,6 +81,19 @@ public class MainCreateJQueryAPIList
     }
   }
 
+  static String _makeIdentifier (final String sName)
+  {
+    // Skip function parameters
+    String sRealName = sName;
+    final int i = sRealName.indexOf ('(');
+    if (i > 0)
+      sRealName = sRealName.substring (0, i);
+    String sID = RegExHelper.getAsIdentifier (sRealName, "_").replaceAll ("_+", "_");
+    sID = StringHelper.trimStart (sID, "_");
+    sID = StringHelper.trimEnd (sID, "_");
+    return sID;
+  }
+
   private static final class Argument
   {
     private final String m_sName;
@@ -94,7 +107,7 @@ public class MainCreateJQueryAPIList
       if (ContainerHelper.isEmpty (aTypes))
         throw new IllegalArgumentException ("types");
       m_sName = sName;
-      m_sIdentifier = RegExHelper.getAsIdentifier (sName);
+      m_sIdentifier = _makeIdentifier (sName);
       m_aTypes = aTypes;
     }
 
@@ -130,6 +143,18 @@ public class MainCreateJQueryAPIList
     public List <String> getAllTypes ()
     {
       return ContainerHelper.newList (m_aTypes);
+    }
+
+    @Nonnull
+    @Nonempty
+    @ReturnsMutableCopy
+    public Set <String> getAllJavaTypes ()
+    {
+      final Set <String> aTypes = new LinkedHashSet <String> ();
+      for (final String sType : m_aTypes)
+        for (final String sType0 : _getJavaTypes (sType))
+          aTypes.add (sType0);
+      return aTypes;
     }
   }
 
@@ -203,7 +228,7 @@ public class MainCreateJQueryAPIList
     {
       m_eAPIType = eAPIType;
       m_sName = sName;
-      m_sIdentifier = PARENT_CLASS_NAMES.contains (sName) ? "_" + sName : RegExHelper.getAsIdentifier (sName);
+      m_sIdentifier = PARENT_CLASS_NAMES.contains (sName) ? "_" + sName : _makeIdentifier (sName);
       m_sReturn = sReturn;
       m_aDeprecated = aDeprecated;
       m_aRemoved = aRemoved;
@@ -243,6 +268,12 @@ public class MainCreateJQueryAPIList
     public String getReturn ()
     {
       return m_sReturn;
+    }
+
+    @Nonnull
+    public String getReturnOrVoid ()
+    {
+      return hasReturn () ? getReturn () : "void";
     }
 
     public boolean isDeprecated ()
@@ -288,7 +319,7 @@ public class MainCreateJQueryAPIList
   }
 
   @Nonnull
-  private static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
+  static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
   {
     if (sType.equals ("Boolean"))
       return new String [] { "boolean" };
@@ -552,6 +583,7 @@ public class MainCreateJQueryAPIList
     // "jQuery."
 
     // Methods without parameter handling
+    if (false)
     {
       final IMultiMapListBased <String, Entry> aUsed = new MultiTreeMapArrayListBased <String, Entry> ();
       for (final Entry aEntry : aAllEntries)
@@ -568,7 +600,7 @@ public class MainCreateJQueryAPIList
           final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
           for (final Entry aEntry : aEntries)
           {
-            aReturnTypes.add (aEntry.getReturn ());
+            aReturnTypes.add (aEntry.getReturnOrVoid ());
             if (aEntry.isDeprecated ())
             {
               aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
@@ -633,7 +665,7 @@ public class MainCreateJQueryAPIList
         final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
         for (final Entry aEntry : aEntries)
         {
-          aReturnTypes.add (aEntry.getReturn ());
+          aReturnTypes.add (aEntry.getReturnOrVoid ());
           if (aEntry.isDeprecated ())
           {
             aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
@@ -682,26 +714,27 @@ public class MainCreateJQueryAPIList
       }
     }
 
-    if (false)
-      for (final Entry aEntry : aAllEntries)
-        if (aEntry.getAPIType () == EAPIType.METHOD)
+    for (final Entry aEntry : aAllEntries)
+      if (aEntry.getAPIType () == EAPIType.METHOD)
+      {
+        for (final Signature aSignature : aEntry.getAllSignatures ())
         {
-          for (final Signature aSignature : aEntry.getAllSignatures ())
-          {
-            String sRealPrefix = (aEntry.hasReturn () ? aEntry.getReturn () : "void") + " " + aEntry.getIdentifier ();
-            if (aEntry.isRemoved ())
-              sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
-            if (aEntry.isDeprecated ())
-              sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
-                            aEntry.getDeprecated ().getAsString (false) +
-                            "\n" +
-                            sRealPrefix;
-            if (aSignature.isAddedAfter10 ())
-              sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+          String sRealPrefix = aEntry.getReturnOrVoid () + " " + aEntry.getIdentifier ();
+          if (aSignature.isAddedAfter10 ())
+            sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
 
-            if (aSignature.getArgumentCount () == 0)
+          if (aSignature.getArgumentCount () == 0)
+          {
+            // No args
+            aLines.add (sRealPrefix + "();");
+          }
+          else
+            if (aSignature.getArgumentCount () == 1)
             {
-              aLines.add (sRealPrefix + "();");
+              // 1 arg
+              final Argument aArg = aSignature.getArgumentAtIndex (0);
+              for (final String sType : aArg.getAllJavaTypes ())
+                aLines.add (sRealPrefix + "(" + sType + " " + aArg.getIdentifier () + ");");
             }
             else
             {
@@ -713,20 +746,17 @@ public class MainCreateJQueryAPIList
                   bFirst = false;
                 else
                   sLine += ", ";
-                final StringBuilder aTypes = new StringBuilder ();
-                for (final String sType : aArg.getAllTypes ())
-                {
-                  if (aTypes.length () > 0)
-                    aTypes.append ("/");
-                  aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
-                }
 
-                sLine += "{" + aTypes.toString () + "} " + aArg.getIdentifier ();
+                final Set <String> aAllJavaTypes = aArg.getAllJavaTypes ();
+                if (aAllJavaTypes.size () > 1)
+                  sLine += "{" + StringHelper.getImploded ('/', aAllJavaTypes) + "} " + aArg.getIdentifier ();
+                else
+                  sLine += aAllJavaTypes.iterator ().next () + " " + aArg.getIdentifier ();
               }
               aLines.add (sLine + ");");
             }
-          }
         }
+      }
 
     for (final String sLine : aLines)
       System.out.println (sLine);
