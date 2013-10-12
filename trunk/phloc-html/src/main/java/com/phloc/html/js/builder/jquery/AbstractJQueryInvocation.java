@@ -655,6 +655,15 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @return The invocation of the jQuery function <code>each()</code>
+   */
+  @Nonnull
+  public IMPLTYPE each (@Nonnull final JSAnonymousFunction aFunc)
+  {
+    return each ().arg (aFunc);
+  }
+
+  /**
    * @return The invocation of the jQuery function <code>empty()</code>
    */
   @Nonnull
@@ -775,6 +784,24 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE find ()
   {
     return jqinvoke ("find");
+  }
+
+  /**
+   * @return The invocation of the jQuery function <code>find()</code>
+   */
+  @Nonnull
+  public IMPLTYPE find (@Nonnull final EHTMLElement eHTMLElement)
+  {
+    return find (JQuerySelector.element (eHTMLElement));
+  }
+
+  /**
+   * @return The invocation of the jQuery function <code>find()</code>
+   */
+  @Nonnull
+  public IMPLTYPE find (@Nonnull final IJQuerySelector aSelector)
+  {
+    return find ().arg (aSelector);
   }
 
   /**
@@ -1344,6 +1371,30 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE onClick ()
   {
     return on ("click");
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
+   * @return The invocation of the jQuery function <code>on('click')</code>
+   * @see #on()
+   */
+  @Nonnull
+  public IMPLTYPE onClick (@Nonnull final IJQuerySelector aSelector, @Nonnull final JSAnonymousFunction aData)
+  {
+    return onClick ().arg (aSelector).arg (aData);
+  }
+
+  /**
+   * Added in jQuery 1.7
+   * 
+   * @return The invocation of the jQuery function <code>on('click')</code>
+   * @see #on()
+   */
+  @Nonnull
+  public IMPLTYPE onClick (@Nonnull final JQuerySelectorList aSelector, @Nonnull final JSAnonymousFunction aData)
+  {
+    return onClick ().arg (aSelector).arg (aData);
   }
 
   /**
@@ -2048,6 +2099,39 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @param nValue
+   *        The value to be used as an argument to <code>val()</code>
+   * @return The invocation of the jQuery function <code>val()</code>
+   */
+  @Nonnull
+  public IMPLTYPE val (@Nonnull final int nValue)
+  {
+    return val (JSExpr.lit (nValue));
+  }
+
+  /**
+   * @param nValue
+   *        The value to be used as an argument to <code>val()</code>
+   * @return The invocation of the jQuery function <code>val()</code>
+   */
+  @Nonnull
+  public IMPLTYPE val (@Nonnull final long nValue)
+  {
+    return val (JSExpr.lit (nValue));
+  }
+
+  /**
+   * @param sValue
+   *        The value to be used as an argument to <code>val()</code>
+   * @return The invocation of the jQuery function <code>val()</code>
+   */
+  @Nonnull
+  public IMPLTYPE val (@Nonnull final String sValue)
+  {
+    return val (JSExpr.lit (sValue));
+  }
+
+  /**
    * @param aExpr
    *        The expression to be used as an argument to <code>val()</code>
    * @return The invocation of the jQuery function <code>val()</code>
@@ -2094,7 +2178,7 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
     return jqinvoke ("wrapInner");
   }
 
-  // Custom provided methods
+  // Custom provided methods from jquery-utils.js in phloc-webctrls
 
   /**
    * @return The invocation of the custom jQuery function <code>enable()</code>
@@ -2115,6 +2199,36 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   }
 
   /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setDisabled()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setDisabled ()
+  {
+    return jqinvoke ("setDisabled");
+  }
+
+  /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setDisabled()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setDisabled (final boolean bDisabled)
+  {
+    return setDisabled (JSExpr.lit (bDisabled));
+  }
+
+  /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setDisabled()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setDisabled (@Nonnull final IJSExpression aExpr)
+  {
+    return setDisabled ().arg (aExpr);
+  }
+
+  /**
    * @return The invocation of the custom jQuery function <code>check()</code>
    */
   @Nonnull
@@ -2130,5 +2244,35 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public IMPLTYPE uncheck ()
   {
     return jqinvoke ("uncheck");
+  }
+
+  /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setChecked()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setChecked ()
+  {
+    return jqinvoke ("setChecked");
+  }
+
+  /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setChecked()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setChecked (final boolean bChecked)
+  {
+    return setChecked (JSExpr.lit (bChecked));
+  }
+
+  /**
+   * @return The invocation of the custom jQuery function
+   *         <code>setChecked()</code>
+   */
+  @Nonnull
+  public IMPLTYPE setChecked (@Nonnull final IJSExpression aExpr)
+  {
+    return setChecked ().arg (aExpr);
   }
 }
