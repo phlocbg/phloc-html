@@ -136,36 +136,6 @@ public class MainCreateJQueryAPIList extends AbstractCreateJQueryAPIList
         if (aEntry.getAPIType () == EAPIType.METHOD)
           aUsed.putSingle (aEntry.getName (), aEntry);
 
-      // non static methods for AbstractJQueryInvocation
-      for (final List <Entry> aEntries : aUsed.values ())
-      {
-        boolean bIsDeprecated = true;
-        for (final Entry aEntry : aEntries)
-          if (!aEntry.isDeprecated ())
-          {
-            bIsDeprecated = false;
-            break;
-          }
-
-        final Entry aEntry = aEntries.get (0);
-
-        // Static methods are handled in class jQuery
-        if (!aEntry.isStaticMethod ())
-        {
-          // Remove implicit prefixes for non-static names
-          String sRealName = aEntry.getName ();
-          final int i = sRealName.indexOf ('.');
-          if (i > 0)
-            sRealName = sRealName.substring (i + 1);
-
-          aLines.add ("@Nonnull");
-          if (bIsDeprecated)
-            aLines.add ("@Deprecated");
-          aLines.add ("public final IMPLTYPE " + aEntry.getIdentifier () + " ()");
-          aLines.add ("{ return jqinvoke (\"" + sRealName + "\"); }");
-        }
-      }
-
       // static methods- for JQuery.java
       if (false)
         for (final List <Entry> aEntries : aUsed.values ())
