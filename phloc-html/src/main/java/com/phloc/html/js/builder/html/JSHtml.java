@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCElement;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAssignment;
 import com.phloc.html.js.builder.JSExpr;
@@ -170,6 +171,12 @@ public final class JSHtml
   public static JSInvocation documentGetElementById (@Nonnull final String sID)
   {
     return documentGetElementById (JSExpr.lit (sID));
+  }
+
+  @Nonnull
+  public static JSInvocation documentGetElementById (@Nonnull final IHCElement <?> aElement)
+  {
+    return documentGetElementById (aElement.ensureID ().getID ());
   }
 
   @Nonnull
