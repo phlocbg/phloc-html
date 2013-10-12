@@ -29,7 +29,7 @@ import com.phloc.html.js.builder.JSFunction;
  * 
  * @author Philip Helger
  */
-public class JQueryInvocation extends AbstractJQueryInvocation <JQueryInvocation>
+public class JQueryInvocation extends AbstractJQueryInvocationExtended <JQueryInvocation>
 {
   public JQueryInvocation (@Nonnull final JSFunction aFunction)
   {

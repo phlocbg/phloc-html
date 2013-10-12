@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -34,6 +35,8 @@ import com.phloc.commons.SystemProperties;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.collections.multimap.IMultiMapListBased;
+import com.phloc.commons.collections.multimap.MultiTreeMapArrayListBased;
 import com.phloc.commons.io.file.filter.FilenameFilterEndsWith;
 import com.phloc.commons.io.file.iterate.FileSystemIterator;
 import com.phloc.commons.lang.EnumHelper;
@@ -182,6 +185,8 @@ public class MainCreateJQueryAPIList
 
   private static final class Entry
   {
+    private static final Set <String> PARENT_CLASS_NAMES = ContainerHelper.newSet ("clone", "eq", "not");
+
     private final EAPIType m_eAPIType;
     private final String m_sName;
     private final String m_sIdentifier;
@@ -198,7 +203,7 @@ public class MainCreateJQueryAPIList
     {
       m_eAPIType = eAPIType;
       m_sName = sName;
-      m_sIdentifier = RegExHelper.getAsIdentifier (sName);
+      m_sIdentifier = PARENT_CLASS_NAMES.contains (sName) ? "_" + sName : RegExHelper.getAsIdentifier (sName);
       m_sReturn = sReturn;
       m_aDeprecated = aDeprecated;
       m_aRemoved = aRemoved;
@@ -446,6 +451,7 @@ public class MainCreateJQueryAPIList
 
     final List <String> aLines = new ArrayList <String> ();
 
+    // All selectors
     if (false)
       for (final Entry aEntry : aAllEntries)
         if (aEntry.getAPIType () == EAPIType.SELECTOR && aEntry.getSignatureCount () == 1)
@@ -468,6 +474,7 @@ public class MainCreateJQueryAPIList
           }
         }
 
+    // Selectors with arguments
     if (false)
       for (final Entry aEntry : aAllEntries)
         if (aEntry.getAPIType () == EAPIType.SELECTOR &&
@@ -516,6 +523,7 @@ public class MainCreateJQueryAPIList
           }
         }
 
+    // All properties
     if (false)
       for (final Entry aEntry : aAllEntries)
         if (aEntry.getAPIType () == EAPIType.PROPERTY)
@@ -537,50 +545,188 @@ public class MainCreateJQueryAPIList
             aLines.add (sLine);
           }
 
-    for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.METHOD)
-      {
-        for (final Signature aSignature : aEntry.getAllSignatures ())
+    // The following prefixes are contained:
+    // "callbacks."
+    // "deferred."
+    // "event."
+    // "jQuery."
+
+    // Methods without parameter handling
+    {
+      final IMultiMapListBased <String, Entry> aUsed = new MultiTreeMapArrayListBased <String, Entry> ();
+      for (final Entry aEntry : aAllEntries)
+        if (aEntry.getAPIType () == EAPIType.METHOD)
+          aUsed.putSingle (aEntry.getName (), aEntry);
+
+      // non static methods for AbstractJQueryInvocation
+      if (false)
+        for (final List <Entry> aEntries : aUsed.values ())
         {
-          String sRealPrefix = (aEntry.hasReturn () ? aEntry.getReturn () : "void") + " " + aEntry.getIdentifier ();
-          if (aEntry.isRemoved ())
-            sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
-          if (aEntry.isDeprecated ())
-            sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
-                          aEntry.getDeprecated ().getAsString (false) +
-                          "\n" +
-                          sRealPrefix;
-          if (aSignature.isAddedAfter10 ())
-            sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
-
-          if (aSignature.getArgumentCount () == 0)
+          boolean bIsDeprecated = true;
+          boolean bIsPartiallyDeprecated = false;
+          final Set <String> aReturnTypes = new LinkedHashSet <String> ();
+          final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
+          for (final Entry aEntry : aEntries)
           {
-            aLines.add (sRealPrefix + "();");
-          }
-          else
-          {
-            String sLine = sRealPrefix + "(";
-            boolean bFirst = true;
-            for (final Argument aArg : aSignature.getAllArguments ())
+            aReturnTypes.add (aEntry.getReturn ());
+            if (aEntry.isDeprecated ())
             {
-              if (bFirst)
-                bFirst = false;
-              else
-                sLine += ", ";
-              final StringBuilder aTypes = new StringBuilder ();
-              for (final String sType : aArg.getAllTypes ())
-              {
-                if (aTypes.length () > 0)
-                  aTypes.append ("/");
-                aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
-              }
-
-              sLine += "{" + aTypes.toString () + "} " + aArg.getIdentifier ();
+              aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
+              bIsPartiallyDeprecated = true;
             }
-            aLines.add (sLine + ");");
+            else
+              bIsDeprecated = false;
+          }
+
+          final Entry aEntry = aEntries.get (0);
+
+          // Static methods are handled in class jQuery
+          final boolean bIsStatic = aEntry.getName ().startsWith ("jQuery.");
+          if (!bIsStatic)
+          {
+            // Remove implicit prefixes for non-static names
+            String sPrefix = "";
+            String sRealName = aEntry.getName ();
+            final int i = sRealName.indexOf ('.');
+            if (i > 0)
+            {
+              sPrefix = sRealName.substring (0, i) + " ";
+              sRealName = sRealName.substring (i + 1);
+            }
+
+            String sSince = null;
+            if (aEntries.size () == 1 &&
+                aEntry.getSignatureCount () == 1 &&
+                aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
+              sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
+
+            aLines.add ("/**");
+            if (!bIsDeprecated && bIsPartiallyDeprecated)
+              aLines.add ("* Certain versions of this method are deprecated since jQuery " +
+                          StringHelper.getImploded (" or ", aDeprecatedVersions));
+            aLines.add (" * @return The invocation of the jQuery " +
+                        sPrefix +
+                        "function <code>" +
+                        sRealName +
+                        "()</code> with return type " +
+                        StringHelper.getImploded (" or ", aReturnTypes));
+            if (bIsDeprecated)
+              aLines.add ("* @deprecated Deprecated since jQuery " +
+                          StringHelper.getImploded (" or ", aDeprecatedVersions));
+            if (sSince != null)
+              aLines.add (" * @since jQuery " + sSince);
+            aLines.add (" */");
+            aLines.add ("@Nonnull");
+            if (bIsDeprecated)
+              aLines.add ("@Deprecated");
+            aLines.add ("public final IMPLTYPE " + aEntry.getIdentifier () + " ()");
+            aLines.add ("{ return jqinvoke (\"" + sRealName + "\"); }");
           }
         }
+
+      // static methods- for JQuery.java
+      for (final List <Entry> aEntries : aUsed.values ())
+      {
+        boolean bIsDeprecated = true;
+        boolean bIsPartiallyDeprecated = false;
+        final Set <String> aReturnTypes = new LinkedHashSet <String> ();
+        final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
+        for (final Entry aEntry : aEntries)
+        {
+          aReturnTypes.add (aEntry.getReturn ());
+          if (aEntry.isDeprecated ())
+          {
+            aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
+            bIsPartiallyDeprecated = true;
+          }
+          else
+            bIsDeprecated = false;
+        }
+
+        final Entry aEntry = aEntries.get (0);
+
+        // Static methods are handled in class jQuery
+        final boolean bIsStatic = aEntry.getName ().startsWith ("jQuery.");
+        if (bIsStatic)
+        {
+          String sSince = null;
+          if (aEntries.size () == 1 &&
+              aEntry.getSignatureCount () == 1 &&
+              aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
+            sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
+
+          aLines.add ("/**");
+          if (!bIsDeprecated && bIsPartiallyDeprecated)
+            aLines.add ("* Certain versions of this method are deprecated since jQuery " +
+                        StringHelper.getImploded (" or ", aDeprecatedVersions));
+          aLines.add (" * @return The invocation of the static jQuery function <code>" +
+                      aEntry.getName () +
+                      "()</code> with return type " +
+                      StringHelper.getImploded (" or ", aReturnTypes));
+          if (bIsDeprecated)
+            aLines.add ("* @deprecated Deprecated since jQuery " +
+                        StringHelper.getImploded (" or ", aDeprecatedVersions));
+          if (sSince != null)
+            aLines.add (" * @since jQuery " + sSince);
+          aLines.add (" */");
+          aLines.add ("@Nonnull");
+          if (bIsDeprecated)
+            aLines.add ("@Deprecated");
+          aLines.add ("public static JQueryInvocation " +
+                      StringHelper.trimStart (aEntry.getIdentifier (), "jQuery_") +
+                      " ()");
+          aLines.add ("{ return new JQueryInvocation (JQueryProperty.jQueryField (), \"" +
+                      aEntry.getName ().substring ("jQuery.".length ()) +
+                      "\"); }");
+        }
       }
+    }
+
+    if (false)
+      for (final Entry aEntry : aAllEntries)
+        if (aEntry.getAPIType () == EAPIType.METHOD)
+        {
+          for (final Signature aSignature : aEntry.getAllSignatures ())
+          {
+            String sRealPrefix = (aEntry.hasReturn () ? aEntry.getReturn () : "void") + " " + aEntry.getIdentifier ();
+            if (aEntry.isRemoved ())
+              sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
+            if (aEntry.isDeprecated ())
+              sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
+                            aEntry.getDeprecated ().getAsString (false) +
+                            "\n" +
+                            sRealPrefix;
+            if (aSignature.isAddedAfter10 ())
+              sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
+
+            if (aSignature.getArgumentCount () == 0)
+            {
+              aLines.add (sRealPrefix + "();");
+            }
+            else
+            {
+              String sLine = sRealPrefix + "(";
+              boolean bFirst = true;
+              for (final Argument aArg : aSignature.getAllArguments ())
+              {
+                if (bFirst)
+                  bFirst = false;
+                else
+                  sLine += ", ";
+                final StringBuilder aTypes = new StringBuilder ();
+                for (final String sType : aArg.getAllTypes ())
+                {
+                  if (aTypes.length () > 0)
+                    aTypes.append ("/");
+                  aTypes.append (StringHelper.getImploded ('/', _getJavaTypes (sType)));
+                }
+
+                sLine += "{" + aTypes.toString () + "} " + aArg.getIdentifier ();
+              }
+              aLines.add (sLine + ");");
+            }
+          }
+        }
 
     for (final String sLine : aLines)
       System.out.println (sLine);
