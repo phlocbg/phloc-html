@@ -486,6 +486,17 @@ public class MainCreateJQueryAPIList
     }
   }
 
+  @Nonnull
+  private static String _getAnnotation (@Nonnull final String sJavaType)
+  {
+    if (sJavaType.equals ("boolean") ||
+        sJavaType.equals ("double") ||
+        sJavaType.equals ("int") ||
+        sJavaType.equals ("long"))
+      return "";
+    return "@Nonnull ";
+  }
+
   public static void main (final String [] args) throws Exception
   {
     int nFiles = 0;
@@ -907,12 +918,7 @@ public class MainCreateJQueryAPIList
         final String sEntryNamePrefix = aEntry.getName () + ":";
         for (final Signature aSignature : aEntry.getAllSignatures ())
         {
-          if (aSignature.getArgumentCount () == 0)
-          {
-            // No args - ignore as this is handled by the base method in
-            // IJQueryInvocation
-            continue;
-          }
+          final int nArgCount = aSignature.getArgumentCount ();
 
           // Build comment
           String sComment = "";
@@ -927,38 +933,34 @@ public class MainCreateJQueryAPIList
 
           final String sRealPrefix = "@Nonnull IMPLTYPE " + aEntry.getIdentifier ();
 
-          if (aSignature.getArgumentCount () == 1)
+          if (nArgCount == 0)
           {
-            // Only one argument
-            final Argument aArg = aSignature.getArgumentAtIndex (0);
-            for (final String sType : aArg.getAllJavaTypes ())
-              if (aUsedJavaSignatures.add (sEntryNamePrefix + sType))
-                aLines.add (sComment + sRealPrefix + "(" + sType + " " + aArg.getIdentifier () + ");");
+            // No args - ignore as this is handled by the base method in
+            // IJQueryInvocation
+            continue;
           }
           else
-          {
-            // More than one argument
-            final int nMultiJavaTypeArgs = aSignature.getArgumentsWithMultipleJavaTypesCount ();
-            if (nMultiJavaTypeArgs == 0)
+            if (nArgCount == 1)
             {
-              String sParams = "";
-              final List <String> aJavaTypeKey = new ArrayList <String> ();
-              for (final Argument aArg : aSignature.getAllArguments ())
-              {
-                if (sParams.length () > 0)
-                  sParams += ", ";
-
-                final String sJavaType = aArg.getFirstJavaType ();
-                sParams += sJavaType + " " + aArg.getIdentifier ();
-                aJavaTypeKey.add (sJavaType);
-              }
-              if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
-                aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
+              // Only one argument
+              final Argument aArg = aSignature.getArgumentAtIndex (0);
+              for (final String sJavaType : aArg.getAllJavaTypes ())
+                if (aUsedJavaSignatures.add (sEntryNamePrefix + sJavaType))
+                  aLines.add (sComment +
+                              sRealPrefix +
+                              "(" +
+                              _getAnnotation (sJavaType) +
+                              sJavaType +
+                              " " +
+                              aArg.getIdentifier () +
+                              ");");
             }
             else
-              if (nMultiJavaTypeArgs == 1)
+            {
+              // More than one argument
+              final int nMultiJavaTypeArgs = aSignature.getArgumentsWithMultipleJavaTypesCount ();
+              if (nMultiJavaTypeArgs == 0)
               {
-                // One multi java-type argument
                 String sParams = "";
                 final List <String> aJavaTypeKey = new ArrayList <String> ();
                 for (final Argument aArg : aSignature.getAllArguments ())
@@ -966,49 +968,68 @@ public class MainCreateJQueryAPIList
                   if (sParams.length () > 0)
                     sParams += ", ";
 
-                  if (aArg.getJavaTypeCount () > 1)
-                  {
-                    final String sJavaType = "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "}";
-                    sParams += sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
-                  else
-                  {
-                    final String sJavaType = aArg.getFirstJavaType ();
-                    sParams += sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
+                  final String sJavaType = aArg.getFirstJavaType ();
+                  sParams += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
+                  aJavaTypeKey.add (sJavaType);
                 }
                 if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
                   aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
               }
               else
               {
-                // Cannot handle currently :(
-                String sParams = "";
+                // At least one multi java-type argument
+                final Argument [] aMultiJavaTypeArgs = new Argument [nArgCount];
+
+                // Build template
+                String sTemplate = "";
                 final List <String> aJavaTypeKey = new ArrayList <String> ();
+                int nArgIndex = 0;
                 for (final Argument aArg : aSignature.getAllArguments ())
                 {
-                  if (sParams.length () > 0)
-                    sParams += ", ";
+                  if (sTemplate.length () > 0)
+                    sTemplate += ", ";
 
                   if (aArg.getJavaTypeCount () > 1)
                   {
-                    final String sJavaType = "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "}";
-                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    final String sJavaType = "{" + nArgIndex + "}";
+                    aMultiJavaTypeArgs[nArgIndex] = aArg;
+                    sTemplate += sJavaType + " " + aArg.getIdentifier ();
                     aJavaTypeKey.add (sJavaType);
                   }
                   else
                   {
                     final String sJavaType = aArg.getFirstJavaType ();
-                    sParams += sJavaType + " " + aArg.getIdentifier ();
+                    sTemplate += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
                     aJavaTypeKey.add (sJavaType);
                   }
+                  ++nArgIndex;
                 }
-                if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
-                  aLines.add ("//" + sRealPrefix + "(" + sParams + ");");
+
+                List <String> aAllParams = ContainerHelper.newList (sTemplate);
+                List <String> aAllJavaKeys = ContainerHelper.newList (StringHelper.getImploded (',', aJavaTypeKey));
+
+                for (int i = 0; i < nArgCount; ++i)
+                  if (aMultiJavaTypeArgs[i] != null)
+                  {
+                    final List <String> aNewParams = new ArrayList <String> ();
+                    final List <String> aNewJavaKeys = new ArrayList <String> ();
+                    final String sSearch = "{" + i + "}";
+                    for (final String sJavaType : aMultiJavaTypeArgs[i].getAllJavaTypes ())
+                    {
+                      for (final String sParam : aAllParams)
+                        aNewParams.add (sParam.replace (sSearch, _getAnnotation (sJavaType) + sJavaType));
+                      for (final String sJavaKey : aAllJavaKeys)
+                        aNewJavaKeys.add (sJavaKey.replace (sSearch, sJavaType));
+                    }
+                    aAllParams = aNewParams;
+                    aAllJavaKeys = aNewJavaKeys;
+                  }
+
+                for (int i = 0; i < aAllParams.size (); ++i)
+                  if (aUsedJavaSignatures.add (sEntryNamePrefix + aAllJavaKeys.get (i)))
+                    aLines.add (sComment + sRealPrefix + "(" + aAllParams.get (i) + ");");
               }
-          }
+            }
         }
       }
 
