@@ -130,74 +130,11 @@ public class MainCreateJQueryAPIList extends AbstractCreateJQueryAPIList
     // Methods without parameter handling
     if (false)
     {
+      // Collect all methods with the same name
       final IMultiMapListBased <String, Entry> aUsed = new MultiTreeMapArrayListBased <String, Entry> ();
       for (final Entry aEntry : aAllEntries)
         if (aEntry.getAPIType () == EAPIType.METHOD)
           aUsed.putSingle (aEntry.getName (), aEntry);
-
-      // non static methods for IJQueryInvocation
-      for (final List <Entry> aEntries : aUsed.values ())
-      {
-        boolean bIsDeprecated = true;
-        boolean bIsPartiallyDeprecated = false;
-        final Set <String> aReturnTypes = new LinkedHashSet <String> ();
-        final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
-        for (final Entry aEntry : aEntries)
-        {
-          aReturnTypes.add (aEntry.getReturnOrVoid ());
-          if (aEntry.isDeprecated ())
-          {
-            aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
-            bIsPartiallyDeprecated = true;
-          }
-          else
-            bIsDeprecated = false;
-        }
-
-        final Entry aEntry = aEntries.get (0);
-
-        // Static methods are handled in class jQuery
-        if (false)
-          if (!aEntry.isStaticMethod ())
-          {
-            // Remove implicit prefixes for non-static names
-            String sPrefix = "";
-            String sRealName = aEntry.getName ();
-            final int i = sRealName.indexOf ('.');
-            if (i > 0)
-            {
-              sPrefix = sRealName.substring (0, i) + " ";
-              sRealName = sRealName.substring (i + 1);
-            }
-
-            String sSince = null;
-            if (aEntries.size () == 1 &&
-                aEntry.getSignatureCount () == 1 &&
-                aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
-              sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
-
-            aLines.add ("/**");
-            if (!bIsDeprecated && bIsPartiallyDeprecated)
-              aLines.add ("* Certain versions of this method are deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            aLines.add (" * @return The invocation of the jQuery " +
-                        sPrefix +
-                        "function <code>" +
-                        sRealName +
-                        "()</code> with return type " +
-                        StringHelper.getImploded (" or ", aReturnTypes));
-            if (bIsDeprecated)
-              aLines.add ("* @deprecated Deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            if (sSince != null)
-              aLines.add (" * @since jQuery " + sSince);
-            aLines.add (" */");
-            aLines.add ("@Nonnull");
-            if (bIsDeprecated)
-              aLines.add ("@Deprecated");
-            aLines.add ("IMPLTYPE " + aEntry.getIdentifier () + " ();");
-          }
-      }
 
       // non static methods for AbstractJQueryInvocation
       for (final List <Entry> aEntries : aUsed.values ())
