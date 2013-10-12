@@ -18,12 +18,10 @@
 package com.phloc.html.supplementary.jquery;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.multimap.IMultiMapListBased;
 import com.phloc.commons.collections.multimap.MultiTreeMapArrayListBased;
 import com.phloc.commons.string.StringHelper;
@@ -288,129 +286,6 @@ public class MainCreateJQueryAPIList extends AbstractCreateJQueryAPIList
           }
         }
     }
-
-    // IJQueryInvocationExtended
-    final Set <String> aUsedJavaSignatures = new HashSet <String> ();
-    for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.METHOD)
-      {
-        final String sEntryNamePrefix = aEntry.getName () + ":";
-        for (final Signature aSignature : aEntry.getAllSignatures ())
-        {
-          final int nArgCount = aSignature.getArgumentCount ();
-
-          // Build comment
-          String sComment = "";
-          for (final Argument aArg : aSignature.getAllArguments ())
-            sComment += "* @param " + aArg.getIdentifier () + " parameter value\n";
-          if (aEntry.isDeprecated ())
-            sComment += "* @deprecated Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false) + "\n";
-          if (aSignature.isAddedAfter10 ())
-            sComment += "* @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n";
-          if (sComment.length () > 0)
-            sComment = "/**\n" + sComment + "*/\n";
-
-          final String sRealPrefix = "@Nonnull IMPLTYPE " + aEntry.getIdentifier ();
-
-          if (nArgCount == 0)
-          {
-            // No args - ignore as this is handled by the base method in
-            // IJQueryInvocation
-            continue;
-          }
-          else
-            if (nArgCount == 1)
-            {
-              // Only one argument
-              final Argument aArg = aSignature.getArgumentAtIndex (0);
-              for (final String sJavaType : aArg.getAllJavaTypes ())
-                if (aUsedJavaSignatures.add (sEntryNamePrefix + sJavaType))
-                  aLines.add (sComment +
-                              sRealPrefix +
-                              "(" +
-                              _getAnnotation (sJavaType) +
-                              sJavaType +
-                              " " +
-                              aArg.getIdentifier () +
-                              ");");
-            }
-            else
-            {
-              // More than one argument
-              final int nMultiJavaTypeArgs = aSignature.getArgumentsWithMultipleJavaTypesCount ();
-              if (nMultiJavaTypeArgs == 0)
-              {
-                String sParams = "";
-                final List <String> aJavaTypeKey = new ArrayList <String> ();
-                for (final Argument aArg : aSignature.getAllArguments ())
-                {
-                  if (sParams.length () > 0)
-                    sParams += ", ";
-
-                  final String sJavaType = aArg.getFirstJavaType ();
-                  sParams += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
-                  aJavaTypeKey.add (sJavaType);
-                }
-                if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
-                  aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
-              }
-              else
-              {
-                // At least one multi java-type argument
-                final Argument [] aMultiJavaTypeArgs = new Argument [nArgCount];
-
-                // Build template
-                String sTemplate = "";
-                final List <String> aJavaTypeKey = new ArrayList <String> ();
-                int nArgIndex = 0;
-                for (final Argument aArg : aSignature.getAllArguments ())
-                {
-                  if (sTemplate.length () > 0)
-                    sTemplate += ", ";
-
-                  if (aArg.getJavaTypeCount () > 1)
-                  {
-                    final String sJavaType = "{" + nArgIndex + "}";
-                    aMultiJavaTypeArgs[nArgIndex] = aArg;
-                    sTemplate += sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
-                  else
-                  {
-                    final String sJavaType = aArg.getFirstJavaType ();
-                    sTemplate += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
-                  ++nArgIndex;
-                }
-
-                List <String> aAllParams = ContainerHelper.newList (sTemplate);
-                List <String> aAllJavaKeys = ContainerHelper.newList (StringHelper.getImploded (',', aJavaTypeKey));
-
-                for (int i = 0; i < nArgCount; ++i)
-                  if (aMultiJavaTypeArgs[i] != null)
-                  {
-                    final List <String> aNewParams = new ArrayList <String> ();
-                    final List <String> aNewJavaKeys = new ArrayList <String> ();
-                    final String sSearch = "{" + i + "}";
-                    for (final String sJavaType : aMultiJavaTypeArgs[i].getAllJavaTypes ())
-                    {
-                      for (final String sParam : aAllParams)
-                        aNewParams.add (sParam.replace (sSearch, _getAnnotation (sJavaType) + sJavaType));
-                      for (final String sJavaKey : aAllJavaKeys)
-                        aNewJavaKeys.add (sJavaKey.replace (sSearch, sJavaType));
-                    }
-                    aAllParams = aNewParams;
-                    aAllJavaKeys = aNewJavaKeys;
-                  }
-
-                for (int i = 0; i < aAllParams.size (); ++i)
-                  if (aUsedJavaSignatures.add (sEntryNamePrefix + aAllJavaKeys.get (i)))
-                    aLines.add (sComment + sRealPrefix + "(" + aAllParams.get (i) + ");");
-              }
-            }
-        }
-      }
 
     for (final String sLine : aLines)
       System.out.println (sLine);

@@ -30,7 +30,6 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.SystemProperties;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -513,8 +512,6 @@ abstract class AbstractCreateJQueryAPIList
 
     final List <Entry> aAllEntries = new ArrayList <Entry> ();
 
-    GlobalDebug.setDebugModeDirect (true);
-
     if (false)
       XMLReader.setDefaultSaxParserFeatureValue (EXMLParserFeature.XINCLUDE, Boolean.TRUE);
     SystemProperties.setPropertyValue ("org.apache.xerces.xni.parser.XMLParserConfiguration",
@@ -650,8 +647,11 @@ abstract class AbstractCreateJQueryAPIList
                         " signatures and " +
                         nArguments +
                         " arguments");
-    System.out.println ("Returns: " + aAllReturnTypes);
-    System.out.println ("Arg Types: " + aAllArgTypes);
+    if (false)
+    {
+      System.out.println ("Returns: " + aAllReturnTypes);
+      System.out.println ("Arg Types: " + aAllArgTypes);
+    }
     return aAllEntries;
   }
 }
