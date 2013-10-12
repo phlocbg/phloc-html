@@ -15,13 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.supplementary.main;
+package com.phloc.html.supplementary.jquery;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +35,6 @@ import com.phloc.commons.SystemProperties;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.collections.multimap.IMultiMapListBased;
-import com.phloc.commons.collections.multimap.MultiTreeMapArrayListBased;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.io.file.filter.FilenameFilterEndsWith;
 import com.phloc.commons.io.file.iterate.FileSystemIterator;
@@ -54,11 +51,11 @@ import com.phloc.commons.version.Version;
 import com.phloc.commons.xml.EXMLParserFeature;
 import com.phloc.commons.xml.serialize.XMLReader;
 
-public class MainCreateJQueryAPIList
+abstract class AbstractCreateJQueryAPIList
 {
   private static final String TYPE_ANY = "Anything";
 
-  private static enum EAPIType implements IHasName
+  protected static enum EAPIType implements IHasName
   {
     METHOD ("method"),
     PROPERTY ("property"),
@@ -98,7 +95,7 @@ public class MainCreateJQueryAPIList
     return sID;
   }
 
-  private static final class Argument
+  protected static final class Argument
   {
     private final String m_sName;
     private final String m_sIdentifier;
@@ -255,7 +252,7 @@ public class MainCreateJQueryAPIList
     }
   }
 
-  private static final class Signature
+  protected static final class Signature
   {
     private static final Version V1 = new Version (1);
 
@@ -358,7 +355,7 @@ public class MainCreateJQueryAPIList
     }
   }
 
-  private static final class Entry
+  protected static final class Entry
   {
     private static final Set <String> PARENT_CLASS_NAMES = ContainerHelper.newSet ("clone", "eq", "not");
 
@@ -487,7 +484,7 @@ public class MainCreateJQueryAPIList
   }
 
   @Nonnull
-  private static String _getAnnotation (@Nonnull final String sJavaType)
+  protected static String _getAnnotation (@Nonnull final String sJavaType)
   {
     if (sJavaType.equals ("boolean") ||
         sJavaType.equals ("double") ||
@@ -497,7 +494,8 @@ public class MainCreateJQueryAPIList
     return "@Nonnull ";
   }
 
-  public static void main (final String [] args) throws Exception
+  @Nonnull
+  public static List <Entry> readAllEntries ()
   {
     int nFiles = 0;
     int nSignatures = 0;
@@ -654,386 +652,6 @@ public class MainCreateJQueryAPIList
                         " arguments");
     System.out.println ("Returns: " + aAllReturnTypes);
     System.out.println ("Arg Types: " + aAllArgTypes);
-
-    final List <String> aLines = new ArrayList <String> ();
-
-    // All selectors
-    if (false)
-      for (final Entry aEntry : aAllEntries)
-        if (aEntry.getAPIType () == EAPIType.SELECTOR && aEntry.getSignatureCount () == 1)
-        {
-          final Signature aSignature = aEntry.getSignatureAtIndex (0);
-          if (aSignature.getArgumentCount () == 0)
-          {
-            if (aSignature.isAddedAfter10 ())
-              aLines.add ("// @since jQuery " + aSignature.getAdded ().getAsString (false));
-            if (aEntry.isDeprecated ())
-            {
-              aLines.add ("// @deprecated");
-              aLines.add ("// Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false));
-            }
-            aLines.add ("public static final IJQuerySelector " +
-                        aEntry.getIdentifier () +
-                        " = new JQuerySelector (\":" +
-                        aEntry.getName () +
-                        "\");");
-          }
-        }
-
-    // Selectors with arguments
-    if (false)
-      for (final Entry aEntry : aAllEntries)
-        if (aEntry.getAPIType () == EAPIType.SELECTOR &&
-            (aEntry.getSignatureCount () > 1 || aEntry.getSignatureAtIndex (0).getArgumentCount () > 0))
-        {
-          final String sPrefix = "public static IJQuerySelector " + aEntry.getIdentifier ();
-          for (final Signature aSignature : aEntry.getAllSignatures ())
-          {
-            String sRealPrefix = sPrefix;
-            if (aEntry.isRemoved ())
-              sRealPrefix = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sRealPrefix;
-            if (aEntry.isDeprecated ())
-              sRealPrefix = "// @deprecated\n// Deprecated since jQuery " +
-                            aEntry.getDeprecated ().getAsString (false) +
-                            "\n" +
-                            sRealPrefix;
-            if (aSignature.isAddedAfter10 ())
-              sRealPrefix = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sRealPrefix;
-
-            if (aSignature.getArgumentCount () == 0)
-            {
-              aLines.add (sRealPrefix + "();");
-            }
-            else
-            {
-              String sLine = sRealPrefix + "(";
-              boolean bFirst = true;
-              for (final Argument aArg : aSignature.getAllArguments ())
-              {
-                if (bFirst)
-                  bFirst = false;
-                else
-                  sLine += ", ";
-
-                sLine += "{" + StringHelper.getImploded ('/', aArg.getAllJavaTypes ()) + "} " + aArg.getIdentifier ();
-              }
-              aLines.add (sLine + ");");
-            }
-          }
-        }
-
-    // All properties
-    if (false)
-      for (final Entry aEntry : aAllEntries)
-        if (aEntry.getAPIType () == EAPIType.PROPERTY)
-          for (final Signature aSignature : aEntry.getAllSignatures ())
-          {
-            String sLine = "JSFieldRef " + aEntry.getName () + "();";
-            if (aEntry.isRemoved ())
-              sLine = "// Removed in jQuery " + aEntry.getRemoved ().getAsString (false) + "\n" + sLine;
-            if (aEntry.isDeprecated ())
-              sLine = "// @deprecated Deprecated since jQuery " +
-                      aEntry.getDeprecated ().getAsString (false) +
-                      "\n" +
-                      sLine;
-            if (aSignature.isAddedAfter10 ())
-              sLine = "// @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n" + sLine;
-
-            if (aSignature.getArgumentCount () > 0)
-              throw new IllegalStateException (aEntry.getName ());
-            aLines.add (sLine);
-          }
-
-    // The following prefixes are contained:
-    // "callbacks."
-    // "deferred."
-    // "event."
-    // "jQuery."
-
-    // Methods without parameter handling
-    if (false)
-    {
-      final IMultiMapListBased <String, Entry> aUsed = new MultiTreeMapArrayListBased <String, Entry> ();
-      for (final Entry aEntry : aAllEntries)
-        if (aEntry.getAPIType () == EAPIType.METHOD)
-          aUsed.putSingle (aEntry.getName (), aEntry);
-
-      // non static methods for IJQueryInvocation
-      for (final List <Entry> aEntries : aUsed.values ())
-      {
-        boolean bIsDeprecated = true;
-        boolean bIsPartiallyDeprecated = false;
-        final Set <String> aReturnTypes = new LinkedHashSet <String> ();
-        final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
-        for (final Entry aEntry : aEntries)
-        {
-          aReturnTypes.add (aEntry.getReturnOrVoid ());
-          if (aEntry.isDeprecated ())
-          {
-            aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
-            bIsPartiallyDeprecated = true;
-          }
-          else
-            bIsDeprecated = false;
-        }
-
-        final Entry aEntry = aEntries.get (0);
-
-        // Static methods are handled in class jQuery
-        if (false)
-          if (!aEntry.isStaticMethod ())
-          {
-            // Remove implicit prefixes for non-static names
-            String sPrefix = "";
-            String sRealName = aEntry.getName ();
-            final int i = sRealName.indexOf ('.');
-            if (i > 0)
-            {
-              sPrefix = sRealName.substring (0, i) + " ";
-              sRealName = sRealName.substring (i + 1);
-            }
-
-            String sSince = null;
-            if (aEntries.size () == 1 &&
-                aEntry.getSignatureCount () == 1 &&
-                aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
-              sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
-
-            aLines.add ("/**");
-            if (!bIsDeprecated && bIsPartiallyDeprecated)
-              aLines.add ("* Certain versions of this method are deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            aLines.add (" * @return The invocation of the jQuery " +
-                        sPrefix +
-                        "function <code>" +
-                        sRealName +
-                        "()</code> with return type " +
-                        StringHelper.getImploded (" or ", aReturnTypes));
-            if (bIsDeprecated)
-              aLines.add ("* @deprecated Deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            if (sSince != null)
-              aLines.add (" * @since jQuery " + sSince);
-            aLines.add (" */");
-            aLines.add ("@Nonnull");
-            if (bIsDeprecated)
-              aLines.add ("@Deprecated");
-            aLines.add ("IMPLTYPE " + aEntry.getIdentifier () + " ();");
-          }
-      }
-
-      // non static methods for AbstractJQueryInvocation
-      for (final List <Entry> aEntries : aUsed.values ())
-      {
-        boolean bIsDeprecated = true;
-        for (final Entry aEntry : aEntries)
-          if (!aEntry.isDeprecated ())
-          {
-            bIsDeprecated = false;
-            break;
-          }
-
-        final Entry aEntry = aEntries.get (0);
-
-        // Static methods are handled in class jQuery
-        if (!aEntry.isStaticMethod ())
-        {
-          // Remove implicit prefixes for non-static names
-          String sRealName = aEntry.getName ();
-          final int i = sRealName.indexOf ('.');
-          if (i > 0)
-            sRealName = sRealName.substring (i + 1);
-
-          aLines.add ("@Nonnull");
-          if (bIsDeprecated)
-            aLines.add ("@Deprecated");
-          aLines.add ("public final IMPLTYPE " + aEntry.getIdentifier () + " ()");
-          aLines.add ("{ return jqinvoke (\"" + sRealName + "\"); }");
-        }
-      }
-
-      // static methods- for JQuery.java
-      if (false)
-        for (final List <Entry> aEntries : aUsed.values ())
-        {
-          boolean bIsDeprecated = true;
-          boolean bIsPartiallyDeprecated = false;
-          final Set <String> aReturnTypes = new LinkedHashSet <String> ();
-          final Set <String> aDeprecatedVersions = new LinkedHashSet <String> ();
-          for (final Entry aEntry : aEntries)
-          {
-            aReturnTypes.add (aEntry.getReturnOrVoid ());
-            if (aEntry.isDeprecated ())
-            {
-              aDeprecatedVersions.add (aEntry.getDeprecated ().getAsString (false));
-              bIsPartiallyDeprecated = true;
-            }
-            else
-              bIsDeprecated = false;
-          }
-
-          final Entry aEntry = aEntries.get (0);
-
-          // Static methods are handled in class jQuery
-          if (aEntry.isStaticMethod ())
-          {
-            String sSince = null;
-            if (aEntries.size () == 1 &&
-                aEntry.getSignatureCount () == 1 &&
-                aEntry.getSignatureAtIndex (0).isAddedAfter10 ())
-              sSince = aEntry.getSignatureAtIndex (0).getAdded ().getAsString (false);
-
-            aLines.add ("/**");
-            if (!bIsDeprecated && bIsPartiallyDeprecated)
-              aLines.add ("* Certain versions of this method are deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            aLines.add (" * @return The invocation of the static jQuery function <code>" +
-                        aEntry.getName () +
-                        "()</code> with return type " +
-                        StringHelper.getImploded (" or ", aReturnTypes));
-            if (bIsDeprecated)
-              aLines.add ("* @deprecated Deprecated since jQuery " +
-                          StringHelper.getImploded (" or ", aDeprecatedVersions));
-            if (sSince != null)
-              aLines.add (" * @since jQuery " + sSince);
-            aLines.add (" */");
-            aLines.add ("@Nonnull");
-            if (bIsDeprecated)
-              aLines.add ("@Deprecated");
-            aLines.add ("public static JQueryInvocation " +
-                        StringHelper.trimStart (aEntry.getIdentifier (), "jQuery_") +
-                        " ()");
-            aLines.add ("{ return new JQueryInvocation (JQueryProperty.jQueryField (), \"" +
-                        aEntry.getName ().substring ("jQuery.".length ()) +
-                        "\"); }");
-          }
-        }
-    }
-
-    // IJQueryInvocationExtended
-    final Set <String> aUsedJavaSignatures = new HashSet <String> ();
-    for (final Entry aEntry : aAllEntries)
-      if (aEntry.getAPIType () == EAPIType.METHOD)
-      {
-        final String sEntryNamePrefix = aEntry.getName () + ":";
-        for (final Signature aSignature : aEntry.getAllSignatures ())
-        {
-          final int nArgCount = aSignature.getArgumentCount ();
-
-          // Build comment
-          String sComment = "";
-          for (final Argument aArg : aSignature.getAllArguments ())
-            sComment += "* @param " + aArg.getIdentifier () + " parameter value\n";
-          if (aEntry.isDeprecated ())
-            sComment += "* @deprecated Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false) + "\n";
-          if (aSignature.isAddedAfter10 ())
-            sComment += "* @since jQuery " + aSignature.getAdded ().getAsString (false) + "\n";
-          if (sComment.length () > 0)
-            sComment = "/**\n" + sComment + "*/\n";
-
-          final String sRealPrefix = "@Nonnull IMPLTYPE " + aEntry.getIdentifier ();
-
-          if (nArgCount == 0)
-          {
-            // No args - ignore as this is handled by the base method in
-            // IJQueryInvocation
-            continue;
-          }
-          else
-            if (nArgCount == 1)
-            {
-              // Only one argument
-              final Argument aArg = aSignature.getArgumentAtIndex (0);
-              for (final String sJavaType : aArg.getAllJavaTypes ())
-                if (aUsedJavaSignatures.add (sEntryNamePrefix + sJavaType))
-                  aLines.add (sComment +
-                              sRealPrefix +
-                              "(" +
-                              _getAnnotation (sJavaType) +
-                              sJavaType +
-                              " " +
-                              aArg.getIdentifier () +
-                              ");");
-            }
-            else
-            {
-              // More than one argument
-              final int nMultiJavaTypeArgs = aSignature.getArgumentsWithMultipleJavaTypesCount ();
-              if (nMultiJavaTypeArgs == 0)
-              {
-                String sParams = "";
-                final List <String> aJavaTypeKey = new ArrayList <String> ();
-                for (final Argument aArg : aSignature.getAllArguments ())
-                {
-                  if (sParams.length () > 0)
-                    sParams += ", ";
-
-                  final String sJavaType = aArg.getFirstJavaType ();
-                  sParams += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
-                  aJavaTypeKey.add (sJavaType);
-                }
-                if (aUsedJavaSignatures.add (sEntryNamePrefix + StringHelper.getImploded (',', aJavaTypeKey)))
-                  aLines.add (sComment + sRealPrefix + "(" + sParams + ");");
-              }
-              else
-              {
-                // At least one multi java-type argument
-                final Argument [] aMultiJavaTypeArgs = new Argument [nArgCount];
-
-                // Build template
-                String sTemplate = "";
-                final List <String> aJavaTypeKey = new ArrayList <String> ();
-                int nArgIndex = 0;
-                for (final Argument aArg : aSignature.getAllArguments ())
-                {
-                  if (sTemplate.length () > 0)
-                    sTemplate += ", ";
-
-                  if (aArg.getJavaTypeCount () > 1)
-                  {
-                    final String sJavaType = "{" + nArgIndex + "}";
-                    aMultiJavaTypeArgs[nArgIndex] = aArg;
-                    sTemplate += sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
-                  else
-                  {
-                    final String sJavaType = aArg.getFirstJavaType ();
-                    sTemplate += _getAnnotation (sJavaType) + sJavaType + " " + aArg.getIdentifier ();
-                    aJavaTypeKey.add (sJavaType);
-                  }
-                  ++nArgIndex;
-                }
-
-                List <String> aAllParams = ContainerHelper.newList (sTemplate);
-                List <String> aAllJavaKeys = ContainerHelper.newList (StringHelper.getImploded (',', aJavaTypeKey));
-
-                for (int i = 0; i < nArgCount; ++i)
-                  if (aMultiJavaTypeArgs[i] != null)
-                  {
-                    final List <String> aNewParams = new ArrayList <String> ();
-                    final List <String> aNewJavaKeys = new ArrayList <String> ();
-                    final String sSearch = "{" + i + "}";
-                    for (final String sJavaType : aMultiJavaTypeArgs[i].getAllJavaTypes ())
-                    {
-                      for (final String sParam : aAllParams)
-                        aNewParams.add (sParam.replace (sSearch, _getAnnotation (sJavaType) + sJavaType));
-                      for (final String sJavaKey : aAllJavaKeys)
-                        aNewJavaKeys.add (sJavaKey.replace (sSearch, sJavaType));
-                    }
-                    aAllParams = aNewParams;
-                    aAllJavaKeys = aNewJavaKeys;
-                  }
-
-                for (int i = 0; i < aAllParams.size (); ++i)
-                  if (aUsedJavaSignatures.add (sEntryNamePrefix + aAllJavaKeys.get (i)))
-                    aLines.add (sComment + sRealPrefix + "(" + aAllParams.get (i) + ");");
-              }
-            }
-        }
-      }
-
-    for (final String sLine : aLines)
-      System.out.println (sLine);
+    return aAllEntries;
   }
 }
