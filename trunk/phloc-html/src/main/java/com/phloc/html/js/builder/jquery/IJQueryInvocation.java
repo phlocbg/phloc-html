@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.JSFieldRef;
 
 /**
@@ -22,6 +23,16 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
    */
   @Nonnull
   IMPLTYPE jqinvoke (@Nonnull @Nonempty String sMethod);
+
+  /**
+   * Adds a CSSClassProvider selector as a string argument.
+   * 
+   * @param aArgument
+   *        value to be added as an argument
+   * @return this
+   */
+  @Nonnull
+  IMPLTYPE arg (@Nullable ICSSClassProvider aArgument);
 
   /**
    * Adds a JQuery selector as a string argument.

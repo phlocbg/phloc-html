@@ -41,6 +41,9 @@ public class Main_IJQueryInvocationExtended extends AbstractCreateJQueryAPIList
     for (final Entry aEntry : aAllEntries)
       if (aEntry.getAPIType () == EAPIType.METHOD)
       {
+        if (aEntry.isStaticMethod ())
+          continue;
+
         final String sUsedSignaturePrefix = aEntry.getName () + ":";
         for (final Signature aSignature : aEntry.getAllSignatures ())
         {
@@ -171,10 +174,12 @@ public class Main_IJQueryInvocationExtended extends AbstractCreateJQueryAPIList
                                                    "import javax.annotation.Nonnull;\n" +
                                                    "\n" +
                                                    "import com.phloc.html.EHTMLElement;\n" +
+                                                   "import com.phloc.html.css.ICSSClassProvider;\n" +
                                                    "import com.phloc.html.hc.IHCNode;\n" +
                                                    "import com.phloc.html.js.builder.IJSExpression;\n" +
                                                    "import com.phloc.html.js.builder.JSAnonymousFunction;\n" +
                                                    "import com.phloc.html.js.builder.JSArray;\n" +
+                                                   "import com.phloc.json2.IJson;\n" +
                                                    "\n" +
                                                    "/**\n" +
                                                    " * This file is generated - do NOT edit!\n" +

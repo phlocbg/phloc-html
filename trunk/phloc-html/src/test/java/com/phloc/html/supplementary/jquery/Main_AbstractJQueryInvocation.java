@@ -79,6 +79,7 @@ public class Main_AbstractJQueryInvocation extends AbstractCreateJQueryAPIList
                                                    + "import javax.annotation.Nullable;\n"
                                                    + "\n"
                                                    + "import com.phloc.commons.annotations.Nonempty;\n"
+                                                   + "import com.phloc.html.css.ICSSClassProvider;\n"
                                                    + "import com.phloc.html.js.builder.AbstractJSInvocation;\n"
                                                    + "import com.phloc.html.js.builder.IJSExpression;\n"
                                                    + "import com.phloc.html.js.builder.JSFieldRef;\n"
@@ -101,6 +102,12 @@ public class Main_AbstractJQueryInvocation extends AbstractCreateJQueryAPIList
                                                    "  public AbstractJQueryInvocation (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String sMethod)\n" +
                                                    "  {\n" +
                                                    "    super (aLhs, sMethod);\n" +
+                                                   "  }\n" +
+                                                   "\n" +
+                                                   "  @Nonnull\n" +
+                                                   "  public IMPLTYPE arg (@Nullable final ICSSClassProvider aArgument)\n" +
+                                                   "  {\n" +
+                                                   "    return aArgument == null ? argNull () : arg (aArgument.getCSSClass ());\n" +
                                                    "  }\n" +
                                                    "\n" +
                                                    "  @Nonnull\n" +

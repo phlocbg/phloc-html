@@ -113,6 +113,7 @@ public class Main_IJQueryInvocation extends AbstractCreateJQueryAPIList
                                                    + "import javax.annotation.Nullable;\n"
                                                    + "\n"
                                                    + "import com.phloc.commons.annotations.Nonempty;\n"
+                                                   + "import com.phloc.html.css.ICSSClassProvider;\n"
                                                    + "import com.phloc.html.js.builder.JSFieldRef;\n"
                                                    + "\n"
                                                    + "/**\n"
@@ -133,6 +134,16 @@ public class Main_IJQueryInvocation extends AbstractCreateJQueryAPIList
                                                    "   */\n" +
                                                    "  @Nonnull\n" +
                                                    "  IMPLTYPE jqinvoke (@Nonnull @Nonempty String sMethod);\n" +
+                                                   "\n" +
+                                                   "  /**\n" +
+                                                   "   * Adds a CSSClassProvider selector as a string argument.\n" +
+                                                   "   * \n" +
+                                                   "   * @param aArgument\n" +
+                                                   "   *        value to be added as an argument\n" +
+                                                   "   * @return this\n" +
+                                                   "   */\n" +
+                                                   "  @Nonnull\n" +
+                                                   "  IMPLTYPE arg (@Nullable ICSSClassProvider aArgument);\n" +
                                                    "\n" +
                                                    "  /**\n" +
                                                    "   * Adds a JQuery selector as a string argument.\n" +

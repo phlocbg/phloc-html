@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,9 @@ import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.microdom.IHasElementName;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.EHTMLElement;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
 import com.phloc.json2.IJson;
@@ -332,6 +337,69 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnull final IHasElementName aElementNameProvider)
   {
     return arg (aElementNameProvider.getElementName ());
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final BigDecimal aValue)
+  {
+    return aValue == null ? argNull () : arg (JSExpr.lit (aValue));
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final BigInteger aValue)
+  {
+    return aValue == null ? argNull () : arg (JSExpr.lit (aValue));
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final EHTMLElement... aElements)
+  {
+    if (aElements == null)
+      return argNull ();
+    final StringBuilder aSB = new StringBuilder ();
+    for (final EHTMLElement eElement : aElements)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (eElement.getElementName ());
+    }
+    return arg (aSB.toString ());
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final Iterable <EHTMLElement> aElements)
+  {
+    if (aElements == null)
+      return argNull ();
+    final StringBuilder aSB = new StringBuilder ();
+    for (final EHTMLElement eElement : aElements)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (eElement.getElementName ());
+    }
+    return arg (aSB.toString ());
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final String... aElements)
+  {
+    if (aElements == null)
+      return argNull ();
+    final StringBuilder aSB = new StringBuilder ();
+    for (final String sElement : aElements)
+    {
+      if (aSB.length () > 0)
+        aSB.append (' ');
+      aSB.append (sElement);
+    }
+    return arg (aSB.toString ());
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final IHCNode aHCNode)
+  {
+    return aHCNode == null ? argNull () : arg (HCSettings.getAsHTMLStringWithoutNamespaces (aHCNode));
   }
 
   /**
