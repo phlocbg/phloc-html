@@ -27,14 +27,15 @@ import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCCanBeDisabled;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
+import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Represents a single option within a select box.
  * 
  * @author Philip Helger
  */
-public class HCOption extends AbstractHCElementWithChildren <HCOption> implements IHCCanBeDisabled <HCOption>
+public class HCOption extends AbstractHCElementWithInternalChildren <HCOption, HCTextNode> implements IHCCanBeDisabled <HCOption>
 {
   /** By default the option is not disabled */
   public static final boolean DEFAULT_DISABLED = false;

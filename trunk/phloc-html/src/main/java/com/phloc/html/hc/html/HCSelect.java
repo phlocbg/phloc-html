@@ -41,6 +41,7 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCControl;
+import com.phloc.html.hc.impl.HCTextNode;
 import com.phloc.html.request.IHCRequestField;
 
 /**
@@ -185,7 +186,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOption (@Nullable final String sValue, @Nullable final String sText)
   {
-    final HCOption aOption = new HCOption ().setValue (sValue).addChild (sText);
+    final HCOption aOption = new HCOption ().setValue (sValue).addChild (HCTextNode.create (sText));
     return addOption (aOption);
   }
 
@@ -213,7 +214,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOptionAtIndex (final int nIndex, final String sValue, final String sText)
   {
-    final HCOption aOption = new HCOption ().setValue (sValue).addChild (sText);
+    final HCOption aOption = new HCOption ().setValue (sValue).addChild (HCTextNode.create (sText));
     return addOptionAtIndex (nIndex, aOption);
   }
 
