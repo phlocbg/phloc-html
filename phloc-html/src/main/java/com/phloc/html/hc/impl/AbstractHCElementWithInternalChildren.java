@@ -75,43 +75,55 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     }
   }
 
-  protected final void addChild (@Nullable final CHILDTYPE aChild)
+  @Nonnull
+  public final THISTYPE addChild (@Nullable final CHILDTYPE aChild)
   {
     _addChild (CGlobal.ILLEGAL_UINT, aChild);
+    return thisAsT ();
   }
 
-  protected final void addChild (@Nonnegative final int nIndex, @Nullable final CHILDTYPE aChild)
+  @Nonnull
+  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final CHILDTYPE aChild)
   {
     if (nIndex < 0 || nIndex > getChildCount ())
       throw new IllegalArgumentException ("Illegal index " + nIndex + " passed!");
     _addChild (nIndex, aChild);
+    return thisAsT ();
   }
 
-  protected final void addChildren (@Nullable final CHILDTYPE... aChildren)
+  @Nonnull
+  public final THISTYPE addChildren (@Nullable final CHILDTYPE... aChildren)
   {
     if (aChildren != null)
       for (final CHILDTYPE aChild : aChildren)
         addChild (aChild);
+    return thisAsT ();
   }
 
-  protected final void removeChild (@Nullable final CHILDTYPE aChild)
+  @Nonnull
+  public final THISTYPE removeChild (@Nullable final CHILDTYPE aChild)
   {
     if (aChild != null && m_aChildren != null)
       m_aChildren.remove (aChild);
+    return thisAsT ();
   }
 
-  protected final void removeChild (@Nonnegative final int nIndex)
+  @Nonnull
+  public final THISTYPE removeChild (@Nonnegative final int nIndex)
   {
     ContainerHelper.removeElementAtIndex (m_aChildren, nIndex);
+    return thisAsT ();
   }
 
-  protected final void removeAllChildren ()
+  @Nonnull
+  public final THISTYPE removeAllChildren ()
   {
     if (m_aChildren != null)
     {
       m_aChildren.clear ();
       m_aChildren = null;
     }
+    return thisAsT ();
   }
 
   @Nullable
