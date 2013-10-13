@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.js.builder.AbstractJSInvocation;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSFieldRef;
@@ -24,6 +25,12 @@ public abstract class AbstractJQueryInvocation <IMPLTYPE extends AbstractJQueryI
   public AbstractJQueryInvocation (@Nullable final IJSExpression aLhs, @Nonnull @Nonempty final String sMethod)
   {
     super (aLhs, sMethod);
+  }
+
+  @Nonnull
+  public IMPLTYPE arg (@Nullable final ICSSClassProvider aArgument)
+  {
+    return aArgument == null ? argNull () : arg (aArgument.getCSSClass ());
   }
 
   @Nonnull

@@ -106,19 +106,27 @@ abstract class AbstractCreateJQueryAPIList
     private static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
     {
       if (sType.equals ("Boolean"))
-        return new String [] { "boolean" };
+        return new String [] { "IJSExpression", "boolean" };
       if (sType.equals ("String"))
-        return new String [] { "String" };
+        return new String [] { "IJSExpression",
+                              "IJson",
+                              "IHCNode",
+                              "String",
+                              "int",
+                              "long",
+                              "BigInteger",
+                              "double",
+                              "BigDecimal" };
       if (sType.equals ("htmlString"))
-        return new String [] { "IHCNode", "String" };
+        return new String [] { "IJSExpression", "IHCNode", "String" };
       if (sType.equals ("Integer"))
-        return new String [] { "int", "long", "BigInteger" };
+        return new String [] { "IJSExpression", "int", "long", "BigInteger" };
       if (sType.equals ("Number"))
-        return new String [] { "int", "long", "BigInteger", "double", "BigDecimal" };
+        return new String [] { "IJSExpression", "int", "long", "BigInteger", "double", "BigDecimal" };
       if (sType.equals ("Selector"))
-        return new String [] { "IJQuerySelector" };
+        return new String [] { "IJSExpression", "IJQuerySelector", "EHTMLElement", "ICSSClassProvider" };
       if (sType.equals ("Function"))
-        return new String [] { "JSAnonymousFunction" };
+        return new String [] { "IJSExpression", "JSAnonymousFunction" };
       if (sType.equals ("Object"))
         return new String [] { "IJSExpression" };
       if (sType.equals ("PlainObject"))
@@ -126,13 +134,13 @@ abstract class AbstractCreateJQueryAPIList
       if (sType.equals ("Anything"))
         return new String [] { "IJSExpression" };
       if (sType.equals ("Array"))
-        return new String [] { "JSArray" };
+        return new String [] { "IJSExpression", "JSArray" };
       if (sType.equals ("Element"))
-        return new String [] { "EHTMLElement", "String" };
+        return new String [] { "IJSExpression", "EHTMLElement", "String" };
       if (sType.equals ("Elements"))
-        return new String [] { "EHTMLElement...", "Iterable<EHTMLElement>", "String..." };
+        return new String [] { "IJSExpression", "EHTMLElement...", "Iterable<EHTMLElement>", "String..." };
       if (sType.equals ("jQuery"))
-        return new String [] { "JQueryInvocation" };
+        return new String [] { "IJSExpression", "JQueryInvocation" };
 
       // DOM document
       if (sType.equals ("document"))
@@ -148,7 +156,7 @@ abstract class AbstractCreateJQueryAPIList
 
       // ????
       if (sType.equals ("jQuery object"))
-        return new String [] { "JQueryInvocation" };
+        return new String [] { "IJSExpression", "JQueryInvocation" };
       throw new IllegalArgumentException ("Unknown type '" + sType + "'");
     }
 
