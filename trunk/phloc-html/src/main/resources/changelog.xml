@@ -20,6 +20,12 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2013-10-12" version="3.12.0" />
+  <entry date="2013-10-12" category="api" action="add">
+    <change>
+      <text locale="en">Added all available jQuery method permutations as Java code :)</text>
+    </change>
+  </entry>
   <entry date="2013-10-12" category="api" action="update">
     <change>
       <text locale="en">Added all available jQuery methods at least without parameter mapping</text>
