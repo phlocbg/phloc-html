@@ -108,15 +108,7 @@ abstract class AbstractCreateJQueryAPIList
       if (sType.equals ("Boolean"))
         return new String [] { "IJSExpression", "boolean" };
       if (sType.equals ("String"))
-        return new String [] { "IJSExpression",
-                              "IJson",
-                              "IHCNode",
-                              "String",
-                              "int",
-                              "long",
-                              "BigInteger",
-                              "double",
-                              "BigDecimal" };
+        return new String [] { "IJSExpression", "IJson", "IHCNode", "String" };
       if (sType.equals ("htmlString"))
         return new String [] { "IJSExpression", "IHCNode", "String" };
       if (sType.equals ("Integer"))
@@ -124,7 +116,11 @@ abstract class AbstractCreateJQueryAPIList
       if (sType.equals ("Number"))
         return new String [] { "IJSExpression", "int", "long", "BigInteger", "double", "BigDecimal" };
       if (sType.equals ("Selector"))
-        return new String [] { "IJSExpression", "IJQuerySelector", "EHTMLElement", "ICSSClassProvider" };
+        return new String [] { "IJSExpression",
+                              "IJQuerySelector",
+                              "JQuerySelectorList",
+                              "EHTMLElement",
+                              "ICSSClassProvider" };
       if (sType.equals ("Function"))
         return new String [] { "IJSExpression", "JSAnonymousFunction" };
       if (sType.equals ("Object"))
