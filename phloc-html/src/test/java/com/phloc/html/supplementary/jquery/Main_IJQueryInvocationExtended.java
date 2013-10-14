@@ -54,7 +54,12 @@ public class Main_IJQueryInvocationExtended extends AbstractCreateJQueryAPIList
           // Build comment
           String sComment = "";
           for (final Argument aArg : aSignature.getAllArguments ())
-            sComment += "* @param " + aArg.getIdentifier () + " parameter value\n";
+          {
+            String sDesc = aArg.getDescription ();
+            if (StringHelper.hasNoText (sDesc))
+              sDesc = "parameter value";
+            sComment += "* @param " + aArg.getIdentifier () + " " + sDesc + "\n";
+          }
           if (aEntry.isDeprecated ())
           {
             sComment += "* @deprecated Deprecated since jQuery " + aEntry.getDeprecated ().getAsString (false) + "\n";

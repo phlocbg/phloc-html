@@ -41,6 +41,7 @@ import com.phloc.commons.lang.EnumHelper;
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.serialize.MicroReader;
+import com.phloc.commons.microdom.utils.MicroUtils;
 import com.phloc.commons.name.IHasName;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
@@ -101,6 +102,7 @@ abstract class AbstractCreateJQueryAPIList
     private final List <String> m_aTypes;
     private final Set <String> m_aJavaTypes;
     private final boolean m_bIsOptional;
+    private final String m_sDescription;
 
     @Nonnull
     private static String [] _getJavaTypes (@Nonnull @Nonempty final String sType)
@@ -156,7 +158,10 @@ abstract class AbstractCreateJQueryAPIList
       throw new IllegalArgumentException ("Unknown type '" + sType + "'");
     }
 
-    public Argument (final String sName, final List <String> aTypes, final boolean bIsOptional)
+    public Argument (final String sName,
+                     final List <String> aTypes,
+                     final boolean bIsOptional,
+                     @Nullable final String sDescription)
     {
       if (StringHelper.hasNoText (sName))
         throw new IllegalArgumentException ("name");
@@ -170,6 +175,7 @@ abstract class AbstractCreateJQueryAPIList
         for (final String sType0 : _getJavaTypes (sType))
           m_aJavaTypes.add (sType0);
       m_bIsOptional = bIsOptional;
+      m_sDescription = sDescription;
     }
 
     @Nonnull
@@ -229,6 +235,12 @@ abstract class AbstractCreateJQueryAPIList
     public boolean isOptional ()
     {
       return m_bIsOptional;
+    }
+
+    @Nullable
+    public String getDescription ()
+    {
+      return m_sDescription;
     }
 
     @Override
@@ -573,6 +585,8 @@ abstract class AbstractCreateJQueryAPIList
               for (final String sRealArgType : StringHelper.getExploded ('/', sArgType.trim ()))
                 aTypes.add (sRealArgType);
 
+            final String sDescription = MicroUtils.getChildTextContent (eArg, "desc");
+
             // Happens in callbacks.fireWith
             if (aTypes.isEmpty ())
               aTypes.add (TYPE_ANY);
@@ -589,7 +603,7 @@ abstract class AbstractCreateJQueryAPIList
             while (aSignature.containsArgumentWithName (sArgName))
               sArgName = sOrigArgName + nArgIndex++;
 
-            aSignature.addArgument (new Argument (sArgName, aTypes, bIsOptional));
+            aSignature.addArgument (new Argument (sArgName, aTypes, bIsOptional, sDescription));
 
             ++nArguments;
           }
