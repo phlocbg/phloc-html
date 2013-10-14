@@ -44,6 +44,15 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 
+/**
+ * Base class for elements with special children.
+ * 
+ * @author Philip Helger
+ * @param <THISTYPE>
+ *        Implementation type
+ * @param <CHILDTYPE>
+ *        Contained child type
+ */
 @NotThreadSafe
 public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
 {

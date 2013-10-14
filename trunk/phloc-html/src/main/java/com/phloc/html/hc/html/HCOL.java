@@ -106,6 +106,7 @@ public class HCOL extends AbstractHCList <HCOL>
   {
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("start", m_aStart)
+                            .append ("reversed", m_bReversed)
                             .appendIfNotNull ("type", m_eType)
                             .toString ();
   }
