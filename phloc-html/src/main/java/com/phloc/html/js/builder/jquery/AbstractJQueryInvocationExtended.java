@@ -39,6 +39,9 @@ public IMPLTYPE add(@Nonnull IJSExpression selector) { return add ().arg (select
 public IMPLTYPE add(@Nonnull IJQuerySelector selector) { return add ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE add(@Nonnull JQuerySelectorList selector) { return add ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE add(@Nonnull EHTMLElement selector) { return add ().arg (selector); }
 
 @Nonnull
@@ -69,6 +72,9 @@ public IMPLTYPE add(@Nonnull IJSExpression selector, @Nonnull IJSExpression cont
 public IMPLTYPE add(@Nonnull IJQuerySelector selector, @Nonnull IJSExpression context) { return add ().arg (selector).arg (context); }
 
 @Nonnull
+public IMPLTYPE add(@Nonnull JQuerySelectorList selector, @Nonnull IJSExpression context) { return add ().arg (selector).arg (context); }
+
+@Nonnull
 public IMPLTYPE add(@Nonnull EHTMLElement selector, @Nonnull IJSExpression context) { return add ().arg (selector).arg (context); }
 
 @Nonnull
@@ -79,6 +85,9 @@ public IMPLTYPE add(@Nonnull IJSExpression selector, @Nonnull EHTMLElement conte
 
 @Nonnull
 public IMPLTYPE add(@Nonnull IJQuerySelector selector, @Nonnull EHTMLElement context) { return add ().arg (selector).arg (context); }
+
+@Nonnull
+public IMPLTYPE add(@Nonnull JQuerySelectorList selector, @Nonnull EHTMLElement context) { return add ().arg (selector).arg (context); }
 
 @Nonnull
 public IMPLTYPE add(@Nonnull EHTMLElement selector, @Nonnull EHTMLElement context) { return add ().arg (selector).arg (context); }
@@ -93,6 +102,9 @@ public IMPLTYPE add(@Nonnull IJSExpression selector, @Nonnull String context) { 
 public IMPLTYPE add(@Nonnull IJQuerySelector selector, @Nonnull String context) { return add ().arg (selector).arg (context); }
 
 @Nonnull
+public IMPLTYPE add(@Nonnull JQuerySelectorList selector, @Nonnull String context) { return add ().arg (selector).arg (context); }
+
+@Nonnull
 public IMPLTYPE add(@Nonnull EHTMLElement selector, @Nonnull String context) { return add ().arg (selector).arg (context); }
 
 @Nonnull
@@ -103,6 +115,9 @@ public IMPLTYPE addBack(@Nonnull IJSExpression selector) { return addBack ().arg
 
 @Nonnull
 public IMPLTYPE addBack(@Nonnull IJQuerySelector selector) { return addBack ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE addBack(@Nonnull JQuerySelectorList selector) { return addBack ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE addBack(@Nonnull EHTMLElement selector) { return addBack ().arg (selector); }
@@ -121,21 +136,6 @@ public IMPLTYPE addClass(@Nonnull IHCNode className) { return addClass ().arg (c
 
 @Nonnull
 public IMPLTYPE addClass(@Nonnull String className) { return addClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE addClass(int className) { return addClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE addClass(long className) { return addClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE addClass(@Nonnull BigInteger className) { return addClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE addClass(double className) { return addClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE addClass(@Nonnull BigDecimal className) { return addClass ().arg (className); }
 
 @Nonnull
 public IMPLTYPE addClass(@Nonnull JSAnonymousFunction function) { return addClass ().arg (function); }
@@ -444,6 +444,9 @@ public IMPLTYPE appendTo(@Nonnull IJSExpression target) { return appendTo ().arg
 public IMPLTYPE appendTo(@Nonnull IJQuerySelector target) { return appendTo ().arg (target); }
 
 @Nonnull
+public IMPLTYPE appendTo(@Nonnull JQuerySelectorList target) { return appendTo ().arg (target); }
+
+@Nonnull
 public IMPLTYPE appendTo(@Nonnull EHTMLElement target) { return appendTo ().arg (target); }
 
 @Nonnull
@@ -474,21 +477,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName) { return attr ().arg (attri
 public IMPLTYPE attr(@Nonnull String attributeName) { return attr ().arg (attributeName); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName) { return attr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName) { return attr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName) { return attr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName) { return attr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName) { return attr ().arg (attributeName); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
@@ -499,21 +487,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull IJSExpression valu
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull IJSExpression value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
@@ -528,21 +501,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull IJson value) { ret
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull IJson value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
@@ -553,21 +511,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull IHCNode value) { r
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull IHCNode value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
@@ -582,21 +525,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull String value) { re
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull String value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, int value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
@@ -607,21 +535,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, int value) { return attr ()
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull String attributeName, int value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(int attributeName, int value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, int value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, int value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, int value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, int value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, long value) { return attr ().arg (attributeName).arg (value); }
@@ -636,21 +549,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, long value) { return attr (
 public IMPLTYPE attr(@Nonnull String attributeName, long value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName, long value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, long value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, long value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, long value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, long value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
@@ -661,21 +559,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull BigInteger value) 
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull BigInteger value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, double value) { return attr ().arg (attributeName).arg (value); }
@@ -690,21 +573,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, double value) { return attr
 public IMPLTYPE attr(@Nonnull String attributeName, double value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName, double value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, double value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, double value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, double value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, double value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
@@ -717,21 +585,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull BigDecimal value) 
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
 
 @Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull BigDecimal value) { return attr ().arg (attributeName).arg (value); }
-
-@Nonnull
 public IMPLTYPE attr(@Nonnull IJSExpression attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
 
 @Nonnull
@@ -742,21 +595,6 @@ public IMPLTYPE attr(@Nonnull IHCNode attributeName, @Nonnull JSAnonymousFunctio
 
 @Nonnull
 public IMPLTYPE attr(@Nonnull String attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
-
-@Nonnull
-public IMPLTYPE attr(int attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
-
-@Nonnull
-public IMPLTYPE attr(long attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigInteger attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
-
-@Nonnull
-public IMPLTYPE attr(double attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
-
-@Nonnull
-public IMPLTYPE attr(@Nonnull BigDecimal attributeName, @Nonnull JSAnonymousFunction function) { return attr ().arg (attributeName).arg (function); }
 
 @Nonnull
 public IMPLTYPE before(@Nonnull IJSExpression content) { return before ().arg (content); }
@@ -900,21 +738,6 @@ public IMPLTYPE bind(@Nonnull IHCNode eventType, @Nonnull IJSExpression eventDat
 public IMPLTYPE bind(@Nonnull String eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
 
 @Nonnull
-public IMPLTYPE bind(int eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
-
-@Nonnull
-public IMPLTYPE bind(long eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigInteger eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
-
-@Nonnull
-public IMPLTYPE bind(double eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData) { return bind ().arg (eventType).arg (eventData); }
-
-@Nonnull
 public IMPLTYPE bind(@Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
@@ -925,21 +748,6 @@ public IMPLTYPE bind(@Nonnull IHCNode eventType, @Nonnull IJSExpression eventDat
 
 @Nonnull
 public IMPLTYPE bind(@Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
 public IMPLTYPE bind(@Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
@@ -954,21 +762,6 @@ public IMPLTYPE bind(@Nonnull IHCNode eventType, @Nonnull IJSExpression eventDat
 public IMPLTYPE bind(@Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
-public IMPLTYPE bind(int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return bind ().arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
 public IMPLTYPE bind(@Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
 
 @Nonnull
@@ -979,21 +772,6 @@ public IMPLTYPE bind(@Nonnull IHCNode eventType, @Nonnull IJSExpression eventDat
 
 @Nonnull
 public IMPLTYPE bind(@Nonnull String eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
-
-@Nonnull
-public IMPLTYPE bind(int eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
-
-@Nonnull
-public IMPLTYPE bind(long eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
-
-@Nonnull
-public IMPLTYPE bind(double eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
-
-@Nonnull
-public IMPLTYPE bind(@Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, boolean preventBubble) { return bind ().arg (eventType).arg (eventData).arg (preventBubble); }
 
 @Nonnull
 public IMPLTYPE bind(@Nonnull IJSExpression events) { return bind ().arg (events); }
@@ -1062,6 +840,9 @@ public IMPLTYPE children(@Nonnull IJSExpression selector) { return children ().a
 public IMPLTYPE children(@Nonnull IJQuerySelector selector) { return children ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE children(@Nonnull JQuerySelectorList selector) { return children ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE children(@Nonnull EHTMLElement selector) { return children ().arg (selector); }
 
 @Nonnull
@@ -1078,21 +859,6 @@ public IMPLTYPE clearQueue(@Nonnull IHCNode queueName) { return clearQueue ().ar
 
 @Nonnull
 public IMPLTYPE clearQueue(@Nonnull String queueName) { return clearQueue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE clearQueue(int queueName) { return clearQueue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE clearQueue(long queueName) { return clearQueue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE clearQueue(@Nonnull BigInteger queueName) { return clearQueue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE clearQueue(double queueName) { return clearQueue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE clearQueue(@Nonnull BigDecimal queueName) { return clearQueue ().arg (queueName); }
 
 @Nonnull
 public IMPLTYPE click(@Nonnull IJSExpression handler) { return click ().arg (handler); }
@@ -1131,6 +897,9 @@ public IMPLTYPE closest(@Nonnull IJSExpression selector) { return closest ().arg
 public IMPLTYPE closest(@Nonnull IJQuerySelector selector) { return closest ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE closest(@Nonnull JQuerySelectorList selector) { return closest ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE closest(@Nonnull EHTMLElement selector) { return closest ().arg (selector); }
 
 @Nonnull
@@ -1141,6 +910,9 @@ public IMPLTYPE closest(@Nonnull IJSExpression selector, @Nonnull IJSExpression 
 
 @Nonnull
 public IMPLTYPE closest(@Nonnull IJQuerySelector selector, @Nonnull IJSExpression context) { return closest ().arg (selector).arg (context); }
+
+@Nonnull
+public IMPLTYPE closest(@Nonnull JQuerySelectorList selector, @Nonnull IJSExpression context) { return closest ().arg (selector).arg (context); }
 
 @Nonnull
 public IMPLTYPE closest(@Nonnull EHTMLElement selector, @Nonnull IJSExpression context) { return closest ().arg (selector).arg (context); }
@@ -1155,6 +927,9 @@ public IMPLTYPE closest(@Nonnull IJSExpression selector, @Nonnull EHTMLElement c
 public IMPLTYPE closest(@Nonnull IJQuerySelector selector, @Nonnull EHTMLElement context) { return closest ().arg (selector).arg (context); }
 
 @Nonnull
+public IMPLTYPE closest(@Nonnull JQuerySelectorList selector, @Nonnull EHTMLElement context) { return closest ().arg (selector).arg (context); }
+
+@Nonnull
 public IMPLTYPE closest(@Nonnull EHTMLElement selector, @Nonnull EHTMLElement context) { return closest ().arg (selector).arg (context); }
 
 @Nonnull
@@ -1165,6 +940,9 @@ public IMPLTYPE closest(@Nonnull IJSExpression selector, @Nonnull String context
 
 @Nonnull
 public IMPLTYPE closest(@Nonnull IJQuerySelector selector, @Nonnull String context) { return closest ().arg (selector).arg (context); }
+
+@Nonnull
+public IMPLTYPE closest(@Nonnull JQuerySelectorList selector, @Nonnull String context) { return closest ().arg (selector).arg (context); }
 
 @Nonnull
 public IMPLTYPE closest(@Nonnull EHTMLElement selector, @Nonnull String context) { return closest ().arg (selector).arg (context); }
@@ -1207,21 +985,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName) { return css ().arg (property
 public IMPLTYPE css(@Nonnull String propertyName) { return css ().arg (propertyName); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName) { return css ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName) { return css ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName) { return css ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName) { return css ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName) { return css ().arg (propertyName); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull JSArray propertyNames) { return css ().arg (propertyNames); }
 
 @Nonnull
@@ -1237,21 +1000,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull IJSExpression value)
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull IJSExpression value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -1262,21 +1010,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull IJson value) { retur
 
 @Nonnull
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull IJson value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
@@ -1291,21 +1024,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull IHCNode value) { ret
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull IHCNode value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -1316,21 +1034,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull String value) { retu
 
 @Nonnull
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull String value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, int value) { return css ().arg (propertyName).arg (value); }
@@ -1345,21 +1048,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, int value) { return css ().ar
 public IMPLTYPE css(@Nonnull String propertyName, int value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName, int value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, int value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, int value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, int value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, int value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, long value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -1370,21 +1058,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, long value) { return css ().a
 
 @Nonnull
 public IMPLTYPE css(@Nonnull String propertyName, long value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(int propertyName, long value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, long value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, long value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, long value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, long value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
@@ -1399,21 +1072,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull BigInteger value) { 
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull BigInteger value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, double value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -1424,21 +1082,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, double value) { return css ()
 
 @Nonnull
 public IMPLTYPE css(@Nonnull String propertyName, double value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(int propertyName, double value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, double value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, double value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, double value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, double value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
@@ -1453,21 +1096,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull BigDecimal value) { 
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull BigDecimal value) { return css ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE css(@Nonnull IJSExpression propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
 
 @Nonnull
@@ -1478,21 +1106,6 @@ public IMPLTYPE css(@Nonnull IHCNode propertyName, @Nonnull JSAnonymousFunction 
 
 @Nonnull
 public IMPLTYPE css(@Nonnull String propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE css(int propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE css(long propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigInteger propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE css(double propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE css(@Nonnull BigDecimal propertyName, @Nonnull JSAnonymousFunction function) { return css ().arg (propertyName).arg (function); }
 
 @Nonnull
 public IMPLTYPE data(@Nonnull IJSExpression key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
@@ -1507,21 +1120,6 @@ public IMPLTYPE data(@Nonnull IHCNode key, @Nonnull IJSExpression value) { retur
 public IMPLTYPE data(@Nonnull String key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
 
 @Nonnull
-public IMPLTYPE data(int key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
-
-@Nonnull
-public IMPLTYPE data(long key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
-
-@Nonnull
-public IMPLTYPE data(@Nonnull BigInteger key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
-
-@Nonnull
-public IMPLTYPE data(double key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
-
-@Nonnull
-public IMPLTYPE data(@Nonnull BigDecimal key, @Nonnull IJSExpression value) { return data ().arg (key).arg (value); }
-
-@Nonnull
 public IMPLTYPE data(@Nonnull IJSExpression obj) { return data ().arg (obj); }
 
 @Nonnull
@@ -1532,21 +1130,6 @@ public IMPLTYPE data(@Nonnull IHCNode key) { return data ().arg (key); }
 
 @Nonnull
 public IMPLTYPE data(@Nonnull String key) { return data ().arg (key); }
-
-@Nonnull
-public IMPLTYPE data(int key) { return data ().arg (key); }
-
-@Nonnull
-public IMPLTYPE data(long key) { return data ().arg (key); }
-
-@Nonnull
-public IMPLTYPE data(@Nonnull BigInteger key) { return data ().arg (key); }
-
-@Nonnull
-public IMPLTYPE data(double key) { return data ().arg (key); }
-
-@Nonnull
-public IMPLTYPE data(@Nonnull BigDecimal key) { return data ().arg (key); }
 
 @Nonnull
 public IMPLTYPE dblclick(@Nonnull IJSExpression handler) { return dblclick ().arg (handler); }
@@ -1818,66 +1401,6 @@ public IMPLTYPE delay(long duration, @Nonnull String queueName) { return delay (
 public IMPLTYPE delay(@Nonnull BigInteger duration, @Nonnull String queueName) { return delay ().arg (duration).arg (queueName); }
 
 @Nonnull
-public IMPLTYPE delay(@Nonnull IJSExpression duration, int queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(int duration, int queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(long duration, int queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull BigInteger duration, int queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull IJSExpression duration, long queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(int duration, long queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(long duration, long queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull BigInteger duration, long queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull IJSExpression duration, @Nonnull BigInteger queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(int duration, @Nonnull BigInteger queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(long duration, @Nonnull BigInteger queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull BigInteger duration, @Nonnull BigInteger queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull IJSExpression duration, double queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(int duration, double queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(long duration, double queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull BigInteger duration, double queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull IJSExpression duration, @Nonnull BigDecimal queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(int duration, @Nonnull BigDecimal queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(long duration, @Nonnull BigDecimal queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
-public IMPLTYPE delay(@Nonnull BigInteger duration, @Nonnull BigDecimal queueName) { return delay ().arg (duration).arg (queueName); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -1888,21 +1411,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJSExpression event
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
@@ -1917,21 +1425,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, @N
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -1942,21 +1435,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType, 
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
@@ -1971,156 +1449,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull String eventType, @
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, int eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, long eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, double eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -2131,21 +1459,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJSExpression event
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
@@ -2160,21 +1473,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, @N
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -2185,21 +1483,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType, 
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
@@ -2214,156 +1497,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull String eventType, @
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, int eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, long eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, double eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
@@ -2374,21 +1507,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJSExpression event
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
@@ -2403,21 +1521,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, @N
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
@@ -2428,21 +1531,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType, 
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
@@ -2457,156 +1545,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull String eventType, @
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
@@ -2617,21 +1555,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJSExpression event
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
@@ -2646,21 +1569,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, @N
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
@@ -2671,21 +1579,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType, 
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
@@ -2700,156 +1593,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull String eventType, @
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
 
 @Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, int eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, long eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, double eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler) { return delegate ().arg (selector).arg (eventType).arg (eventData).arg (handler); }
-
-@Nonnull
 public IMPLTYPE delegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
 
 @Nonnull
@@ -2860,21 +1603,6 @@ public IMPLTYPE delegate(@Nonnull IHCNode selector, @Nonnull IJSExpression event
 
 @Nonnull
 public IMPLTYPE delegate(@Nonnull String selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
-
-@Nonnull
-public IMPLTYPE delegate(int selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
-
-@Nonnull
-public IMPLTYPE delegate(long selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigInteger selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
-
-@Nonnull
-public IMPLTYPE delegate(double selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
-
-@Nonnull
-public IMPLTYPE delegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression events) { return delegate ().arg (selector).arg (events); }
 
 @Nonnull
 public IMPLTYPE dequeue(@Nonnull IJSExpression queueName) { return dequeue ().arg (queueName); }
@@ -2889,25 +1617,13 @@ public IMPLTYPE dequeue(@Nonnull IHCNode queueName) { return dequeue ().arg (que
 public IMPLTYPE dequeue(@Nonnull String queueName) { return dequeue ().arg (queueName); }
 
 @Nonnull
-public IMPLTYPE dequeue(int queueName) { return dequeue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE dequeue(long queueName) { return dequeue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE dequeue(@Nonnull BigInteger queueName) { return dequeue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE dequeue(double queueName) { return dequeue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE dequeue(@Nonnull BigDecimal queueName) { return dequeue ().arg (queueName); }
-
-@Nonnull
 public IMPLTYPE detach(@Nonnull IJSExpression selector) { return detach ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE detach(@Nonnull IJQuerySelector selector) { return detach ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE detach(@Nonnull JQuerySelectorList selector) { return detach ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE detach(@Nonnull EHTMLElement selector) { return detach ().arg (selector); }
@@ -2933,26 +1649,6 @@ public IMPLTYPE die(@Nonnull String eventType) { return die ().arg (eventType); 
 
 @Deprecated
 @Nonnull
-public IMPLTYPE die(int eventType) { return die ().arg (eventType); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType) { return die ().arg (eventType); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType) { return die ().arg (eventType); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType) { return die ().arg (eventType); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType) { return die ().arg (eventType); }
-
-@Deprecated
-@Nonnull
 public IMPLTYPE die(@Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
 
 @Deprecated
@@ -2966,26 +1662,6 @@ public IMPLTYPE die(@Nonnull IHCNode eventType, @Nonnull IJSExpression handler) 
 @Deprecated
 @Nonnull
 public IMPLTYPE die(@Nonnull String eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return die ().arg (eventType).arg (handler); }
 
 @Deprecated
 @Nonnull
@@ -3005,26 +1681,6 @@ public IMPLTYPE die(@Nonnull String eventType, @Nonnull IJson handler) { return 
 
 @Deprecated
 @Nonnull
-public IMPLTYPE die(int eventType, @Nonnull IJson handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull IJson handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull IJson handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull IJson handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull IJson handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
 public IMPLTYPE die(@Nonnull IJSExpression eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
 
 @Deprecated
@@ -3041,26 +1697,6 @@ public IMPLTYPE die(@Nonnull String eventType, @Nonnull IHCNode handler) { retur
 
 @Deprecated
 @Nonnull
-public IMPLTYPE die(int eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull IHCNode handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
 public IMPLTYPE die(@Nonnull IJSExpression eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
 
 @Deprecated
@@ -3074,206 +1710,6 @@ public IMPLTYPE die(@Nonnull IHCNode eventType, @Nonnull String handler) { retur
 @Deprecated
 @Nonnull
 public IMPLTYPE die(@Nonnull String eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull String handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJSExpression eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJson eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IHCNode eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull String eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, int handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJSExpression eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJson eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IHCNode eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull String eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, long handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJSExpression eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJson eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IHCNode eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull String eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull BigInteger handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJSExpression eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJson eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IHCNode eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull String eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, double handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJSExpression eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IJson eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull IHCNode eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull String eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(int eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(long eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigInteger eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(double eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE die(@Nonnull BigDecimal eventType, @Nonnull BigDecimal handler) { return die ().arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE each(@Nonnull IJSExpression function) { return each ().arg (function); }
@@ -4282,816 +2718,6 @@ public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull St
 public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull String easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
 
 @Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, int easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, long easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, double easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing) { return fadeTo ().arg (duration).arg (opacity).arg (easing); }
-
-@Nonnull
 public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull IJSExpression easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
 
 @Nonnull
@@ -5738,816 +3364,6 @@ public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull St
 
 @Nonnull
 public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull String easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, int easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, long easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, double easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull IJSExpression complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
 
 @Nonnull
 public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull IJSExpression easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
@@ -7198,820 +4014,13 @@ public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull St
 public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull String easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
 
 @Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, int easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, long easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigInteger easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, double easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, int opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, long opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, double opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(int duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(long duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(double duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
-public IMPLTYPE fadeTo(@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull BigDecimal easing, @Nonnull JSAnonymousFunction complete) { return fadeTo ().arg (duration).arg (opacity).arg (easing).arg (complete); }
-
-@Nonnull
 public IMPLTYPE filter(@Nonnull IJSExpression selector) { return filter ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE filter(@Nonnull IJQuerySelector selector) { return filter ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE filter(@Nonnull JQuerySelectorList selector) { return filter ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE filter(@Nonnull EHTMLElement selector) { return filter ().arg (selector); }
@@ -8030,6 +4039,9 @@ public IMPLTYPE find(@Nonnull IJSExpression selector) { return find ().arg (sele
 
 @Nonnull
 public IMPLTYPE find(@Nonnull IJQuerySelector selector) { return find ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE find(@Nonnull JQuerySelectorList selector) { return find ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE find(@Nonnull EHTMLElement selector) { return find ().arg (selector); }
@@ -8051,21 +4063,6 @@ public IMPLTYPE finish(@Nonnull IHCNode queue) { return finish ().arg (queue); }
 
 @Nonnull
 public IMPLTYPE finish(@Nonnull String queue) { return finish ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE finish(int queue) { return finish ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE finish(long queue) { return finish ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE finish(@Nonnull BigInteger queue) { return finish ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE finish(double queue) { return finish ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE finish(@Nonnull BigDecimal queue) { return finish ().arg (queue); }
 
 @Nonnull
 public IMPLTYPE focus(@Nonnull IJSExpression handler) { return focus ().arg (handler); }
@@ -8128,21 +4125,6 @@ public IMPLTYPE has(@Nonnull IHCNode selector) { return has ().arg (selector); }
 public IMPLTYPE has(@Nonnull String selector) { return has ().arg (selector); }
 
 @Nonnull
-public IMPLTYPE has(int selector) { return has ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE has(long selector) { return has ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE has(@Nonnull BigInteger selector) { return has ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE has(double selector) { return has ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE has(@Nonnull BigDecimal selector) { return has ().arg (selector); }
-
-@Nonnull
 public IMPLTYPE has(@Nonnull EHTMLElement contained) { return has ().arg (contained); }
 
 @Nonnull
@@ -8156,21 +4138,6 @@ public IMPLTYPE hasClass(@Nonnull IHCNode className) { return hasClass ().arg (c
 
 @Nonnull
 public IMPLTYPE hasClass(@Nonnull String className) { return hasClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE hasClass(int className) { return hasClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE hasClass(long className) { return hasClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE hasClass(@Nonnull BigInteger className) { return hasClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE hasClass(double className) { return hasClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE hasClass(@Nonnull BigDecimal className) { return hasClass ().arg (className); }
 
 @Nonnull
 public IMPLTYPE height(@Nonnull IJSExpression value) { return height ().arg (value); }
@@ -8266,6 +4233,9 @@ public IMPLTYPE index(@Nonnull IJSExpression selector) { return index ().arg (se
 public IMPLTYPE index(@Nonnull IJQuerySelector selector) { return index ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE index(@Nonnull JQuerySelectorList selector) { return index ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE index(@Nonnull EHTMLElement selector) { return index ().arg (selector); }
 
 @Nonnull
@@ -8282,6 +4252,9 @@ public IMPLTYPE insertAfter(@Nonnull IJSExpression target) { return insertAfter 
 
 @Nonnull
 public IMPLTYPE insertAfter(@Nonnull IJQuerySelector target) { return insertAfter ().arg (target); }
+
+@Nonnull
+public IMPLTYPE insertAfter(@Nonnull JQuerySelectorList target) { return insertAfter ().arg (target); }
 
 @Nonnull
 public IMPLTYPE insertAfter(@Nonnull EHTMLElement target) { return insertAfter ().arg (target); }
@@ -8308,6 +4281,9 @@ public IMPLTYPE insertBefore(@Nonnull IJSExpression target) { return insertBefor
 public IMPLTYPE insertBefore(@Nonnull IJQuerySelector target) { return insertBefore ().arg (target); }
 
 @Nonnull
+public IMPLTYPE insertBefore(@Nonnull JQuerySelectorList target) { return insertBefore ().arg (target); }
+
+@Nonnull
 public IMPLTYPE insertBefore(@Nonnull EHTMLElement target) { return insertBefore ().arg (target); }
 
 @Nonnull
@@ -8330,6 +4306,9 @@ public IMPLTYPE is(@Nonnull IJSExpression selector) { return is ().arg (selector
 
 @Nonnull
 public IMPLTYPE is(@Nonnull IJQuerySelector selector) { return is ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE is(@Nonnull JQuerySelectorList selector) { return is ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE is(@Nonnull EHTMLElement selector) { return is ().arg (selector); }
@@ -8397,26 +4376,6 @@ public IMPLTYPE live(@Nonnull String events, @Nonnull IJSExpression handler) { r
 
 @Deprecated
 @Nonnull
-public IMPLTYPE live(int events, @Nonnull IJSExpression handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(long events, @Nonnull IJSExpression handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigInteger events, @Nonnull IJSExpression handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(double events, @Nonnull IJSExpression handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigDecimal events, @Nonnull IJSExpression handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
 public IMPLTYPE live(@Nonnull IJSExpression events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
 
 @Deprecated
@@ -8430,26 +4389,6 @@ public IMPLTYPE live(@Nonnull IHCNode events, @Nonnull JSAnonymousFunction handl
 @Deprecated
 @Nonnull
 public IMPLTYPE live(@Nonnull String events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(int events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(long events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigInteger events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(double events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigDecimal events, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (handler); }
 
 @Deprecated
 @Nonnull
@@ -8469,26 +4408,6 @@ public IMPLTYPE live(@Nonnull String events, @Nonnull IJSExpression data, @Nonnu
 
 @Deprecated
 @Nonnull
-public IMPLTYPE live(int events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(long events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigInteger events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(double events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigDecimal events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
 public IMPLTYPE live(@Nonnull IJSExpression events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
 
 @Deprecated
@@ -8502,26 +4421,6 @@ public IMPLTYPE live(@Nonnull IHCNode events, @Nonnull IJSExpression data, @Nonn
 @Deprecated
 @Nonnull
 public IMPLTYPE live(@Nonnull String events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(int events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(long events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigInteger events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(double events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
-
-@Deprecated
-@Nonnull
-public IMPLTYPE live(@Nonnull BigDecimal events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return live ().arg (events).arg (data).arg (handler); }
 
 @Deprecated
 @Nonnull
@@ -8553,21 +4452,6 @@ public IMPLTYPE load(@Nonnull IHCNode url) { return load ().arg (url); }
 public IMPLTYPE load(@Nonnull String url) { return load ().arg (url); }
 
 @Nonnull
-public IMPLTYPE load(int url) { return load ().arg (url); }
-
-@Nonnull
-public IMPLTYPE load(long url) { return load ().arg (url); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url) { return load ().arg (url); }
-
-@Nonnull
-public IMPLTYPE load(double url) { return load ().arg (url); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url) { return load ().arg (url); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJson url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
 
 @Nonnull
@@ -8575,21 +4459,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJSExpression data) { return
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJSExpression data) { return load ().arg (url).arg (data); }
 
 @Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
@@ -8604,21 +4473,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJson data) { return load ()
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJson data) { return load ().arg (url).arg (data); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
 
 @Nonnull
@@ -8629,21 +4483,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IHCNode data) { return load 
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IHCNode data) { return load ().arg (url).arg (data); }
 
 @Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull String data) { return load ().arg (url).arg (data); }
@@ -8658,156 +4497,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull String data) { return load (
 public IMPLTYPE load(@Nonnull String url, @Nonnull String data) { return load ().arg (url).arg (data); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull String data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull String data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull String data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull String data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull String data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, int data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, long data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigInteger data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, double data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigDecimal data) { return load ().arg (url).arg (data); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
@@ -8818,21 +4507,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJSExpression data, @Nonnull
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
@@ -8847,21 +4521,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJson data, @Nonnull IJSExpr
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJson data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
@@ -8872,21 +4531,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IHCNode data, @Nonnull IJSEx
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IHCNode data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
@@ -8901,156 +4545,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull String data, @Nonnull IJSExp
 public IMPLTYPE load(@Nonnull String url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull String data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, int data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, long data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigInteger data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, double data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigDecimal data, @Nonnull IJSExpression complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
@@ -9061,21 +4555,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJSExpression data, @Nonnull
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
@@ -9090,21 +4569,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IJson data, @Nonnull JSAnony
 public IMPLTYPE load(@Nonnull String url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
@@ -9117,21 +4581,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull IHCNode data, @Nonnull JSAno
 public IMPLTYPE load(@Nonnull String url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
-public IMPLTYPE load(int url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
 public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
@@ -9142,156 +4591,6 @@ public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull String data, @Nonnull JSAnon
 
 @Nonnull
 public IMPLTYPE load(@Nonnull String url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull String data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, int data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, long data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigInteger data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, double data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJSExpression url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IJson url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull IHCNode url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull String url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(int url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(long url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigInteger url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(double url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
-
-@Nonnull
-public IMPLTYPE load(@Nonnull BigDecimal url, @Nonnull BigDecimal data, @Nonnull JSAnonymousFunction complete) { return load ().arg (url).arg (data).arg (complete); }
 
 @Nonnull
 public IMPLTYPE map(@Nonnull IJSExpression callback) { return map ().arg (callback); }
@@ -9390,6 +4689,9 @@ public IMPLTYPE next(@Nonnull IJSExpression selector) { return next ().arg (sele
 public IMPLTYPE next(@Nonnull IJQuerySelector selector) { return next ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE next(@Nonnull JQuerySelectorList selector) { return next ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE next(@Nonnull EHTMLElement selector) { return next ().arg (selector); }
 
 @Nonnull
@@ -9408,25 +4710,13 @@ public IMPLTYPE nextAll(@Nonnull IHCNode selector) { return nextAll ().arg (sele
 public IMPLTYPE nextAll(@Nonnull String selector) { return nextAll ().arg (selector); }
 
 @Nonnull
-public IMPLTYPE nextAll(int selector) { return nextAll ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE nextAll(long selector) { return nextAll ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE nextAll(@Nonnull BigInteger selector) { return nextAll ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE nextAll(double selector) { return nextAll ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE nextAll(@Nonnull BigDecimal selector) { return nextAll ().arg (selector); }
-
-@Nonnull
 public IMPLTYPE nextUntil(@Nonnull IJSExpression selector) { return nextUntil ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector) { return nextUntil ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector) { return nextUntil ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector) { return nextUntil ().arg (selector); }
@@ -9441,6 +4731,9 @@ public IMPLTYPE nextUntil(@Nonnull IJSExpression selector, @Nonnull IJSExpressio
 public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector, @Nonnull IJSExpression filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJSExpression filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector, @Nonnull IJSExpression filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
@@ -9453,16 +4746,37 @@ public IMPLTYPE nextUntil(@Nonnull IJSExpression selector, @Nonnull IJQuerySelec
 public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector, @Nonnull IJQuerySelector filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJQuerySelector filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector, @Nonnull IJQuerySelector filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull ICSSClassProvider selector, @Nonnull IJQuerySelector filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE nextUntil(@Nonnull IJSExpression selector, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull ICSSClassProvider selector, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE nextUntil(@Nonnull IJSExpression selector, @Nonnull EHTMLElement filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector, @Nonnull EHTMLElement filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector, @Nonnull EHTMLElement filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector, @Nonnull EHTMLElement filter) { return nextUntil ().arg (selector).arg (filter); }
@@ -9475,6 +4789,9 @@ public IMPLTYPE nextUntil(@Nonnull IJSExpression selector, @Nonnull ICSSClassPro
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull IJQuerySelector selector, @Nonnull ICSSClassProvider filter) { return nextUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE nextUntil(@Nonnull JQuerySelectorList selector, @Nonnull ICSSClassProvider filter) { return nextUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE nextUntil(@Nonnull EHTMLElement selector, @Nonnull ICSSClassProvider filter) { return nextUntil ().arg (selector).arg (filter); }
@@ -9492,6 +4809,9 @@ public IMPLTYPE nextUntil(@Nonnull String element, @Nonnull IJSExpression filter
 public IMPLTYPE nextUntil(@Nonnull String element, @Nonnull IJQuerySelector filter) { return nextUntil ().arg (element).arg (filter); }
 
 @Nonnull
+public IMPLTYPE nextUntil(@Nonnull String element, @Nonnull JQuerySelectorList filter) { return nextUntil ().arg (element).arg (filter); }
+
+@Nonnull
 public IMPLTYPE nextUntil(@Nonnull String element, @Nonnull EHTMLElement filter) { return nextUntil ().arg (element).arg (filter); }
 
 @Nonnull
@@ -9502,6 +4822,9 @@ public IMPLTYPE _not(@Nonnull IJSExpression selector) { return _not ().arg (sele
 
 @Nonnull
 public IMPLTYPE _not(@Nonnull IJQuerySelector selector) { return _not ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE _not(@Nonnull JQuerySelectorList selector) { return _not ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE _not(@Nonnull EHTMLElement selector) { return _not ().arg (selector); }
@@ -9534,21 +4857,6 @@ public IMPLTYPE off(@Nonnull IHCNode events) { return off ().arg (events); }
 public IMPLTYPE off(@Nonnull String events) { return off ().arg (events); }
 
 @Nonnull
-public IMPLTYPE off(int events) { return off ().arg (events); }
-
-@Nonnull
-public IMPLTYPE off(long events) { return off ().arg (events); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events) { return off ().arg (events); }
-
-@Nonnull
-public IMPLTYPE off(double events) { return off ().arg (events); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events) { return off ().arg (events); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
@@ -9559,21 +4867,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJSExpression selector) { 
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJSExpression selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
@@ -9588,21 +4881,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJson selector) { return o
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJson selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
@@ -9613,21 +4891,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IHCNode selector) { return
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IHCNode selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
@@ -9642,156 +4905,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull String selector) { return 
 public IMPLTYPE off(@Nonnull String events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull String selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, int selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, long selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigInteger selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, double selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigDecimal selector) { return off ().arg (events).arg (selector); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
@@ -9802,21 +4915,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @N
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
@@ -9831,21 +4929,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull I
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
@@ -9856,21 +4939,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
@@ -9885,156 +4953,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull 
 public IMPLTYPE off(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
@@ -10045,21 +4963,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @N
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
@@ -10074,21 +4977,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull J
 public IMPLTYPE off(@Nonnull String events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
@@ -10101,21 +4989,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
-public IMPLTYPE off(int events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
 public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
@@ -10126,156 +4999,6 @@ public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull 
 
 @Nonnull
 public IMPLTYPE off(@Nonnull String events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, int selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, long selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, double selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(int events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(long events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(double events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
-
-@Nonnull
-public IMPLTYPE off(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull JSAnonymousFunction handler) { return off ().arg (events).arg (selector).arg (handler); }
 
 @Nonnull
 public IMPLTYPE offset(@Nonnull IJSExpression coordinates) { return offset ().arg (coordinates); }
@@ -10296,21 +5019,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJSExpression selector) { r
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJSExpression selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
@@ -10321,21 +5029,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJson selector) { return on
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJson selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
@@ -10350,21 +5043,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IHCNode selector) { return 
 public IMPLTYPE on(@Nonnull String events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IHCNode selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
@@ -10375,156 +5053,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull String selector) { return o
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull String selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, int selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, long selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigInteger selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, double selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigDecimal selector) { return on ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
@@ -10539,21 +5067,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @No
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
@@ -10564,21 +5077,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJ
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
@@ -10593,21 +5091,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull 
 public IMPLTYPE on(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
@@ -10618,156 +5101,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull I
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return on ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -10782,21 +5115,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @No
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -10807,21 +5125,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJ
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -10836,21 +5139,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull 
 public IMPLTYPE on(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -10861,156 +5149,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull I
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -11025,21 +5163,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @No
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -11050,21 +5173,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJ
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -11079,21 +5187,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull 
 public IMPLTYPE on(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE on(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -11104,156 +5197,6 @@ public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull I
 
 @Nonnull
 public IMPLTYPE on(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE on(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return on ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE on(@Nonnull IJSExpression events) { return on ().arg (events); }
@@ -11271,21 +5214,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJSExpression data) { retu
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJSExpression data) { return one ().arg (events).arg (data); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
 
 @Nonnull
@@ -11296,21 +5224,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJSExpression data, @Nonnu
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
@@ -11325,21 +5238,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJSExpression data, @Nonnu
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
 
 @Nonnull
@@ -11350,21 +5248,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJson selector) { return o
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJson selector) { return one ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
@@ -11379,21 +5262,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IHCNode selector) { return
 public IMPLTYPE one(@Nonnull String events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IHCNode selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
 
 @Nonnull
@@ -11404,156 +5272,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull String selector) { return 
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull String selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, int selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, long selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigInteger selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, double selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigDecimal selector) { return one ().arg (events).arg (selector); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
@@ -11568,21 +5286,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull I
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
@@ -11593,21 +5296,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
@@ -11622,156 +5310,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull 
 public IMPLTYPE one(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data) { return one ().arg (events).arg (selector).arg (data); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -11782,21 +5320,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @N
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -11811,21 +5334,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull I
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -11836,21 +5344,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -11865,156 +5358,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull 
 public IMPLTYPE one(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull IJSExpression handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -12025,21 +5368,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJSExpression selector, @N
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
@@ -12054,21 +5382,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull I
 public IMPLTYPE one(@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IJson selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -12081,21 +5394,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull IHCNode selector, @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
-public IMPLTYPE one(int events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull IHCNode selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
@@ -12106,156 +5404,6 @@ public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull String selector, @Nonnull 
 
 @Nonnull
 public IMPLTYPE one(@Nonnull String events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull String selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, int selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, long selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigInteger selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, double selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJSExpression events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IJson events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull IHCNode events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull String events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(int events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(long events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigInteger events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(double events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
-
-@Nonnull
-public IMPLTYPE one(@Nonnull BigDecimal events, @Nonnull BigDecimal selector, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler) { return one ().arg (events).arg (selector).arg (data).arg (handler); }
 
 @Nonnull
 public IMPLTYPE one(@Nonnull IJSExpression events) { return one ().arg (events); }
@@ -12279,6 +5427,9 @@ public IMPLTYPE parent(@Nonnull IJSExpression selector) { return parent ().arg (
 public IMPLTYPE parent(@Nonnull IJQuerySelector selector) { return parent ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE parent(@Nonnull JQuerySelectorList selector) { return parent ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE parent(@Nonnull EHTMLElement selector) { return parent ().arg (selector); }
 
 @Nonnull
@@ -12289,6 +5440,9 @@ public IMPLTYPE parents(@Nonnull IJSExpression selector) { return parents ().arg
 
 @Nonnull
 public IMPLTYPE parents(@Nonnull IJQuerySelector selector) { return parents ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE parents(@Nonnull JQuerySelectorList selector) { return parents ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE parents(@Nonnull EHTMLElement selector) { return parents ().arg (selector); }
@@ -12303,6 +5457,9 @@ public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector) { return parentsUn
 public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector) { return parentsUntil ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector) { return parentsUntil ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector) { return parentsUntil ().arg (selector); }
 
 @Nonnull
@@ -12313,6 +5470,9 @@ public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector, @Nonnull IJSExpres
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector, @Nonnull IJSExpression filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJSExpression filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector, @Nonnull IJSExpression filter) { return parentsUntil ().arg (selector).arg (filter); }
@@ -12327,16 +5487,37 @@ public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector, @Nonnull IJQuerySe
 public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector, @Nonnull IJQuerySelector filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJQuerySelector filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector, @Nonnull IJQuerySelector filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull ICSSClassProvider selector, @Nonnull IJQuerySelector filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull ICSSClassProvider selector, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector, @Nonnull EHTMLElement filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector, @Nonnull EHTMLElement filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector, @Nonnull EHTMLElement filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector, @Nonnull EHTMLElement filter) { return parentsUntil ().arg (selector).arg (filter); }
@@ -12349,6 +5530,9 @@ public IMPLTYPE parentsUntil(@Nonnull IJSExpression selector, @Nonnull ICSSClass
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull IJQuerySelector selector, @Nonnull ICSSClassProvider filter) { return parentsUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull JQuerySelectorList selector, @Nonnull ICSSClassProvider filter) { return parentsUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull EHTMLElement selector, @Nonnull ICSSClassProvider filter) { return parentsUntil ().arg (selector).arg (filter); }
@@ -12364,6 +5548,9 @@ public IMPLTYPE parentsUntil(@Nonnull String element, @Nonnull IJSExpression fil
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull String element, @Nonnull IJQuerySelector filter) { return parentsUntil ().arg (element).arg (filter); }
+
+@Nonnull
+public IMPLTYPE parentsUntil(@Nonnull String element, @Nonnull JQuerySelectorList filter) { return parentsUntil ().arg (element).arg (filter); }
 
 @Nonnull
 public IMPLTYPE parentsUntil(@Nonnull String element, @Nonnull EHTMLElement filter) { return parentsUntil ().arg (element).arg (filter); }
@@ -12507,6 +5694,9 @@ public IMPLTYPE prependTo(@Nonnull IJSExpression target) { return prependTo ().a
 public IMPLTYPE prependTo(@Nonnull IJQuerySelector target) { return prependTo ().arg (target); }
 
 @Nonnull
+public IMPLTYPE prependTo(@Nonnull JQuerySelectorList target) { return prependTo ().arg (target); }
+
+@Nonnull
 public IMPLTYPE prependTo(@Nonnull EHTMLElement target) { return prependTo ().arg (target); }
 
 @Nonnull
@@ -12531,6 +5721,9 @@ public IMPLTYPE prev(@Nonnull IJSExpression selector) { return prev ().arg (sele
 public IMPLTYPE prev(@Nonnull IJQuerySelector selector) { return prev ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE prev(@Nonnull JQuerySelectorList selector) { return prev ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE prev(@Nonnull EHTMLElement selector) { return prev ().arg (selector); }
 
 @Nonnull
@@ -12541,6 +5734,9 @@ public IMPLTYPE prevAll(@Nonnull IJSExpression selector) { return prevAll ().arg
 
 @Nonnull
 public IMPLTYPE prevAll(@Nonnull IJQuerySelector selector) { return prevAll ().arg (selector); }
+
+@Nonnull
+public IMPLTYPE prevAll(@Nonnull JQuerySelectorList selector) { return prevAll ().arg (selector); }
 
 @Nonnull
 public IMPLTYPE prevAll(@Nonnull EHTMLElement selector) { return prevAll ().arg (selector); }
@@ -12555,6 +5751,9 @@ public IMPLTYPE prevUntil(@Nonnull IJSExpression selector) { return prevUntil ()
 public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector) { return prevUntil ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector) { return prevUntil ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector) { return prevUntil ().arg (selector); }
 
 @Nonnull
@@ -12565,6 +5764,9 @@ public IMPLTYPE prevUntil(@Nonnull IJSExpression selector, @Nonnull IJSExpressio
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector, @Nonnull IJSExpression filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJSExpression filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector, @Nonnull IJSExpression filter) { return prevUntil ().arg (selector).arg (filter); }
@@ -12579,16 +5781,37 @@ public IMPLTYPE prevUntil(@Nonnull IJSExpression selector, @Nonnull IJQuerySelec
 public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector, @Nonnull IJQuerySelector filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector, @Nonnull IJQuerySelector filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector, @Nonnull IJQuerySelector filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull ICSSClassProvider selector, @Nonnull IJQuerySelector filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
+public IMPLTYPE prevUntil(@Nonnull IJSExpression selector, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull ICSSClassProvider selector, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
 public IMPLTYPE prevUntil(@Nonnull IJSExpression selector, @Nonnull EHTMLElement filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector, @Nonnull EHTMLElement filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector, @Nonnull EHTMLElement filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector, @Nonnull EHTMLElement filter) { return prevUntil ().arg (selector).arg (filter); }
@@ -12601,6 +5824,9 @@ public IMPLTYPE prevUntil(@Nonnull IJSExpression selector, @Nonnull ICSSClassPro
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull IJQuerySelector selector, @Nonnull ICSSClassProvider filter) { return prevUntil ().arg (selector).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull JQuerySelectorList selector, @Nonnull ICSSClassProvider filter) { return prevUntil ().arg (selector).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull EHTMLElement selector, @Nonnull ICSSClassProvider filter) { return prevUntil ().arg (selector).arg (filter); }
@@ -12616,6 +5842,9 @@ public IMPLTYPE prevUntil(@Nonnull String element, @Nonnull IJSExpression filter
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull String element, @Nonnull IJQuerySelector filter) { return prevUntil ().arg (element).arg (filter); }
+
+@Nonnull
+public IMPLTYPE prevUntil(@Nonnull String element, @Nonnull JQuerySelectorList filter) { return prevUntil ().arg (element).arg (filter); }
 
 @Nonnull
 public IMPLTYPE prevUntil(@Nonnull String element, @Nonnull EHTMLElement filter) { return prevUntil ().arg (element).arg (filter); }
@@ -12636,21 +5865,6 @@ public IMPLTYPE promise(@Nonnull IHCNode type) { return promise ().arg (type); }
 public IMPLTYPE promise(@Nonnull String type) { return promise ().arg (type); }
 
 @Nonnull
-public IMPLTYPE promise(int type) { return promise ().arg (type); }
-
-@Nonnull
-public IMPLTYPE promise(long type) { return promise ().arg (type); }
-
-@Nonnull
-public IMPLTYPE promise(@Nonnull BigInteger type) { return promise ().arg (type); }
-
-@Nonnull
-public IMPLTYPE promise(double type) { return promise ().arg (type); }
-
-@Nonnull
-public IMPLTYPE promise(@Nonnull BigDecimal type) { return promise ().arg (type); }
-
-@Nonnull
 public IMPLTYPE promise(@Nonnull IJSExpression type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
 
 @Nonnull
@@ -12661,21 +5875,6 @@ public IMPLTYPE promise(@Nonnull IHCNode type, @Nonnull IJSExpression target) { 
 
 @Nonnull
 public IMPLTYPE promise(@Nonnull String type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
-
-@Nonnull
-public IMPLTYPE promise(int type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
-
-@Nonnull
-public IMPLTYPE promise(long type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
-
-@Nonnull
-public IMPLTYPE promise(@Nonnull BigInteger type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
-
-@Nonnull
-public IMPLTYPE promise(double type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
-
-@Nonnull
-public IMPLTYPE promise(@Nonnull BigDecimal type, @Nonnull IJSExpression target) { return promise ().arg (type).arg (target); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName) { return prop ().arg (propertyName); }
@@ -12690,21 +5889,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName) { return prop ().arg (proper
 public IMPLTYPE prop(@Nonnull String propertyName) { return prop ().arg (propertyName); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName) { return prop ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName) { return prop ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName) { return prop ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName) { return prop ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName) { return prop ().arg (propertyName); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -12715,21 +5899,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull IJSExpression value
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull IJSExpression value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
@@ -12744,21 +5913,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull IJson value) { retu
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull IJson value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -12769,21 +5923,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull IHCNode value) { re
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull IHCNode value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
@@ -12798,21 +5937,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull String value) { ret
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull String value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, int value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -12823,21 +5947,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, int value) { return prop ().
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, int value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, int value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, int value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, int value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, int value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, int value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, long value) { return prop ().arg (propertyName).arg (value); }
@@ -12852,21 +5961,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, long value) { return prop ()
 public IMPLTYPE prop(@Nonnull String propertyName, long value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName, long value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, long value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, long value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, long value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, long value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -12877,21 +5971,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull BigInteger value) {
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull BigInteger value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, double value) { return prop ().arg (propertyName).arg (value); }
@@ -12906,21 +5985,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, double value) { return prop 
 public IMPLTYPE prop(@Nonnull String propertyName, double value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName, double value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, double value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, double value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, double value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, double value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
@@ -12931,21 +5995,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull BigDecimal value) {
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull BigDecimal value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
@@ -12960,21 +6009,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, boolean value) { return prop
 public IMPLTYPE prop(@Nonnull String propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
 
 @Nonnull
-public IMPLTYPE prop(int propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, boolean value) { return prop ().arg (propertyName).arg (value); }
-
-@Nonnull
 public IMPLTYPE prop(@Nonnull IJSExpression propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
 
 @Nonnull
@@ -12985,21 +6019,6 @@ public IMPLTYPE prop(@Nonnull IHCNode propertyName, @Nonnull JSAnonymousFunction
 
 @Nonnull
 public IMPLTYPE prop(@Nonnull String propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE prop(int propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE prop(long propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigInteger propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE prop(double propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
-
-@Nonnull
-public IMPLTYPE prop(@Nonnull BigDecimal propertyName, @Nonnull JSAnonymousFunction function) { return prop ().arg (propertyName).arg (function); }
 
 @Nonnull
 public IMPLTYPE pushStack(@Nonnull IJSExpression elements) { return pushStack ().arg (elements); }
@@ -13032,36 +6051,6 @@ public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull String name,
 public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull String name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
 
 @Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, int name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, int name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, long name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, long name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull BigInteger name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull BigInteger name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, double name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, double name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull BigDecimal name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull BigDecimal name, @Nonnull IJSExpression arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
 public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull IJSExpression name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
 
 @Nonnull
@@ -13086,36 +6075,6 @@ public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull String name,
 public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull String name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
 
 @Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, int name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, int name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, long name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, long name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull BigInteger name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull BigInteger name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, double name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, double name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull IJSExpression elements, @Nonnull BigDecimal name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
-public IMPLTYPE pushStack(@Nonnull JSArray elements, @Nonnull BigDecimal name, @Nonnull JSArray arguments) { return pushStack ().arg (elements).arg (name).arg (arguments); }
-
-@Nonnull
 public IMPLTYPE queue(@Nonnull IJSExpression queueName) { return queue ().arg (queueName); }
 
 @Nonnull
@@ -13126,21 +6085,6 @@ public IMPLTYPE queue(@Nonnull IHCNode queueName) { return queue ().arg (queueNa
 
 @Nonnull
 public IMPLTYPE queue(@Nonnull String queueName) { return queue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE queue(int queueName) { return queue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE queue(long queueName) { return queue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigInteger queueName) { return queue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE queue(double queueName) { return queue ().arg (queueName); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigDecimal queueName) { return queue ().arg (queueName); }
 
 @Nonnull
 public IMPLTYPE queue(@Nonnull IJSExpression queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
@@ -13155,21 +6099,6 @@ public IMPLTYPE queue(@Nonnull IHCNode queueName, @Nonnull IJSExpression newQueu
 public IMPLTYPE queue(@Nonnull String queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
 
 @Nonnull
-public IMPLTYPE queue(int queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(long queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigInteger queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(double queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigDecimal queueName, @Nonnull IJSExpression newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
 public IMPLTYPE queue(@Nonnull IJSExpression queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
 
 @Nonnull
@@ -13182,21 +6111,6 @@ public IMPLTYPE queue(@Nonnull IHCNode queueName, @Nonnull JSArray newQueue) { r
 public IMPLTYPE queue(@Nonnull String queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
 
 @Nonnull
-public IMPLTYPE queue(int queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(long queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigInteger queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(double queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigDecimal queueName, @Nonnull JSArray newQueue) { return queue ().arg (queueName).arg (newQueue); }
-
-@Nonnull
 public IMPLTYPE queue(@Nonnull IJSExpression queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
 
 @Nonnull
@@ -13207,21 +6121,6 @@ public IMPLTYPE queue(@Nonnull IHCNode queueName, @Nonnull JSAnonymousFunction c
 
 @Nonnull
 public IMPLTYPE queue(@Nonnull String queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
-
-@Nonnull
-public IMPLTYPE queue(int queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
-
-@Nonnull
-public IMPLTYPE queue(long queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigInteger queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
-
-@Nonnull
-public IMPLTYPE queue(double queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
-
-@Nonnull
-public IMPLTYPE queue(@Nonnull BigDecimal queueName, @Nonnull JSAnonymousFunction callback) { return queue ().arg (queueName).arg (callback); }
 
 @Nonnull
 public IMPLTYPE ready(@Nonnull IJSExpression handler) { return ready ().arg (handler); }
@@ -13242,21 +6141,6 @@ public IMPLTYPE remove(@Nonnull IHCNode selector) { return remove ().arg (select
 public IMPLTYPE remove(@Nonnull String selector) { return remove ().arg (selector); }
 
 @Nonnull
-public IMPLTYPE remove(int selector) { return remove ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE remove(long selector) { return remove ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE remove(@Nonnull BigInteger selector) { return remove ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE remove(double selector) { return remove ().arg (selector); }
-
-@Nonnull
-public IMPLTYPE remove(@Nonnull BigDecimal selector) { return remove ().arg (selector); }
-
-@Nonnull
 public IMPLTYPE removeAttr(@Nonnull IJSExpression attributeName) { return removeAttr ().arg (attributeName); }
 
 @Nonnull
@@ -13269,21 +6153,6 @@ public IMPLTYPE removeAttr(@Nonnull IHCNode attributeName) { return removeAttr (
 public IMPLTYPE removeAttr(@Nonnull String attributeName) { return removeAttr ().arg (attributeName); }
 
 @Nonnull
-public IMPLTYPE removeAttr(int attributeName) { return removeAttr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE removeAttr(long attributeName) { return removeAttr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE removeAttr(@Nonnull BigInteger attributeName) { return removeAttr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE removeAttr(double attributeName) { return removeAttr ().arg (attributeName); }
-
-@Nonnull
-public IMPLTYPE removeAttr(@Nonnull BigDecimal attributeName) { return removeAttr ().arg (attributeName); }
-
-@Nonnull
 public IMPLTYPE removeClass(@Nonnull IJSExpression className) { return removeClass ().arg (className); }
 
 @Nonnull
@@ -13294,21 +6163,6 @@ public IMPLTYPE removeClass(@Nonnull IHCNode className) { return removeClass ().
 
 @Nonnull
 public IMPLTYPE removeClass(@Nonnull String className) { return removeClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE removeClass(int className) { return removeClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE removeClass(long className) { return removeClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE removeClass(@Nonnull BigInteger className) { return removeClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE removeClass(double className) { return removeClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE removeClass(@Nonnull BigDecimal className) { return removeClass ().arg (className); }
 
 @Nonnull
 public IMPLTYPE removeClass(@Nonnull JSAnonymousFunction function) { return removeClass ().arg (function); }
@@ -13326,21 +6180,6 @@ public IMPLTYPE removeData(@Nonnull IHCNode name) { return removeData ().arg (na
 public IMPLTYPE removeData(@Nonnull String name) { return removeData ().arg (name); }
 
 @Nonnull
-public IMPLTYPE removeData(int name) { return removeData ().arg (name); }
-
-@Nonnull
-public IMPLTYPE removeData(long name) { return removeData ().arg (name); }
-
-@Nonnull
-public IMPLTYPE removeData(@Nonnull BigInteger name) { return removeData ().arg (name); }
-
-@Nonnull
-public IMPLTYPE removeData(double name) { return removeData ().arg (name); }
-
-@Nonnull
-public IMPLTYPE removeData(@Nonnull BigDecimal name) { return removeData ().arg (name); }
-
-@Nonnull
 public IMPLTYPE removeData(@Nonnull JSArray list) { return removeData ().arg (list); }
 
 @Nonnull
@@ -13356,25 +6195,13 @@ public IMPLTYPE removeProp(@Nonnull IHCNode propertyName) { return removeProp ()
 public IMPLTYPE removeProp(@Nonnull String propertyName) { return removeProp ().arg (propertyName); }
 
 @Nonnull
-public IMPLTYPE removeProp(int propertyName) { return removeProp ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE removeProp(long propertyName) { return removeProp ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE removeProp(@Nonnull BigInteger propertyName) { return removeProp ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE removeProp(double propertyName) { return removeProp ().arg (propertyName); }
-
-@Nonnull
-public IMPLTYPE removeProp(@Nonnull BigDecimal propertyName) { return removeProp ().arg (propertyName); }
-
-@Nonnull
 public IMPLTYPE replaceAll(@Nonnull IJSExpression target) { return replaceAll ().arg (target); }
 
 @Nonnull
 public IMPLTYPE replaceAll(@Nonnull IJQuerySelector target) { return replaceAll ().arg (target); }
+
+@Nonnull
+public IMPLTYPE replaceAll(@Nonnull JQuerySelectorList target) { return replaceAll ().arg (target); }
 
 @Nonnull
 public IMPLTYPE replaceAll(@Nonnull EHTMLElement target) { return replaceAll ().arg (target); }
@@ -13518,6 +6345,9 @@ public IMPLTYPE siblings(@Nonnull IJSExpression selector) { return siblings ().a
 public IMPLTYPE siblings(@Nonnull IJQuerySelector selector) { return siblings ().arg (selector); }
 
 @Nonnull
+public IMPLTYPE siblings(@Nonnull JQuerySelectorList selector) { return siblings ().arg (selector); }
+
+@Nonnull
 public IMPLTYPE siblings(@Nonnull EHTMLElement selector) { return siblings ().arg (selector); }
 
 @Nonnull
@@ -13611,21 +6441,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue) { return stop ().arg (queue); }
 public IMPLTYPE stop(@Nonnull String queue) { return stop ().arg (queue); }
 
 @Nonnull
-public IMPLTYPE stop(int queue) { return stop ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE stop(long queue) { return stop ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue) { return stop ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE stop(double queue) { return stop ().arg (queue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue) { return stop ().arg (queue); }
-
-@Nonnull
 public IMPLTYPE stop(@Nonnull IJson queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
 
 @Nonnull
@@ -13635,21 +6450,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, @Nonnull IJSExpression clearQueue) 
 public IMPLTYPE stop(@Nonnull String queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
 
 @Nonnull
-public IMPLTYPE stop(int queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, @Nonnull IJSExpression clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
 public IMPLTYPE stop(@Nonnull IJson queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
 
 @Nonnull
@@ -13657,21 +6457,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, boolean clearQueue) { return stop (
 
 @Nonnull
 public IMPLTYPE stop(@Nonnull String queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(int queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, boolean clearQueue) { return stop ().arg (queue).arg (clearQueue); }
 
 @Nonnull
 public IMPLTYPE stop(@Nonnull IJSExpression queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
@@ -13686,21 +6471,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, @Nonnull IJSExpression clearQueue, 
 public IMPLTYPE stop(@Nonnull String queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
-public IMPLTYPE stop(int queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
 public IMPLTYPE stop(@Nonnull IJSExpression queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
@@ -13711,21 +6481,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, boolean clearQueue, @Nonnull IJSExp
 
 @Nonnull
 public IMPLTYPE stop(@Nonnull String queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(int queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
 public IMPLTYPE stop(@Nonnull IJSExpression queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
@@ -13740,21 +6495,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, @Nonnull IJSExpression clearQueue, 
 public IMPLTYPE stop(@Nonnull String queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
-public IMPLTYPE stop(int queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
 public IMPLTYPE stop(@Nonnull IJSExpression queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
@@ -13765,21 +6505,6 @@ public IMPLTYPE stop(@Nonnull IHCNode queue, boolean clearQueue, boolean jumpToE
 
 @Nonnull
 public IMPLTYPE stop(@Nonnull String queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(int queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(long queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigInteger queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(double queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
-
-@Nonnull
-public IMPLTYPE stop(@Nonnull BigDecimal queue, boolean clearQueue, boolean jumpToEnd) { return stop ().arg (queue).arg (clearQueue).arg (jumpToEnd); }
 
 @Nonnull
 public IMPLTYPE submit(@Nonnull IJSExpression handler) { return submit ().arg (handler); }
@@ -13804,21 +6529,6 @@ public IMPLTYPE text(@Nonnull IHCNode textString) { return text ().arg (textStri
 
 @Nonnull
 public IMPLTYPE text(@Nonnull String textString) { return text ().arg (textString); }
-
-@Nonnull
-public IMPLTYPE text(int textString) { return text ().arg (textString); }
-
-@Nonnull
-public IMPLTYPE text(long textString) { return text ().arg (textString); }
-
-@Nonnull
-public IMPLTYPE text(@Nonnull BigInteger textString) { return text ().arg (textString); }
-
-@Nonnull
-public IMPLTYPE text(double textString) { return text ().arg (textString); }
-
-@Nonnull
-public IMPLTYPE text(@Nonnull BigDecimal textString) { return text ().arg (textString); }
 
 @Nonnull
 public IMPLTYPE text(@Nonnull JSAnonymousFunction function) { return text ().arg (function); }
@@ -13914,21 +6624,6 @@ public IMPLTYPE toggleClass(@Nonnull IHCNode className) { return toggleClass ().
 public IMPLTYPE toggleClass(@Nonnull String className) { return toggleClass ().arg (className); }
 
 @Nonnull
-public IMPLTYPE toggleClass(int className) { return toggleClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE toggleClass(long className) { return toggleClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigInteger className) { return toggleClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE toggleClass(double className) { return toggleClass ().arg (className); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigDecimal className) { return toggleClass ().arg (className); }
-
-@Nonnull
 public IMPLTYPE toggleClass(@Nonnull IJSExpression className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
 
 @Nonnull
@@ -13941,21 +6636,6 @@ public IMPLTYPE toggleClass(@Nonnull IHCNode className, @Nonnull IJSExpression _
 public IMPLTYPE toggleClass(@Nonnull String className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
 
 @Nonnull
-public IMPLTYPE toggleClass(int className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(long className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigInteger className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(double className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigDecimal className, @Nonnull IJSExpression _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
 public IMPLTYPE toggleClass(@Nonnull IJSExpression className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
 
 @Nonnull
@@ -13966,21 +6646,6 @@ public IMPLTYPE toggleClass(@Nonnull IHCNode className, boolean _switch) { retur
 
 @Nonnull
 public IMPLTYPE toggleClass(@Nonnull String className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(int className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(long className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigInteger className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(double className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
-
-@Nonnull
-public IMPLTYPE toggleClass(@Nonnull BigDecimal className, boolean _switch) { return toggleClass ().arg (className).arg (_switch); }
 
 @Nonnull
 public IMPLTYPE toggleClass(boolean _switch) { return toggleClass ().arg (_switch); }
@@ -14007,21 +6672,6 @@ public IMPLTYPE trigger(@Nonnull IHCNode eventType) { return trigger ().arg (eve
 public IMPLTYPE trigger(@Nonnull String eventType) { return trigger ().arg (eventType); }
 
 @Nonnull
-public IMPLTYPE trigger(int eventType) { return trigger ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE trigger(long eventType) { return trigger ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigInteger eventType) { return trigger ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE trigger(double eventType) { return trigger ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigDecimal eventType) { return trigger ().arg (eventType); }
-
-@Nonnull
 public IMPLTYPE trigger(@Nonnull IJSExpression eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
@@ -14032,21 +6682,6 @@ public IMPLTYPE trigger(@Nonnull IHCNode eventType, @Nonnull IJSExpression extra
 
 @Nonnull
 public IMPLTYPE trigger(@Nonnull String eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(int eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(long eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigInteger eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(double eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigDecimal eventType, @Nonnull IJSExpression extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
 public IMPLTYPE trigger(@Nonnull IJSExpression eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
@@ -14061,21 +6696,6 @@ public IMPLTYPE trigger(@Nonnull IHCNode eventType, @Nonnull JSArray extraParame
 public IMPLTYPE trigger(@Nonnull String eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
-public IMPLTYPE trigger(int eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(long eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigInteger eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(double eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE trigger(@Nonnull BigDecimal eventType, @Nonnull JSArray extraParameters) { return trigger ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
 public IMPLTYPE triggerHandler(@Nonnull IJSExpression eventType) { return triggerHandler ().arg (eventType); }
 
 @Nonnull
@@ -14086,21 +6706,6 @@ public IMPLTYPE triggerHandler(@Nonnull IHCNode eventType) { return triggerHandl
 
 @Nonnull
 public IMPLTYPE triggerHandler(@Nonnull String eventType) { return triggerHandler ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(int eventType) { return triggerHandler ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(long eventType) { return triggerHandler ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigInteger eventType) { return triggerHandler ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(double eventType) { return triggerHandler ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigDecimal eventType) { return triggerHandler ().arg (eventType); }
 
 @Nonnull
 public IMPLTYPE triggerHandler(@Nonnull IJSExpression eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
@@ -14115,21 +6720,6 @@ public IMPLTYPE triggerHandler(@Nonnull IHCNode eventType, @Nonnull IJSExpressio
 public IMPLTYPE triggerHandler(@Nonnull String eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
-public IMPLTYPE triggerHandler(int eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(long eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigInteger eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(double eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigDecimal eventType, @Nonnull IJSExpression extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
 public IMPLTYPE triggerHandler(@Nonnull IJSExpression eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
@@ -14140,21 +6730,6 @@ public IMPLTYPE triggerHandler(@Nonnull IHCNode eventType, @Nonnull JSArray extr
 
 @Nonnull
 public IMPLTYPE triggerHandler(@Nonnull String eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(int eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(long eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigInteger eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(double eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
-
-@Nonnull
-public IMPLTYPE triggerHandler(@Nonnull BigDecimal eventType, @Nonnull JSArray extraParameters) { return triggerHandler ().arg (eventType).arg (extraParameters); }
 
 @Nonnull
 public IMPLTYPE unbind(@Nonnull IJSExpression eventType) { return unbind ().arg (eventType); }
@@ -14169,21 +6744,6 @@ public IMPLTYPE unbind(@Nonnull IHCNode eventType) { return unbind ().arg (event
 public IMPLTYPE unbind(@Nonnull String eventType) { return unbind ().arg (eventType); }
 
 @Nonnull
-public IMPLTYPE unbind(int eventType) { return unbind ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE unbind(long eventType) { return unbind ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigInteger eventType) { return unbind ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE unbind(double eventType) { return unbind ().arg (eventType); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigDecimal eventType) { return unbind ().arg (eventType); }
-
-@Nonnull
 public IMPLTYPE unbind(@Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
 
 @Nonnull
@@ -14194,21 +6754,6 @@ public IMPLTYPE unbind(@Nonnull IHCNode eventType, @Nonnull IJSExpression handle
 
 @Nonnull
 public IMPLTYPE unbind(@Nonnull String eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(int eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(long eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(double eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return unbind ().arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE unbind(@Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
@@ -14223,21 +6768,6 @@ public IMPLTYPE unbind(@Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction 
 public IMPLTYPE unbind(@Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE unbind(int eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(long eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(double eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return unbind ().arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE unbind(@Nonnull IJSExpression eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
 
 @Nonnull
@@ -14248,21 +6778,6 @@ public IMPLTYPE unbind(@Nonnull IHCNode eventType, boolean _false) { return unbi
 
 @Nonnull
 public IMPLTYPE unbind(@Nonnull String eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
-
-@Nonnull
-public IMPLTYPE unbind(int eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
-
-@Nonnull
-public IMPLTYPE unbind(long eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigInteger eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
-
-@Nonnull
-public IMPLTYPE unbind(double eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
-
-@Nonnull
-public IMPLTYPE unbind(@Nonnull BigDecimal eventType, boolean _false) { return unbind ().arg (eventType).arg (_false); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
@@ -14277,21 +6792,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJSExpression eve
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
@@ -14302,21 +6802,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJson eventType) 
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
@@ -14331,21 +6816,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
@@ -14356,156 +6826,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull String eventType)
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull String eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, int eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, long eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, double eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType) { return undelegate ().arg (selector).arg (eventType); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
@@ -14520,21 +6840,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJSExpression eve
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -14545,21 +6850,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, 
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
@@ -14574,21 +6864,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -14599,156 +6874,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull String eventType,
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, int eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, long eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, double eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull IJSExpression handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
@@ -14763,21 +6888,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJSExpression eve
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -14788,21 +6898,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IJson eventType, 
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
@@ -14817,21 +6912,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull IHCNode eventType
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
@@ -14844,156 +6924,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull String eventType,
 public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
 
 @Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, int eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, long eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigInteger eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, double eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJSExpression selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IJson selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull IHCNode selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull String selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(int selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(long selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(double selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal selector, @Nonnull BigDecimal eventType, @Nonnull JSAnonymousFunction handler) { return undelegate ().arg (selector).arg (eventType).arg (handler); }
-
-@Nonnull
 public IMPLTYPE undelegate(@Nonnull IJSExpression namespace) { return undelegate ().arg (namespace); }
 
 @Nonnull
@@ -15004,21 +6934,6 @@ public IMPLTYPE undelegate(@Nonnull IHCNode namespace) { return undelegate ().ar
 
 @Nonnull
 public IMPLTYPE undelegate(@Nonnull String namespace) { return undelegate ().arg (namespace); }
-
-@Nonnull
-public IMPLTYPE undelegate(int namespace) { return undelegate ().arg (namespace); }
-
-@Nonnull
-public IMPLTYPE undelegate(long namespace) { return undelegate ().arg (namespace); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigInteger namespace) { return undelegate ().arg (namespace); }
-
-@Nonnull
-public IMPLTYPE undelegate(double namespace) { return undelegate ().arg (namespace); }
-
-@Nonnull
-public IMPLTYPE undelegate(@Nonnull BigDecimal namespace) { return undelegate ().arg (namespace); }
 
 @Deprecated
 @Nonnull
@@ -15047,21 +6962,6 @@ public IMPLTYPE val(@Nonnull IHCNode value) { return val ().arg (value); }
 
 @Nonnull
 public IMPLTYPE val(@Nonnull String value) { return val ().arg (value); }
-
-@Nonnull
-public IMPLTYPE val(int value) { return val ().arg (value); }
-
-@Nonnull
-public IMPLTYPE val(long value) { return val ().arg (value); }
-
-@Nonnull
-public IMPLTYPE val(@Nonnull BigInteger value) { return val ().arg (value); }
-
-@Nonnull
-public IMPLTYPE val(double value) { return val ().arg (value); }
-
-@Nonnull
-public IMPLTYPE val(@Nonnull BigDecimal value) { return val ().arg (value); }
 
 @Nonnull
 public IMPLTYPE val(@Nonnull JSArray value) { return val ().arg (value); }
@@ -15106,6 +7006,9 @@ public IMPLTYPE wrap(@Nonnull IJSExpression wrappingElement) { return wrap ().ar
 public IMPLTYPE wrap(@Nonnull IJQuerySelector wrappingElement) { return wrap ().arg (wrappingElement); }
 
 @Nonnull
+public IMPLTYPE wrap(@Nonnull JQuerySelectorList wrappingElement) { return wrap ().arg (wrappingElement); }
+
+@Nonnull
 public IMPLTYPE wrap(@Nonnull EHTMLElement wrappingElement) { return wrap ().arg (wrappingElement); }
 
 @Nonnull
@@ -15128,6 +7031,9 @@ public IMPLTYPE wrapAll(@Nonnull IJSExpression wrappingElement) { return wrapAll
 
 @Nonnull
 public IMPLTYPE wrapAll(@Nonnull IJQuerySelector wrappingElement) { return wrapAll ().arg (wrappingElement); }
+
+@Nonnull
+public IMPLTYPE wrapAll(@Nonnull JQuerySelectorList wrappingElement) { return wrapAll ().arg (wrappingElement); }
 
 @Nonnull
 public IMPLTYPE wrapAll(@Nonnull EHTMLElement wrappingElement) { return wrapAll ().arg (wrappingElement); }
@@ -15155,21 +7061,6 @@ public IMPLTYPE wrapInner(@Nonnull IHCNode wrappingElement) { return wrapInner (
 
 @Nonnull
 public IMPLTYPE wrapInner(@Nonnull String wrappingElement) { return wrapInner ().arg (wrappingElement); }
-
-@Nonnull
-public IMPLTYPE wrapInner(int wrappingElement) { return wrapInner ().arg (wrappingElement); }
-
-@Nonnull
-public IMPLTYPE wrapInner(long wrappingElement) { return wrapInner ().arg (wrappingElement); }
-
-@Nonnull
-public IMPLTYPE wrapInner(@Nonnull BigInteger wrappingElement) { return wrapInner ().arg (wrappingElement); }
-
-@Nonnull
-public IMPLTYPE wrapInner(double wrappingElement) { return wrapInner ().arg (wrappingElement); }
-
-@Nonnull
-public IMPLTYPE wrapInner(@Nonnull BigDecimal wrappingElement) { return wrapInner ().arg (wrappingElement); }
 
 @Nonnull
 public IMPLTYPE wrapInner(@Nonnull JSAnonymousFunction function) { return wrapInner ().arg (function); }
