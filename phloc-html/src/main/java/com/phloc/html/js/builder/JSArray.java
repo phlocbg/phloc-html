@@ -27,6 +27,8 @@ import javax.annotation.Nullable;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.json.IJSON;
 import com.phloc.json2.IJson;
 
@@ -105,6 +107,12 @@ public class JSArray extends AbstractJSExpression
   public JSArray add (@Nullable final IJson aValue)
   {
     return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
+  }
+
+  @Nonnull
+  public JSArray add (@Nullable final IHCNode aValue)
+  {
+    return add (aValue == null ? null : HCSettings.getAsHTMLStringWithoutNamespaces (aValue));
   }
 
   @Nonnull
