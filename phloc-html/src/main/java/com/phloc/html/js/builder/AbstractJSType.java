@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -55,6 +56,7 @@ public abstract class AbstractJSType implements IJSGeneratable
    * @return A "new type" invocation object
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public final JSInvocation _new ()
   {
     return JSExpr._new (this);
@@ -66,6 +68,7 @@ public abstract class AbstractJSType implements IJSGeneratable
    * @return A "new type" invocation object
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public final JSInvocation _new (@Nullable final IJSExpression... aExprs)
   {
     return _new ().args (aExprs);

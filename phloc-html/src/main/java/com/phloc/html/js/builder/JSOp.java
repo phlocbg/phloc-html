@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 
 /**
@@ -348,6 +349,7 @@ public final class JSOp
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public static JSOpBinary _instanceof (@Nonnull final IJSExpression aLeft, @Nonnull final AbstractJSType aRight)
   {
     return new JSOpBinary (aLeft, " instanceof ", aRight);

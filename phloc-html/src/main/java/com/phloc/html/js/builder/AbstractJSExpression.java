@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -712,6 +713,7 @@ public abstract class AbstractJSExpression implements IJSExpression
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public final AbstractJSExpression _instanceof (@Nonnull final AbstractJSType aType)
   {
     return JSOp._instanceof (this, aType);

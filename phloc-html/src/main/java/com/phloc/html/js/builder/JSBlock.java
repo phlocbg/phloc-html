@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
@@ -102,12 +103,14 @@ public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSState
    * Create a break statement and add it to this block
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _break ()
   {
     return _break (null);
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _break (@Nullable final JSLabel aLabel)
   {
     addStatement (new JSBreak (aLabel));
@@ -115,6 +118,7 @@ public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSState
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _continue ()
   {
     return _continue (null);
@@ -124,6 +128,7 @@ public class JSBlock extends AbstractJSBlock implements IJSGeneratable, IJSState
    * Create a continue statement and add it to this block
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _continue (@Nullable final JSLabel aLabel)
   {
     addStatement (new JSContinue (aLabel));

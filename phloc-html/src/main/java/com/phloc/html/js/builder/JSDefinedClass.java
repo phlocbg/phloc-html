@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -86,6 +87,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * @return This class
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public JSDefinedClass _extends (@Nonnull final AbstractJSClass aSuperClass)
   {
     if (aSuperClass == null)
@@ -100,6 +102,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    */
   @Override
   @Nullable
+  @CodingStyleguideUnaware
   public AbstractJSClass _extends ()
   {
     return m_aSuperClass;

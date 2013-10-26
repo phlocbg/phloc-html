@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.json.IJSON;
 import com.phloc.json2.IJson;
 
@@ -529,6 +530,7 @@ public interface IJSExpression extends IJSGeneratable
 
   /** instanceof */
   @Nonnull
+  @CodingStyleguideUnaware
   IJSExpression _instanceof (@Nonnull AbstractJSType aType);
 
   /**
