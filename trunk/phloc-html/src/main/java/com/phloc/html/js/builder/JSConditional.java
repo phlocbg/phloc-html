@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -71,6 +72,7 @@ public class JSConditional implements IJSStatement
    * @return Then block
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _then ()
   {
     return m_aThen;
@@ -82,6 +84,7 @@ public class JSConditional implements IJSStatement
    * @return Newly generated else block
    */
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _else ()
   {
     if (m_aElse == null)
@@ -97,7 +100,7 @@ public class JSConditional implements IJSStatement
    * @return The conditional for the next "if"
    */
   @Nonnull
-  public JSConditional _elseif (@Nonnull final IJSExpression aBoolExp)
+  public JSConditional elseif (@Nonnull final IJSExpression aBoolExp)
   {
     return _else ()._if (aBoolExp);
   }

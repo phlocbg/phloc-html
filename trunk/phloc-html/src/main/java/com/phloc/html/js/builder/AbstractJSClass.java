@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
@@ -43,6 +44,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    *         return null.
    */
   @Nullable
+  @CodingStyleguideUnaware
   public abstract AbstractJSClass _extends ();
 
   /**

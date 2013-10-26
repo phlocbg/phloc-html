@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
@@ -75,6 +76,7 @@ public class JSSwitch implements IJSStatement
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSCase _case (@Nonnull final IJSExpression aLabel)
   {
     final JSCase aCase = new JSCase (aLabel);
@@ -83,6 +85,7 @@ public class JSSwitch implements IJSStatement
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSCase _default ()
   {
     if (m_aDefaultCase == null)

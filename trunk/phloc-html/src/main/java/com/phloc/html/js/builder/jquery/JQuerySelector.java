@@ -25,6 +25,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
@@ -40,6 +41,7 @@ import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSStringLiteral;
 
 @Immutable
+@CodingStyleguideUnaware
 public final class JQuerySelector implements IJQuerySelector
 {
   public static final IJQuerySelector all = new JQuerySelector ("*");

@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -46,6 +47,7 @@ public class JSTryBlock implements IJSStatement
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSCatchBlock _catch ()
   {
     if (m_aCatch == null)
@@ -54,6 +56,7 @@ public class JSTryBlock implements IJSStatement
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSCatchBlock _catch (@Nonnull @Nonempty final String sName)
   {
     if (m_aCatch == null)
@@ -67,6 +70,7 @@ public class JSTryBlock implements IJSStatement
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public JSBlock _finally ()
   {
     if (m_aFinally == null)

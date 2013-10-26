@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -45,6 +46,7 @@ import com.phloc.json2.IJson;
  * 
  * @author Philip Helger
  */
+@CodingStyleguideUnaware
 public abstract class AbstractJSBlock implements IJSFunctionContainer
 {
   /**

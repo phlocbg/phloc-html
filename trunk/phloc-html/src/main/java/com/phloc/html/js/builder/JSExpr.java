@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
@@ -122,6 +123,7 @@ public final class JSExpr
   }
 
   @Nonnull
+  @CodingStyleguideUnaware
   public static JSInvocation _new (@Nonnull final AbstractJSType aType)
   {
     return new JSInvocation (aType);
