@@ -51,12 +51,15 @@ import com.phloc.html.js.builder.html.JSHtml;
 import com.phloc.json2.IJson;
 import com.phloc.json2.serialize.JsonWriter;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Wrapper around jQuery to allow for easy function calls
  * 
  * @author Philip Helger
  */
 @Immutable
+@SuppressFBWarnings ("NM_METHOD_NAMING_CONVENTION")
 public final class JQuery
 {
   public static final AtomicBoolean s_aUseDollar = new AtomicBoolean (true);
