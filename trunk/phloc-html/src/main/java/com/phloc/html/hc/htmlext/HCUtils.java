@@ -469,6 +469,30 @@ public final class HCUtils
   }
 
   /**
+   * Recursively determine all {@link IHCControl} elements from and incl. the
+   * passed node
+   * 
+   * @param aNode
+   *        The start node. May be <code>null</code>.
+   * @param aTarget
+   *        The target list to be filled. May not be <code>null</code>.
+   */
+  public static void getAllHCControls (@Nullable final IHCNode aNode, @Nonnull final List <? super IHCControl <?>> aTarget)
+  {
+    if (aNode instanceof IHCControl <?>)
+      aTarget.add ((IHCControl <?>) aNode);
+
+    if (aNode instanceof IHCNodeWithChildren <?>)
+    {
+      // E.g. HCNodeList
+      final IHCNodeWithChildren <?> aParent = (IHCNodeWithChildren <?>) aNode;
+      if (aParent.hasChildren ())
+        for (final IHCNode aChild : aParent.getChildren ())
+          getAllHCControls (aChild, aTarget);
+    }
+  }
+
+  /**
    * Customize the passed base node and all child nodes recursively.
    * 
    * @param aBaseNode
