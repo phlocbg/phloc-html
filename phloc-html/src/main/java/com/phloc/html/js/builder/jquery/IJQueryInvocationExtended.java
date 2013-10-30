@@ -12420,6 +12420,8 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
 */
 @Nonnull IMPLTYPE off(@Nonnull String events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler);
 
+@Nonnull IMPLTYPE off();
+
 @Nonnull IMPLTYPE offset();
 
 /**
@@ -16422,8 +16424,6 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
 */
 @Nonnull IMPLTYPE triggerHandler(@Nonnull String eventType, @Nonnull JSArray extraParameters);
 
-@Nonnull IMPLTYPE unbind();
-
 /**
 * @param eventType A string containing a JavaScript event type, such as click or submit.
 */
@@ -16519,6 +16519,8 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
 * @since jQuery 1.4.3
 */
 @Nonnull IMPLTYPE unbind(@Nonnull String eventType, boolean _false);
+
+@Nonnull IMPLTYPE unbind();
 
 @Nonnull IMPLTYPE undelegate();
 
