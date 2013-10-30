@@ -30,7 +30,6 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.json.IJSON;
 import com.phloc.json2.IJson;
-import com.phloc.json2.serialize.JsonWriter;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
@@ -317,9 +316,9 @@ public final class JSExpr
   public static JSExprDirect json (@Nonnull final IJson aJson)
   {
     if (aJson == null)
-      throw new NullPointerException ("JSON");
+      throw new NullPointerException ("Json");
 
-    return direct (JsonWriter.getAsString (aJson));
+    return direct (aJson.getAsString ());
   }
 
   /**
