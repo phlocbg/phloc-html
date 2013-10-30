@@ -24,7 +24,6 @@ import javax.annotation.concurrent.Immutable;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.json2.IJson;
-import com.phloc.json2.serialize.JsonWriter;
 
 /**
  * Implementation of the {@link IJSToStringConverter} interface, for converting
@@ -43,7 +42,7 @@ public final class Json2ToStringConverter implements IJSToStringConverter
                                           aObject.getClass ().getName ());
     if (aType != JSType.JSON)
       throw new IllegalArgumentException ("Unexpected JSType '" + aType + "'! Only JSON is supported!");
-    return aObject == null ? null : JsonWriter.getAsString ((IJson) aObject);
+    return aObject == null ? null : ((IJson) aObject).getAsString ();
   }
 
   @Override
