@@ -452,10 +452,10 @@ public final class HCUtils
     if (aNode instanceof IHCControl <?>)
       return (IHCControl <?>) aNode;
 
-    if (aNode instanceof IHCNodeWithChildren <?>)
+    if (aNode instanceof IHCHasChildren)
     {
       // E.g. HCNodeList
-      final IHCNodeWithChildren <?> aParent = (IHCNodeWithChildren <?>) aNode;
+      final IHCHasChildren aParent = (IHCHasChildren) aNode;
       if (aParent.hasChildren ())
         for (final IHCNode aChild : aParent.getChildren ())
         {
@@ -477,15 +477,16 @@ public final class HCUtils
    * @param aTarget
    *        The target list to be filled. May not be <code>null</code>.
    */
-  public static void getAllHCControls (@Nullable final IHCNode aNode, @Nonnull final List <? super IHCControl <?>> aTarget)
+  public static void getAllHCControls (@Nullable final IHCNode aNode,
+                                       @Nonnull final List <? super IHCControl <?>> aTarget)
   {
     if (aNode instanceof IHCControl <?>)
       aTarget.add ((IHCControl <?>) aNode);
 
-    if (aNode instanceof IHCNodeWithChildren <?>)
+    if (aNode instanceof IHCHasChildren)
     {
       // E.g. HCNodeList
-      final IHCNodeWithChildren <?> aParent = (IHCNodeWithChildren <?>) aNode;
+      final IHCHasChildren aParent = (IHCHasChildren) aNode;
       if (aParent.hasChildren ())
         for (final IHCNode aChild : aParent.getChildren ())
           getAllHCControls (aChild, aTarget);
