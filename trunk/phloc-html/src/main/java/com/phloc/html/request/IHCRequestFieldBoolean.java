@@ -17,17 +17,30 @@
  */
 package com.phloc.html.request;
 
+import javax.annotation.Nullable;
+
 /**
  * Special request field for check boxes and radio buttons.
  * 
- * @author Philip Helger
+ * @author Philip Helger, Boris Gregorcic
  */
 public interface IHCRequestFieldBoolean extends IHCRequestField
 {
   /**
-   * @return <code>true</code> if the checkbox is checked or if no such request
-   *         parameter is present and the fallback is <code>true</code>,
+   * @return <code>true</code> if the check-box is checked or if no such request
+   *         parameter is present and the fall-back is <code>true</code>,
    *         <code>false</code> otherwise.
    */
   boolean isChecked ();
+
+  /**
+   * @param sFieldValue
+   *        In case of multiple check-boxes sharing the same request parameter,
+   *        pass the value set on the specific field to identify which check-box
+   *        to check
+   * @return <code>true</code> if the check-box is checked or if no such request
+   *         parameter is present and the fall-back is <code>true</code>,
+   *         <code>false</code> otherwise.
+   */
+  boolean isChecked (@Nullable String sFieldValue);
 }
