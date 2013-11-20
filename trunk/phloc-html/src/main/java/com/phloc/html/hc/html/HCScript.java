@@ -18,9 +18,12 @@
 package com.phloc.html.hc.html;
 
 import java.util.Locale;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.GuardedBy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,15 +51,16 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   public static enum EMode
   {
     /**
-     * Emit JS code as plain text, but XML masked
+     * Emit JS code as plain text, but XML masked. The XML masking rules for
+     * text nodes apply.
      */
     PLAIN_TEXT,
     /**
-     * Emit JS code as plain text, but without XML masking
+     * Emit JS code as plain text, but without XML masking.
      */
     PLAIN_TEXT_NO_ESCAPE,
     /**
-     * Wrap the whole JS code in XML comments
+     * Wrap the whole JS code in XML comments.
      */
     WRAP_IN_COMMENT,
     /**
@@ -67,13 +71,16 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
 
   /** By default inline scripts are emitted in mode "wrap in comment" */
   public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
 
+  private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
+  private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
+
+  @GuardedBy ("s_aRWLock")
   private static EMode s_eDefaultMode = DEFAULT_MODE;
 
   private final IJSCodeProvider m_aProvider;
   private String m_sJSCode;
-  private EMode m_eMode = s_eDefaultMode;
+  private EMode m_eMode;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
@@ -81,6 +88,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     if (aProvider == null)
       throw new NullPointerException ("provider");
     m_aProvider = aProvider;
+    m_eMode = getDefaultMode ();
   }
 
   @DevelopersNote ("Handle with care!")
@@ -197,7 +205,15 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   {
     if (eMode == null)
       throw new NullPointerException ("mode");
-    s_eDefaultMode = eMode;
+    s_aRWLock.writeLock ().lock ();
+    try
+    {
+      s_eDefaultMode = eMode;
+    }
+    finally
+    {
+      s_aRWLock.writeLock ().unlock ();
+    }
     s_aLogger.info ("Default <script> mode set to " + eMode);
   }
 
@@ -207,6 +223,14 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public static EMode getDefaultMode ()
   {
-    return s_eDefaultMode;
+    s_aRWLock.readLock ().lock ();
+    try
+    {
+      return s_eDefaultMode;
+    }
+    finally
+    {
+      s_aRWLock.readLock ().unlock ();
+    }
   }
 }
