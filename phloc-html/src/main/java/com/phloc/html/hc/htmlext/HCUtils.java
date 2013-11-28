@@ -417,7 +417,7 @@ public final class HCUtils
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> getAsFlattenedList (@Nullable final List <IHCNode> aNodes)
+  public static List <IHCNode> getAsFlattenedList (@Nullable final Iterable <? extends IHCNode> aNodes)
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
     if (aNodes != null)
@@ -513,6 +513,59 @@ public final class HCUtils
         for (final IHCNode aChild : aParent.getChildren ())
           getAllHCControls (aChild, aTarget);
     }
+  }
+
+  /**
+   * Recursively determine all {@link IHCControl} elements from and incl. the
+   * passed node
+   * 
+   * @param aNode
+   *        The start node. May be <code>null</code>.
+   * @return The filled list with all controls. Never <code>null</code> but
+   *         maybe empty.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCControl <?>> getAllHCControls (@Nullable final IHCNode aNode)
+  {
+    final List <IHCControl <?>> ret = new ArrayList <IHCControl <?>> ();
+    getAllHCControls (aNode, ret);
+    return ret;
+  }
+
+  /**
+   * Recursively determine all {@link IHCControl} elements from and incl. the
+   * passed nodes
+   * 
+   * @param aNodes
+   *        The start nodes. May be <code>null</code>.
+   * @param aTarget
+   *        The target list to be filled. May not be <code>null</code>.
+   */
+  public static void getAllHCControls (@Nullable final Iterable <? extends IHCNode> aNodes,
+                                       @Nonnull final List <? super IHCControl <?>> aTarget)
+  {
+    if (aNodes != null)
+      for (final IHCNode aNode : aNodes)
+        getAllHCControls (aNode, aTarget);
+  }
+
+  /**
+   * Recursively determine all {@link IHCControl} elements from and incl. the
+   * passed nodes
+   * 
+   * @param aNodes
+   *        The start nodes. May be <code>null</code>.
+   * @return The filled list with all controls. Never <code>null</code> but
+   *         maybe empty.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCControl <?>> getAllHCControls (@Nullable final Iterable <? extends IHCNode> aNodes)
+  {
+    final List <IHCControl <?>> ret = new ArrayList <IHCControl <?>> ();
+    getAllHCControls (aNodes, ret);
+    return ret;
   }
 
   /**
