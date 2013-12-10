@@ -41,6 +41,7 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   private String m_sValue;
   private int m_nCols = CGlobal.ILLEGAL_UINT;
   private int m_nRows = CGlobal.ILLEGAL_UINT;
+  private String m_sPlaceholder;
 
   public HCTextArea (@Nullable final String sName)
   {
@@ -96,6 +97,19 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
     return this;
   }
 
+  @Nullable
+  public final String getPlaceholder ()
+  {
+    return m_sPlaceholder;
+  }
+
+  @Nonnull
+  public final HCTextArea setPlaceholder (@Nullable final String sPlaceholder)
+  {
+    m_sPlaceholder = sPlaceholder;
+    return thisAsT ();
+  }
+
   @Override
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
@@ -105,6 +119,8 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
       aElement.setAttribute (CHTMLAttributes.COLS, m_nCols);
     if (m_nRows > 0)
       aElement.setAttribute (CHTMLAttributes.ROWS, m_nRows);
+    if (StringHelper.hasText (m_sPlaceholder))
+      aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
 
     // If no children are present, add an empty text node so that an opening
     // and a closing tag are written separately
@@ -125,6 +141,7 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
                             .appendIfNotNull ("value", m_sValue)
                             .append ("cols", m_nCols)
                             .append ("rows", m_nRows)
+                            .appendIfNotNull ("placeholder", m_sPlaceholder)
                             .toString ();
   }
 }
