@@ -68,13 +68,13 @@ public final class HCUtils
         if (nNext >= 0)
         {
           if (nNext > nIndex)
-            ret.add (new HCTextNode (sText.substring (nIndex, nNext)));
+            ret.add (HCTextNode.createOnDemand (sText.substring (nIndex, nNext)));
           ret.add (new HCBR ());
           nIndex = nNext + PATTERN_NEWLINE_LENGTH;
         }
         else
         {
-          ret.add (new HCTextNode (sText.substring (nIndex)));
+          ret.add (HCTextNode.createOnDemand (sText.substring (nIndex)));
           break;
         }
       }
@@ -118,7 +118,7 @@ public final class HCUtils
       {
         if (!ret.isEmpty ())
           ret.add (new HCBR ());
-        ret.add (new HCTextNode (sText));
+        ret.add (HCTextNode.createOnDemand (sText));
       }
     }
     return ret;

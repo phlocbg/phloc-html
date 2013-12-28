@@ -68,7 +68,7 @@ public abstract class AbstractHCRadioButtonBar extends AbstractHCSpan <AbstractH
   @Nonnull
   public final AbstractHCRadioButtonBar addRadioButton (final String sValue, final String sLabel, final boolean bChecked)
   {
-    return addRadioButton (sValue, new HCTextNode (sLabel), bChecked);
+    return addRadioButton (sValue, HCTextNode.createOnDemand (sLabel), bChecked);
   }
 
   @Nonnull
