@@ -37,9 +37,9 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.css.ICSSClassProvider;
-import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.IHCCell;
 import com.phloc.html.hc.IHCNode;
+import com.phloc.html.hc.IHCTable;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -886,7 +886,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
   {
-    return setSpanningHeaderContent (new HCTextNode (sText));
+    return setSpanningHeaderContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
@@ -899,7 +899,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
   {
-    return addSpanningHeaderContent (new HCTextNode (sText));
+    return addSpanningHeaderContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
@@ -912,7 +912,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public THISTYPE addSpanningBodyContent (@Nullable final String sText)
   {
-    return addSpanningBodyContent (new HCTextNode (sText));
+    return addSpanningBodyContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
@@ -925,7 +925,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public THISTYPE setSpanningFooterContent (@Nullable final String sText)
   {
-    return setSpanningFooterContent (new HCTextNode (sText));
+    return setSpanningFooterContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
@@ -938,7 +938,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nonnull
   public THISTYPE addSpanningFooterContent (@Nullable final String sText)
   {
-    return addSpanningFooterContent (new HCTextNode (sText));
+    return addSpanningFooterContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull

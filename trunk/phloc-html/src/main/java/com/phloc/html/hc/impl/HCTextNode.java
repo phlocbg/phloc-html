@@ -107,8 +107,18 @@ public class HCTextNode extends AbstractHCNode
                             .toString ();
   }
 
+  /**
+   * @deprecated Use {@link #createOnDemand(String)} instead
+   */
+  @Deprecated
   @Nullable
   public static HCTextNode create (@Nullable final String sText)
+  {
+    return createOnDemand (sText);
+  }
+
+  @Nullable
+  public static HCTextNode createOnDemand (@Nullable final String sText)
   {
     return sText == null ? null : new HCTextNode (sText);
   }
