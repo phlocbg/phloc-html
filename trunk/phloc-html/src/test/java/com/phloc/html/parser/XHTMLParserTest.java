@@ -32,6 +32,7 @@ import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroReader;
+import com.phloc.commons.xml.serialize.SAXReaderSettings;
 import com.phloc.html.entities.HTMLEntityResolver;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
@@ -364,7 +365,8 @@ public final class XHTMLParserTest
   public void testReadFromFile ()
   {
     final IReadableResource aRes = new ClassPathResource ("html-test/test1.htm");
-    IMicroDocument aDoc = MicroReader.readMicroXML (aRes, HTMLEntityResolver.getInstance ());
+    IMicroDocument aDoc = MicroReader.readMicroXML (aRes,
+                                                    new SAXReaderSettings ().setEntityResolver (HTMLEntityResolver.getInstance ()));
     assertNotNull (aDoc);
     if (false)
     {

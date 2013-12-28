@@ -35,7 +35,8 @@ import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.xml.CXML;
 import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
-import com.phloc.commons.xml.EXMLVersion;
+import com.phloc.commons.xml.serialize.EXMLSerializeVersion;
+import com.phloc.commons.xml.serialize.SAXReaderSettings;
 import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
@@ -123,7 +124,7 @@ public final class XHTMLParser
     // Build mini HTML and insert fragment in the middle.
     // If parsing succeeds, it is considered valid HTML.
     final String sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
-    final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLVersion.XML_10,
+    final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLSerializeVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
                           "<html" +
@@ -145,7 +146,8 @@ public final class XHTMLParser
   @Nullable
   public static IMicroDocument parseXHTMLDocument (@Nullable final String sXHTML)
   {
-    return MicroReader.readMicroXML (sXHTML, HTMLEntityResolver.getInstance ());
+    return MicroReader.readMicroXML (sXHTML,
+                                     new SAXReaderSettings ().setEntityResolver (HTMLEntityResolver.getInstance ()));
   }
 
   /**

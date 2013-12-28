@@ -47,7 +47,6 @@ import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
-import com.phloc.commons.xml.EXMLParserProperty;
 import com.phloc.commons.xml.sax.LoggingSAXErrorHandler;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.CHTMLAttributes;
@@ -131,7 +130,7 @@ public final class MainReadHTMLElementList
     final HtmlParser parser = new HtmlParser (XmlViolationPolicy.ALTER_INFOSET);
     parser.setErrorHandler (LoggingSAXErrorHandler.getInstance ());
     parser.setContentHandler (serializer);
-    parser.setProperty (EXMLParserProperty.SAX_FEATURE_LEXICAL_HANDLER.getName (), serializer);
+    parser.setLexicalHandler (serializer);
     parser.parse (new InputSource (aIS));
     StreamUtils.close (aOS);
 

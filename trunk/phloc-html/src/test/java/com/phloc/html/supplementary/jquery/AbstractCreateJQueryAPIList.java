@@ -49,7 +49,7 @@ import com.phloc.commons.string.StringParser;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
 import com.phloc.commons.xml.EXMLParserFeature;
-import com.phloc.commons.xml.serialize.XMLReader;
+import com.phloc.commons.xml.serialize.SAXReaderDefaultSettings;
 
 abstract class AbstractCreateJQueryAPIList
 {
@@ -529,7 +529,7 @@ abstract class AbstractCreateJQueryAPIList
     final List <Entry> aAllEntries = new ArrayList <Entry> ();
 
     if (false)
-      XMLReader.setDefaultSaxParserFeatureValue (EXMLParserFeature.XINCLUDE, Boolean.TRUE);
+      SAXReaderDefaultSettings.setFeatureValue (EXMLParserFeature.XINCLUDE, Boolean.TRUE);
     SystemProperties.setPropertyValue ("org.apache.xerces.xni.parser.XMLParserConfiguration",
                                        "org.apache.xerces.parsers.XIncludeParserConfiguration");
 
