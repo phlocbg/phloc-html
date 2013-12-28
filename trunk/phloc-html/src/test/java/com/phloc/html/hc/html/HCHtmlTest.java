@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.js.provider.UnparsedJSCodeProvider;
@@ -34,8 +33,6 @@ import com.phloc.html.meta.MetaElement;
  */
 public final class HCHtmlTest
 {
-  private static final String CRLF = CGlobal.LINE_SEPARATOR;
-
   @Test
   public void testOutOfBandNodes1 ()
   {
@@ -44,20 +41,18 @@ public final class HCHtmlTest
     aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addChild (new HCStyle ("h1{color:red;}"));
 
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
-                      CRLF +
-                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
-                      "<body><h1>Test</h1></body>" +
-                      "</html>",
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+                      + "<head><style type=\"text/css\">h1{color:red;}</style></head>"
+                      + "<body><h1>Test</h1></body>"
+                      + "</html>",
                   aHtml.getAsHTMLString (aCS));
     // Do it again and check for node consistency
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
-                      CRLF +
-                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head><style type=\"text/css\">h1{color:red;}</style></head>" +
-                      "<body><h1>Test</h1></body>" +
-                      "</html>",
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+                      + "<head><style type=\"text/css\">h1{color:red;}</style></head>"
+                      + "<body><h1>Test</h1></body>"
+                      + "</html>",
                   aHtml.getAsHTMLString (aCS));
   }
 
@@ -70,28 +65,26 @@ public final class HCHtmlTest
     aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
-                      CRLF +
-                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
-                      "<body><h1>Test</h1>" +
-                      "<script type=\"text/javascript\"><!--\n" +
-                      "$(document).ready(function(){a=b;c=d;});\n" +
-                      "//--></script>" +
-                      "</body>" +
-                      "</html>",
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+                      + "<head><meta name=\"foo\" content=\"bar\" /></head>"
+                      + "<body><h1>Test</h1>"
+                      + "<script type=\"text/javascript\"><!--\n"
+                      + "$(document).ready(function(){a=b;c=d;});\n"
+                      + "//--></script>"
+                      + "</body>"
+                      + "</html>",
                   aHtml.getAsHTMLString (aCS));
     // Do it again and check for node consistency
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
-                      CRLF +
-                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
-                      "<body><h1>Test</h1>" +
-                      "<script type=\"text/javascript\"><!--\n" +
-                      "$(document).ready(function(){a=b;c=d;});\n" +
-                      "//--></script>" +
-                      "</body>" +
-                      "</html>",
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+                      + "<head><meta name=\"foo\" content=\"bar\" /></head>"
+                      + "<body><h1>Test</h1>"
+                      + "<script type=\"text/javascript\"><!--\n"
+                      + "$(document).ready(function(){a=b;c=d;});\n"
+                      + "//--></script>"
+                      + "</body>"
+                      + "</html>",
                   aHtml.getAsHTMLString (aCS));
   }
 }
