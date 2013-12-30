@@ -21,15 +21,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CCharset;
-import com.phloc.commons.charset.CharsetManager;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -47,7 +46,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 @Immutable
 public class HCConditionalCommentNode extends AbstractHCWrappingNode
 {
-  public static final String DEFAULT_LINE_SEPARATOR = CGlobal.LINE_SEPARATOR;
+  public static final String DEFAULT_LINE_SEPARATOR = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
   private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
 
   private String m_sCondition;
@@ -69,7 +68,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   }
 
   /**
-   * @return The condition for the conditional comment
+   * @return The condition for the conditional comment. Neither
+   *         <code>null</code> nor empty.
    */
   @Nonnull
   @Nonempty
@@ -141,8 +141,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   {
     return new ToStringGenerator (this).append ("condition", m_sCondition)
                                        .append ("lineSeparator",
-                                                StringHelper.getHexEncoded (CharsetManager.getAsBytes (m_sLineSeparator,
-                                                                                                       CCharset.CHARSET_ISO_8859_1_OBJ)))
+                                                StringHelper.getHexEncoded (m_sLineSeparator,
+                                                                            CCharset.CHARSET_ISO_8859_1_OBJ))
                                        .append ("wrappedNode", m_aWrappedNode)
                                        .toString ();
   }
@@ -171,6 +171,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEExactVersion (@Nonnull final Version aVersion,
                                                                   @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -178,6 +180,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIENotVersion (@Nonnull final Version aVersion,
                                                                 @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if !IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -185,6 +189,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIELowerThanVersion (@Nonnull final Version aVersion,
                                                                       @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if lt IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -192,6 +198,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIELowerOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                              @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if lte IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -199,6 +207,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEGreaterThanVersion (@Nonnull final Version aVersion,
                                                                         @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if gt IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -206,6 +216,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                                @Nonnull final IHCNode aWrappedNode)
   {
+    if (aVersion == null)
+      throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if gte IE " + aVersion.getAsString (), aWrappedNode);
   }
 

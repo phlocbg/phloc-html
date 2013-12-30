@@ -51,6 +51,9 @@ public class HCCommentNode extends AbstractHCNode
       s_aLogger.warn ("Comments may not contain the string '--': " + sText);
   }
 
+  /**
+   * @return The unescaped comment text. Never <code>null</code>.
+   */
   @Nonnull
   public String getText ()
   {
