@@ -51,6 +51,9 @@ public class HCDOMWrapper extends AbstractHCNode
     m_aNode = aNode;
   }
 
+  /**
+   * @return The source micro node. Never <code>null</code>.
+   */
   @Nonnull
   public IMicroNode getNode ()
   {

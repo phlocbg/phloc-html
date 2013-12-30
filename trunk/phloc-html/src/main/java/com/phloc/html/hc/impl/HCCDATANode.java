@@ -45,6 +45,9 @@ public class HCCDATANode extends AbstractHCNode
     m_sText = sText == null ? "" : sText;
   }
 
+  /**
+   * @return The unescaped CDATA content text.
+   */
   @Nonnull
   public String getText ()
   {
