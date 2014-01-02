@@ -485,13 +485,13 @@ public final class HCSpecialNodeHandler
     if (aSpecialNodes == null)
       throw new NullPointerException ("SpecialNodes");
 
-    // Handle out of band nodes
+    // Extract all out of band nodes from the passed node
     List <IHCNode> aExtractedOutOfBandNodes = recursiveExtractOutOfBandNodes (aNode);
 
     // Merge JS/CSS nodes
     aExtractedOutOfBandNodes = getMergedInlineCSSAndJSNodes (aExtractedOutOfBandNodes, bKeepOnDocumentReady);
 
-    // Extract the special nodes
+    // Extract the special nodes into the provided object
     aExtractedOutOfBandNodes = getWithoutSpecialNodes (aExtractedOutOfBandNodes, aSpecialNodes);
 
     // Now the aExtractedOutOfBandNodes list should be empty - otherwise we have
