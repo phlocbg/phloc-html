@@ -264,21 +264,29 @@ public final class HCSpecialNodeHandler
       // HCScript
       if (aNode instanceof HCScriptOnDocumentReady)
       {
-        aOnDocumentReadyJS.appendFlattened (((HCScriptOnDocumentReady) aNode).getOnDocumentReadyCode ());
+        final HCScriptOnDocumentReady aScript = (HCScriptOnDocumentReady) aNode;
+        aOnDocumentReadyJS.appendFlattened (aScript.getOnDocumentReadyCode ());
       }
       else
         if (aNode instanceof HCScript)
         {
-          aInlineJS.appendFlattened (((HCScript) aNode).getJSCodeProvider ());
+          final HCScript aScript = (HCScript) aNode;
+          aInlineJS.appendFlattened (aScript.getJSCodeProvider ());
         }
         else
           if (aNode instanceof HCStyle && ((HCStyle) aNode).hasNoMediaOrAll ())
           {
             // Merge only inline CSS nodes, that are media-independent
-            aInlineCSS.append (((HCStyle) aNode).getStyleContent ());
+            final HCStyle aStyle = (HCStyle) aNode;
+            aInlineCSS.append (aStyle.getStyleContent ());
           }
           else
+          {
+            // HCLink
+            // HCScriptFile
+            // HCConditionalCommentNode
             ret.add (aNode);
+          }
     }
 
     // Add all inline CSS
