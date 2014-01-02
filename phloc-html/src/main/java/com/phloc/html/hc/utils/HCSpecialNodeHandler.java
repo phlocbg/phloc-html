@@ -449,7 +449,9 @@ public final class HCSpecialNodeHandler
               aSpecialNodes.addInlineJS (((HCScript) aNode).getJSCodeProvider ());
             }
             else
+            {
               ret.add (aNode);
+            }
     }
 
     return ret;

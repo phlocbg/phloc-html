@@ -126,7 +126,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   @Nonnull
   public HCCommentNode getCommentNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return new HCCommentNode (_getCommentText (m_aWrappedNode.convertToNode (aConversionSettings)));
+    final IMicroNode aWrappedMicroNode = m_aWrappedNode.convertToNode (aConversionSettings);
+    return new HCCommentNode (_getCommentText (aWrappedMicroNode));
   }
 
   @Override
