@@ -253,8 +253,10 @@ public final class HCSpecialNodeHandler
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
 
     final StringBuilder aInlineCSS = new StringBuilder ();
-    final CollectingJSCodeProvider aOnDocumentReadyJS = new CollectingJSCodeProvider ();
-    final CollectingJSCodeProvider aInlineJS = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aOnDocumentReadyJSBefore = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aOnDocumentReadyJSAfter = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aInlineJSBefore = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aInlineJSAfter = new CollectingJSCodeProvider ();
     for (final IHCNode aNode : aNodes)
     {
       // Note: do not unwrap the node, because it is not allowed to merge JS/CSS
@@ -265,13 +267,13 @@ public final class HCSpecialNodeHandler
       if (aNode instanceof HCScriptOnDocumentReady)
       {
         final HCScriptOnDocumentReady aScript = (HCScriptOnDocumentReady) aNode;
-        aOnDocumentReadyJS.appendFlattened (aScript.getOnDocumentReadyCode ());
+        (aScript.isEmitAfterFiles () ? aOnDocumentReadyJSAfter : aOnDocumentReadyJSBefore).appendFlattened (aScript.getOnDocumentReadyCode ());
       }
       else
         if (aNode instanceof HCScript)
         {
           final HCScript aScript = (HCScript) aNode;
-          aInlineJS.appendFlattened (aScript.getJSCodeProvider ());
+          (aScript.isEmitAfterFiles () ? aInlineJSAfter : aInlineJSBefore).appendFlattened (aScript.getJSCodeProvider ());
         }
         else
           if (aNode instanceof HCStyle && ((HCStyle) aNode).hasNoMediaOrAll ())
@@ -289,20 +291,29 @@ public final class HCSpecialNodeHandler
           }
     }
 
-    // Add all inline CSS
+    // Add all merged inline CSSs
     if (aInlineCSS.length () > 0)
       ret.add (new HCStyle (aInlineCSS.toString ()));
 
-    // on document ready always as last inline JS!
-    if (!aOnDocumentReadyJS.isEmpty ())
+    // on-document-ready JS always as last inline JS!
+    if (!aOnDocumentReadyJSBefore.isEmpty ())
       if (bKeepOnDocumentReady)
-        aInlineJS.append (JQuery.onDocumentReady (aOnDocumentReadyJS));
+        aInlineJSBefore.append (JQuery.onDocumentReady (aOnDocumentReadyJSBefore));
       else
-        aInlineJS.append (aOnDocumentReadyJS);
+        aInlineJSBefore.append (aOnDocumentReadyJSBefore);
+
+    if (!aOnDocumentReadyJSAfter.isEmpty ())
+      if (bKeepOnDocumentReady)
+        aInlineJSAfter.append (JQuery.onDocumentReady (aOnDocumentReadyJSAfter));
+      else
+        aInlineJSAfter.append (aOnDocumentReadyJSAfter);
 
     // Finally add the inline JS
-    if (!aInlineJS.isEmpty ())
-      ret.add (new HCScript (aInlineJS));
+    if (!aInlineJSBefore.isEmpty ())
+      ret.add (new HCScript (aInlineJSBefore).setEmitAfterFiles (false));
+
+    if (!aInlineJSAfter.isEmpty ())
+      ret.add (new HCScript (aInlineJSAfter));
 
     return ret;
   }
@@ -326,17 +337,22 @@ public final class HCSpecialNodeHandler
         aSpecialNodes.addExternalCSS (((HCLink) aNode).getHrefString ());
       }
       else
-        if (isDirectJSFileNode (aNode))
+        if (isDirectCSSInlineNode (aNode))
         {
-          aSpecialNodes.addExternalJS (((HCScriptFile) aNode).getSrcString ());
+          aSpecialNodes.addInlineCSS (((HCStyle) aNode).getStyleContent ());
         }
         else
-          if (isDirectJSInlineNode (aNode))
+          if (isDirectJSFileNode (aNode))
           {
-            aSpecialNodes.addInlineJS (((HCScript) aNode).getJSCodeProvider ());
+            aSpecialNodes.addExternalJS (((HCScriptFile) aNode).getSrcString ());
           }
           else
-            ret.add (aNode);
+            if (isDirectJSInlineNode (aNode))
+            {
+              aSpecialNodes.addInlineJS (((HCScript) aNode).getJSCodeProvider ());
+            }
+            else
+              ret.add (aNode);
     }
 
     return ret;

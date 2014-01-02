@@ -199,6 +199,9 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     return hasNoMedia () || containsMedium (ECSSMedium.ALL);
   }
 
+  /**
+   * @return The CSS content. May be <code>null</code>.
+   */
   @Nullable
   public String getStyleContent ()
   {
