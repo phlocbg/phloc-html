@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.annotations.OutOfBandNode;
@@ -34,6 +35,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * 
  * @author Philip Helger
  * @see HCScript
+ * @see HCScriptOnDocumentReady
  */
 @OutOfBandNode
 public class HCScriptFile extends AbstractHCScript <HCScriptFile>
@@ -48,9 +50,7 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
   private boolean m_bAsync = DEFAULT_ASYNC;
 
   public HCScriptFile ()
-  {
-    super ();
-  }
+  {}
 
   public boolean isInlineJS ()
   {
@@ -129,5 +129,11 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
   public static HCScriptFile create (@Nullable final ISimpleURL aSrc)
   {
     return new HCScriptFile ().setSrc (aSrc);
+  }
+
+  @Nonnull
+  public static HCScriptFile create (@Nonnull final String sSrc)
+  {
+    return create (new SimpleURL (sSrc));
   }
 }
