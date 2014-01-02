@@ -165,11 +165,16 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
     if (aSpecialNodes == null)
       throw new NullPointerException ("SpecialNodes");
 
+    // CSS
     for (final String sCSSFile : aSpecialNodes.getAllExternalCSSs ())
       addExternalCSS (sCSSFile);
+    addInlineCSS (aSpecialNodes.getInlineCSS ());
+
+    // JS
     for (final String sJSFile : aSpecialNodes.getAllExternalJSs ())
       addExternalJS (sJSFile);
     addInlineJS (aSpecialNodes.getInlineJS ());
+
     return thisAsT ();
   }
 

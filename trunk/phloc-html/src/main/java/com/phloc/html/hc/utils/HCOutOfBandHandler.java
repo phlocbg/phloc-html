@@ -137,19 +137,8 @@ public final class HCOutOfBandHandler
 
     final List <IHCNode> aTargetList = new ArrayList <IHCNode> ();
 
-    if (true)
-    {
-      // Using HCUtils.iterateTree would be too tedious here
-      _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
-    }
-    else
-    {
-      final int n = aTargetList.size ();
-
-      // Using HCUtils.iterateTree would be too tedious here
-      _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
-      s_aLogger.info ("--- +" + (aTargetList.size () - n) + " for " + aParentElement.getClass ().getSimpleName ());
-    }
+    // Using HCUtils.iterateTree would be too tedious here
+    _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
 
     return aTargetList;
   }
