@@ -105,6 +105,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   /** By default inline scripts are emitted in mode "wrap in comment" */
   public static final EMode DEFAULT_MODE = EMode.PLAIN_TEXT_WRAPPED_IN_COMMENT;
 
+  /** By default place inline JS after script files */
+  public static final boolean DEFAULT_EMIT_AFTER_FILES = true;
+
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
 
@@ -114,6 +117,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   private final IJSCodeProvider m_aProvider;
   private String m_sJSCode;
   private EMode m_eMode;
+  private boolean m_bEmitAfterFiles = DEFAULT_EMIT_AFTER_FILES;
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
   {
@@ -179,6 +183,18 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     return this;
   }
 
+  public boolean isEmitAfterFiles ()
+  {
+    return m_bEmitAfterFiles;
+  }
+
+  @Nonnull
+  public HCScript setEmitAfterFiles (final boolean bEmitAfterFiles)
+  {
+    m_bEmitAfterFiles = bEmitAfterFiles;
+    return this;
+  }
+
   public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement,
                                       @Nullable final String sContent,
                                       @Nonnull final EMode eMode)
@@ -238,6 +254,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     return ToStringGenerator.getDerived (super.toString ())
                             .append ("provider", m_aProvider)
                             .append ("mode", m_eMode)
+                            .append ("emitAfterFiles", m_bEmitAfterFiles)
                             .toString ();
   }
 

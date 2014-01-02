@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
@@ -47,6 +48,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCSpecialNodes.class);
 
   private final Set <String> m_aExternalCSSs = new LinkedHashSet <String> ();
+  private final StringBuilder m_aInlineCSS = new StringBuilder ();
   private final Set <String> m_aExternalJSs = new LinkedHashSet <String> ();
   private final CollectingJSCodeProvider m_aInlineJS = new CollectingJSCodeProvider ();
 
@@ -59,6 +61,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   public void clear ()
   {
     m_aExternalCSSs.clear ();
+    m_aInlineCSS.setLength (0);
     m_aExternalJSs.clear ();
     m_aInlineJS.reset ();
   }
@@ -90,6 +93,27 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   public List <String> getAllExternalCSSs ()
   {
     return ContainerHelper.newList (m_aExternalCSSs);
+  }
+
+  @Nonnull
+  public IMPLTYPE addInlineCSS (@Nonnull final CharSequence aInlineCSS)
+  {
+    if (aInlineCSS == null)
+      throw new NullPointerException ("InlineCSS");
+    m_aInlineCSS.append (aInlineCSS);
+    return thisAsT ();
+  }
+
+  public boolean hasInlineCSS ()
+  {
+    return m_aInlineCSS.length () > 0;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public StringBuilder getInlineCSS ()
+  {
+    return new StringBuilder (m_aInlineCSS);
   }
 
   @Nonnull
@@ -158,6 +182,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
       return false;
     final AbstractHCSpecialNodes <?> rhs = (AbstractHCSpecialNodes <?>) o;
     return m_aExternalCSSs.equals (rhs.m_aExternalCSSs) &&
+           EqualsUtils.equals (m_aInlineCSS, rhs.m_aInlineCSS) &&
            m_aExternalJSs.equals (rhs.m_aExternalJSs) &&
            m_aInlineJS.equals (rhs.m_aInlineJS);
   }
@@ -166,6 +191,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   public int hashCode ()
   {
     return new HashCodeGenerator (this).append (m_aExternalCSSs)
+                                       .append (m_aInlineCSS)
                                        .append (m_aExternalJSs)
                                        .append (m_aInlineJS)
                                        .getHashCode ();
@@ -175,6 +201,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   public String toString ()
   {
     return new ToStringGenerator (this).append ("cssFiles", m_aExternalCSSs)
+                                       .append ("inlineCSS", m_aInlineCSS)
                                        .append ("jsFiles", m_aExternalJSs)
                                        .append ("inlineJS", m_aInlineJS)
                                        .toString ();
