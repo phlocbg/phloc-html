@@ -252,6 +252,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aBody == null)
       throw new NullPointerException ("Body");
 
+    int nBeginIndex = aBody.getChildCount ();
+
     // Add all existing JS and CSS nodes from the head, as they are known to be
     // out-of-band
     final List <IHCNode> aCompleteOOBList = new ArrayList <IHCNode> ();
@@ -268,7 +270,17 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
       if (isOutOfBandBodyNode (aNode))
       {
         // It's a body node
-        aBody.addChild (aNode);
+        if (aNode instanceof HCScript && !((HCScript) aNode).isEmitAfterFiles ())
+        {
+          // Before files
+          aBody.addChild (nBeginIndex, aNode);
+          nBeginIndex++;
+        }
+        else
+        {
+          // Append in order
+          aBody.addChild (aNode);
+        }
       }
       else
       {
