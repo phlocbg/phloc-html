@@ -19,15 +19,19 @@ package com.phloc.html.hc.html;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.jquery.JQuery;
+import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * Regular inline JS script elements with the special semantics, that stuff will
  * be executed on document.ready. This requires jQuery to be present!
  * 
  * @author Philip Helger
+ * @see HCScript
+ * @see HCScriptFile
  */
 @OutOfBandNode
 public class HCScriptOnDocumentReady extends HCScript
@@ -38,6 +42,12 @@ public class HCScriptOnDocumentReady extends HCScript
   {
     super (JQuery.onDocumentReady (aOnDocumentReadyCode));
     m_aOnDocumentReadyCode = aOnDocumentReadyCode;
+  }
+
+  @DevelopersNote ("Handle with care!")
+  public HCScriptOnDocumentReady (@Nonnull final String sJSCode)
+  {
+    this (new UnparsedJSCodeProvider (sJSCode));
   }
 
   /**

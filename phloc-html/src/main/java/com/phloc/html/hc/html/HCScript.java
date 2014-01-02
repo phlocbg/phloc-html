@@ -44,6 +44,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
  * 
  * @author Philip Helger
  * @see HCScriptFile
+ * @see HCScriptOnDocumentReady
  */
 @OutOfBandNode
 public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProvider
@@ -53,24 +54,56 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     /**
      * Emit JS code as plain text, but XML masked. The XML masking rules for
      * text nodes apply.
+     * 
+     * <pre>
+     * &lt;script>my &amp;lt; script&lt;/script>
+     * </pre>
      */
     PLAIN_TEXT,
     /**
      * Emit JS code as plain text, but without XML masking.
+     * 
+     * <pre>
+     * &lt;script>my &lt; script&lt;/script>
+     * </pre>
      */
     PLAIN_TEXT_NO_ESCAPE,
     /**
-     * Wrap the whole JS code in XML comments.
+     * Wrap the whole JS code as plain text in XML comments.
+     * 
+     * <pre>
+     * &lt;script>&lt;!--
+     * my &lt; script
+     * //-->&lt;/script>
+     * </pre>
      */
-    WRAP_IN_COMMENT,
+    PLAIN_TEXT_WRAPPED_IN_COMMENT,
     /**
-     * Wrap the whole JS code in an XML CDATA container
+     * Wrap the whole JS code in an XML CDATA container.
+     * 
+     * <pre>
+     * &lt;script>&lt;![CDATA[my &lt; script]]>&lt;/script>
+     * </pre>
      */
-    CDATA;
+    CDATA,
+    /**
+     * Wrap the whole JS code in an XML CDATA container inside a JS comment
+     * Tested OK with FF6, Opera11, Chrome13, IE8, IE9
+     * 
+     * <pre>
+     * &lt;script>//&lt;![CDATA[
+     * my &lt; script
+     * //]]>&lt;/script>
+     * </pre>
+     */
+    CDATA_IN_COMMENT;
+
+    @Deprecated
+    public static final EMode WRAP_IN_COMMENT = PLAIN_TEXT_WRAPPED_IN_COMMENT;
   }
 
   /** By default inline scripts are emitted in mode "wrap in comment" */
-  public static final EMode DEFAULT_MODE = EMode.WRAP_IN_COMMENT;
+  public static final EMode DEFAULT_MODE = EMode.PLAIN_TEXT_WRAPPED_IN_COMMENT;
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
@@ -102,24 +135,41 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     return true;
   }
 
+  /**
+   * @return The JS code passed in the constructor. Never <code>null</code>.
+   */
   @Nonnull
   public IJSCodeProvider getJSCodeProvider ()
   {
     return m_aProvider;
   }
 
+  /**
+   * @return The text representation of the JS code passed in the constructor.
+   *         May be <code>null</code>.
+   */
   @Nullable
   public String getJSCode ()
   {
     return m_aProvider.getJSCode ();
   }
 
+  /**
+   * @return The masking mode. Never <code>null</code>.
+   */
   @Nonnull
   public EMode getMode ()
   {
     return m_eMode;
   }
 
+  /**
+   * Set the masking mode.
+   * 
+   * @param eMode
+   *        The mode to use. MAy not be <code>null</code>.
+   * @return this
+   */
   @Nonnull
   public HCScript setMode (@Nonnull final EMode eMode)
   {
@@ -141,36 +191,34 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
           break;
         case PLAIN_TEXT_NO_ESCAPE:
           if (StringHelper.containsIgnoreCase (sContent, "</script>", Locale.US))
-            throw new IllegalArgumentException ("The script text contains a closing script tag!");
+            throw new IllegalArgumentException ("The script text contains a closing script tag: " + sContent);
           aElement.appendChild (new MicroText (sContent).setEscape (false));
           break;
-        case WRAP_IN_COMMENT:
-          // <script>
-          // my script bla
-          // //</script>
+        case PLAIN_TEXT_WRAPPED_IN_COMMENT:
           if (StringHelper.getLastChar (sContent) == '\n')
             aElement.appendComment ("\n" + sContent + "//");
           else
             aElement.appendComment ("\n" + sContent + "\n//");
           break;
         case CDATA:
-          // Tested OK with FF6, Opera11, Chrome13, IE8, IE9
-          /**
-           * <pre>
-           * //<![CDATA[
-           * my script bla//]]>
-           * </pre>
-           */
-          aElement.appendText ("//");
-          aElement.appendCDATA ("\n" + sContent + "//");
+          aElement.appendCDATA (sContent);
           break;
+        case CDATA_IN_COMMENT:
+          aElement.appendText ("//");
+          if (StringHelper.getLastChar (sContent) == '\n')
+            aElement.appendCDATA ("\n" + sContent + "//");
+          else
+            aElement.appendCDATA ("\n" + sContent + "\n//");
+          break;
+        default:
+          throw new IllegalArgumentException ("Illegal mode: " + eMode);
       }
   }
 
   @Override
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    m_sJSCode = getJSCode ();
+    m_sJSCode = StringHelper.trim (getJSCode ());
     // Don't create script elements with empty content....
     return StringHelper.hasText (m_sJSCode);
   }
@@ -199,7 +247,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
    * {@link #DEFAULT_MODE}.
    * 
    * @param eMode
-   *        The new mode to set. May not be <code>null</code>.
+   *        The new masking mode to set. May not be <code>null</code>.
    */
   public static void setDefaultMode (@Nonnull final EMode eMode)
   {
@@ -218,7 +266,8 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   }
 
   /**
-   * @return The default mode to emit script content. Never <code>null</code>.
+   * @return The default masking mode to emit script content. Never
+   *         <code>null</code>.
    */
   @Nonnull
   public static EMode getDefaultMode ()

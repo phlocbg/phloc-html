@@ -42,6 +42,9 @@ public final class UnparsedJSCodeProvider implements IJSCodeProvider
     m_sJSCode = sJSCode;
   }
 
+  /**
+   * @return The plain JS code passed in the constructor
+   */
   @Nonnull
   public String getJSCode ()
   {
