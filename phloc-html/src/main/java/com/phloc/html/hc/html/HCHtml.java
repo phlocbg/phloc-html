@@ -36,7 +36,7 @@ import com.phloc.html.hc.api.EHCTextDirection;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.AbstractHCElement;
-import com.phloc.html.hc.utils.HCOutOfBandHandler;
+import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 
 /**
  * The node that represents a full HTML document.
@@ -118,7 +118,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     if (aConversionSettings.isExtractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
-      final List <IHCNode> aExtractedOutOfBandNodes = HCOutOfBandHandler.recursiveExtractOutOfBandNodes (aBaseNode);
+      final List <IHCNode> aExtractedOutOfBandNodes = HCSpecialNodeHandler.recursiveExtractOutOfBandNodes (aBaseNode);
 
       // Call out-of-band node handler
       aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);
