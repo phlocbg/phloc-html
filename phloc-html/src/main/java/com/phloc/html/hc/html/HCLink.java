@@ -26,6 +26,7 @@ import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.commons.url.SimpleURL;
 import com.phloc.css.media.CSSMediaList;
 import com.phloc.css.media.ECSSMedium;
 import com.phloc.html.CHTMLAttributes;
@@ -253,5 +254,18 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   public static HCLink createCSSLink (@Nonnull final ISimpleURL aCSSURL)
   {
     return new HCLink ().setRel (EHCLinkType.STYLESHEET).setType (CMimeType.TEXT_CSS).setHref (aCSSURL);
+  }
+
+  /**
+   * Shortcut to create a &lt;link&gt; element specific to CSS
+   * 
+   * @param sCSSURL
+   *        The CSS URL to be referenced
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  public static HCLink createCSSLink (@Nonnull final String sCSSURL)
+  {
+    return createCSSLink (new SimpleURL (sCSSURL));
   }
 }
