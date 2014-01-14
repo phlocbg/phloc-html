@@ -26,6 +26,7 @@ import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.ISimpleURL;
+import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.api5.IHCHasMedia;
@@ -53,10 +54,21 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     super (EHTMLElement.A);
   }
 
+  public HCA (@Nonnull final String sHref)
+  {
+    this (new SimpleURL (sHref));
+  }
+
   public HCA (@Nonnull final ISimpleURL aHref)
   {
     this ();
     setHref (aHref);
+  }
+
+  @Nonnull
+  public final HCA setHref (@Nonnull final String sHref)
+  {
+    return setHref (new SimpleURL (sHref));
   }
 
   @Nonnull
