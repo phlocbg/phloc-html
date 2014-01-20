@@ -70,6 +70,12 @@ public class HCScriptFile extends AbstractHCScript <HCScriptFile>
   }
 
   @Nonnull
+  public HCScriptFile setSrc (@Nullable final String sSrc)
+  {
+    return setSrc (sSrc == null ? null : new SimpleURL (sSrc));
+  }
+
+  @Nonnull
   public HCScriptFile setSrc (@Nullable final ISimpleURL aSrc)
   {
     m_aSrc = aSrc;
