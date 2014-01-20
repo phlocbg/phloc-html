@@ -17,6 +17,8 @@
  */
 package com.phloc.html.hc.html;
 
+import java.nio.charset.Charset;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -70,6 +72,12 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
   public String getCharset ()
   {
     return m_sCharset;
+  }
+
+  @Nonnull
+  public IMPLTYPE setCharset (@Nullable final Charset aCharset)
+  {
+    return setCharset (aCharset == null ? null : aCharset.name ());
   }
 
   @Nonnull
