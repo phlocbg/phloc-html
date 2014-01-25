@@ -280,9 +280,9 @@ public final class JSExpr
   }
 
   @Nonnull
-  public static JSAtom lit (@Nonnull final BigDecimal aValue)
+  public static JSAtomBigDecimal lit (@Nonnull final BigDecimal aValue)
   {
-    return new JSAtom (aValue.toString ());
+    return new JSAtomBigDecimal (aValue);
   }
 
   @Nonnull

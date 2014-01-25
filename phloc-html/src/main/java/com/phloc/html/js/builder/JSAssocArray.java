@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -90,6 +92,18 @@ public class JSAssocArray extends AbstractJSExpression
   public JSAssocArray add (@Nonnull final String sKey, final long nValue)
   {
     return add (sKey, JSExpr.lit (nValue));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final BigDecimal aValue)
+  {
+    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
+  }
+
+  @Nonnull
+  public JSAssocArray add (@Nonnull final String sKey, @Nullable final BigInteger aValue)
+  {
+    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
   }
 
   @Nonnull

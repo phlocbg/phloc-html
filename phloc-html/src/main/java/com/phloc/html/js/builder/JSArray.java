@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +94,18 @@ public class JSArray extends AbstractJSExpression
   }
 
   @Nonnull
+  public JSArray add (@Nullable final BigDecimal aValue)
+  {
+    return add (aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
+  }
+
+  @Nonnull
+  public JSArray add (@Nullable final BigInteger aValue)
+  {
+    return add (aValue == null ? JSExpr.NULL : JSExpr.lit (aValue));
+  }
+
+  @Nonnull
   public JSArray add (@Nullable final String sValue)
   {
     return add (sValue == null ? JSExpr.NULL : JSExpr.lit (sValue));
@@ -160,6 +174,22 @@ public class JSArray extends AbstractJSExpression
   {
     for (final long nValue : aCont)
       add (nValue);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final BigDecimal... aCont)
+  {
+    for (final BigDecimal aValue : aCont)
+      add (aValue);
+    return this;
+  }
+
+  @Nonnull
+  public JSArray addAll (@Nonnull final BigInteger... aCont)
+  {
+    for (final BigInteger aValue : aCont)
+      add (aValue);
     return this;
   }
 
