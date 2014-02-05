@@ -193,4 +193,13 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
                             .appendIfNotNull ("mediaQuery", m_sMediaQuery)
                             .toString ();
   }
+
+  @Nullable
+  public static HCA createLinkedWebsite (@Nullable final String sWebsite)
+  {
+    if (StringHelper.hasNoText (sWebsite))
+      return null;
+
+    return new HCA (sWebsite).addChild (sWebsite);
+  }
 }
