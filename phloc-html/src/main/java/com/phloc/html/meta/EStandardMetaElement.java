@@ -52,7 +52,28 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
   DESCRIPTION ("Description", false),
   KEYWORDS ("Keywords", false),
   AUTHOR ("Author", false),
-  COPYRIGHT ("Copyright", false);
+  COPYRIGHT ("Copyright", false),
+  // http://msdn.microsoft.com/en-us/library/ie/dn255024%28v=vs.85%29.aspx
+  APPLICATION_NAME ("application-name", false),
+  MSAPPLICATION_ALLOW_DOMAIN_API_CALLS ("msapplication-allowDomainApiCalls", false),
+  MSAPPLICATION_ALLOW_DOMAIN_META_TAGS ("msapplication-allowDomainMetaTags", false),
+  MSAPPLICATION_BADGE ("msapplication-badge", false),
+  MSAPPLICATION_CONFIG ("msapplication-config", false),
+  MSAPPLICATION_NAVBUTTON_COLOR ("msapplication-navbutton-color", false),
+  MSAPPLICATION_NOTIFICATION ("msapplication-notification", false),
+  MSAPPLICATION_SQUARE_150X150_LOGO ("msapplication-square150x150logo", false),
+  MSAPPLICATION_SQUARE_310X310_LOGO ("msapplication-square310x310logo", false),
+  MSAPPLICATION_SQUARE_70X70_LOGO ("msapplication-square70x70logo", false),
+  MSAPPLICATION_WIDE_310X150_LOGO ("msapplication-wide310x150logo", false),
+  MSAPPLICATION_STARTURL ("msapplication-starturl", false),
+  MSAPPLICATION_TASK ("msapplication-task", false),
+  MSAPPLICATION_TASK_SEPARATOR ("msapplication-task-separator", false),
+  MSAPPLICATION_TILE_COLOR ("msapplication-TileColor", false),
+  MSAPPLICATION_TILE_IMAGE ("msapplication-TileImage", false),
+  MSAPPLICATION_TOOLTIP ("msapplication-tooltip", false),
+  MSAPPLICATION_WINDOW ("msapplication-window", false),
+  // http://msdn.microsoft.com/en-us/library/ie/dn265018%28v=vs.85%29.aspx
+  FORMAT_DETECTION ("format-detection", false);
 
   private final String m_sName;
   private final boolean m_bIsHttpEquiv;

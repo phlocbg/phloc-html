@@ -213,6 +213,9 @@ public final class CHTMLAttributes
   public static final String ARIA_VALUENOW = "aria-valuenow";
   public static final String ARIA_VALUETEXT = "aria-valuetext";
 
+  // http://msdn.microsoft.com/en-us/library/ie/dn265018%28v=vs.85%29.aspx
+  public static final String X_MS_FORMAT_DETECTION = "x-ms-format-detection";
+
   private CHTMLAttributes ()
   {}
 }
