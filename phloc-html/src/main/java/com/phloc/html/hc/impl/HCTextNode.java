@@ -46,6 +46,11 @@ public class HCTextNode extends AbstractHCNode
     m_sText = sText == null ? "" : sText;
   }
 
+  public HCTextNode (final char cChar)
+  {
+    m_sText = Character.toString (cChar);
+  }
+
   public HCTextNode (final int nText)
   {
     m_sText = Integer.toString (nText);
