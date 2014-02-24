@@ -47,6 +47,12 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   /** Emit a hidden field that indicates that the check-box was in the request. */
   public static final boolean DEFAULT_EMIT_HIDDEN_FIELD = true;
 
+  /**
+   * The prefix to appended to the field name of the checkbox to create the
+   * hidden field.
+   */
+  public static final String DEFAULT_HIDDEN_FIELD_PREFIX = "__";
+
   private String m_sValue;
   private boolean m_bChecked = DEFAULT_CHECKED;
   private boolean m_bEmitHiddenField = DEFAULT_EMIT_HIDDEN_FIELD;
@@ -190,6 +196,21 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
     return this;
   }
 
+  /**
+   * Get the hidden field name for this checkbox.
+   * 
+   * @return <code>null</code> if no field name ({@link #getName()}) is present.
+   * @see #getHiddenFieldName(String)
+   */
+  @Nullable
+  public final String getHiddenFieldName ()
+  {
+    final String sFieldName = getName ();
+    if (StringHelper.hasNoText (sFieldName))
+      return null;
+    return getHiddenFieldName (sFieldName);
+  }
+
   @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
@@ -203,16 +224,35 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   @Override
   protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    final IMicroNode aCheckBoxNode = super.internalConvertToNode (aConversionSettings);
     if (!m_bEmitHiddenField)
-      return super.internalConvertToNode (aConversionSettings);
+    {
+      // No special handling required
+      return aCheckBoxNode;
+    }
+
+    final String sHiddenFieldName = getHiddenFieldName ();
+    if (StringHelper.hasNoText (sHiddenFieldName))
+    {
+      // No field name -> no hidden field
+      return aCheckBoxNode;
+    }
 
     // Create a container with the main checkbox and a hidden field
     final IMicroContainer aCont = new MicroContainer ();
-    aCont.appendChild (super.internalConvertToNode (aConversionSettings));
-    final String sName = getName ();
-    if (StringHelper.hasText (sName))
-      aCont.appendChild (new HCHiddenField (getHiddenFieldName (sName), getValue ()).convertToNode (aConversionSettings));
+    aCont.appendChild (aCheckBoxNode);
+    aCont.appendChild (new HCHiddenField (sHiddenFieldName, getValue ()).convertToNode (aConversionSettings));
     return aCont;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("value", m_sValue)
+                            .append ("checked", m_bChecked)
+                            .append ("emitHiddenField", m_bEmitHiddenField)
+                            .toString ();
   }
 
   /**
@@ -228,15 +268,6 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   {
     if (StringHelper.hasNoText (sFieldName))
       throw new IllegalArgumentException ("fieldName may not be empty!");
-    return "__" + sFieldName;
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("value", m_sValue)
-                            .append ("checked", m_bChecked)
-                            .toString ();
+    return DEFAULT_HIDDEN_FIELD_PREFIX + sFieldName;
   }
 }
