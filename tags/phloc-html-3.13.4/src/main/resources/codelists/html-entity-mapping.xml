@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+
+    Copyright (C) 2006-2014 phloc systems
+    http://www.phloc.com
+    office[at]phloc[dot]com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<mapping>
+  <!-- This is a 0xA0 character!!!-->
+  <map key="&amp;nbsp;" value=" " />
+  <map key="&amp;iexcl;" value="¡" />
+  <map key="&amp;cent;" value="¢" />
+  <map key="&amp;pound;" value="£" />
+  <map key="&amp;curren;" value="¤" />
+  <map key="&amp;yen;" value="¥" />
+  <map key="&amp;brvbar;" value="¦" />
+  <map key="&amp;sect;" value="§" />
+  <map key="&amp;uml;" value="¨" />
+  <map key="&amp;copy;" value="©" />
+  <map key="&amp;ordf;" value="ª" />
+  <map key="&amp;laquo;" value="«" />
+  <map key="&amp;not;" value="¬" />
+  <map key="&amp;shy;" value="­" />
+  <map key="&amp;reg;" value="®" />
+  <map key="&amp;macr;" value="¯" />
+  <map key="&amp;deg;" value="°" />
+  <map key="&amp;plusmn;" value="±" />
+  <map key="&amp;sup2;" value="²" />
+  <map key="&amp;sup3;" value="³" />
+  <map key="&amp;acute;" value="´" />
+  <map key="&amp;micro;" value="µ" />
+  <map key="&amp;para;" value="¶" />
+  <map key="&amp;middot;" value="·" />
+  <map key="&amp;cedil;" value="¸" />
+  <map key="&amp;sup1;" value="¹" />
+  <map key="&amp;ordm;" value="º" />
+  <map key="&amp;raquo;" value="»" />
+  <map key="&amp;frac14;" value="¼" />
+  <map key="&amp;frac12;" value="½" />
+  <map key="&amp;frac34;" value="¾" />
+  <map key="&amp;iquest;" value="¿" />
+  <map key="&amp;Agrave;" value="À" />
+  <map key="&amp;Aacute;" value="Á" />
+  <map key="&amp;Acirc;" value="Â" />
+  <map key="&amp;Atilde;" value="Ã" />
+  <map key="&amp;Auml;" value="Ä" />
+  <map key="&amp;Aring;" value="Å" />
+  <map key="&amp;AElig;" value="Æ" />
+  <map key="&amp;Ccedil;" value="Ç" />
+  <map key="&amp;Egrave;" value="È" />
+  <map key="&amp;Eacute;" value="É" />
+  <map key="&amp;Ecirc;" value="Ê" />
+  <map key="&amp;Euml;" value="Ë" />
+  <map key="&amp;Igrave;" value="Ì" />
+  <map key="&amp;Iacute;" value="Í" />
+  <map key="&amp;Icirc;" value="Î" />
+  <map key="&amp;Iuml;" value="Ï" />
+  <map key="&amp;ETH;" value="Ð" />
+  <map key="&amp;Ntilde;" value="Ñ" />
+  <map key="&amp;Ograve;" value="Ò" />
+  <map key="&amp;Oacute;" value="Ó" />
+  <map key="&amp;Ocirc;" value="Ô" />
+  <map key="&amp;Otilde;" value="Õ" />
+  <map key="&amp;Ouml;" value="Ö" />
+  <map key="&amp;times;" value="×" />
+  <map key="&amp;Oslash;" value="Ø" />
+  <map key="&amp;Ugrave;" value="Ù" />
+  <map key="&amp;Uacute;" value="Ú" />
+  <map key="&amp;Ucirc;" value="Û" />
+  <map key="&amp;Uuml;" value="Ü" />
+  <map key="&amp;Yacute;" value="Ý" />
+  <map key="&amp;THORN;" value="Þ" />
+  <map key="&amp;szlig;" value="ß" />
+  <map key="&amp;agrave;" value="à" />
+  <map key="&amp;aacute;" value="á" />
+  <map key="&amp;acirc;" value="â" />
+  <map key="&amp;atilde;" value="ã" />
+  <map key="&amp;auml;" value="ä" />
+  <map key="&amp;aring;" value="å" />
+  <map key="&amp;aelig;" value="æ" />
+  <map key="&amp;ccedil;" value="ç" />
+  <map key="&amp;egrave;" value="è" />
+  <map key="&amp;eacute;" value="é" />
+  <map key="&amp;ecirc;" value="ê" />
+  <map key="&amp;euml;" value="ë" />
+  <map key="&amp;igrave;" value="ì" />
+  <map key="&amp;iacute;" value="í" />
+  <map key="&amp;icirc;" value="î" />
+  <map key="&amp;iuml;" value="ï" />
+  <map key="&amp;eth;" value="ð" />
+  <map key="&amp;ntilde;" value="ñ" />
+  <map key="&amp;ograve;" value="ò" />
+  <map key="&amp;oacute;" value="ó" />
+  <map key="&amp;ocirc;" value="ô" />
+  <map key="&amp;otilde;" value="õ" />
+  <map key="&amp;ouml;" value="ö" />
+  <map key="&amp;divide;" value="÷" />
+  <map key="&amp;oslash;" value="ø" />
+  <map key="&amp;ugrave;" value="ù" />
+  <map key="&amp;uacute;" value="ú" />
+  <map key="&amp;ucirc;" value="û" />
+  <map key="&amp;uuml;" value="ü" />
+  <map key="&amp;yacute;" value="ý" />
+  <map key="&amp;thorn;" value="þ" />
+  <map key="&amp;yuml;" value="ÿ" />
+  <map key="&amp;quot;" value="&quot;" />
+  <map key="&amp;amp;" value="&amp;" />
+  <map key="&amp;lt;" value="&lt;" />
+  <map key="&amp;gt;" value="&gt;" />
+  <map key="&amp;apos;" value="&apos;" />
+
+  <!-- Non ANSI mapping -->
+  <!-- 
+  <map key="&amp;yuml;" value="&amp;#255;" />
+  -->
+  <map key="&amp;fnof;" value="&amp;#402;" />
+  <map key="&amp;Alpha;" value="&amp;#913;" />
+  <map key="&amp;Beta;" value="&amp;#914;" />
+  <map key="&amp;Gamma;" value="&amp;#915;" />
+  <map key="&amp;Delta;" value="&amp;#916;" />
+  <map key="&amp;Epsilon;" value="&amp;#917;" />
+  <map key="&amp;Zeta;" value="&amp;#918;" />
+  <map key="&amp;Eta;" value="&amp;#919;" />
+  <map key="&amp;Theta;" value="&amp;#920;" />
+  <map key="&amp;Iota;" value="&amp;#921;" />
+  <map key="&amp;Kappa;" value="&amp;#922;" />
+  <map key="&amp;Lambda;" value="&amp;#923;" />
+  <map key="&amp;Mu;" value="&amp;#924;" />
+  <map key="&amp;Nu;" value="&amp;#925;" />
+  <map key="&amp;Xi;" value="&amp;#926;" />
+  <map key="&amp;Omicron;" value="&amp;#927;" />
+  <map key="&amp;Pi;" value="&amp;#928;" />
+  <map key="&amp;Rho;" value="&amp;#929;" />
+  <map key="&amp;Sigma;" value="&amp;#931;" />
+  <map key="&amp;Tau;" value="&amp;#932;" />
+  <map key="&amp;Upsilon;" value="&amp;#933;" />
+  <map key="&amp;Phi;" value="&amp;#934;" />
+  <map key="&amp;Chi;" value="&amp;#935;" />
+  <map key="&amp;Psi;" value="&amp;#936;" />
+  <map key="&amp;Omega;" value="&amp;#937;" />
+  <map key="&amp;alpha;" value="&amp;#945;" />
+  <map key="&amp;beta;" value="&amp;#946;" />
+  <map key="&amp;gamma;" value="&amp;#947;" />
+  <map key="&amp;delta;" value="&amp;#948;" />
+  <map key="&amp;epsilon;" value="&amp;#949;" />
+  <map key="&amp;zeta;" value="&amp;#950;" />
+  <map key="&amp;eta;" value="&amp;#951;" />
+  <map key="&amp;theta;" value="&amp;#952;" />
+  <map key="&amp;iota;" value="&amp;#953;" />
+  <map key="&amp;kappa;" value="&amp;#954;" />
+  <map key="&amp;lambda;" value="&amp;#955;" />
+  <map key="&amp;mu;" value="&amp;#956;" />
+  <map key="&amp;nu;" value="&amp;#957;" />
+  <map key="&amp;xi;" value="&amp;#958;" />
+  <map key="&amp;omicron;" value="&amp;#959;" />
+  <map key="&amp;pi;" value="&amp;#960;" />
+  <map key="&amp;rho;" value="&amp;#961;" />
+  <map key="&amp;sigmaf;" value="&amp;#962;" />
+  <map key="&amp;sigma;" value="&amp;#963;" />
+  <map key="&amp;tau;" value="&amp;#964;" />
+  <map key="&amp;upsilon;" value="&amp;#965;" />
+  <map key="&amp;phi;" value="&amp;#966;" />
+  <map key="&amp;chi;" value="&amp;#967;" />
+  <map key="&amp;psi;" value="&amp;#968;" />
+  <map key="&amp;omega;" value="&amp;#969;" />
+  <map key="&amp;thetasym;" value="&amp;#977;" />
+  <map key="&amp;upsih;" value="&amp;#978;" />
+  <map key="&amp;piv;" value="&amp;#982;" />
+  <map key="&amp;bull;" value="&amp;#8226;" />
+  <map key="&amp;hellip;" value="&amp;#8230;" />
+  <map key="&amp;prime;" value="&amp;#8242;" />
+  <map key="&amp;Prime;" value="&amp;#8243;" />
+  <map key="&amp;oline;" value="&amp;#8254;" />
+  <map key="&amp;frasl;" value="&amp;#8260;" />
+  <map key="&amp;weierp;" value="&amp;#8472;" />
+  <map key="&amp;image;" value="&amp;#8465;" />
+  <map key="&amp;real;" value="&amp;#8476;" />
+  <map key="&amp;trade;" value="&amp;#8482;" />
+  <map key="&amp;alefsym;" value="&amp;#8501;" />
+  <map key="&amp;larr;" value="&amp;#8592;" />
+  <map key="&amp;uarr;" value="&amp;#8593;" />
+  <map key="&amp;rarr;" value="&amp;#8594;" />
+  <map key="&amp;darr;" value="&amp;#8595;" />
+  <map key="&amp;harr;" value="&amp;#8596;" />
+  <map key="&amp;crarr;" value="&amp;#8629;" />
+  <map key="&amp;lArr;" value="&amp;#8656;" />
+  <map key="&amp;uArr;" value="&amp;#8657;" />
+  <map key="&amp;rArr;" value="&amp;#8658;" />
+  <map key="&amp;dArr;" value="&amp;#8659;" />
+  <map key="&amp;hArr;" value="&amp;#8660;" />
+  <map key="&amp;forall;" value="&amp;#8704;" />
+  <map key="&amp;part;" value="&amp;#8706;" />
+  <map key="&amp;exist;" value="&amp;#8707;" />
+  <map key="&amp;empty;" value="&amp;#8709;" />
+  <map key="&amp;nabla;" value="&amp;#8711;" />
+  <map key="&amp;isin;" value="&amp;#8712;" />
+  <map key="&amp;notin;" value="&amp;#8713;" />
+  <map key="&amp;ni;" value="&amp;#8715;" />
+  <map key="&amp;prod;" value="&amp;#8719;" />
+  <map key="&amp;sum;" value="&amp;#8721;" />
+  <map key="&amp;minus;" value="&amp;#8722;" />
+  <map key="&amp;lowast;" value="&amp;#8727;" />
+  <map key="&amp;radic;" value="&amp;#8730;" />
+  <map key="&amp;prop;" value="&amp;#8733;" />
+  <map key="&amp;infin;" value="&amp;#8734;" />
+  <map key="&amp;ang;" value="&amp;#8736;" />
+  <map key="&amp;and;" value="&amp;#8743;" />
+  <map key="&amp;or;" value="&amp;#8744;" />
+  <map key="&amp;cap;" value="&amp;#8745;" />
+  <map key="&amp;cup;" value="&amp;#8746;" />
+  <map key="&amp;int;" value="&amp;#8747;" />
+  <map key="&amp;there4;" value="&amp;#8756;" />
+  <map key="&amp;sim;" value="&amp;#8764;" />
+  <map key="&amp;cong;" value="&amp;#8773;" />
+  <map key="&amp;asymp;" value="&amp;#8776;" />
+  <map key="&amp;ne;" value="&amp;#8800;" />
+  <map key="&amp;equiv;" value="&amp;#8801;" />
+  <map key="&amp;le;" value="&amp;#8804;" />
+  <map key="&amp;ge;" value="&amp;#8805;" />
+  <map key="&amp;sub;" value="&amp;#8834;" />
+  <map key="&amp;sup;" value="&amp;#8835;" />
+  <map key="&amp;nsub;" value="&amp;#8836;" />
+  <map key="&amp;sube;" value="&amp;#8838;" />
+  <map key="&amp;supe;" value="&amp;#8839;" />
+  <map key="&amp;oplus;" value="&amp;#8853;" />
+  <map key="&amp;otimes;" value="&amp;#8855;" />
+  <map key="&amp;perp;" value="&amp;#8869;" />
+  <map key="&amp;sdot;" value="&amp;#8901;" />
+  <map key="&amp;lceil;" value="&amp;#8968;" />
+  <map key="&amp;rceil;" value="&amp;#8969;" />
+  <map key="&amp;lfloor;" value="&amp;#8970;" />
+  <map key="&amp;rfloor;" value="&amp;#8971;" />
+  <map key="&amp;lang;" value="&amp;#9001;" />
+  <map key="&amp;rang;" value="&amp;#9002;" />
+  <map key="&amp;loz;" value="&amp;#9674;" />
+  <map key="&amp;spades;" value="&amp;#9824;" />
+  <map key="&amp;clubs;" value="&amp;#9827;" />
+  <map key="&amp;hearts;" value="&amp;#9829;" />
+  <map key="&amp;diams;" value="&amp;#9830;" />
+  <map key="&amp;OElig;" value="&amp;#338;" />
+  <map key="&amp;oelig;" value="&amp;#339;" />
+  <map key="&amp;Scaron;" value="&amp;#352;" />
+  <map key="&amp;scaron;" value="&amp;#353;" />
+  <map key="&amp;Yuml;" value="&amp;#376;" />
+  <map key="&amp;circ;" value="&amp;#710;" />
+  <map key="&amp;tilde;" value="&amp;#732;" />
+  <map key="&amp;ensp;" value="&amp;#8194;" />
+  <map key="&amp;emsp;" value="&amp;#8195;" />
+  <map key="&amp;thinsp;" value="&amp;#8201;" />
+  <map key="&amp;zwnj;" value="&amp;#8204;" />
+  <map key="&amp;zwj;" value="&amp;#8205;" />
+  <map key="&amp;lrm;" value="&amp;#8206;" />
+  <map key="&amp;rlm;" value="&amp;#8207;" />
+  <map key="&amp;ndash;" value="&amp;#8211;" />
+  <map key="&amp;mdash;" value="&amp;#8212;" />
+  <map key="&amp;lsquo;" value="&amp;#8216;" />
+  <map key="&amp;rsquo;" value="&amp;#8217;" />
+  <map key="&amp;sbquo;" value="&amp;#8218;" />
+  <map key="&amp;ldquo;" value="&amp;#8220;" />
+  <map key="&amp;rdquo;" value="&amp;#8221;" />
+  <map key="&amp;bdquo;" value="&amp;#8222;" />
+  <map key="&amp;dagger;" value="&amp;#8224;" />
+  <map key="&amp;Dagger;" value="&amp;#8225;" />
+  <map key="&amp;permil;" value="&amp;#8240;" />
+  <map key="&amp;lsaquo;" value="&amp;#8249;" />
+  <map key="&amp;rsaquo;" value="&amp;#8250;" />
+  <map key="&amp;euro;" value="&amp;#8364;" />
+</mapping>
