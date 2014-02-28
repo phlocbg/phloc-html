@@ -115,34 +115,14 @@ class Line
       final char ch = m_sValue.charAt (pos);
       if (ch == '\\' && pos + 1 < m_sValue.length ())
       {
-        final char c;
-        switch (c = m_sValue.charAt (pos + 1))
+        final char c = m_sValue.charAt (pos + 1);
+        if (Utils.isEscapeChar (c))
         {
-          case '\\':
-          case '[':
-          case ']':
-          case '(':
-          case ')':
-          case '{':
-          case '}':
-          case '#':
-          case '"':
-          case '\'':
-          case '.':
-          case '>':
-          case '*':
-          case '+':
-          case '-':
-          case '_':
-          case '!':
-          case '`':
-            sb.append (c);
-            pos++;
-            break;
-          default:
-            sb.append (ch);
-            break;
+          sb.append (c);
+          pos++;
         }
+        else
+          sb.append (ch);
       }
       else
       {
