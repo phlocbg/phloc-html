@@ -18,6 +18,7 @@ package com.phloc.html.markdown;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,7 +71,7 @@ class Emitter
    */
   public void addLinkRef (final String key, final LinkRef linkRef)
   {
-    m_aLinkRefs.put (key.toLowerCase (), linkRef);
+    m_aLinkRefs.put (key.toLowerCase (Locale.US), linkRef);
   }
 
   /**
@@ -268,7 +269,7 @@ class Emitter
     pos = Utils.skipSpaces (in, pos);
     if (pos < start)
     {
-      final LinkRef lr = m_aLinkRefs.get (name.toLowerCase ());
+      final LinkRef lr = m_aLinkRefs.get (name.toLowerCase (Locale.US));
       if (lr != null)
       {
         isAbbrev = lr.m_bIsAbbrev;
@@ -326,7 +327,7 @@ class Emitter
           if (pos < start)
             return -1;
           final String id = temp.length () > 0 ? temp.toString () : name;
-          final LinkRef lr = m_aLinkRefs.get (id.toLowerCase ());
+          final LinkRef lr = m_aLinkRefs.get (id.toLowerCase (Locale.US));
           if (lr != null)
           {
             link = lr.m_sLink;
@@ -335,7 +336,7 @@ class Emitter
         }
         else
         {
-          final LinkRef lr = m_aLinkRefs.get (name.toLowerCase ());
+          final LinkRef lr = m_aLinkRefs.get (name.toLowerCase (Locale.US));
           if (lr != null)
           {
             isAbbrev = lr.m_bIsAbbrev;
