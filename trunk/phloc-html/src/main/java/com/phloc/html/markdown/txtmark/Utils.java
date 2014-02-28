@@ -87,7 +87,7 @@ final class Utils
    *        Current parsing position.
    * @return The new position.
    */
-  private static final int _escape (final StringBuilder out, final char ch, final int pos)
+  private static int _escape (final StringBuilder out, final char ch, final int pos)
   {
     if (isEscapeChar (ch))
     {
@@ -288,7 +288,7 @@ final class Utils
    *        End characters.
    * @return The new position or -1 if no 'end' char was found.
    */
-  public static int readRawUntil (final StringBuilder out, final String in, final int start, final char... end)
+  private static int _readRawUntil (final StringBuilder out, final String in, final int start, final char... end)
   {
     int pos = start;
     while (pos < in.length ())
@@ -563,7 +563,7 @@ final class Utils
       if (safeMode)
       {
         final StringBuilder temp = new StringBuilder ();
-        pos = readRawUntil (temp, in, pos, ' ', '/', '>');
+        pos = _readRawUntil (temp, in, pos, ' ', '/', '>');
         if (pos == -1)
           return -1;
         final String tag = temp.toString ().trim ().toLowerCase ();
@@ -580,11 +580,11 @@ final class Utils
         out.append ('<');
         if (isCloseTag)
           out.append ('/');
-        pos = readRawUntil (out, in, pos, ' ', '/', '>');
+        pos = _readRawUntil (out, in, pos, ' ', '/', '>');
       }
       if (pos == -1)
         return -1;
-      pos = readRawUntil (out, in, pos, '/', '>');
+      pos = _readRawUntil (out, in, pos, '/', '>');
       if (in.charAt (pos) == '/')
       {
         out.append (" /");

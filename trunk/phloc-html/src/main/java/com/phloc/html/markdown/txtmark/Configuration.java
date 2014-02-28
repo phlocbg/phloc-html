@@ -18,6 +18,8 @@ package com.phloc.html.markdown.txtmark;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.html.markdown.AbstractPlugin;
 
 /**
@@ -49,7 +51,7 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public final static Configuration DEFAULT = Configuration.builder ().build ();
+  public static final Configuration DEFAULT = Configuration.builder ().build ();
 
   /**
    * <p>
@@ -62,7 +64,7 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public final static Configuration DEFAULT_SAFE = Configuration.builder ().enableSafeMode ().build ();
+  public static final Configuration DEFAULT_SAFE = Configuration.builder ().enableSafeMode ().build ();
 
   /**
    * Constructor.
@@ -255,6 +257,7 @@ public class Configuration
      * @return a Configuration instance
      * @since 0.7
      */
+    @Nonnull
     public Configuration build ()
     {
       return new Configuration (m_bSafeMode,
