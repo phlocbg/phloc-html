@@ -542,10 +542,10 @@ final class Utils
    */
   public static int readXML (final StringBuilder out, final String in, final int start, final boolean safeMode)
   {
-    int pos;
-    final boolean isCloseTag;
     try
     {
+      int pos;
+      boolean isCloseTag;
       if (in.charAt (start + 1) == '/')
       {
         isCloseTag = true;

@@ -20,8 +20,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.phloc.html.markdown.ext.AbstractPlugin;
-
 /**
  * Txtmark configuration.
  * 

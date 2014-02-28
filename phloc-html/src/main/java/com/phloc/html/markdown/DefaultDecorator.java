@@ -15,6 +15,29 @@
  */
 package com.phloc.html.markdown;
 
+import javax.annotation.Nonnull;
+
+import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.HCBlockQuote;
+import com.phloc.html.hc.html.HCCode;
+import com.phloc.html.hc.html.HCEM;
+import com.phloc.html.hc.html.HCH1;
+import com.phloc.html.hc.html.HCH2;
+import com.phloc.html.hc.html.HCH3;
+import com.phloc.html.hc.html.HCH4;
+import com.phloc.html.hc.html.HCH5;
+import com.phloc.html.hc.html.HCH6;
+import com.phloc.html.hc.html.HCHR;
+import com.phloc.html.hc.html.HCImg;
+import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.html.HCOL;
+import com.phloc.html.hc.html.HCP;
+import com.phloc.html.hc.html.HCPre;
+import com.phloc.html.hc.html.HCS;
+import com.phloc.html.hc.html.HCStrong;
+import com.phloc.html.hc.html.HCSup;
+import com.phloc.html.hc.html.HCUL;
+
 /**
  * Default Decorator implementation.
  * <p>
@@ -39,172 +62,170 @@ public class DefaultDecorator implements IDecorator
 {
   /** Constructor. */
   public DefaultDecorator ()
+  {}
+
+  public void openParagraph (final HCStack out)
   {
-    // empty
+    out.push (new HCP ());
   }
 
-  @Override
-  public void openParagraph (final StringBuilder out)
+  public void closeParagraph (final HCStack out)
   {
-    out.append ("<p>");
+    out.pop ();
   }
 
-  @Override
-  public void closeParagraph (final StringBuilder out)
+  public void openBlockquote (final HCStack out)
   {
-    out.append ("</p>\n");
+    out.push (new HCBlockQuote ());
   }
 
-  @Override
-  public void openBlockquote (final StringBuilder out)
+  public void closeBlockquote (final HCStack out)
   {
-    out.append ("<blockquote>");
+    out.pop ();
   }
 
-  @Override
-  public void closeBlockquote (final StringBuilder out)
+  public void openCodeBlock (final HCStack out)
   {
-    out.append ("</blockquote>\n");
+    out.push (new HCPre ());
+    out.push (new HCCode ());
   }
 
-  @Override
-  public void openCodeBlock (final StringBuilder out)
+  public void closeCodeBlock (final HCStack out)
   {
-    out.append ("<pre><code>");
+    out.pop ();
+    out.pop ();
   }
 
-  @Override
-  public void closeCodeBlock (final StringBuilder out)
+  @Nonnull
+  public HCCode openCodeSpan (final HCStack out)
   {
-    out.append ("</code></pre>\n");
+    return out.push (new HCCode ());
   }
 
-  @Override
-  public void openCodeSpan (final StringBuilder out)
+  public void closeCodeSpan (final HCStack out)
   {
-    out.append ("<code>");
+    out.pop ();
   }
 
-  @Override
-  public void closeCodeSpan (final StringBuilder out)
+  public void openHeadline (final HCStack out, final int level)
   {
-    out.append ("</code>");
+    switch (level)
+    {
+      case 1:
+        out.push (new HCH1 ());
+        break;
+      case 2:
+        out.push (new HCH2 ());
+        break;
+      case 3:
+        out.push (new HCH3 ());
+        break;
+      case 4:
+        out.push (new HCH4 ());
+        break;
+      case 5:
+        out.push (new HCH5 ());
+        break;
+      case 6:
+        out.push (new HCH6 ());
+        break;
+    }
   }
 
-  @Override
-  public void openHeadline (final StringBuilder out, final int level)
+  public void closeHeadline (final HCStack out, final int level)
   {
-    out.append ("<h");
-    out.append (level);
+    out.pop ();
   }
 
-  @Override
-  public void closeHeadline (final StringBuilder out, final int level)
+  public void openStrong (final HCStack out)
   {
-    out.append ("</h");
-    out.append (level);
-    out.append (">\n");
+    out.push (new HCStrong ());
   }
 
-  @Override
-  public void openStrong (final StringBuilder out)
+  public void closeStrong (final HCStack out)
   {
-    out.append ("<strong>");
+    out.pop ();
   }
 
-  @Override
-  public void closeStrong (final StringBuilder out)
+  public void openStrike (final HCStack out)
   {
-    out.append ("</strong>");
+    out.push (new HCS ());
   }
 
-  @Override
-  public void openStrike (final StringBuilder out)
+  public void closeStrike (final HCStack out)
   {
-    out.append ("<s>");
+    out.pop ();
   }
 
-  @Override
-  public void closeStrike (final StringBuilder out)
+  public void openEmphasis (final HCStack out)
   {
-    out.append ("</s>");
+    out.push (new HCEM ());
   }
 
-  @Override
-  public void openEmphasis (final StringBuilder out)
+  public void closeEmphasis (final HCStack out)
   {
-    out.append ("<em>");
+    out.pop ();
   }
 
-  @Override
-  public void closeEmphasis (final StringBuilder out)
+  public void openSuper (final HCStack out)
   {
-    out.append ("</em>");
+    out.push (new HCSup ());
   }
 
-  @Override
-  public void openSuper (final StringBuilder out)
+  public void closeSuper (final HCStack out)
   {
-    out.append ("<sup>");
+    out.pop ();
   }
 
-  @Override
-  public void closeSuper (final StringBuilder out)
+  public void openOrderedList (final HCStack out)
   {
-    out.append ("</sup>");
+    out.push (new HCOL ());
   }
 
-  @Override
-  public void openOrderedList (final StringBuilder out)
+  public void closeOrderedList (final HCStack out)
   {
-    out.append ("<ol>\n");
+    out.pop ();
   }
 
-  @Override
-  public void closeOrderedList (final StringBuilder out)
+  public void openUnorderedList (final HCStack out)
   {
-    out.append ("</ol>\n");
+    out.push (new HCUL ());
   }
 
-  @Override
-  public void openUnorderedList (final StringBuilder out)
+  public void closeUnorderedList (final HCStack out)
   {
-    out.append ("<ul>\n");
+    out.pop ();
   }
 
-  @Override
-  public void closeUnorderedList (final StringBuilder out)
+  public void openListItem (final HCStack out)
   {
-    out.append ("</ul>\n");
+    out.push (new HCLI ());
   }
 
-  @Override
-  public void openListItem (final StringBuilder out)
+  public void closeListItem (final HCStack out)
   {
-    out.append ("<li");
+    out.pop ();
   }
 
-  @Override
-  public void closeListItem (final StringBuilder out)
+  public void horizontalRuler (final HCStack out)
   {
-    out.append ("</li>\n");
+    out.append (new HCHR ());
   }
 
-  @Override
-  public void horizontalRuler (final StringBuilder out)
+  public HCA openLink (final HCStack out)
   {
-    out.append ("<hr />\n");
+    return out.push (new HCA ());
   }
 
-  @Override
-  public void openLink (final StringBuilder out)
+  public void closeLink (final HCStack out)
   {
-    out.append ("<a");
+    out.pop ();
   }
 
-  @Override
-  public void openImage (final StringBuilder out)
+  public HCImg openImage (final HCStack out)
   {
-    out.append ("<img");
+    final HCImg ret = new HCImg ();
+    out.append (ret);
+    return ret;
   }
 }

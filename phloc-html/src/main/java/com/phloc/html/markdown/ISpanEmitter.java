@@ -31,5 +31,5 @@ public interface ISpanEmitter
    * @param content
    *        The span's content.
    */
-  void emitSpan (StringBuilder out, String content);
+  void emitSpan (HCStack out, String content);
 }
