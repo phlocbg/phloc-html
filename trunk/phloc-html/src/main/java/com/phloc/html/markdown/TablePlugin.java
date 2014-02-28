@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.phloc.commons.annotations.WorkInProgress;
+
+@WorkInProgress
 public class TablePlugin extends AbstractPlugin
 {
   public TablePlugin ()
@@ -24,6 +27,7 @@ public class TablePlugin extends AbstractPlugin
     return -1;
   }
 
+  @SuppressWarnings ("unused")
   @Override
   public void emit (final StringBuilder out, final List <String> lines, final Map <String, String> params)
   {

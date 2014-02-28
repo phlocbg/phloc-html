@@ -23,7 +23,7 @@ import java.util.HashSet;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class HTML
+final class HTML
 {
   /** List of valid HTML/XML entity names. */
   private final static String [] ENTITY_NAMES = { "&Acirc;",
@@ -527,42 +527,42 @@ class HTML
                                                '\u03B6',
                                                '\u200D',
                                                '\u200C' };
-  /** Valid markdown link prefixes for auto links. */
-  private final static String [] LINK_PREFIXES = { "http", "https", "ftp", "ftps" };
 
   /** HTML block level elements. */
   private final static EHTMLElement [] BLOCK_ELEMENTS = { EHTMLElement.address,
-                                                        EHTMLElement.blockquote,
-                                                        EHTMLElement.del,
-                                                        EHTMLElement.div,
-                                                        EHTMLElement.dl,
-                                                        EHTMLElement.fieldset,
-                                                        EHTMLElement.form,
-                                                        EHTMLElement.h1,
-                                                        EHTMLElement.h2,
-                                                        EHTMLElement.h3,
-                                                        EHTMLElement.h4,
-                                                        EHTMLElement.h5,
-                                                        EHTMLElement.h6,
-                                                        EHTMLElement.hr,
-                                                        EHTMLElement.ins,
-                                                        EHTMLElement.noscript,
-                                                        EHTMLElement.ol,
-                                                        EHTMLElement.p,
-                                                        EHTMLElement.pre,
-                                                        EHTMLElement.table,
-                                                        EHTMLElement.ul };
+                                                         EHTMLElement.blockquote,
+                                                         EHTMLElement.del,
+                                                         EHTMLElement.div,
+                                                         EHTMLElement.dl,
+                                                         EHTMLElement.fieldset,
+                                                         EHTMLElement.form,
+                                                         EHTMLElement.h1,
+                                                         EHTMLElement.h2,
+                                                         EHTMLElement.h3,
+                                                         EHTMLElement.h4,
+                                                         EHTMLElement.h5,
+                                                         EHTMLElement.h6,
+                                                         EHTMLElement.hr,
+                                                         EHTMLElement.ins,
+                                                         EHTMLElement.noscript,
+                                                         EHTMLElement.ol,
+                                                         EHTMLElement.p,
+                                                         EHTMLElement.pre,
+                                                         EHTMLElement.table,
+                                                         EHTMLElement.ul };
 
   /** HTML unsafe elements. */
   private final static EHTMLElement [] UNSAFE_ELEMENTS = { EHTMLElement.applet,
-                                                         EHTMLElement.head,
-                                                         EHTMLElement.html,
-                                                         EHTMLElement.body,
-                                                         EHTMLElement.frame,
-                                                         EHTMLElement.frameset,
-                                                         EHTMLElement.iframe,
-                                                         EHTMLElement.script,
-                                                         EHTMLElement.object, };
+                                                          EHTMLElement.head,
+                                                          EHTMLElement.html,
+                                                          EHTMLElement.body,
+                                                          EHTMLElement.frame,
+                                                          EHTMLElement.frameset,
+                                                          EHTMLElement.iframe,
+                                                          EHTMLElement.script,
+                                                          EHTMLElement.object, };
+  /** Valid markdown link prefixes for auto links. */
+  private final static String [] LINK_PREFIXES = { "http", "https", "ftp", "ftps" };
 
   /** Character to entity encoding map. */
   private final static HashMap <Character, String> encodeMap = new HashMap <Character, String> ();
@@ -581,15 +581,15 @@ class HTML
   {
     for (final EHTMLElement h : EHTMLElement.values ())
     {
-      HTML_ELEMENTS.add (h.toString ());
+      HTML_ELEMENTS.add (h.name ());
     }
     for (final EHTMLElement h : UNSAFE_ELEMENTS)
     {
-      HTML_UNSAFE.add (h.toString ());
+      HTML_UNSAFE.add (h.name ());
     }
     for (final EHTMLElement h : BLOCK_ELEMENTS)
     {
-      HTML_BLOCK_ELEMENTS.add (h.toString ());
+      HTML_BLOCK_ELEMENTS.add (h.name ());
     }
     for (int i = 0; i < ENTITY_NAMES.length; i++)
     {
@@ -613,7 +613,7 @@ class HTML
    *        String to check.
    * @return Returns <code>true</code> if the given String is a link prefix.
    */
-  public final static boolean isLinkPrefix (final String value)
+  public static boolean isLinkPrefix (final String value)
   {
     return LINK_PREFIX.contains (value);
   }
@@ -623,7 +623,7 @@ class HTML
    *        String to check.
    * @return Returns <code>true</code> if the given String is an entity.
    */
-  public final static boolean isEntity (final String value)
+  public static boolean isEntity (final String value)
   {
     return decodeMap.containsKey (value);
   }
@@ -633,7 +633,7 @@ class HTML
    *        String to check.
    * @return Returns <code>true</code> if the given String is a HTML tag.
    */
-  public final static boolean isHtmlElement (final String value)
+  public static boolean isHtmlElement (final String value)
   {
     return HTML_ELEMENTS.contains (value);
   }
@@ -644,7 +644,7 @@ class HTML
    * @return Returns <code>true</code> if the given String is a HTML block level
    *         tag.
    */
-  public final static boolean isHtmlBlockElement (final String value)
+  public static boolean isHtmlBlockElement (final String value)
   {
     return HTML_BLOCK_ELEMENTS.contains (value);
   }
@@ -655,7 +655,7 @@ class HTML
    * @return Returns <code>true</code> if the given String is an unsafe HTML
    *         tag.
    */
-  public final static boolean isUnsafeHtmlElement (final String value)
+  public static boolean isUnsafeHtmlElement (final String value)
   {
     return HTML_UNSAFE.contains (value);
   }

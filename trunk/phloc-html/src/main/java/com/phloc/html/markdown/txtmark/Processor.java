@@ -78,7 +78,7 @@ public class Processor
    * @since 0.7
    * @see Configuration
    */
-  public final static String process (final Reader reader, final Configuration configuration) throws IOException
+  public static final String process (final Reader reader, final Configuration configuration) throws IOException
   {
     final Processor p = new Processor (StreamUtils.getBuffered (reader), configuration);
     return p._process ();
@@ -95,7 +95,7 @@ public class Processor
    * @since 0.7
    * @see Configuration
    */
-  public final static String process (final String input, final Configuration configuration)
+  public static final String process (final String input, final Configuration configuration)
   {
     try
     {
@@ -119,7 +119,7 @@ public class Processor
    * @since 0.7
    * @see Configuration
    */
-  public final static String process (final File file, final Configuration configuration) throws IOException
+  public static final String process (final File file, final Configuration configuration) throws IOException
   {
     final FileInputStream input = new FileInputStream (file);
     final String ret = process (input, configuration);
@@ -140,7 +140,7 @@ public class Processor
    * @since 0.7
    * @see Configuration
    */
-  public final static String process (final InputStream input, final Configuration configuration) throws IOException
+  public static final String process (final InputStream input, final Configuration configuration) throws IOException
   {
     final Processor p = new Processor (new BufferedReader (new InputStreamReader (input, configuration.m_sEncoding)),
                                        configuration);
@@ -155,7 +155,7 @@ public class Processor
    * @return The processed String.
    * @see Configuration#DEFAULT
    */
-  public final static String process (final String input)
+  public static final String process (final String input)
   {
     return process (StringHelper.getNotNull (input), Configuration.DEFAULT);
   }
@@ -170,7 +170,7 @@ public class Processor
    * @return The processed String.
    * @see Configuration#DEFAULT
    */
-  public final static String process (final String input, final boolean safeMode)
+  public static final String process (final String input, final boolean safeMode)
   {
     return process (input, Configuration.builder ().setSafeMode (safeMode).build ());
   }
@@ -185,7 +185,7 @@ public class Processor
    * @return The processed String.
    * @see Configuration#DEFAULT
    */
-  public final static String process (final String input, final IDecorator decorator)
+  public static final String process (final String input, final IDecorator decorator)
   {
     return process (input, Configuration.builder ().setDecorator (decorator).build ());
   }
@@ -202,7 +202,7 @@ public class Processor
    * @return The processed String.
    * @see Configuration#DEFAULT
    */
-  public final static String process (final String input, final IDecorator decorator, final boolean safeMode)
+  public static final String process (final String input, final IDecorator decorator, final boolean safeMode)
   {
     return process (input, Configuration.builder ().setDecorator (decorator).setSafeMode (safeMode).build ());
   }
@@ -217,7 +217,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file) throws IOException
+  public static final String process (final File file) throws IOException
   {
     return process (file, Configuration.DEFAULT);
   }
@@ -234,7 +234,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final boolean safeMode) throws IOException
+  public static final String process (final File file, final boolean safeMode) throws IOException
   {
     return process (file, Configuration.builder ().setSafeMode (safeMode).build ());
   }
@@ -251,7 +251,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final IDecorator decorator) throws IOException
+  public static final String process (final File file, final IDecorator decorator) throws IOException
   {
     return process (file, Configuration.builder ().setDecorator (decorator).build ());
   }
@@ -270,7 +270,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final IDecorator decorator, final boolean safeMode) throws IOException
+  public static final String process (final File file, final IDecorator decorator, final boolean safeMode) throws IOException
   {
     return process (file, Configuration.builder ().setDecorator (decorator).setSafeMode (safeMode).build ());
   }
@@ -287,7 +287,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final String encoding) throws IOException
+  public static final String process (final File file, final String encoding) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).build ());
   }
@@ -306,7 +306,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final String encoding, final boolean safeMode) throws IOException
+  public static final String process (final File file, final String encoding, final boolean safeMode) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).setSafeMode (safeMode).build ());
   }
@@ -325,7 +325,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file, final String encoding, final IDecorator decorator) throws IOException
+  public static final String process (final File file, final String encoding, final IDecorator decorator) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).setDecorator (decorator).build ());
   }
@@ -346,7 +346,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final File file,
+  public static final String process (final File file,
                                       final String encoding,
                                       final IDecorator decorator,
                                       final boolean safeMode) throws IOException
@@ -369,7 +369,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input) throws IOException
+  public static final String process (final InputStream input) throws IOException
   {
     return process (input, Configuration.DEFAULT);
   }
@@ -386,7 +386,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final boolean safeMode) throws IOException
+  public static final String process (final InputStream input, final boolean safeMode) throws IOException
   {
     return process (input, Configuration.builder ().setSafeMode (safeMode).build ());
   }
@@ -403,7 +403,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final IDecorator decorator) throws IOException
+  public static final String process (final InputStream input, final IDecorator decorator) throws IOException
   {
     return process (input, Configuration.builder ().setDecorator (decorator).build ());
   }
@@ -422,7 +422,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final IDecorator decorator, final boolean safeMode) throws IOException
+  public static final String process (final InputStream input, final IDecorator decorator, final boolean safeMode) throws IOException
   {
     return process (input, Configuration.builder ().setDecorator (decorator).setSafeMode (safeMode).build ());
   }
@@ -439,7 +439,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final String encoding) throws IOException
+  public static final String process (final InputStream input, final String encoding) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).build ());
   }
@@ -458,7 +458,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final String encoding, final boolean safeMode) throws IOException
+  public static final String process (final InputStream input, final String encoding, final boolean safeMode) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).setSafeMode (safeMode).build ());
   }
@@ -477,7 +477,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input, final String encoding, final IDecorator decorator) throws IOException
+  public static final String process (final InputStream input, final String encoding, final IDecorator decorator) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).setDecorator (decorator).build ());
   }
@@ -498,7 +498,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final InputStream input,
+  public static final String process (final InputStream input,
                                       final String encoding,
                                       final IDecorator decorator,
                                       final boolean safeMode) throws IOException
@@ -521,7 +521,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final Reader reader) throws IOException
+  public static final String process (final Reader reader) throws IOException
   {
     return process (reader, Configuration.DEFAULT);
   }
@@ -538,7 +538,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final Reader reader, final boolean safeMode) throws IOException
+  public static final String process (final Reader reader, final boolean safeMode) throws IOException
   {
     return process (reader, Configuration.builder ().setSafeMode (safeMode).build ());
   }
@@ -555,7 +555,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final Reader reader, final IDecorator decorator) throws IOException
+  public static final String process (final Reader reader, final IDecorator decorator) throws IOException
   {
     return process (reader, Configuration.builder ().setDecorator (decorator).build ());
   }
@@ -574,7 +574,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public final static String process (final Reader reader, final IDecorator decorator, final boolean safeMode) throws IOException
+  public static final String process (final Reader reader, final IDecorator decorator, final boolean safeMode) throws IOException
   {
     return process (reader, Configuration.builder ().setDecorator (decorator).setSafeMode (safeMode).build ());
   }

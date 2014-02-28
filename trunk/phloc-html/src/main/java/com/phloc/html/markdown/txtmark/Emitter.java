@@ -135,7 +135,7 @@ class Emitter
 
     if (root.hasLines ())
     {
-      emitLines (out, root);
+      _emitLines (out, root);
     }
     else
     {
@@ -189,27 +189,27 @@ class Emitter
    * @param block
    *        The Block to process.
    */
-  private void emitLines (final StringBuilder out, final Block block)
+  private void _emitLines (final StringBuilder out, final Block block)
   {
     switch (block.m_eType)
     {
       case CODE:
-        emitCodeLines (out, block.m_aLines, block.m_sMeta, true);
+        _emitCodeLines (out, block.m_aLines, block.m_sMeta, true);
         break;
       case FENCED_CODE:
-        emitCodeLines (out, block.m_aLines, block.m_sMeta, false);
+        _emitCodeLines (out, block.m_aLines, block.m_sMeta, false);
         break;
       case PLUGIN:
         emitPluginLines (out, block.m_aLines, block.m_sMeta);
         break;
       case XML:
-        emitRawLines (out, block.m_aLines);
+        _emitRawLines (out, block.m_aLines);
         break;
       case PARAGRAPH:
-        emitMarkedLines (out, block.m_aLines);
+        _emitMarkedLines (out, block.m_aLines);
         break;
       default:
-        emitMarkedLines (out, block.m_aLines);
+        _emitMarkedLines (out, block.m_aLines);
         break;
     }
   }
@@ -225,12 +225,12 @@ class Emitter
    *        The token to find.
    * @return The position of the token or -1 if none could be found.
    */
-  private int findToken (final String in, final int start, final EMarkToken token)
+  private int _findToken (final String in, final int start, final EMarkToken token)
   {
     int pos = start;
     while (pos < in.length ())
     {
-      if (getToken (in, pos) == token)
+      if (_getToken (in, pos) == token)
         return pos;
       pos++;
     }
@@ -250,7 +250,7 @@ class Emitter
    *        Either LINK or IMAGE.
    * @return The new position or -1 if there is no valid markdown link.
    */
-  private int checkLink (final StringBuilder out, final String in, final int start, final EMarkToken token)
+  private int _checkLink (final StringBuilder out, final String in, final int start, final EMarkToken token)
   {
     boolean isAbbrev = false;
     int pos = start + (token == EMarkToken.LINK ? 1 : 2);
@@ -360,7 +360,7 @@ class Emitter
         out.append ("<abbr title=\"");
         Utils.appendValue (out, comment, 0, comment.length ());
         out.append ("\">");
-        recursiveEmitLine (out, name, 0, EMarkToken.NONE);
+        _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
         out.append ("</abbr>");
       }
       else
@@ -376,7 +376,7 @@ class Emitter
           out.append ('"');
         }
         out.append ('>');
-        recursiveEmitLine (out, name, 0, EMarkToken.NONE);
+        _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
         out.append ("</a>");
       }
     }
@@ -412,7 +412,7 @@ class Emitter
    *        Starting position.
    * @return The new position or -1 if nothing valid has been found.
    */
-  private int checkHtml (final StringBuilder out, final String in, final int start)
+  private int _checkHtml (final StringBuilder out, final String in, final int start)
   {
     final StringBuilder temp = new StringBuilder ();
     int pos;
@@ -491,7 +491,7 @@ class Emitter
    *        Starting position
    * @return The new position or -1 if this entity in invalid.
    */
-  private static int checkEntity (final StringBuilder out, final String in, final int start)
+  private static int _checkEntity (final StringBuilder out, final String in, final int start)
   {
     final int pos = Utils.readUntil (out, in, start, ';');
     if (pos < 0 || out.length () < 3)
@@ -550,13 +550,13 @@ class Emitter
    * @return The position of the matching Token or -1 if token was NONE or no
    *         Token could be found.
    */
-  private int recursiveEmitLine (final StringBuilder out, final String in, final int start, final EMarkToken token)
+  private int _recursiveEmitLine (final StringBuilder out, final String in, final int start, final EMarkToken token)
   {
     int pos = start, a, b;
     final StringBuilder temp = new StringBuilder ();
     while (pos < in.length ())
     {
-      final EMarkToken mt = getToken (in, pos);
+      final EMarkToken mt = _getToken (in, pos);
       if (token != EMarkToken.NONE &&
           (mt == token || token == EMarkToken.EM_STAR && mt == EMarkToken.STRONG_STAR || token == EMarkToken.EM_UNDERSCORE &&
                                                                                          mt == EMarkToken.STRONG_UNDERSCORE))
@@ -567,7 +567,7 @@ class Emitter
         case IMAGE:
         case LINK:
           temp.setLength (0);
-          b = checkLink (temp, in, pos, mt);
+          b = _checkLink (temp, in, pos, mt);
           if (b > 0)
           {
             out.append (temp);
@@ -581,7 +581,7 @@ class Emitter
         case EM_STAR:
         case EM_UNDERSCORE:
           temp.setLength (0);
-          b = recursiveEmitLine (temp, in, pos + 1, mt);
+          b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
             m_aConfig.m_aDecorator.openEmphasis (out);
@@ -597,7 +597,7 @@ class Emitter
         case STRONG_STAR:
         case STRONG_UNDERSCORE:
           temp.setLength (0);
-          b = recursiveEmitLine (temp, in, pos + 2, mt);
+          b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
             m_aConfig.m_aDecorator.openStrong (out);
@@ -612,7 +612,7 @@ class Emitter
           break;
         case STRIKE:
           temp.setLength (0);
-          b = recursiveEmitLine (temp, in, pos + 2, mt);
+          b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
             m_aConfig.m_aDecorator.openStrike (out);
@@ -627,7 +627,7 @@ class Emitter
           break;
         case SUPER:
           temp.setLength (0);
-          b = recursiveEmitLine (temp, in, pos + 1, mt);
+          b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
             m_aConfig.m_aDecorator.openSuper (out);
@@ -643,7 +643,7 @@ class Emitter
         case CODE_SINGLE:
         case CODE_DOUBLE:
           a = pos + (mt == EMarkToken.CODE_DOUBLE ? 2 : 1);
-          b = findToken (in, a, mt);
+          b = _findToken (in, a, mt);
           if (b > 0)
           {
             pos = b + (mt == EMarkToken.CODE_DOUBLE ? 1 : 0);
@@ -665,7 +665,7 @@ class Emitter
           break;
         case HTML:
           temp.setLength (0);
-          b = checkHtml (temp, in, pos);
+          b = _checkHtml (temp, in, pos);
           if (b > 0)
           {
             out.append (temp);
@@ -678,7 +678,7 @@ class Emitter
           break;
         case ENTITY:
           temp.setLength (0);
-          b = checkEntity (temp, in, pos);
+          b = _checkEntity (temp, in, pos);
           if (b > 0)
           {
             out.append (temp);
@@ -691,7 +691,7 @@ class Emitter
           break;
         case X_LINK_OPEN:
           temp.setLength (0);
-          b = recursiveEmitLine (temp, in, pos + 2, EMarkToken.X_LINK_CLOSE);
+          b = _recursiveEmitLine (temp, in, pos + 2, EMarkToken.X_LINK_CLOSE);
           if (b > 0 && m_aConfig.m_aSpecialLinkEmitter != null)
           {
             m_aConfig.m_aSpecialLinkEmitter.emitSpan (out, temp.toString ());
@@ -759,7 +759,7 @@ class Emitter
    *        Character to check
    * @return 32 is c was a whitespace, c otherwise
    */
-  private static char whitespaceToSpace (final char c)
+  private static char _whitespaceToSpace (final char c)
   {
     return Character.isWhitespace (c) ? ' ' : c;
   }
@@ -773,13 +773,13 @@ class Emitter
    *        Starting position.
    * @return The Token.
    */
-  private EMarkToken getToken (final String in, final int pos)
+  private EMarkToken _getToken (final String in, final int pos)
   {
-    final char c0 = pos > 0 ? whitespaceToSpace (in.charAt (pos - 1)) : ' ';
-    final char c = whitespaceToSpace (in.charAt (pos));
-    final char c1 = pos + 1 < in.length () ? whitespaceToSpace (in.charAt (pos + 1)) : ' ';
-    final char c2 = pos + 2 < in.length () ? whitespaceToSpace (in.charAt (pos + 2)) : ' ';
-    final char c3 = pos + 3 < in.length () ? whitespaceToSpace (in.charAt (pos + 3)) : ' ';
+    final char c0 = pos > 0 ? _whitespaceToSpace (in.charAt (pos - 1)) : ' ';
+    final char c = _whitespaceToSpace (in.charAt (pos));
+    final char c1 = pos + 1 < in.length () ? _whitespaceToSpace (in.charAt (pos + 1)) : ' ';
+    final char c2 = pos + 2 < in.length () ? _whitespaceToSpace (in.charAt (pos + 2)) : ' ';
+    final char c3 = pos + 3 < in.length () ? _whitespaceToSpace (in.charAt (pos + 3)) : ' ';
 
     switch (c)
     {
@@ -877,7 +877,7 @@ class Emitter
    * @param lines
    *        The lines to write.
    */
-  private void emitMarkedLines (final StringBuilder out, final Line lines)
+  private void _emitMarkedLines (final StringBuilder out, final Line lines)
   {
     final StringBuilder in = new StringBuilder ();
     Line line = lines;
@@ -900,7 +900,7 @@ class Emitter
       line = line.m_aNext;
     }
 
-    recursiveEmitLine (out, in.toString (), 0, EMarkToken.NONE);
+    _recursiveEmitLine (out, in.toString (), 0, EMarkToken.NONE);
   }
 
   /**
@@ -911,7 +911,7 @@ class Emitter
    * @param lines
    *        The lines to write.
    */
-  private void emitRawLines (final StringBuilder out, final Line lines)
+  private void _emitRawLines (final StringBuilder out, final Line lines)
   {
     Line line = lines;
     if (m_aConfig.m_bSafeMode)
@@ -973,7 +973,7 @@ class Emitter
    * @param meta
    *        Meta information.
    */
-  private void emitCodeLines (final StringBuilder out, final Line lines, final String meta, final boolean removeIndent)
+  private void _emitCodeLines (final StringBuilder out, final Line lines, final String meta, final boolean removeIndent)
   {
     Line line = lines;
     if (m_aConfig.m_aCodeBlockEmitter != null)
@@ -995,10 +995,9 @@ class Emitter
       {
         if (!line.m_bIsEmpty)
         {
-          for (int i = 4; i < line.m_sValue.length (); i++)
+          for (final char c : line.m_sValue.substring (4).toCharArray ())
           {
-            final char c;
-            switch (c = line.m_sValue.charAt (i))
+            switch (c)
             {
               case '&':
                 out.append ("&amp;");
