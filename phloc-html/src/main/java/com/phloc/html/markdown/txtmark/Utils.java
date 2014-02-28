@@ -15,24 +15,43 @@
  */
 package com.phloc.html.markdown.txtmark;
 
+import com.phloc.commons.collections.ArrayHelper;
+import com.phloc.commons.random.VerySecureRandom;
+
 /**
  * Utilities.
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class Utils
+final class Utils
 {
-  /** Random number generator value. */
-  private static int RND = (int) System.nanoTime ();
+  private static final char [] ESCAPE_CHARS = new char [] { '\\',
+                                                           '[',
+                                                           ']',
+                                                           '(',
+                                                           ')',
+                                                           '{',
+                                                           '}',
+                                                           '#',
+                                                           '"',
+                                                           '\'',
+                                                           '.',
+                                                           '>',
+                                                           '<',
+                                                           '*',
+                                                           '+',
+                                                           '-',
+                                                           '_',
+                                                           '!',
+                                                           '`',
+                                                           '^' };
 
   /**
-   * LCG random number generator.
-   * 
    * @return A pseudo random number between 0 and 1023
    */
-  public final static int rnd ()
+  public static int rnd ()
   {
-    return (RND = RND * 1664525 + 1013904223) >>> 22;
+    return VerySecureRandom.getInstance ().nextInt (1024);
   }
 
   /**
@@ -44,12 +63,17 @@ class Utils
    *        Starting position.
    * @return The new position or -1 if EOL has been reached.
    */
-  public final static int skipSpaces (final String in, final int start)
+  public static int skipSpaces (final String in, final int start)
   {
     int pos = start;
     while (pos < in.length () && (in.charAt (pos) == ' ' || in.charAt (pos) == '\n'))
       pos++;
     return pos < in.length () ? pos : -1;
+  }
+
+  public static boolean isEscapeChar (final char ch)
+  {
+    return ArrayHelper.contains (ESCAPE_CHARS, ch);
   }
 
   /**
@@ -63,36 +87,15 @@ class Utils
    *        Current parsing position.
    * @return The new position.
    */
-  public final static int escape (final StringBuilder out, final char ch, final int pos)
+  private static final int _escape (final StringBuilder out, final char ch, final int pos)
   {
-    switch (ch)
+    if (isEscapeChar (ch))
     {
-      case '\\':
-      case '[':
-      case ']':
-      case '(':
-      case ')':
-      case '{':
-      case '}':
-      case '#':
-      case '"':
-      case '\'':
-      case '.':
-      case '>':
-      case '<':
-      case '*':
-      case '+':
-      case '-':
-      case '_':
-      case '!':
-      case '`':
-      case '^':
-        out.append (ch);
-        return pos + 1;
-      default:
-        out.append ('\\');
-        return pos;
+      out.append (ch);
+      return pos + 1;
     }
+    out.append ('\\');
+    return pos;
   }
 
   /**
@@ -108,7 +111,7 @@ class Utils
    *        End characters.
    * @return The new position or -1 if no 'end' char was found.
    */
-  public final static int readUntil (final StringBuilder out, final String in, final int start, final char... end)
+  public static int readUntil (final StringBuilder out, final String in, final int start, final char... end)
   {
     int pos = start;
     while (pos < in.length ())
@@ -116,7 +119,7 @@ class Utils
       final char ch = in.charAt (pos);
       if (ch == '\\' && pos + 1 < in.length ())
       {
-        pos = escape (out, in.charAt (pos + 1), pos);
+        pos = _escape (out, in.charAt (pos + 1), pos);
       }
       else
       {
@@ -152,7 +155,7 @@ class Utils
    *        End characters.
    * @return The new position or -1 if no 'end' char was found.
    */
-  public final static int readUntil (final StringBuilder out, final String in, final int start, final char end)
+  public static int readUntil (final StringBuilder out, final String in, final int start, final char end)
   {
     int pos = start;
     while (pos < in.length ())
@@ -160,7 +163,7 @@ class Utils
       final char ch = in.charAt (pos);
       if (ch == '\\' && pos + 1 < in.length ())
       {
-        pos = escape (out, in.charAt (pos + 1), pos);
+        pos = _escape (out, in.charAt (pos + 1), pos);
       }
       else
       {
@@ -185,7 +188,7 @@ class Utils
    *        Starting position.
    * @return The new position or -1 if this is no valid markdown link.
    */
-  public final static int readMdLink (final StringBuilder out, final String in, final int start)
+  public static int readMdLink (final StringBuilder out, final String in, final int start)
   {
     int pos = start;
     int counter = 1;
@@ -194,7 +197,7 @@ class Utils
       final char ch = in.charAt (pos);
       if (ch == '\\' && pos + 1 < in.length ())
       {
-        pos = escape (out, in.charAt (pos + 1), pos);
+        pos = _escape (out, in.charAt (pos + 1), pos);
       }
       else
       {
@@ -235,7 +238,7 @@ class Utils
    *        Starting position.
    * @return The new position or -1 if this is no valid markdown link ID.
    */
-  public final static int readMdLinkId (final StringBuilder out, final String in, final int start)
+  public static int readMdLinkId (final StringBuilder out, final String in, final int start)
   {
     int pos = start;
     int counter = 1;
@@ -285,7 +288,7 @@ class Utils
    *        End characters.
    * @return The new position or -1 if no 'end' char was found.
    */
-  public final static int readRawUntil (final StringBuilder out, final String in, final int start, final char... end)
+  public static int readRawUntil (final StringBuilder out, final String in, final int start, final char... end)
   {
     int pos = start;
     while (pos < in.length ())
@@ -323,7 +326,7 @@ class Utils
    *        End characters.
    * @return The new position or -1 if no 'end' char was found.
    */
-  public final static int readRawUntil (final StringBuilder out, final String in, final int start, final char end)
+  public static int readRawUntil (final StringBuilder out, final String in, final int start, final char end)
   {
     int pos = start;
     while (pos < in.length ())
@@ -350,7 +353,7 @@ class Utils
    * @param end
    *        Input String end position.
    */
-  public final static void appendCode (final StringBuilder out, final String in, final int start, final int end)
+  public static void appendCode (final StringBuilder out, final String in, final int start, final int end)
   {
     for (int i = start; i < end; i++)
     {
@@ -386,7 +389,7 @@ class Utils
    * @param end
    *        Input String end position.
    */
-  public final static void appendValue (final StringBuilder out, final String in, final int start, final int end)
+  public static void appendValue (final StringBuilder out, final String in, final int start, final int end)
   {
     for (int i = start; i < end; i++)
     {
@@ -423,7 +426,7 @@ class Utils
    * @param value
    *        The character.
    */
-  public final static void appendDecEntity (final StringBuilder out, final char value)
+  public static void appendDecEntity (final StringBuilder out, final char value)
   {
     out.append ("&#");
     out.append ((int) value);
@@ -438,7 +441,7 @@ class Utils
    * @param value
    *        The character.
    */
-  public final static void appendHexEntity (final StringBuilder out, final char value)
+  public static void appendHexEntity (final StringBuilder out, final char value)
   {
     out.append ("&#x");
     out.append (Integer.toHexString (value));
@@ -457,7 +460,7 @@ class Utils
    * @param end
    *        Input String end position.
    */
-  public final static void appendMailto (final StringBuilder out, final String in, final int start, final int end)
+  public static void appendMailto (final StringBuilder out, final String in, final int start, final int end)
   {
     for (int i = start; i < end; i++)
     {
@@ -497,7 +500,7 @@ class Utils
    * @param in
    *        Input StringBuilder.
    */
-  public final static void getXMLTag (final StringBuilder out, final StringBuilder in)
+  public static void getXMLTag (final StringBuilder out, final StringBuilder in)
   {
     int pos = 1;
     if (in.charAt (1) == '/')
@@ -516,7 +519,7 @@ class Utils
    * @param in
    *        Input String.
    */
-  public final static void getXMLTag (final StringBuilder out, final String in)
+  public static void getXMLTag (final StringBuilder out, final String in)
   {
     int pos = 1;
     if (in.charAt (1) == '/')
@@ -540,7 +543,7 @@ class Utils
    *        Whether to escape unsafe HTML tags or not
    * @return The new position or -1 if this is no valid XML element.
    */
-  public final static int readXML (final StringBuilder out, final String in, final int start, final boolean safeMode)
+  public static int readXML (final StringBuilder out, final String in, final int start, final boolean safeMode)
   {
     int pos;
     final boolean isCloseTag;
@@ -618,7 +621,7 @@ class Utils
    * @param offset
    *        The character offset into value from where to start
    */
-  public final static void codeEncode (final StringBuilder out, final String value, final int offset)
+  public static void codeEncode (final StringBuilder out, final String value, final int offset)
   {
     for (int i = offset; i < value.length (); i++)
     {
@@ -648,7 +651,7 @@ class Utils
    * @return Rest of the line after trimming and backtick removal
    * @since 0.7
    */
-  public final static String getMetaFromFence (final String fenceLine)
+  public static String getMetaFromFence (final String fenceLine)
   {
     for (int i = 0; i < fenceLine.length (); i++)
     {

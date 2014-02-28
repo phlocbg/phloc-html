@@ -559,7 +559,7 @@ class Emitter
       final EMarkToken mt = getToken (in, pos);
       if (token != EMarkToken.NONE &&
           (mt == token || token == EMarkToken.EM_STAR && mt == EMarkToken.STRONG_STAR || token == EMarkToken.EM_UNDERSCORE &&
-                                                                                       mt == EMarkToken.STRONG_UNDERSCORE))
+                                                                                         mt == EMarkToken.STRONG_UNDERSCORE))
         return pos;
 
       switch (mt)
@@ -821,32 +821,9 @@ class Emitter
       case '`':
         return c1 == '`' ? EMarkToken.CODE_DOUBLE : EMarkToken.CODE_SINGLE;
       case '\\':
-        switch (c1)
-        {
-          case '\\':
-          case '[':
-          case ']':
-          case '(':
-          case ')':
-          case '{':
-          case '}':
-          case '#':
-          case '"':
-          case '\'':
-          case '.':
-          case '>':
-          case '<':
-          case '*':
-          case '+':
-          case '-':
-          case '_':
-          case '!':
-          case '`':
-          case '^':
-            return EMarkToken.ESCAPE;
-          default:
-            return EMarkToken.NONE;
-        }
+        if (Utils.isEscapeChar (c1))
+          return EMarkToken.ESCAPE;
+        return EMarkToken.NONE;
       case '<':
         if (m_bUseExtensions && c1 == '<')
           return EMarkToken.X_LAQUO;
