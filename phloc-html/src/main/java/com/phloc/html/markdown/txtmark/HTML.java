@@ -17,6 +17,8 @@ package com.phloc.html.markdown.txtmark;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * HTML utility class.
@@ -26,7 +28,7 @@ import java.util.HashSet;
 final class HTML
 {
   /** List of valid HTML/XML entity names. */
-  private final static String [] ENTITY_NAMES = { "&Acirc;",
+  private static final String [] ENTITY_NAMES = { "&Acirc;",
                                                  "&acirc;",
                                                  "&acute;",
                                                  "&AElig;",
@@ -277,7 +279,7 @@ final class HTML
                                                  "&zwj;",
                                                  "&zwnj;" };
   /** Characters corresponding to ENTITY_NAMES. */
-  private final static char [] ENTITY_CHARS = { '\u00C2',
+  private static final char [] ENTITY_CHARS = { '\u00C2',
                                                '\u00E2',
                                                '\u00B4',
                                                '\u00C6',
@@ -529,7 +531,7 @@ final class HTML
                                                '\u200C' };
 
   /** HTML block level elements. */
-  private final static EHTMLElement [] BLOCK_ELEMENTS = { EHTMLElement.address,
+  private static final EHTMLElement [] BLOCK_ELEMENTS = { EHTMLElement.address,
                                                          EHTMLElement.blockquote,
                                                          EHTMLElement.del,
                                                          EHTMLElement.div,
@@ -552,7 +554,7 @@ final class HTML
                                                          EHTMLElement.ul };
 
   /** HTML unsafe elements. */
-  private final static EHTMLElement [] UNSAFE_ELEMENTS = { EHTMLElement.applet,
+  private static final EHTMLElement [] UNSAFE_ELEMENTS = { EHTMLElement.applet,
                                                           EHTMLElement.head,
                                                           EHTMLElement.html,
                                                           EHTMLElement.body,
@@ -562,44 +564,35 @@ final class HTML
                                                           EHTMLElement.script,
                                                           EHTMLElement.object, };
   /** Valid markdown link prefixes for auto links. */
-  private final static String [] LINK_PREFIXES = { "http", "https", "ftp", "ftps" };
+  private static final String [] LINK_PREFIXES = { "http", "https", "ftp", "ftps" };
 
   /** Character to entity encoding map. */
-  private final static HashMap <Character, String> encodeMap = new HashMap <Character, String> ();
+  private static final Map <Character, String> encodeMap = new HashMap <Character, String> ();
   /** Entity to character decoding map. */
-  private final static HashMap <String, Character> decodeMap = new HashMap <String, Character> ();
-  /** Set of valid HTML tags. */
-  private final static HashSet <String> HTML_ELEMENTS = new HashSet <String> ();
+  private static final Map <String, Character> decodeMap = new HashMap <String, Character> ();
   /** Set of unsafe HTML tags. */
-  private final static HashSet <String> HTML_UNSAFE = new HashSet <String> ();
+  private static final Set <String> HTML_UNSAFE = new HashSet <String> ();
   /** Set of HTML block level tags. */
-  private final static HashSet <String> HTML_BLOCK_ELEMENTS = new HashSet <String> ();
+  private static final Set <String> HTML_BLOCK_ELEMENTS = new HashSet <String> ();
   /** Set of valid markdown link prefixes. */
-  private final static HashSet <String> LINK_PREFIX = new HashSet <String> ();
+  private static final Set <String> LINK_PREFIX = new HashSet <String> ();
 
   static
   {
-    for (final EHTMLElement h : EHTMLElement.values ())
-    {
-      HTML_ELEMENTS.add (h.name ());
-    }
     for (final EHTMLElement h : UNSAFE_ELEMENTS)
-    {
       HTML_UNSAFE.add (h.name ());
-    }
+
     for (final EHTMLElement h : BLOCK_ELEMENTS)
-    {
       HTML_BLOCK_ELEMENTS.add (h.name ());
-    }
+
     for (int i = 0; i < ENTITY_NAMES.length; i++)
     {
       encodeMap.put (Character.valueOf (ENTITY_CHARS[i]), ENTITY_NAMES[i]);
       decodeMap.put (ENTITY_NAMES[i], Character.valueOf (ENTITY_CHARS[i]));
     }
+
     for (final String element : LINK_PREFIXES)
-    {
       LINK_PREFIX.add (element);
-    }
   }
 
   /** Constructor. (Singleton) */
@@ -626,16 +619,6 @@ final class HTML
   public static boolean isEntity (final String value)
   {
     return decodeMap.containsKey (value);
-  }
-
-  /**
-   * @param value
-   *        String to check.
-   * @return Returns <code>true</code> if the given String is a HTML tag.
-   */
-  public static boolean isHtmlElement (final String value)
-  {
-    return HTML_ELEMENTS.contains (value);
   }
 
   /**

@@ -24,6 +24,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.commons.string.StringHelper;
 
@@ -749,17 +751,18 @@ public class Processor
    */
   private void _initListBlock (final Block root)
   {
-    Line line = root.m_aLines;
-    line = line.m_aNext;
-    while (line != null)
+    Line aLine = root.m_aLines;
+    aLine = aLine.m_aNext;
+    while (aLine != null)
     {
-      final ELineType t = line.getLineType (m_bUseExtensions);
-      if ((t == ELineType.OLIST || t == ELineType.ULIST) ||
-          (!line.m_bIsEmpty && (line.m_bPrevEmpty && line.m_nLeading == 0 && !(t == ELineType.OLIST || t == ELineType.ULIST))))
+      final ELineType t = aLine.getLineType (m_bUseExtensions);
+      if (t == ELineType.OLIST ||
+          t == ELineType.ULIST ||
+          (!aLine.m_bIsEmpty && (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && !(t == ELineType.OLIST || t == ELineType.ULIST))))
       {
-        root.split (line.m_aPrevious).m_eType = EBlockType.LIST_ITEM;
+        root.split (aLine.m_aPrevious).m_eType = EBlockType.LIST_ITEM;
       }
-      line = line.m_aNext;
+      aLine = aLine.m_aNext;
     }
     root.split (root.m_aLineTail).m_eType = EBlockType.LIST_ITEM;
   }
@@ -767,41 +770,41 @@ public class Processor
   /**
    * Recursively process the given Block.
    * 
-   * @param root
+   * @param aRoot
    *        The Block to process.
    * @param listMode
    *        Flag indicating that we're in a list item block.
    */
-  private void _recurse (final Block root, final boolean listMode)
+  private void _recurse (final Block aRoot, final boolean listMode)
   {
     Block block, list;
-    Line line = root.m_aLines;
+    Line aLine = aRoot.m_aLines;
 
     if (listMode)
     {
-      root.removeListIndent (m_bUseExtensions);
-      if (m_bUseExtensions && root.m_aLines != null && root.m_aLines.getLineType (m_bUseExtensions) != ELineType.CODE)
+      aRoot.removeListIndent (m_bUseExtensions);
+      if (m_bUseExtensions && aRoot.m_aLines != null && aRoot.m_aLines.getLineType (m_bUseExtensions) != ELineType.CODE)
       {
-        root.m_sId = root.m_aLines.stripID ();
+        aRoot.m_sId = aRoot.m_aLines.stripID ();
       }
     }
 
-    while (line != null && line.m_bIsEmpty)
-      line = line.m_aNext;
-    if (line == null)
+    while (aLine != null && aLine.m_bIsEmpty)
+      aLine = aLine.m_aNext;
+    if (aLine == null)
       return;
 
-    while (line != null)
+    while (aLine != null)
     {
-      final ELineType type = line.getLineType (m_bUseExtensions);
+      final ELineType type = aLine.getLineType (m_bUseExtensions);
       switch (type)
       {
         case OTHER:
         {
-          final boolean wasEmpty = line.m_bPrevEmpty;
-          while (line != null && !line.m_bIsEmpty)
+          final boolean wasEmpty = aLine.m_bPrevEmpty;
+          while (aLine != null && !aLine.m_bIsEmpty)
           {
-            final ELineType t = line.getLineType (m_bUseExtensions);
+            final ELineType t = aLine.getLineType (m_bUseExtensions);
             if ((listMode || m_bUseExtensions) && (t == ELineType.OLIST || t == ELineType.ULIST))
               break;
             if (m_bUseExtensions && (t == ELineType.CODE || t == ELineType.FENCED_CODE || t == ELineType.PLUGIN))
@@ -813,81 +816,82 @@ public class Processor
                 t == ELineType.BQUOTE ||
                 t == ELineType.XML)
               break;
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
           final EBlockType bt;
-          if (line != null && !line.m_bIsEmpty)
+          if (aLine != null && !aLine.m_bIsEmpty)
           {
             bt = (listMode && !wasEmpty) ? EBlockType.NONE : EBlockType.PARAGRAPH;
-            root.split (line.m_aPrevious).m_eType = bt;
-            root.removeLeadingEmptyLines ();
+            aRoot.split (aLine.m_aPrevious).m_eType = bt;
+            aRoot.removeLeadingEmptyLines ();
           }
           else
           {
-            bt = (listMode && (line == null || !line.m_bIsEmpty) && !wasEmpty) ? EBlockType.NONE : EBlockType.PARAGRAPH;
-            root.split (line == null ? root.m_aLineTail : line).m_eType = bt;
-            root.removeLeadingEmptyLines ();
+            bt = (listMode && (aLine == null || !aLine.m_bIsEmpty) && !wasEmpty) ? EBlockType.NONE
+                                                                                : EBlockType.PARAGRAPH;
+            aRoot.split (aLine == null ? aRoot.m_aLineTail : aLine).m_eType = bt;
+            aRoot.removeLeadingEmptyLines ();
           }
-          line = root.m_aLines;
+          aLine = aRoot.m_aLines;
           break;
         }
         case CODE:
-          while (line != null && (line.m_bIsEmpty || line.m_nLeading > 3))
+          while (aLine != null && (aLine.m_bIsEmpty || aLine.m_nLeading > 3))
           {
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
-          block = root.split (line != null ? line.m_aPrevious : root.m_aLineTail);
+          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           block.m_eType = EBlockType.CODE;
           block.removeSurroundingEmptyLines ();
           break;
         case XML:
-          if (line.m_aPrevious != null)
+          if (aLine.m_aPrevious != null)
           {
             // FIXME ... this looks wrong
-            root.split (line.m_aPrevious);
+            aRoot.split (aLine.m_aPrevious);
           }
-          root.split (line.m_aXmlEndLine).m_eType = EBlockType.XML;
-          root.removeLeadingEmptyLines ();
-          line = root.m_aLines;
+          aRoot.split (aLine.m_aXmlEndLine).m_eType = EBlockType.XML;
+          aRoot.removeLeadingEmptyLines ();
+          aLine = aRoot.m_aLines;
           break;
         case BQUOTE:
-          while (line != null)
+          while (aLine != null)
           {
-            if (!line.m_bIsEmpty &&
-                (line.m_bPrevEmpty && line.m_nLeading == 0 && line.getLineType (m_bUseExtensions) != ELineType.BQUOTE))
+            if (!aLine.m_bIsEmpty &&
+                (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && aLine.getLineType (m_bUseExtensions) != ELineType.BQUOTE))
               break;
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
-          block = root.split (line != null ? line.m_aPrevious : root.m_aLineTail);
+          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           block.m_eType = EBlockType.BLOCKQUOTE;
           block.removeSurroundingEmptyLines ();
           block.removeBlockQuotePrefix ();
           _recurse (block, false);
-          line = root.m_aLines;
+          aLine = aRoot.m_aLines;
           break;
         case HR:
-          if (line.m_aPrevious != null)
+          if (aLine.m_aPrevious != null)
           {
             // FIXME ... this looks wrong
-            root.split (line.m_aPrevious);
+            aRoot.split (aLine.m_aPrevious);
           }
-          root.split (line).m_eType = EBlockType.RULER;
-          root.removeLeadingEmptyLines ();
-          line = root.m_aLines;
+          aRoot.split (aLine).m_eType = EBlockType.RULER;
+          aRoot.removeLeadingEmptyLines ();
+          aLine = aRoot.m_aLines;
           break;
         case FENCED_CODE:
-          line = line.m_aNext;
-          while (line != null)
+          aLine = aLine.m_aNext;
+          while (aLine != null)
           {
-            if (line.getLineType (m_bUseExtensions) == ELineType.FENCED_CODE)
+            if (aLine.getLineType (m_bUseExtensions) == ELineType.FENCED_CODE)
               break;
             // TODO ... is this really necessary? Maybe add a special
             // flag?
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
-          if (line != null)
-            line = line.m_aNext;
-          block = root.split (line != null ? line.m_aPrevious : root.m_aLineTail);
+          if (aLine != null)
+            aLine = aLine.m_aNext;
+          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           block.m_eType = EBlockType.FENCED_CODE;
           block.m_sMeta = Utils.getMetaFromFence (block.m_aLines.m_sValue);
           block.m_aLines.setEmpty ();
@@ -896,18 +900,18 @@ public class Processor
           block.removeSurroundingEmptyLines ();
           break;
         case PLUGIN:
-          line = line.m_aNext;
-          while (line != null)
+          aLine = aLine.m_aNext;
+          while (aLine != null)
           {
-            if (line.getLineType (m_bUseExtensions) == ELineType.PLUGIN)
+            if (aLine.getLineType (m_bUseExtensions) == ELineType.PLUGIN)
               break;
             // TODO ... is this really necessary? Maybe add a special
             // flag?
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
-          if (line != null)
-            line = line.m_aNext;
-          block = root.split (line != null ? line.m_aPrevious : root.m_aLineTail);
+          if (aLine != null)
+            aLine = aLine.m_aNext;
+          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           block.m_eType = EBlockType.PLUGIN;
           block.m_sMeta = Utils.getMetaFromFence (block.m_aLines.m_sValue);
           block.m_aLines.setEmpty ();
@@ -918,35 +922,35 @@ public class Processor
         case HEADLINE:
         case HEADLINE1:
         case HEADLINE2:
-          if (line.m_aPrevious != null)
+          if (aLine.m_aPrevious != null)
           {
-            root.split (line.m_aPrevious);
+            aRoot.split (aLine.m_aPrevious);
           }
           if (type != ELineType.HEADLINE)
           {
-            line.m_aNext.setEmpty ();
+            aLine.m_aNext.setEmpty ();
           }
-          block = root.split (line);
+          block = aRoot.split (aLine);
           block.m_eType = EBlockType.HEADLINE;
           if (type != ELineType.HEADLINE)
             block.m_nHlDepth = type == ELineType.HEADLINE1 ? 1 : 2;
           if (m_bUseExtensions)
             block.m_sId = block.m_aLines.stripID ();
           block.transfromHeadline ();
-          root.removeLeadingEmptyLines ();
-          line = root.m_aLines;
+          aRoot.removeLeadingEmptyLines ();
+          aLine = aRoot.m_aLines;
           break;
         case OLIST:
         case ULIST:
-          while (line != null)
+          while (aLine != null)
           {
-            final ELineType t = line.getLineType (m_bUseExtensions);
-            if (!line.m_bIsEmpty &&
-                (line.m_bPrevEmpty && line.m_nLeading == 0 && !(t == ELineType.OLIST || t == ELineType.ULIST)))
+            final ELineType t = aLine.getLineType (m_bUseExtensions);
+            if (!aLine.m_bIsEmpty &&
+                (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && !(t == ELineType.OLIST || t == ELineType.ULIST)))
               break;
-            line = line.m_aNext;
+            aLine = aLine.m_aNext;
           }
-          list = root.split (line != null ? line.m_aPrevious : root.m_aLineTail);
+          list = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           list.m_eType = type == ELineType.OLIST ? EBlockType.ORDERED_LIST : EBlockType.UNORDERED_LIST;
           list.m_aLines.m_bPrevEmpty = false;
           list.m_aLineTail.m_bNextEmpty = false;
@@ -962,7 +966,7 @@ public class Processor
           list.expandListParagraphs ();
           break;
         default:
-          line = line.m_aNext;
+          aLine = aLine.m_aNext;
           break;
       }
     }
@@ -975,20 +979,21 @@ public class Processor
    * @throws IOException
    *         If an IO error occurred.
    */
+  @Nonnull
   private String _process () throws IOException
   {
-    final StringBuilder out = new StringBuilder ();
     final Block parent = _readLines ();
     parent.removeSurroundingEmptyLines ();
-
     _recurse (parent, false);
+
+    final StringBuilder out = new StringBuilder ();
+
     Block block = parent.m_aBlocks;
     while (block != null)
     {
       m_aEmitter.emit (out, block);
       block = block.m_aNext;
     }
-
     return out.toString ();
   }
 }
