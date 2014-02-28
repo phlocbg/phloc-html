@@ -26,28 +26,32 @@ import java.util.Locale;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class Line
+final class Line
 {
   /** Current cursor position. */
   public int m_nPos;
-  /** Leading and trailing spaces. */
-  public int m_nLeading = 0, m_nTrailing = 0;
+  /** Leading spaces. */
+  public int m_nLeading = 0;
+  /** Trailing spaces. */
+  public int m_nTrailing = 0;
   /** Is this line empty? */
   public boolean m_bIsEmpty = true;
   /** This line's value. */
   public String m_sValue = null;
-  /** Previous and next line. */
-  public Line m_aPrevious = null, m_aNext = null;
-  /** Is previous/next line empty? */
-  public boolean m_bPrevEmpty, m_bNextEmpty;
+  /** Previous line. */
+  public Line m_aPrevious = null;
+  /** Next line. */
+  public Line m_aNext = null;
+  /** Is previous line empty? */
+  public boolean m_bPrevEmpty;
+  /** Is next line empty? */
+  public boolean m_bNextEmpty;
   /** Final line of a XML block. */
   public Line m_aXmlEndLine;
 
   /** Constructor. */
   public Line ()
-  {
-    //
-  }
+  {}
 
   /**
    * Calculates leading and trailing spaces. Also sets empty if needed.
@@ -81,9 +85,7 @@ class Line
       m_nLeading++;
 
     if (m_nLeading == m_sValue.length ())
-    {
       setEmpty ();
-    }
   }
 
   /**
@@ -161,7 +163,8 @@ class Line
   public void setEmpty ()
   {
     m_sValue = "";
-    m_nLeading = m_nTrailing = 0;
+    m_nLeading = 0;
+    m_nTrailing = 0;
     m_bIsEmpty = true;
     if (m_aPrevious != null)
       m_aPrevious.m_bNextEmpty = true;
@@ -176,7 +179,7 @@ class Line
    *        The char to count.
    * @return A value > 0 if this line only consists of 'ch' end spaces.
    */
-  private int _countChars (final char ch)
+  private int _countConsecutiveChars (final char ch)
   {
     int count = 0;
     for (int i = 0; i < m_sValue.length (); i++)
@@ -259,7 +262,7 @@ class Line
     if (m_sValue.length () - m_nLeading - m_nTrailing > 2 &&
         (m_sValue.charAt (m_nLeading) == '*' || m_sValue.charAt (m_nLeading) == '-' || m_sValue.charAt (m_nLeading) == '_'))
     {
-      if (_countChars (m_sValue.charAt (m_nLeading)) >= 3)
+      if (_countConsecutiveChars (m_sValue.charAt (m_nLeading)) >= 3)
         return ELineType.HR;
     }
 
@@ -291,9 +294,9 @@ class Line
 
     if (m_aNext != null && !m_aNext.m_bIsEmpty)
     {
-      if ((m_aNext.m_sValue.charAt (0) == '-') && (m_aNext._countChars ('-') > 0))
+      if ((m_aNext.m_sValue.charAt (0) == '-') && (m_aNext._countConsecutiveChars ('-') > 0))
         return ELineType.HEADLINE2;
-      if ((m_aNext.m_sValue.charAt (0) == '=') && (m_aNext._countChars ('=') > 0))
+      if ((m_aNext.m_sValue.charAt (0) == '=') && (m_aNext._countConsecutiveChars ('=') > 0))
         return ELineType.HEADLINE1;
     }
 

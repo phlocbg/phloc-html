@@ -20,7 +20,7 @@ package com.phloc.html.markdown;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class LinkRef
+final class LinkRef
 {
   /** The link. */
   public final String m_sLink;
@@ -44,7 +44,6 @@ class LinkRef
     m_bIsAbbrev = isAbbrev;
   }
 
-  /** @see java.lang.Object#toString() */
   @Override
   public String toString ()
   {

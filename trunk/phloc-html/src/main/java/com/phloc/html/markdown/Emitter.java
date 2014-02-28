@@ -31,7 +31,7 @@ import com.phloc.html.markdown.ext.AbstractPlugin;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class Emitter
+final class Emitter
 {
   /** Link references. */
   private final Map <String, LinkRef> m_aLinkRefs = new HashMap <String, LinkRef> ();
@@ -270,17 +270,12 @@ class Emitter
     if (pos < start)
     {
       final LinkRef lr = m_aLinkRefs.get (name.toLowerCase (Locale.US));
-      if (lr != null)
-      {
-        isAbbrev = lr.m_bIsAbbrev;
-        link = lr.m_sLink;
-        comment = lr.m_sTitle;
-        pos = oldPos;
-      }
-      else
-      {
+      if (lr == null)
         return -1;
-      }
+      isAbbrev = lr.m_bIsAbbrev;
+      link = lr.m_sLink;
+      comment = lr.m_sTitle;
+      pos = oldPos;
     }
     else
       if (in.charAt (pos) == '(')

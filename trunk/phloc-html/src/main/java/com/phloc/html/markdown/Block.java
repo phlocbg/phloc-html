@@ -20,14 +20,18 @@ package com.phloc.html.markdown;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-class Block
+final class Block
 {
   /** This block's type. */
   public EBlockType m_eType = EBlockType.NONE;
-  /** Head and tail of linked lines. */
-  public Line m_aLines = null, m_aLineTail = null;
-  /** Head and tail of child blocks. */
-  public Block m_aBlocks = null, m_aBlockTail = null;
+  /** Head of linked lines. */
+  public Line m_aLines = null;
+  /** Tail of linked lines. */
+  public Line m_aLineTail = null;
+  /** Head of child blocks. */
+  public Block m_aBlocks = null;
+  /** Tail of child blocks. */
+  public Block m_aBlockTail = null;
   /** Next block. */
   public Block m_aNext = null;
   /** Depth of headline BlockType. */
@@ -39,9 +43,7 @@ class Block
 
   /** Constructor. */
   public Block ()
-  {
-    //
-  }
+  {}
 
   /**
    * @return <code>true</code> if this block contains lines.
@@ -71,30 +73,30 @@ class Block
     if (m_nHlDepth > 0)
       return;
     int level = 0;
-    final Line line = m_aLines;
-    if (line.m_bIsEmpty)
+    final Line aLine = m_aLines;
+    if (aLine.m_bIsEmpty)
       return;
-    int start = line.m_nLeading;
-    while (start < line.m_sValue.length () && line.m_sValue.charAt (start) == '#')
+    int start = aLine.m_nLeading;
+    while (start < aLine.m_sValue.length () && aLine.m_sValue.charAt (start) == '#')
     {
       level++;
       start++;
     }
-    while (start < line.m_sValue.length () && line.m_sValue.charAt (start) == ' ')
+    while (start < aLine.m_sValue.length () && aLine.m_sValue.charAt (start) == ' ')
       start++;
-    if (start >= line.m_sValue.length ())
+    if (start >= aLine.m_sValue.length ())
     {
-      line.setEmpty ();
+      aLine.setEmpty ();
     }
     else
     {
-      int end = line.m_sValue.length () - line.m_nTrailing - 1;
-      while (line.m_sValue.charAt (end) == '#')
+      int end = aLine.m_sValue.length () - aLine.m_nTrailing - 1;
+      while (aLine.m_sValue.charAt (end) == '#')
         end--;
-      while (line.m_sValue.charAt (end) == ' ')
+      while (aLine.m_sValue.charAt (end) == ' ')
         end--;
-      line.m_sValue = line.m_sValue.substring (start, end + 1);
-      line.m_nLeading = line.m_nTrailing = 0;
+      aLine.m_sValue = aLine.m_sValue.substring (start, end + 1);
+      aLine.m_nLeading = aLine.m_nTrailing = 0;
     }
     m_nHlDepth = Math.min (level, 6);
   }
@@ -275,9 +277,7 @@ class Block
         while (inner != null && !hasParagraph)
         {
           if (inner.m_eType == EBlockType.PARAGRAPH)
-          {
             hasParagraph = true;
-          }
           inner = inner.m_aNext;
         }
       }
@@ -294,9 +294,7 @@ class Block
           while (inner != null)
           {
             if (inner.m_eType == EBlockType.NONE)
-            {
               inner.m_eType = EBlockType.PARAGRAPH;
-            }
             inner = inner.m_aNext;
           }
         }
