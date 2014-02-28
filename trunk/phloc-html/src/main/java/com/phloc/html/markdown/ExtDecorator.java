@@ -18,30 +18,23 @@ public class ExtDecorator extends DefaultDecorator
 
   public ExtDecorator addStyleClass (final String styleClass, final String... tags)
   {
-    for (final String tag : tags)
-      m_aAttributes.put (tag, "class", styleClass);
-    return this;
+    return addHtmlAttribute ("class", styleClass, tags);
   }
 
   public ExtDecorator useCompactStyle ()
   {
-    m_aAttributes.put ("p", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("a", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h1", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h2", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h3", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h4", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h5", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("h6", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("ul", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("ol", "style", "font-size:100%; padding:0px; margin:0px;");
-    m_aAttributes.put ("li", "style", "font-size:100%; padding:0px; margin:0px;");
+    m_aAttributes.put ("p", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("a", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h1", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h2", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h3", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h4", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h5", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("h6", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("ul", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("ol", "style", "font-size:100%; padding:0; margin:0;");
+    m_aAttributes.put ("li", "style", "font-size:100%; padding:0; margin:0;");
     return this;
-  }
-
-  private boolean _open (final StringBuilder out, final String tagName)
-  {
-    return _open (out, tagName, true);
   }
 
   private boolean _open (final StringBuilder out, final String tagName, final boolean closed)
@@ -60,8 +53,7 @@ public class ExtDecorator extends DefaultDecorator
         out.append (key);
         out.append ("=\"");
         out.append (value);
-        out.append ("\"");
-        out.append (" ");
+        out.append ("\" ");
       }
       if (closed)
       {
@@ -75,28 +67,28 @@ public class ExtDecorator extends DefaultDecorator
   @Override
   public void openParagraph (final StringBuilder out)
   {
-    if (!_open (out, "p"))
+    if (!_open (out, "p", true))
       super.openParagraph (out);
   }
 
   @Override
   public void openBlockquote (final StringBuilder out)
   {
-    if (!_open (out, "blockquote"))
+    if (!_open (out, "blockquote", true))
       super.openBlockquote (out);
   }
 
   @Override
   public void openCodeBlock (final StringBuilder out)
   {
-    if (!_open (out, "pre"))
+    if (!_open (out, "pre", true))
       super.openCodeBlock (out);
   }
 
   @Override
   public void openCodeSpan (final StringBuilder out)
   {
-    if (!_open (out, "code"))
+    if (!_open (out, "code", true))
       super.openCodeSpan (out);
   }
 
@@ -110,42 +102,42 @@ public class ExtDecorator extends DefaultDecorator
   @Override
   public void openStrong (final StringBuilder out)
   {
-    if (!_open (out, "strong"))
+    if (!_open (out, "strong", true))
       super.openStrong (out);
   }
 
   @Override
   public void openStrike (final StringBuilder out)
   {
-    if (!_open (out, "s"))
+    if (!_open (out, "s", true))
       super.openStrike (out);
   }
 
   @Override
   public void openEmphasis (final StringBuilder out)
   {
-    if (!_open (out, "em"))
+    if (!_open (out, "em", true))
       super.openEmphasis (out);
   }
 
   @Override
   public void openSuper (final StringBuilder out)
   {
-    if (!_open (out, "super"))
+    if (!_open (out, "super", true))
       super.openSuper (out);
   }
 
   @Override
   public void openOrderedList (final StringBuilder out)
   {
-    if (!_open (out, "ol"))
+    if (!_open (out, "ol", true))
       super.openOrderedList (out);
   }
 
   @Override
   public void openUnorderedList (final StringBuilder out)
   {
-    if (!_open (out, "ul"))
+    if (!_open (out, "ul", true))
       super.openUnorderedList (out);
   }
 
@@ -160,9 +152,7 @@ public class ExtDecorator extends DefaultDecorator
   public void horizontalRuler (final StringBuilder out)
   {
     if (_open (out, "hr", false))
-    {
       out.append ("/>");
-    }
     else
     {
       super.horizontalRuler (out);
@@ -196,7 +186,7 @@ public class ExtDecorator extends DefaultDecorator
   // @Override
   // public void openParagraph(StringBuilder out) {
   // if(useCompactStyle) {
-  // out.append("<p style=\"font-size:100%; padding:0px; margin:0px;\">");
+  // out.append("<p style=\"font-size:100%; padding:0; margin:0;\">");
   // }
   // else {
   // super.openParagraph(out);
@@ -207,7 +197,7 @@ public class ExtDecorator extends DefaultDecorator
   // public void openHeadline(StringBuilder out, int level) {
   // super.openHeadline(out, level);
   // if(useCompactStyle) {
-  // out.append(" style=\"font-size:100%; padding:0px; margin:0px;\"");
+  // out.append(" style=\"font-size:100%; padding:0; margin:0;\"");
   // }
   // }
   //

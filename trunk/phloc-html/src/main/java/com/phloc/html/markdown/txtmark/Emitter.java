@@ -358,7 +358,7 @@ class Emitter
         if (!m_bUseExtensions)
           return -1;
         out.append ("<abbr title=\"");
-        Utils.appendValue (out, comment, 0, comment.length ());
+        Utils.appendValue (out, comment);
         out.append ("\">");
         _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
         out.append ("</abbr>");
@@ -367,12 +367,12 @@ class Emitter
       {
         m_aConfig.m_aDecorator.openLink (out);
         out.append (" href=\"");
-        Utils.appendValue (out, link, 0, link.length ());
+        Utils.appendValue (out, link);
         out.append ('"');
         if (comment != null)
         {
           out.append (" title=\"");
-          Utils.appendValue (out, comment, 0, comment.length ());
+          Utils.appendValue (out, comment);
           out.append ('"');
         }
         out.append ('>');
@@ -384,14 +384,14 @@ class Emitter
     {
       m_aConfig.m_aDecorator.openImage (out);
       out.append (" src=\"");
-      Utils.appendValue (out, link, 0, link.length ());
+      Utils.appendValue (out, link);
       out.append ("\" alt=\"");
-      Utils.appendValue (out, name, 0, name.length ());
+      Utils.appendValue (out, name);
       out.append ('"');
       if (comment != null)
       {
         out.append (" title=\"");
-        Utils.appendValue (out, comment, 0, comment.length ());
+        Utils.appendValue (out, comment);
         out.append ('"');
       }
       out.append (" />");
@@ -428,9 +428,9 @@ class Emitter
         final String link = temp.toString ();
         m_aConfig.m_aDecorator.openLink (out);
         out.append (" href=\"");
-        Utils.appendValue (out, link, 0, link.length ());
+        Utils.appendValue (out, link);
         out.append ("\">");
-        Utils.appendValue (out, link, 0, link.length ());
+        Utils.appendValue (out, link);
         out.append ("</a>");
         return pos;
       }
@@ -557,10 +557,11 @@ class Emitter
     while (pos < in.length ())
     {
       final EMarkToken mt = _getToken (in, pos);
-      if (token != EMarkToken.NONE &&
-          (mt == token || token == EMarkToken.EM_STAR && mt == EMarkToken.STRONG_STAR || token == EMarkToken.EM_UNDERSCORE &&
-                                                                                         mt == EMarkToken.STRONG_UNDERSCORE))
-        return pos;
+      if (token != EMarkToken.NONE)
+        if (mt == token ||
+            (token == EMarkToken.EM_STAR && mt == EMarkToken.STRONG_STAR) ||
+            (token == EMarkToken.EM_UNDERSCORE && mt == EMarkToken.STRONG_UNDERSCORE))
+          return pos;
 
       switch (mt)
       {
@@ -742,7 +743,8 @@ class Emitter
           break;
         case ESCAPE:
           pos++;
-          //$FALL-THROUGH$
+          out.append (in.charAt (pos));
+          break;
         default:
           out.append (in.charAt (pos));
           break;

@@ -384,6 +384,20 @@ final class Utils
    *        The StringBuilder to write to.
    * @param in
    *        Input String.
+   */
+  public static void appendValue (final StringBuilder out, final String in)
+  {
+    appendValue (out, in, 0, in.length ());
+  }
+
+  /**
+   * Appends the given string encoding special HTML characters (used in HTML
+   * attribute values).
+   * 
+   * @param out
+   *        The StringBuilder to write to.
+   * @param in
+   *        Input String.
    * @param start
    *        Input String starting position.
    * @param end
@@ -426,7 +440,7 @@ final class Utils
    * @param value
    *        The character.
    */
-  public static void appendDecEntity (final StringBuilder out, final char value)
+  private static void _appendDecEntity (final StringBuilder out, final char value)
   {
     out.append ("&#");
     out.append ((int) value);
@@ -441,7 +455,7 @@ final class Utils
    * @param value
    *        The character.
    */
-  public static void appendHexEntity (final StringBuilder out, final char value)
+  private static void _appendHexEntity (final StringBuilder out, final char value)
   {
     out.append ("&#x");
     out.append (Integer.toHexString (value));
@@ -475,39 +489,20 @@ final class Utils
         case '\'':
         case '@':
           if (r < 512)
-            appendDecEntity (out, c);
+            _appendDecEntity (out, c);
           else
-            appendHexEntity (out, c);
+            _appendHexEntity (out, c);
           break;
         default:
           if (r < 32)
             out.append (c);
           else
             if (r < 520)
-              appendDecEntity (out, c);
+              _appendDecEntity (out, c);
             else
-              appendHexEntity (out, c);
+              _appendHexEntity (out, c);
           break;
       }
-    }
-  }
-
-  /**
-   * Extracts the tag from an XML element.
-   * 
-   * @param out
-   *        The StringBuilder to write to.
-   * @param in
-   *        Input StringBuilder.
-   */
-  public static void getXMLTag (final StringBuilder out, final StringBuilder in)
-  {
-    int pos = 1;
-    if (in.charAt (1) == '/')
-      pos++;
-    while (Character.isLetterOrDigit (in.charAt (pos)))
-    {
-      out.append (in.charAt (pos++));
     }
   }
 
@@ -608,39 +603,6 @@ final class Utils
       return -1;
     }
     return -1;
-  }
-
-  /**
-   * Appends the given string to the given StringBuilder, replacing '&amp;',
-   * '&lt;' and '&gt;' by their respective HTML entities.
-   * 
-   * @param out
-   *        The StringBuilder to append to.
-   * @param value
-   *        The string to append.
-   * @param offset
-   *        The character offset into value from where to start
-   */
-  public static void codeEncode (final StringBuilder out, final String value, final int offset)
-  {
-    for (int i = offset; i < value.length (); i++)
-    {
-      final char c = value.charAt (i);
-      switch (c)
-      {
-        case '&':
-          out.append ("&amp;");
-          break;
-        case '<':
-          out.append ("&lt;");
-          break;
-        case '>':
-          out.append ("&gt;");
-          break;
-        default:
-          out.append (c);
-      }
-    }
   }
 
   /**
