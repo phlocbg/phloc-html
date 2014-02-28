@@ -30,7 +30,7 @@ public class IncludePlugin extends AbstractPlugin
     final String src = params.get ("src");
     try
     {
-      final String content2 = getContent (src);
+      final String content2 = _getContent (src);
       if (content2 != null)
       {
         out.append (content2);
@@ -42,7 +42,7 @@ public class IncludePlugin extends AbstractPlugin
     }
   }
 
-  private String getContent (final String src) throws IOException
+  private String _getContent (final String src) throws IOException
   {
     final URL url = new URL (new URL ("file:"), src);
 

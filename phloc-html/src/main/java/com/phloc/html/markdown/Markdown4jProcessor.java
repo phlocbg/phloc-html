@@ -16,18 +16,13 @@ public class Markdown4jProcessor
 
   public Markdown4jProcessor ()
   {
-    m_aBuilder = builder ();
-  }
-
-  private Builder builder ()
-  {
     m_aDecorator = new ExtDecorator ();
-    return Configuration.builder ()
-                        .forceExtentedProfile ()
-                        .registerPlugins (new YumlPlugin (), new WebSequencePlugin (), new IncludePlugin ())
-                        .convertNewline2Br ()
-                        .setDecorator (m_aDecorator)
-                        .setCodeBlockEmitter (new CodeBlockEmitter ());
+    m_aBuilder = Configuration.builder ()
+                              .forceExtentedProfile ()
+                              .registerPlugins (new YumlPlugin (), new WebSequencePlugin (), new IncludePlugin ())
+                              .convertNewline2Br ()
+                              .setDecorator (m_aDecorator)
+                              .setCodeBlockEmitter (new CodeBlockEmitter ());
   }
 
   public Markdown4jProcessor registerPlugins (final AbstractPlugin... plugins)

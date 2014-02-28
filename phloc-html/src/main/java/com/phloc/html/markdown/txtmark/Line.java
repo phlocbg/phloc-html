@@ -175,7 +175,7 @@ class Line
    *        The char to count.
    * @return A value > 0 if this line only consists of 'ch' end spaces.
    */
-  private int countChars (final char ch)
+  private int _countChars (final char ch)
   {
     int count = 0;
     for (int i = 0; i < m_sValue.length (); i++)
@@ -202,7 +202,7 @@ class Line
    * @return Number of characters found.
    * @since 0.7
    */
-  private int countCharsStart (final char ch)
+  private int _countCharsStart (final char ch)
   {
     int count = 0;
     for (int i = 0; i < m_sValue.length (); i++)
@@ -244,13 +244,13 @@ class Line
       if (m_sValue.length () - m_nLeading - m_nTrailing > 2 &&
           (m_sValue.charAt (m_nLeading) == '`' || m_sValue.charAt (m_nLeading) == '~' || m_sValue.charAt (m_nLeading) == '%'))
       {
-        if (countCharsStart ('`') >= 3)
+        if (_countCharsStart ('`') >= 3)
           return ELineType.FENCED_CODE;
 
-        if (countCharsStart ('~') >= 3)
+        if (_countCharsStart ('~') >= 3)
           return ELineType.FENCED_CODE;
 
-        if (countCharsStart ('%') >= 3)
+        if (_countCharsStart ('%') >= 3)
           return ELineType.PLUGIN;
       }
     }
@@ -258,7 +258,7 @@ class Line
     if (m_sValue.length () - m_nLeading - m_nTrailing > 2 &&
         (m_sValue.charAt (m_nLeading) == '*' || m_sValue.charAt (m_nLeading) == '-' || m_sValue.charAt (m_nLeading) == '_'))
     {
-      if (countChars (m_sValue.charAt (m_nLeading)) >= 3)
+      if (_countChars (m_sValue.charAt (m_nLeading)) >= 3)
         return ELineType.HR;
     }
 
@@ -284,15 +284,15 @@ class Line
 
     if (m_sValue.charAt (m_nLeading) == '<')
     {
-      if (checkHTML ())
+      if (_checkHTML ())
         return ELineType.XML;
     }
 
     if (m_aNext != null && !m_aNext.m_bIsEmpty)
     {
-      if ((m_aNext.m_sValue.charAt (0) == '-') && (m_aNext.countChars ('-') > 0))
+      if ((m_aNext.m_sValue.charAt (0) == '-') && (m_aNext._countChars ('-') > 0))
         return ELineType.HEADLINE2;
-      if ((m_aNext.m_sValue.charAt (0) == '=') && (m_aNext.countChars ('=') > 0))
+      if ((m_aNext.m_sValue.charAt (0) == '=') && (m_aNext._countChars ('=') > 0))
         return ELineType.HEADLINE1;
     }
 
@@ -308,7 +308,7 @@ class Line
    *        The starting position.
    * @return The new position or -1 if it is no valid comment.
    */
-  private int readXMLComment (final Line firstLine, final int start)
+  private int _readXMLComment (final Line firstLine, final int start)
   {
     Line line = firstLine;
     if (start + 3 < line.m_sValue.length ())
@@ -438,14 +438,14 @@ class Line
    * 
    * @return <code>true</code> if it is a valid block.
    */
-  private boolean checkHTML ()
+  private boolean _checkHTML ()
   {
     final LinkedList <String> tags = new LinkedList <String> ();
     final StringBuilder temp = new StringBuilder ();
     int pos = m_nLeading;
     if (m_sValue.charAt (m_nLeading + 1) == '!')
     {
-      if (readXMLComment (this, m_nLeading) > 0)
+      if (_readXMLComment (this, m_nLeading) > 0)
         return true;
     }
     pos = Utils.readXML (temp, m_sValue, m_nLeading, false);

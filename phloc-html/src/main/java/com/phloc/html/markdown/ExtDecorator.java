@@ -39,12 +39,12 @@ public class ExtDecorator extends DefaultDecorator
     return this;
   }
 
-  private boolean open (final StringBuilder out, final String tagName)
+  private boolean _open (final StringBuilder out, final String tagName)
   {
-    return open (out, tagName, true);
+    return _open (out, tagName, true);
   }
 
-  private boolean open (final StringBuilder out, final String tagName, final boolean closed)
+  private boolean _open (final StringBuilder out, final String tagName, final boolean closed)
   {
     final Map <String, String> atts = m_aAttributes.get (tagName);
     if (atts != null)
@@ -75,91 +75,91 @@ public class ExtDecorator extends DefaultDecorator
   @Override
   public void openParagraph (final StringBuilder out)
   {
-    if (!open (out, "p"))
+    if (!_open (out, "p"))
       super.openParagraph (out);
   }
 
   @Override
   public void openBlockquote (final StringBuilder out)
   {
-    if (!open (out, "blockquote"))
+    if (!_open (out, "blockquote"))
       super.openBlockquote (out);
   }
 
   @Override
   public void openCodeBlock (final StringBuilder out)
   {
-    if (!open (out, "pre"))
+    if (!_open (out, "pre"))
       super.openCodeBlock (out);
   }
 
   @Override
   public void openCodeSpan (final StringBuilder out)
   {
-    if (!open (out, "code"))
+    if (!_open (out, "code"))
       super.openCodeSpan (out);
   }
 
   @Override
   public void openHeadline (final StringBuilder out, final int level)
   {
-    if (!open (out, "h" + level, false))
+    if (!_open (out, "h" + level, false))
       super.openHeadline (out, level);
   }
 
   @Override
   public void openStrong (final StringBuilder out)
   {
-    if (!open (out, "strong"))
+    if (!_open (out, "strong"))
       super.openStrong (out);
   }
 
   @Override
   public void openStrike (final StringBuilder out)
   {
-    if (!open (out, "s"))
+    if (!_open (out, "s"))
       super.openStrike (out);
   }
 
   @Override
   public void openEmphasis (final StringBuilder out)
   {
-    if (!open (out, "em"))
+    if (!_open (out, "em"))
       super.openEmphasis (out);
   }
 
   @Override
   public void openSuper (final StringBuilder out)
   {
-    if (!open (out, "super"))
+    if (!_open (out, "super"))
       super.openSuper (out);
   }
 
   @Override
   public void openOrderedList (final StringBuilder out)
   {
-    if (!open (out, "ol"))
+    if (!_open (out, "ol"))
       super.openOrderedList (out);
   }
 
   @Override
   public void openUnorderedList (final StringBuilder out)
   {
-    if (!open (out, "ul"))
+    if (!_open (out, "ul"))
       super.openUnorderedList (out);
   }
 
   @Override
   public void openListItem (final StringBuilder out)
   {
-    if (!open (out, "li", false))
+    if (!_open (out, "li", false))
       super.openListItem (out);
   }
 
   @Override
   public void horizontalRuler (final StringBuilder out)
   {
-    if (open (out, "hr", false))
+    if (_open (out, "hr", false))
     {
       out.append ("/>");
     }
@@ -172,14 +172,14 @@ public class ExtDecorator extends DefaultDecorator
   @Override
   public void openLink (final StringBuilder out)
   {
-    if (!open (out, "a", false))
+    if (!_open (out, "a", false))
       super.openLink (out);
   }
 
   @Override
   public void openImage (final StringBuilder out)
   {
-    if (!open (out, "img", false))
+    if (!_open (out, "img", false))
       super.openImage (out);
   }
 
