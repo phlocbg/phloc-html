@@ -29,6 +29,7 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.html.hc.conversion.HCSettings;
 
 /**
  * Markdown processor class.
@@ -987,7 +988,7 @@ public class Processor
     parent.removeSurroundingEmptyLines ();
     _recurse (parent, false);
 
-    final StringBuilder out = new StringBuilder ();
+    final HCStack out = new HCStack ();
 
     Block block = parent.m_aBlocks;
     while (block != null)
@@ -995,6 +996,6 @@ public class Processor
       m_aEmitter.emit (out, block);
       block = block.m_aNext;
     }
-    return out.toString ();
+    return HCSettings.getAsHTMLStringWithoutNamespaces (out.getRoot (), false);
   }
 }

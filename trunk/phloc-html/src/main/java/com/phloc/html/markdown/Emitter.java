@@ -24,7 +24,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.phloc.commons.regex.RegExPool;
-import com.phloc.html.markdown.ext.AbstractPlugin;
+import com.phloc.html.entities.EHTMLEntity;
+import com.phloc.html.entities.HTMLEntity;
+import com.phloc.html.hc.IHCElement;
+import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.HCAbbr;
+import com.phloc.html.hc.html.HCCode;
+import com.phloc.html.hc.html.HCImg;
+import com.phloc.html.hc.impl.HCEntityNode;
+import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Emitter class responsible for generating HTML output.
@@ -82,7 +90,7 @@ final class Emitter
    * @param root
    *        The Block to process.
    */
-  public void emit (final StringBuilder out, final Block root)
+  public void emit (final HCStack out, final Block root)
   {
     root.removeSurroundingEmptyLines ();
 
@@ -97,12 +105,7 @@ final class Emitter
       case HEADLINE:
         m_aConfig.m_aDecorator.openHeadline (out, root.m_nHlDepth);
         if (m_bUseExtensions && root.m_sId != null)
-        {
-          out.append (" id=\"");
-          Utils.appendCode (out, root.m_sId, 0, root.m_sId.length ());
-          out.append ('"');
-        }
-        out.append ('>');
+          ((IHCElement <?>) out.peek ()).setID (root.m_sId);
         break;
       case PARAGRAPH:
         m_aConfig.m_aDecorator.openParagraph (out);
@@ -124,12 +127,7 @@ final class Emitter
       case LIST_ITEM:
         m_aConfig.m_aDecorator.openListItem (out);
         if (m_bUseExtensions && root.m_sId != null)
-        {
-          out.append (" id=\"");
-          Utils.appendCode (out, root.m_sId, 0, root.m_sId.length ());
-          out.append ('"');
-        }
-        out.append ('>');
+          ((IHCElement <?>) out.peek ()).setID (root.m_sId);
         break;
       default:
         break;
@@ -191,7 +189,7 @@ final class Emitter
    * @param block
    *        The Block to process.
    */
-  private void _emitLines (final StringBuilder out, final Block block)
+  private void _emitLines (final HCStack out, final Block block)
   {
     switch (block.m_eType)
     {
@@ -252,7 +250,7 @@ final class Emitter
    *        Either LINK or IMAGE.
    * @return The new position or -1 if there is no valid markdown link.
    */
-  private int _checkLink (final StringBuilder out, final String in, final int start, final EMarkToken token)
+  private int _checkLink (final HCStack out, final String in, final int start, final EMarkToken token)
   {
     boolean isAbbrev = false;
     int pos = start + (token == EMarkToken.LINK ? 1 : 2);
@@ -354,44 +352,27 @@ final class Emitter
       {
         if (!m_bUseExtensions)
           return -1;
-        out.append ("<abbr title=\"");
-        Utils.appendValue (out, comment);
-        out.append ("\">");
+        out.push (new HCAbbr ().setTitle (comment));
         _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
-        out.append ("</abbr>");
+        out.pop ();
       }
       else
       {
-        m_aConfig.m_aDecorator.openLink (out);
-        out.append (" href=\"");
-        Utils.appendValue (out, link);
-        out.append ('"');
+        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
+        aLink.setHref (link);
         if (comment != null)
-        {
-          out.append (" title=\"");
-          Utils.appendValue (out, comment);
-          out.append ('"');
-        }
-        out.append ('>');
+          aLink.setTitle (comment);
         _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
-        out.append ("</a>");
+        m_aConfig.m_aDecorator.closeLink (out);
       }
     }
     else
     {
-      m_aConfig.m_aDecorator.openImage (out);
-      out.append (" src=\"");
-      Utils.appendValue (out, link);
-      out.append ("\" alt=\"");
-      Utils.appendValue (out, name);
-      out.append ('"');
+      final HCImg aImg = m_aConfig.m_aDecorator.openImage (out);
+      aImg.setSrc (link);
+      aImg.setAlt (name);
       if (comment != null)
-      {
-        out.append (" title=\"");
-        Utils.appendValue (out, comment);
-        out.append ('"');
-      }
-      out.append (" />");
+        aImg.setTitle (comment);
     }
 
     return pos;
@@ -409,7 +390,7 @@ final class Emitter
    *        Starting position.
    * @return The new position or -1 if nothing valid has been found.
    */
-  private int _checkHtml (final StringBuilder out, final String in, final int start)
+  private int _checkHtml (final HCStack out, final String in, final int start)
   {
     final StringBuilder temp = new StringBuilder ();
     int pos;
@@ -423,12 +404,9 @@ final class Emitter
       if (pos != -1)
       {
         final String link = temp.toString ();
-        m_aConfig.m_aDecorator.openLink (out);
-        out.append (" href=\"");
-        Utils.appendValue (out, link);
-        out.append ("\">");
-        Utils.appendValue (out, link);
-        out.append ("</a>");
+        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
+        aLink.setHref (link).addChild (link);
+        m_aConfig.m_aDecorator.closeLink (out);
         return pos;
       }
     }
@@ -442,27 +420,21 @@ final class Emitter
       if (pos != -1)
       {
         final String link = temp.toString ();
-        m_aConfig.m_aDecorator.openLink (out);
-        out.append (" href=\"");
+        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
 
-        // address auto links
         if (link.startsWith ("@"))
         {
+          // address auto links
           final String slink = link.substring (1);
           final String url = "https://maps.google.com/maps?q=" + slink.replace (' ', '+');
-          out.append (url);
-          out.append ("\">");
-          out.append (slink);
+          aLink.setHref (url).addChild (slink);
         }
-        // mailto auto links
         else
         {
-          Utils.appendMailto (out, "mailto:", 0, 7);
-          Utils.appendMailto (out, link, 0, link.length ());
-          out.append ("\">");
-          Utils.appendMailto (out, link, 0, link.length ());
+          // mailto auto links
+          aLink.setHref ("mailto:" + link).addChild (link);
         }
-        out.append ("</a>");
+        m_aConfig.m_aDecorator.closeLink (out);
         return pos;
       }
     }
@@ -471,7 +443,17 @@ final class Emitter
     if (start + 2 < in.length ())
     {
       temp.setLength (0);
-      return Utils.readXML (out, in, start, m_aConfig.m_bSafeMode);
+      final int t = Utils.readXML (temp, in, start, m_aConfig.m_bSafeMode);
+      // XXX Is this correct??? Was return t before
+      if (t != -1)
+      {
+        out.append (temp.toString ());
+        pos = t;
+      }
+      else
+      {
+        out.append (in.charAt (pos));
+      }
     }
 
     return -1;
@@ -547,10 +529,11 @@ final class Emitter
    * @return The position of the matching Token or -1 if token was NONE or no
    *         Token could be found.
    */
-  private int _recursiveEmitLine (final StringBuilder out, final String in, final int start, final EMarkToken token)
+  private int _recursiveEmitLine (final HCStack out, final String in, final int start, final EMarkToken token)
   {
     int pos = start, a, b;
-    final StringBuilder temp = new StringBuilder ();
+    final HCStack temp = new HCStack ();
+    final StringBuilder tempSB = new StringBuilder ();
     while (pos < in.length ())
     {
       final EMarkToken mt = _getToken (in, pos);
@@ -564,7 +547,7 @@ final class Emitter
       {
         case IMAGE:
         case LINK:
-          temp.setLength (0);
+          temp.reset ();
           b = _checkLink (temp, in, pos, mt);
           if (b > 0)
           {
@@ -578,7 +561,7 @@ final class Emitter
           break;
         case EM_STAR:
         case EM_UNDERSCORE:
-          temp.setLength (0);
+          temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
@@ -594,7 +577,7 @@ final class Emitter
           break;
         case STRONG_STAR:
         case STRONG_UNDERSCORE:
-          temp.setLength (0);
+          temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
@@ -609,7 +592,7 @@ final class Emitter
           }
           break;
         case STRIKE:
-          temp.setLength (0);
+          temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
@@ -624,7 +607,7 @@ final class Emitter
           }
           break;
         case SUPER:
-          temp.setLength (0);
+          temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
@@ -651,8 +634,8 @@ final class Emitter
             {
               while (in.charAt (b - 1) == ' ')
                 b--;
-              m_aConfig.m_aDecorator.openCodeSpan (out);
-              Utils.appendCode (out, in, a, b);
+              final HCCode aCode = m_aConfig.m_aDecorator.openCodeSpan (out);
+              aCode.addChild (new HCTextNode (in, a, b));
               m_aConfig.m_aDecorator.closeCodeSpan (out);
             }
           }
@@ -662,7 +645,7 @@ final class Emitter
           }
           break;
         case HTML:
-          temp.setLength (0);
+          temp.reset ();
           b = _checkHtml (temp, in, pos);
           if (b > 0)
           {
@@ -671,24 +654,24 @@ final class Emitter
           }
           else
           {
-            out.append ("&lt;");
+            out.append ('<');
           }
           break;
         case ENTITY:
-          temp.setLength (0);
-          b = _checkEntity (temp, in, pos);
+          tempSB.setLength (0);
+          b = _checkEntity (tempSB, in, pos);
           if (b > 0)
           {
-            out.append (temp);
+            out.append (new HCEntityNode (new HTMLEntity (tempSB.substring (1, tempSB.length () - 1)), " "));
             pos = b;
           }
           else
           {
-            out.append ("&amp;");
+            out.append ('&');
           }
           break;
         case X_LINK_OPEN:
-          temp.setLength (0);
+          temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 2, EMarkToken.X_LINK_CLOSE);
           if (b > 0 && m_aConfig.m_aSpecialLinkEmitter != null)
           {
@@ -701,42 +684,42 @@ final class Emitter
           }
           break;
         case X_COPY:
-          out.append ("&copy;");
+          out.append (HCEntityNode.newCopy ());
           pos += 2;
           break;
         case X_REG:
-          out.append ("&reg;");
+          out.append (new HCEntityNode (EHTMLEntity.copy, "(r)"));
           pos += 2;
           break;
         case X_TRADE:
-          out.append ("&trade;");
+          out.append (new HCEntityNode (EHTMLEntity.trade, "TM"));
           pos += 3;
           break;
         case X_NDASH:
-          out.append ("&ndash;");
+          out.append (new HCEntityNode (EHTMLEntity.ndash, "--"));
           pos++;
           break;
         case X_MDASH:
-          out.append ("&mdash;");
+          out.append (new HCEntityNode (EHTMLEntity.mdash, "---"));
           pos += 2;
           break;
         case X_HELLIP:
-          out.append ("&hellip;");
+          out.append (new HCEntityNode (EHTMLEntity.hellip, "..."));
           pos += 2;
           break;
         case X_LAQUO:
-          out.append ("&laquo;");
+          out.append (new HCEntityNode (EHTMLEntity.laquo, "<<"));
           pos++;
           break;
         case X_RAQUO:
-          out.append ("&raquo;");
+          out.append (new HCEntityNode (EHTMLEntity.raquo, ">>"));
           pos++;
           break;
         case X_RDQUO:
-          out.append ("&rdquo;");
+          out.append (new HCEntityNode (EHTMLEntity.rdquo, "\""));
           break;
         case X_LDQUO:
-          out.append ("&ldquo;");
+          out.append (new HCEntityNode (EHTMLEntity.ldquo, "\""));
           break;
         case ESCAPE:
           pos++;
@@ -876,7 +859,7 @@ final class Emitter
    * @param lines
    *        The lines to write.
    */
-  private void _emitMarkedLines (final StringBuilder out, final Line lines)
+  private void _emitMarkedLines (final HCStack out, final Line lines)
   {
     final StringBuilder in = new StringBuilder ();
     Line line = lines;
@@ -910,7 +893,7 @@ final class Emitter
    * @param lines
    *        The lines to write.
    */
-  private void _emitRawLines (final StringBuilder out, final Line lines)
+  private void _emitRawLines (final HCStack out, final Line lines)
   {
     Line line = lines;
     if (m_aConfig.m_bSafeMode)
@@ -919,9 +902,7 @@ final class Emitter
       while (line != null)
       {
         if (!line.m_bIsEmpty)
-        {
           temp.append (line.m_sValue);
-        }
         temp.append ('\n');
         line = line.m_aNext;
       }
@@ -934,7 +915,8 @@ final class Emitter
           final int t = Utils.readXML (temp, in, pos, m_aConfig.m_bSafeMode);
           if (t != -1)
           {
-            out.append (temp);
+            // XXX Is this correct???
+            out.append (temp.toString ());
             pos = t;
           }
           else
@@ -972,7 +954,7 @@ final class Emitter
    * @param meta
    *        Meta information.
    */
-  private void _emitCodeLines (final StringBuilder out, final Line lines, final String meta, final boolean removeIndent)
+  private void _emitCodeLines (final HCStack out, final Line lines, final String meta, final boolean removeIndent)
   {
     Line line = lines;
     if (m_aConfig.m_aCodeBlockEmitter != null)
@@ -993,26 +975,7 @@ final class Emitter
       while (line != null)
       {
         if (!line.m_bIsEmpty)
-        {
-          for (final char c : line.m_sValue.substring (4).toCharArray ())
-          {
-            switch (c)
-            {
-              case '&':
-                out.append ("&amp;");
-                break;
-              case '<':
-                out.append ("&lt;");
-                break;
-              case '>':
-                out.append ("&gt;");
-                break;
-              default:
-                out.append (c);
-                break;
-            }
-          }
-        }
+          out.append (line.m_sValue.substring (4));
         out.append ('\n');
         line = line.m_aNext;
       }
@@ -1029,7 +992,7 @@ final class Emitter
    * @param meta
    *        Meta information.
    */
-  protected void emitPluginLines (final StringBuilder out, final Line lines, final String meta)
+  protected void emitPluginLines (final HCStack out, final Line lines, final String meta)
   {
     Line line = lines;
 
