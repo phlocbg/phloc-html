@@ -41,6 +41,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+import com.phloc.commons.regex.RegExPool;
+
 public class EdgeCasesTest
 {
   @Test
@@ -66,7 +68,7 @@ public class EdgeCasesTest
   {
     // In Perl, split(/x/, "") returns the empty string.
     // But in Java, it's the array { "" }.
-    final Pattern x = Pattern.compile ("x");
+    final Pattern x = RegExPool.getPattern ("x");
     final String [] xs = x.split ("");
     assertEquals (1, xs.length);
     assertEquals ("", xs[0]);
