@@ -37,6 +37,7 @@ public enum EHTMLElement implements IHasElementName
   A ("a", false, EHTMLContentModelType.FLOW),
   ABBR ("abbr", false, EHTMLContentModelType.PHRASING),
   ADDRESS ("address", false, EHTMLContentModelType.FLOW),
+  APPLET ("applet", false, EHTMLContentModelType.FLOW),
   AREA ("area", true, EHTMLContentModelType.PHRASING),
   ARTICLE ("article", false, EHTMLContentModelType.FLOW),
   ASIDE ("aside", false, EHTMLContentModelType.FLOW),

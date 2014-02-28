@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
@@ -697,9 +698,9 @@ public class Processor
       // To make compiler happy: add != null checks
       if (isLinkRef && id != null && link != null)
       {
-        if (id.toLowerCase ().equals ("$profile$"))
+        if (id.toLowerCase (Locale.US).equals ("$profile$"))
         {
-          m_aEmitter.m_bUseExtensions = m_bUseExtensions = link.toLowerCase ().equals ("extended");
+          m_aEmitter.m_bUseExtensions = m_bUseExtensions = link.toLowerCase (Locale.US).equals ("extended");
           lastLinkRef = null;
         }
         else

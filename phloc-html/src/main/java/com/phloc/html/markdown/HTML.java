@@ -20,6 +20,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.phloc.commons.url.IURLProtocol;
+import com.phloc.commons.url.URLProtocolRegistry;
+import com.phloc.html.EHTMLElement;
+
 /**
  * HTML utility class.
  * 
@@ -531,40 +535,38 @@ final class HTML
                                                '\u200C' };
 
   /** HTML block level elements. */
-  private static final EHTMLElement [] BLOCK_ELEMENTS = { EHTMLElement.address,
-                                                         EHTMLElement.blockquote,
-                                                         EHTMLElement.del,
-                                                         EHTMLElement.div,
-                                                         EHTMLElement.dl,
-                                                         EHTMLElement.fieldset,
-                                                         EHTMLElement.form,
-                                                         EHTMLElement.h1,
-                                                         EHTMLElement.h2,
-                                                         EHTMLElement.h3,
-                                                         EHTMLElement.h4,
-                                                         EHTMLElement.h5,
-                                                         EHTMLElement.h6,
-                                                         EHTMLElement.hr,
-                                                         EHTMLElement.ins,
-                                                         EHTMLElement.noscript,
-                                                         EHTMLElement.ol,
-                                                         EHTMLElement.p,
-                                                         EHTMLElement.pre,
-                                                         EHTMLElement.table,
-                                                         EHTMLElement.ul };
+  private static final EHTMLElement [] BLOCK_ELEMENTS = { EHTMLElement.ADDRESS,
+                                                         EHTMLElement.BLOCKQUOTE,
+                                                         EHTMLElement.DEL,
+                                                         EHTMLElement.DIV,
+                                                         EHTMLElement.DL,
+                                                         EHTMLElement.FIELDSET,
+                                                         EHTMLElement.FORM,
+                                                         EHTMLElement.H1,
+                                                         EHTMLElement.H2,
+                                                         EHTMLElement.H3,
+                                                         EHTMLElement.H4,
+                                                         EHTMLElement.H5,
+                                                         EHTMLElement.H6,
+                                                         EHTMLElement.HR,
+                                                         EHTMLElement.INS,
+                                                         EHTMLElement.NOSCRIPT,
+                                                         EHTMLElement.OL,
+                                                         EHTMLElement.P,
+                                                         EHTMLElement.PRE,
+                                                         EHTMLElement.TABLE,
+                                                         EHTMLElement.UL };
 
   /** HTML unsafe elements. */
-  private static final EHTMLElement [] UNSAFE_ELEMENTS = { EHTMLElement.applet,
-                                                          EHTMLElement.head,
-                                                          EHTMLElement.html,
-                                                          EHTMLElement.body,
-                                                          EHTMLElement.frame,
-                                                          EHTMLElement.frameset,
-                                                          EHTMLElement.iframe,
-                                                          EHTMLElement.script,
-                                                          EHTMLElement.object, };
-  /** Valid markdown link prefixes for auto links. */
-  private static final String [] LINK_PREFIXES = { "http", "https", "ftp", "ftps" };
+  private static final EHTMLElement [] UNSAFE_ELEMENTS = { EHTMLElement.APPLET,
+                                                          EHTMLElement.HEAD,
+                                                          EHTMLElement.HTML,
+                                                          EHTMLElement.BODY,
+                                                          EHTMLElement.FRAME,
+                                                          EHTMLElement.FRAMESET,
+                                                          EHTMLElement.IFRAME,
+                                                          EHTMLElement.SCRIPT,
+                                                          EHTMLElement.OBJECT, };
 
   /** Character to entity encoding map. */
   private static final Map <Character, String> encodeMap = new HashMap <Character, String> ();
@@ -580,10 +582,10 @@ final class HTML
   static
   {
     for (final EHTMLElement h : UNSAFE_ELEMENTS)
-      HTML_UNSAFE.add (h.name ());
+      HTML_UNSAFE.add (h.getElementNameLowerCase ());
 
     for (final EHTMLElement h : BLOCK_ELEMENTS)
-      HTML_BLOCK_ELEMENTS.add (h.name ());
+      HTML_BLOCK_ELEMENTS.add (h.getElementNameLowerCase ());
 
     for (int i = 0; i < ENTITY_NAMES.length; i++)
     {
@@ -591,8 +593,12 @@ final class HTML
       decodeMap.put (ENTITY_NAMES[i], Character.valueOf (ENTITY_CHARS[i]));
     }
 
-    for (final String element : LINK_PREFIXES)
-      LINK_PREFIX.add (element);
+    for (final IURLProtocol element : URLProtocolRegistry.getAllProtocols ())
+    {
+      final String sProtocol = element.getProtocol ();
+      final int i = sProtocol.indexOf (':');
+      LINK_PREFIX.add (i < 0 ? sProtocol : sProtocol.substring (0, i));
+    }
   }
 
   /** Constructor. (Singleton) */

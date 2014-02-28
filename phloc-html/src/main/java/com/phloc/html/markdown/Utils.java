@@ -15,6 +15,8 @@
  */
 package com.phloc.html.markdown;
 
+import java.util.Locale;
+
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.random.VerySecureRandom;
 
@@ -566,7 +568,7 @@ final class Utils
         pos = _readRawUntil (temp, in, pos, ' ', '/', '>');
         if (pos == -1)
           return -1;
-        final String tag = temp.toString ().trim ().toLowerCase ();
+        final String tag = temp.toString ().trim ().toLowerCase (Locale.US);
         if (HTML.isUnsafeHtmlElement (tag))
         {
           out.append ("&lt;");
