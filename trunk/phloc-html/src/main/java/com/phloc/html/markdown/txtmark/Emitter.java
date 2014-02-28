@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.phloc.commons.regex.RegExPool;
 import com.phloc.html.markdown.AbstractPlugin;
 
 /**
@@ -1074,10 +1075,9 @@ class Emitter
   protected Map <String, String> parsePluginParams (final String s)
   {
     final Map <String, String> params = new HashMap <String, String> ();
-    final Pattern p = Pattern.compile ("(\\w+)=\"*((?<=\")[^\"]+(?=\")|([^\\s]+))\"*");
+    final Pattern p = RegExPool.getPattern ("(\\w+)=\"*((?<=\")[^\"]+(?=\")|([^\\s]+))\"*");
 
     final Matcher m = p.matcher (s);
-
     while (m.find ())
     {
       params.put (m.group (1), m.group (2));
