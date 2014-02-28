@@ -11,11 +11,7 @@ Span-level HTML tags -- e.g. `<span>`, `<cite>`, or `<del>`
 * Etc.
 
 # Result 2
-<h4>Headers in blockquotes</h4>
-<ul>
-<li>You can quote a list.</li>
-<li>Etc.</li>
-</ul>
+<h4>Headers in blockquotes</h4><ul><li>You can quote a list.</li><li>Etc.</li></ul>
 
 # Test 3 (italic underscore)
 TODO - is _italic_underscore_ italic?
@@ -30,7 +26,7 @@ HTML block.
 
 # Result 4
 <p>Note that Markdown formatting syntax is not processed within block-level
-HTML tags. E.g., you can't use Markdown-style <code>*emphasis*</code> inside an
+HTML tags. E.g., you can&#39;t use Markdown-style <code>*emphasis*</code> inside an
 HTML block.</p>
 
 # Test 5 (auto-links)
@@ -105,18 +101,18 @@ blockquotes look like quoted passages of text, assuming you've ever
 used email.
 
 # Result 8
-<p>To this end, Markdown's syntax is comprised entirely of punctuation
+<p>To this end, Markdown&#39;s syntax is comprised entirely of punctuation
 characters, which punctuation characters have been carefully chosen so
 as to look like what they mean. E.g., asterisks around a word actually
 look like *emphasis*. Markdown lists look like, well, lists. Even
-blockquotes look like quoted passages of text, assuming you've ever
+blockquotes look like quoted passages of text, assuming you&#39;ve ever
 used email.</p>
 
 # Test 9 (code with stuff that looks like backreferences)
 Don't replace `$4`...
 
 # Result 9
-<p>Don't replace <code>$4</code>...</p>
+<p>Don&#39;t replace <code>$4</code>...</p>
 
 # Test 10 (block code with backrefs)
 This is a normal paragraph.
@@ -125,8 +121,7 @@ This is a normal paragraph.
     code block.
 
 # Result 10
-<p>This is a normal paragraph.</p>
-<pre><code>This is a $4 preformatted
+<p>This is a normal paragraph.</p><pre><code>This is a $4 preformatted
 code block.
 </code></pre>
 
@@ -144,8 +139,7 @@ For example, to add an HTML table to a Markdown article:
     This is another regular paragraph.
 
 # Result 11
-<p>For example, to add an HTML table to a Markdown article:</p>
-<pre><code>This is a regular paragraph.
+<p>For example, to add an HTML table to a Markdown article:</p><pre><code>This is a regular paragraph.
 
 &lt;table&gt;
     &lt;tr&gt;
@@ -172,8 +166,7 @@ For example, to add an HTML table to a Markdown article:
 This is not part of the code block.
 
 # Result 11
-<p>For example, to add an HTML table to a Markdown article:</p>
-<pre><code>This is a regular paragraph.
+<p>For example, to add an HTML table to a Markdown article:</p><pre><code>This is a regular paragraph.
 
 &lt;table&gt;
     &lt;tr&gt;
@@ -182,8 +175,7 @@ This is not part of the code block.
 &lt;/table&gt;
 
 This is another regular paragraph.
-</code></pre>
-<p>This is not part of the code block.</p>
+</code></pre><p>This is not part of the code block.</p>
 
 # Test 12 (code-quoted link definitions)
 Because link names may contain spaces, this shortcut even works for
@@ -202,14 +194,10 @@ document, sort of like footnotes.
 
 # Result 12
 <p>Because link names may contain spaces, this shortcut even works for
-multiple words in the link text:</p>
-<pre><code>Visit [Daring Fireball][] for more information.
-</code></pre>
-<p>And then define the link:</p>
-<pre><code>[Daring Fireball]: http://daringfireball.net/
-</code></pre>
-<p>Link definitions can be placed anywhere in your Markdown document. I
-tend to put them immediately after each paragraph in which they're
+multiple words in the link text:</p><pre><code>Visit [Daring Fireball][] for more information.
+</code></pre><p>And then define the link:</p><pre><code>[Daring Fireball]: http://daringfireball.net/
+</code></pre><p>Link definitions can be placed anywhere in your Markdown document. I
+tend to put them immediately after each paragraph in which they&#39;re
 used, but if you want, you can put them all at the end of your
 document, sort of like footnotes.</p>
 
@@ -241,8 +229,7 @@ This is a normal paragraph.
     }
 
 # Result 14
-<p>This is a normal paragraph.</p>
-<pre><code>lang:java
+<p>This is a normal paragraph.</p><pre><code>lang:java
 package com.petebevin.markdown;
 
 import java.util.regex.Matcher;
@@ -261,8 +248,7 @@ This is a normal paragraph.
     code block.
 
 # Result 15
-<p>This is a normal paragraph.</p>
-<pre><code>lang:   java
+<p>This is a normal paragraph.</p><pre><code>lang:   java
 This is a $4 preformatted
 code block.
 </code></pre>
@@ -276,8 +262,7 @@ This is a normal paragraph.
     code block.
 
 # Result 16
-<p>This is a normal paragraph.</p>
-<pre><code>lang:
+<p>This is a normal paragraph.</p><pre><code>lang:
 This is a $4 preformatted
 code block.
 </code></pre>
