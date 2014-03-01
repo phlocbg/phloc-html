@@ -452,6 +452,8 @@ final class Emitter
       {
         // Read as XML
         final IMicroDocument aXML = MicroReader.readMicroXML (temp.toString ());
+        if (aXML == null)
+          throw new IllegalArgumentException (temp.toString ());
         // And use the root element
         out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
         return t;
@@ -904,8 +906,7 @@ final class Emitter
       while (line != null)
       {
         if (!line.m_bIsEmpty)
-          temp.append (line.m_sValue);
-        temp.append ('\n');
+          temp.append (line.m_sValue.trim ());
         line = line.m_aNext;
       }
       final String in = temp.toString ();
@@ -934,15 +935,16 @@ final class Emitter
     }
     else
     {
+      final StringBuilder aXML = new StringBuilder ();
       while (line != null)
       {
         if (!line.m_bIsEmpty)
-        {
-          out.append (line.m_sValue);
-        }
-        out.append ('\n');
+          aXML.append (line.m_sValue.trim ());
         line = line.m_aNext;
       }
+
+      final IMicroDocument aDoc = MicroReader.readMicroXML (aXML.toString ());
+      out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
     }
   }
 
