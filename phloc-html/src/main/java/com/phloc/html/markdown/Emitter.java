@@ -106,7 +106,7 @@ final class Emitter
     switch (aRoot.m_eType)
     {
       case RULER:
-        m_aConfig.m_aDecorator.horizontalRuler (out);
+        m_aConfig.m_aDecorator.appendHorizontalRuler (out);
         return;
       case NONE:
       case XML:
@@ -383,7 +383,7 @@ final class Emitter
     }
     else
     {
-      final HCImg aImg = m_aConfig.m_aDecorator.openImage (out);
+      final HCImg aImg = m_aConfig.m_aDecorator.appendImage (out);
       aImg.setSrc (link);
       aImg.setAlt (name);
       if (comment != null)
@@ -457,23 +457,72 @@ final class Emitter
     // Check for inline html
     if (start + 2 < in.length ())
     {
+      pos = start;
+      if (start + 3 < in.length () &&
+          in.charAt (start + 1) == '!' &&
+          in.charAt (start + 2) == '-' &&
+          in.charAt (start + 3) == '-')
+      {
+        pos = start + 4;
+        final int nCommentStartPos = pos;
+        while (true)
+        {
+          while (pos < in.length () && in.charAt (pos) != '-')
+            pos++;
+
+          if (pos == in.length ())
+          {
+            // End of line in comment
+            return -1;
+          }
+          if (pos + 2 < in.length () && in.charAt (pos + 1) == '-' && in.charAt (pos + 2) == '>')
+          {
+            // XML comment inline
+            out.append (new HCCommentNode (in.substring (nCommentStartPos, pos)));
+            return pos + 2;
+          }
+          pos++;
+        }
+      }
+
       temp.setLength (0);
       final int t = Utils.readXMLElement (temp, in, start, m_aConfig.m_bSafeMode);
       if (t != -1)
       {
-        // Read as XML
-        final IMicroDocument aXML = MicroReader.readMicroXML (temp.toString ());
-        if (aXML == null)
+        final String sElement = temp.toString ();
+        if (sElement.endsWith ("/>"))
         {
-          // FIXME Failed to parse XML - write text as is
-          out.append (temp.toString ());
+          // Self closed tag - can be parsed
+          final IMicroDocument aXML = MicroReader.readMicroXML (sElement);
+          if (aXML == null)
+          {
+            // FIXME Failed to parse XML - write text as is
+            out.append (temp.toString ());
+          }
+          else
+          {
+            // And use the root element
+            out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+          }
         }
         else
-        {
-          // And use the root element
-          out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
-        }
-        return t;
+          if (sElement.startsWith ("</"))
+          {
+            // Closing tag
+            out.pop ();
+          }
+          else
+          {
+            // Opening tag - parse as self-closed tag and push to stack
+            final String sParseCode = sElement.substring (0, sElement.length () - 1) + "/>";
+            final IMicroDocument aXML = MicroReader.readMicroXML (sParseCode);
+            if (aXML == null)
+              throw new IllegalArgumentException ("Failed to parse: " + sParseCode);
+            // And use the root element
+            out.push (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+          }
+
+        return t - 1;
       }
     }
 
@@ -979,11 +1028,16 @@ final class Emitter
     while (line != null)
     {
       if (!line.m_bIsEmpty)
+      {
+        // Append without trimming!
         aXML.append (line.m_sValue);
+      }
       aXML.append ('\n');
       line = line.m_aNext;
     }
 
+    // Trim only once, so that newlines before or after a comment start/close is
+    // removed
     final String sContent = StringHelper.trimStartAndEnd (aXML.toString ().trim (),
                                                           XMLEmitterPhloc.COMMENT_START,
                                                           XMLEmitterPhloc.COMMENT_END);

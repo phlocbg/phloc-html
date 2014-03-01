@@ -3,17 +3,17 @@ package com.phloc.html.markdown;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.collections.NonBlockingStack;
-import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.AbstractHCList;
 import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
 public class HCStack
 {
-  private final NonBlockingStack <IHCHasChildren> m_aStack = new NonBlockingStack <IHCHasChildren> ();
+  private final NonBlockingStack <IHCNode> m_aStack = new NonBlockingStack <IHCNode> ();
 
   public HCStack ()
   {
@@ -21,6 +21,12 @@ public class HCStack
   }
 
   public void push (@Nonnull final AbstractHCList <?> aNode)
+  {
+    append (aNode);
+    m_aStack.push (aNode);
+  }
+
+  public void push (@Nonnull final HCDOMWrapper aNode)
   {
     append (aNode);
     m_aStack.push (aNode);
@@ -36,6 +42,8 @@ public class HCStack
 
   public void pop ()
   {
+    if (m_aStack.size () == 1)
+      throw new IllegalStateException ("Can't pop from empty stack");
     m_aStack.pop ();
   }
 
@@ -69,7 +77,7 @@ public class HCStack
 
   public void append (final IHCNode aNode)
   {
-    final IHCHasChildren aParent = m_aStack.peek ();
+    final IHCNode aParent = m_aStack.peek ();
     if (aNode instanceof HCLI && aParent instanceof AbstractHCList <?>)
       ((AbstractHCList <?>) aParent).addItem ((HCLI) aNode);
     else

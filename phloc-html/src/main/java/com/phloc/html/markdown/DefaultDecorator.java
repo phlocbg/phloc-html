@@ -203,7 +203,7 @@ public class DefaultDecorator implements IDecorator
     out.pop ();
   }
 
-  public void horizontalRuler (final HCStack out)
+  public void appendHorizontalRuler (final HCStack out)
   {
     out.append (new HCHR ());
   }
@@ -218,7 +218,7 @@ public class DefaultDecorator implements IDecorator
     out.pop ();
   }
 
-  public HCImg openImage (final HCStack out)
+  public HCImg appendImage (final HCStack out)
   {
     final HCImg ret = new HCImg ();
     out.append (ret);
