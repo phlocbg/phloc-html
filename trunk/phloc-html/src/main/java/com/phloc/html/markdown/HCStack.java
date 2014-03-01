@@ -24,7 +24,6 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.AbstractHCList;
 import com.phloc.html.hc.html.HCLI;
-import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
@@ -37,13 +36,7 @@ public class HCStack
     m_aStack.push (new HCNodeList ());
   }
 
-  public void push (@Nonnull final AbstractHCList <?> aNode)
-  {
-    append (aNode);
-    m_aStack.push (aNode);
-  }
-
-  public void push (@Nonnull final HCDOMWrapper aNode)
+  public void push (@Nonnull final IHCNode aNode)
   {
     append (aNode);
     m_aStack.push (aNode);
