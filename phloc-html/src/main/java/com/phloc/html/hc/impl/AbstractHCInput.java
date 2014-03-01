@@ -35,21 +35,33 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 @NotThreadSafe
 public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYPE>> extends AbstractHCControl <THISTYPE> implements IHCInput <THISTYPE>
 {
-  private final EHCInputType m_eType;
+  private EHCInputType m_eType;
   private String m_sPlaceholder;
+
+  public AbstractHCInput ()
+  {
+    super (EHTMLElement.INPUT);
+  }
 
   public AbstractHCInput (@Nonnull final EHCInputType eType)
   {
-    super (EHTMLElement.INPUT);
-    if (eType == null)
-      throw new NullPointerException ("type");
-    m_eType = eType;
+    this ();
+    setType (eType);
   }
 
   @Nonnull
   public final EHCInputType getType ()
   {
     return m_eType;
+  }
+
+  @Nonnull
+  public final THISTYPE setType (@Nonnull final EHCInputType eType)
+  {
+    if (eType == null)
+      throw new NullPointerException ("type");
+    m_eType = eType;
+    return thisAsT ();
   }
 
   @Nullable
@@ -70,7 +82,8 @@ public abstract class AbstractHCInput <THISTYPE extends AbstractHCInput <THISTYP
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
+    if (m_eType != null)
+      aElement.setAttribute (CHTMLAttributes.TYPE, m_eType);
     if (StringHelper.hasText (m_sPlaceholder))
       aElement.setAttribute (CHTMLAttributes.PLACEHOLDER, m_sPlaceholder);
   }
