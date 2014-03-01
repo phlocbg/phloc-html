@@ -2601,6 +2601,42 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @param eventType
    *        A string containing one or more DOM event types, such as "click" or
    *        "submit," or custom event names.
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  IMPLTYPE bind (@Nonnull IJSExpression eventType);
+
+  /**
+   * @param eventType
+   *        A string containing one or more DOM event types, such as "click" or
+   *        "submit," or custom event names.
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  IMPLTYPE bind (@Nonnull IJson eventType);
+
+  /**
+   * @param eventType
+   *        A string containing one or more DOM event types, such as "click" or
+   *        "submit," or custom event names.
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  IMPLTYPE bind (@Nonnull IHCNode eventType);
+
+  /**
+   * @param eventType
+   *        A string containing one or more DOM event types, such as "click" or
+   *        "submit," or custom event names.
+   * @since jQuery 1.4.3
+   */
+  @Nonnull
+  IMPLTYPE bind (@Nonnull String eventType);
+
+  /**
+   * @param eventType
+   *        A string containing one or more DOM event types, such as "click" or
+   *        "submit," or custom event names.
    * @param eventData
    *        An object containing data that will be passed to the event handler.
    * @param preventBubble
@@ -2656,15 +2692,6 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE bind (@Nonnull String eventType, @Nonnull IJSExpression eventData, boolean preventBubble);
-
-  /**
-   * @param events
-   *        An object containing one or more DOM event types and functions to
-   *        execute for them.
-   * @since jQuery 1.4
-   */
-  @Nonnull
-  IMPLTYPE bind (@Nonnull IJSExpression events);
 
   /**
    * @param handler
@@ -17516,6 +17543,98 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   IMPLTYPE innerWidth ();
 
   /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull IJSExpression value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull IJson value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull IHCNode value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull String value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (int value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (long value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull BigInteger value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (double value);
+
+  /**
+   * @param value
+   *        A number representing the number of pixels, or a number along with
+   *        an optional unit of measure appended (as a string).
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull BigDecimal value);
+
+  /**
+   * @param function
+   *        A function returning the inner width (including padding but not
+   *        border) to set. Receives the index position of the element in the
+   *        set and the old inner width as arguments. Within the function, this
+   *        refers to the current element in the set.
+   * @since jQuery 1.8
+   */
+  @Nonnull
+  IMPLTYPE innerWidth (@Nonnull JSAnonymousFunction function);
+
+  /**
    * @param target
    *        A selector, element, array of elements, HTML string, or jQuery
    *        object; the matched set of elements will be inserted after the
@@ -17724,12 +17843,12 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   IMPLTYPE is (@Nonnull JSAnonymousFunction function);
 
   /**
-   * @param element
-   *        An element to match the current set of elements against.
+   * @param elements
+   *        One or more elements to match the current set of elements against.
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE is (@Nonnull String element);
+  IMPLTYPE is (@Nonnull String elements);
 
   /**
    * @param handler
@@ -20263,7 +20382,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
 
   /**
    * @param coordinates
-   *        An object containing the properties top and left, which are integers
+   *        An object containing the properties top and left, which are numbers
    *        indicating the new top and left coordinates for the elements.
    * @since jQuery 1.4
    */

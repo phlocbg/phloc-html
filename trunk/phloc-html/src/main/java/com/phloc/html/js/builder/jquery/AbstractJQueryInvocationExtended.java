@@ -1518,6 +1518,30 @@ public abstract class AbstractJQueryInvocationExtended <IMPLTYPE extends Abstrac
   }
 
   @Nonnull
+  public IMPLTYPE bind (@Nonnull IJSExpression eventType)
+  {
+    return bind ().arg (eventType);
+  }
+
+  @Nonnull
+  public IMPLTYPE bind (@Nonnull IJson eventType)
+  {
+    return bind ().arg (eventType);
+  }
+
+  @Nonnull
+  public IMPLTYPE bind (@Nonnull IHCNode eventType)
+  {
+    return bind ().arg (eventType);
+  }
+
+  @Nonnull
+  public IMPLTYPE bind (@Nonnull String eventType)
+  {
+    return bind ().arg (eventType);
+  }
+
+  @Nonnull
   public IMPLTYPE bind (@Nonnull IJSExpression eventType, @Nonnull IJSExpression eventData, boolean preventBubble)
   {
     return bind ().arg (eventType).arg (eventData).arg (preventBubble);
@@ -1539,12 +1563,6 @@ public abstract class AbstractJQueryInvocationExtended <IMPLTYPE extends Abstrac
   public IMPLTYPE bind (@Nonnull String eventType, @Nonnull IJSExpression eventData, boolean preventBubble)
   {
     return bind ().arg (eventType).arg (eventData).arg (preventBubble);
-  }
-
-  @Nonnull
-  public IMPLTYPE bind (@Nonnull IJSExpression events)
-  {
-    return bind ().arg (events);
   }
 
   @Nonnull
@@ -9703,6 +9721,66 @@ public abstract class AbstractJQueryInvocationExtended <IMPLTYPE extends Abstrac
   }
 
   @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull IJSExpression value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull IJson value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull IHCNode value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull String value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (int value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (long value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull BigInteger value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (double value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull BigDecimal value)
+  {
+    return innerWidth ().arg (value);
+  }
+
+  @Nonnull
+  public IMPLTYPE innerWidth (@Nonnull JSAnonymousFunction function)
+  {
+    return innerWidth ().arg (function);
+  }
+
+  @Nonnull
   public IMPLTYPE insertAfter (@Nonnull IJSExpression target)
   {
     return insertAfter ().arg (target);
@@ -9847,9 +9925,9 @@ public abstract class AbstractJQueryInvocationExtended <IMPLTYPE extends Abstrac
   }
 
   @Nonnull
-  public IMPLTYPE is (@Nonnull String element)
+  public IMPLTYPE is (@Nonnull String elements)
   {
-    return is ().arg (element);
+    return is ().arg (elements);
   }
 
   @Nonnull
