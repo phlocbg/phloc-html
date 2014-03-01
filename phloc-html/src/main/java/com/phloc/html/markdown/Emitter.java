@@ -41,6 +41,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCCommentNode;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCEntityNode;
+import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
 /**
@@ -472,7 +473,7 @@ final class Emitter
 
           if (pos == in.length ())
           {
-            // End of line in comment
+            // FIXME End of line in comment
             return -1;
           }
           if (pos + 2 < in.length () && in.charAt (pos + 1) == '-' && in.charAt (pos + 2) == '>')
@@ -510,6 +511,7 @@ final class Emitter
           {
             // Closing tag
             out.pop ();
+            out.pop ();
           }
           else
           {
@@ -520,6 +522,7 @@ final class Emitter
               throw new IllegalArgumentException ("Failed to parse: " + sParseCode);
             // And use the root element
             out.push (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+            out.push (new HCNodeList ());
           }
 
         return t - 1;

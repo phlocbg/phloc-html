@@ -94,23 +94,30 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
 
   private IMimeType m_aType = DEFAULT_TYPE;
   private CSSMediaList m_aMediaList;
-  private final String m_sContent;
+  private String m_sContent;
   private EMode m_eMode = s_eDefaultMode;
+
+  public HCStyle ()
+  {
+    super (EHTMLElement.STYLE);
+  }
 
   public HCStyle (@Nullable final String sContent)
   {
-    super (EHTMLElement.STYLE);
-    m_sContent = sContent;
+    this ();
+    setStyleContent (sContent);
   }
 
   public HCStyle (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings)
   {
-    this (new CSSWriter (aSettings).getCSSAsString (aCSS));
+    this ();
+    setStyleContent (aCSS, aSettings);
   }
 
   public HCStyle (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings)
   {
-    this (new CSSWriter (aSettings).getCSSAsString (aCSS));
+    this ();
+    setStyleContent (aCSS, aSettings);
   }
 
   public boolean isInlineCSS ()
@@ -197,6 +204,25 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   public boolean hasNoMediaOrAll ()
   {
     return hasNoMedia () || containsMedium (ECSSMedium.ALL);
+  }
+
+  @Nonnull
+  public HCStyle setStyleContent (@Nullable final String sContent)
+  {
+    m_sContent = sContent;
+    return this;
+  }
+
+  @Nonnull
+  public HCStyle setStyleContent (@Nonnull final CascadingStyleSheet aCSS, @Nonnull final CSSWriterSettings aSettings)
+  {
+    return setStyleContent (new CSSWriter (aSettings).getCSSAsString (aCSS));
+  }
+
+  @Nonnull
+  public HCStyle setStyleContent (@Nonnull final CSSDeclarationList aCSS, @Nonnull final CSSWriterSettings aSettings)
+  {
+    return setStyleContent (new CSSWriter (aSettings).getCSSAsString (aCSS));
   }
 
   /**

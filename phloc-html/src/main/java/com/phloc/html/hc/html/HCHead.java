@@ -435,7 +435,7 @@ public class HCHead extends AbstractHCElement <HCHead>
 
     // page title
     if (StringHelper.hasText (m_sPageTitle))
-      eHead.appendElement (sNamespaceURI, EHTMLElement.TITLE).appendText (m_sPageTitle);
+      eHead.appendChild (new HCTitle (m_sPageTitle).convertToNode (aConversionSettings));
 
     // base
     if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)

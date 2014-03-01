@@ -42,12 +42,15 @@ public class HCParam extends AbstractHCElement <HCParam>
   private EHCParamValueType m_eValueType;
   private IMimeType m_aType;
 
-  public HCParam (@Nonnull final String sName)
+  public HCParam ()
   {
     super (EHTMLElement.PARAM);
-    if (sName == null)
-      throw new NullPointerException ("name");
-    m_sName = sName;
+  }
+
+  public HCParam (@Nonnull final String sName)
+  {
+    this ();
+    setName (sName);
   }
 
   @Nullable

@@ -17,22 +17,19 @@
  */
 package com.phloc.html.hc.html;
 
-import javax.annotation.Nonnull;
-
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.annotations.DeprecatedInHTML5;
 
 /**
- * Abstract base class for DD and DT tags ({@link HCDD} and {@link HCDT})
+ * Represents an HTML &lt;dir&gt; element
  * 
  * @author Philip Helger
- * @param <THISTYPE>
- *        The implementing type
  */
-public abstract class AbstractHCDefinitionItem <THISTYPE extends AbstractHCDefinitionItem <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE>
+@DeprecatedInHTML5
+public class HCDir extends AbstractHCList <HCDir>
 {
-  public AbstractHCDefinitionItem (@Nonnull final EHTMLElement aElement)
+  public HCDir ()
   {
-    super (aElement);
+    super (EHTMLElement.DIR);
   }
 }

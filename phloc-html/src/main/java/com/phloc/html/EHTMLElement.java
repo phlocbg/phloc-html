@@ -308,6 +308,7 @@ public enum EHTMLElement implements IHasElementName
    * @return The matching {@link EHTMLElement} or <code>null</code> if no such
    *         element is present.
    */
+  @Nullable
   public static EHTMLElement getFromTagNameOrNull (@Nullable final String sTagName)
   {
     if (StringHelper.hasText (sTagName))
