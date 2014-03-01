@@ -500,7 +500,7 @@ final class Emitter
           // Self closed tag - can be parsed
           final IMicroDocument aXML = MicroReader.readMicroXML (sElement);
           if (aXML == null)
-            throw new IllegalArgumentException ("Failed to parse: " + sElement);
+            throw new MarkdownException ("Failed to parse XML: " + sElement);
           // And use the root element
           out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
         }
@@ -516,13 +516,13 @@ final class Emitter
             final String sParseCode = sElement.substring (0, sElement.length () - 1) + "/>";
             final IMicroDocument aXML = MicroReader.readMicroXML (sParseCode);
             if (aXML == null)
-              throw new IllegalArgumentException ("Failed to parse: " + sParseCode);
+              throw new MarkdownException ("Failed to parse XML: " + sParseCode);
             final IMicroElement eRoot = aXML.getDocumentElement ();
 
             // And use the root element
             final AbstractHCElement <?> aHC = HCUtils.createHCElementFromName (eRoot.getTagName ());
             if (aHC == null)
-              throw new IllegalArgumentException ("Failed to get HC element: " + eRoot.getTagName ());
+              throw new MarkdownException ("Failed to get HC element: " + eRoot.getTagName ());
 
             // Clone all attributes
             if (eRoot.hasAttributes ())
@@ -531,7 +531,7 @@ final class Emitter
 
             if (aHC.getElement ().mayBeSelfClosed ())
             {
-              // e.g. <hr>
+              // e.g. <hr />
               out.append (aHC);
             }
             else
@@ -1019,23 +1019,30 @@ final class Emitter
     else
     {
       final StringBuilder aXML = new StringBuilder ();
+      int nLines = 0;
       while (line != null)
       {
         if (!line.m_bIsEmpty)
+        {
           aXML.append (line.m_sValue.trim ());
+          ++nLines;
+        }
         line = line.m_aNext;
       }
 
-      final IMicroDocument aDoc = MicroReader.readMicroXML (aXML.toString ());
+      String sXML = aXML.toString ();
+      if (nLines == 1 && !sXML.contains ("/>") && !sXML.contains ("</"))
+      {
+        // Unclosed tag - parse as self-closed tag and push to stack
+        // Workaround e.g. for <hr>
+        sXML = sXML.substring (0, sXML.length () - 1) + "/>";
+      }
+
+      final IMicroDocument aDoc = MicroReader.readMicroXML (sXML);
       if (aDoc == null)
-      {
-        // FIXME Failed to parse XML
-        out.append (aXML.toString ());
-      }
-      else
-      {
-        out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
-      }
+        throw new MarkdownException ("Failed to parse XML: " + sXML);
+
+      out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
     }
   }
 

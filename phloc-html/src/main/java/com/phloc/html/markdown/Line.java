@@ -96,7 +96,6 @@ final class Line
    * 
    * @return <code>false</code> if end of line is reached
    */
-  // TODO use Util#skipSpaces
   public boolean skipSpaces ()
   {
     while (m_nPos < m_sValue.length () && m_sValue.charAt (m_nPos) == ' ')
@@ -111,7 +110,6 @@ final class Line
    *        Delimiting character(s)
    * @return The read String or <code>null</code> if no 'end' char was reached.
    */
-  // TODO use Util#readUntil
   public String readUntil (final char... end)
   {
     final StringBuilder sb = new StringBuilder ();
@@ -134,13 +132,11 @@ final class Line
       {
         boolean endReached = false;
         for (final char element : end)
-        {
           if (ch == element)
           {
             endReached = true;
             break;
           }
-        }
         if (endReached)
           break;
         sb.append (ch);
@@ -150,13 +146,11 @@ final class Line
 
     final char ch = pos < m_sValue.length () ? m_sValue.charAt (pos) : '\n';
     for (final char element : end)
-    {
       if (ch == element)
       {
         m_nPos = pos;
         return sb.toString ();
       }
-    }
     return null;
   }
 
@@ -217,10 +211,9 @@ final class Line
       final char c = m_sValue.charAt (i);
       if (c == ' ')
         continue;
-      if (c == ch)
-        count++;
-      else
+      if (c != ch)
         break;
+      count++;
     }
     return count;
   }
