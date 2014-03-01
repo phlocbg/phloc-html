@@ -862,7 +862,9 @@ public class Processor
           while (aLine != null)
           {
             if (!aLine.m_bIsEmpty &&
-                (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && aLine.getLineType (m_bUseExtensions) != ELineType.BQUOTE))
+                aLine.m_bPrevEmpty &&
+                aLine.m_nLeading == 0 &&
+                aLine.getLineType (m_bUseExtensions) != ELineType.BQUOTE)
               break;
             aLine = aLine.m_aNext;
           }

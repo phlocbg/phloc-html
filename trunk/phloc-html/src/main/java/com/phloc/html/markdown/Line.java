@@ -289,18 +289,18 @@ final class Line
 
     if (m_sValue.charAt (m_nLeading) == '<')
     {
-      final EHTMLType eType = _checkHTML ();
-      if (eType == EHTMLType.TAG)
+      final EHTMLElementType eType = _checkHTML ();
+      if (eType == EHTMLElementType.TAG)
         return ELineType.XML;
-      if (eType == EHTMLType.COMMENT)
+      if (eType == EHTMLElementType.COMMENT)
         return ELineType.XML_COMMENT;
     }
 
     if (m_aNext != null && !m_aNext.m_bIsEmpty)
     {
-      if ((m_aNext.m_sValue.charAt (0) == '-') && (m_aNext._countConsecutiveChars ('-') > 0))
+      if (m_aNext.m_sValue.charAt (0) == '-' && m_aNext._countConsecutiveChars ('-') > 0)
         return ELineType.HEADLINE2;
-      if ((m_aNext.m_sValue.charAt (0) == '=') && (m_aNext._countConsecutiveChars ('=') > 0))
+      if (m_aNext.m_sValue.charAt (0) == '=' && m_aNext._countConsecutiveChars ('=') > 0)
         return ELineType.HEADLINE1;
     }
 
@@ -441,7 +441,7 @@ final class Line
     return null;
   }
 
-  private static enum EHTMLType
+  private static enum EHTMLElementType
   {
     NONE,
     TAG,
@@ -455,7 +455,7 @@ final class Line
    *         is a valid block.
    */
   @Nonnull
-  private EHTMLType _checkHTML ()
+  private EHTMLElementType _checkHTML ()
   {
     final LinkedList <String> tags = new LinkedList <String> ();
     final StringBuilder temp = new StringBuilder ();
@@ -463,20 +463,19 @@ final class Line
     if (m_sValue.charAt (m_nLeading + 1) == '!')
     {
       if (_readXMLComment (this, m_nLeading) > 0)
-        return EHTMLType.COMMENT;
+        return EHTMLElementType.COMMENT;
     }
     pos = Utils.readXMLElement (temp, m_sValue, m_nLeading, false);
-    String element, tag;
     if (pos > -1)
     {
-      element = temp.toString ();
-      tag = Utils.getXMLTag (element);
+      String element = temp.toString ();
+      String tag = Utils.getXMLTag (element);
       if (!HTML.isHtmlBlockElement (tag))
-        return EHTMLType.NONE;
+        return EHTMLElementType.NONE;
       if (tag.equals ("hr"))
       {
         m_aXmlEndLine = this;
-        return EHTMLType.TAG;
+        return EHTMLElementType.TAG;
       }
       tags.add (tag);
       Line line = this;
@@ -503,7 +502,7 @@ final class Line
               if (element.charAt (1) == '/')
               {
                 if (!tags.getLast ().equals (tag))
-                  return EHTMLType.NONE;
+                  return EHTMLElementType.NONE;
                 tags.removeLast ();
               }
               else
@@ -524,8 +523,9 @@ final class Line
           }
         }
       }
-      return tags.isEmpty () ? EHTMLType.TAG : EHTMLType.NONE;
+      if (tags.isEmpty ())
+        return EHTMLElementType.TAG;
     }
-    return EHTMLType.NONE;
+    return EHTMLElementType.NONE;
   }
 }

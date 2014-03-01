@@ -407,7 +407,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void horizontalRuler (HCStack out);
+  void appendHorizontalRuler (HCStack out);
 
   /**
    * Called when a link is opened.
@@ -445,5 +445,5 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  HCImg openImage (HCStack out);
+  HCImg appendImage (HCStack out);
 }
