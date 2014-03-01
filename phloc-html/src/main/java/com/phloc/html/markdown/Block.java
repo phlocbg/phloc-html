@@ -251,7 +251,6 @@ final class Block
       m_aLines = m_aLineTail = line;
     else
     {
-      m_aLineTail.m_bNextEmpty = line.m_bIsEmpty;
       line.m_bPrevEmpty = m_aLineTail.m_bIsEmpty;
       line.m_aPrevious = m_aLineTail;
       m_aLineTail.m_aNext = line;

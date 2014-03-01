@@ -223,6 +223,8 @@ final class Utils
             if (counter == 0)
               endReached = true;
             break;
+          default:
+            break;
         }
         if (endReached)
           break;

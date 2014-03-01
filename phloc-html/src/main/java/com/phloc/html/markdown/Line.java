@@ -47,8 +47,6 @@ final class Line
   public Line m_aNext = null;
   /** Is previous line empty? */
   public boolean m_bPrevEmpty;
-  /** Is next line empty? */
-  public boolean m_bNextEmpty;
   /** Final line of a XML block. */
   public Line m_aXmlEndLine;
 
@@ -163,8 +161,6 @@ final class Line
     m_nLeading = 0;
     m_nTrailing = 0;
     m_bIsEmpty = true;
-    if (m_aPrevious != null)
-      m_aPrevious.m_bNextEmpty = true;
     if (m_aNext != null)
       m_aNext.m_bPrevEmpty = true;
   }
@@ -368,12 +364,8 @@ final class Line
         case '\\':
           if (p + 1 < m_sValue.length ())
           {
-            switch (m_sValue.charAt (p + 1))
-            {
-              case '{':
-                p++;
-                break;
-            }
+            if (m_sValue.charAt (p + 1) == '{')
+              p++;
           }
           p++;
           break;

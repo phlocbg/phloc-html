@@ -961,9 +961,8 @@ public class Processor
           list = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
           list.m_eType = type == ELineType.OLIST ? EBlockType.ORDERED_LIST : EBlockType.UNORDERED_LIST;
           list.m_aLines.m_bPrevEmpty = false;
-          list.m_aLineTail.m_bNextEmpty = false;
           list.removeSurroundingEmptyLines ();
-          list.m_aLines.m_bPrevEmpty = list.m_aLineTail.m_bNextEmpty = false;
+          list.m_aLines.m_bPrevEmpty = false;
           _initListBlock (list);
           block = list.m_aBlocks;
           while (block != null)
