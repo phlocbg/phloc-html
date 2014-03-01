@@ -287,8 +287,11 @@ final class Line
 
     if (m_sValue.charAt (m_nLeading) == '<')
     {
-      if (_checkHTML ())
+      final EHTMLType eType = _checkHTML ();
+      if (eType == EHTMLType.TAG)
         return ELineType.XML;
+      if (eType == EHTMLType.COMMENT)
+        return ELineType.XML_COMMENT;
     }
 
     if (m_aNext != null && !m_aNext.m_bIsEmpty)
@@ -436,12 +439,19 @@ final class Line
     return null;
   }
 
+  private static enum EHTMLType
+  {
+    NONE,
+    TAG,
+    COMMENT;
+  }
+
   /**
    * Checks for a valid HTML block. Sets <code>xmlEndLine</code>.
    * 
    * @return <code>true</code> if it is a valid block.
    */
-  private boolean _checkHTML ()
+  private EHTMLType _checkHTML ()
   {
     final LinkedList <String> tags = new LinkedList <String> ();
     final StringBuilder temp = new StringBuilder ();
@@ -449,7 +459,7 @@ final class Line
     if (m_sValue.charAt (m_nLeading + 1) == '!')
     {
       if (_readXMLComment (this, m_nLeading) > 0)
-        return true;
+        return EHTMLType.COMMENT;
     }
     pos = Utils.readXML (temp, m_sValue, m_nLeading, false);
     String element, tag;
@@ -458,11 +468,11 @@ final class Line
       element = temp.toString ();
       tag = Utils.getXMLTag (element);
       if (!HTML.isHtmlBlockElement (tag))
-        return false;
+        return EHTMLType.NONE;
       if (tag.equals ("hr"))
       {
         m_aXmlEndLine = this;
-        return true;
+        return EHTMLType.TAG;
       }
       tags.add (tag);
       Line line = this;
@@ -489,7 +499,7 @@ final class Line
               if (element.charAt (1) == '/')
               {
                 if (!tags.getLast ().equals (tag))
-                  return false;
+                  return EHTMLType.NONE;
                 tags.removeLast ();
               }
               else
@@ -497,7 +507,7 @@ final class Line
                 tags.addLast (tag);
               }
             }
-            if (tags.size () == 0)
+            if (tags.isEmpty ())
             {
               m_aXmlEndLine = line;
               break;
@@ -510,8 +520,8 @@ final class Line
           }
         }
       }
-      return tags.size () == 0;
+      return tags.isEmpty () ? EHTMLType.TAG : EHTMLType.NONE;
     }
-    return false;
+    return EHTMLType.NONE;
   }
 }

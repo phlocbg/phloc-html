@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.regex.RegExPool;
+import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
 import com.phloc.html.entities.EHTMLEntity;
 import com.phloc.html.entities.HTMLEntity;
 import com.phloc.html.hc.html.HCA;
@@ -34,6 +36,7 @@ import com.phloc.html.hc.html.HCCode;
 import com.phloc.html.hc.html.HCImg;
 import com.phloc.html.hc.html.HCLI;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.HCCommentNode;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.impl.HCTextNode;
@@ -105,6 +108,7 @@ final class Emitter
         return;
       case NONE:
       case XML:
+      case XML_COMMENT:
         // No open required
         break;
       case HEADLINE:
@@ -157,6 +161,7 @@ final class Emitter
       case RULER:
       case NONE:
       case XML:
+      case XML_COMMENT:
         break;
       case HEADLINE:
         m_aConfig.m_aDecorator.closeHeadline (out, aRoot.m_nHlDepth);
@@ -209,6 +214,9 @@ final class Emitter
         break;
       case XML:
         _emitXMLLines (out, block.m_aLines);
+        break;
+      case XML_COMMENT:
+        _emitXMLComment (out, block.m_aLines);
         break;
       case PARAGRAPH:
         _emitMarkedLines (out, block.m_aLines);
@@ -961,6 +969,24 @@ final class Emitter
         out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
       }
     }
+  }
+
+  private void _emitXMLComment (final HCStack out, final Line lines)
+  {
+    Line line = lines;
+    final StringBuilder aXML = new StringBuilder ();
+    while (line != null)
+    {
+      if (!line.m_bIsEmpty)
+        aXML.append (line.m_sValue);
+      aXML.append ('\n');
+      line = line.m_aNext;
+    }
+
+    final String sContent = StringHelper.trimStartAndEnd (aXML.toString ().trim (),
+                                                          XMLEmitterPhloc.COMMENT_START,
+                                                          XMLEmitterPhloc.COMMENT_END);
+    out.append (new HCCommentNode (sContent));
   }
 
   /**

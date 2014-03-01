@@ -44,6 +44,8 @@ enum EBlockType
   UNORDERED_LIST,
   /** A XML block. */
   XML,
+  /** A XML comment block. */
+  XML_COMMENT,
   /** A plugin block. */
   PLUGIN
 }
