@@ -16,7 +16,6 @@
 package com.phloc.html.markdown;
 
 import java.util.LinkedList;
-import java.util.Locale;
 
 /**
  * This class represents a text line.
@@ -457,9 +456,7 @@ final class Line
     if (pos > -1)
     {
       element = temp.toString ();
-      temp.setLength (0);
-      Utils.getXMLTag (temp, element);
-      tag = temp.toString ().toLowerCase (Locale.US);
+      tag = Utils.getXMLTag (element);
       if (!HTML.isHtmlBlockElement (tag))
         return false;
       if (tag.equals ("hr"))
@@ -468,14 +465,12 @@ final class Line
         return true;
       }
       tags.add (tag);
-
       Line line = this;
       while (line != null)
       {
         while (pos < line.m_sValue.length () && line.m_sValue.charAt (pos) != '<')
-        {
           pos++;
-        }
+
         if (pos >= line.m_sValue.length ())
         {
           line = line.m_aNext;
@@ -488,9 +483,7 @@ final class Line
           if (newPos > 0)
           {
             element = temp.toString ();
-            temp.setLength (0);
-            Utils.getXMLTag (temp, element);
-            tag = temp.toString ().toLowerCase (Locale.US);
+            tag = Utils.getXMLTag (element);
             if (HTML.isHtmlBlockElement (tag) && !tag.equals ("hr"))
             {
               if (element.charAt (1) == '/')

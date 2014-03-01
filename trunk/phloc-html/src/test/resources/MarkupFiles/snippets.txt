@@ -53,13 +53,7 @@ Go to http://www.petebevin.com/ and poke around.
 Wasn't that fun!
 
 # Result 6
-<p>0 &lt; 1</p>
-<table>
- <tr>
- <td>Hello!</td>
- </tr>
-</table>
-<p>Wasn't that fun!</p>
+<p>0 &lt; 1</p><table><tr><td>Hello!</td></tr></table><p>Wasn&#39;t that fun!</p>
 
 # Test 7 (ID links)
 <h3 id="philosophy">Philosophy</h3>

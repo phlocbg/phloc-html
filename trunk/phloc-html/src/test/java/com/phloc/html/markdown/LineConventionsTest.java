@@ -39,11 +39,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.phloc.html.markdown.Processor;
-
 public class LineConventionsTest
 {
-  private static final String EXPECTED = "<p>a\nb\nc</p>\n";
+  private static final String EXPECTED = "<p>a\nb\nc</p>";
 
   @Test
   public void testUnixLineConventions ()
