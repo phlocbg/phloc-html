@@ -45,6 +45,12 @@ public class HCRow extends AbstractHCElementWithInternalChildren <HCRow, IHCCell
 {
   private final boolean m_bHeader;
 
+  @DevelopersNote ("Works only for tbody rows!")
+  public HCRow ()
+  {
+    this (false);
+  }
+
   public HCRow (final boolean bHeader)
   {
     super (EHTMLElement.TR);
