@@ -114,29 +114,49 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @GuardedBy ("s_aRWLock")
   private static EMode s_eDefaultMode = DEFAULT_MODE;
 
-  private final IJSCodeProvider m_aProvider;
+  private IJSCodeProvider m_aProvider;
   private String m_sJSCode;
   private EMode m_eMode;
   private boolean m_bEmitAfterFiles = DEFAULT_EMIT_AFTER_FILES;
 
-  public HCScript (@Nonnull final IJSCodeProvider aProvider)
+  public HCScript ()
   {
     super ();
-    if (aProvider == null)
-      throw new NullPointerException ("provider");
-    m_aProvider = aProvider;
     m_eMode = getDefaultMode ();
+  }
+
+  public HCScript (@Nonnull final IJSCodeProvider aProvider)
+  {
+    this ();
+    setJSCodeProvider (aProvider);
   }
 
   @DevelopersNote ("Handle with care!")
   public HCScript (@Nonnull final String sJSCode)
   {
-    this (new UnparsedJSCodeProvider (sJSCode));
+    this ();
+    setJSCode (sJSCode);
   }
 
   public boolean isInlineJS ()
   {
     return true;
+  }
+
+  @Nonnull
+  public HCScript setJSCodeProvider (@Nonnull final IJSCodeProvider aProvider)
+  {
+    if (aProvider == null)
+      throw new NullPointerException ("provider");
+    m_aProvider = aProvider;
+    return this;
+  }
+
+  @Nonnull
+  @DevelopersNote ("Handle with care!")
+  public HCScript setJSCode (@Nonnull final String sJSCode)
+  {
+    return setJSCodeProvider (new UnparsedJSCodeProvider (sJSCode));
   }
 
   /**

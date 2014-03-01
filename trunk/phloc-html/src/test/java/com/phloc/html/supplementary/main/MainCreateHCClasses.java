@@ -44,7 +44,7 @@ public class MainCreateHCClasses
                                               " * \r\n" +
                                               " * @author Philip Helger\r\n" +
                                               " */\r\n" +
-                                              "public class HC$$ extends $SUPERCLASS$ <HC$$>\r\n" +
+                                              "$ANNOTATIONS$public class HC$$ extends $SUPERCLASS$ <HC$$>\r\n" +
                                               "{\r\n" +
                                               "  /**\r\n" +
                                               "   * Create a new $$$ element\r\n" +
@@ -213,6 +213,7 @@ public class MainCreateHCClasses
                                               "Center",
                                               "Div",
                                               "EM",
+                                              "Font",
                                               "H1",
                                               "H2",
                                               "H3",
@@ -228,10 +229,12 @@ public class MainCreateHCClasses
                                               "Q",
                                               "S",
                                               "Samp",
+                                              "Small",
                                               "Span",
                                               "Strong",
                                               "Sub",
                                               "Sup",
+                                              "U",
                                               "Var" };
     final File aMainDir = new File ("src/main/java/com/phloc/html/hc/html");
     final File aTestDir = new File ("src/test/java/com/phloc/html/hc/html");
@@ -241,21 +244,22 @@ public class MainCreateHCClasses
       {
         String sSuperClass = "AbstractHCElementWithChildren";
         String sSuperParam = "EHTMLElement." + sUC;
-        if (s.equals ("Div"))
+        if (s.equals ("Div") || s.equals ("Span"))
         {
-          sSuperClass = "AbstractHCDiv";
+          sSuperClass = "AbstractHC" + s;
           sSuperParam = "";
         }
+        String sAnnotations = "";
+        if (s.equals ("Font"))
+          sAnnotations = "@DeprecatedInHTML5\r\n";
         else
-          if (s.equals ("Span"))
-          {
-            sSuperClass = "AbstractHCSpan";
-            sSuperParam = "";
-          }
+          if (s.equals ("U"))
+            sAnnotations = "@DeprecatedInHTML4\r\n@DeprecatedInHTML5\r\n";
 
         String sMainCode = TEMPLATE_MAIN;
         sMainCode = sMainCode.replace ("$SUPERCLASS$", sSuperClass);
         sMainCode = sMainCode.replace ("$SUPERPARAM$", sSuperParam);
+        sMainCode = sMainCode.replace ("$ANNOTATIONS$", sAnnotations);
         sMainCode = sMainCode.replace ("$$$", sUC);
         sMainCode = sMainCode.replace ("$$", s);
 

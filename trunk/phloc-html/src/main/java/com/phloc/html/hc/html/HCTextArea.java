@@ -43,9 +43,14 @@ public class HCTextArea extends AbstractHCControl <HCTextArea>
   private int m_nRows = CGlobal.ILLEGAL_UINT;
   private String m_sPlaceholder;
 
-  public HCTextArea (@Nullable final String sName)
+  public HCTextArea ()
   {
     super (EHTMLElement.TEXTAREA);
+  }
+
+  public HCTextArea (@Nullable final String sName)
+  {
+    this ();
     setName (sName);
   }
 
