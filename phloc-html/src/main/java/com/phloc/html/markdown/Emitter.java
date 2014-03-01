@@ -105,6 +105,7 @@ final class Emitter
         return;
       case NONE:
       case XML:
+        // No open required
         break;
       case HEADLINE:
         final AbstractHCElementWithChildren <?> aHX = m_aConfig.m_aDecorator.openHeadline (out, aRoot.m_nHlDepth);
@@ -453,9 +454,15 @@ final class Emitter
         // Read as XML
         final IMicroDocument aXML = MicroReader.readMicroXML (temp.toString ());
         if (aXML == null)
-          throw new IllegalArgumentException (temp.toString ());
-        // And use the root element
-        out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+        {
+          // FIXME Failed to parse XML - write text as is
+          out.append (temp.toString ());
+        }
+        else
+        {
+          // And use the root element
+          out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+        }
         return t;
       }
     }
@@ -944,7 +951,15 @@ final class Emitter
       }
 
       final IMicroDocument aDoc = MicroReader.readMicroXML (aXML.toString ());
-      out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
+      if (aDoc == null)
+      {
+        // FIXME Failed to parse XML
+        out.append (aXML.toString ());
+      }
+      else
+      {
+        out.append (new HCDOMWrapper (aDoc.getDocumentElement ().detachFromParent ()));
+      }
     }
   }
 
