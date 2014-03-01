@@ -17,6 +17,8 @@ package com.phloc.html.markdown;
 
 import java.util.LinkedList;
 
+import javax.annotation.Nonnull;
+
 /**
  * This class represents a text line.
  * <p>
@@ -449,8 +451,10 @@ final class Line
   /**
    * Checks for a valid HTML block. Sets <code>xmlEndLine</code>.
    * 
-   * @return <code>true</code> if it is a valid block.
+   * @return <code>EHTMLType.TAG</code> or <code>EHTMLType.COMMENT</code> if it
+   *         is a valid block.
    */
+  @Nonnull
   private EHTMLType _checkHTML ()
   {
     final LinkedList <String> tags = new LinkedList <String> ();
@@ -461,7 +465,7 @@ final class Line
       if (_readXMLComment (this, m_nLeading) > 0)
         return EHTMLType.COMMENT;
     }
-    pos = Utils.readXML (temp, m_sValue, m_nLeading, false);
+    pos = Utils.readXMLElement (temp, m_sValue, m_nLeading, false);
     String element, tag;
     if (pos > -1)
     {
@@ -489,7 +493,7 @@ final class Line
         else
         {
           temp.setLength (0);
-          final int newPos = Utils.readXML (temp, line.m_sValue, pos, false);
+          final int newPos = Utils.readXMLElement (temp, line.m_sValue, pos, false);
           if (newPos > 0)
           {
             element = temp.toString ();

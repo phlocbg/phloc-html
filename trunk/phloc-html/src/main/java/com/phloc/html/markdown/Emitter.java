@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.regex.RegExPool;
@@ -238,7 +240,7 @@ final class Emitter
    *        The token to find.
    * @return The position of the token or -1 if none could be found.
    */
-  private int _findToken (final String in, final int start, final EMarkToken token)
+  private int _findInlineToken (final String in, final int start, final EMarkToken token)
   {
     int pos = start;
     while (pos < in.length ())
@@ -263,7 +265,7 @@ final class Emitter
    *        Either LINK or IMAGE.
    * @return The new position or -1 if there is no valid markdown link.
    */
-  private int _checkLink (final HCStack out, final String in, final int start, final EMarkToken token)
+  private int _checkInlineLink (final HCStack out, final String in, final int start, final EMarkToken token)
   {
     boolean isAbbrev = false;
     int pos = start + (token == EMarkToken.LINK ? 1 : 2);
@@ -403,7 +405,7 @@ final class Emitter
    *        Starting position.
    * @return The new position or -1 if nothing valid has been found.
    */
-  private int _checkHtml (final HCStack out, final String in, final int start)
+  private int _checkInlineHtml (final HCStack out, final String in, final int start)
   {
     final StringBuilder temp = new StringBuilder ();
     int pos;
@@ -456,7 +458,7 @@ final class Emitter
     if (start + 2 < in.length ())
     {
       temp.setLength (0);
-      final int t = Utils.readXML (temp, in, start, m_aConfig.m_bSafeMode);
+      final int t = Utils.readXMLElement (temp, in, start, m_aConfig.m_bSafeMode);
       if (t != -1)
       {
         // Read as XML
@@ -489,7 +491,7 @@ final class Emitter
    *        Starting position
    * @return The new position or -1 if this entity in invalid.
    */
-  private static int _checkEntity (final StringBuilder out, final String in, final int start)
+  private static int _checkInlineEntity (final StringBuilder out, final String in, final int start)
   {
     final int pos = Utils.readUntil (out, in, start, ';');
     if (pos < 0 || out.length () < 3)
@@ -567,7 +569,7 @@ final class Emitter
         case IMAGE:
         case LINK:
           temp.reset ();
-          b = _checkLink (temp, in, pos, mt);
+          b = _checkInlineLink (temp, in, pos, mt);
           if (b > 0)
           {
             out.append (temp);
@@ -643,7 +645,7 @@ final class Emitter
         case CODE_SINGLE:
         case CODE_DOUBLE:
           a = pos + (mt == EMarkToken.CODE_DOUBLE ? 2 : 1);
-          b = _findToken (in, a, mt);
+          b = _findInlineToken (in, a, mt);
           if (b > 0)
           {
             pos = b + (mt == EMarkToken.CODE_DOUBLE ? 1 : 0);
@@ -665,7 +667,7 @@ final class Emitter
           break;
         case HTML:
           temp.reset ();
-          b = _checkHtml (temp, in, pos);
+          b = _checkInlineHtml (temp, in, pos);
           if (b > 0)
           {
             out.append (temp);
@@ -678,7 +680,7 @@ final class Emitter
           break;
         case ENTITY:
           tempSB.setLength (0);
-          b = _checkEntity (tempSB, in, pos);
+          b = _checkInlineEntity (tempSB, in, pos);
           if (b > 0)
           {
             out.append (new HCEntityNode (new HTMLEntity (tempSB.substring (1, tempSB.length () - 1)), " "));
@@ -774,6 +776,7 @@ final class Emitter
    *        Starting position.
    * @return The Token.
    */
+  @Nonnull
   private EMarkToken _getToken (final String in, final int pos)
   {
     final char c0 = pos > 0 ? _whitespaceToSpace (in.charAt (pos - 1)) : ' ';
@@ -894,9 +897,7 @@ final class Emitter
       {
         in.append ('\n');
         if (m_bConvertNewline2Br)
-        {
           in.append ("<br />");
-        }
       }
       line = line.m_aNext;
     }
@@ -930,7 +931,7 @@ final class Emitter
         if (in.charAt (pos) == '<')
         {
           temp.setLength (0);
-          final int t = Utils.readXML (temp, in, pos, m_aConfig.m_bSafeMode);
+          final int t = Utils.readXMLElement (temp, in, pos, m_aConfig.m_bSafeMode);
           if (t != -1)
           {
             // XXX Is this correct???

@@ -18,6 +18,7 @@ package com.phloc.html.markdown;
 import java.util.Locale;
 
 import javax.annotation.CheckForSigned;
+import javax.annotation.Nonnull;
 
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.random.VerySecureRandom;
@@ -228,7 +229,7 @@ final class Utils
       pos++;
     }
 
-    return (pos == in.length ()) ? -1 : pos;
+    return pos == in.length () ? -1 : pos;
   }
 
   /**
@@ -275,7 +276,7 @@ final class Utils
       pos++;
     }
 
-    return (pos == in.length ()) ? -1 : pos;
+    return pos == in.length () ? -1 : pos;
   }
 
   /**
@@ -421,6 +422,7 @@ final class Utils
    * @param in
    *        Input String.
    */
+  @Nonnull
   public static String getXMLTag (final String in)
   {
     final StringBuilder aSB = new StringBuilder ();
@@ -435,74 +437,75 @@ final class Utils
   /**
    * Reads an XML element.
    * 
-   * @param out
+   * @param aSB
    *        The StringBuilder to write to.
-   * @param in
+   * @param sIn
    *        Input String.
-   * @param start
+   * @param nStart
    *        Starting position.
-   * @param safeMode
+   * @param bSafeMode
    *        Whether to escape unsafe HTML tags or not
    * @return The new position or -1 if this is no valid XML element.
    */
   @CheckForSigned
-  public static int readXML (final StringBuilder out, final String in, final int start, final boolean safeMode)
+  public static int readXMLElement (final StringBuilder aSB, final String sIn, final int nStart, final boolean bSafeMode)
   {
     try
     {
-      int pos;
-      boolean isCloseTag;
-      if (in.charAt (start + 1) == '/')
+      if (sIn.charAt (nStart + 1) == '!')
       {
-        isCloseTag = true;
-        pos = start + 2;
+        aSB.append ("<!");
+        return nStart + 1;
+      }
+
+      int pos;
+      boolean bIsCloseTag;
+      if (sIn.charAt (nStart + 1) == '/')
+      {
+        bIsCloseTag = true;
+        pos = nStart + 2;
       }
       else
-        if (in.charAt (start + 1) == '!')
-        {
-          out.append ("<!");
-          return start + 1;
-        }
-        else
-        {
-          isCloseTag = false;
-          pos = start + 1;
-        }
-      if (safeMode)
+      {
+        bIsCloseTag = false;
+        pos = nStart + 1;
+      }
+
+      if (bSafeMode)
       {
         final StringBuilder temp = new StringBuilder ();
-        pos = _readRawUntil (temp, in, pos, ' ', '/', '>');
+        pos = _readRawUntil (temp, sIn, pos, ' ', '/', '>');
         if (pos == -1)
           return -1;
         final String tag = temp.toString ().trim ().toLowerCase (Locale.US);
         if (HTML.isUnsafeHtmlElement (tag))
         {
-          out.append ("&lt;");
-          if (isCloseTag)
-            out.append ('/');
-          out.append (temp);
+          aSB.append ("&lt;");
+          if (bIsCloseTag)
+            aSB.append ('/');
+          aSB.append (temp);
         }
       }
       else
       {
-        out.append ('<');
-        if (isCloseTag)
-          out.append ('/');
-        pos = _readRawUntil (out, in, pos, ' ', '/', '>');
+        aSB.append ('<');
+        if (bIsCloseTag)
+          aSB.append ('/');
+        pos = _readRawUntil (aSB, sIn, pos, ' ', '/', '>');
       }
       if (pos == -1)
         return -1;
-      pos = _readRawUntil (out, in, pos, '/', '>');
-      if (in.charAt (pos) == '/')
+      pos = _readRawUntil (aSB, sIn, pos, '/', '>');
+      if (sIn.charAt (pos) == '/')
       {
-        out.append (" /");
-        pos = readRawUntil (out, in, pos + 1, '>');
+        aSB.append (" /");
+        pos = readRawUntil (aSB, sIn, pos + 1, '>');
         if (pos == -1)
           return -1;
       }
-      if (in.charAt (pos) == '>')
+      if (sIn.charAt (pos) == '>')
       {
-        out.append ('>');
+        aSB.append ('>');
         return pos + 1;
       }
     }
