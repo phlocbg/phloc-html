@@ -24,6 +24,7 @@ import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.impl.MicroComment;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
+import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
@@ -43,6 +44,8 @@ public class HCCommentNode extends AbstractHCNode
   public HCCommentNode (@Nullable final String sText)
   {
     m_sText = sText == null ? "" : sText;
+    if (m_sText.contains (XMLEmitterPhloc.COMMENT_START) || m_sText.contains (XMLEmitterPhloc.COMMENT_END))
+      throw new IllegalArgumentException ("XML comment contains nested XML comment: " + m_sText);
   }
 
   /**
