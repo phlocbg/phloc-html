@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.microdom.IMicroDocument;
+import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.regex.RegExPool;
 import com.phloc.commons.string.StringHelper;
@@ -39,11 +40,12 @@ import com.phloc.html.hc.html.HCAbbr;
 import com.phloc.html.hc.html.HCCode;
 import com.phloc.html.hc.html.HCImg;
 import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.htmlext.HCUtils;
+import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCCommentNode;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCEntityNode;
-import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
 /**
@@ -498,21 +500,14 @@ final class Emitter
           // Self closed tag - can be parsed
           final IMicroDocument aXML = MicroReader.readMicroXML (sElement);
           if (aXML == null)
-          {
-            // FIXME Failed to parse XML - write text as is
-            out.append (temp.toString ());
-          }
-          else
-          {
-            // And use the root element
-            out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
-          }
+            throw new IllegalArgumentException ("Failed to parse: " + sElement);
+          // And use the root element
+          out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
         }
         else
           if (sElement.startsWith ("</"))
           {
             // Closing tag
-            out.pop ();
             out.pop ();
           }
           else
@@ -522,9 +517,28 @@ final class Emitter
             final IMicroDocument aXML = MicroReader.readMicroXML (sParseCode);
             if (aXML == null)
               throw new IllegalArgumentException ("Failed to parse: " + sParseCode);
+            final IMicroElement eRoot = aXML.getDocumentElement ();
+
             // And use the root element
-            out.push (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
-            out.push (new HCNodeList ());
+            final AbstractHCElement <?> aHC = HCUtils.createHCElementFromName (eRoot.getTagName ());
+            if (aHC == null)
+              throw new IllegalArgumentException ("Failed to get HC element: " + eRoot.getTagName ());
+
+            // Clone all attributes
+            if (eRoot.hasAttributes ())
+              for (final Map.Entry <String, String> aEntry : eRoot.getAllAttributes ().entrySet ())
+                aHC.setCustomAttr (aEntry.getKey (), aEntry.getValue ());
+
+            if (aHC.getElement ().mayBeSelfClosed ())
+            {
+              // e.g. <hr>
+              out.append (aHC);
+            }
+            else
+            {
+              // Push
+              out.push (aHC);
+            }
           }
 
         return t - 1;
