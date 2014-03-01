@@ -62,8 +62,7 @@ public class HCHead extends AbstractHCElement <HCHead>
 
   private String m_sProfile;
   private String m_sPageTitle;
-  private String m_sBaseHref;
-  private HCA_Target m_aBaseTarget;
+  private final HCBase m_aBase = new HCBase ();
   private final Map <String, IMetaElement> m_aMetaElements = new LinkedHashMap <String, IMetaElement> ();
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
   private final List <IHCNode> m_aCSS = new ArrayList <IHCNode> ();
@@ -107,26 +106,26 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nullable
   public String getBaseHref ()
   {
-    return m_sBaseHref;
+    return m_aBase.getHref ();
   }
 
   @Nonnull
   public HCHead setBaseHref (@Nullable final String sBaseHref)
   {
-    m_sBaseHref = sBaseHref;
+    m_aBase.setHref (sBaseHref);
     return this;
   }
 
   @Nullable
   public HCA_Target getBaseTarget ()
   {
-    return m_aBaseTarget;
+    return m_aBase.getTarget ();
   }
 
   @Nonnull
   public HCHead setBaseTarget (@Nullable final HCA_Target aTarget)
   {
-    m_aBaseTarget = aTarget;
+    m_aBase.setTarget (aTarget);
     return this;
   }
 
@@ -424,8 +423,6 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     super.applyProperties (eHead, aConversionSettings);
 
-    final String sNamespaceURI = aConversionSettings.getHTMLNamespaceURI ();
-
     if (StringHelper.hasText (m_sProfile))
       eHead.setAttribute (CHTMLAttributes.PROFILE, m_sProfile);
 
@@ -438,14 +435,7 @@ public class HCHead extends AbstractHCElement <HCHead>
       eHead.appendChild (new HCTitle (m_sPageTitle).convertToNode (aConversionSettings));
 
     // base
-    if (StringHelper.hasText (m_sBaseHref) || m_aBaseTarget != null)
-    {
-      final IMicroElement eBase = eHead.appendElement (sNamespaceURI, EHTMLElement.BASE);
-      if (StringHelper.hasText (m_sBaseHref))
-        eBase.setAttribute (CHTMLAttributes.HREF, m_sBaseHref);
-      if (m_aBaseTarget != null)
-        eBase.setAttribute (CHTMLAttributes.TARGET, m_aBaseTarget);
-    }
+    eHead.appendChild (new HCBase ().convertToNode (aConversionSettings));
 
     // links
     emitLinks (eHead, aConversionSettings);
@@ -475,8 +465,7 @@ public class HCHead extends AbstractHCElement <HCHead>
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("profile", m_sProfile)
                             .appendIfNotNull ("pageTitle", m_sPageTitle)
-                            .appendIfNotNull ("baseHref", m_sBaseHref)
-                            .appendIfNotNull ("baseTarget", m_aBaseTarget)
+                            .appendIfNotNull ("base", m_aBase)
                             .appendIfNotNull ("metaElements", m_aMetaElements)
                             .appendIfNotNull ("links", m_aLinks)
                             .appendIfNotNull ("CSS", m_aCSS)

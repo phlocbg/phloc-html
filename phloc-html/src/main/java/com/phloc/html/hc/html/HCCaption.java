@@ -23,18 +23,18 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
- * Represents an HTML &lt;title&gt; element
+ * Represents an HTML &lt;caption&gt; element
  * 
  * @author Philip Helger
  */
-public class HCTitle extends AbstractHCElementWithChildren <HCTitle>
+public class HCCaption extends AbstractHCElementWithChildren <HCCaption>
 {
-  public HCTitle ()
+  public HCCaption ()
   {
-    super (EHTMLElement.TITLE);
+    super (EHTMLElement.CAPTION);
   }
 
-  public HCTitle (@Nullable final String sTitle)
+  public HCCaption (@Nullable final String sTitle)
   {
     this ();
     addChild (sTitle);
