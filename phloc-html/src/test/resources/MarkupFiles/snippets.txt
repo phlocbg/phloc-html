@@ -76,15 +76,13 @@ inspiration for Markdown's syntax is the format of plain text email.
   [6]: http://ettext.taint.org/doc/
 
 # Result 7
-<h3 id="philosophy">Philosophy</h3>
-<p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
-<p>Readability, however, is emphasized above all else. A Markdown-formatted
+<h3 id="philosophy">Philosophy</h3><p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p><p>Readability, however, is emphasized above all else. A Markdown-formatted
 document should be publishable as-is, as plain text, without looking
-like it's been marked up with tags or formatting instructions. While
-Markdown's syntax has been influenced by several existing text-to-HTML
+like it&#39;s been marked up with tags or formatting instructions. While
+Markdown&#39;s syntax has been influenced by several existing text-to-HTML
 filters -- including <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/">atx</a>, <a href="http://textism.com/tools/textile/">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>,
 <a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a>, and <a href="http://ettext.taint.org/doc/">EtText</a> -- the single biggest source of
-inspiration for Markdown's syntax is the format of plain text email.</p>
+inspiration for Markdown&#39;s syntax is the format of plain text email.</p>
 
 # Test 8 (Backslash escapes)
 To this end, Markdown's syntax is comprised entirely of punctuation
