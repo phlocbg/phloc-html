@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -50,7 +51,13 @@ public class HCBase extends AbstractHCElement <HCBase>
   }
 
   @Nonnull
-  public HCBase setHref (final String sHref)
+  public HCBase setHref (@Nullable final ISimpleURL aHref)
+  {
+    return setHref (aHref == null ? null : aHref.getAsString ());
+  }
+
+  @Nonnull
+  public HCBase setHref (@Nullable final String sHref)
   {
     m_sHref = sHref;
     return this;
