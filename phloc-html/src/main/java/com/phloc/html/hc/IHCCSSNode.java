@@ -17,7 +17,6 @@
  */
 package com.phloc.html.hc;
 
-
 /**
  * Marker interface for nodes that can contain CSS code (inline or external)
  * 

@@ -23,9 +23,7 @@ package com.phloc.html.hc;
  * @author Philip Helger
  * @param <THISTYPE>
  */
-public interface IHCElementWithChildren <THISTYPE extends IHCElementWithChildren <THISTYPE>> extends
-                                                                                             IHCElement <THISTYPE>,
-                                                                                             IHCNodeWithChildren <THISTYPE>
+public interface IHCElementWithChildren <THISTYPE extends IHCElementWithChildren <THISTYPE>> extends IHCElement <THISTYPE>, IHCNodeWithChildren <THISTYPE>
 {
   /** empty */
 }

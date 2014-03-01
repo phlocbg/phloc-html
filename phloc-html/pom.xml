@@ -161,6 +161,8 @@
           <excludes>
             <exclude>src/main/resources/html/**</exclude>
             <exclude>src/test/resources/jquery/**</exclude>
+            <exclude>src/test/resources/MarkdownTest/**</exclude>
+            <exclude>src/test/resources/MarkupFiles/**</exclude>
           </excludes>
         </configuration>
       </plugin>
