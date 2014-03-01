@@ -133,6 +133,7 @@ public class Configuration
      * @return This builder
      * @since 0.7
      */
+    @Nonnull
     public Builder enableSafeMode ()
     {
       m_bSafeMode = true;
@@ -145,6 +146,7 @@ public class Configuration
      * @return This builder.
      * @since 0.7
      */
+    @Nonnull
     public Builder forceExtentedProfile ()
     {
       m_bForceExtendedProfile = true;
@@ -156,6 +158,7 @@ public class Configuration
      * 
      * @return This builder.
      */
+    @Nonnull
     public Builder convertNewline2Br ()
     {
       m_bConvertNewline2Br = true;
@@ -170,6 +173,7 @@ public class Configuration
      * @return This builder
      * @since 0.7
      */
+    @Nonnull
     public Builder setSafeMode (final boolean flag)
     {
       m_bSafeMode = flag;
@@ -185,10 +189,16 @@ public class Configuration
      * @return This builder
      * @since 0.7
      */
+    @Nonnull
     public Builder setEncoding (final String encoding)
     {
       m_sEncoding = encoding;
       return this;
+    }
+
+    public IDecorator getDecorator ()
+    {
+      return m_aDecorator;
     }
 
     /**
@@ -200,6 +210,7 @@ public class Configuration
      * @see DefaultDecorator
      * @since 0.7
      */
+    @Nonnull
     public Builder setDecorator (final IDecorator decorator)
     {
       m_aDecorator = decorator;
@@ -215,6 +226,7 @@ public class Configuration
      * @see IBlockEmitter
      * @since 0.7
      */
+    @Nonnull
     public Builder setCodeBlockEmitter (final IBlockEmitter emitter)
     {
       m_aCodeBlockEmitter = emitter;
@@ -229,6 +241,7 @@ public class Configuration
      * @return This builder.
      * @since 0.7
      */
+    @Nonnull
     public Builder setSpecialLinkEmitter (final ISpanEmitter emitter)
     {
       m_aSpecialLinkEmitter = emitter;
@@ -242,12 +255,11 @@ public class Configuration
      *        The plugins.
      * @return This builder.
      */
+    @Nonnull
     public Builder registerPlugins (final AbstractPlugin... plugins)
     {
       for (final AbstractPlugin plugin : plugins)
-      {
         m_aPlugins.add (plugin);
-      }
       return this;
     }
 
@@ -268,11 +280,6 @@ public class Configuration
                                 m_bConvertNewline2Br,
                                 m_aSpecialLinkEmitter,
                                 m_aPlugins);
-    }
-
-    public IDecorator getDecorator ()
-    {
-      return m_aDecorator;
     }
   }
 }
