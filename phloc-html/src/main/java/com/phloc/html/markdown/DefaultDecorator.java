@@ -37,6 +37,7 @@ import com.phloc.html.hc.html.HCS;
 import com.phloc.html.hc.html.HCStrong;
 import com.phloc.html.hc.html.HCSup;
 import com.phloc.html.hc.html.HCUL;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Default Decorator implementation.
@@ -107,29 +108,24 @@ public class DefaultDecorator implements IDecorator
     out.pop ();
   }
 
-  public void openHeadline (final HCStack out, final int level)
+  public AbstractHCElementWithChildren <?> openHeadline (final HCStack out, final int level)
   {
     switch (level)
     {
       case 1:
-        out.push (new HCH1 ());
-        break;
+        return out.push (new HCH1 ());
       case 2:
-        out.push (new HCH2 ());
-        break;
+        return out.push (new HCH2 ());
       case 3:
-        out.push (new HCH3 ());
-        break;
+        return out.push (new HCH3 ());
       case 4:
-        out.push (new HCH4 ());
-        break;
+        return out.push (new HCH4 ());
       case 5:
-        out.push (new HCH5 ());
-        break;
+        return out.push (new HCH5 ());
       case 6:
-        out.push (new HCH6 ());
-        break;
+        return out.push (new HCH6 ());
     }
+    throw new IllegalArgumentException ();
   }
 
   public void closeHeadline (final HCStack out, final int level)
@@ -197,9 +193,9 @@ public class DefaultDecorator implements IDecorator
     out.pop ();
   }
 
-  public void openListItem (final HCStack out)
+  public HCLI openListItem (final HCStack out)
   {
-    out.push (new HCLI ());
+    return out.push (new HCLI ());
   }
 
   public void closeListItem (final HCStack out)

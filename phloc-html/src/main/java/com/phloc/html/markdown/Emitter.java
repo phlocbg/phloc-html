@@ -23,14 +23,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.phloc.commons.microdom.IMicroDocument;
+import com.phloc.commons.microdom.serialize.MicroReader;
 import com.phloc.commons.regex.RegExPool;
 import com.phloc.html.entities.EHTMLEntity;
 import com.phloc.html.entities.HTMLEntity;
-import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.html.HCA;
 import com.phloc.html.hc.html.HCAbbr;
 import com.phloc.html.hc.html.HCCode;
 import com.phloc.html.hc.html.HCImg;
+import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.impl.HCTextNode;
 
@@ -87,14 +91,14 @@ final class Emitter
    * 
    * @param out
    *        The StringBuilder to write to.
-   * @param root
+   * @param aRoot
    *        The Block to process.
    */
-  public void emit (final HCStack out, final Block root)
+  public void emit (final HCStack out, final Block aRoot)
   {
-    root.removeSurroundingEmptyLines ();
+    aRoot.removeSurroundingEmptyLines ();
 
-    switch (root.m_eType)
+    switch (aRoot.m_eType)
     {
       case RULER:
         m_aConfig.m_aDecorator.horizontalRuler (out);
@@ -103,9 +107,9 @@ final class Emitter
       case XML:
         break;
       case HEADLINE:
-        m_aConfig.m_aDecorator.openHeadline (out, root.m_nHlDepth);
-        if (m_bUseExtensions && root.m_sId != null)
-          ((IHCElement <?>) out.peek ()).setID (root.m_sId);
+        final AbstractHCElementWithChildren <?> aHX = m_aConfig.m_aDecorator.openHeadline (out, aRoot.m_nHlDepth);
+        if (m_bUseExtensions && aRoot.m_sId != null)
+          aHX.setID (aRoot.m_sId);
         break;
       case PARAGRAPH:
         m_aConfig.m_aDecorator.openParagraph (out);
@@ -125,21 +129,21 @@ final class Emitter
         m_aConfig.m_aDecorator.openOrderedList (out);
         break;
       case LIST_ITEM:
-        m_aConfig.m_aDecorator.openListItem (out);
-        if (m_bUseExtensions && root.m_sId != null)
-          ((IHCElement <?>) out.peek ()).setID (root.m_sId);
+        final HCLI aLI = m_aConfig.m_aDecorator.openListItem (out);
+        if (m_bUseExtensions && aRoot.m_sId != null)
+          aLI.setID (aRoot.m_sId);
         break;
       default:
         break;
     }
 
-    if (root.hasLines ())
+    if (aRoot.hasLines ())
     {
-      _emitLines (out, root);
+      _emitLines (out, aRoot);
     }
     else
     {
-      Block block = root.m_aBlocks;
+      Block block = aRoot.m_aBlocks;
       while (block != null)
       {
         emit (out, block);
@@ -147,14 +151,14 @@ final class Emitter
       }
     }
 
-    switch (root.m_eType)
+    switch (aRoot.m_eType)
     {
       case RULER:
       case NONE:
       case XML:
         break;
       case HEADLINE:
-        m_aConfig.m_aDecorator.closeHeadline (out, root.m_nHlDepth);
+        m_aConfig.m_aDecorator.closeHeadline (out, aRoot.m_nHlDepth);
         break;
       case PARAGRAPH:
         m_aConfig.m_aDecorator.closeParagraph (out);
@@ -203,7 +207,7 @@ final class Emitter
         emitPluginLines (out, block.m_aLines, block.m_sMeta);
         break;
       case XML:
-        _emitRawLines (out, block.m_aLines);
+        _emitXMLLines (out, block.m_aLines);
         break;
       case PARAGRAPH:
         _emitMarkedLines (out, block.m_aLines);
@@ -444,15 +448,13 @@ final class Emitter
     {
       temp.setLength (0);
       final int t = Utils.readXML (temp, in, start, m_aConfig.m_bSafeMode);
-      // XXX Is this correct??? Was return t before
       if (t != -1)
       {
-        out.append (temp.toString ());
-        pos = t;
-      }
-      else
-      {
-        out.append (in.charAt (pos));
+        // Read as XML
+        final IMicroDocument aXML = MicroReader.readMicroXML (temp.toString ());
+        // And use the root element
+        out.append (new HCDOMWrapper (aXML.getDocumentElement ().detachFromParent ()));
+        return t;
       }
     }
 
@@ -893,7 +895,7 @@ final class Emitter
    * @param lines
    *        The lines to write.
    */
-  private void _emitRawLines (final HCStack out, final Line lines)
+  private void _emitXMLLines (final HCStack out, final Line lines)
   {
     Line line = lines;
     if (m_aConfig.m_bSafeMode)

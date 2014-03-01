@@ -50,7 +50,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.file.SimpleFileIO;
 import com.phloc.commons.io.resource.ClassPathResource;
-import com.phloc.html.markdown.Processor;
 
 @RunWith (value = Parameterized.class)
 public class MarkdownTest
@@ -83,21 +82,21 @@ public class MarkdownTest
 
   public MarkdownTest (final String dir, final String test)
   {
-    this.m_sDir = dir;
-    this.m_sTest = test;
+    m_sDir = dir;
+    m_sTest = test;
+  }
+
+  private static String _slurp (final String fileName)
+  {
+    return SimpleFileIO.readFileAsString (ClassPathResource.getAsFile (fileName), CCharset.CHARSET_UTF_8_OBJ);
   }
 
   @Test
   public void runTest ()
   {
-    final String testText = slurp (m_sDir + File.separator + m_sTest + ".text");
-    final String htmlText = slurp (m_sDir + File.separator + m_sTest + ".html");
+    final String testText = _slurp (m_sDir + File.separator + m_sTest + ".text");
+    final String htmlText = _slurp (m_sDir + File.separator + m_sTest + ".html");
     final String markdownText = Processor.process (testText);
     assertEquals (m_sTest, htmlText.trim (), markdownText.trim ());
-  }
-
-  private static String slurp (final String fileName)
-  {
-    return SimpleFileIO.readFileAsString (ClassPathResource.getAsFile (fileName), CCharset.CHARSET_UTF_8_OBJ);
   }
 }

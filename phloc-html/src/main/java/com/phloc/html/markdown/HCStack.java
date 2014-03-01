@@ -20,12 +20,6 @@ public class HCStack
     m_aStack.push (new HCNodeList ());
   }
 
-  @Nonnull
-  public IHCHasChildren peek ()
-  {
-    return m_aStack.peek ();
-  }
-
   public void push (@Nonnull final AbstractHCList <?> aNode)
   {
     append (aNode);
@@ -75,7 +69,7 @@ public class HCStack
 
   public void append (final IHCNode aNode)
   {
-    final IHCHasChildren aParent = peek ();
+    final IHCHasChildren aParent = m_aStack.peek ();
     if (aNode instanceof HCLI && aParent instanceof AbstractHCList <?>)
       ((AbstractHCList <?>) aParent).addItem ((HCLI) aNode);
     else

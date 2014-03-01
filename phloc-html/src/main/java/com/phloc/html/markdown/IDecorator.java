@@ -18,6 +18,8 @@ package com.phloc.html.markdown;
 import com.phloc.html.hc.html.HCA;
 import com.phloc.html.hc.html.HCCode;
 import com.phloc.html.hc.html.HCImg;
+import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Decorator interface.
@@ -160,7 +162,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openHeadline (HCStack out, int level);
+  AbstractHCElementWithChildren <?> openHeadline (HCStack out, int level);
 
   /**
    * Called when a headline is closed.
@@ -375,7 +377,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openListItem (HCStack out);
+  HCLI openListItem (HCStack out);
 
   /**
    * Called when a list item is closed.

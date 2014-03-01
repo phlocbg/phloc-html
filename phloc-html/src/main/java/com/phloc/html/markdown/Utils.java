@@ -17,6 +17,8 @@ package com.phloc.html.markdown;
 
 import java.util.Locale;
 
+import javax.annotation.CheckForSigned;
+
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.random.VerySecureRandom;
 
@@ -141,7 +143,7 @@ final class Utils
       pos++;
     }
 
-    return (pos == in.length ()) ? -1 : pos;
+    return pos == in.length () ? -1 : pos;
   }
 
   /**
@@ -176,7 +178,7 @@ final class Utils
       pos++;
     }
 
-    return (pos == in.length ()) ? -1 : pos;
+    return pos == in.length () ? -1 : pos;
   }
 
   /**
@@ -311,7 +313,7 @@ final class Utils
       pos++;
     }
 
-    return (pos == in.length ()) ? -1 : pos;
+    return pos == in.length () ? -1 : pos;
   }
 
   /**
@@ -344,97 +346,6 @@ final class Utils
   }
 
   /**
-   * Appends the given string encoding special HTML characters.
-   * 
-   * @param out
-   *        The StringBuilder to write to.
-   * @param in
-   *        Input String.
-   * @param start
-   *        Input String starting position.
-   * @param end
-   *        Input String end position.
-   */
-  public static void appendCode (final StringBuilder out, final String in, final int start, final int end)
-  {
-    for (int i = start; i < end; i++)
-    {
-      final char c;
-      switch (c = in.charAt (i))
-      {
-        case '&':
-          out.append ("&amp;");
-          break;
-        case '<':
-          out.append ("&lt;");
-          break;
-        case '>':
-          out.append ("&gt;");
-          break;
-        default:
-          out.append (c);
-          break;
-      }
-    }
-  }
-
-  /**
-   * Appends the given string encoding special HTML characters (used in HTML
-   * attribute values).
-   * 
-   * @param out
-   *        The StringBuilder to write to.
-   * @param in
-   *        Input String.
-   */
-  public static void appendValue (final StringBuilder out, final String in)
-  {
-    appendValue (out, in, 0, in.length ());
-  }
-
-  /**
-   * Appends the given string encoding special HTML characters (used in HTML
-   * attribute values).
-   * 
-   * @param out
-   *        The StringBuilder to write to.
-   * @param in
-   *        Input String.
-   * @param start
-   *        Input String starting position.
-   * @param end
-   *        Input String end position.
-   */
-  public static void appendValue (final StringBuilder out, final String in, final int start, final int end)
-  {
-    for (int i = start; i < end; i++)
-    {
-      final char c;
-      switch (c = in.charAt (i))
-      {
-        case '&':
-          out.append ("&amp;");
-          break;
-        case '<':
-          out.append ("&lt;");
-          break;
-        case '>':
-          out.append ("&gt;");
-          break;
-        case '"':
-          out.append ("&quot;");
-          break;
-        case '\'':
-          out.append ("&apos;");
-          break;
-        default:
-          out.append (c);
-          break;
-      }
-    }
-  }
-
-  /**
    * Append the given char as a decimal HTML entity.
    * 
    * @param out
@@ -444,9 +355,7 @@ final class Utils
    */
   private static void _appendDecEntity (final StringBuilder out, final char value)
   {
-    out.append ("&#");
-    out.append ((int) value);
-    out.append (';');
+    out.append ("&#").append ((int) value).append (';');
   }
 
   /**
@@ -459,9 +368,7 @@ final class Utils
    */
   private static void _appendHexEntity (final StringBuilder out, final char value)
   {
-    out.append ("&#x");
-    out.append (Integer.toHexString (value));
-    out.append (';');
+    out.append ("&#x").append (Integer.toHexString (value)).append (';');
   }
 
   /**
@@ -480,9 +387,9 @@ final class Utils
   {
     for (int i = start; i < end; i++)
     {
-      final char c;
+      final char c = in.charAt (i);
       final int r = rnd ();
-      switch (c = in.charAt (i))
+      switch (c)
       {
         case '&':
         case '<':
@@ -511,20 +418,18 @@ final class Utils
   /**
    * Extracts the tag from an XML element.
    * 
-   * @param out
-   *        The StringBuilder to write to.
    * @param in
    *        Input String.
    */
-  public static void getXMLTag (final StringBuilder out, final String in)
+  public static String getXMLTag (final String in)
   {
+    final StringBuilder aSB = new StringBuilder ();
     int pos = 1;
     if (in.charAt (1) == '/')
       pos++;
     while (Character.isLetterOrDigit (in.charAt (pos)))
-    {
-      out.append (in.charAt (pos++));
-    }
+      aSB.append (in.charAt (pos++));
+    return aSB.toString ().toLowerCase (Locale.US);
   }
 
   /**
@@ -540,6 +445,7 @@ final class Utils
    *        Whether to escape unsafe HTML tags or not
    * @return The new position or -1 if this is no valid XML element.
    */
+  @CheckForSigned
   public static int readXML (final StringBuilder out, final String in, final int start, final boolean safeMode)
   {
     try
@@ -597,7 +503,7 @@ final class Utils
       if (in.charAt (pos) == '>')
       {
         out.append ('>');
-        return pos;
+        return pos + 1;
       }
     }
     catch (final StringIndexOutOfBoundsException e)
