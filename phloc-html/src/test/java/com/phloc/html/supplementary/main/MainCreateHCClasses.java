@@ -224,6 +224,7 @@ public class MainCreateHCClasses
                                               "Ins",
                                               "KBD",
                                               "LI",
+                                              "NoBR",
                                               "NoScript",
                                               "Pre",
                                               "Q",
@@ -253,7 +254,7 @@ public class MainCreateHCClasses
         if (s.equals ("Font"))
           sAnnotations = "@DeprecatedInHTML5\r\n";
         else
-          if (s.equals ("U"))
+          if (s.equals ("U") || s.equals ("NoBR"))
             sAnnotations = "@DeprecatedInHTML4\r\n@DeprecatedInHTML5\r\n";
 
         String sMainCode = TEMPLATE_MAIN;
