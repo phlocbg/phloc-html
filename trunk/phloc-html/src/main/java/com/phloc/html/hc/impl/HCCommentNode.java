@@ -20,9 +20,6 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.phloc.commons.microdom.IMicroComment;
 import com.phloc.commons.microdom.impl.MicroComment;
 import com.phloc.commons.string.ToStringGenerator;
@@ -36,7 +33,6 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCCommentNode extends AbstractHCNode
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HCCommentNode.class);
   private final String m_sText;
 
   public HCCommentNode (@Nonnull final IPredefinedLocaleTextProvider aTextProvider)
@@ -47,8 +43,6 @@ public class HCCommentNode extends AbstractHCNode
   public HCCommentNode (@Nullable final String sText)
   {
     m_sText = sText == null ? "" : sText;
-    if (m_sText.contains ("--"))
-      s_aLogger.warn ("Comments may not contain the string '--': " + sText);
   }
 
   /**

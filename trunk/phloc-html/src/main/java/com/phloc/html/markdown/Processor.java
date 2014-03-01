@@ -816,7 +816,8 @@ public class Processor
                 t == ELineType.HEADLINE2 ||
                 t == ELineType.HR ||
                 t == ELineType.BQUOTE ||
-                t == ELineType.XML)
+                t == ELineType.XML ||
+                t == ELineType.XML_COMMENT)
               break;
             aLine = aLine.m_aNext;
           }
@@ -847,12 +848,13 @@ public class Processor
           block.removeSurroundingEmptyLines ();
           break;
         case XML:
+        case XML_COMMENT:
           if (aLine.m_aPrevious != null)
           {
             // FIXME ... this looks wrong
             aRoot.split (aLine.m_aPrevious);
           }
-          aRoot.split (aLine.m_aXmlEndLine).m_eType = EBlockType.XML;
+          aRoot.split (aLine.m_aXmlEndLine).m_eType = type == ELineType.XML ? EBlockType.XML : EBlockType.XML_COMMENT;
           aRoot.removeLeadingEmptyLines ();
           aLine = aRoot.m_aLines;
           break;

@@ -41,6 +41,8 @@ enum ELineType
   HR,
   /** Start of a XML block. */
   XML,
+  /** XML comment. */
+  XML_COMMENT,
   /** Fenced code block start/end */
   FENCED_CODE,
   /** plugin block */
