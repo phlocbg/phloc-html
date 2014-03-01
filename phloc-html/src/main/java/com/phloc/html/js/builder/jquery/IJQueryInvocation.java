@@ -732,7 +732,7 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
 
   /**
    * @return The invocation of the jQuery function <code>height()</code> with
-   *         return type Integer or jQuery
+   *         return type Number or jQuery
    */
   @Nonnull
   IMPLTYPE height ();
@@ -767,7 +767,7 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
 
   /**
    * @return The invocation of the jQuery function <code>innerHeight()</code>
-   *         with return type Integer
+   *         with return type Number
    * @since jQuery 1.2.6
    */
   @Nonnull
@@ -775,8 +775,7 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
 
   /**
    * @return The invocation of the jQuery function <code>innerWidth()</code>
-   *         with return type Integer
-   * @since jQuery 1.2.6
+   *         with return type Integer or jQuery
    */
   @Nonnull
   IMPLTYPE innerWidth ();
@@ -972,14 +971,14 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
 
   /**
    * @return The invocation of the jQuery function <code>outerHeight()</code>
-   *         with return type Integer
+   *         with return type Number
    */
   @Nonnull
   IMPLTYPE outerHeight ();
 
   /**
    * @return The invocation of the jQuery function <code>outerWidth()</code>
-   *         with return type Integer
+   *         with return type Number
    */
   @Nonnull
   IMPLTYPE outerWidth ();
@@ -1334,7 +1333,7 @@ public interface IJQueryInvocation <IMPLTYPE extends IJQueryInvocation <IMPLTYPE
 
   /**
    * @return The invocation of the jQuery function <code>width()</code> with
-   *         return type Integer or jQuery
+   *         return type Number or jQuery
    */
   @Nonnull
   IMPLTYPE width ();
