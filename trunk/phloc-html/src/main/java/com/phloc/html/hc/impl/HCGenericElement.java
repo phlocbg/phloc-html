@@ -15,18 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phloc.html.hc;
+package com.phloc.html.hc.impl;
 
-/**
- * Marker interface for nodes that can contain JS code (inline or external)
- * 
- * @author Philip Helger
- */
-public interface IHCJSNode extends IHCNode
+import javax.annotation.Nonnull;
+
+import com.phloc.html.EHTMLElement;
+
+public class HCGenericElement extends AbstractHCElement <HCGenericElement>
 {
-  /**
-   * @return <code>true</code> if this is an inline JS node, <code>false</code>
-   *         if it is an externally referenced JS node
-   */
-  boolean isInlineJS ();
+  public HCGenericElement (@Nonnull final EHTMLElement eElement)
+  {
+    super (eElement);
+  }
 }

@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCBR;
 import com.phloc.html.hc.impl.HCTextNode;
@@ -53,5 +54,12 @@ public final class HCUtilsTest
     assertEquals (3, HCUtils.nl2brList (HTML_STRING6).size ());
     assertEquals (5, HCUtils.nl2brList (HTML_STRING7).size ());
     assertEquals (1, HCUtils.nl2brList (HTML_STRING8).size ());
+  }
+
+  @Test
+  public void testCreateHCElement ()
+  {
+    for (final EHTMLElement e : EHTMLElement.values ())
+      assertNotNull (HCUtils.createHCElement (e));
   }
 }

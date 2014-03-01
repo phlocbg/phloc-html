@@ -40,9 +40,117 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.HCAbbr;
+import com.phloc.html.hc.html.HCAddress;
+import com.phloc.html.hc.html.HCB;
+import com.phloc.html.hc.html.HCBDO;
 import com.phloc.html.hc.html.HCBR;
+import com.phloc.html.hc.html.HCBase;
+import com.phloc.html.hc.html.HCBlockQuote;
+import com.phloc.html.hc.html.HCBody;
+import com.phloc.html.hc.html.HCButton;
+import com.phloc.html.hc.html.HCCaption;
+import com.phloc.html.hc.html.HCCenter;
+import com.phloc.html.hc.html.HCCite;
+import com.phloc.html.hc.html.HCCode;
+import com.phloc.html.hc.html.HCCol;
+import com.phloc.html.hc.html.HCColGroup;
+import com.phloc.html.hc.html.HCDD;
+import com.phloc.html.hc.html.HCDFN;
+import com.phloc.html.hc.html.HCDL;
+import com.phloc.html.hc.html.HCDT;
+import com.phloc.html.hc.html.HCDel;
+import com.phloc.html.hc.html.HCDir;
 import com.phloc.html.hc.html.HCDiv;
+import com.phloc.html.hc.html.HCEM;
+import com.phloc.html.hc.html.HCEmbed;
+import com.phloc.html.hc.html.HCFieldSet;
+import com.phloc.html.hc.html.HCFont;
+import com.phloc.html.hc.html.HCForm;
+import com.phloc.html.hc.html.HCFrame;
+import com.phloc.html.hc.html.HCFrameset;
+import com.phloc.html.hc.html.HCH1;
+import com.phloc.html.hc.html.HCH2;
+import com.phloc.html.hc.html.HCH3;
+import com.phloc.html.hc.html.HCH4;
+import com.phloc.html.hc.html.HCH5;
+import com.phloc.html.hc.html.HCH6;
+import com.phloc.html.hc.html.HCHR;
+import com.phloc.html.hc.html.HCHead;
+import com.phloc.html.hc.html.HCHtml;
+import com.phloc.html.hc.html.HCI;
+import com.phloc.html.hc.html.HCIFrame;
+import com.phloc.html.hc.html.HCImg;
+import com.phloc.html.hc.html.HCInput;
+import com.phloc.html.hc.html.HCIns;
+import com.phloc.html.hc.html.HCKBD;
+import com.phloc.html.hc.html.HCLI;
+import com.phloc.html.hc.html.HCLabel;
+import com.phloc.html.hc.html.HCLegend;
+import com.phloc.html.hc.html.HCLink;
+import com.phloc.html.hc.html.HCMenu;
+import com.phloc.html.hc.html.HCNoBR;
+import com.phloc.html.hc.html.HCNoScript;
+import com.phloc.html.hc.html.HCOL;
+import com.phloc.html.hc.html.HCObject;
+import com.phloc.html.hc.html.HCOptGroup;
+import com.phloc.html.hc.html.HCOption;
+import com.phloc.html.hc.html.HCP;
+import com.phloc.html.hc.html.HCParam;
+import com.phloc.html.hc.html.HCPre;
+import com.phloc.html.hc.html.HCQ;
+import com.phloc.html.hc.html.HCRow;
+import com.phloc.html.hc.html.HCS;
+import com.phloc.html.hc.html.HCSamp;
+import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.HCSelect;
+import com.phloc.html.hc.html.HCSmall;
+import com.phloc.html.hc.html.HCSpan;
+import com.phloc.html.hc.html.HCStrong;
+import com.phloc.html.hc.html.HCStyle;
+import com.phloc.html.hc.html.HCSub;
+import com.phloc.html.hc.html.HCSup;
+import com.phloc.html.hc.html.HCTD;
+import com.phloc.html.hc.html.HCTH;
+import com.phloc.html.hc.html.HCTable;
+import com.phloc.html.hc.html.HCTextArea;
+import com.phloc.html.hc.html.HCTitle;
+import com.phloc.html.hc.html.HCU;
+import com.phloc.html.hc.html.HCUL;
+import com.phloc.html.hc.html.HCVar;
+import com.phloc.html.hc.html5.HCArticle;
+import com.phloc.html.hc.html5.HCAside;
+import com.phloc.html.hc.html5.HCAudio;
+import com.phloc.html.hc.html5.HCBDI;
+import com.phloc.html.hc.html5.HCCanvas;
+import com.phloc.html.hc.html5.HCCommand;
+import com.phloc.html.hc.html5.HCDetails;
+import com.phloc.html.hc.html5.HCFigCaption;
+import com.phloc.html.hc.html5.HCFigure;
+import com.phloc.html.hc.html5.HCFooter;
+import com.phloc.html.hc.html5.HCHGroup;
+import com.phloc.html.hc.html5.HCHeader;
+import com.phloc.html.hc.html5.HCKeyGen;
+import com.phloc.html.hc.html5.HCMain;
+import com.phloc.html.hc.html5.HCMark;
+import com.phloc.html.hc.html5.HCMeter;
+import com.phloc.html.hc.html5.HCNav;
+import com.phloc.html.hc.html5.HCOutput;
+import com.phloc.html.hc.html5.HCProgress;
+import com.phloc.html.hc.html5.HCRP;
+import com.phloc.html.hc.html5.HCRT;
+import com.phloc.html.hc.html5.HCRuby;
+import com.phloc.html.hc.html5.HCSection;
+import com.phloc.html.hc.html5.HCSource;
+import com.phloc.html.hc.html5.HCSummary;
+import com.phloc.html.hc.html5.HCTime;
+import com.phloc.html.hc.html5.HCTrack;
+import com.phloc.html.hc.html5.HCVideo;
+import com.phloc.html.hc.html5.HCWBR;
+import com.phloc.html.hc.impl.AbstractHCElement;
 import com.phloc.html.hc.impl.AbstractHCNodeList;
+import com.phloc.html.hc.impl.HCGenericElementWithChildren;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.hc.impl.HCTextNode;
 
@@ -592,5 +700,258 @@ public final class HCUtils
         return EFinish.UNFINISHED;
       }
     });
+  }
+
+  @Nullable
+  public static AbstractHCElement <?> createHCElementFromName (@Nullable final String sTagName)
+  {
+    final EHTMLElement eElement = EHTMLElement.getFromTagNameOrNull (sTagName);
+    return createHCElement (eElement);
+  }
+
+  @Nullable
+  public static AbstractHCElement <?> createHCElement (@Nullable final EHTMLElement eElement)
+  {
+    if (eElement == null)
+      return null;
+
+    switch (eElement)
+    {
+      case A:
+        return new HCA ();
+      case ABBR:
+        return new HCAbbr ();
+      case ADDRESS:
+        return new HCAddress ();
+      case APPLET:
+        return new HCGenericElementWithChildren (eElement);
+      case AREA:
+        return new HCGenericElementWithChildren (eElement);
+      case ARTICLE:
+        return new HCArticle ();
+      case ASIDE:
+        return new HCAside ();
+      case AUDIO:
+        return new HCAudio ();
+      case B:
+        return new HCB ();
+      case BASE:
+        return new HCBase ();
+      case BDI:
+        return new HCBDI ();
+      case BDO:
+        return new HCBDO ();
+      case BLOCKQUOTE:
+        return new HCBlockQuote ();
+      case BODY:
+        return new HCBody ();
+      case BR:
+        return new HCBR ();
+      case BUTTON:
+        return new HCButton ();
+      case CANVAS:
+        return new HCCanvas ();
+      case CAPTION:
+        return new HCCaption ();
+      case CENTER:
+        return new HCCenter ();
+      case CITE:
+        return new HCCite ();
+      case CODE:
+        return new HCCode ();
+      case COL:
+        return new HCCol ();
+      case COLGROUP:
+        return new HCColGroup ();
+      case COMMAND:
+        return new HCCommand ();
+      case DATALIST:
+        return new HCGenericElementWithChildren (eElement);
+      case DD:
+        return new HCDD ();
+      case DEL:
+        return new HCDel ();
+      case DETAILS:
+        return new HCDetails ();
+      case DFN:
+        return new HCDFN ();
+      case DIR:
+        return new HCDir ();
+      case DIV:
+        return new HCDiv ();
+      case DL:
+        return new HCDL ();
+      case DT:
+        return new HCDT ();
+      case EM:
+        return new HCEM ();
+      case EMBED:
+        return new HCEmbed ();
+      case FIELDSET:
+        return new HCFieldSet ();
+      case FIGCAPTION:
+        return new HCFigCaption ();
+      case FIGURE:
+        return new HCFigure ();
+      case FONT:
+        return new HCFont ();
+      case FOOTER:
+        return new HCFooter ();
+      case FORM:
+        return new HCForm ();
+      case FRAME:
+        return new HCFrame ();
+      case FRAMESET:
+        return new HCFrameset ();
+      case H1:
+        return new HCH1 ();
+      case H2:
+        return new HCH2 ();
+      case H3:
+        return new HCH3 ();
+      case H4:
+        return new HCH4 ();
+      case H5:
+        return new HCH5 ();
+      case H6:
+        return new HCH6 ();
+      case HEAD:
+        return new HCHead ();
+      case HEADER:
+        return new HCHeader ();
+      case HGROUP:
+        return new HCHGroup ();
+      case HR:
+        return new HCHR ();
+      case HTML:
+        return new HCHtml ();
+      case I:
+        return new HCI ();
+      case IFRAME:
+        return new HCIFrame ();
+      case IMG:
+        return new HCImg ();
+      case INS:
+        return new HCIns ();
+      case INPUT:
+        return new HCInput ();
+      case KBD:
+        return new HCKBD ();
+      case KEYGEN:
+        return new HCKeyGen ();
+      case LABEL:
+        return new HCLabel ();
+      case LEGEND:
+        return new HCLegend ();
+      case LI:
+        return new HCLI ();
+      case LINK:
+        return new HCLink ();
+      case MAIN:
+        return new HCMain ();
+      case MAP:
+        return new HCGenericElementWithChildren (eElement);
+      case MARK:
+        return new HCMark ();
+      case MENU:
+        return new HCMenu ();
+      case META:
+        return new HCGenericElementWithChildren (eElement);
+      case METER:
+        return new HCMeter ();
+      case NAV:
+        return new HCNav ();
+      case NOBR:
+        return new HCNoBR ();
+      case NOSCRIPT:
+        return new HCNoScript ();
+      case OBJECT:
+        return new HCObject ();
+      case OL:
+        return new HCOL ();
+      case OPTGROUP:
+        return new HCOptGroup ();
+      case OPTION:
+        return new HCOption ();
+      case OUTPUT:
+        return new HCOutput ();
+      case P:
+        return new HCP ();
+      case PARAM:
+        return new HCParam ();
+      case PRE:
+        return new HCPre ();
+      case PROGRESS:
+        return new HCProgress ();
+      case RP:
+        return new HCRP ();
+      case RT:
+        return new HCRT ();
+      case RUBY:
+        return new HCRuby ();
+      case Q:
+        return new HCQ ();
+      case S:
+        return new HCS ();
+      case SAMP:
+        return new HCSamp ();
+      case SCRIPT:
+        return new HCScript ();
+      case SECTION:
+        return new HCSection ();
+      case SELECT:
+        return new HCSelect ();
+      case SMALL:
+        return new HCSmall ();
+      case SOURCE:
+        return new HCSource ();
+      case SPAN:
+        return new HCSpan ();
+      case STRONG:
+        return new HCStrong ();
+      case SUB:
+        return new HCSub ();
+      case SUMMARY:
+        return new HCSummary ();
+      case SUP:
+        return new HCSup ();
+      case STYLE:
+        return new HCStyle ();
+      case TABLE:
+        return new HCTable ();
+      case TBODY:
+        return new HCGenericElementWithChildren (eElement);
+      case TD:
+        return new HCTD ();
+      case TEXTAREA:
+        return new HCTextArea ();
+      case TEMPLATE:
+        return new HCGenericElementWithChildren (eElement);
+      case TFOOT:
+        return new HCGenericElementWithChildren (eElement);
+      case TH:
+        return new HCTH ();
+      case THEAD:
+        return new HCGenericElementWithChildren (eElement);
+      case TIME:
+        return new HCTime ();
+      case TITLE:
+        return new HCTitle ();
+      case TR:
+        return new HCRow ();
+      case TRACK:
+        return new HCTrack ();
+      case U:
+        return new HCU ();
+      case UL:
+        return new HCUL ();
+      case VAR:
+        return new HCVar ();
+      case VIDEO:
+        return new HCVideo ();
+      case WBR:
+        return new HCWBR ();
+    }
+    throw new IllegalStateException ("Failed to resolve element type from " + eElement);
   }
 }

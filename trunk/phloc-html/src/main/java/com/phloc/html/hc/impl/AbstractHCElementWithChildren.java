@@ -50,9 +50,9 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 {
   private List <IHCNode> m_aChildren;
 
-  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement aElement)
+  protected AbstractHCElementWithChildren (@Nonnull final EHTMLElement eElement)
   {
-    super (aElement);
+    super (eElement);
   }
 
   public final boolean hasChildren ()

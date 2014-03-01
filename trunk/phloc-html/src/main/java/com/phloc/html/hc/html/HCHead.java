@@ -435,7 +435,7 @@ public class HCHead extends AbstractHCElement <HCHead>
       eHead.appendChild (new HCTitle (m_sPageTitle).convertToNode (aConversionSettings));
 
     // base
-    eHead.appendChild (new HCBase ().convertToNode (aConversionSettings));
+    eHead.appendChild (m_aBase.convertToNode (aConversionSettings));
 
     // links
     emitLinks (eHead, aConversionSettings);
