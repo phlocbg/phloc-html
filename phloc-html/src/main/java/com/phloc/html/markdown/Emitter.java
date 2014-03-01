@@ -601,7 +601,9 @@ final class Emitter
    */
   private int _recursiveEmitLine (final HCStack out, final String in, final int start, final EMarkToken token)
   {
-    int pos = start, a, b;
+    int pos = start;
+    int a;
+    int b;
     final HCStack temp = new HCStack ();
     final StringBuilder tempSB = new StringBuilder ();
     while (pos < in.length ())
@@ -617,11 +619,9 @@ final class Emitter
       {
         case IMAGE:
         case LINK:
-          temp.reset ();
-          b = _checkInlineLink (temp, in, pos, mt);
+          b = _checkInlineLink (out, in, pos, mt);
           if (b > 0)
           {
-            out.append (temp);
             pos = b;
           }
           else
@@ -715,11 +715,9 @@ final class Emitter
           }
           break;
         case HTML:
-          temp.reset ();
-          b = _checkInlineHtml (temp, in, pos);
+          b = _checkInlineHtml (out, in, pos);
           if (b > 0)
           {
-            out.append (temp);
             pos = b;
           }
           else
@@ -732,6 +730,7 @@ final class Emitter
           b = _checkInlineEntity (tempSB, in, pos);
           if (b > 0)
           {
+            // Remove leading '&' and trailing ';'
             out.append (new HCEntityNode (new HTMLEntity (tempSB.substring (1, tempSB.length () - 1)), " "));
             pos = b;
           }
@@ -745,7 +744,7 @@ final class Emitter
           b = _recursiveEmitLine (temp, in, pos + 2, EMarkToken.X_LINK_CLOSE);
           if (b > 0 && m_aConfig.m_aSpecialLinkEmitter != null)
           {
-            m_aConfig.m_aSpecialLinkEmitter.emitSpan (out, temp.toString ());
+            m_aConfig.m_aSpecialLinkEmitter.emitSpan (out, temp);
             pos = b + 1;
           }
           else
