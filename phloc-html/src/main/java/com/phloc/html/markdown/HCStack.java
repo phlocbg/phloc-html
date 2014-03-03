@@ -59,9 +59,9 @@ public class HCStack
   }
 
   @Nonnull
-  public IHCNode getRoot ()
+  public HCNodeList getRoot ()
   {
-    return m_aStack.get (0);
+    return (HCNodeList) m_aStack.get (0);
   }
 
   public void reset ()
@@ -69,11 +69,6 @@ public class HCStack
     // Ensure to create a new node list in case the object was appended!
     m_aStack.clear ();
     m_aStack.push (new HCNodeList ());
-  }
-
-  public void append (final HCStack aOther)
-  {
-    append (aOther.getRoot ());
   }
 
   public void append (final char c)
