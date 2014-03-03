@@ -591,7 +591,7 @@ final class Emitter
           return -1;
       }
       out.append (';');
-      return MarkdownHTML.isEntity (out.toString ()) ? pos : -1;
+      return EHTMLEntity.isValidEntityReference (out.toString ()) ? pos : -1;
     }
 
     return pos;
