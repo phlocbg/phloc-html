@@ -24,9 +24,9 @@ public abstract class AbstractPlugin
 {
   protected String m_sIdPlugin;
 
-  public AbstractPlugin (final String idPlugin)
+  public AbstractPlugin (final String sIDPlugin)
   {
-    m_sIdPlugin = idPlugin;
+    m_sIdPlugin = sIDPlugin;
   }
 
   public abstract void emit (final HCStack out, final List <String> lines, final Map <String, String> params);

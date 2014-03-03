@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
@@ -67,7 +68,7 @@ public class Processor
   {
     m_aReader = reader;
     m_aConfig = config;
-    m_bUseExtensions = config.m_bForceExtendedProfile;
+    m_bUseExtensions = config.isExtendedProfile ();
     m_aEmitter = new Emitter (m_aConfig);
   }
 
@@ -148,7 +149,7 @@ public class Processor
    */
   public static final String process (final InputStream input, final Configuration configuration) throws IOException
   {
-    final Processor p = new Processor (new BufferedReader (new InputStreamReader (input, configuration.m_sEncoding)),
+    final Processor p = new Processor (new BufferedReader (new InputStreamReader (input, configuration.getEncoding ())),
                                        configuration);
     return p._process ();
   }
@@ -293,7 +294,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final File file, final String encoding) throws IOException
+  public static final String process (final File file, final Charset encoding) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).build ());
   }
@@ -312,7 +313,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final File file, final String encoding, final boolean safeMode) throws IOException
+  public static final String process (final File file, final Charset encoding, final boolean safeMode) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).setSafeMode (safeMode).build ());
   }
@@ -331,7 +332,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final File file, final String encoding, final IDecorator decorator) throws IOException
+  public static final String process (final File file, final Charset encoding, final IDecorator decorator) throws IOException
   {
     return process (file, Configuration.builder ().setEncoding (encoding).setDecorator (decorator).build ());
   }
@@ -353,7 +354,7 @@ public class Processor
    * @see Configuration#DEFAULT
    */
   public static final String process (final File file,
-                                      final String encoding,
+                                      final Charset encoding,
                                       final IDecorator decorator,
                                       final boolean safeMode) throws IOException
   {
@@ -445,7 +446,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final InputStream input, final String encoding) throws IOException
+  public static final String process (final InputStream input, final Charset encoding) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).build ());
   }
@@ -464,7 +465,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final InputStream input, final String encoding, final boolean safeMode) throws IOException
+  public static final String process (final InputStream input, final Charset encoding, final boolean safeMode) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).setSafeMode (safeMode).build ());
   }
@@ -483,7 +484,7 @@ public class Processor
    *         if an IO error occurs
    * @see Configuration#DEFAULT
    */
-  public static final String process (final InputStream input, final String encoding, final IDecorator decorator) throws IOException
+  public static final String process (final InputStream input, final Charset encoding, final IDecorator decorator) throws IOException
   {
     return process (input, Configuration.builder ().setEncoding (encoding).setDecorator (decorator).build ());
   }
@@ -505,7 +506,7 @@ public class Processor
    * @see Configuration#DEFAULT
    */
   public static final String process (final InputStream input,
-                                      final String encoding,
+                                      final Charset encoding,
                                       final IDecorator decorator,
                                       final boolean safeMode) throws IOException
   {

@@ -17,10 +17,15 @@
  */
 package com.phloc.html.markdown;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.charset.CCharset;
+import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * Txtmark configuration.
@@ -30,15 +35,6 @@ import javax.annotation.Nonnull;
  */
 public class Configuration
 {
-  final boolean m_bSafeMode;
-  final String m_sEncoding;
-  final IDecorator m_aDecorator;
-  final IBlockEmitter m_aCodeBlockEmitter;
-  final boolean m_bForceExtendedProfile;
-  final boolean m_bConvertNewline2Br;
-  final ISpanEmitter m_aSpecialLinkEmitter;
-  final List <AbstractPlugin> m_aPlugins;
-
   /**
    * <p>
    * This is the default configuration for txtmark's <code>process</code>
@@ -55,6 +51,20 @@ public class Configuration
 
   /**
    * <p>
+   * This is the default configuration for txtmark's <code>process</code>
+   * methods
+   * </p>
+   * <ul>
+   * <li><code>safeMode = false</code></li>
+   * <li><code>encoding = UTF-8</code></li>
+   * <li><code>decorator = DefaultDecorator</code></li>
+   * <li><code>codeBlockEmitter = null</code></li>
+   * </ul>
+   */
+  public static final Configuration DEFAULT_EXTENSIONS = Configuration.builder ().forceExtentedProfile ().build ();
+
+  /**
+   * <p>
    * Default safe configuration
    * </p>
    * <ul>
@@ -67,29 +77,96 @@ public class Configuration
   public static final Configuration DEFAULT_SAFE = Configuration.builder ().enableSafeMode ().build ();
 
   /**
+   * <p>
+   * Default safe configuration
+   * </p>
+   * <ul>
+   * <li><code>safeMode = true</code></li>
+   * <li><code>encoding = UTF-8</code></li>
+   * <li><code>decorator = DefaultDecorator</code></li>
+   * <li><code>codeBlockEmitter = null</code></li>
+   * </ul>
+   */
+  public static final Configuration DEFAULT_SAFE_EXTENSIONS = Configuration.builder ()
+                                                                           .enableSafeMode ()
+                                                                           .forceExtentedProfile ()
+                                                                           .build ();
+
+  private final boolean m_bSafeMode;
+  private final Charset m_aEncoding;
+  private final IDecorator m_aDecorator;
+  private final IBlockEmitter m_aCodeBlockEmitter;
+  private final boolean m_bForceExtendedProfile;
+  private final boolean m_bConvertNewline2Br;
+  private final ISpanEmitter m_aSpecialLinkEmitter;
+  private final List <AbstractPlugin> m_aPlugins;
+
+  /**
    * Constructor.
    * 
    * @param safeMode
    * @param encoding
    * @param decorator
    */
-  Configuration (final boolean safeMode,
-                 final String encoding,
-                 final IDecorator decorator,
-                 final IBlockEmitter codeBlockEmitter,
-                 final boolean forceExtendedProfile,
-                 final boolean convertNewline2Br,
-                 final ISpanEmitter specialLinkEmitter,
-                 final List <AbstractPlugin> plugins)
+  public Configuration (final boolean safeMode,
+                        final Charset encoding,
+                        final IDecorator decorator,
+                        final IBlockEmitter aCodeBlockEmitter,
+                        final boolean forceExtendedProfile,
+                        final boolean convertNewline2Br,
+                        final ISpanEmitter specialLinkEmitter,
+                        final List <AbstractPlugin> plugins)
   {
     m_bSafeMode = safeMode;
-    m_sEncoding = encoding;
+    m_aEncoding = encoding;
     m_aDecorator = decorator;
-    m_aCodeBlockEmitter = codeBlockEmitter;
-    m_bConvertNewline2Br = convertNewline2Br;
+    m_aCodeBlockEmitter = aCodeBlockEmitter;
     m_bForceExtendedProfile = forceExtendedProfile;
+    m_bConvertNewline2Br = convertNewline2Br;
     m_aSpecialLinkEmitter = specialLinkEmitter;
     m_aPlugins = plugins;
+  }
+
+  public boolean isSafeMode ()
+  {
+    return m_bSafeMode;
+  }
+
+  public Charset getEncoding ()
+  {
+    return m_aEncoding;
+  }
+
+  public IDecorator getDecorator ()
+  {
+    return m_aDecorator;
+  }
+
+  public IBlockEmitter getCodeBlockEmitter ()
+  {
+    return m_aCodeBlockEmitter;
+  }
+
+  public boolean isExtendedProfile ()
+  {
+    return m_bForceExtendedProfile;
+  }
+
+  public boolean isConvertNewline2Br ()
+  {
+    return m_bConvertNewline2Br;
+  }
+
+  public ISpanEmitter getSpecialLinkEmitter ()
+  {
+    return m_aSpecialLinkEmitter;
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public List <AbstractPlugin> getAllPlugins ()
+  {
+    return ContainerHelper.newList (m_aPlugins);
   }
 
   /**
@@ -97,6 +174,7 @@ public class Configuration
    * 
    * @return A new Builder instance.
    */
+  @Nonnull
   public static Builder builder ()
   {
     return new Builder ();
@@ -113,7 +191,7 @@ public class Configuration
     private boolean m_bSafeMode = false;
     private boolean m_bForceExtendedProfile = false;
     private boolean m_bConvertNewline2Br = false;
-    private String m_sEncoding = "UTF-8";
+    private Charset m_aEncoding = CCharset.CHARSET_UTF_8_OBJ;
     private IDecorator m_aDecorator = new DefaultDecorator ();
     private IBlockEmitter m_aCodeBlockEmitter = null;
     private ISpanEmitter m_aSpecialLinkEmitter = null;
@@ -184,15 +262,15 @@ public class Configuration
      * Sets the character encoding for txtmark. Default:
      * <code>&quot;UTF-8&quot;</code>
      * 
-     * @param encoding
+     * @param aEncoding
      *        The encoding
      * @return This builder
      * @since 0.7
      */
     @Nonnull
-    public Builder setEncoding (final String encoding)
+    public Builder setEncoding (final Charset aEncoding)
     {
-      m_sEncoding = encoding;
+      m_aEncoding = aEncoding;
       return this;
     }
 
@@ -273,7 +351,7 @@ public class Configuration
     public Configuration build ()
     {
       return new Configuration (m_bSafeMode,
-                                m_sEncoding,
+                                m_aEncoding,
                                 m_aDecorator,
                                 m_aCodeBlockEmitter,
                                 m_bForceExtendedProfile,
