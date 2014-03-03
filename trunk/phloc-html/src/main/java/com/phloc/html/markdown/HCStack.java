@@ -77,7 +77,7 @@ public class HCStack
 
   public void append (final char c)
   {
-    append (Character.toString (c));
+    append (new HCTextNode (c));
   }
 
   public void append (final String s)
@@ -91,6 +91,12 @@ public class HCStack
     if (aNode instanceof HCLI && aParent instanceof AbstractHCList <?>)
       ((AbstractHCList <?>) aParent).addItem ((HCLI) aNode);
     else
-      ((IHCNodeWithChildren <?>) aParent).addChild (aNode);
+    {
+      final IHCNodeWithChildren <?> aRealParent = ((IHCNodeWithChildren <?>) aParent);
+      if (aNode instanceof HCTextNode && aRealParent.getLastChild () instanceof HCTextNode)
+        ((HCTextNode) aRealParent.getLastChild ()).appendText (((HCTextNode) aNode).getText ());
+      else
+        aRealParent.addChild (aNode);
+    }
   }
 }

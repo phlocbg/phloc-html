@@ -17,11 +17,13 @@
  */
 package com.phloc.html.hc.impl;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.impl.MicroText;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -33,7 +35,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public class HCTextNode extends AbstractHCNode
 {
-  private final String m_sText;
+  private String m_sText;
   private boolean m_bEscape = MicroText.DEFAULT_ESCAPE;
 
   public HCTextNode (@Nonnull final IPredefinedLocaleTextProvider aTextProvider)
@@ -43,22 +45,51 @@ public class HCTextNode extends AbstractHCNode
 
   public HCTextNode (@Nullable final String sText)
   {
-    m_sText = sText == null ? "" : sText;
+    setText (sText);
   }
 
   public HCTextNode (final char cChar)
   {
-    m_sText = Character.toString (cChar);
+    this (Character.toString (cChar));
   }
 
   public HCTextNode (final int nText)
   {
-    m_sText = Integer.toString (nText);
+    this (Integer.toString (nText));
   }
 
   public HCTextNode (final long nText)
   {
-    m_sText = Long.toString (nText);
+    this (Long.toString (nText));
+  }
+
+  @Nonnull
+  public HCTextNode prependText (@Nullable final String sText)
+  {
+    if (StringHelper.hasText (sText))
+      m_sText = sText + m_sText;
+    return this;
+  }
+
+  @Nonnull
+  public HCTextNode appendText (@Nullable final String sText)
+  {
+    if (StringHelper.hasText (sText))
+      m_sText = m_sText + sText;
+    return this;
+  }
+
+  @Nonnull
+  public HCTextNode appendText (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
+  {
+    return appendText (new String (aChars, nOfs, nLen));
+  }
+
+  @Nonnull
+  public HCTextNode setText (@Nullable final String sText)
+  {
+    m_sText = StringHelper.getNotNull (sText);
+    return this;
   }
 
   /**
@@ -117,16 +148,6 @@ public class HCTextNode extends AbstractHCNode
                             .append ("text", m_sText)
                             .append ("escape", m_bEscape)
                             .toString ();
-  }
-
-  /**
-   * @deprecated Use {@link #createOnDemand(String)} instead
-   */
-  @Deprecated
-  @Nullable
-  public static HCTextNode create (@Nullable final String sText)
-  {
-    return createOnDemand (sText);
   }
 
   @Nullable
