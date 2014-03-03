@@ -47,7 +47,6 @@ import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
-import com.phloc.html.hc.impl.HCTextNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.meta.IMetaElement;
 
@@ -94,14 +93,13 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nullable
   public String getPageTitle ()
   {
-    return m_aPageTitle.getPlainText ();
+    return m_aPageTitle.getContent ();
   }
 
   @Nonnull
   public HCHead setPageTitle (@Nullable final String sPageTitle)
   {
-    m_aPageTitle.removeAllChildren ();
-    m_aPageTitle.addChild (HCTextNode.createOnDemand (sPageTitle));
+    m_aPageTitle.setContent (sPageTitle);
     return this;
   }
 
