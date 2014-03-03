@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.cache.AnnotationUsageCache;
 import com.phloc.commons.state.EFinish;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
@@ -62,6 +63,11 @@ public final class HCConsistencyChecker
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCConsistencyChecker.class);
 
+  private static final AnnotationUsageCache s_aAUC_D_HTML4 = new AnnotationUsageCache (DeprecatedInHTML4.class);
+  private static final AnnotationUsageCache s_aAUC_D_XHTML1 = new AnnotationUsageCache (DeprecatedInXHTML1.class);
+  private static final AnnotationUsageCache s_aAUC_D_HTML5 = new AnnotationUsageCache (DeprecatedInHTML5.class);
+  private static final AnnotationUsageCache s_aAUC_S_HTML5 = new AnnotationUsageCache (SinceHTML5.class);
+
   @SuppressWarnings ("unused")
   @PresentForCodeCoverage
   private static final HCConsistencyChecker s_aInstance = new HCConsistencyChecker ();
@@ -84,22 +90,22 @@ public final class HCConsistencyChecker
                                          final String sElementName,
                                          final EHTMLVersion eHTMLVersion)
   {
-    if (aElementClass.getAnnotation (DeprecatedInHTML4.class) != null)
+    if (s_aAUC_D_HTML4.hasAnnotation (aElementClass))
       consistencyWarning ("The element '" + sElementName + "' was deprecated in HTML 4.0");
     else
-      if (aElementClass.getAnnotation (DeprecatedInXHTML1.class) != null)
+      if (s_aAUC_D_XHTML1.hasAnnotation (aElementClass))
         consistencyWarning ("The element '" + sElementName + "' is deprecated in XHTML1");
       else
         if (eHTMLVersion.isAtLeastHTML5 ())
         {
           // HTML5 specifics checks
-          if (aElementClass.getAnnotation (DeprecatedInHTML5.class) != null)
+          if (s_aAUC_D_HTML5.hasAnnotation (aElementClass))
             consistencyWarning ("The element '" + sElementName + "' is deprecated in HTML5");
         }
         else
         {
           // pre-HTML5 checks
-          if (aElementClass.getAnnotation (SinceHTML5.class) != null)
+          if (s_aAUC_S_HTML5.hasAnnotation (aElementClass))
             consistencyWarning ("The element '" + sElementName + "' is only available in HTML5");
         }
   }

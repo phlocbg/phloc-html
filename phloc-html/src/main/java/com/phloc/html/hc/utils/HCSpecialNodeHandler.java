@@ -18,9 +18,7 @@
 package com.phloc.html.hc.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -32,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.cache.AnnotationUsageCache;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCCSSNode;
@@ -60,7 +59,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
 public final class HCSpecialNodeHandler
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCSpecialNodeHandler.class);
-  private static final Map <String, Boolean> s_aOOBNAnnotationCache = new HashMap <String, Boolean> ();
+  private static final AnnotationUsageCache s_aOOBNAnnotationCache = new AnnotationUsageCache (OutOfBandNode.class);
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
@@ -249,14 +248,7 @@ public final class HCSpecialNodeHandler
       throw new NullPointerException ("HCNode");
 
     // Is the @OutOfBandNode annotation present?
-    final String sClassName = aHCNode.getClass ().getName ();
-    Boolean aIs = s_aOOBNAnnotationCache.get (sClassName);
-    if (aIs == null)
-    {
-      aIs = Boolean.valueOf (aHCNode.getClass ().getAnnotation (OutOfBandNode.class) != null);
-      s_aOOBNAnnotationCache.put (sClassName, aIs);
-    }
-    if (aIs.booleanValue ())
+    if (s_aOOBNAnnotationCache.hasAnnotation (aHCNode))
       return true;
 
     // If it is a wrapped node, look into it
@@ -349,13 +341,12 @@ public final class HCSpecialNodeHandler
       throw new NullPointerException ("nodes");
 
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
-
-    final StringBuilder aCSSInlineBefore = new StringBuilder ();
-    final StringBuilder aCSSInlineAfter = new StringBuilder ();
     final CollectingJSCodeProvider aJSOnDocumentReadyBefore = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aJSOnDocumentReadyAfter = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aJSInlineBefore = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aJSInlineAfter = new CollectingJSCodeProvider ();
+    final StringBuilder aCSSInlineBefore = new StringBuilder ();
+    final StringBuilder aCSSInlineAfter = new StringBuilder ();
     for (final IHCNode aNode : aNodes)
     {
       // Note: do not unwrap the node, because it is not allowed to merge JS/CSS
@@ -396,13 +387,6 @@ public final class HCSpecialNodeHandler
           }
     }
 
-    // Add all merged inline CSSs
-    if (aCSSInlineBefore.length () > 0)
-      ret.add (new HCStyle (aCSSInlineBefore.toString ()).setEmitAfterFiles (false));
-
-    if (aCSSInlineAfter.length () > 0)
-      ret.add (new HCStyle (aCSSInlineAfter.toString ()));
-
     // on-document-ready JS always as last inline JS!
     if (!aJSOnDocumentReadyBefore.isEmpty ())
       if (bKeepOnDocumentReady)
@@ -421,7 +405,14 @@ public final class HCSpecialNodeHandler
       ret.add (new HCScript (aJSInlineBefore).setEmitAfterFiles (false));
 
     if (!aJSInlineAfter.isEmpty ())
-      ret.add (new HCScript (aJSInlineAfter));
+      ret.add (new HCScript (aJSInlineAfter).setEmitAfterFiles (true));
+
+    // Add all merged inline CSSs
+    if (aCSSInlineBefore.length () > 0)
+      ret.add (new HCStyle (aCSSInlineBefore.toString ()).setEmitAfterFiles (false));
+
+    if (aCSSInlineAfter.length () > 0)
+      ret.add (new HCStyle (aCSSInlineAfter.toString ()).setEmitAfterFiles (true));
 
     return ret;
   }
