@@ -400,95 +400,93 @@ final class Emitter
    *        The StringBuilder to write to.
    * @param in
    *        Input String.
-   * @param start
+   * @param nStart
    *        Starting position.
    * @return The new position or -1 if nothing valid has been found.
    */
-  private int _checkInlineHtml (final HCStack out, final String in, final int start)
+  private int _checkInlineHtml (final HCStack out, final String in, final int nStart)
   {
-    final StringBuilder temp = new StringBuilder ();
-    int pos;
+    final StringBuilder aTemp = new StringBuilder ();
 
     // Check for auto links
-    temp.setLength (0);
-    pos = Utils.readUntil (temp, in, start + 1, ':', ' ', '>', '\n');
-    if (pos != -1 && in.charAt (pos) == ':' && MarkdownHTML.isLinkPrefix (temp.toString ()))
+    aTemp.setLength (0);
+    int nPos = Utils.readUntil (aTemp, in, nStart + 1, ':', ' ', '>', '\n');
+    if (nPos != -1 && in.charAt (nPos) == ':' && MarkdownHTML.isLinkPrefix (aTemp.toString ()))
     {
-      pos = Utils.readUntil (temp, in, pos, '>');
-      if (pos != -1)
+      nPos = Utils.readUntil (aTemp, in, nPos, '>');
+      if (nPos != -1)
       {
-        final String link = temp.toString ();
+        final String sLink = aTemp.toString ();
         final HCA aLink = m_aConfig.getDecorator ().openLink (out);
-        aLink.setHref (link).addChild (link);
+        aLink.setHref (sLink).addChild (sLink);
         m_aConfig.getDecorator ().closeLink (out);
-        return pos;
+        return nPos;
       }
     }
 
     // Check for mailto or adress auto link
-    temp.setLength (0);
-    pos = Utils.readUntil (temp, in, start + 1, '@', ' ', '>', '\n');
-    if (pos != -1 && in.charAt (pos) == '@')
+    aTemp.setLength (0);
+    nPos = Utils.readUntil (aTemp, in, nStart + 1, '@', ' ', '>', '\n');
+    if (nPos != -1 && in.charAt (nPos) == '@')
     {
-      pos = Utils.readUntil (temp, in, pos, '>');
-      if (pos != -1)
+      nPos = Utils.readUntil (aTemp, in, nPos, '>');
+      if (nPos != -1)
       {
-        final String link = temp.toString ();
+        final String sLink = aTemp.toString ();
         final HCA aLink = m_aConfig.getDecorator ().openLink (out);
-
-        if (link.startsWith ("@"))
+        if (sLink.startsWith ("@"))
         {
           // address auto links
-          final String slink = link.substring (1);
-          final String url = "https://maps.google.com/maps?q=" + slink.replace (' ', '+');
-          aLink.setHref (url).addChild (slink);
+          final String sAddress = sLink.substring (1);
+          final String sUrl = "https://maps.google.com/maps?q=" + sAddress.replace (' ', '+');
+          aLink.setHref (sUrl).addChild (sAddress);
         }
         else
         {
           // mailto auto links
-          aLink.setHref ("mailto:" + link).addChild (link);
+          aLink.setHref ("mailto:" + sLink).addChild (sLink);
         }
         m_aConfig.getDecorator ().closeLink (out);
-        return pos;
+        return nPos;
       }
     }
 
     // Check for inline html
-    if (start + 2 < in.length ())
+    if (nStart + 2 < in.length ())
     {
-      pos = start;
-      if (start + 3 < in.length () &&
-          in.charAt (start + 1) == '!' &&
-          in.charAt (start + 2) == '-' &&
-          in.charAt (start + 3) == '-')
+      nPos = nStart;
+      if (nStart + 3 < in.length () &&
+          in.charAt (nStart + 1) == '!' &&
+          in.charAt (nStart + 2) == '-' &&
+          in.charAt (nStart + 3) == '-')
       {
-        pos = start + 4;
-        final int nCommentStartPos = pos;
+        nPos = nStart + 4;
+        final int nCommentStartPos = nPos;
         while (true)
         {
-          while (pos < in.length () && in.charAt (pos) != '-')
-            pos++;
+          while (nPos < in.length () && in.charAt (nPos) != '-')
+            nPos++;
 
-          if (pos == in.length ())
+          if (nPos == in.length ())
           {
             // FIXME End of line in comment
             return -1;
           }
-          if (pos + 2 < in.length () && in.charAt (pos + 1) == '-' && in.charAt (pos + 2) == '>')
+          if (nPos + 2 < in.length () && in.charAt (nPos + 1) == '-' && in.charAt (nPos + 2) == '>')
           {
             // XML comment inline
-            out.append (new HCCommentNode (in.substring (nCommentStartPos, pos)));
-            return pos + 2;
+            out.append (new HCCommentNode (in.substring (nCommentStartPos, nPos)));
+            return nPos + 2;
           }
-          pos++;
+          nPos++;
         }
       }
 
-      temp.setLength (0);
-      final int t = Utils.readXMLElement (temp, in, start, m_aConfig.isSafeMode ());
+      aTemp.setLength (0);
+      final int t = Utils.readXMLElement (aTemp, in, nStart, m_aConfig.isSafeMode ());
       if (t != -1)
       {
-        final String sElement = temp.toString ();
+        final String sElement = aTemp.toString ();
         if (sElement.endsWith ("/>"))
         {
           // Self closed tag - can be parsed
