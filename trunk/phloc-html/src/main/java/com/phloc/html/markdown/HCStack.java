@@ -52,8 +52,9 @@ public class HCStack
 
   public void pop ()
   {
+    // Never pop the fixed nodelist
     if (m_aStack.size () == 1)
-      throw new IllegalStateException ("Can't pop from empty stack");
+      throw new MarkdownException ("Can't pop from empty stack");
     m_aStack.pop ();
   }
 
