@@ -97,9 +97,6 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
      * </pre>
      */
     CDATA_IN_COMMENT;
-
-    @Deprecated
-    public static final EMode WRAP_IN_COMMENT = PLAIN_TEXT_WRAPPED_IN_COMMENT;
   }
 
   /** By default inline scripts are emitted in mode "wrap in comment" */
