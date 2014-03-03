@@ -504,7 +504,7 @@ final class MarkdownHTML
                                                '\u0398',
                                                '\u03B8',
                                                '\u03D1',
-                                               '\u00DE',
+                                               '\u2009',
                                                '\u00FE',
                                                '\u02DC',
                                                '\u00D7',
@@ -627,6 +627,11 @@ final class MarkdownHTML
   public static boolean isEntity (final String value)
   {
     return decodeMap.containsKey (value);
+  }
+
+  public static Character getEntityChar (final String value)
+  {
+    return decodeMap.get (value);
   }
 
   /**
