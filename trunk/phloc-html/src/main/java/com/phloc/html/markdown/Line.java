@@ -393,12 +393,8 @@ final class Line
             case '\\':
               if (p + 1 < m_sValue.length ())
               {
-                switch (m_sValue.charAt (p + 1))
-                {
-                  case '}':
-                    p++;
-                    break;
-                }
+                if (m_sValue.charAt (p + 1) == '}')
+                  p++;
               }
               p++;
               break;
