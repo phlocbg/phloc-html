@@ -17,9 +17,14 @@
  */
 package com.phloc.html.hc.html;
 
+import java.util.List;
+
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -45,6 +50,29 @@ public abstract class AbstractHCTablePart <THISTYPE extends AbstractHCTablePart 
   public final boolean isHeaderOrFooter ()
   {
     return m_bHeaderOrFooter;
+  }
+
+  @Nonnull
+  public final HCRow addRow ()
+  {
+    final HCRow aRow = new HCRow (m_bHeaderOrFooter);
+    addChild (aRow);
+    return aRow;
+  }
+
+  @Nonnull
+  public final HCRow addRow (@Nonnegative final int nIndex)
+  {
+    final HCRow aRow = new HCRow (m_bHeaderOrFooter);
+    addChild (nIndex, aRow);
+    return aRow;
+  }
+
+  @Nullable
+  @ReturnsMutableObject (reason = "speed")
+  final List <HCRow> directGetRowList ()
+  {
+    return directGetChildren ();
   }
 
   @Override

@@ -25,9 +25,10 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.html.hc.IHCCell;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.IHCTable;
+import com.phloc.html.hc.html.AbstractHCBaseTable;
 import com.phloc.html.hc.html.AbstractHCDefinitionItem;
 import com.phloc.html.hc.html.AbstractHCList;
+import com.phloc.html.hc.html.AbstractHCTablePart;
 import com.phloc.html.hc.html.HCCol;
 import com.phloc.html.hc.html.HCColGroup;
 import com.phloc.html.hc.html.HCDL;
@@ -35,6 +36,9 @@ import com.phloc.html.hc.html.HCLI;
 import com.phloc.html.hc.html.HCOptGroup;
 import com.phloc.html.hc.html.HCOption;
 import com.phloc.html.hc.html.HCRow;
+import com.phloc.html.hc.html.HCTBody;
+import com.phloc.html.hc.html.HCTFoot;
+import com.phloc.html.hc.html.HCTHead;
 import com.phloc.html.hc.html5.AbstractHCMediaElement;
 import com.phloc.html.hc.html5.AbstractHCMediaElementChild;
 import com.phloc.html.hc.html5.AbstractHCRubyChild;
@@ -123,24 +127,41 @@ final class HCStack
               if (aParent instanceof HCOption && aNode instanceof HCTextNode)
                 ((HCOption) aParent).addChild ((HCTextNode) aNode);
               else
-                if (aParent instanceof IHCTable <?> && aNode instanceof HCRow)
-                  ((IHCTable <?>) aParent).addBodyRow ((HCRow) aNode);
-                else
-                  if (aParent instanceof HCRow && aNode instanceof IHCCell <?>)
-                    ((HCRow) aParent).addCell (aNode);
+                if (aParent instanceof AbstractHCBaseTable <?>)
+                {
+                  if (aNode instanceof HCTHead)
+                    ((AbstractHCBaseTable <?>) aParent).setHead ((HCTHead) aNode);
                   else
-                    if (aParent instanceof HCRuby && aNode instanceof AbstractHCRubyChild <?>)
-                      ((HCRuby) aParent).addChild ((AbstractHCRubyChild <?>) aNode);
+                    if (aNode instanceof HCTBody)
+                      ((AbstractHCBaseTable <?>) aParent).setBody ((HCTBody) aNode);
                     else
-                      if (aParent instanceof IHCNodeWithChildren <?>)
-                      {
-                        final IHCNodeWithChildren <?> aRealParent = ((IHCNodeWithChildren <?>) aParent);
-                        if (aNode instanceof HCTextNode && aRealParent.getLastChild () instanceof HCTextNode)
-                          ((HCTextNode) aRealParent.getLastChild ()).appendText (((HCTextNode) aNode).getText ());
-                        else
-                          aRealParent.addChild (aNode);
-                      }
+                      if (aNode instanceof HCTFoot)
+                        ((AbstractHCBaseTable <?>) aParent).setFoot ((HCTFoot) aNode);
                       else
-                        throw new MarkdownException ("Cannot add node " + aNode + " to " + aParent);
+                        if (aNode instanceof HCRow)
+                          ((AbstractHCBaseTable <?>) aParent).addBodyRow ((HCRow) aNode);
+                        else
+                          throw new MarkdownException ("Cannot add node " + aNode + " to " + aParent);
+                }
+                else
+                  if (aParent instanceof AbstractHCTablePart <?> && aNode instanceof HCRow)
+                    ((AbstractHCTablePart <?>) aParent).addChild ((HCRow) aNode);
+                  else
+                    if (aParent instanceof HCRow && aNode instanceof IHCCell <?>)
+                      ((HCRow) aParent).addCell (aNode);
+                    else
+                      if (aParent instanceof HCRuby && aNode instanceof AbstractHCRubyChild <?>)
+                        ((HCRuby) aParent).addChild ((AbstractHCRubyChild <?>) aNode);
+                      else
+                        if (aParent instanceof IHCNodeWithChildren <?>)
+                        {
+                          final IHCNodeWithChildren <?> aRealParent = ((IHCNodeWithChildren <?>) aParent);
+                          if (aNode instanceof HCTextNode && aRealParent.getLastChild () instanceof HCTextNode)
+                            ((HCTextNode) aRealParent.getLastChild ()).appendText (((HCTextNode) aNode).getText ());
+                          else
+                            aRealParent.addChild (aNode);
+                        }
+                        else
+                          throw new MarkdownException ("Cannot add node " + aNode + " to " + aParent);
   }
 }

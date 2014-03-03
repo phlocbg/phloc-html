@@ -24,7 +24,6 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -64,58 +63,6 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     addColumns (aCols);
   }
 
-  @OverrideOnDemand
-  protected void applyHeaderRow (@Nonnull final IMicroElement aTHead,
-                                 @Nonnull final HCRow aRow,
-                                 @Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    aTHead.appendChild (aRow.convertToNode (aConversionSettings));
-  }
-
-  @OverrideOnDemand
-  protected void applyFooterRow (@Nonnull final IMicroElement aTFoot,
-                                 @Nonnull final HCRow aRow,
-                                 @Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    aTFoot.appendChild (aRow.convertToNode (aConversionSettings));
-  }
-
-  /**
-   * @param aTBody
-   *        TBody micro element
-   * @param aConversionSettings
-   *        The conversion settings to use
-   */
-  @OverrideOnDemand
-  protected void applyBody (@Nonnull final IMicroElement aTBody,
-                            @Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    /* empty */
-  }
-
-  @OverrideOnDemand
-  protected void applyBodyRow (@Nonnull final IMicroElement aTBody,
-                               @Nonnull final HCRow aRow,
-                               @Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    aTBody.appendChild (aRow.convertToNode (aConversionSettings));
-  }
-
-  @Override
-  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    // Avoid creating a table without header, body and footer
-    return hasHeaderRows () ||
-           hasHeaderID () ||
-           hasHeaderClasses () ||
-           hasBodyRows () ||
-           hasBodyID () ||
-           hasBodyClasses () ||
-           hasFooterRows () ||
-           hasFooterID () ||
-           hasFooterClasses ();
-  }
-
   @Override
   @OverridingMethodsMustInvokeSuper
   protected void applyProperties (@Nonnull final IMicroElement aElement,
@@ -145,51 +92,13 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
     if (getColGroup () != null && getColGroup ().hasColumns ())
       aElement.appendChild (getColGroup ().convertToNode (aConversionSettings));
 
-    // Table header?
-    if (hasHeaderRows () || hasHeaderID () || hasHeaderClasses ())
-    {
-      final IMicroElement aTHead = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                           EHTMLElement.THEAD);
-      if (hasHeaderID ())
-        aTHead.setAttribute (CHTMLAttributes.ID, getHeaderID ());
-      if (hasHeaderClasses ())
-        aTHead.setAttribute (CHTMLAttributes.CLASS, getAllHeaderClassesAsString ());
-      for (final HCRow aRow : directGetHeaderRowList ())
-        applyHeaderRow (aTHead, aRow, aConversionSettings);
-      if (!aTHead.hasChildren () && !EHTMLElement.THEAD.mayBeSelfClosed ())
-        aTHead.appendText ("");
-    }
+    // Table header
+    aElement.appendChild (getHead ().convertToNode (aConversionSettings));
 
-    // Table footer?
-    if (hasFooterRows () || hasFooterID () || hasFooterClasses ())
-    {
-      final IMicroElement aTFoot = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (),
-                                                           EHTMLElement.TFOOT);
-      if (hasFooterID ())
-        aTFoot.setAttribute (CHTMLAttributes.ID, getFooterID ());
-      if (hasFooterClasses ())
-        aTFoot.setAttribute (CHTMLAttributes.CLASS, getAllFooterClassesAsString ());
-      for (final HCRow aRow : directGetFooterRowList ())
-        applyFooterRow (aTFoot, aRow, aConversionSettings);
-      if (!aTFoot.hasChildren () && !EHTMLElement.TFOOT.mayBeSelfClosed ())
-        aTFoot.appendText ("");
-    }
-
-    // add the tbody anyway - helpful for JS tables
+    // Table footer
+    aElement.appendChild (getFoot ().convertToNode (aConversionSettings));
 
     // Table body
-    final IMicroElement aTBody = aElement.appendElement (aConversionSettings.getHTMLNamespaceURI (), EHTMLElement.TBODY);
-    if (hasBodyID ())
-      aTBody.setAttribute (CHTMLAttributes.ID, getBodyID ());
-    if (hasBodyClasses ())
-      aTBody.setAttribute (CHTMLAttributes.CLASS, getAllBodyClassesAsString ());
-    applyBody (aTBody, aConversionSettings);
-
-    // Main body rows
-    for (final HCRow aRow : directGetBodyRowList ())
-      applyBodyRow (aTBody, aRow, aConversionSettings);
-
-    if (!aTBody.hasChildren () && !EHTMLElement.TBODY.mayBeSelfClosed ())
-      aTBody.appendText ("");
+    aElement.appendChild (getBody ().convertToNode (aConversionSettings));
   }
 }

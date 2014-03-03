@@ -111,8 +111,11 @@ import com.phloc.html.hc.html.HCStrong;
 import com.phloc.html.hc.html.HCStyle;
 import com.phloc.html.hc.html.HCSub;
 import com.phloc.html.hc.html.HCSup;
+import com.phloc.html.hc.html.HCTBody;
 import com.phloc.html.hc.html.HCTD;
+import com.phloc.html.hc.html.HCTFoot;
 import com.phloc.html.hc.html.HCTH;
+import com.phloc.html.hc.html.HCTHead;
 import com.phloc.html.hc.html.HCTable;
 import com.phloc.html.hc.html.HCTextArea;
 import com.phloc.html.hc.html.HCTitle;
@@ -920,7 +923,7 @@ public final class HCUtils
       case TABLE:
         return new HCTable ();
       case TBODY:
-        return new HCGenericElementWithChildren (eElement);
+        return new HCTBody ();
       case TD:
         return new HCTD ();
       case TEXTAREA:
@@ -928,11 +931,11 @@ public final class HCUtils
       case TEMPLATE:
         return new HCGenericElementWithChildren (eElement);
       case TFOOT:
-        return new HCGenericElementWithChildren (eElement);
+        return new HCTFoot ();
       case TH:
         return new HCTH ();
       case THEAD:
-        return new HCGenericElementWithChildren (eElement);
+        return new HCTHead ();
       case TIME:
         return new HCTime ();
       case TITLE:
