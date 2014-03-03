@@ -20,32 +20,56 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.microdom.IMicroElement;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
-import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
-import com.phloc.html.hc.impl.HCTextNode;
+import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;title&gt; element
  * 
  * @author Philip Helger
  */
-public class HCTitle extends AbstractHCElementWithInternalChildren <HCTitle, HCTextNode>
+public class HCTitle extends AbstractHCElement <HCTitle>
 {
+  private String m_sContent;
+
   public HCTitle ()
   {
     super (EHTMLElement.TITLE);
   }
 
-  public HCTitle (@Nullable final String sTitle)
+  public HCTitle (@Nullable final String sContent)
   {
     this ();
-    addChild (HCTextNode.createOnDemand (sTitle));
+    setContent (sContent);
+  }
+
+  @Nullable
+  public String getContent ()
+  {
+    return m_sContent;
+  }
+
+  @Nonnull
+  public HCTitle setContent (@Nullable final String sContent)
+  {
+    m_sContent = sContent;
+    return this;
   }
 
   @Override
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return hasChildren ();
+    return StringHelper.hasText (m_sContent);
+  }
+
+  @Override
+  protected void applyProperties (@Nonnull final IMicroElement aElement,
+                                  @Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    super.applyProperties (aElement, aConversionSettings);
+    aElement.appendText (m_sContent);
   }
 }
