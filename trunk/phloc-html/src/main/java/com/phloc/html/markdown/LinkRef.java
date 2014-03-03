@@ -25,11 +25,11 @@ package com.phloc.html.markdown;
 final class LinkRef
 {
   /** The link. */
-  public final String m_sLink;
+  private final String m_sLink;
   /** The optional comment/title. */
-  public String m_sTitle;
+  private String m_sTitle;
   /** Flag indicating that this is an abbreviation. */
-  public final boolean m_bIsAbbrev;
+  private final boolean m_bIsAbbrev;
 
   /**
    * Constructor.
@@ -46,9 +46,23 @@ final class LinkRef
     m_bIsAbbrev = isAbbrev;
   }
 
-  @Override
-  public String toString ()
+  public String getLink ()
   {
-    return m_sLink + " \"" + m_sTitle + "\"";
+    return m_sLink;
+  }
+
+  public String getTitle ()
+  {
+    return m_sTitle;
+  }
+
+  public void setTitle (final String sTitle)
+  {
+    m_sTitle = sTitle;
+  }
+
+  public boolean isAbbrev ()
+  {
+    return m_bIsAbbrev;
   }
 }

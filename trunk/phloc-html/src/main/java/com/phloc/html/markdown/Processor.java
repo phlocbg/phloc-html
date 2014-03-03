@@ -731,7 +731,7 @@ public class Processor
             comment = line.readUntil (ch == '(' ? ')' : ch);
           }
           if (comment != null)
-            lastLinkRef.m_sTitle = comment;
+            lastLinkRef.setTitle (comment);
 
           lastLinkRef = null;
         }
