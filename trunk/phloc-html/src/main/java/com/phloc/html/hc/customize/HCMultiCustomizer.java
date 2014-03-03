@@ -39,7 +39,7 @@ import com.phloc.html.hc.html.HCHead;
  * @author Philip Helger
  */
 @Immutable
-public final class HCMultiCustomizer implements IHCCustomizer
+public class HCMultiCustomizer implements IHCCustomizer
 {
   private final List <IHCCustomizer> m_aCustomizers = new ArrayList <IHCCustomizer> ();
 
