@@ -66,9 +66,9 @@ public class EdgeCasesTest
   @Test
   public void testEmptyString () throws IOException
   {
-    assertEquals ("", new MarkdownProcessor ("", MarkdownConfiguration.DEFAULT).processToString ());
-    assertEquals ("", new MarkdownProcessor ("  ", MarkdownConfiguration.DEFAULT).processToString ());
-    assertEquals ("", new MarkdownProcessor ((String) null, MarkdownConfiguration.DEFAULT).processToString ());
+    assertEquals ("", new MarkdownProcessor (MarkdownConfiguration.DEFAULT).process ("").getAsHTMLString ());
+    assertEquals ("", new MarkdownProcessor (MarkdownConfiguration.DEFAULT).process ("  ").getAsHTMLString ());
+    assertEquals ("", new MarkdownProcessor (MarkdownConfiguration.DEFAULT).process ((String) null).getAsHTMLString ());
   }
 
   @Test

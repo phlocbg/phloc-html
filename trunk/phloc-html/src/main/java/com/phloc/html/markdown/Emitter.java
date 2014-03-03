@@ -64,7 +64,7 @@ final class Emitter
   /** Newline flag. */
   public boolean m_bConvertNewline2Br = false;
   /** Plugins references **/
-  private final Map <String, AbstractPlugin> m_aPlugins = new HashMap <String, AbstractPlugin> ();
+  private final Map <String, AbstractMarkdownPlugin> m_aPlugins = new HashMap <String, AbstractMarkdownPlugin> ();
 
   /** Constructor. */
   public Emitter (final MarkdownConfiguration config)
@@ -72,11 +72,11 @@ final class Emitter
     m_aConfig = config;
     m_bUseExtensions = config.isExtendedProfile ();
     m_bConvertNewline2Br = config.isConvertNewline2Br ();
-    for (final AbstractPlugin plugin : config.getAllPlugins ())
+    for (final AbstractMarkdownPlugin plugin : config.getAllPlugins ())
       register (plugin);
   }
 
-  public void register (final AbstractPlugin plugin)
+  public void register (final AbstractMarkdownPlugin plugin)
   {
     m_aPlugins.put (plugin.getIdPlugin (), plugin);
   }
@@ -1143,7 +1143,7 @@ final class Emitter
       line = line.m_aNext;
     }
 
-    final AbstractPlugin plugin = m_aPlugins.get (idPlugin);
+    final AbstractMarkdownPlugin plugin = m_aPlugins.get (idPlugin);
     if (plugin != null)
     {
       plugin.emit (out, list, params);
