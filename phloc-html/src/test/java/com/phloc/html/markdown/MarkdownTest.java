@@ -107,7 +107,7 @@ public class MarkdownTest
   {
     final String testText = _slurp (m_sDir + File.separator + m_sTest + ".text");
     final String htmlText = _slurp (m_sDir + File.separator + m_sTest + ".html");
-    final String markdownText = new MarkdownProcessor (testText, MarkdownConfiguration.DEFAULT).processToString ();
+    final String markdownText = new MarkdownProcessor ().process (testText).getAsHTMLString ();
     assertEquals (m_sTest, htmlText.trim (), markdownText.trim ());
   }
 }

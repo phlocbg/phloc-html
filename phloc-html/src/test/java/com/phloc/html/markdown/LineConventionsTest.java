@@ -65,8 +65,8 @@ public class LineConventionsTest
   @Test
   public void testUnixLineConventions () throws IOException
   {
-    assertEquals (EXPECTED, new MarkdownProcessor ("a\nb\nc\n", MarkdownConfiguration.DEFAULT).processToString ());
-    assertEquals (EXPECTED, new MarkdownProcessor ("a\r\nb\r\nc\r\n", MarkdownConfiguration.DEFAULT).processToString ());
-    assertEquals (EXPECTED, new MarkdownProcessor ("a\rb\rc\r", MarkdownConfiguration.DEFAULT).processToString ());
+    assertEquals (EXPECTED, new MarkdownProcessor ().process ("a\nb\nc\n").getAsHTMLString ());
+    assertEquals (EXPECTED, new MarkdownProcessor ().process ("a\r\nb\r\nc\r\n").getAsHTMLString ());
+    assertEquals (EXPECTED, new MarkdownProcessor ().process ("a\rb\rc\r").getAsHTMLString ());
   }
 }

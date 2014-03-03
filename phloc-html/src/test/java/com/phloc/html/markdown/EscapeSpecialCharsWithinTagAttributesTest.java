@@ -64,7 +64,7 @@ public class EscapeSpecialCharsWithinTagAttributesTest
   public void testImages () throws IOException
   {
     final String url = "![an *image*](/images/an_image_with_underscores.jpg \"An_image_title\")";
-    final String processed = new MarkdownProcessor (url, MarkdownConfiguration.DEFAULT).processToString ();
+    final String processed = new MarkdownProcessor ().process (url).getAsHTMLString ();
     final String output = "<p><img title=\"An_image_title\" src=\"/images/an_image_with_underscores.jpg\" alt=\"an *image*\" /></p>";
     assertEquals (output, processed);
   }
@@ -73,7 +73,7 @@ public class EscapeSpecialCharsWithinTagAttributesTest
   public void testAutoLinks () throws IOException
   {
     final String url = "[a _link_](http://url.com/a_tale_of_two_cities?var1=a_query_&var2=string \"A_link_title\")";
-    final String processed = new MarkdownProcessor (url, MarkdownConfiguration.DEFAULT).processToString ();
+    final String processed = new MarkdownProcessor ().process (url).getAsHTMLString ();
     final String output = "<p><a title=\"A_link_title\" href=\"http://url.com/a_tale_of_two_cities?var1=a_query_&amp;var2=string\">a <em>link</em></a></p>";
     assertEquals (output, processed);
   }

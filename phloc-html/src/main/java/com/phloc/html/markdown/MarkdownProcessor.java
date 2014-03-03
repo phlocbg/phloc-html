@@ -22,12 +22,12 @@ import java.io.Reader;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.WillClose;
 
-import com.phloc.commons.io.IReadableResource;
 import com.phloc.commons.io.streams.NonBlockingStringReader;
+import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.commons.string.StringHelper;
-import com.phloc.html.hc.conversion.HCSettings;
-import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Markdown processor class.
@@ -44,8 +44,6 @@ import com.phloc.html.hc.impl.HCNodeList;
  */
 public class MarkdownProcessor
 {
-  /** The reader. */
-  private final Reader m_aReader;
   /** The emitter. */
   private final Emitter m_aEmitter;
   /** The Configuration. */
@@ -53,31 +51,21 @@ public class MarkdownProcessor
   /** Extension flag. */
   private boolean m_bUseExtensions;
 
-  public MarkdownProcessor (@Nonnull final String sText, @Nonnull final MarkdownConfiguration aConfig)
+  public MarkdownProcessor ()
   {
-    this (new NonBlockingStringReader (StringHelper.getNotNull (sText)), aConfig);
-  }
-
-  public MarkdownProcessor (@Nonnull final IReadableResource aRes, @Nonnull final MarkdownConfiguration aConfig)
-  {
-    this (aRes.getReader (aConfig.getEncoding ()), aConfig);
+    this (MarkdownConfiguration.DEFAULT);
   }
 
   /**
    * Constructor.
    * 
-   * @param aReader
-   *        The input reader. May not be <code>null</code>.
    * @param aConfig
    *        The configuration to use. May not be <code>null</code>.
    */
-  public MarkdownProcessor (@Nonnull final Reader aReader, @Nonnull final MarkdownConfiguration aConfig)
+  public MarkdownProcessor (@Nonnull final MarkdownConfiguration aConfig)
   {
-    if (aReader == null)
-      throw new NullPointerException ("Reader");
     if (aConfig == null)
       throw new NullPointerException ("Config");
-    m_aReader = aReader;
     m_aConfig = aConfig;
     m_bUseExtensions = aConfig.isExtendedProfile ();
     m_aEmitter = new Emitter (m_aConfig);
@@ -94,11 +82,11 @@ public class MarkdownProcessor
    *         If an IO error occurred.
    */
   @Nonnull
-  private Block _readLines () throws IOException
+  private Block _readLines (@Nonnull final Reader aReader) throws IOException
   {
     final Block block = new Block ();
     final StringBuilder sb = new StringBuilder (80);
-    int c = m_aReader.read ();
+    int c = aReader.read ();
     LinkRef lastLinkRef = null;
     while (c != -1)
     {
@@ -113,15 +101,15 @@ public class MarkdownProcessor
             eol = true;
             break;
           case '\n':
-            c = m_aReader.read ();
+            c = aReader.read ();
             if (c == '\r')
-              c = m_aReader.read ();
+              c = aReader.read ();
             eol = true;
             break;
           case '\r':
-            c = m_aReader.read ();
+            c = aReader.read ();
             if (c == '\n')
-              c = m_aReader.read ();
+              c = aReader.read ();
             eol = true;
             break;
           case '\t':
@@ -132,13 +120,13 @@ public class MarkdownProcessor
               sb.append (' ');
               pos++;
             }
-            c = m_aReader.read ();
+            c = aReader.read ();
             break;
           }
           default:
             pos++;
             sb.append ((char) c);
-            c = m_aReader.read ();
+            c = aReader.read ();
             break;
         }
       }
@@ -478,42 +466,40 @@ public class MarkdownProcessor
     }
   }
 
-  /**
-   * Does all the processing.
-   * 
-   * @return The processed nodelist.
-   * @throws IOException
-   *         If an IO error occurred.
-   */
   @Nonnull
-  public HCNodeList process () throws IOException
+  public MarkdownProcessingResult process (@Nullable final String sText) throws IOException
   {
-    final Block parent = _readLines ();
-    parent.removeSurroundingEmptyLines ();
-    _recurse (parent, false);
-
-    final HCStack out = new HCStack ();
-
-    Block block = parent.m_aBlocks;
-    while (block != null)
-    {
-      m_aEmitter.emit (out, block);
-      block = block.m_aNext;
-    }
-    return out.getRoot ();
+    return process (new NonBlockingStringReader (StringHelper.getNotNull (sText)));
   }
 
   /**
    * Does all the processing.
    * 
-   * @return The processed HTML string.
+   * @return The processing result.
    * @throws IOException
    *         If an IO error occurred.
    */
   @Nonnull
-  public String processToString () throws IOException
+  public MarkdownProcessingResult process (@Nonnull @WillClose final Reader aReader) throws IOException
   {
-    final HCNodeList aNL = process ();
-    return HCSettings.getAsHTMLStringWithoutNamespaces (aNL, false);
+    try
+    {
+      final Block aParent = _readLines (aReader);
+      aParent.removeSurroundingEmptyLines ();
+      _recurse (aParent, false);
+
+      final HCStack aOut = new HCStack ();
+      Block aBlock = aParent.m_aBlocks;
+      while (aBlock != null)
+      {
+        m_aEmitter.emit (aOut, aBlock);
+        aBlock = aBlock.m_aNext;
+      }
+      return new MarkdownProcessingResult (aOut);
+    }
+    finally
+    {
+      StreamUtils.close (aReader);
+    }
   }
 }

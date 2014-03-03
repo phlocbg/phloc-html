@@ -101,7 +101,7 @@ public class MarkdownConfiguration
   private final boolean m_bForceExtendedProfile;
   private final boolean m_bConvertNewline2Br;
   private final ISpanEmitter m_aSpecialLinkEmitter;
-  private final List <AbstractPlugin> m_aPlugins;
+  private final List <AbstractMarkdownPlugin> m_aPlugins;
 
   /**
    * Constructor.
@@ -117,7 +117,7 @@ public class MarkdownConfiguration
                                 final boolean forceExtendedProfile,
                                 final boolean convertNewline2Br,
                                 final ISpanEmitter specialLinkEmitter,
-                                final List <AbstractPlugin> plugins)
+                                final List <AbstractMarkdownPlugin> plugins)
   {
     m_bSafeMode = safeMode;
     m_aEncoding = encoding;
@@ -166,7 +166,7 @@ public class MarkdownConfiguration
 
   @Nonnull
   @ReturnsMutableCopy
-  public List <AbstractPlugin> getAllPlugins ()
+  public List <AbstractMarkdownPlugin> getAllPlugins ()
   {
     return ContainerHelper.newList (m_aPlugins);
   }
@@ -197,7 +197,7 @@ public class MarkdownConfiguration
     private IDecorator m_aDecorator = new DefaultDecorator ();
     private IBlockEmitter m_aCodeBlockEmitter = null;
     private ISpanEmitter m_aSpecialLinkEmitter = null;
-    private final List <AbstractPlugin> m_aPlugins = new ArrayList <AbstractPlugin> ();
+    private final List <AbstractMarkdownPlugin> m_aPlugins = new ArrayList <AbstractMarkdownPlugin> ();
 
     /**
      * Constructor.
@@ -323,9 +323,9 @@ public class MarkdownConfiguration
      * @return This builder.
      */
     @Nonnull
-    public Builder registerPlugins (final AbstractPlugin... plugins)
+    public Builder registerPlugins (final AbstractMarkdownPlugin... plugins)
     {
-      for (final AbstractPlugin plugin : plugins)
+      for (final AbstractMarkdownPlugin plugin : plugins)
         m_aPlugins.add (plugin);
       return this;
     }

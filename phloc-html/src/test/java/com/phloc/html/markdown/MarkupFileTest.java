@@ -208,6 +208,6 @@ public class MarkupFileTest
       aBuilder.setExtendedProfile (true);
     assertEquals (m_sTestName,
                   m_sExpectedResult.trim (),
-                  new MarkdownProcessor (m_sTestString, aBuilder.build ()).processToString ().trim ());
+                  new MarkdownProcessor (aBuilder.build ()).process (m_sTestString).getAsHTMLString ());
   }
 }

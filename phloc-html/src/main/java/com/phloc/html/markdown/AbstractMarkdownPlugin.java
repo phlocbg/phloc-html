@@ -20,11 +20,11 @@ package com.phloc.html.markdown;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractPlugin
+public abstract class AbstractMarkdownPlugin
 {
   protected String m_sIdPlugin;
 
-  public AbstractPlugin (final String sIDPlugin)
+  public AbstractMarkdownPlugin (final String sIDPlugin)
   {
     m_sIdPlugin = sIDPlugin;
   }
