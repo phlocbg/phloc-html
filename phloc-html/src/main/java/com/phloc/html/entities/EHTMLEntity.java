@@ -17,10 +17,15 @@
  */
 package com.phloc.html.entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -32,268 +37,309 @@ import com.phloc.commons.string.ToStringGenerator;
 public enum EHTMLEntity implements IHTMLEntity
 {
   // Reserved chars:
-  amp ("amp"), // ampersand
-  gt ("gt"), // greater-than
-  lt ("lt"), // less-than
-  quot ("quot"), // quotation mark
-  apos ("apos"), // apostrophe
+  amp ("amp", '&', "ampersand"),
+  gt ("gt", '>', "greater-than"),
+  lt ("lt", '<', "less-than"),
+  quot ("quot", '"', "quotation mark"),
+  apos ("apos", '\'', "apostrophe"),
 
   // ISO-8859 symbols
-  nbsp ("nbsp"), // non-breaking space
-  iexcl ("iexcl"), // inverted exclamation mark
-  cent ("cent"), // cent
-  pound ("pound"), // pound
-  curren ("curren"), // currency
-  yen ("yen"), // yen
-  brvbar ("brvbar"), // broken vertical bar
-  sect ("sect"), // section
-  uml ("uml"), // spacing diaeresis
-  copy ("copy"), // copyright
-  ordf ("ordf"), // feminine ordinal indicator
-  laquo ("laquo"), // angle quotation mark (left)
-  not ("not"), // negation
-  shy ("shy"), // soft hyphen
-  reg ("reg"), // registered trademark
-  macr ("macr"), // spacing macron
-  deg ("deg"), // degree
-  plusmn ("plusmn"), // plus-or-minus 
-  sup2 ("sup2"), // superscript 2
-  sup3 ("sup3"), // superscript 3
-  acute ("acute"), // spacing acute
-  micro ("micro"), // micro
-  para ("para"), // paragraph
-  middot ("middot"), // middle dot
-  cedil ("cedil"), // spacing cedilla
-  sup1 ("sup1"), // superscript 1
-  ordm ("ordm"), // masculine ordinal indicator
-  raquo ("raquo"), // angle quotation mark (right)
-  frac14 ("frac14"), // fraction 1/4
-  frac12 ("frac12"), // fraction 1/2
-  frac34 ("frac34"), // fraction 3/4
-  iquest ("iquest"), // inverted question mark
-  times ("times"), // multiplication
-  divide ("divide"), // division
+  nbsp ("nbsp", '\u00a0', "non-breaking space"),
+  iexcl ("iexcl", '\u00a1', "inverted exclamation mark"),
+  cent ("cent", '\u00a2', "cent"),
+  pound ("pound", '\u00a3', "pound"),
+  curren ("curren", '\u00a4', "currency"),
+  yen ("yen", '\u00a5', "yen"),
+  brvbar ("brvbar", '\u00a6', "broken vertical bar"),
+  sect ("sect", '\u00a7', "section"),
+  uml ("uml", '\u00a8', "spacing diaeresis"),
+  copy ("copy", '\u00a9', "copyright"),
+  ordf ("ordf", '\u00aa', "feminine ordinal indicator"),
+  laquo ("laquo", '\u00ab', "angle quotation mark (left)"),
+  not ("not", '\u00ac', "negation"),
+  shy ("shy", '\u00ad', "soft hyphen"),
+  reg ("reg", '\u00ae', "registered trademark"),
+  macr ("macr", '\u00af', "spacing macron"),
+  deg ("deg", '\u00b0', "degree"),
+  plusmn ("plusmn", '\u00b1', "plus-or-minus "),
+  sup2 ("sup2", '\u00b2', "superscript 2"),
+  sup3 ("sup3", '\u00b3', "superscript 3"),
+  acute ("acute", '\u00b4', "spacing acute"),
+  micro ("micro", '\u00b5', "micro"),
+  para ("para", '\u00b6', "paragraph"),
+  middot ("middot", '\u00b7', "middle dot"),
+  cedil ("cedil", '\u00b8', "spacing cedilla"),
+  sup1 ("sup1", '\u00b9', "superscript 1"),
+  ordm ("ordm", '\u00ba', "masculine ordinal indicator"),
+  raquo ("raquo", '\u00bb', "angle quotation mark (right)"),
+  frac14 ("frac14", '\u00bc', "fraction 1/4"),
+  frac12 ("frac12", '\u00bd', "fraction 1/2"),
+  frac34 ("frac34", '\u00be', "fraction 3/4"),
+  iquest ("iquest", '\u00bf', "inverted question mark"),
+  times ("times", '\u00d7', "multiplication"),
+  divide ("divide", '\u00f7', "division"),
 
   // ISO-8859 characters
-  Agrave ("Agrave"), // capital a, grave accent
-  Aacute ("Aacute"), // capital a, acute accent
-  Acirc ("Acirc"), // capital a, circumflex accent
-  Atilde ("Atilde"), // capital a, tilde
-  Auml ("Auml"), // capital a, umlaut mark
-  Aring ("Aring"), // capital a, ring
-  AElig ("AElig"), // capital ae
-  Ccedil ("Ccedil"), // capital c, cedilla
-  Egrave ("Egrave"), // capital e, grave accent
-  Eacute ("Eacute"), // capital e, acute accent
-  Ecirc ("Ecirc"), // capital e, circumflex accent
-  Euml ("Euml"), // capital e, umlaut mark
-  Igrave ("Igrave"), // capital i, grave accent
-  Iacute ("Iacute"), // capital i, acute accent
-  Icirc ("Icirc"), // capital i, circumflex accent
-  Iuml ("Iuml"), // capital i, umlaut mark
-  ETH ("ETH"), // capital eth, Icelandic
-  Ntilde ("Ntilde"), // capital n, tilde
-  Ograve ("Ograve"), // capital o, grave accent
-  Oacute ("Oacute"), // capital o, acute accent
-  Ocirc ("Ocirc"), // capital o, circumflex accent
-  Otilde ("Otilde"), // capital o, tilde
-  Ouml ("Ouml"), // capital o, umlaut mark
-  Oslash ("Oslash"), // capital o, slash
-  Ugrave ("Ugrave"), // capital u, grave accent
-  Uacute ("Uacute"), // capital u, acute accent
-  Ucirc ("Ucirc"), // capital u, circumflex accent
-  Uuml ("Uuml"), // capital u, umlaut mark
-  Yacute ("Yacute"), // capital y, acute accent
-  THORN ("THORN"), // capital THORN, Icelandic
-  szlig ("szlig"), // small sharp s, German
-  agrave ("agrave"), // small a, grave accent
-  aacute ("aacute"), // small a, acute accent
-  acirc ("acirc"), // small a, circumflex accent
-  atilde ("atilde"), // small a, tilde
-  auml ("auml"), // small a, umlaut mark
-  aring ("aring"), // small a, ring
-  aelig ("aelig"), // small ae
-  ccedil ("ccedil"), // small c, cedilla
-  egrave ("egrave"), // small e, grave accent
-  eacute ("eacute"), // small e, acute accent
-  ecirc ("ecirc"), // small e, circumflex accent
-  euml ("euml"), // small e, umlaut mark
-  igrave ("igrave"), // small i, grave accent
-  iacute ("iacute"), // small i, acute accent
-  icirc ("icirc"), // small i, circumflex accent
-  iuml ("iuml"), // small i, umlaut mark
-  eth ("eth"), // small eth, Icelandic
-  ntilde ("ntilde"), // small n, tilde
-  ograve ("ograve"), // small o, grave accent
-  oacute ("oacute"), // small o, acute accent
-  ocirc ("ocirc"), // small o, circumflex accent
-  otilde ("otilde"), // small o, tilde
-  ouml ("ouml"), // small o, umlaut mark
-  oslash ("oslash"), // small o, slash
-  ugrave ("ugrave"), // small u, grave accent
-  uacute ("uacute"), // small u, acute accent
-  ucirc ("ucirc"), // small u, circumflex accent
-  uuml ("uuml"), // small u, umlaut mark
-  yacute ("yacute"), // small y, acute accent
-  thorn ("thorn"), // small thorn, Icelandic
-  yuml ("yuml"), // small y, umlaut mark
+  Agrave ("Agrave", '\u00c0', "capital a, grave accent"),
+  Aacute ("Aacute", '\u00c1', "capital a, acute accent"),
+  Acirc ("Acirc", '\u00c2', "capital a, circumflex accent"),
+  Atilde ("Atilde", '\u00c3', "capital a, tilde"),
+  Auml ("Auml", '\u00c4', "capital a, umlaut mark"),
+  Aring ("Aring", '\u00c5', "capital a, ring"),
+  AElig ("AElig", '\u00c6', "capital ae"),
+  Ccedil ("Ccedil", '\u00c7', "capital c, cedilla"),
+  Egrave ("Egrave", '\u00c8', "capital e, grave accent"),
+  Eacute ("Eacute", '\u00c9', "capital e, acute accent"),
+  Ecirc ("Ecirc", '\u00ca', "capital e, circumflex accent"),
+  Euml ("Euml", '\u00cb', "capital e, umlaut mark"),
+  Igrave ("Igrave", '\u00cc', "capital i, grave accent"),
+  Iacute ("Iacute", '\u00cd', "capital i, acute accent"),
+  Icirc ("Icirc", '\u00ce', "capital i, circumflex accent"),
+  Iuml ("Iuml", '\u00cf', "capital i, umlaut mark"),
+  ETH ("ETH", '\u00d0', "capital eth, Icelandic"),
+  Ntilde ("Ntilde", '\u00d1', "capital n, tilde"),
+  Ograve ("Ograve", '\u00d2', "capital o, grave accent"),
+  Oacute ("Oacute", '\u00d3', "capital o, acute accent"),
+  Ocirc ("Ocirc", '\u00d4', "capital o, circumflex accent"),
+  Otilde ("Otilde", '\u00d5', "capital o, tilde"),
+  Ouml ("Ouml", '\u00d6', "capital o, umlaut mark"),
+  Oslash ("Oslash", '\u00d8', "capital o, slash"),
+  Ugrave ("Ugrave", '\u00d9', "capital u, grave accent"),
+  Uacute ("Uacute", '\u00da', "capital u, acute accent"),
+  Ucirc ("Ucirc", '\u00db', "capital u, circumflex accent"),
+  Uuml ("Uuml", '\u00dc', "capital u, umlaut mark"),
+  Yacute ("Yacute", '\u00dd', "capital y, acute accent"),
+  THORN ("THORN", '\u00de', "capital THORN, Icelandic"),
+  szlig ("szlig", '\u00df', "small sharp s, German"),
+  agrave ("agrave", '\u00e0', "small a, grave accent"),
+  aacute ("aacute", '\u00e1', "small a, acute accent"),
+  acirc ("acirc", '\u00e2', "small a, circumflex accent"),
+  atilde ("atilde", '\u00e3', "small a, tilde"),
+  auml ("auml", '\u00e4', "small a, umlaut mark"),
+  aring ("aring", '\u00e5', "small a, ring"),
+  aelig ("aelig", '\u00e6', "small ae"),
+  ccedil ("ccedil", '\u00e7', "small c, cedilla"),
+  egrave ("egrave", '\u00e8', "small e, grave accent"),
+  eacute ("eacute", '\u00e9', "small e, acute accent"),
+  ecirc ("ecirc", '\u00ea', "small e, circumflex accent"),
+  euml ("euml", '\u00eb', "small e, umlaut mark"),
+  igrave ("igrave", '\u00ec', "small i, grave accent"),
+  iacute ("iacute", '\u00ed', "small i, acute accent"),
+  icirc ("icirc", '\u00ee', "small i, circumflex accent"),
+  iuml ("iuml", '\u00ef', "small i, umlaut mark"),
+  eth ("eth", '\u00f0', "small eth, Icelandic"),
+  ntilde ("ntilde", '\u00f1', "small n, tilde"),
+  ograve ("ograve", '\u00f2', "small o, grave accent"),
+  oacute ("oacute", '\u00f3', "small o, acute accent"),
+  ocirc ("ocirc", '\u00f4', "small o, circumflex accent"),
+  otilde ("otilde", '\u00f5', "small o, tilde"),
+  ouml ("ouml", '\u00f6', "small o, umlaut mark"),
+  oslash ("oslash", '\u00f8', "small o, slash"),
+  ugrave ("ugrave", '\u00f9', "small u, grave accent"),
+  uacute ("uacute", '\u00fa', "small u, acute accent"),
+  ucirc ("ucirc", '\u00fb', "small u, circumflex accent"),
+  uuml ("uuml", '\u00fc', "small u, umlaut mark"),
+  yacute ("yacute", '\u00fd', "small y, acute accent"),
+  thorn ("thorn", '\u00fe', "small thorn, Icelandic"),
+  yuml ("yuml", '\u00ff', "small y, umlaut mark"),
 
   // Math symbols
-  forall ("forall"), // for all
-  part ("part"), // part
-  exist ("exist"), // exists
-  empty ("empty"), // empty
-  nabla ("nabla"), // nabla
-  isin ("isin"), // isin
-  notin ("notin"), // notin
-  ni ("ni"), // ni
-  prod ("prod"), // prod
-  sum ("sum"), // sum
-  minus ("minus"), // minus
-  lowast ("lowast"), // lowast
-  radic ("radic"), // square root
-  prop ("prop"), // proportional to
-  infin ("infin"), // infinity
-  ang ("ang"), // angle
-  and ("and"), // and
-  or ("or"), // or
-  cap ("cap"), // cap
-  cup ("cup"), // cup
-  int_ ("int"), // integral
-  there4 ("there4"), // therefore
-  sim ("sim"), // similar to
-  cong ("cong"), // congruent to
-  asymp ("asymp"), // almost equal
-  ne ("ne"), // not equal
-  equiv ("equiv"), // equivalent
-  le ("le"), // less or equal
-  ge ("ge"), // greater or equal
-  sub ("sub"), // subset of
-  sup ("sup"), // superset of
-  nsub ("nsub"), // not subset of
-  sube ("sube"), // subset or equal
-  supe ("supe"), // superset or equal
-  oplus ("oplus"), // circled plus
-  otimes ("otimes"), // circled times
-  perp ("perp"), // perpendicular
-  sdot ("sdot"), // dot operator
+  forall ("forall", '\u2200', "for all"),
+  part ("part", '\u2202', "part"),
+  exist ("exist", '\u2203', "exists"),
+  empty ("empty", '\u2205', "empty"),
+  nabla ("nabla", '\u2207', "nabla"),
+  isin ("isin", '\u2208', "isin"),
+  notin ("notin", '\u2209', "notin"),
+  ni ("ni", '\u220b', "ni"),
+  prod ("prod", '\u220f', "prod"),
+  sum ("sum", '\u2211', "sum"),
+  minus ("minus", '\u2212', "minus"),
+  lowast ("lowast", '\u2217', "lowast"),
+  radic ("radic", '\u221a', "square root"),
+  prop ("prop", '\u221d', "proportional to"),
+  infin ("infin", '\u221e', "infinity"),
+  ang ("ang", '\u2220', "angle"),
+  and ("and", '\u2227', "and"),
+  or ("or", '\u2228', "or"),
+  cap ("cap", '\u2229', "cap"),
+  cup ("cup", '\u222a', "cup"),
+  int_ ("int", '\u222b', "integral"),
+  there4 ("there4", '\u2234', "therefore"),
+  sim ("sim", '\u223c', "similar to"),
+  cong ("cong", '\u2245', "congruent to"),
+  asymp ("asymp", '\u2248', "almost equal"),
+  ne ("ne", '\u2260', "not equal"),
+  equiv ("equiv", '\u2261', "equivalent"),
+  le ("le", '\u2264', "less or equal"),
+  ge ("ge", '\u2265', "greater or equal"),
+  sub ("sub", '\u2282', "subset of"),
+  sup ("sup", '\u2283', "superset of"),
+  nsub ("nsub", '\u2284', "not subset of"),
+  sube ("sube", '\u2286', "subset or equal"),
+  supe ("supe", '\u2287', "superset or equal"),
+  oplus ("oplus", '\u2295', "circled plus"),
+  otimes ("otimes", '\u2297', "circled times"),
+  perp ("perp", '\u22a5', "perpendicular"),
+  sdot ("sdot", '\u22c5', "dot operator"),
 
   // Greek letters
-  Alpha ("Alpha"), // Alpha
-  Beta ("Beta"), // Beta
-  Gamma ("Gamma"), // Gamma
-  Delta ("Delta"), // Delta
-  Epsilon ("Epsilon"), // Epsilon
-  Zeta ("Zeta"), // Zeta
-  Eta ("Eta"), // Eta
-  Theta ("Theta"), // Theta
-  Iota ("Iota"), // Iota
-  Kappa ("Kappa"), // Kappa
-  Lambda ("Lambda"), // Lambda
-  Mu ("Mu"), // Mu
-  Nu ("Nu"), // Nu
-  Xi ("Xi"), // Xi
-  Omicron ("Omicron"), // Omicron
-  Pi ("Pi"), // Pi
-  Rho ("Rho"), // Rho
-  // Sigmaf is undefined
-  Sigma ("Sigma"), // Sigma
-  Tau ("Tau"), // Tau
-  Upsilon ("Upsilon"), // Upsilon
-  Phi ("Phi"), // Phi
-  Chi ("Chi"), // Chi
-  Psi ("Psi"), // Psi
-  Omega ("Omega"), // Omega
+  Alpha ("Alpha", '\u0391', "Alpha"),
+  Beta ("Beta", '\u0392', "Beta"),
+  Gamma ("Gamma", '\u0393', "Gamma"),
+  Delta ("Delta", '\u0394', "Delta"),
+  Epsilon ("Epsilon", '\u0395', "Epsilon"),
+  Zeta ("Zeta", '\u0396', "Zeta"),
+  Eta ("Eta", '\u0397', "Eta"),
+  Theta ("Theta", '\u0398', "Theta"),
+  Iota ("Iota", '\u0399', "Iota"),
+  Kappa ("Kappa", '\u039a', "Kappa"),
+  Lambda ("Lambda", '\u039b', "Lambda"),
+  Mu ("Mu", '\u039c', "Mu"),
+  Nu ("Nu", '\u039d', "Nu"),
+  Xi ("Xi", '\u039e', "Xi"),
+  Omicron ("Omicron", '\u039f', "Omicron"),
+  Pi ("Pi", '\u03a0', "Pi"),
+  Rho ("Rho", '\u03a1', "Rho"),
+  // Sigmaf is undefined!
+  Sigma ("Sigma", '\u03a3', "Sigma"),
+  Tau ("Tau", '\u03a4', "Tau"),
+  Upsilon ("Upsilon", '\u03a5', "Upsilon"),
+  Phi ("Phi", '\u03a6', "Phi"),
+  Chi ("Chi", '\u03a7', "Chi"),
+  Psi ("Psi", '\u03a8', "Psi"),
+  Omega ("Omega", '\u03a9', "Omega"),
 
-  alpha ("alpha"), // alpha
-  beta ("beta"), // beta
-  gamma ("gamma"), // gamma
-  delta ("delta"), // delta
-  epsilon ("epsilon"), // epsilon
-  zeta ("zeta"), // zeta
-  eta ("eta"), // eta
-  theta ("theta"), // theta
-  iota ("iota"), // iota
-  kappa ("kappa"), // kappa
-  lambda ("lambda"), // lambda
-  mu ("mu"), // mu
-  nu ("nu"), // nu
-  xi ("xi"), // xi
-  omicron ("omicron"), // omicron
-  pi ("pi"), // pi
-  rho ("rho"), // rho
-  sigmaf ("sigmaf"), // sigmaf
-  sigma ("sigma"), // sigma
-  tau ("tau"), // tau
-  upsilon ("upsilon"), // upsilon
-  phi ("phi"), // phi
-  chi ("chi"), // chi
-  psi ("psi"), // psi
-  omega ("omega"), // omega
+  alpha ("alpha", '\u03b1', "alpha"),
+  beta ("beta", '\u03b2', "beta"),
+  gamma ("gamma", '\u03b3', "gamma"),
+  delta ("delta", '\u03b4', "delta"),
+  epsilon ("epsilon", '\u03b5', "epsilon"),
+  zeta ("zeta", '\u03b6', "zeta"),
+  eta ("eta", '\u03b7', "eta"),
+  theta ("theta", '\u03b8', "theta"),
+  iota ("iota", '\u03b9', "iota"),
+  kappa ("kappa", '\u03ba', "kappa"),
+  lambda ("lambda", '\u03bb', "lambda"),
+  mu ("mu", '\u03bc', "mu"),
+  nu ("nu", '\u03bd', "nu"),
+  xi ("xi", '\u03be', "xi"),
+  omicron ("omicron", '\u03bf', "omicron"),
+  pi ("pi", '\u03c0', "pi"),
+  rho ("rho", '\u03c1', "rho"),
+  sigmaf ("sigmaf", '\u03c2', "sigmaf"),
+  sigma ("sigma", '\u03c3', "sigma"),
+  tau ("tau", '\u03c4', "tau"),
+  upsilon ("upsilon", '\u03c5', "upsilon"),
+  phi ("phi", '\u03c6', "phi"),
+  chi ("chi", '\u03c7', "chi"),
+  psi ("psi", '\u03c8', "psi"),
+  omega ("omega", '\u03c9', "omega"),
 
-  thetasym ("thetasym"), // theta symbol
-  upsih ("upsih"), // upsilon symbol
-  piv ("piv"), // pi symbol
+  thetasym ("thetasym", '\u03d1', "theta symbol"),
+  upsih ("upsih", '\u03d2', "upsilon symbol"),
+  piv ("piv", '\u03d6', "pi symbol"),
+
+  // Letterlike Symbols
+  weierp ("weierp", '\u2118', "script capital P = power set = Weierstrass p"),
+  image ("image", '\u2111', "blackletter capital I = imaginary part"),
+  real ("real", '\u211c', "blackletter capital R = real part symbol"),
+  trade ("trade", '\u2122', "trade mark sign"),
+  alefsym ("alefsym", '\u2135', "alef symbol = first transfinite cardinal"),
+
+  // Arrows
+  larr ("larr", '\u2190', "left arrow"),
+  uarr ("uarr", '\u2191', "up arrow"),
+  rarr ("rarr", '\u2192', "right arrow"),
+  darr ("darr", '\u2193', "down arrow"),
+  harr ("harr", '\u2194', "left right arrow"),
+  crarr ("crarr", '\u21b5', "carriage return arrow"),
+  lArr ("lArr", '\u21d0', "leftwards double arrow"),
+  uArr ("uArr", '\u21d1', "upwards double arrow"),
+  rArr ("rArr", '\u21d2', "rightwards double arrow"),
+  dArr ("dArr", '\u21d3', "downwards double arrow"),
+  hArr ("hArr", '\u21d4', "left right double arrow"),
 
   // Other entities
-  OElig ("OElig"), // capital ligature OE
-  oelig ("oelig"), // small ligature oe
-  Scaron ("Scaron"), // capital S with caron
-  scaron ("scaron"), // small S with caron
-  Yuml ("Yuml"), // capital Y with diaeres
-  fnof ("fnof"), // f with hook
-  circ ("circ"), // modifier letter circumflex accent
-  tilde ("tilde"), // small tilde
-  ensp ("ensp"), // en space
-  emsp ("emsp"), // em space
-  thinsp ("thinsp"), // thin space
-  zwnj ("zwnj"), // zero width non-joiner
-  zwj ("zwj"), // zero width joiner
-  lrm ("lrm"), // left-to-right mark
-  rlm ("rlm"), // right-to-left mark
-  ndash ("ndash"), // en dash
-  mdash ("mdash"), // em dash
-  lsquo ("lsquo"), // left single quotation mark
-  rsquo ("rsquo"), // right single quotation mark
-  sbquo ("sbquo"), // single low-9 quotation mark
-  ldquo ("ldquo"), // left double quotation mark
-  rdquo ("rdquo"), // right double quotation mark
-  bdquo ("bdquo"), // double low-9 quotation mark
-  dagger ("dagger"), // dagger
-  Dagger ("Dagger"), // double dagger
-  bull ("bull"), // bullet
-  hellip ("hellip"), // horizontal ellipsis
-  permil ("permil"), // per mille
-  prime ("prime"), // minutes
-  Prime ("Prime"), // seconds
-  lsaquo ("lsaquo"), // single left angle quotation
-  rsaquo ("rsaquo"), // single right angle quotation
-  oline ("oline"), // overline
-  euro ("euro"), // euro
-  trade ("trade"), // trademark
-  larr ("larr"), // left arrow
-  uarr ("uarr"), // up arrow
-  rarr ("rarr"), // right arrow
-  darr ("darr"), // down arrow
-  harr ("harr"), // left right arrow
-  crarr ("crarr"), // carriage return arrow
-  lceil ("lceil"), // left ceiling
-  rceil ("rceil"), // right ceiling
-  lfloor ("lfloor"), // left floor
-  rfloor ("rfloor"), // right floor
-  loz ("loz"), // lozenge
-  spades ("spades"), // spade
-  clubs ("clubs"), // club
-  hearts ("hearts"), // heart
-  diams ("diams"); // diamond
+  OElig ("OElig", '\u0152', "capital ligature OE"),
+  oelig ("oelig", '\u0153', "small ligature oe"),
+  Scaron ("Scaron", '\u0160', "capital S with caron"),
+  scaron ("scaron", '\u0161', "small S with caron"),
+  Yuml ("Yuml", '\u0178', "capital Y with diaeres"),
+  fnof ("fnof", '\u0192', "f with hook"),
+  circ ("circ", '\u02c6', "modifier letter circumflex accent"),
+  tilde ("tilde", '\u02dc', "small tilde"),
+  ensp ("ensp", '\u2002', "en space"),
+  emsp ("emsp", '\u2003', "em space"),
+  thinsp ("thinsp", '\u2009', "thin space"),
+  zwnj ("zwnj", '\u200c', "zero width non-joiner"),
+  zwj ("zwj", '\u200d', "zero width joiner"),
+  lrm ("lrm", '\u200e', "left-to-right mark"),
+  rlm ("rlm", '\u200f', "right-to-left mark"),
+  ndash ("ndash", '\u2013', "en dash"),
+  mdash ("mdash", '\u2014', "em dash"),
+  lsquo ("lsquo", '\u2018', "left single quotation mark"),
+  rsquo ("rsquo", '\u2019', "right single quotation mark"),
+  sbquo ("sbquo", '\u201a', "single low-9 quotation mark"),
+  ldquo ("ldquo", '\u201c', "left double quotation mark"),
+  rdquo ("rdquo", '\u201d', "right double quotation mark"),
+  bdquo ("bdquo", '\u201e', "double low-9 quotation mark"),
+  dagger ("dagger", '\u2020', "dagger"),
+  Dagger ("Dagger", '\u2021', "double dagger"),
+  bull ("bull", '\u2022', "bullet"),
+  hellip ("hellip", '\u2026', "horizontal ellipsis"),
+  permil ("permil", '\u2030', "per mille"),
+  prime ("prime", '\u2032', "minutes"),
+  Prime ("Prime", '\u2033', "seconds"),
+  lsaquo ("lsaquo", '\u2039', "single left angle quotation"),
+  rsaquo ("rsaquo", '\u203a', "single right angle quotation"),
+  oline ("oline", '\u203e', "overline"),
+  euro ("euro", '\u20ac', "euro"),
+  lceil ("lceil", '\u2308', "left ceiling"),
+  rceil ("rceil", '\u2309', "right ceiling"),
+  lfloor ("lfloor", '\u230a', "left floor"),
+  rfloor ("rfloor", '\u230b', "right floor"),
+  loz ("loz", '\u25ca', "lozenge"),
+  spades ("spades", '\u2660', "spade"),
+  clubs ("clubs", '\u2663', "club"),
+  hearts ("hearts", '\u2665', "heart"),
+  diams ("diams", '\u2666', "diamond"),
+  frasl ("frasl", '\u2044', "fraction slash"),
+  lang ("lang", '\u2329', "left-pointing angle bracket = bra"),
+  rang ("rang", '\u232a', "right-pointing angle bracket = ket");
 
-  private String m_sEntityName;
-  private String m_sEntityReference;
+  private static final Map <String, EHTMLEntity> s_aEntityRefMap = new HashMap <String, EHTMLEntity> ();
+  private static final Map <Character, EHTMLEntity> s_aCharMap = new HashMap <Character, EHTMLEntity> ();
 
-  private EHTMLEntity (@Nonnull @Nonempty final String sName)
+  static
+  {
+    for (final EHTMLEntity e : values ())
+    {
+      if (s_aEntityRefMap.put (e.m_sEntityReference, e) != null)
+        throw new IllegalStateException ("Another entity reference '" +
+                                         e.m_sEntityReference +
+                                         "' is already contained!");
+
+      final Character aChar = Character.valueOf (e.m_cChar);
+      if (s_aCharMap.put (aChar, e) != null)
+        throw new IllegalStateException ("Another entity reference for '" +
+                                         "0x" +
+                                         StringHelper.getHexStringLeadingZero (e.m_cChar, 4) +
+                                         " is already contained!");
+    }
+  }
+
+  private final String m_sEntityName;
+  private final String m_sEntityReference;
+  private char m_cChar;
+  private final String m_sDescription;
+
+  private EHTMLEntity (@Nonnull @Nonempty final String sName, final char c, @Nonnull @Nonempty final String sDescription)
   {
     m_sEntityName = sName;
     m_sEntityReference = '&' + sName + ';';
+    m_cChar = c;
+    m_sDescription = sDescription;
   }
 
   @Nonnull
@@ -312,14 +358,47 @@ public enum EHTMLEntity implements IHTMLEntity
 
   @Nonnull
   @Nonempty
-  public String getChar ()
+  public String getDescription ()
   {
-    return HTMLEntities.getCharOfEntity (this);
+    return m_sDescription;
+  }
+
+  /**
+   * @return The source character matching the entity.
+   */
+  public char getChar ()
+  {
+    return m_cChar;
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("name", m_sEntityName).toString ();
+    return new ToStringGenerator (this).append ("name", m_sEntityName)
+                                       .append ("char", "0x" + StringHelper.getHexStringLeadingZero (m_cChar, 4))
+                                       .append ("description", m_sDescription)
+                                       .toString ();
+  }
+
+  public static boolean isValidEntityReference (@Nullable final String sEntityReference)
+  {
+    return getFromEntityReferenceOrNull (sEntityReference) != null;
+  }
+
+  @Nullable
+  public static EHTMLEntity getFromEntityReferenceOrNull (@Nullable final String sEntityReference)
+  {
+    return s_aEntityRefMap.get (sEntityReference);
+  }
+
+  public static boolean isValidEntityChar (final char c)
+  {
+    return getFromCharOrNull (c) != null;
+  }
+
+  @Nullable
+  public static EHTMLEntity getFromCharOrNull (final char c)
+  {
+    return s_aCharMap.get (Character.valueOf (c));
   }
 }

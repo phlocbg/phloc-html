@@ -36,6 +36,11 @@ public class HCEntityNode extends AbstractHCNode
   private final IHTMLEntity m_aEntity;
   private final String m_sPlainText;
 
+  public HCEntityNode (@Nonnull final EHTMLEntity eEntity)
+  {
+    this (eEntity, Character.toString (eEntity.getChar ()));
+  }
+
   public HCEntityNode (@Nonnull final IHTMLEntity aEntity, @Nonnull final String sPlainText)
   {
     if (aEntity == null)
