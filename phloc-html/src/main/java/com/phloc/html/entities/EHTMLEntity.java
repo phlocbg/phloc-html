@@ -364,6 +364,15 @@ public enum EHTMLEntity implements IHTMLEntity
     return m_cChar;
   }
 
+  /**
+   * @return The source character string matching the entity.
+   */
+  @Nonnull
+  public String getCharString ()
+  {
+    return Character.toString (m_cChar);
+  }
+
   @Nonnull
   @Nonempty
   public String getDescription ()

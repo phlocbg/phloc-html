@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.charset.CCharset;
@@ -106,27 +107,32 @@ public class MarkdownConfiguration
   /**
    * Constructor.
    * 
-   * @param safeMode
-   * @param encoding
-   * @param decorator
+   * @param bSafeMode
+   * @param aEncoding
+   * @param aDecorator
    */
-  public MarkdownConfiguration (final boolean safeMode,
-                                final Charset encoding,
-                                final IDecorator decorator,
-                                final IBlockEmitter aCodeBlockEmitter,
-                                final boolean forceExtendedProfile,
-                                final boolean convertNewline2Br,
-                                final ISpanEmitter specialLinkEmitter,
-                                final List <AbstractMarkdownPlugin> plugins)
+  public MarkdownConfiguration (final boolean bSafeMode,
+                                @Nonnull final Charset aEncoding,
+                                @Nonnull final IDecorator aDecorator,
+                                @Nullable final IBlockEmitter aCodeBlockEmitter,
+                                final boolean bForceExtendedProfile,
+                                final boolean bConvertNewline2Br,
+                                @Nullable final ISpanEmitter aSpecialLinkEmitter,
+                                @Nullable final List <? extends AbstractMarkdownPlugin> aPlugins)
   {
-    m_bSafeMode = safeMode;
-    m_aEncoding = encoding;
-    m_aDecorator = decorator;
+    if (aEncoding == null)
+      throw new NullPointerException ("Encoding");
+    if (aDecorator == null)
+      throw new NullPointerException ("Decorator");
+
+    m_bSafeMode = bSafeMode;
+    m_aEncoding = aEncoding;
+    m_aDecorator = aDecorator;
     m_aCodeBlockEmitter = aCodeBlockEmitter;
-    m_bForceExtendedProfile = forceExtendedProfile;
-    m_bConvertNewline2Br = convertNewline2Br;
-    m_aSpecialLinkEmitter = specialLinkEmitter;
-    m_aPlugins = plugins;
+    m_bForceExtendedProfile = bForceExtendedProfile;
+    m_bConvertNewline2Br = bConvertNewline2Br;
+    m_aSpecialLinkEmitter = aSpecialLinkEmitter;
+    m_aPlugins = ContainerHelper.newList (aPlugins);
   }
 
   public boolean isSafeMode ()
@@ -134,16 +140,19 @@ public class MarkdownConfiguration
     return m_bSafeMode;
   }
 
+  @Nonnull
   public Charset getEncoding ()
   {
     return m_aEncoding;
   }
 
+  @Nonnull
   public IDecorator getDecorator ()
   {
     return m_aDecorator;
   }
 
+  @Nullable
   public IBlockEmitter getCodeBlockEmitter ()
   {
     return m_aCodeBlockEmitter;
@@ -159,6 +168,7 @@ public class MarkdownConfiguration
     return m_bConvertNewline2Br;
   }
 
+  @Nullable
   public ISpanEmitter getSpecialLinkEmitter ()
   {
     return m_aSpecialLinkEmitter;
@@ -203,9 +213,7 @@ public class MarkdownConfiguration
      * Constructor.
      */
     Builder ()
-    {
-      // empty
-    }
+    {}
 
     /**
      * Forces extened profile to be enabled by default.
@@ -257,12 +265,16 @@ public class MarkdownConfiguration
      * @since 0.7
      */
     @Nonnull
-    public Builder setEncoding (final Charset aEncoding)
+    public Builder setEncoding (@Nonnull final Charset aEncoding)
     {
+      if (aEncoding == null)
+        throw new NullPointerException ("Encoding");
+
       m_aEncoding = aEncoding;
       return this;
     }
 
+    @Nonnull
     public IDecorator getDecorator ()
     {
       return m_aDecorator;
@@ -271,16 +283,18 @@ public class MarkdownConfiguration
     /**
      * Sets the decorator for txtmark. Default: <code>DefaultDecorator()</code>
      * 
-     * @param decorator
+     * @param aDecorator
      *        The decorator
      * @return This builder
      * @see MarkdownDefaultDecorator
      * @since 0.7
      */
     @Nonnull
-    public Builder setDecorator (final IDecorator decorator)
+    public Builder setDecorator (@Nonnull final IDecorator aDecorator)
     {
-      m_aDecorator = decorator;
+      if (aDecorator == null)
+        throw new NullPointerException ("Decorator");
+      m_aDecorator = aDecorator;
       return this;
     }
 
@@ -294,7 +308,7 @@ public class MarkdownConfiguration
      * @since 0.7
      */
     @Nonnull
-    public Builder setCodeBlockEmitter (final IBlockEmitter emitter)
+    public Builder setCodeBlockEmitter (@Nullable final IBlockEmitter emitter)
     {
       m_aCodeBlockEmitter = emitter;
       return this;
@@ -309,7 +323,7 @@ public class MarkdownConfiguration
      * @since 0.7
      */
     @Nonnull
-    public Builder setSpecialLinkEmitter (final ISpanEmitter emitter)
+    public Builder setSpecialLinkEmitter (@Nullable final ISpanEmitter emitter)
     {
       m_aSpecialLinkEmitter = emitter;
       return this;
@@ -318,15 +332,15 @@ public class MarkdownConfiguration
     /**
      * Sets the plugins.
      * 
-     * @param plugins
+     * @param aPlugins
      *        The plugins.
      * @return This builder.
      */
     @Nonnull
-    public Builder registerPlugins (final AbstractMarkdownPlugin... plugins)
+    public Builder registerPlugins (@Nonnull final AbstractMarkdownPlugin... aPlugins)
     {
-      for (final AbstractMarkdownPlugin plugin : plugins)
-        m_aPlugins.add (plugin);
+      for (final AbstractMarkdownPlugin aPlugin : aPlugins)
+        m_aPlugins.add (aPlugin);
       return this;
     }
 
