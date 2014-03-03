@@ -37,7 +37,7 @@ final class Block
   /** Next block. */
   public Block m_aNext = null;
   /** Depth of headline BlockType. */
-  public int m_nHlDepth = 0;
+  public int m_nHeadlineDepth = 0;
   /** ID for headlines and list items */
   public String m_sId = null;
   /** Block meta information */
@@ -72,7 +72,7 @@ final class Block
    */
   public void transfromHeadline ()
   {
-    if (m_nHlDepth > 0)
+    if (m_nHeadlineDepth > 0)
       return;
     int nLevel = 0;
     final Line aLine = m_aLines;
@@ -100,7 +100,7 @@ final class Block
       aLine.m_sValue = aLine.m_sValue.substring (nStart, nEnd + 1);
       aLine.m_nLeading = aLine.m_nTrailing = 0;
     }
-    m_nHlDepth = Math.min (nLevel, 6);
+    m_nHeadlineDepth = Math.min (nLevel, 6);
   }
 
   /**

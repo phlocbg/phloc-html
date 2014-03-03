@@ -194,7 +194,7 @@ public class MarkdownConfiguration
     private boolean m_bForceExtendedProfile = false;
     private boolean m_bConvertNewline2Br = false;
     private Charset m_aEncoding = CCharset.CHARSET_UTF_8_OBJ;
-    private IDecorator m_aDecorator = new DefaultDecorator ();
+    private IDecorator m_aDecorator = new MarkdownDefaultDecorator ();
     private IBlockEmitter m_aCodeBlockEmitter = null;
     private ISpanEmitter m_aSpecialLinkEmitter = null;
     private final List <AbstractMarkdownPlugin> m_aPlugins = new ArrayList <AbstractMarkdownPlugin> ();
@@ -274,7 +274,7 @@ public class MarkdownConfiguration
      * @param decorator
      *        The decorator
      * @return This builder
-     * @see DefaultDecorator
+     * @see MarkdownDefaultDecorator
      * @since 0.7
      */
     @Nonnull

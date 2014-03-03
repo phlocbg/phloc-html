@@ -20,19 +20,22 @@ package com.phloc.html.markdown;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 public abstract class AbstractMarkdownPlugin
 {
-  protected String m_sIdPlugin;
+  protected String m_sPluginID;
 
-  public AbstractMarkdownPlugin (final String sIDPlugin)
+  public AbstractMarkdownPlugin (@Nonnull final String sPluginID)
   {
-    m_sIdPlugin = sIDPlugin;
+    m_sPluginID = sPluginID;
   }
 
   public abstract void emit (final HCStack out, final List <String> lines, final Map <String, String> params);
 
-  public String getIdPlugin ()
+  @Nonnull
+  public String getPluginID ()
   {
-    return m_sIdPlugin;
+    return m_sPluginID;
   }
 }

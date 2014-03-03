@@ -61,9 +61,9 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-public class DefaultDecorator implements IDecorator
+public class MarkdownDefaultDecorator implements IDecorator
 {
-  public DefaultDecorator ()
+  public MarkdownDefaultDecorator ()
   {}
 
   public void openParagraph (@Nonnull final HCStack out)

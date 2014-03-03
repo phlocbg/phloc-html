@@ -78,7 +78,7 @@ final class Emitter
 
   public void register (final AbstractMarkdownPlugin plugin)
   {
-    m_aPlugins.put (plugin.getIdPlugin (), plugin);
+    m_aPlugins.put (plugin.getPluginID (), plugin);
   }
 
   /**
@@ -118,7 +118,7 @@ final class Emitter
         // No open required
         break;
       case HEADLINE:
-        final AbstractHCElementWithChildren <?> aHX = aDecorator.openHeadline (out, aRoot.m_nHlDepth);
+        final AbstractHCElementWithChildren <?> aHX = aDecorator.openHeadline (out, aRoot.m_nHeadlineDepth);
         if (m_bUseExtensions && aRoot.m_sId != null)
           aHX.setID (aRoot.m_sId);
         break;
@@ -170,7 +170,7 @@ final class Emitter
       case XML_COMMENT:
         break;
       case HEADLINE:
-        aDecorator.closeHeadline (out, aRoot.m_nHlDepth);
+        aDecorator.closeHeadline (out, aRoot.m_nHeadlineDepth);
         break;
       case PARAGRAPH:
         aDecorator.closeParagraph (out);

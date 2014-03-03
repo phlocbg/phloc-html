@@ -426,7 +426,7 @@ public class MarkdownProcessor
           aBlock = aRoot.split (aLine);
           aBlock.m_eType = EBlockType.HEADLINE;
           if (eType != ELineType.HEADLINE)
-            aBlock.m_nHlDepth = eType == ELineType.HEADLINE1 ? 1 : 2;
+            aBlock.m_nHeadlineDepth = eType == ELineType.HEADLINE1 ? 1 : 2;
           if (m_bUseExtensions)
             aBlock.m_sId = aBlock.m_aLines.stripID ();
           aBlock.transfromHeadline ();
