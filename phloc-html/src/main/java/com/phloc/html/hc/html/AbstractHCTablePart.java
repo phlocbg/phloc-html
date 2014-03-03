@@ -68,6 +68,12 @@ public abstract class AbstractHCTablePart <THISTYPE extends AbstractHCTablePart 
     return aRow;
   }
 
+  /**
+   * Get the contained list object that holds all the rows. Handle with care
+   * because it alters the internal data structures of this table.
+   * 
+   * @return The contained list object. May be <code>null</code>.
+   */
   @Nullable
   @ReturnsMutableObject (reason = "speed")
   final List <HCRow> directGetRowList ()
@@ -80,7 +86,7 @@ public abstract class AbstractHCTablePart <THISTYPE extends AbstractHCTablePart 
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating an empty part
-    return hasChildren () || hasID () || hasAnyClass () || hasAnyStyle ();
+    return hasChildren () || hasID () || hasAnyClass () || hasAnyStyle () || hasCustomAttrs ();
   }
 
   @Override
