@@ -412,7 +412,7 @@ final class Emitter
     // Check for auto links
     temp.setLength (0);
     pos = Utils.readUntil (temp, in, start + 1, ':', ' ', '>', '\n');
-    if (pos != -1 && in.charAt (pos) == ':' && HTML.isLinkPrefix (temp.toString ()))
+    if (pos != -1 && in.charAt (pos) == ':' && MarkdownHTML.isLinkPrefix (temp.toString ()))
     {
       pos = Utils.readUntil (temp, in, pos, '>');
       if (pos != -1)
@@ -591,7 +591,7 @@ final class Emitter
           return -1;
       }
       out.append (';');
-      return HTML.isEntity (out.toString ()) ? pos : -1;
+      return MarkdownHTML.isEntity (out.toString ()) ? pos : -1;
     }
 
     return pos;
@@ -1068,35 +1068,38 @@ final class Emitter
    * 
    * @param out
    *        The StringBuilder to write to.
-   * @param lines
+   * @param aLines
    *        The lines to write.
    * @param meta
    *        Meta information.
    */
-  private void _emitCodeLines (final HCStack out, final Line lines, final String meta, final boolean removeIndent)
+  private void _emitCodeLines (final HCStack out,
+                               final Line aLines,
+                               @Nonnull final String meta,
+                               final boolean removeIndent)
   {
-    Line line = lines;
+    Line aLine = aLines;
     if (m_aConfig.getCodeBlockEmitter () != null)
     {
       final List <String> list = new ArrayList <String> ();
-      while (line != null)
+      while (aLine != null)
       {
-        if (line.m_bIsEmpty)
+        if (aLine.m_bIsEmpty)
           list.add ("");
         else
-          list.add (removeIndent ? line.m_sValue.substring (4) : line.m_sValue);
-        line = line.m_aNext;
+          list.add (removeIndent ? aLine.m_sValue.substring (4) : aLine.m_sValue);
+        aLine = aLine.m_aNext;
       }
       m_aConfig.getCodeBlockEmitter ().emitBlock (out, list, meta);
     }
     else
     {
-      while (line != null)
+      while (aLine != null)
       {
-        if (!line.m_bIsEmpty)
-          out.append (line.m_sValue.substring (4));
+        if (!aLine.m_bIsEmpty)
+          out.append (aLine.m_sValue.substring (4));
         out.append ('\n');
-        line = line.m_aNext;
+        aLine = aLine.m_aNext;
       }
     }
   }
@@ -1111,7 +1114,7 @@ final class Emitter
    * @param meta
    *        Meta information.
    */
-  protected void emitPluginLines (final HCStack out, final Line lines, final String meta)
+  protected void emitPluginLines (final HCStack out, final Line lines, @Nonnull final String meta)
   {
     Line line = lines;
 

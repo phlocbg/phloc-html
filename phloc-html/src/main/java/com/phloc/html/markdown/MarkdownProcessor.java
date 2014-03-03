@@ -89,7 +89,7 @@ public class MarkdownProcessor
     final Block block = new Block ();
     final StringBuilder sb = new StringBuilder (80);
     int c = aReader.read ();
-    LinkRef lastLinkRef = null;
+    LinkRef aLastLinkRef = null;
     while (c != -1)
     {
       sb.setLength (0);
@@ -133,102 +133,102 @@ public class MarkdownProcessor
         }
       }
 
-      final Line line = new Line ();
-      line.m_sValue = sb.toString ();
-      line.init ();
+      final Line aLine = new Line ();
+      aLine.m_sValue = sb.toString ();
+      aLine.init ();
 
       // Check for link definitions
-      boolean isLinkRef = false;
-      String id = null, link = null, comment = null;
-      if (!line.m_bIsEmpty && line.m_nLeading < 4 && line.m_sValue.charAt (line.m_nLeading) == '[')
+      boolean bIsLinkRef = false;
+      String sID = null, sLink = null, sComment = null;
+      if (!aLine.m_bIsEmpty && aLine.m_nLeading < 4 && aLine.m_sValue.charAt (aLine.m_nLeading) == '[')
       {
-        line.m_nPos = line.m_nLeading + 1;
+        aLine.m_nPos = aLine.m_nLeading + 1;
         // Read ID up to ']'
-        id = line.readUntil (']');
+        sID = aLine.readUntil (']');
         // Is ID valid and are there any more characters?
-        if (id != null && line.m_nPos + 2 < line.m_sValue.length ())
+        if (sID != null && aLine.m_nPos + 2 < aLine.m_sValue.length ())
         {
           // Check for ':' ([...]:...)
-          if (line.m_sValue.charAt (line.m_nPos + 1) == ':')
+          if (aLine.m_sValue.charAt (aLine.m_nPos + 1) == ':')
           {
-            line.m_nPos += 2;
-            line.skipSpaces ();
+            aLine.m_nPos += 2;
+            aLine.skipSpaces ();
             // Check for link syntax
-            if (line.m_sValue.charAt (line.m_nPos) == '<')
+            if (aLine.m_sValue.charAt (aLine.m_nPos) == '<')
             {
-              line.m_nPos++;
-              link = line.readUntil ('>');
-              line.m_nPos++;
+              aLine.m_nPos++;
+              sLink = aLine.readUntil ('>');
+              aLine.m_nPos++;
             }
             else
-              link = line.readUntil (' ', '\n');
+              sLink = aLine.readUntil (' ', '\n');
 
             // Is link valid?
-            if (link != null)
+            if (sLink != null)
             {
               // Any non-whitespace characters following?
-              if (line.skipSpaces ())
+              if (aLine.skipSpaces ())
               {
-                final char ch = line.m_sValue.charAt (line.m_nPos);
+                final char ch = aLine.m_sValue.charAt (aLine.m_nPos);
                 // Read comment
                 if (ch == '\"' || ch == '\'' || ch == '(')
                 {
-                  line.m_nPos++;
-                  comment = line.readUntil (ch == '(' ? ')' : ch);
+                  aLine.m_nPos++;
+                  sComment = aLine.readUntil (ch == '(' ? ')' : ch);
                   // Valid linkRef only if comment is valid
-                  if (comment != null)
-                    isLinkRef = true;
+                  if (sComment != null)
+                    bIsLinkRef = true;
                 }
               }
               else
-                isLinkRef = true;
+                bIsLinkRef = true;
             }
           }
         }
       }
 
       // To make compiler happy: add != null checks
-      if (isLinkRef && id != null && link != null)
+      if (bIsLinkRef && sID != null && sLink != null)
       {
-        if (id.toLowerCase (Locale.US).equals ("$profile$"))
+        if (sID.toLowerCase (Locale.US).equals ("$profile$"))
         {
-          m_aEmitter.m_bUseExtensions = m_bUseExtensions = link.toLowerCase (Locale.US).equals ("extended");
-          lastLinkRef = null;
+          m_aEmitter.m_bUseExtensions = m_bUseExtensions = sLink.toLowerCase (Locale.US).equals ("extended");
+          aLastLinkRef = null;
         }
         else
         {
           // Store linkRef and skip line
-          final LinkRef lr = new LinkRef (link, comment, comment != null &&
-                                                         (link.length () == 1 && link.charAt (0) == '*'));
-          m_aEmitter.addLinkRef (id, lr);
-          if (comment == null)
-            lastLinkRef = lr;
+          final LinkRef aLinkRef = new LinkRef (sLink, sComment, sComment != null &&
+                                                                 (sLink.length () == 1 && sLink.charAt (0) == '*'));
+          m_aEmitter.addLinkRef (sID, aLinkRef);
+          if (sComment == null)
+            aLastLinkRef = aLinkRef;
         }
       }
       else
       {
-        comment = null;
+        sComment = null;
         // Check for multi-line linkRef
-        if (!line.m_bIsEmpty && lastLinkRef != null)
+        if (!aLine.m_bIsEmpty && aLastLinkRef != null)
         {
-          line.m_nPos = line.m_nLeading;
-          final char ch = line.m_sValue.charAt (line.m_nPos);
+          aLine.m_nPos = aLine.m_nLeading;
+          final char ch = aLine.m_sValue.charAt (aLine.m_nPos);
           if (ch == '\"' || ch == '\'' || ch == '(')
           {
-            line.m_nPos++;
-            comment = line.readUntil (ch == '(' ? ')' : ch);
+            aLine.m_nPos++;
+            sComment = aLine.readUntil (ch == '(' ? ')' : ch);
           }
-          if (comment != null)
-            lastLinkRef.setTitle (comment);
+          if (sComment != null)
+            aLastLinkRef.setTitle (sComment);
 
-          lastLinkRef = null;
+          aLastLinkRef = null;
         }
 
         // No multi-line linkRef, store line
-        if (comment == null)
+        if (sComment == null)
         {
-          line.m_nPos = 0;
-          block.appendLine (line);
+          aLine.m_nPos = 0;
+          block.appendLine (aLine);
         }
       }
     }
@@ -270,7 +270,7 @@ public class MarkdownProcessor
    */
   private void _recurse (@Nonnull final Block aRoot, final boolean listMode)
   {
-    Block block, list;
+    Block aBlock, list;
     Line aLine = aRoot.m_aLines;
 
     if (listMode)
@@ -289,12 +289,12 @@ public class MarkdownProcessor
 
     while (aLine != null)
     {
-      final ELineType type = aLine.getLineType (m_bUseExtensions);
-      switch (type)
+      final ELineType eType = aLine.getLineType (m_bUseExtensions);
+      switch (eType)
       {
         case OTHER:
         {
-          final boolean wasEmpty = aLine.m_bPrevEmpty;
+          final boolean bWasEmpty = aLine.m_bPrevEmpty;
           while (aLine != null && !aLine.m_bIsEmpty)
           {
             final ELineType t = aLine.getLineType (m_bUseExtensions);
@@ -315,14 +315,14 @@ public class MarkdownProcessor
           final EBlockType bt;
           if (aLine != null && !aLine.m_bIsEmpty)
           {
-            bt = (listMode && !wasEmpty) ? EBlockType.NONE : EBlockType.PARAGRAPH;
+            bt = (listMode && !bWasEmpty) ? EBlockType.NONE : EBlockType.PARAGRAPH;
             aRoot.split (aLine.m_aPrevious).m_eType = bt;
             aRoot.removeLeadingEmptyLines ();
           }
           else
           {
-            bt = (listMode && (aLine == null || !aLine.m_bIsEmpty) && !wasEmpty) ? EBlockType.NONE
-                                                                                : EBlockType.PARAGRAPH;
+            bt = (listMode && (aLine == null || !aLine.m_bIsEmpty) && !bWasEmpty) ? EBlockType.NONE
+                                                                                 : EBlockType.PARAGRAPH;
             aRoot.split (aLine == null ? aRoot.m_aLineTail : aLine).m_eType = bt;
             aRoot.removeLeadingEmptyLines ();
           }
@@ -334,9 +334,9 @@ public class MarkdownProcessor
           {
             aLine = aLine.m_aNext;
           }
-          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
-          block.m_eType = EBlockType.CODE;
-          block.removeSurroundingEmptyLines ();
+          aBlock = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
+          aBlock.m_eType = EBlockType.CODE;
+          aBlock.removeSurroundingEmptyLines ();
           break;
         case XML:
         case XML_COMMENT:
@@ -345,7 +345,7 @@ public class MarkdownProcessor
             // FIXME ... this looks wrong
             aRoot.split (aLine.m_aPrevious);
           }
-          aRoot.split (aLine.m_aXmlEndLine).m_eType = type == ELineType.XML ? EBlockType.XML : EBlockType.XML_COMMENT;
+          aRoot.split (aLine.m_aXmlEndLine).m_eType = eType == ELineType.XML ? EBlockType.XML : EBlockType.XML_COMMENT;
           aRoot.removeLeadingEmptyLines ();
           aLine = aRoot.m_aLines;
           break;
@@ -359,11 +359,11 @@ public class MarkdownProcessor
               break;
             aLine = aLine.m_aNext;
           }
-          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
-          block.m_eType = EBlockType.BLOCKQUOTE;
-          block.removeSurroundingEmptyLines ();
-          block.removeBlockQuotePrefix ();
-          _recurse (block, false);
+          aBlock = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
+          aBlock.m_eType = EBlockType.BLOCKQUOTE;
+          aBlock.removeSurroundingEmptyLines ();
+          aBlock.removeBlockQuotePrefix ();
+          _recurse (aBlock, false);
           aLine = aRoot.m_aLines;
           break;
         case HR:
@@ -388,13 +388,13 @@ public class MarkdownProcessor
           }
           if (aLine != null)
             aLine = aLine.m_aNext;
-          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
-          block.m_eType = EBlockType.FENCED_CODE;
-          block.m_sMeta = Utils.getMetaFromFence (block.m_aLines.m_sValue);
-          block.m_aLines.setEmpty ();
-          if (block.m_aLineTail.getLineType (m_bUseExtensions) == ELineType.FENCED_CODE)
-            block.m_aLineTail.setEmpty ();
-          block.removeSurroundingEmptyLines ();
+          aBlock = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
+          aBlock.m_eType = EBlockType.FENCED_CODE;
+          aBlock.m_sMeta = Utils.getMetaFromFence (aBlock.m_aLines.m_sValue);
+          aBlock.m_aLines.setEmpty ();
+          if (aBlock.m_aLineTail.getLineType (m_bUseExtensions) == ELineType.FENCED_CODE)
+            aBlock.m_aLineTail.setEmpty ();
+          aBlock.removeSurroundingEmptyLines ();
           break;
         case PLUGIN:
           aLine = aLine.m_aNext;
@@ -408,32 +408,28 @@ public class MarkdownProcessor
           }
           if (aLine != null)
             aLine = aLine.m_aNext;
-          block = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
-          block.m_eType = EBlockType.PLUGIN;
-          block.m_sMeta = Utils.getMetaFromFence (block.m_aLines.m_sValue);
-          block.m_aLines.setEmpty ();
-          if (block.m_aLineTail.getLineType (m_bUseExtensions) == ELineType.PLUGIN)
-            block.m_aLineTail.setEmpty ();
-          block.removeSurroundingEmptyLines ();
+          aBlock = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
+          aBlock.m_eType = EBlockType.PLUGIN;
+          aBlock.m_sMeta = Utils.getMetaFromFence (aBlock.m_aLines.m_sValue);
+          aBlock.m_aLines.setEmpty ();
+          if (aBlock.m_aLineTail.getLineType (m_bUseExtensions) == ELineType.PLUGIN)
+            aBlock.m_aLineTail.setEmpty ();
+          aBlock.removeSurroundingEmptyLines ();
           break;
         case HEADLINE:
         case HEADLINE1:
         case HEADLINE2:
           if (aLine.m_aPrevious != null)
-          {
             aRoot.split (aLine.m_aPrevious);
-          }
-          if (type != ELineType.HEADLINE)
-          {
+          if (eType != ELineType.HEADLINE)
             aLine.m_aNext.setEmpty ();
-          }
-          block = aRoot.split (aLine);
-          block.m_eType = EBlockType.HEADLINE;
-          if (type != ELineType.HEADLINE)
-            block.m_nHlDepth = type == ELineType.HEADLINE1 ? 1 : 2;
+          aBlock = aRoot.split (aLine);
+          aBlock.m_eType = EBlockType.HEADLINE;
+          if (eType != ELineType.HEADLINE)
+            aBlock.m_nHlDepth = eType == ELineType.HEADLINE1 ? 1 : 2;
           if (m_bUseExtensions)
-            block.m_sId = block.m_aLines.stripID ();
-          block.transfromHeadline ();
+            aBlock.m_sId = aBlock.m_aLines.stripID ();
+          aBlock.transfromHeadline ();
           aRoot.removeLeadingEmptyLines ();
           aLine = aRoot.m_aLines;
           break;
@@ -441,23 +437,23 @@ public class MarkdownProcessor
         case ULIST:
           while (aLine != null)
           {
-            final ELineType t = aLine.getLineType (m_bUseExtensions);
+            final ELineType e = aLine.getLineType (m_bUseExtensions);
             if (!aLine.m_bIsEmpty &&
-                (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && !(t == ELineType.OLIST || t == ELineType.ULIST)))
+                (aLine.m_bPrevEmpty && aLine.m_nLeading == 0 && !(e == ELineType.OLIST || e == ELineType.ULIST)))
               break;
             aLine = aLine.m_aNext;
           }
           list = aRoot.split (aLine != null ? aLine.m_aPrevious : aRoot.m_aLineTail);
-          list.m_eType = type == ELineType.OLIST ? EBlockType.ORDERED_LIST : EBlockType.UNORDERED_LIST;
+          list.m_eType = eType == ELineType.OLIST ? EBlockType.ORDERED_LIST : EBlockType.UNORDERED_LIST;
           list.m_aLines.m_bPrevEmpty = false;
           list.removeSurroundingEmptyLines ();
           list.m_aLines.m_bPrevEmpty = false;
           _initListBlock (list);
-          block = list.m_aBlocks;
-          while (block != null)
+          aBlock = list.m_aBlocks;
+          while (aBlock != null)
           {
-            _recurse (block, true);
-            block = block.m_aNext;
+            _recurse (aBlock, true);
+            aBlock = aBlock.m_aNext;
           }
           list.expandListParagraphs ();
           break;

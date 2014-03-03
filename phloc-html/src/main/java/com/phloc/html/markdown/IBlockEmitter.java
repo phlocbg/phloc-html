@@ -19,6 +19,8 @@ package com.phloc.html.markdown;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 /**
  * Block emitter interface. An example for a code block emitter is given below:
  * 
@@ -70,5 +72,5 @@ public interface IBlockEmitter
    * @param meta
    *        Meta information as a single String (if any) or empty String
    */
-  void emitBlock (HCStack out, List <String> lines, String meta);
+  void emitBlock (@Nonnull HCStack out, @Nonnull List <String> lines, @Nonnull String meta);
 }

@@ -458,7 +458,7 @@ final class Line
     {
       String element = temp.toString ();
       String tag = Utils.getXMLTag (element);
-      if (!HTML.isHtmlBlockElement (tag))
+      if (!MarkdownHTML.isHtmlBlockElement (tag))
         return EHTMLElementType.NONE;
       if (tag.equals ("hr"))
       {
@@ -485,7 +485,7 @@ final class Line
           {
             element = temp.toString ();
             tag = Utils.getXMLTag (element);
-            if (HTML.isHtmlBlockElement (tag) && !tag.equals ("hr"))
+            if (MarkdownHTML.isHtmlBlockElement (tag) && !tag.equals ("hr"))
             {
               if (element.charAt (1) == '/')
               {

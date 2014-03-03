@@ -17,6 +17,8 @@
  */
 package com.phloc.html.markdown;
 
+import javax.annotation.Nonnull;
+
 /**
  * An interface for emitting span elements. Currently only used for special
  * links.
@@ -33,5 +35,5 @@ public interface ISpanEmitter
    * @param content
    *        The span's content.
    */
-  void emitSpan (HCStack out, HCStack content);
+  void emitSpan (@Nonnull HCStack out, @Nonnull HCStack content);
 }

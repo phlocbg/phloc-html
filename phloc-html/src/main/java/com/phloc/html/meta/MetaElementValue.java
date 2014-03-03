@@ -35,7 +35,7 @@ import com.phloc.commons.string.ToStringGenerator;
  * @author Philip Helger
  */
 @Immutable
-public final class MetaElementValue implements IMetaElementValue
+public class MetaElementValue implements IMetaElementValue
 {
   private final String m_sName;
   private final Locale m_aContentLocale;
