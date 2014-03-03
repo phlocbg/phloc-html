@@ -63,54 +63,54 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
  */
 public class DefaultDecorator implements IDecorator
 {
-  /** Constructor. */
   public DefaultDecorator ()
   {}
 
-  public void openParagraph (final HCStack out)
+  public void openParagraph (@Nonnull final HCStack out)
   {
     out.push (new HCP ());
   }
 
-  public void closeParagraph (final HCStack out)
+  public void closeParagraph (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openBlockquote (final HCStack out)
+  public void openBlockquote (@Nonnull final HCStack out)
   {
     out.push (new HCBlockQuote ());
   }
 
-  public void closeBlockquote (final HCStack out)
+  public void closeBlockquote (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openCodeBlock (final HCStack out)
+  public void openCodeBlock (@Nonnull final HCStack out)
   {
     out.push (new HCPre ());
     out.push (new HCCode ());
   }
 
-  public void closeCodeBlock (final HCStack out)
+  public void closeCodeBlock (@Nonnull final HCStack out)
   {
     out.pop ();
     out.pop ();
   }
 
   @Nonnull
-  public HCCode openCodeSpan (final HCStack out)
+  public HCCode openCodeSpan (@Nonnull final HCStack out)
   {
     return out.push (new HCCode ());
   }
 
-  public void closeCodeSpan (final HCStack out)
+  public void closeCodeSpan (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public AbstractHCElementWithChildren <?> openHeadline (final HCStack out, final int level)
+  @Nonnull
+  public AbstractHCElementWithChildren <?> openHeadline (@Nonnull final HCStack out, final int level)
   {
     switch (level)
     {
@@ -130,97 +130,100 @@ public class DefaultDecorator implements IDecorator
     throw new IllegalArgumentException ();
   }
 
-  public void closeHeadline (final HCStack out, final int level)
+  public void closeHeadline (@Nonnull final HCStack out, final int level)
   {
     out.pop ();
   }
 
-  public void openStrong (final HCStack out)
+  public void openStrong (@Nonnull final HCStack out)
   {
     out.push (new HCStrong ());
   }
 
-  public void closeStrong (final HCStack out)
+  public void closeStrong (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openStrike (final HCStack out)
+  public void openStrike (@Nonnull final HCStack out)
   {
     out.push (new HCS ());
   }
 
-  public void closeStrike (final HCStack out)
+  public void closeStrike (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openEmphasis (final HCStack out)
+  public void openEmphasis (@Nonnull final HCStack out)
   {
     out.push (new HCEM ());
   }
 
-  public void closeEmphasis (final HCStack out)
+  public void closeEmphasis (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openSuper (final HCStack out)
+  public void openSuper (@Nonnull final HCStack out)
   {
     out.push (new HCSup ());
   }
 
-  public void closeSuper (final HCStack out)
+  public void closeSuper (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openOrderedList (final HCStack out)
+  public void openOrderedList (@Nonnull final HCStack out)
   {
     out.push (new HCOL ());
   }
 
-  public void closeOrderedList (final HCStack out)
+  public void closeOrderedList (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void openUnorderedList (final HCStack out)
+  public void openUnorderedList (@Nonnull final HCStack out)
   {
     out.push (new HCUL ());
   }
 
-  public void closeUnorderedList (final HCStack out)
+  public void closeUnorderedList (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public HCLI openListItem (final HCStack out)
+  @Nonnull
+  public HCLI openListItem (@Nonnull final HCStack out)
   {
     return out.push (new HCLI ());
   }
 
-  public void closeListItem (final HCStack out)
+  public void closeListItem (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public void appendHorizontalRuler (final HCStack out)
+  public void appendHorizontalRuler (@Nonnull final HCStack out)
   {
     out.append (new HCHR ());
   }
 
-  public HCA openLink (final HCStack out)
+  @Nonnull
+  public HCA openLink (@Nonnull final HCStack out)
   {
     return out.push (new HCA ());
   }
 
-  public void closeLink (final HCStack out)
+  public void closeLink (@Nonnull final HCStack out)
   {
     out.pop ();
   }
 
-  public HCImg appendImage (final HCStack out)
+  @Nonnull
+  public HCImg appendImage (@Nonnull final HCStack out)
   {
     final HCImg ret = new HCImg ();
     out.append (ret);

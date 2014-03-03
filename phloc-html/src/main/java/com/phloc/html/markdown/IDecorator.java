@@ -17,6 +17,8 @@
  */
 package com.phloc.html.markdown;
 
+import javax.annotation.Nonnull;
+
 import com.phloc.html.hc.html.HCA;
 import com.phloc.html.hc.html.HCCode;
 import com.phloc.html.hc.html.HCImg;
@@ -43,7 +45,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openParagraph (HCStack out);
+  void openParagraph (@Nonnull HCStack out);
 
   /**
    * Called when a paragraph is closed.
@@ -58,7 +60,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeParagraph (HCStack out);
+  void closeParagraph (@Nonnull HCStack out);
 
   /**
    * Called when a blockquote is opened. Default implementation is:
@@ -70,7 +72,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openBlockquote (HCStack out);
+  void openBlockquote (@Nonnull HCStack out);
 
   /**
    * Called when a blockquote is closed.
@@ -85,7 +87,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeBlockquote (HCStack out);
+  void closeBlockquote (@Nonnull HCStack out);
 
   /**
    * Called when a code block is opened.
@@ -100,7 +102,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openCodeBlock (HCStack out);
+  void openCodeBlock (@Nonnull HCStack out);
 
   /**
    * Called when a code block is closed.
@@ -115,7 +117,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeCodeBlock (HCStack out);
+  void closeCodeBlock (@Nonnull HCStack out);
 
   /**
    * Called when a code span is opened.
@@ -130,7 +132,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  HCCode openCodeSpan (HCStack out);
+  HCCode openCodeSpan (@Nonnull HCStack out);
 
   /**
    * Called when a code span is closed.
@@ -145,7 +147,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeCodeSpan (HCStack out);
+  void closeCodeSpan (@Nonnull HCStack out);
 
   /**
    * Called when a headline is opened.
@@ -164,7 +166,8 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  AbstractHCElementWithChildren <?> openHeadline (HCStack out, int level);
+  @Nonnull
+  AbstractHCElementWithChildren <?> openHeadline (@Nonnull HCStack out, int level);
 
   /**
    * Called when a headline is closed.
@@ -181,7 +184,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeHeadline (HCStack out, int level);
+  void closeHeadline (@Nonnull HCStack out, int level);
 
   /**
    * Called when a strong span is opened.
@@ -196,7 +199,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openStrong (HCStack out);
+  void openStrong (@Nonnull HCStack out);
 
   /**
    * Called when a strong span is closed.
@@ -211,7 +214,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeStrong (HCStack out);
+  void closeStrong (@Nonnull HCStack out);
 
   /**
    * Called when a strike span is opened.
@@ -226,7 +229,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openStrike (HCStack out);
+  void openStrike (@Nonnull HCStack out);
 
   /**
    * Called when a strike span is closed.
@@ -241,7 +244,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeStrike (HCStack out);
+  void closeStrike (@Nonnull HCStack out);
 
   /**
    * Called when an emphasis span is opened.
@@ -256,7 +259,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openEmphasis (HCStack out);
+  void openEmphasis (@Nonnull HCStack out);
 
   /**
    * Called when an emphasis span is closed.
@@ -271,7 +274,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeEmphasis (HCStack out);
+  void closeEmphasis (@Nonnull HCStack out);
 
   /**
    * Called when a superscript span is opened.
@@ -286,7 +289,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openSuper (HCStack out);
+  void openSuper (@Nonnull HCStack out);
 
   /**
    * Called when a superscript span is closed.
@@ -301,7 +304,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeSuper (HCStack out);
+  void closeSuper (@Nonnull HCStack out);
 
   /**
    * Called when an ordered list is opened.
@@ -316,7 +319,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openOrderedList (HCStack out);
+  void openOrderedList (@Nonnull HCStack out);
 
   /**
    * Called when an ordered list is closed.
@@ -331,7 +334,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeOrderedList (HCStack out);
+  void closeOrderedList (@Nonnull HCStack out);
 
   /**
    * Called when an unordered list is opened.
@@ -346,7 +349,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void openUnorderedList (HCStack out);
+  void openUnorderedList (@Nonnull HCStack out);
 
   /**
    * Called when an unordered list is closed.
@@ -361,7 +364,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeUnorderedList (HCStack out);
+  void closeUnorderedList (@Nonnull HCStack out);
 
   /**
    * Called when a list item is opened.
@@ -379,7 +382,8 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  HCLI openListItem (HCStack out);
+  @Nonnull
+  HCLI openListItem (@Nonnull HCStack out);
 
   /**
    * Called when a list item is closed.
@@ -394,7 +398,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void closeListItem (HCStack out);
+  void closeListItem (@Nonnull HCStack out);
 
   /**
    * Called when a horizontal ruler is encountered.
@@ -409,7 +413,7 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  void appendHorizontalRuler (HCStack out);
+  void appendHorizontalRuler (@Nonnull HCStack out);
 
   /**
    * Called when a link is opened.
@@ -427,9 +431,10 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  HCA openLink (HCStack out);
+  @Nonnull
+  HCA openLink (@Nonnull HCStack out);
 
-  void closeLink (HCStack out);
+  void closeLink (@Nonnull HCStack out);
 
   /**
    * Called when an image is opened.
@@ -447,5 +452,6 @@ public interface IDecorator
    * @param out
    *        The StringBuilder to write to.
    */
-  HCImg appendImage (HCStack out);
+  @Nonnull
+  HCImg appendImage (@Nonnull HCStack out);
 }

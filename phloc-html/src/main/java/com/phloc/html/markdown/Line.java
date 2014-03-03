@@ -217,11 +217,12 @@ final class Line
   /**
    * Gets this line's type.
    * 
-   * @param extendedMode
+   * @param bExtendedMode
    *        Whether extended profile is enabled or not
    * @return The LineType.
    */
-  public ELineType getLineType (final boolean extendedMode)
+  @Nonnull
+  public ELineType getLineType (final boolean bExtendedMode)
   {
     if (m_bIsEmpty)
       return ELineType.EMPTY;
@@ -235,7 +236,7 @@ final class Line
     if (m_sValue.charAt (m_nLeading) == '>')
       return ELineType.BQUOTE;
 
-    if (extendedMode)
+    if (bExtendedMode)
     {
       if (m_sValue.length () - m_nLeading - m_nTrailing > 2 &&
           (m_sValue.charAt (m_nLeading) == '`' || m_sValue.charAt (m_nLeading) == '~' || m_sValue.charAt (m_nLeading) == '%'))
