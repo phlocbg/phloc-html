@@ -18,8 +18,10 @@
 package com.phloc.html.hc.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nonnegative;
@@ -322,6 +324,8 @@ public final class HCSpecialNodeHandler
     return aTargetList;
   }
 
+  private static final Map <String, IHCSpecialNodeListModifier> s_aModifiers = new HashMap <String, IHCSpecialNodeListModifier> ();
+
   @Nonnull
   private static Iterable <? extends IHCNode> _applyModifiers (@Nonnull final Iterable <? extends IHCNode> aNodes)
   {
@@ -336,11 +340,19 @@ public final class HCSpecialNodeHandler
       return aNodes;
     }
 
+    // Ensure all modifiers are instantiated
+    for (final Class <? extends IHCSpecialNodeListModifier> aModifierClass : aModifiersToApply)
+    {
+      final String sClassName = aModifierClass.getName ();
+      if (!s_aModifiers.containsKey (sClassName))
+        s_aModifiers.put (sClassName, GenericReflection.newInstance (aModifierClass));
+    }
+
     // Apply all modifiers
     List <IHCNode> ret = ContainerHelper.newList (aNodes);
     for (final Class <? extends IHCSpecialNodeListModifier> aModifierClass : aModifiersToApply)
     {
-      final IHCSpecialNodeListModifier aModifier = GenericReflection.newInstance (aModifierClass);
+      final IHCSpecialNodeListModifier aModifier = s_aModifiers.get (aModifierClass.getName ());
       if (aModifier != null)
       {
         // Invocation successful
@@ -376,6 +388,7 @@ public final class HCSpecialNodeHandler
     // Apply all modifiers
     final Iterable <? extends IHCNode> aRealSpecialNodes = _applyModifiers (aNodes);
 
+    // Do standard aggregations of CSS and JS
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
     final CollectingJSCodeProvider aJSOnDocumentReadyBefore = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aJSOnDocumentReadyAfter = new CollectingJSCodeProvider ();
