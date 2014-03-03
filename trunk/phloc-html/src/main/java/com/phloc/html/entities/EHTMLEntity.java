@@ -356,19 +356,19 @@ public enum EHTMLEntity implements IHTMLEntity
     return m_sEntityReference;
   }
 
-  @Nonnull
-  @Nonempty
-  public String getDescription ()
-  {
-    return m_sDescription;
-  }
-
   /**
    * @return The source character matching the entity.
    */
   public char getChar ()
   {
     return m_cChar;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getDescription ()
+  {
+    return m_sDescription;
   }
 
   @Override
