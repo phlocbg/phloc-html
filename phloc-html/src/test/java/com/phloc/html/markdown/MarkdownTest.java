@@ -70,7 +70,7 @@ import com.phloc.commons.io.file.SimpleFileIO;
 import com.phloc.commons.io.file.iterate.FileSystemRecursiveIterator;
 
 @RunWith (value = Parameterized.class)
-public class MarkdownTest
+public final class MarkdownTest
 {
   @Parameters
   public static Collection <Object []> markdownTests ()

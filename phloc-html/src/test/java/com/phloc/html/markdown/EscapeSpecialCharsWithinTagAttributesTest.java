@@ -58,7 +58,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public class EscapeSpecialCharsWithinTagAttributesTest
+public final class EscapeSpecialCharsWithinTagAttributesTest
 {
   @Test
   public void testImages () throws IOException

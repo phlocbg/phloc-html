@@ -58,7 +58,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public class LineConventionsTest
+public final class LineConventionsTest
 {
   private static final String EXPECTED = "<p>a\nb\nc</p>";
 
