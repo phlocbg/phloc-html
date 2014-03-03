@@ -74,49 +74,49 @@ final class Block
   {
     if (m_nHlDepth > 0)
       return;
-    int level = 0;
+    int nLevel = 0;
     final Line aLine = m_aLines;
     if (aLine.m_bIsEmpty)
       return;
-    int start = aLine.m_nLeading;
-    while (start < aLine.m_sValue.length () && aLine.m_sValue.charAt (start) == '#')
+    int nStart = aLine.m_nLeading;
+    while (nStart < aLine.m_sValue.length () && aLine.m_sValue.charAt (nStart) == '#')
     {
-      level++;
-      start++;
+      nLevel++;
+      nStart++;
     }
-    while (start < aLine.m_sValue.length () && aLine.m_sValue.charAt (start) == ' ')
-      start++;
-    if (start >= aLine.m_sValue.length ())
+    while (nStart < aLine.m_sValue.length () && aLine.m_sValue.charAt (nStart) == ' ')
+      nStart++;
+    if (nStart >= aLine.m_sValue.length ())
     {
       aLine.setEmpty ();
     }
     else
     {
-      int end = aLine.m_sValue.length () - aLine.m_nTrailing - 1;
-      while (aLine.m_sValue.charAt (end) == '#')
-        end--;
-      while (aLine.m_sValue.charAt (end) == ' ')
-        end--;
-      aLine.m_sValue = aLine.m_sValue.substring (start, end + 1);
+      int nEnd = aLine.m_sValue.length () - aLine.m_nTrailing - 1;
+      while (aLine.m_sValue.charAt (nEnd) == '#')
+        nEnd--;
+      while (aLine.m_sValue.charAt (nEnd) == ' ')
+        nEnd--;
+      aLine.m_sValue = aLine.m_sValue.substring (nStart, nEnd + 1);
       aLine.m_nLeading = aLine.m_nTrailing = 0;
     }
-    m_nHlDepth = Math.min (level, 6);
+    m_nHlDepth = Math.min (nLevel, 6);
   }
 
   /**
    * Used for nested lists. Removes list markers and up to 4 leading spaces.
    * 
-   * @param extendedMode
-   *        Whether extended profile ist activated or not
+   * @param bExtendedMode
+   *        Whether extended profile is activated or not
    */
-  public void removeListIndent (final boolean extendedMode)
+  public void removeListIndent (final boolean bExtendedMode)
   {
     Line line = m_aLines;
     while (line != null)
     {
       if (!line.m_bIsEmpty)
       {
-        switch (line.getLineType (extendedMode))
+        switch (line.getLineType (bExtendedMode))
         {
           case ULIST:
             line.m_sValue = line.m_sValue.substring (line.m_nLeading + 2);

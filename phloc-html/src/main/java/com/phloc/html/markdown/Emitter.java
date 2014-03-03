@@ -70,12 +70,10 @@ final class Emitter
   public Emitter (final Configuration config)
   {
     m_aConfig = config;
-    m_bUseExtensions = config.m_bForceExtendedProfile;
-    m_bConvertNewline2Br = config.m_bConvertNewline2Br;
-    for (final AbstractPlugin plugin : config.m_aPlugins)
-    {
+    m_bUseExtensions = config.isExtendedProfile ();
+    m_bConvertNewline2Br = config.isConvertNewline2Br ();
+    for (final AbstractPlugin plugin : config.getAllPlugins ())
       register (plugin);
-    }
   }
 
   public void register (final AbstractPlugin plugin)
@@ -107,11 +105,12 @@ final class Emitter
   public void emit (final HCStack out, final Block aRoot)
   {
     aRoot.removeSurroundingEmptyLines ();
+    final IDecorator aDecorator = m_aConfig.getDecorator ();
 
     switch (aRoot.m_eType)
     {
       case RULER:
-        m_aConfig.m_aDecorator.appendHorizontalRuler (out);
+        aDecorator.appendHorizontalRuler (out);
         return;
       case NONE:
       case XML:
@@ -119,29 +118,29 @@ final class Emitter
         // No open required
         break;
       case HEADLINE:
-        final AbstractHCElementWithChildren <?> aHX = m_aConfig.m_aDecorator.openHeadline (out, aRoot.m_nHlDepth);
+        final AbstractHCElementWithChildren <?> aHX = aDecorator.openHeadline (out, aRoot.m_nHlDepth);
         if (m_bUseExtensions && aRoot.m_sId != null)
           aHX.setID (aRoot.m_sId);
         break;
       case PARAGRAPH:
-        m_aConfig.m_aDecorator.openParagraph (out);
+        aDecorator.openParagraph (out);
         break;
       case CODE:
       case FENCED_CODE:
-        if (m_aConfig.m_aCodeBlockEmitter == null)
-          m_aConfig.m_aDecorator.openCodeBlock (out);
+        if (m_aConfig.getCodeBlockEmitter () == null)
+          aDecorator.openCodeBlock (out);
         break;
       case BLOCKQUOTE:
-        m_aConfig.m_aDecorator.openBlockquote (out);
+        aDecorator.openBlockquote (out);
         break;
       case UNORDERED_LIST:
-        m_aConfig.m_aDecorator.openUnorderedList (out);
+        aDecorator.openUnorderedList (out);
         break;
       case ORDERED_LIST:
-        m_aConfig.m_aDecorator.openOrderedList (out);
+        aDecorator.openOrderedList (out);
         break;
       case LIST_ITEM:
-        final HCLI aLI = m_aConfig.m_aDecorator.openListItem (out);
+        final HCLI aLI = aDecorator.openListItem (out);
         if (m_bUseExtensions && aRoot.m_sId != null)
           aLI.setID (aRoot.m_sId);
         break;
@@ -171,27 +170,27 @@ final class Emitter
       case XML_COMMENT:
         break;
       case HEADLINE:
-        m_aConfig.m_aDecorator.closeHeadline (out, aRoot.m_nHlDepth);
+        aDecorator.closeHeadline (out, aRoot.m_nHlDepth);
         break;
       case PARAGRAPH:
-        m_aConfig.m_aDecorator.closeParagraph (out);
+        aDecorator.closeParagraph (out);
         break;
       case CODE:
       case FENCED_CODE:
-        if (m_aConfig.m_aCodeBlockEmitter == null)
-          m_aConfig.m_aDecorator.closeCodeBlock (out);
+        if (m_aConfig.getCodeBlockEmitter () == null)
+          aDecorator.closeCodeBlock (out);
         break;
       case BLOCKQUOTE:
-        m_aConfig.m_aDecorator.closeBlockquote (out);
+        aDecorator.closeBlockquote (out);
         break;
       case UNORDERED_LIST:
-        m_aConfig.m_aDecorator.closeUnorderedList (out);
+        aDecorator.closeUnorderedList (out);
         break;
       case ORDERED_LIST:
-        m_aConfig.m_aDecorator.closeOrderedList (out);
+        aDecorator.closeOrderedList (out);
         break;
       case LIST_ITEM:
-        m_aConfig.m_aDecorator.closeListItem (out);
+        aDecorator.closeListItem (out);
         break;
       default:
         break;
@@ -378,17 +377,17 @@ final class Emitter
       }
       else
       {
-        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
+        final HCA aLink = m_aConfig.getDecorator ().openLink (out);
         aLink.setHref (link);
         if (comment != null)
           aLink.setTitle (comment);
         _recursiveEmitLine (out, name, 0, EMarkToken.NONE);
-        m_aConfig.m_aDecorator.closeLink (out);
+        m_aConfig.getDecorator ().closeLink (out);
       }
     }
     else
     {
-      final HCImg aImg = m_aConfig.m_aDecorator.appendImage (out);
+      final HCImg aImg = m_aConfig.getDecorator ().appendImage (out);
       aImg.setSrc (link);
       aImg.setAlt (name);
       if (comment != null)
@@ -424,9 +423,9 @@ final class Emitter
       if (pos != -1)
       {
         final String link = temp.toString ();
-        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
+        final HCA aLink = m_aConfig.getDecorator ().openLink (out);
         aLink.setHref (link).addChild (link);
-        m_aConfig.m_aDecorator.closeLink (out);
+        m_aConfig.getDecorator ().closeLink (out);
         return pos;
       }
     }
@@ -440,7 +439,7 @@ final class Emitter
       if (pos != -1)
       {
         final String link = temp.toString ();
-        final HCA aLink = m_aConfig.m_aDecorator.openLink (out);
+        final HCA aLink = m_aConfig.getDecorator ().openLink (out);
 
         if (link.startsWith ("@"))
         {
@@ -454,7 +453,7 @@ final class Emitter
           // mailto auto links
           aLink.setHref ("mailto:" + link).addChild (link);
         }
-        m_aConfig.m_aDecorator.closeLink (out);
+        m_aConfig.getDecorator ().closeLink (out);
         return pos;
       }
     }
@@ -491,7 +490,7 @@ final class Emitter
       }
 
       temp.setLength (0);
-      final int t = Utils.readXMLElement (temp, in, start, m_aConfig.m_bSafeMode);
+      final int t = Utils.readXMLElement (temp, in, start, m_aConfig.isSafeMode ());
       if (t != -1)
       {
         final String sElement = temp.toString ();
@@ -654,9 +653,9 @@ final class Emitter
           b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
-            m_aConfig.m_aDecorator.openEmphasis (out);
+            m_aConfig.getDecorator ().openEmphasis (out);
             out.append (temp);
-            m_aConfig.m_aDecorator.closeEmphasis (out);
+            m_aConfig.getDecorator ().closeEmphasis (out);
             pos = b;
           }
           else
@@ -670,9 +669,9 @@ final class Emitter
           b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
-            m_aConfig.m_aDecorator.openStrong (out);
+            m_aConfig.getDecorator ().openStrong (out);
             out.append (temp);
-            m_aConfig.m_aDecorator.closeStrong (out);
+            m_aConfig.getDecorator ().closeStrong (out);
             pos = b + 1;
           }
           else
@@ -685,9 +684,9 @@ final class Emitter
           b = _recursiveEmitLine (temp, in, pos + 2, mt);
           if (b > 0)
           {
-            m_aConfig.m_aDecorator.openStrike (out);
+            m_aConfig.getDecorator ().openStrike (out);
             out.append (temp);
-            m_aConfig.m_aDecorator.closeStrike (out);
+            m_aConfig.getDecorator ().closeStrike (out);
             pos = b + 1;
           }
           else
@@ -700,9 +699,9 @@ final class Emitter
           b = _recursiveEmitLine (temp, in, pos + 1, mt);
           if (b > 0)
           {
-            m_aConfig.m_aDecorator.openSuper (out);
+            m_aConfig.getDecorator ().openSuper (out);
             out.append (temp);
-            m_aConfig.m_aDecorator.closeSuper (out);
+            m_aConfig.getDecorator ().closeSuper (out);
             pos = b;
           }
           else
@@ -723,9 +722,9 @@ final class Emitter
             {
               while (in.charAt (b - 1) == ' ')
                 b--;
-              final HCCode aCode = m_aConfig.m_aDecorator.openCodeSpan (out);
-              aCode.addChild (new HCTextNode (in, a, b));
-              m_aConfig.m_aDecorator.closeCodeSpan (out);
+              final HCCode aCode = m_aConfig.getDecorator ().openCodeSpan (out);
+              aCode.addChild (HCTextNode.createOnDemand (in, a, b));
+              m_aConfig.getDecorator ().closeCodeSpan (out);
             }
           }
           else
@@ -761,9 +760,9 @@ final class Emitter
         case X_LINK_OPEN:
           temp.reset ();
           b = _recursiveEmitLine (temp, in, pos + 2, EMarkToken.X_LINK_CLOSE);
-          if (b > 0 && m_aConfig.m_aSpecialLinkEmitter != null)
+          if (b > 0 && m_aConfig.getSpecialLinkEmitter () != null)
           {
-            m_aConfig.m_aSpecialLinkEmitter.emitSpan (out, temp);
+            m_aConfig.getSpecialLinkEmitter ().emitSpan (out, temp);
             pos = b + 1;
           }
           else
@@ -983,7 +982,7 @@ final class Emitter
   private void _emitXMLLines (final HCStack out, final Line lines)
   {
     Line line = lines;
-    if (m_aConfig.m_bSafeMode)
+    if (m_aConfig.isSafeMode ())
     {
       final StringBuilder temp = new StringBuilder ();
       while (line != null)
@@ -998,7 +997,7 @@ final class Emitter
         if (in.charAt (pos) == '<')
         {
           temp.setLength (0);
-          final int t = Utils.readXMLElement (temp, in, pos, m_aConfig.m_bSafeMode);
+          final int t = Utils.readXMLElement (temp, in, pos, m_aConfig.isSafeMode ());
           if (t != -1)
           {
             // XXX Is this correct???
@@ -1082,7 +1081,7 @@ final class Emitter
   private void _emitCodeLines (final HCStack out, final Line lines, final String meta, final boolean removeIndent)
   {
     Line line = lines;
-    if (m_aConfig.m_aCodeBlockEmitter != null)
+    if (m_aConfig.getCodeBlockEmitter () != null)
     {
       final List <String> list = new ArrayList <String> ();
       while (line != null)
@@ -1093,7 +1092,7 @@ final class Emitter
           list.add (removeIndent ? line.m_sValue.substring (4) : line.m_sValue);
         line = line.m_aNext;
       }
-      m_aConfig.m_aCodeBlockEmitter.emitBlock (out, list, meta);
+      m_aConfig.getCodeBlockEmitter ().emitBlock (out, list, meta);
     }
     else
     {
