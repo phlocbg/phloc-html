@@ -45,6 +45,7 @@ import com.phloc.html.hc.html.HCScriptFile;
 import com.phloc.html.hc.html.HCScriptOnDocumentReady;
 import com.phloc.html.hc.html.HCStyle;
 import com.phloc.html.hc.htmlext.HCUtils;
+import com.phloc.html.hc.impl.HCConditionalCommentNode;
 import com.phloc.html.hc.impl.HCNodeList;
 import com.phloc.html.js.builder.jquery.JQuery;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
@@ -266,9 +267,9 @@ public final class HCSpecialNodeHandler
     return false;
   }
 
-  private static void _recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
-                                                       @Nonnull final List <IHCNode> aTargetList,
-                                                       @Nonnegative final int nLevel)
+  private static void _recursiveExtractAndRemoveOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement,
+                                                                @Nonnull final List <IHCNode> aTargetList,
+                                                                @Nonnegative final int nLevel)
   {
     if (aParentElement.hasChildren ())
     {
@@ -293,7 +294,7 @@ public final class HCSpecialNodeHandler
 
         // Recurse deeper?
         if (aChild instanceof IHCHasChildren)
-          _recursiveExtractOutOfBandNodes ((IHCHasChildren) aChild, aTargetList, nLevel + 1);
+          _recursiveExtractAndRemoveOutOfBandNodes ((IHCHasChildren) aChild, aTargetList, nLevel + 1);
       }
     }
   }
@@ -311,7 +312,7 @@ public final class HCSpecialNodeHandler
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static List <IHCNode> recursiveExtractOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement)
+  public static List <IHCNode> recursiveExtractAndRemoveOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement)
   {
     if (aParentElement == null)
       throw new NullPointerException ("parentElement");
@@ -319,7 +320,7 @@ public final class HCSpecialNodeHandler
     final List <IHCNode> aTargetList = new ArrayList <IHCNode> ();
 
     // Using HCUtils.iterateTree would be too tedious here
-    _recursiveExtractOutOfBandNodes (aParentElement, aTargetList, 0);
+    _recursiveExtractAndRemoveOutOfBandNodes (aParentElement, aTargetList, 0);
 
     return aTargetList;
   }
@@ -349,11 +350,12 @@ public final class HCSpecialNodeHandler
 
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
 
-    final StringBuilder aInlineCSS = new StringBuilder ();
-    final CollectingJSCodeProvider aOnDocumentReadyJSBefore = new CollectingJSCodeProvider ();
-    final CollectingJSCodeProvider aOnDocumentReadyJSAfter = new CollectingJSCodeProvider ();
-    final CollectingJSCodeProvider aInlineJSBefore = new CollectingJSCodeProvider ();
-    final CollectingJSCodeProvider aInlineJSAfter = new CollectingJSCodeProvider ();
+    final StringBuilder aCSSInlineBefore = new StringBuilder ();
+    final StringBuilder aCSSInlineAfter = new StringBuilder ();
+    final CollectingJSCodeProvider aJSOnDocumentReadyBefore = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aJSOnDocumentReadyAfter = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aJSInlineBefore = new CollectingJSCodeProvider ();
+    final CollectingJSCodeProvider aJSInlineAfter = new CollectingJSCodeProvider ();
     for (final IHCNode aNode : aNodes)
     {
       // Note: do not unwrap the node, because it is not allowed to merge JS/CSS
@@ -364,53 +366,62 @@ public final class HCSpecialNodeHandler
       if (aNode instanceof HCScriptOnDocumentReady)
       {
         final HCScriptOnDocumentReady aScript = (HCScriptOnDocumentReady) aNode;
-        (aScript.isEmitAfterFiles () ? aOnDocumentReadyJSAfter : aOnDocumentReadyJSBefore).appendFlattened (aScript.getOnDocumentReadyCode ());
+        (aScript.isEmitAfterFiles () ? aJSOnDocumentReadyAfter : aJSOnDocumentReadyBefore).appendFlattened (aScript.getOnDocumentReadyCode ());
       }
       else
         if (aNode instanceof HCScript)
         {
           final HCScript aScript = (HCScript) aNode;
-          (aScript.isEmitAfterFiles () ? aInlineJSAfter : aInlineJSBefore).appendFlattened (aScript.getJSCodeProvider ());
+          (aScript.isEmitAfterFiles () ? aJSInlineAfter : aJSInlineBefore).appendFlattened (aScript.getJSCodeProvider ());
         }
         else
           if (aNode instanceof HCStyle && ((HCStyle) aNode).hasNoMediaOrAll ())
           {
             // Merge only inline CSS nodes, that are media-independent
             final HCStyle aStyle = (HCStyle) aNode;
-            aInlineCSS.append (aStyle.getStyleContent ());
+            (aStyle.isEmitAfterFiles () ? aCSSInlineAfter : aCSSInlineBefore).append (aStyle.getStyleContent ());
           }
           else
           {
             // HCLink
             // HCScriptFile
             // HCConditionalCommentNode
+            if (!(aNode instanceof HCLink) &&
+                !(aNode instanceof HCScriptFile) &&
+                !(aNode instanceof HCConditionalCommentNode))
+              s_aLogger.warn ("Found unexpected node to merge inline CSS/JS: " + aNode);
+
+            // Add always!
             ret.add (aNode);
           }
     }
 
     // Add all merged inline CSSs
-    if (aInlineCSS.length () > 0)
-      ret.add (new HCStyle (aInlineCSS.toString ()));
+    if (aCSSInlineBefore.length () > 0)
+      ret.add (new HCStyle (aCSSInlineBefore.toString ()).setEmitAfterFiles (false));
+
+    if (aCSSInlineAfter.length () > 0)
+      ret.add (new HCStyle (aCSSInlineAfter.toString ()));
 
     // on-document-ready JS always as last inline JS!
-    if (!aOnDocumentReadyJSBefore.isEmpty ())
+    if (!aJSOnDocumentReadyBefore.isEmpty ())
       if (bKeepOnDocumentReady)
-        aInlineJSBefore.append (JQuery.onDocumentReady (aOnDocumentReadyJSBefore));
+        aJSInlineBefore.append (JQuery.onDocumentReady (aJSOnDocumentReadyBefore));
       else
-        aInlineJSBefore.append (aOnDocumentReadyJSBefore);
+        aJSInlineBefore.append (aJSOnDocumentReadyBefore);
 
-    if (!aOnDocumentReadyJSAfter.isEmpty ())
+    if (!aJSOnDocumentReadyAfter.isEmpty ())
       if (bKeepOnDocumentReady)
-        aInlineJSAfter.append (JQuery.onDocumentReady (aOnDocumentReadyJSAfter));
+        aJSInlineAfter.append (JQuery.onDocumentReady (aJSOnDocumentReadyAfter));
       else
-        aInlineJSAfter.append (aOnDocumentReadyJSAfter);
+        aJSInlineAfter.append (aJSOnDocumentReadyAfter);
 
     // Finally add the inline JS
-    if (!aInlineJSBefore.isEmpty ())
-      ret.add (new HCScript (aInlineJSBefore).setEmitAfterFiles (false));
+    if (!aJSInlineBefore.isEmpty ())
+      ret.add (new HCScript (aJSInlineBefore).setEmitAfterFiles (false));
 
-    if (!aInlineJSAfter.isEmpty ())
-      ret.add (new HCScript (aInlineJSAfter));
+    if (!aJSInlineAfter.isEmpty ())
+      ret.add (new HCScript (aJSInlineAfter));
 
     return ret;
   }
@@ -486,7 +497,7 @@ public final class HCSpecialNodeHandler
       throw new NullPointerException ("SpecialNodes");
 
     // Extract all out of band nodes from the passed node
-    List <IHCNode> aExtractedOutOfBandNodes = recursiveExtractOutOfBandNodes (aNode);
+    List <IHCNode> aExtractedOutOfBandNodes = recursiveExtractAndRemoveOutOfBandNodes (aNode);
 
     // Merge JS/CSS nodes
     aExtractedOutOfBandNodes = getMergedInlineCSSAndJSNodes (aExtractedOutOfBandNodes, bKeepOnDocumentReady);

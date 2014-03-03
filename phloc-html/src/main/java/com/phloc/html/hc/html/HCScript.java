@@ -270,6 +270,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   {
     return ToStringGenerator.getDerived (super.toString ())
                             .append ("provider", m_aProvider)
+                            .append ("jsCode", m_sJSCode)
                             .append ("mode", m_eMode)
                             .append ("emitAfterFiles", m_bEmitAfterFiles)
                             .toString ();
