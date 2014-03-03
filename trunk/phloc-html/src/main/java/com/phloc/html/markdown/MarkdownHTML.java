@@ -65,34 +65,31 @@ final class MarkdownHTML
                                                           EHTMLElement.SCRIPT,
                                                           EHTMLElement.OBJECT, };
 
-  /** Set of unsafe HTML tags. */
-  private static final Set <String> HTML_UNSAFE = new HashSet <String> ();
-  /** Set of HTML block level tags. */
-  private static final Set <String> HTML_BLOCK_ELEMENTS = new HashSet <String> ();
   /** Set of valid markdown link prefixes. */
   private static final Set <String> LINK_PREFIX = new HashSet <String> ();
+  /** Set of HTML block level tags. */
+  private static final Set <String> HTML_BLOCK_ELEMENTS = new HashSet <String> ();
+   /** Set of unsafe HTML tags. */
+  private static final Set <String> HTML_UNSAFE = new HashSet <String> ();
 
   static
   {
-    for (final EHTMLElement h : UNSAFE_ELEMENTS)
-      HTML_UNSAFE.add (h.getElementNameLowerCase ());
-
-    for (final EHTMLElement h : BLOCK_ELEMENTS)
-      HTML_BLOCK_ELEMENTS.add (h.getElementNameLowerCase ());
-
     for (final IURLProtocol element : URLProtocolRegistry.getAllProtocols ())
     {
       final String sProtocol = element.getProtocol ();
       final int i = sProtocol.indexOf (':');
       LINK_PREFIX.add (i < 0 ? sProtocol : sProtocol.substring (0, i));
     }
-  }
 
-  /** Constructor. (Singleton) */
+    for (final EHTMLElement h : BLOCK_ELEMENTS)
+      HTML_BLOCK_ELEMENTS.add (h.getElementNameLowerCase ());
+
+    for (final EHTMLElement h : UNSAFE_ELEMENTS)
+      HTML_UNSAFE.add (h.getElementNameLowerCase ());
+   }
+
   private MarkdownHTML ()
-  {
-    //
-  }
+  {}
 
   /**
    * @param value

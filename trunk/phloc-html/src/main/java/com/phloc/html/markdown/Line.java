@@ -21,6 +21,8 @@ import java.util.LinkedList;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.html.EHTMLElement;
+
 /**
  * This class represents a text line.
  * <p>
@@ -104,50 +106,50 @@ final class Line
   /**
    * Reads chars from this line until any 'end' char is reached.
    * 
-   * @param end
+   * @param aEndChars
    *        Delimiting character(s)
    * @return The read String or <code>null</code> if no 'end' char was reached.
    */
-  public String readUntil (final char... end)
+  public String readUntil (final char... aEndChars)
   {
-    final StringBuilder sb = new StringBuilder ();
-    int pos = m_nPos;
-    while (pos < m_sValue.length ())
+    final StringBuilder aSB = new StringBuilder ();
+    int nPos = m_nPos;
+    while (nPos < m_sValue.length ())
     {
-      final char ch = m_sValue.charAt (pos);
-      if (ch == '\\' && pos + 1 < m_sValue.length ())
+      final char ch = m_sValue.charAt (nPos);
+      if (ch == '\\' && nPos + 1 < m_sValue.length ())
       {
-        final char c = m_sValue.charAt (pos + 1);
+        final char c = m_sValue.charAt (nPos + 1);
         if (Utils.isEscapeChar (c))
         {
-          sb.append (c);
-          pos++;
+          aSB.append (c);
+          nPos++;
         }
         else
-          sb.append (ch);
+          aSB.append (ch);
       }
       else
       {
-        boolean endReached = false;
-        for (final char element : end)
-          if (ch == element)
+        boolean bEndReached = false;
+        for (final char cElement : aEndChars)
+          if (ch == cElement)
           {
-            endReached = true;
+            bEndReached = true;
             break;
           }
-        if (endReached)
+        if (bEndReached)
           break;
-        sb.append (ch);
+        aSB.append (ch);
       }
-      pos++;
+      nPos++;
     }
 
-    final char ch = pos < m_sValue.length () ? m_sValue.charAt (pos) : '\n';
-    for (final char element : end)
-      if (ch == element)
+    final char ch = nPos < m_sValue.length () ? m_sValue.charAt (nPos) : '\n';
+    for (final char cElement : aEndChars)
+      if (ch == cElement)
       {
-        m_nPos = pos;
-        return sb.toString ();
+        m_nPos = nPos;
+        return aSB.toString ();
       }
     return null;
   }
@@ -356,69 +358,69 @@ final class Line
   {
     if (m_bIsEmpty || m_sValue.charAt (m_sValue.length () - m_nTrailing - 1) != '}')
       return null;
-    int p = m_nLeading;
-    boolean found = false;
-    while (p < m_sValue.length () && !found)
+    int nPos = m_nLeading;
+    boolean bFound = false;
+    while (nPos < m_sValue.length () && !bFound)
     {
-      switch (m_sValue.charAt (p))
+      switch (m_sValue.charAt (nPos))
       {
         case '\\':
-          if (p + 1 < m_sValue.length ())
+          if (nPos + 1 < m_sValue.length ())
           {
-            if (m_sValue.charAt (p + 1) == '{')
-              p++;
+            if (m_sValue.charAt (nPos + 1) == '{')
+              nPos++;
           }
-          p++;
+          nPos++;
           break;
         case '{':
-          found = true;
+          bFound = true;
           break;
         default:
-          p++;
+          nPos++;
           break;
       }
     }
 
-    if (found)
+    if (bFound)
     {
-      if (p + 1 < m_sValue.length () && m_sValue.charAt (p + 1) == '#')
+      if (nPos + 1 < m_sValue.length () && m_sValue.charAt (nPos + 1) == '#')
       {
-        final int start = p + 2;
-        p = start;
-        found = false;
-        while (p < m_sValue.length () && !found)
+        final int nStart = nPos + 2;
+        nPos = nStart;
+        bFound = false;
+        while (nPos < m_sValue.length () && !bFound)
         {
-          switch (m_sValue.charAt (p))
+          switch (m_sValue.charAt (nPos))
           {
             case '\\':
-              if (p + 1 < m_sValue.length ())
+              if (nPos + 1 < m_sValue.length ())
               {
-                if (m_sValue.charAt (p + 1) == '}')
-                  p++;
+                if (m_sValue.charAt (nPos + 1) == '}')
+                  nPos++;
               }
-              p++;
+              nPos++;
               break;
             case '}':
-              found = true;
+              bFound = true;
               break;
             default:
-              p++;
+              nPos++;
               break;
           }
         }
-        if (found)
+        if (bFound)
         {
-          final String id = m_sValue.substring (start, p).trim ();
+          final String sID = m_sValue.substring (nStart, nPos).trim ();
           if (m_nLeading != 0)
           {
-            m_sValue = m_sValue.substring (0, m_nLeading) + m_sValue.substring (m_nLeading, start - 2).trim ();
+            m_sValue = m_sValue.substring (0, m_nLeading) + m_sValue.substring (m_nLeading, nStart - 2).trim ();
           }
           else
           {
-            m_sValue = m_sValue.substring (m_nLeading, start - 2).trim ();
+            m_sValue = m_sValue.substring (m_nLeading, nStart - 2).trim ();
           }
           m_nTrailing = 0;
-          return id.length () > 0 ? id : null;
+          return sID.length () > 0 ? sID : null;
         }
       }
     }
@@ -441,73 +443,73 @@ final class Line
   @Nonnull
   private EHTMLElementType _checkHTML ()
   {
-    final LinkedList <String> tags = new LinkedList <String> ();
-    final StringBuilder temp = new StringBuilder ();
-    int pos = m_nLeading;
+    final LinkedList <String> aTags = new LinkedList <String> ();
+    final StringBuilder aSB = new StringBuilder ();
+    int nPos = m_nLeading;
     if (m_sValue.charAt (m_nLeading + 1) == '!')
     {
       if (_readXMLComment (this, m_nLeading) > 0)
         return EHTMLElementType.COMMENT;
     }
-    pos = Utils.readXMLElement (temp, m_sValue, m_nLeading, false);
-    if (pos > -1)
+    nPos = Utils.readXMLElement (aSB, m_sValue, m_nLeading, false);
+    if (nPos > -1)
     {
-      String element = temp.toString ();
-      String tag = Utils.getXMLTag (element);
-      if (!MarkdownHTML.isHtmlBlockElement (tag))
+      String sElement = aSB.toString ();
+      String sTag = Utils.getXMLTag (sElement);
+      if (!MarkdownHTML.isHtmlBlockElement (sTag))
         return EHTMLElementType.NONE;
-      if (tag.equals ("hr"))
+      if (EHTMLElement.getFromTagNameOrNull (sTag).mayBeSelfClosed ())
       {
         m_aXmlEndLine = this;
         return EHTMLElementType.TAG;
       }
-      tags.add (tag);
-      Line line = this;
-      while (line != null)
+      aTags.add (sTag);
+      Line aLine = this;
+      while (aLine != null)
       {
-        while (pos < line.m_sValue.length () && line.m_sValue.charAt (pos) != '<')
-          pos++;
+        while (nPos < aLine.m_sValue.length () && aLine.m_sValue.charAt (nPos) != '<')
+          nPos++;
 
-        if (pos >= line.m_sValue.length ())
+        if (nPos >= aLine.m_sValue.length ())
         {
-          line = line.m_aNext;
-          pos = 0;
+          aLine = aLine.m_aNext;
+          nPos = 0;
         }
         else
         {
-          temp.setLength (0);
-          final int newPos = Utils.readXMLElement (temp, line.m_sValue, pos, false);
-          if (newPos > 0)
+          aSB.setLength (0);
+          final int nNewPos = Utils.readXMLElement (aSB, aLine.m_sValue, nPos, false);
+          if (nNewPos > 0)
           {
-            element = temp.toString ();
-            tag = Utils.getXMLTag (element);
-            if (MarkdownHTML.isHtmlBlockElement (tag) && !tag.equals ("hr"))
+            sElement = aSB.toString ();
+            sTag = Utils.getXMLTag (sElement);
+            if (MarkdownHTML.isHtmlBlockElement (sTag) && !EHTMLElement.getFromTagNameOrNull (sTag).mayBeSelfClosed ())
             {
-              if (element.charAt (1) == '/')
+              if (sElement.charAt (1) == '/')
               {
-                if (!tags.getLast ().equals (tag))
+                if (!aTags.getLast ().equals (sTag))
                   return EHTMLElementType.NONE;
-                tags.removeLast ();
+                aTags.removeLast ();
               }
               else
               {
-                tags.addLast (tag);
+                aTags.addLast (sTag);
               }
             }
-            if (tags.isEmpty ())
+            if (aTags.isEmpty ())
             {
-              m_aXmlEndLine = line;
+              m_aXmlEndLine = aLine;
               break;
             }
-            pos = newPos;
+            nPos = nNewPos;
           }
           else
           {
-            pos++;
+            nPos++;
           }
         }
       }
-      if (tags.isEmpty ())
+      if (aTags.isEmpty ())
         return EHTMLElementType.TAG;
     }
     return EHTMLElementType.NONE;
