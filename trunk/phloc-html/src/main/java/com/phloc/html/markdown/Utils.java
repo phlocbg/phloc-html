@@ -482,7 +482,7 @@ final class Utils
         if (pos == -1)
           return -1;
         final String tag = temp.toString ().trim ().toLowerCase (Locale.US);
-        if (HTML.isUnsafeHtmlElement (tag))
+        if (MarkdownHTML.isUnsafeHtmlElement (tag))
         {
           aSB.append ("&lt;");
           if (bIsCloseTag)
@@ -528,6 +528,7 @@ final class Utils
    * @return Rest of the line after trimming and backtick removal
    * @since 0.7
    */
+  @Nonnull
   public static String getMetaFromFence (final String fenceLine)
   {
     for (int i = 0; i < fenceLine.length (); i++)

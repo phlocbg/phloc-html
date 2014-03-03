@@ -19,8 +19,13 @@ package com.phloc.html.entities;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.junit.Test;
 
+import com.phloc.commons.compare.ComparatorString;
 import com.phloc.commons.string.StringHelper;
 
 /**
@@ -39,5 +44,10 @@ public final class EHTMLEntityTest
       assertTrue (StringHelper.hasText (e.getEntityReference ()));
       assertTrue (e.toString (), StringHelper.getLength (e.getChar ()) >= 1);
     }
+
+    final Set <String> a = new TreeSet <String> (new ComparatorString (Locale.US));
+    for (final EHTMLEntity e : EHTMLEntity.values ())
+      a.add (e.getEntityReference ());
+    System.out.println (a.size () + " - " + a);
   }
 }

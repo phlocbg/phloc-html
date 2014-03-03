@@ -17,6 +17,8 @@
  */
 package com.phloc.html.markdown;
 
+import javax.annotation.Nonnull;
+
 /**
  * A markdown link reference.
  * 
@@ -34,18 +36,19 @@ final class LinkRef
   /**
    * Constructor.
    * 
-   * @param link
+   * @param sLink
    *        The link.
-   * @param title
+   * @param sTitle
    *        The title (may be <code>null</code>).
    */
-  public LinkRef (final String link, final String title, final boolean isAbbrev)
+  public LinkRef (@Nonnull final String sLink, final String sTitle, final boolean bIsAbbrev)
   {
-    m_sLink = link;
-    m_sTitle = title;
-    m_bIsAbbrev = isAbbrev;
+    m_sLink = sLink;
+    m_sTitle = sTitle;
+    m_bIsAbbrev = bIsAbbrev;
   }
 
+  @Nonnull
   public String getLink ()
   {
     return m_sLink;

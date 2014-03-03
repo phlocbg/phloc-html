@@ -31,7 +31,7 @@ import com.phloc.html.EHTMLElement;
  * 
  * @author René Jeschke <rene_jeschke@yahoo.de>
  */
-final class HTML
+final class MarkdownHTML
 {
   /** List of valid HTML/XML entity names. */
   private static final String [] ENTITY_NAMES = { "&Acirc;",
@@ -604,7 +604,7 @@ final class HTML
   }
 
   /** Constructor. (Singleton) */
-  private HTML ()
+  private MarkdownHTML ()
   {
     //
   }
