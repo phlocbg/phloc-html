@@ -19,6 +19,7 @@ package com.phloc.html.hc;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -112,7 +113,7 @@ public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElem
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getAllHeaderClasses ();
+  Set <ICSSClassProvider> getAllHeaderClasses ();
 
   @Nonnull
   String getAllHeaderClassesAsString ();
@@ -180,7 +181,7 @@ public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElem
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getAllFooterClasses ();
+  Set <ICSSClassProvider> getAllFooterClasses ();
 
   @Nonnull
   String getAllFooterClassesAsString ();
@@ -248,7 +249,7 @@ public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElem
 
   @Nonnull
   @ReturnsMutableCopy
-  List <ICSSClassProvider> getAllBodyClasses ();
+  Set <ICSSClassProvider> getAllBodyClasses ();
 
   @Nonnull
   String getAllBodyClassesAsString ();

@@ -18,9 +18,9 @@
 package com.phloc.html.hc.html;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -32,7 +32,6 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
@@ -50,210 +49,18 @@ import com.phloc.html.hc.impl.HCTextNode;
  * complex constructs (e.g. PUI)
  * 
  * @author Philip Helger
- * @param <THISTYPE>
+ * @param <IMPLTYPE>
  *        Implementation type
  */
-public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable <THISTYPE>> extends AbstractHCElement <THISTYPE> implements IHCTable <THISTYPE>
+public abstract class AbstractHCBaseTable <IMPLTYPE extends AbstractHCBaseTable <IMPLTYPE>> extends AbstractHCElement <IMPLTYPE> implements IHCTable <IMPLTYPE>
 {
-  private static final class RowSet
-  {
-    private final boolean m_bHeader;
-    private final List <HCRow> m_aRows = new ArrayList <HCRow> ();
-    private String m_sID;
-    private List <ICSSClassProvider> m_aClasses;
-
-    public RowSet (final boolean bHeader)
-    {
-      m_bHeader = bHeader;
-    }
-
-    @Nullable
-    public String getID ()
-    {
-      return m_sID;
-    }
-
-    public void setID (@Nullable final String sID)
-    {
-      m_sID = sID;
-    }
-
-    /**
-     * @return <code>true</code> if a ID is present, <code>false</code>
-     *         otherwise
-     */
-    public boolean hasID ()
-    {
-      return StringHelper.hasText (m_sID);
-    }
-
-    @Nonnull
-    @ReturnsMutableCopy
-    public List <ICSSClassProvider> getAllClasses ()
-    {
-      return ContainerHelper.newList (m_aClasses);
-    }
-
-    @Nonnull
-    public String getAllClassesAsString ()
-    {
-      if (m_aClasses == null || m_aClasses.isEmpty ())
-        return "";
-      final StringBuilder aSB = new StringBuilder ();
-      for (final ICSSClassProvider aCSSClass : m_aClasses)
-      {
-        if (aSB.length () > 0)
-          aSB.append (' ');
-        aSB.append (aCSSClass.getCSSClass ());
-      }
-      return aSB.toString ();
-    }
-
-    public void addClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
-    {
-      if (aCSSClassProvider == null)
-        throw new NullPointerException ("CSSClassProvider");
-
-      if (m_aClasses == null)
-        m_aClasses = new ArrayList <ICSSClassProvider> ();
-      m_aClasses.add (aCSSClassProvider);
-    }
-
-    public void removeClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
-    {
-      if (m_aClasses != null)
-        m_aClasses.remove (aCSSClassProvider);
-    }
-
-    public boolean hasClasses ()
-    {
-      return ContainerHelper.isNotEmpty (m_aClasses);
-    }
-
-    public boolean hasRows ()
-    {
-      return !m_aRows.isEmpty ();
-    }
-
-    @Nonnegative
-    public int getRowCount ()
-    {
-      return m_aRows.size ();
-    }
-
-    /**
-     * Get the contained list object that holds all the rows. Handle with care
-     * because it alters the internal data structures of this table.
-     * 
-     * @return The contained list object for external row order handling.
-     */
-    @Nonnull
-    @ReturnsMutableObject (reason = "For performance reasons in derived classes")
-    protected List <HCRow> directGetRowList ()
-    {
-      return m_aRows;
-    }
-
-    @Nullable
-    public HCRow getFirstRow ()
-    {
-      return ContainerHelper.getFirstElement (m_aRows);
-    }
-
-    @Nullable
-    public HCRow getRowAtIndex (@Nonnegative final int nIndex)
-    {
-      return ContainerHelper.getSafe (m_aRows, nIndex);
-    }
-
-    @Nullable
-    public HCRow getLastRow ()
-    {
-      return ContainerHelper.getLastElement (m_aRows);
-    }
-
-    @Nonnull
-    @ReturnsMutableCopy
-    public List <HCRow> getAllRows ()
-    {
-      return ContainerHelper.newList (m_aRows);
-    }
-
-    @Nonnull
-    public HCRow addRow ()
-    {
-      final HCRow ret = new HCRow (m_bHeader);
-      m_aRows.add (ret);
-      return ret;
-    }
-
-    @Nonnull
-    public HCRow addRow (@Nonnegative final int nIndex)
-    {
-      final HCRow ret = new HCRow (m_bHeader);
-      m_aRows.add (nIndex, ret);
-      return ret;
-    }
-
-    public void addRow (@Nullable final HCRow aRow)
-    {
-      if (aRow != null)
-        m_aRows.add (aRow);
-    }
-
-    public void addRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
-    {
-      if (aRow != null)
-        m_aRows.add (nIndex, aRow);
-    }
-
-    public void removeRowAtIndex (@Nonnegative final int nIndex)
-    {
-      ContainerHelper.removeElementAtIndex (m_aRows, nIndex);
-    }
-
-    public void removeAllRows ()
-    {
-      m_aRows.clear ();
-    }
-
-    public void sortAllRows (@Nonnull final Comparator <? super HCRow> aComparator)
-    {
-      if (aComparator == null)
-        throw new NullPointerException ("comparator");
-      Collections.sort (m_aRows, aComparator);
-    }
-
-    public boolean canConvertToNode ()
-    {
-      return hasRows () || hasID () || hasClasses ();
-    }
-
-    public StringBuilder getPlainText ()
-    {
-      final StringBuilder ret = new StringBuilder ();
-      for (final HCRow aRow : m_aRows)
-        ret.append (aRow.getPlainText ()).append (' ');
-      return ret;
-    }
-
-    @Override
-    public String toString ()
-    {
-      return new ToStringGenerator (this).append ("rows", m_aRows)
-                                         .appendIfNotNull ("ID", m_sID)
-                                         .appendIfNotNull ("classes", m_aClasses)
-                                         .toString ();
-    }
-  }
-
   private HCColGroup m_aColGroup;
   private int m_nCellSpacing = CGlobal.ILLEGAL_UINT;
   private int m_nCellPadding = CGlobal.ILLEGAL_UINT;
 
-  private final RowSet m_aHeader = new RowSet (true);
-  private final RowSet m_aBody = new RowSet (false);
-  private final RowSet m_aFooter = new RowSet (true);
+  private HCTHead m_aHead = new HCTHead ();
+  private HCTBody m_aBody = new HCTBody ();
+  private HCTFoot m_aFoot = new HCTFoot ();
 
   /**
    * This constructor is used to create elements with logic like a table but
@@ -267,15 +74,69 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     super (aElement);
   }
 
+  /**
+   * @return The table header. Never <code>null</code>.
+   */
+  @Nonnull
+  public final HCTHead getHead ()
+  {
+    return m_aHead;
+  }
+
+  @Nonnull
+  public final IMPLTYPE setHead (@Nonnull final HCTHead aHead)
+  {
+    if (aHead == null)
+      throw new NullPointerException ("Head");
+    m_aHead = aHead;
+    return thisAsT ();
+  }
+
+  /**
+   * @return The table body. Never <code>null</code>.
+   */
+  @Nonnull
+  public final HCTBody getBody ()
+  {
+    return m_aBody;
+  }
+
+  @Nonnull
+  public final IMPLTYPE setBody (@Nonnull final HCTBody aBody)
+  {
+    if (aBody == null)
+      throw new NullPointerException ("Body");
+    m_aBody = aBody;
+    return thisAsT ();
+  }
+
+  /**
+   * @return The table footer. Never <code>null</code>.
+   */
+  @Nonnull
+  public final HCTFoot getFoot ()
+  {
+    return m_aFoot;
+  }
+
+  @Nonnull
+  public final IMPLTYPE setFoot (@Nonnull final HCTFoot aFoot)
+  {
+    if (aFoot == null)
+      throw new NullPointerException ("Foot");
+    m_aFoot = aFoot;
+    return thisAsT ();
+  }
+
   public final boolean hasChildren ()
   {
-    return m_aHeader.hasRows () || m_aBody.hasRows () || m_aFooter.hasRows ();
+    return m_aHead.hasChildren () || m_aBody.hasChildren () || m_aFoot.hasChildren ();
   }
 
   @Nonnegative
   public final int getChildCount ()
   {
-    return m_aHeader.getRowCount () + m_aBody.getRowCount () + m_aFooter.getRowCount ();
+    return m_aHead.getChildCount () + m_aBody.getChildCount () + m_aFoot.getChildCount ();
   }
 
   @Nullable
@@ -309,9 +170,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final List <IHCNode> getChildren ()
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
-    ret.addAll (m_aHeader.directGetRowList ());
-    ret.addAll (m_aBody.directGetRowList ());
-    ret.addAll (m_aFooter.directGetRowList ());
+    ret.addAll (m_aHead.getChildren ());
+    ret.addAll (m_aBody.getChildren ());
+    ret.addAll (m_aFoot.getChildren ());
     return ret;
   }
 
@@ -336,7 +197,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE setCellSpacing (final int nCellSpacing)
+  public final IMPLTYPE setCellSpacing (final int nCellSpacing)
   {
     m_nCellSpacing = nCellSpacing;
     return thisAsT ();
@@ -348,7 +209,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE setCellPadding (final int nCellPadding)
+  public final IMPLTYPE setCellPadding (final int nCellPadding)
   {
     m_nCellPadding = nCellPadding;
     return thisAsT ();
@@ -365,7 +226,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumn (@Nullable final HCCol aCol)
+  public final IMPLTYPE addColumn (@Nullable final HCCol aCol)
   {
     if (aCol != null)
     {
@@ -377,7 +238,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
+  public final IMPLTYPE addColumn (@Nonnegative final int nIndex, @Nullable final HCCol aCol)
   {
     if (aCol != null)
     {
@@ -390,13 +251,13 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @Deprecated
-  public final THISTYPE addColumns (@Nullable final HCCol aCol)
+  public final IMPLTYPE addColumns (@Nullable final HCCol aCol)
   {
     return addColumn (aCol);
   }
 
   @Nonnull
-  public final THISTYPE addColumns (@Nullable final HCCol... aCols)
+  public final IMPLTYPE addColumns (@Nullable final HCCol... aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -405,7 +266,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addColumns (@Nullable final Iterable <? extends HCCol> aCols)
+  public final IMPLTYPE addColumns (@Nullable final Iterable <? extends HCCol> aCols)
   {
     if (aCols != null)
       for (final HCCol aCol : aCols)
@@ -414,7 +275,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE removeColumnAtIndex (@Nonnegative final int nColumnIndex)
+  public final IMPLTYPE removeColumnAtIndex (@Nonnegative final int nColumnIndex)
   {
     if (m_aColGroup != null)
       m_aColGroup.removeColumnAtIndex (nColumnIndex);
@@ -422,7 +283,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE removeAllColumns ()
+  public final IMPLTYPE removeAllColumns ()
   {
     m_aColGroup = null;
     return thisAsT ();
@@ -441,62 +302,62 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nullable
   public final String getHeaderID ()
   {
-    return m_aHeader.getID ();
+    return m_aHead.getID ();
   }
 
   @Nonnull
-  public final THISTYPE setHeaderID (@Nullable final String sID)
+  public final IMPLTYPE setHeaderID (@Nullable final String sID)
   {
-    m_aHeader.setID (sID);
+    m_aHead.setID (sID);
     return thisAsT ();
   }
 
   public final boolean hasHeaderID ()
   {
-    return m_aHeader.hasID ();
+    return m_aHead.hasID ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getAllHeaderClasses ()
+  public final Set <ICSSClassProvider> getAllHeaderClasses ()
   {
-    return m_aHeader.getAllClasses ();
+    return m_aHead.getAllClasses ();
   }
 
   @Nonnull
   public final String getAllHeaderClassesAsString ()
   {
-    return m_aHeader.getAllClassesAsString ();
+    return m_aHead.getAllClassesAsString ();
   }
 
   @Nonnull
-  public final THISTYPE addHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE addHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    m_aHeader.addClass (aCSSClassProvider);
+    m_aHead.addClass (aCSSClassProvider);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE removeHeaderClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    m_aHeader.removeClass (aCSSClassProvider);
+    m_aHead.removeClass (aCSSClassProvider);
     return thisAsT ();
   }
 
   public final boolean hasHeaderClasses ()
   {
-    return m_aHeader.hasClasses ();
+    return m_aHead.hasAnyClass ();
   }
 
   public final boolean hasHeaderRows ()
   {
-    return m_aHeader.hasRows ();
+    return m_aHead.hasChildren ();
   }
 
   @Nonnegative
   public final int getHeaderRowCount ()
   {
-    return m_aHeader.getRowCount ();
+    return m_aHead.getChildCount ();
   }
 
   /**
@@ -505,82 +366,82 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
    * 
    * @return The contained list object for external row order handling.
    */
-  @Nonnull
+  @Nullable
   @ReturnsMutableObject (reason = "For performance reasons in derived classes")
   protected final List <HCRow> directGetHeaderRowList ()
   {
-    return m_aHeader.directGetRowList ();
+    return m_aHead.directGetRowList ();
   }
 
   @Nullable
   public final HCRow getFirstHeaderRow ()
   {
-    return m_aHeader.getFirstRow ();
+    return m_aHead.getFirstChild ();
   }
 
   @Nullable
   public final HCRow getHeaderRowAtIndex (@Nonnegative final int nIndex)
   {
-    return m_aHeader.getRowAtIndex (nIndex);
+    return m_aHead.getChildAtIndex (nIndex);
   }
 
   @Nullable
   public final HCRow getLastHeaderRow ()
   {
-    return m_aHeader.getLastRow ();
+    return m_aHead.getLastChild ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public final List <HCRow> getAllHeaderRows ()
   {
-    return m_aHeader.getAllRows ();
+    return m_aHead.getChildren ();
   }
 
   @Nonnull
   public final HCRow addHeaderRow ()
   {
-    return m_aHeader.addRow ();
+    return m_aHead.addRow ();
   }
 
   @Nonnull
   public final HCRow addHeaderRow (@Nonnegative final int nIndex)
   {
-    return m_aHeader.addRow (nIndex);
+    return m_aHead.addRow (nIndex);
   }
 
   @Nonnull
-  public final THISTYPE addHeaderRow (@Nullable final HCRow aRow)
+  public final IMPLTYPE addHeaderRow (@Nullable final HCRow aRow)
   {
-    m_aHeader.addRow (aRow);
+    m_aHead.addChild (aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE addHeaderRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
+  public final IMPLTYPE addHeaderRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
-    m_aHeader.addRow (nIndex, aRow);
+    m_aHead.addChild (nIndex, aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeHeaderRowAtIndex (@Nonnegative final int nIndex)
+  public final IMPLTYPE removeHeaderRowAtIndex (@Nonnegative final int nIndex)
   {
-    m_aHeader.removeRowAtIndex (nIndex);
+    m_aHead.removeChild (nIndex);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeAllHeaderRows ()
+  public final IMPLTYPE removeAllHeaderRows ()
   {
-    m_aHeader.removeAllRows ();
+    m_aHead.removeAllChildren ();
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE sortAllHeaderRows (@Nonnull final Comparator <? super HCRow> aComparator)
+  public final IMPLTYPE sortAllHeaderRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
-    m_aHeader.sortAllRows (aComparator);
+    m_aHead.sortAllChildren (aComparator);
     return thisAsT ();
   }
 
@@ -590,62 +451,62 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nullable
   public final String getFooterID ()
   {
-    return m_aFooter.getID ();
+    return m_aFoot.getID ();
   }
 
   @Nonnull
-  public final THISTYPE setFooterID (@Nullable final String sID)
+  public final IMPLTYPE setFooterID (@Nullable final String sID)
   {
-    m_aFooter.setID (sID);
+    m_aFoot.setID (sID);
     return thisAsT ();
   }
 
   public final boolean hasFooterID ()
   {
-    return m_aFooter.hasID ();
+    return m_aFoot.hasID ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getAllFooterClasses ()
+  public final Set <ICSSClassProvider> getAllFooterClasses ()
   {
-    return m_aFooter.getAllClasses ();
+    return m_aFoot.getAllClasses ();
   }
 
   @Nonnull
   public final String getAllFooterClassesAsString ()
   {
-    return m_aFooter.getAllClassesAsString ();
+    return m_aFoot.getAllClassesAsString ();
   }
 
   @Nonnull
-  public final THISTYPE addFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE addFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    m_aFooter.addClass (aCSSClassProvider);
+    m_aFoot.addClass (aCSSClassProvider);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE removeFooterClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
-    m_aFooter.removeClass (aCSSClassProvider);
+    m_aFoot.removeClass (aCSSClassProvider);
     return thisAsT ();
   }
 
   public final boolean hasFooterClasses ()
   {
-    return m_aFooter.hasClasses ();
+    return m_aFoot.hasAnyClass ();
   }
 
   public final boolean hasFooterRows ()
   {
-    return m_aFooter.hasRows ();
+    return m_aFoot.hasChildren ();
   }
 
   @Nonnegative
   public final int getFooterRowCount ()
   {
-    return m_aFooter.getRowCount ();
+    return m_aFoot.getChildCount ();
   }
 
   /**
@@ -654,82 +515,82 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
    * 
    * @return The contained list object for external row order handling.
    */
-  @Nonnull
+  @Nullable
   @ReturnsMutableObject (reason = "For performance reasons in derived classes")
   protected final List <HCRow> directGetFooterRowList ()
   {
-    return m_aFooter.directGetRowList ();
+    return m_aFoot.directGetRowList ();
   }
 
   @Nullable
   public final HCRow getFirstFooterRow ()
   {
-    return m_aFooter.getFirstRow ();
+    return m_aFoot.getFirstChild ();
   }
 
   @Nullable
   public final HCRow getFooterRowAtIndex (@Nonnegative final int nIndex)
   {
-    return m_aFooter.getRowAtIndex (nIndex);
+    return m_aFoot.getChildAtIndex (nIndex);
   }
 
   @Nullable
   public final HCRow getLastFooterRow ()
   {
-    return m_aFooter.getLastRow ();
+    return m_aFoot.getLastChild ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public final List <HCRow> getAllFooterRows ()
   {
-    return m_aFooter.getAllRows ();
+    return m_aFoot.getChildren ();
   }
 
   @Nonnull
   public final HCRow addFooterRow ()
   {
-    return m_aFooter.addRow ();
+    return m_aFoot.addRow ();
   }
 
   @Nonnull
   public final HCRow addFooterRow (@Nonnegative final int nIndex)
   {
-    return m_aFooter.addRow (nIndex);
+    return m_aFoot.addRow (nIndex);
   }
 
   @Nonnull
-  public final THISTYPE addFooterRow (@Nullable final HCRow aRow)
+  public final IMPLTYPE addFooterRow (@Nullable final HCRow aRow)
   {
-    m_aFooter.addRow (aRow);
+    m_aFoot.addChild (aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE addFooterRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
+  public final IMPLTYPE addFooterRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
-    m_aFooter.addRow (nIndex, aRow);
+    m_aFoot.addChild (nIndex, aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeFooterRowAtIndex (@Nonnegative final int nIndex)
+  public final IMPLTYPE removeFooterRowAtIndex (@Nonnegative final int nIndex)
   {
-    m_aFooter.removeRowAtIndex (nIndex);
+    m_aFoot.removeChild (nIndex);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeAllFooterRows ()
+  public final IMPLTYPE removeAllFooterRows ()
   {
-    m_aFooter.removeAllRows ();
+    m_aFoot.removeAllChildren ();
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE sortAllFooterRows (@Nonnull final Comparator <? super HCRow> aComparator)
+  public final IMPLTYPE sortAllFooterRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
-    m_aFooter.sortAllRows (aComparator);
+    m_aFoot.sortAllChildren (aComparator);
     return thisAsT ();
   }
 
@@ -744,7 +605,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE setBodyID (@Nullable final String sID)
+  public final IMPLTYPE setBodyID (@Nullable final String sID)
   {
     m_aBody.setID (sID);
     return thisAsT ();
@@ -757,7 +618,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   @Nonnull
   @ReturnsMutableCopy
-  public final List <ICSSClassProvider> getAllBodyClasses ()
+  public final Set <ICSSClassProvider> getAllBodyClasses ()
   {
     return m_aBody.getAllClasses ();
   }
@@ -769,14 +630,14 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE addBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
     m_aBody.addClass (aCSSClassProvider);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
+  public final IMPLTYPE removeBodyClass (@Nonnull final ICSSClassProvider aCSSClassProvider)
   {
     m_aBody.removeClass (aCSSClassProvider);
     return thisAsT ();
@@ -784,18 +645,18 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
 
   public final boolean hasBodyClasses ()
   {
-    return m_aBody.hasClasses ();
+    return m_aBody.hasAnyClass ();
   }
 
   public final boolean hasBodyRows ()
   {
-    return m_aBody.hasRows ();
+    return m_aBody.hasChildren ();
   }
 
   @Nonnegative
   public final int getBodyRowCount ()
   {
-    return m_aBody.getRowCount ();
+    return m_aBody.getChildCount ();
   }
 
   /**
@@ -804,7 +665,7 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
    * 
    * @return The contained list object for external row order handling.
    */
-  @Nonnull
+  @Nullable
   @ReturnsMutableObject (reason = "For performance reasons in derived classes")
   protected final List <HCRow> directGetBodyRowList ()
   {
@@ -814,26 +675,26 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @Nullable
   public final HCRow getFirstBodyRow ()
   {
-    return m_aBody.getFirstRow ();
+    return m_aBody.getFirstChild ();
   }
 
   @Nullable
   public final HCRow getBodyRowAtIndex (@Nonnegative final int nIndex)
   {
-    return m_aBody.getRowAtIndex (nIndex);
+    return m_aBody.getChildAtIndex (nIndex);
   }
 
   @Nullable
   public final HCRow getLastBodyRow ()
   {
-    return m_aBody.getLastRow ();
+    return m_aBody.getLastChild ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public final List <HCRow> getAllBodyRows ()
   {
-    return m_aBody.getAllRows ();
+    return m_aBody.getChildren ();
   }
 
   @Nonnull
@@ -849,100 +710,100 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   @Nonnull
-  public final THISTYPE addBodyRow (@Nullable final HCRow aRow)
+  public final IMPLTYPE addBodyRow (@Nullable final HCRow aRow)
   {
-    m_aBody.addRow (aRow);
+    m_aBody.addChild (aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE addBodyRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
+  public final IMPLTYPE addBodyRow (@Nonnegative final int nIndex, @Nullable final HCRow aRow)
   {
-    m_aBody.addRow (nIndex, aRow);
+    m_aBody.addChild (nIndex, aRow);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeBodyRowAtIndex (@Nonnegative final int nIndex)
+  public final IMPLTYPE removeBodyRowAtIndex (@Nonnegative final int nIndex)
   {
-    m_aBody.removeRowAtIndex (nIndex);
+    m_aBody.removeChild (nIndex);
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE removeAllBodyRows ()
+  public final IMPLTYPE removeAllBodyRows ()
   {
-    m_aBody.removeAllRows ();
+    m_aBody.removeAllChildren ();
     return thisAsT ();
   }
 
   @Nonnull
-  public final THISTYPE sortAllBodyRows (@Nonnull final Comparator <? super HCRow> aComparator)
+  public final IMPLTYPE sortAllBodyRows (@Nonnull final Comparator <? super HCRow> aComparator)
   {
-    m_aBody.sortAllRows (aComparator);
+    m_aBody.sortAllChildren (aComparator);
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE setSpanningHeaderContent (@Nullable final String sText)
+  public IMPLTYPE setSpanningHeaderContent (@Nullable final String sText)
   {
     return setSpanningHeaderContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
-  public THISTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
+  public IMPLTYPE setSpanningHeaderContent (@Nullable final IHCNode aNode)
   {
     removeAllHeaderRows ();
     return addSpanningHeaderContent (aNode);
   }
 
   @Nonnull
-  public THISTYPE addSpanningHeaderContent (@Nullable final String sText)
+  public IMPLTYPE addSpanningHeaderContent (@Nullable final String sText)
   {
     return addSpanningHeaderContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
+  public IMPLTYPE addSpanningHeaderContent (@Nullable final IHCNode aNode)
   {
     addHeaderRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE addSpanningBodyContent (@Nullable final String sText)
+  public IMPLTYPE addSpanningBodyContent (@Nullable final String sText)
   {
     return addSpanningBodyContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
+  public IMPLTYPE addSpanningBodyContent (@Nullable final IHCNode aNode)
   {
     addBodyRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE setSpanningFooterContent (@Nullable final String sText)
+  public IMPLTYPE setSpanningFooterContent (@Nullable final String sText)
   {
     return setSpanningFooterContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
-  public THISTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
+  public IMPLTYPE setSpanningFooterContent (@Nullable final IHCNode aNode)
   {
     removeAllFooterRows ();
     return addSpanningFooterContent (aNode);
   }
 
   @Nonnull
-  public THISTYPE addSpanningFooterContent (@Nullable final String sText)
+  public IMPLTYPE addSpanningFooterContent (@Nullable final String sText)
   {
     return addSpanningFooterContent (HCTextNode.createOnDemand (sText));
   }
 
   @Nonnull
-  public THISTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
+  public IMPLTYPE addSpanningFooterContent (@Nullable final IHCNode aNode)
   {
     addFooterRow ().addAndReturnCell (aNode).setColspan (getColumnCount ());
     return thisAsT ();
@@ -957,7 +818,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     // Avoid creating a table without header, body and footer
-    return m_aBody.canConvertToNode () || m_aHeader.canConvertToNode () || m_aFooter.canConvertToNode ();
+    return m_aBody.canConvertToNode (aConversionSettings) ||
+           m_aHead.canConvertToNode (aConversionSettings) ||
+           m_aFoot.canConvertToNode (aConversionSettings);
   }
 
   private static int _getApplicableRowspan (final int nCellIndex, @Nullable final List <int []> aRowSpans)
@@ -994,51 +857,52 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   }
 
   private static void _checkConsistency (@Nonnull final String sContext,
-                                         @Nonnull final RowSet aRows,
+                                         @Nonnull final AbstractHCTablePart <?> aPart,
                                          @Nonnegative final int nCols)
   {
     int nRowIndex = 0;
     boolean bTotalHasRowSpans = false;
-    final List <int []> aTotalRowSpans = new ArrayList <int []> (aRows.getRowCount ());
-    for (final HCRow aBodyRow : aRows.directGetRowList ())
-    {
-      // Pass null if no row spans are defined!
-      final int nRowCols = _getEffectiveCellCount (aBodyRow, bTotalHasRowSpans ? aTotalRowSpans : null);
-      if (nRowCols != nCols)
-        HCConsistencyChecker.consistencyWarning (sContext +
-                                                 " row #" +
-                                                 (nRowIndex + 1) +
-                                                 " has " +
-                                                 nRowCols +
-                                                 " cells but was expecting " +
-                                                 nCols +
-                                                 " cells");
-      // Add row span at the end of the row so that it affects following rows
+    final List <int []> aTotalRowSpans = new ArrayList <int []> (aPart.getChildCount ());
+    if (aPart.hasChildren ())
+      for (final HCRow aBodyRow : aPart.directGetRowList ())
       {
-        final int [] aRowRowSpans = new int [aBodyRow.getCellCount ()];
-        int nCellIndex = 0;
-        boolean bRowHasRowSpans = false;
-        for (final IHCCell <?> aCell : aBodyRow.getChildren ())
+        // Pass null if no row spans are defined!
+        final int nRowCols = _getEffectiveCellCount (aBodyRow, bTotalHasRowSpans ? aTotalRowSpans : null);
+        if (nRowCols != nCols)
+          HCConsistencyChecker.consistencyWarning (sContext +
+                                                   " row #" +
+                                                   (nRowIndex + 1) +
+                                                   " has " +
+                                                   nRowCols +
+                                                   " cells but was expecting " +
+                                                   nCols +
+                                                   " cells");
+        // Add row span at the end of the row so that it affects following rows
         {
-          final int nRowSpan = aCell.getRowspan ();
-          aRowRowSpans[nCellIndex++] = nRowSpan;
-          if (nRowSpan != 1)
-            bRowHasRowSpans = true;
+          final int [] aRowRowSpans = new int [aBodyRow.getCellCount ()];
+          int nCellIndex = 0;
+          boolean bRowHasRowSpans = false;
+          for (final IHCCell <?> aCell : aBodyRow.getChildren ())
+          {
+            final int nRowSpan = aCell.getRowspan ();
+            aRowRowSpans[nCellIndex++] = nRowSpan;
+            if (nRowSpan != 1)
+              bRowHasRowSpans = true;
+          }
+          if (bRowHasRowSpans)
+          {
+            // This row has at least one row span!
+            aTotalRowSpans.add (0, aRowRowSpans);
+            bTotalHasRowSpans = true;
+          }
+          else
+          {
+            // There are no row spans defined in this row
+            aTotalRowSpans.add (0, null);
+          }
         }
-        if (bRowHasRowSpans)
-        {
-          // This row has at least one row span!
-          aTotalRowSpans.add (0, aRowRowSpans);
-          bTotalHasRowSpans = true;
-        }
-        else
-        {
-          // There are no row spans defined in this row
-          aTotalRowSpans.add (0, null);
-        }
+        nRowIndex++;
       }
-      nRowIndex++;
-    }
   }
 
   public static void checkInternalConsistency (@Nonnull final AbstractHCBaseTable <?> aBaseTable)
@@ -1047,19 +911,19 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
     int nCols = 0;
     if (aBaseTable.m_aColGroup != null)
       nCols = aBaseTable.m_aColGroup.getColumnCount ();
-    if (nCols == 0 && aBaseTable.m_aHeader.hasRows ())
-      nCols = aBaseTable.m_aHeader.getFirstRow ().getEffectiveCellCount ();
-    if (nCols == 0 && aBaseTable.m_aBody.hasRows ())
-      nCols = aBaseTable.m_aBody.getFirstRow ().getEffectiveCellCount ();
-    if (nCols == 0 && aBaseTable.m_aFooter.hasRows ())
-      nCols = aBaseTable.m_aFooter.getFirstRow ().getEffectiveCellCount ();
+    if (nCols == 0 && aBaseTable.m_aHead.hasChildren ())
+      nCols = aBaseTable.m_aHead.getFirstChild ().getEffectiveCellCount ();
+    if (nCols == 0 && aBaseTable.m_aBody.hasChildren ())
+      nCols = aBaseTable.m_aBody.getFirstChild ().getEffectiveCellCount ();
+    if (nCols == 0 && aBaseTable.m_aFoot.hasChildren ())
+      nCols = aBaseTable.m_aFoot.getFirstChild ().getEffectiveCellCount ();
 
     String sPrefix = "Table";
     if (StringHelper.hasText (aBaseTable.getID ()))
       sPrefix += " with ID " + aBaseTable.getID ();
-    _checkConsistency (sPrefix + " header", aBaseTable.m_aHeader, nCols);
+    _checkConsistency (sPrefix + " header", aBaseTable.m_aHead, nCols);
     _checkConsistency (sPrefix + " body", aBaseTable.m_aBody, nCols);
-    _checkConsistency (sPrefix + " footer", aBaseTable.m_aFooter, nCols);
+    _checkConsistency (sPrefix + " footer", aBaseTable.m_aFoot, nCols);
   }
 
   @Override
@@ -1067,12 +931,15 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   @OverridingMethodsMustInvokeSuper
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    for (final HCRow aHeaderRow : m_aHeader.directGetRowList ())
-      aHeaderRow.beforeConvertToNode (aConversionSettings);
-    for (final HCRow aBodyRow : m_aBody.directGetRowList ())
-      aBodyRow.beforeConvertToNode (aConversionSettings);
-    for (final HCRow aFooterRow : m_aFooter.directGetRowList ())
-      aFooterRow.beforeConvertToNode (aConversionSettings);
+    if (m_aHead.hasChildren ())
+      for (final HCRow aHeaderRow : m_aHead.directGetRowList ())
+        aHeaderRow.beforeConvertToNode (aConversionSettings);
+    if (m_aBody.hasChildren ())
+      for (final HCRow aBodyRow : m_aBody.directGetRowList ())
+        aBodyRow.beforeConvertToNode (aConversionSettings);
+    if (m_aFoot.hasChildren ())
+      for (final HCRow aFooterRow : m_aFoot.directGetRowList ())
+        aFooterRow.beforeConvertToNode (aConversionSettings);
   }
 
   @Override
@@ -1080,9 +947,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
   public final String getPlainText ()
   {
     final StringBuilder ret = new StringBuilder ();
-    ret.append (m_aHeader.getPlainText ());
+    ret.append (m_aHead.getPlainText ());
     ret.append (m_aBody.getPlainText ());
-    ret.append (m_aFooter.getPlainText ());
+    ret.append (m_aFoot.getPlainText ());
     return ret.toString ();
   }
 
@@ -1093,9 +960,9 @@ public abstract class AbstractHCBaseTable <THISTYPE extends AbstractHCBaseTable 
                             .appendIfNotNull ("colGroup", m_aColGroup)
                             .append ("cellSpacing", m_nCellSpacing)
                             .append ("cellPadding", m_nCellPadding)
-                            .append ("header", m_aHeader)
+                            .append ("header", m_aHead)
                             .append ("body", m_aBody)
-                            .append ("footer", m_aFooter)
+                            .append ("footer", m_aFoot)
                             .toString ();
   }
 }

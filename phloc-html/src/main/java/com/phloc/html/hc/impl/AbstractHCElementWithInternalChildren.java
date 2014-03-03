@@ -185,7 +185,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Nonnull
-  public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super CHILDTYPE> aComparator)
   {
     if (aComparator == null)
       throw new NullPointerException ("comparator");
