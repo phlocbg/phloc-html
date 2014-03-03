@@ -18,7 +18,9 @@
 package com.phloc.html.hc.utils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -31,6 +33,8 @@ import org.slf4j.LoggerFactory;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.cache.AnnotationUsageCache;
+import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCCSSNode;
@@ -60,6 +64,7 @@ public final class HCSpecialNodeHandler
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCSpecialNodeHandler.class);
   private static final AnnotationUsageCache s_aOOBNAnnotationCache = new AnnotationUsageCache (OutOfBandNode.class);
+  private static final AnnotationUsageCache s_aSNLMAnnotationCache = new AnnotationUsageCache (SpecialNodeListModifier.class);
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
@@ -317,6 +322,34 @@ public final class HCSpecialNodeHandler
     return aTargetList;
   }
 
+  @Nonnull
+  private static Iterable <? extends IHCNode> _applyModifiers (@Nonnull final Iterable <? extends IHCNode> aNodes)
+  {
+    final Set <Class <? extends IHCSpecialNodeListModifier>> aModifiersToApply = new LinkedHashSet <Class <? extends IHCSpecialNodeListModifier>> ();
+    for (final IHCNode aNode : aNodes)
+      if (s_aSNLMAnnotationCache.hasAnnotation (aNode))
+        aModifiersToApply.add (aNode.getClass ().getAnnotation (SpecialNodeListModifier.class).value ());
+
+    if (aModifiersToApply.isEmpty ())
+    {
+      // No modifiers present - return as is
+      return aNodes;
+    }
+
+    // Apply all modifiers
+    List <IHCNode> ret = ContainerHelper.newList (aNodes);
+    for (final Class <? extends IHCSpecialNodeListModifier> aModifierClass : aModifiersToApply)
+    {
+      final IHCSpecialNodeListModifier aModifier = GenericReflection.newInstance (aModifierClass);
+      if (aModifier != null)
+      {
+        // Invocation successful
+        ret = aModifier.modifySpecialNodes (ret);
+      }
+    }
+    return ret;
+  }
+
   /**
    * Merge all inline CSS and JS elements contained in the source nodes into one
    * script elements
@@ -340,6 +373,9 @@ public final class HCSpecialNodeHandler
     if (aNodes == null)
       throw new NullPointerException ("nodes");
 
+    // Apply all modifiers
+    final Iterable <? extends IHCNode> aRealSpecialNodes = _applyModifiers (aNodes);
+
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
     final CollectingJSCodeProvider aJSOnDocumentReadyBefore = new CollectingJSCodeProvider ();
     final CollectingJSCodeProvider aJSOnDocumentReadyAfter = new CollectingJSCodeProvider ();
@@ -347,7 +383,7 @@ public final class HCSpecialNodeHandler
     final CollectingJSCodeProvider aJSInlineAfter = new CollectingJSCodeProvider ();
     final StringBuilder aCSSInlineBefore = new StringBuilder ();
     final StringBuilder aCSSInlineAfter = new StringBuilder ();
-    for (final IHCNode aNode : aNodes)
+    for (final IHCNode aNode : aRealSpecialNodes)
     {
       // Note: do not unwrap the node, because it is not allowed to merge JS/CSS
       // with a conditional comment with JS/CSS without a conditional comment!
