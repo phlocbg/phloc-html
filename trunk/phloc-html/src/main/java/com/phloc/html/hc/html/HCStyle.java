@@ -88,6 +88,10 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   public static final EMode DEFAULT_MODE = EMode.PLAIN_TEXT_NO_ESCAPE;
   /** The default MIME type is text/css */
   public static final IMimeType DEFAULT_TYPE = CMimeType.TEXT_CSS;
+
+  /** By default place inline CSS after script files */
+  public static final boolean DEFAULT_EMIT_AFTER_FILES = true;
+
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCStyle.class);
 
   private static EMode s_eDefaultMode = DEFAULT_MODE;
@@ -96,6 +100,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   private CSSMediaList m_aMediaList;
   private String m_sContent;
   private EMode m_eMode = s_eDefaultMode;
+  private boolean m_bEmitAfterFiles = DEFAULT_EMIT_AFTER_FILES;
 
   public HCStyle ()
   {
@@ -249,6 +254,18 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
     return this;
   }
 
+  public boolean isEmitAfterFiles ()
+  {
+    return m_bEmitAfterFiles;
+  }
+
+  @Nonnull
+  public HCStyle setEmitAfterFiles (final boolean bEmitAfterFiles)
+  {
+    m_bEmitAfterFiles = bEmitAfterFiles;
+    return this;
+  }
+
   @Override
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
@@ -292,6 +309,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
                             .appendIfNotNull ("mediaList", m_aMediaList)
                             .append ("content", m_sContent)
                             .append ("mode", m_eMode)
+                            .append ("emitAfterFiles", m_bEmitAfterFiles)
                             .toString ();
   }
 

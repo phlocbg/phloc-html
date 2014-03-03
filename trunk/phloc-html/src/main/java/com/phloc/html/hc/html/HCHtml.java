@@ -118,7 +118,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
     if (aConversionSettings.isExtractOutOfBandNodes ())
     {
       // Extract all out-of-band nodes
-      final List <IHCNode> aExtractedOutOfBandNodes = HCSpecialNodeHandler.recursiveExtractOutOfBandNodes (aBaseNode);
+      final List <IHCNode> aExtractedOutOfBandNodes = HCSpecialNodeHandler.recursiveExtractAndRemoveOutOfBandNodes (aBaseNode);
 
       // Call out-of-band node handler
       aConversionSettings.getCustomizer ().handleOutOfBandNodes (aExtractedOutOfBandNodes, aHead, aBody);

@@ -58,6 +58,7 @@ import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
+import com.phloc.html.hc.html.HCStyle;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.js.EJSEvent;
@@ -270,7 +271,8 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
       if (isOutOfBandBodyNode (aNode))
       {
         // It's a body node
-        if (aNode instanceof HCScript && !((HCScript) aNode).isEmitAfterFiles ())
+        if ((aNode instanceof HCScript && !((HCScript) aNode).isEmitAfterFiles ()) ||
+            (aNode instanceof HCStyle && !((HCStyle) aNode).isEmitAfterFiles ()))
         {
           // Before files
           aBody.addChild (nBeginIndex, aNode);

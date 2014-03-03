@@ -17,17 +17,20 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
+import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.hc.impl.AbstractHCElementWithInternalChildren;
+import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Represents an HTML &lt;title&gt; element
  * 
  * @author Philip Helger
  */
-public class HCTitle extends AbstractHCElementWithChildren <HCTitle>
+public class HCTitle extends AbstractHCElementWithInternalChildren <HCTitle, HCTextNode>
 {
   public HCTitle ()
   {
@@ -37,6 +40,12 @@ public class HCTitle extends AbstractHCElementWithChildren <HCTitle>
   public HCTitle (@Nullable final String sTitle)
   {
     this ();
-    addChild (sTitle);
+    addChild (HCTextNode.createOnDemand (sTitle));
+  }
+
+  @Override
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return hasChildren ();
   }
 }

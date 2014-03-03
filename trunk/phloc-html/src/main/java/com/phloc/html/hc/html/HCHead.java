@@ -47,6 +47,7 @@ import com.phloc.html.hc.api.EHCLinkType;
 import com.phloc.html.hc.api.IHCLinkType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCElement;
+import com.phloc.html.hc.impl.HCTextNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.meta.IMetaElement;
 
@@ -61,7 +62,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCHead.class);
 
   private String m_sProfile;
-  private String m_sPageTitle;
+  private final HCTitle m_aPageTitle = new HCTitle ();
   private final HCBase m_aBase = new HCBase ();
   private final Map <String, IMetaElement> m_aMetaElements = new LinkedHashMap <String, IMetaElement> ();
   private final List <HCLink> m_aLinks = new ArrayList <HCLink> ();
@@ -93,13 +94,14 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nullable
   public String getPageTitle ()
   {
-    return m_sPageTitle;
+    return m_aPageTitle.getPlainText ();
   }
 
   @Nonnull
   public HCHead setPageTitle (@Nullable final String sPageTitle)
   {
-    m_sPageTitle = sPageTitle;
+    m_aPageTitle.removeAllChildren ();
+    m_aPageTitle.addChild (HCTextNode.createOnDemand (sPageTitle));
     return this;
   }
 
@@ -431,8 +433,7 @@ public class HCHead extends AbstractHCElement <HCHead>
       eHead.appendChild (aMetaElement.convertToNode (aConversionSettings));
 
     // page title
-    if (StringHelper.hasText (m_sPageTitle))
-      eHead.appendChild (new HCTitle (m_sPageTitle).convertToNode (aConversionSettings));
+    eHead.appendChild (m_aPageTitle.convertToNode (aConversionSettings));
 
     // base
     eHead.appendChild (m_aBase.convertToNode (aConversionSettings));
@@ -456,7 +457,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   public String getPlainText ()
   {
     // Use the page title as plain text
-    return StringHelper.getNotNull (m_sPageTitle);
+    return m_aPageTitle.getPlainText ();
   }
 
   @Override
@@ -464,8 +465,8 @@ public class HCHead extends AbstractHCElement <HCHead>
   {
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("profile", m_sProfile)
-                            .appendIfNotNull ("pageTitle", m_sPageTitle)
-                            .appendIfNotNull ("base", m_aBase)
+                            .append ("pageTitle", m_aPageTitle)
+                            .append ("base", m_aBase)
                             .appendIfNotNull ("metaElements", m_aMetaElements)
                             .appendIfNotNull ("links", m_aLinks)
                             .appendIfNotNull ("CSS", m_aCSS)
