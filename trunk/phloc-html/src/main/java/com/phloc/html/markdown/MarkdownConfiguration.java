@@ -97,11 +97,11 @@ public class MarkdownConfiguration
 
   private final boolean m_bSafeMode;
   private final Charset m_aEncoding;
-  private final IDecorator m_aDecorator;
-  private final IBlockEmitter m_aCodeBlockEmitter;
+  private final IMarkdownDecorator m_aDecorator;
+  private final IMarkdownBlockEmitter m_aCodeBlockEmitter;
   private final boolean m_bForceExtendedProfile;
   private final boolean m_bConvertNewline2Br;
-  private final ISpanEmitter m_aSpecialLinkEmitter;
+  private final IMarkdownSpanEmitter m_aSpecialLinkEmitter;
   private final List <AbstractMarkdownPlugin> m_aPlugins;
 
   /**
@@ -113,11 +113,11 @@ public class MarkdownConfiguration
    */
   public MarkdownConfiguration (final boolean bSafeMode,
                                 @Nonnull final Charset aEncoding,
-                                @Nonnull final IDecorator aDecorator,
-                                @Nullable final IBlockEmitter aCodeBlockEmitter,
+                                @Nonnull final IMarkdownDecorator aDecorator,
+                                @Nullable final IMarkdownBlockEmitter aCodeBlockEmitter,
                                 final boolean bForceExtendedProfile,
                                 final boolean bConvertNewline2Br,
-                                @Nullable final ISpanEmitter aSpecialLinkEmitter,
+                                @Nullable final IMarkdownSpanEmitter aSpecialLinkEmitter,
                                 @Nullable final List <? extends AbstractMarkdownPlugin> aPlugins)
   {
     if (aEncoding == null)
@@ -147,13 +147,13 @@ public class MarkdownConfiguration
   }
 
   @Nonnull
-  public IDecorator getDecorator ()
+  public IMarkdownDecorator getDecorator ()
   {
     return m_aDecorator;
   }
 
   @Nullable
-  public IBlockEmitter getCodeBlockEmitter ()
+  public IMarkdownBlockEmitter getCodeBlockEmitter ()
   {
     return m_aCodeBlockEmitter;
   }
@@ -169,7 +169,7 @@ public class MarkdownConfiguration
   }
 
   @Nullable
-  public ISpanEmitter getSpecialLinkEmitter ()
+  public IMarkdownSpanEmitter getSpecialLinkEmitter ()
   {
     return m_aSpecialLinkEmitter;
   }
@@ -204,9 +204,9 @@ public class MarkdownConfiguration
     private boolean m_bForceExtendedProfile = false;
     private boolean m_bConvertNewline2Br = false;
     private Charset m_aEncoding = CCharset.CHARSET_UTF_8_OBJ;
-    private IDecorator m_aDecorator = new MarkdownDefaultDecorator ();
-    private IBlockEmitter m_aCodeBlockEmitter = null;
-    private ISpanEmitter m_aSpecialLinkEmitter = null;
+    private IMarkdownDecorator m_aDecorator = new MarkdownDefaultDecorator ();
+    private IMarkdownBlockEmitter m_aCodeBlockEmitter = null;
+    private IMarkdownSpanEmitter m_aSpecialLinkEmitter = null;
     private final List <AbstractMarkdownPlugin> m_aPlugins = new ArrayList <AbstractMarkdownPlugin> ();
 
     /**
@@ -275,7 +275,7 @@ public class MarkdownConfiguration
     }
 
     @Nonnull
-    public IDecorator getDecorator ()
+    public IMarkdownDecorator getDecorator ()
     {
       return m_aDecorator;
     }
@@ -290,7 +290,7 @@ public class MarkdownConfiguration
      * @since 0.7
      */
     @Nonnull
-    public Builder setDecorator (@Nonnull final IDecorator aDecorator)
+    public Builder setDecorator (@Nonnull final IMarkdownDecorator aDecorator)
     {
       if (aDecorator == null)
         throw new NullPointerException ("Decorator");
@@ -304,11 +304,11 @@ public class MarkdownConfiguration
      * @param emitter
      *        The BlockEmitter
      * @return This builder
-     * @see IBlockEmitter
+     * @see IMarkdownBlockEmitter
      * @since 0.7
      */
     @Nonnull
-    public Builder setCodeBlockEmitter (@Nullable final IBlockEmitter emitter)
+    public Builder setCodeBlockEmitter (@Nullable final IMarkdownBlockEmitter emitter)
     {
       m_aCodeBlockEmitter = emitter;
       return this;
@@ -323,7 +323,7 @@ public class MarkdownConfiguration
      * @since 0.7
      */
     @Nonnull
-    public Builder setSpecialLinkEmitter (@Nullable final ISpanEmitter emitter)
+    public Builder setSpecialLinkEmitter (@Nullable final IMarkdownSpanEmitter emitter)
     {
       m_aSpecialLinkEmitter = emitter;
       return this;

@@ -105,7 +105,7 @@ final class Emitter
   public void emit (final HCStack out, final Block aRoot)
   {
     aRoot.removeSurroundingEmptyLines ();
-    final IDecorator aDecorator = m_aConfig.getDecorator ();
+    final IMarkdownDecorator aDecorator = m_aConfig.getDecorator ();
 
     switch (aRoot.m_eType)
     {

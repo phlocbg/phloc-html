@@ -59,7 +59,7 @@ import javax.annotation.Nonnull;
  * @author René Jeschke <rene_jeschke@yahoo.de>
  * @since 0.7
  */
-public interface IBlockEmitter
+public interface IMarkdownBlockEmitter
 {
   /**
    * This method is responsible for outputting a markdown block and for any

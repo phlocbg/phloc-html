@@ -80,7 +80,7 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.html.markdown.MarkdownConfiguration.Builder;
 
 @RunWith (Parameterized.class)
-public class MarkupFileTest
+public final class MarkupFileTest
 {
   private final static String [] TEST_FILENAMES = new String [] { "/dingus.txt",
                                                                  "/paragraphs.txt",

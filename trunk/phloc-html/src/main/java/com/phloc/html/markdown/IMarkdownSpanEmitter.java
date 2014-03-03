@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
  * 
  * @author René Jeschke (rene_jeschke@yahoo.de)
  */
-public interface ISpanEmitter
+public interface IMarkdownSpanEmitter
 {
   /**
    * Emits a span element.
