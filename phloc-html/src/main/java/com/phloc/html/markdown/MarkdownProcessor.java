@@ -18,6 +18,7 @@
 package com.phloc.html.markdown;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.util.Locale;
 
@@ -25,6 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.WillClose;
 
+import com.phloc.commons.io.IReadableResource;
 import com.phloc.commons.io.streams.NonBlockingStringReader;
 import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.commons.string.StringHelper;
@@ -464,6 +466,22 @@ public class MarkdownProcessor
           break;
       }
     }
+  }
+
+  @Nonnull
+  public MarkdownProcessingResult process (@Nonnull final IReadableResource aRes) throws IOException
+  {
+    if (aRes == null)
+      throw new NullPointerException ("Resource");
+    return process (aRes.getReader (m_aConfig.getEncoding ()));
+  }
+
+  @Nonnull
+  public MarkdownProcessingResult process (@Nonnull final InputStream aIS) throws IOException
+  {
+    if (aIS == null)
+      throw new NullPointerException ("InputStream");
+    return process (StreamUtils.getBuffered (StreamUtils.createReader (aIS, m_aConfig.getEncoding ())));
   }
 
   @Nonnull
