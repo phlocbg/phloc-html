@@ -58,7 +58,7 @@ final class Emitter
   /** Link references. */
   private final Map <String, LinkRef> m_aLinkRefs = new HashMap <String, LinkRef> ();
   /** The configuration. */
-  private final Configuration m_aConfig;
+  private final MarkdownConfiguration m_aConfig;
   /** Extension flag. */
   public boolean m_bUseExtensions = false;
   /** Newline flag. */
@@ -67,7 +67,7 @@ final class Emitter
   private final Map <String, AbstractPlugin> m_aPlugins = new HashMap <String, AbstractPlugin> ();
 
   /** Constructor. */
-  public Emitter (final Configuration config)
+  public Emitter (final MarkdownConfiguration config)
   {
     m_aConfig = config;
     m_bUseExtensions = config.isExtendedProfile ();
@@ -649,7 +649,7 @@ final class Emitter
           if (b > 0)
           {
             m_aConfig.getDecorator ().openEmphasis (out);
-            out.append (temp);
+            out.append (temp.getRoot ());
             m_aConfig.getDecorator ().closeEmphasis (out);
             pos = b;
           }
@@ -665,7 +665,7 @@ final class Emitter
           if (b > 0)
           {
             m_aConfig.getDecorator ().openStrong (out);
-            out.append (temp);
+            out.append (temp.getRoot ());
             m_aConfig.getDecorator ().closeStrong (out);
             pos = b + 1;
           }
@@ -680,7 +680,7 @@ final class Emitter
           if (b > 0)
           {
             m_aConfig.getDecorator ().openStrike (out);
-            out.append (temp);
+            out.append (temp.getRoot ());
             m_aConfig.getDecorator ().closeStrike (out);
             pos = b + 1;
           }
@@ -695,7 +695,7 @@ final class Emitter
           if (b > 0)
           {
             m_aConfig.getDecorator ().openSuper (out);
-            out.append (temp);
+            out.append (temp.getRoot ());
             m_aConfig.getDecorator ().closeSuper (out);
             pos = b;
           }

@@ -33,7 +33,7 @@ import com.phloc.commons.collections.ContainerHelper;
  * @author René Jeschke <rene_jeschke@yahoo.de>
  * @since 0.7
  */
-public class Configuration
+public class MarkdownConfiguration
 {
   /**
    * <p>
@@ -47,7 +47,7 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public static final Configuration DEFAULT = Configuration.builder ().build ();
+  public static final MarkdownConfiguration DEFAULT = MarkdownConfiguration.builder ().build ();
 
   /**
    * <p>
@@ -61,7 +61,9 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public static final Configuration DEFAULT_EXTENSIONS = Configuration.builder ().forceExtentedProfile ().build ();
+  public static final MarkdownConfiguration DEFAULT_EXTENSIONS = MarkdownConfiguration.builder ()
+                                                                                      .setExtendedProfile (true)
+                                                                                      .build ();
 
   /**
    * <p>
@@ -74,7 +76,7 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public static final Configuration DEFAULT_SAFE = Configuration.builder ().enableSafeMode ().build ();
+  public static final MarkdownConfiguration DEFAULT_SAFE = MarkdownConfiguration.builder ().setSafeMode (true).build ();
 
   /**
    * <p>
@@ -87,10 +89,10 @@ public class Configuration
    * <li><code>codeBlockEmitter = null</code></li>
    * </ul>
    */
-  public static final Configuration DEFAULT_SAFE_EXTENSIONS = Configuration.builder ()
-                                                                           .enableSafeMode ()
-                                                                           .forceExtentedProfile ()
-                                                                           .build ();
+  public static final MarkdownConfiguration DEFAULT_SAFE_EXTENSIONS = MarkdownConfiguration.builder ()
+                                                                                           .setSafeMode (true)
+                                                                                           .setExtendedProfile (true)
+                                                                                           .build ();
 
   private final boolean m_bSafeMode;
   private final Charset m_aEncoding;
@@ -108,14 +110,14 @@ public class Configuration
    * @param encoding
    * @param decorator
    */
-  public Configuration (final boolean safeMode,
-                        final Charset encoding,
-                        final IDecorator decorator,
-                        final IBlockEmitter aCodeBlockEmitter,
-                        final boolean forceExtendedProfile,
-                        final boolean convertNewline2Br,
-                        final ISpanEmitter specialLinkEmitter,
-                        final List <AbstractPlugin> plugins)
+  public MarkdownConfiguration (final boolean safeMode,
+                                final Charset encoding,
+                                final IDecorator decorator,
+                                final IBlockEmitter aCodeBlockEmitter,
+                                final boolean forceExtendedProfile,
+                                final boolean convertNewline2Br,
+                                final ISpanEmitter specialLinkEmitter,
+                                final List <AbstractPlugin> plugins)
   {
     m_bSafeMode = safeMode;
     m_aEncoding = encoding;
@@ -206,28 +208,15 @@ public class Configuration
     }
 
     /**
-     * Enables HTML safe mode. Default: <code>false</code>
-     * 
-     * @return This builder
-     * @since 0.7
-     */
-    @Nonnull
-    public Builder enableSafeMode ()
-    {
-      m_bSafeMode = true;
-      return this;
-    }
-
-    /**
      * Forces extened profile to be enabled by default.
      * 
      * @return This builder.
      * @since 0.7
      */
     @Nonnull
-    public Builder forceExtentedProfile ()
+    public Builder setExtendedProfile (final boolean bExtendedProfile)
     {
-      m_bForceExtendedProfile = true;
+      m_bForceExtendedProfile = bExtendedProfile;
       return this;
     }
 
@@ -348,16 +337,16 @@ public class Configuration
      * @since 0.7
      */
     @Nonnull
-    public Configuration build ()
+    public MarkdownConfiguration build ()
     {
-      return new Configuration (m_bSafeMode,
-                                m_aEncoding,
-                                m_aDecorator,
-                                m_aCodeBlockEmitter,
-                                m_bForceExtendedProfile,
-                                m_bConvertNewline2Br,
-                                m_aSpecialLinkEmitter,
-                                m_aPlugins);
+      return new MarkdownConfiguration (m_bSafeMode,
+                                        m_aEncoding,
+                                        m_aDecorator,
+                                        m_aCodeBlockEmitter,
+                                        m_bForceExtendedProfile,
+                                        m_bConvertNewline2Br,
+                                        m_aSpecialLinkEmitter,
+                                        m_aPlugins);
     }
   }
 }

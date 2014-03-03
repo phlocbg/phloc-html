@@ -55,6 +55,7 @@ package com.phloc.html.markdown;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -102,11 +103,11 @@ public class MarkdownTest
   }
 
   @Test
-  public void runTest ()
+  public void runTest () throws IOException
   {
     final String testText = _slurp (m_sDir + File.separator + m_sTest + ".text");
     final String htmlText = _slurp (m_sDir + File.separator + m_sTest + ".html");
-    final String markdownText = Processor.process (testText);
+    final String markdownText = new MarkdownProcessor (testText, MarkdownConfiguration.DEFAULT).processToString ();
     assertEquals (m_sTest, htmlText.trim (), markdownText.trim ());
   }
 }
