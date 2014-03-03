@@ -289,9 +289,9 @@ final class Emitter
       final LinkRef lr = m_aLinkRefs.get (name.toLowerCase (Locale.US));
       if (lr == null)
         return -1;
-      isAbbrev = lr.m_bIsAbbrev;
-      link = lr.m_sLink;
-      comment = lr.m_sTitle;
+      isAbbrev = lr.isAbbrev ();
+      link = lr.getLink ();
+      comment = lr.getTitle ();
       pos = oldPos;
     }
     else
@@ -342,24 +342,19 @@ final class Emitter
           final LinkRef lr = m_aLinkRefs.get (id.toLowerCase (Locale.US));
           if (lr != null)
           {
-            link = lr.m_sLink;
-            comment = lr.m_sTitle;
+            link = lr.getLink ();
+            comment = lr.getTitle ();
           }
         }
         else
         {
           final LinkRef lr = m_aLinkRefs.get (name.toLowerCase (Locale.US));
-          if (lr != null)
-          {
-            isAbbrev = lr.m_bIsAbbrev;
-            link = lr.m_sLink;
-            comment = lr.m_sTitle;
-            pos = oldPos;
-          }
-          else
-          {
+          if (lr == null)
             return -1;
-          }
+          isAbbrev = lr.isAbbrev ();
+          link = lr.getLink ();
+          comment = lr.getTitle ();
+          pos = oldPos;
         }
 
     if (link == null)
