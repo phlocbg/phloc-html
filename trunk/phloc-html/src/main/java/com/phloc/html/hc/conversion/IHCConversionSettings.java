@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 
 import com.phloc.commons.ICloneable;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.html.EHTMLVersion;
 
 /**
@@ -32,12 +31,6 @@ import com.phloc.html.EHTMLVersion;
  */
 public interface IHCConversionSettings extends IHCConversionSettingsToNode, ICloneable <IHCConversionSettings>
 {
-  /**
-   * @return The XML writer settings to be used. Never <code>null</code>.
-   */
-  @Nonnull
-  IXMLWriterSettings getXMLWriterSettings ();
-
   /**
    * Get a clone of this settings, but with a different HTML version.
    * 

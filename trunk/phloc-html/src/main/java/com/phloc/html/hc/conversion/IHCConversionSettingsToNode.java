@@ -20,6 +20,7 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.css.ICSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.IHCCustomizer;
@@ -44,6 +45,12 @@ public interface IHCConversionSettingsToNode
    */
   @Nullable
   String getHTMLNamespaceURI ();
+
+  /**
+   * @return The XML writer settings to be used. Never <code>null</code>.
+   */
+  @Nonnull
+  IXMLWriterSettings getXMLWriterSettings ();
 
   /**
    * @return The CSS writer settings to be used. Never <code>null</code>.

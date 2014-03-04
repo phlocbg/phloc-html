@@ -75,9 +75,10 @@ public abstract class AbstractHCForm <IMPLTYPE extends AbstractHCForm <IMPLTYPE>
     setAction (sAction);
   }
 
-  public AbstractHCForm (@Nonnull final ISimpleURL aAction)
+  public AbstractHCForm (@Nullable final ISimpleURL aAction)
   {
-    this (aAction.getAsString ());
+    this ();
+    setAction (aAction);
   }
 
   public AbstractHCForm (@Nullable final IJSStatement aAction)
@@ -96,6 +97,12 @@ public abstract class AbstractHCForm <IMPLTYPE extends AbstractHCForm <IMPLTYPE>
   public final IJSCodeProvider getActionJS ()
   {
     return m_aAction;
+  }
+
+  @Nonnull
+  public final IMPLTYPE setAction (@Nullable final ISimpleURL aAction)
+  {
+    return setAction (aAction == null ? null : aAction.getAsString ());
   }
 
   @Nonnull
