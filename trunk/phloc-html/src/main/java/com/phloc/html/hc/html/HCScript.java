@@ -29,11 +29,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.js.IJSCodeProvider;
@@ -105,16 +108,21 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   /** By default place inline JS after script files */
   public static final boolean DEFAULT_EMIT_AFTER_FILES = true;
 
+  public static final String DEFAULT_LINE_SEPARATOR = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
+
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCScript.class);
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
 
   @GuardedBy ("s_aRWLock")
   private static EMode s_eDefaultMode = DEFAULT_MODE;
+  @GuardedBy ("s_aRWLock")
+  private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
 
   private IJSCodeProvider m_aProvider;
   private String m_sJSCode;
   private EMode m_eMode;
   private boolean m_bEmitAfterFiles = DEFAULT_EMIT_AFTER_FILES;
+  private String m_sLineSeparator = s_sDefaultLineSeparator;
 
   public HCScript ()
   {
@@ -212,9 +220,26 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     return this;
   }
 
+  @Nonnull
+  @Nonempty
+  public String getLineSeparator ()
+  {
+    return m_sLineSeparator;
+  }
+
+  @Nonnull
+  public HCScript setLineSeparator (@Nonnull @Nonempty final String sLineSeparator)
+  {
+    if (StringHelper.hasNoText (sLineSeparator))
+      throw new IllegalArgumentException ("lineSeparator");
+    m_sLineSeparator = sLineSeparator;
+    return this;
+  }
+
   public static void setInlineScript (@Nonnull final IMicroNodeWithChildren aElement,
                                       @Nullable final String sContent,
-                                      @Nonnull final EMode eMode)
+                                      @Nonnull final EMode eMode,
+                                      @Nonnull final String sLineSeparator)
   {
     if (StringHelper.hasText (sContent))
       switch (eMode)
@@ -229,9 +254,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
           break;
         case PLAIN_TEXT_WRAPPED_IN_COMMENT:
           if (StringHelper.getLastChar (sContent) == '\n')
-            aElement.appendComment ("\n" + sContent + "//");
+            aElement.appendComment (sLineSeparator + sContent + "//");
           else
-            aElement.appendComment ("\n" + sContent + "\n//");
+            aElement.appendComment (sLineSeparator + sContent + sLineSeparator + "//");
           break;
         case CDATA:
           aElement.appendCDATA (sContent);
@@ -239,9 +264,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
         case CDATA_IN_COMMENT:
           aElement.appendText ("//");
           if (StringHelper.getLastChar (sContent) == '\n')
-            aElement.appendCDATA ("\n" + sContent + "//");
+            aElement.appendCDATA (sLineSeparator + sContent + "//");
           else
-            aElement.appendCDATA ("\n" + sContent + "\n//");
+            aElement.appendCDATA (sLineSeparator + sContent + sLineSeparator + "//");
           break;
         default:
           throw new IllegalArgumentException ("Illegal mode: " + eMode);
@@ -262,7 +287,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     super.applyProperties (aElement, aConversionSettings);
 
     // m_sJSCode is set in canConvertToNode which is called before this method!
-    setInlineScript (aElement, m_sJSCode, m_eMode);
+    setInlineScript (aElement, m_sJSCode, m_eMode, m_sLineSeparator);
   }
 
   @Override
@@ -273,31 +298,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
                             .append ("jsCode", m_sJSCode)
                             .append ("mode", m_eMode)
                             .append ("emitAfterFiles", m_bEmitAfterFiles)
+                            .append ("lineSeparator",
+                                     StringHelper.getHexEncoded (m_sLineSeparator, CCharset.CHARSET_ISO_8859_1_OBJ))
                             .toString ();
-  }
-
-  /**
-   * Set how the content of script elements should be emitted. This only affects
-   * new built objects, and does not alter existing objects! The default mode is
-   * {@link #DEFAULT_MODE}.
-   * 
-   * @param eMode
-   *        The new masking mode to set. May not be <code>null</code>.
-   */
-  public static void setDefaultMode (@Nonnull final EMode eMode)
-  {
-    if (eMode == null)
-      throw new NullPointerException ("mode");
-    s_aRWLock.writeLock ().lock ();
-    try
-    {
-      s_eDefaultMode = eMode;
-    }
-    finally
-    {
-      s_aRWLock.writeLock ().unlock ();
-    }
-    s_aLogger.info ("Default <script> mode set to " + eMode);
   }
 
   /**
@@ -315,6 +318,62 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     finally
     {
       s_aRWLock.readLock ().unlock ();
+    }
+  }
+
+  /**
+   * Set how the content of script elements should be emitted. This only affects
+   * new built objects, and does not alter existing objects! The default mode is
+   * {@link #DEFAULT_MODE}.
+   * 
+   * @param eMode
+   *        The new masking mode to set. May not be <code>null</code>.
+   */
+  public static void setDefaultMode (@Nonnull final EMode eMode)
+  {
+    if (eMode == null)
+      throw new NullPointerException ("mode");
+
+    s_aRWLock.writeLock ().lock ();
+    try
+    {
+      s_eDefaultMode = eMode;
+    }
+    finally
+    {
+      s_aRWLock.writeLock ().unlock ();
+    }
+    s_aLogger.info ("Default <script> mode set to " + eMode);
+  }
+
+  @Nonnull
+  @Nonempty
+  public static String getDefaultLineSeparator ()
+  {
+    s_aRWLock.readLock ().lock ();
+    try
+    {
+      return s_sDefaultLineSeparator;
+    }
+    finally
+    {
+      s_aRWLock.readLock ().unlock ();
+    }
+  }
+
+  public static void setDefaultLineSeparator (@Nonnull @Nonempty final String sDefaultLineSeparator)
+  {
+    if (StringHelper.hasNoText (sDefaultLineSeparator))
+      throw new IllegalArgumentException ("defaultLineSeparator");
+
+    s_aRWLock.writeLock ().lock ();
+    try
+    {
+      s_sDefaultLineSeparator = sDefaultLineSeparator;
+    }
+    finally
+    {
+      s_aRWLock.writeLock ().unlock ();
     }
   }
 }
