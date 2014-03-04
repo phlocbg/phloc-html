@@ -349,7 +349,7 @@ public final class HCSpecialNodeHandler
     }
 
     // Apply all modifiers
-    List <IHCNode> ret = ContainerHelper.newList (aNodes);
+    List <? extends IHCNode> ret = ContainerHelper.newList (aNodes);
     for (final Class <? extends IHCSpecialNodeListModifier> aModifierClass : aModifiersToApply)
     {
       final IHCSpecialNodeListModifier aModifier = s_aModifiers.get (aModifierClass.getName ());
