@@ -49,21 +49,35 @@ public class HCSpecialNodeHandlerTest
     aHtml.getHead ().addJS (new MockScript ("var x=0;"));
     aHtml.getHead ().addJS (new MockScript ("var y=0;"));
     aHtml.getBody ().addChild (new HCH1 ().addChild ("root"));
-    assertEquals ("<!DOCTYPE html>\r\n"
-                      + "<html dir=\"ltr\">\r\n"
-                      + "<head>\r\n"
-                      + "<title>Test</title>\r\n"
-                      + "</head>\r\n"
-                      + "<body>\r\n"
-                      + "<h1>root</h1>\r\n"
-                      + "<script type=\"text/javascript\">\r\n"
-                      + "<!--\r\n"
-                      + "var y=0;\r\n"
-                      + "//-->\r\n"
-                      + "</script>\r\n"
-                      + "</body>\r\n"
-                      + "</html>\r\n"
-                      + "",
+    final String sCRLF = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
+    assertEquals ("<!DOCTYPE html>" +
+                      sCRLF +
+                      "<html dir=\"ltr\">" +
+                      sCRLF +
+                      "<head>" +
+                      sCRLF +
+                      "<title>Test</title>" +
+                      sCRLF +
+                      "</head>" +
+                      sCRLF +
+                      "<body>" +
+                      sCRLF +
+                      "<h1>root</h1>" +
+                      sCRLF +
+                      "<script type=\"text/javascript\">" +
+                      sCRLF +
+                      "<!--" +
+                      sCRLF +
+                      "var y=0;" +
+                      sCRLF +
+                      "//-->" +
+                      sCRLF +
+                      "</script>" +
+                      sCRLF +
+                      "</body>" +
+                      sCRLF +
+                      "</html>" +
+                      sCRLF,
                   aHtml.getAsHTMLString (new HCConversionSettings (EHTMLVersion.HTML5).setXMLWriterSettings (new XMLWriterSettings ().setEmitNamespaces (false)
                                                                                                                                      .setFormat (EXMLSerializeFormat.HTML)
                                                                                                                                      .setIndent (EXMLSerializeIndent.ALIGN_ONLY))));
