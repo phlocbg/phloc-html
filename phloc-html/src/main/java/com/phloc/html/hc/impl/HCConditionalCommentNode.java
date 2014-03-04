@@ -28,6 +28,7 @@ import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
@@ -111,9 +112,14 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
 
   @Nonnull
   @Nonempty
-  private String _getCommentText (@Nonnull final IMicroNode aNode)
+  private String _getCommentText (@Nonnull final IMicroNode aNode, @Nonnull final IXMLWriterSettings aXMLWriterSettings)
   {
-    return '[' + m_sCondition + "]>" + m_sLineSeparator + MicroWriter.getXMLString (aNode) + "<![endif]";
+    return '[' +
+           m_sCondition +
+           "]>" +
+           m_sLineSeparator +
+           MicroWriter.getNodeAsString (aNode, aXMLWriterSettings) +
+           "<![endif]";
   }
 
   /**
@@ -127,7 +133,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public HCCommentNode getCommentNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroNode aWrappedMicroNode = m_aWrappedNode.convertToNode (aConversionSettings);
-    return new HCCommentNode (_getCommentText (aWrappedMicroNode));
+    return new HCCommentNode (_getCommentText (aWrappedMicroNode, aConversionSettings.getXMLWriterSettings ()));
   }
 
   @Override
