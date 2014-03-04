@@ -65,26 +65,31 @@ public final class HCHtmlTest
     aHtml.getBody ().addChild (new HCH1 ().addChild ("Test"));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("a=b;")));
     aHtml.getBody ().addChild (new HCScriptOnDocumentReady (new UnparsedJSCodeProvider ("c=d;")));
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
-                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
-                      + "<head><meta name=\"foo\" content=\"bar\" /></head>"
-                      + "<body><h1>Test</h1>"
-                      + "<script type=\"text/javascript\"><!--\n"
-                      + "$(document).ready(function(){a=b;c=d;});\n"
-                      + "//--></script>"
-                      + "</body>"
-                      + "</html>",
+    final String sCRLF = HCScript.getDefaultLineSeparator ();
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
+                      "<body><h1>Test</h1>" +
+                      "<script type=\"text/javascript\"><!--" +
+                      sCRLF +
+                      "$(document).ready(function(){a=b;c=d;});" +
+                      sCRLF +
+                      "//--></script>" +
+                      "</body>" +
+                      "</html>",
                   aHtml.getAsHTMLString (aCS));
     // Do it again and check for node consistency
-    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
-                      + "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">"
-                      + "<head><meta name=\"foo\" content=\"bar\" /></head>"
-                      + "<body><h1>Test</h1>"
-                      + "<script type=\"text/javascript\"><!--\n"
-                      + "$(document).ready(function(){a=b;c=d;});\n"
-                      + "//--></script>"
-                      + "</body>"
-                      + "</html>",
+    assertEquals ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+                      "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                      "<head><meta name=\"foo\" content=\"bar\" /></head>" +
+                      "<body><h1>Test</h1>" +
+                      "<script type=\"text/javascript\"><!--" +
+                      sCRLF +
+                      "$(document).ready(function(){a=b;c=d;});" +
+                      sCRLF +
+                      "//--></script>" +
+                      "</body>" +
+                      "</html>",
                   aHtml.getAsHTMLString (aCS));
   }
 }

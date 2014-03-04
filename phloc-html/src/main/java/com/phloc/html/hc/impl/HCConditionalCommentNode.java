@@ -17,8 +17,12 @@
  */
 package com.phloc.html.hc.impl;
 
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.annotations.Nonempty;
@@ -48,11 +52,15 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public class HCConditionalCommentNode extends AbstractHCWrappingNode
 {
   public static final String DEFAULT_LINE_SEPARATOR = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
+
+  private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
+
+  @GuardedBy ("s_aRWLock")
   private static String s_sDefaultLineSeparator = DEFAULT_LINE_SEPARATOR;
 
   private String m_sCondition;
   private final IHCNode m_aWrappedNode;
-  private String m_sLineSeparator = s_sDefaultLineSeparator;
+  private String m_sLineSeparator = getDefaultLineSeparator ();
 
   public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCNode aWrappedNode)
   {
@@ -158,14 +166,31 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   @Nonempty
   public static String getDefaultLineSeparator ()
   {
-    return s_sDefaultLineSeparator;
+    s_aRWLock.readLock ().lock ();
+    try
+    {
+      return s_sDefaultLineSeparator;
+    }
+    finally
+    {
+      s_aRWLock.readLock ().unlock ();
+    }
   }
 
   public static void setDefaultLineSeparator (@Nonnull @Nonempty final String sDefaultLineSeparator)
   {
     if (StringHelper.hasNoText (sDefaultLineSeparator))
       throw new IllegalArgumentException ("defaultLineSeparator");
-    s_sDefaultLineSeparator = sDefaultLineSeparator;
+
+    s_aRWLock.writeLock ().lock ();
+    try
+    {
+      s_sDefaultLineSeparator = sDefaultLineSeparator;
+    }
+    finally
+    {
+      s_aRWLock.writeLock ().unlock ();
+    }
   }
 
   @Nonnull
