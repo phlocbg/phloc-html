@@ -37,9 +37,11 @@ public final class HCConditionalCommentNodeTest
     HCConditionalCommentNode.setDefaultLineSeparator ("\n");
     assertEquals ("<!--[if IE]>\nabc<![endif]-->",
                   HCSettings.getAsHTMLString (HCConditionalCommentNode.createForIE (new HCTextNode ("abc")), false));
-    HCConditionalCommentNode.setDefaultLineSeparator ("\n");
     assertEquals ("<!--[if IE]>\n" + "<b xmlns=\"http://www.w3.org/1999/xhtml\">bold</b>" + "<![endif]-->",
                   HCSettings.getAsHTMLString (HCConditionalCommentNode.createForIE (new HCB ().addChild ("bold")),
                                               false));
+    assertEquals ("<!--[if IE]>\n" + "<b>bold</b>" + "<![endif]-->",
+                  HCSettings.getAsHTMLStringWithoutNamespaces (HCConditionalCommentNode.createForIE (new HCB ().addChild ("bold")),
+                                                               false));
   }
 }
