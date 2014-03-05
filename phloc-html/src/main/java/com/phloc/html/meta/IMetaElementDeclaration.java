@@ -17,6 +17,8 @@
  */
 package com.phloc.html.meta;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 
 import com.phloc.commons.name.IHasName;
@@ -26,7 +28,7 @@ import com.phloc.commons.name.IHasName;
  * 
  * @author Philip Helger
  */
-public interface IMetaElementDeclaration extends IHasName
+public interface IMetaElementDeclaration extends IHasName, Serializable
 {
   /**
    * Get the optional metatag scheme.

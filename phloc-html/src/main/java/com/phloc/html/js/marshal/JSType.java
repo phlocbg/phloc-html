@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.marshal;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -34,7 +36,7 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 @Immutable
 @MustImplementEqualsAndHashcode
-public class JSType
+public class JSType implements Serializable
 {
   /**
    * Special JS type for type auto detection - in this case {@link #getType()}

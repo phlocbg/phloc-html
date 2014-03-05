@@ -17,6 +17,8 @@
  */
 package com.phloc.html.resource.js;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
@@ -28,7 +30,7 @@ import com.phloc.commons.annotations.Nonempty;
  * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
-public interface IJSPathProvider
+public interface IJSPathProvider extends Serializable
 {
   /**
    * Get the path to this JavaScript resource. It is always classpath relative.
