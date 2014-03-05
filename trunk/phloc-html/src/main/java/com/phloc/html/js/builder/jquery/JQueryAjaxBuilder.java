@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.builder.jquery;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -31,7 +33,7 @@ import com.phloc.html.js.builder.JSExpr;
  * 
  * @author Philip Helger
  */
-public class JQueryAjaxBuilder
+public class JQueryAjaxBuilder implements Serializable
 {
   /** By default asynchronous AJAX is enabled */
   public static final boolean DEFAULT_ASYNC = true;

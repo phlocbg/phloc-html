@@ -17,6 +17,8 @@
  */
 package com.phloc.html.resource.css;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 
 import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
@@ -28,7 +30,7 @@ import com.phloc.commons.annotations.Nonempty;
  * @author Philip Helger
  */
 @MustImplementEqualsAndHashcode
-public interface ICSSPathProvider
+public interface ICSSPathProvider extends Serializable
 {
   /**
    * @param bRegular

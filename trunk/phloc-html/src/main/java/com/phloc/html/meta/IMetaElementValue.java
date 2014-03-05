@@ -17,6 +17,7 @@
  */
 package com.phloc.html.meta;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
@@ -29,7 +30,7 @@ import com.phloc.commons.name.IHasName;
  * 
  * @author Philip Helger
  */
-public interface IMetaElementValue extends IHasName
+public interface IMetaElementValue extends IHasName, Serializable
 {
   /**
    * @return The content of the meta tag. May not be <code>null</code>.

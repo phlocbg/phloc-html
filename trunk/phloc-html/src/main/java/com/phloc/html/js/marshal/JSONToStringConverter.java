@@ -17,6 +17,8 @@
  */
 package com.phloc.html.js.marshal;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -32,7 +34,7 @@ import com.phloc.json.IJSON;
  * @author Philip Helger
  */
 @Immutable
-public final class JSONToStringConverter implements IJSToStringConverter
+public final class JSONToStringConverter implements IJSToStringConverter, Serializable
 {
   @Nullable
   public String objectToJSString (@Nullable final Object aObject, @Nonnull final JSType aType)
