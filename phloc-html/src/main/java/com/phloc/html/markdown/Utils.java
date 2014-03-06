@@ -489,6 +489,13 @@ final class Utils
             aSB.append ('/');
           aSB.append (temp);
         }
+        else
+        {
+          aSB.append ('<');
+          if (bIsCloseTag)
+            aSB.append ('/');
+          aSB.append (temp);
+        }
       }
       else
       {
