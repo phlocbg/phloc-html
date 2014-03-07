@@ -132,6 +132,12 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
     return this;
   }
 
+  @Nonnull
+  public HCLink setHref (@Nullable final String sHref)
+  {
+    return setHref (sHref == null ? null : new SimpleURL (sHref));
+  }
+
   @Nullable
   public String getHrefLang ()
   {
