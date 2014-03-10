@@ -52,6 +52,13 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public class HCConditionalCommentNode extends AbstractHCWrappingNode
 {
   public static final String DEFAULT_LINE_SEPARATOR = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
+  public static final Version IE5 = new Version (5);
+  public static final Version IE6 = new Version (6);
+  public static final Version IE7 = new Version (7);
+  public static final Version IE8 = new Version (8);
+  public static final Version IE9 = new Version (9);
+  public static final Version IE10 = new Version (10);
+  public static final Version IE11 = new Version (11);
 
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
 
@@ -209,6 +216,48 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   }
 
   @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion5 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE5, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion6 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE6, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion7 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE7, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion8 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE8, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion9 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE9, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion10 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE10, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEExactVersion11 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEExactVersion (IE11, aWrappedNode);
+  }
+
+  @Nonnull
   public static HCConditionalCommentNode createForIENotVersion (@Nonnull final Version aVersion,
                                                                 @Nonnull final IHCNode aWrappedNode)
   {
@@ -227,12 +276,96 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   }
 
   @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion5 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE5, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion6 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE6, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion7 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE7, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion8 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE8, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion9 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE9, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion10 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE10, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerThanVersion11 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerThanVersion (IE11, aWrappedNode);
+  }
+
+  @Nonnull
   public static HCConditionalCommentNode createForIELowerOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                              @Nonnull final IHCNode aWrappedNode)
   {
     if (aVersion == null)
       throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if lte IE " + aVersion.getAsString (), aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion5 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE5, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion6 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE6, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion7 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE7, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion8 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE8, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion9 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE9, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion10 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE10, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIELowerOrEqualThanVersion11 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIELowerOrEqualThanVersion (IE11, aWrappedNode);
   }
 
   @Nonnull
