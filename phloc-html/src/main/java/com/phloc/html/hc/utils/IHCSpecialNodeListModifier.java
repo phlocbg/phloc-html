@@ -35,5 +35,5 @@ public interface IHCSpecialNodeListModifier
    */
   @Nonnull
   @ReturnsMutableCopy
-  List <? extends IHCNode> modifySpecialNodes (@Nonnull Iterable <? extends IHCNode> aNodes);
+  List <? extends IHCNode> modifySpecialNodes (@Nonnull List <? extends IHCNode> aNodes);
 }
