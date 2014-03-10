@@ -162,8 +162,26 @@ public final class XHTMLParser
   @Nullable
   public static IMicroContainer unescapeXHTML (@Nullable final String sXHTML)
   {
+    return unescapeXHTML (EHTMLVersion.DEFAULT, sXHTML);
+  }
+
+  /**
+   * Interpret the passed XHTML fragment as HTML and retrieve a result container
+   * with all body elements.
+   * 
+   * @param eHTMLVersion
+   *        The HTML version to be used for parsing. May not be
+   *        <code>null</code>.
+   * @param sXHTML
+   *        The XHTML text fragment.
+   * @return <code>null</code> if the passed text could not be interpreted as
+   *         XHTML.
+   */
+  @Nullable
+  public static IMicroContainer unescapeXHTML (@Nonnull final EHTMLVersion eHTMLVersion, @Nullable final String sXHTML)
+  {
     // Ensure that the content is surrounded by a single tag
-    final IMicroDocument aDoc = parseXHTMLFragment (sXHTML);
+    final IMicroDocument aDoc = parseXHTMLFragment (eHTMLVersion, sXHTML);
     if (aDoc != null && aDoc.getDocumentElement () != null)
     {
       // Find body case insensitive
