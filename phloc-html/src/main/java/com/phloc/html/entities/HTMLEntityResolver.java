@@ -29,7 +29,7 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.annotations.ReturnsImmutableObject;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.io.resource.ClassPathResource;
 import com.phloc.commons.io.streams.StreamUtils;
@@ -117,10 +117,10 @@ public final class HTMLEntityResolver implements EntityResolver
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Set <String> getAllPublicIds ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aResolveMap.keySet ());
+    return ContainerHelper.newSet (m_aResolveMap.keySet ());
   }
 
   @Nullable
