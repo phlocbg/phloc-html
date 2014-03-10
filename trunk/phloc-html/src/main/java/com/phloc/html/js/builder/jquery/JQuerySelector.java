@@ -178,6 +178,237 @@ public final class JQuerySelector implements IJQuerySelector
   }
 
   @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector animated ()
+  {
+    return chain (this, animated);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector button ()
+  {
+    return chain (this, button);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector checkbox ()
+  {
+    return chain (this, checkbox);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector checked ()
+  {
+    return chain (this, checked);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector disabled ()
+  {
+    return chain (this, disabled);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector empty ()
+  {
+    return chain (this, empty);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector enabled ()
+  {
+    return chain (this, enabled);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector even ()
+  {
+    return chain (this, even);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector file ()
+  {
+    return chain (this, file);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector first ()
+  {
+    return chain (this, first);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector first_child ()
+  {
+    return chain (this, first_child);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector first_of_type ()
+  {
+    return chain (this, first_of_type);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector focus ()
+  {
+    return chain (this, focus);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector header ()
+  {
+    return chain (this, header);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector hidden ()
+  {
+    return chain (this, hidden);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector image ()
+  {
+    return chain (this, image);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector input ()
+  {
+    return chain (this, input);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector last ()
+  {
+    return chain (this, last);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector last_child ()
+  {
+    return chain (this, last_child);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector last_of_type ()
+  {
+    return chain (this, last_of_type);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector odd ()
+  {
+    return chain (this, odd);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector only_child ()
+  {
+    return chain (this, only_child);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector only_of_type ()
+  {
+    return chain (this, only_of_type);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector parent ()
+  {
+    return chain (this, parent);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector password ()
+  {
+    return chain (this, password);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector radio ()
+  {
+    return chain (this, radio);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector reset ()
+  {
+    return chain (this, reset);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector root ()
+  {
+    return chain (this, root);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector selected ()
+  {
+    return chain (this, selected);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector submit ()
+  {
+    return chain (this, submit);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector target ()
+  {
+    return chain (this, target);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector text ()
+  {
+    return chain (this, text);
+  }
+
+  @Nonnull
+  @CheckReturnValue
+  public IJQuerySelector visible ()
+  {
+    return chain (this, visible);
+  }
+
+  @Nonnull
   public JQueryInvocation invoke ()
   {
     return JQuery.jQuery (getExpression ());

@@ -39,7 +39,7 @@ public class HCSpecialNodeHandlerTest
 {
   public static final class MockSpecialNodeListHandler implements IHCSpecialNodeListModifier
   {
-    public List <? extends IHCNode> modifySpecialNodes (final Iterable <? extends IHCNode> aNodes)
+    public List <? extends IHCNode> modifySpecialNodes (final List <? extends IHCNode> aNodes)
     {
       final List <IHCNode> ret = ContainerHelper.newList (aNodes);
       if (!ret.isEmpty ())
