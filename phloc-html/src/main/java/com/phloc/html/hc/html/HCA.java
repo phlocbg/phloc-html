@@ -95,6 +95,12 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     return this;
   }
 
+  @Nonnull
+  public HCA setTargetBlank ()
+  {
+    return setTarget (HCA_Target.BLANK);
+  }
+
   @Nullable
   public String getName ()
   {
