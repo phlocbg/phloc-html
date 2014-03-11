@@ -20,6 +20,17 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2014-03-11" version="4.0.1" />
+  <entry date="2014-03-10" category="api" action="add" >
+    <change>
+      <text locale="en">Extended HCConditionalCommentNode with IE specific version</text>
+    </change>
+  </entry>
+  <entry date="2014-03-06" category="tech" action="fix" >
+    <change>
+      <text locale="en">Fixed error in markdown processor when safe mode is used</text>
+    </change>
+  </entry>
   <release date="2014-03-05" version="4.0.0" />
   <entry date="2014-03-03" category="feature" action="add" >
     <change>
