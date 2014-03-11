@@ -378,12 +378,96 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   }
 
   @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion5 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE5, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion6 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE6, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion7 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE7, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion8 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE8, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion9 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE9, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion10 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE10, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterThanVersion11 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterThanVersion (IE11, aWrappedNode);
+  }
+
+  @Nonnull
   public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                                @Nonnull final IHCNode aWrappedNode)
   {
     if (aVersion == null)
       throw new NullPointerException ("Version");
     return new HCConditionalCommentNode ("if gte IE " + aVersion.getAsString (), aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion5 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE5, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion6 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE6, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion7 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE7, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion8 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE8, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion9 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE9, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion10 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE10, aWrappedNode);
+  }
+
+  @Nonnull
+  public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion11 (@Nonnull final IHCNode aWrappedNode)
+  {
+    return createForIEGreaterOrEqualThanVersion (IE11, aWrappedNode);
   }
 
   @Nullable
