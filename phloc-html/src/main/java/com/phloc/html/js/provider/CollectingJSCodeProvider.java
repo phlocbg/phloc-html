@@ -176,6 +176,6 @@ public final class CollectingJSCodeProvider implements IJSCodeProvider, IHasSize
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("list", m_aList).toString ();
+    return new ToStringGenerator (this).appendIfNotEmpty ("list", m_aList).toString ();
   }
 }
