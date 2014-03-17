@@ -205,9 +205,9 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("cssFiles", m_aExternalCSSs)
+    return new ToStringGenerator (this).appendIfNotEmpty ("cssFiles", m_aExternalCSSs)
                                        .append ("inlineCSS", m_aInlineCSS)
-                                       .append ("jsFiles", m_aExternalJSs)
+                                       .appendIfNotEmpty ("jsFiles", m_aExternalJSs)
                                        .append ("inlineJS", m_aInlineJS)
                                        .toString ();
   }
