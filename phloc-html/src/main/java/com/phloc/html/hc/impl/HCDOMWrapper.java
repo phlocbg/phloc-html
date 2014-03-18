@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.EMicroNodeType;
 import com.phloc.commons.microdom.IMicroCDATA;
 import com.phloc.commons.microdom.IMicroNode;
@@ -46,8 +47,9 @@ public class HCDOMWrapper extends AbstractHCNode
    */
   public HCDOMWrapper (@Nonnull final IMicroNode aNode)
   {
-    if (aNode == null)
-      throw new NullPointerException ("node");
+    ValueEnforcer.notNull (aNode, "Node");
+    if (aNode.hasParent ())
+      throw new IllegalArgumentException ("Passed MicroNode may not have a parent!");
     m_aNode = aNode;
   }
 
@@ -64,7 +66,10 @@ public class HCDOMWrapper extends AbstractHCNode
   @Nonnull
   protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    return m_aNode;
+    // Always return a clone, because otherwise upon first generation the node
+    // will be assigned a parent, and upon second generation an exception is
+    // thrown, because a parent is already present!
+    return m_aNode.getClone ();
   }
 
   @Override
