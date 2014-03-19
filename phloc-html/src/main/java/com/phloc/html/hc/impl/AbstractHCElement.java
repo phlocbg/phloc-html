@@ -45,6 +45,7 @@ import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.impl.MicroElement;
+import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
@@ -157,10 +158,18 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
   }
 
   @Nonnull
-  public final THISTYPE setID (final String sID)
+  public final THISTYPE setID (@Nullable final String sID)
   {
-    // RegEx check: !CXMLRegEx.PATTERN_NCNAME.matcher (sID).matches ()
-    // Happens to often, since "[" and "]" occur very often and are not allowed
+    if (StringHelper.hasText (sID))
+    {
+      // RegEx check: !CXMLRegEx.PATTERN_NCNAME.matcher (sID).matches ()
+      // Happens to often, since "[" and "]" occur very often and are not
+      // allowed
+
+      // Check if a whitespace is contained
+      if (RegExHelper.stringMatchesPattern (".*\\s.*", sID))
+        throw new IllegalArgumentException ("ID '" + sID + "' may not contains whitespace chars!");
+    }
     m_sID = sID;
     return thisAsT ();
   }
