@@ -20,6 +20,17 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2014-03-19" version="4.0.2" />
+  <entry date="2014-03-18" category="tech" action="add" >
+    <change>
+      <text locale="en">Added check that element IDs never contain whitespaces</text>
+    </change>
+  </entry>
+  <entry date="2014-03-18" category="tech" action="add" >
+    <change>
+      <text locale="en">HCDOMWrapper now always returns a clone of the contained MicroNode to avoiding troubles because the node already has a parent</text>
+    </change>
+  </entry>
   <release date="2014-03-11" version="4.0.1" />
   <entry date="2014-03-10" category="api" action="add" >
     <change>

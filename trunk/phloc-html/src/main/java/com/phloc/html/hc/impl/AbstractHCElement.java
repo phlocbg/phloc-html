@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -120,9 +121,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   protected AbstractHCElement (@Nonnull final EHTMLElement eElement)
   {
-    if (eElement == null)
-      throw new NullPointerException ("element");
-    m_eElement = eElement;
+    m_eElement = ValueEnforcer.notNull (eElement, "Element");
     m_sElementName = eElement.getElementNameLowerCase ();
   }
 
