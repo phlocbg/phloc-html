@@ -19,11 +19,14 @@ package com.phloc.html.hc.conversion;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.xml.serialize.IXMLWriterSettings;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
  * Provider interface for {@link HCConversionSettings} objects.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHCConversionSettingsProvider
@@ -36,11 +39,26 @@ public interface IHCConversionSettingsProvider
 
   /**
    * Get the conversion settings.
-   * 
+   *
    * @param bIndentAndAlign
    *        Should the output be indented and aligned (pretty printed)?
    * @return The non-<code>null</code> conversion settings object.
    */
   @Nonnull
   IHCConversionSettings getConversionSettings (boolean bIndentAndAlign);
+
+  @Nonnull
+  IHCConversionSettingsProvider setXMLWriterSettings (@Nonnull IXMLWriterSettings aXMLWriterSettings);
+
+  @Nonnull
+  IHCConversionSettingsProvider setCSSWriterSettings (@Nonnull CSSWriterSettings aCSSWriterSettings);
+
+  @Nonnull
+  IHCConversionSettingsProvider setConsistencyChecksEnabled (boolean bConsistencyChecksEnabled);
+
+  @Nonnull
+  IHCConversionSettingsProvider setExtractOutOfBandNodes (boolean bExtractOutOfBandNodes);
+
+  @Nonnull
+  IHCConversionSettingsProvider setCustomizer (@Nonnull IHCCustomizer aCustomizer);
 }

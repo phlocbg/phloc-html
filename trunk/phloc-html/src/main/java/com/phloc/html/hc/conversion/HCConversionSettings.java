@@ -21,8 +21,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
 import com.phloc.commons.xml.serialize.EXMLSerializeFormat;
+import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ECSSVersion;
@@ -57,7 +61,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Constructor
-   * 
+   *
    * @param eHTMLVersion
    *        The HTML version to use. May not be <code>null</code>.
    */
@@ -67,7 +71,10 @@ public class HCConversionSettings implements IHCConversionSettings
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
     m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
-    m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML);
+    m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML)
+                                                   .setIncorrectCharacterHandling (EXMLIncorrectCharacterHandling.DO_NOT_WRITE_LOG_WARNING)
+                                                   .setIndent (DEFAULT_INDENT_AND_ALIGN_HTML ? EXMLSerializeIndent.INDENT_AND_ALIGN
+                                                                                            : EXMLSerializeIndent.NONE);
     m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION, !DEFAULT_INDENT_AND_ALIGN_CSS);
     m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
     m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
@@ -77,7 +84,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Copy ctor. Also creates a copy of the {@link XMLWriterSettings} and the
    * {@link CSSWriterSettings}.
-   * 
+   *
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    */
@@ -89,7 +96,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Kind of copy ctor. Also creates a copy of the {@link XMLWriterSettings} and
    * the {@link CSSWriterSettings}.
-   * 
+   *
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    * @param eHTMLVersion
@@ -125,7 +132,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the XML writer settings to be used. By default values equivalent to
    * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used.
-   * 
+   *
    * @param aXMLWriterSettings
    *        The XML writer settings to be used. May not be <code>null</code>.
    * @return this
@@ -141,14 +148,22 @@ public class HCConversionSettings implements IHCConversionSettings
   }
 
   @Nonnull
+  @ReturnsMutableObject (reason = "Design")
   public XMLWriterSettings getXMLWriterSettings ()
   {
     return m_aXMLWriterSettings;
   }
 
+  @Nonnull
+  @ReturnsMutableCopy
+  public XMLWriterSettings getMutableXMLWriterSettings ()
+  {
+    return m_aXMLWriterSettings.getClone ();
+  }
+
   /**
    * Set the CSS writer settings to be used.
-   * 
+   *
    * @param aCSSWriterSettings
    *        The settings. May not be <code>null</code>.
    * @return this
@@ -163,15 +178,23 @@ public class HCConversionSettings implements IHCConversionSettings
   }
 
   @Nonnull
+  @ReturnsMutableObject (reason = "Design")
   public CSSWriterSettings getCSSWriterSettings ()
   {
     return m_aCSSWriterSettings;
   }
 
+  @Nonnull
+  @ReturnsMutableCopy
+  public CSSWriterSettings getMutableCSSWriterSettings ()
+  {
+    return new CSSWriterSettings (m_aCSSWriterSettings);
+  }
+
   /**
    * Enable or disable the consistency checks. It is recommended that the
    * consistency checks are only run in debug mode!
-   * 
+   *
    * @param bConsistencyChecksEnabled
    *        The new value.
    * @return this
@@ -190,7 +213,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Enable or disable the extraction of out-of-band nodes.
-   * 
+   *
    * @param bExtractOutOfBandNodes
    *        The new value.
    * @return this
@@ -210,7 +233,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the global customizer to be used to globally customize created
    * elements.
-   * 
+   *
    * @param aCustomizer
    *        The customizer to be used. May not be <code>null</code>.
    * @return this
@@ -252,11 +275,11 @@ public class HCConversionSettings implements IHCConversionSettings
   public String toString ()
   {
     return new ToStringGenerator (this).append ("htmlVersion", m_eHTMLVersion)
-                                       .append ("XMLWriterSettings", m_aXMLWriterSettings)
-                                       .append ("CSSWriterSettings", m_aCSSWriterSettings)
-                                       .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
-                                       .append ("extractOutOfBandNodes", m_bExtractOutOfBandNodes)
-                                       .append ("customizer", m_aCustomizer)
-                                       .toString ();
+        .append ("XMLWriterSettings", m_aXMLWriterSettings)
+        .append ("CSSWriterSettings", m_aCSSWriterSettings)
+        .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
+        .append ("extractOutOfBandNodes", m_bExtractOutOfBandNodes)
+        .append ("customizer", m_aCustomizer)
+        .toString ();
   }
 }
