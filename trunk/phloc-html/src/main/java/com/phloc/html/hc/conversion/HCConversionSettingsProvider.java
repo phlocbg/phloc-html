@@ -37,19 +37,19 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 @NotThreadSafe
 public class HCConversionSettingsProvider implements IHCConversionSettingsProvider
 {
-  private final HCConversionSettings m_aCS;
+  private final HCConversionSettings m_aCSPrettyPrint;
   private HCConversionSettings m_aCSOptimized;
 
   public HCConversionSettingsProvider (@Nonnull final EHTMLVersion eHTMLVersion)
   {
     ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
-    m_aCS = new HCConversionSettings (eHTMLVersion);
+    m_aCSPrettyPrint = new HCConversionSettings (eHTMLVersion);
   }
 
   @Nonnull
   public EHTMLVersion getHTMLVersion ()
   {
-    return m_aCS.getHTMLVersion ();
+    return m_aCSPrettyPrint.getHTMLVersion ();
   }
 
   /**
@@ -69,7 +69,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
     if (m_aCSOptimized == null)
     {
       // Lazily create optimized version
-      m_aCSOptimized = m_aCS.getClone ();
+      m_aCSOptimized = m_aCSPrettyPrint.getClone ();
       // Modify settings
       modifyOptimizedConversionSettings (m_aCSOptimized);
     }
@@ -77,15 +77,21 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   }
 
   @Nonnull
-  public HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
+  public HCConversionSettings getConversionSettings ()
   {
-    return bIndentAndAlign ? m_aCS : _getOrCreateOptimized ();
+    return getConversionSettings (HCSettings.isDefaultPrettyPrint ());
+  }
+
+  @Nonnull
+  public HCConversionSettings getConversionSettings (final boolean bPrettyPrint)
+  {
+    return bPrettyPrint ? m_aCSPrettyPrint : _getOrCreateOptimized ();
   }
 
   @Nonnull
   public HCConversionSettingsProvider setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
   {
-    m_aCS.setXMLWriterSettings (aXMLWriterSettings);
+    m_aCSPrettyPrint.setXMLWriterSettings (aXMLWriterSettings);
     m_aCSOptimized = null;
     return this;
   }
@@ -93,7 +99,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   @Nonnull
   public HCConversionSettingsProvider setCSSWriterSettings (@Nonnull final CSSWriterSettings aCSSWriterSettings)
   {
-    m_aCS.setCSSWriterSettings (aCSSWriterSettings);
+    m_aCSPrettyPrint.setCSSWriterSettings (aCSSWriterSettings);
     m_aCSOptimized = null;
     return this;
   }
@@ -101,7 +107,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   @Nonnull
   public HCConversionSettingsProvider setConsistencyChecksEnabled (final boolean bConsistencyChecksEnabled)
   {
-    m_aCS.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
+    m_aCSPrettyPrint.setConsistencyChecksEnabled (bConsistencyChecksEnabled);
     m_aCSOptimized = null;
     return this;
   }
@@ -109,7 +115,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   @Nonnull
   public HCConversionSettingsProvider setExtractOutOfBandNodes (final boolean bExtractOutOfBandNodes)
   {
-    m_aCS.setExtractOutOfBandNodes (bExtractOutOfBandNodes);
+    m_aCSPrettyPrint.setExtractOutOfBandNodes (bExtractOutOfBandNodes);
     m_aCSOptimized = null;
     return this;
   }
@@ -117,7 +123,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   @Nonnull
   public HCConversionSettingsProvider setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
   {
-    m_aCS.setCustomizer (aCustomizer);
+    m_aCSPrettyPrint.setCustomizer (aCustomizer);
     m_aCSOptimized = null;
     return this;
   }

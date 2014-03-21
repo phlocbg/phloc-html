@@ -38,14 +38,22 @@ public interface IHCConversionSettingsProvider
   EHTMLVersion getHTMLVersion ();
 
   /**
+   * Get the conversion settings using default pretty print mode.
+   *
+   * @return The non-<code>null</code> conversion settings object.
+   */
+  @Nonnull
+  IHCConversionSettings getConversionSettings ();
+
+  /**
    * Get the conversion settings.
    *
-   * @param bIndentAndAlign
+   * @param bPrettyPrint
    *        Should the output be indented and aligned (pretty printed)?
    * @return The non-<code>null</code> conversion settings object.
    */
   @Nonnull
-  IHCConversionSettings getConversionSettings (boolean bIndentAndAlign);
+  IHCConversionSettings getConversionSettings (boolean bPrettyPrint);
 
   @Nonnull
   IHCConversionSettingsProvider setXMLWriterSettings (@Nonnull IXMLWriterSettings aXMLWriterSettings);
