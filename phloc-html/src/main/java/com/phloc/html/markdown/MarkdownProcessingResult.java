@@ -25,7 +25,7 @@ import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * The result of a Markdown processing
- * 
+ *
  * @author Philip Helger
  */
 public class MarkdownProcessingResult
@@ -48,13 +48,13 @@ public class MarkdownProcessingResult
   @Nonnull
   public String getAsHTMLString ()
   {
-    return getAsHTMLString (false);
+    return getAsHTMLString (HCSettings.isDefaultPrettyPrint ());
   }
 
   @Nonnull
-  public String getAsHTMLString (final boolean bIndentAndAlign)
+  public String getAsHTMLString (final boolean bPrettyPrint)
   {
-    return HCSettings.getAsHTMLStringWithoutNamespaces (m_aNodeList, bIndentAndAlign).trim ();
+    return HCSettings.getAsHTMLStringWithoutNamespaces (m_aNodeList, bPrettyPrint).trim ();
   }
 
   @Nonnull
