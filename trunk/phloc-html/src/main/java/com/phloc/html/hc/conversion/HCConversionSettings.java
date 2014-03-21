@@ -59,6 +59,21 @@ public class HCConversionSettings implements IHCConversionSettings
   private boolean m_bExtractOutOfBandNodes;
   private IHCCustomizer m_aCustomizer;
 
+  @Nonnull
+  public static XMLWriterSettings createDefaultXMLWriterSettings ()
+  {
+    return new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML)
+        .setIncorrectCharacterHandling (EXMLIncorrectCharacterHandling.DO_NOT_WRITE_LOG_WARNING)
+        .setIndent (DEFAULT_INDENT_AND_ALIGN_HTML ? EXMLSerializeIndent.INDENT_AND_ALIGN
+                                                  : EXMLSerializeIndent.NONE);
+  }
+
+  @Nonnull
+  public static CSSWriterSettings createDefaultCSSWriterSettings ()
+  {
+    return new CSSWriterSettings (DEFAULT_CSS_VERSION, !DEFAULT_INDENT_AND_ALIGN_CSS);
+  }
+
   /**
    * Constructor
    *
@@ -71,11 +86,8 @@ public class HCConversionSettings implements IHCConversionSettings
       throw new NullPointerException ("HTMLVersion");
     m_eHTMLVersion = eHTMLVersion;
     m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
-    m_aXMLWriterSettings = new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML)
-                                                   .setIncorrectCharacterHandling (EXMLIncorrectCharacterHandling.DO_NOT_WRITE_LOG_WARNING)
-                                                   .setIndent (DEFAULT_INDENT_AND_ALIGN_HTML ? EXMLSerializeIndent.INDENT_AND_ALIGN
-                                                                                            : EXMLSerializeIndent.NONE);
-    m_aCSSWriterSettings = new CSSWriterSettings (DEFAULT_CSS_VERSION, !DEFAULT_INDENT_AND_ALIGN_CSS);
+    m_aXMLWriterSettings = createDefaultXMLWriterSettings ();
+    m_aCSSWriterSettings = createDefaultCSSWriterSettings ();
     m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
     m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
     m_aCustomizer = new HCDefaultCustomizer ();

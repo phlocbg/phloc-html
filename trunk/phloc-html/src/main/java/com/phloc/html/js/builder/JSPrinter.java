@@ -30,7 +30,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Helper class to get the textual representation of JSDOM objects
- * 
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -84,6 +84,14 @@ public final class JSPrinter
     return s_bGenerateComments;
   }
 
+  /**
+   * This is a wrapper around {@link #setIndentAndAlign(boolean)},
+   * {@link #setGenerateTypeNames(boolean)} and
+   * {@link #setGenerateComments(boolean)}
+   *
+   * @param bMinimumCodeSize
+   *        true for minimum code size
+   */
   public static void setMinimumCodeSize (final boolean bMinimumCodeSize)
   {
     setIndentAndAlign (!bMinimumCodeSize);
@@ -96,8 +104,8 @@ public final class JSPrinter
   public static JSFormatter createFormatter (@Nonnull @WillNotClose final Writer aWriter)
   {
     return new JSFormatter (aWriter).indentAndAlign (s_bIndentAndAlign)
-                                    .generateTypeNames (s_bGenerateTypeNames)
-                                    .generateComments (s_bGenerateComments);
+        .generateTypeNames (s_bGenerateTypeNames)
+        .generateComments (s_bGenerateComments);
   }
 
   public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable,
@@ -164,7 +172,7 @@ public final class JSPrinter
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeGeneratable (aGeneratable, aSW);
-    return aSW.getAsString ();
+    return aSW.getAsString ().trim ();
   }
 
   @Nonnull
@@ -172,7 +180,7 @@ public final class JSPrinter
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeDeclaration (aDecl, aSW);
-    return aSW.getAsString ();
+    return aSW.getAsString ().trim ();
   }
 
   @Nonnull
@@ -180,7 +188,7 @@ public final class JSPrinter
   {
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeStatement (aStatement, aSW);
-    return aSW.getAsString ();
+    return aSW.getAsString ().trim ();
   }
 
   @Nonnull
@@ -191,6 +199,6 @@ public final class JSPrinter
 
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writePackage (aPackage, aSW);
-    return aSW.getAsString ();
+    return aSW.getAsString ().trim ();
   }
 }
