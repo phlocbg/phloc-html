@@ -34,7 +34,7 @@ import com.phloc.html.hc.html.HCTable;
 
 /**
  * Test class for class {@link HCNodeList}
- * 
+ *
  * @author Philip Helger
  */
 public final class HCNodeListTest
@@ -47,7 +47,7 @@ public final class HCNodeListTest
     x.addChild (new HCDiv ().addChild ("d1"));
     x.addChild (new HCDiv ().addChild ("d2"));
     assertTrue (x.hasChildren ());
-    final IMicroContainer aNode = (IMicroContainer) HCSettings.getAsNode (x);
+    final IMicroContainer aNode = (IMicroContainer) HCSettings.getAsNode (x, true);
     assertNotNull (aNode);
     assertEquals (2, x.getChildCount ());
 
@@ -77,7 +77,7 @@ public final class HCNodeListTest
     final HCNodeList x = new HCNodeList ();
     x.addChild (new HCDiv ().addChild ("Na so was"));
     x.addChild (new HCDiv ().addChild ("aber auch"));
-    assertNotNull (HCSettings.getAsNode (x));
+    assertNotNull (HCSettings.getAsNode (x, true));
     assertEquals ("<div xmlns=\"http://www.w3.org/1999/xhtml\">Na so was</div>" +
                   CGlobal.LINE_SEPARATOR +
                   "<div xmlns=\"http://www.w3.org/1999/xhtml\">aber auch</div>" +
