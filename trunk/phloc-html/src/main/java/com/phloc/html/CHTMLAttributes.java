@@ -22,7 +22,7 @@ import javax.annotation.concurrent.Immutable;
 // ESCA-JAVA0116:
 /**
  * Contains constant HTML attribute names.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -215,6 +215,9 @@ public final class CHTMLAttributes
 
   // http://msdn.microsoft.com/en-us/library/ie/dn265018%28v=vs.85%29.aspx
   public static final String X_MS_FORMAT_DETECTION = "x-ms-format-detection";
+
+  // https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+  public static final String SIZES = "sizes";
 
   private CHTMLAttributes ()
   {}
