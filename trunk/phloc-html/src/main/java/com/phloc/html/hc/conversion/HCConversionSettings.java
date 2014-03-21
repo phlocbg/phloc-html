@@ -63,15 +63,21 @@ public class HCConversionSettings implements IHCConversionSettings
   public static XMLWriterSettings createDefaultXMLWriterSettings ()
   {
     return new XMLWriterSettings ().setFormat (EXMLSerializeFormat.XHTML)
-        .setIncorrectCharacterHandling (EXMLIncorrectCharacterHandling.DO_NOT_WRITE_LOG_WARNING)
-        .setIndent (DEFAULT_INDENT_AND_ALIGN_HTML ? EXMLSerializeIndent.INDENT_AND_ALIGN
-                                                  : EXMLSerializeIndent.NONE);
+                                   .setIncorrectCharacterHandling (EXMLIncorrectCharacterHandling.DO_NOT_WRITE_LOG_WARNING)
+                                   .setIndent (DEFAULT_INDENT_AND_ALIGN_HTML ? EXMLSerializeIndent.INDENT_AND_ALIGN
+                                                                            : EXMLSerializeIndent.NONE);
   }
 
   @Nonnull
   public static CSSWriterSettings createDefaultCSSWriterSettings ()
   {
     return new CSSWriterSettings (DEFAULT_CSS_VERSION, !DEFAULT_INDENT_AND_ALIGN_CSS);
+  }
+
+  @Nonnull
+  public static IHCCustomizer createDefaultCustomizer ()
+  {
+    return new HCDefaultCustomizer ();
   }
 
   /**
@@ -90,7 +96,7 @@ public class HCConversionSettings implements IHCConversionSettings
     m_aCSSWriterSettings = createDefaultCSSWriterSettings ();
     m_bConsistencyChecksEnabled = DEFAULT_CONSISTENCY_CHECKS;
     m_bExtractOutOfBandNodes = DEFAULT_EXTRACT_OUT_OF_BAND_NODES;
-    m_aCustomizer = new HCDefaultCustomizer ();
+    m_aCustomizer = createDefaultCustomizer ();
   }
 
   /**
@@ -287,11 +293,11 @@ public class HCConversionSettings implements IHCConversionSettings
   public String toString ()
   {
     return new ToStringGenerator (this).append ("htmlVersion", m_eHTMLVersion)
-        .append ("XMLWriterSettings", m_aXMLWriterSettings)
-        .append ("CSSWriterSettings", m_aCSSWriterSettings)
-        .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
-        .append ("extractOutOfBandNodes", m_bExtractOutOfBandNodes)
-        .append ("customizer", m_aCustomizer)
-        .toString ();
+                                       .append ("XMLWriterSettings", m_aXMLWriterSettings)
+                                       .append ("CSSWriterSettings", m_aCSSWriterSettings)
+                                       .append ("consistencyChecksEnabled", m_bConsistencyChecksEnabled)
+                                       .append ("extractOutOfBandNodes", m_bExtractOutOfBandNodes)
+                                       .append ("customizer", m_aCustomizer)
+                                       .toString ();
   }
 }
