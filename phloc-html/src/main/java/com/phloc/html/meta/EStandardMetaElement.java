@@ -25,7 +25,7 @@ import com.phloc.commons.lang.EnumHelper;
 
 /**
  * A class with a set of predefined meta tag names.
- * 
+ *
  * @author Philip Helger
  */
 public enum EStandardMetaElement implements IMetaElementDeclaration
@@ -53,6 +53,8 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
   KEYWORDS ("Keywords", false),
   AUTHOR ("Author", false),
   COPYRIGHT ("Copyright", false),
+  LANGUAGE ("Language", false),
+  VIEWPORT ("viewport", false),
   // http://msdn.microsoft.com/en-us/library/ie/dn255024%28v=vs.85%29.aspx
   APPLICATION_NAME ("application-name", false),
   MSAPPLICATION_ALLOW_DOMAIN_API_CALLS ("msapplication-allowDomainApiCalls", false),
@@ -86,7 +88,7 @@ public enum EStandardMetaElement implements IMetaElementDeclaration
 
   /**
    * Get the meta tag name.
-   * 
+   *
    * @return the meta tag name
    */
   @Nonnull
