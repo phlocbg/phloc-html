@@ -776,7 +776,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   /**
    * Set all attributes and child elements of this object
-   * 
+   *
    * @param aElement
    *        The current micro element to be filled
    * @param aConversionSettings
@@ -845,10 +845,12 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
       for (final Map.Entry <String, String> aEntry : m_aCustomAttrs.entrySet ())
       {
         final String sAttrName = aEntry.getKey ();
+        // Link element often contains arbitrary attributes
         if (bHTML5 &&
             aConversionSettings.areConsistencyChecksEnabled () &&
             !StringHelper.startsWith (sAttrName, CHTMLAttributes.HTML5_PREFIX_DATA) &&
-            !StringHelper.startsWith (sAttrName, CHTMLAttributes.PREFIX_ARIA))
+            !StringHelper.startsWith (sAttrName, CHTMLAttributes.PREFIX_ARIA) &&
+            m_eElement != EHTMLElement.LINK)
         {
           s_aLogger.warn ("Custom attribute '" +
                           sAttrName +
@@ -866,7 +868,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called after the element itself was created and filled.
    * Overwrite this method to perform actions that can only be done after the
    * element was build finally.
-   * 
+   *
    * @param eElement
    *        The created micro element
    * @param aConversionSettings
