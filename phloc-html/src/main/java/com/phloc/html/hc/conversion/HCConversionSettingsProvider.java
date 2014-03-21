@@ -20,6 +20,8 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ValueEnforcer;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.xml.serialize.EXMLSerializeIndent;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
 import com.phloc.css.writer.CSSWriterSettings;
@@ -28,8 +30,8 @@ import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
  * Default implementation of {@link IHCConversionSettingsProvider} using a
- * provided {@link EHTMLVersion}
- * 
+ * provided {@link EHTMLVersion}.
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -40,8 +42,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
 
   public HCConversionSettingsProvider (@Nonnull final EHTMLVersion eHTMLVersion)
   {
-    if (eHTMLVersion == null)
-      throw new NullPointerException ("HTMLVersion");
+    ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
     m_aCS = new HCConversionSettings (eHTMLVersion);
   }
 
@@ -51,15 +52,26 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
     return m_aCS.getHTMLVersion ();
   }
 
+  /**
+   * @param aCSOptimized
+   */
+  @OverrideOnDemand
+  protected void modifyOptimizedConversionSettings (@Nonnull final HCConversionSettings aCSOptimized)
+  {
+    aCSOptimized.getXMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE);
+    aCSOptimized.getCSSWriterSettings ().setOptimizedOutput (true).setRemoveUnnecessaryCode (true);
+    aCSOptimized.setConsistencyChecksEnabled (false);
+  }
+
   @Nonnull
-  private HCConversionSettings _getOptimized ()
+  private HCConversionSettings _getOrCreateOptimized ()
   {
     if (m_aCSOptimized == null)
     {
-      // Lazily create on demand
+      // Lazily create optimized version
       m_aCSOptimized = m_aCS.getClone ();
-      m_aCSOptimized.getXMLWriterSettings ().setIndent (EXMLSerializeIndent.NONE);
-      m_aCSOptimized.getCSSWriterSettings ().setOptimizedOutput (true);
+      // Modify settings
+      modifyOptimizedConversionSettings (m_aCSOptimized);
     }
     return m_aCSOptimized;
   }
@@ -67,7 +79,7 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
   @Nonnull
   public HCConversionSettings getConversionSettings (final boolean bIndentAndAlign)
   {
-    return bIndentAndAlign ? m_aCS : _getOptimized ();
+    return bIndentAndAlign ? m_aCS : _getOrCreateOptimized ();
   }
 
   @Nonnull

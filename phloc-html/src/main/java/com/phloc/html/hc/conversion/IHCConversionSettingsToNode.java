@@ -20,14 +20,17 @@ package com.phloc.html.hc.conversion;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.xml.serialize.IXMLWriterSettings;
+import com.phloc.commons.xml.serialize.XMLWriterSettings;
 import com.phloc.css.ICSSWriterSettings;
+import com.phloc.css.writer.CSSWriterSettings;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.customize.IHCCustomizer;
 
 /**
  * Settings interface that is used to convert HC* nodes to micro nodes.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHCConversionSettingsToNode
@@ -53,10 +56,25 @@ public interface IHCConversionSettingsToNode
   IXMLWriterSettings getXMLWriterSettings ();
 
   /**
+   * @return A mutable copy of the XML writer settings to be used. Never
+   *         <code>null</code>.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  XMLWriterSettings getMutableXMLWriterSettings ();
+
+  /**
    * @return The CSS writer settings to be used. Never <code>null</code>.
    */
   @Nonnull
   ICSSWriterSettings getCSSWriterSettings ();
+
+  /**
+   * @return A mutable copy of the CSS writer settings to be used. Never
+   *         <code>null</code>.
+   */
+  @Nonnull
+  CSSWriterSettings getMutableCSSWriterSettings ();
 
   /**
    * @return <code>true</code> if the consistency checks are enabled,
