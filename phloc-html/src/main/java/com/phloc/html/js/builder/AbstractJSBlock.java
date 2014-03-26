@@ -216,7 +216,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnegative
   public int pos (@Nonnegative final int nNewPos)
   {
-    ValueEnforcer.isBetweenInclusive (nNewPos, "NewPos", 0, m_aObjs.size () - 1);
+    ValueEnforcer.isBetweenInclusive (nNewPos, "NewPos", 0, m_aObjs.size ());
     final int nOldPos = m_nPos;
     m_nPos = nNewPos;
     return nOldPos;
@@ -1121,8 +1121,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   public String toString ()
   {
     return new ToStringGenerator (this).append ("objs", m_aObjs)
-                                       .append ("decls", m_aDecls)
-                                       .append ("pos", m_nPos)
-                                       .toString ();
+        .append ("decls", m_aDecls)
+        .append ("pos", m_nPos)
+        .toString ();
   }
 }
