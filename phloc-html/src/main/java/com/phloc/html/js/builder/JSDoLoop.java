@@ -20,13 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Do loops
- * 
+ *
  * @author Philip Helger
  */
 public class JSDoLoop implements IJSStatement
@@ -46,9 +47,7 @@ public class JSDoLoop implements IJSStatement
    */
   public JSDoLoop (@Nonnull final IJSExpression aTest)
   {
-    if (aTest == null)
-      throw new NullPointerException ("test");
-    m_aTest = aTest;
+    m_aTest = ValueEnforcer.notNull (aTest, "Test");
   }
 
   @Nonnull

@@ -103,25 +103,25 @@ public final class ConstantJSPathProvider implements IJSPathProvider
       return false;
     final ConstantJSPathProvider rhs = (ConstantJSPathProvider) o;
     return m_sPath.equals (rhs.m_sPath) &&
-        m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
-        m_bCanBeBundled == rhs.m_bCanBeBundled;
+           m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
+           m_bCanBeBundled == rhs.m_bCanBeBundled;
   }
 
   @Override
   public int hashCode ()
   {
     return new HashCodeGenerator (this).append (m_sPath)
-        .append (m_sMinifiedPath)
-        .append (m_bCanBeBundled)
-        .getHashCode ();
+                                       .append (m_sMinifiedPath)
+                                       .append (m_bCanBeBundled)
+                                       .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
     return new ToStringGenerator (this).append ("path", m_sPath)
-        .append ("minifiedPath", m_sMinifiedPath)
-        .append ("canBeBundled", m_bCanBeBundled)
-        .toString ();
+                                       .append ("minifiedPath", m_sMinifiedPath)
+                                       .append ("canBeBundled", m_bCanBeBundled)
+                                       .toString ();
   }
 }

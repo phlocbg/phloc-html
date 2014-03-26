@@ -2,6 +2,8 @@
 = Change log =
 <wiki:comment>This content is generated. Do not modify!</wiki:comment>
 <table border="1" cellspacing="0"><thead><tr><th>Date</th><th>Action</th><th>Category</th><th>Incompatible?</th><th>Description</th></tr></thead><tbody>
+<tr border="1"><td>3/26/14</td><td colspan="4">_Release *4.0.3*_</td></tr>
+<tr><td>3/21/14</td><td>update</td><td>api</td><td></td><td>Made HCSettings and IHCConversionSettings more flexible</td></tr>
 <tr border="1"><td>3/19/14</td><td colspan="4">_Release *4.0.2*_</td></tr>
 <tr><td>3/18/14</td><td>add</td><td>tech</td><td></td><td>Added check that element IDs never contain whitespaces</td></tr>
 <tr><td>3/18/14</td><td>add</td><td>tech</td><td></td><td>HCDOMWrapper now always returns a clone of the contained MicroNode to avoiding troubles because the node already has a parent</td></tr>

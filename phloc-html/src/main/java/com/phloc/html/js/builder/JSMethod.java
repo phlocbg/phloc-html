@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -30,7 +31,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * JS method.
- * 
+ *
  * @author Philip Helger
  */
 public class JSMethod extends JSFunction
@@ -41,7 +42,7 @@ public class JSMethod extends JSFunction
 
   /**
    * Constructor
-   * 
+   *
    * @param aOwnerClass
    *        Owning class
    * @param aType
@@ -54,8 +55,7 @@ public class JSMethod extends JSFunction
                    @Nonnull @Nonempty final String sName)
   {
     super (aType, sName);
-    if (aOwnerClass == null)
-      throw new NullPointerException ("class");
+    ValueEnforcer.notNull (aOwnerClass, "OwnerClass");
     if (!JSMarshaller.isJSIdentifier (sName))
       throw new IllegalArgumentException ("The name '" + sName + "' is not a legal JS identifier!");
     if (sName.equals (aOwnerClass.name ()))

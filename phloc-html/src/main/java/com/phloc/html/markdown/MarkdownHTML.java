@@ -69,7 +69,7 @@ final class MarkdownHTML
   private static final Set <String> LINK_PREFIX = new HashSet <String> ();
   /** Set of HTML block level tags. */
   private static final Set <String> HTML_BLOCK_ELEMENTS = new HashSet <String> ();
-   /** Set of unsafe HTML tags. */
+  /** Set of unsafe HTML tags. */
   private static final Set <String> HTML_UNSAFE = new HashSet <String> ();
 
   static
@@ -86,7 +86,7 @@ final class MarkdownHTML
 
     for (final EHTMLElement h : UNSAFE_ELEMENTS)
       HTML_UNSAFE.add (h.getElementNameLowerCase ());
-   }
+  }
 
   private MarkdownHTML ()
   {}

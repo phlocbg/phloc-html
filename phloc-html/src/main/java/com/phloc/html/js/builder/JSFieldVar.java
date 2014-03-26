@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -27,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A field of a class
- * 
+ *
  * @author Philip Helger
  */
 public class JSFieldVar extends JSVar implements IJSDocCommentable
@@ -41,7 +42,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
 
   /**
    * Field constructor
-   * 
+   *
    * @param aType
    *        data type of this variable
    * @param sName
@@ -55,9 +56,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
                      @Nullable final IJSExpression aInit)
   {
     super (aType, sName, aInit);
-    if (aOwnerClass == null)
-      throw new NullPointerException ("OwnerClass");
-    m_aOwnerClass = aOwnerClass;
+    m_aOwnerClass = ValueEnforcer.notNull (aOwnerClass, "OwnerClass");
   }
 
   @Nonnull
@@ -86,7 +85,7 @@ public class JSFieldVar extends JSVar implements IJSDocCommentable
 
   /**
    * Creates, if necessary, and returns the class JSDoc for this field
-   * 
+   *
    * @return {@link JSCommentMultiLine} containing JSDoc for this field
    */
   @Nonnull

@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
@@ -33,7 +34,7 @@ import com.phloc.json2.IJson;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -306,8 +307,7 @@ public final class JSExpr
   @Nonnull
   public static JSExprDirect json (@Nonnull final IJSON aJSON)
   {
-    if (aJSON == null)
-      throw new NullPointerException ("JSON");
+    ValueEnforcer.notNull (aJSON, "JSON");
 
     return direct (aJSON.getJSONString (JSPrinter.isIndentAndAlign ()));
   }
@@ -315,8 +315,7 @@ public final class JSExpr
   @Nonnull
   public static JSExprDirect json (@Nonnull final IJson aJson)
   {
-    if (aJson == null)
-      throw new NullPointerException ("Json");
+    ValueEnforcer.notNull (aJson, "Json");
 
     return direct (aJson.getAsString ());
   }

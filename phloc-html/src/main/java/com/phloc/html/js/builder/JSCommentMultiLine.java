@@ -24,13 +24,14 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * JSDoc comment.
- * 
+ *
  * @author Philip Helger
  */
 public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
@@ -66,8 +67,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   @Nonnull
   public JSCommentPart addParam (@Nonnull final String sParam)
   {
-    if (sParam == null)
-      throw new NullPointerException ("param");
+    ValueEnforcer.notNull (sParam, "Param");
 
     JSCommentPart aPart = m_aParams.get (sParam);
     if (aPart == null)
@@ -115,8 +115,7 @@ public class JSCommentMultiLine extends JSCommentPart implements IJSGeneratable
   @Nonnull
   public Map <String, String> addXdoclet (@Nonnull final String sName)
   {
-    if (sName == null)
-      throw new NullPointerException ("name");
+    ValueEnforcer.notNull (sName, "Name");
 
     Map <String, String> aMap = m_aXDoclets.get (sName);
     if (aMap == null)

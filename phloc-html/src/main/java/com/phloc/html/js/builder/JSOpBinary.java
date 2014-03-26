@@ -19,13 +19,14 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * This class represents a single binary operator
- * 
+ *
  * @author Philip Helger
  */
 public class JSOpBinary extends AbstractJSExpression
@@ -56,7 +57,7 @@ public class JSOpBinary extends AbstractJSExpression
 
   /**
    * Constructor
-   * 
+   *
    * @param aLeft
    *        Left side. May not be <code>null</code>.
    * @param sOp
@@ -72,7 +73,7 @@ public class JSOpBinary extends AbstractJSExpression
 
   /**
    * Constructor
-   * 
+   *
    * @param aLeft
    *        Left side. May not be <code>null</code>.
    * @param sOp
@@ -89,15 +90,9 @@ public class JSOpBinary extends AbstractJSExpression
                      @Nonnull final IJSGeneratable aRight,
                      final boolean bUseBraces)
   {
-    if (aLeft == null)
-      throw new NullPointerException ("left");
-    if (sOp == null)
-      throw new NullPointerException ("empty operator");
-    if (aRight == null)
-      throw new NullPointerException ("right");
-    m_aLeft = aLeft;
-    m_sOp = sOp;
-    m_aRight = aRight;
+    m_aLeft = ValueEnforcer.notNull (aLeft, "Left");
+    m_sOp = ValueEnforcer.notNull (sOp, "Operator");
+    m_aRight = ValueEnforcer.notNull (aRight, "Right");
     m_bUseBraces = bUseBraces;
   }
 

@@ -20,12 +20,13 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Throw statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSThrow implements IJSStatement
@@ -37,15 +38,13 @@ public class JSThrow implements IJSStatement
 
   /**
    * constructor
-   * 
+   *
    * @param aExpr
    *        JExpression which evaluates to JThrow value
    */
   public JSThrow (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
-    m_aExpr = aExpr;
+    m_aExpr = ValueEnforcer.notNull (aExpr, "Expr");
   }
 
   @Nonnull

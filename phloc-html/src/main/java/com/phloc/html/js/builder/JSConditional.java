@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -27,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * If statement, with optional else clause
- * 
+ *
  * @author Philip Helger
  */
 public class JSConditional implements IJSStatement
@@ -49,15 +50,13 @@ public class JSConditional implements IJSStatement
 
   /**
    * Constructor
-   * 
+   *
    * @param aTest
    *        Expression which will determine branching
    */
   public JSConditional (@Nonnull final IJSExpression aTest)
   {
-    if (aTest == null)
-      throw new NullPointerException ("test");
-    m_aTest = aTest;
+    m_aTest = ValueEnforcer.notNull (aTest, "Test");
   }
 
   @Nonnull
@@ -68,7 +67,7 @@ public class JSConditional implements IJSStatement
 
   /**
    * Return the block to be executed by the "then" branch
-   * 
+   *
    * @return Then block
    */
   @Nonnull
@@ -80,7 +79,7 @@ public class JSConditional implements IJSStatement
 
   /**
    * Create a block to be executed by "else" branch
-   * 
+   *
    * @return Newly generated else block
    */
   @Nonnull
@@ -94,7 +93,7 @@ public class JSConditional implements IJSStatement
 
   /**
    * Creates <tt>... else if(...) ...</tt> code.
-   * 
+   *
    * @param aBoolExp
    *        The boolean expression
    * @return The conditional for the next "if"

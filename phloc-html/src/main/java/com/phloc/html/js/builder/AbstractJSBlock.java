@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
@@ -43,7 +44,7 @@ import com.phloc.json2.IJson;
 
 /**
  * A JS block. It contains a list of statements and declarations.
- * 
+ *
  * @author Philip Helger
  */
 @CodingStyleguideUnaware
@@ -92,7 +93,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
-   * 
+   *
    * @return <code>null</code> If the object is not yet created.
    */
   @Nullable
@@ -103,7 +104,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Checks if a given name is already defined as a class/interface
-   * 
+   *
    * @return <code>true</code> if the passed variable is contained
    */
   public boolean isDeclared (@Nullable final String sName)
@@ -143,7 +144,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Remove all contents of the block. Sets the position to 0.
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -157,7 +158,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Called when a declaration is added
-   * 
+   *
    * @param aDeclaration
    *        The added declaration. Never <code>null</code>.
    */
@@ -168,8 +169,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public final <T extends IJSDeclaration> T addDeclaration (@Nonnull final T aDeclaration) throws JSNameAlreadyExistsException
   {
-    if (aDeclaration == null)
-      throw new NullPointerException ("declaration");
+    ValueEnforcer.notNull (aDeclaration, "Declaration");
 
     final String sName = aDeclaration.name ();
     final IJSDeclaration aOldDecl = m_aDecls.get (sName);
@@ -185,8 +185,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public final <T extends IJSStatement> T addStatement (@Nonnull final T aStatement)
   {
-    if (aStatement == null)
-      throw new NullPointerException ("statement");
+    ValueEnforcer.notNull (aStatement, "Statement");
 
     m_aObjs.add (m_nPos, aStatement);
     m_nPos++;
@@ -197,7 +196,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * Gets the current position to which new statements will be inserted. For
    * example if the value is 0, newly created instructions will be inserted at
    * the very beginning of the block.
-   * 
+   *
    * @see #pos(int)
    */
   @Nonnegative
@@ -208,7 +207,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Sets the current position.
-   * 
+   *
    * @return the old value of the current position.
    * @throws IllegalArgumentException
    *         if the new position value is illegal.
@@ -217,8 +216,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnegative
   public int pos (@Nonnegative final int nNewPos)
   {
-    if (nNewPos < 0 || nNewPos > m_aObjs.size ())
-      throw new IllegalArgumentException ("New position " + nNewPos + " is not valid!");
+    ValueEnforcer.isBetweenInclusive (nNewPos, "NewPos", 0, m_aObjs.size () - 1);
     final int nOldPos = m_nPos;
     m_nPos = nNewPos;
     return nOldPos;
@@ -226,7 +224,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Sets the current position to the end of the block.
-   * 
+   *
    * @return the old value of the current position.
    * @see #pos()
    */
@@ -238,7 +236,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Add a class to this package.
-   * 
+   *
    * @param sName
    *        Name of class to be added to this package
    * @return Newly generated class
@@ -260,8 +258,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public JSInvocation _new (@Nonnull final AbstractJSType aType)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
+    ValueEnforcer.notNull (aType, "Type");
 
     return aType._new ();
   }
@@ -274,7 +271,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Add a function to this package.
-   * 
+   *
    * @param aType
    *        Optional return type
    * @param sName
@@ -292,7 +289,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @return Newly generated {@link JSVar}
@@ -307,7 +304,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param bInitValue
@@ -324,7 +321,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param cInitValue
@@ -341,7 +338,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param dInitValue
@@ -358,7 +355,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param fInitValue
@@ -375,7 +372,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param nInitValue
@@ -392,7 +389,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param nInitValue
@@ -409,7 +406,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param sInitValue
@@ -426,7 +423,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param sName
    *        Name of the variable
    * @param aInitExpression
@@ -443,7 +440,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Adds a local variable declaration to this block
-   * 
+   *
    * @param aType
    *        Type of the variable
    * @param sName
@@ -460,7 +457,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Add a var to this block.
-   * 
+   *
    * @param aType
    *        optional type to use
    * @param sName
@@ -483,8 +480,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSAnonymousFunction aAnonFunction)
   {
-    if (aAnonFunction == null)
-      throw new NullPointerException ("anonFunction");
+    ValueEnforcer.notNull (aAnonFunction, "AnonFunction");
 
     return addStatement (aAnonFunction.invoke ());
   }
@@ -492,8 +488,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public JSInvocation invoke (@Nonnull final JSFunction aFunction)
   {
-    if (aFunction == null)
-      throw new NullPointerException ("Function");
+    ValueEnforcer.notNull (aFunction, "Function");
 
     return addStatement (aFunction.invoke ());
   }
@@ -521,7 +516,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Creates an invocation statement and adds it to this block.
-   * 
+   *
    * @param aExpr
    *        JExpression evaluating to the class or object upon which the named
    *        method will be invoked
@@ -538,7 +533,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Creates an invocation statement and adds it to this block.
-   * 
+   *
    * @param aExpr
    *        JExpression evaluating to the class or object upon which the method
    *        will be invoked
@@ -875,7 +870,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create a For statement and add it to this block
-   * 
+   *
    * @return Newly generated For statement
    */
   @Nonnull
@@ -906,7 +901,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create a While statement and add it to this block
-   * 
+   *
    * @return Newly generated While statement
    */
   @Nonnull
@@ -917,7 +912,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create a Do statement and add it to this block
-   * 
+   *
    * @return Newly generated Do statement
    */
   @Nonnull
@@ -937,7 +932,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create a Try statement and add it to this block
-   * 
+   *
    * @return Newly generated Try statement
    */
   @Nonnull
@@ -948,7 +943,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Insert a <code>delete aExpr;</code> statement
-   * 
+   *
    * @param aExpr
    *        the expression to be deleted. May not be <code>null</code>.
    */
@@ -988,7 +983,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create an If statement and add it to this block
-   * 
+   *
    * @param aTest
    *        {@link IJSExpression} to be tested to determine branching
    * @return Newly generated conditional statement
@@ -1074,7 +1069,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Create a sub-block and add it to this block
-   * 
+   *
    * @return The newly created block
    */
   @Nonnull

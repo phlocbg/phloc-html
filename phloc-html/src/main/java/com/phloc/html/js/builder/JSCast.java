@@ -19,12 +19,13 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A cast operation.
- * 
+ *
  * @author Philip Helger
  */
 public class JSCast extends AbstractJSExpression
@@ -41,7 +42,7 @@ public class JSCast extends AbstractJSExpression
 
   /**
    * JCast constructor
-   * 
+   *
    * @param aType
    *        JType to which the expression is cast
    * @param aObject
@@ -49,10 +50,8 @@ public class JSCast extends AbstractJSExpression
    */
   public JSCast (@Nonnull final AbstractJSType aType, @Nonnull final IJSExpression aObject)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
-    if (aObject == null)
-      throw new NullPointerException ("object");
+    ValueEnforcer.notNull (aType, "Type");
+    ValueEnforcer.notNull (aObject, "Object");
     m_aType = aType;
     m_aExpr = aObject;
   }

@@ -20,13 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Single line comments
- * 
+ *
  * @author Philip Helger
  */
 public class JSCommentSingleLine implements IJSStatement
@@ -35,9 +36,7 @@ public class JSCommentSingleLine implements IJSStatement
 
   public JSCommentSingleLine (@Nonnull final String sComment)
   {
-    if (sComment == null)
-      throw new NullPointerException ("comment");
-    m_sComment = sComment;
+    m_sComment = ValueEnforcer.notNull (sComment, "Comment");
   }
 
   @Override

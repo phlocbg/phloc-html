@@ -20,14 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Label that can be used for continue and break.
- * 
+ *
  * @author Philip Helger
  */
 public class JSLabel implements IJSStatement
@@ -36,15 +36,13 @@ public class JSLabel implements IJSStatement
 
   /**
    * constructor
-   * 
+   *
    * @param sLabel
    *        break label or null.
    */
   public JSLabel (@Nonnull @Nonempty final String sLabel)
   {
-    if (StringHelper.hasNoText (sLabel))
-      throw new IllegalArgumentException ("label");
-    m_sLabel = sLabel;
+    m_sLabel = ValueEnforcer.notEmpty (sLabel, "Label");
   }
 
   @Nonnull

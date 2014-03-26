@@ -20,12 +20,13 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * delete statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSDelete implements IJSStatement
@@ -34,15 +35,13 @@ public class JSDelete implements IJSStatement
 
   /**
    * constructor
-   * 
+   *
    * @param aExpr
    *        expression to delete. May not be <code>null</code>.
    */
   public JSDelete (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
-    m_aExpr = aExpr;
+    m_aExpr = ValueEnforcer.notNull (aExpr, "Expr");
   }
 
   public void state (@Nonnull final JSFormatter aFormatter)

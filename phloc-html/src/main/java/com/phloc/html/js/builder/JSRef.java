@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -28,7 +29,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * Global Reference
- * 
+ *
  * @author Philip Helger
  */
 public class JSRef extends AbstractJSAssignmentTarget
@@ -52,9 +53,7 @@ public class JSRef extends AbstractJSAssignmentTarget
 
   public JSRef (@Nonnull final JSVar aVar)
   {
-    if (aVar == null)
-      throw new NullPointerException ("var");
-    m_aVar = aVar;
+    m_aVar = ValueEnforcer.notNull (aVar, "Var");
   }
 
   @Nonnull

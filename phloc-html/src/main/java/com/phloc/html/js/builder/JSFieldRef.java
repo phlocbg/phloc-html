@@ -19,13 +19,14 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Field Reference
- * 
+ *
  * @author Philip Helger
  */
 public class JSFieldRef extends JSRef
@@ -39,17 +40,13 @@ public class JSFieldRef extends JSRef
   public JSFieldRef (@Nonnull final IJSGeneratable aObject, @Nonnull @Nonempty final String sName)
   {
     super (sName);
-    if (aObject == null)
-      throw new NullPointerException ("object");
-    m_aObject = aObject;
+    m_aObject = ValueEnforcer.notNull (aObject, "Object");
   }
 
   public JSFieldRef (@Nonnull final IJSGeneratable aObject, @Nonnull final JSVar aVar)
   {
     super (aVar);
-    if (aObject == null)
-      throw new NullPointerException ("object");
-    m_aObject = aObject;
+    m_aObject = ValueEnforcer.notNull (aObject, "Object");
   }
 
   @Nonnull

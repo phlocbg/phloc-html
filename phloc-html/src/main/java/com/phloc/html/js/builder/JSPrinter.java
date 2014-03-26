@@ -104,8 +104,8 @@ public final class JSPrinter
   public static JSFormatter createFormatter (@Nonnull @WillNotClose final Writer aWriter)
   {
     return new JSFormatter (aWriter).indentAndAlign (s_bIndentAndAlign)
-        .generateTypeNames (s_bGenerateTypeNames)
-        .generateComments (s_bGenerateComments);
+                                    .generateTypeNames (s_bGenerateTypeNames)
+                                    .generateComments (s_bGenerateComments);
   }
 
   public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable,

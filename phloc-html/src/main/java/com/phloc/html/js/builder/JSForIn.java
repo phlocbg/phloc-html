@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -27,7 +28,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * For in Statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSForIn implements IJSStatement
@@ -45,11 +46,8 @@ public class JSForIn implements IJSStatement
 
   public JSForIn (@Nonnull final JSVar aLoopVar, @Nonnull final IJSExpression aCollection)
   {
-    if (aCollection == null)
-      throw new NullPointerException ("Collection");
-
-    m_aLoopVar = aLoopVar;
-    m_aCollection = aCollection;
+    m_aLoopVar = ValueEnforcer.notNull (aLoopVar, "LoopVar");
+    m_aCollection = ValueEnforcer.notNull (aCollection, "Collection");
   }
 
   /**

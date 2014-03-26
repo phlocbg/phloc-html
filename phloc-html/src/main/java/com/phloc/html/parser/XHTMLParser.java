@@ -127,11 +127,11 @@ public final class XHTMLParser
     final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLSerializeVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
-                                                                        "<html" +
-                                                                        (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
-                                                                        "><head><title></title></head><body>" +
-                                                                        StringHelper.getNotNull (sXHTMLFragment) +
-                                                                        "</body></html>";
+                          "<html" +
+                          (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
+                          "><head><title></title></head><body>" +
+                          StringHelper.getNotNull (sXHTMLFragment) +
+                          "</body></html>";
     return parseXHTMLDocument (sXHTML);
   }
 

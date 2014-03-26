@@ -19,14 +19,14 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * This class represents a single ternary operator.
- * 
+ *
  * @author Philip Helger
  */
 public class JSOpTernary extends AbstractJSExpression
@@ -43,22 +43,11 @@ public class JSOpTernary extends AbstractJSExpression
                       @Nonnull @Nonempty final String sOp2,
                       @Nonnull final IJSExpression aExpr3)
   {
-    if (aExpr1 == null)
-      throw new NullPointerException ("expr1");
-    if (StringHelper.hasNoText (sOp1))
-      throw new IllegalArgumentException ("empty operator1");
-    if (aExpr2 == null)
-      throw new NullPointerException ("expr2");
-    if (StringHelper.hasNoText (sOp2))
-      throw new IllegalArgumentException ("empty operator1");
-    if (aExpr3 == null)
-      throw new NullPointerException ("expr3");
-
-    m_aExpr1 = aExpr1;
-    m_sOp1 = sOp1;
-    m_aExpr2 = aExpr2;
-    m_sOp2 = sOp2;
-    m_aExpr3 = aExpr3;
+    m_aExpr1 = ValueEnforcer.notNull (aExpr1, "Expr");
+    m_sOp1 = ValueEnforcer.notEmpty (sOp1, "Operator1");
+    m_aExpr2 = ValueEnforcer.notNull (aExpr2, "Expr2");
+    m_sOp2 = ValueEnforcer.notEmpty (sOp2, "Operator2");
+    m_aExpr3 = ValueEnforcer.notNull (aExpr3, "Expr3");
   }
 
   @Nonnull

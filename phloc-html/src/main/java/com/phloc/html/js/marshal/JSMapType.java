@@ -82,8 +82,8 @@ public final class JSMapType extends JSType
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-        .append ("keyType", m_aKeyType)
-        .append ("valueType", m_aValueType)
-        .toString ();
+                            .append ("keyType", m_aKeyType)
+                            .append ("valueType", m_aValueType)
+                            .toString ();
   }
 }

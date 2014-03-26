@@ -20,14 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * This class represents a single unary operator
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -49,12 +49,8 @@ public class JSOpUnary extends AbstractJSExpression
 
   private JSOpUnary (@Nonnull final String sOp, @Nonnull final IJSExpression aExpr, final boolean bOpFirst)
   {
-    if (StringHelper.hasNoText (sOp))
-      throw new IllegalArgumentException ("empty operator");
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
-    m_sOp = sOp;
-    m_aExpr = aExpr;
+    m_sOp = ValueEnforcer.notEmpty (sOp, "Operator");
+    m_aExpr = ValueEnforcer.notNull (aExpr, "Expr");
     m_bOpFirst = bOpFirst;
   }
 

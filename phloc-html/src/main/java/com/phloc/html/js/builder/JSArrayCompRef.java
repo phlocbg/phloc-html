@@ -80,8 +80,8 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-        .append ("array", m_aArray)
-        .append ("index", m_aIndex)
-        .toString ();
+                            .append ("array", m_aArray)
+                            .append ("index", m_aIndex)
+                            .toString ();
   }
 }

@@ -24,6 +24,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -31,7 +32,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * A list of JS statements that is itself a statement
- * 
+ *
  * @author Philip Helger
  */
 public final class JSStatementList implements IJSStatement
@@ -58,8 +59,7 @@ public final class JSStatementList implements IJSStatement
   @Nonnull
   public JSStatementList add (@Nonnull final IJSStatement aStatement)
   {
-    if (aStatement == null)
-      throw new NullPointerException ("statement");
+    ValueEnforcer.notNull (aStatement, "Statement");
     m_aStatements.add (aStatement);
     return this;
   }

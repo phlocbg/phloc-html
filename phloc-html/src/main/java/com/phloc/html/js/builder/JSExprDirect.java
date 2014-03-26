@@ -20,6 +20,7 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -30,9 +31,7 @@ public final class JSExprDirect extends AbstractJSExpression
 
   public JSExprDirect (@Nonnull final String sSource)
   {
-    if (sSource == null)
-      throw new NullPointerException ("source");
-    m_sSource = sSource;
+    m_sSource = ValueEnforcer.notNull (sSource, "Source");
   }
 
   @Nonnull
