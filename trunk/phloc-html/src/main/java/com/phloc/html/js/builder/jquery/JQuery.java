@@ -26,10 +26,9 @@ import javax.annotation.concurrent.Immutable;
 
 import org.w3c.dom.Node;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
-import com.phloc.commons.collections.ArrayHelper;
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.collections.pair.IReadonlyPair;
 import com.phloc.commons.collections.pair.ReadonlyPair;
 import com.phloc.commons.id.IHasID;
@@ -55,7 +54,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Wrapper around jQuery to allow for easy function calls
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -73,7 +72,7 @@ public final class JQuery
 
   /**
    * Globally decide, whether to use "$" or "jQuery" to access jQuery function
-   * 
+   *
    * @param bUseDollar
    *        <code>true</code> to use "$", <code>false</code> to use "jQuery"
    */
@@ -265,7 +264,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param sID
    *        The ID to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed ID: <code>$('#id')</code>
@@ -278,7 +277,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aID
    *        The ID to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed ID: <code>$('#'+id)</code>
@@ -291,7 +290,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aIDProvider
    *        The provider that has the ID to be selected. May not be
    *        <code>null</code>.
@@ -305,7 +304,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aElement
    *        The element that has the ID to be selected. May not be
    *        <code>null</code>.
@@ -319,7 +318,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aIDs
    *        The IDs to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed IDs:
@@ -328,8 +327,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final String... aIDs)
   {
-    if (ArrayHelper.isEmpty (aIDs))
-      throw new IllegalArgumentException ("IDs may not be empty");
+    ValueEnforcer.notEmpty (aIDs, "IDs");
 
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final String sID : aIDs)
@@ -339,7 +337,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aIDs
    *        The IDs to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed IDs:
@@ -348,8 +346,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation idRefMultiple (@Nonnull @Nonempty final Iterable <String> aIDs)
   {
-    if (ContainerHelper.isEmpty (aIDs))
-      throw new IllegalArgumentException ("IDs may not be empty");
+    ValueEnforcer.notEmpty (aIDs, "IDs");
 
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final String sID : aIDs)
@@ -359,7 +356,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aCSSClass
    *        The class to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed class: <code>$('.class')</code>
@@ -372,7 +369,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aCSSClasses
    *        The classes to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed classes:
@@ -381,8 +378,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final ICSSClassProvider... aCSSClasses)
   {
-    if (ArrayHelper.isEmpty (aCSSClasses))
-      throw new IllegalArgumentException ("classes may not be empty");
+    ValueEnforcer.notEmpty (aCSSClasses, "CSSClasses");
 
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
@@ -392,7 +388,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param aCSSClasses
    *        The classes to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed classes:
@@ -401,8 +397,7 @@ public final class JQuery
   @Nonnull
   public static JQueryInvocation classRefMultiple (@Nonnull @Nonempty final Iterable <? extends ICSSClassProvider> aCSSClasses)
   {
-    if (ContainerHelper.isEmpty (aCSSClasses))
-      throw new IllegalArgumentException ("classes may not be empty");
+    ValueEnforcer.notEmpty (aCSSClasses, "CSSClasses");
 
     final List <IJQuerySelector> aSelectors = new ArrayList <IJQuerySelector> ();
     for (final ICSSClassProvider aCSSClass : aCSSClasses)
@@ -412,7 +407,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param eElement
    *        The HTML element to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed element:
@@ -426,7 +421,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param sElementName
    *        The HTML element to be selected. May not be <code>null</code>.
    * @return A jQuery invocation with the passed element:
@@ -440,7 +435,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param eElement
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param aSelector
@@ -458,7 +453,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param sElementName
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param aSelector
@@ -476,7 +471,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param eElement
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param sID
@@ -493,7 +488,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param sElementName
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param sID
@@ -510,7 +505,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param eElement
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param aCSSClass
@@ -528,7 +523,7 @@ public final class JQuery
 
   /**
    * Get the result of a jQuery selection
-   * 
+   *
    * @param sElementName
    *        The HTML element to be selected. May not be <code>null</code>.
    * @param aCSSClass
@@ -558,7 +553,7 @@ public final class JQuery
 
   /**
    * Add onDocumentReady call with a single statement
-   * 
+   *
    * @param aJSCodeProvider
    *        The statement to be executed on document ready
    * @return The invocation object

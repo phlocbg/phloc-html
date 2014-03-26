@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -42,7 +43,7 @@ import com.phloc.json2.IJson;
 
 /**
  * Object invocation
- * 
+ *
  * @author Philip Helger
  */
 public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends AbstractJSExpression implements IJSStatement
@@ -76,53 +77,47 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invoke a function
-   * 
+   *
    * @param aFunction
    */
   protected AbstractJSInvocation (@Nonnull final JSFunction aFunction)
   {
-    if (aFunction == null)
-      throw new NullPointerException ("function");
     m_aObject = null;
     m_sName = null;
-    m_aCallee = aFunction;
+    m_aCallee = ValueEnforcer.notNull (aFunction, "Function");
     m_aCtorType = null;
   }
 
   /**
    * Invoke a function
-   * 
+   *
    * @param sFunctionName
    */
   public AbstractJSInvocation (@Nonnull final String sFunctionName)
   {
-    if (sFunctionName == null)
-      throw new NullPointerException ("function");
     m_aObject = null;
-    m_sName = sFunctionName;
+    m_sName = ValueEnforcer.notNull (sFunctionName, "FunctionName");
     m_aCallee = null;
     m_aCtorType = null;
   }
 
   /**
    * Invoke an anonymous function
-   * 
+   *
    * @param aAnonymousFunction
    *        The function to be invoked
    */
   protected AbstractJSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
-    if (aAnonymousFunction == null)
-      throw new NullPointerException ("anonymousFunction");
     m_aObject = null;
     m_sName = null;
-    m_aCallee = aAnonymousFunction;
+    m_aCallee = ValueEnforcer.notNull (aAnonymousFunction, "AnonymousFunction");
     m_aCtorType = null;
   }
 
   /**
    * Invokes a method on an object.
-   * 
+   *
    * @param aLhs
    *        Expression for the object upon which the named method will be
    *        invoked, or null if none
@@ -164,28 +159,24 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   private AbstractJSInvocation (@Nullable final IJSGeneratable aLhs, @Nonnull final JSMethod aMethod)
   {
-    if (aMethod == null)
-      throw new NullPointerException ("method");
     m_aObject = aLhs;
     m_sName = null;
-    m_aCallee = aMethod;
+    m_aCallee = ValueEnforcer.notNull (aMethod, "Method");
     m_aCtorType = null;
   }
 
   /**
    * Invokes a constructor of an object (i.e., creates a new object.)
-   * 
+   *
    * @param aType
    *        Type of the object to be created. May not be <code>null</code>.
    */
   protected AbstractJSInvocation (@Nonnull final AbstractJSType aType)
   {
-    if (aType == null)
-      throw new NullPointerException ("constructorType");
     m_aObject = null;
     m_sName = null;
     m_aCallee = null;
-    m_aCtorType = aType;
+    m_aCtorType = ValueEnforcer.notNull (aType, "Type");
   }
 
   @SuppressWarnings ("unchecked")
@@ -197,7 +188,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   * 
+   *
    * @param aExpr
    *        Argument to add to argument list
    * @return this
@@ -205,15 +196,14 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   @Nonnull
   public IMPLTYPE arg (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("argument");
+    ValueEnforcer.notNull (aExpr, "Argument");
     m_aArgs.add (aExpr);
     return _thisAsT ();
   }
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(bArgument))}
-   * 
+   *
    * @param bValue
    *        value to be added as an argument
    * @return this
@@ -226,7 +216,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(cArgument))}
-   * 
+   *
    * @param cValue
    *        value to be added as an argument
    * @return this
@@ -239,7 +229,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(dArgument))}
-   * 
+   *
    * @param dValue
    *        value to be added as an argument
    * @return this
@@ -252,7 +242,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(fArgument))}
-   * 
+   *
    * @param fValue
    *        value to be added as an argument
    * @return this
@@ -265,7 +255,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
-   * 
+   *
    * @param nValue
    *        value to be added as an argument
    * @return this
@@ -278,7 +268,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
-   * 
+   *
    * @param nValue
    *        value to be added as an argument
    * @return this
@@ -292,7 +282,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   /**
    * Add an expression to this invocation's argument list or "null" if it is
    * <code>null</code>
-   * 
+   *
    * @param aExpr
    *        Argument to add to argument list
    * @return this
@@ -356,6 +346,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   {
     if (aElements == null)
       return argNull ();
+
     final StringBuilder aSB = new StringBuilder ();
     for (final EHTMLElement eElement : aElements)
     {
@@ -371,6 +362,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   {
     if (aElements == null)
       return argNull ();
+
     final StringBuilder aSB = new StringBuilder ();
     for (final EHTMLElement eElement : aElements)
     {
@@ -386,6 +378,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   {
     if (aElements == null)
       return argNull ();
+
     final StringBuilder aSB = new StringBuilder ();
     for (final String sElement : aElements)
     {
@@ -422,7 +415,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   * 
+   *
    * @param aArgument
    *        Argument to add to argument list
    */
@@ -434,15 +427,14 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   * 
+   *
    * @param aArgument
    *        Argument to add to argument list
    */
   @Nonnull
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final IJSExpression aArgument)
   {
-    if (aArgument == null)
-      throw new NullPointerException ("argument");
+    ValueEnforcer.notNull (aArgument, "Argument");
     m_aArgs.add (nIndex, aArgument);
     return _thisAsT ();
   }
@@ -557,7 +549,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   * 
+   *
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -573,7 +565,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   * 
+   *
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -589,7 +581,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   * 
+   *
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -605,7 +597,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   * 
+   *
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -621,7 +613,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Returns all arguments of the invocation.
-   * 
+   *
    * @return If there's no arguments, an empty array will be returned.
    */
   @Nonnull
@@ -657,7 +649,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Remove all arguments
-   * 
+   *
    * @return this
    */
   @Nonnull

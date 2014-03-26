@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.IMicroDocument;
@@ -48,7 +49,7 @@ import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Utility class for parsing stuff as HTML.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -62,7 +63,7 @@ public final class XHTMLParser
   /**
    * Check whether the passed text looks like it contains XHTML code. This is a
    * heuristic check only and does not perform actual parsing!
-   * 
+   *
    * @param sText
    *        The text to check.
    * @return <code>true</code> if the text looks like HTML
@@ -78,7 +79,7 @@ public final class XHTMLParser
   /**
    * Check if the given fragment is valid XHTML 1.1 mark-up. This method tries
    * to parse the XHTML fragment, so it is potentially slow!
-   * 
+   *
    * @param sXHTMLFragment
    *        The XHTML fragment to parse. It is not checked, whether the value
    *        looks like HTML or not.
@@ -94,7 +95,7 @@ public final class XHTMLParser
    * Parse the given fragment as XHTML 1.1. This is a sanity method for
    * {@link #parseXHTMLFragment(EHTMLVersion, String)} with the predefined XHTML
    * 1.1 document type.
-   * 
+   *
    * @param sXHTMLFragment
    *        The XHTML fragment to parse.
    * @return <code>null</code> if parsing failed.
@@ -107,7 +108,7 @@ public final class XHTMLParser
 
   /**
    * Parse the given fragment with the specified document type.
-   * 
+   *
    * @param eHTMLVersion
    *        The HTML version to use.
    * @param sXHTMLFragment
@@ -118,8 +119,7 @@ public final class XHTMLParser
   public static IMicroDocument parseXHTMLFragment (@Nonnull final EHTMLVersion eHTMLVersion,
                                                    @Nullable final String sXHTMLFragment)
   {
-    if (eHTMLVersion == null)
-      throw new NullPointerException ("HTMLversion");
+    ValueEnforcer.notNull (eHTMLVersion, "HTMLversion");
 
     // Build mini HTML and insert fragment in the middle.
     // If parsing succeeds, it is considered valid HTML.
@@ -127,18 +127,18 @@ public final class XHTMLParser
     final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLSerializeVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
                                                                         eHTMLVersion.getDocType ()) +
-                          "<html" +
-                          (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
-                          "><head><title></title></head><body>" +
-                          StringHelper.getNotNull (sXHTMLFragment) +
-                          "</body></html>";
+                                                                        "<html" +
+                                                                        (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
+                                                                        "><head><title></title></head><body>" +
+                                                                        StringHelper.getNotNull (sXHTMLFragment) +
+                                                                        "</body></html>";
     return parseXHTMLDocument (sXHTML);
   }
 
   /**
    * This method parses a full HTML document into a {@link IMicroDocument} using
    * the {@link HTMLEntityResolver} resolver.
-   * 
+   *
    * @param sXHTML
    *        The complete XHTML document as a string.
    * @return <code>null</code> if interpretation failed
@@ -153,7 +153,7 @@ public final class XHTMLParser
   /**
    * Interpret the passed XHTML fragment as HTML and retrieve a result container
    * with all body elements.
-   * 
+   *
    * @param sXHTML
    *        The XHTML text fragment.
    * @return <code>null</code> if the passed text could not be interpreted as
@@ -168,7 +168,7 @@ public final class XHTMLParser
   /**
    * Interpret the passed XHTML fragment as HTML and retrieve a result container
    * with all body elements.
-   * 
+   *
    * @param eHTMLVersion
    *        The HTML version to be used for parsing. May not be
    *        <code>null</code>.
@@ -205,7 +205,7 @@ public final class XHTMLParser
   /**
    * If the passed text looks like XHTML, unescape it (using
    * {@link #unescapeXHTML(String)}) else return a simple text node.
-   * 
+   *
    * @param sText
    *        The text to be converted. May be <code>null</code>.
    * @return A non-<code>null</code> IHCNode with the result representation

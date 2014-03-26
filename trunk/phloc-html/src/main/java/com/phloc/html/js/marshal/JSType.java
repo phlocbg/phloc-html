@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.MustImplementEqualsAndHashcode;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
@@ -31,7 +32,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Wrapper around JavaScript types.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -77,14 +78,14 @@ public class JSType implements Serializable
 
   /**
    * Constant basic type for objects already having JS code present.
-   * 
+   *
    * @see IJSCodeProvider
    */
   public static final JSType JS = new JSType (EJSType.JS);
 
   /**
    * Constant basic type for objects already having JSON code present.
-   * 
+   *
    * @see IJSCodeProvider
    */
   public static final JSType JSON = new JSType (EJSType.JSON);
@@ -102,20 +103,18 @@ public class JSType implements Serializable
   /**
    * The constructor is protected to avoid outside instantiation. Use only the
    * above constants.
-   * 
+   *
    * @param eType
    *        The basic type. May not be <code>null</code>.
    */
   protected JSType (@Nonnull final EJSType eType)
   {
-    if (eType == null)
-      throw new NullPointerException ("type");
-    m_eType = eType;
+    m_eType = ValueEnforcer.notNull (eType, "Type");
   }
 
   /**
    * Get the contained base type.
-   * 
+   *
    * @return The base type. Is only <code>null</code> for the
    *         {@link #AUTO_DETECT} type.
    */

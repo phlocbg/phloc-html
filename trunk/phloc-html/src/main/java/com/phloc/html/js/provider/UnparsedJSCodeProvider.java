@@ -20,6 +20,7 @@ package com.phloc.html.js.provider;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
@@ -27,7 +28,7 @@ import com.phloc.html.js.IJSCodeProvider;
 /**
  * Implementation of {@link IJSCodeProvider} that takes an arbitrary string from
  * any sources
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -37,9 +38,7 @@ public final class UnparsedJSCodeProvider implements IJSCodeProvider
 
   public UnparsedJSCodeProvider (@Nonnull final String sJSCode)
   {
-    if (sJSCode == null)
-      throw new NullPointerException ("JSCode");
-    m_sJSCode = sJSCode;
+    m_sJSCode = ValueEnforcer.notNull (sJSCode, "JSCode");
   }
 
   /**

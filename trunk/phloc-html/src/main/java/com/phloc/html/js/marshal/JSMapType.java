@@ -20,12 +20,13 @@ package com.phloc.html.js.marshal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Specific JavaScript map type.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -44,12 +45,8 @@ public final class JSMapType extends JSType
   public JSMapType (@Nonnull final JSType aKeyType, @Nonnull final JSType aValueType)
   {
     super (EJSType.MAP);
-    if (aKeyType == null)
-      throw new NullPointerException ("keyType");
-    if (aValueType == null)
-      throw new NullPointerException ("valueType");
-    m_aKeyType = aKeyType;
-    m_aValueType = aValueType;
+    m_aKeyType = ValueEnforcer.notNull (aKeyType, "KeyType");
+    m_aValueType = ValueEnforcer.notNull (aValueType, "ValueType");
   }
 
   @Nonnull
@@ -85,8 +82,8 @@ public final class JSMapType extends JSType
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("keyType", m_aKeyType)
-                            .append ("valueType", m_aValueType)
-                            .toString ();
+        .append ("keyType", m_aKeyType)
+        .append ("valueType", m_aValueType)
+        .toString ();
   }
 }

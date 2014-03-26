@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -36,7 +37,7 @@ import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
- * 
+ *
  * @author Philip Helger
  */
 public class JSArray extends AbstractJSExpression
@@ -231,8 +232,7 @@ public class JSArray extends AbstractJSExpression
   @Nonnull
   public JSArray add (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
+    ValueEnforcer.notNull (aExpr, "Expr");
 
     if (m_aExprs == null)
       m_aExprs = new ArrayList <IJSExpression> ();

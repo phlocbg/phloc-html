@@ -19,12 +19,13 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * array component reference.
- * 
+ *
  * @author Philip Helger
  */
 public class JSArrayCompRef extends AbstractJSAssignmentTarget
@@ -41,7 +42,7 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
 
   /**
    * JArray component reference constructor given an array expression and index.
-   * 
+   *
    * @param aArray
    *        JExpression for the array upon which the component will be accessed,
    * @param aIndex
@@ -49,12 +50,8 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
    */
   JSArrayCompRef (@Nonnull final IJSExpression aArray, @Nonnull final IJSExpression aIndex)
   {
-    if (aArray == null)
-      throw new NullPointerException ("array");
-    if (aIndex == null)
-      throw new NullPointerException ("index");
-    m_aArray = aArray;
-    m_aIndex = aIndex;
+    m_aArray = ValueEnforcer.notNull (aArray, "Array");
+    m_aIndex = ValueEnforcer.notNull (aIndex, "Index");
   }
 
   public void generate (@Nonnull final JSFormatter aFormatter)
@@ -83,8 +80,8 @@ public class JSArrayCompRef extends AbstractJSAssignmentTarget
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("array", m_aArray)
-                            .append ("index", m_aIndex)
-                            .toString ();
+        .append ("array", m_aArray)
+        .append ("index", m_aIndex)
+        .toString ();
   }
 }

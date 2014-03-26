@@ -24,6 +24,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
@@ -32,7 +33,7 @@ import com.phloc.html.js.builder.IJSExpression;
 
 /**
  * A list of jQuery selectors that are chained with ' ' (space)
- * 
+ *
  * @author Philip Helger
  */
 public class JQuerySelectorList implements IJSCodeProvider
@@ -75,8 +76,7 @@ public class JQuerySelectorList implements IJSCodeProvider
   @Nonnull
   public JQuerySelectorList addSelector (@Nonnull final IJQuerySelector aSelector)
   {
-    if (aSelector == null)
-      throw new NullPointerException ("selector");
+    ValueEnforcer.notNull (aSelector, "Selector");
     m_aElements.add (aSelector);
     return this;
   }

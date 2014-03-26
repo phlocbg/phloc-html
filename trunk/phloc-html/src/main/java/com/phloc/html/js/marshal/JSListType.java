@@ -20,12 +20,13 @@ package com.phloc.html.js.marshal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Specific JavaScript list type.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -39,9 +40,7 @@ public final class JSListType extends JSType implements IHasChildJSType
   public JSListType (@Nonnull final JSType aChildType)
   {
     super (EJSType.LIST);
-    if (aChildType == null)
-      throw new NullPointerException ("childType");
-    m_aChildType = aChildType;
+    m_aChildType = ValueEnforcer.notNull (aChildType, "ChildType");
   }
 
   @Nonnull

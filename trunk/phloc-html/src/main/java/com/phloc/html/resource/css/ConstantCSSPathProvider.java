@@ -19,15 +19,15 @@ package com.phloc.html.resource.css;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.css.CSSFilenameHelper;
 
 /**
  * Implementation of {@link ICSSPathProvider} with constant paths.
- * 
+ *
  * @author Philip Helger
  */
 public final class ConstantCSSPathProvider implements ICSSPathProvider
@@ -42,12 +42,10 @@ public final class ConstantCSSPathProvider implements ICSSPathProvider
 
   public ConstantCSSPathProvider (@Nonnull @Nonempty final String sPath, @Nonnull @Nonempty final String sMinifiedPath)
   {
-    if (StringHelper.hasNoText (sPath))
-      throw new IllegalArgumentException ("path is empty");
+    ValueEnforcer.notEmpty (sPath, "Path");
     if (!CSSFilenameHelper.isCSSFilename (sPath))
       throw new IllegalArgumentException ("path");
-    if (StringHelper.hasNoText (sMinifiedPath))
-      throw new IllegalArgumentException ("minified path is empty");
+    ValueEnforcer.notEmpty (sMinifiedPath, "MinifiedPath");
     if (!CSSFilenameHelper.isCSSFilename (sMinifiedPath))
       throw new IllegalArgumentException ("minified path");
     m_sPath = sPath;

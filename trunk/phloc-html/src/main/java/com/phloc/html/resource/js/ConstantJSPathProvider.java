@@ -19,14 +19,14 @@ package com.phloc.html.resource.js;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * An implementation of {@link IJSPathProvider} using constant paths.
- * 
+ *
  * @author Philip Helger
  */
 public final class ConstantJSPathProvider implements IJSPathProvider
@@ -56,12 +56,10 @@ public final class ConstantJSPathProvider implements IJSPathProvider
                                  @Nonnull @Nonempty final String sMinifiedPath,
                                  final boolean bCanBeBundled)
   {
-    if (StringHelper.hasNoText (sPath))
-      throw new IllegalArgumentException ("path is empty");
+    ValueEnforcer.notEmpty (sPath, "Path");
     if (!JSFilenameHelper.isJSFilename (sPath))
       throw new IllegalArgumentException ("path");
-    if (StringHelper.hasNoText (sMinifiedPath))
-      throw new IllegalArgumentException ("minified path is empty");
+    ValueEnforcer.notEmpty (sMinifiedPath, "MinifiedPath");
     if (!JSFilenameHelper.isJSFilename (sMinifiedPath))
       throw new IllegalArgumentException ("minified path");
     m_sPath = sPath;
@@ -105,25 +103,25 @@ public final class ConstantJSPathProvider implements IJSPathProvider
       return false;
     final ConstantJSPathProvider rhs = (ConstantJSPathProvider) o;
     return m_sPath.equals (rhs.m_sPath) &&
-           m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
-           m_bCanBeBundled == rhs.m_bCanBeBundled;
+        m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
+        m_bCanBeBundled == rhs.m_bCanBeBundled;
   }
 
   @Override
   public int hashCode ()
   {
     return new HashCodeGenerator (this).append (m_sPath)
-                                       .append (m_sMinifiedPath)
-                                       .append (m_bCanBeBundled)
-                                       .getHashCode ();
+        .append (m_sMinifiedPath)
+        .append (m_bCanBeBundled)
+        .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
     return new ToStringGenerator (this).append ("path", m_sPath)
-                                       .append ("minifiedPath", m_sMinifiedPath)
-                                       .append ("canBeBundled", m_bCanBeBundled)
-                                       .toString ();
+        .append ("minifiedPath", m_sMinifiedPath)
+        .append ("canBeBundled", m_bCanBeBundled)
+        .toString ();
   }
 }

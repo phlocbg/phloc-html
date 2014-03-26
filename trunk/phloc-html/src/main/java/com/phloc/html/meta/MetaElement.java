@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -53,7 +54,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single HTML meta element.
- * 
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -77,7 +78,7 @@ public class MetaElement implements IMetaElement
 
   /**
    * Constructor without content!!
-   * 
+   *
    * @param sName
    *        Element name
    * @param sScheme
@@ -88,9 +89,7 @@ public class MetaElement implements IMetaElement
    */
   public MetaElement (@Nonnull final String sName, @Nullable final String sScheme, final boolean bIsHttpEquiv)
   {
-    if (sName == null)
-      throw new NullPointerException ("name");
-    m_sName = sName;
+    m_sName = ValueEnforcer.notNull (sName, "Name");
     m_sScheme = sScheme;
     m_bIsHttpEquiv = bIsHttpEquiv;
   }
@@ -116,9 +115,7 @@ public class MetaElement implements IMetaElement
                       @Nullable final Locale aContentLocale,
                       @Nullable final String sContent)
   {
-    if (sName == null)
-      throw new NullPointerException ("name");
-    m_sName = sName;
+    m_sName = ValueEnforcer.notNull (sName, "Name");
     m_sScheme = sScheme;
     m_bIsHttpEquiv = bIsHttpEquiv;
     setContent (aContentLocale, sContent);

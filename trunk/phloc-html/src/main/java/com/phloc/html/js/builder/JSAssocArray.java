@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -37,7 +38,7 @@ import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
- * 
+ *
  * @author Philip Helger
  */
 public class JSAssocArray extends AbstractJSExpression
@@ -164,10 +165,8 @@ public class JSAssocArray extends AbstractJSExpression
   @Nonnull
   public JSAssocArray add (@Nonnull final IJSExpression aKey, @Nonnull final IJSExpression aValue)
   {
-    if (aKey == null)
-      throw new NullPointerException ("key");
-    if (aValue == null)
-      throw new NullPointerException ("value");
+    ValueEnforcer.notNull (aKey, "Key");
+    ValueEnforcer.notNull (aValue, "Value");
 
     if (m_aExprs == null)
       m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
