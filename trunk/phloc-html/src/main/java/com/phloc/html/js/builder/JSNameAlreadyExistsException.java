@@ -19,9 +19,11 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
+
 /**
  * Indicates that a declaration is already created.
- * 
+ *
  * @author Philip Helger
  */
 public class JSNameAlreadyExistsException extends RuntimeException
@@ -30,15 +32,12 @@ public class JSNameAlreadyExistsException extends RuntimeException
 
   public JSNameAlreadyExistsException (@Nonnull final IJSDeclaration aExisting)
   {
-    if (aExisting == null)
-      throw new NullPointerException ("existing");
-
-    m_aExisting = aExisting;
+    m_aExisting = ValueEnforcer.notNull (aExisting, "Existing");
   }
 
   /**
    * Gets a reference to the existing {@link IJSDeclaration}.
-   * 
+   *
    * @return This method always return non-null valid object.
    */
   @Nonnull

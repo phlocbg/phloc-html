@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -28,9 +29,7 @@ public class JSExprParanthesis extends AbstractJSExpression
 
   public JSExprParanthesis (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
-    m_aExpr = aExpr;
+    m_aExpr = ValueEnforcer.notNull (aExpr, "Expr");
   }
 
   @Nonnull

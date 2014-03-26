@@ -98,7 +98,7 @@ public final class JSMarshaller
                                                                                 "true",
                                                                                 "false",
                                                                                 "null",
-      "undefined");
+                                                                                "undefined");
 
   private JSMarshaller ()
   {}
@@ -331,7 +331,7 @@ public final class JSMarshaller
         case STRING:
           // Note: use single quotes for use in HTML attributes!
           final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
-                                                                                 : String.valueOf (aObject);
+                                                                                : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
           break;
         case ARRAY:

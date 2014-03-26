@@ -26,10 +26,12 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.annotation.WillCloseWhenClosed;
 
+import com.phloc.commons.ValueEnforcer;
+
 /**
  * This is a utility class for managing indentation and other basic formatting
  * for {@link PrintWriter}.
- * 
+ *
  * @author Philip Helger
  */
 public class JSFormatter implements Closeable
@@ -78,7 +80,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Creates a JFormatter.
-   * 
+   *
    * @param aPrintWriter
    *        PrintWriter to use.
    * @param sIndentSpace
@@ -86,13 +88,8 @@ public class JSFormatter implements Closeable
    */
   public JSFormatter (@Nonnull @WillCloseWhenClosed final PrintWriter aPrintWriter, @Nonnull final String sIndentSpace)
   {
-    if (aPrintWriter == null)
-      throw new NullPointerException ("printWriter");
-    if (sIndentSpace == null)
-      throw new NullPointerException ("indentSpace");
-
-    m_aPW = aPrintWriter;
-    m_sIndentSpace = sIndentSpace;
+    m_aPW = ValueEnforcer.notNull (aPrintWriter, "PrintWriter");
+    m_sIndentSpace = ValueEnforcer.notNull (sIndentSpace, "IndentSpace");
   }
 
   public boolean indentAndAlign ()
@@ -141,7 +138,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Decrement the indentation level if {@link #indentAndAlign()} is on
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -154,7 +151,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Decrement the indentation level.
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -169,7 +166,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Increment the indentation level if {@link #indentAndAlign()} is on
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -182,7 +179,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Increment the indentation level.
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -205,7 +202,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a char into the stream
-   * 
+   *
    * @param cChar
    *        the char
    */
@@ -219,7 +216,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a {@link String} into the stream
-   * 
+   *
    * @param sText
    *        the {@link String}
    */
@@ -233,7 +230,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a type name.
-   * 
+   *
    * @param aType
    *        The type whose name is to be printed
    */
@@ -246,7 +243,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a new line into the stream if {@link #indentAndAlign()} is on
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -259,7 +256,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Print a new line into the stream
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -272,7 +269,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the {@link IJSGeneratable} object to generate source for itself
-   * 
+   *
    * @param aGeneratable
    *        the {@link IJSGeneratable} object
    */
@@ -303,7 +300,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the {@link IJSDeclaration} to generate source for itself
-   * 
+   *
    * @param aDeclaration
    *        the {@link IJSDeclaration} object
    */
@@ -316,7 +313,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the {@link IJSStatement} to generate source for itself
-   * 
+   *
    * @param aStatement
    *        the {@link IJSStatement} object
    */
@@ -329,7 +326,7 @@ public class JSFormatter implements Closeable
 
   /**
    * Cause the {@link JSVar} to generate source for itself
-   * 
+   *
    * @param aVar
    *        the {@link JSVar} object
    */

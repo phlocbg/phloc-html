@@ -20,12 +20,13 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Postfix decrement (x--) statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSDecrPostfix implements IJSStatement
@@ -34,15 +35,13 @@ public class JSDecrPostfix implements IJSStatement
 
   /**
    * constructor
-   * 
+   *
    * @param aExpr
    *        expression to be incremented
    */
   public JSDecrPostfix (@Nonnull final IJSAssignmentTarget aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("Expr");
-    m_aExpr = aExpr;
+    m_aExpr = ValueEnforcer.notNull (aExpr, "Expr");
   }
 
   @Nonnull

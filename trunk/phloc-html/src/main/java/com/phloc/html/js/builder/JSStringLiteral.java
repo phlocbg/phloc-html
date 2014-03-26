@@ -19,6 +19,7 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
@@ -26,7 +27,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * String literal.
- * 
+ *
  * @author Philip Helger
  */
 public class JSStringLiteral extends AbstractJSExpression
@@ -35,10 +36,8 @@ public class JSStringLiteral extends AbstractJSExpression
 
   public JSStringLiteral (@Nonnull final String sStr)
   {
-    if (sStr == null)
-      throw new NullPointerException ("string");
     // May be empty
-    m_sStr = sStr;
+    m_sStr = ValueEnforcer.notNull (sStr, "String");
   }
 
   /**

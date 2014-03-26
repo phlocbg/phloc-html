@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -39,7 +40,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * A generated JS class.
- * 
+ *
  * @author Philip Helger
  */
 public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, IJSDocCommentable
@@ -66,7 +67,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * constructor
-   * 
+   *
    * @param sName
    *        Name of this class
    */
@@ -81,7 +82,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * This class extends the specified class.
-   * 
+   *
    * @param aSuperClass
    *        Superclass for this class
    * @return This class
@@ -90,10 +91,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   @CodingStyleguideUnaware
   public JSDefinedClass _extends (@Nonnull final AbstractJSClass aSuperClass)
   {
-    if (aSuperClass == null)
-      throw new NullPointerException ("superClass");
-
-    m_aSuperClass = aSuperClass;
+    m_aSuperClass = ValueEnforcer.notNull (aSuperClass, "SuperClass");
     return this;
   }
 
@@ -113,7 +111,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
    * <p>
    * For example, for <code>java.util.List</code>, this method returns
    * <code>"List"</code>"
-   * 
+   *
    * @return Name of this class
    */
   @Override
@@ -126,7 +124,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a field to the list of field members of this defined class.
-   * 
+   *
    * @param sName
    *        Name of this field
    * @return Newly generated field
@@ -139,7 +137,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a field to the list of field members of this defined class.
-   * 
+   *
    * @param aType
    *        type of this field
    * @param sName
@@ -154,7 +152,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a field to the list of field members of this defined class.
-   * 
+   *
    * @param sName
    *        Name of this field.
    * @param aInit
@@ -169,7 +167,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a field to the list of field members of this defined class.
-   * 
+   *
    * @param aType
    *        type of this field.
    * @param sName
@@ -196,8 +194,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   @Nonnull
   public JSFieldVar addField (@Nonnull final JSFieldVar aField) throws JSNameAlreadyExistsException
   {
-    if (aField == null)
-      throw new NullPointerException ("Field");
+    ValueEnforcer.notNull (aField, "Field");
 
     final String sName = aField.name ();
     final JSFieldVar aOldField = getFieldOfName (sName);
@@ -211,7 +208,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   /**
    * Returns all the fields declared in this class. The returned {@link Map} is
    * a read-only live view.
-   * 
+   *
    * @return always non-null.
    */
   @Nonnull
@@ -228,7 +225,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Removes a {@link JSFieldVar} from this class.
-   * 
+   *
    * @return this
    * @throws IllegalArgumentException
    *         if the given field is not a field on this class.
@@ -236,8 +233,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
   @Nonnull
   public JSDefinedClass removeField (@Nonnull final JSFieldVar aField)
   {
-    if (aField == null)
-      throw new NullPointerException ("field");
+    ValueEnforcer.notNull (aField, "Field");
 
     if (m_aFields.remove (aField.name ()) != aField)
       throw new IllegalArgumentException ("Failed to remove field '" + aField.name () + "' from " + m_aFields.keySet ());
@@ -253,7 +249,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Adds a constructor to this class.
-   * 
+   *
    * @return The constructor object to use. Never <code>null</code>.
    */
   @Nonnull
@@ -266,7 +262,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Add a method to the list of method members of this JS class instance.
-   * 
+   *
    * @param sName
    *        Name of the method
    * @return Newly generated method
@@ -279,7 +275,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Add a method to the list of method members of this JS class instance.
-   * 
+   *
    * @param aType
    *        Return type for this method
    * @param sName
@@ -306,7 +302,7 @@ public class JSDefinedClass extends AbstractJSClass implements IJSDeclaration, I
 
   /**
    * Creates, if necessary, and returns the class JSDoc for this defined class
-   * 
+   *
    * @return {@link JSCommentMultiLine} containing JSDoc for this class
    */
   @Nonnull

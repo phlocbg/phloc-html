@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -32,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Switch statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSSwitch implements IJSStatement
@@ -57,9 +58,7 @@ public class JSSwitch implements IJSStatement
    */
   public JSSwitch (@Nonnull final IJSExpression aTest)
   {
-    if (aTest == null)
-      throw new NullPointerException ("test");
-    m_aTest = aTest;
+    m_aTest = ValueEnforcer.notNull (aTest, "Test");
   }
 
   @Nonnull

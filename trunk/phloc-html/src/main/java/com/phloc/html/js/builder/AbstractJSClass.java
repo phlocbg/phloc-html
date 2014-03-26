@@ -20,12 +20,13 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
 
 /**
  * Represents an abstract JS class.
- * 
+ *
  * @author Philip Helger
  */
 public abstract class AbstractJSClass extends AbstractJSType
@@ -35,7 +36,7 @@ public abstract class AbstractJSClass extends AbstractJSType
 
   /**
    * Gets the super class of this class.
-   * 
+   *
    * @return Returns the JClass representing the superclass of the entity (class
    *         or interface) represented by this {@link AbstractJSClass}. Even if
    *         no super class is given explicitly or this {@link AbstractJSClass}
@@ -55,8 +56,7 @@ public abstract class AbstractJSClass extends AbstractJSType
    */
   public final boolean isAssignableFrom (@Nonnull final AbstractJSClass aDerived)
   {
-    if (aDerived == null)
-      throw new NullPointerException ("derived");
+    ValueEnforcer.notNull (aDerived, "Derived");
 
     // to avoid the confusion, always use "this" explicitly in this method.
     if (this == aDerived)

@@ -19,12 +19,13 @@ package com.phloc.html.js.builder;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * RegEx literal.
- * 
+ *
  * @author Philip Helger
  */
 public class JSRegExLiteral extends AbstractJSExpression
@@ -40,9 +41,7 @@ public class JSRegExLiteral extends AbstractJSExpression
 
   public JSRegExLiteral (@Nonnull final String sRegEx)
   {
-    if (sRegEx == null)
-      throw new NullPointerException ("regex");
-    m_sRegEx = sRegEx;
+    m_sRegEx = ValueEnforcer.notNull (sRegEx, "RegEx");
   }
 
   public boolean global ()
@@ -83,7 +82,7 @@ public class JSRegExLiteral extends AbstractJSExpression
 
   /**
    * Set global, case insensitive and multi line at once
-   * 
+   *
    * @param bGlobal
    *        value for global
    * @param bCaseInsensitive

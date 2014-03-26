@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -32,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * For statement
- * 
+ *
  * @author Philip Helger
  */
 public class JSForLoop implements IJSStatement
@@ -85,8 +86,7 @@ public class JSForLoop implements IJSStatement
                      @Nonnull @Nonempty final String sVarName,
                      @Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("initExpression");
+    ValueEnforcer.notNull (aExpr, "InitExpression");
 
     final JSVar aVar = new JSVar (aType, sVarName, aExpr);
     m_aInits.add (aVar);
@@ -100,16 +100,12 @@ public class JSForLoop implements IJSStatement
 
   public void test (@Nonnull final IJSExpression aTest)
   {
-    if (aTest == null)
-      throw new NullPointerException ("test");
-
-    m_aTest = aTest;
+    m_aTest = ValueEnforcer.notNull (aTest, "Test");
   }
 
   public void update (@Nonnull final IJSExpression aExpr)
   {
-    if (aExpr == null)
-      throw new NullPointerException ("expr");
+    ValueEnforcer.notNull (aExpr, "Expr");
 
     m_aUpdates.add (aExpr);
   }

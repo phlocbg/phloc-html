@@ -24,6 +24,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
@@ -33,7 +34,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
  * This class represents a map from an {@link EJSEvent} to an
  * {@link IJSCodeProvider} that represents the code. This is mainly meant for
  * managing HTML element JS event handler.
- * 
+ *
  * @author Philip Helger
  */
 public final class JSEventMap implements Serializable
@@ -43,7 +44,7 @@ public final class JSEventMap implements Serializable
   /**
    * Add an additional handler for the given JS event. If an existing handler is
    * present, the new handler is appended at the end.
-   * 
+   *
    * @param eJSEvent
    *        The JS event. May not be <code>null</code>.
    * @param aNewHandler
@@ -51,10 +52,8 @@ public final class JSEventMap implements Serializable
    */
   public void addHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
   {
-    if (eJSEvent == null)
-      throw new NullPointerException ("JSEvent");
-    if (aNewHandler == null)
-      throw new NullPointerException ("newHandler");
+    ValueEnforcer.notNull (eJSEvent, "JSEvent");
+    ValueEnforcer.notNull (aNewHandler, "NewHandler");
 
     CollectingJSCodeProvider aCode = m_aEvents.get (eJSEvent);
     if (aCode == null)
@@ -68,7 +67,7 @@ public final class JSEventMap implements Serializable
   /**
    * Add an additional handler for the given JS event. If an existing handler is
    * present, the new handler is appended at front.
-   * 
+   *
    * @param eJSEvent
    *        The JS event. May not be <code>null</code>.
    * @param aNewHandler
@@ -76,10 +75,8 @@ public final class JSEventMap implements Serializable
    */
   public void prependHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
   {
-    if (eJSEvent == null)
-      throw new NullPointerException ("JSEvent");
-    if (aNewHandler == null)
-      throw new NullPointerException ("newHandler");
+    ValueEnforcer.notNull (eJSEvent, "JSEvent");
+    ValueEnforcer.notNull (aNewHandler, "NewHandler");
 
     CollectingJSCodeProvider aCode = m_aEvents.get (eJSEvent);
     if (aCode == null)
@@ -93,7 +90,7 @@ public final class JSEventMap implements Serializable
   /**
    * Set a handler for the given JS event. If an existing handler is present, it
    * is automatically overridden.
-   * 
+   *
    * @param eJSEvent
    *        The JS event. May not be <code>null</code>.
    * @param aNewHandler
@@ -101,10 +98,8 @@ public final class JSEventMap implements Serializable
    */
   public void setHandler (@Nonnull final EJSEvent eJSEvent, @Nonnull final IJSCodeProvider aNewHandler)
   {
-    if (eJSEvent == null)
-      throw new NullPointerException ("JSEvent");
-    if (aNewHandler == null)
-      throw new NullPointerException ("newHandler");
+    ValueEnforcer.notNull (eJSEvent, "JSEvent");
+    ValueEnforcer.notNull (aNewHandler, "NewHandler");
 
     // Set only the new handler and remove any existing handler
     m_aEvents.put (eJSEvent, new CollectingJSCodeProvider (aNewHandler));

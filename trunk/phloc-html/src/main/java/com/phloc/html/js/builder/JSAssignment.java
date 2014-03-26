@@ -96,19 +96,19 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   public int hashCode ()
   {
     return HashCodeGenerator.getDerived (super.hashCode ())
-        .append (m_aLhs)
-        .append (m_sOp)
-        .append (m_aRhs)
-        .getHashCode ();
+                            .append (m_aLhs)
+                            .append (m_sOp)
+                            .append (m_aRhs)
+                            .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-        .append ("lhs", m_aLhs)
-        .append ("op", m_sOp)
-        .append ("rhs", m_aRhs)
-        .toString ();
+                            .append ("lhs", m_aLhs)
+                            .append ("op", m_sOp)
+                            .append ("rhs", m_aRhs)
+                            .toString ();
   }
 }
