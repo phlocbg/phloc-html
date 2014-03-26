@@ -22,13 +22,14 @@ import java.math.BigDecimal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * An atomic BigDecimal number
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -38,9 +39,7 @@ public class JSAtomBigDecimal extends AbstractJSAtomNumeric
 
   public JSAtomBigDecimal (@Nonnull final BigDecimal aValue)
   {
-    if (aValue == null)
-      throw new NullPointerException ("Value");
-    m_aValue = aValue;
+    m_aValue = ValueEnforcer.notNull (aValue, "Value");
   }
 
   @Override
@@ -80,7 +79,7 @@ public class JSAtomBigDecimal extends AbstractJSAtomNumeric
   private static BigDecimal _getParam (@Nonnull final AbstractJSAtomNumeric aRhs)
   {
     return aRhs instanceof JSAtomBigDecimal ? ((JSAtomBigDecimal) aRhs).getContainedValue ()
-                                           : BigDecimal.valueOf (aRhs.doubleValue ());
+                                            : BigDecimal.valueOf (aRhs.doubleValue ());
   }
 
   @Override

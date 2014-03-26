@@ -20,12 +20,13 @@ package com.phloc.html.js.marshal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.hash.HashCodeGenerator;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Specific JavaScript array type.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -39,9 +40,7 @@ public final class JSArrayType extends JSType implements IHasChildJSType
   public JSArrayType (@Nonnull final JSType aChildType)
   {
     super (EJSType.ARRAY);
-    if (aChildType == null)
-      throw new NullPointerException ("childType");
-    m_aChildType = aChildType;
+    m_aChildType = ValueEnforcer.notNull (aChildType, "ChildType");
   }
 
   @Nonnull

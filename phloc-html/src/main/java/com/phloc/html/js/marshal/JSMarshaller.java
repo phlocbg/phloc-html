@@ -30,6 +30,7 @@ import javax.annotation.concurrent.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.lang.ClassHelper;
@@ -45,7 +46,7 @@ import com.phloc.json2.IJson;
 /**
  * Marshaler class that converts Java Objects to their respective JavaScript
  * notation.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -97,7 +98,7 @@ public final class JSMarshaller
                                                                                 "true",
                                                                                 "false",
                                                                                 "null",
-                                                                                "undefined");
+      "undefined");
 
   private JSMarshaller ()
   {}
@@ -108,7 +109,7 @@ public final class JSMarshaller
    * Reference: <a href=
    * "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Literals#String_Literals"
    * > Core JavaScript 1.5 Guide </a>
-   * 
+   *
    * @param sInput
    *        the input string
    * @return the escaped string
@@ -171,7 +172,7 @@ public final class JSMarshaller
    * Important: this is not a 100% reversion of
    * {@link #javaScriptEscape(String)} since the escaping method drops any '\r'
    * character and it will therefore not be unescaped!
-   * 
+   *
    * @param sInput
    *        The string to be unescaped. May be <code>null</code>.
    * @return The unescaped string.
@@ -330,7 +331,7 @@ public final class JSMarshaller
         case STRING:
           // Note: use single quotes for use in HTML attributes!
           final String sValue = aObject instanceof IPredefinedLocaleTextProvider ? ((IPredefinedLocaleTextProvider) aObject).getText ()
-                                                                                : String.valueOf (aObject);
+                                                                                 : String.valueOf (aObject);
           aSB.append ('\'').append (javaScriptEscape (sValue)).append ('\'');
           break;
         case ARRAY:
@@ -428,7 +429,7 @@ public final class JSMarshaller
   /**
    * Auto-detect the type of the passed object and convert it to a JS string. If
    * the type detection failed, an {@link IllegalArgumentException} is thrown.
-   * 
+   *
    * @param aObject
    *        The object to be converted. May be <code>null</code>. Note: works
    *        for atomic types and arrays, but <b>not</b> for collection types!
@@ -451,8 +452,7 @@ public final class JSMarshaller
                                          @Nonnull final JSType aType,
                                          final boolean bWithSurroundingVar)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
+    ValueEnforcer.notNull (aType, "Type");
 
     final StringBuilder aSB = new StringBuilder ();
     _toJSString (aObject, _getRealJSType (aObject, aType), aSB, 0, bWithSurroundingVar);

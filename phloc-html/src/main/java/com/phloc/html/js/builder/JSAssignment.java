@@ -20,14 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Assignment statements, which are also expressions.
- * 
+ *
  * @author Philip Helger
  */
 public class JSAssignment extends AbstractJSExpression implements IJSStatement
@@ -40,16 +40,9 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
                        @Nonnull @Nonempty final String sOp,
                        @Nonnull final IJSExpression aRhs)
   {
-    if (aLhs == null)
-      throw new NullPointerException ("lhs");
-    if (StringHelper.hasNoText (sOp))
-      throw new IllegalArgumentException ("operator is empty");
-    if (aRhs == null)
-      throw new NullPointerException ("rhs");
-
-    m_aLhs = aLhs;
-    m_sOp = sOp;
-    m_aRhs = aRhs;
+    m_aLhs = ValueEnforcer.notNull (aLhs, "Lhs");
+    m_sOp = ValueEnforcer.notEmpty (sOp, "Operator");
+    m_aRhs = ValueEnforcer.notNull (aRhs, "Rhs");
   }
 
   @Nonnull
@@ -103,19 +96,19 @@ public class JSAssignment extends AbstractJSExpression implements IJSStatement
   public int hashCode ()
   {
     return HashCodeGenerator.getDerived (super.hashCode ())
-                            .append (m_aLhs)
-                            .append (m_sOp)
-                            .append (m_aRhs)
-                            .getHashCode ();
+        .append (m_aLhs)
+        .append (m_sOp)
+        .append (m_aRhs)
+        .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("lhs", m_aLhs)
-                            .append ("op", m_sOp)
-                            .append ("rhs", m_aRhs)
-                            .toString ();
+        .append ("lhs", m_aLhs)
+        .append ("op", m_sOp)
+        .append ("rhs", m_aRhs)
+        .toString ();
   }
 }

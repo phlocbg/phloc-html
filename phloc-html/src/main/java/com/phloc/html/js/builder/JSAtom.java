@@ -20,14 +20,14 @@ package com.phloc.html.js.builder;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Simple code components that merely generate themselves.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -37,9 +37,7 @@ public class JSAtom extends AbstractJSExpression
 
   public JSAtom (@Nonnull @Nonempty final String sAtom)
   {
-    if (StringHelper.hasNoText (sAtom))
-      throw new IllegalArgumentException ("atom");
-    m_sAtom = sAtom;
+    m_sAtom = ValueEnforcer.notEmpty (sAtom, "Atom");
   }
 
   @Nonnull
