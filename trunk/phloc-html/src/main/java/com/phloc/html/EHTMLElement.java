@@ -29,7 +29,7 @@ import com.phloc.commons.string.StringHelper;
 
 /**
  * Contains a list of all HTML element names.
- * 
+ *
  * @author Philip Helger
  */
 public enum EHTMLElement implements IHasElementName
@@ -98,7 +98,7 @@ public enum EHTMLElement implements IHasElementName
   LABEL ("label", false, EHTMLContentModelType.PHRASING),
   LEGEND ("legend", false, EHTMLContentModelType.CHILD),
   LI ("li", false, EHTMLContentModelType.CHILD),
-  LINK ("link", false, EHTMLContentModelType.METADATA),
+  LINK ("link", true, EHTMLContentModelType.METADATA),
   MAIN ("main", false, EHTMLContentModelType.FLOW),
   MAP ("map", false, EHTMLContentModelType.FLOW),
   MARK ("mark", false, EHTMLContentModelType.PHRASING),
@@ -256,7 +256,7 @@ public enum EHTMLElement implements IHasElementName
 
   /**
    * Check if the passed element may be self closed when creating HTML.
-   * 
+   *
    * @param sElementName
    *        The name of the tag to validate.
    * @return <code>true</code> if the tag may not be self closed.
@@ -272,7 +272,7 @@ public enum EHTMLElement implements IHasElementName
 
   /**
    * Check if the passed element may not be self closed when creating HTML.
-   * 
+   *
    * @param sElementName
    *        The name of the tag to validate.
    * @return <code>true</code> if the tag may not be self closed.
@@ -288,7 +288,7 @@ public enum EHTMLElement implements IHasElementName
 
   /**
    * Check if the passed tag is an HTML tag name.
-   * 
+   *
    * @param sTagName
    *        The case sensitive tag name to check.
    * @return <code>true</code> if it is a known HTML tag, <code>false</code>
@@ -302,7 +302,7 @@ public enum EHTMLElement implements IHasElementName
   /**
    * Get the {@link EHTMLElement} for the passed tag name using case insensitive
    * compare
-   * 
+   *
    * @param sTagName
    *        The case sensitive tag name to check.
    * @return The matching {@link EHTMLElement} or <code>null</code> if no such
