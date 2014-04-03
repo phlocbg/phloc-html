@@ -259,19 +259,27 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
     return aChild;
   }
 
+  /**
+   * Invoked after an element was removed.
+   */
+  @OverrideOnDemand
+  protected void afterRemoveChild ()
+  {}
+
   @Nonnull
   public final THISTYPE removeChild (@Nullable final IHCNode aChild)
   {
     if (aChild != null && m_aChildren != null)
-      m_aChildren.remove (aChild);
+      if (m_aChildren.remove (aChild))
+        afterRemoveChild ();
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE removeChild (@Nonnegative final int nIndex)
   {
-    if (m_aChildren != null && m_aChildren.size () > nIndex)
-      m_aChildren.remove (nIndex);
+    if (ContainerHelper.removeElementAtIndex (m_aChildren, nIndex).isChanged ())
+      afterRemoveChild ();
     return thisAsT ();
   }
 
@@ -279,7 +287,14 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   public final THISTYPE removeAllChildren ()
   {
     if (m_aChildren != null)
-      m_aChildren.clear ();
+    {
+      if (!m_aChildren.isEmpty ())
+      {
+        m_aChildren.clear ();
+        afterRemoveChild ();
+      }
+      m_aChildren = null;
+    }
     return thisAsT ();
   }
 
