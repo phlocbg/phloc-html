@@ -30,6 +30,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -46,7 +47,7 @@ import com.phloc.html.hc.htmlext.HCUtils;
 
 /**
  * Base class for elements with special children.
- * 
+ *
  * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
@@ -68,6 +69,26 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     return ContainerHelper.isNotEmpty (m_aChildren);
   }
 
+  /**
+   * Callback
+   *
+   * @param aChild
+   *        The child that was added
+   */
+  @OverrideOnDemand
+  protected void beforeAddChild (@Nonnull final IHCNode aChild)
+  {}
+
+  /**
+   * Callback
+   *
+   * @param aChild
+   *        The child that was added
+   */
+  @OverrideOnDemand
+  protected void afterAddChild (@Nonnull final IHCNode aChild)
+  {}
+
   private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
   {
     if (aChild == this)
@@ -75,12 +96,14 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
     if (aChild != null)
     {
+      beforeAddChild (aChild);
       if (m_aChildren == null)
         m_aChildren = new ArrayList <CHILDTYPE> ();
       if (nIndex < 0)
         m_aChildren.add (aChild);
       else
         m_aChildren.add (nIndex, aChild);
+      afterAddChild (aChild);
     }
   }
 
@@ -94,8 +117,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nonnull
   public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final CHILDTYPE aChild)
   {
-    if (nIndex < 0 || nIndex > getChildCount ())
-      throw new IllegalArgumentException ("Illegal index " + nIndex + " passed!");
+    ValueEnforcer.isBetweenInclusive (nIndex, "Index", 0, getChildCount ());
     _addChild (nIndex, aChild);
     return thisAsT ();
   }
@@ -207,7 +229,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   /**
    * Helper method that returns the elements in the correct order for emitting.
    * This can e.g. be used for sorting or ordering.
-   * 
+   *
    * @param aChildren
    *        The children to be emitted. Is a direct reference to the container
    *        where the children are stored. So handle with care!
