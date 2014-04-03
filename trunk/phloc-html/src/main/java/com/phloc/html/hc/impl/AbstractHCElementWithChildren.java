@@ -31,6 +31,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -62,7 +63,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   /**
    * Callback
-   * 
+   *
    * @param aChild
    *        The child that was added
    */
@@ -72,7 +73,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   /**
    * Callback
-   * 
+   *
    * @param aChild
    *        The child that was added
    */
@@ -81,7 +82,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   {}
 
   @Nonnull
-  private THISTYPE _addChild (@CheckForSigned final int nIndex, @Nullable final IHCNode aChild)
+  private void _addChild (@CheckForSigned final int nIndex, @Nullable final IHCNode aChild)
   {
     if (aChild == this)
       throw new IllegalArgumentException ("Cannot append to self!");
@@ -97,7 +98,6 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
         m_aChildren.add (nIndex, aChild);
       afterAddChild (aChild);
     }
-    return thisAsT ();
   }
 
   @Nonnull
@@ -128,7 +128,8 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   @Nonnull
   public final THISTYPE addChild (@Nullable final IHCNode aChild)
   {
-    return _addChild (CGlobal.ILLEGAL_UINT, aChild);
+    _addChild (CGlobal.ILLEGAL_UINT, aChild);
+    return thisAsT ();
   }
 
   @Nonnull
@@ -160,9 +161,9 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   @Nonnull
   public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final IHCNode aChild)
   {
-    if (nIndex < 0 || nIndex > getChildCount ())
-      throw new IllegalArgumentException ("Illegal index " + nIndex + " passed!");
-    return _addChild (nIndex, aChild);
+    ValueEnforcer.isBetweenInclusive (nIndex, "Index", 0, getChildCount ());
+    _addChild (nIndex, aChild);
+    return thisAsT ();
   }
 
   @Nonnull
