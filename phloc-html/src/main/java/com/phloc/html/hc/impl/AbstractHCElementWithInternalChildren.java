@@ -76,7 +76,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
    *        The child that was added
    */
   @OverrideOnDemand
-  protected void beforeAddChild (@Nonnull final IHCNode aChild)
+  protected void beforeAddChild (@Nonnull final CHILDTYPE aChild)
   {}
 
   /**
@@ -86,7 +86,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
    *        The child that was added
    */
   @OverrideOnDemand
-  protected void afterAddChild (@Nonnull final IHCNode aChild)
+  protected void afterAddChild (@Nonnull final CHILDTYPE aChild)
   {}
 
   private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
