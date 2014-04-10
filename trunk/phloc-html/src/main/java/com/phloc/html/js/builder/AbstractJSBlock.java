@@ -1120,8 +1120,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("objs", m_aObjs)
-                                       .append ("decls", m_aDecls)
+    return new ToStringGenerator (this).appendIfNotEmpty ("objs", m_aObjs)
+                                       .appendIfNotEmpty ("decls", m_aDecls)
                                        .append ("pos", m_nPos)
                                        .toString ();
   }

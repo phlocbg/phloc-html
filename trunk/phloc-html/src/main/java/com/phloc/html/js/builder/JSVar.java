@@ -28,7 +28,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * Variables and fields.
- * 
+ *
  * @author Philip Helger
  */
 public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
@@ -50,7 +50,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Constructor
-   * 
+   *
    * @param sName
    *        name of the variable
    */
@@ -61,7 +61,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Constructor
-   * 
+   *
    * @param sName
    *        Name of this variable
    * @param aInit
@@ -74,7 +74,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Constructor
-   * 
+   *
    * @param aType
    *        Type of this variable
    * @param sName
@@ -87,7 +87,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Constructor
-   * 
+   *
    * @param aType
    *        Datatype of this variable
    * @param sName
@@ -117,7 +117,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Sets the type of this variable.
-   * 
+   *
    * @param aNewType
    *        new type. may be <code>null</code>.
    * @return the old type value.
@@ -132,7 +132,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Get the name of this variable
-   * 
+   *
    * @return Name of the variable
    */
   @Nonnull
@@ -174,7 +174,7 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
 
   /**
    * Initialize this variable
-   * 
+   *
    * @param aNewInit
    *        Expression to be used to initialize this field. May be
    *        <code>null</code>.
@@ -241,9 +241,9 @@ public class JSVar extends AbstractJSAssignmentTarget implements IJSDeclaration
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("type", m_aType)
+                            .appendIfNotNull ("type", m_aType)
                             .append ("name", m_sName)
-                            .append ("init", m_aInit)
+                            .appendIfNotNull ("init", m_aInit)
                             .toString ();
   }
 }
