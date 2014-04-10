@@ -540,7 +540,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery class selection
-   *
+   * 
    * @param aCSSClass
    *        The CSS class to select
    * @return <code>.class</code>
@@ -594,7 +594,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery element name selection
-   *
+   * 
    * @param eHTMLElement
    *        The HTML element to select
    * @return <code>element</code>
@@ -608,7 +608,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery element name selection
-   *
+   * 
    * @param sElementName
    *        The HTML element to select
    * @return <code>element</code>
@@ -695,7 +695,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects elements which contain at least one element that matches the
    * specified selector.
-   *
+   * 
    * @param aSelector
    *        Selector to use
    * @return <code>:has(selector)</code>
@@ -710,7 +710,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects elements which contain at least one element that matches the
    * specified selector.
-   *
+   * 
    * @param aExpr
    *        Selector to use
    * @return <code>:has(expr)</code>
@@ -739,7 +739,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery ID selection
-   *
+   * 
    * @param aIDProvider
    *        The object with an ID to select
    * @return <code>#id</code>
@@ -752,7 +752,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery ID selection
-   *
+   * 
    * @param aElement
    *        The object with an ID to select
    * @return <code>#id</code>
@@ -766,7 +766,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery ID selection
-   *
+   * 
    * @param sID
    *        The ID to select
    * @return <code>#id</code>
@@ -780,7 +780,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery ID selection
-   *
+   * 
    * @param aID
    *        The ID to select
    * @return <code>'#'+id</code>
@@ -793,7 +793,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery language selection
-   *
+   * 
    * @param sLanguage
    *        The language to select
    * @return <code>:lang(language)</code>
@@ -807,7 +807,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * jQuery language selection
-   *
+   * 
    * @param aExpr
    *        The language to select
    * @return <code>:lang(expr)</code>
@@ -949,7 +949,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
@@ -963,7 +963,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
@@ -977,7 +977,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
@@ -991,7 +991,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
@@ -1005,7 +1005,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-child(value)</code>
@@ -1019,7 +1019,7 @@ public final class JQuerySelector implements IJQuerySelector
 
   /**
    * Selects all elements that are the nth-child of their parent.
-   *
+   * 
    * @param aExpr
    *        index
    * @return <code>:nth-child(aExpr)</code>
@@ -1034,7 +1034,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
@@ -1049,7 +1049,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
@@ -1064,7 +1064,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
@@ -1079,7 +1079,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
@@ -1094,7 +1094,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        value
    * @return <code>:nth-last-child(value)</code>
@@ -1109,7 +1109,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param aExpr
    *        index
    * @return <code>:nth-last-child(aExpr)</code>
@@ -1124,7 +1124,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
@@ -1139,7 +1139,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
@@ -1154,7 +1154,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
@@ -1169,7 +1169,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
@@ -1184,7 +1184,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-last-of-type(value)</code>
@@ -1199,7 +1199,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth-child of their parent, counting from
    * the last element to the first.
-   *
+   * 
    * @param aExpr
    *        index
    * @return <code>:nth-last-of-type(aExpr)</code>
@@ -1214,7 +1214,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
@@ -1229,7 +1229,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
@@ -1244,7 +1244,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
@@ -1259,7 +1259,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
@@ -1274,7 +1274,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param v
    *        index
    * @return <code>:nth-of-type(value)</code>
@@ -1289,7 +1289,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Selects all elements that are the nth child of their parent in relation to
    * siblings with the same element name.
-   *
+   * 
    * @param aExpr
    *        index
    * @return <code>:nth-of-type(aExpr)</code>
@@ -1304,7 +1304,7 @@ public final class JQuerySelector implements IJQuerySelector
   /**
    * Chain them directly together to build stuff like "div#id" or
    * ".class1.class" or "span.foo"
-   *
+   * 
    * @param aFirstSelector
    *        The first selector. May not be <code>null</code>.
    * @param aSecondSelector
