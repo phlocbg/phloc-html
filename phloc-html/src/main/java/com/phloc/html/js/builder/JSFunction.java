@@ -34,7 +34,7 @@ import com.phloc.html.js.marshal.JSMarshaller;
 
 /**
  * JS function
- * 
+ *
  * @author Philip Helger
  */
 public class JSFunction implements IJSDocCommentable, IJSDeclaration
@@ -66,7 +66,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * function constructor
-   * 
+   *
    * @param sName
    *        Name of this function
    */
@@ -77,7 +77,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * function constructor
-   * 
+   *
    * @param sName
    *        Name of this function
    */
@@ -128,7 +128,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Returns the list of variable of this function.
-   * 
+   *
    * @return List of parameters of this function. This list is not modifiable.
    */
   @Nonnull
@@ -141,7 +141,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   * 
+   *
    * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
@@ -155,7 +155,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   * 
+   *
    * @param aType
    *        Type of the parameter being added
    * @param sName
@@ -191,7 +191,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Get the block that makes up body of this function
-   * 
+   *
    * @return Body of function
    */
   @Nonnull
@@ -204,7 +204,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
 
   /**
    * Creates, if necessary, and returns the class JSDocs for this function
-   * 
+   *
    * @return {@link JSCommentMultiLine} containing JSDocs for this class
    */
   @Nonnull
@@ -288,7 +288,7 @@ public class JSFunction implements IJSDocCommentable, IJSDeclaration
     return new ToStringGenerator (this).appendIfNotNull ("jsDoc", m_aJSDoc)
                                        .appendIfNotNull ("type", m_aType)
                                        .append ("name", m_sName)
-                                       .append ("params", m_aParams)
+                                       .appendIfNotEmpty ("params", m_aParams)
                                        .appendIfNotNull ("body", m_aBody)
                                        .toString ();
   }

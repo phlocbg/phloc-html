@@ -33,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * An anonymous function (a function without a name)
- * 
+ *
  * @author Philip Helger
  */
 public class JSAnonymousFunction extends AbstractJSExpression
@@ -61,7 +61,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * constructor
-   * 
+   *
    * @param aType
    *        Type to which the expression is cast
    */
@@ -72,7 +72,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Constructor for simple functions
-   * 
+   *
    * @param aBody
    *        The body statement. May be <code>null</code>.
    */
@@ -103,7 +103,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Overrides the return type.
-   * 
+   *
    * @param aType
    *        the new return type.
    */
@@ -114,7 +114,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Returns the list of variable of this function.
-   * 
+   *
    * @return List of parameters of this function. This list is not modifiable.
    */
   @Nonnull
@@ -127,7 +127,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   * 
+   *
    * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
@@ -141,7 +141,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   * 
+   *
    * @param aType
    *        type of the parameter being added
    * @param sName
@@ -170,7 +170,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Get the block that makes up body of this function
-   * 
+   *
    * @return Body of function
    */
   @Nonnull
@@ -233,7 +233,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   {
     return ToStringGenerator.getDerived (super.toString ())
                             .appendIfNotNull ("type", m_aType)
-                            .append ("params", m_aParams)
+                            .appendIfNotEmpty ("params", m_aParams)
                             .append ("body", m_aBody)
                             .toString ();
   }
