@@ -315,6 +315,7 @@ public enum EHTMLEntity implements IHTMLEntity
   private static final Map <String, Character> s_aEntityRefToCharMap = new HashMap <String, Character> ();
   private static final Map <String, String> s_aEntityRefToCharStringMap = new HashMap <String, String> ();
   private static final Map <Character, String> s_aCharToEntityRefMap = new HashMap <Character, String> ();
+  private static final Map <String, String> s_aCharStringToEntityRefMap = new HashMap <String, String> ();
 
   static
   {
@@ -339,6 +340,12 @@ public enum EHTMLEntity implements IHTMLEntity
         throw new IllegalStateException ("Another char for '" + sEntityRef + "' is already contained!");
 
       if (s_aCharToEntityRefMap.put (aChar, sEntityRef) != null)
+        throw new IllegalStateException ("Another entity reference for '" +
+                                         "0x" +
+                                         StringHelper.getHexStringLeadingZero (e.m_cChar, 4) +
+                                         "' is already contained!");
+
+      if (s_aCharStringToEntityRefMap.put (aChar.toString (), sEntityRef) != null)
         throw new IllegalStateException ("Another entity reference for '" +
                                          "0x" +
                                          StringHelper.getHexStringLeadingZero (e.m_cChar, 4) +
@@ -416,60 +423,135 @@ public enum EHTMLEntity implements IHTMLEntity
                                        .toString ();
   }
 
+  /**
+   * Check if the passed entity reference string is valid.
+   * 
+   * @param sEntityReference
+   *        The string to be checked (e.g. <code>"&amp;ndash;"</code>)
+   * @return <code>true</code> if it is valid, <code>false</code> if not
+   */
   public static boolean isValidEntityReference (@Nullable final String sEntityReference)
   {
-    return getFromEntityReferenceOrNull (sEntityReference) != null;
+    return s_aEntityRefToEntityMap.containsKey (sEntityReference);
   }
 
+  /**
+   * Get the predefined HTML entity for the specified entity reference string is
+   * valid.
+   * 
+   * @param sEntityReference
+   *        The string to be checked (e.g. <code>"&amp;ndash;"</code>)
+   * @return <code>null</code> if no such HTML entity is present
+   */
   @Nullable
   public static EHTMLEntity getFromEntityReferenceOrNull (@Nullable final String sEntityReference)
   {
     return s_aEntityRefToEntityMap.get (sEntityReference);
   }
 
+  /**
+   * Check if the passed character can be presented by an entity reference
+   * string.
+   * 
+   * @param c
+   *        The char to be checked (e.g. <code>'–'</code>)
+   * @return <code>true</code> if an entity representation is present,
+   *         <code>false</code> if not
+   */
   public static boolean isValidEntityChar (final char c)
   {
-    return getFromCharOrNull (c) != null;
+    return s_aCharToEntityMap.containsKey (Character.valueOf (c));
   }
 
+  /**
+   * Get the predefined HTML entity to be used to represent the passed
+   * character.
+   * 
+   * @param c
+   *        The char to be checked (e.g. <code>'–'</code>)
+   * @return <code>null</code> if no such HTML entity is present
+   */
   @Nullable
   public static EHTMLEntity getFromCharOrNull (final char c)
   {
     return s_aCharToEntityMap.get (Character.valueOf (c));
   }
 
+  /**
+   * @return The global map from entity reference string to the according entity
+   *         (e.g. from <code>"&amp;ndash;"</code> to
+   *         <code>EHTMLEntity.ndash</code>). Never <code>null</code> nor empty.
+   */
   @Nonnull
+  @Nonempty
   @ReturnsMutableCopy
   public static final Map <String, EHTMLEntity> getEntityRefToEntityMap ()
   {
     return ContainerHelper.newMap (s_aEntityRefToEntityMap);
   }
 
+  /**
+   * @return The global map from entity reference string to the according entity
+   *         (e.g. from <code>'–'</code> to <code>EHTMLEntity.ndash</code>).
+   *         Never <code>null</code> nor empty.
+   */
   @Nonnull
+  @Nonempty
   @ReturnsMutableCopy
   public static final Map <Character, EHTMLEntity> getCharToEntityMap ()
   {
     return ContainerHelper.newMap (s_aCharToEntityMap);
   }
 
+  /**
+   * @return The global map from entity reference string to the according
+   *         character (e.g. from <code>"&amp;ndash;"</code> to <code>'–'</code>
+   *         ). Never <code>null</code> nor empty.
+   */
   @Nonnull
+  @Nonempty
   @ReturnsMutableCopy
   public static final Map <String, Character> getEntityRefToCharMap ()
   {
     return ContainerHelper.newMap (s_aEntityRefToCharMap);
   }
 
+  /**
+   * @return The global map from entity reference string to the according
+   *         character as a String (e.g. from <code>"&amp;ndash;"</code> to
+   *         <code>"–"</code>). Never <code>null</code> nor empty.
+   */
   @Nonnull
+  @Nonempty
   @ReturnsMutableCopy
   public static final Map <String, String> getEntityRefToCharStringMap ()
   {
     return ContainerHelper.newMap (s_aEntityRefToCharStringMap);
   }
 
+  /**
+   * @return The global map from character to the according entity reference
+   *         string (e.g. from <code>'–'</code> to <code>"&amp;ndash;"</code> ).
+   *         Never <code>null</code> nor empty.
+   */
   @Nonnull
+  @Nonempty
   @ReturnsMutableCopy
   public static final Map <Character, String> getCharToEntityRefMap ()
   {
     return ContainerHelper.newMap (s_aCharToEntityRefMap);
+  }
+
+  /**
+   * @return The global map from character string to the according entity
+   *         reference string (e.g. from <code>"–"</code> to
+   *         <code>"&amp;ndash;"</code> ). Never <code>null</code> nor empty.
+   */
+  @Nonnull
+  @Nonempty
+  @ReturnsMutableCopy
+  public static final Map <String, String> getCharStringToEntityRefMap ()
+  {
+    return ContainerHelper.newMap (s_aCharStringToEntityRefMap);
   }
 }
