@@ -17,6 +17,7 @@
  */
 package com.phloc.html.entities;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -41,5 +42,10 @@ public final class EHTMLEntityTest
       assertSame (e, EHTMLEntity.getFromEntityReferenceOrNull (e.getEntityReference ()));
       assertSame (e, EHTMLEntity.getFromCharOrNull (e.getChar ()));
     }
+    assertEquals (EHTMLEntity.values ().length, EHTMLEntity.getEntityRefToEntityMap ().size ());
+    assertEquals (EHTMLEntity.values ().length, EHTMLEntity.getCharToEntityMap ().size ());
+    assertEquals (EHTMLEntity.values ().length, EHTMLEntity.getEntityRefToCharMap ().size ());
+    assertEquals (EHTMLEntity.values ().length, EHTMLEntity.getEntityRefToCharStringMap ().size ());
+    assertEquals (EHTMLEntity.values ().length, EHTMLEntity.getCharToEntityRefMap ().size ());
   }
 }
