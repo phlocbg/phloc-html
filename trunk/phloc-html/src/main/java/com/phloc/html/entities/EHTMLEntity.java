@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
@@ -308,24 +310,39 @@ public enum EHTMLEntity implements IHTMLEntity
   lang ("lang", '\u2329', "left-pointing angle bracket = bra"),
   rang ("rang", '\u232a', "right-pointing angle bracket = ket");
 
-  private static final Map <String, EHTMLEntity> s_aEntityRefMap = new HashMap <String, EHTMLEntity> ();
-  private static final Map <Character, EHTMLEntity> s_aCharMap = new HashMap <Character, EHTMLEntity> ();
+  private static final Map <String, EHTMLEntity> s_aEntityRefToEntityMap = new HashMap <String, EHTMLEntity> ();
+  private static final Map <Character, EHTMLEntity> s_aCharToEntityMap = new HashMap <Character, EHTMLEntity> ();
+  private static final Map <String, Character> s_aEntityRefToCharMap = new HashMap <String, Character> ();
+  private static final Map <String, String> s_aEntityRefToCharStringMap = new HashMap <String, String> ();
+  private static final Map <Character, String> s_aCharToEntityRefMap = new HashMap <Character, String> ();
 
   static
   {
     for (final EHTMLEntity e : values ())
     {
-      if (s_aEntityRefMap.put (e.m_sEntityReference, e) != null)
-        throw new IllegalStateException ("Another entity reference '" +
-                                         e.m_sEntityReference +
-                                         "' is already contained!");
+      final String sEntityRef = e.m_sEntityReference;
+      final Character aChar = e.getCharObj ();
 
-      final Character aChar = Character.valueOf (e.m_cChar);
-      if (s_aCharMap.put (aChar, e) != null)
+      if (s_aEntityRefToEntityMap.put (sEntityRef, e) != null)
+        throw new IllegalStateException ("Another entity reference '" + sEntityRef + "' is already contained!");
+
+      if (s_aCharToEntityMap.put (aChar, e) != null)
         throw new IllegalStateException ("Another entity reference for '" +
                                          "0x" +
                                          StringHelper.getHexStringLeadingZero (e.m_cChar, 4) +
-                                         " is already contained!");
+                                         "' is already contained!");
+
+      if (s_aEntityRefToCharMap.put (sEntityRef, aChar) != null)
+        throw new IllegalStateException ("Another char for '" + sEntityRef + "' is already contained!");
+
+      if (s_aEntityRefToCharStringMap.put (sEntityRef, aChar.toString ()) != null)
+        throw new IllegalStateException ("Another char for '" + sEntityRef + "' is already contained!");
+
+      if (s_aCharToEntityRefMap.put (aChar, sEntityRef) != null)
+        throw new IllegalStateException ("Another entity reference for '" +
+                                         "0x" +
+                                         StringHelper.getHexStringLeadingZero (e.m_cChar, 4) +
+                                         "' is already contained!");
     }
   }
 
@@ -365,6 +382,16 @@ public enum EHTMLEntity implements IHTMLEntity
   }
 
   /**
+   * @return The source character object matching the entity. Never
+   *         <code>null</code>.
+   */
+  @Nonnull
+  public Character getCharObj ()
+  {
+    return Character.valueOf (m_cChar);
+  }
+
+  /**
    * @return The source character string matching the entity.
    */
   @Nonnull
@@ -397,7 +424,7 @@ public enum EHTMLEntity implements IHTMLEntity
   @Nullable
   public static EHTMLEntity getFromEntityReferenceOrNull (@Nullable final String sEntityReference)
   {
-    return s_aEntityRefMap.get (sEntityReference);
+    return s_aEntityRefToEntityMap.get (sEntityReference);
   }
 
   public static boolean isValidEntityChar (final char c)
@@ -408,6 +435,41 @@ public enum EHTMLEntity implements IHTMLEntity
   @Nullable
   public static EHTMLEntity getFromCharOrNull (final char c)
   {
-    return s_aCharMap.get (Character.valueOf (c));
+    return s_aCharToEntityMap.get (Character.valueOf (c));
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public static final Map <String, EHTMLEntity> getEntityRefToEntityMap ()
+  {
+    return ContainerHelper.newMap (s_aEntityRefToEntityMap);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public static final Map <Character, EHTMLEntity> getCharToEntityMap ()
+  {
+    return ContainerHelper.newMap (s_aCharToEntityMap);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public static final Map <String, Character> getEntityRefToCharMap ()
+  {
+    return ContainerHelper.newMap (s_aEntityRefToCharMap);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public static final Map <String, String> getEntityRefToCharStringMap ()
+  {
+    return ContainerHelper.newMap (s_aEntityRefToCharStringMap);
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public static final Map <Character, String> getCharToEntityRefMap ()
+  {
+    return ContainerHelper.newMap (s_aCharToEntityRefMap);
   }
 }
