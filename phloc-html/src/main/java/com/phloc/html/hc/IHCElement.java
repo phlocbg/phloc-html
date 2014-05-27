@@ -45,6 +45,9 @@ import com.phloc.html.js.IJSCodeProvider;
  */
 public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHCNode, IHCHasCSSStyles <THISTYPE>, IHCHasCSSClasses <THISTYPE>
 {
+  /** The default value for an unset tab index, as -1 is used for "none" */
+  public static final long DEFAULT_TABINDEX = -5l;
+
   /**
    * @return The contained HTML element. Never <code>null</code>.
    */
@@ -212,16 +215,22 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setHidden (boolean bHidden);
 
   /**
-   * @return The tab index of this object. Negative values are invalid!
+   * @return The tab index of this object. The semantics of negative values
+   *         depends on the browser! In HTML5 negative values are allowed but
+   *         won't set a focus when tabbing. The default value is indicated by
+   *         {@link #DEFAULT_TABINDEX}
    */
   @CheckForSigned
   long getTabIndex ();
 
   /**
    * Set the tab index of this object. This is a common element in HTML5 only.
+   * The default value is {@link #DEFAULT_TABINDEX}
    * 
    * @param nTabIndex
-   *        The tab-index of this object. Negative values will be ignored!
+   *        The tab-index of this object. The semantics of negative values
+   *        depends on the browser! In HTML5 negative values are allowed but
+   *        won't set a focus when tabbing.
    * @return this
    */
   @Nonnull

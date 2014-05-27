@@ -34,7 +34,6 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.phloc.commons.CGlobal;
 import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
@@ -104,7 +103,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    */
   private JSEventMap m_aJSHandler;
   private boolean m_bUnfocusable = DEFAULT_UNFOCUSABLE;
-  private long m_nTabIndex = CGlobal.ILLEGAL_ULONG;
+  private long m_nTabIndex = DEFAULT_TABINDEX;
   private String m_sAccessKey;
 
   // HTML5 global attributes
@@ -776,7 +775,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
 
   /**
    * Set all attributes and child elements of this object
-   *
+   * 
    * @param aElement
    *        The current micro element to be filled
    * @param aConversionSettings
@@ -816,7 +815,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
     // unfocusable is handled by the customizer as it is non-standard
 
     // Global attributes
-    if (m_nTabIndex != CGlobal.ILLEGAL_UINT)
+    if (m_nTabIndex != DEFAULT_TABINDEX)
       aElement.setAttribute (CHTMLAttributes.TABINDEX, m_nTabIndex);
     if (StringHelper.hasNoText (m_sAccessKey))
       aElement.setAttribute (CHTMLAttributes.ACCESSKEY, m_sAccessKey);
@@ -868,7 +867,7 @@ public abstract class AbstractHCElement <THISTYPE extends AbstractHCElement <THI
    * This method is called after the element itself was created and filled.
    * Overwrite this method to perform actions that can only be done after the
    * element was build finally.
-   *
+   * 
    * @param eElement
    *        The created micro element
    * @param aConversionSettings
