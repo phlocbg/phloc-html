@@ -24,9 +24,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mutable.MutableBoolean;
 import com.phloc.commons.mutable.Wrapper;
@@ -167,25 +167,29 @@ public final class HCUtils
   {}
 
   @Nonnull
+  @ReturnsMutableCopy
   public static List <IHCNode> nl2brList (@Nullable final String sText)
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
     if (StringHelper.hasText (sText))
     {
+      // Remove all "\r" chars
+      final String sRealText = sText.replace ("\r", "");
       int nIndex = 0;
-      while (nIndex < sText.length ())
+      while (nIndex < sRealText.length ())
       {
-        final int nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
+        final int nNext = sRealText.indexOf (PATTERN_NEWLINE, nIndex);
         if (nNext >= 0)
         {
           if (nNext > nIndex)
-            ret.add (HCTextNode.createOnDemand (sText.substring (nIndex, nNext)));
+            ret.add (new HCTextNode (sRealText.substring (nIndex, nNext)));
           ret.add (new HCBR ());
           nIndex = nNext + PATTERN_NEWLINE_LENGTH;
         }
         else
         {
-          ret.add (HCTextNode.createOnDemand (sText.substring (nIndex)));
+          // Add the rest
+          ret.add (new HCTextNode (sRealText.substring (nIndex)));
           break;
         }
       }
@@ -193,25 +197,43 @@ public final class HCUtils
     return ret;
   }
 
+  /**
+   * Convert the passed text to a list of &lt;div&gt; elements. Each \n is used
+   * to split the text into separate lines. \r characters are removed from the
+   * string! Empty lines are preserved except for the last line. E.g.
+   * <code>Hello\nworld</code> results in 2 &lt;div&gt;s:
+   * &lt;div&gt;Hello&lt;/div&gt; and &lt;div&gt;world&lt;/div&gt;
+   * 
+   * @param sText
+   *        The text to be split. May be <code>null</code>.
+   * @return A non-<code>null</code> but maybe empty list. The list is empty, if
+   *         the string is empty.
+   */
   @Nonnull
+  @ReturnsMutableCopy
   public static List <HCDiv> nl2divList (@Nullable final String sText)
   {
     final List <HCDiv> ret = new ArrayList <HCDiv> ();
     if (StringHelper.hasText (sText))
     {
+      // Remove all "\r" chars
+      final String sRealText = sText.replace ("\r", "");
       int nIndex = 0;
-      while (nIndex < sText.length ())
+      while (nIndex < sRealText.length ())
       {
-        final int nNext = sText.indexOf (PATTERN_NEWLINE, nIndex);
+        final int nNext = sRealText.indexOf (PATTERN_NEWLINE, nIndex);
         if (nNext >= 0)
         {
-          if (nNext > nIndex)
-            ret.add (HCDiv.create (sText.substring (nIndex, nNext)));
+          // There is a newline
+          ret.add (new HCDiv ().addChild (sRealText.substring (nIndex, nNext)));
           nIndex = nNext + PATTERN_NEWLINE_LENGTH;
         }
         else
         {
-          ret.add (HCDiv.create (sText.substring (nIndex)));
+          // Add the rest
+          final String sRest = sRealText.substring (nIndex);
+          if (sRest.length () > 0)
+            ret.add (new HCDiv ().addChild (sRest));
           break;
         }
       }
@@ -220,6 +242,7 @@ public final class HCUtils
   }
 
   @Nonnull
+  @ReturnsMutableCopy
   public static List <IHCNode> list2brList (@Nullable final Iterable <String> aCont)
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
@@ -229,19 +252,20 @@ public final class HCUtils
       {
         if (!ret.isEmpty ())
           ret.add (new HCBR ());
-        ret.add (HCTextNode.createOnDemand (sText));
+        ret.add (new HCTextNode (sText));
       }
     }
     return ret;
   }
 
   @Nonnull
+  @ReturnsMutableCopy
   public static List <IHCNode> list2divList (@Nullable final Iterable <String> aCont)
   {
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
     if (aCont != null)
       for (final String sText : aCont)
-        ret.add (HCDiv.create (sText));
+        ret.add (new HCDiv ().addChild (sText));
     return ret;
   }
 
@@ -258,10 +282,8 @@ public final class HCUtils
   public static IHCElement <?> recursiveGetFirstChildWithTagName (@Nonnull final IHCHasChildren aOwner,
                                                                   @Nonnull @Nonempty final EHTMLElement... aElements)
   {
-    if (aOwner == null)
-      throw new NullPointerException ("owner");
-    if (ArrayHelper.isEmpty (aElements))
-      throw new IllegalArgumentException ("No tag name to search was provided");
+    ValueEnforcer.notNull (aOwner, "Owner");
+    ValueEnforcer.notEmpty (aElements, "Elements");
 
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
     iterateChildren (aOwner, new IHCIteratorCallback ()
@@ -305,10 +327,8 @@ public final class HCUtils
   public static IHCElement <?> recursiveGetFirstChildWithDifferentTagName (@Nonnull final IHCHasChildren aOwner,
                                                                            @Nonnull @Nonempty final EHTMLElement... aElements)
   {
-    if (aOwner == null)
-      throw new NullPointerException ("owner");
-    if (ArrayHelper.isEmpty (aElements))
-      throw new IllegalArgumentException ("No tag name to search was provided");
+    ValueEnforcer.notNull (aOwner, "Owner");
+    ValueEnforcer.notEmpty (aElements, "Elements");
 
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
     iterateChildren (aOwner, new IHCIteratorCallback ()
@@ -408,10 +428,8 @@ public final class HCUtils
    */
   public static void iterateTree (@Nonnull final IHCHasChildren aNode, @Nonnull final IHCIteratorCallback aCallback)
   {
-    if (aNode == null)
-      throw new NullPointerException ("node");
-    if (aCallback == null)
-      throw new NullPointerException ("callback");
+    ValueEnforcer.notNull (aNode, "node");
+    ValueEnforcer.notNull (aCallback, "callback");
 
     // call callback on start node
     if (aCallback.call (null, aNode).isUnfinished ())
@@ -428,10 +446,8 @@ public final class HCUtils
    */
   public static void iterateChildren (@Nonnull final IHCHasChildren aNode, @Nonnull final IHCIteratorCallback aCallback)
   {
-    if (aNode == null)
-      throw new NullPointerException ("node");
-    if (aCallback == null)
-      throw new NullPointerException ("callback");
+    ValueEnforcer.notNull (aNode, "node");
+    ValueEnforcer.notNull (aCallback, "callback");
 
     _recursiveIterateTree (aNode, aCallback);
   }
@@ -451,6 +467,9 @@ public final class HCUtils
   public static IMicroElement getFirstChildElement (@Nonnull final IMicroElement aElement,
                                                     @Nonnull final EHTMLElement eHTMLElement)
   {
+    ValueEnforcer.notNull (aElement, "element");
+    ValueEnforcer.notNull (eHTMLElement, "HTMLElement");
+
     IMicroElement aChild = aElement.getFirstChildElement (eHTMLElement.getElementNameLowerCase ());
     if (aChild == null)
       aChild = aElement.getFirstChildElement (eHTMLElement.getElementNameUpperCase ());
@@ -473,6 +492,9 @@ public final class HCUtils
   public static List <IMicroElement> getChildElements (@Nonnull final IMicroElement aElement,
                                                        @Nonnull final EHTMLElement eHTMLElement)
   {
+    ValueEnforcer.notNull (aElement, "element");
+    ValueEnforcer.notNull (eHTMLElement, "HTMLElement");
+
     final List <IMicroElement> ret = new ArrayList <IMicroElement> ();
     ret.addAll (aElement.getAllChildElements (eHTMLElement.getElementNameLowerCase ()));
     ret.addAll (aElement.getAllChildElements (eHTMLElement.getElementNameUpperCase ()));
@@ -481,6 +503,8 @@ public final class HCUtils
 
   private static void _recursiveAddFlattened (@Nullable final IHCNode aNode, @Nonnull final List <IHCNode> aRealList)
   {
+    ValueEnforcer.notNull (aRealList, "RealList");
+
     if (aNode != null)
     {
       // Only check HCNodeList and not IHCNodeWithChildren because other
@@ -607,14 +631,16 @@ public final class HCUtils
    * 
    * @param aNode
    *        The start node. May be <code>null</code>.
-   * @param aTarget
+   * @param aTargetList
    *        The target list to be filled. May not be <code>null</code>.
    */
   public static void getAllHCControls (@Nullable final IHCNode aNode,
-                                       @Nonnull final List <? super IHCControl <?>> aTarget)
+                                       @Nonnull final List <? super IHCControl <?>> aTargetList)
   {
+    ValueEnforcer.notNull (aTargetList, "TargetList");
+
     if (aNode instanceof IHCControl <?>)
-      aTarget.add ((IHCControl <?>) aNode);
+      aTargetList.add ((IHCControl <?>) aNode);
 
     if (aNode instanceof IHCHasChildren)
     {
@@ -622,7 +648,7 @@ public final class HCUtils
       final IHCHasChildren aParent = (IHCHasChildren) aNode;
       if (aParent.hasChildren ())
         for (final IHCNode aChild : aParent.getChildren ())
-          getAllHCControls (aChild, aTarget);
+          getAllHCControls (aChild, aTargetList);
     }
   }
 
@@ -650,15 +676,17 @@ public final class HCUtils
    * 
    * @param aNodes
    *        The start nodes. May be <code>null</code>.
-   * @param aTarget
+   * @param aTargetList
    *        The target list to be filled. May not be <code>null</code>.
    */
   public static void getAllHCControls (@Nullable final Iterable <? extends IHCNode> aNodes,
-                                       @Nonnull final List <? super IHCControl <?>> aTarget)
+                                       @Nonnull final List <? super IHCControl <?>> aTargetList)
   {
+    ValueEnforcer.notNull (aTargetList, "TargetList");
+
     if (aNodes != null)
       for (final IHCNode aNode : aNodes)
-        getAllHCControls (aNode, aTarget);
+        getAllHCControls (aNode, aTargetList);
   }
 
   /**
@@ -691,6 +719,9 @@ public final class HCUtils
   public static void customizeNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
                                      @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    ValueEnforcer.notNull (aBaseNode, "BaseNode");
+    ValueEnforcer.notNull (aConversionSettings, "ConversionSettings");
+
     // Customize element, before extracting out-of-band nodes, in case the
     // customizer adds some out-of-band nodes as well
     iterateTree (aBaseNode, new IHCIteratorCallback ()
