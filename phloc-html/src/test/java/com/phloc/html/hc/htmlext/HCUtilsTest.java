@@ -28,6 +28,7 @@ import org.junit.Test;
 import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.html.HCBR;
+import com.phloc.html.hc.html.HCDiv;
 import com.phloc.html.hc.impl.HCTextNode;
 
 /**
@@ -40,6 +41,7 @@ public final class HCUtilsTest
   private static final String HTML_STRING6 = "this is a \nlinebreak test.";
   private static final String HTML_STRING7 = "\nthis is a \nlinebreak test.\n";
   private static final String HTML_STRING8 = "\n";
+  private static final String HTML_STRING9 = "\n\n\n";
 
   @Test
   public void testNl2brList ()
@@ -54,6 +56,36 @@ public final class HCUtilsTest
     assertEquals (3, HCUtils.nl2brList (HTML_STRING6).size ());
     assertEquals (5, HCUtils.nl2brList (HTML_STRING7).size ());
     assertEquals (1, HCUtils.nl2brList (HTML_STRING8).size ());
+    assertEquals (3, HCUtils.nl2brList (HTML_STRING9).size ());
+  }
+
+  @Test
+  public void testNl2diveList ()
+  {
+    List <HCDiv> ret = HCUtils.nl2divList ("a\nb");
+    assertNotNull (ret);
+    assertEquals (2, ret.size ());
+
+    ret = HCUtils.nl2divList (HTML_STRING6);
+    assertEquals (2, ret.size ());
+    assertEquals ("this is a ", ret.get (0).getPlainText ());
+    assertEquals ("linebreak test.", ret.get (1).getPlainText ());
+
+    ret = HCUtils.nl2divList (HTML_STRING7);
+    assertEquals (3, ret.size ());
+    assertEquals ("", ret.get (0).getPlainText ());
+    assertEquals ("this is a ", ret.get (1).getPlainText ());
+    assertEquals ("linebreak test.", ret.get (2).getPlainText ());
+
+    ret = HCUtils.nl2divList (HTML_STRING8);
+    assertEquals (1, ret.size ());
+    assertEquals ("", ret.get (0).getPlainText ());
+
+    ret = HCUtils.nl2divList (HTML_STRING9);
+    assertEquals (3, ret.size ());
+    assertEquals ("", ret.get (0).getPlainText ());
+    assertEquals ("", ret.get (1).getPlainText ());
+    assertEquals ("", ret.get (2).getPlainText ());
   }
 
   @Test
