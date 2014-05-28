@@ -20,12 +20,15 @@ package com.phloc.html.hc.customize;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCNode;
@@ -38,7 +41,7 @@ import com.phloc.html.hc.html.HCHead;
  * 
  * @author Philip Helger
  */
-@Immutable
+@NotThreadSafe
 public class HCMultiCustomizer implements IHCCustomizer
 {
   private final List <IHCCustomizer> m_aCustomizers = new ArrayList <IHCCustomizer> ();
@@ -47,14 +50,34 @@ public class HCMultiCustomizer implements IHCCustomizer
   {
     if (aCustomizers != null)
       for (final IHCCustomizer aCustomizer : aCustomizers)
-        m_aCustomizers.add (aCustomizer);
+        addCustomizer (aCustomizer);
   }
 
   public HCMultiCustomizer (@Nullable final Iterable <? extends IHCCustomizer> aCustomizers)
   {
     if (aCustomizers != null)
       for (final IHCCustomizer aCustomizer : aCustomizers)
-        m_aCustomizers.add (aCustomizer);
+        addCustomizer (aCustomizer);
+  }
+
+  @Nonnull
+  public HCMultiCustomizer addCustomizer (@Nonnull final IHCCustomizer aCustomizer)
+  {
+    ValueEnforcer.notNull (aCustomizer, "Customizer");
+    m_aCustomizers.add (aCustomizer);
+    return this;
+  }
+
+  @Nonnull
+  public EChange removeCustomizer (@Nullable final IHCCustomizer aCustomizer)
+  {
+    return EChange.valueOf (m_aCustomizers.add (aCustomizer));
+  }
+
+  @Nonnegative
+  public int getCustomizerCount ()
+  {
+    return m_aCustomizers.size ();
   }
 
   @Nonnull
