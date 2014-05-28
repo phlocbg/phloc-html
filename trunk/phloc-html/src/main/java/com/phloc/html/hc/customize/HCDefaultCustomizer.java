@@ -210,7 +210,12 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
         // Read only?
         if (aCtrl.isReadonly ())
+        {
           aCtrl.addClass (CSS_CLASS_READONLY);
+
+          // Set explicit tab index -1 to avoid focusing
+          aCtrl.setTabIndex (-1L);
+        }
 
         if (aCtrl.isFocused ())
         {
