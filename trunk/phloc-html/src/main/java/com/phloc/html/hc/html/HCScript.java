@@ -28,6 +28,7 @@ import javax.annotation.concurrent.GuardedBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CCharset;
@@ -151,9 +152,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public HCScript setJSCodeProvider (@Nonnull final IJSCodeProvider aProvider)
   {
-    if (aProvider == null)
-      throw new NullPointerException ("provider");
-    m_aProvider = aProvider;
+    m_aProvider = ValueEnforcer.notNull (aProvider, "Provider");
     return this;
   }
 
@@ -202,9 +201,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public HCScript setMode (@Nonnull final EMode eMode)
   {
-    if (eMode == null)
-      throw new NullPointerException ("mode");
-    m_eMode = eMode;
+    m_eMode = ValueEnforcer.notNull (eMode, "Mode");
     return this;
   }
 
@@ -331,8 +328,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
    */
   public static void setDefaultMode (@Nonnull final EMode eMode)
   {
-    if (eMode == null)
-      throw new NullPointerException ("mode");
+    ValueEnforcer.notNull (eMode, "Mode");
 
     s_aRWLock.writeLock ().lock ();
     try

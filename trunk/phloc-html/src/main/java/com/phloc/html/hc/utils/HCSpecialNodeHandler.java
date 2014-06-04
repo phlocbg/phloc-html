@@ -32,6 +32,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.cache.AnnotationUsageCache;
@@ -251,8 +252,7 @@ public final class HCSpecialNodeHandler
    */
   public static boolean isOutOfBandNode (@Nonnull final IHCNode aHCNode)
   {
-    if (aHCNode == null)
-      throw new NullPointerException ("HCNode");
+    ValueEnforcer.notNull (aHCNode, "HCNode");
 
     // Is the @OutOfBandNode annotation present?
     if (s_aOOBNAnnotationCache.hasAnnotation (aHCNode))
@@ -270,6 +270,8 @@ public final class HCSpecialNodeHandler
                                                                 @Nonnull final List <IHCNode> aTargetList,
                                                                 @Nonnegative final int nLevel)
   {
+    ValueEnforcer.notNull (aParentElement, "ParentElement");
+
     if (aParentElement.hasChildren ())
     {
       int nNodeIndex = 0;
@@ -313,8 +315,7 @@ public final class HCSpecialNodeHandler
   @ReturnsMutableCopy
   public static List <IHCNode> recursiveExtractAndRemoveOutOfBandNodes (@Nonnull final IHCHasChildren aParentElement)
   {
-    if (aParentElement == null)
-      throw new NullPointerException ("parentElement");
+    ValueEnforcer.notNull (aParentElement, "ParentElement");
 
     final List <IHCNode> aTargetList = new ArrayList <IHCNode> ();
 
@@ -382,8 +383,7 @@ public final class HCSpecialNodeHandler
   public static List <IHCNode> getMergedInlineCSSAndJSNodes (@Nonnull final Iterable <? extends IHCNode> aNodes,
                                                              final boolean bKeepOnDocumentReady)
   {
-    if (aNodes == null)
-      throw new NullPointerException ("nodes");
+    ValueEnforcer.notNull (aNodes, "Nodes");
 
     // Apply all modifiers
     final Iterable <? extends IHCNode> aRealSpecialNodes = _applyModifiers (aNodes);
@@ -471,10 +471,8 @@ public final class HCSpecialNodeHandler
   public static List <IHCNode> getWithoutSpecialNodes (@Nonnull final Iterable <? extends IHCNode> aNodes,
                                                        @Nonnull final AbstractHCSpecialNodes <?> aSpecialNodes)
   {
-    if (aNodes == null)
-      throw new NullPointerException ("nodes");
-    if (aSpecialNodes == null)
-      throw new NullPointerException ("specialNodes");
+    ValueEnforcer.notNull (aNodes, "Nodes");
+    ValueEnforcer.notNull (aSpecialNodes, "SpecialNodes");
 
     final List <IHCNode> ret = new ArrayList <IHCNode> ();
 
@@ -531,10 +529,8 @@ public final class HCSpecialNodeHandler
                                                   @Nonnull final AbstractHCSpecialNodes <?> aSpecialNodes,
                                                   final boolean bKeepOnDocumentReady)
   {
-    if (aNode == null)
-      throw new NullPointerException ("Node");
-    if (aSpecialNodes == null)
-      throw new NullPointerException ("SpecialNodes");
+    ValueEnforcer.notNull (aNode, "Node");
+    ValueEnforcer.notNull (aSpecialNodes, "SpecialNodes");
 
     // Extract all out of band nodes from the passed node
     List <IHCNode> aExtractedOutOfBandNodes = recursiveExtractAndRemoveOutOfBandNodes (aNode);

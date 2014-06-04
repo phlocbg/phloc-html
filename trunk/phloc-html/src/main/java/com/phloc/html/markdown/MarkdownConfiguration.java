@@ -24,6 +24,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.collections.ContainerHelper;
@@ -120,10 +121,8 @@ public class MarkdownConfiguration
                                 @Nullable final IMarkdownSpanEmitter aSpecialLinkEmitter,
                                 @Nullable final List <? extends AbstractMarkdownPlugin> aPlugins)
   {
-    if (aEncoding == null)
-      throw new NullPointerException ("Encoding");
-    if (aDecorator == null)
-      throw new NullPointerException ("Decorator");
+    ValueEnforcer.notNull (aEncoding, "Encoding");
+    ValueEnforcer.notNull (aDecorator, "Decorator");
 
     m_bSafeMode = bSafeMode;
     m_aEncoding = aEncoding;
@@ -267,10 +266,7 @@ public class MarkdownConfiguration
     @Nonnull
     public Builder setEncoding (@Nonnull final Charset aEncoding)
     {
-      if (aEncoding == null)
-        throw new NullPointerException ("Encoding");
-
-      m_aEncoding = aEncoding;
+      m_aEncoding = ValueEnforcer.notNull (aEncoding, "Encoding");
       return this;
     }
 
@@ -292,9 +288,7 @@ public class MarkdownConfiguration
     @Nonnull
     public Builder setDecorator (@Nonnull final IMarkdownDecorator aDecorator)
     {
-      if (aDecorator == null)
-        throw new NullPointerException ("Decorator");
-      m_aDecorator = aDecorator;
+      m_aDecorator = ValueEnforcer.notNull (aDecorator, "Decorator");
       return this;
     }
 

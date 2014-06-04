@@ -26,6 +26,7 @@ import javax.annotation.concurrent.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.string.StringParser;
 import com.phloc.css.ECSSUnit;
@@ -251,12 +252,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {
-    if (aOutOfBandNodes == null)
-      throw new NullPointerException ("OutOfBandNodes");
-    if (aHead == null)
-      throw new NullPointerException ("Head");
-    if (aBody == null)
-      throw new NullPointerException ("Body");
+    ValueEnforcer.notNull (aOutOfBandNodes, "OutOfBandNodes");
+    ValueEnforcer.notNull (aHead, "Head");
+    ValueEnforcer.notNull (aBody, "Body");
 
     int nBeginIndex = aBody.getChildCount ();
 

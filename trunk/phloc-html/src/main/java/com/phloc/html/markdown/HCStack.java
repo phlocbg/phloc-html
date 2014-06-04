@@ -20,6 +20,7 @@ package com.phloc.html.markdown;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.collections.NonBlockingStack;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.hc.IHCCell;
@@ -103,8 +104,7 @@ final class HCStack
 
   public void append (@Nonnull final IHCNode aNode)
   {
-    if (aNode == null)
-      throw new NullPointerException ("Node");
+    ValueEnforcer.notNull (aNode, "Node");
 
     final IHCNode aParent = m_aStack.peek ();
 

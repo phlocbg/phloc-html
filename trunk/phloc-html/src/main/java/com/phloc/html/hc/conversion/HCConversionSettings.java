@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.string.ToStringGenerator;
@@ -82,14 +83,14 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Constructor
-   *
+   * 
    * @param eHTMLVersion
    *        The HTML version to use. May not be <code>null</code>.
    */
   public HCConversionSettings (@Nonnull final EHTMLVersion eHTMLVersion)
   {
-    if (eHTMLVersion == null)
-      throw new NullPointerException ("HTMLVersion");
+    ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
+
     m_eHTMLVersion = eHTMLVersion;
     m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
     m_aXMLWriterSettings = createDefaultXMLWriterSettings ();
@@ -102,7 +103,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Copy ctor. Also creates a copy of the {@link XMLWriterSettings} and the
    * {@link CSSWriterSettings}.
-   *
+   * 
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    */
@@ -114,7 +115,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Kind of copy ctor. Also creates a copy of the {@link XMLWriterSettings} and
    * the {@link CSSWriterSettings}.
-   *
+   * 
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    * @param eHTMLVersion
@@ -122,10 +123,9 @@ public class HCConversionSettings implements IHCConversionSettings
    */
   public HCConversionSettings (@Nonnull final IHCConversionSettings aBase, @Nonnull final EHTMLVersion eHTMLVersion)
   {
-    if (aBase == null)
-      throw new NullPointerException ("base");
-    if (eHTMLVersion == null)
-      throw new NullPointerException ("HTMLVersion");
+    ValueEnforcer.notNull (aBase, "Base");
+    ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
+
     m_eHTMLVersion = eHTMLVersion;
     m_sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
     m_aXMLWriterSettings = new XMLWriterSettings (aBase.getXMLWriterSettings ());
@@ -150,7 +150,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the XML writer settings to be used. By default values equivalent to
    * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used.
-   *
+   * 
    * @param aXMLWriterSettings
    *        The XML writer settings to be used. May not be <code>null</code>.
    * @return this
@@ -158,8 +158,8 @@ public class HCConversionSettings implements IHCConversionSettings
   @Nonnull
   public HCConversionSettings setXMLWriterSettings (@Nonnull final IXMLWriterSettings aXMLWriterSettings)
   {
-    if (aXMLWriterSettings == null)
-      throw new NullPointerException ("XMLWriterSettings");
+    ValueEnforcer.notNull (aXMLWriterSettings, "XMLWriterSettings");
+
     // The objects are cached with indent and no-indent for performance reasons
     m_aXMLWriterSettings = new XMLWriterSettings (aXMLWriterSettings);
     return this;
@@ -181,7 +181,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Set the CSS writer settings to be used.
-   *
+   * 
    * @param aCSSWriterSettings
    *        The settings. May not be <code>null</code>.
    * @return this
@@ -189,8 +189,8 @@ public class HCConversionSettings implements IHCConversionSettings
   @Nonnull
   public HCConversionSettings setCSSWriterSettings (@Nonnull final ICSSWriterSettings aCSSWriterSettings)
   {
-    if (aCSSWriterSettings == null)
-      throw new NullPointerException ("CSSWriterSettings");
+    ValueEnforcer.notNull (aCSSWriterSettings, "CSSWriterSettings");
+
     m_aCSSWriterSettings = new CSSWriterSettings (aCSSWriterSettings);
     return this;
   }
@@ -212,7 +212,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Enable or disable the consistency checks. It is recommended that the
    * consistency checks are only run in debug mode!
-   *
+   * 
    * @param bConsistencyChecksEnabled
    *        The new value.
    * @return this
@@ -231,7 +231,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Enable or disable the extraction of out-of-band nodes.
-   *
+   * 
    * @param bExtractOutOfBandNodes
    *        The new value.
    * @return this
@@ -251,7 +251,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the global customizer to be used to globally customize created
    * elements.
-   *
+   * 
    * @param aCustomizer
    *        The customizer to be used. May not be <code>null</code>.
    * @return this
@@ -259,9 +259,7 @@ public class HCConversionSettings implements IHCConversionSettings
   @Nonnull
   public HCConversionSettings setCustomizer (@Nonnull final IHCCustomizer aCustomizer)
   {
-    if (aCustomizer == null)
-      throw new NullPointerException ("customizer");
-    m_aCustomizer = aCustomizer;
+    m_aCustomizer = ValueEnforcer.notNull (aCustomizer, "Customizer");
     return this;
   }
 

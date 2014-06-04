@@ -20,6 +20,7 @@ package com.phloc.html.hc.html5;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.url.ISimpleURL;
@@ -139,9 +140,7 @@ public class HCCommand extends AbstractHCElement <HCCommand> implements IHCCanBe
   @Nonnull
   public HCCommand setType (@Nonnull final EHCCommandType eType)
   {
-    if (eType == null)
-      throw new NullPointerException ("type");
-    m_eType = eType;
+    m_eType = ValueEnforcer.notNull (eType, "Type");
     return this;
   }
 

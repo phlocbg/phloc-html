@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -86,9 +87,7 @@ public abstract class AbstractHCBaseTable <IMPLTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final IMPLTYPE setHead (@Nonnull final HCTHead aHead)
   {
-    if (aHead == null)
-      throw new NullPointerException ("Head");
-    m_aHead = aHead;
+    m_aHead = ValueEnforcer.notNull (aHead, "Head");
     return thisAsT ();
   }
 
@@ -104,9 +103,7 @@ public abstract class AbstractHCBaseTable <IMPLTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final IMPLTYPE setBody (@Nonnull final HCTBody aBody)
   {
-    if (aBody == null)
-      throw new NullPointerException ("Body");
-    m_aBody = aBody;
+    m_aBody = ValueEnforcer.notNull (aBody, "Body");
     return thisAsT ();
   }
 
@@ -122,9 +119,7 @@ public abstract class AbstractHCBaseTable <IMPLTYPE extends AbstractHCBaseTable 
   @Nonnull
   public final IMPLTYPE setFoot (@Nonnull final HCTFoot aFoot)
   {
-    if (aFoot == null)
-      throw new NullPointerException ("Foot");
-    m_aFoot = aFoot;
+    m_aFoot = ValueEnforcer.notNull (aFoot, "Foot");
     return thisAsT ();
   }
 

@@ -44,6 +44,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.microdom.IMicroNodeWithChildren;
 import com.phloc.commons.microdom.impl.MicroText;
@@ -139,9 +140,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   @Nonnull
   public HCStyle setType (@Nonnull final IMimeType aType)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
-    m_aType = aType;
+    m_aType = ValueEnforcer.notNull (aType, "Type");
     return this;
   }
 
@@ -248,9 +247,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
   @Nonnull
   public HCStyle setMode (@Nonnull final EMode eMode)
   {
-    if (eMode == null)
-      throw new NullPointerException ("mode");
-    m_eMode = eMode;
+    m_eMode = ValueEnforcer.notNull (eMode, "Mode");
     return this;
   }
 
@@ -323,8 +320,7 @@ public class HCStyle extends AbstractHCElement <HCStyle> implements IHCCSSNode
    */
   public static void setDefaultMode (@Nonnull final EMode eMode)
   {
-    if (eMode == null)
-      throw new NullPointerException ("mode");
+    ValueEnforcer.notNull (eMode, "mode");
     s_eDefaultMode = eMode;
     s_aLogger.info ("Default <style> mode set to " + eMode);
   }

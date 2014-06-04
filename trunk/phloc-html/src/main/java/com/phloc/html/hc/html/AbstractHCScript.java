@@ -22,6 +22,7 @@ import java.nio.charset.Charset;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.CMimeType;
 import com.phloc.commons.mime.IMimeType;
@@ -62,9 +63,7 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
   @Nonnull
   public IMPLTYPE setType (@Nonnull final IMimeType aType)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
-    m_aType = aType;
+    m_aType = ValueEnforcer.notNull (aType, "Type");
     return thisAsT ();
   }
 

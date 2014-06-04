@@ -20,6 +20,7 @@ package com.phloc.html.hc.html5;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.CHTMLAttributeValues;
@@ -78,9 +79,7 @@ public class HCKeyGen extends AbstractHCElement <HCKeyGen> implements IHCCanBeDi
   @Nonnull
   public HCKeyGen setKeyType (@Nonnull final EHCKeyGenType eKeyType)
   {
-    if (eKeyType == null)
-      throw new NullPointerException ("keyType");
-    m_eKeyType = eKeyType;
+    m_eKeyType = ValueEnforcer.notNull (eKeyType, "KeyType");
     return this;
   }
 

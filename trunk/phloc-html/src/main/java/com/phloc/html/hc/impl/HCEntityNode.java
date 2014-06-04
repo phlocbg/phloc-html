@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroEntityReference;
 import com.phloc.commons.microdom.impl.MicroEntityReference;
 import com.phloc.commons.string.ToStringGenerator;
@@ -43,10 +44,8 @@ public class HCEntityNode extends AbstractHCNode
 
   public HCEntityNode (@Nonnull final IHTMLEntity aEntity, @Nonnull final String sPlainText)
   {
-    if (aEntity == null)
-      throw new NullPointerException ("entity");
-    if (sPlainText == null)
-      throw new NullPointerException ("plainText");
+    ValueEnforcer.notNull (aEntity, "Entity");
+    ValueEnforcer.notNull (sPlainText, "PlainText");
     m_aEntity = aEntity;
     m_sPlainText = sPlainText;
   }

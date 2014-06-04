@@ -22,9 +22,9 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 
 /**
@@ -47,12 +47,10 @@ public class MetaElementValue implements IMetaElementValue
                            @Nonnull final String sContent,
                            final boolean bIsHttpEquiv)
   {
-    if (StringHelper.hasNoText (sName))
-      throw new IllegalArgumentException ("name");
-    if (aContentLocale == null)
-      throw new NullPointerException ("contentLocale");
-    if (sContent == null)
-      throw new NullPointerException ("content");
+    ValueEnforcer.notEmpty (sName, "Name");
+    ValueEnforcer.notNull (aContentLocale, "ContentLocale");
+    ValueEnforcer.notNull (sContent, "Content");
+
     m_sName = sName;
     m_aContentLocale = aContentLocale;
     m_sContent = sContent;

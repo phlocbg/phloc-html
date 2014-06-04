@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.microdom.IMicroNode;
@@ -39,13 +40,13 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML conditional comment for IE specific usage. E.g.
- *
+ * 
  * <pre>
  * &lt;!--[if IE 6]>
  * Special instructions for IE 6 here
  * &lt;![endif]-->
  * </pre>
- *
+ * 
  * @author Philip Helger
  */
 @Immutable
@@ -71,10 +72,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
 
   public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCNode aWrappedNode)
   {
-    if (StringHelper.hasNoText (sCondition))
-      throw new IllegalArgumentException ("Passed condition may not be empty!");
-    if (aWrappedNode == null)
-      throw new NullPointerException ("wrappedNode");
+    ValueEnforcer.notEmpty (sCondition, "Condition");
+    ValueEnforcer.notNull (aWrappedNode, "WrappedNode");
     if (aWrappedNode instanceof HCCommentNode)
       throw new IllegalArgumentException ("You cannot wrap a comment inside a conditional comment");
     if (aWrappedNode instanceof HCConditionalCommentNode)
@@ -143,7 +142,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
    * This method wraps an arbitrary HC node in a conditional node. The passed
    * node is simply converted to an XML string and the content is put into the
    * conditional comment.
-   *
+   * 
    * @return The wrapped node. Never <code>null</code>.
    */
   @Nonnull
@@ -212,8 +211,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEExactVersion (@Nonnull final Version aVersion,
                                                                   @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
+
     return new HCConditionalCommentNode ("if IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -263,8 +262,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIENotVersion (@Nonnull final Version aVersion,
                                                                 @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
+
     return new HCConditionalCommentNode ("if !IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -272,8 +271,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIELowerThanVersion (@Nonnull final Version aVersion,
                                                                       @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
     return new HCConditionalCommentNode ("if lt IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -323,8 +321,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIELowerOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                              @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
+
     return new HCConditionalCommentNode ("if lte IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -374,8 +372,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEGreaterThanVersion (@Nonnull final Version aVersion,
                                                                         @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
+
     return new HCConditionalCommentNode ("if gt IE " + aVersion.getAsString (), aWrappedNode);
   }
 
@@ -425,8 +423,8 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   public static HCConditionalCommentNode createForIEGreaterOrEqualThanVersion (@Nonnull final Version aVersion,
                                                                                @Nonnull final IHCNode aWrappedNode)
   {
-    if (aVersion == null)
-      throw new NullPointerException ("Version");
+    ValueEnforcer.notNull (aVersion, "Version");
+
     return new HCConditionalCommentNode ("if gte IE " + aVersion.getAsString (), aWrappedNode);
   }
 

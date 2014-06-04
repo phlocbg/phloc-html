@@ -19,13 +19,14 @@ package com.phloc.html.markdown;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * The result of a Markdown processing
- *
+ * 
  * @author Philip Helger
  */
 public class MarkdownProcessingResult
@@ -34,8 +35,8 @@ public class MarkdownProcessingResult
 
   public MarkdownProcessingResult (@Nonnull final HCStack aResult)
   {
-    if (aResult == null)
-      throw new NullPointerException ("Result");
+    ValueEnforcer.notNull (aResult, "Result");
+
     m_aNodeList = aResult.getRoot ();
   }
 
