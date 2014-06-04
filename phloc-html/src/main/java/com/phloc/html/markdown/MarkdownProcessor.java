@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.WillClose;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.io.IReadableResource;
 import com.phloc.commons.io.streams.NonBlockingStringReader;
 import com.phloc.commons.io.streams.StreamUtils;
@@ -66,8 +67,8 @@ public class MarkdownProcessor
    */
   public MarkdownProcessor (@Nonnull final MarkdownConfiguration aConfig)
   {
-    if (aConfig == null)
-      throw new NullPointerException ("Config");
+    ValueEnforcer.notNull (aConfig, "Config");
+
     m_aConfig = aConfig;
     m_bUseExtensions = aConfig.isExtendedProfile ();
     m_aEmitter = new Emitter (m_aConfig);
@@ -467,16 +468,16 @@ public class MarkdownProcessor
   @Nonnull
   public MarkdownProcessingResult process (@Nonnull final IReadableResource aRes) throws IOException
   {
-    if (aRes == null)
-      throw new NullPointerException ("Resource");
+    ValueEnforcer.notNull (aRes, "Resource");
+
     return process (aRes.getReader (m_aConfig.getEncoding ()));
   }
 
   @Nonnull
   public MarkdownProcessingResult process (@Nonnull final InputStream aIS) throws IOException
   {
-    if (aIS == null)
-      throw new NullPointerException ("InputStream");
+    ValueEnforcer.notNull (aIS, "InputStream");
+
     return process (StreamUtils.getBuffered (StreamUtils.createReader (aIS, m_aConfig.getEncoding ())));
   }
 

@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.annotations.OutOfBandNode;
 import com.phloc.html.hc.IHCNode;
@@ -35,9 +36,7 @@ public final class HCOutOfBandNode extends AbstractHCWrappingNode
 
   public HCOutOfBandNode (@Nonnull final IHCNode aOutOfBandNode)
   {
-    if (aOutOfBandNode == null)
-      throw new NullPointerException ("outOfBandNode");
-    m_aOutOfBandNode = aOutOfBandNode;
+    m_aOutOfBandNode = ValueEnforcer.notNull (aOutOfBandNode, "OutOfBandNode");
   }
 
   @Nonnull

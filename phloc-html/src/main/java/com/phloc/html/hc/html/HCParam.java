@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -62,9 +63,7 @@ public class HCParam extends AbstractHCElement <HCParam>
   @Nonnull
   public HCParam setName (@Nonnull final String sName)
   {
-    if (sName == null)
-      throw new NullPointerException ("name");
-    m_sName = sName;
+    m_sName = ValueEnforcer.notNull (sName, "Name");
     return this;
   }
 

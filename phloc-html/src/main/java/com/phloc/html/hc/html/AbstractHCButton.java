@@ -20,6 +20,7 @@ package com.phloc.html.hc.html;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
@@ -109,9 +110,7 @@ public abstract class AbstractHCButton <IMPLTYPE extends AbstractHCButton <IMPLT
   @Nonnull
   public IMPLTYPE setType (@Nonnull final EHCButtonType eType)
   {
-    if (eType == null)
-      throw new NullPointerException ("type");
-    m_eType = eType;
+    m_eType = ValueEnforcer.notNull (eType, "Type");
     return thisAsT ();
   }
 

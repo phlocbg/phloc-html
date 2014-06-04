@@ -63,7 +63,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   /**
    * Callback
-   *
+   * 
    * @param aChild
    *        The child that was added
    */
@@ -73,7 +73,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
 
   /**
    * Callback
-   *
+   * 
    * @param aChild
    *        The child that was added
    */
@@ -338,8 +338,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   @Nonnull
   public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
   {
-    if (aComparator == null)
-      throw new NullPointerException ("comparator");
+    ValueEnforcer.notNull (aComparator, "Comparator");
     if (m_aChildren != null)
       Collections.sort (m_aChildren, aComparator);
     return thisAsT ();

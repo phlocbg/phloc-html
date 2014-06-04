@@ -47,7 +47,7 @@ import com.phloc.html.hc.htmlext.HCUtils;
 
 /**
  * Base class for elements with special children.
- *
+ * 
  * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
@@ -71,7 +71,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   /**
    * Callback
-   *
+   * 
    * @param aChild
    *        The child that was added
    */
@@ -81,7 +81,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   /**
    * Callback
-   *
+   * 
    * @param aChild
    *        The child that was added
    */
@@ -222,8 +222,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nonnull
   public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super CHILDTYPE> aComparator)
   {
-    if (aComparator == null)
-      throw new NullPointerException ("comparator");
+    ValueEnforcer.notNull (aComparator, "Comparator");
     if (m_aChildren != null)
       Collections.sort (m_aChildren, aComparator);
     return thisAsT ();
@@ -242,7 +241,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   /**
    * Helper method that returns the elements in the correct order for emitting.
    * This can e.g. be used for sorting or ordering.
-   *
+   * 
    * @param aChildren
    *        The children to be emitted. Is a direct reference to the container
    *        where the children are stored. So handle with care!

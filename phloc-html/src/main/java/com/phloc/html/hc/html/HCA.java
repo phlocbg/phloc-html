@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.mime.IMimeType;
 import com.phloc.commons.string.StringHelper;
@@ -74,8 +75,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
   @Nonnull
   public final HCA setHref (@Nonnull final ISimpleURL aHref)
   {
-    if (aHref == null)
-      throw new NullPointerException ("href");
+    ValueEnforcer.notNull (aHref, "href");
 
     HCConsistencyChecker.checkIfLinkIsMasked (aHref.getAsString ());
     m_aHref = aHref;

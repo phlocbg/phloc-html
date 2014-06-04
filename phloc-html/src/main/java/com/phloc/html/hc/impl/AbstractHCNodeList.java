@@ -27,6 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.lang.GenericReflection;
@@ -324,8 +325,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   @Nonnull
   public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
   {
-    if (aComparator == null)
-      throw new NullPointerException ("comparator");
+    ValueEnforcer.notNull (aComparator, "Comparator");
     Collections.sort (m_aChildren, aComparator);
     return thisAsT ();
   }

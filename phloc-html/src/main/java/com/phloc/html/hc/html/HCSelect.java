@@ -27,6 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.CGlobal;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsImmutableObject;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
@@ -136,8 +137,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOption (@Nonnull final HCOption aOption)
   {
-    if (aOption == null)
-      throw new NullPointerException ("option");
+    ValueEnforcer.notNull (aOption, "Option");
 
     // Ensure list is present
     if (m_aOptions == null)
@@ -155,8 +155,7 @@ public class HCSelect extends AbstractHCControl <HCSelect>
   @Nonnull
   public final HCOption addOptionAtIndex (@Nonnegative final int nIndex, @Nonnull final HCOption aOption)
   {
-    if (aOption == null)
-      throw new NullPointerException ("option");
+    ValueEnforcer.notNull (aOption, "Option");
 
     // Ensure list is present
     if (m_aOptions == null)

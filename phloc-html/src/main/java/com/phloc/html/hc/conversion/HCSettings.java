@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.hc.IHCNode;
@@ -52,14 +53,13 @@ public final class HCSettings
 
   /**
    * Set the global conversion settings provider.
-   *
+   * 
    * @param aConversionSettingsProvider
    *        The object to be used. May not be <code>null</code>.
    */
   public static void setConversionSettingsProvider (@Nonnull final IHCConversionSettingsProvider aConversionSettingsProvider)
   {
-    if (aConversionSettingsProvider == null)
-      throw new NullPointerException ("conversionSettingsProvider");
+    ValueEnforcer.notNull (aConversionSettingsProvider, "ConversionSettingsProvider");
 
     s_aRWLock.writeLock ().lock ();
     try
@@ -94,7 +94,7 @@ public final class HCSettings
   /**
    * Get the conversion settings from the current conversion settings provider
    * using default pretty print mode
-   *
+   * 
    * @return The non-<code>null</code> conversion settings
    */
   @Nonnull
@@ -105,7 +105,7 @@ public final class HCSettings
 
   /**
    * Get the conversion settings from the current conversion settings provider
-   *
+   * 
    * @param bPrettyPrint
    *        For pretty printed output?
    * @return The non-<code>null</code> conversion settings
@@ -119,7 +119,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to a micro node using the conversion
    * settings provider.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @return The fully created HTML node
@@ -133,7 +133,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to a micro node using the conversion
    * settings provider.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @param bPrettyPrint
@@ -149,7 +149,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to a micro node using the conversion
    * settings provider.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @param aConversionSettings
@@ -166,7 +166,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to a micro node using the conversion settings
    * provider.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @return The fully created HTML node
@@ -180,7 +180,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to a micro node using the conversion settings
    * provider.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @param bPrettyPrint
@@ -210,7 +210,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to an HTML string using default pretty
    * print mode.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @return The node as HTML.
@@ -224,7 +224,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to an HTML string using the conversion
    * settings factory.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @param bPrettyPrint
@@ -240,7 +240,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node builder to an HTML string using the passed
    * conversion settings.
-   *
+   * 
    * @param aNodeBuilder
    *        The node to be converted. May not be <code>null</code>.
    * @param aConversionSettings
@@ -257,7 +257,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to an HTML string. Indent and align status is
    * determined from {@link GlobalDebug#isDebugMode()}
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @return The node as XML with or without indentation.
@@ -271,7 +271,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to an HTML string using the conversion settings
    * factory.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @param bPrettyPrint
@@ -287,7 +287,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to an HTML string using the passed conversion
    * settings.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @param aConversionSettings
@@ -304,7 +304,7 @@ public final class HCSettings
   /**
    * Convert the passed HC node to an HTML string without namespaces. Indent and
    * align status is determined from {@link GlobalDebug#isDebugMode()}
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @return The node as XML with or without indentation.
@@ -317,7 +317,7 @@ public final class HCSettings
 
   /**
    * Convert the passed HC node to an HTML string without namespaces.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @param bPrettyPrint
@@ -332,7 +332,7 @@ public final class HCSettings
 
   /**
    * Convert the passed HC node to an HTML string without namespaces.
-   *
+   * 
    * @param aHCNode
    *        The node to be converted. May not be <code>null</code>.
    * @param aConversionSettings
@@ -353,7 +353,7 @@ public final class HCSettings
   /**
    * Get the {@link Charset} that is used to create the HTML code in default
    * pretty print mode.
-   *
+   * 
    * @return The non-<code>null</code> Charset object
    */
   @Nonnull
@@ -364,7 +364,7 @@ public final class HCSettings
 
   /**
    * Get the {@link Charset} that is used to create the HTML code.
-   *
+   * 
    * @param bPrettyPrint
    *        For pretty printed output?
    * @return The non-<code>null</code> Charset object
@@ -377,7 +377,7 @@ public final class HCSettings
 
   /**
    * Get the customizer currently used in default pretty print mode.
-   *
+   * 
    * @return The customizer to use. May be <code>null</code>.
    */
   @Nullable
@@ -388,7 +388,7 @@ public final class HCSettings
 
   /**
    * Get the customizer currently used.
-   *
+   * 
    * @param bPrettyPrint
    *        For pretty printed output?
    * @return The customizer to use. May be <code>null</code>.

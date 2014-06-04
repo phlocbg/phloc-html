@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.GlobalDebug;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -136,8 +137,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addMetaElement (@Nonnull final IMetaElement aMetaElement)
   {
-    if (aMetaElement == null)
-      throw new NullPointerException ("metaElement");
+    ValueEnforcer.notNull (aMetaElement, "MetaElement");
     m_aMetaElements.put (aMetaElement.getName (), aMetaElement);
     return this;
   }
@@ -193,8 +193,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addLink (@Nonnull final HCLink aLink)
   {
-    if (aLink == null)
-      throw new NullPointerException ("link");
+    ValueEnforcer.notNull (aLink, "Link");
     m_aLinks.add (aLink);
     return this;
   }
@@ -212,8 +211,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addLink (@Nonnegative final int nIndex, @Nonnull final HCLink aLink)
   {
-    if (aLink == null)
-      throw new NullPointerException ("link");
+    ValueEnforcer.notNull (aLink, "Link");
     m_aLinks.add (nIndex, aLink);
     return this;
   }
@@ -254,8 +252,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addCSS (@Nonnull final IHCNode aCSS)
   {
-    if (aCSS == null)
-      throw new NullPointerException ("css");
+    ValueEnforcer.notNull (aCSS, "CSS");
     if (!HCSpecialNodeHandler.isCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (aCSS);
@@ -265,8 +262,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addCSS (@Nonnegative final int nIndex, @Nonnull final IHCNode aCSS)
   {
-    if (aCSS == null)
-      throw new NullPointerException ("css");
+    ValueEnforcer.notNull (aCSS, "CSS");
     if (!HCSpecialNodeHandler.isCSSNode (aCSS))
       throw new IllegalArgumentException (aCSS + " is not a valid CSS node!");
     m_aCSS.add (nIndex, aCSS);
@@ -316,8 +312,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addJS (@Nonnull final IHCNode aJS)
   {
-    if (aJS == null)
-      throw new NullPointerException ("js");
+    ValueEnforcer.notNull (aJS, "JS");
     if (!HCSpecialNodeHandler.isJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (aJS);
@@ -336,8 +331,7 @@ public class HCHead extends AbstractHCElement <HCHead>
   @Nonnull
   public HCHead addJS (@Nonnegative final int nIndex, @Nonnull final IHCNode aJS)
   {
-    if (aJS == null)
-      throw new NullPointerException ("js");
+    ValueEnforcer.notNull (aJS, "JS");
     if (!HCSpecialNodeHandler.isJSNode (aJS))
       throw new IllegalArgumentException (aJS + " is not a valid JS node!");
     m_aJS.add (nIndex, aJS);

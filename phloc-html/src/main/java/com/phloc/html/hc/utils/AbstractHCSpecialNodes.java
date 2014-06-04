@@ -27,12 +27,12 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.equals.EqualsUtils;
 import com.phloc.commons.hash.HashCodeGenerator;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
@@ -76,8 +76,8 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Nonnull
   public IMPLTYPE addExternalCSS (@Nonnull @Nonempty final String sCSSFile)
   {
-    if (StringHelper.hasNoText (sCSSFile))
-      throw new IllegalArgumentException ("CSSFile");
+    ValueEnforcer.notEmpty (sCSSFile, "CSSFile");
+
     if (!m_aExternalCSSs.add (sCSSFile))
       s_aLogger.warn ("Duplicate CSS file '" + sCSSFile + "' ignored");
     return thisAsT ();
@@ -98,8 +98,8 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Nonnull
   public IMPLTYPE addInlineCSS (@Nonnull final CharSequence aInlineCSS)
   {
-    if (aInlineCSS == null)
-      throw new NullPointerException ("InlineCSS");
+    ValueEnforcer.notNull (aInlineCSS, "InlineCSS");
+
     m_aInlineCSS.append (aInlineCSS);
     return thisAsT ();
   }
@@ -119,8 +119,8 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Nonnull
   public IMPLTYPE addExternalJS (@Nonnull @Nonempty final String sJSFile)
   {
-    if (StringHelper.hasNoText (sJSFile))
-      throw new IllegalArgumentException ("JSFile");
+    ValueEnforcer.notEmpty (sJSFile, "JSFile");
+
     if (!m_aExternalJSs.add (sJSFile))
       s_aLogger.warn ("Duplicate JS file '" + sJSFile + "' ignored");
     return thisAsT ();
@@ -141,8 +141,8 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Nonnull
   public IMPLTYPE addInlineJS (@Nonnull final IJSCodeProvider aInlineJS)
   {
-    if (aInlineJS == null)
-      throw new NullPointerException ("InlineJS");
+    ValueEnforcer.notNull (aInlineJS, "InlineJS");
+
     m_aInlineJS.appendFlattened (aInlineJS);
     return thisAsT ();
   }
@@ -162,8 +162,7 @@ public abstract class AbstractHCSpecialNodes <IMPLTYPE extends AbstractHCSpecial
   @Nonnull
   public IMPLTYPE addAll (@Nonnull final IHCSpecialNodes aSpecialNodes)
   {
-    if (aSpecialNodes == null)
-      throw new NullPointerException ("SpecialNodes");
+    ValueEnforcer.notNull (aSpecialNodes, "SpecialNodes");
 
     // CSS
     for (final String sCSSFile : aSpecialNodes.getAllExternalCSSs ())

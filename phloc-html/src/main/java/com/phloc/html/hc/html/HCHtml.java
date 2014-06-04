@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.microdom.IMicroDocument;
 import com.phloc.commons.microdom.IMicroElement;
@@ -112,8 +113,7 @@ public class HCHtml extends AbstractHCElement <HCHtml>
                                                      @Nonnull final HCHead aHead,
                                                      @Nonnull final HCBody aBody)
   {
-    if (aConversionSettings == null)
-      throw new NullPointerException ("ConversionSettings");
+    ValueEnforcer.notNull (aConversionSettings, "ConversionSettings");
 
     if (aConversionSettings.isExtractOutOfBandNodes ())
     {
