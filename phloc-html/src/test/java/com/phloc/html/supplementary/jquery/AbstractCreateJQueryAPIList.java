@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.SystemProperties;
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
@@ -276,15 +277,12 @@ abstract class AbstractCreateJQueryAPIList
 
     public Signature (@Nonnull final Version aAdded)
     {
-      if (aAdded == null)
-        throw new NullPointerException ("added");
-      m_aAdded = aAdded;
+      m_aAdded = ValueEnforcer.notNull (aAdded, "Added");
     }
 
     void addArgument (@Nonnull final Argument aArg)
     {
-      if (aArg == null)
-        throw new NullPointerException ("arg");
+      ValueEnforcer.notNull (aArg, "Arg");
       m_aArgs.add (aArg);
     }
 
