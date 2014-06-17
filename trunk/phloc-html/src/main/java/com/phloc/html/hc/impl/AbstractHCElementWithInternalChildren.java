@@ -280,7 +280,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (hasChildren ())
-      for (final IHCNode aChild : m_aChildren)
+      for (final CHILDTYPE aChild : m_aChildren)
         aChild.beforeConvertToNode (aConversionSettings);
   }
 
@@ -297,7 +297,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Nonnull
   @Nonempty
   @OverrideOnDemand
-  protected List <? extends IHCNode> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
+  protected List <? extends CHILDTYPE> getChildrenFormEmitting (@Nonnull @Nonempty final List <CHILDTYPE> aChildren)
   {
     return aChildren;
   }
@@ -309,7 +309,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     super.applyProperties (aElement, aConversionSettings);
     if (hasChildren ())
-      for (final IHCNode aChild : getChildrenFormEmitting (m_aChildren))
+      for (final CHILDTYPE aChild : getChildrenFormEmitting (m_aChildren))
         aElement.appendChild (aChild.convertToNode (aConversionSettings));
 
     if (!aElement.hasChildren ())
@@ -330,7 +330,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     if (!hasChildren ())
       return "";
     final StringBuilder ret = new StringBuilder ();
-    for (final CHILDTYPE aChild : m_aChildren)
+    for (final CHILDTYPE aChild : getChildrenFormEmitting (m_aChildren))
     {
       final String sPlainText = aChild.getPlainText ();
       if (StringHelper.hasText (sPlainText))
