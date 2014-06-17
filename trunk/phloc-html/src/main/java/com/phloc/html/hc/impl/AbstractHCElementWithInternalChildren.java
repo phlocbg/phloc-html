@@ -86,8 +86,11 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
    *        The child that was added
    */
   @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
   protected void afterAddChild (@Nonnull final CHILDTYPE aChild)
-  {}
+  {
+    aChild.onAdded (this);
+  }
 
   private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
   {
@@ -133,25 +136,32 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
 
   /**
    * Invoked after an element was removed.
+   * 
+   * @param aChild
+   *        The child that was removed. Never <code>null</code>.
    */
   @OverrideOnDemand
-  protected void afterRemoveChild ()
-  {}
+  @OverridingMethodsMustInvokeSuper
+  protected void afterRemoveChild (@Nonnull final CHILDTYPE aChild)
+  {
+    aChild.onRemoved (this);
+  }
 
   @Nonnull
   public final THISTYPE removeChild (@Nullable final CHILDTYPE aChild)
   {
     if (aChild != null && m_aChildren != null)
       if (m_aChildren.remove (aChild))
-        afterRemoveChild ();
+        afterRemoveChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
   public final THISTYPE removeChild (@Nonnegative final int nIndex)
   {
-    if (ContainerHelper.removeElementAtIndex (m_aChildren, nIndex).isChanged ())
-      afterRemoveChild ();
+    final CHILDTYPE aRemovedChild = ContainerHelper.removeAndReturnElementAtIndex (m_aChildren, nIndex);
+    if (aRemovedChild != null)
+      afterRemoveChild (aRemovedChild);
     return thisAsT ();
   }
 
@@ -160,11 +170,8 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     if (m_aChildren != null)
     {
-      if (!m_aChildren.isEmpty ())
-      {
-        m_aChildren.clear ();
-        afterRemoveChild ();
-      }
+      while (!m_aChildren.isEmpty ())
+        removeChild (0);
       m_aChildren = null;
     }
     return thisAsT ();

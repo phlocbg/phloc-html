@@ -36,6 +36,22 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public interface IHCNode extends IHasPlainText, Serializable
 {
   /**
+   * Callback to be invoked, after this child was added to a node.
+   * 
+   * @param aParent
+   *        The parent node this node was added to. Never <code>null</code>.
+   */
+  void onAdded (@Nonnull IHCHasChildren aParent);
+
+  /**
+   * Callback to be invoked, after this child was removed from a node.
+   * 
+   * @param aParent
+   *        The parent node this node was removed from. Never <code>null</code>.
+   */
+  void onRemoved (@Nonnull IHCHasChildren aParent);
+
+  /**
    * @return <code>true</code> if the customizer was already run on this node,
    *         <code>false</code> if not.
    */

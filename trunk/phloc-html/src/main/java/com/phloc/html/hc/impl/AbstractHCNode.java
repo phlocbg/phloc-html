@@ -45,6 +45,12 @@ public abstract class AbstractHCNode implements IHCNode
   private boolean m_bCustomized = false;
   private boolean m_bConvertedToNode = false;
 
+  public void onAdded (@Nonnull final IHCHasChildren aParent)
+  {}
+
+  public void onRemoved (@Nonnull final IHCHasChildren aParent)
+  {}
+
   /**
    * @return <code>true</code> if the customizer was already run on this node,
    *         <code>false</code> if not.
