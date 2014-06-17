@@ -331,7 +331,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   }
 
   @Nonnull
-  public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super IHCNode> aComparator)
   {
     ValueEnforcer.notNull (aComparator, "Comparator");
     Collections.sort (m_aChildren, aComparator);

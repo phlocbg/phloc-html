@@ -1,10 +1,13 @@
 package com.phloc.html.hc;
 
+import java.util.Comparator;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Base interface for HC nodes that have mutable children.
@@ -107,4 +110,21 @@ public interface IHCHasChildrenMutable <THISTYPE extends IHCHasChildrenMutable <
    */
   @Nonnull
   THISTYPE removeAllChildren ();
+
+  /**
+   * Sort all children with the passed comparator
+   * 
+   * @param aComparator
+   *        The comparator to be used. May not be <code>null</code>.
+   * @return this
+   */
+  @Nonnull
+  THISTYPE sortAllChildren (@Nonnull Comparator <? super CHILDTYPE> aComparator);
+
+  /**
+   * @return A new node list with all contained children. Never
+   *         <code>null</code> but maybe empty.
+   */
+  @Nonnull
+  HCNodeList getAllChildrenAsNodeList ();
 }

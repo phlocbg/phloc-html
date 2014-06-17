@@ -268,6 +268,12 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     return thisAsT ();
   }
 
+  @Nonnull
+  public final HCNodeList getAllChildrenAsNodeList ()
+  {
+    return new HCNodeList ().addChildren (m_aChildren);
+  }
+
   @Override
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper

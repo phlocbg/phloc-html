@@ -17,15 +17,12 @@
  */
 package com.phloc.html.hc;
 
-import java.util.Comparator;
-
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
-import com.phloc.html.hc.impl.HCNodeList;
 
 /**
  * Special node interface for objects containing other objects
@@ -146,21 +143,4 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE addChildren (@Nullable IHCNodeBuilder... aChildren);
-
-  /**
-   * Sort all children with the passed comparator
-   * 
-   * @param aComparator
-   *        The comparator to be used. May not be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE sortAllChildren (@Nonnull Comparator <IHCNode> aComparator);
-
-  /**
-   * @return A new node list with all contained children. Never
-   *         <code>null</code> but maybe empty.
-   */
-  @Nonnull
-  HCNodeList getAllChildrenAsNodeList ();
 }

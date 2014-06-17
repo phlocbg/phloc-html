@@ -343,7 +343,7 @@ public abstract class AbstractHCElementWithChildren <THISTYPE extends AbstractHC
   }
 
   @Nonnull
-  public final THISTYPE sortAllChildren (@Nonnull final Comparator <IHCNode> aComparator)
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super IHCNode> aComparator)
   {
     ValueEnforcer.notNull (aComparator, "Comparator");
     if (m_aChildren != null)
