@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.CheckForSigned;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,7 +41,7 @@ import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLElement;
-import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.htmlext.HCUtils;
@@ -55,7 +56,7 @@ import com.phloc.html.hc.htmlext.HCUtils;
  *        Contained child type
  */
 @NotThreadSafe
-public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildren
+public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends AbstractHCElementWithInternalChildren <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCElement <THISTYPE> implements IHCHasChildrenMutable <THISTYPE, CHILDTYPE>
 {
   private List <CHILDTYPE> m_aChildren;
 
@@ -126,12 +127,44 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   }
 
   @Nonnull
+  @Deprecated
+  public final THISTYPE addChildren (@Nullable final CHILDTYPE aChild)
+  {
+    return addChild (aChild);
+  }
+
+  @Nonnull
   public final THISTYPE addChildren (@Nullable final CHILDTYPE... aChildren)
   {
     if (aChildren != null)
       for (final CHILDTYPE aChild : aChildren)
         addChild (aChild);
     return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE addChildren (@Nullable final Iterable <? extends CHILDTYPE> aChildren)
+  {
+    if (aChildren != null)
+      for (final CHILDTYPE aChild : aChildren)
+        addChild (aChild);
+    return thisAsT ();
+  }
+
+  @Nullable
+  @CheckReturnValue
+  public final <V extends CHILDTYPE> V addAndReturnChild (@Nullable final V aChild)
+  {
+    addChild (aChild);
+    return aChild;
+  }
+
+  @Nullable
+  @CheckReturnValue
+  public final <V extends CHILDTYPE> V addAndReturnChild (@Nonnegative final int nIndex, @Nullable final V aChild)
+  {
+    addChild (nIndex, aChild);
+    return aChild;
   }
 
   /**

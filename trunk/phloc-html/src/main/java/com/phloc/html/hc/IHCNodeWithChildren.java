@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.HCNodeList;
  * @param <THISTYPE>
  *        The type of the contained child objects.
  */
-public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THISTYPE>> extends IHCHasChildren
+public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THISTYPE>> extends IHCHasChildrenMutable <THISTYPE, IHCNode>
 {
   /**
    * @param aTextProvider
@@ -59,14 +59,6 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE addChild (@Nullable IHCNodeBuilder aNodeBuilder);
-
-  /**
-   * @param aNode
-   *        Child to add. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addChild (@Nullable IHCNode aNode);
 
   /**
    * @param nIndex
@@ -97,16 +89,6 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNodeBuilder aNodeBuilder);
-
-  /**
-   * @param nIndex
-   *        The index to where the element should be inserted.
-   * @param aNode
-   *        Child to add. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addChild (@Nonnegative int nIndex, @Nullable IHCNode aNode);
 
   /**
    * Use {@link #addChild(IPredefinedLocaleTextProvider)} instead
@@ -164,83 +146,6 @@ public interface IHCNodeWithChildren <THISTYPE extends IHCNodeWithChildren <THIS
    */
   @Nonnull
   THISTYPE addChildren (@Nullable IHCNodeBuilder... aChildren);
-
-  /**
-   * Use {@link #addChild(IHCNode)} instead.
-   * 
-   * @param aChild
-   *        The child to add. May be <code>null</code>.
-   * @return this
-   */
-  @Deprecated
-  @DevelopersNote ("Use addChild instead")
-  THISTYPE addChildren (@Nullable IHCNode aChild);
-
-  /**
-   * @param aChildren
-   *        Children to add. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addChildren (@Nullable IHCNode... aChildren);
-
-  /**
-   * @param aChildren
-   *        Children to add. May be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE addChildren (@Nullable Iterable <? extends IHCNode> aChildren);
-
-  /**
-   * @param aChild
-   *        Child to add. May be <code>null</code>.
-   * @param <V>
-   *        The type to add. Needs to be a IHCNode or a sub class.
-   * @return the added child
-   */
-  @Nullable
-  <V extends IHCNode> V addAndReturnChild (@Nullable V aChild);
-
-  /**
-   * @param nIndex
-   *        The index where the element should be added. Always &ge; 0.
-   * @param aChild
-   *        Child to add. May be <code>null</code>.
-   * @param <V>
-   *        The type to add. Needs to be a IHCNode or a sub class.
-   * @return the added child
-   */
-  @Nullable
-  <V extends IHCNode> V addAndReturnChild (@Nonnegative int nIndex, @Nullable V aChild);
-
-  /**
-   * Remove the child at the specified index.
-   * 
-   * @param nIndex
-   *        The index to use. Must be &ge; 0.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE removeChild (@Nonnegative int nIndex);
-
-  /**
-   * Remove the passed direct child object.
-   * 
-   * @param aNode
-   *        The node to be removed. May not be <code>null</code>.
-   * @return this
-   */
-  @Nonnull
-  THISTYPE removeChild (@Nullable IHCNode aNode);
-
-  /**
-   * Remove all children of this object.
-   * 
-   * @return this
-   */
-  @Nonnull
-  THISTYPE removeAllChildren ();
 
   /**
    * Sort all children with the passed comparator
