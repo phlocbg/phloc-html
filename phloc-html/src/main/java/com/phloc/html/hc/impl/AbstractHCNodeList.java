@@ -95,20 +95,28 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   @Nonnull
   public THISTYPE addChild (@Nullable final IHCNode aNode)
   {
+    if (aNode == this)
+      throw new IllegalArgumentException ("Cannot append to self!");
+
     if (aNode != null)
     {
-      if (aNode == this)
-        throw new IllegalArgumentException ("Cannot append to self!");
-
       if (aNode instanceof AbstractHCNodeList <?>)
       {
+        final AbstractHCNodeList <?> aNodeList = (AbstractHCNodeList <?>) aNode;
         // Directly add all contained nodes of the node list, to avoid building
         // a hierarchy of node lists
-        for (final IHCNode aContainedNode : ((AbstractHCNodeList <?>) aNode).m_aChildren)
+        for (final IHCNode aContainedNode : aNodeList.m_aChildren)
+        {
+          aContainedNode.onRemoved (aNodeList);
           m_aChildren.add (aContainedNode);
+          aContainedNode.onAdded (this);
+        }
       }
       else
+      {
         m_aChildren.add (aNode);
+        aNode.onAdded (this);
+      }
     }
     return thisAsT ();
   }

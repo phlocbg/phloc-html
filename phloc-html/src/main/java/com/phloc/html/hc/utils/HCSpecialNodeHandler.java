@@ -23,6 +23,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -37,6 +38,7 @@ import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.cache.AnnotationUsageCache;
 import com.phloc.commons.collections.ContainerHelper;
+import com.phloc.commons.lang.CGStringHelper;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.html.annotations.OutOfBandNode;
@@ -68,6 +70,7 @@ public final class HCSpecialNodeHandler
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCSpecialNodeHandler.class);
   private static final AnnotationUsageCache s_aOOBNAnnotationCache = new AnnotationUsageCache (OutOfBandNode.class);
   private static final AnnotationUsageCache s_aSNLMAnnotationCache = new AnnotationUsageCache (SpecialNodeListModifier.class);
+  private static final AtomicBoolean s_aOOBDebugging = new AtomicBoolean (false);
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
@@ -75,6 +78,16 @@ public final class HCSpecialNodeHandler
 
   private HCSpecialNodeHandler ()
   {}
+
+  public static boolean isOutOfBandDebuggingEnabled ()
+  {
+    return s_aOOBDebugging.get ();
+  }
+
+  public static void setOutOfBandDebuggingEnabled (final boolean bEnabled)
+  {
+    s_aOOBDebugging.set (bEnabled);
+  }
 
   /**
    * Check if the passed node is a CSS node after unwrapping.
@@ -274,14 +287,20 @@ public final class HCSpecialNodeHandler
 
     if (aParentElement.hasChildren ())
     {
+      final boolean bDebug = isOutOfBandDebuggingEnabled ();
       int nNodeIndex = 0;
+
       for (final IHCNode aChild : aParentElement.getChildren ())
       {
-        if (false)
-          s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) + aChild.getClass ().getCanonicalName ());
+        if (bDebug)
+          s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) +
+                          CGStringHelper.getClassLocalName (aChild.getClass ()));
 
         if (isOutOfBandNode (aChild))
         {
+          if (bDebug)
+            s_aLogger.info (StringHelper.getRepeated ("  ", nLevel) + "=> is an OOB node!");
+
           aTargetList.add (aChild);
           if (aParentElement instanceof IHCNodeWithChildren <?>)
             ((IHCNodeWithChildren <?>) aParentElement).removeChild (nNodeIndex);
