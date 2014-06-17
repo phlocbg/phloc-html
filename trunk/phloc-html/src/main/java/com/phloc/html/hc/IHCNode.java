@@ -41,7 +41,7 @@ public interface IHCNode extends IHasPlainText, Serializable
    * @param aParent
    *        The parent node this node was added to. Never <code>null</code>.
    */
-  void onAdded (@Nonnull IHCHasChildren aParent);
+  void onAdded (@Nonnull IHCHasChildrenMutable <?, ?> aParent);
 
   /**
    * Callback to be invoked, after this child was removed from a node.
@@ -49,7 +49,7 @@ public interface IHCNode extends IHasPlainText, Serializable
    * @param aParent
    *        The parent node this node was removed from. Never <code>null</code>.
    */
-  void onRemoved (@Nonnull IHCHasChildren aParent);
+  void onRemoved (@Nonnull IHCHasChildrenMutable <?, ?> aParent);
 
   /**
    * @return <code>true</code> if the customizer was already run on this node,
