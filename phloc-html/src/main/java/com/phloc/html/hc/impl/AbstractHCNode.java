@@ -29,6 +29,7 @@ import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.commons.microdom.serialize.MicroWriter;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
@@ -45,10 +46,10 @@ public abstract class AbstractHCNode implements IHCNode
   private boolean m_bCustomized = false;
   private boolean m_bConvertedToNode = false;
 
-  public void onAdded (@Nonnull final IHCHasChildren aParent)
+  public void onAdded (@Nonnull final IHCHasChildrenMutable <?, ?> aParent)
   {}
 
-  public void onRemoved (@Nonnull final IHCHasChildren aParent)
+  public void onRemoved (@Nonnull final IHCHasChildrenMutable <?, ?> aParent)
   {}
 
   /**
