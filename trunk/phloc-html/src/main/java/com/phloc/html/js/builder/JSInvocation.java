@@ -34,7 +34,7 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
    * 
    * @param aFunction
    */
-  protected JSInvocation (@Nonnull final JSFunction aFunction)
+  public JSInvocation (@Nonnull final JSFunction aFunction)
   {
     super (aFunction);
   }
@@ -55,7 +55,7 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
    * @param aAnonymousFunction
    *        The function to be invoked
    */
-  protected JSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
+  public JSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
     super (aAnonymousFunction);
   }
@@ -69,12 +69,12 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
    * @param sName
    *        Name of method to invoke
    */
-  protected JSInvocation (@Nullable final IJSExpression aObject, @Nonnull @Nonempty final String sName)
+  public JSInvocation (@Nullable final IJSExpression aObject, @Nonnull @Nonempty final String sName)
   {
     super (aObject, sName);
   }
 
-  protected JSInvocation (@Nullable final IJSExpression aObject, @Nonnull final JSMethod aMethod)
+  public JSInvocation (@Nullable final IJSExpression aObject, @Nonnull final JSMethod aMethod)
   {
     super (aObject, aMethod);
   }
@@ -82,12 +82,12 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
   /**
    * Invokes a static method on a class.
    */
-  protected JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull @Nonempty final String sName)
+  public JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull @Nonempty final String sName)
   {
     super (aType, sName);
   }
 
-  protected JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
+  public JSInvocation (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
   {
     super (aType, aMethod);
   }
@@ -98,7 +98,7 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
    * @param aType
    *        Type of the object to be created. May not be <code>null</code>.
    */
-  protected JSInvocation (@Nonnull final AbstractJSType aType)
+  public JSInvocation (@Nonnull final AbstractJSType aType)
   {
     super (aType);
   }
