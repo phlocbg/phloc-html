@@ -17,7 +17,7 @@
  */
 package com.phloc.html.js.builder;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 /**
  * A JS package. This is the entry point for all functions, declarations etc.
@@ -32,7 +32,7 @@ public class JSPackage extends AbstractJSBlock
   public JSPackage ()
   {}
 
-  @Nullable
+  @Nonnull
   public String getJSCode ()
   {
     return JSPrinter.getAsString (this);

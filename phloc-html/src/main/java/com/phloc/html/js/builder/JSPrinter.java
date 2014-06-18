@@ -24,13 +24,14 @@ import javax.annotation.WillClose;
 import javax.annotation.WillNotClose;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.io.streams.NonBlockingStringWriter;
 import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Helper class to get the textual representation of JSDOM objects
- *
+ * 
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -88,7 +89,7 @@ public final class JSPrinter
    * This is a wrapper around {@link #setIndentAndAlign(boolean)},
    * {@link #setGenerateTypeNames(boolean)} and
    * {@link #setGenerateComments(boolean)}
-   *
+   * 
    * @param bMinimumCodeSize
    *        true for minimum code size
    */
@@ -170,6 +171,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSGeneratable aGeneratable)
   {
+    ValueEnforcer.notNull (aGeneratable, "Generatable");
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeGeneratable (aGeneratable, aSW);
     return aSW.getAsString ().trim ();
@@ -178,6 +180,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSDeclaration aDecl)
   {
+    ValueEnforcer.notNull (aDecl, "Decl");
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeDeclaration (aDecl, aSW);
     return aSW.getAsString ().trim ();
@@ -186,6 +189,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSStatement aStatement)
   {
+    ValueEnforcer.notNull (aStatement, "Statement");
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeStatement (aStatement, aSW);
     return aSW.getAsString ().trim ();
@@ -194,6 +198,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final JSPackage aPackage)
   {
+    ValueEnforcer.notNull (aPackage, "Package");
     if (aPackage.memberCount () == 0)
       return "";
 

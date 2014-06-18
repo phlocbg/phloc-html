@@ -43,7 +43,7 @@ import com.phloc.json2.IJson;
 
 /**
  * Object invocation
- *
+ * 
  * @author Philip Helger
  */
 public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocation <IMPLTYPE>> extends AbstractJSExpression implements IJSStatement
@@ -55,10 +55,9 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   private final IJSGeneratable m_aObject;
 
   /**
-   * If {@link m_bIsConstructor} == <code>true</code>, this field keeps the type
-   * to be created.
+   * If this field keeps the type to be created.
    */
-  private final AbstractJSType m_aCtorType;
+  private final IJSGeneratable m_aCtorType;
 
   /**
    * Name of the method to be invoked. Either this field is set, or
@@ -77,7 +76,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invoke a function
-   *
+   * 
    * @param aFunction
    */
   protected AbstractJSInvocation (@Nonnull final JSFunction aFunction)
@@ -90,7 +89,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invoke a function
-   *
+   * 
    * @param sFunctionName
    */
   public AbstractJSInvocation (@Nonnull final String sFunctionName)
@@ -103,7 +102,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invoke an anonymous function
-   *
+   * 
    * @param aAnonymousFunction
    *        The function to be invoked
    */
@@ -117,7 +116,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invokes a method on an object.
-   *
+   * 
    * @param aLhs
    *        Expression for the object upon which the named method will be
    *        invoked, or null if none
@@ -167,11 +166,11 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Invokes a constructor of an object (i.e., creates a new object.)
-   *
+   * 
    * @param aType
    *        Type of the object to be created. May not be <code>null</code>.
    */
-  protected AbstractJSInvocation (@Nonnull final AbstractJSType aType)
+  protected AbstractJSInvocation (@Nonnull final IJSGeneratable aType)
   {
     m_aObject = null;
     m_sName = null;
@@ -188,7 +187,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   *
+   * 
    * @param aExpr
    *        Argument to add to argument list
    * @return this
@@ -203,7 +202,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(bArgument))}
-   *
+   * 
    * @param bValue
    *        value to be added as an argument
    * @return this
@@ -216,7 +215,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(cArgument))}
-   *
+   * 
    * @param cValue
    *        value to be added as an argument
    * @return this
@@ -229,7 +228,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(dArgument))}
-   *
+   * 
    * @param dValue
    *        value to be added as an argument
    * @return this
@@ -242,7 +241,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(fArgument))}
-   *
+   * 
    * @param fValue
    *        value to be added as an argument
    * @return this
@@ -255,7 +254,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
-   *
+   * 
    * @param nValue
    *        value to be added as an argument
    * @return this
@@ -268,7 +267,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Adds a literal argument. Short for {@code arg(JSExpr.lit(nArgument))}
-   *
+   * 
    * @param nValue
    *        value to be added as an argument
    * @return this
@@ -282,7 +281,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   /**
    * Add an expression to this invocation's argument list or "null" if it is
    * <code>null</code>
-   *
+   * 
    * @param aExpr
    *        Argument to add to argument list
    * @return this
@@ -415,7 +414,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   *
+   * 
    * @param aArgument
    *        Argument to add to argument list
    */
@@ -427,7 +426,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add an expression to this invocation's argument list
-   *
+   * 
    * @param aArgument
    *        Argument to add to argument list
    */
@@ -549,7 +548,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   *
+   * 
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -565,7 +564,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   *
+   * 
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -581,7 +580,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   *
+   * 
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -597,7 +596,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Add 0-n expressions to this invocation's argument list
-   *
+   * 
    * @param aExprs
    *        Argument to add to argument list
    * @return this
@@ -613,7 +612,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Returns all arguments of the invocation.
-   *
+   * 
    * @return If there's no arguments, an empty array will be returned.
    */
   @Nonnull
@@ -649,7 +648,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   /**
    * Remove all arguments
-   *
+   * 
    * @return this
    */
   @Nonnull
