@@ -98,7 +98,7 @@ public class JSInvocation extends AbstractJSInvocation <JSInvocation>
    * @param aType
    *        Type of the object to be created. May not be <code>null</code>.
    */
-  public JSInvocation (@Nonnull final AbstractJSType aType)
+  public JSInvocation (@Nonnull final IJSGeneratable aType)
   {
     super (aType);
   }
