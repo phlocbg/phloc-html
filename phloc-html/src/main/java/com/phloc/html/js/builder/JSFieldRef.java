@@ -26,7 +26,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * Field Reference
- *
+ * 
  * @author Philip Helger
  */
 public class JSFieldRef extends JSRef
@@ -53,6 +53,21 @@ public class JSFieldRef extends JSRef
   public IJSGeneratable object ()
   {
     return m_aObject;
+  }
+
+  public boolean isInvocable ()
+  {
+    return m_aObject instanceof AbstractJSClass || m_aObject instanceof IJSExpression;
+  }
+
+  @Nonnull
+  public JSInvocation invoke ()
+  {
+    if (m_aObject instanceof AbstractJSClass)
+      return new JSInvocation ((AbstractJSClass) m_aObject, name ());
+    if (m_aObject instanceof IJSExpression)
+      return new JSInvocation ((IJSExpression) m_aObject, name ());
+    throw new IllegalStateException ("The present object " + m_aObject + " cannot be invoked (at the moment)");
   }
 
   @Override

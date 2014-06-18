@@ -33,7 +33,7 @@ import com.phloc.commons.string.ToStringGenerator;
 
 /**
  * An anonymous function (a function without a name)
- *
+ * 
  * @author Philip Helger
  */
 public class JSAnonymousFunction extends AbstractJSExpression
@@ -61,7 +61,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * constructor
-   *
+   * 
    * @param aType
    *        Type to which the expression is cast
    */
@@ -72,7 +72,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Constructor for simple functions
-   *
+   * 
    * @param aBody
    *        The body statement. May be <code>null</code>.
    */
@@ -82,9 +82,50 @@ public class JSAnonymousFunction extends AbstractJSExpression
       body ().add (aBody);
   }
 
-  JSAnonymousFunction (@Nullable final AbstractJSType aType,
-                       @Nullable final List <JSVar> aParams,
-                       @Nullable final JSBlock aBody)
+  public JSAnonymousFunction (@Nullable final JSVar aParam, @Nullable final IJSStatement aBody)
+  {
+    if (aParam != null)
+      m_aParams.add (aParam);
+    if (aBody != null)
+      body ().add (aBody);
+  }
+
+  public JSAnonymousFunction (@Nullable final List <JSVar> aParams, @Nullable final IJSStatement aBody)
+  {
+    if (aParams != null)
+      m_aParams.addAll (aParams);
+    if (aBody != null)
+      body ().add (aBody);
+  }
+
+  public JSAnonymousFunction (@Nullable final AbstractJSType aType,
+                              @Nullable final List <JSVar> aParams,
+                              @Nullable final IJSStatement aBody)
+  {
+    this (aType);
+    if (aParams != null)
+      m_aParams.addAll (aParams);
+    if (aBody != null)
+      body ().add (aBody);
+  }
+
+  public JSAnonymousFunction (@Nullable final JSVar aParam, @Nullable final JSBlock aBody)
+  {
+    if (aParam != null)
+      m_aParams.add (aParam);
+    m_aBody = aBody;
+  }
+
+  public JSAnonymousFunction (@Nullable final List <JSVar> aParams, @Nullable final JSBlock aBody)
+  {
+    if (aParams != null)
+      m_aParams.addAll (aParams);
+    m_aBody = aBody;
+  }
+
+  public JSAnonymousFunction (@Nullable final AbstractJSType aType,
+                              @Nullable final List <JSVar> aParams,
+                              @Nullable final JSBlock aBody)
   {
     this (aType);
     if (aParams != null)
@@ -103,7 +144,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Overrides the return type.
-   *
+   * 
    * @param aType
    *        the new return type.
    */
@@ -114,7 +155,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Returns the list of variable of this function.
-   *
+   * 
    * @return List of parameters of this function. This list is not modifiable.
    */
   @Nonnull
@@ -127,7 +168,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   *
+   * 
    * @param sName
    *        Name of the parameter being added
    * @return New parameter variable
@@ -141,7 +182,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
   /**
    * Add the specified variable to the list of parameters for this function
    * signature.
-   *
+   * 
    * @param aType
    *        type of the parameter being added
    * @param sName
@@ -170,7 +211,7 @@ public class JSAnonymousFunction extends AbstractJSExpression
 
   /**
    * Get the block that makes up body of this function
-   *
+   * 
    * @return Body of function
    */
   @Nonnull
