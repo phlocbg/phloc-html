@@ -98,6 +98,13 @@ public interface IMetaElement extends IMetaElementDeclaration
   @Nonnull
   List <IMetaElementValue> getAsMetaElementValueList ();
 
+  /**
+   * Convert this meta element to an {@link IMicroNode}
+   * 
+   * @param aConversionSettings
+   *        The conversion settings to be used. May not be <code>null</code>.
+   * @return <code>null</code> if this meta element contains no content.
+   */
   @Nullable
   IMicroNode convertToNode (@Nonnull IHCConversionSettingsToNode aConversionSettings);
 }
