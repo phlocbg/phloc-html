@@ -88,6 +88,7 @@ public class Main_AbstractJQueryInvocation extends AbstractCreateJQueryAPIList
                                                    + "/**\n"
                                                    + " * Special invocation semantics for jQuery\n"
                                                    + " * \n"
+                                                   + " * This file is generated - do NOT edit!\n"
                                                    + " * @author " +
                                                    Main_AbstractJQueryInvocation.class.getName () +
                                                    "\n" +

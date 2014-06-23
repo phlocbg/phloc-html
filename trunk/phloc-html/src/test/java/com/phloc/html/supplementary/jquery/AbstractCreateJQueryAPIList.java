@@ -508,6 +508,52 @@ abstract class AbstractCreateJQueryAPIList
   }
 
   @Nonnull
+  protected static String _getTestValue (@Nonnull final String sJavaType)
+  {
+    if (sJavaType.equals ("boolean"))
+      return "true";
+    if (sJavaType.equals ("double"))
+      return "123.456";
+    if (sJavaType.equals ("int"))
+      return "3456";
+    if (sJavaType.equals ("long"))
+      return "87654321L";
+    if (sJavaType.equals ("BigInteger"))
+      return "BigInteger.valueOf (3456)";
+    if (sJavaType.equals ("BigDecimal"))
+      return "BigDecimal.valueOf (12.3456)";
+    if (sJavaType.equals ("String"))
+      return "\"foo\"";
+    if (sJavaType.equals ("String..."))
+      return "\"foo\", \"bar\"";
+    if (sJavaType.equals ("IJSExpression"))
+      return "JSExpr.lit (\"foo\")";
+    if (sJavaType.equals ("JQueryInvocation"))
+      return "JQuery.idRef (\"foo\")";
+    if (sJavaType.equals ("IJQuerySelector"))
+      return "JQuerySelector.eq (0)";
+    if (sJavaType.equals ("JQuerySelectorList"))
+      return "new JQuerySelectorList (JQuerySelector.lt (3))";
+    if (sJavaType.equals ("EHTMLElement"))
+      return "EHTMLElement.DIV";
+    if (sJavaType.equals ("EHTMLElement..."))
+      return "EHTMLElement.DIV, EHTMLElement.SPAN";
+    if (sJavaType.equals ("Iterable<EHTMLElement>"))
+      return "ContainerHelper.newList (EHTMLElement.DIV, EHTMLElement.SPAN)";
+    if (sJavaType.equals ("ICSSClassProvider"))
+      return "DefaultCSSClassProvider.create (\"cssclass\")";
+    if (sJavaType.equals ("IHCNode"))
+      return "new HCDiv ().addChild (\"foo\")";
+    if (sJavaType.equals ("IJson"))
+      return "new JsonObject ().add (\"foo\", 5)";
+    if (sJavaType.equals ("JSAnonymousFunction"))
+      return "new JSAnonymousFunction ()";
+    if (sJavaType.equals ("JSArray"))
+      return "new JSArray ().add (1).add (2)";
+    throw new IllegalArgumentException (sJavaType);
+  }
+
+  @Nonnull
   public static List <Entry> readAllEntries ()
   {
     int nFiles = 0;
