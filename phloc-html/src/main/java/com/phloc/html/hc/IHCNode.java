@@ -69,7 +69,7 @@ public interface IHCNode extends IHasPlainText, Serializable
    *        be <code>null</code>.
    */
   void applyCustomization (@Nonnull IHCConversionSettingsToNode aConversionSettings,
-                           @Nonnull IHCNodeWithChildren <?> aParentNode);
+                           @Nonnull IHCHasChildrenMutable <?, ? super IHCNode> aParentNode);
 
   /**
    * @return <code>true</code> if this node was already converted to a micro

@@ -31,7 +31,6 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCHasChildren;
 import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
@@ -62,7 +61,7 @@ public abstract class AbstractHCNode implements IHCNode
   }
 
   public final void applyCustomization (@Nonnull final IHCConversionSettingsToNode aConversionSettings,
-                                        @Nonnull final IHCNodeWithChildren <?> aParentNode)
+                                        @Nonnull final IHCHasChildrenMutable <?, ? super IHCNode> aParentNode)
   {
     if (!m_bCustomized)
     {

@@ -31,8 +31,8 @@ import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
 
@@ -87,7 +87,7 @@ public class HCMultiCustomizer implements IHCCustomizer
     return ContainerHelper.newList (m_aCustomizers);
   }
 
-  public void customizeNode (@Nonnull final IHCNodeWithChildren <?> aParentElement,
+  public void customizeNode (@Nonnull final IHCHasChildrenMutable <?, ? super IHCNode> aParentElement,
                              @Nonnull final IHCNode aNode,
                              @Nonnull final EHTMLVersion eHTMLVersion)
   {
