@@ -22,8 +22,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.phloc.html.EHTMLVersion;
+import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.html.HCBody;
 import com.phloc.html.hc.html.HCHead;
 
@@ -46,7 +46,7 @@ public interface IHCCustomizer
    * @param eHTMLVersion
    *        The HTML version to be used. Never <code>null</code>.
    */
-  void customizeNode (@Nonnull IHCNodeWithChildren <?> aParentElement,
+  void customizeNode (@Nonnull IHCHasChildrenMutable <?, ? super IHCNode> aParentElement,
                       @Nonnull IHCNode aNode,
                       @Nonnull EHTMLVersion eHTMLVersion);
 

@@ -36,8 +36,8 @@ import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCControl;
 import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCHasChildren;
+import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.IHCWrappingNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.html.HCA;
@@ -716,7 +716,7 @@ public final class HCUtils
    * @param aConversionSettings
    *        The conversion settings to use. May not be <code>null</code>.
    */
-  public static void customizeNodes (@Nonnull final IHCNodeWithChildren <?> aBaseNode,
+  public static void customizeNodes (@Nonnull final IHCHasChildrenMutable <?, ? super IHCNode> aBaseNode,
                                      @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     ValueEnforcer.notNull (aBaseNode, "BaseNode");
