@@ -41,6 +41,18 @@ public abstract class AbstractHCWrappingNode extends AbstractHCNode implements I
   }
 
   @Override
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    return getWrappedNode ().canConvertToNode (aConversionSettings);
+  }
+
+  @Override
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    getWrappedNode ().beforeConvertToNode (aConversionSettings);
+  }
+
+  @Override
   @Nullable
   protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {

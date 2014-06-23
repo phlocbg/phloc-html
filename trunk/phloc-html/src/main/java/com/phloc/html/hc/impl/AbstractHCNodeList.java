@@ -25,9 +25,11 @@ import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.ValueEnforcer;
+import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.lang.GenericReflection;
@@ -345,7 +347,19 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   }
 
   @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (hasChildren ())
+      for (final IHCNode aChild : m_aChildren)
+        aChild.beforeConvertToNode (aConversionSettings);
+  }
+
   @Nonnull
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
   protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
