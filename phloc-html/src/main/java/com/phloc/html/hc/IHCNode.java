@@ -19,6 +19,7 @@ package com.phloc.html.hc;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -38,10 +39,12 @@ public interface IHCNode extends IHasPlainText, Serializable
   /**
    * Callback to be invoked, after this child was added to a node.
    * 
+   * @param nIndex
+   *        The index where the element was added. Always &ge; 0.
    * @param aParent
    *        The parent node this node was added to. Never <code>null</code>.
    */
-  void onAdded (@Nonnull IHCHasChildrenMutable <?, ?> aParent);
+  void onAdded (@Nonnegative int nIndex, @Nonnull IHCHasChildrenMutable <?, ?> aParent);
 
   /**
    * Callback to be invoked, after this child was removed from a node.

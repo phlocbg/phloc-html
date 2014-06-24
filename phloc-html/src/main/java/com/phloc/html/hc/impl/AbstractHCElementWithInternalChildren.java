@@ -83,14 +83,16 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   /**
    * Callback
    * 
+   * @param nIndex
+   *        Index where the child was added. Always &ge; 0.
    * @param aChild
    *        The child that was added
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void afterAddChild (@Nonnull final CHILDTYPE aChild)
+  protected void afterAddChild (@Nonnegative final int nIndex, @Nonnull final CHILDTYPE aChild)
   {
-    aChild.onAdded (this);
+    aChild.onAdded (nIndex, this);
   }
 
   private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
@@ -103,11 +105,18 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
       beforeAddChild (aChild);
       if (m_aChildren == null)
         m_aChildren = new ArrayList <CHILDTYPE> ();
+      int nAddIndex;
       if (nIndex < 0)
+      {
+        nAddIndex = m_aChildren.size ();
         m_aChildren.add (aChild);
+      }
       else
+      {
+        nAddIndex = nIndex;
         m_aChildren.add (nIndex, aChild);
-      afterAddChild (aChild);
+      }
+      afterAddChild (nAddIndex, aChild);
     }
   }
 
@@ -277,6 +286,15 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   @Override
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    // Can always be converted to a node
+    return true;
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     if (hasChildren ())
@@ -329,6 +347,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     if (!hasChildren ())
       return "";
+
     final StringBuilder ret = new StringBuilder ();
     for (final CHILDTYPE aChild : getChildrenFormEmitting (m_aChildren))
     {
