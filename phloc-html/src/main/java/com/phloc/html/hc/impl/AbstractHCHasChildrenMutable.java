@@ -22,24 +22,31 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.CheckForSigned;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import com.phloc.commons.CGlobal;
 import com.phloc.commons.ValueEnforcer;
+import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.annotations.ReturnsMutableCopy;
+import com.phloc.commons.annotations.ReturnsMutableObject;
 import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.lang.GenericReflection;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.hc.htmlext.HCUtils;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without
@@ -50,7 +57,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 @NotThreadSafe
 public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCHasChildrenMutable <THISTYPE, CHILDTYPE>, CHILDTYPE extends IHCNode> extends AbstractHCNode implements IHCHasChildrenMutable <THISTYPE, CHILDTYPE>
 {
-  private final List <CHILDTYPE> m_aChildren = new ArrayList <CHILDTYPE> ();
+  private List <CHILDTYPE> m_aChildren;
 
   public AbstractHCHasChildrenMutable ()
   {}
@@ -62,10 +69,20 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
     return GenericReflection.<AbstractHCHasChildrenMutable <THISTYPE, CHILDTYPE>, THISTYPE> uncheckedCast (this);
   }
 
-  public boolean hasChildren ()
+  public final boolean hasChildren ()
   {
-    return !m_aChildren.isEmpty ();
+    return ContainerHelper.isNotEmpty (m_aChildren);
   }
+
+  /**
+   * Callback
+   * 
+   * @param aChild
+   *        The child that was added
+   */
+  @OverrideOnDemand
+  protected void beforeAddChild (@Nonnull final CHILDTYPE aChild)
+  {}
 
   /**
    * Callback
@@ -82,72 +99,82 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
     aChild.onAdded (nIndex, this);
   }
 
-  @Nonnull
-  public THISTYPE addChild (@Nullable final CHILDTYPE aNode)
+  private void _addChild (@CheckForSigned final int nIndex, @Nullable final CHILDTYPE aChild)
   {
-    if (aNode == this)
+    if (aChild == this)
       throw new IllegalArgumentException ("Cannot append to self!");
 
-    if (aNode != null)
+    if (aChild != null)
     {
-      final int nAddIndex = m_aChildren.size ();
-      m_aChildren.add (aNode);
-      afterAddChild (nAddIndex, aNode);
+      beforeAddChild (aChild);
+      if (m_aChildren == null)
+        m_aChildren = new ArrayList <CHILDTYPE> ();
+      int nAddIndex;
+      if (nIndex < 0)
+      {
+        nAddIndex = m_aChildren.size ();
+        m_aChildren.add (aChild);
+      }
+      else
+      {
+        nAddIndex = nIndex;
+        m_aChildren.add (nIndex, aChild);
+      }
+      afterAddChild (nAddIndex, aChild);
     }
+  }
+
+  @Nonnull
+  public final THISTYPE addChild (@Nullable final CHILDTYPE aChild)
+  {
+    _addChild (CGlobal.ILLEGAL_UINT, aChild);
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final CHILDTYPE aChildNode)
+  public final THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final CHILDTYPE aChild)
   {
-    if (aChildNode == this)
-      throw new IllegalArgumentException ("Cannot append to self!");
-
-    if (aChildNode != null)
-    {
-      m_aChildren.add (nIndex, aChildNode);
-      afterAddChild (nIndex, aChildNode);
-    }
+    ValueEnforcer.isBetweenInclusive (nIndex, "Index", 0, getChildCount ());
+    _addChild (nIndex, aChild);
     return thisAsT ();
   }
 
-  /**
-   * Just for completeness, to avoid unnecessary array creation!
-   */
   @Nonnull
   @Deprecated
-  public THISTYPE addChildren (@Nullable final CHILDTYPE aNode)
+  public final THISTYPE addChildren (@Nullable final CHILDTYPE aChild)
   {
-    return addChild (aNode);
+    return addChild (aChild);
   }
 
   @Nonnull
-  public THISTYPE addChildren (@Nullable final CHILDTYPE... aNodes)
+  public final THISTYPE addChildren (@Nullable final CHILDTYPE... aChildren)
   {
-    if (aNodes != null)
-      for (final CHILDTYPE aNode : aNodes)
-        addChild (aNode);
+    if (aChildren != null)
+      for (final CHILDTYPE aChild : aChildren)
+        addChild (aChild);
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE addChildren (@Nullable final Iterable <? extends CHILDTYPE> aNodes)
+  public final THISTYPE addChildren (@Nullable final Iterable <? extends CHILDTYPE> aChildren)
   {
-    if (aNodes != null)
-      for (final CHILDTYPE aNode : aNodes)
-        addChild (aNode);
+    if (aChildren != null)
+      for (final CHILDTYPE aChild : aChildren)
+        addChild (aChild);
     return thisAsT ();
   }
 
   @Nullable
-  public <T extends CHILDTYPE> T addAndReturnChild (@Nullable final T aChild)
+  @CheckReturnValue
+  public final <V extends CHILDTYPE> V addAndReturnChild (@Nullable final V aChild)
   {
     addChild (aChild);
     return aChild;
   }
 
   @Nullable
-  public <T extends CHILDTYPE> T addAndReturnChild (@Nonnegative final int nIndex, @Nullable final T aChild)
+  @CheckReturnValue
+  public final <V extends CHILDTYPE> V addAndReturnChild (@Nonnegative final int nIndex, @Nullable final V aChild)
   {
     addChild (nIndex, aChild);
     return aChild;
@@ -167,59 +194,91 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
   }
 
   @Nonnull
-  public THISTYPE removeChild (@Nonnegative final int nIndex)
+  public final THISTYPE removeChild (@Nullable final CHILDTYPE aChild)
   {
-    final CHILDTYPE aRemovedChild = m_aChildren.remove (nIndex);
+    if (aChild != null && m_aChildren != null)
+      if (m_aChildren.remove (aChild))
+        afterRemoveChild (aChild);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final THISTYPE removeChild (@Nonnegative final int nIndex)
+  {
+    final CHILDTYPE aRemovedChild = ContainerHelper.removeAndReturnElementAtIndex (m_aChildren, nIndex);
     if (aRemovedChild != null)
       afterRemoveChild (aRemovedChild);
     return thisAsT ();
   }
 
   @Nonnull
-  public THISTYPE removeChild (@Nullable final CHILDTYPE aNode)
+  public final THISTYPE removeAllChildren ()
   {
-    if (m_aChildren.remove (aNode))
-      afterRemoveChild (aNode);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE removeAllChildren ()
-  {
-    while (!m_aChildren.isEmpty ())
-      removeChild (0);
+    if (m_aChildren != null)
+    {
+      while (!m_aChildren.isEmpty ())
+        removeChild (0);
+      m_aChildren = null;
+    }
     return thisAsT ();
   }
 
   @Nonnegative
-  public int getChildCount ()
+  public final int getChildCount ()
   {
-    return m_aChildren.size ();
+    return ContainerHelper.getSize (m_aChildren);
+  }
+
+  @Nullable
+  @ReturnsMutableObject (reason = "speed")
+  protected final List <CHILDTYPE> directGetChildren ()
+  {
+    return m_aChildren;
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public List <CHILDTYPE> getChildren ()
+  public final List <CHILDTYPE> getChildren ()
   {
     return ContainerHelper.newList (m_aChildren);
   }
 
   @Nullable
-  public CHILDTYPE getChildAtIndex (@Nonnegative final int nIndex)
+  public final CHILDTYPE getChildAtIndex (@Nonnegative final int nIndex)
   {
     return ContainerHelper.getSafe (m_aChildren, nIndex);
   }
 
   @Nullable
-  public CHILDTYPE getFirstChild ()
+  public final CHILDTYPE getFirstChild ()
   {
     return ContainerHelper.getFirstElement (m_aChildren);
   }
 
   @Nullable
-  public CHILDTYPE getLastChild ()
+  public final CHILDTYPE getLastChild ()
   {
     return ContainerHelper.getLastElement (m_aChildren);
+  }
+
+  public final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
+  {
+    return HCUtils.recursiveGetFirstChildWithTagName (this, aElements) != null;
+  }
+
+  @Nonnull
+  public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super CHILDTYPE> aComparator)
+  {
+    ValueEnforcer.notNull (aComparator, "Comparator");
+    if (m_aChildren != null)
+      Collections.sort (m_aChildren, aComparator);
+    return thisAsT ();
+  }
+
+  @Nonnull
+  public final HCNodeList getAllChildrenAsNodeList ()
+  {
+    return new HCNodeList ().addChildren (m_aChildren);
   }
 
   /**
@@ -241,21 +300,6 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
 
     // Return as-is
     return this;
-  }
-
-  @Nonnull
-  public THISTYPE sortAllChildren (@Nonnull final Comparator <? super CHILDTYPE> aComparator)
-  {
-    ValueEnforcer.notNull (aComparator, "Comparator");
-    Collections.sort (m_aChildren, aComparator);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  @ReturnsMutableCopy
-  public HCNodeList getAllChildrenAsNodeList ()
-  {
-    return new HCNodeList ().addChildren (m_aChildren);
   }
 
   @Override

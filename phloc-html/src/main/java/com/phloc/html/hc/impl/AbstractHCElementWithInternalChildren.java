@@ -263,7 +263,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
     return ContainerHelper.getLastElement (m_aChildren);
   }
 
-  protected final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
+  public final boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty final EHTMLElement... aElements)
   {
     return HCUtils.recursiveGetFirstChildWithTagName (this, aElements) != null;
   }

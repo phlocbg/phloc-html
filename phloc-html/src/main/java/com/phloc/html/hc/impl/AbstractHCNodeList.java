@@ -20,10 +20,8 @@ package com.phloc.html.hc.impl;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.phloc.commons.annotations.OverrideOnDemand;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeBuilder;
@@ -40,22 +38,6 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
 {
   public AbstractHCNodeList ()
   {}
-
-  /**
-   * Callback
-   * 
-   * @param nIndex
-   *        Index where the child was added. Always &ge; 0.
-   * @param aChild
-   *        The child that was added
-   */
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void afterAddChild (@Nonnegative final int nIndex, @Nonnull final IHCNode aChild)
-  {
-    aChild.onAdded (nIndex, this);
-  }
 
   @Nonnull
   public THISTYPE addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
@@ -154,66 +136,5 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
       for (final IHCNodeBuilder aChild : aChildren)
         addChild (aChild);
     return thisAsT ();
-  }
-
-  /**
-   * Just for completeness, to avoid unnecessary array creation!
-   */
-  @Override
-  @Nonnull
-  @Deprecated
-  public THISTYPE addChildren (@Nullable final IHCNode aNode)
-  {
-    return addChild (aNode);
-  }
-
-  @Override
-  @Nonnull
-  public THISTYPE addChildren (@Nullable final IHCNode... aNodes)
-  {
-    if (aNodes != null)
-      for (final IHCNode aNode : aNodes)
-        addChild (aNode);
-    return thisAsT ();
-  }
-
-  @Override
-  @Nonnull
-  public THISTYPE addChildren (@Nullable final Iterable <? extends IHCNode> aNodes)
-  {
-    if (aNodes != null)
-      for (final IHCNode aNode : aNodes)
-        addChild (aNode);
-    return thisAsT ();
-  }
-
-  @Override
-  @Nullable
-  public <T extends IHCNode> T addAndReturnChild (@Nullable final T aChild)
-  {
-    addChild (aChild);
-    return aChild;
-  }
-
-  @Override
-  @Nullable
-  public <T extends IHCNode> T addAndReturnChild (@Nonnegative final int nIndex, @Nullable final T aChild)
-  {
-    addChild (nIndex, aChild);
-    return aChild;
-  }
-
-  /**
-   * Invoked after an element was removed.
-   * 
-   * @param aChild
-   *        The child that was removed. Never <code>null</code>.
-   */
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void afterRemoveChild (@Nonnull final IHCNode aChild)
-  {
-    aChild.onRemoved (this);
   }
 }

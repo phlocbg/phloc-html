@@ -7,6 +7,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.phloc.commons.annotations.DevelopersNote;
+import com.phloc.commons.annotations.Nonempty;
+import com.phloc.html.EHTMLElement;
 import com.phloc.html.hc.impl.HCNodeList;
 
 /**
@@ -110,6 +112,16 @@ public interface IHCHasChildrenMutable <THISTYPE extends IHCHasChildrenMutable <
    */
   @Nonnull
   THISTYPE removeAllChildren ();
+
+  /**
+   * Check if any of the specified elements is contained as a child of this.
+   * 
+   * @param aElements
+   *        The elements to check. May neither be <code>null</code> nor empty.
+   * @return <code>true</code> if at least one of the specified elements is
+   *         contained, <code>false</code> otherwise.
+   */
+  boolean recursiveContainsChildWithTagName (@Nonnull @Nonempty EHTMLElement... aElements);
 
   /**
    * Sort all children with the passed comparator
