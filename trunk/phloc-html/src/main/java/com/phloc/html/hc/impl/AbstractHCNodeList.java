@@ -17,31 +17,17 @@
  */
 package com.phloc.html.hc.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.OverrideOnDemand;
-import com.phloc.commons.annotations.ReturnsMutableCopy;
-import com.phloc.commons.collections.ContainerHelper;
-import com.phloc.commons.lang.GenericReflection;
-import com.phloc.commons.microdom.IMicroContainer;
-import com.phloc.commons.microdom.impl.MicroContainer;
-import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.text.IPredefinedLocaleTextProvider;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCNodeBuilder;
 import com.phloc.html.hc.IHCNodeWithChildren;
-import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * This class is an abstract HC node that represents a list of nodes without
@@ -50,24 +36,10 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  * @author Philip Helger
  */
 @NotThreadSafe
-public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <THISTYPE>> extends AbstractHCNode implements IHCNodeWithChildren <THISTYPE>
+public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <THISTYPE>> extends AbstractHCHasChildrenMutable <THISTYPE, IHCNode> implements IHCNodeWithChildren <THISTYPE>
 {
-  private final List <IHCNode> m_aChildren = new ArrayList <IHCNode> ();
-
   public AbstractHCNodeList ()
   {}
-
-  @Nonnull
-  protected final THISTYPE thisAsT ()
-  {
-    // Avoid the unchecked cast warning in all places
-    return GenericReflection.<AbstractHCNodeList <THISTYPE>, THISTYPE> uncheckedCast (this);
-  }
-
-  public boolean hasChildren ()
-  {
-    return !m_aChildren.isEmpty ();
-  }
 
   /**
    * Callback
@@ -77,6 +49,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
    * @param aChild
    *        The child that was added
    */
+  @Override
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void afterAddChild (@Nonnegative final int nIndex, @Nonnull final IHCNode aChild)
@@ -110,37 +83,6 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   }
 
   @Nonnull
-  public THISTYPE addChild (@Nullable final IHCNode aNode)
-  {
-    if (aNode == this)
-      throw new IllegalArgumentException ("Cannot append to self!");
-
-    if (aNode != null)
-    {
-      if (aNode instanceof AbstractHCNodeList <?>)
-      {
-        final AbstractHCNodeList <?> aNodeList = (AbstractHCNodeList <?>) aNode;
-        // Directly add all contained nodes of the node list, to avoid building
-        // a hierarchy of node lists
-        for (final IHCNode aContainedNode : aNodeList.m_aChildren)
-        {
-          aContainedNode.onRemoved (aNodeList);
-          final int nAddIndex = m_aChildren.size ();
-          m_aChildren.add (aContainedNode);
-          afterAddChild (nAddIndex, aContainedNode);
-        }
-      }
-      else
-      {
-        final int nAddIndex = m_aChildren.size ();
-        m_aChildren.add (aNode);
-        afterAddChild (nAddIndex, aNode);
-      }
-    }
-    return thisAsT ();
-  }
-
-  @Nonnull
   public final THISTYPE addChild (@Nonnegative final int nIndex,
                                   @Nullable final IPredefinedLocaleTextProvider aTextProvider)
   {
@@ -163,36 +105,6 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   {
     if (aNodeBuilder != null)
       addChild (nIndex, aNodeBuilder.build ());
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE addChild (@Nonnegative final int nIndex, @Nullable final IHCNode aChildNode)
-  {
-    if (aChildNode == this)
-      throw new IllegalArgumentException ("Cannot append to self!");
-
-    if (aChildNode != null)
-    {
-      if (aChildNode instanceof AbstractHCNodeList <?>)
-      {
-        // The child node is itself a list -> inline the content
-        final AbstractHCNodeList <?> aChildNodeList = (AbstractHCNodeList <?>) aChildNode;
-        int nRealIndex = nIndex;
-        for (final IHCNode aContainedNode : aChildNodeList.m_aChildren)
-        {
-          aContainedNode.onRemoved (aChildNodeList);
-          m_aChildren.add (nRealIndex, aContainedNode);
-          afterAddChild (nRealIndex, aContainedNode);
-          ++nRealIndex;
-        }
-      }
-      else
-      {
-        m_aChildren.add (nIndex, aChildNode);
-        afterAddChild (nIndex, aChildNode);
-      }
-    }
     return thisAsT ();
   }
 
@@ -247,6 +159,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   /**
    * Just for completeness, to avoid unnecessary array creation!
    */
+  @Override
   @Nonnull
   @Deprecated
   public THISTYPE addChildren (@Nullable final IHCNode aNode)
@@ -254,6 +167,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return addChild (aNode);
   }
 
+  @Override
   @Nonnull
   public THISTYPE addChildren (@Nullable final IHCNode... aNodes)
   {
@@ -263,6 +177,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return thisAsT ();
   }
 
+  @Override
   @Nonnull
   public THISTYPE addChildren (@Nullable final Iterable <? extends IHCNode> aNodes)
   {
@@ -272,6 +187,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return thisAsT ();
   }
 
+  @Override
   @Nullable
   public <T extends IHCNode> T addAndReturnChild (@Nullable final T aChild)
   {
@@ -279,6 +195,7 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return aChild;
   }
 
+  @Override
   @Nullable
   public <T extends IHCNode> T addAndReturnChild (@Nonnegative final int nIndex, @Nullable final T aChild)
   {
@@ -292,170 +209,11 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
    * @param aChild
    *        The child that was removed. Never <code>null</code>.
    */
+  @Override
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
   protected void afterRemoveChild (@Nonnull final IHCNode aChild)
   {
     aChild.onRemoved (this);
-  }
-
-  @Nonnull
-  public THISTYPE removeChild (@Nonnegative final int nIndex)
-  {
-    final IHCNode aRemovedChild = m_aChildren.remove (nIndex);
-    if (aRemovedChild != null)
-      afterRemoveChild (aRemovedChild);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE removeChild (@Nullable final IHCNode aNode)
-  {
-    if (m_aChildren.remove (aNode))
-      afterRemoveChild (aNode);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  public THISTYPE removeAllChildren ()
-  {
-    while (!m_aChildren.isEmpty ())
-      removeChild (0);
-    return thisAsT ();
-  }
-
-  @Nonnegative
-  public int getChildCount ()
-  {
-    return m_aChildren.size ();
-  }
-
-  @Nonnull
-  @ReturnsMutableCopy
-  public List <IHCNode> getChildren ()
-  {
-    return ContainerHelper.newList (m_aChildren);
-  }
-
-  @Nullable
-  public IHCNode getChildAtIndex (@Nonnegative final int nIndex)
-  {
-    return ContainerHelper.getSafe (m_aChildren, nIndex);
-  }
-
-  @Nullable
-  public IHCNode getFirstChild ()
-  {
-    return ContainerHelper.getFirstElement (m_aChildren);
-  }
-
-  @Nullable
-  public IHCNode getLastChild ()
-  {
-    return ContainerHelper.getLastElement (m_aChildren);
-  }
-
-  /**
-   * Try to simplify this node list as much as possible.
-   * 
-   * @return the most simple representation of this list. If the list is empty,
-   *         <code>null</code> is returned. If exactly one element is contained,
-   *         this element will be returned. If more than one element is
-   *         contained no simplification can be performed.
-   */
-  @Nullable
-  public IHCNode getAsSimpleNode ()
-  {
-    if (m_aChildren.isEmpty ())
-      return null;
-
-    if (m_aChildren.size () == 1)
-      return ContainerHelper.getFirstElement (m_aChildren);
-
-    // Return as-is
-    return this;
-  }
-
-  @Nonnull
-  public final THISTYPE sortAllChildren (@Nonnull final Comparator <? super IHCNode> aComparator)
-  {
-    ValueEnforcer.notNull (aComparator, "Comparator");
-    Collections.sort (m_aChildren, aComparator);
-    return thisAsT ();
-  }
-
-  @Nonnull
-  @ReturnsMutableCopy
-  public HCNodeList getAllChildrenAsNodeList ()
-  {
-    return new HCNodeList ().addChildren (m_aChildren);
-  }
-
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    if (hasChildren ())
-    {
-      // If at least one child is present and can be converted to a node, the
-      // whole list can be converted to a node
-      for (final IHCNode aChild : m_aChildren)
-        if (aChild.canConvertToNode (aConversionSettings))
-          return true;
-    }
-    // No children, or all children cannot be converted -> cannot convert this
-    // list
-    return false;
-  }
-
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    if (hasChildren ())
-      for (final IHCNode aChild : m_aChildren)
-        aChild.beforeConvertToNode (aConversionSettings);
-  }
-
-  @Nonnull
-  @Override
-  @OverrideOnDemand
-  @OverridingMethodsMustInvokeSuper
-  protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    final IMicroContainer ret = new MicroContainer ();
-    if (hasChildren ())
-      for (final IHCNode aNode : m_aChildren)
-        ret.appendChild (aNode.convertToNode (aConversionSettings));
-    return ret;
-  }
-
-  @Override
-  @Nonnull
-  public String getPlainText ()
-  {
-    if (!hasChildren ())
-      return "";
-
-    final StringBuilder ret = new StringBuilder ();
-    for (final IHCNode aNode : m_aChildren)
-    {
-      final String sPlainText = aNode.getPlainText ();
-      if (StringHelper.hasText (sPlainText))
-      {
-        if (ret.length () > 0)
-          ret.append (' ');
-        ret.append (sPlainText);
-      }
-    }
-    return ret.toString ();
-  }
-
-  @Override
-  public String toString ()
-  {
-    return ToStringGenerator.getDerived (super.toString ()).append ("children", m_aChildren).toString ();
   }
 }
