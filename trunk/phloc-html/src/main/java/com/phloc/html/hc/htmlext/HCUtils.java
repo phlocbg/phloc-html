@@ -320,6 +320,46 @@ public final class HCUtils
    * 
    * @param aElements
    *        The tag names to search. May not be <code>null</code>.
+   * @return All elements with the passed element name on any level. Never
+   *         <code>null</code>.
+   */
+  @Nonnull
+  @ReturnsMutableCopy
+  public static List <IHCElement <?>> recursiveGetAllChildrenWithTagName (@Nonnull final IHCHasChildren aOwner,
+                                                                          @Nonnull @Nonempty final EHTMLElement... aElements)
+  {
+    ValueEnforcer.notNull (aOwner, "Owner");
+    ValueEnforcer.notEmpty (aElements, "Elements");
+
+    final List <IHCElement <?>> ret = new ArrayList <IHCElement <?>> ();
+    iterateChildren (aOwner, new IHCIteratorCallback ()
+    {
+      @Nullable
+      public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
+      {
+        if (aChildNode instanceof IHCElement <?>)
+        {
+          final IHCElement <?> aCurrentElement = (IHCElement <?>) aChildNode;
+          final String sCurrentTagName = aCurrentElement.getTagName ();
+          for (final EHTMLElement aElement : aElements)
+            if (sCurrentTagName.equalsIgnoreCase (aElement.getElementName ()))
+            {
+              ret.add (aCurrentElement);
+              break;
+            }
+        }
+        return EFinish.UNFINISHED;
+      }
+    });
+    return ret;
+  }
+
+  /**
+   * Helper method to enforce correct element nesting. See
+   * http://www.w3.org/TR/xhtml1#prohibitions
+   * 
+   * @param aElements
+   *        The tag names to search. May not be <code>null</code>.
    * @return The first element with a different than the passed tag name on any
    *         level, or <code>null</code> if no such element exists.
    */
