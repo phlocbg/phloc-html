@@ -69,6 +69,21 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return !m_aChildren.isEmpty ();
   }
 
+  /**
+   * Callback
+   * 
+   * @param nIndex
+   *        Index where the child was added. Always &ge; 0.
+   * @param aChild
+   *        The child that was added
+   */
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void afterAddChild (@Nonnegative final int nIndex, @Nonnull final IHCNode aChild)
+  {
+    aChild.onAdded (nIndex, this);
+  }
+
   @Nonnull
   public THISTYPE addChild (@Nullable final IPredefinedLocaleTextProvider aTextProvider)
   {
@@ -110,14 +125,16 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
         for (final IHCNode aContainedNode : aNodeList.m_aChildren)
         {
           aContainedNode.onRemoved (aNodeList);
+          final int nAddIndex = m_aChildren.size ();
           m_aChildren.add (aContainedNode);
-          aContainedNode.onAdded (this);
+          afterAddChild (nAddIndex, aContainedNode);
         }
       }
       else
       {
+        final int nAddIndex = m_aChildren.size ();
         m_aChildren.add (aNode);
-        aNode.onAdded (this);
+        afterAddChild (nAddIndex, aNode);
       }
     }
     return thisAsT ();
@@ -154,20 +171,27 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   {
     if (aChildNode == this)
       throw new IllegalArgumentException ("Cannot append to self!");
+
     if (aChildNode != null)
     {
       if (aChildNode instanceof AbstractHCNodeList <?>)
       {
         // The child node is itself a list -> inline the content
-        int i = nIndex;
-        for (final IHCNode aContainedNode : ((AbstractHCNodeList <?>) aChildNode).m_aChildren)
+        final AbstractHCNodeList <?> aChildNodeList = (AbstractHCNodeList <?>) aChildNode;
+        int nRealIndex = nIndex;
+        for (final IHCNode aContainedNode : aChildNodeList.m_aChildren)
         {
-          m_aChildren.add (i, aContainedNode);
-          ++i;
+          aContainedNode.onRemoved (aChildNodeList);
+          m_aChildren.add (nRealIndex, aContainedNode);
+          afterAddChild (nRealIndex, aContainedNode);
+          ++nRealIndex;
         }
       }
       else
+      {
         m_aChildren.add (nIndex, aChildNode);
+        afterAddChild (nIndex, aChildNode);
+      }
     }
     return thisAsT ();
   }
@@ -262,24 +286,41 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
     return aChild;
   }
 
+  /**
+   * Invoked after an element was removed.
+   * 
+   * @param aChild
+   *        The child that was removed. Never <code>null</code>.
+   */
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  protected void afterRemoveChild (@Nonnull final IHCNode aChild)
+  {
+    aChild.onRemoved (this);
+  }
+
   @Nonnull
   public THISTYPE removeChild (@Nonnegative final int nIndex)
   {
-    m_aChildren.remove (nIndex);
+    final IHCNode aRemovedChild = m_aChildren.remove (nIndex);
+    if (aRemovedChild != null)
+      afterRemoveChild (aRemovedChild);
     return thisAsT ();
   }
 
   @Nonnull
   public THISTYPE removeChild (@Nullable final IHCNode aNode)
   {
-    m_aChildren.remove (aNode);
+    if (m_aChildren.remove (aNode))
+      afterRemoveChild (aNode);
     return thisAsT ();
   }
 
   @Nonnull
   public THISTYPE removeAllChildren ()
   {
-    m_aChildren.clear ();
+    while (!m_aChildren.isEmpty ())
+      removeChild (0);
     return thisAsT ();
   }
 
@@ -327,8 +368,11 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   {
     if (m_aChildren.isEmpty ())
       return null;
+
     if (m_aChildren.size () == 1)
       return ContainerHelper.getFirstElement (m_aChildren);
+
+    // Return as-is
     return this;
   }
 
@@ -341,9 +385,28 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   }
 
   @Nonnull
+  @ReturnsMutableCopy
   public HCNodeList getAllChildrenAsNodeList ()
   {
     return new HCNodeList ().addChildren (m_aChildren);
+  }
+
+  @Override
+  @OverrideOnDemand
+  @OverridingMethodsMustInvokeSuper
+  public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
+  {
+    if (hasChildren ())
+    {
+      // If at least one child is present and can be converted to a node, the
+      // whole list can be converted to a node
+      for (final IHCNode aChild : m_aChildren)
+        if (aChild.canConvertToNode (aConversionSettings))
+          return true;
+    }
+    // No children, or all children cannot be converted -> cannot convert this
+    // list
+    return false;
   }
 
   @Override
@@ -363,8 +426,9 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   protected IMicroContainer internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     final IMicroContainer ret = new MicroContainer ();
-    for (final IHCNode aNode : m_aChildren)
-      ret.appendChild (aNode.convertToNode (aConversionSettings));
+    if (hasChildren ())
+      for (final IHCNode aNode : m_aChildren)
+        ret.appendChild (aNode.convertToNode (aConversionSettings));
     return ret;
   }
 
@@ -372,6 +436,9 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   @Nonnull
   public String getPlainText ()
   {
+    if (!hasChildren ())
+      return "";
+
     final StringBuilder ret = new StringBuilder ();
     for (final IHCNode aNode : m_aChildren)
     {
@@ -389,6 +456,6 @@ public abstract class AbstractHCNodeList <THISTYPE extends AbstractHCNodeList <T
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("nodes", m_aChildren).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("children", m_aChildren).toString ();
   }
 }

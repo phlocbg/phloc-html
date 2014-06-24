@@ -19,6 +19,7 @@ package com.phloc.html.hc.impl;
 
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -45,7 +46,7 @@ public abstract class AbstractHCNode implements IHCNode
   private boolean m_bCustomized = false;
   private boolean m_bConvertedToNode = false;
 
-  public void onAdded (@Nonnull final IHCHasChildrenMutable <?, ?> aParent)
+  public void onAdded (@Nonnegative final int nIndex, @Nonnull final IHCHasChildrenMutable <?, ?> aParent)
   {}
 
   public void onRemoved (@Nonnull final IHCHasChildrenMutable <?, ?> aParent)
