@@ -28,10 +28,10 @@ import com.phloc.html.hc.html.HCRow;
  * Base interface for a table cell.
  * 
  * @author Philip Helger
- * @param <IMPLTYPE>
+ * @param <THISTYPE>
  *        Implementation type
  */
-public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>
+public interface IHCCell <THISTYPE extends IHCCell <THISTYPE>> extends IHCElementWithChildren <THISTYPE>
 {
   /**
    * @return The owning parent row.
@@ -46,7 +46,7 @@ public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElemen
   int getColspan ();
 
   @Nonnull
-  IMPLTYPE setColspan (@Nonnegative int nColspan);
+  THISTYPE setColspan (@Nonnegative int nColspan);
 
   /**
    * @return Current row spanning. Defaults to 1.
@@ -55,7 +55,7 @@ public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElemen
   int getRowspan ();
 
   @Nonnull
-  IMPLTYPE setRowspan (@Nonnegative int nRowspan);
+  THISTYPE setRowspan (@Nonnegative int nRowspan);
 
   /**
    * @return The cell content alignment. Defaults to <code>null</code>.
@@ -64,5 +64,5 @@ public interface IHCCell <IMPLTYPE extends IHCCell <IMPLTYPE>> extends IHCElemen
   EHCCellAlign getAlign ();
 
   @Nonnull
-  IMPLTYPE setAlign (@Nullable EHCCellAlign eAlign);
+  THISTYPE setAlign (@Nullable EHCCellAlign eAlign);
 }

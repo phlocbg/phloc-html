@@ -24,7 +24,7 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.html.hc.api.EHCButtonType;
 import com.phloc.html.js.IJSCodeProvider;
 
-public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCCanBeDisabled <IMPLTYPE>, IHCHasName <IMPLTYPE>
+public interface IHCButton <THISTYPE extends IHCButton <THISTYPE>> extends IHCElementWithChildren <THISTYPE>, IHCCanBeDisabled <THISTYPE>, IHCHasName <THISTYPE>
 {
   /**
    * @return The value of the button. May be <code>null</code>.
@@ -40,7 +40,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE setValue (@Nullable String sValue);
+  THISTYPE setValue (@Nullable String sValue);
 
   /**
    * @return The type of the button (button, submit or reset). Never
@@ -57,7 +57,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE setType (@Nonnull EHCButtonType eType);
+  THISTYPE setType (@Nonnull EHCButtonType eType);
 
   /**
    * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
@@ -67,7 +67,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE setOnClick (@Nullable IJSCodeProvider aOnClick);
+  THISTYPE setOnClick (@Nullable IJSCodeProvider aOnClick);
 
   /**
    * Shortcut for <code>setOnClick(JSHtml.windowLocationHref (aURL))</code>
@@ -77,7 +77,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE setOnClick (@Nonnull ISimpleURL aURL);
+  THISTYPE setOnClick (@Nonnull ISimpleURL aURL);
 
   /**
    * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
@@ -87,7 +87,7 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE addOnClick (@Nullable IJSCodeProvider aOnClick);
+  THISTYPE addOnClick (@Nullable IJSCodeProvider aOnClick);
 
   /**
    * Shortcut for <code>addOnClick(JSHtml.windowLocationHref (aURL))</code>
@@ -97,6 +97,5 @@ public interface IHCButton <IMPLTYPE extends IHCButton <IMPLTYPE>> extends IHCEl
    * @return this
    */
   @Nonnull
-  IMPLTYPE addOnClick (@Nonnull ISimpleURL aURL);
-
+  THISTYPE addOnClick (@Nonnull ISimpleURL aURL);
 }

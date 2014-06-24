@@ -21,10 +21,10 @@ package com.phloc.html.hc;
  * Interface for DIVs
  * 
  * @author Philip Helger
- * @param <IMPLTYPE>
+ * @param <THISTYPE>
  *        Implementation type
  */
-public interface IHCDiv <IMPLTYPE extends IHCDiv <IMPLTYPE>> extends IHCElementWithChildren <IMPLTYPE>, IHCHasName <IMPLTYPE>
+public interface IHCDiv <THISTYPE extends IHCDiv <THISTYPE>> extends IHCElementWithChildren <THISTYPE>, IHCHasName <THISTYPE>
 {
   /* empty */
 }
