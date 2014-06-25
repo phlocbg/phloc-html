@@ -183,22 +183,28 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
   /**
    * Invoked after an element was removed.
    * 
+   * @param nIndex
+   *        The index where the element was removed from. Always &ge; 0. This is
+   *        the OLD index and now contains a different or no child.
    * @param aChild
    *        The child that was removed. Never <code>null</code>.
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void afterRemoveChild (@Nonnull final CHILDTYPE aChild)
+  protected void afterRemoveChild (@Nonnegative final int nIndex, @Nonnull final CHILDTYPE aChild)
   {
-    aChild.onRemoved (this);
+    aChild.onRemoved (nIndex, this);
   }
 
   @Nonnull
   public final THISTYPE removeChild (@Nullable final CHILDTYPE aChild)
   {
     if (aChild != null && m_aChildren != null)
-      if (m_aChildren.remove (aChild))
-        afterRemoveChild (aChild);
+    {
+      final int nChildIndex = m_aChildren.indexOf (aChild);
+      if (nChildIndex >= 0)
+        removeChild (nChildIndex);
+    }
     return thisAsT ();
   }
 
@@ -207,7 +213,7 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
   {
     final CHILDTYPE aRemovedChild = ContainerHelper.removeAndReturnElementAtIndex (m_aChildren, nIndex);
     if (aRemovedChild != null)
-      afterRemoveChild (aRemovedChild);
+      afterRemoveChild (nIndex, aRemovedChild);
     return thisAsT ();
   }
 

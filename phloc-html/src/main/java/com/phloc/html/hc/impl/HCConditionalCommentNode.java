@@ -72,13 +72,12 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
 
   public HCConditionalCommentNode (@Nonnull @Nonempty final String sCondition, @Nonnull final IHCNode aWrappedNode)
   {
-    ValueEnforcer.notEmpty (sCondition, "Condition");
     ValueEnforcer.notNull (aWrappedNode, "WrappedNode");
     if (aWrappedNode instanceof HCCommentNode)
       throw new IllegalArgumentException ("You cannot wrap a comment inside a conditional comment");
     if (aWrappedNode instanceof HCConditionalCommentNode)
       throw new IllegalArgumentException ("You cannot wrap a conditional comment inside another conditional comment");
-    m_sCondition = sCondition;
+    setCondition (sCondition);
     m_aWrappedNode = aWrappedNode;
   }
 
@@ -96,8 +95,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   @Nonnull
   public HCConditionalCommentNode setCondition (@Nonnull @Nonempty final String sCondition)
   {
-    if (StringHelper.hasNoText (sCondition))
-      throw new IllegalArgumentException ("Passed condition may not be empty!");
+    ValueEnforcer.notEmpty (sCondition, "Condition");
     m_sCondition = sCondition;
     return this;
   }
@@ -118,8 +116,7 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   @Nonnull
   public HCConditionalCommentNode setLineSeparator (@Nonnull @Nonempty final String sLineSeparator)
   {
-    if (StringHelper.hasNoText (sLineSeparator))
-      throw new IllegalArgumentException ("lineSeparator");
+    ValueEnforcer.notEmpty (sLineSeparator, "LineSeparator");
     m_sLineSeparator = sLineSeparator;
     return this;
   }
@@ -148,8 +145,12 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
   @Nonnull
   public HCCommentNode getCommentNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    // First convert the contained node to a micro node
     final IMicroNode aWrappedMicroNode = m_aWrappedNode.convertToNode (aConversionSettings);
-    return new HCCommentNode (_getCommentText (aWrappedMicroNode, aConversionSettings.getXMLWriterSettings ()));
+    // Now wrap the created XML in the special format required for a conditional
+    // comment
+    final String sWrappedXML = _getCommentText (aWrappedMicroNode, aConversionSettings.getXMLWriterSettings ());
+    return new HCCommentNode (sWrappedXML);
   }
 
   @Override

@@ -56,10 +56,13 @@ public interface IHCNode extends IHasPlainText, Serializable
    * When implementing this method, it should ideally undo the actions performed
    * in {@link #onAdded(int, IHCHasChildrenMutable)}.
    * 
+   * @param nIndex
+   *        The index where the element was removed from. Always &ge; 0. This is
+   *        the OLD index and now contains a different or no child.
    * @param aParent
    *        The parent node this node was removed from. Never <code>null</code>.
    */
-  void onRemoved (@Nonnull IHCHasChildrenMutable <?, ?> aParent);
+  void onRemoved (@Nonnegative int nIndex, @Nonnull IHCHasChildrenMutable <?, ?> aParent);
 
   /**
    * @return <code>true</code> if the customizer was already run on this node,
