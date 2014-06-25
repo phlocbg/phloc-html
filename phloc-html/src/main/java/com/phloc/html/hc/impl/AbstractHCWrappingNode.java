@@ -49,6 +49,7 @@ public abstract class AbstractHCWrappingNode extends AbstractHCNode implements I
   @Override
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    // Propagate to wrapped node
     getWrappedNode ().beforeConvertToNode (aConversionSettings);
   }
 
