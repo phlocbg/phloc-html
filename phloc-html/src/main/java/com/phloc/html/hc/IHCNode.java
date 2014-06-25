@@ -28,6 +28,7 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.microdom.IMicroNode;
 import com.phloc.html.hc.conversion.IHCConversionSettings;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.hc.impl.HCConditionalCommentNode;
 
 /**
  * Base interface for a main HC node.
@@ -127,14 +128,15 @@ public interface IHCNode extends IHasPlainText, Serializable
 
   /**
    * Get this node wrapped in a conditional comment. This is a sanity method for
-   * <code>new HCConditionalCommentNode (this, sCondition)</code>
+   * <code>new HCConditionalCommentNode (this, sCondition)</code>. If this node
+   * is already an {@link HCConditionalCommentNode} the object is simply casted.
    * 
    * @param sCondition
    *        The condition to us. May neither be <code>null</code> nor empty.
    * @return Never <code>null</code>.
    */
   @Nonnull
-  IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
+  HCConditionalCommentNode getAsConditionalCommentNode (@Nonnull @Nonempty String sCondition);
 
   /**
    * Convert the passed node to it's HTML representation. First this HC-node is

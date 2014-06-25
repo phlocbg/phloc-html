@@ -173,8 +173,10 @@ public abstract class AbstractHCNode implements IHCNode
   }
 
   @Nonnull
-  public final IHCNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
+  public final HCConditionalCommentNode getAsConditionalCommentNode (@Nonnull @Nonempty final String sCondition)
   {
+    if (this instanceof HCConditionalCommentNode)
+      return (HCConditionalCommentNode) this;
     return new HCConditionalCommentNode (sCondition, this);
   }
 
