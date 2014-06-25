@@ -43,8 +43,9 @@ import com.phloc.html.hc.IHCElement;
 import com.phloc.html.hc.IHCHasChildrenMutable;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.IHCTable;
+import com.phloc.html.hc.html.AbstractHCButton;
+import com.phloc.html.hc.html.AbstractHCForm;
 import com.phloc.html.hc.html.HCBody;
-import com.phloc.html.hc.html.HCButton;
 import com.phloc.html.hc.html.HCButton_Submit;
 import com.phloc.html.hc.html.HCCheckBox;
 import com.phloc.html.hc.html.HCCol;
@@ -52,7 +53,6 @@ import com.phloc.html.hc.html.HCColGroup;
 import com.phloc.html.hc.html.HCEdit;
 import com.phloc.html.hc.html.HCEditFile;
 import com.phloc.html.hc.html.HCEditPassword;
-import com.phloc.html.hc.html.HCForm;
 import com.phloc.html.hc.html.HCHead;
 import com.phloc.html.hc.html.HCHiddenField;
 import com.phloc.html.hc.html.HCLink;
@@ -117,7 +117,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aNode instanceof IHCElement <?>)
     {
       final IHCElement <?> aElement = (IHCElement <?>) aNode;
-      if (aElement instanceof HCButton)
+      if (aElement instanceof AbstractHCButton <?>)
       {
         aElement.addClass (CSS_CLASS_BUTTON);
       }
@@ -127,7 +127,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
           final HCCheckBox aCheckBox = (HCCheckBox) aElement;
           aCheckBox.addClass (CSS_CLASS_CHECKBOX);
 
-          // If no value is present, assign the default value
+          // If no value is present, assign the default value "true"
           if (aCheckBox.getValue () == null)
             aCheckBox.setValue (CHCParam.VALUE_CHECKED);
         }
@@ -147,9 +147,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                 aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_PASSWORD);
               }
               else
-                if (aElement instanceof HCForm)
+                if (aElement instanceof AbstractHCForm <?>)
                 {
-                  final HCForm aForm = (HCForm) aElement;
+                  final AbstractHCForm <?> aForm = (AbstractHCForm <?>) aElement;
                   if (aForm.isSubmitPressingEnter ())
                   {
                     final IHCButton <?> aButton = createFakeSubmitButton ();
@@ -199,7 +199,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
       if (aElement.isUnfocusable ())
         aElement.setEventHandler (EJSEvent.ONFOCUS, JS_BLUR);
 
-      // Disable
+      // Added "disabled" class on disabled element
       if (aElement instanceof IHCCanBeDisabled <?>)
         if (((IHCCanBeDisabled <?>) aElement).isDisabled ())
           aElement.addClass (CSS_CLASS_DISABLED);
@@ -212,6 +212,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
         // Read only?
         if (aCtrl.isReadonly ())
         {
+          // Add read-only class
           aCtrl.addClass (CSS_CLASS_READONLY);
 
           // Set explicit tab index -1 to avoid focusing
@@ -220,7 +221,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
         if (aCtrl.isFocused ())
         {
-          // Add this out of band node
+          // Add a JS call that focuses this element
           // Note: assuming jQuery
           aParentElement.addChild (new HCScript (JQuery.idRef (aCtrl).focus ()));
         }
