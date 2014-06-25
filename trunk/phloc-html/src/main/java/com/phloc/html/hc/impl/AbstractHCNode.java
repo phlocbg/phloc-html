@@ -95,7 +95,11 @@ public abstract class AbstractHCNode implements IHCNode
   /**
    * This method is called only once for each instance. It is called before the
    * node itself is created. Overwrite this method to perform actions that can
-   * only be done when the node is build finally.
+   * only be done when the node is build finally.<br>
+   * Things to do in this method are:
+   * <ul>
+   * <li>Register external resources like JS or CSS files</li>
+   * </ul>
    * 
    * @param aConversionSettings
    *        The conversion settings to be used

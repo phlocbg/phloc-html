@@ -37,7 +37,12 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 public interface IHCNode extends IHasPlainText, Serializable
 {
   /**
-   * Callback to be invoked, after this child was added to a node.
+   * Callback to be invoked, after this child was added to a node.<br>
+   * Common use cases for this method are:
+   * <ul>
+   * <li>Add additional nodes that are part of this node (e.g. &lt;script&gt;)
+   * to the parent.</li>
+   * </ul>
    * 
    * @param nIndex
    *        The index where the element was added. Always &ge; 0.
@@ -47,7 +52,9 @@ public interface IHCNode extends IHasPlainText, Serializable
   void onAdded (@Nonnegative int nIndex, @Nonnull IHCHasChildrenMutable <?, ?> aParent);
 
   /**
-   * Callback to be invoked, after this child was removed from a node.
+   * Callback to be invoked, after this child was removed from a node.<br>
+   * When implementing this method, it should ideally undo the actions performed
+   * in {@link #onAdded(int, IHCHasChildrenMutable)}.
    * 
    * @param aParent
    *        The parent node this node was removed from. Never <code>null</code>.
