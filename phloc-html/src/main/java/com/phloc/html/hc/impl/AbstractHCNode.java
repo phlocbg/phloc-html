@@ -111,6 +111,8 @@ public abstract class AbstractHCNode implements IHCNode
     if (!m_bConvertedToNode)
     {
       m_bConvertedToNode = true;
+
+      // Call internal method exactly once
       internalBeforeConvertToNode (aConversionSettings);
     }
   }
