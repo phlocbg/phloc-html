@@ -331,6 +331,7 @@ public abstract class AbstractHCHasChildrenMutable <THISTYPE extends AbstractHCH
   @OverridingMethodsMustInvokeSuper
   protected void internalBeforeConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
+    // Propagate to children
     if (hasChildren ())
       for (final CHILDTYPE aChild : m_aChildren)
         aChild.beforeConvertToNode (aConversionSettings);

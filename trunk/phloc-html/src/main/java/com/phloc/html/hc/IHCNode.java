@@ -40,6 +40,7 @@ public interface IHCNode extends IHasPlainText, Serializable
    * Callback to be invoked, after this child was added to a node.<br>
    * Common use cases for this method are:
    * <ul>
+   * <li>Register external resources like JS or CSS files</li>
    * <li>Add additional nodes that are part of this node (e.g. &lt;script&gt;)
    * to the parent.</li>
    * </ul>

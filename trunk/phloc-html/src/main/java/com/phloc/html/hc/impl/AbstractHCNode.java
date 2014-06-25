@@ -96,9 +96,19 @@ public abstract class AbstractHCNode implements IHCNode
    * This method is called only once for each instance. It is called before the
    * node itself is created. Overwrite this method to perform actions that can
    * only be done when the node is build finally.<br>
-   * Things to do in this method are:
+   * Things <b>to do</b> in this method are:
    * <ul>
-   * <li>Register external resources like JS or CSS files</li>
+   * <li>Propagate the call to
+   * {@link #beforeConvertToNode(IHCConversionSettingsToNode)} to all child
+   * nodes.</li>
+   * <li>Add special child elements depending on certain states</li>
+   * </ul>
+   * Things <b>NOT to do</b> in this method are:
+   * <ul>
+   * <li>Register external resources like JS or CSS files because this would be
+   * to late, because this is already part of the HTML serialization to a
+   * String! Use {@link #onAdded(int, IHCHasChildrenMutable)} instead to
+   * register external resources.</li>
    * </ul>
    * 
    * @param aConversionSettings
