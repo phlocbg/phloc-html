@@ -17,18 +17,19 @@
  */
 package com.phloc.html.hc.html;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.commons.microdom.impl.MicroContainer;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.CHTMLAttributeValues;
 import com.phloc.html.CHTMLAttributes;
+import com.phloc.html.hc.IHCHasChildrenMutable;
+import com.phloc.html.hc.IHCNodeWithChildren;
 import com.phloc.html.hc.api.EHCInputType;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 import com.phloc.html.hc.impl.AbstractHCInput;
@@ -199,7 +200,8 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   /**
    * Get the hidden field name for this checkbox.
    * 
-   * @return <code>null</code> if no field name ({@link #getName()}) is present.
+   * @return <code>null</code> if no field name ({@link #getName()}) is present
+   *         or a non-<code>null</code> and non-empty string.
    * @see #getHiddenFieldName(String)
    */
   @Nullable
@@ -212,6 +214,24 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   }
 
   @Override
+  public void onAdded (@Nonnegative final int nIndex, @Nonnull final IHCHasChildrenMutable <?, ?> aParent)
+  {
+    if (m_bEmitHiddenField)
+    {
+      final String sHiddenFieldName = getHiddenFieldName ();
+      if (sHiddenFieldName != null)
+        ((IHCNodeWithChildren <?>) aParent).addChild (new HCHiddenField (sHiddenFieldName, getValue ()));
+    }
+  }
+
+  @Override
+  public void onRemoved (@Nonnegative final int nIndex, @Nonnull final IHCHasChildrenMutable <?, ?> aParent)
+  {
+    if (m_bEmitHiddenField && getHiddenFieldName () != null)
+      ((IHCNodeWithChildren <?>) aParent).removeChild (nIndex);
+  }
+
+  @Override
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
@@ -219,30 +239,6 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
       aElement.setAttribute (CHTMLAttributes.VALUE, m_sValue);
     if (m_bChecked)
       aElement.setAttribute (CHTMLAttributes.CHECKED, CHTMLAttributeValues.CHECKED);
-  }
-
-  @Override
-  protected IMicroNode internalConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
-  {
-    final IMicroNode aCheckBoxNode = super.internalConvertToNode (aConversionSettings);
-    if (!m_bEmitHiddenField)
-    {
-      // No special handling required
-      return aCheckBoxNode;
-    }
-
-    final String sHiddenFieldName = getHiddenFieldName ();
-    if (StringHelper.hasNoText (sHiddenFieldName))
-    {
-      // No field name -> no hidden field
-      return aCheckBoxNode;
-    }
-
-    // Create a container with the main checkbox and a hidden field
-    final IMicroContainer aCont = new MicroContainer ();
-    aCont.appendChild (aCheckBoxNode);
-    aCont.appendChild (new HCHiddenField (sHiddenFieldName, getValue ()).convertToNode (aConversionSettings));
-    return aCont;
   }
 
   @Override
@@ -264,10 +260,10 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
    *         name.
    */
   @Nonnull
+  @Nonempty
   public static String getHiddenFieldName (@Nonnull @Nonempty final String sFieldName)
   {
-    if (StringHelper.hasNoText (sFieldName))
-      throw new IllegalArgumentException ("fieldName may not be empty!");
+    ValueEnforcer.notEmpty (sFieldName, "FieldName");
     return DEFAULT_HIDDEN_FIELD_PREFIX + sFieldName;
   }
 }

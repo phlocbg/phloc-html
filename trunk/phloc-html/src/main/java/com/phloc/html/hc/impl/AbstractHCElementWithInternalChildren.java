@@ -179,22 +179,27 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   /**
    * Invoked after an element was removed.
    * 
+   * @param nIndex
+   *        The index of the child relative to the parent.
    * @param aChild
    *        The child that was removed. Never <code>null</code>.
    */
   @OverrideOnDemand
   @OverridingMethodsMustInvokeSuper
-  protected void afterRemoveChild (@Nonnull final CHILDTYPE aChild)
+  protected void afterRemoveChild (@Nonnegative final int nIndex, @Nonnull final CHILDTYPE aChild)
   {
-    aChild.onRemoved (this);
+    aChild.onRemoved (nIndex, this);
   }
 
   @Nonnull
   public final THISTYPE removeChild (@Nullable final CHILDTYPE aChild)
   {
     if (aChild != null && m_aChildren != null)
-      if (m_aChildren.remove (aChild))
-        afterRemoveChild (aChild);
+    {
+      final int nChildIndex = m_aChildren.indexOf (aChild);
+      if (nChildIndex >= 0)
+        removeChild (nChildIndex);
+    }
     return thisAsT ();
   }
 
@@ -203,7 +208,7 @@ public abstract class AbstractHCElementWithInternalChildren <THISTYPE extends Ab
   {
     final CHILDTYPE aRemovedChild = ContainerHelper.removeAndReturnElementAtIndex (m_aChildren, nIndex);
     if (aRemovedChild != null)
-      afterRemoveChild (aRemovedChild);
+      afterRemoveChild (nIndex, aRemovedChild);
     return thisAsT ();
   }
 

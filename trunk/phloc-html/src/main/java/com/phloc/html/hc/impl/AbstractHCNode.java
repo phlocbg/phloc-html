@@ -49,7 +49,7 @@ public abstract class AbstractHCNode implements IHCNode
   public void onAdded (@Nonnegative final int nIndex, @Nonnull final IHCHasChildrenMutable <?, ?> aParent)
   {}
 
-  public void onRemoved (@Nonnull final IHCHasChildrenMutable <?, ?> aParent)
+  public void onRemoved (@Nonnegative final int nIndex, @Nonnull final IHCHasChildrenMutable <?, ?> aParent)
   {}
 
   /**
