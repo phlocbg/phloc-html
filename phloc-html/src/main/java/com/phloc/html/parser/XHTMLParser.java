@@ -36,6 +36,7 @@ import com.phloc.commons.regex.RegExHelper;
 import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.xml.CXML;
 import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
+import com.phloc.commons.xml.EXMLParserFeature;
 import com.phloc.commons.xml.serialize.EXMLSerializeVersion;
 import com.phloc.commons.xml.serialize.SAXReaderSettings;
 import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
@@ -147,7 +148,8 @@ public final class XHTMLParser
   public static IMicroDocument parseXHTMLDocument (@Nullable final String sXHTML)
   {
     return MicroReader.readMicroXML (sXHTML,
-                                     new SAXReaderSettings ().setEntityResolver (HTMLEntityResolver.getInstance ()));
+                                     new SAXReaderSettings ().setEntityResolver (HTMLEntityResolver.getInstance ())
+                                                             .setFeatureValues (EXMLParserFeature.AVOID_XXE_SETTINGS));
   }
 
   /**
