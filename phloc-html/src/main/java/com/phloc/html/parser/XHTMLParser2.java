@@ -66,7 +66,11 @@ public final class XHTMLParser2
   // * DOCTYPE must be allowed because it is common in HTML files
   // * parameter entities must be allowed, because otherwise the HTML DTDs
   // cannot be read correctly
-  private SAXReaderSettings m_aAdditionalSAXReaderSettings = new SAXReaderSettings ().setFeatureValue (EXMLParserFeature.EXTERNAL_GENERAL_ENTITIES,
+  // Note: SECURE_PROCESSING is not available in JDK parser 1.6.0_32 (most
+  // probably also not in the previous versions)
+  private SAXReaderSettings m_aAdditionalSAXReaderSettings = new SAXReaderSettings ().setFeatureValue (EXMLParserFeature.SECURE_PROCESSING,
+                                                                                                       true)
+                                                                                     .setFeatureValue (EXMLParserFeature.EXTERNAL_GENERAL_ENTITIES,
                                                                                                        false);
 
   public XHTMLParser2 ()
