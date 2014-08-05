@@ -21,43 +21,25 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.phloc.commons.ValueEnforcer;
-import com.phloc.commons.collections.ContainerHelper;
 import com.phloc.commons.microdom.IMicroContainer;
 import com.phloc.commons.microdom.IMicroDocument;
-import com.phloc.commons.microdom.IMicroElement;
-import com.phloc.commons.microdom.IMicroNode;
-import com.phloc.commons.microdom.impl.MicroContainer;
-import com.phloc.commons.microdom.serialize.MicroReader;
-import com.phloc.commons.regex.RegExHelper;
-import com.phloc.commons.string.StringHelper;
-import com.phloc.commons.xml.CXML;
-import com.phloc.commons.xml.EXMLIncorrectCharacterHandling;
-import com.phloc.commons.xml.EXMLParserFeature;
-import com.phloc.commons.xml.serialize.EXMLSerializeVersion;
-import com.phloc.commons.xml.serialize.SAXReaderSettings;
-import com.phloc.commons.xml.serialize.XMLEmitterPhloc;
-import com.phloc.html.EHTMLElement;
 import com.phloc.html.EHTMLVersion;
 import com.phloc.html.entities.HTMLEntityResolver;
 import com.phloc.html.hc.IHCNode;
-import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCTextNode;
 
 /**
- * Utility class for parsing stuff as HTML.
+ * Utility class for parsing stuff as HTML. This class is deprecated and should
+ * no longer be used, because the API possibilities are limited. Use
+ * {@link XHTMLParser2} instead.
  *
  * @author Philip Helger
  */
 @Immutable
+@Deprecated
 public final class XHTMLParser
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (XHTMLParser.class);
-
   private XHTMLParser ()
   {}
 
@@ -71,10 +53,7 @@ public final class XHTMLParser
    */
   public static boolean looksLikeXHTML (@Nullable final String sText)
   {
-    // If the text contains an open angle bracket followed by a character that
-    // we think of it as HTML
-    // (?s) enables the "dotall" mode - see Pattern.DOTALL
-    return StringHelper.hasText (sText) && RegExHelper.stringMatchesPattern ("(?s).*<[a-zA-Z].+", sText);
+    return XHTMLParser2.looksLikeXHTML (sText);
   }
 
   /**
@@ -89,7 +68,7 @@ public final class XHTMLParser
    */
   public static boolean isValidXHTMLFragment (@Nullable final String sXHTMLFragment)
   {
-    return StringHelper.hasNoText (sXHTMLFragment) || parseXHTMLFragment (sXHTMLFragment) != null;
+    return new XHTMLParser2 ().isValidXHTMLFragment (sXHTMLFragment);
   }
 
   /**
@@ -104,7 +83,7 @@ public final class XHTMLParser
   @Nullable
   public static IMicroDocument parseXHTMLFragment (@Nullable final String sXHTMLFragment)
   {
-    return parseXHTMLFragment (EHTMLVersion.DEFAULT, sXHTMLFragment);
+    return new XHTMLParser2 ().parseXHTMLFragment (sXHTMLFragment);
   }
 
   /**
@@ -120,20 +99,7 @@ public final class XHTMLParser
   public static IMicroDocument parseXHTMLFragment (@Nonnull final EHTMLVersion eHTMLVersion,
                                                    @Nullable final String sXHTMLFragment)
   {
-    ValueEnforcer.notNull (eHTMLVersion, "HTMLversion");
-
-    // Build mini HTML and insert fragment in the middle.
-    // If parsing succeeds, it is considered valid HTML.
-    final String sHTMLNamespaceURI = eHTMLVersion.getNamespaceURI ();
-    final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLSerializeVersion.XML_10,
-                                                                        EXMLIncorrectCharacterHandling.DEFAULT,
-                                                                        eHTMLVersion.getDocType ()) +
-                          "<html" +
-                          (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
-                          "><head><title></title></head><body>" +
-                          StringHelper.getNotNull (sXHTMLFragment) +
-                          "</body></html>";
-    return parseXHTMLDocument (sXHTML);
+    return new XHTMLParser2 (eHTMLVersion).parseXHTMLFragment (sXHTMLFragment);
   }
 
   /**
@@ -147,9 +113,7 @@ public final class XHTMLParser
   @Nullable
   public static IMicroDocument parseXHTMLDocument (@Nullable final String sXHTML)
   {
-    return MicroReader.readMicroXML (sXHTML,
-                                     new SAXReaderSettings ().setEntityResolver (HTMLEntityResolver.getInstance ())
-                                                             .setFeatureValues (EXMLParserFeature.AVOID_XXE_SETTINGS));
+    return new XHTMLParser2 ().parseXHTMLDocument (sXHTML);
   }
 
   /**
@@ -164,7 +128,7 @@ public final class XHTMLParser
   @Nullable
   public static IMicroContainer unescapeXHTML (@Nullable final String sXHTML)
   {
-    return unescapeXHTML (EHTMLVersion.DEFAULT, sXHTML);
+    return new XHTMLParser2 ().unescapeXHTMLFragment (sXHTML);
   }
 
   /**
@@ -182,26 +146,7 @@ public final class XHTMLParser
   @Nullable
   public static IMicroContainer unescapeXHTML (@Nonnull final EHTMLVersion eHTMLVersion, @Nullable final String sXHTML)
   {
-    // Ensure that the content is surrounded by a single tag
-    final IMicroDocument aDoc = parseXHTMLFragment (eHTMLVersion, sXHTML);
-    if (aDoc != null && aDoc.getDocumentElement () != null)
-    {
-      // Find body case insensitive
-      final IMicroElement eBody = HCUtils.getFirstChildElement (aDoc.getDocumentElement (), EHTMLElement.BODY);
-      if (eBody != null)
-      {
-        final IMicroContainer ret = new MicroContainer ();
-        if (eBody.hasChildren ())
-        {
-          // Make a copy of the list, because it is modified in
-          // detachFromParent!
-          for (final IMicroNode aChildNode : ContainerHelper.newList (eBody.getChildren ()))
-            ret.appendChild (aChildNode.detachFromParent ());
-        }
-        return ret;
-      }
-    }
-    return null;
+    return new XHTMLParser2 (eHTMLVersion).unescapeXHTMLFragment (sXHTML);
   }
 
   /**
@@ -217,13 +162,6 @@ public final class XHTMLParser
   @Nonnull
   public static IHCNode convertToXHTMLOnDemand (@Nullable final String sText)
   {
-    if (looksLikeXHTML (sText))
-    {
-      final IMicroContainer aCont = unescapeXHTML (sText);
-      if (aCont != null)
-        return new HCDOMWrapper (aCont);
-      s_aLogger.error ("Failed to unescape XHTML:\n" + sText);
-    }
-    return new HCTextNode (sText);
+    return new XHTMLParser2 ().convertToXHTMLFragmentOnDemand (sText);
   }
 }
