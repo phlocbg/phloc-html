@@ -42,7 +42,7 @@ import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCTextNode;
 
 /**
- * Test class for class {@link aParser}.
+ * Test class for class {@link XHTMLParser2}.
  *
  * @author Philip Helger
  */

@@ -152,8 +152,8 @@ public final class XHTMLParser2
 
   /**
    * Parse the given fragment as XHTML 1.1. This is a sanity method for
-   * {@link #parseXHTMLFragment(EHTMLVersion, String)} with the predefined XHTML
-   * 1.1 document type.
+   * {@link #parseXHTMLFragment(String)} with the predefined XHTML 1.1 document
+   * type.
    *
    * @param sXHTMLFragment
    *        The XHTML fragment to parse. May be <code>null</code>.
@@ -231,7 +231,7 @@ public final class XHTMLParser2
 
   /**
    * If the passed text looks like XHTML, unescape it (using
-   * {@link #unescapeXHTML(String)}) else return a simple text node.
+   * {@link #unescapeXHTMLFragment(String)}) else return a simple text node.
    *
    * @param sText
    *        The text to be converted. May be <code>null</code>.
