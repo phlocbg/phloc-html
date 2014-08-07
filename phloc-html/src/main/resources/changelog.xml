@@ -20,6 +20,21 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <entry date="2014-08-05" category="api" action="add">
+    <change>
+      <text locale="en">Added new class XHTMLParser2 that supports custom SAXReaderSettings</text>
+    </change>
+  </entry>
+  <entry date="2014-06-25" category="api" action="add" incompatible="true">
+    <change>
+      <text locale="en">Added callbacks to IHCNode API</text>
+    </change>
+  </entry>
+  <entry date="2014-05-27" category="tech" action="change">
+    <change>
+      <text locale="en">Setting tabindex attribute to -1 in an element is readonly</text>
+    </change>
+  </entry>
   <release date="2014-05-21" version="4.1.0" />
   <entry date="2014-05-21" category="tech" action="change">
     <change>
