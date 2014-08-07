@@ -29,7 +29,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an entity reference as HC node.
- * 
+ *
  * @author Philip Helger
  */
 public class HCEntityNode extends AbstractHCNode
@@ -107,5 +107,11 @@ public class HCEntityNode extends AbstractHCNode
   public static HCEntityNode newRightArrow ()
   {
     return new HCEntityNode (EHTMLEntity.rarr, "->");
+  }
+
+  @Nonnull
+  public static HCEntityNode newNDash ()
+  {
+    return new HCEntityNode (EHTMLEntity.ndash, "-");
   }
 }
