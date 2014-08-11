@@ -228,6 +228,10 @@ public class JSArray extends AbstractJSExpression
 
   /**
    * Add an element to the array initializer
+   *
+   * @param aExpr
+   *        Expression to add. May not be <code>null</code>.
+   * @return this
    */
   @Nonnull
   public JSArray add (@Nonnull final IJSExpression aExpr)

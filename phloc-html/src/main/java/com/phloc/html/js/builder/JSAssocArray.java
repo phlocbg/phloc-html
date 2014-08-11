@@ -161,6 +161,12 @@ public class JSAssocArray extends AbstractJSExpression
 
   /**
    * Add an element to the array initializer
+   * 
+   * @param aKey
+   *        key to use
+   * @param aValue
+   *        value to use
+   * @return this
    */
   @Nonnull
   public JSAssocArray add (@Nonnull final IJSExpression aKey, @Nonnull final IJSExpression aValue)

@@ -76,9 +76,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
      * Wrap the whole JS code as plain text in XML comments.
      *
      * <pre>
-     * &lt;script>&lt;!--
+     * &lt;script&gt;&lt;!--
      * my &lt; script
-     * //-->&lt;/script&gt;
+     * //--&gt;&lt;/script&gt;
      * </pre>
      */
     PLAIN_TEXT_WRAPPED_IN_COMMENT,

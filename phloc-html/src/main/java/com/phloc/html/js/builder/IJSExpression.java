@@ -464,7 +464,7 @@ public interface IJSExpression extends IJSGeneratable
   @Nonnull
   IJSExpression gt (long nValue);
 
-  /** Greater than '>'. */
+  /** Greater than '&gt;'. */
   @Nonnull
   IJSExpression gt (@Nonnull IJSExpression aExpr);
 
@@ -480,7 +480,7 @@ public interface IJSExpression extends IJSGeneratable
   @Nonnull
   IJSExpression gte (long nValue);
 
-  /** Greater than or equal '>='. */
+  /** Greater than or equal '&gt;='. */
   @Nonnull
   IJSExpression gte (@Nonnull IJSExpression aExpr);
 
