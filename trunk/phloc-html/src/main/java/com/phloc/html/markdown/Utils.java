@@ -27,8 +27,8 @@ import com.phloc.commons.random.VerySecureRandom;
 
 /**
  * Utilities.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 final class Utils
 {
@@ -63,7 +63,7 @@ final class Utils
 
   /**
    * Skips spaces in the given String.
-   * 
+   *
    * @param in
    *        Input String.
    * @param start
@@ -85,7 +85,7 @@ final class Utils
 
   /**
    * Processed the given escape sequence.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param ch
@@ -107,7 +107,7 @@ final class Utils
 
   /**
    * Reads characters until any 'end' character is encountered.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -151,7 +151,7 @@ final class Utils
 
   /**
    * Reads characters until the 'end' character is encountered.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -186,7 +186,7 @@ final class Utils
 
   /**
    * Reads a markdown link.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -238,7 +238,7 @@ final class Utils
 
   /**
    * Reads a markdown link ID.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -286,7 +286,7 @@ final class Utils
   /**
    * Reads characters until any 'end' character is encountered, ignoring escape
    * sequences.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -324,7 +324,7 @@ final class Utils
   /**
    * Reads characters until the end character is encountered, ignoring escape
    * sequences.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -352,7 +352,7 @@ final class Utils
 
   /**
    * Append the given char as a decimal HTML entity.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param value
@@ -365,7 +365,7 @@ final class Utils
 
   /**
    * Append the given char as a hexadecimal HTML entity.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param value
@@ -378,7 +378,7 @@ final class Utils
 
   /**
    * Appends the given mailto link using obfuscation.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -422,7 +422,7 @@ final class Utils
 
   /**
    * Extracts the tag from an XML element.
-   * 
+   *
    * @param in
    *        Input String.
    */
@@ -440,7 +440,7 @@ final class Utils
 
   /**
    * Reads an XML element.
-   * 
+   *
    * @param aSB
    *        The StringBuilder to write to.
    * @param sIn
@@ -529,7 +529,7 @@ final class Utils
 
   /**
    * Removes trailing <code>`</code> and trims spaces.
-   * 
+   *
    * @param fenceLine
    *        Fenced code block starting line
    * @return Rest of the line after trimming and backtick removal

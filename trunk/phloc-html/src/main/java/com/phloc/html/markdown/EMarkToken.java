@@ -19,8 +19,8 @@ package com.phloc.html.markdown;
 
 /**
  * Markdown token enumeration.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
  */
 enum EMarkToken
 {
