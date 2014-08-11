@@ -28,7 +28,7 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 /**
  * Decorator interface.
  *
- * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 public interface IMarkdownDecorator
 {
@@ -39,7 +39,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;p>");</code>
+   * <code>out.append("&lt;p&gt;");</code>
    * </pre>
    *
    * @param out
@@ -54,7 +54,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/p>\n");</code>
+   * <code>out.append("&lt;/p&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -66,7 +66,7 @@ public interface IMarkdownDecorator
    * Called when a blockquote is opened. Default implementation is:
    *
    * <pre>
-   * <code>out.append("&lt;blockquote>");</code>
+   * <code>out.append("&lt;blockquote&gt;");</code>
    * </pre>
    *
    * @param out
@@ -81,7 +81,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/blockquote>\n");</code>
+   * <code>out.append("&lt;/blockquote&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -96,7 +96,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;pre>&lt;code>");</code>
+   * <code>out.append("&lt;pre&gt;&lt;code&gt;");</code>
    * </pre>
    *
    * @param out
@@ -111,7 +111,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/code>&lt;/pre>\n");</code>
+   * <code>out.append("&lt;/code&gt;&lt;/pre&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -126,7 +126,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;code>");</code>
+   * <code>out.append("&lt;code&gt;");</code>
    * </pre>
    *
    * @param out
@@ -141,7 +141,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/code>");</code>
+   * <code>out.append("&lt;/code&gt;");</code>
    * </pre>
    *
    * @param out
@@ -178,7 +178,7 @@ public interface IMarkdownDecorator
    * <pre>
    * <code> out.append("&lt;/h");
    * out.append(level);
-   * out.append(">\n");</code>
+   * out.append("&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -193,7 +193,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;strong>");</code>
+   * <code>out.append("&lt;strong&gt;");</code>
    * </pre>
    *
    * @param out
@@ -208,7 +208,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/strong>");</code>
+   * <code>out.append("&lt;/strong&gt;");</code>
    * </pre>
    *
    * @param out
@@ -223,7 +223,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;s>");</code>
+   * <code>out.append("&lt;s&gt;");</code>
    * </pre>
    *
    * @param out
@@ -238,7 +238,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/s>");</code>
+   * <code>out.append("&lt;/s&gt;");</code>
    * </pre>
    *
    * @param out
@@ -253,7 +253,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;em>");</code>
+   * <code>out.append("&lt;em&gt;");</code>
    * </pre>
    *
    * @param out
@@ -268,7 +268,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/em>");</code>
+   * <code>out.append("&lt;/em&gt;");</code>
    * </pre>
    *
    * @param out
@@ -283,7 +283,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;sup>");</code>
+   * <code>out.append("&lt;sup&gt;");</code>
    * </pre>
    *
    * @param out
@@ -298,7 +298,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/sup>");</code>
+   * <code>out.append("&lt;/sup&gt;");</code>
    * </pre>
    *
    * @param out
@@ -313,7 +313,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;ol>\n");</code>
+   * <code>out.append("&lt;ol&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -328,7 +328,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/ol>\n");</code>
+   * <code>out.append("&lt;/ol&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -343,7 +343,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;ul>\n");</code>
+   * <code>out.append("&lt;ul&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -358,7 +358,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/ul>\n");</code>
+   * <code>out.append("&lt;/ul&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -392,7 +392,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;/li>\n");</code>
+   * <code>out.append("&lt;/li&gt;\n");</code>
    * </pre>
    *
    * @param out
@@ -407,7 +407,7 @@ public interface IMarkdownDecorator
    * </p>
    *
    * <pre>
-   * <code>out.append("&lt;hr />\n");</code>
+   * <code>out.append("&lt;hr /&gt;\n");</code>
    * </pre>
    *
    * @param out

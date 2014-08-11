@@ -25,38 +25,37 @@ import javax.annotation.Nonnull;
  * Block emitter interface. An example for a code block emitter is given below:
  *
  * <pre>
- * <code>public void emitBlock(StringBuilder out, List&lt;String&gt; lines, String meta)
+ * public void emitBlock (StringBuilder out, List &lt;String&gt; lines, String meta)
  * {
- *     out.append("&lt;pre&gt;&lt;code&gt;");
- *     for (final String s : lines)
+ *   out.append (&quot;&lt;pre&gt;&lt;code&gt;&quot;);
+ *   for (final String s : lines)
+ *   {
+ *     for (int i = 0; i &lt; s.length (); i++)
  *     {
- *         for (int i = 0; i < s.length(); i++)
- *         {
- *           final char c = s.charAt(i);
- *           switch (c)
- *           {
- *             case '&':
- *                 out.append("&amp;amp;");
- *                 break;
- *             case '&lt;':
- *                 out.append("&amp;lt;");
- *                 break;
- *             case '&gt;':
- *                 out.append("&amp;gt;");
- *                 break;
- *             default:
- *                 out.append(c);
- *                 break;
- *           }
- *         }
- *         out.append('\n');
+ *       final char c = s.charAt (i);
+ *       switch (c)
+ *       {
+ *         case '&amp;':
+ *           out.append (&quot;&amp;amp;&quot;);
+ *           break;
+ *         case '&lt;':
+ *           out.append (&quot;&amp;lt;&quot;);
+ *           break;
+ *         case '&gt;':
+ *           out.append (&quot;&amp;gt;&quot;);
+ *           break;
+ *         default:
+ *           out.append (c);
+ *           break;
+ *       }
  *     }
- *     out.append("&lt;/code&gt;&lt;/pre&gt;\n");
+ *     out.append ('\n');
+ *   }
+ *   out.append (&quot;&lt;/code&gt;&lt;/pre&gt;\n&quot;);
  * }
- * </code>
  * </pre>
  *
- * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  * @since 0.7
  */
 public interface IMarkdownBlockEmitter

@@ -193,7 +193,7 @@ public class MarkdownConfiguration
   /**
    * Configuration builder.
    *
-   * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
+   * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
    * @since 0.7
    */
   public static class Builder
