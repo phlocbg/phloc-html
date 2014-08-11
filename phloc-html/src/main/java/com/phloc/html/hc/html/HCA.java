@@ -39,7 +39,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Represents an HTML &lt;a&gt; element
- * 
+ *
  * @author Philip Helger
  */
 public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMedia <HCA>
@@ -66,6 +66,12 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
     setHref (aHref);
   }
 
+  @Nullable
+  public ISimpleURL getHref ()
+  {
+    return m_aHref;
+  }
+
   @Nonnull
   public final HCA setHref (@Nonnull final String sHref)
   {
@@ -83,9 +89,14 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
   }
 
   @Nullable
-  public ISimpleURL getHref ()
+  public HCA_Target getTarget ()
   {
-    return m_aHref;
+    return m_aTarget;
+  }
+
+  public boolean hasTarget ()
+  {
+    return m_aTarget != null;
   }
 
   @Nonnull
@@ -142,7 +153,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
 
   /**
    * Shortcut for <code>setEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
+   *
    * @param aOnClick
    *        JS event to trigger
    * @return this
@@ -155,7 +166,7 @@ public class HCA extends AbstractHCElementWithChildren <HCA> implements IHCHasMe
 
   /**
    * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
-   * 
+   *
    * @param aOnClick
    *        JS event to trigger
    * @return this

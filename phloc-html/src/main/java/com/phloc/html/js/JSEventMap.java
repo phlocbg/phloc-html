@@ -23,8 +23,10 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.phloc.commons.ValueEnforcer;
+import com.phloc.commons.annotations.ReturnsMutableCopy;
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
@@ -37,6 +39,7 @@ import com.phloc.html.js.provider.CollectingJSCodeProvider;
  *
  * @author Philip Helger
  */
+@NotThreadSafe
 public final class JSEventMap implements Serializable
 {
   private final Map <EJSEvent, CollectingJSCodeProvider> m_aEvents = new EnumMap <EJSEvent, CollectingJSCodeProvider> (EJSEvent.class);
@@ -137,6 +140,13 @@ public final class JSEventMap implements Serializable
         aElement.setAttribute (eEvent.getEvent (), CJS.JS_PREFIX + sJSCode);
       }
     }
+  }
+
+  @Nonnull
+  @ReturnsMutableCopy
+  public Map <EJSEvent, CollectingJSCodeProvider> getAllEventHandler ()
+  {
+    return new EnumMap <EJSEvent, CollectingJSCodeProvider> (m_aEvents);
   }
 
   @Override
