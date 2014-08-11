@@ -27,11 +27,11 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * This interface represents all special nodes that can occur in an HTML
- * document: CSS files (<code>&lt;link rel="stylesheet" href="..."/></code>), JS
- * files (<code>&lt;script
- * href="..."></code>) and inline JS code (
- * <code>&lt;script>...&lt;/script></code>).
- * 
+ * document: CSS files (<code>&lt;link rel="stylesheet" href="..."/&gt;</code>),
+ * JS files (<code>&lt;script
+ * href="..."&gt;</code>) and inline JS code (
+ * <code>&lt;script&gt;...&lt;/script&gt;</code>).
+ *
  * @author Philip Helger
  */
 public interface IHCSpecialNodes extends Serializable

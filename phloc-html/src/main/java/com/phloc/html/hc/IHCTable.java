@@ -33,9 +33,10 @@ import com.phloc.html.hc.html.HCRow;
 
 /**
  * Base interface for HTML tables
- * 
+ *
  * @author Philip Helger
  * @param <IMPLTYPE>
+ *        Implementation type
  */
 public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElement <IMPLTYPE>, IHCHasChildren
 {
@@ -74,7 +75,7 @@ public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElem
   /**
    * Remove the column definition at the specified index. This does not affect
    * any row contents.
-   * 
+   *
    * @param nColumnIndex
    *        The index of the column to remove
    * @return this
@@ -84,7 +85,7 @@ public interface IHCTable <IMPLTYPE extends IHCTable <IMPLTYPE>> extends IHCElem
 
   /**
    * Remove all column definitions. This does not affect any row contents.
-   * 
+   *
    * @return this
    */
   @Nonnull

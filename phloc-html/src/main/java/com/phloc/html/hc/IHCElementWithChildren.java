@@ -19,9 +19,10 @@ package com.phloc.html.hc;
 
 /**
  * Interface for elements having children.
- * 
+ *
  * @author Philip Helger
  * @param <THISTYPE>
+ *        Implementation type
  */
 public interface IHCElementWithChildren <THISTYPE extends IHCElementWithChildren <THISTYPE>> extends IHCElement <THISTYPE>, IHCNodeWithChildren <THISTYPE>
 {

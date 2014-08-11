@@ -54,6 +54,8 @@ public class HCConversionSettingsProvider implements IHCConversionSettingsProvid
 
   /**
    * @param aCSOptimized
+   *        The settings to be modified for optimized output. Never
+   *        <code>null</code>.
    */
   @OverrideOnDemand
   protected void modifyOptimizedConversionSettings (@Nonnull final HCConversionSettings aCSOptimized)

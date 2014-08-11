@@ -45,7 +45,7 @@ import com.phloc.html.js.provider.UnparsedJSCodeProvider;
 
 /**
  * This class represents an HTML &lt;script&gt; element with inline JS content.
- * 
+ *
  * @author Philip Helger
  * @see HCScriptFile
  * @see HCScriptOnDocumentReady
@@ -58,46 +58,46 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     /**
      * Emit JS code as plain text, but XML masked. The XML masking rules for
      * text nodes apply.
-     * 
+     *
      * <pre>
-     * &lt;script>my &amp;lt; script&lt;/script>
+     * &lt;script&gt;my &amp;lt; script&lt;/script&gt;
      * </pre>
      */
     PLAIN_TEXT,
     /**
      * Emit JS code as plain text, but without XML masking.
-     * 
+     *
      * <pre>
-     * &lt;script>my &lt; script&lt;/script>
+     * &lt;script&gt;my &lt; script&lt;/script&gt;
      * </pre>
      */
     PLAIN_TEXT_NO_ESCAPE,
     /**
      * Wrap the whole JS code as plain text in XML comments.
-     * 
+     *
      * <pre>
      * &lt;script>&lt;!--
      * my &lt; script
-     * //-->&lt;/script>
+     * //-->&lt;/script&gt;
      * </pre>
      */
     PLAIN_TEXT_WRAPPED_IN_COMMENT,
     /**
      * Wrap the whole JS code in an XML CDATA container.
-     * 
+     *
      * <pre>
-     * &lt;script>&lt;![CDATA[my &lt; script]]>&lt;/script>
+     * &lt;script&gt;&lt;![CDATA[my &lt; script]]&gt;&lt;/script&gt;
      * </pre>
      */
     CDATA,
     /**
      * Wrap the whole JS code in an XML CDATA container inside a JS comment
      * Tested OK with FF6, Opera11, Chrome13, IE8, IE9
-     * 
+     *
      * <pre>
-     * &lt;script>//&lt;![CDATA[
+     * &lt;script&gt;//&lt;![CDATA[
      * my &lt; script
-     * //]]>&lt;/script>
+     * //]]&gt;&lt;/script&gt;
      * </pre>
      */
     CDATA_IN_COMMENT;
@@ -193,7 +193,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
 
   /**
    * Set the masking mode.
-   * 
+   *
    * @param eMode
    *        The mode to use. MAy not be <code>null</code>.
    * @return this
@@ -322,7 +322,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
    * Set how the content of script elements should be emitted. This only affects
    * new built objects, and does not alter existing objects! The default mode is
    * {@link #DEFAULT_MODE}.
-   * 
+   *
    * @param eMode
    *        The new masking mode to set. May not be <code>null</code>.
    */

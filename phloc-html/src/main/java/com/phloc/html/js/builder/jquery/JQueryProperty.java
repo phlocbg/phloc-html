@@ -29,7 +29,7 @@ import com.phloc.html.js.builder.JSRef;
 
 /**
  * Wrapper around jQuery to allow for easy function calls
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -46,7 +46,7 @@ public final class JQueryProperty
 
   /**
    * Globally decide, whether to use "$" or "jQuery" to access jQuery field
-   * 
+   *
    * @param bUseDollar
    *        <code>true</code> to use "$", <code>false</code> to use "jQuery"
    */
@@ -76,7 +76,7 @@ public final class JQueryProperty
   }
 
   /**
-   * @return <code>$.browser<code>
+   * @return <code>$.browser</code>
    * @deprecated Deprecated since jQuery 1.3 Removed in jQuery 1.9
    */
   @Deprecated
@@ -161,7 +161,7 @@ public final class JQueryProperty
   // Internals
 
   /**
-   * @return <code>$.fn<code>
+   * @return <code>$.fn</code>
    */
   @Nonnull
   public static JSFieldRef fn ()

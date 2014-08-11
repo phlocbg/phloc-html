@@ -206,7 +206,8 @@ public enum EHTMLElement implements IHasElementName
 
   /**
    * @return <code>true</code> if this element may be self-closed (e.g. &lt;br
-   *         />), and <code>false</code> if not (e.g. &lt;link...>&lt;/link>)
+   *         /&gt;), and <code>false</code> if not (e.g.
+   *         &lt;link...&gt;&lt;/link&gt;)
    */
   public boolean mayBeSelfClosed ()
   {
@@ -215,8 +216,8 @@ public enum EHTMLElement implements IHasElementName
 
   /**
    * @return <code>true</code> if this element may not be self-closed (e.g.
-   *         &lt;link...>&lt;/link>), <code>false</code> if it may be
-   *         self-closed (e.g. &lt;br />)
+   *         &lt;link...&gt;&lt;/link&gt;), <code>false</code> if it may be
+   *         self-closed (e.g. &lt;br /&gt;)
    */
   public boolean mayNotBeSelfClosed ()
   {

@@ -40,13 +40,13 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents an HTML conditional comment for IE specific usage. E.g.
- * 
+ *
  * <pre>
- * &lt;!--[if IE 6]>
+ * &lt;!--[if IE 6]&gt;
  * Special instructions for IE 6 here
- * &lt;![endif]-->
+ * &lt;![endif]--&gt;
  * </pre>
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -139,7 +139,9 @@ public class HCConditionalCommentNode extends AbstractHCWrappingNode
    * This method wraps an arbitrary HC node in a conditional node. The passed
    * node is simply converted to an XML string and the content is put into the
    * conditional comment.
-   * 
+   *
+   * @param aConversionSettings
+   *        Conversion settings to be used.
    * @return The wrapped node. Never <code>null</code>.
    */
   @Nonnull

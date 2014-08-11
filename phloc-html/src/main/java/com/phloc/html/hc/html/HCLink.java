@@ -40,7 +40,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;link&gt; element
- * 
+ *
  * @author Philip Helger
  */
 @OutOfBandNode
@@ -66,7 +66,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
   }
 
   /**
-   * @return <code>true</code> if this &lt;link>-element is a CSS Stylesheet,
+   * @return <code>true</code> if this &lt;link&gt;-element is a CSS Stylesheet,
    *         <code>false</code> if not
    */
   public boolean isCSSLink ()
@@ -251,7 +251,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 
   /**
    * Shortcut to create a &lt;link&gt; element specific to CSS
-   * 
+   *
    * @param aCSSURL
    *        The CSS URL to be referenced
    * @return Never <code>null</code>.
@@ -264,7 +264,7 @@ public class HCLink extends AbstractHCElement <HCLink> implements IHCCSSNode
 
   /**
    * Shortcut to create a &lt;link&gt; element specific to CSS
-   * 
+   *
    * @param sCSSURL
    *        The CSS URL to be referenced
    * @return Never <code>null</code>.

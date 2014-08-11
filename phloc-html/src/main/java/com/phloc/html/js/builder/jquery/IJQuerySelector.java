@@ -25,7 +25,7 @@ import com.phloc.html.js.builder.IJSExpression;
 
 /**
  * A single jQuery selector
- * 
+ *
  * @author Philip Helger
  */
 public interface IJQuerySelector extends IJSCodeProvider
@@ -39,7 +39,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Get chained with the passed selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
    * @return <code>this<i>rhs</i></code>
@@ -50,7 +50,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Make a multiple selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
    * @return <code>this, rhs</code>
@@ -61,10 +61,10 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Make a child selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
-   * @return <code>this > rhs</code>
+   * @return <code>this &gt; rhs</code>
    */
   @Nonnull
   @CheckReturnValue
@@ -72,7 +72,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Make a descendant selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
    * @return <code>this rhs</code>
@@ -83,7 +83,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Make a next adjacent selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
    * @return <code>this + rhs</code>
@@ -94,7 +94,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Make a next siblings selector
-   * 
+   *
    * @param aRhsSelector
    *        Other selector
    * @return <code>this ~ rhs</code>
@@ -105,7 +105,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a animated selector
-   * 
+   *
    * @return <code>this<i>:animated</i></code>
    */
   @Nonnull
@@ -114,7 +114,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a button selector
-   * 
+   *
    * @return <code>this<i>:button</i></code>
    */
   @Nonnull
@@ -123,7 +123,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a checkbox selector
-   * 
+   *
    * @return <code>this<i>:checkbox</i></code>
    */
   @Nonnull
@@ -132,7 +132,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a checked selector
-   * 
+   *
    * @return <code>this<i>:checked</i></code>
    */
   @Nonnull
@@ -141,7 +141,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a disabled selector
-   * 
+   *
    * @return <code>this<i>:disabled</i></code>
    */
   @Nonnull
@@ -150,7 +150,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a empty selector
-   * 
+   *
    * @return <code>this<i>:empty</i></code>
    */
   @Nonnull
@@ -159,7 +159,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a enabled selector
-   * 
+   *
    * @return <code>this<i>:enabled</i></code>
    */
   @Nonnull
@@ -168,7 +168,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a even selector
-   * 
+   *
    * @return <code>this<i>:even</i></code>
    */
   @Nonnull
@@ -177,7 +177,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a file selector
-   * 
+   *
    * @return <code>this<i>:file</i></code>
    */
   @Nonnull
@@ -186,7 +186,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a first selector
-   * 
+   *
    * @return <code>this<i>:first</i></code>
    */
   @Nonnull
@@ -195,7 +195,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a first-child selector
-   * 
+   *
    * @return <code>this<i>:first-child</i></code>
    */
   @Nonnull
@@ -204,7 +204,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a first-of-type selector
-   * 
+   *
    * @return <code>this<i>:first-of-type</i></code>
    */
   @Nonnull
@@ -213,7 +213,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a focus selector
-   * 
+   *
    * @return <code>this<i>:focus</i></code>
    */
   @Nonnull
@@ -222,7 +222,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a header selector
-   * 
+   *
    * @return <code>this<i>:header</i></code>
    */
   @Nonnull
@@ -231,7 +231,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a hidden selector
-   * 
+   *
    * @return <code>this<i>:hidden</i></code>
    */
   @Nonnull
@@ -240,7 +240,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a image selector
-   * 
+   *
    * @return <code>this<i>:image</i></code>
    */
   @Nonnull
@@ -249,7 +249,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a input selector
-   * 
+   *
    * @return <code>this<i>:input</i></code>
    */
   @Nonnull
@@ -258,7 +258,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a last selector
-   * 
+   *
    * @return <code>this<i>:last</i></code>
    */
   @Nonnull
@@ -267,7 +267,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a last-child selector
-   * 
+   *
    * @return <code>this<i>:last-child</i></code>
    */
   @Nonnull
@@ -276,7 +276,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a last-of-type selector
-   * 
+   *
    * @return <code>this<i>:last-of-type</i></code>
    */
   @Nonnull
@@ -285,7 +285,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a odd selector
-   * 
+   *
    * @return <code>this<i>:odd</i></code>
    */
   @Nonnull
@@ -294,7 +294,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a only-child selector
-   * 
+   *
    * @return <code>this<i>:only-child</i></code>
    */
   @Nonnull
@@ -303,7 +303,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a only-of-type selector
-   * 
+   *
    * @return <code>this<i>:only-of-type</i></code>
    */
   @Nonnull
@@ -312,7 +312,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a parent selector
-   * 
+   *
    * @return <code>this<i>:parent</i></code>
    */
   @Nonnull
@@ -321,7 +321,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a password selector
-   * 
+   *
    * @return <code>this<i>:password</i></code>
    */
   @Nonnull
@@ -330,7 +330,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a radio selector
-   * 
+   *
    * @return <code>this<i>:radio</i></code>
    */
   @Nonnull
@@ -339,7 +339,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a reset selector
-   * 
+   *
    * @return <code>this<i>:reset</i></code>
    */
   @Nonnull
@@ -348,7 +348,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a root selector
-   * 
+   *
    * @return <code>this<i>:root</i></code>
    */
   @Nonnull
@@ -357,7 +357,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a selected selector
-   * 
+   *
    * @return <code>this<i>:selected</i></code>
    */
   @Nonnull
@@ -366,7 +366,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a submit selector
-   * 
+   *
    * @return <code>this<i>:submit</i></code>
    */
   @Nonnull
@@ -375,7 +375,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a target selector
-   * 
+   *
    * @return <code>this<i>:target</i></code>
    */
   @Nonnull
@@ -384,7 +384,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a text selector
-   * 
+   *
    * @return <code>this<i>:text</i></code>
    */
   @Nonnull
@@ -393,7 +393,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Chain a visible selector
-   * 
+   *
    * @return <code>this<i>:visible</i></code>
    */
   @Nonnull
@@ -402,7 +402,7 @@ public interface IJQuerySelector extends IJSCodeProvider
 
   /**
    * Create an invocation of this selector
-   * 
+   *
    * @return <code>$(selectorString)</code>
    */
   @Nonnull

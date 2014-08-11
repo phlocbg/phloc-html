@@ -34,7 +34,7 @@ import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
  * Represents an HTML &lt;col&gt; element
- * 
+ *
  * @author Philip Helger
  */
 public class HCCol extends AbstractHCElement <HCCol>
@@ -111,7 +111,7 @@ public class HCCol extends AbstractHCElement <HCCol>
   }
 
   /**
-   * @return A new "star" column (<code>&lt;col width="*" /></code>). Never
+   * @return A new "star" column (<code>&lt;col width="*" /&gt;</code>). Never
    *         <code>null</code>.
    */
   @Nonnull
@@ -122,7 +122,7 @@ public class HCCol extends AbstractHCElement <HCCol>
 
   /**
    * Create a new column with a certain percentage.
-   * 
+   *
    * @param nPerc
    *        The percentage to be used. Should ideally be between 0 and 100.
    * @return Never <code>null</code>.
@@ -135,7 +135,7 @@ public class HCCol extends AbstractHCElement <HCCol>
 
   /**
    * Create a new column with an arbitrary width definition.
-   * 
+   *
    * @param sWidth
    *        The width to be used. May be <code>null</code>.
    * @return Never <code>null</code>.
