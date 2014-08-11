@@ -28,8 +28,8 @@ import com.phloc.html.EHTMLElement;
  * <p>
  * It also provides methods for processing and analyzing a line.
  * </p>
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
  */
 final class Line
 {
@@ -93,7 +93,7 @@ final class Line
 
   /**
    * Skips spaces.
-   * 
+   *
    * @return <code>false</code> if end of line is reached
    */
   public boolean skipSpaces ()
@@ -105,7 +105,7 @@ final class Line
 
   /**
    * Reads chars from this line until any 'end' char is reached.
-   * 
+   *
    * @param aEndChars
    *        Delimiting character(s)
    * @return The read String or <code>null</code> if no 'end' char was reached.
@@ -169,7 +169,7 @@ final class Line
 
   /**
    * Counts the amount of 'ch' in this line.
-   * 
+   *
    * @param ch
    *        The char to count.
    * @return A value > 0 if this line only consists of 'ch' end spaces.
@@ -195,7 +195,7 @@ final class Line
 
   /**
    * Counts the amount of 'ch' at the start of this line ignoring spaces.
-   * 
+   *
    * @param ch
    *        The char to count.
    * @return Number of characters found.
@@ -218,7 +218,7 @@ final class Line
 
   /**
    * Gets this line's type.
-   * 
+   *
    * @param bExtendedMode
    *        Whether extended profile is enabled or not
    * @return The LineType.
@@ -303,7 +303,7 @@ final class Line
 
   /**
    * Reads an XML comment. Sets <code>xmlEndLine</code>.
-   * 
+   *
    * @param firstLine
    *        The Line to start reading from.
    * @param start
@@ -350,7 +350,7 @@ final class Line
   /**
    * Checks if this line contains an ID at it's end and removes it from the
    * line.
-   * 
+   *
    * @return The ID or <code>null</code> if no valid ID exists.
    */
   // FIXME ... hack
@@ -436,7 +436,7 @@ final class Line
 
   /**
    * Checks for a valid HTML block. Sets <code>xmlEndLine</code>.
-   * 
+   *
    * @return <code>EHTMLType.TAG</code> or <code>EHTMLType.COMMENT</code> if it
    *         is a valid block.
    */

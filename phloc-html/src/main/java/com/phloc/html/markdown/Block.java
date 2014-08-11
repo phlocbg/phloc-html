@@ -19,8 +19,8 @@ package com.phloc.html.markdown;
 
 /**
  * This class represents a block of lines.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
  */
 final class Block
 {
@@ -105,7 +105,7 @@ final class Block
 
   /**
    * Used for nested lists. Removes list markers and up to 4 leading spaces.
-   * 
+   *
    * @param bExtendedMode
    *        Whether extended profile is activated or not
    */
@@ -159,7 +159,7 @@ final class Block
 
   /**
    * Removes leading empty lines.
-   * 
+   *
    * @return <code>true</code> if an empty line was removed.
    */
   public boolean removeLeadingEmptyLines ()
@@ -191,7 +191,7 @@ final class Block
   /**
    * Splits this block's lines, creating a new child block having 'line' as it's
    * lineTail.
-   * 
+   *
    * @param line
    *        The line to split from.
    * @return The newly created Block.
@@ -222,7 +222,7 @@ final class Block
 
   /**
    * Removes the given line from this block.
-   * 
+   *
    * @param line
    *        Line to remove.
    */
@@ -241,7 +241,7 @@ final class Block
 
   /**
    * Appends the given line to this block.
-   * 
+   *
    * @param line
    *        Line to append.
    */

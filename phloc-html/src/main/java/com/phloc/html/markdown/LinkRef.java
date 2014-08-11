@@ -21,8 +21,8 @@ import javax.annotation.Nonnull;
 
 /**
  * A markdown link reference.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 final class LinkRef
 {
@@ -35,7 +35,7 @@ final class LinkRef
 
   /**
    * Constructor.
-   * 
+   *
    * @param sLink
    *        The link.
    * @param sTitle

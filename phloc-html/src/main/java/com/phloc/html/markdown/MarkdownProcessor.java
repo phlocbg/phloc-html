@@ -37,13 +37,13 @@ import com.phloc.commons.string.StringHelper;
  * <p>
  * Example usage:
  * </p>
- * 
+ *
  * <pre>
- * <code>String result = Processor.process("This is ***TXTMARK***");
+ * <code>String result = MarkdownProcessor.process("This is ***TXTMARK***");
  * </code>
  * </pre>
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 public class MarkdownProcessor
 {
@@ -61,7 +61,7 @@ public class MarkdownProcessor
 
   /**
    * Constructor.
-   * 
+   *
    * @param aConfig
    *        The configuration to use. May not be <code>null</code>.
    */
@@ -79,7 +79,7 @@ public class MarkdownProcessor
    * <p>
    * Takes care of markdown link references.
    * </p>
-   * 
+   *
    * @return A Block containing all lines.
    * @throws IOException
    *         If an IO error occurred.
@@ -239,7 +239,7 @@ public class MarkdownProcessor
 
   /**
    * Initializes a list block by separating it into list item blocks.
-   * 
+   *
    * @param aRoot
    *        The Block to process.
    */
@@ -263,7 +263,7 @@ public class MarkdownProcessor
 
   /**
    * Recursively process the given Block.
-   * 
+   *
    * @param aRoot
    *        The Block to process.
    * @param listMode
@@ -489,7 +489,7 @@ public class MarkdownProcessor
 
   /**
    * Does all the processing.
-   * 
+   *
    * @return The processing result.
    * @throws IOException
    *         If an IO error occurred.

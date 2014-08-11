@@ -26,8 +26,8 @@ import com.phloc.html.EHTMLElement;
 
 /**
  * HTML utility class.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 final class MarkdownHTML
 {

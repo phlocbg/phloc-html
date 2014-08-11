@@ -50,8 +50,8 @@ import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Emitter class responsible for generating HTML output.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
  */
 final class Emitter
 {
@@ -83,7 +83,7 @@ final class Emitter
 
   /**
    * Adds a LinkRef to this set of LinkRefs.
-   * 
+   *
    * @param key
    *        The key/id.
    * @param linkRef
@@ -96,7 +96,7 @@ final class Emitter
 
   /**
    * Transforms the given block recursively into HTML.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param aRoot
@@ -199,7 +199,7 @@ final class Emitter
 
   /**
    * Transforms lines into HTML.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param block
@@ -235,7 +235,7 @@ final class Emitter
 
   /**
    * Finds the position of the given Token in the given String.
-   * 
+   *
    * @param in
    *        The String to search on.
    * @param start
@@ -258,7 +258,7 @@ final class Emitter
 
   /**
    * Checks if there is a valid markdown link definition.
-   * 
+   *
    * @param out
    *        The StringBuilder containing the generated output.
    * @param in
@@ -395,7 +395,7 @@ final class Emitter
   /**
    * Check if there is a valid HTML tag here. This method also transforms auto
    * links and mailto auto links.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -542,7 +542,7 @@ final class Emitter
 
   /**
    * Check if this is a valid XML/HTML entity.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -598,7 +598,7 @@ final class Emitter
   /**
    * Recursively scans through the given line, taking care of any markdown
    * stuff.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param in
@@ -816,7 +816,7 @@ final class Emitter
 
   /**
    * Turns every whitespace character into a space character.
-   * 
+   *
    * @param c
    *        Character to check
    * @return 32 is c was a whitespace, c otherwise
@@ -828,7 +828,7 @@ final class Emitter
 
   /**
    * Check if there is any markdown Token.
-   * 
+   *
    * @param in
    *        Input String.
    * @param pos
@@ -934,7 +934,7 @@ final class Emitter
 
   /**
    * Writes a set of markdown lines into the StringBuilder.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param lines
@@ -966,7 +966,7 @@ final class Emitter
 
   /**
    * Writes a set of raw lines into the StringBuilder.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param lines
@@ -1063,7 +1063,7 @@ final class Emitter
 
   /**
    * Writes a code block into the StringBuilder.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param aLines
@@ -1104,7 +1104,7 @@ final class Emitter
 
   /**
    * interprets a plugin block into the StringBuilder.
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    * @param lines

@@ -27,8 +27,8 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 
 /**
  * Decorator interface.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
  */
 public interface IMarkdownDecorator
 {
@@ -37,11 +37,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;p>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -52,11 +52,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/p>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -64,11 +64,11 @@ public interface IMarkdownDecorator
 
   /**
    * Called when a blockquote is opened. Default implementation is:
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;blockquote>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -79,11 +79,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/blockquote>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -94,11 +94,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;pre>&lt;code>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -109,11 +109,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/code>&lt;/pre>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -124,11 +124,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;code>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -139,11 +139,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/code>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -157,12 +157,12 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code> out.append("&lt;h");
    * out.append(level);</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -174,13 +174,13 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code> out.append("&lt;/h");
    * out.append(level);
    * out.append(">\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -191,11 +191,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;strong>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -206,11 +206,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/strong>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -221,11 +221,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;s>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -236,11 +236,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/s>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -251,11 +251,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;em>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -266,11 +266,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/em>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -281,11 +281,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;sup>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -296,11 +296,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/sup>");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -311,11 +311,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;ol>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -326,11 +326,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/ol>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -341,11 +341,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;ul>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -356,11 +356,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/ul>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -374,11 +374,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;li");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -390,11 +390,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;/li>\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -405,11 +405,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;hr />\n");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -423,11 +423,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;a");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */
@@ -444,11 +444,11 @@ public interface IMarkdownDecorator
    * <p>
    * Default implementation is:
    * </p>
-   * 
+   *
    * <pre>
    * <code>out.append("&lt;img");</code>
    * </pre>
-   * 
+   *
    * @param out
    *        The StringBuilder to write to.
    */

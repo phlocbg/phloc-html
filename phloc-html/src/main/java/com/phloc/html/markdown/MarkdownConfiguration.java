@@ -31,9 +31,8 @@ import com.phloc.commons.collections.ContainerHelper;
 
 /**
  * Txtmark configuration.
- * 
- * @author René Jeschke <rene_jeschke@yahoo.de>
- * @since 0.7
+ *
+ * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt;
  */
 public class MarkdownConfiguration
 {
@@ -107,7 +106,7 @@ public class MarkdownConfiguration
 
   /**
    * Constructor.
-   * 
+   *
    * @param bSafeMode
    * @param aEncoding
    * @param aDecorator
@@ -182,7 +181,7 @@ public class MarkdownConfiguration
 
   /**
    * Creates a new Builder instance.
-   * 
+   *
    * @return A new Builder instance.
    */
   @Nonnull
@@ -193,8 +192,8 @@ public class MarkdownConfiguration
 
   /**
    * Configuration builder.
-   * 
-   * @author René Jeschke <rene_jeschke@yahoo.de>
+   *
+   * @author René Jeschke &lt;rene_jeschke@yahoo.de&gt
    * @since 0.7
    */
   public static class Builder
@@ -216,7 +215,7 @@ public class MarkdownConfiguration
 
     /**
      * Forces extened profile to be enabled by default.
-     * 
+     *
      * @return This builder.
      * @since 0.7
      */
@@ -229,7 +228,7 @@ public class MarkdownConfiguration
 
     /**
      * convertNewline2Br.
-     * 
+     *
      * @return This builder.
      */
     @Nonnull
@@ -241,7 +240,7 @@ public class MarkdownConfiguration
 
     /**
      * Sets the HTML safe mode flag. Default: <code>false</code>
-     * 
+     *
      * @param flag
      *        <code>true</code> to enable safe mode
      * @return This builder
@@ -257,7 +256,7 @@ public class MarkdownConfiguration
     /**
      * Sets the character encoding for txtmark. Default:
      * <code>&quot;UTF-8&quot;</code>
-     * 
+     *
      * @param aEncoding
      *        The encoding
      * @return This builder
@@ -278,7 +277,7 @@ public class MarkdownConfiguration
 
     /**
      * Sets the decorator for txtmark. Default: <code>DefaultDecorator()</code>
-     * 
+     *
      * @param aDecorator
      *        The decorator
      * @return This builder
@@ -294,7 +293,7 @@ public class MarkdownConfiguration
 
     /**
      * Sets the code block emitter. Default: <code>null</code>
-     * 
+     *
      * @param emitter
      *        The BlockEmitter
      * @return This builder
@@ -310,7 +309,7 @@ public class MarkdownConfiguration
 
     /**
      * Sets the emitter for special link spans ([[ ... ]]).
-     * 
+     *
      * @param emitter
      *        The emitter.
      * @return This builder.
@@ -325,7 +324,7 @@ public class MarkdownConfiguration
 
     /**
      * Sets the plugins.
-     * 
+     *
      * @param aPlugins
      *        The plugins.
      * @return This builder.
@@ -340,7 +339,7 @@ public class MarkdownConfiguration
 
     /**
      * Builds a configuration instance.
-     * 
+     *
      * @return a Configuration instance
      * @since 0.7
      */
