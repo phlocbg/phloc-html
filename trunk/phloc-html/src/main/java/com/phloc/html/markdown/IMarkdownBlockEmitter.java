@@ -27,14 +27,14 @@ import javax.annotation.Nonnull;
  * <pre>
  * <code>public void emitBlock(StringBuilder out, List&lt;String&gt; lines, String meta)
  * {
- *     out.append("&lt;pre>&lt;code>");
- *     for(final String s : lines)
+ *     out.append("&lt;pre&gt;&lt;code&gt;");
+ *     for (final String s : lines)
  *     {
- *         for(int i = 0; i < s.length(); i++)
+ *         for (int i = 0; i < s.length(); i++)
  *         {
- *             final char c = s.charAt(i);
- *             switch(c)
- *             {
+ *           final char c = s.charAt(i);
+ *           switch (c)
+ *           {
  *             case '&':
  *                 out.append("&amp;amp;");
  *                 break;
@@ -47,11 +47,11 @@ import javax.annotation.Nonnull;
  *             default:
  *                 out.append(c);
  *                 break;
- *             }
+ *           }
  *         }
  *         out.append('\n');
  *     }
- *     out.append("&lt;/code>&lt;/pre>\n");
+ *     out.append("&lt;/code&gt;&lt;/pre&gt;\n");
  * }
  * </code>
  * </pre>

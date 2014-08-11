@@ -38,7 +38,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Base interface for an HC element
- * 
+ *
  * @author Philip Helger
  * @param <THISTYPE>
  *        The implementation type
@@ -69,10 +69,10 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Get the HTML ID of this object.<br>
-   * Note: we cannot use <code>IHasID&lt;String></code> because the constraint
-   * of IHasID is, that the returned ID may not be <code>null</code> whereas
-   * here the HTML ID can be <code>null</code>!
-   * 
+   * Note: we cannot use <code>IHasID&lt;String&gt;</code> because the
+   * constraint of IHasID is, that the returned ID may not be <code>null</code>
+   * whereas here the HTML ID can be <code>null</code>!
+   *
    * @return The HTML ID of this object.
    */
   @Nullable
@@ -80,7 +80,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set the HTML ID of this object.
-   * 
+   *
    * @param sID
    *        The ID to use. Must conform to the HTML rules for an element ID.
    * @return this
@@ -91,7 +91,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a unique HTML ID for this object. Equal to
    * <code>setID (GlobalIDFactory.getNewStringID ())</code>
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -100,7 +100,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a new ID if none is present. This is a shortcut for
    * <code>if (!hasID())setUniqueID ();</code>
-   * 
+   *
    * @return this
    */
   @Nonnull
@@ -126,7 +126,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Get the event handler of the specified event.
-   * 
+   *
    * @param eJSEvent
    *        The event to query. May be <code>null</code>.
    * @return <code>null</code> if no such event handler is registered.
@@ -136,7 +136,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Check if any event handler is registered for the specified event.
-   * 
+   *
    * @param eJSEvent
    *        The event to be queried. May be <code>null</code>.
    * @return <code>true</code> of a non-<code>null</code> event is specified,
@@ -146,7 +146,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Add a JS event handler at the end.
-   * 
+   *
    * @param eJSEvent
    *        The event to use. May not be <code>null</code>.
    * @param aJSHandler
@@ -159,7 +159,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Add a JS event handler at the front.
-   * 
+   *
    * @param eJSEvent
    *        The event to use. May not be <code>null</code>.
    * @param aJSHandler
@@ -173,7 +173,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a JS event handler. All eventually present event handlers are
    * overwritten.
-   * 
+   *
    * @param eJSEvent
    *        The event to set. May not be <code>null</code>.
    * @param aJSHandler
@@ -187,7 +187,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Remove all event handler for the specified JS event.
-   * 
+   *
    * @param eJSEvent
    *        The JS event to remove the handler. May be <code>null</code>.
    * @return this
@@ -207,7 +207,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set the hidden state of this element
-   * 
+   *
    * @param bHidden
    *        <code>true</code> if it is hidden, <code>false</code> otherwise
    * @return this
@@ -226,7 +226,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set the tab index of this object. This is a common element in HTML5 only.
    * The default value is {@link #DEFAULT_TABINDEX}
-   * 
+   *
    * @param nTabIndex
    *        The tab-index of this object. The semantics of negative values
    *        depends on the browser! In HTML5 negative values are allowed but
@@ -250,7 +250,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set the draggable state of this element
-   * 
+   *
    * @param eDraggable
    *        Value to set. May be <code>null</code>.
    * @return this
@@ -266,7 +266,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set the drop zone value of this element.
-   * 
+   *
    * @param eDropZone
    *        Value to set. May be <code>null</code>.
    * @return this
@@ -282,7 +282,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Change the content editable state
-   * 
+   *
    * @param eContentEditable
    *        New value
    * @return this
@@ -291,17 +291,17 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   THISTYPE setContentEditable (@Nullable EHCContentEditable eContentEditable);
 
   /**
-   * @return The ID of the &lt;menu> element that should be used as the context
-   *         menu. May be <code>null</code>.
+   * @return The ID of the &lt;menu&gt; element that should be used as the
+   *         context menu. May be <code>null</code>.
    */
   @Nullable
   String getContextMenu ();
 
   /**
-   * Set the ID of the &lt;menu> element that should add as a context menu
-   * 
+   * Set the ID of the &lt;menu&gt; element that should add as a context menu
+   *
    * @param sContextMenu
-   *        The ID of the &lt;menu> element
+   *        The ID of the &lt;menu&gt; element
    * @return this
    */
   @Nonnull
@@ -321,7 +321,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set the role attribute of this element.
-   * 
+   *
    * @param eRole
    *        The role to set. May be <code>null</code>. According to the specs,
    *        abstract roles should not be used!
@@ -343,7 +343,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Check if a certain custom attribute is contained
-   * 
+   *
    * @param sName
    *        The name of the custom attribute to check
    * @return <code>true</code> if such a custom attribute is contained.
@@ -352,7 +352,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Get the value of a certain custom attribute
-   * 
+   *
    * @param sName
    *        The name of the custom attribute to retrieve the value from
    * @return <code>null</code> if no such custom attribute is contained.
@@ -369,7 +369,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set a custom attribute that is serialized as is.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -382,7 +382,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set a custom attribute that is serialized as is.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -395,7 +395,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Set a custom attribute that is serialized as is.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -409,7 +409,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
 
   /**
    * Remove the custom attribute with the specified name
-   * 
+   *
    * @param sName
    *        The name of the custom attribute to be removed
    * @return this
@@ -425,7 +425,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Check if a certain data attribute is contained. Shortcut for
    * <code>containsCustomAttr ("data-"+sName)</code>.
-   * 
+   *
    * @param sName
    *        The name of the data attribute to check
    * @return <code>true</code> if such a data attribute is contained.
@@ -435,7 +435,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Get the value of a certain data attribute. Shortcut for
    * <code>getCustomAttrValue ("data-"+sName)</code>.
-   * 
+   *
    * @param sName
    *        The name of the data attribute to retrieve the value from
    * @return <code>null</code> if no such data attribute is contained.
@@ -453,7 +453,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a data attribute that is serialized as is. Shortcut for
    * <code>setCustomAttr ("data-"+sName, nValue)</code>.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -467,7 +467,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a data attribute that is serialized as is. Shortcut for
    * <code>setCustomAttr ("data-"+sName, nValue)</code>.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -481,7 +481,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Set a data attribute that is serialized as is. Shortcut for
    * <code>setCustomAttr ("data-"+sName, sValue)</code>.
-   * 
+   *
    * @param sName
    *        The name of the attribute. If it is <code>null</code> nothing
    *        happens
@@ -496,7 +496,7 @@ public interface IHCElement <THISTYPE extends IHCElement <THISTYPE>> extends IHC
   /**
    * Remove the data attribute with the specified name. Shortcut for
    * <code>removeCustomAttr ("data-"+sName)</code>.
-   * 
+   *
    * @param sName
    *        The name of the data attribute to be removed
    * @return this

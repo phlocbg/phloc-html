@@ -25,7 +25,7 @@ import com.phloc.json2.IJson;
 
 /**
  * A JS expression.
- * 
+ *
  * @author Philip Helger
  */
 public interface IJSExpression extends IJSGeneratable
@@ -85,12 +85,16 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression typeof ();
 
   /**
+   * @param aType
+   *        The type to compare against
    * @return "typeof [this] === typename" from "[this]"
    */
   @Nonnull
   IJSExpression isTypeof (@Nonnull AbstractJSType aType);
 
   /**
+   * @param aType
+   *        The type to compare against
    * @return "typeof [this] !== typename" from "[this]"
    */
   @Nonnull
@@ -111,132 +115,176 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression isNotUndefined ();
 
   /**
+   * @param cValue
+   *        constant char to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (char cValue);
 
   /**
+   * @param dValue
+   *        constant value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (double dValue);
 
   /**
+   * @param fValue
+   *        constant value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (float fValue);
 
   /**
+   * @param nValue
+   *        constant value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (int nValue);
 
   /**
+   * @param nValue
+   *        constant value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (long nValue);
 
   /**
+   * @param sValue
+   *        constant String value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (@Nonnull String sValue);
 
   /**
+   * @param aExpr
+   *        value to add
    * @return "[this]+[right]"
    */
   @Nonnull
   IJSExpression plus (@Nonnull IJSExpression aExpr);
 
   /**
+   * @param dValue
+   *        constant value to subtract
    * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (double dValue);
 
   /**
+   * @param fValue
+   *        constant value to subtract
    * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (float fValue);
 
   /**
+   * @param nValue
+   *        constant value to subtract
    * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (int nValue);
 
   /**
+   * @param nValue
+   *        constant value to subtract
    * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (long nValue);
 
   /**
+   * @param aExpr
+   *        value to subtract
    * @return "[this]-[right]"
    */
   @Nonnull
   IJSExpression minus (@Nonnull IJSExpression aExpr);
 
   /**
+   * @param dValue
+   *        constant value to multiply with
    * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (double dValue);
 
   /**
+   * @param fValue
+   *        constant value to multiply with
    * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (float fValue);
 
   /**
+   * @param nValue
+   *        constant value to multiply with
    * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (int nValue);
 
   /**
+   * @param nValue
+   *        constant value to multiply with
    * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (long nValue);
 
   /**
+   * @param aExpr
+   *        value to multiply with
    * @return "[this]*[right]"
    */
   @Nonnull
   IJSExpression mul (@Nonnull IJSExpression aExpr);
 
   /**
+   * @param dValue
+   *        constant value to divide through
    * @return "[this]/[right]"
    */
   @Nonnull
   IJSExpression div (double dValue);
 
   /**
+   * @param fValue
+   *        constant value to divide through
    * @return "[this]/[right]"
    */
   @Nonnull
   IJSExpression div (float fValue);
 
   /**
+   * @param nValue
+   *        constant value to divide through
    * @return "[this]/[right]"
    */
   @Nonnull
   IJSExpression div (int nValue);
 
   /**
+   * @param nValue
+   *        constant value to divide through
    * @return "[this]/[right]"
    */
   @Nonnull
   IJSExpression div (long nValue);
 
   /**
+   * @param aExpr
+   *        value to divide through
    * @return "[this]/[right]"
    */
   @Nonnull
@@ -249,49 +297,81 @@ public interface IJSExpression extends IJSGeneratable
   IJSExpression mod (long nValue);
 
   /**
+   * @param aExpr
+   *        value to modulo against
    * @return "[this]%[right]"
    */
   @Nonnull
   IJSExpression mod (@Nonnull IJSExpression aExpr);
 
+  /**
+   * @param nValue
+   *        constant value to shift left
+   * @return "[this]&lt;&lt;[right]"
+   */
   @Nonnull
   IJSExpression shl (int nValue);
 
+  /**
+   * @param nValue
+   *        constant value to shift left
+   * @return "[this]&lt;&lt;[right]"
+   */
   @Nonnull
   IJSExpression shl (long nValue);
 
   /**
+   * @param aExpr
+   *        value to shift left
    * @return "[this]&lt;&lt;[right]"
    */
   @Nonnull
   IJSExpression shl (@Nonnull IJSExpression aExpr);
 
+  /**
+   * @param nValue
+   *        constant value to shift right
+   * @return "[this]&gt;&gt;[right]"
+   */
   @Nonnull
   IJSExpression shr (int nValue);
 
+  /**
+   * @param nValue
+   *        constant value to shift right
+   * @return "[this]&gt;&gt;[right]"
+   */
   @Nonnull
   IJSExpression shr (long nValue);
 
   /**
-   * @return "[this]>>[right]"
+   * @param aExpr
+   *        value to shift right
+   * @return "[this]&gt;&gt;[right]"
    */
   @Nonnull
   IJSExpression shr (@Nonnull IJSExpression aExpr);
 
   /**
-   * @return "[this]>>>[right]"
+   * @param nValue
+   *        constant value to shift right with zero padding
+   * @return "[this]&gt;&gt;&gt;[right]"
    */
   @Nonnull
   IJSExpression shrz (int nValue);
 
   /**
-   * @return "[this]>>>[right]"
+   * @param nValue
+   *        constant value to shift right with zero padding
+   * @return "[this]&gt;&gt;&gt;[right]"
    */
   @Nonnull
   IJSExpression shrz (long nValue);
 
   /**
-   * @return "[this]>>>[right]"
+   * @param aExpr
+   *        value to shift right with zero padding
+   * @return "[this]&gt;&gt;&gt;[right]"
    */
   @Nonnull
   IJSExpression shrz (@Nonnull IJSExpression aExpr);

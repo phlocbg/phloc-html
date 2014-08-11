@@ -24,9 +24,10 @@ import com.phloc.html.hc.api.EHCInputType;
 
 /**
  * Base interface for controls base on &lt;input&gt; area.
- * 
+ *
  * @author Philip Helger
  * @param <IMPLTYPE>
+ *        Implementation type
  */
 public interface IHCInput <IMPLTYPE extends IHCInput <IMPLTYPE>> extends IHCControl <IMPLTYPE>
 {

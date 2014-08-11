@@ -30,7 +30,7 @@ import com.phloc.html.hc.impl.AbstractHCInput;
 
 /**
  * Base class for an HTML &lt;input&gt; element to be used as an edit
- * 
+ *
  * @author Philip Helger
  * @param <THISTYPE>
  *        The implementing type
@@ -61,9 +61,9 @@ public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>
 
   /**
    * Set the maximum number of characters to be entered.
-   * 
+   *
    * @param nMaxLength
-   *        The max length. Should be > 0.
+   *        The max length. Should be &gt; 0.
    * @return this
    */
   @Nonnull
@@ -85,7 +85,7 @@ public abstract class AbstractHCEdit <THISTYPE extends AbstractHCEdit <THISTYPE>
    * Sets the visible size of the edit. Should not be necessary in most cases,
    * as styling via CSS is the preferred way. If you want to limit the number of
    * available characters use {@link #setMaxLength(int)} instead.
-   * 
+   *
    * @param nSize
    *        The width of the edit in characters.
    * @return this

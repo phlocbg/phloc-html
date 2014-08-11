@@ -37,7 +37,7 @@ import com.phloc.html.request.IHCRequestFieldBoolean;
 
 /**
  * Represents an HTML &lt;input&gt; element with type "checkbox"
- * 
+ *
  * @author Philip Helger, Boris Gregorcic
  */
 public class HCCheckBox extends AbstractHCInput <HCCheckBox>
@@ -68,7 +68,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Constructor
-   * 
+   *
    * @param sName
    *        The name of this check-box (used as field name)
    */
@@ -80,7 +80,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Constructor
-   * 
+   *
    * @param sName
    *        The name of this check-box (used as field name)
    * @param bChecked
@@ -94,7 +94,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Constructor
-   * 
+   *
    * @param sName
    *        The name of this check-box (used as field name)
    * @param bChecked
@@ -110,7 +110,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Constructor, where the passed value decides upon the initial check state
-   * 
+   *
    * @param aRF
    *        The request field
    * @param sValue
@@ -123,7 +123,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Constructor
-   * 
+   *
    * @param aRF
    *        The request field
    */
@@ -143,12 +143,13 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Sets the passed field value
-   * 
+   *
    * @param sValue
+   *        Value to use.
    * @return This object for chaining
    */
   @Nonnull
-  public final HCCheckBox setValue (final String sValue)
+  public final HCCheckBox setValue (@Nullable final String sValue)
   {
     m_sValue = sValue;
     return this;
@@ -164,8 +165,9 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Set the checked state according to the passed value
-   * 
+   *
    * @param bChecked
+   *        new checked state
    * @return This object for chaining
    */
   @Nonnull
@@ -186,8 +188,10 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
   /**
    * Sets whether or not hidden fields will be emitted according to the passed
    * value
-   * 
+   *
    * @param bEmitHiddenField
+   *        <code>true</code> to emit the hidden field, <code>false</code> to
+   *        avoid.
    * @return This object for chaining
    */
   @Nonnull
@@ -199,7 +203,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Get the hidden field name for this checkbox.
-   * 
+   *
    * @return <code>null</code> if no field name ({@link #getName()}) is present
    *         or a non-<code>null</code> and non-empty string.
    * @see #getHiddenFieldName(String)
@@ -253,7 +257,7 @@ public class HCCheckBox extends AbstractHCInput <HCCheckBox>
 
   /**
    * Get the name of the automatic hidden field associated with a check-box.
-   * 
+   *
    * @param sFieldName
    *        The name of the check-box.
    * @return The name of the hidden field associated with the given check-box

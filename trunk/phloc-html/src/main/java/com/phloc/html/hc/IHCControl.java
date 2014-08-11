@@ -23,9 +23,10 @@ import javax.annotation.Nullable;
 /**
  * Base interface for controls like edit, checkbox, radio button, select or text
  * area.
- * 
+ *
  * @author Philip Helger
  * @param <THISTYPE>
+ *        Implementation type
  */
 public interface IHCControl <THISTYPE extends IHCControl <THISTYPE>> extends IHCHasFocus <THISTYPE>, IHCCanBeDisabled <THISTYPE>
 {

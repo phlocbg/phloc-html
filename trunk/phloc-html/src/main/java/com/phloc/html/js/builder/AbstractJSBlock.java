@@ -73,6 +73,10 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Removes a declaration from this package.
+   *
+   * @param sName
+   *        Name to remove
+   * @return Never <code>null</code>.
    */
   @Nonnull
   public EChange removeByName (final String sName)
@@ -94,6 +98,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   /**
    * Gets a reference to the already created {@link JSDefinedClass}.
    *
+   * @param sName
+   *        Name to search
    * @return <code>null</code> If the object is not yet created.
    */
   @Nullable
@@ -105,6 +111,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   /**
    * Checks if a given name is already defined as a class/interface
    *
+   * @param sName
+   *        Name to search
    * @return <code>true</code> if the passed variable is contained
    */
   public boolean isDeclared (@Nullable final String sName)
@@ -197,6 +205,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * example if the value is 0, newly created instructions will be inserted at
    * the very beginning of the block.
    *
+   * @return The current position
    * @see #pos(int)
    */
   @Nonnegative
@@ -208,6 +217,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   /**
    * Sets the current position.
    *
+   * @param nNewPos
+   *        New position to use
    * @return the old value of the current position.
    * @throws IllegalArgumentException
    *         if the new position value is illegal.
@@ -550,6 +561,12 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Creates a static invocation statement.
+   *
+   * @param aType
+   *        Type to use
+   * @param sMethod
+   *        Method name to invoke
+   * @return Never <code>null</code>.
    */
   @Nonnull
   public JSInvocation staticInvoke (@Nullable final AbstractJSClass aType, @Nonnull final String sMethod)
@@ -560,6 +577,12 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   /**
    * Creates a static invocation statement.
+   *
+   * @param aType
+   *        Type to use
+   * @param aMethod
+   *        Method to invoke
+   * @return Never <code>null</code>.
    */
   @Nonnull
   public JSInvocation staticInvoke (@Nullable final AbstractJSClass aType, @Nonnull final JSMethod aMethod)
@@ -902,6 +925,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   /**
    * Create a While statement and add it to this block
    *
+   * @param aTest
+   *        The while condition to use
    * @return Newly generated While statement
    */
   @Nonnull

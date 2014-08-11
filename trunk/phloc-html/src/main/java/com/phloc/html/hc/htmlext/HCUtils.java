@@ -203,7 +203,7 @@ public final class HCUtils
    * string! Empty lines are preserved except for the last line. E.g.
    * <code>Hello\nworld</code> results in 2 &lt;div&gt;s:
    * &lt;div&gt;Hello&lt;/div&gt; and &lt;div&gt;world&lt;/div&gt;
-   * 
+   *
    * @param sText
    *        The text to be split. May be <code>null</code>.
    * @return A non-<code>null</code> but maybe empty list. The list is empty, if
@@ -272,7 +272,9 @@ public final class HCUtils
   /**
    * Helper method to enforce correct element nesting. See
    * http://www.w3.org/TR/xhtml1#prohibitions
-   * 
+   *
+   * @param aOwner
+   *        Owner to start searching
    * @param aElements
    *        The tag names to search. May not be <code>null</code>.
    * @return The first element with the passed tag name on any level, or
@@ -317,7 +319,9 @@ public final class HCUtils
   /**
    * Helper method to enforce correct element nesting. See
    * http://www.w3.org/TR/xhtml1#prohibitions
-   * 
+   *
+   * @param aOwner
+   *        Owner where to start searching
    * @param aElements
    *        The tag names to search. May not be <code>null</code>.
    * @return All elements with the passed element name on any level. Never
@@ -357,7 +361,9 @@ public final class HCUtils
   /**
    * Helper method to enforce correct element nesting. See
    * http://www.w3.org/TR/xhtml1#prohibitions
-   * 
+   *
+   * @param aOwner
+   *        Owner where to start searching
    * @param aElements
    *        The tag names to search. May not be <code>null</code>.
    * @return The first element with a different than the passed tag name on any
@@ -460,7 +466,7 @@ public final class HCUtils
    * Recursively iterate the node and all child nodes of the passed node. The
    * difference to {@link #iterateChildren(IHCHasChildren, IHCIteratorCallback)}
    * is, that the callback is also invoked on the passed node.
-   * 
+   *
    * @param aNode
    *        The node to be iterated.
    * @param aCallback
@@ -478,7 +484,7 @@ public final class HCUtils
 
   /**
    * Recursively iterate all child nodes of the passed node.
-   * 
+   *
    * @param aNode
    *        The node who's children should be iterated.
    * @param aCallback
@@ -496,7 +502,7 @@ public final class HCUtils
    * Find the first HTML child element within a start element. This check
    * considers both lower- and upper-case element names. Mixed case is not
    * supported!
-   * 
+   *
    * @param aElement
    *        The element to search in
    * @param eHTMLElement
@@ -519,7 +525,7 @@ public final class HCUtils
   /**
    * Get a list of all HTML child elements of the given element. This methods
    * handles lower- and upper-cased elements.
-   * 
+   *
    * @param aElement
    *        The element to search in
    * @param eHTMLElement
@@ -566,7 +572,7 @@ public final class HCUtils
    * flattens something if the passed node is an {@link HCNodeList} and all
    * node-lists directly contained in the other node lists. Node-lists that are
    * hidden deep inside the tree are not considered!
-   * 
+   *
    * @param aNode
    *        The source node. May be <code>null</code>.
    * @return A non-<code>null</code> flattened list.
@@ -585,7 +591,7 @@ public final class HCUtils
    * flattens something if the passed node is an {@link HCNodeList} and all
    * node-lists directly contained in the other node lists. Node-lists that are
    * hidden deep inside the tree are not considered!
-   * 
+   *
    * @param aNodes
    *        The source nodes. May be <code>null</code> or empty.
    * @return A non-<code>null</code> flattened list.
@@ -604,7 +610,7 @@ public final class HCUtils
   /**
    * Resolve all wrappings via {@link IHCWrappingNode} of the passed node. This
    * is usually either an HCOutOfBandNode or a HCConditionalCommentNode.
-   * 
+   *
    * @param aHCNode
    *        The node to be unwrapped. May be <code>null</code>.
    * @return The unwrapped node. May be the same as the parameter, if the node
@@ -623,7 +629,7 @@ public final class HCUtils
   /**
    * Check if the passed node is a wrapped node by checking if it implements
    * {@link IHCWrappingNode}.
-   * 
+   *
    * @param aHCNode
    *        The node to be checked. May be <code>null</code>.
    * @return <code>true</code> if the node is not <code>null</code> and if it
@@ -637,7 +643,7 @@ public final class HCUtils
   /**
    * Find the first instance of {@link IHCControl} that is either the passed
    * element or a child of the passed element.
-   * 
+   *
    * @param aNode
    *        The source node to start searching. May be <code>null</code>.
    * @return <code>null</code> if no {@link IHCControl} can be found below the
@@ -668,7 +674,7 @@ public final class HCUtils
   /**
    * Recursively determine all {@link IHCControl} elements from and incl. the
    * passed node
-   * 
+   *
    * @param aNode
    *        The start node. May be <code>null</code>.
    * @param aTargetList
@@ -695,7 +701,7 @@ public final class HCUtils
   /**
    * Recursively determine all {@link IHCControl} elements from and incl. the
    * passed node
-   * 
+   *
    * @param aNode
    *        The start node. May be <code>null</code>.
    * @return The filled list with all controls. Never <code>null</code> but
@@ -713,7 +719,7 @@ public final class HCUtils
   /**
    * Recursively determine all {@link IHCControl} elements from and incl. the
    * passed nodes
-   * 
+   *
    * @param aNodes
    *        The start nodes. May be <code>null</code>.
    * @param aTargetList
@@ -732,7 +738,7 @@ public final class HCUtils
   /**
    * Recursively determine all {@link IHCControl} elements from and incl. the
    * passed nodes
-   * 
+   *
    * @param aNodes
    *        The start nodes. May be <code>null</code>.
    * @return The filled list with all controls. Never <code>null</code> but
@@ -749,7 +755,7 @@ public final class HCUtils
 
   /**
    * Customize the passed base node and all child nodes recursively.
-   * 
+   *
    * @param aBaseNode
    *        Base node to start customizing (incl.). May not be <code>null</code>
    *        .

@@ -24,8 +24,8 @@ import com.phloc.html.annotations.SinceHTML5;
 import com.phloc.html.hc.impl.AbstractHCElement;
 
 /**
- * Base class for &lt;source> and &lt;track
- * 
+ * Base class for &lt;source&gt; and &lt;track
+ *
  * @author Philip Helger
  * @param <THISTYPE>
  *        Implementation type
