@@ -23,14 +23,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.Nonempty;
-import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.api.IHCHasHTMLAttributeValue;
 
 /**
  * Represents the value of the "target" attribute of an HTML &lt;a&gt; element
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -50,9 +50,7 @@ public class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
 
   public HCA_Target (@Nonnull @Nonempty final String sName)
   {
-    if (StringHelper.hasNoText (sName))
-      throw new IllegalArgumentException ("Name may not be empty!");
-    m_sName = sName;
+    m_sName = ValueEnforcer.notEmpty (sName, "Name");
   }
 
   @Nonnull
@@ -78,7 +76,7 @@ public class HCA_Target implements IHCHasHTMLAttributeValue, Serializable
   /**
    * Try to find one of the default targets by name. The name comparison is
    * performed case insensitive.
-   * 
+   *
    * @param sName
    *        The name to check. May not be <code>null</code>.
    * @param aDefault

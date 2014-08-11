@@ -109,6 +109,7 @@ public abstract class AbstractHCControl <THISTYPE extends AbstractHCControl <THI
       aElement.setAttribute (CHTMLAttributes.DISABLED, CHTMLAttributeValues.DISABLED);
     if (m_bReadOnly)
       aElement.setAttribute (CHTMLAttributes.READONLY, CHTMLAttributeValues.READONLY);
+    // focus handling is performed in HCDefaultCustomizer!
   }
 
   @Override

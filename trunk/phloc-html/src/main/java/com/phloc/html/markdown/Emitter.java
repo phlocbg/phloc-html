@@ -46,7 +46,6 @@ import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.hc.impl.HCCommentNode;
 import com.phloc.html.hc.impl.HCDOMWrapper;
 import com.phloc.html.hc.impl.HCEntityNode;
-import com.phloc.html.hc.impl.HCTextNode;
 
 /**
  * Emitter class responsible for generating HTML output.
@@ -716,7 +715,7 @@ final class Emitter
               while (in.charAt (b - 1) == ' ')
                 b--;
               final HCCode aCode = m_aConfig.getDecorator ().openCodeSpan (out);
-              aCode.addChild (HCTextNode.createOnDemand (in, a, b));
+              aCode.addChild (in.substring (a, b));
               m_aConfig.getDecorator ().closeCodeSpan (out);
             }
           }

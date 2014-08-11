@@ -21,6 +21,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.microdom.IMicroText;
 import com.phloc.commons.microdom.impl.MicroText;
 import com.phloc.commons.string.StringHelper;
@@ -30,7 +31,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
 
 /**
  * Represents a single text node as HC node.
- * 
+ *
  * @author Philip Helger
  */
 public class HCTextNode extends AbstractHCNode
@@ -48,6 +49,16 @@ public class HCTextNode extends AbstractHCNode
     setText (sText);
   }
 
+  public HCTextNode (@Nonnull final char [] aChars)
+  {
+    setText (aChars);
+  }
+
+  public HCTextNode (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
+  {
+    setText (aChars, nOfs, nLen);
+  }
+
   public HCTextNode (final char cChar)
   {
     this (Character.toString (cChar));
@@ -63,12 +74,56 @@ public class HCTextNode extends AbstractHCNode
     this (Long.toString (nText));
   }
 
+  /**
+   * @return The unescaped text. Never <code>null</code>.
+   */
+  @Nonnull
+  public String getText ()
+  {
+    return m_sText;
+  }
+
+  @Nonnull
+  public HCTextNode setText (@Nullable final String sText)
+  {
+    m_sText = StringHelper.getNotNull (sText);
+    return this;
+  }
+
+  @Nonnull
+  public HCTextNode setText (@Nonnull final char [] aChars)
+  {
+    ValueEnforcer.notNull (aChars, "Chars");
+    return setText (new String (aChars));
+  }
+
+  @Nonnull
+  public HCTextNode setText (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
+  {
+    ValueEnforcer.notNull (aChars, "Chars");
+    return setText (new String (aChars, nOfs, nLen));
+  }
+
   @Nonnull
   public HCTextNode prependText (@Nullable final String sText)
   {
     if (StringHelper.hasText (sText))
       m_sText = sText + m_sText;
     return this;
+  }
+
+  @Nonnull
+  public HCTextNode prependText (@Nonnull final char [] aChars)
+  {
+    ValueEnforcer.notNull (aChars, "Chars");
+    return prependText (new String (aChars));
+  }
+
+  @Nonnull
+  public HCTextNode prependText (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
+  {
+    ValueEnforcer.notNull (aChars, "Chars");
+    return prependText (new String (aChars, nOfs, nLen));
   }
 
   @Nonnull
@@ -80,23 +135,24 @@ public class HCTextNode extends AbstractHCNode
   }
 
   @Nonnull
-  public HCTextNode appendText (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
+  public HCTextNode appendText (@Nonnull final char [] aChars)
   {
-    return appendText (new String (aChars, nOfs, nLen));
+    ValueEnforcer.notNull (aChars, "Chars");
+    return appendText (new String (aChars));
   }
 
   @Nonnull
-  public HCTextNode setText (@Nullable final String sText)
+  public HCTextNode appendText (@Nonnull final char [] aChars, @Nonnegative final int nOfs, @Nonnegative final int nLen)
   {
-    m_sText = StringHelper.getNotNull (sText);
-    return this;
+    ValueEnforcer.notNull (aChars, "Chars");
+    return appendText (new String (aChars, nOfs, nLen));
   }
 
   /**
    * Enable or disable XML escaping in the final document. By default all text
    * is escaped ({@link MicroText#DEFAULT_ESCAPE}), but for certain special
    * cases (like script elements in HTML), XML escaping must be disabled.
-   * 
+   *
    * @param bEscape
    *        <code>true</code> to enable escaping (default), <code>false</code>
    *        to disable it
@@ -116,15 +172,6 @@ public class HCTextNode extends AbstractHCNode
   public boolean isEscape ()
   {
     return m_bEscape;
-  }
-
-  /**
-   * @return The unescaped text. Never <code>null</code>.
-   */
-  @Nonnull
-  public String getText ()
-  {
-    return m_sText;
   }
 
   @Override
@@ -154,11 +201,5 @@ public class HCTextNode extends AbstractHCNode
   public static HCTextNode createOnDemand (@Nullable final String sText)
   {
     return sText == null ? null : new HCTextNode (sText);
-  }
-
-  @Nullable
-  public static HCTextNode createOnDemand (@Nullable final String sText, final int nBegin, final int nEnd)
-  {
-    return sText == null ? null : new HCTextNode (sText.substring (nBegin, nEnd));
   }
 }

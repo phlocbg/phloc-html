@@ -21,6 +21,12 @@ import javax.annotation.Nonnull;
 
 import com.phloc.html.EHTMLElement;
 
+/**
+ * Fallback implementation of {@link AbstractHCElementWithChildren} for
+ * {@link EHTMLElement} items that are not explicitly wrapped in its own class.
+ *
+ * @author Philip Helger
+ */
 public class HCGenericElementWithChildren extends AbstractHCElementWithChildren <HCGenericElementWithChildren>
 {
   public HCGenericElementWithChildren (@Nonnull final EHTMLElement eElement)
