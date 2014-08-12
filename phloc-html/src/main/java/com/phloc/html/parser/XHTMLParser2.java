@@ -116,7 +116,7 @@ public final class XHTMLParser2
    */
   public void setAdditionalSAXReaderSettings (@Nullable final ISAXReaderSettings aAdditionalSaxReaderSettings)
   {
-    m_aAdditionalSAXReaderSettings = new SAXReaderSettings (aAdditionalSaxReaderSettings);
+    m_aAdditionalSAXReaderSettings = SAXReaderSettings.createCloneOnDemand (aAdditionalSaxReaderSettings);
   }
 
   /**
