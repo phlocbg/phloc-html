@@ -31,7 +31,7 @@ import com.phloc.html.js.IJSCodeProvider;
 
 /**
  * Helper class to get the textual representation of JSDOM objects
- * 
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -89,7 +89,7 @@ public final class JSPrinter
    * This is a wrapper around {@link #setIndentAndAlign(boolean)},
    * {@link #setGenerateTypeNames(boolean)} and
    * {@link #setGenerateComments(boolean)}
-   * 
+   *
    * @param bMinimumCodeSize
    *        true for minimum code size
    */
@@ -150,17 +150,31 @@ public final class JSPrinter
     }
   }
 
+  private static void _writePackage (@Nonnull final JSPackage aPackage, @Nonnull final JSFormatter aFormatter)
+  {
+    // for all declarations in the current package
+    for (final IJSCodeProvider aObj : aPackage.members ())
+      if (aObj instanceof IJSDeclaration)
+        aFormatter.decl ((IJSDeclaration) aObj);
+      else
+        if (aObj instanceof IJSStatement)
+          aFormatter.stmt ((IJSStatement) aObj);
+        else
+          if (aObj instanceof JSPackage)
+          {
+            // Nested package
+            _writePackage ((JSPackage) aObj, aFormatter);
+          }
+          else
+            aFormatter.plain (aObj.getJSCode ());
+  }
+
   public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull @WillClose final Writer aWriter)
   {
     final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
-      // for all declarations in the current package
-      for (final IJSCodeProvider aObj : aPackage.members ())
-        if (aObj instanceof IJSDeclaration)
-          aFormatter.decl ((IJSDeclaration) aObj);
-        else
-          aFormatter.stmt ((IJSStatement) aObj);
+      _writePackage (aPackage, aFormatter);
     }
     finally
     {
