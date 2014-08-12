@@ -43,6 +43,7 @@ import com.phloc.commons.math.MathHelper;
 import com.phloc.commons.state.EChange;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
+import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.json.IJSON;
 import com.phloc.json2.IJson;
 
@@ -1126,14 +1127,21 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
         add (aNestedJSCode);
     }
     else
-    {
-      if (GlobalDebug.isDebugMode ())
-        if (!(aJSCode instanceof IJSDeclaration) && !(aJSCode instanceof IJSStatement))
-          s_aLogger.warn ("Adding untyped IJSCodeProvider of class " + aJSCode.getClass ().getName () + " to JSBlock");
+      if (aJSCode instanceof CollectingJSCodeProvider)
+      {
+        // Flatten CollectingJSCodeProvider
+        for (final IJSCodeProvider aNestedJSCode : ((CollectingJSCodeProvider) aJSCode).getAll ())
+          add (aNestedJSCode);
+      }
+      else
+      {
+        if (GlobalDebug.isDebugMode ())
+          if (!(aJSCode instanceof IJSDeclaration) && !(aJSCode instanceof IJSStatement))
+            s_aLogger.warn ("Adding untyped IJSCodeProvider of class " + aJSCode.getClass ().getName () + " to JSBlock");
 
-      m_aObjs.add (m_nPos, aJSCode);
-      m_nPos++;
-    }
+        m_aObjs.add (m_nPos, aJSCode);
+        m_nPos++;
+      }
     return this;
   }
 
