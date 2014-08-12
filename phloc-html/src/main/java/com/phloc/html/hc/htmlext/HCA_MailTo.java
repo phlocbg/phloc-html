@@ -20,17 +20,34 @@ package com.phloc.html.hc.htmlext;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.email.IEmailAddress;
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.url.EURLProtocol;
 import com.phloc.commons.url.ReadonlySimpleURL;
-import com.phloc.html.hc.html.HCA;
+import com.phloc.html.hc.html.AbstractHCA;
 
-public class HCA_MailTo extends HCA
+public class HCA_MailTo extends AbstractHCA <HCA_MailTo>
 {
+  private final String m_sEmail;
+
   public HCA_MailTo (@Nonnull final String sEmail)
   {
     super (new ReadonlySimpleURL (EURLProtocol.MAILTO.getProtocol () + sEmail));
+    m_sEmail = ValueEnforcer.notNull (sEmail, "Email");
+  }
+
+  @Nonnull
+  public String getEmail ()
+  {
+    return m_sEmail;
+  }
+
+  @Override
+  public String toString ()
+  {
+    return ToStringGenerator.getDerived (super.toString ()).append ("email", m_sEmail).toString ();
   }
 
   @Nullable
