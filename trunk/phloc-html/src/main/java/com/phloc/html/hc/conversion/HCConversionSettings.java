@@ -78,12 +78,13 @@ public class HCConversionSettings implements IHCConversionSettings
   @Nonnull
   public static IHCCustomizer createDefaultCustomizer ()
   {
+    // Use default constructor for backwards compatibility
     return new HCDefaultCustomizer ();
   }
 
   /**
    * Constructor
-   * 
+   *
    * @param eHTMLVersion
    *        The HTML version to use. May not be <code>null</code>.
    */
@@ -103,7 +104,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Copy ctor. Also creates a copy of the {@link XMLWriterSettings} and the
    * {@link CSSWriterSettings}.
-   * 
+   *
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    */
@@ -115,7 +116,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Kind of copy ctor. Also creates a copy of the {@link XMLWriterSettings} and
    * the {@link CSSWriterSettings}.
-   * 
+   *
    * @param aBase
    *        Object to copy the settings from. May not be <code>null</code>.
    * @param eHTMLVersion
@@ -150,7 +151,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the XML writer settings to be used. By default values equivalent to
    * {@link XMLWriterSettings#DEFAULT_XML_SETTINGS} are used.
-   * 
+   *
    * @param aXMLWriterSettings
    *        The XML writer settings to be used. May not be <code>null</code>.
    * @return this
@@ -181,7 +182,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Set the CSS writer settings to be used.
-   * 
+   *
    * @param aCSSWriterSettings
    *        The settings. May not be <code>null</code>.
    * @return this
@@ -212,7 +213,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Enable or disable the consistency checks. It is recommended that the
    * consistency checks are only run in debug mode!
-   * 
+   *
    * @param bConsistencyChecksEnabled
    *        The new value.
    * @return this
@@ -231,7 +232,7 @@ public class HCConversionSettings implements IHCConversionSettings
 
   /**
    * Enable or disable the extraction of out-of-band nodes.
-   * 
+   *
    * @param bExtractOutOfBandNodes
    *        The new value.
    * @return this
@@ -251,7 +252,7 @@ public class HCConversionSettings implements IHCConversionSettings
   /**
    * Set the global customizer to be used to globally customize created
    * elements.
-   * 
+   *
    * @param aCustomizer
    *        The customizer to be used. May not be <code>null</code>.
    * @return this

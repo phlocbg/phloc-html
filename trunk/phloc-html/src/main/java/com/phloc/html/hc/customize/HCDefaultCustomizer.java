@@ -71,7 +71,7 @@ import com.phloc.html.js.builder.jquery.JQuery;
 /**
  * The default implementation of {@link IHCCustomizer} performing some default
  * class assignments etc.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -100,8 +100,23 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCDefaultCustomizer.class);
 
+  private final boolean m_bCreateControlCSSClasses;
+
   public HCDefaultCustomizer ()
-  {}
+  {
+    // Backwards compatibility
+    this (true);
+  }
+
+  public HCDefaultCustomizer (final boolean bCreateControlCSSClasses)
+  {
+    m_bCreateControlCSSClasses = bCreateControlCSSClasses;
+  }
+
+  public final boolean isCreateControlCSSClasses ()
+  {
+    return m_bCreateControlCSSClasses;
+  }
 
   @Nonnull
   protected IHCButton <?> createFakeSubmitButton ()
@@ -117,83 +132,76 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aNode instanceof IHCElement <?>)
     {
       final IHCElement <?> aElement = (IHCElement <?>) aNode;
-      if (aElement instanceof AbstractHCButton <?>)
+      if (m_bCreateControlCSSClasses)
       {
-        aElement.addClass (CSS_CLASS_BUTTON);
-      }
-      else
-        if (aElement instanceof HCCheckBox)
-        {
-          final HCCheckBox aCheckBox = (HCCheckBox) aElement;
-          aCheckBox.addClass (CSS_CLASS_CHECKBOX);
-
-          // If no value is present, assign the default value "true"
-          if (aCheckBox.getValue () == null)
-            aCheckBox.setValue (CHCParam.VALUE_CHECKED);
-        }
+        if (aElement instanceof AbstractHCButton <?>)
+          aElement.addClass (CSS_CLASS_BUTTON);
         else
-          if (aElement instanceof HCEdit)
-          {
-            aElement.addClass (CSS_CLASS_EDIT);
-          }
+          if (aElement instanceof HCCheckBox)
+            aElement.addClass (CSS_CLASS_CHECKBOX);
           else
-            if (aElement instanceof HCEditFile)
-            {
-              aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_FILE);
-            }
+            if (aElement instanceof HCEdit)
+              aElement.addClass (CSS_CLASS_EDIT);
             else
-              if (aElement instanceof HCEditPassword)
-              {
-                aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_PASSWORD);
-              }
+              if (aElement instanceof HCEditFile)
+                aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_FILE);
               else
-                if (aElement instanceof AbstractHCForm <?>)
-                {
-                  final AbstractHCForm <?> aForm = (AbstractHCForm <?>) aElement;
-                  if (aForm.isSubmitPressingEnter ())
-                  {
-                    final IHCButton <?> aButton = createFakeSubmitButton ();
-                    aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
-                    aForm.addChild (aButton);
-                  }
-                }
+                if (aElement instanceof HCEditPassword)
+                  aElement.addClasses (CSS_CLASS_EDIT, CSS_CLASS_EDIT_PASSWORD);
                 else
                   if (aElement instanceof HCHiddenField)
-                  {
                     aElement.addClass (CSS_CLASS_HIDDEN);
-                  }
                   else
                     if (aElement instanceof HCRadioButton)
-                    {
                       aElement.addClass (CSS_CLASS_RADIO);
-                    }
-                    else
-                      if (aElement instanceof IHCTable <?>)
-                      {
-                        final IHCTable <?> aTable = (IHCTable <?>) aElement;
-                        final HCColGroup aColGroup = aTable.getColGroup ();
-                        // bug fix for IE9 table layout bug
-                        // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
-                        // IE9 only interprets column widths if the first row
-                        // does not use colspan (i.e. at least one row does not
-                        // use colspan)
-                        if (aColGroup != null &&
-                            aColGroup.hasColumns () &&
-                            aTable.hasBodyRows () &&
-                            aTable.getFirstBodyRow ().isColspanUsed ())
-                        {
-                          // Create a dummy row with explicit widths
-                          final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
-                          for (final HCCol aCol : aColGroup.getAllColumns ())
-                          {
-                            final IHCCell <?> aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
-                            final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
-                            if (nWidth >= 0)
-                              aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
-                          }
-                          aTable.addBodyRow (0, aRow);
-                        }
-                      }
+      }
+
+      if (aElement instanceof HCCheckBox)
+      {
+        final HCCheckBox aCheckBox = (HCCheckBox) aElement;
+
+        // If no value is present, assign the default value "true"
+        if (aCheckBox.getValue () == null)
+          aCheckBox.setValue (CHCParam.VALUE_CHECKED);
+      }
+      else
+        if (aElement instanceof AbstractHCForm <?>)
+        {
+          final AbstractHCForm <?> aForm = (AbstractHCForm <?>) aElement;
+          if (aForm.isSubmitPressingEnter ())
+          {
+            final IHCButton <?> aButton = createFakeSubmitButton ();
+            aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
+            aForm.addChild (aButton);
+          }
+        }
+        else
+          if (aElement instanceof IHCTable <?>)
+          {
+            final IHCTable <?> aTable = (IHCTable <?>) aElement;
+            final HCColGroup aColGroup = aTable.getColGroup ();
+            // bug fix for IE9 table layout bug
+            // (http://msdn.microsoft.com/en-us/library/ms531161%28v=vs.85%29.aspx)
+            // IE9 only interprets column widths if the first row
+            // does not use colspan (i.e. at least one row does not
+            // use colspan)
+            if (aColGroup != null &&
+                aColGroup.hasColumns () &&
+                aTable.hasBodyRows () &&
+                aTable.getFirstBodyRow ().isColspanUsed ())
+            {
+              // Create a dummy row with explicit widths
+              final HCRow aRow = new HCRow (false).addClass (CSS_FORCE_COLSPAN);
+              for (final HCCol aCol : aColGroup.getAllColumns ())
+              {
+                final IHCCell <?> aCell = aRow.addAndReturnCell (HCEntityNode.newNBSP ());
+                final int nWidth = StringParser.parseInt (aCol.getWidth (), -1);
+                if (nWidth >= 0)
+                  aCell.addStyle (CCSSProperties.WIDTH.newValue (ECSSUnit.px (nWidth)));
+              }
+              aTable.addBodyRow (0, aRow);
+            }
+          }
 
       // Unfocusable?
       if (aElement.isUnfocusable ())
@@ -231,7 +239,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
   /**
    * Check if the passed out-of-band node belongs to the body or to the head.
-   * 
+   *
    * @param aOOBNode
    *        The node to check. Never <code>null</code>.
    * @return <code>true</code> if it belongs to the body, <code>false</code> if
