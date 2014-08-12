@@ -109,9 +109,21 @@ public class HCEntityNode extends AbstractHCNode
     return new HCEntityNode (EHTMLEntity.rarr, "->");
   }
 
+  /**
+   * @return dash of length "n"
+   */
   @Nonnull
   public static HCEntityNode newNDash ()
   {
     return new HCEntityNode (EHTMLEntity.ndash, "-");
+  }
+
+  /**
+   * @return soft hyphen
+   */
+  @Nonnull
+  public static HCEntityNode newShy ()
+  {
+    return new HCEntityNode (EHTMLEntity.shy, "");
   }
 }

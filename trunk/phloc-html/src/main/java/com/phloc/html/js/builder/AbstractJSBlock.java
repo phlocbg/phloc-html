@@ -26,6 +26,10 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.phloc.commons.GlobalDebug;
 import com.phloc.commons.ValueEnforcer;
 import com.phloc.commons.annotations.CodingStyleguideUnaware;
 import com.phloc.commons.annotations.Nonempty;
@@ -50,6 +54,8 @@ import com.phloc.json2.IJson;
 @CodingStyleguideUnaware
 public abstract class AbstractJSBlock implements IJSFunctionContainer
 {
+  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractJSBlock.class);
+
   /**
    * List of the content of this block
    */
@@ -1113,8 +1119,21 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public AbstractJSBlock add (@Nonnull final IJSCodeProvider aJSCode)
   {
-    m_aObjs.add (m_nPos, aJSCode);
-    m_nPos++;
+    if (aJSCode instanceof JSPackage)
+    {
+      // Avoid nested JSPackage
+      for (final IJSCodeProvider aNestedJSCode : ((JSPackage) aJSCode).members ())
+        add (aNestedJSCode);
+    }
+    else
+    {
+      if (GlobalDebug.isDebugMode ())
+        if (!(aJSCode instanceof IJSDeclaration) && !(aJSCode instanceof IJSStatement))
+          s_aLogger.warn ("Adding untyped IJSCodeProvider of class " + aJSCode.getClass ().getName () + " to JSBlock");
+
+      m_aObjs.add (m_nPos, aJSCode);
+      m_nPos++;
+    }
     return this;
   }
 
