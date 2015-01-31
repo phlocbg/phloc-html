@@ -42,8 +42,9 @@ import com.phloc.html.js.IJSCodeProvider;
  *
  * @author Philip Helger
  */
-public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE> implements IHCHasMedia <THISTYPE>
+public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE> implements IHCHasMedia <THISTYPE>, IHCA <THISTYPE>
 {
+  private static final long serialVersionUID = -6891012934766966780L;
   private ISimpleURL m_aHref;
   private HCA_Target m_aTarget;
   private String m_sName;
@@ -66,88 +67,101 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
     setHref (aHref);
   }
 
+  @Override
   @Nullable
   public ISimpleURL getHref ()
   {
-    return m_aHref;
+    return this.m_aHref;
   }
 
+  @Override
   @Nonnull
   public final THISTYPE setHref (@Nonnull final String sHref)
   {
     return setHref (new SimpleURL (sHref));
   }
 
+  @Override
   @Nonnull
   public final THISTYPE setHref (@Nonnull final ISimpleURL aHref)
   {
-    ValueEnforcer.notNull (aHref, "href");
+    ValueEnforcer.notNull (aHref, "href"); //$NON-NLS-1$
 
     HCConsistencyChecker.checkIfLinkIsMasked (aHref.getAsString ());
-    m_aHref = aHref;
+    this.m_aHref = aHref;
     return thisAsT ();
   }
 
+  @Override
   @Nullable
   public HCA_Target getTarget ()
   {
-    return m_aTarget;
+    return this.m_aTarget;
   }
 
+  @Override
   public boolean hasTarget ()
   {
-    return m_aTarget != null;
+    return this.m_aTarget != null;
   }
 
+  @Override
   @Nonnull
   public THISTYPE setTarget (@Nullable final HCA_Target aTarget)
   {
-    m_aTarget = aTarget;
+    this.m_aTarget = aTarget;
     return thisAsT ();
   }
 
+  @Override
   @Nonnull
   public THISTYPE setTargetBlank ()
   {
     return setTarget (HCA_Target.BLANK);
   }
 
+  @Override
   @Nullable
   public String getName ()
   {
-    return m_sName;
+    return this.m_sName;
   }
 
+  @Override
   @Nonnull
   public THISTYPE setName (@Nullable final String sName)
   {
-    m_sName = sName;
+    this.m_sName = sName;
     return thisAsT ();
   }
 
+  @Override
   @Nullable
   public IMimeType getType ()
   {
-    return m_aType;
+    return this.m_aType;
   }
 
+  @Override
   @Nonnull
   public THISTYPE setType (@Nullable final IMimeType aType)
   {
-    m_aType = aType;
+    this.m_aType = aType;
     return thisAsT ();
   }
 
+  @Override
   @Nullable
   public String getMedia ()
   {
-    return m_sMediaQuery;
+    return this.m_sMediaQuery;
   }
 
+  @Override
   @Nonnull
   public THISTYPE setMedia (@Nullable final String sMediaQuery)
   {
-    m_sMediaQuery = sMediaQuery;
+    this.m_sMediaQuery = sMediaQuery;
     return thisAsT ();
   }
 
@@ -158,6 +172,7 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
    *        JS event to trigger
    * @return this
    */
+  @Override
   @Nonnull
   public THISTYPE setOnClick (@Nullable final IJSCodeProvider aOnClick)
   {
@@ -171,6 +186,7 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
    *        JS event to trigger
    * @return this
    */
+  @Override
   @Nonnull
   public THISTYPE addOnClick (@Nullable final IJSCodeProvider aOnClick)
   {
@@ -182,32 +198,31 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    if (m_aHref != null)
-      aElement.setAttribute (CHTMLAttributes.HREF, m_aHref.getAsString ());
-    if (m_aTarget != null)
+    if (this.m_aHref != null)
+      aElement.setAttribute (CHTMLAttributes.HREF, this.m_aHref.getAsString ());
+    if (this.m_aTarget != null)
     {
       // Note: attribute "target" is not allowed in XHTML 1.0 strict (but in
       // 1.1)
-      aElement.setAttribute (CHTMLAttributes.TARGET, m_aTarget);
+      aElement.setAttribute (CHTMLAttributes.TARGET, this.m_aTarget);
     }
-    if (StringHelper.hasText (m_sName))
-      aElement.setAttribute (CHTMLAttributes.NAME, m_sName);
-    if (m_aType != null)
-      aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
+    if (StringHelper.hasText (this.m_sName))
+      aElement.setAttribute (CHTMLAttributes.NAME, this.m_sName);
+    if (this.m_aType != null)
+      aElement.setAttribute (CHTMLAttributes.TYPE, this.m_aType.getAsString ());
     // HTML5 only:
-    if (StringHelper.hasText (m_sMediaQuery))
-      aElement.setAttribute (CHTMLAttributes.MEDIA, m_sMediaQuery);
+    if (StringHelper.hasText (this.m_sMediaQuery))
+      aElement.setAttribute (CHTMLAttributes.MEDIA, this.m_sMediaQuery);
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("href", m_aHref)
-                            .appendIfNotNull ("target", m_aTarget)
-                            .appendIfNotNull ("name", m_sName)
-                            .appendIfNotNull ("type", m_aType)
-                            .appendIfNotNull ("mediaQuery", m_sMediaQuery)
+    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("href", this.m_aHref) //$NON-NLS-1$
+                            .appendIfNotNull ("target", this.m_aTarget) //$NON-NLS-1$
+                            .appendIfNotNull ("name", this.m_sName) //$NON-NLS-1$
+                            .appendIfNotNull ("type", this.m_aType) //$NON-NLS-1$
+                            .appendIfNotNull ("mediaQuery", this.m_sMediaQuery) //$NON-NLS-1$
                             .toString ();
   }
 }

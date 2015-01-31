@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.phloc</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>23.1</version>
+    <version>23.2</version>
     <relativePath>../phloc-parent-pom/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -52,13 +52,6 @@
   </organization>
 
   <developers>
-    <developer>
-      <id>philip</id>
-      <name>Philip Helger</name>
-      <email>ph(at)phloc.com</email>
-      <url>http://www.phloc.com</url>
-      <organization>phloc systems</organization>
-    </developer>
     <developer>
       <id>boris</id>
       <name>Boris Gregorcic</name>
