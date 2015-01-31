@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.url.ReadonlySimpleURL;
 import com.phloc.html.hc.html.AbstractHCA;
+import com.phloc.html.hc.html.IHCA;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.builder.JSExpr;
@@ -62,13 +63,13 @@ public class HCA_JS extends AbstractHCA <HCA_JS>
     return this;
   }
 
-  public static void addOnClickReturnFalse (@Nonnull final AbstractHCA <?> aLink,
+  public static void addOnClickReturnFalse (@Nonnull final IHCA <?> aLink,
                                             @Nullable final IJSCodeProvider aJSOnClick)
   {
     aLink.addOnClick (new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));
   }
 
-  public static void setOnClickReturnFalse (@Nonnull final AbstractHCA <?> aLink,
+  public static void setOnClickReturnFalse (@Nonnull final IHCA <?> aLink,
                                             @Nullable final IJSCodeProvider aJSOnClick)
   {
     aLink.setOnClick (new CollectingJSCodeProvider (aJSOnClick, new JSReturn (JSExpr.FALSE)));

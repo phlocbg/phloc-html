@@ -77,26 +77,26 @@ import com.phloc.html.js.builder.jquery.JQuery;
 @Immutable
 public class HCDefaultCustomizer extends HCEmptyCustomizer
 {
-  public static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button");
-  public static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox");
-  public static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit");
-  public static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file");
-  public static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password");
-  public static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden");
-  public static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio");
+  public static final ICSSClassProvider CSS_CLASS_BUTTON = DefaultCSSClassProvider.create ("button"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_CHECKBOX = DefaultCSSClassProvider.create ("checkbox"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_EDIT = DefaultCSSClassProvider.create ("edit"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_EDIT_FILE = DefaultCSSClassProvider.create ("edit_file"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_EDIT_PASSWORD = DefaultCSSClassProvider.create ("edit_password"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_HIDDEN = DefaultCSSClassProvider.create ("hidden"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_RADIO = DefaultCSSClassProvider.create ("radio"); //$NON-NLS-1$
 
   // For controls only
-  public static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled");
-  public static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly");
+  public static final ICSSClassProvider CSS_CLASS_DISABLED = DefaultCSSClassProvider.create ("disabled"); //$NON-NLS-1$
+  public static final ICSSClassProvider CSS_CLASS_READONLY = DefaultCSSClassProvider.create ("readonly"); //$NON-NLS-1$
 
   // For buttons
-  public static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button");
+  public static final ICSSClassProvider CSS_CLASS_INVISIBLE_BUTTON = DefaultCSSClassProvider.create ("pdaf_invisible_button"); //$NON-NLS-1$
 
   // For tables
-  public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan");
+  public static final ICSSClassProvider CSS_FORCE_COLSPAN = DefaultCSSClassProvider.create ("force_colspan"); //$NON-NLS-1$
 
   // JS Code
-  public static final JSInvocation JS_BLUR = JSExpr.invoke ("blur");
+  public static final JSInvocation JS_BLUR = JSExpr.invoke ("blur"); //$NON-NLS-1$
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (HCDefaultCustomizer.class);
 
@@ -110,18 +110,19 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
 
   public HCDefaultCustomizer (final boolean bCreateControlCSSClasses)
   {
-    m_bCreateControlCSSClasses = bCreateControlCSSClasses;
+    this.m_bCreateControlCSSClasses = bCreateControlCSSClasses;
   }
 
   public final boolean isCreateControlCSSClasses ()
   {
-    return m_bCreateControlCSSClasses;
+    return this.m_bCreateControlCSSClasses;
   }
 
+  @SuppressWarnings ("static-method")
   @Nonnull
   protected IHCButton <?> createFakeSubmitButton ()
   {
-    return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON);
+    return new HCButton_Submit ("").addClass (CSS_CLASS_INVISIBLE_BUTTON); //$NON-NLS-1$
   }
 
   @Override
@@ -132,7 +133,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
     if (aNode instanceof IHCElement <?>)
     {
       final IHCElement <?> aElement = (IHCElement <?>) aNode;
-      if (m_bCreateControlCSSClasses)
+      if (this.m_bCreateControlCSSClasses)
       {
         if (aElement instanceof AbstractHCButton <?>)
           aElement.addClass (CSS_CLASS_BUTTON);
@@ -245,6 +246,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
    * @return <code>true</code> if it belongs to the body, <code>false</code> if
    *         it belongs to the head.
    */
+  @SuppressWarnings ("static-method")
   @OverrideOnDemand
   protected boolean isOutOfBandBodyNode (@Nonnull final IHCNode aOOBNode)
   {
@@ -261,9 +263,9 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
                                     @Nonnull final HCHead aHead,
                                     @Nonnull final HCBody aBody)
   {
-    ValueEnforcer.notNull (aOutOfBandNodes, "OutOfBandNodes");
-    ValueEnforcer.notNull (aHead, "Head");
-    ValueEnforcer.notNull (aBody, "Body");
+    ValueEnforcer.notNull (aOutOfBandNodes, "OutOfBandNodes"); //$NON-NLS-1$
+    ValueEnforcer.notNull (aHead, "Head"); //$NON-NLS-1$
+    ValueEnforcer.notNull (aBody, "Body"); //$NON-NLS-1$
 
     int nBeginIndex = aBody.getChildCount ();
 
@@ -311,7 +313,7 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
               aHead.addLink ((HCLink) aNode);
             }
             else
-              s_aLogger.error ("Found illegal out-of-band head node: " + aNode);
+              s_aLogger.error ("Found illegal out-of-band head node: " + aNode); //$NON-NLS-1$
       }
     }
   }

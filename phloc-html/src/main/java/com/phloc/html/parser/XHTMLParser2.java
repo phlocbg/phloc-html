@@ -68,6 +68,7 @@ public final class XHTMLParser2
   // cannot be read correctly
   // Note: SECURE_PROCESSING is not available in JDK parser 1.6.0_32 (most
   // probably also not in the previous versions)
+
   private SAXReaderSettings m_aAdditionalSAXReaderSettings = new SAXReaderSettings ().setFeatureValue (EXMLParserFeature.SECURE_PROCESSING,
                                                                                                        true)
                                                                                      .setFeatureValue (EXMLParserFeature.EXTERNAL_GENERAL_ENTITIES,
@@ -80,7 +81,7 @@ public final class XHTMLParser2
 
   public XHTMLParser2 (@Nonnull final EHTMLVersion eHTMLVersion)
   {
-    m_eHTMLVersion = ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
+    this.m_eHTMLVersion = ValueEnforcer.notNull (eHTMLVersion, "HTMLVersion");
   }
 
   /**
@@ -90,7 +91,7 @@ public final class XHTMLParser2
   @Nonnull
   public EHTMLVersion getHTMLVersion ()
   {
-    return m_eHTMLVersion;
+    return this.m_eHTMLVersion;
   }
 
   /**
@@ -103,7 +104,7 @@ public final class XHTMLParser2
   public SAXReaderSettings getAdditionalSAXReaderSettings ()
   {
     // Return a clone
-    return m_aAdditionalSAXReaderSettings.getClone ();
+    return this.m_aAdditionalSAXReaderSettings.getClone ();
   }
 
   /**
@@ -116,7 +117,7 @@ public final class XHTMLParser2
    */
   public void setAdditionalSAXReaderSettings (@Nullable final ISAXReaderSettings aAdditionalSaxReaderSettings)
   {
-    m_aAdditionalSAXReaderSettings = SAXReaderSettings.createCloneOnDemand (aAdditionalSaxReaderSettings);
+    this.m_aAdditionalSAXReaderSettings = SAXReaderSettings.createCloneOnDemand (aAdditionalSaxReaderSettings);
   }
 
   /**
@@ -164,10 +165,10 @@ public final class XHTMLParser2
   {
     // Build mini HTML and insert fragment in the middle.
     // If parsing succeeds, it is considered valid HTML.
-    final String sHTMLNamespaceURI = m_eHTMLVersion.getNamespaceURI ();
+    final String sHTMLNamespaceURI = this.m_eHTMLVersion.getNamespaceURI ();
     final String sXHTML = XMLEmitterPhloc.getDocTypeHTMLRepresentation (EXMLSerializeVersion.XML_10,
                                                                         EXMLIncorrectCharacterHandling.DEFAULT,
-                                                                        m_eHTMLVersion.getDocType ()) +
+                                                                        this.m_eHTMLVersion.getDocType ()) +
                           "<html" +
                           (sHTMLNamespaceURI != null ? ' ' + CXML.XML_ATTR_XMLNS + "=\"" + sHTMLNamespaceURI + '"' : "") +
                           "><head><title></title></head><body>" +
@@ -189,8 +190,8 @@ public final class XHTMLParser2
   public IMicroDocument parseXHTMLDocument (@Nullable final String sXHTML)
   {
     return MicroReader.readMicroXML (sXHTML,
-                                     m_aAdditionalSAXReaderSettings.getClone ()
-                                                                   .setEntityResolver (HTMLEntityResolver.getInstance ()));
+                                     this.m_aAdditionalSAXReaderSettings.getClone ()
+                                                                        .setEntityResolver (HTMLEntityResolver.getInstance ()));
   }
 
   /**
