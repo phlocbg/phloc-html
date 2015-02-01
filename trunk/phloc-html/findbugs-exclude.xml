@@ -29,4 +29,9 @@
     <Class name="com.phloc.html.js.builder.jquery.JQuery" />
     <Bug code="NM_METHOD_NAMING_CONVENTION" />
   </Match>
+  <!-- false positives -->
+  <Match>
+    <!--<Bug code="JCIP_FIELD_ISNT_FINAL_IN_IMMUTABLE_CLASS" />-->
+    <BugPattern name="JCIP_FIELD_ISNT_FINAL_IN_IMMUTABLE_CLASS" />
+  </Match> 
 </FindBugsFilter>
