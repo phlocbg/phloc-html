@@ -29,6 +29,8 @@ import com.phloc.commons.io.streams.NonBlockingStringWriter;
 import com.phloc.commons.io.streams.StreamUtils;
 import com.phloc.html.js.IJSCodeProvider;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Helper class to get the textual representation of JSDOM objects
  *
@@ -109,6 +111,7 @@ public final class JSPrinter
                                     .generateComments (s_bGenerateComments);
   }
 
+  @SuppressFBWarnings (value = { "OBL_UNSATISFIED_OBLIGATION" })
   public static void writeGeneratable (@Nonnull final IJSGeneratable aGeneratable,
                                        @Nonnull @WillClose final Writer aWriter)
   {
