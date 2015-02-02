@@ -126,6 +126,7 @@ public final class JSPrinter
     }
   }
 
+  @SuppressFBWarnings (value = { "OBL_UNSATISFIED_OBLIGATION" })
   public static void writeDeclaration (@Nonnull final IJSDeclaration aDeclaration,
                                        @Nonnull @WillClose final Writer aWriter)
   {
@@ -140,6 +141,7 @@ public final class JSPrinter
     }
   }
 
+  @SuppressFBWarnings (value = { "OBL_UNSATISFIED_OBLIGATION" })
   public static void writeStatement (@Nonnull final IJSStatement aStatement, @Nonnull @WillClose final Writer aWriter)
   {
     final JSFormatter aFormatter = createFormatter (aWriter);
@@ -153,7 +155,7 @@ public final class JSPrinter
     }
   }
 
-  private static void _writePackage (@Nonnull final JSPackage aPackage, @Nonnull final JSFormatter aFormatter)
+  private static void writePackageInternal (@Nonnull final JSPackage aPackage, @Nonnull final JSFormatter aFormatter)
   {
     // for all declarations in the current package
     for (final IJSCodeProvider aObj : aPackage.members ())
@@ -166,18 +168,19 @@ public final class JSPrinter
           if (aObj instanceof JSPackage)
           {
             // Nested package
-            _writePackage ((JSPackage) aObj, aFormatter);
+            writePackageInternal ((JSPackage) aObj, aFormatter);
           }
           else
             aFormatter.plain (aObj.getJSCode ());
   }
 
+  @SuppressFBWarnings (value = { "OBL_UNSATISFIED_OBLIGATION" })
   public static void writePackage (@Nonnull final JSPackage aPackage, @Nonnull @WillClose final Writer aWriter)
   {
     final JSFormatter aFormatter = createFormatter (aWriter);
     try
     {
-      _writePackage (aPackage, aFormatter);
+      writePackageInternal (aPackage, aFormatter);
     }
     finally
     {
@@ -188,7 +191,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSGeneratable aGeneratable)
   {
-    ValueEnforcer.notNull (aGeneratable, "Generatable");
+    ValueEnforcer.notNull (aGeneratable, "Generatable"); //$NON-NLS-1$
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeGeneratable (aGeneratable, aSW);
     return aSW.getAsString ().trim ();
@@ -197,7 +200,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSDeclaration aDecl)
   {
-    ValueEnforcer.notNull (aDecl, "Decl");
+    ValueEnforcer.notNull (aDecl, "Decl"); //$NON-NLS-1$
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeDeclaration (aDecl, aSW);
     return aSW.getAsString ().trim ();
@@ -206,7 +209,7 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final IJSStatement aStatement)
   {
-    ValueEnforcer.notNull (aStatement, "Statement");
+    ValueEnforcer.notNull (aStatement, "Statement"); //$NON-NLS-1$
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writeStatement (aStatement, aSW);
     return aSW.getAsString ().trim ();
@@ -215,9 +218,9 @@ public final class JSPrinter
   @Nonnull
   public static String getAsString (@Nonnull final JSPackage aPackage)
   {
-    ValueEnforcer.notNull (aPackage, "Package");
+    ValueEnforcer.notNull (aPackage, "Package"); //$NON-NLS-1$
     if (aPackage.memberCount () == 0)
-      return "";
+      return ""; //$NON-NLS-1$
 
     final NonBlockingStringWriter aSW = new NonBlockingStringWriter ();
     writePackage (aPackage, aSW);
