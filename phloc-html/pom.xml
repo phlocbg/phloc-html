@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.phloc</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>23.2</version>
+    <version>24.0</version>
     <relativePath>../phloc-parent-pom/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -30,7 +30,7 @@
   <version>4.2.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>phloc-html</name>
-  <url>http://repo.phloc.com/apidocs/phloc-html/${project.version}</url>
+  <url>http://github.com/phlocbg/phloc-html</url>
  
   <licenses>
     <license>
@@ -41,9 +41,10 @@
   </licenses>
   
   <scm>
-    <url>http://code.google.com/p/phloc-html/source/browse/</url>
-    <connection>scm:svn:http://phloc-html.googlecode.com/svn/trunk/phloc-html</connection>
-    <developerConnection>scm:svn:https://phloc-html.googlecode.com/svn/trunk/phloc-html</developerConnection>
+    <connection>scm:git:https://github.com/phlocbg/phloc-html</connection>
+    <developerConnection>scm:git:https://github.com/phlocbg/phloc-html</developerConnection>
+  <url>http://github.com/phlocbg/phloc-html</url>
+    <tag>HEAD</tag>
   </scm>
 
   <organization>
