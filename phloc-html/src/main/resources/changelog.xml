@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2006-2014 phloc systems
+    Copyright (C) 2006-2015 phloc systems
     http://www.phloc.com
     office[at]phloc[dot]com
 
@@ -20,6 +20,7 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2015-10-09" version="4.3.0" />
   <release date="2015-01-31" version="4.2.3" />
   <entry date="2015-01-31" category="api" action="change">
     <change>
