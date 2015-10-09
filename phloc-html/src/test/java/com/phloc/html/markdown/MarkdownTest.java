@@ -68,6 +68,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.file.SimpleFileIO;
 import com.phloc.commons.io.file.iterate.FileSystemRecursiveIterator;
+import com.phloc.commons.string.StringHelper;
 
 @RunWith (value = Parameterized.class)
 public final class MarkdownTest
@@ -76,10 +77,10 @@ public final class MarkdownTest
   public static Collection <Object []> markdownTests ()
   {
     final List <Object []> list = new ArrayList <Object []> ();
-    for (final File aFile : new FileSystemRecursiveIterator (new File ("src/test/resources/MarkdownTest")))
+    for (final File aFile : new FileSystemRecursiveIterator (new File ("src/test/resources/MarkdownTest"))) //$NON-NLS-1$
     {
       final String fileName = aFile.getName ();
-      if (fileName.endsWith (".text"))
+      if (fileName.endsWith (".text")) //$NON-NLS-1$
       {
         final String testName = fileName.substring (0, fileName.lastIndexOf ('.'));
         list.add (new Object [] { aFile.getParentFile ().getAbsolutePath (), testName });
@@ -93,8 +94,8 @@ public final class MarkdownTest
 
   public MarkdownTest (final String dir, final String test)
   {
-    m_sDir = dir;
-    m_sTest = test;
+    this.m_sDir = dir;
+    this.m_sTest = test;
   }
 
   private static String _slurp (final String fileName)
@@ -102,12 +103,18 @@ public final class MarkdownTest
     return SimpleFileIO.readFileAsString (new File (fileName), CCharset.CHARSET_UTF_8_OBJ);
   }
 
+  private static String getWithconsolidateLineEndings (final String sString)
+  {
+    return StringHelper.replaceAll (sString, "\r\n", "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+  }
+
   @Test
   public void runTest () throws IOException
   {
-    final String testText = _slurp (m_sDir + File.separator + m_sTest + ".text");
-    final String htmlText = _slurp (m_sDir + File.separator + m_sTest + ".html");
+    final String testText = _slurp (this.m_sDir + File.separator + this.m_sTest + ".text"); //$NON-NLS-1$
+    final String htmlText = _slurp (this.m_sDir + File.separator + this.m_sTest + ".html"); //$NON-NLS-1$
     final String markdownText = new MarkdownProcessor ().process (testText).getAsHTMLString ();
-    assertEquals (m_sTest, htmlText.trim (), markdownText.trim ());
+    // StringHelper.
+    assertEquals (this.m_sTest, htmlText.trim (), markdownText.trim ());
   }
 }
