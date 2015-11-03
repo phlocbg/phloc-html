@@ -30,7 +30,6 @@ import com.phloc.commons.annotations.Nonempty;
 import com.phloc.commons.annotations.PresentForCodeCoverage;
 import com.phloc.commons.collections.ArrayHelper;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * Factory methods that generate various {@link IJSExpression}s.
@@ -310,14 +309,6 @@ public final class JSExpr
     ValueEnforcer.notNull (aJSON, "JSON");
 
     return direct (aJSON.getJSONString (JSPrinter.isIndentAndAlign ()));
-  }
-
-  @Nonnull
-  public static JSExprDirect json (@Nonnull final IJson aJson)
-  {
-    ValueEnforcer.notNull (aJson, "Json");
-
-    return direct (aJson.getAsString ());
   }
 
   /**

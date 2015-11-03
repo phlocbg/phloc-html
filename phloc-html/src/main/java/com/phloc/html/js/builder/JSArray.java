@@ -33,7 +33,6 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
@@ -49,13 +48,13 @@ public class JSArray extends AbstractJSExpression
 
   public boolean isEmpty ()
   {
-    return m_aExprs == null || m_aExprs.isEmpty ();
+    return this.m_aExprs == null || this.m_aExprs.isEmpty ();
   }
 
   @Nonnegative
   public int size ()
   {
-    return m_aExprs == null ? 0 : m_aExprs.size ();
+    return this.m_aExprs == null ? 0 : this.m_aExprs.size ();
   }
 
   @Nonnull
@@ -114,12 +113,6 @@ public class JSArray extends AbstractJSExpression
 
   @Nonnull
   public JSArray add (@Nullable final IJSON aValue)
-  {
-    return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
-  }
-
-  @Nonnull
-  public JSArray add (@Nullable final IJson aValue)
   {
     return add (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
@@ -238,25 +231,26 @@ public class JSArray extends AbstractJSExpression
   {
     ValueEnforcer.notNull (aExpr, "Expr");
 
-    if (m_aExprs == null)
-      m_aExprs = new ArrayList <IJSExpression> ();
-    m_aExprs.add (aExpr);
+    if (this.m_aExprs == null)
+      this.m_aExprs = new ArrayList <IJSExpression> ();
+    this.m_aExprs.add (aExpr);
     return this;
   }
 
   @Nonnull
   public JSArray remove (@Nonnegative final int nIndex)
   {
-    if (m_aExprs != null)
-      m_aExprs.remove (nIndex);
+    if (this.m_aExprs != null)
+      this.m_aExprs.remove (nIndex);
     return this;
   }
 
+  @Override
   public void generate (@Nonnull final JSFormatter aFormatter)
   {
     aFormatter.plain ('[');
-    if (m_aExprs != null)
-      aFormatter.generatable (m_aExprs);
+    if (this.m_aExprs != null)
+      aFormatter.generatable (this.m_aExprs);
     aFormatter.plain (']');
   }
 
@@ -268,18 +262,18 @@ public class JSArray extends AbstractJSExpression
     if (!super.equals (o))
       return false;
     final JSArray rhs = (JSArray) o;
-    return EqualsUtils.equals (m_aExprs, rhs.m_aExprs);
+    return EqualsUtils.equals (this.m_aExprs, rhs.m_aExprs);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aExprs).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (this.m_aExprs).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("exprs", m_aExprs).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("exprs", this.m_aExprs).toString ();
   }
 }

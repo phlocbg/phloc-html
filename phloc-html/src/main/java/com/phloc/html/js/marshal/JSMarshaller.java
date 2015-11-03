@@ -41,7 +41,6 @@ import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.CJS;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * Marshaler class that converts Java Objects to their respective JavaScript
@@ -264,8 +263,6 @@ public final class JSMarshaller
       return new JSListType (JSType.AUTO_DETECT);
     if (IJSON.class.isAssignableFrom (aClass))
       return JSType.JSON;
-    if (IJson.class.isAssignableFrom (aClass))
-      return JSType.JSON;
     s_aLogger.warn ("Failed to detect JS type of class " + aClass);
     return null;
   }
@@ -325,8 +322,6 @@ public final class JSMarshaller
         case JSON:
           if (aObject instanceof IJSON)
             aSB.append (((IJSON) aObject).getJSONString ());
-          else
-            aSB.append (((IJson) aObject).getAsString ());
           break;
         case STRING:
           // Note: use single quotes for use in HTML attributes!

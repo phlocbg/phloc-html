@@ -28,7 +28,7 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.js.builder.IJSExpression;
 import com.phloc.html.js.builder.JSAnonymousFunction;
 import com.phloc.html.js.builder.JSArray;
-import com.phloc.json2.IJson;
+import com.phloc.json.IJSON;
 
 /**
  * This file is generated - do NOT edit!
@@ -315,6 +315,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE add (@Nonnull ICSSClassProvider selector, @Nonnull String context);
 
+  @Override
   @Nonnull
   IMPLTYPE addBack ();
 
@@ -377,7 +378,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        attribute of each matched element.
    */
   @Nonnull
-  IMPLTYPE addClass (@Nonnull IJson className);
+  IMPLTYPE addClass (@Nonnull IJSON className);
 
   /**
    * @param className
@@ -982,6 +983,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE ajaxSuccess (@Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE andSelf ();
@@ -1579,7 +1581,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        The name of the attribute to get.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName);
+  IMPLTYPE attr (@Nonnull IJSON attributeName);
 
   /**
    * @param attributeName
@@ -1611,7 +1613,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull IJSExpression value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull IJSExpression value);
 
   /**
    * @param attributeName
@@ -1638,7 +1640,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJSExpression attributeName, @Nonnull IJson value);
+  IMPLTYPE attr (@Nonnull IJSExpression attributeName, @Nonnull IJSON value);
 
   /**
    * @param attributeName
@@ -1647,7 +1649,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull IJson value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull IJSON value);
 
   /**
    * @param attributeName
@@ -1656,7 +1658,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IHCNode attributeName, @Nonnull IJson value);
+  IMPLTYPE attr (@Nonnull IHCNode attributeName, @Nonnull IJSON value);
 
   /**
    * @param attributeName
@@ -1665,7 +1667,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull String attributeName, @Nonnull IJson value);
+  IMPLTYPE attr (@Nonnull String attributeName, @Nonnull IJSON value);
 
   /**
    * @param attributeName
@@ -1683,7 +1685,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull IHCNode value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull IHCNode value);
 
   /**
    * @param attributeName
@@ -1719,7 +1721,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull String value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull String value);
 
   /**
    * @param attributeName
@@ -1755,7 +1757,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, int value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, int value);
 
   /**
    * @param attributeName
@@ -1791,7 +1793,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, long value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, long value);
 
   /**
    * @param attributeName
@@ -1827,7 +1829,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull BigInteger value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull BigInteger value);
 
   /**
    * @param attributeName
@@ -1863,7 +1865,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, double value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, double value);
 
   /**
    * @param attributeName
@@ -1899,7 +1901,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the attribute.
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull BigDecimal value);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull BigDecimal value);
 
   /**
    * @param attributeName
@@ -1941,7 +1943,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.1
    */
   @Nonnull
-  IMPLTYPE attr (@Nonnull IJson attributeName, @Nonnull JSAnonymousFunction function);
+  IMPLTYPE attr (@Nonnull IJSON attributeName, @Nonnull JSAnonymousFunction function);
 
   /**
    * @param attributeName
@@ -2477,7 +2479,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        An object containing data that will be passed to the event handler.
    */
   @Nonnull
-  IMPLTYPE bind (@Nonnull IJson eventType, @Nonnull IJSExpression eventData);
+  IMPLTYPE bind (@Nonnull IJSON eventType, @Nonnull IJSExpression eventData);
 
   /**
    * @param eventType
@@ -2521,7 +2523,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to execute each time the event is triggered.
    */
   @Nonnull
-  IMPLTYPE bind (@Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler);
+  IMPLTYPE bind (@Nonnull IJSON eventType, @Nonnull IJSExpression eventData, @Nonnull IJSExpression handler);
 
   /**
    * @param eventType
@@ -2571,7 +2573,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to execute each time the event is triggered.
    */
   @Nonnull
-  IMPLTYPE bind (@Nonnull IJson eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE bind (@Nonnull IJSON eventType, @Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param eventType
@@ -2613,7 +2615,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE bind (@Nonnull IJson eventType);
+  IMPLTYPE bind (@Nonnull IJSON eventType);
 
   /**
    * @param eventType
@@ -2661,7 +2663,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE bind (@Nonnull IJson eventType, @Nonnull IJSExpression eventData, boolean preventBubble);
+  IMPLTYPE bind (@Nonnull IJSON eventType, @Nonnull IJSExpression eventData, boolean preventBubble);
 
   /**
    * @param eventType
@@ -2727,6 +2729,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE blur (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE blur ();
 
@@ -2757,12 +2760,15 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE callbacks_add (@Nonnull JSArray callbacks);
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_disable ();
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_disabled ();
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_empty ();
 
@@ -2774,6 +2780,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE callbacks_fire (@Nonnull IJSExpression arguments);
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_fireWith ();
 
@@ -2798,6 +2805,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE callbacks_fireWith (@Nonnull IJSExpression context, @Nonnull IJSExpression args);
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_fired ();
 
@@ -2817,9 +2825,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE callbacks_has (@Nonnull JSAnonymousFunction callback);
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_lock ();
 
+  @Override
   @Nonnull
   IMPLTYPE callbacks_locked ();
 
@@ -2884,9 +2894,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE change (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE change ();
 
+  @Override
   @Nonnull
   IMPLTYPE children ();
 
@@ -2925,6 +2937,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE children (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE clearQueue ();
 
@@ -2944,7 +2957,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE clearQueue (@Nonnull IJson queueName);
+  IMPLTYPE clearQueue (@Nonnull IJSON queueName);
 
   /**
    * @param queueName
@@ -2998,9 +3011,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE click (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE click ();
 
+  @Override
   @Nonnull
   IMPLTYPE _clone ();
 
@@ -3374,6 +3389,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE closest (@Nonnull JSArray selectors, @Nonnull String context);
 
+  @Override
   @Nonnull
   IMPLTYPE contents ();
 
@@ -3389,7 +3405,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A CSS property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName);
+  IMPLTYPE css (@Nonnull IJSON propertyName);
 
   /**
    * @param propertyName
@@ -3429,7 +3445,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull IJSExpression value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull IJSExpression value);
 
   /**
    * @param propertyName
@@ -3456,7 +3472,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJSExpression propertyName, @Nonnull IJson value);
+  IMPLTYPE css (@Nonnull IJSExpression propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -3465,7 +3481,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull IJson value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -3474,7 +3490,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IHCNode propertyName, @Nonnull IJson value);
+  IMPLTYPE css (@Nonnull IHCNode propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -3483,7 +3499,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull String propertyName, @Nonnull IJson value);
+  IMPLTYPE css (@Nonnull String propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -3501,7 +3517,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull IHCNode value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull IHCNode value);
 
   /**
    * @param propertyName
@@ -3537,7 +3553,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull String value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull String value);
 
   /**
    * @param propertyName
@@ -3573,7 +3589,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, int value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, int value);
 
   /**
    * @param propertyName
@@ -3609,7 +3625,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, long value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, long value);
 
   /**
    * @param propertyName
@@ -3645,7 +3661,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull BigInteger value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull BigInteger value);
 
   /**
    * @param propertyName
@@ -3681,7 +3697,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, double value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, double value);
 
   /**
    * @param propertyName
@@ -3717,7 +3733,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A value to set for the property.
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull BigDecimal value);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull BigDecimal value);
 
   /**
    * @param propertyName
@@ -3759,7 +3775,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE css (@Nonnull IJson propertyName, @Nonnull JSAnonymousFunction function);
+  IMPLTYPE css (@Nonnull IJSON propertyName, @Nonnull JSAnonymousFunction function);
 
   /**
    * @param propertyName
@@ -3805,7 +3821,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2.3
    */
   @Nonnull
-  IMPLTYPE data (@Nonnull IJson key, @Nonnull IJSExpression value);
+  IMPLTYPE data (@Nonnull IJSON key, @Nonnull IJSExpression value);
 
   /**
    * @param key
@@ -3843,7 +3859,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2.3
    */
   @Nonnull
-  IMPLTYPE data (@Nonnull IJson key);
+  IMPLTYPE data (@Nonnull IJSON key);
 
   /**
    * @param key
@@ -3861,6 +3877,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE data (@Nonnull String key);
 
+  @Override
   @Nonnull
   IMPLTYPE data ();
 
@@ -3898,6 +3915,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE dblclick (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE dblclick ();
 
@@ -4099,10 +4117,12 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_fail (@Nonnull JSAnonymousFunction failCallbacks, @Nonnull JSAnonymousFunction failCallbacks1);
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE deferred_isRejected ();
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE deferred_isResolved ();
@@ -4133,6 +4153,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_notifyWith (@Nonnull IJSExpression context, @Nonnull IJSExpression args);
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE deferred_pipe ();
@@ -4368,6 +4389,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_progress (@Nonnull JSArray progressCallbacks);
 
+  @Override
   @Nonnull
   IMPLTYPE deferred_promise ();
 
@@ -4379,6 +4401,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_promise (@Nonnull IJSExpression target);
 
+  @Override
   @Nonnull
   IMPLTYPE deferred_reject ();
 
@@ -4418,6 +4441,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_rejectWith (@Nonnull IJSExpression context, @Nonnull JSArray args);
 
+  @Override
   @Nonnull
   IMPLTYPE deferred_resolve ();
 
@@ -4457,6 +4481,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE deferred_resolveWith (@Nonnull IJSExpression context, @Nonnull JSArray args);
 
+  @Override
   @Nonnull
   IMPLTYPE deferred_state ();
 
@@ -4738,7 +4763,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE delay (@Nonnull IJSExpression duration, @Nonnull IJson queueName);
+  IMPLTYPE delay (@Nonnull IJSExpression duration, @Nonnull IJSON queueName);
 
   /**
    * @param duration
@@ -4750,7 +4775,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE delay (int duration, @Nonnull IJson queueName);
+  IMPLTYPE delay (int duration, @Nonnull IJSON queueName);
 
   /**
    * @param duration
@@ -4762,7 +4787,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE delay (long duration, @Nonnull IJson queueName);
+  IMPLTYPE delay (long duration, @Nonnull IJSON queueName);
 
   /**
    * @param duration
@@ -4774,7 +4799,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE delay (@Nonnull BigInteger duration, @Nonnull IJson queueName);
+  IMPLTYPE delay (@Nonnull BigInteger duration, @Nonnull IJSON queueName);
 
   /**
    * @param duration
@@ -4896,7 +4921,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -4935,7 +4960,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IJSExpression selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -4948,7 +4973,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -4961,7 +4986,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IHCNode selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -4974,7 +4999,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull String selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -5000,7 +5025,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -5052,7 +5077,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull String eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull String eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -5106,7 +5131,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5145,7 +5170,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IJSExpression selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5158,7 +5183,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5171,7 +5196,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IHCNode selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5184,7 +5209,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull String selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5210,7 +5235,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5262,7 +5287,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5321,7 +5346,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
+  IMPLTYPE delegate (@Nonnull IJSON selector,
                      @Nonnull IJSExpression eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
@@ -5376,7 +5401,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE delegate (@Nonnull IJSExpression selector,
-                     @Nonnull IJson eventType,
+                     @Nonnull IJSON eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
 
@@ -5393,8 +5418,8 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
-                     @Nonnull IJson eventType,
+  IMPLTYPE delegate (@Nonnull IJSON selector,
+                     @Nonnull IJSON eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
 
@@ -5412,7 +5437,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE delegate (@Nonnull IHCNode selector,
-                     @Nonnull IJson eventType,
+                     @Nonnull IJSON eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
 
@@ -5430,7 +5455,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE delegate (@Nonnull String selector,
-                     @Nonnull IJson eventType,
+                     @Nonnull IJSON eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
 
@@ -5465,7 +5490,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
+  IMPLTYPE delegate (@Nonnull IJSON selector,
                      @Nonnull IHCNode eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
@@ -5505,294 +5530,6 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
                      @Nonnull IHCNode eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull IJSExpression handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector,
-                     @Nonnull String eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull IJSExpression handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
-                     @Nonnull String eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull IJSExpression handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector,
-                     @Nonnull String eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull IJSExpression handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector,
-                     @Nonnull String eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull IJSExpression handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector,
-                     @Nonnull IJSExpression eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
-                     @Nonnull IJSExpression eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector,
-                     @Nonnull IJSExpression eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector,
-                     @Nonnull IJSExpression eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector,
-                     @Nonnull IJson eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
-                     @Nonnull IJson eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector,
-                     @Nonnull IJson eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector,
-                     @Nonnull IJson eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJSExpression selector,
-                     @Nonnull IHCNode eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
-                     @Nonnull IHCNode eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull IHCNode selector,
-                     @Nonnull IHCNode eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param selector
-   *        A selector to filter the elements that trigger the event.
-   * @param eventType
-   *        A string containing one or more space-separated JavaScript event
-   *        types, such as "click" or "keydown," or custom event names.
-   * @param eventData
-   *        An object containing data that will be passed to the event handler.
-   * @param handler
-   *        A function to execute at the time the event is triggered.
-   * @since jQuery 1.4.2
-   */
-  @Nonnull
-  IMPLTYPE delegate (@Nonnull String selector,
-                     @Nonnull IHCNode eventType,
-                     @Nonnull IJSExpression eventData,
-                     @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -5810,6 +5547,78 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   IMPLTYPE delegate (@Nonnull IJSExpression selector,
                      @Nonnull String eventType,
                      @Nonnull IJSExpression eventData,
+                     @Nonnull IJSExpression handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSON selector,
+                     @Nonnull String eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull IJSExpression handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IHCNode selector,
+                     @Nonnull String eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull IJSExpression handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull String selector,
+                     @Nonnull String eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull IJSExpression handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSExpression selector,
+                     @Nonnull IJSExpression eventType,
+                     @Nonnull IJSExpression eventData,
                      @Nonnull JSAnonymousFunction handler);
 
   /**
@@ -5825,7 +5634,223 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector,
+  IMPLTYPE delegate (@Nonnull IJSON selector,
+                     @Nonnull IJSExpression eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IHCNode selector,
+                     @Nonnull IJSExpression eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull String selector,
+                     @Nonnull IJSExpression eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSExpression selector,
+                     @Nonnull IJSON eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSON selector,
+                     @Nonnull IJSON eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IHCNode selector,
+                     @Nonnull IJSON eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull String selector,
+                     @Nonnull IJSON eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSExpression selector,
+                     @Nonnull IHCNode eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSON selector,
+                     @Nonnull IHCNode eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IHCNode selector,
+                     @Nonnull IHCNode eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull String selector,
+                     @Nonnull IHCNode eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSExpression selector,
+                     @Nonnull String eventType,
+                     @Nonnull IJSExpression eventData,
+                     @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param selector
+   *        A selector to filter the elements that trigger the event.
+   * @param eventType
+   *        A string containing one or more space-separated JavaScript event
+   *        types, such as "click" or "keydown," or custom event names.
+   * @param eventData
+   *        An object containing data that will be passed to the event handler.
+   * @param handler
+   *        A function to execute at the time the event is triggered.
+   * @since jQuery 1.4.2
+   */
+  @Nonnull
+  IMPLTYPE delegate (@Nonnull IJSON selector,
                      @Nonnull String eventType,
                      @Nonnull IJSExpression eventData,
                      @Nonnull JSAnonymousFunction handler);
@@ -5886,7 +5911,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE delegate (@Nonnull IJson selector, @Nonnull IJSExpression events);
+  IMPLTYPE delegate (@Nonnull IJSON selector, @Nonnull IJSExpression events);
 
   /**
    * @param selector
@@ -5910,6 +5935,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE delegate (@Nonnull String selector, @Nonnull IJSExpression events);
 
+  @Override
   @Nonnull
   IMPLTYPE dequeue ();
 
@@ -5929,7 +5955,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE dequeue (@Nonnull IJson queueName);
+  IMPLTYPE dequeue (@Nonnull IJSON queueName);
 
   /**
    * @param queueName
@@ -5949,6 +5975,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE dequeue (@Nonnull String queueName);
 
+  @Override
   @Nonnull
   IMPLTYPE detach ();
 
@@ -5997,6 +6024,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE detach (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE die ();
@@ -6021,7 +6049,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJson eventType);
+  IMPLTYPE die (@Nonnull IJSON eventType);
 
   /**
    * @param eventType
@@ -6069,7 +6097,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE die (@Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param eventType
@@ -6108,7 +6136,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJSExpression eventType, @Nonnull IJson handler);
+  IMPLTYPE die (@Nonnull IJSExpression eventType, @Nonnull IJSON handler);
 
   /**
    * @param eventType
@@ -6121,7 +6149,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJson eventType, @Nonnull IJson handler);
+  IMPLTYPE die (@Nonnull IJSON eventType, @Nonnull IJSON handler);
 
   /**
    * @param eventType
@@ -6134,7 +6162,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IHCNode eventType, @Nonnull IJson handler);
+  IMPLTYPE die (@Nonnull IHCNode eventType, @Nonnull IJSON handler);
 
   /**
    * @param eventType
@@ -6147,7 +6175,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull String eventType, @Nonnull IJson handler);
+  IMPLTYPE die (@Nonnull String eventType, @Nonnull IJSON handler);
 
   /**
    * @param eventType
@@ -6173,7 +6201,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJson eventType, @Nonnull IHCNode handler);
+  IMPLTYPE die (@Nonnull IJSON eventType, @Nonnull IHCNode handler);
 
   /**
    * @param eventType
@@ -6225,7 +6253,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE die (@Nonnull IJson eventType, @Nonnull String handler);
+  IMPLTYPE die (@Nonnull IJSON eventType, @Nonnull String handler);
 
   /**
    * @param eventType
@@ -6267,9 +6295,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE each (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE empty ();
 
+  @Override
   @Nonnull
   IMPLTYPE end ();
 
@@ -6347,27 +6377,35 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE error (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE event_isDefaultPrevented ();
 
+  @Override
   @Nonnull
   IMPLTYPE event_isImmediatePropagationStopped ();
 
+  @Override
   @Nonnull
   IMPLTYPE event_isPropagationStopped ();
 
+  @Override
   @Nonnull
   IMPLTYPE event_preventDefault ();
 
+  @Override
   @Nonnull
   IMPLTYPE event_stopImmediatePropagation ();
 
+  @Override
   @Nonnull
   IMPLTYPE event_stopPropagation ();
 
+  @Override
   @Nonnull
   IMPLTYPE fadeIn ();
 
+  @Override
   @Nonnull
   IMPLTYPE fadeOut ();
 
@@ -6387,7 +6425,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity);
 
   /**
    * @param duration
@@ -6468,7 +6506,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity);
 
   /**
    * @param duration
@@ -6549,7 +6587,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity);
 
   /**
    * @param duration
@@ -6630,7 +6668,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity);
 
   /**
    * @param duration
@@ -6711,7 +6749,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity);
 
   /**
    * @param duration
@@ -6792,7 +6830,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A number between 0 and 1 denoting the target opacity.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity);
 
   /**
    * @param duration
@@ -6877,7 +6915,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -6976,7 +7014,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -7075,7 +7113,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -7174,7 +7212,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -7273,7 +7311,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -7372,7 +7410,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -7473,7 +7511,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -7572,7 +7610,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -7671,7 +7709,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -7770,7 +7808,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -7869,7 +7907,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -7968,7 +8006,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A function to call once the animation is complete.
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -8057,7 +8095,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8069,7 +8107,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8081,7 +8119,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8093,7 +8131,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8105,7 +8143,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8117,7 +8155,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8129,7 +8167,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8141,7 +8179,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8153,7 +8191,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8165,7 +8203,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8177,7 +8215,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8189,7 +8227,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8201,7 +8239,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8213,7 +8251,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8225,7 +8263,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8237,7 +8275,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8249,7 +8287,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8261,7 +8299,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, int opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, int opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8273,7 +8311,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8285,7 +8323,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8297,7 +8335,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8309,7 +8347,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8321,7 +8359,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8333,7 +8371,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8345,7 +8383,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8357,7 +8395,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8369,7 +8407,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, long opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, long opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8381,7 +8419,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8393,7 +8431,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8405,7 +8443,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8417,7 +8455,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8429,7 +8467,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8441,7 +8479,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8453,7 +8491,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8465,7 +8503,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8477,7 +8515,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8489,7 +8527,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8501,7 +8539,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8513,7 +8551,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8525,7 +8563,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8537,7 +8575,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8549,7 +8587,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8561,7 +8599,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8573,7 +8611,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8585,7 +8623,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, double opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, double opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8597,7 +8635,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8609,7 +8647,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8621,7 +8659,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8633,7 +8671,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull String duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8645,7 +8683,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (int duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8657,7 +8695,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (long duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8669,7 +8707,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8681,7 +8719,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (double duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8693,7 +8731,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing);
 
   /**
    * @param duration
@@ -8717,7 +8755,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -8825,7 +8863,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -8933,7 +8971,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -9041,7 +9079,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -9149,7 +9187,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -9257,7 +9295,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull IHCNode easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity, @Nonnull IHCNode easing);
 
   /**
    * @param duration
@@ -9365,7 +9403,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull IJSExpression opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull IJSExpression opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -9473,7 +9511,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -9581,7 +9619,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -9689,7 +9727,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigInteger opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigInteger opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -9797,7 +9835,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -9905,7 +9943,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, @Nonnull BigDecimal opacity, @Nonnull String easing);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, @Nonnull BigDecimal opacity, @Nonnull String easing);
 
   /**
    * @param duration
@@ -10020,7 +10058,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull IJSExpression complete);
@@ -10173,7 +10211,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IJSExpression easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IJSExpression easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -10311,7 +10349,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IJSExpression easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IJSExpression easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -10452,7 +10490,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull IJSExpression complete);
@@ -10605,7 +10643,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    double opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull IJSExpression complete);
@@ -10749,7 +10787,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull IJSExpression complete);
@@ -10887,7 +10925,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -10902,9 +10940,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -10921,7 +10959,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -10938,7 +10976,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -10953,7 +10991,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -10967,7 +11005,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull IJSExpression opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, @Nonnull IJSExpression opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -10983,7 +11021,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11000,7 +11038,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (double duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11017,7 +11055,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11032,7 +11070,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11046,7 +11084,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11060,7 +11098,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11074,7 +11112,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11088,7 +11126,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11102,7 +11140,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11116,7 +11154,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11130,7 +11168,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11144,7 +11182,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, int opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, int opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11158,7 +11196,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSExpression duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11172,7 +11210,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11186,7 +11224,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11200,7 +11238,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11214,7 +11252,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11228,7 +11266,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11242,7 +11280,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11256,7 +11294,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11270,7 +11308,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, long opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, long opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11286,7 +11324,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11301,9 +11339,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11320,7 +11358,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11337,7 +11375,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11352,7 +11390,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull BigInteger opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11366,7 +11404,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull BigInteger opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11382,7 +11420,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11397,7 +11435,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, @Nonnull BigInteger opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (double duration, @Nonnull BigInteger opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11413,7 +11451,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11430,7 +11468,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11445,7 +11483,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11459,7 +11497,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11473,7 +11511,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull String duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11487,7 +11525,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11501,7 +11539,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11515,7 +11553,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigInteger duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigInteger duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11529,7 +11567,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11543,7 +11581,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, double opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull BigDecimal duration, double opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11559,7 +11597,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11574,9 +11612,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11593,7 +11631,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11610,7 +11648,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11625,7 +11663,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (int duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11639,7 +11677,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (long duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11655,7 +11693,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11670,7 +11708,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, @Nonnull BigDecimal opacity, @Nonnull IJson easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (double duration, @Nonnull BigDecimal opacity, @Nonnull IJSON easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -11686,7 +11724,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull IJSExpression complete);
 
   /**
@@ -11718,7 +11756,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull IJSExpression complete);
@@ -11871,7 +11909,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -12000,7 +12038,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -12129,7 +12167,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull IJSExpression complete);
@@ -12276,7 +12314,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IHCNode easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -12411,7 +12449,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull IJSExpression complete);
@@ -12558,7 +12596,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull String easing,
                    @Nonnull IJSExpression complete);
@@ -12705,7 +12743,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -12834,7 +12872,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -12963,7 +13001,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull String easing,
                    @Nonnull IJSExpression complete);
@@ -13107,7 +13145,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull String easing, @Nonnull IJSExpression complete);
 
   /**
    * @param duration
@@ -13236,7 +13274,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull String easing,
                    @Nonnull IJSExpression complete);
@@ -13380,7 +13418,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -13533,7 +13571,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    int opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -13677,7 +13715,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    long opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -13821,7 +13859,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -13974,7 +14012,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    double opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -14118,7 +14156,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull IJSExpression easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -14256,7 +14294,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14271,9 +14309,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14290,7 +14328,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14307,7 +14345,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14324,7 +14362,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (int duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14341,7 +14379,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (long duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14358,7 +14396,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14375,7 +14413,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (double duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14392,7 +14430,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull IJSExpression opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14409,7 +14447,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    int opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14424,7 +14462,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14438,7 +14476,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14452,7 +14490,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull String duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14466,7 +14504,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (int duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14480,7 +14518,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (long duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14496,7 +14534,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    int opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14511,7 +14549,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (double duration, int opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14527,7 +14565,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    int opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14544,7 +14582,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    long opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14559,7 +14597,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14573,7 +14611,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IHCNode duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14587,7 +14625,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull String duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14601,7 +14639,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (int duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14615,7 +14653,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (long duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14631,7 +14669,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    long opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14646,7 +14684,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (double duration, long opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14662,7 +14700,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    long opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14679,7 +14717,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14694,9 +14732,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14713,7 +14751,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14730,7 +14768,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14747,7 +14785,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (int duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14764,7 +14802,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (long duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14781,7 +14819,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14798,7 +14836,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (double duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14815,7 +14853,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull BigInteger opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14832,7 +14870,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14847,7 +14885,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, double opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, double opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14863,7 +14901,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14880,7 +14918,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14895,7 +14933,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (int duration, double opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14909,7 +14947,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (long duration, double opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14925,7 +14963,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14940,7 +14978,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJson easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (double duration, double opacity, @Nonnull IJSON easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -14956,7 +14994,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    double opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14973,7 +15011,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IJSExpression duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -14988,9 +15026,9 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15007,7 +15045,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull IHCNode duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15024,7 +15062,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull String duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15041,7 +15079,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (int duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15058,7 +15096,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (long duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15075,7 +15113,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigInteger duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15092,7 +15130,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (double duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15109,7 +15147,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE fadeTo (@Nonnull BigDecimal duration,
                    @Nonnull BigDecimal opacity,
-                   @Nonnull IJson easing,
+                   @Nonnull IJSON easing,
                    @Nonnull JSAnonymousFunction complete);
 
   /**
@@ -15141,7 +15179,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -15294,7 +15332,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull IHCNode easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull IHCNode easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -15432,7 +15470,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull IHCNode easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull IHCNode easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -15573,7 +15611,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -15726,7 +15764,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    double opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -15870,7 +15908,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull IHCNode easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -16023,7 +16061,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull IJSExpression opacity,
                    @Nonnull String easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -16176,7 +16214,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, int opacity, @Nonnull String easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, int opacity, @Nonnull String easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -16311,7 +16349,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration, long opacity, @Nonnull String easing, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE fadeTo (@Nonnull IJSON duration, long opacity, @Nonnull String easing, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param duration
@@ -16449,7 +16487,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigInteger opacity,
                    @Nonnull String easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -16602,7 +16640,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    double opacity,
                    @Nonnull String easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -16746,7 +16784,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE fadeTo (@Nonnull IJson duration,
+  IMPLTYPE fadeTo (@Nonnull IJSON duration,
                    @Nonnull BigDecimal opacity,
                    @Nonnull String easing,
                    @Nonnull JSAnonymousFunction complete);
@@ -16870,6 +16908,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
                    @Nonnull String easing,
                    @Nonnull JSAnonymousFunction complete);
 
+  @Override
   @Nonnull
   IMPLTYPE fadeToggle ();
 
@@ -16972,6 +17011,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE find (@Nonnull String element);
 
+  @Override
   @Nonnull
   IMPLTYPE finish ();
 
@@ -16989,7 +17029,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.9
    */
   @Nonnull
-  IMPLTYPE finish (@Nonnull IJson queue);
+  IMPLTYPE finish (@Nonnull IJSON queue);
 
   /**
    * @param queue
@@ -17007,6 +17047,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE finish (@Nonnull String queue);
 
+  @Override
   @Nonnull
   IMPLTYPE first ();
 
@@ -17044,6 +17085,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE focus (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE focus ();
 
@@ -17147,6 +17189,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE get (@Nonnull BigInteger index);
 
+  @Override
   @Nonnull
   IMPLTYPE get ();
 
@@ -17164,7 +17207,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4
    */
   @Nonnull
-  IMPLTYPE has (@Nonnull IJson selector);
+  IMPLTYPE has (@Nonnull IJSON selector);
 
   /**
    * @param selector
@@ -17204,7 +17247,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE hasClass (@Nonnull IJson className);
+  IMPLTYPE hasClass (@Nonnull IJSON className);
 
   /**
    * @param className
@@ -17222,6 +17265,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE hasClass (@Nonnull String className);
 
+  @Override
   @Nonnull
   IMPLTYPE height ();
 
@@ -17239,7 +17283,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        optional unit of measure appended (as a string).
    */
   @Nonnull
-  IMPLTYPE height (@Nonnull IJson value);
+  IMPLTYPE height (@Nonnull IJSON value);
 
   /**
    * @param value
@@ -17307,6 +17351,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE height (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE hide ();
 
@@ -17364,7 +17409,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE hide (@Nonnull IJson duration);
+  IMPLTYPE hide (@Nonnull IJSON duration);
 
   /**
    * @param duration
@@ -17436,6 +17481,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE hover (@Nonnull JSAnonymousFunction handlerInOut);
 
+  @Override
   @Nonnull
   IMPLTYPE html ();
 
@@ -17472,6 +17518,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE html (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE index ();
 
@@ -17536,9 +17583,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE index (@Nonnull JQueryInvocation element);
 
+  @Override
   @Nonnull
   IMPLTYPE innerHeight ();
 
+  @Override
   @Nonnull
   IMPLTYPE innerWidth ();
 
@@ -17558,7 +17607,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.8
    */
   @Nonnull
-  IMPLTYPE innerWidth (@Nonnull IJson value);
+  IMPLTYPE innerWidth (@Nonnull IJSON value);
 
   /**
    * @param value
@@ -17884,6 +17933,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE keydown (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE keydown ();
 
@@ -17921,6 +17971,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE keypress (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE keypress ();
 
@@ -17958,9 +18009,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE keyup (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE keyup ();
 
+  @Override
   @Nonnull
   IMPLTYPE last ();
 
@@ -17990,7 +18043,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE live (@Nonnull IJson events, @Nonnull IJSExpression handler);
+  IMPLTYPE live (@Nonnull IJSON events, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -18046,7 +18099,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE live (@Nonnull IJson events, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE live (@Nonnull IJSON events, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -18106,7 +18159,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE live (@Nonnull IJson events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler);
+  IMPLTYPE live (@Nonnull IJSON events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -18170,7 +18223,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Deprecated
   @Nonnull
-  IMPLTYPE live (@Nonnull IJson events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE live (@Nonnull IJSON events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -18262,7 +18315,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A string containing the URL to which the request is sent.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url);
+  IMPLTYPE load (@Nonnull IJSON url);
 
   /**
    * @param url
@@ -18286,7 +18339,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJSExpression data);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSExpression data);
 
   /**
    * @param url
@@ -18316,7 +18369,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJson data);
+  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJSON data);
 
   /**
    * @param url
@@ -18326,7 +18379,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJson data);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSON data);
 
   /**
    * @param url
@@ -18336,7 +18389,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJson data);
+  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJSON data);
 
   /**
    * @param url
@@ -18346,7 +18399,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull String url, @Nonnull IJson data);
+  IMPLTYPE load (@Nonnull String url, @Nonnull IJSON data);
 
   /**
    * @param url
@@ -18366,7 +18419,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IHCNode data);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IHCNode data);
 
   /**
    * @param url
@@ -18406,7 +18459,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        request.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull String data);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull String data);
 
   /**
    * @param url
@@ -18450,7 +18503,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSExpression data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18486,7 +18539,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJson data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJSON data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18498,7 +18551,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJson data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSON data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18510,7 +18563,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJson data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJSON data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18522,7 +18575,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull String url, @Nonnull IJson data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull String url, @Nonnull IJSON data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18546,7 +18599,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IHCNode data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IHCNode data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18594,7 +18647,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull String data, @Nonnull IJSExpression complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull String data, @Nonnull IJSExpression complete);
 
   /**
    * @param url
@@ -18642,7 +18695,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18678,7 +18731,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IJSExpression url, @Nonnull IJSON data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18690,7 +18743,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IJSON data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18702,7 +18755,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IHCNode url, @Nonnull IJSON data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18714,7 +18767,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull String url, @Nonnull IJson data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull String url, @Nonnull IJSON data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18738,7 +18791,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull IHCNode data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18786,7 +18839,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A callback function that is executed when the request completes.
    */
   @Nonnull
-  IMPLTYPE load (@Nonnull IJson url, @Nonnull String data, @Nonnull JSAnonymousFunction complete);
+  IMPLTYPE load (@Nonnull IJSON url, @Nonnull String data, @Nonnull JSAnonymousFunction complete);
 
   /**
    * @param url
@@ -18864,6 +18917,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mousedown (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mousedown ();
 
@@ -18901,6 +18955,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mouseenter (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mouseenter ();
 
@@ -18938,6 +18993,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mouseleave (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mouseleave ();
 
@@ -18975,6 +19031,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mousemove (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mousemove ();
 
@@ -19012,6 +19069,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mouseout (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mouseout ();
 
@@ -19049,6 +19107,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mouseover (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mouseover ();
 
@@ -19086,9 +19145,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE mouseup (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE mouseup ();
 
+  @Override
   @Nonnull
   IMPLTYPE next ();
 
@@ -19127,6 +19188,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE next (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE nextAll ();
 
@@ -19144,7 +19206,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE nextAll (@Nonnull IJson selector);
+  IMPLTYPE nextAll (@Nonnull IJSON selector);
 
   /**
    * @param selector
@@ -19162,6 +19224,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE nextAll (@Nonnull String selector);
 
+  @Override
   @Nonnull
   IMPLTYPE nextUntil ();
 
@@ -19632,7 +19695,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events);
+  IMPLTYPE off (@Nonnull IJSON events);
 
   /**
    * @param events
@@ -19678,7 +19741,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJSExpression selector);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSExpression selector);
 
   /**
    * @param events
@@ -19717,7 +19780,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJson selector);
+  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -19730,7 +19793,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJson selector);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -19743,7 +19806,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJson selector);
+  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -19756,7 +19819,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull String events, @Nonnull IJson selector);
+  IMPLTYPE off (@Nonnull String events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -19782,7 +19845,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IHCNode selector);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IHCNode selector);
 
   /**
    * @param events
@@ -19834,7 +19897,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull String selector);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull String selector);
 
   /**
    * @param events
@@ -19892,7 +19955,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSExpression selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -19940,7 +20003,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJSON selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -19956,7 +20019,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJson selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSON selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -19972,7 +20035,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJSON selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -19988,7 +20051,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull String events, @Nonnull IJSON selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -20020,7 +20083,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IHCNode selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -20084,7 +20147,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull String selector, @Nonnull IJSExpression handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull String selector, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -20148,7 +20211,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSExpression selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20196,7 +20259,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IJSExpression events, @Nonnull IJSON selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20212,7 +20275,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IJSON selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20228,7 +20291,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IHCNode events, @Nonnull IJSON selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20244,7 +20307,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull String events, @Nonnull IJson selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull String events, @Nonnull IJSON selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20276,7 +20339,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull IHCNode selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20340,7 +20403,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE off (@Nonnull IJson events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE off (@Nonnull IJSON events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -20374,9 +20437,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE off (@Nonnull String events, @Nonnull String selector, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE off ();
 
+  @Override
   @Nonnull
   IMPLTYPE offset ();
 
@@ -20400,6 +20465,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE offset (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE offsetParent ();
 
@@ -20427,7 +20493,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IJSExpression selector);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IJSExpression selector);
 
   /**
    * @param events
@@ -20466,7 +20532,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events, @Nonnull IJson selector);
+  IMPLTYPE on (@Nonnull IJSExpression events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -20479,7 +20545,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IJson selector);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -20492,7 +20558,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events, @Nonnull IJson selector);
+  IMPLTYPE on (@Nonnull IHCNode events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -20505,7 +20571,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull String events, @Nonnull IJson selector);
+  IMPLTYPE on (@Nonnull String events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -20531,7 +20597,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IHCNode selector);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IHCNode selector);
 
   /**
    * @param events
@@ -20583,7 +20649,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull String selector);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull String selector);
 
   /**
    * @param events
@@ -20641,7 +20707,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IJSExpression selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20689,7 +20755,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IJSExpression events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20705,7 +20771,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20721,7 +20787,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IHCNode events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20737,7 +20803,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull String events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20769,7 +20835,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull IHCNode selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull IHCNode selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20833,7 +20899,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events, @Nonnull String selector, @Nonnull IJSExpression data);
+  IMPLTYPE on (@Nonnull IJSON events, @Nonnull String selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -20908,7 +20974,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
+  IMPLTYPE on (@Nonnull IJSON events,
                @Nonnull IJSExpression selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
@@ -20978,7 +21044,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE on (@Nonnull IJSExpression events,
-               @Nonnull IJson selector,
+               @Nonnull IJSON selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
 
@@ -21000,8 +21066,8 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
-               @Nonnull IJson selector,
+  IMPLTYPE on (@Nonnull IJSON events,
+               @Nonnull IJSON selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
 
@@ -21024,7 +21090,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE on (@Nonnull IHCNode events,
-               @Nonnull IJson selector,
+               @Nonnull IJSON selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
 
@@ -21047,7 +21113,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE on (@Nonnull String events,
-               @Nonnull IJson selector,
+               @Nonnull IJSON selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
 
@@ -21092,7 +21158,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
+  IMPLTYPE on (@Nonnull IJSON events,
                @Nonnull IHCNode selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
@@ -21142,374 +21208,6 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
                @Nonnull IHCNode selector,
                @Nonnull IJSExpression data,
                @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events,
-               @Nonnull String selector,
-               @Nonnull IJSExpression data,
-               @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
-               @Nonnull String selector,
-               @Nonnull IJSExpression data,
-               @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events,
-               @Nonnull String selector,
-               @Nonnull IJSExpression data,
-               @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull String events,
-               @Nonnull String selector,
-               @Nonnull IJSExpression data,
-               @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events,
-               @Nonnull IJSExpression selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
-               @Nonnull IJSExpression selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events,
-               @Nonnull IJSExpression selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull String events,
-               @Nonnull IJSExpression selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events,
-               @Nonnull IJson selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
-               @Nonnull IJson selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events,
-               @Nonnull IJson selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull String events,
-               @Nonnull IJson selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJSExpression events,
-               @Nonnull IHCNode selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
-               @Nonnull IHCNode selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull IHCNode events,
-               @Nonnull IHCNode selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE on (@Nonnull String events,
-               @Nonnull IHCNode selector,
-               @Nonnull IJSExpression data,
-               @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -21532,6 +21230,98 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   IMPLTYPE on (@Nonnull IJSExpression events,
                @Nonnull String selector,
                @Nonnull IJSExpression data,
+               @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSON events,
+               @Nonnull String selector,
+               @Nonnull IJSExpression data,
+               @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IHCNode events,
+               @Nonnull String selector,
+               @Nonnull IJSExpression data,
+               @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull String events,
+               @Nonnull String selector,
+               @Nonnull IJSExpression data,
+               @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSExpression events,
+               @Nonnull IJSExpression selector,
+               @Nonnull IJSExpression data,
                @Nonnull JSAnonymousFunction handler);
 
   /**
@@ -21552,7 +21342,283 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE on (@Nonnull IJson events,
+  IMPLTYPE on (@Nonnull IJSON events,
+               @Nonnull IJSExpression selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IHCNode events,
+               @Nonnull IJSExpression selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull String events,
+               @Nonnull IJSExpression selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSExpression events,
+               @Nonnull IJSON selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSON events,
+               @Nonnull IJSON selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IHCNode events,
+               @Nonnull IJSON selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull String events,
+               @Nonnull IJSON selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSExpression events,
+               @Nonnull IHCNode selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSON events,
+               @Nonnull IHCNode selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IHCNode events,
+               @Nonnull IHCNode selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull String events,
+               @Nonnull IHCNode selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSExpression events,
+               @Nonnull String selector,
+               @Nonnull IJSExpression data,
+               @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE on (@Nonnull IJSON events,
                @Nonnull String selector,
                @Nonnull IJSExpression data,
                @Nonnull JSAnonymousFunction handler);
@@ -21633,7 +21699,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.1
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -21681,7 +21747,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.1
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IJSExpression data, @Nonnull IJSExpression handler);
 
   /**
    * @param events
@@ -21733,7 +21799,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.1
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IJSExpression data, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -21772,7 +21838,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events, @Nonnull IJson selector);
+  IMPLTYPE one (@Nonnull IJSExpression events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -21785,7 +21851,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IJson selector);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -21798,7 +21864,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events, @Nonnull IJson selector);
+  IMPLTYPE one (@Nonnull IHCNode events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -21811,7 +21877,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull String events, @Nonnull IJson selector);
+  IMPLTYPE one (@Nonnull String events, @Nonnull IJSON selector);
 
   /**
    * @param events
@@ -21837,7 +21903,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IHCNode selector);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IHCNode selector);
 
   /**
    * @param events
@@ -21889,7 +21955,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull String selector);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull String selector);
 
   /**
    * @param events
@@ -21931,7 +21997,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IJSExpression events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -21947,7 +22013,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -21963,7 +22029,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IHCNode events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -21979,7 +22045,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull String events, @Nonnull IJson selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull String events, @Nonnull IJSON selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -22011,7 +22077,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull IHCNode selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull IHCNode selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -22075,7 +22141,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events, @Nonnull String selector, @Nonnull IJSExpression data);
+  IMPLTYPE one (@Nonnull IJSON events, @Nonnull String selector, @Nonnull IJSExpression data);
 
   /**
    * @param events
@@ -22150,7 +22216,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
+  IMPLTYPE one (@Nonnull IJSON events,
                 @Nonnull IJSExpression selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
@@ -22220,7 +22286,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE one (@Nonnull IJSExpression events,
-                @Nonnull IJson selector,
+                @Nonnull IJSON selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
 
@@ -22242,8 +22308,8 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
-                @Nonnull IJson selector,
+  IMPLTYPE one (@Nonnull IJSON events,
+                @Nonnull IJSON selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
 
@@ -22266,7 +22332,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE one (@Nonnull IHCNode events,
-                @Nonnull IJson selector,
+                @Nonnull IJSON selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
 
@@ -22289,7 +22355,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    */
   @Nonnull
   IMPLTYPE one (@Nonnull String events,
-                @Nonnull IJson selector,
+                @Nonnull IJSON selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
 
@@ -22334,7 +22400,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
+  IMPLTYPE one (@Nonnull IJSON events,
                 @Nonnull IHCNode selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
@@ -22384,374 +22450,6 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
                 @Nonnull IHCNode selector,
                 @Nonnull IJSExpression data,
                 @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events,
-                @Nonnull String selector,
-                @Nonnull IJSExpression data,
-                @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
-                @Nonnull String selector,
-                @Nonnull IJSExpression data,
-                @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events,
-                @Nonnull String selector,
-                @Nonnull IJSExpression data,
-                @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull String events,
-                @Nonnull String selector,
-                @Nonnull IJSExpression data,
-                @Nonnull IJSExpression handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events,
-                @Nonnull IJSExpression selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
-                @Nonnull IJSExpression selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events,
-                @Nonnull IJSExpression selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull String events,
-                @Nonnull IJSExpression selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events,
-                @Nonnull IJson selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
-                @Nonnull IJson selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events,
-                @Nonnull IJson selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull String events,
-                @Nonnull IJson selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJSExpression events,
-                @Nonnull IHCNode selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
-                @Nonnull IHCNode selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull IHCNode events,
-                @Nonnull IHCNode selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
-
-  /**
-   * @param events
-   *        One or more space-separated event types and optional namespaces,
-   *        such as "click" or "keydown.myPlugin".
-   * @param selector
-   *        A selector string to filter the descendants of the selected elements
-   *        that trigger the event. If the selector is null or omitted, the
-   *        event is always triggered when it reaches the selected element.
-   * @param data
-   *        Data to be passed to the handler in event.data when an event is
-   *        triggered.
-   * @param handler
-   *        A function to execute when the event is triggered. The value false
-   *        is also allowed as a shorthand for a function that simply does
-   *        return false.
-   * @since jQuery 1.7
-   */
-  @Nonnull
-  IMPLTYPE one (@Nonnull String events,
-                @Nonnull IHCNode selector,
-                @Nonnull IJSExpression data,
-                @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param events
@@ -22774,6 +22472,98 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   IMPLTYPE one (@Nonnull IJSExpression events,
                 @Nonnull String selector,
                 @Nonnull IJSExpression data,
+                @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSON events,
+                @Nonnull String selector,
+                @Nonnull IJSExpression data,
+                @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IHCNode events,
+                @Nonnull String selector,
+                @Nonnull IJSExpression data,
+                @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull String events,
+                @Nonnull String selector,
+                @Nonnull IJSExpression data,
+                @Nonnull IJSExpression handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSExpression events,
+                @Nonnull IJSExpression selector,
+                @Nonnull IJSExpression data,
                 @Nonnull JSAnonymousFunction handler);
 
   /**
@@ -22794,7 +22584,283 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE one (@Nonnull IJson events,
+  IMPLTYPE one (@Nonnull IJSON events,
+                @Nonnull IJSExpression selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IHCNode events,
+                @Nonnull IJSExpression selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull String events,
+                @Nonnull IJSExpression selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSExpression events,
+                @Nonnull IJSON selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSON events,
+                @Nonnull IJSON selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IHCNode events,
+                @Nonnull IJSON selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull String events,
+                @Nonnull IJSON selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSExpression events,
+                @Nonnull IHCNode selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSON events,
+                @Nonnull IHCNode selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IHCNode events,
+                @Nonnull IHCNode selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull String events,
+                @Nonnull IHCNode selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSExpression events,
+                @Nonnull String selector,
+                @Nonnull IJSExpression data,
+                @Nonnull JSAnonymousFunction handler);
+
+  /**
+   * @param events
+   *        One or more space-separated event types and optional namespaces,
+   *        such as "click" or "keydown.myPlugin".
+   * @param selector
+   *        A selector string to filter the descendants of the selected elements
+   *        that trigger the event. If the selector is null or omitted, the
+   *        event is always triggered when it reaches the selected element.
+   * @param data
+   *        Data to be passed to the handler in event.data when an event is
+   *        triggered.
+   * @param handler
+   *        A function to execute when the event is triggered. The value false
+   *        is also allowed as a shorthand for a function that simply does
+   *        return false.
+   * @since jQuery 1.7
+   */
+  @Nonnull
+  IMPLTYPE one (@Nonnull IJSON events,
                 @Nonnull String selector,
                 @Nonnull IJSExpression data,
                 @Nonnull JSAnonymousFunction handler);
@@ -22855,6 +22921,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE one (@Nonnull IJSExpression events);
 
+  @Override
   @Nonnull
   IMPLTYPE outerHeight ();
 
@@ -22876,6 +22943,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE outerHeight (boolean includeMargin);
 
+  @Override
   @Nonnull
   IMPLTYPE outerWidth ();
 
@@ -22897,6 +22965,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE outerWidth (boolean includeMargin);
 
+  @Override
   @Nonnull
   IMPLTYPE parent ();
 
@@ -22935,6 +23004,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE parent (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE parents ();
 
@@ -22973,6 +23043,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE parents (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE parentsUntil ();
 
@@ -23360,6 +23431,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE parentsUntil (@Nonnull String element, @Nonnull ICSSClassProvider filter);
 
+  @Override
   @Nonnull
   IMPLTYPE position ();
 
@@ -23978,6 +24050,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE prependTo (@Nonnull JQueryInvocation target);
 
+  @Override
   @Nonnull
   IMPLTYPE prev ();
 
@@ -24016,6 +24089,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE prev (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE prevAll ();
 
@@ -24059,6 +24133,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE prevAll (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Nonnull
   IMPLTYPE prevUntil ();
 
@@ -24446,6 +24521,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE prevUntil (@Nonnull String element, @Nonnull ICSSClassProvider filter);
 
+  @Override
   @Nonnull
   IMPLTYPE promise ();
 
@@ -24463,7 +24539,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE promise (@Nonnull IJson type);
+  IMPLTYPE promise (@Nonnull IJSON type);
 
   /**
    * @param type
@@ -24499,7 +24575,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE promise (@Nonnull IJson type, @Nonnull IJSExpression target);
+  IMPLTYPE promise (@Nonnull IJSON type, @Nonnull IJSExpression target);
 
   /**
    * @param type
@@ -24535,7 +24611,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName);
+  IMPLTYPE prop (@Nonnull IJSON propertyName);
 
   /**
    * @param propertyName
@@ -24571,7 +24647,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull IJSExpression value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull IJSExpression value);
 
   /**
    * @param propertyName
@@ -24601,7 +24677,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJSExpression propertyName, @Nonnull IJson value);
+  IMPLTYPE prop (@Nonnull IJSExpression propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -24611,7 +24687,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull IJson value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -24621,7 +24697,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IHCNode propertyName, @Nonnull IJson value);
+  IMPLTYPE prop (@Nonnull IHCNode propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -24631,7 +24707,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull String propertyName, @Nonnull IJson value);
+  IMPLTYPE prop (@Nonnull String propertyName, @Nonnull IJSON value);
 
   /**
    * @param propertyName
@@ -24651,7 +24727,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull IHCNode value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull IHCNode value);
 
   /**
    * @param propertyName
@@ -24691,7 +24767,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull String value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull String value);
 
   /**
    * @param propertyName
@@ -24731,7 +24807,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, int value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, int value);
 
   /**
    * @param propertyName
@@ -24771,7 +24847,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, long value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, long value);
 
   /**
    * @param propertyName
@@ -24811,7 +24887,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull BigInteger value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull BigInteger value);
 
   /**
    * @param propertyName
@@ -24851,7 +24927,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, double value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, double value);
 
   /**
    * @param propertyName
@@ -24891,7 +24967,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull BigDecimal value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull BigDecimal value);
 
   /**
    * @param propertyName
@@ -24931,7 +25007,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, boolean value);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, boolean value);
 
   /**
    * @param propertyName
@@ -24975,7 +25051,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE prop (@Nonnull IJson propertyName, @Nonnull JSAnonymousFunction function);
+  IMPLTYPE prop (@Nonnull IJSON propertyName, @Nonnull JSAnonymousFunction function);
 
   /**
    * @param propertyName
@@ -25057,7 +25133,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE pushStack (@Nonnull IJSExpression elements, @Nonnull IJson name, @Nonnull IJSExpression arguments);
+  IMPLTYPE pushStack (@Nonnull IJSExpression elements, @Nonnull IJSON name, @Nonnull IJSExpression arguments);
 
   /**
    * @param elements
@@ -25071,7 +25147,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE pushStack (@Nonnull JSArray elements, @Nonnull IJson name, @Nonnull IJSExpression arguments);
+  IMPLTYPE pushStack (@Nonnull JSArray elements, @Nonnull IJSON name, @Nonnull IJSExpression arguments);
 
   /**
    * @param elements
@@ -25169,7 +25245,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE pushStack (@Nonnull IJSExpression elements, @Nonnull IJson name, @Nonnull JSArray arguments);
+  IMPLTYPE pushStack (@Nonnull IJSExpression elements, @Nonnull IJSON name, @Nonnull JSArray arguments);
 
   /**
    * @param elements
@@ -25183,7 +25259,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE pushStack (@Nonnull JSArray elements, @Nonnull IJson name, @Nonnull JSArray arguments);
+  IMPLTYPE pushStack (@Nonnull JSArray elements, @Nonnull IJSON name, @Nonnull JSArray arguments);
 
   /**
    * @param elements
@@ -25241,6 +25317,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE pushStack (@Nonnull JSArray elements, @Nonnull String name, @Nonnull JSArray arguments);
 
+  @Override
   @Nonnull
   IMPLTYPE queue ();
 
@@ -25260,7 +25337,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE queue (@Nonnull IJson queueName);
+  IMPLTYPE queue (@Nonnull IJSON queueName);
 
   /**
    * @param queueName
@@ -25300,7 +25377,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE queue (@Nonnull IJson queueName, @Nonnull IJSExpression newQueue);
+  IMPLTYPE queue (@Nonnull IJSON queueName, @Nonnull IJSExpression newQueue);
 
   /**
    * @param queueName
@@ -25344,7 +25421,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE queue (@Nonnull IJson queueName, @Nonnull JSArray newQueue);
+  IMPLTYPE queue (@Nonnull IJSON queueName, @Nonnull JSArray newQueue);
 
   /**
    * @param queueName
@@ -25390,7 +25467,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE queue (@Nonnull IJson queueName, @Nonnull JSAnonymousFunction callback);
+  IMPLTYPE queue (@Nonnull IJSON queueName, @Nonnull JSAnonymousFunction callback);
 
   /**
    * @param queueName
@@ -25430,6 +25507,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE ready (@Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE remove ();
 
@@ -25447,7 +25525,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        removed.
    */
   @Nonnull
-  IMPLTYPE remove (@Nonnull IJson selector);
+  IMPLTYPE remove (@Nonnull IJSON selector);
 
   /**
    * @param selector
@@ -25479,7 +25557,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        space-separated list of attributes.
    */
   @Nonnull
-  IMPLTYPE removeAttr (@Nonnull IJson attributeName);
+  IMPLTYPE removeAttr (@Nonnull IJSON attributeName);
 
   /**
    * @param attributeName
@@ -25497,6 +25575,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE removeAttr (@Nonnull String attributeName);
 
+  @Override
   @Nonnull
   IMPLTYPE removeClass ();
 
@@ -25514,7 +25593,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        attribute of each matched element.
    */
   @Nonnull
-  IMPLTYPE removeClass (@Nonnull IJson className);
+  IMPLTYPE removeClass (@Nonnull IJSON className);
 
   /**
    * @param className
@@ -25542,6 +25621,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE removeClass (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE removeData ();
 
@@ -25559,7 +25639,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2.3
    */
   @Nonnull
-  IMPLTYPE removeData (@Nonnull IJson name);
+  IMPLTYPE removeData (@Nonnull IJSON name);
 
   /**
    * @param name
@@ -25600,7 +25680,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE removeProp (@Nonnull IJson propertyName);
+  IMPLTYPE removeProp (@Nonnull IJSON propertyName);
 
   /**
    * @param propertyName
@@ -25787,6 +25867,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE resize (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE resize ();
 
@@ -25824,9 +25905,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE scroll (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE scroll ();
 
+  @Override
   @Nonnull
   IMPLTYPE scrollLeft ();
 
@@ -25878,6 +25961,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE scrollLeft (@Nonnull BigDecimal value);
 
+  @Override
   @Nonnull
   IMPLTYPE scrollTop ();
 
@@ -25963,15 +26047,19 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE select (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE select ();
 
+  @Override
   @Nonnull
   IMPLTYPE serialize ();
 
+  @Override
   @Nonnull
   IMPLTYPE serializeArray ();
 
+  @Override
   @Nonnull
   IMPLTYPE show ();
 
@@ -26029,7 +26117,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE show (@Nonnull IJson duration);
+  IMPLTYPE show (@Nonnull IJSON duration);
 
   /**
    * @param duration
@@ -26047,6 +26135,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE show (@Nonnull String duration);
 
+  @Override
   @Nonnull
   IMPLTYPE siblings ();
 
@@ -26085,6 +26174,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE siblings (@Nonnull ICSSClassProvider selector);
 
+  @Override
   @Deprecated
   @Nonnull
   IMPLTYPE size ();
@@ -26369,15 +26459,19 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE slice (@Nonnull BigInteger start, @Nonnull BigInteger end);
 
+  @Override
   @Nonnull
   IMPLTYPE slideDown ();
 
+  @Override
   @Nonnull
   IMPLTYPE slideToggle ();
 
+  @Override
   @Nonnull
   IMPLTYPE slideUp ();
 
+  @Override
   @Nonnull
   IMPLTYPE stop ();
 
@@ -26453,7 +26547,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue);
+  IMPLTYPE stop (@Nonnull IJSON queue);
 
   /**
    * @param queue
@@ -26480,7 +26574,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, @Nonnull IJSExpression clearQueue);
+  IMPLTYPE stop (@Nonnull IJSON queue, @Nonnull IJSExpression clearQueue);
 
   /**
    * @param queue
@@ -26513,7 +26607,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, boolean clearQueue);
+  IMPLTYPE stop (@Nonnull IJSON queue, boolean clearQueue);
 
   /**
    * @param queue
@@ -26563,7 +26657,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd);
+  IMPLTYPE stop (@Nonnull IJSON queue, @Nonnull IJSExpression clearQueue, @Nonnull IJSExpression jumpToEnd);
 
   /**
    * @param queue
@@ -26619,7 +26713,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd);
+  IMPLTYPE stop (@Nonnull IJSON queue, boolean clearQueue, @Nonnull IJSExpression jumpToEnd);
 
   /**
    * @param queue
@@ -26675,7 +26769,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd);
+  IMPLTYPE stop (@Nonnull IJSON queue, @Nonnull IJSExpression clearQueue, boolean jumpToEnd);
 
   /**
    * @param queue
@@ -26731,7 +26825,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.7
    */
   @Nonnull
-  IMPLTYPE stop (@Nonnull IJson queue, boolean clearQueue, boolean jumpToEnd);
+  IMPLTYPE stop (@Nonnull IJSON queue, boolean clearQueue, boolean jumpToEnd);
 
   /**
    * @param queue
@@ -26795,9 +26889,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE submit (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE submit ();
 
+  @Override
   @Nonnull
   IMPLTYPE text ();
 
@@ -26813,7 +26909,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        A string of text to set as the content of each matched element.
    */
   @Nonnull
-  IMPLTYPE text (@Nonnull IJson textString);
+  IMPLTYPE text (@Nonnull IJSON textString);
 
   /**
    * @param textString
@@ -26839,6 +26935,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE text (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE toArray ();
 
@@ -27006,6 +27103,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
                    @Nonnull JSAnonymousFunction handler_eventObject_1,
                    @Nonnull JSAnonymousFunction handler_eventObject_2);
 
+  @Override
   @Nonnull
   IMPLTYPE toggle ();
 
@@ -27063,7 +27161,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE toggle (@Nonnull IJson duration);
+  IMPLTYPE toggle (@Nonnull IJSON duration);
 
   /**
    * @param duration
@@ -27103,7 +27201,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        element in the matched set.
    */
   @Nonnull
-  IMPLTYPE toggleClass (@Nonnull IJson className);
+  IMPLTYPE toggleClass (@Nonnull IJSON className);
 
   /**
    * @param className
@@ -27143,7 +27241,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE toggleClass (@Nonnull IJson className, @Nonnull IJSExpression _switch);
+  IMPLTYPE toggleClass (@Nonnull IJSON className, @Nonnull IJSExpression _switch);
 
   /**
    * @param className
@@ -27191,7 +27289,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.3
    */
   @Nonnull
-  IMPLTYPE toggleClass (@Nonnull IJson className, boolean _switch);
+  IMPLTYPE toggleClass (@Nonnull IJSON className, boolean _switch);
 
   /**
    * @param className
@@ -27217,6 +27315,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE toggleClass (@Nonnull String className, boolean _switch);
 
+  @Override
   @Nonnull
   IMPLTYPE toggleClass ();
 
@@ -27282,7 +27381,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        submit.
    */
   @Nonnull
-  IMPLTYPE trigger (@Nonnull IJson eventType);
+  IMPLTYPE trigger (@Nonnull IJSON eventType);
 
   /**
    * @param eventType
@@ -27318,7 +27417,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        Additional parameters to pass along to the event handler.
    */
   @Nonnull
-  IMPLTYPE trigger (@Nonnull IJson eventType, @Nonnull IJSExpression extraParameters);
+  IMPLTYPE trigger (@Nonnull IJSON eventType, @Nonnull IJSExpression extraParameters);
 
   /**
    * @param eventType
@@ -27358,7 +27457,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        Additional parameters to pass along to the event handler.
    */
   @Nonnull
-  IMPLTYPE trigger (@Nonnull IJson eventType, @Nonnull JSArray extraParameters);
+  IMPLTYPE trigger (@Nonnull IJSON eventType, @Nonnull JSArray extraParameters);
 
   /**
    * @param eventType
@@ -27396,7 +27495,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE triggerHandler (@Nonnull IJson eventType);
+  IMPLTYPE triggerHandler (@Nonnull IJSON eventType);
 
   /**
    * @param eventType
@@ -27438,7 +27537,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE triggerHandler (@Nonnull IJson eventType, @Nonnull IJSExpression extraParameters);
+  IMPLTYPE triggerHandler (@Nonnull IJSON eventType, @Nonnull IJSExpression extraParameters);
 
   /**
    * @param eventType
@@ -27486,7 +27585,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE triggerHandler (@Nonnull IJson eventType, @Nonnull JSArray extraParameters);
+  IMPLTYPE triggerHandler (@Nonnull IJSON eventType, @Nonnull JSArray extraParameters);
 
   /**
    * @param eventType
@@ -27526,7 +27625,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        submit.
    */
   @Nonnull
-  IMPLTYPE unbind (@Nonnull IJson eventType);
+  IMPLTYPE unbind (@Nonnull IJSON eventType);
 
   /**
    * @param eventType
@@ -27562,7 +27661,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        The function that is to be no longer executed.
    */
   @Nonnull
-  IMPLTYPE unbind (@Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE unbind (@Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param eventType
@@ -27602,7 +27701,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        The function that is to be no longer executed.
    */
   @Nonnull
-  IMPLTYPE unbind (@Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE unbind (@Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param eventType
@@ -27646,7 +27745,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.3
    */
   @Nonnull
-  IMPLTYPE unbind (@Nonnull IJson eventType, boolean _false);
+  IMPLTYPE unbind (@Nonnull IJSON eventType, boolean _false);
 
   /**
    * @param eventType
@@ -27672,9 +27771,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE unbind (@Nonnull String eventType, boolean _false);
 
+  @Override
   @Nonnull
   IMPLTYPE unbind ();
 
+  @Override
   @Nonnull
   IMPLTYPE undelegate ();
 
@@ -27698,7 +27799,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJSExpression eventType);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSExpression eventType);
 
   /**
    * @param selector
@@ -27731,7 +27832,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJson eventType);
+  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJSON eventType);
 
   /**
    * @param selector
@@ -27742,7 +27843,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJson eventType);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSON eventType);
 
   /**
    * @param selector
@@ -27753,7 +27854,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJson eventType);
+  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJSON eventType);
 
   /**
    * @param selector
@@ -27764,7 +27865,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJson eventType);
+  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJSON eventType);
 
   /**
    * @param selector
@@ -27786,7 +27887,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IHCNode eventType);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IHCNode eventType);
 
   /**
    * @param selector
@@ -27830,7 +27931,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull String eventType);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull String eventType);
 
   /**
    * @param selector
@@ -27878,7 +27979,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSExpression eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -27917,7 +28018,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -27930,7 +28031,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -27943,7 +28044,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -27956,7 +28057,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJson eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJSON eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -27982,7 +28083,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IHCNode eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -28034,7 +28135,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull String eventType, @Nonnull IJSExpression handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull String eventType, @Nonnull IJSExpression handler);
 
   /**
    * @param selector
@@ -28088,7 +28189,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSExpression eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28127,7 +28228,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IJSExpression selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28140,7 +28241,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28153,7 +28254,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IHCNode selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28166,7 +28267,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJson eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull String selector, @Nonnull IJSON eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28192,7 +28293,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull IHCNode eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28244,7 +28345,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.4.2
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler);
+  IMPLTYPE undelegate (@Nonnull IJSON selector, @Nonnull String eventType, @Nonnull JSAnonymousFunction handler);
 
   /**
    * @param selector
@@ -28286,7 +28387,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.6
    */
   @Nonnull
-  IMPLTYPE undelegate (@Nonnull IJson namespace);
+  IMPLTYPE undelegate (@Nonnull IJSON namespace);
 
   /**
    * @param namespace
@@ -28346,9 +28447,11 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE unload (@Nonnull IJSExpression eventData, @Nonnull JSAnonymousFunction handler);
 
+  @Override
   @Nonnull
   IMPLTYPE unwrap ();
 
+  @Override
   @Nonnull
   IMPLTYPE val ();
 
@@ -28366,7 +28469,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        of each matched element to set as selected/checked.
    */
   @Nonnull
-  IMPLTYPE val (@Nonnull IJson value);
+  IMPLTYPE val (@Nonnull IJSON value);
 
   /**
    * @param value
@@ -28402,6 +28505,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
   @Nonnull
   IMPLTYPE val (@Nonnull JSAnonymousFunction function);
 
+  @Override
   @Nonnull
   IMPLTYPE width ();
 
@@ -28419,7 +28523,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    *        with an optional unit of measure appended (as a string).
    */
   @Nonnull
-  IMPLTYPE width (@Nonnull IJson value);
+  IMPLTYPE width (@Nonnull IJSON value);
 
   /**
    * @param value
@@ -28652,7 +28756,7 @@ public interface IJQueryInvocationExtended <IMPLTYPE extends IJQueryInvocationEx
    * @since jQuery 1.2
    */
   @Nonnull
-  IMPLTYPE wrapInner (@Nonnull IJson wrappingElement);
+  IMPLTYPE wrapInner (@Nonnull IJSON wrappingElement);
 
   /**
    * @param wrappingElement

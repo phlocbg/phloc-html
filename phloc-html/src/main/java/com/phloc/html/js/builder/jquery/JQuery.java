@@ -47,8 +47,7 @@ import com.phloc.html.js.builder.JSAssocArray;
 import com.phloc.html.js.builder.JSExpr;
 import com.phloc.html.js.builder.JSFunction;
 import com.phloc.html.js.builder.html.JSHtml;
-import com.phloc.json2.IJson;
-import com.phloc.json2.serialize.JsonWriter;
+import com.phloc.json.IJSON;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -219,9 +218,9 @@ public final class JQuery
   }
 
   @Nonnull
-  public static JQueryInvocation parseJSON (@Nonnull final IJson aJson)
+  public static JQueryInvocation parseJSON (@Nonnull final IJSON aJson)
   {
-    return parseJSON (JsonWriter.getAsString (aJson));
+    return parseJSON (aJson.getJSONString ());
   }
 
   @Nonnull

@@ -39,7 +39,6 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * Object invocation
@@ -81,10 +80,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    */
   protected AbstractJSInvocation (@Nonnull final JSFunction aFunction)
   {
-    m_aObject = null;
-    m_sName = null;
-    m_aCallee = ValueEnforcer.notNull (aFunction, "Function");
-    m_aCtorType = null;
+    this.m_aObject = null;
+    this.m_sName = null;
+    this.m_aCallee = ValueEnforcer.notNull (aFunction, "Function");
+    this.m_aCtorType = null;
   }
 
   /**
@@ -94,10 +93,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    */
   public AbstractJSInvocation (@Nonnull final String sFunctionName)
   {
-    m_aObject = null;
-    m_sName = ValueEnforcer.notNull (sFunctionName, "FunctionName");
-    m_aCallee = null;
-    m_aCtorType = null;
+    this.m_aObject = null;
+    this.m_sName = ValueEnforcer.notNull (sFunctionName, "FunctionName");
+    this.m_aCallee = null;
+    this.m_aCtorType = null;
   }
 
   /**
@@ -108,10 +107,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    */
   protected AbstractJSInvocation (@Nonnull final JSAnonymousFunction aAnonymousFunction)
   {
-    m_aObject = null;
-    m_sName = null;
-    m_aCallee = ValueEnforcer.notNull (aAnonymousFunction, "AnonymousFunction");
-    m_aCtorType = null;
+    this.m_aObject = null;
+    this.m_sName = null;
+    this.m_aCallee = ValueEnforcer.notNull (aAnonymousFunction, "AnonymousFunction");
+    this.m_aCtorType = null;
   }
 
   /**
@@ -150,18 +149,18 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   {
     if (!JSMarshaller.isJSIdentifier (sMethod))
       throw new IllegalArgumentException ("The name '" + sMethod + "' is not a legal JS identifier!");
-    m_aObject = aLhs;
-    m_sName = sMethod;
-    m_aCallee = null;
-    m_aCtorType = null;
+    this.m_aObject = aLhs;
+    this.m_sName = sMethod;
+    this.m_aCallee = null;
+    this.m_aCtorType = null;
   }
 
   private AbstractJSInvocation (@Nullable final IJSGeneratable aLhs, @Nonnull final JSMethod aMethod)
   {
-    m_aObject = aLhs;
-    m_sName = null;
-    m_aCallee = ValueEnforcer.notNull (aMethod, "Method");
-    m_aCtorType = null;
+    this.m_aObject = aLhs;
+    this.m_sName = null;
+    this.m_aCallee = ValueEnforcer.notNull (aMethod, "Method");
+    this.m_aCtorType = null;
   }
 
   /**
@@ -172,10 +171,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    */
   protected AbstractJSInvocation (@Nonnull final IJSGeneratable aType)
   {
-    m_aObject = null;
-    m_sName = null;
-    m_aCallee = null;
-    m_aCtorType = ValueEnforcer.notNull (aType, "Type");
+    this.m_aObject = null;
+    this.m_sName = null;
+    this.m_aCallee = null;
+    this.m_aCtorType = ValueEnforcer.notNull (aType, "Type");
   }
 
   @SuppressWarnings ("unchecked")
@@ -196,7 +195,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnull final IJSExpression aExpr)
   {
     ValueEnforcer.notNull (aExpr, "Argument");
-    m_aArgs.add (aExpr);
+    this.m_aArgs.add (aExpr);
     return _thisAsT ();
   }
 
@@ -317,12 +316,6 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   }
 
   @Nonnull
-  public IMPLTYPE arg (@Nullable final IJson aValue)
-  {
-    return aValue == null ? argNull () : arg (JSExpr.json (aValue));
-  }
-
-  @Nonnull
   public IMPLTYPE arg (@Nonnull final IHasElementName aElementNameProvider)
   {
     return arg (aElementNameProvider.getElementName ());
@@ -434,7 +427,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nonnull final IJSExpression aArgument)
   {
     ValueEnforcer.notNull (aArgument, "Argument");
-    m_aArgs.add (nIndex, aArgument);
+    this.m_aArgs.add (nIndex, aArgument);
     return _thisAsT ();
   }
 
@@ -512,12 +505,6 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
 
   @Nonnull
   public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJSON aValue)
-  {
-    return aValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (aValue));
-  }
-
-  @Nonnull
-  public IMPLTYPE arg (@Nonnegative final int nIndex, @Nullable final IJson aValue)
   {
     return aValue == null ? argNull (nIndex) : arg (nIndex, JSExpr.json (aValue));
   }
@@ -619,7 +606,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   @ReturnsMutableCopy
   public List <IJSExpression> args ()
   {
-    return ContainerHelper.newList (m_aArgs);
+    return ContainerHelper.newList (this.m_aArgs);
   }
 
   /**
@@ -628,7 +615,7 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   @Nonnegative
   public int getArgCount ()
   {
-    return m_aArgs.size ();
+    return this.m_aArgs.size ();
   }
 
   /**
@@ -637,13 +624,13 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
    */
   public boolean hasArgs ()
   {
-    return !m_aArgs.isEmpty ();
+    return !this.m_aArgs.isEmpty ();
   }
 
   @Nullable
   public IJSExpression getArgAtIndex (final int nIndex)
   {
-    return ContainerHelper.getSafe (m_aArgs, nIndex);
+    return ContainerHelper.getSafe (this.m_aArgs, nIndex);
   }
 
   /**
@@ -654,36 +641,37 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   @Nonnull
   public IMPLTYPE removeAllArgs ()
   {
-    m_aArgs.clear ();
+    this.m_aArgs.clear ();
     return _thisAsT ();
   }
 
+  @Override
   public void generate (@Nonnull final JSFormatter f)
   {
-    if (m_aCallee instanceof JSAnonymousFunction)
+    if (this.m_aCallee instanceof JSAnonymousFunction)
     {
       // It's an anonymous function
-      f.generatable (((JSAnonymousFunction) m_aCallee).inParantheses ()).plain ('(');
+      f.generatable (((JSAnonymousFunction) this.m_aCallee).inParantheses ()).plain ('(');
     }
     else
-      if (m_aCtorType != null)
+      if (this.m_aCtorType != null)
       {
         // It's a constructor call
-        f.plain ("new ").generatable (m_aCtorType).plain ('(');
+        f.plain ("new ").generatable (this.m_aCtorType).plain ('(');
       }
       else
       {
         // Find name
-        String sName = m_sName;
-        if (sName == null && m_aCallee instanceof IJSDeclaration)
-          sName = ((IJSDeclaration) m_aCallee).name ();
+        String sName = this.m_sName;
+        if (sName == null && this.m_aCallee instanceof IJSDeclaration)
+          sName = ((IJSDeclaration) this.m_aCallee).name ();
 
-        if (m_aObject != null)
+        if (this.m_aObject != null)
         {
           // Regular object method invocation
           if (sName == null)
             throw new IllegalStateException ("Name is required if an object is present");
-          f.generatable (m_aObject).plain ('.').plain (sName).plain ('(');
+          f.generatable (this.m_aObject).plain ('.').plain (sName).plain ('(');
         }
         else
           if (sName != null)
@@ -694,9 +682,10 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
       }
 
     // Add the arguments
-    f.generatable (m_aArgs).plain (')');
+    f.generatable (this.m_aArgs).plain (')');
   }
 
+  @Override
   public void state (@Nonnull final JSFormatter f)
   {
     f.generatable (this).plain (';').nl ();
@@ -717,22 +706,22 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
     if (!super.equals (o))
       return false;
     final AbstractJSInvocation <?> rhs = (AbstractJSInvocation <?>) o;
-    return EqualsUtils.equals (m_aObject, rhs.m_aObject) &&
-           EqualsUtils.equals (m_aCtorType, rhs.m_aCtorType) &&
-           EqualsUtils.equals (m_aCallee, rhs.m_aCallee) &&
-           EqualsUtils.equals (m_sName, rhs.m_sName) &&
-           m_aArgs.equals (rhs.m_aArgs);
+    return EqualsUtils.equals (this.m_aObject, rhs.m_aObject) &&
+           EqualsUtils.equals (this.m_aCtorType, rhs.m_aCtorType) &&
+           EqualsUtils.equals (this.m_aCallee, rhs.m_aCallee) &&
+           EqualsUtils.equals (this.m_sName, rhs.m_sName) &&
+           this.m_aArgs.equals (rhs.m_aArgs);
   }
 
   @Override
   public int hashCode ()
   {
     return HashCodeGenerator.getDerived (super.hashCode ())
-                            .append (m_aObject)
-                            .append (m_aCtorType)
-                            .append (m_aCallee)
-                            .append (m_sName)
-                            .append (m_aArgs)
+                            .append (this.m_aObject)
+                            .append (this.m_aCtorType)
+                            .append (this.m_aCallee)
+                            .append (this.m_sName)
+                            .append (this.m_aArgs)
                             .getHashCode ();
   }
 
@@ -740,11 +729,11 @@ public abstract class AbstractJSInvocation <IMPLTYPE extends AbstractJSInvocatio
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("object", m_aObject)
-                            .appendIfNotNull ("ctorType", m_aCtorType)
-                            .appendIfNotNull ("callee", m_aCallee)
-                            .appendIfNotNull ("name", m_sName)
-                            .append ("args", m_aArgs)
+                            .appendIfNotNull ("object", this.m_aObject)
+                            .appendIfNotNull ("ctorType", this.m_aCtorType)
+                            .appendIfNotNull ("callee", this.m_aCallee)
+                            .appendIfNotNull ("name", this.m_sName)
+                            .append ("args", this.m_aArgs)
                             .toString ();
   }
 }

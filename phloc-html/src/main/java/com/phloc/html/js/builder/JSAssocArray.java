@@ -34,7 +34,6 @@ import com.phloc.html.hc.IHCNode;
 import com.phloc.html.hc.conversion.HCSettings;
 import com.phloc.html.js.marshal.JSMarshaller;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * array creation and initialization.
@@ -50,13 +49,13 @@ public class JSAssocArray extends AbstractJSExpression
 
   public boolean isEmpty ()
   {
-    return m_aExprs == null || m_aExprs.isEmpty ();
+    return this.m_aExprs == null || this.m_aExprs.isEmpty ();
   }
 
   @Nonnegative
   public int size ()
   {
-    return m_aExprs == null ? 0 : m_aExprs.size ();
+    return this.m_aExprs == null ? 0 : this.m_aExprs.size ();
   }
 
   @Nonnull
@@ -120,12 +119,6 @@ public class JSAssocArray extends AbstractJSExpression
   }
 
   @Nonnull
-  public JSAssocArray add (@Nonnull final String sKey, @Nullable final IJson aValue)
-  {
-    return add (sKey, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
-  }
-
-  @Nonnull
   public JSAssocArray add (@Nonnull final String sKey, @Nullable final IHCNode aValue)
   {
     return add (sKey, aValue == null ? null : HCSettings.getAsHTMLStringWithoutNamespaces (aValue));
@@ -174,16 +167,16 @@ public class JSAssocArray extends AbstractJSExpression
     ValueEnforcer.notNull (aKey, "Key");
     ValueEnforcer.notNull (aValue, "Value");
 
-    if (m_aExprs == null)
-      m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
-    m_aExprs.put (aKey, aValue);
+    if (this.m_aExprs == null)
+      this.m_aExprs = new LinkedHashMap <IJSExpression, IJSExpression> ();
+    this.m_aExprs.put (aKey, aValue);
     return this;
   }
 
   @Nonnull
   public JSAssocArray remove (@Nonnull final String sKey)
   {
-    if (m_aExprs != null)
+    if (this.m_aExprs != null)
       remove (JSExpr.lit (sKey));
     return this;
   }
@@ -191,18 +184,19 @@ public class JSAssocArray extends AbstractJSExpression
   @Nonnull
   public JSAssocArray remove (@Nullable final IJSExpression aKey)
   {
-    if (m_aExprs != null)
-      m_aExprs.remove (aKey);
+    if (this.m_aExprs != null)
+      this.m_aExprs.remove (aKey);
     return this;
   }
 
+  @Override
   public void generate (@Nonnull final JSFormatter aFormatter)
   {
     aFormatter.plain ('{').nl ().indent ();
-    if (m_aExprs != null)
+    if (this.m_aExprs != null)
     {
       boolean bFirst = true;
-      for (final Map.Entry <IJSExpression, IJSExpression> aEntry : m_aExprs.entrySet ())
+      for (final Map.Entry <IJSExpression, IJSExpression> aEntry : this.m_aExprs.entrySet ())
       {
         if (bFirst)
           bFirst = false;
@@ -222,18 +216,18 @@ public class JSAssocArray extends AbstractJSExpression
     if (!super.equals (o))
       return false;
     final JSAssocArray rhs = (JSAssocArray) o;
-    return EqualsUtils.equals (m_aExprs, rhs.m_aExprs);
+    return EqualsUtils.equals (this.m_aExprs, rhs.m_aExprs);
   }
 
   @Override
   public int hashCode ()
   {
-    return HashCodeGenerator.getDerived (super.hashCode ()).append (m_aExprs).getHashCode ();
+    return HashCodeGenerator.getDerived (super.hashCode ()).append (this.m_aExprs).getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).append ("exprs", m_aExprs).toString ();
+    return ToStringGenerator.getDerived (super.toString ()).append ("exprs", this.m_aExprs).toString ();
   }
 }

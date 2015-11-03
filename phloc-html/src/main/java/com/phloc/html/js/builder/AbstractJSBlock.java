@@ -45,7 +45,6 @@ import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.html.js.IJSCodeProvider;
 import com.phloc.html.js.provider.CollectingJSCodeProvider;
 import com.phloc.json.IJSON;
-import com.phloc.json2.IJson;
 
 /**
  * A JS block. It contains a list of statements and declarations.
@@ -88,10 +87,10 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public EChange removeByName (final String sName)
   {
-    final IJSDeclaration aDecl = m_aDecls.remove (sName);
+    final IJSDeclaration aDecl = this.m_aDecls.remove (sName);
     if (aDecl == null)
       return EChange.UNCHANGED;
-    m_aObjs.remove (aDecl);
+    this.m_aObjs.remove (aDecl);
     return EChange.CHANGED;
   }
 
@@ -99,7 +98,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @ReturnsMutableCopy
   public List <IJSDeclaration> declarations ()
   {
-    return ContainerHelper.newList (m_aDecls.values ());
+    return ContainerHelper.newList (this.m_aDecls.values ());
   }
 
   /**
@@ -112,7 +111,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nullable
   public IJSDeclaration getDeclaration (@Nullable final String sName)
   {
-    return m_aDecls.get (sName);
+    return this.m_aDecls.get (sName);
   }
 
   /**
@@ -124,7 +123,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    */
   public boolean isDeclared (@Nullable final String sName)
   {
-    return m_aDecls.containsKey (sName);
+    return this.m_aDecls.containsKey (sName);
   }
 
   /**
@@ -133,13 +132,13 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    */
   public boolean isEmpty ()
   {
-    return m_aObjs.isEmpty ();
+    return this.m_aObjs.isEmpty ();
   }
 
   @Nonnegative
   public int memberCount ()
   {
-    return m_aObjs.size ();
+    return this.m_aObjs.size ();
   }
 
   @Nonnull
@@ -147,14 +146,14 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   List <IJSCodeProvider> directMembers ()
   {
     // ESCA-JAVA0259:
-    return m_aObjs;
+    return this.m_aObjs;
   }
 
   @Nonnull
   @ReturnsMutableCopy
   public List <IJSCodeProvider> members ()
   {
-    return ContainerHelper.newList (m_aObjs);
+    return ContainerHelper.newList (this.m_aObjs);
   }
 
   /**
@@ -165,9 +164,9 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnull
   public AbstractJSBlock clear ()
   {
-    m_aObjs.clear ();
-    m_aDecls.clear ();
-    m_nPos = 0;
+    this.m_aObjs.clear ();
+    this.m_aDecls.clear ();
+    this.m_nPos = 0;
     return this;
   }
 
@@ -187,12 +186,12 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     ValueEnforcer.notNull (aDeclaration, "Declaration");
 
     final String sName = aDeclaration.name ();
-    final IJSDeclaration aOldDecl = m_aDecls.get (sName);
+    final IJSDeclaration aOldDecl = this.m_aDecls.get (sName);
     if (aOldDecl != null)
       throw new JSNameAlreadyExistsException (aOldDecl);
-    m_aObjs.add (m_nPos, aDeclaration);
-    m_aDecls.put (sName, aDeclaration);
-    m_nPos++;
+    this.m_aObjs.add (this.m_nPos, aDeclaration);
+    this.m_aDecls.put (sName, aDeclaration);
+    this.m_nPos++;
     onAddDeclaration (aDeclaration);
     return aDeclaration;
   }
@@ -202,8 +201,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   {
     ValueEnforcer.notNull (aStatement, "Statement");
 
-    m_aObjs.add (m_nPos, aStatement);
-    m_nPos++;
+    this.m_aObjs.add (this.m_nPos, aStatement);
+    this.m_nPos++;
     return aStatement;
   }
 
@@ -218,7 +217,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnegative
   public int pos ()
   {
-    return m_nPos;
+    return this.m_nPos;
   }
 
   /**
@@ -234,9 +233,9 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnegative
   public int pos (@Nonnegative final int nNewPos)
   {
-    ValueEnforcer.isBetweenInclusive (nNewPos, "NewPos", 0, m_aObjs.size ());
-    final int nOldPos = m_nPos;
-    m_nPos = nNewPos;
+    ValueEnforcer.isBetweenInclusive (nNewPos, "NewPos", 0, this.m_aObjs.size ());
+    final int nOldPos = this.m_nPos;
+    this.m_nPos = nNewPos;
     return nOldPos;
   }
 
@@ -249,7 +248,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
   @Nonnegative
   public int posEnd ()
   {
-    return pos (m_aObjs.size ());
+    return pos (this.m_aObjs.size ());
   }
 
   /**
@@ -281,6 +280,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return aType._new ();
   }
 
+  @Override
   @Nonnull
   public JSFunction function (@Nonnull final String sName) throws JSNameAlreadyExistsException
   {
@@ -298,6 +298,7 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
    * @exception JSNameAlreadyExistsException
    *            When the specified function was already created.
    */
+  @Override
   @Nonnull
   public JSFunction function (@Nullable final AbstractJSType aType, @Nonnull @Nonempty final String sName) throws JSNameAlreadyExistsException
   {
@@ -642,12 +643,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
 
   @Nonnull
   public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nullable final IJSON aValue)
-  {
-    return assign (aLhs, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
-  }
-
-  @Nonnull
-  public AbstractJSBlock assign (@Nonnull final IJSAssignmentTarget aLhs, @Nullable final IJson aValue)
   {
     return assign (aLhs, aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
@@ -1083,12 +1078,6 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     return _return (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
   }
 
-  @Nonnull
-  public AbstractJSBlock _return (@Nullable final IJson aValue)
-  {
-    return _return (aValue == null ? JSExpr.NULL : JSExpr.json (aValue));
-  }
-
   /**
    * Create a return statement and add it to this block
    */
@@ -1139,8 +1128,8 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
           if (!(aJSCode instanceof IJSDeclaration) && !(aJSCode instanceof IJSStatement))
             s_aLogger.warn ("Adding untyped IJSCodeProvider of class " + aJSCode.getClass ().getName () + " to JSBlock");
 
-        m_aObjs.add (m_nPos, aJSCode);
-        m_nPos++;
+        this.m_aObjs.add (this.m_nPos, aJSCode);
+        this.m_nPos++;
       }
     return this;
   }
@@ -1160,21 +1149,24 @@ public abstract class AbstractJSBlock implements IJSFunctionContainer
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final AbstractJSBlock rhs = (AbstractJSBlock) o;
-    return m_aObjs.equals (rhs.m_aObjs) && m_aDecls.equals (rhs.m_aDecls) && m_nPos == rhs.m_nPos;
+    return this.m_aObjs.equals (rhs.m_aObjs) && this.m_aDecls.equals (rhs.m_aDecls) && this.m_nPos == rhs.m_nPos;
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_aObjs).append (m_aDecls).append (m_nPos).getHashCode ();
+    return new HashCodeGenerator (this).append (this.m_aObjs)
+                                       .append (this.m_aDecls)
+                                       .append (this.m_nPos)
+                                       .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).appendIfNotEmpty ("objs", m_aObjs)
-                                       .appendIfNotEmpty ("decls", m_aDecls)
-                                       .append ("pos", m_nPos)
+    return new ToStringGenerator (this).appendIfNotEmpty ("objs", this.m_aObjs)
+                                       .appendIfNotEmpty ("decls", this.m_aDecls)
+                                       .append ("pos", this.m_nPos)
                                        .toString ();
   }
 }
