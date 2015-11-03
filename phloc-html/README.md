@@ -8,6 +8,6 @@ Add the following to your pom.xml to use this artifact:
 <dependency>
   <groupId>com.phloc</groupId>
   <artifactId>phloc-html</artifactId>
-  <version>4.4.1</version>
+  <version>4.4.2</version>
 </dependency>
 ```
