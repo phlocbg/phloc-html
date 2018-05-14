@@ -64,6 +64,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.file.SimpleFileIO;
@@ -73,6 +75,8 @@ import com.phloc.commons.string.StringHelper;
 @RunWith (value = Parameterized.class)
 public final class MarkdownTest
 {
+  private static final Logger LOG = LoggerFactory.getLogger (MarkdownTest.class);
+
   @Parameters
   public static Collection <Object []> markdownTests ()
   {
@@ -111,10 +115,16 @@ public final class MarkdownTest
   @Test
   public void runTest () throws IOException
   {
-    final String testText = _slurp (this.m_sDir + File.separator + this.m_sTest + ".text"); //$NON-NLS-1$
-    final String htmlText = _slurp (this.m_sDir + File.separator + this.m_sTest + ".html"); //$NON-NLS-1$
+    LOG.info (this.m_sTest);
+    final String testText = getWithconsolidateLineEndings (_slurp (this.m_sDir +
+                                                                   File.separator +
+                                                                   this.m_sTest +
+                                                                   ".text")); //$NON-NLS-1$
+    final String htmlText = getWithconsolidateLineEndings (_slurp (this.m_sDir +
+                                                                   File.separator +
+                                                                   this.m_sTest +
+                                                                   ".html")); //$NON-NLS-1$
     final String markdownText = new MarkdownProcessor ().process (testText).getAsHTMLString ();
-    // StringHelper.
     assertEquals (this.m_sTest, htmlText.trim (), markdownText.trim ());
   }
 }
