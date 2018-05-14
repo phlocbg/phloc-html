@@ -42,4 +42,11 @@ public interface ICSSPathProvider extends Serializable
   @Nonnull
   @Nonempty
   String getCSSItemPath (boolean bRegular);
+
+  /**
+   * @return Whether or not this stylesheet can be bundled to a big CSS profile.
+   *         For some files this is not possible (e.g. external resources using
+   *         releative paths)
+   */
+  boolean canBeBundled ();
 }
