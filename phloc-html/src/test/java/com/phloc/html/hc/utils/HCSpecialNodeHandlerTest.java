@@ -37,13 +37,72 @@ import com.phloc.html.hc.html.HCScript;
 
 public class HCSpecialNodeHandlerTest
 {
+  private static final String XHTML11 = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<html dir=\"ltr\">" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<head>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<title>Test</title>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "</head>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<body>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<h1>root</h1>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<script type=\"text/javascript\">" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "<!--" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "var y=0;" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "//-->" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "</script>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "</body>" +
+                                        XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                        "</html>";
+
+  private static final String HTML5 = "<!DOCTYPE html>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<html dir=\"ltr\">" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<head>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<title>Test</title>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "</head>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<body>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<h1>root</h1>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<script>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "<!--" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "var y=0;" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "//-->" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "</script>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "</body>" +
+                                      XMLWriterSettings.DEFAULT_NEWLINE_STRING +
+                                      "</html>";
+
   public static final class MockSpecialNodeListHandler implements IHCSpecialNodeListModifier
   {
+    @Override
     public List <? extends IHCNode> modifySpecialNodes (final List <? extends IHCNode> aNodes)
     {
       final List <IHCNode> ret = ContainerHelper.newList (aNodes);
       if (!ret.isEmpty ())
+      {
         ret.remove (0);
+      }
       return ret;
     }
   }
@@ -67,36 +126,13 @@ public class HCSpecialNodeHandlerTest
     aHtml.getHead ().addJS (new MockScript ("var y=0;"));
     aHtml.getBody ().addChild (new HCH1 ().addChild ("root"));
     final String sCRLF = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
-    assertEquals ("<!DOCTYPE html>" +
-                      sCRLF +
-                      "<html dir=\"ltr\">" +
-                      sCRLF +
-                      "<head>" +
-                      sCRLF +
-                      "<title>Test</title>" +
-                      sCRLF +
-                      "</head>" +
-                      sCRLF +
-                      "<body>" +
-                      sCRLF +
-                      "<h1>root</h1>" +
-                      sCRLF +
-                      "<script type=\"text/javascript\">" +
-                      sCRLF +
-                      "<!--" +
-                      sCRLF +
-                      "var y=0;" +
-                      sCRLF +
-                      "//-->" +
-                      sCRLF +
-                      "</script>" +
-                      sCRLF +
-                      "</body>" +
-                      sCRLF +
-                      "</html>" +
-                      sCRLF,
+    assertEquals (HTML5 + sCRLF,
                   aHtml.getAsHTMLString (new HCConversionSettings (EHTMLVersion.HTML5).setXMLWriterSettings (new XMLWriterSettings ().setEmitNamespaces (false)
                                                                                                                                      .setFormat (EXMLSerializeFormat.HTML)
                                                                                                                                      .setIndent (EXMLSerializeIndent.ALIGN_ONLY))));
+    assertEquals (XHTML11 + sCRLF,
+                  aHtml.getAsHTMLString (new HCConversionSettings (EHTMLVersion.XHTML11).setXMLWriterSettings (new XMLWriterSettings ().setEmitNamespaces (false)
+                                                                                                                                       .setFormat (EXMLSerializeFormat.HTML)
+                                                                                                                                       .setIndent (EXMLSerializeIndent.ALIGN_ONLY))));
   }
 }

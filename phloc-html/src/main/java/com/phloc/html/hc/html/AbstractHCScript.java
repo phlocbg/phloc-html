@@ -57,20 +57,20 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
   @Nonnull
   public IMimeType getType ()
   {
-    return m_aType;
+    return this.m_aType;
   }
 
   @Nonnull
   public IMPLTYPE setType (@Nonnull final IMimeType aType)
   {
-    m_aType = ValueEnforcer.notNull (aType, "Type");
+    this.m_aType = ValueEnforcer.notNull (aType, "Type");
     return thisAsT ();
   }
 
   @Nullable
   public String getCharset ()
   {
-    return m_sCharset;
+    return this.m_sCharset;
   }
 
   @Nonnull
@@ -82,7 +82,7 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
   @Nonnull
   public IMPLTYPE setCharset (@Nullable final String sCharset)
   {
-    m_sCharset = sCharset;
+    this.m_sCharset = sCharset;
     return thisAsT ();
   }
 
@@ -90,17 +90,22 @@ public abstract class AbstractHCScript <IMPLTYPE extends AbstractHCScript <IMPLT
   protected void applyProperties (final IMicroElement aElement, final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-    aElement.setAttribute (CHTMLAttributes.TYPE, m_aType.getAsString ());
-    if (StringHelper.hasText (m_sCharset))
-      aElement.setAttribute (CHTMLAttributes.CHARSET, m_sCharset);
+    if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())
+    {
+      aElement.setAttribute (CHTMLAttributes.TYPE, this.m_aType.getAsString ());
+    }
+    if (StringHelper.hasText (this.m_sCharset))
+    {
+      aElement.setAttribute (CHTMLAttributes.CHARSET, this.m_sCharset);
+    }
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .appendIfNotNull ("type", m_aType)
-                            .appendIfNotNull ("charset", m_sCharset)
+                            .appendIfNotNull ("type", this.m_aType)
+                            .appendIfNotNull ("charset", this.m_sCharset)
                             .toString ();
   }
 }
