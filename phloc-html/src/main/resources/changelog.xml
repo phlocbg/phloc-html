@@ -20,13 +20,18 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2018-07-31" version="4.4.5" />
+  <entry date="2018-07-31" category="tech" action="update">
+    <change>
+      <text locale="en">Removed warning on more than 31 included CSS files (concerns IE 8 and lower).</text>
+    </change>
+  </entry>
   <release date="2018-07-05" version="4.4.4" />
   <entry date="2018-07-05" category="feature" action="add">
     <change>
       <text locale="en">Script and style tags no longer emit the type for html5</text>
     </change>
   </entry>
-
   <release date="2018-05-14" version="4.4.3" />
   <entry date="2018-05-14" category="feature" action="add">
     <change>
