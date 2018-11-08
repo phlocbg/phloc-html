@@ -26,6 +26,7 @@ import com.phloc.commons.collections.multimap.IMultiMapListBased;
 import com.phloc.commons.collections.multimap.MultiTreeMapArrayListBased;
 import com.phloc.commons.string.StringHelper;
 
+@SuppressWarnings ("unused")
 public class MainCreateJQueryAPIList extends AbstractCreateJQueryAPIList
 {
   public static void main (final String [] args) throws Exception

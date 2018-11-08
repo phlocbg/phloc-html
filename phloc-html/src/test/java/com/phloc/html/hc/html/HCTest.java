@@ -170,8 +170,6 @@ public final class HCTest
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.DEFAULT);
     assertNotNull (h.convertToNode (aCS));
-    if (false)
-      System.out.print (h.getAsHTMLString (aCS));
   }
 
   @Test

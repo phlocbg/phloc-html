@@ -21,9 +21,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.phloc.commons.microdom.IMicroElement;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
@@ -38,7 +35,7 @@ import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
  */
 public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYPE>> extends AbstractHCBaseTable <THISTYPE>
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (AbstractHCTable.class);
+  private static final long serialVersionUID = 6495057291213351430L;
 
   public AbstractHCTable ()
   {
@@ -69,14 +66,6 @@ public abstract class AbstractHCTable <THISTYPE extends AbstractHCTable <THISTYP
                                   @Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
     super.applyProperties (aElement, aConversionSettings);
-
-    if (false)
-    {
-      // May happen when a table is filled via AJAX
-      // Required by XHTML 1.1
-      if (!hasBodyRows () && !hasBodyID () && !hasBodyClasses () && aConversionSettings.getHTMLVersion ().isXHTML11 ())
-        s_aLogger.warn ("Tables without body rows are prohibited by XHTML 1.1!");
-    }
 
     // Table specific attributes
     if (aConversionSettings.getHTMLVersion ().isPriorToHTML5 ())

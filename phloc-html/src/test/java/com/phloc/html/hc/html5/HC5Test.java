@@ -91,7 +91,5 @@ public final class HC5Test
 
     final IHCConversionSettings aCS = HCSettings.getConversionSettings (true).getClone (EHTMLVersion.HTML5);
     assertNotNull (h.convertToNode (aCS));
-    if (false)
-      System.out.print (h.getAsHTMLString (aCS));
   }
 }

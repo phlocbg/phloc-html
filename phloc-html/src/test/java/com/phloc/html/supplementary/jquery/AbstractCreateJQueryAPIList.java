@@ -49,8 +49,6 @@ import com.phloc.commons.string.StringHelper;
 import com.phloc.commons.string.StringParser;
 import com.phloc.commons.string.ToStringGenerator;
 import com.phloc.commons.version.Version;
-import com.phloc.commons.xml.EXMLParserFeature;
-import com.phloc.commons.xml.serialize.SAXReaderDefaultSettings;
 
 abstract class AbstractCreateJQueryAPIList
 {
@@ -58,22 +56,23 @@ abstract class AbstractCreateJQueryAPIList
 
   protected static enum EAPIType implements IHasName
   {
-    METHOD ("method"),
-    PROPERTY ("property"),
-    SELECTOR ("selector");
+   METHOD ("method"),
+   PROPERTY ("property"),
+   SELECTOR ("selector");
 
     private final String m_sName;
 
     private EAPIType (@Nonnull @Nonempty final String sName)
     {
-      m_sName = sName;
+      this.m_sName = sName;
     }
 
+    @Override
     @Nonnull
     @Nonempty
     public String getName ()
     {
-      return m_sName;
+      return this.m_sName;
     }
 
     @Nonnull
@@ -120,10 +119,10 @@ abstract class AbstractCreateJQueryAPIList
         return new String [] { "IJSExpression", "int", "long", "BigInteger", "double", "BigDecimal" };
       if (sType.equals ("Selector"))
         return new String [] { "IJSExpression",
-                              "IJQuerySelector",
-                              "JQuerySelectorList",
-                              "EHTMLElement",
-                              "ICSSClassProvider" };
+                               "IJQuerySelector",
+                               "JQuerySelectorList",
+                               "EHTMLElement",
+                               "ICSSClassProvider" };
       if (sType.equals ("Function"))
         return new String [] { "IJSExpression", "JSAnonymousFunction" };
       if (sType.equals ("Object"))
@@ -168,41 +167,41 @@ abstract class AbstractCreateJQueryAPIList
         throw new IllegalArgumentException ("name");
       if (ContainerHelper.isEmpty (aTypes))
         throw new IllegalArgumentException ("types");
-      m_sName = sName;
-      m_sIdentifier = _makeIdentifier (sName);
-      m_aTypes = aTypes;
-      m_aJavaTypes = new LinkedHashSet <String> ();
+      this.m_sName = sName;
+      this.m_sIdentifier = _makeIdentifier (sName);
+      this.m_aTypes = aTypes;
+      this.m_aJavaTypes = new LinkedHashSet <String> ();
       for (final String sType : aTypes)
         for (final String sType0 : _getJavaTypes (sType))
-          m_aJavaTypes.add (sType0);
-      m_bIsOptional = bIsOptional;
-      m_sDescription = sDescription;
+          this.m_aJavaTypes.add (sType0);
+      this.m_bIsOptional = bIsOptional;
+      this.m_sDescription = sDescription;
     }
 
     @Nonnull
     @Nonempty
     public String getName ()
     {
-      return m_sName;
+      return this.m_sName;
     }
 
     @Nonnull
     @Nonempty
     public String getIdentifier ()
     {
-      return m_sIdentifier;
+      return this.m_sIdentifier;
     }
 
     @Nonnegative
     public int getTypeCount ()
     {
-      return m_aTypes.size ();
+      return this.m_aTypes.size ();
     }
 
     @Nonnull
     public String getTypeAtIndex (@Nonnegative final int nIndex)
     {
-      return m_aTypes.get (nIndex);
+      return this.m_aTypes.get (nIndex);
     }
 
     @Nonnull
@@ -210,13 +209,13 @@ abstract class AbstractCreateJQueryAPIList
     @ReturnsMutableCopy
     public List <String> getAllTypes ()
     {
-      return ContainerHelper.newList (m_aTypes);
+      return ContainerHelper.newList (this.m_aTypes);
     }
 
     @Nonnegative
     public int getJavaTypeCount ()
     {
-      return m_aJavaTypes.size ();
+      return this.m_aJavaTypes.size ();
     }
 
     @Nonnull
@@ -224,24 +223,24 @@ abstract class AbstractCreateJQueryAPIList
     @ReturnsMutableCopy
     public Set <String> getAllJavaTypes ()
     {
-      return ContainerHelper.newOrderedSet (m_aJavaTypes);
+      return ContainerHelper.newOrderedSet (this.m_aJavaTypes);
     }
 
     @Nonnull
     public String getFirstJavaType ()
     {
-      return ContainerHelper.getFirstElement (m_aJavaTypes);
+      return ContainerHelper.getFirstElement (this.m_aJavaTypes);
     }
 
     public boolean isOptional ()
     {
-      return m_bIsOptional;
+      return this.m_bIsOptional;
     }
 
     @Nullable
     public String getDescription ()
     {
-      return m_sDescription;
+      return this.m_sDescription;
     }
 
     @Override
@@ -252,19 +251,19 @@ abstract class AbstractCreateJQueryAPIList
       if (!(o instanceof Argument))
         return false;
       final Argument rhs = (Argument) o;
-      return m_aTypes.equals (rhs.m_aTypes);
+      return this.m_aTypes.equals (rhs.m_aTypes);
     }
 
     @Override
     public int hashCode ()
     {
-      return new HashCodeGenerator (this).append (m_aTypes).getHashCode ();
+      return new HashCodeGenerator (this).append (this.m_aTypes).getHashCode ();
     }
 
     @Override
     public String toString ()
     {
-      return new ToStringGenerator (null).append ("name", m_sName).append ("types", m_aTypes).toString ();
+      return new ToStringGenerator (null).append ("name", this.m_sName).append ("types", this.m_aTypes).toString ();
     }
   }
 
@@ -277,50 +276,50 @@ abstract class AbstractCreateJQueryAPIList
 
     public Signature (@Nonnull final Version aAdded)
     {
-      m_aAdded = ValueEnforcer.notNull (aAdded, "Added");
+      this.m_aAdded = ValueEnforcer.notNull (aAdded, "Added");
     }
 
     void addArgument (@Nonnull final Argument aArg)
     {
       ValueEnforcer.notNull (aArg, "Arg");
-      m_aArgs.add (aArg);
+      this.m_aArgs.add (aArg);
     }
 
     @Nonnull
     public Version getAdded ()
     {
-      return m_aAdded;
+      return this.m_aAdded;
     }
 
     public boolean isAddedAfter10 ()
     {
-      return m_aAdded.isGreaterThan (V1);
+      return this.m_aAdded.isGreaterThan (V1);
     }
 
     @Nonnegative
     public int getArgumentCount ()
     {
-      return m_aArgs.size ();
+      return this.m_aArgs.size ();
     }
 
     @Nonnull
     public Argument getArgumentAtIndex (@Nonnegative final int nIndex)
     {
-      return m_aArgs.get (nIndex);
+      return this.m_aArgs.get (nIndex);
     }
 
     @Nonnull
     @ReturnsMutableCopy
     public List <Argument> getAllArguments ()
     {
-      return ContainerHelper.newList (m_aArgs);
+      return ContainerHelper.newList (this.m_aArgs);
     }
 
     @Nonnegative
     public int getOptionalArgumentCount ()
     {
       int ret = 0;
-      for (final Argument aArg : m_aArgs)
+      for (final Argument aArg : this.m_aArgs)
         if (aArg.isOptional ())
           ++ret;
       return ret;
@@ -328,7 +327,7 @@ abstract class AbstractCreateJQueryAPIList
 
     public boolean containsArgumentWithName (final String sArgName)
     {
-      for (final Argument aArg : m_aArgs)
+      for (final Argument aArg : this.m_aArgs)
         if (aArg.getName ().equals (sArgName))
           return true;
       return false;
@@ -338,7 +337,7 @@ abstract class AbstractCreateJQueryAPIList
     public int getArgumentsWithMultipleJavaTypesCount ()
     {
       int ret = 0;
-      for (final Argument aArg : m_aArgs)
+      for (final Argument aArg : this.m_aArgs)
         if (aArg.getJavaTypeCount () > 1)
           ++ret;
       return ret;
@@ -352,19 +351,19 @@ abstract class AbstractCreateJQueryAPIList
       if (!(o instanceof Signature))
         return false;
       final Signature rhs = (Signature) o;
-      return m_aArgs.equals (rhs.m_aArgs);
+      return this.m_aArgs.equals (rhs.m_aArgs);
     }
 
     @Override
     public int hashCode ()
     {
-      return new HashCodeGenerator (this).append (m_aArgs).getHashCode ();
+      return new HashCodeGenerator (this).append (this.m_aArgs).getHashCode ();
     }
 
     @Override
     public String toString ()
     {
-      return new ToStringGenerator (null).append ("added", m_aAdded).append ("args", m_aArgs).toString ();
+      return new ToStringGenerator (null).append ("added", this.m_aAdded).append ("args", this.m_aArgs).toString ();
     }
   }
 
@@ -386,61 +385,58 @@ abstract class AbstractCreateJQueryAPIList
                   @Nullable final Version aDeprecated,
                   @Nullable final Version aRemoved)
     {
-      m_eAPIType = eAPIType;
-      m_sName = sName;
-      m_sIdentifier = PARENT_CLASS_NAMES.contains (sName) ? "_" + sName : _makeIdentifier (sName);
-      m_sReturn = sReturn;
-      m_aDeprecated = aDeprecated;
-      m_aRemoved = aRemoved;
+      this.m_eAPIType = eAPIType;
+      this.m_sName = sName;
+      this.m_sIdentifier = PARENT_CLASS_NAMES.contains (sName) ? "_" + sName : _makeIdentifier (sName);
+      this.m_sReturn = sReturn;
+      this.m_aDeprecated = aDeprecated;
+      this.m_aRemoved = aRemoved;
     }
 
     void addSignature (@Nonnull final Signature aSignature)
     {
-      m_aSignatures.add (aSignature);
+      this.m_aSignatures.add (aSignature);
     }
 
     boolean containsSignature (@Nonnull final Signature aSignature)
     {
-      final boolean b = m_aSignatures.contains (aSignature);
-      if (b && false)
-        System.out.println ("Duplicate: " + aSignature);
-      return b;
+      return this.m_aSignatures.contains (aSignature);
     }
 
     void addSignature (@Nonnegative final int nIndex, @Nonnull final Signature aSignature)
     {
-      m_aSignatures.add (nIndex, aSignature);
+      this.m_aSignatures.add (nIndex, aSignature);
     }
 
     @Nonnull
     public EAPIType getAPIType ()
     {
-      return m_eAPIType;
+      return this.m_eAPIType;
     }
 
     @Nonnull
     @Nonempty
     public String getName ()
     {
-      return m_sName;
+      return this.m_sName;
     }
 
     @Nonnull
     @Nonempty
     public String getIdentifier ()
     {
-      return m_sIdentifier;
+      return this.m_sIdentifier;
     }
 
     public boolean hasReturn ()
     {
-      return StringHelper.hasText (m_sReturn);
+      return StringHelper.hasText (this.m_sReturn);
     }
 
     @Nullable
     public String getReturn ()
     {
-      return m_sReturn;
+      return this.m_sReturn;
     }
 
     @Nonnull
@@ -451,48 +447,48 @@ abstract class AbstractCreateJQueryAPIList
 
     public boolean isDeprecated ()
     {
-      return m_aDeprecated != null;
+      return this.m_aDeprecated != null;
     }
 
     @Nullable
     public Version getDeprecated ()
     {
-      return m_aDeprecated;
+      return this.m_aDeprecated;
     }
 
     public boolean isRemoved ()
     {
-      return m_aRemoved != null;
+      return this.m_aRemoved != null;
     }
 
     @Nullable
     public Version getRemoved ()
     {
-      return m_aRemoved;
+      return this.m_aRemoved;
     }
 
     @Nonnegative
     public int getSignatureCount ()
     {
-      return m_aSignatures.size ();
+      return this.m_aSignatures.size ();
     }
 
     @Nonnull
     public Signature getSignatureAtIndex (@Nonnegative final int nIndex)
     {
-      return m_aSignatures.get (nIndex);
+      return this.m_aSignatures.get (nIndex);
     }
 
     @Nonnull
     @ReturnsMutableCopy
     public List <Signature> getAllSignatures ()
     {
-      return ContainerHelper.newList (m_aSignatures);
+      return ContainerHelper.newList (this.m_aSignatures);
     }
 
     public boolean isStaticMethod ()
     {
-      return m_eAPIType == EAPIType.METHOD && m_sName.startsWith ("jQuery.");
+      return this.m_eAPIType == EAPIType.METHOD && this.m_sName.startsWith ("jQuery.");
     }
   }
 
@@ -572,8 +568,6 @@ abstract class AbstractCreateJQueryAPIList
 
     final List <Entry> aAllEntries = new ArrayList <Entry> ();
 
-    if (false)
-      SAXReaderDefaultSettings.setFeatureValue (EXMLParserFeature.XINCLUDE, Boolean.TRUE);
     SystemProperties.setPropertyValue ("org.apache.xerces.xni.parser.XMLParserConfiguration",
                                        "org.apache.xerces.parsers.XIncludeParserConfiguration");
 
@@ -616,7 +610,7 @@ abstract class AbstractCreateJQueryAPIList
             final String sOrigArgName = eArg.getAttribute ("name");
             final String sArgType = eArg.getAttribute ("type");
             final boolean bIsOptional = eArg.hasAttribute ("optional") ? StringParser.parseBool (eArg.getAttribute ("optional"))
-                                                                      : false;
+                                                                       : false;
 
             final List <String> aTypes = new ArrayList <String> ();
             if (StringHelper.hasNoTextAfterTrim (sArgType))
@@ -668,6 +662,7 @@ abstract class AbstractCreateJQueryAPIList
 
     Collections.sort (aAllEntries, new Comparator <Entry> ()
     {
+      @Override
       public int compare (final Entry o1, final Entry o2)
       {
         return o1.getName ().compareTo (o2.getName ());
@@ -684,8 +679,6 @@ abstract class AbstractCreateJQueryAPIList
         if (nOptCount > 0)
         {
           final int nArgs = aSig.getArgumentCount ();
-          if (false)
-            System.out.println (aEntry.getName () + " " + nArgs + " - " + nOptCount);
           for (int i = nOptCount; i >= 1; --i)
           {
             final int nRemainingArgs = nArgs - i;
@@ -709,11 +702,6 @@ abstract class AbstractCreateJQueryAPIList
                         " signatures and " +
                         nArguments +
                         " arguments");
-    if (false)
-    {
-      System.out.println ("Returns: " + aAllReturnTypes);
-      System.out.println ("Arg Types: " + aAllArgTypes);
-    }
     return aAllEntries;
   }
 }
