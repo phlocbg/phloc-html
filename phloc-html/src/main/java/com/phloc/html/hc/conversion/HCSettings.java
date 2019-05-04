@@ -42,6 +42,13 @@ public final class HCSettings
   private HCSettings ()
   {}
 
+  // TODO BG 03.01.2019: Currently we may emit nested P elements. This is
+  // interpreted by the browser by closing the outer P once encountering the
+  // first inner P (See
+  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p). This seems to
+  // have no big negative side effects but still we may want to handle this more
+  // explicitly or at least to warn
+
   /**
    * @return <code>true</code> if default mode is pretty print,
    *         <code>false</code> if optimized version is the default
