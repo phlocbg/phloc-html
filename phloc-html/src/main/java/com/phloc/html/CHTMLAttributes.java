@@ -70,6 +70,10 @@ public final class CHTMLAttributes
   public static final String CONTROLS = "controls";
   public static final String COORDS = "coords";
   public static final String CROSSORIGIN = "crossorigin";
+  public static final String CX = "cx";
+  public static final String CY = "cy";
+  public static final String D = "d";
+  public static final String DY = "dy";
   public static final String DATA = "data";
   public static final String DATETIME = "datetime";
   public static final String DECLARE = "declare";
@@ -82,6 +86,10 @@ public final class CHTMLAttributes
   public static final String ENCTYPE = "enctype";
   public static final String ENDTIME = "endtime";
   public static final String FACE = "face";
+  public static final String FILL = "fill";
+  public static final String FILLRULE = "fill-rule";
+  public static final String FILTER = "filter";
+  public static final String FILTERUNITS = "filterUnits";
   public static final String FOR = "for";
   public static final String FORM = "form";
   public static final String FRAME = "frame";
@@ -96,6 +104,7 @@ public final class CHTMLAttributes
   public static final String HTTP_EQUIV = "http-equiv";
   public static final String ICON = "icon";
   public static final String ID = "id";
+  public static final String IN = "in";
   public static final String ISMAP = "ismap";
   public static final String KEYTYPE = "keytype";
   public static final String KIND = "kind";
@@ -107,6 +116,7 @@ public final class CHTMLAttributes
   public static final String LOW = "low";
   public static final String MARGINHEIGHT = "marginheight";
   public static final String MARGINWIDTH = "marginwidth";
+  public static final String MASK = "mask";
   public static final String MASTERSOUND = "mastersound";
   public static final String MAX = "max";
   public static final String MAXLENGTH = "maxlength";
@@ -132,9 +142,11 @@ public final class CHTMLAttributes
   public static final String PRELOAD = "preload";
   public static final String PROFILE = "profile";
   public static final String QUALITY = "quality";
+  public static final String R = "r";
   public static final String RADIOGROUP = "radiogroup";
   public static final String READONLY = "readonly";
   public static final String REL = "rel";
+  public static final String RESULT = "result";
   public static final String REV = "rev";
   public static final String REVERSED = "reversed";
   public static final String ROLE = "role";
@@ -155,21 +167,28 @@ public final class CHTMLAttributes
   public static final String STANDBY = "standby";
   public static final String START = "start";
   public static final String STARTTIME = "starttime";
+  public static final String STDDEVIATION = "stdDeviation";
+  public static final String STROKE = "stroke";
   public static final String STYLE = "style";
   public static final String SUMMARY = "summary";
   public static final String SWLIVECONNECT = "swliveconnect";
   public static final String TABINDEX = "tabindex";
   public static final String TARGET = "target";
   public static final String TITLE = "title";
+  public static final String TRANSFORM = "transform";
   public static final String TYPE = "type";
   public static final String UNITS = "units";
   public static final String USEMAP = "usemap";
   public static final String VSPACE = "vspace";
   public static final String VALIGN = "valign";
   public static final String VALUE = "value";
+  public static final String VALUES = "values";
   public static final String VALUETYPE = "valuetype";
+  public static final String VIEWBOX = "viewBox";
   public static final String VOLUME = "volume";
   public static final String WIDTH = "width";
+  public static final String X = "x";
+  public static final String Y = "y";
 
   /** The standard prefix for HTML5 custom attributes */
   public static final String HTML5_PREFIX_DATA = "data-";
