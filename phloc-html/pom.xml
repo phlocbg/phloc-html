@@ -27,7 +27,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>phloc-html</artifactId>
-  <version>4.4.7-SNAPSHOT</version>
+  <version>4.4.7</version>
   <packaging>bundle</packaging>
   <name>phloc-html</name>
   <url>http://github.com/phlocbg/phloc-html</url>
@@ -44,7 +44,7 @@
     <connection>scm:git:https://github.com/phlocbg/phloc-html</connection>
     <developerConnection>scm:git:https://github.com/phlocbg/phloc-html</developerConnection>
   <url>http://github.com/phlocbg/phloc-html</url>
-    <tag>HEAD</tag>
+    <tag>phloc-html-4.4.7</tag>
   </scm>
 
   <organization>
