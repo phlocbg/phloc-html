@@ -55,52 +55,52 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
 {
   public static enum EMode
   {
-    /**
-     * Emit JS code as plain text, but XML masked. The XML masking rules for
-     * text nodes apply.
-     *
-     * <pre>
-     * &lt;script&gt;my &amp;lt; script&lt;/script&gt;
-     * </pre>
-     */
-    PLAIN_TEXT,
-    /**
-     * Emit JS code as plain text, but without XML masking.
-     *
-     * <pre>
-     * &lt;script&gt;my &lt; script&lt;/script&gt;
-     * </pre>
-     */
-    PLAIN_TEXT_NO_ESCAPE,
-    /**
-     * Wrap the whole JS code as plain text in XML comments.
-     *
-     * <pre>
-     * &lt;script&gt;&lt;!--
-     * my &lt; script
-     * //--&gt;&lt;/script&gt;
-     * </pre>
-     */
-    PLAIN_TEXT_WRAPPED_IN_COMMENT,
-    /**
-     * Wrap the whole JS code in an XML CDATA container.
-     *
-     * <pre>
-     * &lt;script&gt;&lt;![CDATA[my &lt; script]]&gt;&lt;/script&gt;
-     * </pre>
-     */
-    CDATA,
-    /**
-     * Wrap the whole JS code in an XML CDATA container inside a JS comment
-     * Tested OK with FF6, Opera11, Chrome13, IE8, IE9
-     *
-     * <pre>
-     * &lt;script&gt;//&lt;![CDATA[
-     * my &lt; script
-     * //]]&gt;&lt;/script&gt;
-     * </pre>
-     */
-    CDATA_IN_COMMENT;
+   /**
+    * Emit JS code as plain text, but XML masked. The XML masking rules for text
+    * nodes apply.
+    *
+    * <pre>
+    * &lt;script&gt;my &amp;lt; script&lt;/script&gt;
+    * </pre>
+    */
+   PLAIN_TEXT,
+   /**
+    * Emit JS code as plain text, but without XML masking.
+    *
+    * <pre>
+    * &lt;script&gt;my &lt; script&lt;/script&gt;
+    * </pre>
+    */
+   PLAIN_TEXT_NO_ESCAPE,
+   /**
+    * Wrap the whole JS code as plain text in XML comments.
+    *
+    * <pre>
+    * &lt;script&gt;&lt;!--
+    * my &lt; script
+    * //--&gt;&lt;/script&gt;
+    * </pre>
+    */
+   PLAIN_TEXT_WRAPPED_IN_COMMENT,
+   /**
+    * Wrap the whole JS code in an XML CDATA container.
+    *
+    * <pre>
+    * &lt;script&gt;&lt;![CDATA[my &lt; script]]&gt;&lt;/script&gt;
+    * </pre>
+    */
+   CDATA,
+   /**
+    * Wrap the whole JS code in an XML CDATA container inside a JS comment
+    * Tested OK with FF6, Opera11, Chrome13, IE8, IE9
+    *
+    * <pre>
+    * &lt;script&gt;//&lt;![CDATA[
+    * my &lt; script
+    * //]]&gt;&lt;/script&gt;
+    * </pre>
+    */
+   CDATA_IN_COMMENT;
   }
 
   /** By default inline scripts are emitted in mode "wrap in comment" */
@@ -108,6 +108,8 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
 
   /** By default place inline JS after script files */
   public static final boolean DEFAULT_EMIT_AFTER_FILES = true;
+
+  public static final boolean DEFAULT_ALLOW_OUT_OF_BOUNDS = true;
 
   public static final String DEFAULT_LINE_SEPARATOR = XMLWriterSettings.DEFAULT_NEWLINE_STRING;
 
@@ -124,11 +126,12 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   private EMode m_eMode;
   private boolean m_bEmitAfterFiles = DEFAULT_EMIT_AFTER_FILES;
   private String m_sLineSeparator = s_sDefaultLineSeparator;
+  private boolean m_bAllowOutOfBounds = DEFAULT_ALLOW_OUT_OF_BOUNDS;
 
   public HCScript ()
   {
     super ();
-    m_eMode = getDefaultMode ();
+    this.m_eMode = getDefaultMode ();
   }
 
   public HCScript (@Nonnull final IJSCodeProvider aProvider)
@@ -144,15 +147,27 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     setJSCode (sJSCode);
   }
 
+  @Override
   public boolean isInlineJS ()
   {
     return true;
   }
 
+  public HCScript setAllowOutOfBounds (final boolean bAllowOutOfBounds)
+  {
+    this.m_bAllowOutOfBounds = bAllowOutOfBounds;
+    return this;
+  }
+
+  public boolean isAllowOutOfBounds ()
+  {
+    return this.m_bAllowOutOfBounds;
+  }
+
   @Nonnull
   public HCScript setJSCodeProvider (@Nonnull final IJSCodeProvider aProvider)
   {
-    m_aProvider = ValueEnforcer.notNull (aProvider, "Provider");
+    this.m_aProvider = ValueEnforcer.notNull (aProvider, "Provider");
     return this;
   }
 
@@ -169,17 +184,18 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public IJSCodeProvider getJSCodeProvider ()
   {
-    return m_aProvider;
+    return this.m_aProvider;
   }
 
   /**
    * @return The text representation of the JS code passed in the constructor.
    *         May be <code>null</code>.
    */
+  @Override
   @Nullable
   public String getJSCode ()
   {
-    return m_aProvider.getJSCode ();
+    return this.m_aProvider.getJSCode ();
   }
 
   /**
@@ -188,7 +204,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public EMode getMode ()
   {
-    return m_eMode;
+    return this.m_eMode;
   }
 
   /**
@@ -201,19 +217,19 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonnull
   public HCScript setMode (@Nonnull final EMode eMode)
   {
-    m_eMode = ValueEnforcer.notNull (eMode, "Mode");
+    this.m_eMode = ValueEnforcer.notNull (eMode, "Mode");
     return this;
   }
 
   public boolean isEmitAfterFiles ()
   {
-    return m_bEmitAfterFiles;
+    return this.m_bEmitAfterFiles;
   }
 
   @Nonnull
   public HCScript setEmitAfterFiles (final boolean bEmitAfterFiles)
   {
-    m_bEmitAfterFiles = bEmitAfterFiles;
+    this.m_bEmitAfterFiles = bEmitAfterFiles;
     return this;
   }
 
@@ -221,7 +237,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Nonempty
   public String getLineSeparator ()
   {
-    return m_sLineSeparator;
+    return this.m_sLineSeparator;
   }
 
   @Nonnull
@@ -229,7 +245,7 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   {
     if (StringHelper.hasNoText (sLineSeparator))
       throw new IllegalArgumentException ("lineSeparator");
-    m_sLineSeparator = sLineSeparator;
+    this.m_sLineSeparator = sLineSeparator;
     return this;
   }
 
@@ -273,9 +289,9 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
   @Override
   public boolean canConvertToNode (@Nonnull final IHCConversionSettingsToNode aConversionSettings)
   {
-    m_sJSCode = StringHelper.trim (getJSCode ());
+    this.m_sJSCode = StringHelper.trim (getJSCode ());
     // Don't create script elements with empty content....
-    return StringHelper.hasText (m_sJSCode);
+    return StringHelper.hasText (this.m_sJSCode);
   }
 
   @Override
@@ -284,19 +300,20 @@ public class HCScript extends AbstractHCScript <HCScript> implements IJSCodeProv
     super.applyProperties (aElement, aConversionSettings);
 
     // m_sJSCode is set in canConvertToNode which is called before this method!
-    setInlineScript (aElement, m_sJSCode, m_eMode, m_sLineSeparator);
+    setInlineScript (aElement, this.m_sJSCode, this.m_eMode, this.m_sLineSeparator);
   }
 
   @Override
   public String toString ()
   {
     return ToStringGenerator.getDerived (super.toString ())
-                            .append ("provider", m_aProvider)
-                            .append ("jsCode", m_sJSCode)
-                            .append ("mode", m_eMode)
-                            .append ("emitAfterFiles", m_bEmitAfterFiles)
+                            .append ("provider", this.m_aProvider)
+                            .append ("jsCode", this.m_sJSCode)
+                            .append ("mode", this.m_eMode)
+                            .append ("emitAfterFiles", this.m_bEmitAfterFiles)
                             .append ("lineSeparator",
-                                     StringHelper.getHexEncoded (m_sLineSeparator, CCharset.CHARSET_ISO_8859_1_OBJ))
+                                     StringHelper.getHexEncoded (this.m_sLineSeparator,
+                                                                 CCharset.CHARSET_ISO_8859_1_OBJ))
                             .toString ();
   }
 

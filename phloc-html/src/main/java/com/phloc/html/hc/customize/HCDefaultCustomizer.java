@@ -60,6 +60,7 @@ import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
 import com.phloc.html.hc.html.HCScript;
 import com.phloc.html.hc.html.HCStyle;
+import com.phloc.html.hc.htmlext.HCUtils;
 import com.phloc.html.hc.impl.HCEntityNode;
 import com.phloc.html.hc.utils.HCSpecialNodeHandler;
 import com.phloc.html.js.EJSEvent;
@@ -252,8 +253,14 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
   {
     // JS nodes go to body
     if (HCSpecialNodeHandler.isJSNode (aOOBNode))
+    {
+      final IHCNode aUnwrappedNode = HCUtils.getUnwrappedNode (aOOBNode);
+      if (aUnwrappedNode instanceof HCScript)
+      {
+        return ((HCScript) aUnwrappedNode).isAllowOutOfBounds ();
+      }
       return true;
-
+    }
     // All other nodes stay in the head
     return false;
   }

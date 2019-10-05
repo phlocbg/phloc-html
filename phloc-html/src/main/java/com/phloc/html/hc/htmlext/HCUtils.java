@@ -127,28 +127,39 @@ import com.phloc.html.hc.html5.HCAside;
 import com.phloc.html.hc.html5.HCAudio;
 import com.phloc.html.hc.html5.HCBDI;
 import com.phloc.html.hc.html5.HCCanvas;
+import com.phloc.html.hc.html5.HCCircle;
 import com.phloc.html.hc.html5.HCCommand;
+import com.phloc.html.hc.html5.HCDefs;
 import com.phloc.html.hc.html5.HCDetails;
+import com.phloc.html.hc.html5.HCFeColorMatrix;
+import com.phloc.html.hc.html5.HCFeGaussianBlur;
+import com.phloc.html.hc.html5.HCFeOffset;
 import com.phloc.html.hc.html5.HCFigCaption;
 import com.phloc.html.hc.html5.HCFigure;
+import com.phloc.html.hc.html5.HCFilter;
 import com.phloc.html.hc.html5.HCFooter;
+import com.phloc.html.hc.html5.HCG;
 import com.phloc.html.hc.html5.HCHGroup;
 import com.phloc.html.hc.html5.HCHeader;
 import com.phloc.html.hc.html5.HCKeyGen;
 import com.phloc.html.hc.html5.HCMain;
 import com.phloc.html.hc.html5.HCMark;
+import com.phloc.html.hc.html5.HCMask;
 import com.phloc.html.hc.html5.HCMeter;
 import com.phloc.html.hc.html5.HCNav;
 import com.phloc.html.hc.html5.HCOutput;
+import com.phloc.html.hc.html5.HCPath;
 import com.phloc.html.hc.html5.HCProgress;
 import com.phloc.html.hc.html5.HCRP;
 import com.phloc.html.hc.html5.HCRT;
 import com.phloc.html.hc.html5.HCRuby;
+import com.phloc.html.hc.html5.HCSVG;
 import com.phloc.html.hc.html5.HCSection;
 import com.phloc.html.hc.html5.HCSource;
 import com.phloc.html.hc.html5.HCSummary;
 import com.phloc.html.hc.html5.HCTime;
 import com.phloc.html.hc.html5.HCTrack;
+import com.phloc.html.hc.html5.HCUse;
 import com.phloc.html.hc.html5.HCVideo;
 import com.phloc.html.hc.html5.HCWBR;
 import com.phloc.html.hc.impl.AbstractHCElement;
@@ -290,6 +301,7 @@ public final class HCUtils
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
     iterateChildren (aOwner, new IHCIteratorCallback ()
     {
+      @Override
       @Nullable
       public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
@@ -338,6 +350,7 @@ public final class HCUtils
     final List <IHCElement <?>> ret = new ArrayList <IHCElement <?>> ();
     iterateChildren (aOwner, new IHCIteratorCallback ()
     {
+      @Override
       @Nullable
       public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
@@ -379,6 +392,7 @@ public final class HCUtils
     final Wrapper <IHCElement <?>> ret = new Wrapper <IHCElement <?>> ();
     iterateChildren (aOwner, new IHCIteratorCallback ()
     {
+      @Override
       @Nullable
       public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
@@ -424,6 +438,7 @@ public final class HCUtils
       final MutableBoolean ret = new MutableBoolean (false);
       iterateChildren ((IHCHasChildren) aStartNode, new IHCIteratorCallback ()
       {
+        @Override
         @Nullable
         public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
         {
@@ -772,6 +787,7 @@ public final class HCUtils
     // customizer adds some out-of-band nodes as well
     iterateTree (aBaseNode, new IHCIteratorCallback ()
     {
+      @Override
       @Nonnull
       public EFinish call (@Nullable final IHCHasChildren aParentNode, @Nonnull final IHCNode aChildNode)
       {
@@ -1031,6 +1047,30 @@ public final class HCUtils
         return new HCVideo ();
       case WBR:
         return new HCWBR ();
+      case CIRCLE:
+        return new HCCircle ();
+      case DEFS:
+        return new HCDefs ();
+      case FECOLORMATRIX:
+        return new HCFeColorMatrix ();
+      case FEGAUSSIANBLUR:
+        return new HCFeGaussianBlur ();
+      case FEOFFSET:
+        return new HCFeOffset ();
+      case FILTER:
+        return new HCFilter ();
+      case G:
+        return new HCG ();
+      case MASK:
+        return new HCMask ();
+      case PATH:
+        return new HCPath ();
+      case SVG:
+        return new HCSVG ();
+      case USE:
+        return new HCUse ();
+      default:
+        break;
     }
     throw new IllegalStateException ("Failed to resolve element type from " + eElement);
   }
