@@ -30,9 +30,12 @@ import com.phloc.commons.url.ISimpleURL;
 import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.CHTMLAttributes;
 import com.phloc.html.EHTMLElement;
+import com.phloc.html.css.DefaultCSSClassProvider;
+import com.phloc.html.css.ICSSClassProvider;
 import com.phloc.html.hc.api5.IHCHasMedia;
 import com.phloc.html.hc.conversion.HCConsistencyChecker;
 import com.phloc.html.hc.conversion.IHCConversionSettingsToNode;
+import com.phloc.html.hc.htmlext.HCA_JS;
 import com.phloc.html.hc.impl.AbstractHCElementWithChildren;
 import com.phloc.html.js.EJSEvent;
 import com.phloc.html.js.IJSCodeProvider;
@@ -45,6 +48,8 @@ import com.phloc.html.js.IJSCodeProvider;
 public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends AbstractHCElementWithChildren <THISTYPE> implements IHCHasMedia <THISTYPE>, IHCA <THISTYPE>
 {
   private static final long serialVersionUID = -6891012934766966780L;
+
+  private static final ICSSClassProvider CSS_DISABLED_LINK = DefaultCSSClassProvider.create ("link_disabled");
   private ISimpleURL m_aHref;
   private HCA_Target m_aTarget;
   private String m_sName;
@@ -179,6 +184,13 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
     return setEventHandler (EJSEvent.ONCLICK, aOnClick);
   }
 
+  public void disable ()
+  {
+    setHref (HCA_JS.JS_URL);
+    removeAllEventHandler (EJSEvent.ONCLICK);
+    addClass (CSS_DISABLED_LINK);
+  }
+
   /**
    * Shortcut for <code>addEventHandler(EJSEvent.ONCLICK, aOnClick)</code>
    *
@@ -218,7 +230,8 @@ public class AbstractHCA <THISTYPE extends AbstractHCA <THISTYPE>> extends Abstr
   @Override
   public String toString ()
   {
-    return ToStringGenerator.getDerived (super.toString ()).appendIfNotNull ("href", this.m_aHref) //$NON-NLS-1$
+    return ToStringGenerator.getDerived (super.toString ())
+                            .appendIfNotNull ("href", this.m_aHref) //$NON-NLS-1$
                             .appendIfNotNull ("target", this.m_aTarget) //$NON-NLS-1$
                             .appendIfNotNull ("name", this.m_sName) //$NON-NLS-1$
                             .appendIfNotNull ("type", this.m_aType) //$NON-NLS-1$
