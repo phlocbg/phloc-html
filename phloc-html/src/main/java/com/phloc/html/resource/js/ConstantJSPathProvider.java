@@ -44,7 +44,7 @@ public final class ConstantJSPathProvider implements IJSPathProvider
 
   public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath, final boolean bCanBeBundled)
   {
-    this (sPath, JSFilenameHelper.getMinifiedJSPath (sPath), bCanBeBundled);
+    this (sPath, bCanBeBundled ? JSFilenameHelper.getMinifiedJSPath (sPath) : sPath, bCanBeBundled);
   }
 
   public ConstantJSPathProvider (@Nonnull @Nonempty final String sPath, @Nonnull @Nonempty final String sMinifiedPath)
@@ -62,36 +62,37 @@ public final class ConstantJSPathProvider implements IJSPathProvider
     ValueEnforcer.notEmpty (sMinifiedPath, "MinifiedPath");
     if (!JSFilenameHelper.isJSFilename (sMinifiedPath))
       throw new IllegalArgumentException ("minified path");
-    m_sPath = sPath;
-    m_sMinifiedPath = sMinifiedPath;
-    m_bCanBeBundled = bCanBeBundled;
+    this.m_sPath = sPath;
+    this.m_sMinifiedPath = sMinifiedPath;
+    this.m_bCanBeBundled = bCanBeBundled;
   }
 
+  @Override
   @Nonnull
   @Nonempty
   public String getJSItemPath (final boolean bRegular)
   {
-    return bRegular ? m_sPath : m_sMinifiedPath;
+    return bRegular ? this.m_sPath : this.m_sMinifiedPath;
   }
 
   @Nonnull
   @Nonempty
   public String getJSItemPathRegular ()
   {
-    return m_sPath;
+    return this.m_sPath;
   }
 
   @Nonnull
   @Nonempty
   public String getJSItemPathMinified ()
   {
-    return m_sMinifiedPath;
+    return this.m_sMinifiedPath;
   }
 
   @Override
   public boolean canBeBundled ()
   {
-    return m_bCanBeBundled;
+    return this.m_bCanBeBundled;
   }
 
   @Override
@@ -102,26 +103,26 @@ public final class ConstantJSPathProvider implements IJSPathProvider
     if (!(o instanceof ConstantJSPathProvider))
       return false;
     final ConstantJSPathProvider rhs = (ConstantJSPathProvider) o;
-    return m_sPath.equals (rhs.m_sPath) &&
-           m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
-           m_bCanBeBundled == rhs.m_bCanBeBundled;
+    return this.m_sPath.equals (rhs.m_sPath) &&
+           this.m_sMinifiedPath.equals (rhs.m_sMinifiedPath) &&
+           this.m_bCanBeBundled == rhs.m_bCanBeBundled;
   }
 
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sPath)
-                                       .append (m_sMinifiedPath)
-                                       .append (m_bCanBeBundled)
+    return new HashCodeGenerator (this).append (this.m_sPath)
+                                       .append (this.m_sMinifiedPath)
+                                       .append (this.m_bCanBeBundled)
                                        .getHashCode ();
   }
 
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("path", m_sPath)
-                                       .append ("minifiedPath", m_sMinifiedPath)
-                                       .append ("canBeBundled", m_bCanBeBundled)
+    return new ToStringGenerator (this).append ("path", this.m_sPath)
+                                       .append ("minifiedPath", this.m_sMinifiedPath)
+                                       .append ("canBeBundled", this.m_bCanBeBundled)
                                        .toString ();
   }
 }

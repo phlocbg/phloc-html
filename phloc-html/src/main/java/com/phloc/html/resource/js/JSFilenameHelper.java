@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.phloc.commons.string.StringHelper;
+import com.phloc.commons.url.SimpleURL;
 import com.phloc.html.js.CJS;
 
 /**
@@ -37,12 +38,17 @@ public final class JSFilenameHelper
 
   public static boolean isJSFilename (@Nullable final String sFilename)
   {
-    return StringHelper.endsWith (sFilename, CJS.FILE_EXTENSION_JS);
+    return StringHelper.endsWith (getFileName (sFilename), CJS.FILE_EXTENSION_JS);
   }
 
   public static boolean isMinifiedJSFilename (@Nullable final String sFilename)
   {
-    return StringHelper.endsWith (sFilename, CJS.FILE_EXTENSION_MIN_JS);
+    return StringHelper.endsWith (getFileName (sFilename), CJS.FILE_EXTENSION_MIN_JS);
+  }
+
+  private static String getFileName (@Nullable final String sFilename)
+  {
+    return new SimpleURL (sFilename).getPath ();
   }
 
   public static boolean isRegularJSFilename (@Nullable final String sFilename)
