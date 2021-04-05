@@ -20,6 +20,17 @@
 -->
 <changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="phloc-html">
+  <release date="2021-04-05" version="4.4.9" />
+  <entry date="2021-04-05" category="feature" action="update">
+    <change>
+      <text locale="en">Workaround for auto submit on single field forms</text>
+    </change>
+  </entry>
+  <entry date="2021-04-05" category="tech" action="update">
+    <change>
+      <text locale="en">Fixed constant JS path provider for non-bundled paths</text>
+    </change>
+  </entry>
   <release date="2020-06-07" version="4.4.8" />
   <entry date="2019-06-07" category="feature" action="update">
     <change>
