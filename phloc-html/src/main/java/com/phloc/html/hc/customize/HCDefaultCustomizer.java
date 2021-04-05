@@ -55,6 +55,7 @@ import com.phloc.html.hc.html.HCEditFile;
 import com.phloc.html.hc.html.HCEditPassword;
 import com.phloc.html.hc.html.HCHead;
 import com.phloc.html.hc.html.HCHiddenField;
+import com.phloc.html.hc.html.HCInput;
 import com.phloc.html.hc.html.HCLink;
 import com.phloc.html.hc.html.HCRadioButton;
 import com.phloc.html.hc.html.HCRow;
@@ -175,6 +176,11 @@ public class HCDefaultCustomizer extends HCEmptyCustomizer
             final IHCButton <?> aButton = createFakeSubmitButton ();
             aButton.setTabIndex (aForm.getSubmitButtonTabIndex ());
             aForm.addChild (aButton);
+          }
+          else
+          {
+            // https://stackoverflow.com/questions/1370021/why-does-forms-with-single-input-field-submit-upon-pressing-enter-key-in-input
+            aForm.addChild (new HCInput ().addStyle (CCSSProperties.DISPLAY_NONE));
           }
         }
         else
